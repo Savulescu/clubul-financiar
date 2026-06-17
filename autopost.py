@@ -93,6 +93,9 @@ def main():
             return log(f"nimic programat azi ({today})")
     folder = entry["folder"]
     log(f"postez '{folder}' pentru {today}")
+    _t = os.environ.get("TELEGRAM_TOKEN", "")
+    log(f"  [debug] TG_TOKEN prezent={bool(_t)} lungime={len(_t)} (corect=46) | "
+        f"TG_CHANNEL={os.environ.get('TELEGRAM_CHANNEL')!r}")
     funcs = {"telegram": post_telegram, "facebook": post_facebook, "instagram": post_instagram}
     for plat in entry["platforms"]:
         if plat in funcs:
