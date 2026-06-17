@@ -7,7 +7,7 @@ Acoperire:
   Telegram  ✅   (TELEGRAM_TOKEN, TELEGRAM_CHANNEL)
   Facebook  ✅   (FB_PAGE_ID, FB_PAGE_TOKEN)        -> postează prin URL public (raw GitHub)
   Instagram ⚙️   (IG_USER_ID, IG_TOKEN)             -> Graph API, video la URL public
-  YouTube   ⚙️   (se adaugă ulterior, OAuth)
+  YouTube   ✅   (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN) -> Data API v3, resumable upload (Short)
   TikTok    ❌   manual (API cere aprobare de app)
 """
 import json, os, sys, datetime, re, time
@@ -80,6 +80,66 @@ def post_instagram(folder):
                       data={"creation_id": cid, "access_token": tok}, timeout=120)
     log(f"  instagram: {'OK' if p.ok and 'id' in p.text else 'FAIL ' + p.text[:200]}")
 
+def _parse_youtube(block):
+    """Extrage TITLU + DESCRIERE din secțiunea YOUTUBE SHORT a caption-ului."""
+    title = "Clubul Financiar — educație financiară"
+    desc = ""
+    mt = re.search(r"TITLU:\s*(.+)", block)
+    if mt:
+        title = mt.group(1).strip()
+    md = re.search(r"DESCRIERE:\s*\n?(.+)", block, re.S)
+    if md:
+        desc = md.group(1).strip()
+    else:
+        desc = block.strip()
+    return title, desc
+
+def post_youtube(folder):
+    cid = os.environ.get("YT_CLIENT_ID")
+    csec = os.environ.get("YT_CLIENT_SECRET")
+    rtok = os.environ.get("YT_REFRESH_TOKEN")
+    if not (cid and csec and rtok):
+        return log("  youtube: fără secrets, sar")
+    # 1) refresh token -> access token
+    tr = requests.post("https://oauth2.googleapis.com/token", data={
+        "client_id": cid, "client_secret": csec,
+        "refresh_token": rtok, "grant_type": "refresh_token"}, timeout=60)
+    if not tr.ok:
+        return log(f"  youtube: FAIL token {tr.text[:200]}")
+    access = tr.json().get("access_token")
+    if not access:
+        return log("  youtube: FAIL token (fără access_token)")
+    # 2) titlu + descriere din caption
+    title, desc = _parse_youtube(caption(folder, "youtube"))
+    video = os.path.join(ROOT, "media", folder, "reel.mp4")
+    size = os.path.getsize(video)
+    meta = {
+        "snippet": {"title": title[:100], "description": desc[:4900], "categoryId": "27"},  # 27 = Education
+        "status": {"privacyStatus": os.environ.get("YT_PRIVACY", "public"),
+                   "selfDeclaredMadeForKids": False},
+    }
+    # 3) inițiază upload resumable
+    init = requests.post(
+        "https://www.googleapis.com/upload/youtube/v3/videos",
+        params={"uploadType": "resumable", "part": "snippet,status"},
+        headers={"Authorization": f"Bearer {access}",
+                 "Content-Type": "application/json; charset=UTF-8",
+                 "X-Upload-Content-Type": "video/*",
+                 "X-Upload-Content-Length": str(size)},
+        data=json.dumps(meta), timeout=60)
+    location = init.headers.get("Location")
+    if init.status_code not in (200, 201) or not location:
+        return log(f"  youtube: FAIL init {init.status_code} {init.text[:200]}")
+    # 4) urcă octeții video
+    with open(video, "rb") as f:
+        up = requests.put(location, headers={"Content-Type": "video/*",
+                          "Content-Length": str(size)}, data=f, timeout=900)
+    if up.ok:
+        vid = up.json().get("id", "")
+        log(f"  youtube: OK https://youtu.be/{vid}")
+    else:
+        log(f"  youtube: FAIL upload {up.status_code} {up.text[:200]}")
+
 def main():
     sched = json.load(open(os.path.join(ROOT, "schedule.json")))
     today = datetime.date.today().isoformat()
@@ -96,7 +156,8 @@ def main():
     _t = os.environ.get("TELEGRAM_TOKEN", "")
     log(f"  [debug] TG_TOKEN prezent={bool(_t)} lungime={len(_t)} (corect=46) | "
         f"TG_CHANNEL={os.environ.get('TELEGRAM_CHANNEL')!r}")
-    funcs = {"telegram": post_telegram, "facebook": post_facebook, "instagram": post_instagram}
+    funcs = {"telegram": post_telegram, "facebook": post_facebook,
+             "instagram": post_instagram, "youtube": post_youtube}
     for plat in entry["platforms"]:
         if plat in funcs:
             try:

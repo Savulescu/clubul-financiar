@@ -1,7 +1,7 @@
 # Clubul Financiar — Auto-poster (gratis, în cloud)
 
-Postează singur, zilnic la 19:30 (ora României), pe **Telegram, Facebook, Instagram**
-(YouTube se adaugă ulterior). **TikTok = manual** (API-ul lor cere aprobare de app).
+Postează singur, zilnic la 19:30 (ora României), pe **Telegram, Facebook, Instagram, YouTube**
+(Shorts). **TikTok = manual** (API-ul lor cere aprobare de app).
 Rulează gratis prin **GitHub Actions** — nu-ți trebuie calculatorul pornit.
 
 ## Cum funcționează
@@ -35,6 +35,18 @@ Folosește aceeași app Meta. Permisiuni: `instagram_basic`, `instagram_content_
 ### 5. Testează ACUM (fără să aștepți cron-ul)
 GitHub → **Actions → Auto-post Clubul Financiar → Run workflow**.
 Verifică log-ul. Dacă o zi e programată azi, postează; altfel scrie „nimic programat azi".
+
+### 6. YouTube (Shorts) — autorizare o singură dată
+Upload-ul pe YouTube cere OAuth (refresh token), nu doar o cheie. Se face o singură dată:
+1. **console.cloud.google.com** → proiect nou → **APIs & Services → Library** → activează **YouTube Data API v3**
+2. **OAuth consent screen** → External → adaugă-te ca *Test user* → scope `.../auth/youtube.upload`
+3. **Credentials → Create OAuth client ID → Desktop app** → copiază Client ID + Client Secret
+4. Local: `pip install requests && python3 get_youtube_token.py` → autorizează cu contul canalului → îți dă 3 valori
+5. Secrets: `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`
+   - opțional `YT_PRIVACY` = `public` (implicit) / `unlisted` / `private`
+
+Reel-urile verticale se urcă automat ca **Shorts**. Titlul + descrierea vin din secțiunea
+`=== YOUTUBE SHORT ===` (TITLU / DESCRIERE) din `captions/ziuaN.txt`.
 
 ## Conținut nou
 Cere-i lui Claude un lot nou de postări → se adaugă în `media/` + `captions/` + `schedule.json` → push → cron-ul le postează singur.
