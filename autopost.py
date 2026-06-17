@@ -8,7 +8,7 @@ Acoperire:
   Facebook  ✅   (FB_PAGE_ID, FB_PAGE_TOKEN)        -> postează prin URL public (raw GitHub)
   Instagram ⚙️   (IG_USER_ID, IG_TOKEN)             -> Graph API, video la URL public
   YouTube   ✅   (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN) -> Data API v3, resumable upload (Short)
-  TikTok    ❌   manual (API cere aprobare de app)
+  TikTok    ⚙️   (TT_CLIENT_KEY, TT_CLIENT_SECRET, TT_REFRESH_TOKEN) -> semi-auto: urcă în inbox, publici din app
 """
 import json, os, sys, datetime, re, time
 import requests
@@ -140,6 +140,46 @@ def post_youtube(folder):
     else:
         log(f"  youtube: FAIL upload {up.status_code} {up.text[:200]}")
 
+def post_tiktok(folder):
+    """Semi-automat: urcă reel-ul în INBOX-ul TikTok (draft). Tu dai 'Publică' din app.
+    Mod 'upload to inbox' (scope video.upload) — merge și înainte de auditul TikTok.
+    Caption-ul îl pui tu în app la publicare (vezi secțiunea TIKTOK din captions/ziuaN.txt)."""
+    ck = os.environ.get("TT_CLIENT_KEY")
+    cs = os.environ.get("TT_CLIENT_SECRET")
+    rt = os.environ.get("TT_REFRESH_TOKEN")
+    if not (ck and cs and rt):
+        return log("  tiktok: fără secrets, sar (semi-automat: ajunge în inbox-ul TikTok)")
+    # 1) refresh -> access token
+    tr = requests.post("https://open.tiktokapis.com/v2/oauth/token/",
+                       headers={"Content-Type": "application/x-www-form-urlencoded"},
+                       data={"client_key": ck, "client_secret": cs,
+                             "grant_type": "refresh_token", "refresh_token": rt}, timeout=60)
+    if not tr.ok or "access_token" not in tr.text:
+        return log(f"  tiktok: FAIL token {tr.text[:200]}")
+    access = tr.json()["access_token"]
+    # 2) init upload (FILE_UPLOAD, un singur chunk)
+    video = os.path.join(ROOT, "media", folder, "reel.mp4")
+    size = os.path.getsize(video)
+    init = requests.post("https://open.tiktokapis.com/v2/post/publish/inbox/video/init/",
+                         headers={"Authorization": f"Bearer {access}",
+                                  "Content-Type": "application/json; charset=UTF-8"},
+                         data=json.dumps({"source_info": {
+                             "source": "FILE_UPLOAD", "video_size": size,
+                             "chunk_size": size, "total_chunk_count": 1}}), timeout=60)
+    if not init.ok or "upload_url" not in init.text:
+        return log(f"  tiktok: FAIL init {init.status_code} {init.text[:200]}")
+    upload_url = init.json()["data"]["upload_url"]
+    # 3) urcă octeții
+    with open(video, "rb") as f:
+        up = requests.put(upload_url, headers={
+            "Content-Type": "video/mp4",
+            "Content-Range": f"bytes 0-{size - 1}/{size}",
+            "Content-Length": str(size)}, data=f, timeout=900)
+    if up.ok:
+        log("  tiktok: OK — video în inbox-ul TikTok; deschide app-ul și apasă Publică")
+    else:
+        log(f"  tiktok: FAIL upload {up.status_code} {up.text[:200]}")
+
 def main():
     sched = json.load(open(os.path.join(ROOT, "schedule.json")))
     today = datetime.date.today().isoformat()
@@ -157,14 +197,13 @@ def main():
     log(f"  [debug] TG_TOKEN prezent={bool(_t)} lungime={len(_t)} (corect=46) | "
         f"TG_CHANNEL={os.environ.get('TELEGRAM_CHANNEL')!r}")
     funcs = {"telegram": post_telegram, "facebook": post_facebook,
-             "instagram": post_instagram, "youtube": post_youtube}
+             "instagram": post_instagram, "youtube": post_youtube, "tiktok": post_tiktok}
     for plat in entry["platforms"]:
         if plat in funcs:
             try:
                 funcs[plat](folder)
             except Exception as e:
                 log(f"  {plat}: EROARE {e}")
-    log("  tiktok: manual (API cere aprobare)")
 
 if __name__ == "__main__":
     main()
