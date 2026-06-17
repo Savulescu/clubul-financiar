@@ -5,6 +5,8 @@ on:
     # 16:30 UTC = 19:30 ora României (vara). Iarna devine 18:30 local.
     - cron: '30 16 * * *'
   workflow_dispatch: {}   # buton de test manual (Actions -> Run workflow)
+  push:
+    branches: [main]      # rulează automat la fiecare push (pt test/declanșare)
 
 jobs:
   post:
