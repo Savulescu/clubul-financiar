@@ -85,7 +85,12 @@ def main():
     today = datetime.date.today().isoformat()
     entry = next((e for e in sched if e["date"] == today), None)
     if not entry:
-        return log(f"nimic programat azi ({today})")
+        # mod test: la rulare manuală (Run workflow) postează prima zi, ca să verifici că merge
+        if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+            entry = sched[0]
+            log(f"TEST (rulare manuală): nimic azi, postez '{entry['folder']}' ca probă")
+        else:
+            return log(f"nimic programat azi ({today})")
     folder = entry["folder"]
     log(f"postez '{folder}' pentru {today}")
     funcs = {"telegram": post_telegram, "facebook": post_facebook, "instagram": post_instagram}
