@@ -86,7 +86,7 @@ def main():
     entry = next((e for e in sched if e["date"] == today), None)
     if not entry:
         # mod test: la rulare manuală (Run workflow) postează prima zi, ca să verifici că merge
-        if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+        if os.environ.get("GITHUB_EVENT_NAME") in ("workflow_dispatch", "push"):
             entry = sched[0]
             log(f"TEST (rulare manuală): nimic azi, postez '{entry['folder']}' ca probă")
         else:
