@@ -63,7 +63,7 @@ KW = ["ban", "leu", "euro", "dolar", "bnr", "inflați", "infla", "dobând", "dob
       "taxe", "taxă", "impozit", "anaf", "bursă", "bursa", "bvb", "acțiun", "investiți", "economi",
       "salari", "pensi", "preț", "pret", "buget", "pib", "bancă", "banca", "fisc", "tva", "energie",
       "piață", "piata", "datorie", "deficit", "criz", "scump", "ieftin", "randament", "etf", "imobiliar"]
-MAX_ITEMS = 90
+MAX_ITEMS = 110
 MAX_AGE_DAYS = 4
 
 # Categorii (cheie, etichetă, cuvinte) — ordine = prioritate la clasificare
@@ -147,7 +147,18 @@ def collect():
     for a in items:
         a.pop("_sw", None)
     items.sort(key=lambda x: x["score"], reverse=True)
-    return items[:MAX_ITEMS]
+    # diversitate: garantează minim GUARANTEE articole/sursă, apoi umple după scor
+    GUARANTEE = 2
+    per, chosen, rest = {}, [], []
+    for it in items:
+        s = it["source"]
+        if per.get(s, 0) < GUARANTEE:
+            per[s] = per.get(s, 0) + 1; chosen.append(it)
+        else:
+            rest.append(it)
+    chosen += rest[:max(0, MAX_ITEMS - len(chosen))]
+    chosen.sort(key=lambda x: x["score"], reverse=True)
+    return chosen[:MAX_ITEMS]
 
 FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">'
 
