@@ -8,6 +8,7 @@
   const NAV = [
     ["Începe aici", "/incepe-aici.html"],
     ["Educație", "/educatie.html"],
+    ["Știri", "/stiri.html"],
     ["Investiții", "/investitii.html"],
     ["Credite", "/credite.html"],
     ["Calculatoare", "/calculatoare.html"],
