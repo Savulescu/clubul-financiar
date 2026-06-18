@@ -1,261 +1,474 @@
 /* ============================================================
-   CLUBUL FINANCIAR — VISUAL UPGRADE LAYER
-   Se adauga DUPA style.css. Nu redenumeste nimic.
-   Pastreaza toti tokenii + clasele existente, doar le ridica.
+   CLUBUL FINANCIAR — UPGRADE.CSS v2 (BOLD / PREMIUM)
+   Se incarca DUPA style.css. Inlocuieste complet upgrade.css.
+   Pastreaza TOTI tokenii + TOATE clasele existente; doar le ridica
+   dramatic si adauga componente noi optionale.
    ============================================================ */
 
-/* ---------- 1. TOKENI NOI (extind, nu inlocuiesc) ---------- */
+/* @import TREBUIE sa fie prima regula din fisier (spec CSS).
+   Fallback: daca <link> Sora nu e adaugat in HTML, fontul vine de aici. */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap');
+
+/* ============================================================
+   1. TOKENI NOI (extind, nu inlocuiesc cei din style.css)
+   ============================================================ */
 :root{
-  /* Scala tipografica fluida (ratio ~1.18) */
-  --text-xs:   clamp(0.72rem, 0.68rem + 0.2vw, 0.78rem);
-  --text-sm:   clamp(0.83rem, 0.79rem + 0.2vw, 0.90rem);
-  --text-base: clamp(0.97rem, 0.93rem + 0.2vw, 1.05rem);
-  --text-md:   clamp(1.08rem, 1.02rem + 0.3vw, 1.18rem);
-  --text-lg:   clamp(1.22rem, 1.12rem + 0.5vw, 1.42rem);
-  --text-xl:   clamp(1.48rem, 1.26rem + 1.1vw, 1.90rem);
-  --text-2xl:  clamp(1.75rem, 1.35rem + 2.0vw, 2.50rem);
-  --text-3xl:  clamp(2.10rem, 1.50rem + 3.0vw, 3.60rem);
+  /* Font expresiv pentru titluri (geometric, modern, premium) */
+  --font-display: 'Sora', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 
-  --lh-tight: 1.12;
-  --lh-snug:  1.26;
-  --lh-body:  1.72;
-  --lh-loose: 1.85;
+  /* Scala tipografica fluida */
+  --display-hero:    clamp(2.6rem, 1.8rem + 4.4vw, 5.0rem);
+  --display-section: clamp(1.9rem, 1.3rem + 3vw, 3.2rem);
+  --display-band:    clamp(2.0rem, 1.4rem + 3.4vw, 3.8rem);
 
-  --ls-tight:  -0.03em;
-  --ls-snug:   -0.02em;
-  --ls-normal:  0em;
-  --ls-wide:    0.06em;
-  --ls-wider:   0.12em;
-  --ls-widest:  0.16em;
+  /* Accente / suprafete cu personalitate */
+  --emerald-vivid: #0dcc8a;
+  --navy-deep:    #081728;
+  --navy-mid:     #0d2138;
+  --navy-surface: #122c49;
 
-  /* Ritm de spatiere */
-  --space-1: 6px;  --space-2: 12px; --space-3: 18px;
-  --space-4: 24px; --space-5: 36px; --space-6: 56px; --space-7: 84px;
+  /* Gradienti semnatura */
+  --grad-warm:    linear-gradient(135deg, var(--emerald), var(--gold));
+  --grad-cool:    linear-gradient(135deg, var(--emerald), var(--blue));
+  --grad-tri:     linear-gradient(120deg, var(--emerald) 0%, var(--blue) 55%, var(--gold) 120%);
 
-  /* Easing premium */
-  --ease-out: cubic-bezier(.22,.68,0,1.06);
-  --ease-spring: cubic-bezier(.22,.68,0,1.2);
+  /* Umbre ridicate */
+  --shadow-soft:  0 6px 22px rgba(15,37,64,.07);
+  --shadow-pop:   0 26px 70px rgba(15,37,64,.18);
+  --ring-emerald: 0 0 0 1px rgba(16,185,129,.18);
 
-  /* Suprafete & gradient-uri rafinate (tint, nu inlocuiesc --grad) */
-  --emerald-tint: rgba(16,185,129,.08);
-  --emerald-line: rgba(16,185,129,.32);
-  --blue-tint:    rgba(37,99,235,.08);
-  --grad-surface: linear-gradient(135deg, rgba(16,185,129,.07) 0%, rgba(37,99,235,.07) 100%);
-  --grad-deep:    linear-gradient(145deg, var(--emerald-d) 0%, var(--blue-d) 100%);
-  --grad-145:     linear-gradient(145deg, var(--emerald), var(--blue));
-
-  /* Shadow colorata pentru depth premium */
-  --shadow-emerald: 0 18px 40px rgba(16,185,129,.16);
-  --ring: 0 0 0 3px rgba(16,185,129,.35);
+  /* Raze + tranzitii */
+  --radius-xl: 28px;
+  --ease: cubic-bezier(.22,.61,.36,1);
 }
-
 [data-theme="dark"]{
-  --emerald-tint: rgba(16,185,129,.12);
-  --emerald-line: rgba(16,185,129,.40);
-  --blue-tint:    rgba(37,99,235,.14);
-  --grad-surface: linear-gradient(135deg, rgba(16,185,129,.10) 0%, rgba(37,99,235,.10) 100%);
-  --shadow-emerald: 0 18px 44px rgba(16,185,129,.20);
-  --ring: 0 0 0 3px rgba(16,185,129,.45);
-  --bg-soft:#0d1b2f; --bg-soft2:#13243d; --card:#11203a;
-  --border:rgba(255,255,255,.08);
+  --shadow-soft: 0 6px 22px rgba(0,0,0,.4);
+  --shadow-pop:  0 30px 80px rgba(0,0,0,.6);
+  --ring-emerald: 0 0 0 1px rgba(13,204,138,.28);
 }
 
-/* ---------- 2. TIPOGRAFIE ---------- */
-body{
-  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
-  font-optical-sizing:auto;
-  font-feature-settings:'cv02','cv03','cv04','cv11';
-  font-size:var(--text-base);
-  line-height:var(--lh-body);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+/* ============================================================
+   2. TIPOGRAFIE INDRAZNEATA
+   ============================================================ */
+body{ font-family: var(--font-body); font-weight: 450; }
+
+h1, h2, h3, .title{ font-family: var(--font-display); }
+
+h1, h2, h3{ letter-spacing: -.03em; line-height: 1.08; }
+
+.hero h1{
+  font-family: var(--font-display);
+  font-size: var(--display-hero);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.035em;
 }
+h1{
+  font-size: clamp(2.1rem, 1.5rem + 3.4vw, 3.8rem);
+  font-weight: 800;
+}
+h2.title{
+  font-family: var(--font-display);
+  font-size: var(--display-section);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.1;
+  margin: 12px 0 16px;
+}
+h3{ font-size: clamp(1.08rem,.96rem + .7vw, 1.34rem); font-weight: 700; }
 
-h1,h2,h3,h4{font-family:inherit;font-optical-sizing:auto;text-wrap:balance}
-h1{font-size:var(--text-3xl);font-weight:800;line-height:var(--lh-tight);letter-spacing:var(--ls-tight)}
-h2{font-size:var(--text-2xl);font-weight:800;line-height:var(--lh-snug);letter-spacing:var(--ls-snug)}
-h3{font-size:var(--text-lg);font-weight:700;line-height:var(--lh-snug);letter-spacing:var(--ls-snug)}
-
-h2.title{font-size:var(--text-2xl);font-weight:800;line-height:var(--lh-snug);letter-spacing:var(--ls-snug);margin:12px 0 14px}
-
+/* eyebrow cu linie decorativa */
 .eyebrow{
-  color:var(--emerald);font-weight:700;text-transform:uppercase;
-  font-size:var(--text-xs);letter-spacing:var(--ls-widest);line-height:1;
-  -webkit-font-smoothing:antialiased;
+  font-family: var(--font-body);
+  color: var(--emerald);
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-size: .74rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
+.eyebrow::before{
+  content:''; width: 26px; height: 2px; border-radius: 2px;
+  background: currentColor; flex-shrink: 0;
+}
+.center .eyebrow::before{ display:none; }
 
 .lead{
-  color:var(--muted);font-size:var(--text-md);line-height:var(--lh-loose);
-  max-width:640px;font-weight:400;text-wrap:pretty;
+  font-size: clamp(1.06rem, 1rem + .45vw, 1.24rem);
+  line-height: 1.72;
+  font-weight: 450;
 }
 
-.grad-text{background:var(--grad-145);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* grad-text mai bogat (tri-color) + fallback culoare */
+.grad-text{
+  background: var(--grad-tri);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-/* ---------- 3. HERO mai impactant ---------- */
+/* brand-logo .name optional (defensiv) */
+.brand-logo .name{ font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em; }
+
+/* numere = vedete vizuale */
+.stat .num, .price .amt, .result-big{
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.04em;
+}
+
+/* ============================================================
+   3. HERO — GRADIENT MESH SPECTACULOS + ORB + GRAIN
+   ============================================================ */
 .hero{
+  position: relative;
+  overflow: hidden;
   background:
-    radial-gradient(ellipse 820px 520px at 82% -8%,  rgba(37,99,235,.18),  transparent 55%),
-    radial-gradient(ellipse 620px 420px at 8% 14%,   rgba(16,185,129,.14), transparent 52%),
-    radial-gradient(ellipse 420px 320px at 52% 112%, rgba(37,99,235,.08),  transparent 60%),
+    radial-gradient(ellipse 960px 640px at 82% -10%, rgba(37,99,235,.28),  transparent 52%),
+    radial-gradient(ellipse 760px 540px at 2%  18%,  rgba(16,185,129,.24), transparent 50%),
+    radial-gradient(ellipse 560px 420px at 52% 112%, rgba(232,194,104,.16),transparent 58%),
+    radial-gradient(ellipse 420px 300px at 96% 88%,  rgba(16,185,129,.12), transparent 60%),
     var(--bg);
 }
+/* orb rotativ — plasma subtila in spate */
+.hero::after{
+  content:''; position:absolute; inset:-45%; z-index:0; pointer-events:none;
+  border-radius:50%;
+  background: conic-gradient(from 0deg at 64% 36%,
+    rgba(16,185,129,.16) 0deg, rgba(37,99,235,.22) 90deg,
+    rgba(232,194,104,.12) 160deg, transparent 215deg,
+    rgba(37,99,235,.12) 295deg, rgba(16,185,129,.12) 360deg);
+  animation: cf-orb 26s linear infinite;
+  will-change: transform;
+}
+@keyframes cf-orb{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+/* grain premium */
 .hero::before{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.6;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }
-.hero > *{position:relative;z-index:1}
-.hero h1{font-size:var(--text-3xl);font-weight:900;line-height:var(--lh-tight);letter-spacing:var(--ls-tight)}
-.hero .lead{margin:18px 0 28px;font-size:var(--text-md);line-height:var(--lh-loose)}
-[data-theme="dark"] .hero::before{opacity:.35}
+.hero > *{ position: relative; z-index: 1; }
 
-/* glasscard hero — adancime sticla */
+[data-theme="dark"] .hero{
+  background:
+    radial-gradient(ellipse 960px 640px at 82% -10%, rgba(37,99,235,.42),  transparent 52%),
+    radial-gradient(ellipse 760px 540px at 2%  18%,  rgba(16,185,129,.34), transparent 50%),
+    radial-gradient(ellipse 560px 420px at 52% 112%, rgba(232,194,104,.20),transparent 58%),
+    radial-gradient(ellipse 420px 300px at 96% 88%,  rgba(16,185,129,.20), transparent 60%),
+    var(--bg);
+}
+[data-theme="dark"] .hero::before{ opacity:.4; }
+
+.hero .lead{ margin: 20px 0 30px; }
+.hero-trust{ margin-top: 28px; font-weight: 700; }
+.hero-trust span{ display:flex; align-items:center; gap:7px; }
+
+/* ============================================================
+   4. GLASSCARD — sticla reala + halo + flotare
+   ============================================================ */
 .glasscard{
-  background:color-mix(in srgb,var(--card) 88%,transparent);
-  backdrop-filter:saturate(140%) blur(6px);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.5);
+  position: relative;
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  backdrop-filter: saturate(190%) blur(18px);
+  -webkit-backdrop-filter: saturate(190%) blur(18px);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--ring-emerald), var(--shadow-pop), inset 0 1px 0 rgba(255,255,255,.6);
+  animation: cf-float 6s ease-in-out infinite;
+  will-change: transform;
 }
-[data-theme="dark"] .glasscard{box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.06)}
-.chart .bar{transition:opacity .2s ease, filter .2s ease}
-.glasscard:hover .chart .bar{opacity:1;filter:saturate(1.1)}
+.glasscard::before{
+  content:''; position:absolute; inset:-3px -3px -26px -3px; z-index:-1;
+  border-radius: inherit;
+  background: linear-gradient(148deg, rgba(16,185,129,.34), rgba(37,99,235,.28));
+  filter: blur(30px); opacity:.65; transition: opacity .45s var(--ease);
+  pointer-events: none;
+}
+.glasscard:hover::before{ opacity:1; }
+@keyframes cf-float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+@media(prefers-reduced-motion: reduce){
+  .glasscard, .hero::after{ animation: none; }
+}
+[data-theme="dark"] .glasscard{
+  background: color-mix(in srgb, var(--card) 76%, transparent);
+  border-color: rgba(255,255,255,.1);
+}
+[data-theme="dark"] .glasscard::before{
+  background: linear-gradient(148deg, rgba(13,204,138,.44), rgba(37,99,235,.38)); opacity:.5;
+}
 
-/* ---------- 4. BUTOANE — shimmer + states ---------- */
-.btn{transition:transform .15s var(--ease-out), box-shadow .2s ease, background .2s ease, background-position .45s ease}
+/* chart staggered + bara 6 aurie (payoff) */
+.chart .bar{ background: var(--grad-cool); border-radius: 9px 9px 0 0; transition: filter .2s; }
+.chart .bar:nth-child(1){ animation: grow .65s 0s var(--ease) both; }
+.chart .bar:nth-child(2){ animation: grow .65s .09s var(--ease) both; }
+.chart .bar:nth-child(3){ animation: grow .65s .18s var(--ease) both; }
+.chart .bar:nth-child(4){ animation: grow .65s .27s var(--ease) both; }
+.chart .bar:nth-child(5){ animation: grow .65s .36s var(--ease) both; }
+.chart .bar:nth-child(6){
+  animation: grow .65s .48s var(--ease) both;
+  background: linear-gradient(to top, var(--emerald), var(--gold));
+  box-shadow: 0 0 22px rgba(232,194,104,.6);
+}
+.glasscard:hover .chart .bar{ filter: saturate(1.15); }
+
+/* ============================================================
+   5. NAVBAR — premium glass + stripe gradient
+   ============================================================ */
+.nav{
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.nav::after{
+  content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px;
+  background: var(--grad-tri); opacity:.7;
+}
+.brand-logo .dot{ box-shadow: 0 6px 16px rgba(16,185,129,.4); }
+.nav-links a{ position: relative; }
+.nav-links a::after{
+  content:''; position:absolute; left:11px; right:11px; bottom:4px; height:2px;
+  background: var(--grad-cool); border-radius:2px;
+  transform: scaleX(0); transform-origin: left; transition: transform .22s var(--ease);
+}
+.nav-links a:hover::after{ transform: scaleX(1); }
+
+/* ============================================================
+   6. BUTOANE — mai indraznete + shine sweep
+   ============================================================ */
+.btn{
+  font-family: var(--font-body);
+  font-weight: 800;
+  border-radius: 14px;
+  padding: 14px 26px;
+  transition: transform .16s var(--ease), box-shadow .16s var(--ease), background .16s;
+  position: relative; overflow: hidden;
+}
+.btn:hover{ transform: translateY(-3px); }
+.btn:active{ transform: translateY(-1px); }
 .btn-primary{
-  background:var(--grad-145);background-size:200% auto;
-  box-shadow:0 8px 24px rgba(16,185,129,.30), 0 1px 3px rgba(15,37,64,.12);
+  background: var(--grad-cool);
+  box-shadow: 0 10px 28px rgba(16,185,129,.4);
 }
-.btn-primary:hover{
-  transform:translateY(-2px);background-position:right center;
-  box-shadow:0 12px 30px rgba(16,185,129,.40), 0 2px 6px rgba(15,37,64,.14);
+.btn-primary:hover{ box-shadow: 0 16px 40px rgba(16,185,129,.5); }
+.btn-primary::after{
+  content:''; position:absolute; top:0; left:-120%; width:60%; height:100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: skewX(-18deg); transition: left .6s var(--ease);
 }
-.btn-primary:active{transform:translateY(0);box-shadow:0 3px 10px rgba(16,185,129,.28)}
-.btn-ghost:hover{border-color:var(--emerald);color:var(--emerald);background:var(--emerald-tint)}
+.btn-primary:hover::after{ left:140%; }
+.btn-ghost{ border-color: var(--border); font-weight: 700; }
+.btn-ghost:hover{ border-color: var(--emerald); color: var(--emerald); background: color-mix(in srgb,var(--emerald) 7%, transparent); }
 
-/* ---------- 5. NAV polish ---------- */
-.nav{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(170%) blur(14px)}
-.nav-links a{transition:color .15s ease, background .15s ease}
-.icon-btn{transition:border-color .15s ease, transform .15s var(--ease-out), background .15s ease}
-.icon-btn:hover{border-color:var(--emerald);background:var(--emerald-tint);transform:translateY(-1px)}
-
-/* ---------- 6. CARDURI mai elegante ---------- */
-.card{
-  transition:transform .22s var(--ease-spring), box-shadow .22s ease, border-color .2s ease;
-  position:relative;
+/* ============================================================
+   7. STATS — accent gradient + ridicare
+   ============================================================ */
+.stat{
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s;
 }
-.card:hover{
-  transform:translateY(-5px);
-  border-color:var(--emerald-line);
-  box-shadow:
-    0 4px 0 0 rgba(16,185,129,.16),
-    0 22px 44px rgba(16,185,129,.10),
-    0 8px 18px rgba(15,37,64,.08);
-}
-[data-theme="dark"] .card:hover{
-  box-shadow:0 4px 0 0 rgba(16,185,129,.20), 0 22px 50px rgba(0,0,0,.45);
-}
-.card .ic{
-  background:var(--grad-surface);
-  border:1px solid var(--emerald-tint);
-  transition:transform .22s var(--ease-spring);
-}
-.card:hover .ic{transform:scale(1.06) rotate(-3deg)}
-.card h3{font-size:var(--text-md);font-weight:700;margin-bottom:6px}
-.card p{color:var(--muted);font-size:var(--text-sm);line-height:var(--lh-body)}
-.card .more{color:var(--emerald);font-weight:700;font-size:var(--text-sm);margin-top:14px;display:inline-flex;align-items:center;gap:6px;transition:gap .15s ease}
-.card:hover .more{gap:10px}
-
-/* ---------- 7. STATS — cifre tabulare + accent border ---------- */
-.stat{border-top:2px solid transparent;border-image:var(--grad-145) 1;transition:box-shadow .2s ease, transform .2s var(--ease-out)}
-.stat:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.stat:hover{ transform: translateY(-4px); box-shadow: var(--shadow-pop); border-color: color-mix(in srgb,var(--emerald) 40%, var(--border)); }
 .stat .num{
-  font-size:clamp(1.7rem,1.3rem + 2vw,2.2rem);font-weight:900;line-height:1;
-  letter-spacing:var(--ls-tight);
-  font-variant-numeric:tabular-nums;font-feature-settings:'tnum';
+  font-size: clamp(2.1rem, 1.5rem + 2.4vw, 3.1rem);
+  font-weight: 800; line-height: .95;
+  background: var(--grad-tri);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.stat .lbl{font-size:var(--text-sm)}
+.stat .lbl{ font-weight: 600; }
 
-/* ---------- 8. LEVELS / PRICING ---------- */
-.level{transition:transform .2s var(--ease-out), border-color .2s ease, box-shadow .2s ease}
-.level:hover{transform:translateY(-3px);border-color:var(--emerald);box-shadow:var(--shadow-emerald)}
-.level .n{font-variant-numeric:tabular-nums}
+/* ============================================================
+   8. CARDURI — bold hover + bara de accent sus
+   ============================================================ */
+.card{
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s;
+  position: relative; overflow: hidden;
+}
+.card::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background: var(--grad-cool); transform: scaleX(0); transform-origin: left;
+  transition: transform .3s var(--ease);
+}
+.card:hover{ transform: translateY(-6px); box-shadow: var(--shadow-pop); border-color: color-mix(in srgb,var(--emerald) 45%, var(--border)); }
+.card:hover::before{ transform: scaleX(1); }
+.card .ic{
+  width: 50px; height: 50px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(16,185,129,.18), rgba(37,99,235,.18));
+  font-size: 1.4rem; box-shadow: inset 0 0 0 1px rgba(16,185,129,.18);
+}
+.card:hover .ic{ background: var(--grad-cool); color:#fff; }
+.card .more{ font-weight: 800; }
+.card .more::after{ content:' →'; transition: margin .2s var(--ease); }
+.card:hover .more::after{ margin-left: 4px; }
 
-.price{transition:transform .22s var(--ease-spring), box-shadow .22s ease}
-.price:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.price.feat{box-shadow:0 22px 54px rgba(16,185,129,.22)}
-.price.feat:hover{box-shadow:0 28px 64px rgba(16,185,129,.30)}
-.price .amt{font-size:var(--text-2xl);font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:var(--ls-snug)}
+/* ============================================================
+   9. LEVELS / PRICING / BAND
+   ============================================================ */
+.level{ border-radius: var(--radius); box-shadow: var(--shadow-soft); transition: transform .18s var(--ease), border-color .18s, box-shadow .18s; }
+.level:hover{ transform: translateY(-4px); border-color: var(--emerald); box-shadow: var(--shadow-pop); }
+.level .n{ background: var(--grad-cool); box-shadow: 0 8px 20px rgba(16,185,129,.32); font-family: var(--font-display); }
 
-/* ---------- 9. BAND CTA ---------- */
-.band{background:var(--grad-deep);position:relative;overflow:hidden}
+.price{ border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); transition: transform .2s var(--ease), box-shadow .2s; }
+.price:hover{ transform: translateY(-5px); box-shadow: var(--shadow-pop); }
+.price.feat{
+  border-color: var(--emerald);
+  box-shadow: var(--ring-emerald), 0 26px 60px rgba(16,185,129,.28);
+  transform: scale(1.02);
+}
+.price.feat:hover{ transform: scale(1.02) translateY(-5px); }
+.price .amt{ font-size: clamp(2.1rem,1.7rem + 1.6vw, 3rem); font-weight: 800; }
+.price li::before{ font-weight: 900; }
+
+.band{
+  background: var(--grad-tri);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-pop);
+  position: relative; overflow: hidden;
+}
 .band::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(600px 300px at 80% -20%, rgba(255,255,255,.18), transparent 60%);
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(600px 300px at 80% -20%, rgba(255,255,255,.22), transparent 60%);
 }
-.band > *{position:relative;z-index:1}
+.band > *{ position: relative; z-index:1; }
+.band h2{
+  font-family: var(--font-display);
+  font-size: var(--display-band);
+  font-weight: 800; letter-spacing: -.03em; line-height: 1.08;
+}
 
-/* ---------- 10. PILL ---------- */
-.pill{transition:transform .15s var(--ease-out), border-color .15s ease, background .15s ease}
-.pill:hover{transform:translateY(-1px);border-color:var(--emerald-line);background:var(--emerald-tint)}
+/* ============================================================
+   10. PILL / BADGE + PILL nou
+   ============================================================ */
+.pill{
+  background: color-mix(in srgb, var(--emerald) 12%, var(--card));
+  color: var(--emerald-d);
+  border: 1px solid color-mix(in srgb, var(--emerald) 30%, var(--border));
+  font-weight: 800; border-radius: 999px;
+}
+[data-theme="dark"] .pill{ color: var(--emerald); }
 
-/* ---------- 11. ARTICLE — coloana lizibila ---------- */
-.article{max-width:700px;padding:48px 24px 80px}
-.article h1{font-size:var(--text-2xl);font-weight:800;line-height:var(--lh-snug);letter-spacing:var(--ls-snug);margin:16px 0 6px}
-.article h2{font-size:var(--text-xl);font-weight:700;line-height:var(--lh-snug);letter-spacing:-.01em;margin:40px 0 12px}
-.article h3{font-size:var(--text-lg);font-weight:700;margin:28px 0 10px}
-.article p,.article li{font-size:var(--text-base);line-height:var(--lh-body);color:var(--text);opacity:.93;margin:14px 0}
-.article .meta{font-size:var(--text-sm);color:var(--muted);letter-spacing:.01em;margin-bottom:10px}
+/* componenta noua optionala: .badge (daca nu e definita altundeva) */
+.badge{
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 999px;
+  font-size: .74rem; font-weight: 800; letter-spacing: .02em;
+  border: 1px solid var(--border); background: var(--bg-soft);
+}
 
-/* ---------- 12. CALCULATOR ---------- */
-.calc .panel{transition:box-shadow .2s ease}
-.calc .panel:hover{box-shadow:var(--shadow-lg)}
-.field input,.field select{transition:border-color .15s ease, box-shadow .15s ease}
-.field input:focus,.field select:focus{outline:none;border-color:var(--emerald);box-shadow:var(--ring)}
+/* ============================================================
+   11. ARTICOL — lizibilitate premium
+   ============================================================ */
+.article h1{ font-family: var(--font-body); font-weight: 800; letter-spacing: -.025em; }
+.article h2{ font-family: var(--font-display); font-weight: 700; letter-spacing: -.02em; }
+.article p, .article li{ font-size: 1.06rem; line-height: 1.85; }
+.article .disc{ border-left: 4px solid var(--gold); border-radius: 10px; }
+
+/* ============================================================
+   12. CALCULATOR
+   ============================================================ */
+.calc .panel{ border-radius: var(--radius); box-shadow: var(--shadow-soft); }
+.field input, .field select{ border-radius: 12px; transition: border-color .15s, box-shadow .15s; }
+.field input:focus, .field select:focus{
+  outline: none; border-color: var(--emerald);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--emerald) 22%, transparent);
+}
 .result-big{
-  font-size:clamp(2.0rem,1.4rem + 3vw,3.0rem);font-weight:900;line-height:1.05;
-  letter-spacing:var(--ls-tight);
-  font-variant-numeric:tabular-nums;font-feature-settings:'tnum';
-}
-.result-row{font-variant-numeric:tabular-nums}
-
-/* ---------- 13. REVEAL micro-interactiune ---------- */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease-out), transform .6s var(--ease-out)}
-.reveal.in{opacity:1;transform:none}
-
-/* ---------- 14. COMPONENTE NOI optionale ---------- */
-/* badge mic colorat */
-.tagline{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
-  background:var(--emerald-tint);border:1px solid var(--emerald-line);color:var(--emerald-d);
-  font-size:var(--text-sm);font-weight:700}
-[data-theme="dark"] .tagline{color:#5ce0b0}
-/* divider subtil cu gradient */
-.divider{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:var(--space-6) 0}
-/* sectiune soft cu adancime */
-.section-soft{background:linear-gradient(180deg,var(--bg-soft),var(--bg-soft2));position:relative}
-/* kicker numar mare decorativ (ex: pasi) */
-.step-num{font-size:var(--text-3xl);font-weight:900;line-height:1;background:var(--grad-145);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  font-variant-numeric:tabular-nums;opacity:.9}
-/* quote / testimonial */
-.quote{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--emerald);
-  border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);font-size:var(--text-md);line-height:var(--lh-loose)}
-.quote cite{display:block;margin-top:12px;font-size:var(--text-sm);color:var(--muted);font-style:normal;font-weight:700}
-
-/* ---------- 15. ACCESIBILITATE ---------- */
-:focus-visible{outline:2px solid var(--emerald);outline-offset:3px;border-radius:6px}
-.btn:focus-visible,.icon-btn:focus-visible{outline:2px solid var(--emerald);outline-offset:3px}
-a:focus-visible{outline:2px solid var(--emerald);outline-offset:3px;border-radius:4px}
-
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{
-    animation-duration:.001ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;
-    scroll-behavior:auto !important;
-  }
-  .reveal{opacity:1;transform:none}
+  font-size: clamp(2.3rem,1.8rem + 2.6vw, 3.4rem); font-weight: 800;
+  background: var(--grad-tri);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 
-/* ---------- 16. SELECTION ---------- */
-::selection{background:rgba(16,185,129,.22);color:var(--text)}
+/* ============================================================
+   13. COMPONENTE NOI OPTIONALE
+   ============================================================ */
+
+/* --- .timeline (vertical, cu nod gradient) --- */
+.timeline{ position: relative; display: grid; gap: 18px; }
+.timeline::before{
+  content:''; position:absolute; left:21px; top:8px; bottom:8px; width:2px;
+  background: linear-gradient(var(--emerald), var(--blue), var(--gold)); opacity:.35;
+}
+.tl-item{
+  position: relative; display: flex; gap: 16px; align-items: flex-start;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 20px; box-shadow: var(--shadow-soft);
+  transition: transform .18s var(--ease), border-color .18s, box-shadow .18s;
+}
+.tl-item:hover{ transform: translateX(4px); border-color: var(--emerald); box-shadow: var(--shadow-pop); }
+.tl-node{
+  flex: 0 0 44px; width: 44px; height: 44px; border-radius: 14px;
+  background: var(--grad-cool); color:#fff; font-family: var(--font-display);
+  font-weight: 800; display: grid; place-items: center;
+  box-shadow: 0 8px 20px rgba(16,185,129,.32); position: relative; z-index:1;
+}
+.tl-title{ margin: 4px 0 4px; }
+.tl-desc{ color: var(--muted); font-size: .95rem; }
+.tl-link{ color: var(--emerald); font-weight: 800; font-size: .9rem; }
+
+/* --- .testimonial --- */
+.testimonial{
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-soft);
+  position: relative;
+}
+.testimonial::before{
+  content:'\201C'; position:absolute; top:6px; left:18px;
+  font-family: var(--font-display); font-size: 4rem; line-height:1;
+  color: var(--emerald); opacity:.18;
+}
+.testimonial p{ font-size: 1.06rem; line-height: 1.7; position: relative; z-index:1; }
+.testimonial .who{ display:flex; align-items:center; gap:12px; margin-top:16px; }
+.testimonial .who img,
+.testimonial .who .avatar{
+  width:44px; height:44px; border-radius:50%; object-fit:cover;
+  background: var(--grad-cool); display:grid; place-items:center; color:#fff; font-weight:800;
+}
+.testimonial .who b{ display:block; font-weight:800; }
+.testimonial .who span{ color: var(--muted); font-size:.86rem; }
+
+/* --- .logo-strip / trust-strip (marquee orizontal) --- */
+.logo-strip{ overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.logo-strip .track{ display:flex; gap: 40px; width: max-content; animation: cf-marquee 30s linear infinite; }
+.logo-strip:hover .track{ animation-play-state: paused; }
+@keyframes cf-marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.logo-strip .item{ color: var(--muted); font-weight: 700; display:flex; align-items:center; gap:8px; white-space:nowrap; }
+
+/* --- sectiuni dark cu personalitate (optional, via .section--dark) --- */
+.section--dark, .section--navy{
+  background: var(--navy-deep); color: #e8eefb; position: relative;
+}
+.section--dark .num, .section--navy .num{
+  background: var(--grad-warm);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section--dark .stat, .section--navy .card{
+  background: var(--navy-surface); border-color: rgba(255,255,255,.08);
+}
+.section--dark .lbl, .section--navy p{ color: #93a7c4; }
+
+/* ============================================================
+   14. REVEAL on scroll (pastrat + curba)
+   ============================================================ */
+.reveal{ opacity:0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal.in{ opacity:1; transform:none; }
+@media(prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; }
+  .nav-links a::after, .card::before, .btn-primary::after, .logo-strip .track{ animation:none; transition:none; }
+}
+
+/* ============================================================
+   15. RESPONSIVE
+   ============================================================ */
+@media(max-width: 600px){
+  .hero h1{ font-size: clamp(2.3rem, 9vw, 3.1rem); letter-spacing: -.03em; }
+  .band h2{ font-size: clamp(1.9rem, 7vw, 2.8rem); }
+  h2.title{ font-size: clamp(1.7rem, 6.5vw, 2.3rem); }
+  .eyebrow::before{ width: 18px; }
+  .price.feat{ transform: none; }
+}
