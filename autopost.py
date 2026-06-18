@@ -115,7 +115,8 @@ def post_youtube(folder):
         return log("  youtube: FAIL token (fără access_token)")
     # 2) titlu + descriere + tag-uri din caption (tag-urile ajută la căutare/recomandări)
     title, desc = _parse_youtube(caption(folder, "youtube"))
-    tags = re.findall(r"#(\w+)", caption(folder, "youtube"))
+    tags = [t for t in re.findall(r"#(\w+)", caption(folder, "youtube"))
+            if not t.isdigit() and len(t) > 1]
     tags = list(dict.fromkeys(tags + ["educatie financiara", "finante personale",
                                        "bani", "Romania", "Clubul Financiar"]))[:15]
     video = os.path.join(ROOT, "media", folder, "reel.mp4")
