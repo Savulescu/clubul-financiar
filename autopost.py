@@ -11,6 +11,7 @@ Acoperire:
   TikTok    ⚙️   (TT_CLIENT_KEY, TT_CLIENT_SECRET, TT_REFRESH_TOKEN) -> semi-auto: urcă în inbox, publici din app
   X/Twitter ✅   (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET) -> v2 media upload + tweet, 100% auto
   Threads   ✅   (THREADS_USER_ID, THREADS_TOKEN)   -> graph.threads.net, container video + publish, 100% auto
+  Reddit    ✅   (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD, REDDIT_SUBREDDIT) -> video în subreddit propriu, 100% auto
 """
 import json, os, sys, datetime, re, time
 import requests
@@ -172,6 +173,56 @@ def post_threads(folder):
                       data={"creation_id": cid, "access_token": tok}, timeout=120)
     log(f"  threads: {'OK' if p.ok and 'id' in p.text else 'FAIL ' + p.text[:200]}")
 
+def post_reddit(folder):
+    """Reddit — postează video în subreddit-ul propriu (r/REDDIT_SUBREDDIT). 100% automat.
+    OAuth2 password grant (app tip 'script'). Upload video + poster în media Reddit, apoi submit kind=video.
+    Titlul = TITLU din secțiunea YOUTUBE SHORT a caption-ului."""
+    cid = os.environ.get("REDDIT_CLIENT_ID")
+    csec = os.environ.get("REDDIT_CLIENT_SECRET")
+    user = os.environ.get("REDDIT_USERNAME")
+    pw = os.environ.get("REDDIT_PASSWORD")
+    sub = os.environ.get("REDDIT_SUBREDDIT", "ClubulFinanciar")
+    if not (cid and csec and user and pw):
+        return log("  reddit: fără secrets, sar")
+    UA = f"clubulfinanciar-autoposter/1.0 by u/{user}"
+    # 1) access token (password grant)
+    tr = requests.post("https://www.reddit.com/api/v1/access_token", auth=(cid, csec),
+                       data={"grant_type": "password", "username": user, "password": pw},
+                       headers={"User-Agent": UA}, timeout=60)
+    if not tr.ok or "access_token" not in tr.text:
+        return log(f"  reddit: FAIL token {tr.status_code} {tr.text[:200]}")
+    H = {"Authorization": f"Bearer {tr.json()['access_token']}", "User-Agent": UA}
+    # helper: urcă un fișier în media Reddit (S3) -> întoarce URL-ul public
+    def upload(path, mimetype):
+        fn = os.path.basename(path)
+        lease = requests.post("https://oauth.reddit.com/api/media/asset.json", headers=H,
+                              data={"filepath": fn, "mimetype": mimetype}, timeout=60)
+        if not lease.ok:
+            return None
+        a = lease.json()["args"]
+        action = a["action"]
+        action = ("https:" + action) if action.startswith("//") else action
+        fields = {f["name"]: f["value"] for f in a["fields"]}
+        with open(path, "rb") as fh:
+            up = requests.post(action, data=fields, files={"file": (fn, fh, mimetype)}, timeout=600)
+        if up.status_code not in (200, 201, 204):
+            return None
+        return f"{action}/{fields['key']}"
+    video_url = upload(os.path.join(ROOT, "media", folder, "reel.mp4"), "video/mp4")
+    poster_url = upload(os.path.join(ROOT, "media", folder, "feed.png"), "image/png")
+    if not (video_url and poster_url):
+        return log("  reddit: FAIL upload media")
+    title = _parse_youtube(caption(folder, "youtube"))[0]
+    sb = requests.post("https://oauth.reddit.com/api/submit", headers=H, data={
+        "sr": sub, "kind": "video", "title": title[:300], "url": video_url,
+        "video_poster_url": poster_url, "api_type": "json", "resubmit": "true",
+        "sendreplies": "false"}, timeout=120)
+    try:
+        errs = sb.json().get("json", {}).get("errors", [])
+    except Exception:
+        errs = [["PARSE", sb.text[:120]]]
+    log(f"  reddit: {'OK' if sb.ok and not errs else 'FAIL ' + str(errs or sb.text[:200])}")
+
 def post_tiktok(folder):
     """Semi-automat: urcă reel-ul în INBOX-ul TikTok (draft). Tu dai 'Publică' din app.
     Mod 'upload to inbox' (scope video.upload) — merge și înainte de auditul TikTok.
@@ -296,7 +347,8 @@ def main():
         f"TG_CHANNEL={os.environ.get('TELEGRAM_CHANNEL')!r}")
     funcs = {"telegram": post_telegram, "facebook": post_facebook,
              "instagram": post_instagram, "youtube": post_youtube,
-             "tiktok": post_tiktok, "x": post_x, "threads": post_threads}
+             "tiktok": post_tiktok, "x": post_x, "threads": post_threads,
+             "reddit": post_reddit}
     for plat in entry["platforms"]:
         if plat in funcs:
             try:
