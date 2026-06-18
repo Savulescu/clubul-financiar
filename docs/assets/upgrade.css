@@ -1,0 +1,261 @@
+/* ============================================================
+   CLUBUL FINANCIAR — VISUAL UPGRADE LAYER
+   Se adauga DUPA style.css. Nu redenumeste nimic.
+   Pastreaza toti tokenii + clasele existente, doar le ridica.
+   ============================================================ */
+
+/* ---------- 1. TOKENI NOI (extind, nu inlocuiesc) ---------- */
+:root{
+  /* Scala tipografica fluida (ratio ~1.18) */
+  --text-xs:   clamp(0.72rem, 0.68rem + 0.2vw, 0.78rem);
+  --text-sm:   clamp(0.83rem, 0.79rem + 0.2vw, 0.90rem);
+  --text-base: clamp(0.97rem, 0.93rem + 0.2vw, 1.05rem);
+  --text-md:   clamp(1.08rem, 1.02rem + 0.3vw, 1.18rem);
+  --text-lg:   clamp(1.22rem, 1.12rem + 0.5vw, 1.42rem);
+  --text-xl:   clamp(1.48rem, 1.26rem + 1.1vw, 1.90rem);
+  --text-2xl:  clamp(1.75rem, 1.35rem + 2.0vw, 2.50rem);
+  --text-3xl:  clamp(2.10rem, 1.50rem + 3.0vw, 3.60rem);
+
+  --lh-tight: 1.12;
+  --lh-snug:  1.26;
+  --lh-body:  1.72;
+  --lh-loose: 1.85;
+
+  --ls-tight:  -0.03em;
+  --ls-snug:   -0.02em;
+  --ls-normal:  0em;
+  --ls-wide:    0.06em;
+  --ls-wider:   0.12em;
+  --ls-widest:  0.16em;
+
+  /* Ritm de spatiere */
+  --space-1: 6px;  --space-2: 12px; --space-3: 18px;
+  --space-4: 24px; --space-5: 36px; --space-6: 56px; --space-7: 84px;
+
+  /* Easing premium */
+  --ease-out: cubic-bezier(.22,.68,0,1.06);
+  --ease-spring: cubic-bezier(.22,.68,0,1.2);
+
+  /* Suprafete & gradient-uri rafinate (tint, nu inlocuiesc --grad) */
+  --emerald-tint: rgba(16,185,129,.08);
+  --emerald-line: rgba(16,185,129,.32);
+  --blue-tint:    rgba(37,99,235,.08);
+  --grad-surface: linear-gradient(135deg, rgba(16,185,129,.07) 0%, rgba(37,99,235,.07) 100%);
+  --grad-deep:    linear-gradient(145deg, var(--emerald-d) 0%, var(--blue-d) 100%);
+  --grad-145:     linear-gradient(145deg, var(--emerald), var(--blue));
+
+  /* Shadow colorata pentru depth premium */
+  --shadow-emerald: 0 18px 40px rgba(16,185,129,.16);
+  --ring: 0 0 0 3px rgba(16,185,129,.35);
+}
+
+[data-theme="dark"]{
+  --emerald-tint: rgba(16,185,129,.12);
+  --emerald-line: rgba(16,185,129,.40);
+  --blue-tint:    rgba(37,99,235,.14);
+  --grad-surface: linear-gradient(135deg, rgba(16,185,129,.10) 0%, rgba(37,99,235,.10) 100%);
+  --shadow-emerald: 0 18px 44px rgba(16,185,129,.20);
+  --ring: 0 0 0 3px rgba(16,185,129,.45);
+  --bg-soft:#0d1b2f; --bg-soft2:#13243d; --card:#11203a;
+  --border:rgba(255,255,255,.08);
+}
+
+/* ---------- 2. TIPOGRAFIE ---------- */
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  font-optical-sizing:auto;
+  font-feature-settings:'cv02','cv03','cv04','cv11';
+  font-size:var(--text-base);
+  line-height:var(--lh-body);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+h1,h2,h3,h4{font-family:inherit;font-optical-sizing:auto;text-wrap:balance}
+h1{font-size:var(--text-3xl);font-weight:800;line-height:var(--lh-tight);letter-spacing:var(--ls-tight)}
+h2{font-size:var(--text-2xl);font-weight:800;line-height:var(--lh-snug);letter-spacing:var(--ls-snug)}
+h3{font-size:var(--text-lg);font-weight:700;line-height:var(--lh-snug);letter-spacing:var(--ls-snug)}
+
+h2.title{font-size:var(--text-2xl);font-weight:800;line-height:var(--lh-snug);letter-spacing:var(--ls-snug);margin:12px 0 14px}
+
+.eyebrow{
+  color:var(--emerald);font-weight:700;text-transform:uppercase;
+  font-size:var(--text-xs);letter-spacing:var(--ls-widest);line-height:1;
+  -webkit-font-smoothing:antialiased;
+}
+
+.lead{
+  color:var(--muted);font-size:var(--text-md);line-height:var(--lh-loose);
+  max-width:640px;font-weight:400;text-wrap:pretty;
+}
+
+.grad-text{background:var(--grad-145);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ---------- 3. HERO mai impactant ---------- */
+.hero{
+  background:
+    radial-gradient(ellipse 820px 520px at 82% -8%,  rgba(37,99,235,.18),  transparent 55%),
+    radial-gradient(ellipse 620px 420px at 8% 14%,   rgba(16,185,129,.14), transparent 52%),
+    radial-gradient(ellipse 420px 320px at 52% 112%, rgba(37,99,235,.08),  transparent 60%),
+    var(--bg);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+.hero > *{position:relative;z-index:1}
+.hero h1{font-size:var(--text-3xl);font-weight:900;line-height:var(--lh-tight);letter-spacing:var(--ls-tight)}
+.hero .lead{margin:18px 0 28px;font-size:var(--text-md);line-height:var(--lh-loose)}
+[data-theme="dark"] .hero::before{opacity:.35}
+
+/* glasscard hero — adancime sticla */
+.glasscard{
+  background:color-mix(in srgb,var(--card) 88%,transparent);
+  backdrop-filter:saturate(140%) blur(6px);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.5);
+}
+[data-theme="dark"] .glasscard{box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.06)}
+.chart .bar{transition:opacity .2s ease, filter .2s ease}
+.glasscard:hover .chart .bar{opacity:1;filter:saturate(1.1)}
+
+/* ---------- 4. BUTOANE — shimmer + states ---------- */
+.btn{transition:transform .15s var(--ease-out), box-shadow .2s ease, background .2s ease, background-position .45s ease}
+.btn-primary{
+  background:var(--grad-145);background-size:200% auto;
+  box-shadow:0 8px 24px rgba(16,185,129,.30), 0 1px 3px rgba(15,37,64,.12);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);background-position:right center;
+  box-shadow:0 12px 30px rgba(16,185,129,.40), 0 2px 6px rgba(15,37,64,.14);
+}
+.btn-primary:active{transform:translateY(0);box-shadow:0 3px 10px rgba(16,185,129,.28)}
+.btn-ghost:hover{border-color:var(--emerald);color:var(--emerald);background:var(--emerald-tint)}
+
+/* ---------- 5. NAV polish ---------- */
+.nav{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(170%) blur(14px)}
+.nav-links a{transition:color .15s ease, background .15s ease}
+.icon-btn{transition:border-color .15s ease, transform .15s var(--ease-out), background .15s ease}
+.icon-btn:hover{border-color:var(--emerald);background:var(--emerald-tint);transform:translateY(-1px)}
+
+/* ---------- 6. CARDURI mai elegante ---------- */
+.card{
+  transition:transform .22s var(--ease-spring), box-shadow .22s ease, border-color .2s ease;
+  position:relative;
+}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:var(--emerald-line);
+  box-shadow:
+    0 4px 0 0 rgba(16,185,129,.16),
+    0 22px 44px rgba(16,185,129,.10),
+    0 8px 18px rgba(15,37,64,.08);
+}
+[data-theme="dark"] .card:hover{
+  box-shadow:0 4px 0 0 rgba(16,185,129,.20), 0 22px 50px rgba(0,0,0,.45);
+}
+.card .ic{
+  background:var(--grad-surface);
+  border:1px solid var(--emerald-tint);
+  transition:transform .22s var(--ease-spring);
+}
+.card:hover .ic{transform:scale(1.06) rotate(-3deg)}
+.card h3{font-size:var(--text-md);font-weight:700;margin-bottom:6px}
+.card p{color:var(--muted);font-size:var(--text-sm);line-height:var(--lh-body)}
+.card .more{color:var(--emerald);font-weight:700;font-size:var(--text-sm);margin-top:14px;display:inline-flex;align-items:center;gap:6px;transition:gap .15s ease}
+.card:hover .more{gap:10px}
+
+/* ---------- 7. STATS — cifre tabulare + accent border ---------- */
+.stat{border-top:2px solid transparent;border-image:var(--grad-145) 1;transition:box-shadow .2s ease, transform .2s var(--ease-out)}
+.stat:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.stat .num{
+  font-size:clamp(1.7rem,1.3rem + 2vw,2.2rem);font-weight:900;line-height:1;
+  letter-spacing:var(--ls-tight);
+  font-variant-numeric:tabular-nums;font-feature-settings:'tnum';
+}
+.stat .lbl{font-size:var(--text-sm)}
+
+/* ---------- 8. LEVELS / PRICING ---------- */
+.level{transition:transform .2s var(--ease-out), border-color .2s ease, box-shadow .2s ease}
+.level:hover{transform:translateY(-3px);border-color:var(--emerald);box-shadow:var(--shadow-emerald)}
+.level .n{font-variant-numeric:tabular-nums}
+
+.price{transition:transform .22s var(--ease-spring), box-shadow .22s ease}
+.price:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.price.feat{box-shadow:0 22px 54px rgba(16,185,129,.22)}
+.price.feat:hover{box-shadow:0 28px 64px rgba(16,185,129,.30)}
+.price .amt{font-size:var(--text-2xl);font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:var(--ls-snug)}
+
+/* ---------- 9. BAND CTA ---------- */
+.band{background:var(--grad-deep);position:relative;overflow:hidden}
+.band::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(600px 300px at 80% -20%, rgba(255,255,255,.18), transparent 60%);
+}
+.band > *{position:relative;z-index:1}
+
+/* ---------- 10. PILL ---------- */
+.pill{transition:transform .15s var(--ease-out), border-color .15s ease, background .15s ease}
+.pill:hover{transform:translateY(-1px);border-color:var(--emerald-line);background:var(--emerald-tint)}
+
+/* ---------- 11. ARTICLE — coloana lizibila ---------- */
+.article{max-width:700px;padding:48px 24px 80px}
+.article h1{font-size:var(--text-2xl);font-weight:800;line-height:var(--lh-snug);letter-spacing:var(--ls-snug);margin:16px 0 6px}
+.article h2{font-size:var(--text-xl);font-weight:700;line-height:var(--lh-snug);letter-spacing:-.01em;margin:40px 0 12px}
+.article h3{font-size:var(--text-lg);font-weight:700;margin:28px 0 10px}
+.article p,.article li{font-size:var(--text-base);line-height:var(--lh-body);color:var(--text);opacity:.93;margin:14px 0}
+.article .meta{font-size:var(--text-sm);color:var(--muted);letter-spacing:.01em;margin-bottom:10px}
+
+/* ---------- 12. CALCULATOR ---------- */
+.calc .panel{transition:box-shadow .2s ease}
+.calc .panel:hover{box-shadow:var(--shadow-lg)}
+.field input,.field select{transition:border-color .15s ease, box-shadow .15s ease}
+.field input:focus,.field select:focus{outline:none;border-color:var(--emerald);box-shadow:var(--ring)}
+.result-big{
+  font-size:clamp(2.0rem,1.4rem + 3vw,3.0rem);font-weight:900;line-height:1.05;
+  letter-spacing:var(--ls-tight);
+  font-variant-numeric:tabular-nums;font-feature-settings:'tnum';
+}
+.result-row{font-variant-numeric:tabular-nums}
+
+/* ---------- 13. REVEAL micro-interactiune ---------- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease-out), transform .6s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- 14. COMPONENTE NOI optionale ---------- */
+/* badge mic colorat */
+.tagline{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
+  background:var(--emerald-tint);border:1px solid var(--emerald-line);color:var(--emerald-d);
+  font-size:var(--text-sm);font-weight:700}
+[data-theme="dark"] .tagline{color:#5ce0b0}
+/* divider subtil cu gradient */
+.divider{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:var(--space-6) 0}
+/* sectiune soft cu adancime */
+.section-soft{background:linear-gradient(180deg,var(--bg-soft),var(--bg-soft2));position:relative}
+/* kicker numar mare decorativ (ex: pasi) */
+.step-num{font-size:var(--text-3xl);font-weight:900;line-height:1;background:var(--grad-145);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  font-variant-numeric:tabular-nums;opacity:.9}
+/* quote / testimonial */
+.quote{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--emerald);
+  border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);font-size:var(--text-md);line-height:var(--lh-loose)}
+.quote cite{display:block;margin-top:12px;font-size:var(--text-sm);color:var(--muted);font-style:normal;font-weight:700}
+
+/* ---------- 15. ACCESIBILITATE ---------- */
+:focus-visible{outline:2px solid var(--emerald);outline-offset:3px;border-radius:6px}
+.btn:focus-visible,.icon-btn:focus-visible{outline:2px solid var(--emerald);outline-offset:3px}
+a:focus-visible{outline:2px solid var(--emerald);outline-offset:3px;border-radius:4px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1;transform:none}
+}
+
+/* ---------- 16. SELECTION ---------- */
+::selection{background:rgba(16,185,129,.22);color:var(--text)}
