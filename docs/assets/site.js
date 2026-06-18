@@ -72,18 +72,36 @@
   </div>`;
   document.body.appendChild(foot);
 
+  // ---- roluri (admin / premium) ----
+  const ADMIN_EMAILS = ["clubulfinanciar@gmail.com"];
+  function applyRole(session){
+    const email = session && session.user && (session.user.email || "").toLowerCase();
+    const isAdmin = !!email && ADMIN_EMAILS.includes(email);
+    const isPremium = isAdmin; // momentan: admin = acces premium complet
+    document.body.toggleAttribute("data-cf-premium", isPremium);
+    document.body.toggleAttribute("data-cf-role-admin", isAdmin);
+    window.cfPremium = isPremium; window.cfAdmin = isAdmin;
+    return { isAdmin, isPremium };
+  }
+
   // ---- auth account area ----
   function renderAcct(session){
+    const { isAdmin, isPremium } = applyRole(session);
     const slot = document.getElementById("acctSlot");
     if(!slot) return;
     if(session && session.user){
       const name = session.user.email || "cont";
+      const roleLine = isAdmin
+        ? `<div style="font-size:.72rem;font-weight:800;color:var(--gold,#E8C268);margin-top:3px">👑 Administrator · acces complet</div>`
+        : (isPremium ? `<div style="font-size:.72rem;font-weight:800;color:var(--gold,#E8C268);margin-top:3px">⭐ Premium activ</div>` : ``);
+      const avBg = isAdmin ? "linear-gradient(135deg,#E8C268,#caa23f)" : "var(--grad)";
       slot.innerHTML = `<span style="position:relative">
-        <button class="icon-btn" id="avatarBtn" title="Contul meu" style="background:var(--grad);border:none;color:#fff;font-weight:800">${(name[0]||"U").toUpperCase()}</button>
-        <div id="acctMenu" hidden style="position:absolute;top:46px;right:0;width:230px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:8px;box-shadow:var(--shadow-lg)">
-          <div style="padding:8px 10px 10px;border-bottom:1px solid var(--border);margin-bottom:6px"><div style="font-weight:700;font-size:.84rem;color:var(--emerald);word-break:break-all">${name}</div></div>
+        <button class="icon-btn" id="avatarBtn" title="Contul meu" style="background:${avBg};border:none;color:#fff;font-weight:800">${(name[0]||"U").toUpperCase()}</button>
+        <div id="acctMenu" hidden style="position:absolute;top:46px;right:0;width:240px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:8px;box-shadow:var(--shadow-lg)">
+          <div style="padding:8px 10px 10px;border-bottom:1px solid var(--border);margin-bottom:6px"><div style="font-weight:700;font-size:.84rem;color:var(--emerald);word-break:break-all">${name}</div>${roleLine}</div>
           <a href="/account.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">👤 Contul meu</a>
           <a href="/cursuri.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">🎓 Cursurile mele</a>
+          ${isPremium ? `<a href="/cursuri.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">🔓 Cursuri premium (deblocate)</a>` : ``}
           <button id="logoutBtn" style="width:100%;text-align:left;background:transparent;border:none;border-top:1px solid var(--border);margin-top:6px;padding:10px;color:#e25555;font-size:.9rem;cursor:pointer">↩︎ Deconectează-te</button>
         </div></span>`;
       const menu = document.getElementById("acctMenu");
