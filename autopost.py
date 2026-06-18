@@ -10,6 +10,7 @@ Acoperire:
   YouTube   ✅   (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN) -> Data API v3, resumable upload (Short)
   TikTok    ⚙️   (TT_CLIENT_KEY, TT_CLIENT_SECRET, TT_REFRESH_TOKEN) -> semi-auto: urcă în inbox, publici din app
   X/Twitter ✅   (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET) -> v2 media upload + tweet, 100% auto
+  Threads   ✅   (THREADS_USER_ID, THREADS_TOKEN)   -> graph.threads.net, container video + publish, 100% auto
 """
 import json, os, sys, datetime, re, time
 import requests
@@ -141,6 +142,36 @@ def post_youtube(folder):
     else:
         log(f"  youtube: FAIL upload {up.status_code} {up.text[:200]}")
 
+def post_threads(folder):
+    """Threads (Meta) — 100% automat. Flux ca la Instagram: container video -> procesare -> publish.
+    graph.threads.net, scope threads_basic + threads_content_publish, text max 500."""
+    uid, tok = os.environ.get("THREADS_USER_ID"), os.environ.get("THREADS_TOKEN")
+    if not (uid and tok):
+        return log("  threads: fără secrets, sar")
+    url = f"{RAW}/media/{folder}/reel.mp4"
+    text = caption(folder, "instagram")[:500]
+    G = "https://graph.threads.net/v1.0"
+    # 1) container video
+    c = requests.post(f"{G}/{uid}/threads",
+                      data={"media_type": "VIDEO", "video_url": url, "text": text,
+                            "access_token": tok}, timeout=120)
+    if not c.ok or "id" not in c.text:
+        return log(f"  threads: FAIL container {c.text[:200]}")
+    cid = c.json()["id"]
+    # 2) așteaptă procesarea (video = asincron; min ~30s recomandat)
+    for _ in range(20):
+        time.sleep(15)
+        st = requests.get(f"{G}/{cid}",
+                          params={"fields": "status", "access_token": tok}, timeout=60).json()
+        if st.get("status") == "FINISHED":
+            break
+        if st.get("status") == "ERROR":
+            return log(f"  threads: FAIL procesare {st}")
+    # 3) publish
+    p = requests.post(f"{G}/{uid}/threads_publish",
+                      data={"creation_id": cid, "access_token": tok}, timeout=120)
+    log(f"  threads: {'OK' if p.ok and 'id' in p.text else 'FAIL ' + p.text[:200]}")
+
 def post_tiktok(folder):
     """Semi-automat: urcă reel-ul în INBOX-ul TikTok (draft). Tu dai 'Publică' din app.
     Mod 'upload to inbox' (scope video.upload) — merge și înainte de auditul TikTok.
@@ -265,7 +296,7 @@ def main():
         f"TG_CHANNEL={os.environ.get('TELEGRAM_CHANNEL')!r}")
     funcs = {"telegram": post_telegram, "facebook": post_facebook,
              "instagram": post_instagram, "youtube": post_youtube,
-             "tiktok": post_tiktok, "x": post_x}
+             "tiktok": post_tiktok, "x": post_x, "threads": post_threads}
     for plat in entry["platforms"]:
         if plat in funcs:
             try:
