@@ -61,6 +61,7 @@
         <button type="submit" class="submit" id="submitBtn">Conectează-te</button>
       </form>
       <p class="toggle" id="toggle">Nu ai cont? <a id="toggleLink">Înregistrează-te</a></p>
+      <p class="toggle"><a id="forgotLink">Ai uitat parola?</a></p>
       <p id="msg"></p>
     </div>
 
@@ -128,6 +129,16 @@
       sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo } }));
     $("facebookBtn").addEventListener("click", () =>
       sb.auth.signInWithOAuth({ provider: "facebook", options: { redirectTo } }));
+
+    // resetare parolă
+    $("forgotLink").addEventListener("click", async () => {
+      const email = $("email").value.trim();
+      if (!email) return setMsg("Scrie întâi emailul în câmpul de mai sus.", false);
+      setMsg("Se trimite linkul de resetare…", true);
+      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + "/reset.html" });
+      if (error) return setMsg(error.message, false);
+      setMsg("Ți-am trimis pe email linkul de resetare ✓", true);
+    });
 
     // logout
     $("logoutBtn").addEventListener("click", async () => { await sb.auth.signOut(); });

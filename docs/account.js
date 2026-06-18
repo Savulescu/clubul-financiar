@@ -15,7 +15,8 @@
     #accountBadge a.acc-login:hover{background:#E8C268;color:#1a1208}
     #accountBadge .acc-email{color:#e8eefb;font-size:.82rem;background:rgba(8,20,40,.55);backdrop-filter:blur(4px);
       padding:7px 12px;border-radius:999px;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-      border:1px solid rgba(232,194,104,.3)}
+      border:1px solid rgba(232,194,104,.3);text-decoration:none;display:inline-block}
+    #accountBadge .acc-email:hover{border-color:#E8C268;color:#fff}
     #accountBadge button.acc-logout{background:rgba(8,20,40,.55);backdrop-filter:blur(4px);
       border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:999px;padding:7px 13px;font-size:.82rem;cursor:pointer}
     #accountBadge button.acc-logout:hover{border-color:#ff9a9a;color:#ff9a9a}
@@ -27,7 +28,7 @@
     if (!el) { el = document.createElement("div"); el.id = "accountBadge"; document.body.appendChild(el); }
     if (session && session.user) {
       const name = session.user.email || session.user.user_metadata?.name || "cont";
-      el.innerHTML = `<span class="acc-email" title="${name}">${name}</span><button class="acc-logout">Ieși</button>`;
+      el.innerHTML = `<a class="acc-email" href="./account.html" title="${name}">${name}</a><button class="acc-logout">Ieși</button>`;
       el.querySelector(".acc-logout").onclick = () => sb.auth.signOut();
     } else {
       el.innerHTML = `<a class="acc-login" href="./login.html">Cont</a>`;

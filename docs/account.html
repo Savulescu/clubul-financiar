@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contul meu — Clubul Financiar</title>
+<style>
+  :root{--navy:#0e2750;--navy2:#081428;--gold:#E8C268;--green:#36D67E;--ink:#cbd7ea;--white:#f4ecd8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:linear-gradient(160deg,var(--navy),var(--navy2));color:var(--white);min-height:100vh;
+    display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{width:100%;max-width:440px;background:rgba(255,255,255,.04);border:1px solid rgba(232,194,104,.18);
+    border-radius:18px;padding:32px 28px}
+  .brand{text-align:center;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;color:var(--gold);font-weight:700;margin-bottom:6px}
+  h1{text-align:center;font-size:1.5rem;margin-bottom:6px}
+  .email{text-align:center;color:var(--gold);font-weight:600;word-break:break-all;margin-bottom:24px}
+  h3{font-size:.95rem;color:var(--ink);margin:22px 0 10px;border-top:1px solid rgba(255,255,255,.08);padding-top:18px}
+  form{display:flex;flex-direction:column;gap:10px}
+  input{width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.06);color:var(--white);font-size:.92rem}
+  input::placeholder{color:#7d93b8}
+  button.act{background:linear-gradient(135deg,var(--gold),#C68F2C);color:#1a1208;font-weight:700;
+    border:none;padding:11px;border-radius:10px;cursor:pointer;font-size:.92rem}
+  .logout{margin-top:24px;background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--white);
+    padding:12px;border-radius:10px;cursor:pointer;font-weight:600;width:100%}
+  .logout:hover{border-color:#ff9a9a;color:#ff9a9a}
+  .home{display:block;text-align:center;margin-top:18px;color:#7d93b8;font-size:.85rem;text-decoration:none}
+  .msg{font-size:.84rem;min-height:16px;margin-top:6px}
+  .msg.err{color:#ff9a9a}.msg.ok{color:var(--green)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <p class="brand">Clubul Financiar</p>
+    <h1>Contul meu</h1>
+    <p class="email" id="curEmail">…</p>
+
+    <h3>🔑 Schimbă parola</h3>
+    <form id="pwForm">
+      <input type="password" id="newPw" placeholder="Parolă nouă (min. 6)" minlength="6" autocomplete="new-password" required>
+      <button class="act" type="submit">Schimbă parola</button>
+      <p class="msg" id="pwMsg"></p>
+    </form>
+
+    <h3>✉️ Schimbă emailul</h3>
+    <form id="emailForm">
+      <input type="email" id="newEmail" placeholder="Email nou" autocomplete="email" required>
+      <button class="act" type="submit">Schimbă emailul</button>
+      <p class="msg" id="emailMsg"></p>
+    </form>
+
+    <button class="logout" id="logout">Deconectează-te</button>
+    <a class="home" href="./index.html">← Înapoi la site</a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const sb = window.supabase.createClient(
+      "https://maumjqciuxdbwjtvcpsy.supabase.co",
+      "sb_publishable_N6X3B_Sn7oWkxJF-iHCfbg__w4J7ONR");
+    const $ = (id) => document.getElementById(id);
+    const setMsg = (id, t, ok) => { const m = $(id); m.textContent = t; m.className = "msg " + (ok ? "ok" : "err"); };
+
+    // cere autentificare
+    sb.auth.getSession().then(({ data }) => {
+      if (!data.session) { location.replace("./login.html"); return; }
+      $("curEmail").textContent = data.session.user.email || "cont conectat";
+    });
+
+    $("pwForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      setMsg("pwMsg", "Se salvează…", true);
+      const { error } = await sb.auth.updateUser({ password: $("newPw").value });
+      if (error) return setMsg("pwMsg", error.message, false);
+      setMsg("pwMsg", "Parolă schimbată ✓", true); $("newPw").value = "";
+    });
+
+    $("emailForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      setMsg("emailMsg", "Se trimite confirmarea…", true);
+      const { error } = await sb.auth.updateUser({ email: $("newEmail").value.trim() });
+      if (error) return setMsg("emailMsg", error.message, false);
+      setMsg("emailMsg", "Verifică NOUL email pentru confirmare ✓", true);
+    });
+
+    $("logout").addEventListener("click", async () => { await sb.auth.signOut(); location.replace("./index.html"); });
+  </script>
+</body>
+</html>

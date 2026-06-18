@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parolă nouă — Clubul Financiar</title>
+<style>
+  :root{--navy:#0e2750;--navy2:#081428;--gold:#E8C268;--green:#36D67E;--white:#f4ecd8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:linear-gradient(160deg,var(--navy),var(--navy2));color:var(--white);min-height:100vh;
+    display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{width:100%;max-width:400px;background:rgba(255,255,255,.04);border:1px solid rgba(232,194,104,.18);
+    border-radius:18px;padding:34px 28px}
+  .brand{text-align:center;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;color:var(--gold);font-weight:700;margin-bottom:6px}
+  h1{text-align:center;font-size:1.4rem;margin-bottom:22px}
+  form{display:flex;flex-direction:column;gap:12px}
+  input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.06);color:var(--white);font-size:.95rem}
+  input::placeholder{color:#7d93b8}
+  .submit{background:linear-gradient(135deg,var(--gold),#C68F2C);color:#1a1208;font-weight:800;
+    border:none;padding:13px;border-radius:10px;cursor:pointer;font-size:.98rem}
+  #msg{text-align:center;margin-top:14px;font-size:.88rem;min-height:18px}
+  #msg.err{color:#ff9a9a}#msg.ok{color:var(--green)}
+  .home{display:block;text-align:center;margin-top:20px;color:#7d93b8;font-size:.85rem;text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="card">
+    <p class="brand">Clubul Financiar</p>
+    <h1>Setează o parolă nouă</h1>
+    <form id="form">
+      <input type="password" id="pw" placeholder="Parolă nouă (min. 6 caractere)" minlength="6" autocomplete="new-password" required>
+      <input type="password" id="pw2" placeholder="Confirmă parola" minlength="6" autocomplete="new-password" required>
+      <button class="submit" type="submit">Salvează parola</button>
+    </form>
+    <p id="msg"></p>
+    <a class="home" href="./index.html">← Înapoi la site</a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const sb = window.supabase.createClient(
+      "https://maumjqciuxdbwjtvcpsy.supabase.co",
+      "sb_publishable_N6X3B_Sn7oWkxJF-iHCfbg__w4J7ONR");
+    const $ = (id) => document.getElementById(id);
+    const setMsg = (t, ok) => { const m = $("msg"); m.textContent = t; m.className = ok ? "ok" : "err"; };
+    let ready = false;
+    sb.auth.onAuthStateChange((event) => { if (event === "PASSWORD_RECOVERY") { ready = true; setMsg("Introdu noua parolă.", true); } });
+    sb.auth.getSession().then(({ data }) => { if (data.session) ready = true; else setMsg("Deschide pagina din linkul primit pe email.", false); });
+    $("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if ($("pw").value !== $("pw2").value) return setMsg("Parolele nu coincid.", false);
+      setMsg("Se salvează…", true);
+      const { error } = await sb.auth.updateUser({ password: $("pw").value });
+      if (error) return setMsg(error.message, false);
+      setMsg("Parolă schimbată! Te redirecționăm la conectare…", true);
+      setTimeout(() => location.href = "./login.html", 2000);
+    });
+  </script>
+</body>
+</html>
