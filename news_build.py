@@ -40,14 +40,49 @@ SOURCES = [
     ("Spotmedia Economie", gn("site:spotmedia.ro economie"), 0.72, False, True),
     ("Ziare.com Economie", gn("site:ziare.com economie"), 0.68, False, True),
     ("ProTV Economic", gn("site:stirileprotv.ro economic"), 0.7, False, True),
+    # --- surse suplimentare ---
+    ("Income Magazine", gn("site:incomemagazine.ro"), 0.74, False, True),
+    ("Money.ro", gn("site:money.ro"), 0.72, False, True),
+    ("Banking News", gn("site:bankingnews.ro"), 0.74, False, True),
+    ("Conso.ro", gn("site:conso.ro"), 0.7, False, True),
+    ("AvocatNet Fiscal", gn("site:avocatnet.ro fiscal"), 0.72, False, True),
+    ("Contzilla", gn("site:contzilla.ro"), 0.68, False, True),
+    ("1asig (asigurări)", gn("site:1asig.ro"), 0.7, False, True),
+    ("Biziday", gn("site:biziday.ro economie"), 0.72, False, True),
+    ("PressOne", gn("site:pressone.ro economie"), 0.7, False, True),
+    ("Panorama", gn("site:panorama.ro economie"), 0.72, False, True),
+    ("Antena3 Economic", gn("site:antena3.ro economic"), 0.68, False, True),
+    ("Observator Economic", gn("site:observatornews.ro economic"), 0.68, False, True),
+    ("DCNews Economie", gn("site:dcnews.ro economie"), 0.66, False, True),
+    ("Știri pe surse Economie", gn("site:stiripesurse.ro economie"), 0.66, False, True),
+    ("Jurnalul Economic", gn("site:jurnalul.ro economie"), 0.66, False, True),
+    ("Criptomonede RO", gn("criptomonede OR cripto Romania"), 0.7, True, True),
 ]
-PER_SOURCE = 10  # max articole luate per sursă
+PER_SOURCE = 9  # max articole luate per sursă
 KW = ["ban", "leu", "euro", "dolar", "bnr", "inflați", "infla", "dobând", "dobanzi", "credit",
       "taxe", "taxă", "impozit", "anaf", "bursă", "bursa", "bvb", "acțiun", "investiți", "economi",
       "salari", "pensi", "preț", "pret", "buget", "pib", "bancă", "banca", "fisc", "tva", "energie",
       "piață", "piata", "datorie", "deficit", "criz", "scump", "ieftin", "randament", "etf", "imobiliar"]
-MAX_ITEMS = 60
+MAX_ITEMS = 90
 MAX_AGE_DAYS = 4
+
+# Categorii (cheie, etichetă, cuvinte) — ordine = prioritate la clasificare
+NEWS_CATS = [
+    ("crypto", "₿ Criptomonede", ["bitcoin", "crypto", "cripto", "blockchain", "ethereum", "stablecoin", "binance", "solana"]),
+    ("taxe", "🧾 Taxe & ANAF", ["taxe", "taxă", "impozit", "anaf", "fiscal", "tva", "declarați", "microîntreprind", "microintreprind", "accize", "contribuți"]),
+    ("imobiliare", "🏠 Imobiliare", ["imobiliar", "locuinț", "apartament", "chirie", "construcț", "rezidenț", "metru pătrat", "metru patrat", "teren", "mall", "birouri"]),
+    ("bursa", "📈 Bursă & Investiții", ["bursă", "bursa", "bvb", "acțiun", "actiun", "etf", "dividend", "indice", "investiț", "investit", "randament", "broker", "obligațiun", "fond mutual", "ipo", "listare", "tezaur", "fidelis"]),
+    ("banci", "🏦 Bănci & Credite", ["bancă", "banca", "bnr", "credit", "dobând", "dobanzi", "ircc", "ipotec", "depozit", "împrumut", "imprumut", "refinanț", "card de credit"]),
+    ("companii", "💼 Companii & Afaceri", ["companie", "compania", "afaceri", "antreprenor", "startup", "firma", "firmă", "cifra de afaceri", "profit net", "fuziune", "achiziți", "angajat", "concedier", "fabric", "investiție de"]),
+    ("economie", "🌍 Economie & Macro", []),  # catch-all
+]
+
+def classify(text):
+    t = text.lower()
+    for key, _, kws in NEWS_CATS:
+        if kws and any(k in t for k in kws):
+            return key
+    return "economie"
 
 def clean(t):
     t = re.sub(r"<[^>]+>", "", t or "")
@@ -118,37 +153,67 @@ FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="pr
 
 def build():
     items = collect()
-    today = datetime.date.today().strftime("%d.%m.%Y")
+    for it in items:
+        it["cat"] = classify(it["title"] + " " + it["summary"])
+    today = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
+    counts = {}
+    for it in items:
+        counts[it["cat"]] = counts.get(it["cat"], 0) + 1
+    n_src = len({it["source"] for it in items})
+    tabs = f'<button class="news-tab active" data-f="all">Toate <span>({len(items)})</span></button>'
+    for key, label, _ in NEWS_CATS:
+        if counts.get(key):
+            tabs += f'<button class="news-tab" data-f="{key}">{label} <span>({counts[key]})</span></button>'
     cards = ""
     for it in items:
         t = html.escape(it["title"]); s = html.escape(it["summary"])
-        cards += f'''<a class="card reveal" href="{html.escape(it['link'])}" target="_blank" rel="noopener nofollow">
+        cards += f'''<a class="card reveal news-card" data-cat="{it['cat']}" href="{html.escape(it['link'])}" target="_blank" rel="noopener nofollow">
 <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px">
 <span class="pill">{html.escape(it['source'])}</span><span style="color:var(--muted);font-size:.8rem">{reltime(it['ts'])}</span></div>
 <h3 style="font-size:1.05rem">{t}</h3>{f'<p>{s}</p>' if s else ''}<span class="more">Citește la sursă →</span></a>\n'''
     page = f'''<!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Știri financiare România — Clubul Financiar</title>
-<meta name="description" content="Cele mai importante știri financiare și economice din România, agregate din mai multe surse și actualizate automat.">
+<meta name="description" content="Cele mai importante știri financiare și economice din România, pe categorii (bursă, bănci, taxe, imobiliare, crypto), agregate din zeci de surse și actualizate automat.">
 <meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
 <link rel="canonical" href="https://clubulfinanciar.ro/stiri.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="Știri financiare România — Clubul Financiar"><meta property="og:description" content="Cele mai importante știri financiare din România, într-un singur loc."><meta property="og:url" content="https://clubulfinanciar.ro/stiri.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta property="og:title" content="Știri financiare România — Clubul Financiar"><meta property="og:description" content="Știri financiare RO pe categorii, din zeci de surse, într-un singur loc."><meta property="og:url" content="https://clubulfinanciar.ro/stiri.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
-<link rel="stylesheet" href="/assets/style.css?v=5"><link rel="stylesheet" href="/assets/upgrade.css?v=5"></head><body>
+<link rel="stylesheet" href="/assets/style.css?v=6"><link rel="stylesheet" href="/assets/upgrade.css?v=6">
+<style>
+.news-tabs{{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:30px}}
+.news-tab{{font:inherit;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.2s}}
+.news-tab span{{color:var(--muted);font-weight:600}}
+.news-tab:hover{{border-color:var(--emerald)}}
+.news-tab.active{{background:var(--grad);border-color:transparent;color:#fff}}
+.news-tab.active span{{color:rgba(255,255,255,.85)}}
+</style></head><body>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
-<p class="eyebrow">Știri · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
-<p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, adunate din mai multe surse și ordonate după relevanță.</p></div></section>
-<section class="section"><div class="container"><div class="grid grid-3">
+<p class="eyebrow">Știri · {n_src} surse · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
+<p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, pe categorii, din zeci de surse, ordonate după relevanță.</p></div></section>
+<section class="section"><div class="container">
+<div class="news-tabs">{tabs}</div>
+<div class="grid grid-3" id="newsGrid">
 {cards}
 </div>
-<p style="color:var(--muted);font-size:.85rem;margin-top:30px;text-align:center">Știrile sunt agregate automat din surse externe (titlu + scurt rezumat + link). Drepturile aparțin publicațiilor sursă. Actualizat automat de mai multe ori pe zi.</p>
+<p style="color:var(--muted);font-size:.85rem;margin-top:30px;text-align:center">Știrile sunt agregate automat din surse externe (titlu + scurt rezumat + link către sursă). Drepturile aparțin publicațiilor sursă. Actualizat automat la fiecare 30 de minute.</p>
 </div></section>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/site.js?v=5"></script></body></html>'''
+<script>
+(function(){{
+  var tabs=document.querySelectorAll('.news-tab'), cards=document.querySelectorAll('.news-card');
+  tabs.forEach(function(b){{b.addEventListener('click',function(){{
+    tabs.forEach(function(x){{x.classList.remove('active')}}); b.classList.add('active');
+    var f=b.dataset.f;
+    cards.forEach(function(c){{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';}});
+  }});}});
+}})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/site.js?v=6"></script></body></html>'''
     open(os.path.join(ROOT, "docs", "stiri.html"), "w", encoding="utf-8").write(page)
-    print(f"stiri.html scris cu {len(items)} știri")
+    print(f"stiri.html scris cu {len(items)} știri din {n_src} surse | categorii: {counts}")
 
 if __name__ == "__main__":
     build()
