@@ -12,6 +12,7 @@ Acoperire:
   X/Twitter ✅   (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET) -> v2 media upload + tweet, 100% auto
   Threads   ✅   (THREADS_USER_ID, THREADS_TOKEN)   -> graph.threads.net, container video + publish, 100% auto
   Reddit    ✅   (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD, REDDIT_SUBREDDIT) -> video în subreddit propriu, 100% auto
+  LinkedIn  ✅   (LINKEDIN_TOKEN, LINKEDIN_PERSON_URN)  -> Videos API + Posts API pe profil personal, 100% auto
 """
 import json, os, sys, datetime, re, time
 import requests
@@ -172,6 +173,65 @@ def post_threads(folder):
     p = requests.post(f"{G}/{uid}/threads_publish",
                       data={"creation_id": cid, "access_token": tok}, timeout=120)
     log(f"  threads: {'OK' if p.ok and 'id' in p.text else 'FAIL ' + p.text[:200]}")
+
+def post_linkedin(folder):
+    """LinkedIn — postează video pe profil personal. 100% automat.
+    Videos API (initialize/upload/finalize) + Posts API. Token expiră în 60 zile."""
+    tok = os.environ.get("LINKEDIN_TOKEN")
+    urn = os.environ.get("LINKEDIN_PERSON_URN")  # urn:li:person:XXXX
+    if not (tok and urn):
+        return log("  linkedin: fără secrets, sar")
+    VER = os.environ.get("LINKEDIN_VERSION", "202409")
+    H = {"Authorization": f"Bearer {tok}", "LinkedIn-Version": VER,
+         "X-Restli-Protocol-Version": "2.0.0"}
+    JH = {**H, "Content-Type": "application/json"}
+    video = os.path.join(ROOT, "media", folder, "reel.mp4")
+    with open(video, "rb") as f:
+        data = f.read()
+    size = len(data)
+    # 1) initialize upload
+    init = requests.post("https://api.linkedin.com/rest/videos?action=initializeUpload", headers=JH,
+                         data=json.dumps({"initializeUploadRequest": {
+                             "owner": urn, "fileSizeBytes": size,
+                             "uploadCaptions": False, "uploadThumbnail": False}}), timeout=60)
+    if not init.ok:
+        return log(f"  linkedin: FAIL init {init.status_code} {init.text[:200]}")
+    val = init.json()["value"]
+    video_urn = val["video"]
+    upload_token = val.get("uploadToken", "")
+    # 2) upload părți (după byte-range), strânge ETag-urile
+    etags = []
+    for ins in val["uploadInstructions"]:
+        fb, lb = ins["firstByte"], ins["lastByte"]
+        up = requests.put(ins["uploadUrl"], data=data[fb:lb + 1],
+                          headers={"Content-Type": "application/octet-stream"}, timeout=600)
+        if up.status_code not in (200, 201):
+            return log(f"  linkedin: FAIL upload {up.status_code} {up.text[:120]}")
+        etags.append(up.headers.get("etag", "").strip('"'))
+    # 3) finalize
+    fin = requests.post("https://api.linkedin.com/rest/videos?action=finalizeUpload", headers=JH,
+                        data=json.dumps({"finalizeUploadRequest": {
+                            "video": video_urn, "uploadToken": upload_token,
+                            "uploadedPartIds": etags}}), timeout=60)
+    if not fin.ok:
+        return log(f"  linkedin: FAIL finalize {fin.status_code} {fin.text[:200]}")
+    # 4) așteaptă procesarea video (AVAILABLE)
+    enc = requests.utils.quote(video_urn, safe="")
+    for _ in range(20):
+        time.sleep(15)
+        s = requests.get(f"https://api.linkedin.com/rest/videos/{enc}", headers=H, timeout=60)
+        stt = s.json().get("status") if s.ok else None
+        if stt in ("AVAILABLE", "PROCESSING_FAILED"):
+            break
+    # 5) creează postarea
+    text = caption(folder, "linkedin")[:2900]
+    post = requests.post("https://api.linkedin.com/rest/posts", headers=JH, data=json.dumps({
+        "author": urn, "commentary": text, "visibility": "PUBLIC",
+        "distribution": {"feedDistribution": "MAIN_FEED", "targetEntities": [],
+                         "thirdPartyDistributionChannels": []},
+        "content": {"media": {"title": "Clubul Financiar", "id": video_urn}},
+        "lifecycleState": "PUBLISHED", "isReshareDisabledByAuthor": False}), timeout=120)
+    log(f"  linkedin: {'OK' if post.status_code in (200, 201) else 'FAIL ' + str(post.status_code) + ' ' + post.text[:200]}")
 
 def post_reddit(folder):
     """Reddit — postează video în subreddit-ul propriu (r/REDDIT_SUBREDDIT). 100% automat.
@@ -348,7 +408,7 @@ def main():
     funcs = {"telegram": post_telegram, "facebook": post_facebook,
              "instagram": post_instagram, "youtube": post_youtube,
              "tiktok": post_tiktok, "x": post_x, "threads": post_threads,
-             "reddit": post_reddit}
+             "reddit": post_reddit, "linkedin": post_linkedin}
     for plat in entry["platforms"]:
         if plat in funcs:
             try:
