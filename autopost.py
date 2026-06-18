@@ -5,7 +5,9 @@ pentru care există SECRETS în GitHub. Tu nu uploadezi nimic — programul o fa
 
 Acoperire:
   Telegram  ✅   (TELEGRAM_TOKEN, TELEGRAM_CHANNEL)
-  Facebook  ✅   (FB_PAGE_ID, FB_PAGE_TOKEN)        -> postează prin URL public (raw GitHub)
+  Facebook  ✅   (FB_PAGE_ID, FB_PAGE_TOKEN)        -> REEL (fallback video) + Facebook Story video
+  IG Story  ✅   (IG_USER_ID, IG_TOKEN)             -> Instagram Story video (media_type=STORIES)
+  FB Story  ✅   (FB_PAGE_ID, FB_PAGE_TOKEN)        -> /video_stories (3 faze)
   Instagram ⚙️   (IG_USER_ID, IG_TOKEN)             -> Graph API, video la URL public
   YouTube   ✅   (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN) -> Data API v3, resumable upload (Short)
   TikTok    ⚙️   (TT_CLIENT_KEY, TT_CLIENT_SECRET, TT_REFRESH_TOKEN) -> semi-auto: urcă în inbox, publici din app
@@ -48,14 +50,78 @@ def post_telegram(folder):
     log(f"  telegram: {'OK' if ok else 'FAIL ' + r.text[:200]}")
 
 def post_facebook(folder):
+    """Facebook — postează ca REEL (reach mai mare), cu fallback la video normal dacă reel-ul pică."""
     pid, tok = os.environ.get("FB_PAGE_ID"), os.environ.get("FB_PAGE_TOKEN")
     if not (pid and tok):
         return log("  facebook: fără secrets, sar")
     url = f"{RAW}/media/{folder}/reel.mp4"
-    cap = caption(folder, "facebook")
-    r = requests.post(f"https://graph.facebook.com/v21.0/{pid}/videos",
-                      data={"file_url": url, "description": cap, "access_token": tok}, timeout=180)
-    log(f"  facebook: {'OK' if r.ok and 'id' in r.text else 'FAIL ' + r.text[:200]}")
+    desc = caption(folder, "facebook")
+    G = "https://graph.facebook.com/v21.0"
+    # întâi REEL (3 faze: start -> upload prin file_url -> finish)
+    try:
+        s = requests.post(f"{G}/{pid}/video_reels",
+                          data={"upload_phase": "start", "access_token": tok}, timeout=60).json()
+        vid, up = s.get("video_id"), s.get("upload_url")
+        if vid and up:
+            ru = requests.post(up, headers={"Authorization": f"OAuth {tok}", "file_url": url}, timeout=300)
+            if ru.ok:
+                fin = requests.post(f"{G}/{pid}/video_reels",
+                                    data={"upload_phase": "finish", "video_id": vid,
+                                          "video_state": "PUBLISHED", "description": desc,
+                                          "access_token": tok}, timeout=120)
+                if fin.ok and fin.json().get("success", True):
+                    return log("  facebook: OK (reel)")
+            log(f"  facebook: reel eșuat ({ru.status_code}), fallback video")
+        else:
+            log(f"  facebook: reel start eșuat ({s}), fallback video")
+    except Exception as e:
+        log(f"  facebook: reel eroare ({e}), fallback video")
+    # fallback: video normal
+    r = requests.post(f"{G}/{pid}/videos",
+                      data={"file_url": url, "description": desc, "access_token": tok}, timeout=180)
+    log(f"  facebook: {'OK (video)' if r.ok and 'id' in r.text else 'FAIL ' + r.text[:200]}")
+
+def post_facebook_story(folder):
+    """Facebook Story video (3 faze ca la reels, fără descriere — story-urile sunt vizuale)."""
+    pid, tok = os.environ.get("FB_PAGE_ID"), os.environ.get("FB_PAGE_TOKEN")
+    if not (pid and tok):
+        return log("  fb_story: fără secrets, sar")
+    url = f"{RAW}/media/{folder}/reel.mp4"
+    G = "https://graph.facebook.com/v21.0"
+    s = requests.post(f"{G}/{pid}/video_stories",
+                      data={"upload_phase": "start", "access_token": tok}, timeout=60).json()
+    vid, up = s.get("video_id"), s.get("upload_url")
+    if not (vid and up):
+        return log(f"  fb_story: FAIL start {s}")
+    ru = requests.post(up, headers={"Authorization": f"OAuth {tok}", "file_url": url}, timeout=300)
+    if not ru.ok:
+        return log(f"  fb_story: FAIL upload {ru.status_code} {ru.text[:150]}")
+    fin = requests.post(f"{G}/{pid}/video_stories",
+                        data={"upload_phase": "finish", "video_id": vid, "access_token": tok}, timeout=120)
+    log(f"  fb_story: {'OK' if fin.ok else 'FAIL ' + fin.text[:200]}")
+
+def post_instagram_story(folder):
+    """Instagram Story video (container media_type=STORIES -> procesare -> publish)."""
+    uid, tok = os.environ.get("IG_USER_ID"), os.environ.get("IG_TOKEN")
+    if not (uid and tok):
+        return log("  ig_story: fără secrets, sar")
+    url = f"{RAW}/media/{folder}/reel.mp4"
+    G = "https://graph.facebook.com/v21.0"
+    c = requests.post(f"{G}/{uid}/media",
+                      data={"media_type": "STORIES", "video_url": url, "access_token": tok}, timeout=120)
+    if not c.ok or "id" not in c.text:
+        return log(f"  ig_story: FAIL container {c.text[:200]}")
+    cid = c.json()["id"]
+    for _ in range(20):
+        time.sleep(15)
+        st = requests.get(f"{G}/{cid}", params={"fields": "status_code", "access_token": tok}, timeout=60).json()
+        if st.get("status_code") == "FINISHED":
+            break
+        if st.get("status_code") == "ERROR":
+            return log("  ig_story: FAIL procesare")
+    p = requests.post(f"{G}/{uid}/media_publish",
+                      data={"creation_id": cid, "access_token": tok}, timeout=120)
+    log(f"  ig_story: {'OK' if p.ok and 'id' in p.text else 'FAIL ' + p.text[:200]}")
 
 def post_instagram(folder):
     uid, tok = os.environ.get("IG_USER_ID"), os.environ.get("IG_TOKEN")
@@ -413,7 +479,8 @@ def main():
     funcs = {"telegram": post_telegram, "facebook": post_facebook,
              "instagram": post_instagram, "youtube": post_youtube,
              "tiktok": post_tiktok, "x": post_x, "threads": post_threads,
-             "reddit": post_reddit, "linkedin": post_linkedin}
+             "reddit": post_reddit, "linkedin": post_linkedin,
+             "facebook_story": post_facebook_story, "instagram_story": post_instagram_story}
     for plat in entry["platforms"]:
         if plat in funcs:
             try:
