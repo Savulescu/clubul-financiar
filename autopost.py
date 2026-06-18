@@ -113,12 +113,16 @@ def post_youtube(folder):
     access = tr.json().get("access_token")
     if not access:
         return log("  youtube: FAIL token (fără access_token)")
-    # 2) titlu + descriere din caption
+    # 2) titlu + descriere + tag-uri din caption (tag-urile ajută la căutare/recomandări)
     title, desc = _parse_youtube(caption(folder, "youtube"))
+    tags = re.findall(r"#(\w+)", caption(folder, "youtube"))
+    tags = list(dict.fromkeys(tags + ["educatie financiara", "finante personale",
+                                       "bani", "Romania", "Clubul Financiar"]))[:15]
     video = os.path.join(ROOT, "media", folder, "reel.mp4")
     size = os.path.getsize(video)
     meta = {
-        "snippet": {"title": title[:100], "description": desc[:4900], "categoryId": "27"},  # 27 = Education
+        "snippet": {"title": title[:100], "description": desc[:4900], "categoryId": "27",  # 27 = Education
+                    "tags": tags},
         "status": {"privacyStatus": os.environ.get("YT_PRIVACY", "public"),
                    "selfDeclaredMadeForKids": False},
     }
