@@ -89,9 +89,8 @@
 
     function renderSession(session) {
       if (session && session.user) {
-        $("loggedOut").style.display = "none";
-        $("loggedIn").style.display = "block";
-        $("userEmail").textContent = session.user.email || session.user.user_metadata?.name || "cont conectat";
+        // conectat -> mergi pe site, unde contul apare sus-dreapta
+        window.location.replace("./index.html");
       } else {
         $("loggedOut").style.display = "block";
         $("loggedIn").style.display = "none";
