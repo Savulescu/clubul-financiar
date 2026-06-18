@@ -37,7 +37,7 @@
     const c = document.createElement("canvas"); c.width = 512; c.height = 256;
     const x = c.getContext("2d");
     const g = x.createLinearGradient(0, 0, 0, 256);
-    g.addColorStop(0, "#0a1830"); g.addColorStop(0.5, "#0f3a52"); g.addColorStop(0.75, "#10b981"); g.addColorStop(1, "#E8C268");
+    g.addColorStop(0, "#0e2750"); g.addColorStop(0.45, "#123a5e"); g.addColorStop(0.72, "#36D67E"); g.addColorStop(1, "#E8C268");
     x.fillStyle = g; x.fillRect(0, 0, 512, 256);
     const r = x.createRadialGradient(380, 60, 6, 380, 60, 160);
     r.addColorStop(0, "rgba(255,255,255,.9)"); r.addColorStop(1, "rgba(255,255,255,0)");
@@ -49,10 +49,11 @@
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.35));
   const key = new THREE.DirectionalLight(0xfff0d6, 1.0); key.position.set(3, 8, 6); scene.add(key);
-  const fill = new THREE.PointLight(0x2563eb, 40, 40); fill.position.set(-4, 3, 4); scene.add(fill);
+  const fill = new THREE.PointLight(0xE8C268, 42, 40); fill.position.set(-4, 3, 4); scene.add(fill);
+  const fill2 = new THREE.PointLight(0x36D67E, 34, 40); fill2.position.set(5, 1, 4); scene.add(fill2);
 
   const chart = new THREE.Group();
-  chart.position.set(1.4, -1.2, 0);
+  chart.position.set(0.7, -1.2, 0);
   chart.rotation.y = -0.32;
   scene.add(chart);
 
@@ -62,7 +63,7 @@
   chart.add(grid);
 
   // bare care cresc (emerald -> auriu)
-  const cE = new THREE.Color(0x10b981), cG = new THREE.Color(0xE8C268);
+  const cE = new THREE.Color(0x36D67E), cG = new THREE.Color(0xE8C268);
   const heights = [0.7, 1.15, 0.95, 1.7, 2.0, 1.85, 2.55, 3.15];
   const gap = 0.92, bw = 0.5;
   const bars = [];
@@ -84,7 +85,7 @@
 
   // linia care urcă, colorată pe direcție: VERDE la creștere, ROȘU la scădere
   const linePts = [new THREE.Vector3(-0.6, 0.45, 0), ...topPts, new THREE.Vector3(spanX + 0.7, 3.55, 0)];
-  const cUp = new THREE.Color(0x2ef0a6), cDown = new THREE.Color(0xff5874);
+  const cUp = new THREE.Color(0x36D67E), cDown = new THREE.Color(0xff5874);
   const nodeMat = new THREE.MeshBasicMaterial({ color: 0xeafff6 });
   const nodeGeo = new THREE.SphereGeometry(0.07, 16, 16);
   for (let i = 0; i < linePts.length - 1; i++) {
@@ -128,7 +129,7 @@
     raf = requestAnimationFrame(loop);
     const t = (performance.now() - t0) / 1000;
     cx += (tx - cx) * 0.05; cy += (ty - cy) * 0.05;
-    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(0.4, 0.95, 0);
+    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(-0.1, 0.95, 0);
     // creșterea barelor (staggered) + respirație ușoară
     bars.forEach((b, i) => {
       const g = ease(Math.min(1, Math.max(0, (t - i * 0.12) / 0.7)));

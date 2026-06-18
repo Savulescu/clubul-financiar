@@ -3,7 +3,7 @@
 import re, os, glob
 
 ROOT = "/Users/savulescucristian/clubul-financiar/docs"
-V = "10"
+V = "15"
 changed = 0
 for p in glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True):
     if "/_src/" in p:
