@@ -205,4 +205,23 @@
     });
   }
   window.addEventListener("DOMContentLoaded",markRead);
+
+  // ---- parallax hero la scroll (jos/sus) ----
+  (function(){
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const hero=document.querySelector(".hero"); if(!hero) return;
+    const txt=hero.querySelector(".hero-grid > div:first-child");
+    const cap=hero.querySelector(".hero-caption");
+    const c3d=document.getElementById("hero3d");
+    let ticking=false;
+    function onScroll(){
+      ticking=false; const y=window.scrollY; if(y>1200) return;
+      const f=Math.max(0,1-y/600);
+      if(txt){ txt.style.transform="translateY("+(y*0.34)+"px)"; txt.style.opacity=f; }
+      if(cap){ cap.style.transform="translateY("+(y*0.16)+"px)"; cap.style.opacity=f; }
+      if(c3d){ c3d.style.transform="translateY("+(y*0.14)+"px) scale("+(1+y*0.00014)+")"; }
+    }
+    window.addEventListener("scroll",()=>{ if(!ticking){ requestAnimationFrame(onScroll); ticking=true; } }, {passive:true});
+    onScroll();
+  })();
 })();
