@@ -10,7 +10,7 @@ Acoperire:
   FB Story  ✅   (FB_PAGE_ID, FB_PAGE_TOKEN)        -> /video_stories (3 faze)
   Instagram ⚙️   (IG_USER_ID, IG_TOKEN)             -> Graph API, video la URL public
   YouTube   ✅   (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN) -> Data API v3, resumable upload (Short)
-  TikTok    ⚙️   (TT_CLIENT_KEY, TT_CLIENT_SECRET, TT_REFRESH_TOKEN) -> semi-auto: urcă în inbox, publici din app
+  TikTok    ✅   (TT_CLIENT_KEY, TT_CLIENT_SECRET, TT_REFRESH_TOKEN, TT_PRIVACY) -> direct post (video.publish); cont privat + SELF_ONLY până la audit, apoi public
   X/Twitter ✅   (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET) -> v2 media upload + tweet, 100% auto
   Threads   ✅   (THREADS_USER_ID, THREADS_TOKEN)   -> graph.threads.net, container video + publish, 100% auto
   Reddit    ✅   (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD, REDDIT_SUBREDDIT) -> video în subreddit propriu, 100% auto
@@ -355,14 +355,14 @@ def post_reddit(folder):
     log(f"  reddit: {'OK' if sb.ok and not errs else 'FAIL ' + str(errs or sb.text[:200])}")
 
 def post_tiktok(folder):
-    """Semi-automat: urcă reel-ul în INBOX-ul TikTok (draft). Tu dai 'Publică' din app.
-    Mod 'upload to inbox' (scope video.upload) — merge și înainte de auditul TikTok.
-    Caption-ul îl pui tu în app la publicare (vezi secțiunea TIKTOK din captions/ziuaN.txt)."""
+    """TikTok — postare DIRECTĂ automată (Content Posting API, scope video.publish).
+    Caption din secțiunea TIKTOK. Privacy din TT_PRIVACY (SELF_ONLY cât app-ul e neauditat;
+    PUBLIC_TO_EVERYONE după aprobare audit). Cont trebuie privat cât app-ul e neauditat."""
     ck = os.environ.get("TT_CLIENT_KEY")
     cs = os.environ.get("TT_CLIENT_SECRET")
     rt = os.environ.get("TT_REFRESH_TOKEN")
     if not (ck and cs and rt):
-        return log("  tiktok: fără secrets, sar (semi-automat: ajunge în inbox-ul TikTok)")
+        return log("  tiktok: fără secrets, sar")
     # 1) refresh -> access token
     tr = requests.post("https://open.tiktokapis.com/v2/oauth/token/",
                        headers={"Content-Type": "application/x-www-form-urlencoded"},
@@ -371,26 +371,33 @@ def post_tiktok(folder):
     if not tr.ok or "access_token" not in tr.text:
         return log(f"  tiktok: FAIL token {tr.text[:200]}")
     access = tr.json()["access_token"]
-    # 2) init upload (FILE_UPLOAD, un singur chunk)
+    H = {"Authorization": f"Bearer {access}", "Content-Type": "application/json; charset=UTF-8"}
     video = os.path.join(ROOT, "media", folder, "reel.mp4")
     size = os.path.getsize(video)
-    init = requests.post("https://open.tiktokapis.com/v2/post/publish/inbox/video/init/",
-                         headers={"Authorization": f"Bearer {access}",
-                                  "Content-Type": "application/json; charset=UTF-8"},
-                         data=json.dumps({"source_info": {
-                             "source": "FILE_UPLOAD", "video_size": size,
-                             "chunk_size": size, "total_chunk_count": 1}}), timeout=60)
-    if not init.ok or "upload_url" not in init.text:
+    cap = caption(folder, "tiktok")[:2000]
+    privacy = os.environ.get("TT_PRIVACY", "SELF_ONLY")
+    # 2) init direct post
+    body = {"post_info": {"title": cap, "privacy_level": privacy, "disable_duet": False,
+                          "disable_comment": False, "disable_stitch": False,
+                          "video_cover_timestamp_ms": 1000},
+            "source_info": {"source": "FILE_UPLOAD", "video_size": size,
+                            "chunk_size": size, "total_chunk_count": 1}}
+    init = requests.post("https://open.tiktokapis.com/v2/post/publish/video/init/",
+                         headers=H, data=json.dumps(body), timeout=60)
+    if not init.ok:
         return log(f"  tiktok: FAIL init {init.status_code} {init.text[:200]}")
-    upload_url = init.json()["data"]["upload_url"]
+    d = init.json().get("data", {})
+    upload_url = d.get("upload_url")
+    if not upload_url:
+        return log(f"  tiktok: FAIL init (fără upload_url) {init.text[:200]}")
     # 3) urcă octeții
     with open(video, "rb") as f:
         up = requests.put(upload_url, headers={
             "Content-Type": "video/mp4",
             "Content-Range": f"bytes 0-{size - 1}/{size}",
             "Content-Length": str(size)}, data=f, timeout=900)
-    if up.ok:
-        log("  tiktok: OK — video în inbox-ul TikTok; deschide app-ul și apasă Publică")
+    if up.status_code in (200, 201):
+        log(f"  tiktok: OK (direct post, {privacy})")
     else:
         log(f"  tiktok: FAIL upload {up.status_code} {up.text[:200]}")
 
