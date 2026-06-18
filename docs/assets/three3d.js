@@ -53,7 +53,7 @@
   const fill2 = new THREE.PointLight(0x36D67E, 34, 40); fill2.position.set(5, 1, 4); scene.add(fill2);
 
   const chart = new THREE.Group();
-  chart.position.set(0.7, -1.2, 0);
+  chart.position.set(1.5, -1.2, 0);
   chart.rotation.y = -0.32;
   scene.add(chart);
 
@@ -129,7 +129,7 @@
     raf = requestAnimationFrame(loop);
     const t = (performance.now() - t0) / 1000;
     cx += (tx - cx) * 0.05; cy += (ty - cy) * 0.05;
-    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(-0.1, 0.95, 0);
+    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(0.6, 0.95, 0);
     // creșterea barelor (staggered) + respirație ușoară
     bars.forEach((b, i) => {
       const g = ease(Math.min(1, Math.max(0, (t - i * 0.12) / 0.7)));
