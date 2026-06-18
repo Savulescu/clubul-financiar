@@ -52,8 +52,8 @@
   const fill = new THREE.PointLight(0x2563eb, 40, 40); fill.position.set(-4, 3, 4); scene.add(fill);
 
   const chart = new THREE.Group();
-  chart.position.set(2.2, -1.2, 0);
-  chart.rotation.y = -0.35;
+  chart.position.set(1.4, -1.2, 0);
+  chart.rotation.y = -0.32;
   scene.add(chart);
 
   // grilă „trading floor"
@@ -82,18 +82,26 @@
   });
   const spanX = (heights.length - 1) * gap;
 
-  // linia care urcă (tub luminos prin vârfuri, prelungită)
-  const curvePts = [new THREE.Vector3(-0.6, 0.45, 0), ...topPts, new THREE.Vector3(spanX + 0.7, 3.6, 0)];
-  const curve = new THREE.CatmullRomCurve3(curvePts, false, "catmullrom", 0.5);
-  const tube = new THREE.Mesh(
-    new THREE.TubeGeometry(curve, 140, 0.06, 12, false),
-    new THREE.MeshBasicMaterial({ color: 0xb6ffe4 })
-  );
-  chart.add(tube);
+  // linia care urcă, colorată pe direcție: VERDE la creștere, ROȘU la scădere
+  const linePts = [new THREE.Vector3(-0.6, 0.45, 0), ...topPts, new THREE.Vector3(spanX + 0.7, 3.55, 0)];
+  const cUp = new THREE.Color(0x2ef0a6), cDown = new THREE.Color(0xff5874);
+  const nodeMat = new THREE.MeshBasicMaterial({ color: 0xeafff6 });
+  const nodeGeo = new THREE.SphereGeometry(0.07, 16, 16);
+  for (let i = 0; i < linePts.length - 1; i++) {
+    const a = linePts[i], b = linePts[i + 1];
+    const up = b.y >= a.y - 0.001;
+    const seg = new THREE.Mesh(
+      new THREE.TubeGeometry(new THREE.LineCurve3(a, b), 1, 0.05, 12, false),
+      new THREE.MeshBasicMaterial({ color: up ? cUp : cDown })
+    );
+    chart.add(seg);
+    if (i > 0) { const n = new THREE.Mesh(nodeGeo, nodeMat); n.position.copy(a); chart.add(n); }
+  }
 
   // vârful luminos (acum)
+  const tipPos = linePts[linePts.length - 1];
   const tip = new THREE.Mesh(new THREE.SphereGeometry(0.13, 24, 24), new THREE.MeshBasicMaterial({ color: 0xffffff }));
-  tip.position.copy(curvePts[curvePts.length - 1]); chart.add(tip);
+  tip.position.copy(tipPos); chart.add(tip);
   function glowTex() {
     const c = document.createElement("canvas"); c.width = c.height = 128; const x = c.getContext("2d");
     const g = x.createRadialGradient(64, 64, 2, 64, 64, 64);
@@ -120,7 +128,7 @@
     raf = requestAnimationFrame(loop);
     const t = (performance.now() - t0) / 1000;
     cx += (tx - cx) * 0.05; cy += (ty - cy) * 0.05;
-    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(1.1, 0.95, 0);
+    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(0.4, 0.95, 0);
     // creșterea barelor (staggered) + respirație ușoară
     bars.forEach((b, i) => {
       const g = ease(Math.min(1, Math.max(0, (t - i * 0.12) / 0.7)));
