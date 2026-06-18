@@ -1,7 +1,7 @@
 # Clubul Financiar — Auto-poster (gratis, în cloud)
 
 Postează singur, zilnic la 19:30 (ora României), pe **Telegram, Facebook, Instagram, YouTube**
-(Shorts). **TikTok = manual** (API-ul lor cere aprobare de app).
+(Shorts) **și X/Twitter**. **TikTok = semi-manual** (API-ul lor cere aprobare de app).
 Rulează gratis prin **GitHub Actions** — nu-ți trebuie calculatorul pornit.
 
 ## Cum funcționează
@@ -47,6 +47,22 @@ Upload-ul pe YouTube cere OAuth (refresh token), nu doar o cheie. Se face o sing
 
 Reel-urile verticale se urcă automat ca **Shorts**. Titlul + descrierea vin din secțiunea
 `=== YOUTUBE SHORT ===` (TITLU / DESCRIERE) din `captions/ziuaN.txt`.
+
+### 7. X / Twitter — 100% automat (OAuth 1.0a, fără flow)
+Postează video + text singur. Nu are nevoie de script de autorizare ca YouTube — generezi direct 4 chei:
+1. **developer.x.com** → Developer Portal → creează un **Project + App**
+2. La App → **User authentication settings** → setează **App permissions = Read and write** (obligatoriu ca să poată posta) + tip OAuth 1.0a
+3. La App → tab **Keys and tokens**:
+   - **API Key** și **API Key Secret** (Consumer Keys)
+   - **Access Token** și **Access Token Secret** → apasă **Generate** (asigură-te că arată „Read and Write"; dacă nu, regenerează după ce ai pus permisiunile la pasul 2)
+4. Secrets în GitHub:
+   - `X_API_KEY` = API Key
+   - `X_API_SECRET` = API Key Secret
+   - `X_ACCESS_TOKEN` = Access Token
+   - `X_ACCESS_SECRET` = Access Token Secret
+
+Textul vine din secțiunea `=== X ===` din `captions/ziuaN.txt` (limitat la 280 caractere).
+Notă: pe planul **Free** al X API ai ~500 postări/lună — mai mult decât suficient pentru o postare/zi.
 
 ## Conținut nou
 Cere-i lui Claude un lot nou de postări → se adaugă în `media/` + `captions/` + `schedule.json` → push → cron-ul le postează singur.

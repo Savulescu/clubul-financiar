@@ -9,6 +9,7 @@ Acoperire:
   Instagram ⚙️   (IG_USER_ID, IG_TOKEN)             -> Graph API, video la URL public
   YouTube   ✅   (YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN) -> Data API v3, resumable upload (Short)
   TikTok    ⚙️   (TT_CLIENT_KEY, TT_CLIENT_SECRET, TT_REFRESH_TOKEN) -> semi-auto: urcă în inbox, publici din app
+  X/Twitter ✅   (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET) -> v2 media upload + tweet, 100% auto
 """
 import json, os, sys, datetime, re, time
 import requests
@@ -180,6 +181,74 @@ def post_tiktok(folder):
     else:
         log(f"  tiktok: FAIL upload {up.status_code} {up.text[:200]}")
 
+def post_x(folder):
+    """X / Twitter — postează video + text 100% automat.
+    OAuth 1.0a User Context (4 chei generate din developer.x.com, fără flow).
+    Upload video prin v2 chunked media upload (api.x.com/2/media/upload), apoi tweet v2.
+    """
+    ck = os.environ.get("X_API_KEY")
+    cs = os.environ.get("X_API_SECRET")
+    at = os.environ.get("X_ACCESS_TOKEN")
+    ats = os.environ.get("X_ACCESS_SECRET")
+    if not (ck and cs and at and ats):
+        return log("  x: fără secrets, sar")
+    try:
+        from requests_oauthlib import OAuth1
+    except ImportError:
+        return log("  x: lipsește requests_oauthlib (adaugă-l în workflow)")
+    auth = OAuth1(ck, cs, at, ats)
+    video = os.path.join(ROOT, "media", folder, "reel.mp4")
+    size = os.path.getsize(video)
+    UPLOAD = "https://api.x.com/2/media/upload"
+    # 1) INIT
+    init = requests.post(UPLOAD, auth=auth, data={
+        "command": "INIT", "total_bytes": size,
+        "media_type": "video/mp4", "media_category": "tweet_video"}, timeout=60)
+    if not init.ok:
+        return log(f"  x: FAIL init {init.status_code} {init.text[:200]}")
+    media_id = (init.json().get("data") or init.json()).get("id") or init.json().get("media_id_string")
+    if not media_id:
+        return log(f"  x: FAIL init (fără media_id) {init.text[:200]}")
+    # 2) APPEND (chunk-uri de 4MB)
+    CHUNK = 4 * 1024 * 1024
+    with open(video, "rb") as f:
+        idx = 0
+        while True:
+            buf = f.read(CHUNK)
+            if not buf:
+                break
+            ap = requests.post(UPLOAD, auth=auth,
+                               data={"command": "APPEND", "media_id": media_id,
+                                     "segment_index": idx},
+                               files={"media": buf}, timeout=300)
+            if not ap.ok:
+                return log(f"  x: FAIL append {idx} {ap.status_code} {ap.text[:200]}")
+            idx += 1
+    # 3) FINALIZE
+    fin = requests.post(UPLOAD, auth=auth,
+                        data={"command": "FINALIZE", "media_id": media_id}, timeout=60)
+    if not fin.ok:
+        return log(f"  x: FAIL finalize {fin.status_code} {fin.text[:200]}")
+    # 4) așteaptă procesarea video (dacă e cazul)
+    info = (fin.json().get("data") or fin.json()).get("processing_info")
+    for _ in range(20):
+        if not info or info.get("state") == "succeeded":
+            break
+        if info.get("state") == "failed":
+            return log(f"  x: FAIL procesare {info}")
+        time.sleep(max(info.get("check_after_secs", 5), 3))
+        st = requests.get(UPLOAD, auth=auth,
+                          params={"command": "STATUS", "media_id": media_id}, timeout=60)
+        info = (st.json().get("data") or st.json()).get("processing_info")
+    # 5) tweet cu media
+    cap = caption(folder, "x")[:280]
+    tw = requests.post("https://api.x.com/2/tweets", auth=auth,
+                       json={"text": cap, "media": {"media_ids": [str(media_id)]}}, timeout=120)
+    if tw.ok and (tw.json().get("data") or {}).get("id"):
+        log(f"  x: OK https://x.com/i/status/{tw.json()['data']['id']}")
+    else:
+        log(f"  x: FAIL tweet {tw.status_code} {tw.text[:200]}")
+
 def main():
     sched = json.load(open(os.path.join(ROOT, "schedule.json")))
     today = datetime.date.today().isoformat()
@@ -197,7 +266,8 @@ def main():
     log(f"  [debug] TG_TOKEN prezent={bool(_t)} lungime={len(_t)} (corect=46) | "
         f"TG_CHANNEL={os.environ.get('TELEGRAM_CHANNEL')!r}")
     funcs = {"telegram": post_telegram, "facebook": post_facebook,
-             "instagram": post_instagram, "youtube": post_youtube, "tiktok": post_tiktok}
+             "instagram": post_instagram, "youtube": post_youtube,
+             "tiktok": post_tiktok, "x": post_x}
     for plat in entry["platforms"]:
         if plat in funcs:
             try:
