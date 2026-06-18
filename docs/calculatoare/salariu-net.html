@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator salariu net din brut — Clubul Financiar</title>
+<meta name="description" content="Află cât iei net dintr-un salariu brut în România: CAS, CASS și impozit pe venit."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/salariu-net.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Calculator salariu net din brut"><meta property="og:description" content="Află cât iei net dintr-un salariu brut în România: CAS, CASS și impozit pe venit."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/salariu-net.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator salariu net din brut"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="stylesheet" href="/assets/style.css"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator salariu net (brut → net)</h1></div></section>
+<section class="section"><div class="container"><div class="calc">
+<div class="panel"><div class="field"><label>Salariu brut (lei)</label><input type="number" id="B" value="5000" step="1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
+</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum se calculează salariul net</h2><p style="color:var(--muted)">Din salariul brut se rețin CAS (25%), CASS (10%) și impozitul pe venit (10% din baza rămasă). Calculul nu include deducerea personală sau cazuri speciale (IT, construcții) — pentru exactitate verifică fluturașul de salariu.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
+</div></section>
+<script>
+const $=id=>document.getElementById(id);
+const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+function calc(){ let B=+$("B").value, cas=B*0.25, cass=B*0.10, baza=B-cas-cass, imp=baza*0.10, net=B-cas-cass-imp;
+$("out").innerHTML=`<p style="color:var(--muted)">Salariu net estimat</p><div class="result-big">${lei(net)}</div>
+<div class="result-row"><span>CAS (pensie) 25%</span><b>${lei(cas)}</b></div>
+<div class="result-row"><span>CASS (sănătate) 10%</span><b>${lei(cass)}</b></div>
+<div class="result-row"><span>Impozit 10%</span><b>${lei(imp)}</b></div>`; }
+$("calcBtn").addEventListener("click",calc); calc();
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/site.js"></script></body></html>
