@@ -8,6 +8,7 @@
   const NAV = [
     ["Începe aici", "/incepe-aici.html"],
     ["Educație", "/educatie.html"],
+    ["Glosar", "/glosar.html"],
     ["Știri", "/stiri.html"],
     ["Investiții", "/investitii.html"],
     ["Credite", "/credite.html"],
@@ -39,6 +40,7 @@
     <a class="brand-logo" href="/index.html"><span class="dot">CF</span> Clubul Financiar</a>
     <nav class="nav-links" id="navLinks">${NAV.map(([t,h])=>`<a href="${h}">${t}</a>`).join("")}</nav>
     <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
       <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">${document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"🌙"}</span></button>
       <span id="acctSlot"></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu">☰</button>
@@ -47,6 +49,64 @@
   document.body.prepend(nav);
   document.getElementById("themeBtn").onclick = toggleTheme;
   document.getElementById("burger").onclick = () => document.getElementById("navLinks").classList.toggle("open");
+
+  // ---- căutare globală (articole + glosar) ----
+  let searchIdx = null, searchLoaded = false;
+  const overlay = document.createElement("div");
+  overlay.className = "search-ov";
+  overlay.hidden = true;
+  overlay.innerHTML = `<div class="search-box">
+    <div class="search-in"><span>🔍</span><input id="searchInput" type="search" placeholder="Caută articole, termeni, calculatoare…" autocomplete="off"><button id="searchClose" aria-label="Închide">✕</button></div>
+    <div id="searchRes" class="search-res"><p class="search-hint">Scrie un cuvânt — ex: „inflație", „ETF", „credit ipotecar".</p></div>
+  </div>`;
+  document.body.appendChild(overlay);
+  const sInput = overlay.querySelector("#searchInput");
+  const sRes = overlay.querySelector("#searchRes");
+  const norm = s => (s || "").toLowerCase().replace(/[ăâ]/g,"a").replace(/î/g,"i").replace(/ș|ş/g,"s").replace(/ț|ţ/g,"t");
+  function openSearch() {
+    overlay.hidden = false; document.body.style.overflow = "hidden"; setTimeout(() => sInput.focus(), 40);
+    if (!searchLoaded) {
+      searchLoaded = true;
+      fetch("/search-index.json").then(r => r.json()).then(d => { searchIdx = d; runSearch(); }).catch(() => { sRes.innerHTML = `<p class="search-hint">Căutarea nu e disponibilă momentan.</p>`; });
+    }
+  }
+  function closeSearch() { overlay.hidden = true; document.body.style.overflow = ""; }
+  function runSearch() {
+    const q = norm(sInput.value.trim());
+    if (!searchIdx) return;
+    if (q.length < 2) { sRes.innerHTML = `<p class="search-hint">Scrie cel puțin 2 litere.</p>`; return; }
+    const terms = q.split(/\s+/);
+    const scored = [];
+    for (const a of searchIdx) {
+      const hay = norm((a.t || "") + " " + (a.d || "") + " " + (a.c || ""));
+      let ok = true, score = 0;
+      for (const t of terms) { if (!hay.includes(t)) { ok = false; break; } }
+      if (!ok) continue;
+      if (norm(a.t).startsWith(terms[0])) score += 10;
+      if (norm(a.t).includes(q)) score += 5;
+      score += (a.k === "g" ? 0 : 1);
+      scored.push([score, a]);
+    }
+    scored.sort((x, y) => y[0] - x[0]);
+    const top = scored.slice(0, 24);
+    if (!top.length) { sRes.innerHTML = `<p class="search-hint">Niciun rezultat pentru „${sInput.value}".</p>`; return; }
+    sRes.innerHTML = top.map(([, a]) => {
+      const badge = a.k === "g" ? "Glosar" : (a.k === "calc" ? "Calculator" : (a.cn || "Articol"));
+      return `<a class="search-item" href="${a.u}"><div><strong>${a.t}</strong><span class="search-badge">${badge}</span></div><p>${a.d || ""}</p></a>`;
+    }).join("");
+  }
+  document.getElementById("searchBtn").onclick = openSearch;
+  window.cfOpenSearch = function (q) { openSearch(); if (q) { sInput.value = q; runSearch(); } };
+  overlay.querySelector("#searchClose").onclick = closeSearch;
+  overlay.addEventListener("click", e => { if (e.target === overlay) closeSearch(); });
+  sInput.addEventListener("input", runSearch);
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !overlay.hidden) closeSearch();
+    if ((e.key === "/" || (e.key === "k" && (e.metaKey || e.ctrlKey))) && overlay.hidden) {
+      const tag = (document.activeElement && document.activeElement.tagName) || "";
+      if (tag !== "INPUT" && tag !== "TEXTAREA" && tag !== "SELECT") { e.preventDefault(); openSearch(); }
+    }
+  });
 
   // ---- footer ----
   const cols = [
@@ -122,4 +182,18 @@
   // ---- reveal on scroll ----
   const io = new IntersectionObserver((es)=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add("in")}),{threshold:.12});
   window.addEventListener("DOMContentLoaded",()=>document.querySelectorAll(".reveal").forEach(e=>io.observe(e)));
+
+  // ---- bifează articolele deja citite (orice card spre /articole/...) ----
+  function markRead(){
+    let read; try{ read=JSON.parse(localStorage.getItem("cf-read")||"[]"); }catch(e){ return; }
+    if(!read.length) return;
+    document.querySelectorAll('a[href*="/articole/"]').forEach(a=>{
+      const m=(a.getAttribute("href")||"").match(/\/articole\/([^\/]+)\.html/);
+      if(m && read.includes(decodeURIComponent(m[1])) && !a.querySelector(".read-tick")){
+        const h=a.querySelector("h3");
+        if(h && !h.querySelector(".read-tick")){ const s=document.createElement("span"); s.className="read-tick"; s.title="Citit"; s.textContent="✓"; h.appendChild(s); }
+      }
+    });
+  }
+  window.addEventListener("DOMContentLoaded",markRead);
 })();

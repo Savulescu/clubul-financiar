@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator pensie — cât strângi până la pensionare — Clubul Financiar</title>
+<meta name="description" content="Estimează ce fond aduni până la pensionare din contribuții lunare (ex. Pilon III) și ce venit lunar ți-ar putea aduce, cu randament compus."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/pensie.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Calculator pensie"><meta property="og:description" content="Ce fond aduni până la pensionare și ce venit lunar ți-ar putea aduce."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/pensie.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator pensie"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=10">
+<link rel="stylesheet" href="/assets/upgrade.css?v=10"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Cât strâng pentru pensie?</h1></div></section>
+<section class="section"><div class="container"><div class="calc">
+<div class="panel"><div class="field"><label>Vârsta actuală</label><input type="number" id="age" value="30" step="1"></div><div class="field"><label>Vârsta de pensionare</label><input type="number" id="ret" value="65" step="1"></div><div class="field"><label>Sumă strânsă deja pentru pensie (lei)</label><input type="number" id="p0" value="0" step="1000"></div><div class="field"><label>Contribuție lunară (lei)</label><input type="number" id="pm" value="400" step="50"></div><div class="field"><label>Randament anual estimat (%)</label><input type="number" id="r" value="6" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
+</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">De ce să economisești singur pentru pensie</h2><p style="color:var(--muted)">Pensia de stat (Pilon I) acoperă, de regulă, doar o parte din venitul de dinainte de pensionare. Construirea unui fond propriu — prin Pilon III (pensie facultativă, cu deducere fiscală până la 400 EUR/an din baza impozabilă, verifică legislația în vigoare), prin investiții sau alte instrumente — îți poate completa semnificativ venitul la bătrânețe. Venitul lunar estimat folosește o retragere prudentă de 4% pe an din fond.</p><div class="disc">⚠️ Estimare educativă simplificată. Nu include inflația, taxele sau modificările legislative. Randamentele nu sunt garantate. Nu reprezintă consultanță financiară sau de pensii.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
+</div></section>
+<script>
+const $=id=>document.getElementById(id);
+const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+function calc(){ let age=+$("age").value, ret=+$("ret").value, bal=+$("p0").value, pm=+$("pm").value, i=(+$("r").value)/100/12;
+let n=Math.max(0,(ret-age))*12;
+if(n<=0){ $("out").innerHTML=`<p style="color:var(--muted)">Verifică vârstele</p><div class="result-big" style="font-size:1.5rem">Vârsta de pensionare trebuie să fie mai mare</div>`; return; }
+let fv = bal*Math.pow(1+i,n) + (i>0? pm*((Math.pow(1+i,n)-1)/i) : pm*n);
+let contrib = (+$("p0").value) + pm*n;
+let lunar = fv*0.04/12;
+$("out").innerHTML=`<p style="color:var(--muted)">Fond estimat la ${ret} de ani</p><div class="result-big">${lei(fv)}</div>
+<div class="result-row"><span>Total contribuit de tine</span><b>${lei(contrib)}</b></div>
+<div class="result-row"><span>Randament acumulat</span><b style="color:var(--emerald)">${lei(fv-contrib)}</b></div>
+<div class="result-row"><span>Venit lunar estimat (regula 4%)</span><b>${lei(lunar)}</b></div>
+<p style="margin-top:12px;color:var(--muted);font-size:.9rem">Adică un supliment de ~${lei(lunar)} pe lună la pensie, pe lângă Pilon I și II.</p>`; }
+$("calcBtn").addEventListener("click",calc); calc();
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/tilt.js?v=10"></script><script src="/assets/site.js?v=10"></script></body></html>

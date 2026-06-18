@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator obiectiv de economisire — în cât timp atingi ținta — Clubul Financiar</title>
+<meta name="description" content="Află în câți ani atingi o sumă-țintă, pornind de la economiile actuale și o contribuție lunară, cu randament compus."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/obiectiv-economisire.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Calculator obiectiv de economisire"><meta property="og:description" content="În câți ani atingi o sumă-țintă, pornind de la economiile actuale și o contribuție lunară."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/obiectiv-economisire.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator obiectiv de economisire"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=10">
+<link rel="stylesheet" href="/assets/upgrade.css?v=10"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">În cât timp îmi ating obiectivul?</h1></div></section>
+<section class="section"><div class="container"><div class="calc">
+<div class="panel"><div class="field"><label>Sumă-țintă (lei)</label><input type="number" id="T" value="100000" step="1000"></div><div class="field"><label>Economii actuale (lei)</label><input type="number" id="p0" value="10000" step="500"></div><div class="field"><label>Contribuție lunară (lei)</label><input type="number" id="pm" value="1000" step="50"></div><div class="field"><label>Randament anual estimat (%)</label><input type="number" id="r" value="6" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
+</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">De la țintă la plan concret</h2><p style="color:var(--muted)">Un obiectiv financiar devine realist când îl traduci în timp și sumă lunară. Calculatorul ține cont de dobânda compusă, deci banii puși deoparte încep să producă, la rândul lor, randament. Automatizează contribuția în ziua salariului ca să fie consecventă.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Randamentele reale variază și nu sunt garantate. Nu reprezintă consultanță financiară.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
+</div></section>
+<script>
+const $=id=>document.getElementById(id);
+const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+function calc(){ let T=+$("T").value, bal=+$("p0").value, pm=+$("pm").value, i=(+$("r").value)/100/12;
+if(bal>=T){ $("out").innerHTML=`<p style="color:var(--muted)">Felicitări!</p><div class="result-big">Ținta e deja atinsă</div><p style="margin-top:10px;color:var(--muted)">Economiile actuale acoperă deja suma-țintă.</p>`; return; }
+let m=0, contribTotal=+$("p0").value;
+while(bal<T && m<1200){ bal=bal*(1+i)+pm; contribTotal+=pm; m++; }
+if(m>=1200){ $("out").innerHTML=`<p style="color:var(--muted)">Cu acești parametri</p><div class="result-big" style="font-size:1.6rem">peste 100 de ani</div><p style="margin-top:10px;color:var(--muted)">Mărește contribuția lunară sau ținta e prea mare. Încearcă alte valori.</p>`; return; }
+let ani=Math.floor(m/12), luni=m%12, depus=contribTotal-pm, dob=bal-contribTotal+pm;
+let txt = ani>0?`${ani} ani`:"" ; if(luni>0) txt+=(ani>0?" și ":"")+`${luni} luni`; if(!txt) txt="sub o lună";
+$("out").innerHTML=`<p style="color:var(--muted)">Atingi ținta în</p><div class="result-big">${txt}</div>
+<div class="result-row"><span>Total depus de tine</span><b>${lei(contribTotal-pm)}</b></div>
+<div class="result-row"><span>Randament câștigat</span><b style="color:var(--emerald)">${lei(bal-(contribTotal-pm))}</b></div>
+<div class="result-row"><span>Sumă finală</span><b>${lei(bal)}</b></div>`; }
+$("calcBtn").addEventListener("click",calc); calc();
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/tilt.js?v=10"></script><script src="/assets/site.js?v=10"></script></body></html>

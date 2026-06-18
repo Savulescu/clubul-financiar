@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator chirie vs cumpărare — ce e mai avantajos — Clubul Financiar</title>
+<meta name="description" content="Compară costul total al cumpărării unei locuințe cu creditul față de chirie, pe un orizont de timp ales. Vezi care e mai avantajos financiar."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/chirie-vs-cumparare.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Calculator chirie vs cumpărare"><meta property="og:description" content="Compară costul total al cumpărării cu creditul față de chirie, pe un orizont de timp ales."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/chirie-vs-cumparare.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator chirie vs cumpărare"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=10">
+<link rel="stylesheet" href="/assets/upgrade.css?v=10"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Chirie sau cumpărare?</h1></div></section>
+<section class="section"><div class="container"><div class="calc">
+<div class="panel"><div class="field"><label>Preț locuință (lei)</label><input type="number" id="pret" value="500000" step="5000"></div><div class="field"><label>Avans (%)</label><input type="number" id="avans" value="15" step="1"></div><div class="field"><label>Dobândă credit (% pe an)</label><input type="number" id="dob" value="7" step="0.1"></div><div class="field"><label>Durată credit (ani)</label><input type="number" id="ani" value="25" step="1"></div><div class="field"><label>Chirie lunară comparabilă (lei)</label><input type="number" id="chirie" value="2500" step="100"></div><div class="field"><label>Orizont de analiză (ani)</label><input type="number" id="oriz" value="10" step="1"></div><div class="field"><label>Apreciere locuință (% pe an)</label><input type="number" id="apr" value="3" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Compară</button></div>
+<div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Compară".</p></div>
+</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum citești comparația</h2><p style="color:var(--muted)">Calculatorul estimează <strong>costul net</strong> al fiecărei variante pe orizontul ales. La cumpărare, adună avansul, costurile de achiziție (~2%), ratele și întreținerea, apoi scade capitalul propriu acumulat (partea de proprietate plus aprecierea). La chirie, însumează chiriile plătite. Nu este o decizie pur financiară — contează și flexibilitatea, stabilitatea și planurile tale de viață.</p><div class="disc">⚠️ Estimare educativă simplificată. Nu include costul de oportunitate al avansului investit, impozite locale sau fluctuațiile pieței. Nu reprezintă consultanță financiară.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
+</div></section>
+<script>
+const $=id=>document.getElementById(id);
+const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+function calc(){ let pret=+$("pret").value, avansP=(+$("avans").value)/100, dob=(+$("dob").value)/100/12, aniC=+$("ani").value, chirie=+$("chirie").value, oriz=+$("oriz").value, apr=(+$("apr").value)/100;
+let avans=pret*avansP, credit=pret-avans, nC=aniC*12, nO=Math.min(oriz,aniC)*12;
+let rata = dob>0? credit*dob/(1-Math.pow(1+dob,-nC)) : credit/nC;
+// sold ramas dupa nO luni
+let sold = dob>0? credit*Math.pow(1+dob,nO) - rata*((Math.pow(1+dob,nO)-1)/dob) : credit-rata*nO;
+if(oriz>aniC){ sold=0; } // credit achitat
+let costAchizitie = pret*0.02;
+let intretinere = pret*0.01*oriz; // ~1%/an
+let rateProgramate = rata*Math.min(oriz,aniC)*12 + (oriz>aniC?0:0);
+let totalRate = rata*nO + (oriz>aniC? 0:0);
+let valoareViitor = pret*Math.pow(1+apr,oriz);
+let equity = valoareViitor - sold; // capital propriu (proprietate - datorie ramasa)
+let cashOut = avans + costAchizitie + totalRate + intretinere;
+let costNetCump = cashOut - equity;
+let costChirie = chirie*oriz*12;
+let castig = costChirie - costNetCump;
+let buyWins = costNetCump < costChirie;
+let col = buyWins?"var(--emerald)":"var(--blue)";
+$("out").innerHTML=`<p style="color:var(--muted)">Mai avantajos pe ${oriz} ani</p><div class="result-big" style="color:${col};-webkit-text-fill-color:${col}">${buyWins?"Cumpărarea":"Chiria"}</div>
+<div class="result-row"><span>Cost net cumpărare</span><b>${lei(costNetCump)}</b></div>
+<div class="result-row"><span>Cost total chirie</span><b>${lei(costChirie)}</b></div>
+<div class="result-row"><span>Diferență</span><b style="color:${col}">${lei(Math.abs(castig))}</b></div>
+<div class="result-row"><span>Rată lunară credit</span><b>${lei(rata)}</b></div>
+<div class="result-row"><span>Capital propriu acumulat</span><b style="color:var(--emerald)">${lei(equity)}</b></div>
+<p style="margin-top:12px;color:var(--muted);font-size:.85rem">La cumpărare rămâi cu o proprietate de ~${lei(valoareViitor)}; la chirie banii sunt cheltuiți, dar ai flexibilitate.</p>`; }
+$("calcBtn").addEventListener("click",calc); calc();
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/tilt.js?v=10"></script><script src="/assets/site.js?v=10"></script></body></html>

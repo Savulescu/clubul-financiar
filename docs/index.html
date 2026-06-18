@@ -28,13 +28,14 @@
 </script>
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=6">
-<link rel="stylesheet" href="/assets/upgrade.css?v=6">
+<link rel="stylesheet" href="/assets/style.css?v=10">
+<link rel="stylesheet" href="/assets/upgrade.css?v=10">
 </head>
 <body>
 
 <!-- HERO -->
 <section class="hero">
+  <div id="hero3d" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div>
       <p class="eyebrow">Învață · Aplică · Crește</p>
@@ -44,6 +45,9 @@
         <a class="btn btn-primary" href="/incepe-aici.html">Începe gratuit →</a>
         <a class="btn btn-ghost" href="/cursuri.html">Vezi cursurile</a>
       </div>
+      <button class="hero-search" onclick="window.cfOpenSearch&&window.cfOpenSearch()" aria-label="Caută pe site">
+        <span>🔍</span><span class="hs-txt">Caută în articole, glosar, calculatoare…</span><span class="hs-key">/</span>
+      </button>
       <div class="hero-trust">
         <span>✓ Gratuit la start</span><span>✓ În limba română</span><span>✓ Fără jargon</span>
       </div>
@@ -67,9 +71,9 @@
 <!-- STATS -->
 <section class="section-sm"><div class="container">
   <div class="stats">
-    <div class="stat reveal"><div class="num">25+</div><div class="lbl">Articole educaționale</div></div>
-    <div class="stat reveal"><div class="num">8</div><div class="lbl">Calculatoare financiare</div></div>
-    <div class="stat reveal"><div class="num">9</div><div class="lbl">Categorii acoperite</div></div>
+    <div class="stat reveal"><div class="num">400+</div><div class="lbl">Articole educaționale</div></div>
+    <div class="stat reveal"><div class="num">11</div><div class="lbl">Calculatoare financiare</div></div>
+    <div class="stat reveal"><div class="num">16</div><div class="lbl">Categorii acoperite</div></div>
     <div class="stat reveal"><div class="num">100%</div><div class="lbl">Gratuit la start</div></div>
   </div>
 </div></section>
@@ -104,6 +108,8 @@
     <a class="card reveal" href="/calculatoare.html"><div class="ic">🧮</div><h3>Calculatoare</h3><p>Dobândă compusă, economii, credit, salariu net, FIRE.</p><span class="more">Calculează →</span></a>
     <a class="card reveal" href="/educatie.html#economie"><div class="ic">🌍</div><h3>Economie</h3><p>Inflație, recesiune, PIB, dobânzi — explicat simplu.</p><span class="more">Învață →</span></a>
     <a class="card reveal" href="/cursuri.html"><div class="ic">🎓</div><h3>Cursuri</h3><p>De la „Educație financiară 101" la masterclass-uri avansate.</p><span class="more">Vezi cursuri →</span></a>
+    <a class="card reveal" href="/glosar.html"><div class="ic">📖</div><h3>Glosar financiar</h3><p>Peste 130 de termeni despre bani, explicați simplu.</p><span class="more">Caută un termen →</span></a>
+    <a class="card reveal" href="/stiri.html"><div class="ic">📰</div><h3>Știri</h3><p>Cele mai importante știri financiare din România, la zi.</p><span class="more">Vezi știrile →</span></a>
   </div>
 </div></section>
 
@@ -160,7 +166,7 @@
 
 <!-- CELE MAI CITITE -->
 <section class="section"><div class="container">
-  <div class="center" style="margin-bottom:34px"><p class="eyebrow">Bibliotecă · 110 articole</p><h2 class="title">Cele mai citite articole</h2></div>
+  <div class="center" style="margin-bottom:34px"><p class="eyebrow">Bibliotecă · 400 articole</p><h2 class="title">Cele mai citite articole</h2></div>
   <div class="grid grid-3">
     <a class="card reveal" href="/articole/dobanda-compusa-a-opta-minune-a-lumii.html"><div class="ic">📈</div><h3>Dobânda compusă: a opta minune</h3><p>De ce timpul e cel mai important ingredient în investiții.</p><span class="more">Citește →</span></a>
     <a class="card reveal" href="/articole/cum-iti-faci-primul-buget-personal-pas-cu-pas.html"><div class="ic">💰</div><h3>Cum îți faci primul buget</h3><p>Ghid pas cu pas pentru începători.</p><span class="more">Citește →</span></a>
@@ -169,7 +175,7 @@
     <a class="card reveal" href="/articole/ce-este-bitcoin-pe-intelesul-tuturor.html"><div class="ic">₿</div><h3>Ce este Bitcoin</h3><p>Criptomonedele explicate simplu și onest.</p><span class="more">Citește →</span></a>
     <a class="card reveal" href="/articole/creditul-ipotecar-in-romania-ghid-complet-pentru-incepatori.html"><div class="ic">🏠</div><h3>Creditul ipotecar în România</h3><p>Tot ce trebuie să știi înainte să semnezi.</p><span class="more">Citește →</span></a>
   </div>
-  <div class="center" style="margin-top:28px"><a class="btn btn-ghost" href="/educatie.html">Vezi toate cele 110 articole →</a></div>
+  <div class="center" style="margin-top:28px"><a class="btn btn-ghost" href="/educatie.html">Vezi toate cele 400 articole →</a></div>
 </div></section>
 
 <!-- CTA FINAL -->
@@ -182,6 +188,8 @@
 </div></section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/assets/site.js?v=8"></script>
+<script type="module" src="/assets/three3d.js?v=10"></script>
+<script src="/assets/tilt.js?v=10"></script>
+<script src="/assets/site.js?v=10"></script>
 </body>
 </html>

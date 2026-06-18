@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculator grad de îndatorare — cât din venit merge pe rate — Clubul Financiar</title>
+<meta name="description" content="Calculează-ți gradul de îndatorare (DTI): ce procent din venitul net lunar pleacă pe rate. Vezi dacă te încadrezi în limita prudentă."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/grad-indatorare.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Calculator grad de îndatorare"><meta property="og:description" content="Ce procent din venitul net lunar pleacă pe rate. Vezi dacă te încadrezi în limita prudentă."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/grad-indatorare.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator grad de îndatorare"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=10">
+<link rel="stylesheet" href="/assets/upgrade.css?v=10"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Care e gradul meu de îndatorare?</h1></div></section>
+<section class="section"><div class="container"><div class="calc">
+<div class="panel"><div class="field"><label>Venit net lunar al gospodăriei (lei)</label><input type="number" id="v" value="6000" step="100"></div><div class="field"><label>Rate lunare existente — total (lei)</label><input type="number" id="ex" value="800" step="50"></div><div class="field"><label>Rata nouă pe care o iei în calcul (lei)</label><input type="number" id="nou" value="1200" step="50"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
+</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Ce înseamnă gradul de îndatorare</h2><p style="color:var(--muted)">Gradul de îndatorare (DTI — <em>debt-to-income</em>) arată ce parte din venitul tău net lunar pleacă pe rate de credit. Băncile din România folosesc acest indicator când decid dacă îți acordă un împrumut, iar ca regulă prudentă, ratele totale nu ar trebui să depășească aproximativ <strong>40%</strong> din venitul net. Sub 30% e confortabil, peste 40% devine riscant pentru bugetul tău.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Limitele reale de creditare diferă pe bancă, tip de credit și monedă — verifică direct cu banca. Nu reprezintă consultanță financiară.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
+</div></section>
+<script>
+const $=id=>document.getElementById(id);
+const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+function calc(){ let v=+$("v").value, total=(+$("ex").value)+(+$("nou").value);
+let dti=v>0? total/v*100 : 0;
+let col = dti<30?"var(--emerald)" : (dti<=40?"var(--gold)":"#e25555");
+let verdict = dti<30?"Confortabil — ai spațiu de manevră în buget." : (dti<=40?"Prudent — ești la limita recomandată, lasă-ți o marjă." : "Risc ridicat — peste pragul prudent de ~40%. Reconsideră suma sau durata.");
+$("out").innerHTML=`<p style="color:var(--muted)">Gradul tău de îndatorare</p><div class="result-big" style="color:${col};-webkit-text-fill-color:${col}">${dti.toFixed(1)}%</div>
+<div class="result-row"><span>Rate totale lunare</span><b>${lei(total)}</b></div>
+<div class="result-row"><span>Venit net lunar</span><b>${lei(v)}</b></div>
+<div class="result-row"><span>Rămâne pentru trai</span><b style="color:var(--emerald)">${lei(Math.max(0,v-total))}</b></div>
+<p style="margin-top:14px;font-weight:700;color:${col}">${verdict}</p>`; }
+$("calcBtn").addEventListener("click",calc); calc();
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/tilt.js?v=10"></script><script src="/assets/site.js?v=10"></script></body></html>
