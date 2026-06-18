@@ -8,17 +8,22 @@ import requests, feedparser
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# (nume, url, greutate sursă, necesită filtru de relevanță financiară)
+# (nume, url, greutate sursă, necesită filtru relevanță, e_google_news)
+GN = "https://news.google.com/rss/search?q=site:{}&hl=ro&gl=RO&ceid=RO:ro"
 SOURCES = [
-    ("Ziarul Financiar", "https://www.zf.ro/rss", 1.0, False),
-    ("ZF Companii", "https://www.zf.ro/rss/companii", 0.9, False),
-    ("Economica.net", "https://www.economica.net/rss", 0.9, False),
-    ("Financial Intelligence", "https://financialintelligence.ro/feed/", 0.85, False),
-    ("Mediafax Economic", "https://www.mediafax.ro/rss/economic.xml", 0.8, False),
-    ("Digi24 Economie", "https://www.digi24.ro/rss/economie", 0.85, False),
-    ("Curs de guvernare", "https://cursdeguvernare.ro/feed", 0.8, False),
-    ("HotNews", "https://hotnews.ro/feed", 0.75, True),
+    ("Ziarul Financiar", "https://www.zf.ro/rss", 1.0, False, False),
+    ("ZF Companii", "https://www.zf.ro/rss/companii", 0.9, False, False),
+    ("Economica.net", "https://www.economica.net/rss", 0.9, False, False),
+    ("Financial Intelligence", "https://financialintelligence.ro/feed/", 0.85, False, False),
+    ("Mediafax Economic", "https://www.mediafax.ro/rss/economic.xml", 0.8, False, False),
+    ("Digi24 Economie", "https://www.digi24.ro/rss/economie", 0.85, False, False),
+    ("Curs de guvernare", "https://cursdeguvernare.ro/feed", 0.8, False, False),
+    ("Profit.ro", GN.format("profit.ro"), 0.9, False, True),
+    ("Bursa.ro", GN.format("bursa.ro"), 0.85, False, True),
+    ("Wall-Street.ro", GN.format("wall-street.ro"), 0.85, False, True),
+    ("HotNews Economic", GN.format("hotnews.ro+economie"), 0.75, True, True),
 ]
+PER_SOURCE = 14  # max articole luate per sursă
 KW = ["ban", "leu", "euro", "dolar", "bnr", "inflați", "infla", "dobând", "dobanzi", "credit",
       "taxe", "taxă", "impozit", "anaf", "bursă", "bursa", "bvb", "acțiun", "investiți", "economi",
       "salari", "pensi", "preț", "pret", "buget", "pib", "bancă", "banca", "fisc", "tva", "energie",
@@ -45,18 +50,25 @@ def fetch(url):
     except Exception as e:
         print("  fail", url, e); return None
 
+JUNK = ("ultimele stiri", "stiri online", "ultimele știri", "știri online")
+def sigwords(t):
+    return {w for w in re.sub(r"[^a-zăâîșț ]", "", t.lower()).split() if len(w) > 4}
+
 def collect():
     items, seen = [], set()
     now = time.time()
-    for name, url, w, need in SOURCES:
+    for name, url, w, need, gnews in SOURCES:
         f = fetch(url)
         if not f or not f.entries:
             print(f"  0  {name}"); continue
         cnt = 0
-        for e in f.entries[:30]:
+        for e in f.entries[:PER_SOURCE * 3]:
             title = clean(e.get("title", ""))
             link = e.get("link", "")
-            if not title or not link: continue
+            if gnews and " - " in title:           # Google News: scoate " - Sursă"
+                title = title.rsplit(" - ", 1)[0].strip()
+            if not title or not link or len(title) < 25: continue
+            if any(j in title.lower() for j in JUNK): continue
             key = re.sub(r"[^a-z0-9]", "", title.lower())[:60]
             if key in seen: continue
             tp = e.get("published_parsed") or e.get("updated_parsed")
@@ -70,9 +82,17 @@ def collect():
             age_h = (now - ts) / 3600
             score = w + max(0, 2.0 - age_h / 12) + (0.6 if kw_hit else 0)
             items.append({"title": title, "link": link, "source": name, "ts": ts,
-                          "summary": summ, "score": score})
+                          "summary": summ, "score": score, "_sw": sigwords(title)})
             cnt += 1
+            if cnt >= PER_SOURCE: break
         print(f"  {cnt:2}  {name}")
+    # boost de cluster: știrea acoperită de mai multe surse = mai importantă
+    for a in items:
+        cluster = sum(1 for b in items if a is not b and a["source"] != b["source"]
+                      and len(a["_sw"] & b["_sw"]) >= 3)
+        a["score"] += min(cluster * 0.5, 1.6)
+    for a in items:
+        a.pop("_sw", None)
     items.sort(key=lambda x: x["score"], reverse=True)
     return items[:MAX_ITEMS]
 
