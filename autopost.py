@@ -200,19 +200,15 @@ def post_x(folder):
     video = os.path.join(ROOT, "media", folder, "reel.mp4")
     size = os.path.getsize(video)
     UPLOAD = "https://api.x.com/2/media/upload"
-    # endpoint-ul v2 cere multipart/form-data (NU urlencoded) -> câmpurile ca (None, val)
-    def mp(fields):
-        return {k: (None, str(v)) for k, v in fields.items()}
-    # 1) INIT
-    init = requests.post(UPLOAD, auth=auth, files=mp({
-        "command": "INIT", "total_bytes": size,
-        "media_type": "video/mp4", "media_category": "tweet_video"}), timeout=60)
+    # v2 chunked upload prin endpoint-urile dedicate (initialize/append/finalize)
+    # 1) initialize (JSON) -> media_id
+    init = requests.post(UPLOAD + "/initialize", auth=auth, json={
+        "media_category": "tweet_video", "media_type": "video/mp4",
+        "total_bytes": size}, timeout=60)
     if not init.ok:
-        return log(f"  x: FAIL init {init.status_code} {init.text[:200]}")
-    media_id = (init.json().get("data") or init.json()).get("id")
-    if not media_id:
-        return log(f"  x: FAIL init (fără media_id) {init.text[:200]}")
-    # 2) APPEND (chunk-uri de 4MB, multipart cu binarul)
+        return log(f"  x: FAIL initialize {init.status_code} {init.text[:200]}")
+    media_id = init.json()["data"]["id"]
+    # 2) append (chunk-uri de 4MB, multipart cu binarul)
     CHUNK = 4 * 1024 * 1024
     with open(video, "rb") as f:
         idx = 0
@@ -220,20 +216,19 @@ def post_x(folder):
             buf = f.read(CHUNK)
             if not buf:
                 break
-            ap = requests.post(UPLOAD, auth=auth, files={
-                "command": (None, "APPEND"), "media_id": (None, str(media_id)),
-                "segment_index": (None, str(idx)),
-                "media": ("chunk", buf, "application/octet-stream")}, timeout=300)
+            ap = requests.post(f"{UPLOAD}/{media_id}/append", auth=auth,
+                               data={"segment_index": idx},
+                               files={"media": ("chunk", buf, "application/octet-stream")},
+                               timeout=300)
             if not ap.ok:
                 return log(f"  x: FAIL append {idx} {ap.status_code} {ap.text[:200]}")
             idx += 1
-    # 3) FINALIZE
-    fin = requests.post(UPLOAD, auth=auth, files=mp({
-        "command": "FINALIZE", "media_id": media_id}), timeout=60)
+    # 3) finalize
+    fin = requests.post(f"{UPLOAD}/{media_id}/finalize", auth=auth, timeout=60)
     if not fin.ok:
         return log(f"  x: FAIL finalize {fin.status_code} {fin.text[:200]}")
     # 4) așteaptă procesarea video (dacă e cazul)
-    info = (fin.json().get("data") or fin.json()).get("processing_info")
+    info = (fin.json().get("data") or {}).get("processing_info")
     for _ in range(20):
         if not info or info.get("state") == "succeeded":
             break
