@@ -103,12 +103,6 @@
   const tipGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex(), transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
   tipGlow.scale.set(2.2, 2.2, 1); tipGlow.position.copy(tip.position); chart.add(tipGlow);
 
-  // particule fine
-  const N = 320, pos = new Float32Array(N * 3);
-  for (let i = 0; i < N; i++) { pos[i*3]=(Math.random()-0.3)*18; pos[i*3+1]=Math.random()*9; pos[i*3+2]=(Math.random()-0.5)*8; }
-  const pg = new THREE.BufferGeometry(); pg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-  scene.add(new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xCFE9D6, size: 0.04, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending, depthWrite: false })));
-
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(W(), H()), 0.85, 0.7, 0.7);
@@ -138,9 +132,6 @@
     chart.rotation.y = -0.35 + Math.sin(t * 0.25) * 0.06;
     const pulse = 1 + Math.sin(t * 2.2) * 0.18;
     tipGlow.scale.set(2.2 * pulse, 2.2 * pulse, 1);
-    const pa = pg.attributes.position.array;
-    for (let i = 0; i < N; i++) { pa[i*3+1] += 0.006; if (pa[i*3+1] > 9) pa[i*3+1] = 0; }
-    pg.attributes.position.needsUpdate = true;
     composer.render();
   }
   function start() { if (!running) { running = true; t0 = performance.now(); loop(); } }
