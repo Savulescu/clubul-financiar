@@ -39,7 +39,7 @@ def post_telegram(folder):
     if not (tok and chat):
         return log("  telegram: fără secrets, sar")
     video = os.path.join(ROOT, "media", folder, "reel.mp4")
-    cap = caption(folder, "instagram")[:1000]
+    cap = (caption(folder, "telegram") or caption(folder, "instagram"))[:1000]
     with open(video, "rb") as f:
         r = requests.post(f"https://api.telegram.org/bot{tok}/sendVideo",
                           data={"chat_id": chat, "caption": cap, "supports_streaming": True},
@@ -151,7 +151,7 @@ def post_threads(folder):
     if not (uid and tok):
         return log("  threads: fără secrets, sar")
     url = f"{RAW}/media/{folder}/reel.mp4"
-    text = caption(folder, "instagram")[:500]
+    text = (caption(folder, "threads") or caption(folder, "instagram"))[:500]
     G = "https://graph.threads.net/v1.0"
     # 1) container video
     c = requests.post(f"{G}/{uid}/threads",
