@@ -78,9 +78,10 @@
     const email = session && session.user && (session.user.email || "").toLowerCase();
     const isAdmin = !!email && ADMIN_EMAILS.includes(email);
     const isPremium = isAdmin; // momentan: admin = acces premium complet
-    document.body.toggleAttribute("data-cf-premium", isPremium);
-    document.body.toggleAttribute("data-cf-role-admin", isAdmin);
-    window.cfPremium = isPremium; window.cfAdmin = isAdmin;
+    if(isPremium){ document.body.setAttribute("data-cf-premium",""); } else { document.body.removeAttribute("data-cf-premium"); }
+    if(isAdmin){ document.body.setAttribute("data-cf-role-admin",""); } else { document.body.removeAttribute("data-cf-role-admin"); }
+    window.cfPremium = isPremium; window.cfAdmin = isAdmin; window.cfEmail = email || null;
+    try { window.dispatchEvent(new CustomEvent("cf-auth", { detail: { email: email || null, isPremium, isAdmin } })); } catch(e){}
     return { isAdmin, isPremium };
   }
 
