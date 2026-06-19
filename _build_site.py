@@ -221,7 +221,7 @@ json.dump(idx, open(os.path.join(ROOT, "search-index.json"), "w", encoding="utf-
 print(f"search-index.json OK ({len(idx)} intrări)")
 
 # ---------- 5. sitemap.xml ----------
-PAGES = ["", "incepe-aici.html", "educatie.html", "glosar.html", "stiri.html", "investitii.html",
+PAGES = ["", "incepe-aici.html", "educatie.html", "teste.html", "glosar.html", "stiri.html", "investitii.html",
          "credite.html", "calculatoare.html", "cursuri.html", "premium.html", "despre.html", "contact.html",
          "privacy.html", "terms.html"]
 CALC_PAGES = [u.lstrip("/") for _, _, u in CALCS]

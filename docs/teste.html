@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teste — învață banii ca la Duolingo — Clubul Financiar</title>
+<meta name="description" content="Verifică-ți cunoștințele financiare cu teste pe 17 domenii: streak zilnic, XP, certificate. ~5.000 de întrebări, de la buget la investiții.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/teste.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Teste — învață banii ca la Duolingo"><meta property="og:description" content="Teste pe 17 domenii financiare: streak, XP, certificate. ~5.000 de întrebări."><meta property="og:url" content="https://clubulfinanciar.ro/teste.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Teste — Clubul Financiar"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<style>
+.qz-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+.qz-stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 18px;box-shadow:var(--shadow);font-weight:800}
+.qz-stat span{display:block;font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.qz-stat b{font-size:1.5rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.qz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.qz-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.qz-grid{grid-template-columns:1fr}}
+.qz-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s;position:relative}
+.qz-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--emerald) 45%,var(--border))}
+.qz-card h3{font-size:1.08rem;margin-bottom:4px}
+.qz-card p{color:var(--muted);font-size:.86rem}
+.qz-card .qz-prog{height:7px;border-radius:99px;background:var(--bg-soft);margin-top:12px;overflow:hidden}
+.qz-card .qz-prog i{display:block;height:100%;background:var(--grad);width:0}
+.qz-badge-free{position:absolute;top:12px;right:12px;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--emerald-link)}
+.qz-lock-mini{position:absolute;top:12px;right:12px;font-size:1rem}
+/* engine */
+.qz-view{max-width:640px;margin:0 auto}
+.qz-bar{height:10px;border-radius:99px;background:var(--bg-soft);overflow:hidden;margin-bottom:20px}
+.qz-bar i{display:block;height:100%;background:var(--grad);transition:width .3s}
+.qz-q{font-size:1.3rem;font-weight:800;font-family:var(--font-display);line-height:1.3;margin-bottom:20px}
+.qz-opt{display:block;width:100%;text-align:left;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:15px 18px;margin-bottom:12px;font:inherit;font-size:1rem;cursor:pointer;transition:.15s}
+.qz-opt:hover:not(:disabled){border-color:var(--emerald);transform:translateX(3px)}
+.qz-opt.ok{border-color:var(--emerald);background:color-mix(in srgb,var(--emerald) 14%,var(--card))}
+.qz-opt.no{border-color:#e25555;background:color-mix(in srgb,#e25555 12%,var(--card))}
+.qz-opt:disabled{cursor:default}
+.qz-explain{background:var(--bg-soft);border-left:4px solid var(--emerald);border-radius:10px;padding:14px 16px;margin:6px 0 16px;font-size:.94rem;display:none}
+.qz-explain.show{display:block}
+.qz-result{text-align:center}
+.qz-result .big{font-size:3rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+</style></head><body>
+<section class="section"><div class="container">
+
+<!-- HUB -->
+<div id="qzHub">
+  <div class="center" style="margin-bottom:6px">
+    <p class="eyebrow">Teste · învață ca la Duolingo</p>
+    <h1 class="title">Testează-te și ține minte ce înveți</h1>
+    <p class="lead" style="margin-inline:auto">~5.000 de întrebări pe 17 domenii. Răspunzi, primești feedback pe loc, îți ții seria zilnică și câștigi XP.</p>
+  </div>
+  <div class="qz-stats" id="qzStats" hidden>
+    <div class="qz-stat"><span>🔥 Seria ta</span><b id="qzStreak">0</b></div>
+    <div class="qz-stat"><span>⭐ XP total</span><b id="qzXp">0</b></div>
+    <div class="qz-stat"><span>✓ Întrebări corecte</span><b id="qzCorrect">0</b></div>
+  </div>
+  <p id="qzGuestNote" class="search-hint center" style="margin:8px auto 20px"></p>
+  <div class="qz-grid" id="qzGrid"></div>
+</div>
+
+<!-- ENGINE -->
+<div id="qzView" class="qz-view" hidden>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <button class="btn btn-ghost" id="qzBack" style="padding:7px 14px">← Înapoi</button>
+    <span id="qzCount" style="color:var(--muted);font-weight:700"></span>
+  </div>
+  <div class="qz-bar"><i id="qzBarFill"></i></div>
+  <div id="qzBody"></div>
+</div>
+
+<div class="disc" style="max-width:640px;margin:30px auto 0">⚠️ Testele au scop educativ, bazate pe lecțiile noastre. Nu reprezintă consultanță financiară.</div>
+</div></section>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script>
+(function(){
+  var CATNAMES={buget:"💰 Buget personal",economii:"🐖 Economii",datorii:"💳 Datorii",psihologie:"🧠 Psihologia banilor",venituri:"💵 Venituri",investitii:"📈 Investiții",credite:"🏦 Credite",economie:"🌍 Economie",antreprenoriat:"🚀 Antreprenoriat",imobiliare:"🏠 Imobiliare",crypto:"₿ Criptomonede",taxe:"🧾 Taxe & ANAF",pensii:"🪙 Pensii",asigurari:"🛡️ Asigurări",planificare:"🗺️ Planificare",siguranta:"🔐 Siguranță & fraude",fire:"🔥 FIRE"};
+  // domeniile cu test GUST gratuit (restul = premium)
+  var FREE=["buget","economii","datorii"];
+  var SESSION=10, FREE_LIMIT=5;
+  var hub=document.getElementById("qzHub"), view=document.getElementById("qzView"), grid=document.getElementById("qzGrid");
+  var isPremium=false;
+  function getNum(k){return parseInt(localStorage.getItem(k)||"0",10)||0;}
+  function setNum(k,v){localStorage.setItem(k,String(v));}
+  function refreshStats(){
+    document.getElementById("qzStreak").textContent=getNum("cf-qz-streak");
+    document.getElementById("qzXp").textContent=getNum("cf-qz-xp");
+    document.getElementById("qzCorrect").textContent=getNum("cf-qz-correct");
+    document.getElementById("qzStats").hidden=false;
+  }
+  function updateStreak(){
+    var today=new Date().toISOString().slice(0,10), last=localStorage.getItem("cf-qz-last");
+    if(last===today) return;
+    var y=new Date(Date.now()-86400000).toISOString().slice(0,10);
+    setNum("cf-qz-streak", last===y ? getNum("cf-qz-streak")+1 : 1);
+    localStorage.setItem("cf-qz-last",today);
+  }
+  function gate(){
+    isPremium = !!window.cfPremium;
+    document.getElementById("qzGuestNote").innerHTML = isPremium
+      ? ""
+      : 'Mod <b>gust</b>: 5 întrebări/domeniu, fără serie/XP/certificat. <a href="/premium.html" style="color:var(--emerald-link);font-weight:700">Premium</a> deblochează toate testele + streak + certificate.';
+    if(isPremium) refreshStats(); else document.getElementById("qzStats").hidden=true;
+  }
+  window.addEventListener("cf-auth", gate);
+
+  var manifest={};
+  fetch("/assets/quiz/manifest.json").then(function(r){return r.json();}).then(function(m){manifest=m; renderHub();});
+  function renderHub(){
+    var order=Object.keys(CATNAMES).filter(function(c){return manifest[c];});
+    grid.innerHTML=order.map(function(c){
+      var m=manifest[c], free=FREE.indexOf(c)>=0;
+      var done=getNum("cf-qz-d-"+c), pct=Math.min(100,Math.round(done/m.intrebari*100));
+      return '<div class="qz-card" data-c="'+c+'">'+
+        (free?'<span class="qz-badge-free">Gratuit</span>':(isPremium?'':'<span class="qz-lock-mini">🔒</span>'))+
+        '<h3>'+CATNAMES[c]+'</h3><p>'+m.lectii+' lecții · '+m.intrebari+' întrebări</p>'+
+        '<div class="qz-prog"><i style="width:'+pct+'%"></i></div></div>';
+    }).join("");
+    grid.querySelectorAll(".qz-card").forEach(function(card){
+      card.addEventListener("click",function(){ start(card.dataset.c); });
+    });
+  }
+
+  var cur={cat:null,qs:[],i:0,correct:0,limit:SESSION};
+  function start(cat){
+    var free=FREE.indexOf(cat)>=0;
+    if(!free && !isPremium){ location.href="/premium.html"; return; }
+    fetch("/assets/quiz/d/"+cat+".json").then(function(r){return r.json();}).then(function(d){
+      var pool=[];
+      Object.keys(d).forEach(function(slug){ d[slug].q.forEach(function(q){ pool.push(q); }); });
+      // amestecă
+      for(var k=pool.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));var t=pool[k];pool[k]=pool[j];pool[j]=t;}
+      cur={cat:cat, qs:pool, i:0, correct:0, limit: isPremium?SESSION:FREE_LIMIT};
+      hub.hidden=true; view.hidden=false; window.scrollTo(0,0); renderQ();
+    });
+  }
+  function renderQ(){
+    if(cur.i>=cur.limit || cur.i>=cur.qs.length){ return finish(); }
+    var q=cur.qs[cur.i];
+    document.getElementById("qzCount").textContent=(cur.i+1)+" / "+cur.limit;
+    document.getElementById("qzBarFill").style.width=(cur.i/cur.limit*100)+"%";
+    var body=document.getElementById("qzBody");
+    body.innerHTML='<div class="qz-q">'+esc(q.q)+'</div>'+
+      q.options.map(function(o,k){return '<button class="qz-opt" data-k="'+k+'">'+esc(o)+'</button>';}).join("")+
+      '<div class="qz-explain" id="qzEx"></div>'+
+      '<button class="btn btn-primary" id="qzNext" style="width:100%;justify-content:center;display:none">Continuă</button>';
+    body.querySelectorAll(".qz-opt").forEach(function(b){ b.addEventListener("click",function(){ answer(b,q); }); });
+  }
+  function answer(btn,q){
+    var opts=document.querySelectorAll(".qz-opt"); opts.forEach(function(o){o.disabled=true;});
+    var chosen=+btn.dataset.k, ok=chosen===q.correct;
+    opts[q.correct].classList.add("ok");
+    if(!ok) btn.classList.add("no");
+    if(ok){ cur.correct++; if(isPremium){ setNum("cf-qz-xp",getNum("cf-qz-xp")+10); setNum("cf-qz-correct",getNum("cf-qz-correct")+1); } }
+    var ex=document.getElementById("qzEx"); ex.innerHTML=(ok?"✓ Corect! ":"✗ ")+esc(q.explain||""); ex.classList.add("show");
+    var nx=document.getElementById("qzNext"); nx.style.display="inline-flex"; nx.textContent = (cur.i+1>=cur.limit)?"Vezi rezultatul":"Continuă";
+    nx.onclick=function(){ cur.i++; if(isPremium){ setNum("cf-qz-d-"+cur.cat,getNum("cf-qz-d-"+cur.cat)+1);} renderQ(); };
+  }
+  function finish(){
+    if(isPremium){ updateStreak(); refreshStats(); }
+    var pct=Math.round(cur.correct/Math.max(1,Math.min(cur.limit,cur.qs.length))*100);
+    var cert = isPremium && pct>=80;
+    document.getElementById("qzBarFill").style.width="100%";
+    document.getElementById("qzBody").innerHTML='<div class="qz-result">'+
+      '<div class="big">'+pct+'%</div><p style="color:var(--muted);margin-bottom:16px">Ai răspuns corect la '+cur.correct+' din '+Math.min(cur.limit,cur.qs.length)+' întrebări.</p>'+
+      (isPremium ? '<p style="font-weight:700">+'+(cur.correct*10)+' XP'+(cert?' · 🏆 Ai promovat! Certificat deblocat la finalizarea cursului.':'')+'</p>'
+                 : '<div class="cf-premium-lock" style="margin:18px auto"><div class="lock-ic">🔓</div><h2>Vrei seria zilnică, XP și certificate?</h2><p>În modul gust nu salvăm progresul. Cu Premium îți ții seria, aduni XP și primești certificate.</p><p class="price-line">Premium — 49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Activează Premium</a></div>')+
+      '<div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-ghost" id="qzAgain">Încă o rundă</button><button class="btn btn-ghost" id="qzHome">Toate testele</button></div></div>';
+    document.getElementById("qzAgain").onclick=function(){ start(cur.cat); };
+    document.getElementById("qzHome").onclick=back;
+  }
+  function back(){ view.hidden=true; hub.hidden=false; renderHub(); window.scrollTo(0,0); }
+  document.getElementById("qzBack").addEventListener("click",back);
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  // gate inițial (în caz că cf-auth a rulat deja)
+  setTimeout(gate, 1200);
+})();
+</script>
+</body></html>
