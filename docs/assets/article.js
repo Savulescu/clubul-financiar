@@ -7,6 +7,37 @@
   const titleText = h1 ? h1.textContent.trim() : document.title;
   const slug = decodeURIComponent(location.pathname.split("/").pop().replace(/\.html$/, ""));
 
+  // ---------- gating premium (preview + lock, SEO-safe: conținutul rămâne în DOM) ----------
+  (function () {
+    if (art.getAttribute("data-premium") !== "1" || window.cfPremium) return;
+    const disc = art.querySelector(".disc");
+    if (!h1 || !disc) return;
+    const nodes = []; let nn = h1.nextElementSibling;
+    while (nn && nn !== disc) { nodes.push(nn); nn = nn.nextElementSibling; }
+    if (nodes.length < 4) return;
+    let total = 0; nodes.forEach(x => total += (x.textContent || "").length);
+    let acc = 0, cut = nodes.length;
+    for (let i = 0; i < nodes.length; i++) { acc += (nodes[i].textContent || "").length; if (i >= 1 && acc >= total * 0.25) { cut = i + 1; break; } }
+    const heads = [];
+    for (let j = cut; j < nodes.length; j++) { if (/^H[23]$/.test(nodes[j].tagName)) { const h = nodes[j].textContent.trim(); if (h) heads.push(h); } }
+    const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const st = document.createElement("style");
+    st.textContent = "article.cf-locked .premium-rest{display:none}.premium-gate{position:relative;margin:0 0 10px;text-align:center}.premium-gate .pg-fade{height:90px;margin-top:-110px;margin-bottom:20px;background:linear-gradient(transparent,var(--bg));pointer-events:none;position:relative}.premium-gate .pg-card{border:1px solid color-mix(in srgb,var(--gold) 42%,var(--border));background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 9%,var(--card)),var(--card));border-radius:18px;padding:28px 24px;box-shadow:var(--shadow-lg)}.premium-gate h2{font-size:1.4rem;margin:8px 0 6px}.premium-gate .pg-list{list-style:none;padding:0;margin:12px auto 16px;max-width:430px;text-align:left}.premium-gate .pg-list li{padding:7px 0 7px 26px;position:relative;color:var(--muted)}.premium-gate .pg-list li::before{content:'🔒';position:absolute;left:0;font-size:.82rem}.premium-gate .price-line{color:var(--gold);font-weight:800;margin:10px 0 14px}";
+    document.head.appendChild(st);
+    const rest = document.createElement("div"); rest.className = "premium-rest";
+    for (let k = cut; k < nodes.length; k++) rest.appendChild(nodes[k]);
+    const gate = document.createElement("div"); gate.className = "premium-gate";
+    gate.innerHTML = '<div class="pg-fade"></div><div class="pg-card"><span class="cf-premium-badge">Premium</span><h2>Restul lecției e în Premium</h2>' +
+      (heads.length ? '<p style="color:var(--muted)">Ce mai afli în această lecție:</p><ul class="pg-list">' + heads.slice(0, 6).map(h => '<li>' + esc(h) + '</li>').join("") + '</ul>' : '<p style="color:var(--muted)">Deblochează lecția completă + toate cele 500 + teste.</p>') +
+      '<p class="price-line">Toate cele 500 de lecții + teste + instrumente — 49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login.html" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
+    disc.parentNode.insertBefore(gate, disc);
+    disc.parentNode.insertBefore(rest, disc);
+    art.classList.add("cf-locked");
+    window.addEventListener("cf-auth", function () {
+      if (window.cfPremium) { art.classList.remove("cf-locked"); while (rest.firstChild) disc.parentNode.insertBefore(rest.firstChild, rest); gate.remove(); rest.remove(); }
+    });
+  })();
+
   // ---------- bară de progres ----------
   const bar = document.createElement("div");
   bar.className = "read-progress";
