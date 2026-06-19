@@ -203,7 +203,7 @@ def build():
 .news-tab:hover{{border-color:var(--emerald)}}
 .news-tab.active{{background:var(--grad);border-color:transparent;color:#fff}}
 .news-tab.active span{{color:rgba(255,255,255,.85)}}
-.news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:16px}}
+.news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:34px}}
 .news-grp{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
 .news-lbl{{color:var(--muted);font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}}
 </style></head><body>{NAV_HTML}
@@ -238,11 +238,7 @@ def build():
   var st={{cat:'all',range:'all',sort:'relevant'}};
   var now=Date.now()/1000;
   function inRange(ts){{ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }}
-  function gateUI(){{
-    var ctrl=document.querySelector('.news-controls'); var tabs=document.querySelector('.news-tabs');
-    if(ctrl) ctrl.style.display=prem?'':'none';
-    if(tabs) tabs.style.display=prem?'':'none';
-  }}
+  function gateUI(){{ /* controale + tab-uri vizibile pentru toți; gating = doar nr. de carduri */ }}
   function apply(){{
     var vis=cards.filter(function(c){{
       var okCat=(st.cat==='all'||c.dataset.cat===st.cat);
