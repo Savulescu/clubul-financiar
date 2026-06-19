@@ -73,7 +73,7 @@
     const col = cE.clone().lerp(cG, i / (heights.length - 1));
     const m = new THREE.Mesh(
       new THREE.BoxGeometry(bw, 1, bw),
-      new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.5, metalness: 0.6, roughness: 0.22, envMapIntensity: 1.2 })
+      new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.18, metalness: 0.6, roughness: 0.26, envMapIntensity: 1.1 })
     );
     const x = i * gap;
     m.position.set(x, 0.0005, 0);
@@ -101,23 +101,15 @@
   const dynMat = new THREE.MeshBasicMaterial({ color: 0x36D67E });
   let dynSeg = new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(prevTop, topPts[LAST]), 1, 0.055, 12, false), dynMat);
   chart.add(dynSeg);
-  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.13, 24, 24), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.1, 20, 20), new THREE.MeshBasicMaterial({ color: 0xffffff }));
   chart.add(tip);
-  function glowTex() {
-    const c = document.createElement("canvas"); c.width = c.height = 128; const x = c.getContext("2d");
-    const g = x.createRadialGradient(64, 64, 2, 64, 64, 64);
-    g.addColorStop(0, "rgba(155,255,217,.95)"); g.addColorStop(0.4, "rgba(80,230,180,.4)"); g.addColorStop(1, "rgba(0,0,0,0)");
-    x.fillStyle = g; x.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c);
-  }
-  const tipGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex(), transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
-  tipGlow.scale.set(2.2, 2.2, 1); chart.add(tipGlow);
   const arrowMat = new THREE.MeshBasicMaterial({ color: 0x36D67E });
-  const arrow = new THREE.Mesh(new THREE.ConeGeometry(0.19, 0.42, 24), arrowMat);
+  const arrow = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.34, 22), arrowMat);
   chart.add(arrow);
 
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(W(), H()), 0.85, 0.7, 0.7);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(W(), H()), 0.42, 0.4, 0.86);
   composer.addPass(bloom);
 
   let tx = 0, ty = 0, cx = 0, cy = 0;
@@ -156,13 +148,11 @@
     dynSeg.geometry.dispose();
     dynSeg.geometry = new THREE.TubeGeometry(new THREE.LineCurve3(prevTop, movingTop), 1, 0.055, 12, false);
     dynMat.color.copy(dirCol);
-    tip.position.copy(movingTop); tipGlow.position.copy(movingTop);
-    arrow.position.set(lastX, curH + 0.5, 0);
+    tip.position.copy(movingTop);
+    arrow.position.set(lastX, curH + 0.46, 0);
     arrow.rotation.x = rising ? 0 : Math.PI;
     arrowMat.color.copy(dirCol);
     chart.rotation.y = -0.35 + Math.sin(t * 0.25) * 0.06;
-    const pulse = 1 + Math.sin(t * 2.2) * 0.18;
-    tipGlow.scale.set(2.2 * pulse, 2.2 * pulse, 1);
     composer.render();
   }
   function start() { if (!running) { running = true; t0 = performance.now(); loop(); } }
