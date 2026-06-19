@@ -193,6 +193,7 @@
           <a href="/account.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">👤 Contul meu</a>
           <a href="/cursuri.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">🎓 Cursurile mele</a>
           ${isPremium ? `<a href="/cursuri.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">🔓 Cursuri premium (deblocate)</a>` : ``}
+          ${isAdmin ? `<a href="/statistici.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">📊 Statistici</a>` : ``}
           <button id="logoutBtn" style="width:100%;text-align:left;background:transparent;border:none;border-top:1px solid var(--border);margin-top:6px;padding:10px;color:#e25555;font-size:.9rem;cursor:pointer">↩︎ Deconectează-te</button>
         </div></span>`;
       const menu = document.getElementById("acctMenu");
@@ -244,5 +245,17 @@
     }
     window.addEventListener("scroll",()=>{ if(!ticking){ requestAnimationFrame(onScroll); ticking=true; } }, {passive:true});
     onScroll();
+  })();
+
+  // ---- analytics minimal: numără pageview-ul în Supabase (cookieless, fără date personale) ----
+  (function(){
+    try{
+      if (navigator.webdriver) return;                 // sari peste boți/headless
+      if (location.pathname.indexOf("/statistici") === 0) return; // nu număra panoul de admin
+      let vid = localStorage.getItem("cf-vid");
+      if (!vid) { vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now())+"-"+Math.random().toString(36).slice(2)); localStorage.setItem("cf-vid", vid); }
+      if (!sb) return;
+      sb.from("page_views").insert({ path: location.pathname, visitor: vid, referrer: document.referrer || null });
+    }catch(e){}
   })();
 })();

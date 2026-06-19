@@ -195,7 +195,7 @@ def build():
 <meta property="og:title" content="Știri financiare România — Clubul Financiar"><meta property="og:description" content="Știri financiare RO pe categorii, din zeci de surse, într-un singur loc."><meta property="og:url" content="https://clubulfinanciar.ro/stiri.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
-<link rel="stylesheet" href="/assets/style.css?v=21"><link rel="stylesheet" href="/assets/upgrade.css?v=21">
+<link rel="stylesheet" href="/assets/style.css?v=22"><link rel="stylesheet" href="/assets/upgrade.css?v=22">
 <style>
 .news-tabs{{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:30px}}
 .news-tab{{font:inherit;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.2s}}
@@ -225,7 +225,7 @@ def build():
   }});}});
 }})();
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=21"></script><script defer src="/assets/site.js?v=21"></script></body></html>'''
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=22"></script><script defer src="/assets/site.js?v=22"></script></body></html>'''
     open(os.path.join(ROOT, "docs", "stiri.html"), "w", encoding="utf-8").write(page)
     print(f"stiri.html scris cu {len(items)} știri din {n_src} surse | categorii: {counts}")
 
