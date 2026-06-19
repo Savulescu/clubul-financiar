@@ -180,7 +180,7 @@ def build():
     cards = ""
     for it in items:
         t = html.escape(it["title"]); s = html.escape(it["summary"])
-        cards += f'''<a class="card reveal news-card" data-cat="{it['cat']}" href="{html.escape(it['link'])}" target="_blank" rel="noopener nofollow">
+        cards += f'''<a class="card reveal news-card" data-cat="{it['cat']}" data-ts="{it['ts']}" data-score="{it['score']:.3f}" href="{html.escape(it['link'])}" target="_blank" rel="noopener nofollow">
 <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px">
 <span class="pill">{html.escape(it['source'])}</span><span style="color:var(--muted);font-size:.8rem">{reltime(it['ts'])}</span></div>
 <h3 style="font-size:1.05rem">{t}</h3>{f'<p>{s}</p>' if s else ''}<span class="more">Citește la sursă →</span></a>\n'''
@@ -203,12 +203,25 @@ def build():
 .news-tab:hover{{border-color:var(--emerald)}}
 .news-tab.active{{background:var(--grad);border-color:transparent;color:#fff}}
 .news-tab.active span{{color:rgba(255,255,255,.85)}}
+.news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:16px}}
+.news-grp{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
+.news-lbl{{color:var(--muted);font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}}
 </style></head><body>{NAV_HTML}
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri · {n_src} surse · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
 <p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, pe categorii, din zeci de surse, ordonate după relevanță.</p></div></section>
 <section class="section"><div class="container">
+<div class="news-controls">
+<div class="news-grp"><span class="news-lbl">Interval</span>
+<button class="news-tab nt-range active" data-range="all">Toate</button>
+<button class="news-tab nt-range" data-range="24h">Ultimele 24h</button>
+<button class="news-tab nt-range" data-range="7d">Ultima săptămână</button></div>
+<div class="news-grp"><span class="news-lbl">Sortare</span>
+<button class="news-tab nt-sort active" data-sort="relevant">Cele mai relevante</button>
+<button class="news-tab nt-sort" data-sort="recent">Cele mai recente</button></div>
+</div>
 <div class="news-tabs">{tabs}</div>
+<p id="newsEmpty" class="lead" hidden style="text-align:center;margin:14px auto">Nicio știre în acest interval. Încearcă alt filtru.</p>
 <div class="grid grid-3" id="newsGrid">
 {cards}
 </div>
@@ -217,12 +230,35 @@ def build():
 {FOOTER_HTML}
 <script>
 (function(){{
-  var tabs=document.querySelectorAll('.news-tab'), cards=document.querySelectorAll('.news-card');
-  tabs.forEach(function(b){{b.addEventListener('click',function(){{
-    tabs.forEach(function(x){{x.classList.remove('active')}}); b.classList.add('active');
-    var f=b.dataset.f;
-    cards.forEach(function(c){{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';}});
-  }});}});
+  var grid=document.getElementById('newsGrid');
+  var cards=[].slice.call(document.querySelectorAll('.news-card'));
+  var st={{cat:'all',range:'all',sort:'relevant'}};
+  var now=Date.now()/1000;
+  function inRange(ts){{ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }}
+  function apply(){{
+    var vis=cards.filter(function(c){{
+      var okCat=(st.cat==='all'||c.dataset.cat===st.cat);
+      var okR=inRange(parseFloat(c.dataset.ts)||0);
+      c.style.display=(okCat&&okR)?'':'none';
+      return okCat&&okR;
+    }});
+    vis.sort(function(a,b){{
+      if(st.sort==='recent') return (parseFloat(b.dataset.ts)||0)-(parseFloat(a.dataset.ts)||0);
+      return (parseFloat(b.dataset.score)||0)-(parseFloat(a.dataset.score)||0);
+    }});
+    vis.forEach(function(c){{ grid.appendChild(c); }});
+    var e=document.getElementById('newsEmpty'); if(e) e.hidden=(vis.length>0);
+  }}
+  function wire(sel,key){{ document.querySelectorAll(sel).forEach(function(b){{ b.addEventListener('click',function(){{
+    document.querySelectorAll(sel).forEach(function(x){{x.classList.remove('active')}}); b.classList.add('active');
+    st[key]=b.dataset[key]; apply();
+  }}); }}); }}
+  wire('.nt-range','range'); wire('.nt-sort','sort');
+  document.querySelectorAll('.news-tab[data-f]').forEach(function(b){{ b.addEventListener('click',function(){{
+    document.querySelectorAll('.news-tab[data-f]').forEach(function(x){{x.classList.remove('active')}}); b.classList.add('active');
+    st.cat=b.dataset.f; apply();
+  }}); }});
+  apply();
 }})();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=22"></script><script defer src="/assets/site.js?v=22"></script></body></html>'''
