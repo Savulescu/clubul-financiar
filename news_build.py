@@ -203,7 +203,7 @@ def build():
 .news-tab:hover{{border-color:var(--emerald)}}
 .news-tab.active{{background:var(--grad);border-color:transparent;color:#fff}}
 .news-tab.active span{{color:rgba(255,255,255,.85)}}
-.news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:34px}}
+.news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:54px}}
 .news-grp{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
 .news-lbl{{color:var(--muted);font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}}
 </style></head><body>{NAV_HTML}

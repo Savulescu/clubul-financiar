@@ -162,7 +162,7 @@ def main():
 .news-tab{{font:inherit;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.2s}}
 .news-tab span{{color:var(--muted);font-weight:600}}.news-tab:hover{{border-color:var(--emerald)}}
 .news-tab.active{{background:var(--grad);border-color:transparent;color:#fff}}.news-tab.active span{{color:rgba(255,255,255,.85)}}
-.news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:34px}}
+.news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:54px}}
 .news-grp{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
 .news-lbl{{color:var(--muted);font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}}
 .news-ext,.news-card{{padding:22px}}.ne-top{{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}}
