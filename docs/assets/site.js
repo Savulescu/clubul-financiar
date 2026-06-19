@@ -46,7 +46,8 @@
     document.querySelectorAll(".theme-ic").forEach(e=>e.textContent=cur==="dark"?"☀️":"🌙");
   }
 
-  // ---- navbar ----
+  // ---- navbar (hidratează dacă e pre-randat static în HTML, altfel îl creează) ----
+  if (!document.querySelector("header.nav")) {
   const nav = document.createElement("header");
   nav.className = "nav";
   nav.innerHTML = `<div class="container nav-in">
@@ -60,6 +61,7 @@
     </div>
   </div>`;
   document.body.prepend(nav);
+  }
   document.getElementById("themeBtn").onclick = toggleTheme;
   const burgerBtn = document.getElementById("burger");
   const navLinksEl = document.getElementById("navLinks");
@@ -140,6 +142,7 @@
     ["Investiții", [["Bursă & acțiuni","/investitii.html"],["ETF-uri","/investitii.html"],["Titluri de stat","/investitii.html"],["Calculatoare","/calculatoare.html"]]],
     ["Platformă", [["Despre noi","/despre.html"],["Cursuri","/cursuri.html"],["Premium","/premium.html"],["Cont","/login.html"],["Contact","/contact.html"]]],
   ];
+  if (!document.querySelector("footer.foot")) {
   const foot = document.createElement("footer");
   foot.className = "foot";
   foot.innerHTML = `<div class="container">
@@ -157,6 +160,7 @@
     </div>
   </div>`;
   document.body.appendChild(foot);
+  }
 
   // ---- roluri (admin / premium) ----
   const ADMIN_EMAILS = ["clubulfinanciar@gmail.com"];

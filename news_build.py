@@ -3,8 +3,10 @@
 Adună din mai multe ziare (RSS), ordonează după importanță (sursă + recență + relevanță),
 și generează docs/stiri.html. Rulează în GitHub Actions (cron). Doar titlu + scurt rezumat
 + link către sursă (agregator, nu republică articole întregi)."""
-import os, re, time, html, datetime
+import os, re, time, html, datetime, sys
 import requests, feedparser
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _shell import NAV_HTML, FOOTER_HTML  # nav+footer pre-randate static
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -201,7 +203,7 @@ def build():
 .news-tab:hover{{border-color:var(--emerald)}}
 .news-tab.active{{background:var(--grad);border-color:transparent;color:#fff}}
 .news-tab.active span{{color:rgba(255,255,255,.85)}}
-</style></head><body>
+</style></head><body>{NAV_HTML}
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri · {n_src} surse · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
 <p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, pe categorii, din zeci de surse, ordonate după relevanță.</p></div></section>
@@ -212,6 +214,7 @@ def build():
 </div>
 <p style="color:var(--muted);font-size:.85rem;margin-top:30px;text-align:center">Știrile sunt agregate automat din surse externe (titlu + scurt rezumat + link către sursă). Drepturile aparțin publicațiilor sursă. Actualizat automat la fiecare 30 de minute.</p>
 </div></section>
+{FOOTER_HTML}
 <script>
 (function(){{
   var tabs=document.querySelectorAll('.news-tab'), cards=document.querySelectorAll('.news-card');

@@ -2,6 +2,9 @@
 """Construiește paginile noilor articole din _src + metadata, apoi rebuild educatie/search/sitemap/index."""
 import json, re, html, os, sys, glob
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _shell import NAV_HTML, FOOTER_HTML  # nav+footer pre-randate static (sursă unică)
+
 ROOT = "/Users/savulescucristian/clubul-financiar/docs"
 ART = os.path.join(ROOT, "articole")
 SRC = os.path.join(ART, "_src")
@@ -17,6 +20,7 @@ CATS = [
     ("credite", "🏦 Credite"), ("economie", "🌍 Economie"), ("antreprenoriat", "🚀 Antreprenoriat"),
     ("imobiliare", "🏠 Imobiliare"), ("crypto", "₿ Criptomonede"), ("taxe", "🧾 Taxe & ANAF"),
     ("pensii", "🪙 Pensii"), ("asigurari", "🛡️ Asigurări"), ("planificare", "🗺️ Planificare financiară"),
+    ("siguranta", "🔐 Siguranță & fraude"),
     ("fire", "🔥 Independență financiară (FIRE)"),
 ]
 CATNAME = dict(CATS)
@@ -69,7 +73,7 @@ PAGE_TMPL = '''<!DOCTYPE html><html lang="ro"><head>
 <script type="application/ld+json">{ldjson}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v={v}"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"></head><body><article class="article"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#{cat}">{catname}</a> · {min} min citire · Actualizat {date_disp}</p><h1>{title}</h1>{body}<div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
+<link rel="stylesheet" href="/assets/style.css?v={v}"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"></head><body>{nav}<article class="article"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#{cat}">{catname}</a> · {min} min citire · Actualizat {date_disp}</p><h1>{title}</h1>{body}<div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
 
 def build_page(slug, title, desc, cat, body):
     mins = reading_minutes(body)
@@ -83,7 +87,7 @@ def build_page(slug, title, desc, cat, body):
         "mainEntityOfPage":f"https://clubulfinanciar.ro/articole/{slug}.html"}, ensure_ascii=False)
     return PAGE_TMPL.format(title=esc(title), desc=esc(desc), slug=slug, ldjson=ld,
         cat=cat, catname=esc(CATNAME.get(cat, cat)), min=mins, body=body, v=V,
-        date_disp=ro_date(BUILD_DATE))
+        date_disp=ro_date(BUILD_DATE), nav=NAV_HTML, footer=FOOTER_HTML)
 
 # ---------- 1. construiește paginile noi ----------
 new_built, skipped, missing = 0, [], []
@@ -151,7 +155,7 @@ EDU_HEAD = '''<!DOCTYPE html><html lang="ro"><head><meta charset="utf-8"><meta n
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Educație financiară — articole și ghiduri"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=__V__"><link rel="stylesheet" href="/assets/upgrade.css?v=__V__"></head><body><section class="section"><div class="container"><div class="center" style="margin-bottom:6px"><p class="eyebrow">Bibliotecă · TOTAL articole</p><h1 class="title">Educație financiară</h1><p class="lead" style="margin-inline:auto">Ghiduri pe înțelesul tuturor — de la primul buget la independența financiară.</p></div>
+<link rel="stylesheet" href="/assets/style.css?v=__V__"><link rel="stylesheet" href="/assets/upgrade.css?v=__V__"></head><body>__NAV__<section class="section"><div class="container"><div class="center" style="margin-bottom:6px"><p class="eyebrow">Bibliotecă · TOTAL articole</p><h1 class="title">Educație financiară</h1><p class="lead" style="margin-inline:auto">Ghiduri pe înțelesul tuturor — de la primul buget la independența financiară.</p></div>
 <div class="glos-search" style="max-width:560px"><input type="search" id="eduQ" placeholder="Filtrează articolele… (ex: ETF, pensie, credit)" autocomplete="off"></div>
 <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:18px 0 4px">__QUICKNAV__</div>
 <p id="eduEmpty" class="search-hint" hidden>Niciun articol găsit. Încearcă alt cuvânt.</p>
@@ -170,10 +174,11 @@ eduQ&&eduQ.addEventListener("input",()=>{
   eduEmpty.hidden=shown>0;
 });
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/site.js?v=__V__"></script></body></html>'''
+__FOOTER__<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/site.js?v=__V__"></script></body></html>'''
 
 edu = (EDU_HEAD.replace("__V__", V).replace("__QUICKNAV__", quicknav)
-       .replace("__SECTIONS__", "\n".join(sections)).replace("TOTAL", str(total)))
+       .replace("__SECTIONS__", "\n".join(sections)).replace("TOTAL", str(total))
+       .replace("__NAV__", NAV_HTML).replace("__FOOTER__", FOOTER_HTML))
 open(os.path.join(ROOT, "educatie.html"), "w", encoding="utf-8").write(edu)
 print("educatie.html rebuild OK")
 

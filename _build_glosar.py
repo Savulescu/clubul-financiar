@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-import json, re, html, unicodedata, os
+import json, re, html, unicodedata, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _shell import NAV_HTML, FOOTER_HTML  # nav+footer pre-randate static
 
 SRC = "/private/tmp/claude-501/-Users-savulescucristian/2d8bd220-1ab9-4311-b6f9-e180142ffdfa/tasks/wu28oa28b.output"
 OUT = "/Users/savulescucristian/clubul-financiar/docs/glosar.html"
@@ -85,7 +87,7 @@ page = f'''<!DOCTYPE html><html lang="ro"><head>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=21">
-<link rel="stylesheet" href="/assets/upgrade.css?v=21"></head><body>
+<link rel="stylesheet" href="/assets/upgrade.css?v=21"></head><body>{NAV_HTML}
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Dicționar</p><h1 class="title">Glosar financiar</h1>
 <p class="lead" style="margin-inline:auto">{count} de termeni despre bani, investiții, credite și taxe — explicați pe înțelesul tuturor.</p>
@@ -99,6 +101,7 @@ page = f'''<!DOCTYPE html><html lang="ro"><head>
 <p id="glosEmpty" class="search-hint" hidden>Niciun termen găsit. Încearcă alt cuvânt.</p>
 <div style="max-width:820px;margin:34px auto 0"><div class="disc">⚠️ Definițiile au scop educativ și sunt simplificate pentru începători. Pentru decizii financiare consultă un specialist autorizat.</div></div>
 </div></section>
+{FOOTER_HTML}
 <script>
 const cards=[...document.querySelectorAll(".glos-card")];
 const letters=[...document.querySelectorAll(".glos-letter")];
