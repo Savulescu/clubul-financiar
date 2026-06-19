@@ -209,7 +209,8 @@ def build():
 </style></head><body>{NAV_HTML}
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri · {n_src} surse · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
-<p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, pe categorii, din zeci de surse, ordonate după relevanță.</p></div></section>
+<p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, pe categorii, din zeci de surse, ordonate după relevanță.</p>
+<div class="news-tabs" style="justify-content:center;margin-top:6px"><a class="news-tab active" href="/stiri.html"><span>🇷🇴 Știri România</span></a><a class="news-tab" href="/stiri-externe.html">🌍 Știri externe</a></div></div></section>
 <section class="section"><div class="container">
 <div class="news-controls">
 <div class="news-grp"><span class="news-lbl">Interval</span>
