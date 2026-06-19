@@ -11,8 +11,13 @@ permissions:
 jobs:
   news:
     runs-on: ubuntu-latest
+    concurrency:
+      group: stiri-push
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -24,8 +29,16 @@ jobs:
           git config user.email "clubulfinanciar@gmail.com"
           git add docs/stiri.html
           if git diff --staged --quiet; then
-            echo "fără știri noi"
-          else
-            git commit -m "Actualizare automată știri ($(date -u +%Y-%m-%d\ %H:%M) UTC)"
-            git push
+            echo "fără știri noi"; exit 0
           fi
+          git commit -m "Actualizare automată știri ($(date -u +%Y-%m-%d\ %H:%M) UTC)"
+          # push robust la curse: dacă remote-ul a avansat (alt push), rebază păstrând
+          # stiri.html-ul nostru (cel mai proaspăt) și reîncearcă
+          for i in 1 2 3 4 5 6; do
+            if git push origin HEAD:main; then echo "pushed"; exit 0; fi
+            echo "push respins, încerc rebase (#$i)…"
+            git fetch origin main
+            git rebase -X theirs origin/main || git rebase --abort
+            sleep $((i * 3))
+          done
+          echo "push eșuat după retry"; exit 1
