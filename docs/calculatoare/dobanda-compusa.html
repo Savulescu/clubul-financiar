@@ -5,14 +5,14 @@
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/dobanda-compusa.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="Calculator dobândă compusă"><meta property="og:description" content="Calculează cât cresc banii tăi în timp cu dobândă compusă. Sumă inițială, contribuție lunară, dobândă și ani."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/dobanda-compusa.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator dobândă compusă"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta property="og:title" content="Calculator dobândă compusă"><meta property="og:description" content="Calculează cât cresc banii tăi în timp cu dobândă compusă. Sumă inițială, contribuție lunară, dobândă și ani."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/dobanda-compusa.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator dobândă compusă"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/upgrade.css?v=15"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator dobândă compusă</h1></div></section>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=21">
+<link rel="stylesheet" href="/assets/upgrade.css?v=21"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator dobândă compusă</h1></div></section>
 <section class="section"><div class="container"><div class="calc">
-<div class="panel"><div class="field"><label>Sumă inițială (lei)</label><input type="number" id="p0" value="1000" step="1"></div><div class="field"><label>Contribuție lunară (lei)</label><input type="number" id="pm" value="300" step="1"></div><div class="field"><label>Număr de ani</label><input type="number" id="yr" value="30" step="1"></div><div class="field"><label>Randament anual (%)</label><input type="number" id="r" value="8" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel"><div class="field"><label>Sumă inițială (lei)</label><input type="number" id="p0" value="1000" min="0" step="100"></div><div class="field"><label>Contribuție lunară (lei)</label><input type="number" id="pm" value="300" min="0" step="50"></div><div class="field"><label>Număr de ani</label><input type="number" id="yr" value="30" min="1" max="80" step="1"></div><div class="field"><label>Randament anual (%)</label><input type="number" id="r" value="8" min="0" max="50" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
 <div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum funcționează dobânda compusă</h2><p style="color:var(--muted)">Dobânda compusă înseamnă că primești dobândă nu doar la banii depuși, ci și la dobânda acumulată anterior. Cu cât începi mai devreme, cu atât efectul e mai puternic — timpul e cel mai important ingredient.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
@@ -21,11 +21,28 @@
 <script>
 const $=id=>document.getElementById(id);
 const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
-function calc(){ let p0=+$("p0").value,pm=+$("pm").value,yr=+$("yr").value,i=(+$("r").value)/100/12,n=yr*12;
+// Grafic SVG: contribuții (albastru) vs randament (emerald) acumulate pe ani.
+function chart(p0,pm,i,yr){
+  let pts=[]; for(let y=0;y<=yr;y++){ let m=y*12;
+    let bal=i>0? p0*Math.pow(1+i,m)+pm*((Math.pow(1+i,m)-1)/i) : p0+pm*m;
+    let contrib=p0+pm*m; pts.push({contrib:contrib, total:bal}); }
+  let max=pts[pts.length-1].total||1, W=320, H=140, n=pts.length, bw=W/n*0.7, gap=W/n;
+  let bars=pts.map((p,idx)=>{ let x=idx*gap+gap*0.15;
+    let hT=(p.total/max)*H, hC=(p.contrib/max)*H;
+    return `<rect x="${x.toFixed(1)}" y="${(H-hT).toFixed(1)}" width="${bw.toFixed(1)}" height="${hT.toFixed(1)}" fill="var(--emerald)" opacity=".85" rx="1.5"/>`+
+           `<rect x="${x.toFixed(1)}" y="${(H-hC).toFixed(1)}" width="${bw.toFixed(1)}" height="${hC.toFixed(1)}" fill="var(--blue)" rx="1.5"/>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${W} ${H+16}" width="100%" style="margin-top:14px;overflow:visible">${bars}</svg>
+    <div style="display:flex;gap:16px;justify-content:center;font-size:.8rem;color:var(--muted);margin-top:4px">
+    <span><span style="display:inline-block;width:10px;height:10px;background:var(--blue);border-radius:2px;vertical-align:middle"></span> Depuneri</span>
+    <span><span style="display:inline-block;width:10px;height:10px;background:var(--emerald);border-radius:2px;vertical-align:middle"></span> Total cu randament</span></div>`;
+}
+function calc(){ let p0=+$("p0").value,pm=+$("pm").value,yr=+$("yr").value,r=+$("r").value,i=r/100/12,n=yr*12;
+if(!isFinite(p0)||p0<0||!isFinite(pm)||pm<0||!isFinite(yr)||yr<=0||!isFinite(r)||r<0){ $("out").innerHTML=`<p style="color:var(--muted)">Completează valori valide (ani > 0).</p>`; return; }
 let fv=i>0? p0*Math.pow(1+i,n)+pm*((Math.pow(1+i,n)-1)/i) : p0+pm*n;
 let contrib=p0+pm*n, dob=fv-contrib;
 $("out").innerHTML=`<p style="color:var(--muted)">Vei avea după ${yr} ani</p><div class="result-big">${lei(fv)}</div>
 <div class="result-row"><span>Bani depuși de tine</span><b>${lei(contrib)}</b></div>
-<div class="result-row"><span>Dobândă câștigată</span><b style="color:var(--emerald)">${lei(dob)}</b></div>`; }
-$("calcBtn").addEventListener("click",calc); calc();
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/tilt.js?v=15"></script><script src="/assets/site.js?v=15"></script></body></html>
+<div class="result-row"><span>Dobândă câștigată</span><b style="color:var(--emerald)">${lei(dob)}</b></div>${chart(p0,pm,i,yr)}`; }
+$("calcBtn").addEventListener("click",calc); ["p0","pm","yr","r"].forEach(id=>$(id).addEventListener("input",calc)); calc();
+</script><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=21"></script><script defer src="/assets/site.js?v=21"></script></body></html>

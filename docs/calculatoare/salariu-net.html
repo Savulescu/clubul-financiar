@@ -5,26 +5,44 @@
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/salariu-net.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="Calculator salariu net din brut"><meta property="og:description" content="Află cât iei net dintr-un salariu brut în România: CAS, CASS și impozit pe venit."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/salariu-net.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator salariu net din brut"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta property="og:title" content="Calculator salariu net din brut"><meta property="og:description" content="Află cât iei net dintr-un salariu brut în România: CAS, CASS și impozit pe venit."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/salariu-net.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator salariu net din brut"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/upgrade.css?v=15"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator salariu net (brut → net)</h1></div></section>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=21">
+<link rel="stylesheet" href="/assets/upgrade.css?v=21"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator salariu net (brut → net)</h1></div></section>
 <section class="section"><div class="container"><div class="calc">
-<div class="panel"><div class="field"><label>Salariu brut (lei)</label><input type="number" id="B" value="5000" step="1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel"><div class="field"><label>Salariu brut (lei)</label><input type="number" id="B" value="5000" min="0" step="50"></div><div class="field"><label>Persoane în întreținere</label><select id="dep"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4 sau mai multe</option></select></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
-<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum se calculează salariul net</h2><p style="color:var(--muted)">Din salariul brut se rețin CAS (25%), CASS (10%) și impozitul pe venit (10% din baza rămasă). Calculul nu include deducerea personală sau cazuri speciale (IT, construcții) — pentru exactitate verifică fluturașul de salariu.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum se calculează salariul net</h2><p style="color:var(--muted)">Din salariul brut se rețin <strong>CAS (25%)</strong> și <strong>CASS (10%)</strong>. Impozitul pe venit (<strong>10%</strong>) se aplică pe baza rămasă <em>după</em> CAS și CASS, din care se scade întâi <strong>deducerea personală</strong>. Pentru 2026, deducerea pornește de la 20% din salariul minim (4.050 lei) la nivelul salariului minim, crește cu 5% pentru fiecare persoană în întreținere (max. 4) și scade treptat până la zero pentru un brut peste salariul minim + 2.000 lei (≈6.050 lei). Calculul nu include cazuri speciale (IT, construcții, scutiri) — pentru exactitate verifică fluturașul de salariu.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
 </div></section>
 <script>
 const $=id=>document.getElementById(id);
 const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
-function calc(){ let B=+$("B").value, cas=B*0.25, cass=B*0.10, baza=B-cas-cass, imp=baza*0.10, net=B-cas-cass-imp;
+const SAL_MIN=4050; // salariu minim brut 2026 (sem. I)
+// Deducerea personală de bază 2026 (OUG 89/2025): procent din salariul minim.
+// 20% la nivelul salariului minim, +5% per persoană în întreținere (max 4),
+// scade liniar la 0 pe intervalul de 2.000 lei peste salariul minim.
+function deducere(B, dep){
+  if(B<=0) return 0;
+  if(B>SAL_MIN+2000) return 0; // peste plafon: fără deducere
+  dep=Math.min(Math.max(dep,0),4);
+  let procentStart=0.20+0.05*dep;        // procent la nivelul salariului minim
+  let delta=Math.max(0,B-SAL_MIN);        // cât depășește salariul minim
+  let fractie=1-delta/2000;               // scade liniar până la 0 la +2.000 lei
+  let procent=procentStart*fractie;
+  return Math.max(0, procent*SAL_MIN);
+}
+function calc(){ let B=+$("B").value, dep=+$("dep").value;
+  if(!isFinite(B) || B<0){ $("out").innerHTML=`<p style="color:var(--muted)">Completează un salariu brut valid (≥ 0).</p>`; return; }
+  let cas=B*0.25, cass=B*0.10, ded=deducere(B,dep);
+  let baza=Math.max(0, B-cas-cass-ded), imp=baza*0.10, net=B-cas-cass-imp;
 $("out").innerHTML=`<p style="color:var(--muted)">Salariu net estimat</p><div class="result-big">${lei(net)}</div>
 <div class="result-row"><span>CAS (pensie) 25%</span><b>${lei(cas)}</b></div>
 <div class="result-row"><span>CASS (sănătate) 10%</span><b>${lei(cass)}</b></div>
-<div class="result-row"><span>Impozit 10%</span><b>${lei(imp)}</b></div>`; }
-$("calcBtn").addEventListener("click",calc); calc();
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/tilt.js?v=15"></script><script src="/assets/site.js?v=15"></script></body></html>
+<div class="result-row"><span>Deducere personală</span><b style="color:var(--emerald)">${lei(ded)}</b></div>
+<div class="result-row"><span>Impozit 10% (după deducere)</span><b>${lei(imp)}</b></div>`; }
+$("calcBtn").addEventListener("click",calc); $("B").addEventListener("input",calc); $("dep").addEventListener("change",calc); calc();
+</script><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=21"></script><script defer src="/assets/site.js?v=21"></script></body></html>

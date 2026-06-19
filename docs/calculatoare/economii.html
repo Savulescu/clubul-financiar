@@ -5,14 +5,14 @@
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/economii.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="Calculator economii — cât pui lunar pentru o țintă"><meta property="og:description" content="Află cât trebuie să economisești lunar ca să atingi o sumă-țintă într-un anumit număr de ani."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/economii.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.png">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator economii — cât pui lunar pentru o țintă"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.png">
+<meta property="og:title" content="Calculator economii — cât pui lunar pentru o țintă"><meta property="og:description" content="Află cât trebuie să economisești lunar ca să atingi o sumă-țintă într-un anumit număr de ani."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/economii.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator economii — cât pui lunar pentru o țintă"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=15">
-<link rel="stylesheet" href="/assets/upgrade.css?v=15"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Cât economisesc lunar pentru ținta mea?</h1></div></section>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=21">
+<link rel="stylesheet" href="/assets/upgrade.css?v=21"></head><body><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Cât economisesc lunar pentru ținta mea?</h1></div></section>
 <section class="section"><div class="container"><div class="calc">
-<div class="panel"><div class="field"><label>Sumă-țintă (lei)</label><input type="number" id="T" value="50000" step="1"></div><div class="field"><label>În câți ani</label><input type="number" id="yr" value="5" step="1"></div><div class="field"><label>Randament anual (%)</label><input type="number" id="r" value="5" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel"><div class="field"><label>Sumă-țintă (lei)</label><input type="number" id="T" value="50000" min="1" step="1000"></div><div class="field"><label>În câți ani</label><input type="number" id="yr" value="5" min="1" max="80" step="1"></div><div class="field"><label>Randament anual (%)</label><input type="number" id="r" value="5" min="0" max="50" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
 <div style="max-width:760px;margin:34px auto 0"><h2 class="title">Planifică-ți economiile</h2><p style="color:var(--muted)">Stabilește o țintă (fond de urgență, avans, vacanță) și află exact cât să pui deoparte lunar. Automatizează transferul în ziua salariului — „plătește-te primul".</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
@@ -21,11 +21,12 @@
 <script>
 const $=id=>document.getElementById(id);
 const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
-function calc(){ let T=+$("T").value,i=(+$("r").value)/100/12,n=(+$("yr").value)*12;
+function calc(){ let T=+$("T").value,rp=+$("r").value,yr=+$("yr").value,i=rp/100/12,n=yr*12;
+if(!isFinite(T)||T<=0||!isFinite(yr)||yr<=0||!isFinite(rp)||rp<0){ $("out").innerHTML=`<p style="color:var(--muted)">Completează valori valide (țintă și ani > 0).</p>`; return; }
 let pm=i>0? T*i/(Math.pow(1+i,n)-1) : T/n;
 let contrib=pm*n, dob=T-contrib;
 $("out").innerHTML=`<p style="color:var(--muted)">Trebuie să economisești lunar</p><div class="result-big">${lei(pm)}</div>
 <div class="result-row"><span>Total depus de tine</span><b>${lei(contrib)}</b></div>
 <div class="result-row"><span>Dobândă câștigată</span><b style="color:var(--emerald)">${lei(dob)}</b></div>`; }
-$("calcBtn").addEventListener("click",calc); calc();
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="/assets/tilt.js?v=15"></script><script src="/assets/site.js?v=15"></script></body></html>
+$("calcBtn").addEventListener("click",calc); ["T","yr","r"].forEach(id=>$(id).addEventListener("input",calc)); calc();
+</script><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=21"></script><script defer src="/assets/site.js?v=21"></script></body></html>
