@@ -109,4 +109,62 @@
     }</div>`;
     art.appendChild(rel);
   }).catch(() => {});
+
+  // ---------- navigare capitol (prev/next cu nume) + test după lecție ----------
+  (function () {
+    var esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    var st = document.createElement("style");
+    st.textContent = ".lesson-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:30px 0}.lnav{display:block;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:.15s}.lnav:hover{border-color:var(--emerald);transform:translateY(-2px)}.lnav span{display:block;color:var(--muted);font-size:.78rem;font-weight:700}.lnav b{display:block;font-size:.95rem;margin-top:3px;color:var(--text)}.lnav.next{text-align:right}@media(max-width:560px){.lesson-nav{grid-template-columns:1fr}.lnav.next{text-align:left}}.lesson-quiz{background:linear-gradient(135deg,color-mix(in srgb,var(--emerald) 10%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--emerald) 30%,var(--border));border-radius:16px;padding:22px;margin:34px 0 10px;text-align:center}.lq-q{font-size:1.15rem;font-weight:800;font-family:var(--font-display);margin:10px 0 16px;text-align:left}.lq-opt{display:block;width:100%;text-align:left;background:var(--card);border:2px solid var(--border);border-radius:12px;padding:13px 16px;margin-bottom:10px;font:inherit;font-size:1rem;cursor:pointer;transition:.15s}.lq-opt:hover:not(:disabled){border-color:var(--emerald)}.lq-opt.ok{border-color:var(--emerald);background:color-mix(in srgb,var(--emerald) 14%,var(--card))}.lq-opt.no{border-color:#e25555;background:color-mix(in srgb,#e25555 12%,var(--card))}.lq-ex{display:none;background:var(--bg-soft);border-left:4px solid var(--emerald);border-radius:10px;padding:12px 14px;margin:4px 0 14px;text-align:left;font-size:.92rem}.lq-ex.show{display:block}.lq-prog{color:var(--muted);font-weight:700;font-size:.85rem;text-align:left;margin-bottom:6px}.lq-big{font-size:2.4rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}";
+    document.head.appendChild(st);
+
+    fetch("/assets/manual-order.json").then(r => r.json()).then(ord => {
+      var e = ord[slug]; if (!e) return;
+      // test după lecție
+      var box = document.createElement("section"); box.className = "lesson-quiz";
+      box.innerHTML = '<div id="lqStart"><p class="eyebrow">Testează-te</p><h2 style="font-size:1.3rem;margin:4px 0 10px">Ai înțeles lecția? Verifică în 10 întrebări.</h2><button class="btn btn-primary" id="lqBtn">Începe testul</button></div><div id="lqRun"></div>';
+      art.appendChild(box);
+      // prev / next (cu nume)
+      var nav = document.createElement("nav"); nav.className = "lesson-nav";
+      nav.innerHTML =
+        (e.p ? '<a class="lnav prev" href="/articole/' + encodeURIComponent(e.p[0]) + '.html"><span>← Lecția anterioară</span><b>' + esc(e.p[1]) + '</b></a>'
+             : '<a class="lnav prev" href="/manual/' + e.d + '.html"><span>← Înapoi la</span><b>Capitol</b></a>') +
+        (e.n ? '<a class="lnav next" href="/articole/' + encodeURIComponent(e.n[0]) + '.html"><span>Lecția următoare →</span><b>' + esc(e.n[1]) + '</b></a>'
+             : '<a class="lnav next" href="/teste.html?d=' + e.d + '"><span>Testul capitolului →</span><b>Recapitulare</b></a>');
+      art.appendChild(nav);
+
+      fetch("/assets/quiz/d/" + e.d + ".json").then(r => r.json()).then(qd => {
+        var qs = (qd[slug] && qd[slug].q) || [];
+        if (!qs.length) { box.style.display = "none"; return; }
+        document.getElementById("lqBtn").onclick = () => runQuiz(qs);
+      }).catch(() => { box.style.display = "none"; });
+
+      function runQuiz(qs) {
+        var i = 0, correct = 0, prem = !!window.cfPremium;
+        var run = document.getElementById("lqRun"); document.getElementById("lqStart").style.display = "none";
+        function q() {
+          if (i >= qs.length) return done();
+          var it = qs[i];
+          run.innerHTML = '<div class="lq-prog">' + (i + 1) + ' / ' + qs.length + '</div><div class="lq-q">' + esc(it.q) + '</div>' +
+            it.options.map((o, k) => '<button class="lq-opt" data-k="' + k + '">' + esc(o) + '</button>').join("") +
+            '<div class="lq-ex" id="lqEx"></div><button class="btn btn-primary" id="lqNext" style="display:none;width:100%;justify-content:center">Continuă</button>';
+          run.querySelectorAll(".lq-opt").forEach(b => b.onclick = () => ans(b, it));
+        }
+        function ans(b, it) {
+          var opts = run.querySelectorAll(".lq-opt"); opts.forEach(o => o.disabled = true);
+          var ok = +b.dataset.k === it.correct; opts[it.correct].classList.add("ok"); if (!ok) b.classList.add("no");
+          if (ok) { correct++; if (prem) { try { localStorage.setItem("cf-qz-xp", parseInt(localStorage.getItem("cf-qz-xp") || "0", 10) + 10); } catch (e) {} } }
+          var ex = document.getElementById("lqEx"); ex.innerHTML = (ok ? "✓ Corect! " : "✗ ") + esc(it.explain || ""); ex.classList.add("show");
+          var nx = document.getElementById("lqNext"); nx.style.display = "inline-flex"; nx.textContent = (i + 1 >= qs.length) ? "Vezi rezultatul" : "Continuă"; nx.onclick = () => { i++; q(); };
+        }
+        function done() {
+          var pct = Math.round(correct / qs.length * 100);
+          run.innerHTML = '<div class="lq-big">' + pct + '%</div><p style="color:var(--muted)">' + correct + ' din ' + qs.length + ' corecte.' + (prem ? ' +' + (correct * 10) + ' XP' : '') + '</p>' +
+            (prem ? '' : '<p style="font-size:.9rem;margin-top:8px">Cu <a href="/premium.html" style="color:var(--emerald-link);font-weight:700">Premium</a> îți ții seria zilnică, aduni XP și primești certificate.</p>') +
+            '<button class="btn btn-ghost" id="lqAgain" style="margin-top:12px">Încă o dată</button>';
+          document.getElementById("lqAgain").onclick = () => runQuiz(qs);
+        }
+        q();
+      }
+    }).catch(() => {});
+  })();
 })();
