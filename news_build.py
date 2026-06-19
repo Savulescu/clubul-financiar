@@ -232,9 +232,16 @@ def build():
 (function(){{
   var grid=document.getElementById('newsGrid');
   var cards=[].slice.call(document.querySelectorAll('.news-card'));
+  var FREE=18;
+  var prem=!!window.cfPremium;
   var st={{cat:'all',range:'all',sort:'relevant'}};
   var now=Date.now()/1000;
   function inRange(ts){{ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }}
+  function gateUI(){{
+    var ctrl=document.querySelector('.news-controls'); var tabs=document.querySelector('.news-tabs');
+    if(ctrl) ctrl.style.display=prem?'':'none';
+    if(tabs) tabs.style.display=prem?'':'none';
+  }}
   function apply(){{
     var vis=cards.filter(function(c){{
       var okCat=(st.cat==='all'||c.dataset.cat===st.cat);
@@ -247,7 +254,15 @@ def build():
       return (parseFloat(b.dataset.score)||0)-(parseFloat(a.dataset.score)||0);
     }});
     vis.forEach(function(c){{ grid.appendChild(c); }});
+    if(!prem) vis.forEach(function(c,i){{ if(i>=FREE) c.style.display='none'; }});
     var e=document.getElementById('newsEmpty'); if(e) e.hidden=(vis.length>0);
+    var cta=document.getElementById('newsPremCTA');
+    if(!prem && vis.length>FREE){{
+      if(!cta){{ cta=document.createElement('div'); cta.id='newsPremCTA'; cta.className='cf-premium-lock'; cta.style.margin='26px 0 0';
+        cta.innerHTML='<div class="lock-ic">🔒</div><h2>Vezi toate știrile + filtre cu Premium</h2><p>Free: primele '+FREE+' știri din sursele principale. Premium: toate sursele, pe categorii, cu filtre (24h / 7 zile / relevanță).</p><p class="price-line" style="color:var(--gold);font-weight:800;margin:10px 0 14px">49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Deblochează cu Premium</a>';
+        grid.parentNode.insertBefore(cta, grid.nextSibling); }}
+      cta.style.display='';
+    }} else if(cta) cta.style.display='none';
   }}
   function wire(sel,key){{ document.querySelectorAll(sel).forEach(function(b){{ b.addEventListener('click',function(){{
     document.querySelectorAll(sel).forEach(function(x){{x.classList.remove('active')}}); b.classList.add('active');
@@ -258,7 +273,8 @@ def build():
     document.querySelectorAll('.news-tab[data-f]').forEach(function(x){{x.classList.remove('active')}}); b.classList.add('active');
     st.cat=b.dataset.f; apply();
   }}); }});
-  apply();
+  gateUI(); apply();
+  window.addEventListener('cf-auth', function(){{ prem=!!window.cfPremium; gateUI(); apply(); }});
 }})();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>'''
