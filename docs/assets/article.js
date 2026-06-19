@@ -103,8 +103,9 @@
     if (!pick.length) return;
     const rel = document.createElement("section");
     rel.className = "related";
+    const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     rel.innerHTML = `<h2 class="title" style="font-size:1.4rem">Articole conexe</h2><div class="related-grid">${
-      pick.map(a => `<a class="card" href="/articole/${a.s}.html"><h3>${a.t}</h3><p>${a.d || ""}</p><span class="more">Citește →</span></a>`).join("")
+      pick.map(a => `<a class="card" href="/articole/${encodeURIComponent(a.s)}.html"><h3>${esc(a.t)}</h3><p>${esc(a.d || "")}</p><span class="more">Citește</span></a>`).join("")
     }</div>`;
     art.appendChild(rel);
   }).catch(() => {});

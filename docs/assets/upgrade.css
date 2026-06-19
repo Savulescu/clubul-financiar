@@ -593,7 +593,7 @@ h3{ font-size: clamp(1.08rem,.96rem + .7vw, 1.34rem); font-weight: 700; }
     radial-gradient(620px 480px at 98% 4%, rgba(232,194,104,.16), transparent 58%),
     linear-gradient(105deg,#0d2342 0%,#0a1a33 40%,#060f1e 100%) !important;
   --text:#eef3ff; --muted:#bcccea; --border:rgba(255,255,255,.14); --card:rgba(255,255,255,.06);
-  --emerald:#36D67E; --emerald-d:#27c06a; --blue:#E8C268;
+  --emerald:#36D67E; --emerald-d:#27c06a; --blue:#E8C268; --emerald-link:#5cf0aa;
 }
 .hero::before{ content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
   background:linear-gradient(90deg, rgba(6,15,30,.94) 0%, rgba(6,15,30,.6) 34%, transparent 54%); }
@@ -617,3 +617,65 @@ h3{ font-size: clamp(1.08rem,.96rem + .7vw, 1.34rem); font-weight: 700; }
 .foot .soc a svg{ width:18px; height:18px; fill:currentColor; }
 .foot .soc a:hover{ color:#fff; border-color:var(--emerald); background:var(--emerald); }
 .foot .soc-h{ font-size:.82rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; margin:16px 0 9px; }
+
+/* ============================================================
+   19. FIX-URI AUDIT 2026-06-19 (a11y, contrast, overflow, disclaimer, ancore)
+   ============================================================ */
+/* token de link cu contrast WCAG AA (emerald pe alb pică la 2.5:1) */
+:root{ --emerald-link:#047857; }            /* ~5.3:1 pe alb */
+[data-theme="dark"]{ --emerald-link:#34d399; }
+
+/* aplicat pe textele emerald mici/bold care nu treceau de AA */
+.card .more, .toc a, .eyebrow, .glos-letter, .search-badge, .tl-link,
+.read-btn, .pill{ color: var(--emerald-link); }
+[data-theme="dark"] .pill{ color: var(--emerald-link); }
+
+/* focus vizibil pe TOATE elementele interactive (lipsea complet) — :focus-visible, nu :focus */
+:where(a, button, input, select, textarea, .card, .level, .price,
+       .search-item, .glos-alpha button, .nav-links a, .icon-btn, .btn):focus-visible{
+  outline: 3px solid var(--emerald);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+/* contrast mai bun al inelului pe fundaluri întunecate (hero/nav navy) */
+.hero :focus-visible, .nav :focus-visible{ outline-color: #5cf0aa; }
+
+/* plasă de siguranță overflow orizontal pe mobil (clip nu strică position:sticky) */
+html, body{ overflow-x: clip; }
+
+/* disclaimer legal stilizat GLOBAL (nu doar în .article) — apare pe toate calculatoarele */
+.disc{
+  margin-top: 28px; padding: 14px 16px; background: var(--bg-soft);
+  border-left: 4px solid var(--gold); border-radius: 10px;
+  color: var(--muted); font-size: .9rem; line-height: 1.55;
+}
+
+/* ancorele cuprinsului/categoriilor nu mai aterizează sub bara fixă */
+.article h2, .article h3{ scroll-margin-top: 80px; }
+.cat-h{ scroll-margin-top: 84px; }
+
+/* navbar mobil: previne depășirea viewportului (cauza overflow-ului) */
+@media(max-width: 600px){
+  .nav-in{ gap: 10px; }
+  .brand-logo{ font-size: 1.04rem; }
+  .brand-img{ width: 30px; height: 30px; }
+  .nav-right{ gap: 7px; }
+}
+@media(max-width: 400px){
+  .brand-logo span, .brand-logo{ letter-spacing: -.03em; }
+  .brand-txt{ display: none; }          /* sub 400px: doar logo-ul, fără text */
+}
+
+/* meniu mobil: tranziție fină + nu mai apare instant (display nu e animabil) */
+@media(max-width: 980px){
+  .nav-links{
+    display: flex !important; flex-direction: column;
+    max-height: 0; opacity: 0; overflow: hidden; pointer-events: none;
+    padding-top: 0; padding-bottom: 0;
+    transition: max-height .3s var(--ease), opacity .22s ease, padding .3s var(--ease);
+  }
+  .nav-links.open{
+    max-height: 75vh; opacity: 1; pointer-events: auto; overflow: auto;
+    padding-top: 12px; padding-bottom: 12px;
+  }
+}

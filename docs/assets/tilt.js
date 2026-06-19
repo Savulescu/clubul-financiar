@@ -17,7 +17,8 @@
     let raf = 0, rx = 0, ry = 0;
     function apply() {
       raf = 0;
-      el.style.transform = "perspective(900px) rotateX(" + rx + "deg) rotateY(" + ry + "deg)";
+      // include translateY(-6px) ca să apară și „lift"-ul de hover pe desktop (CSS-ul era suprascris)
+      el.style.transform = "perspective(900px) rotateX(" + rx + "deg) rotateY(" + ry + "deg) translateY(-6px)";
     }
     el.addEventListener("pointerenter", () => { el.style.transition = "none"; });
     el.addEventListener("pointermove", e => {

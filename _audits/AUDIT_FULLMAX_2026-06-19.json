@@ -1,0 +1,699 @@
+{
+  "summary": "Audit critic full-max al clubulfinanciar.ro cu ~54 agenti pe 5 teme + raport master prioritizat",
+  "agentCount": 54,
+  "logs": [
+    "Audit complet: 48/48 dimensiuni cu findings"
+  ],
+  "result": {
+    "report": "I have all five thematic syntheses. No tools needed — this is a synthesis task. Writing the master report now.\n\n# RAPORT MASTER — Audit critic clubulfinanciar.ro\n*Director de produs → Cristian · 2026-06-19 · standard țintă: „ultra mega premium\"*\n\n## 1. Verdict executiv\n\nSite-ul are o fundație reală peste media pieței RO — 400 articole fact-checked, glosar de 131 termeni, 11 calculatoare, sistem de design cu intenție clară de premium (paletă brand, tipografie cu clamp, hero 3D, căutare globală) — dar executia e fracturată și nu atinge standardul promis. Trei lucruri contează cel mai mult, în ordine: **(1) un bug LIVE de cache-busting** prin care 411-428 din ~430 de pagini servesc JS/CSS vechi (`v=15` vs `v=20`/`v=21`), deci toată munca de design și TOATE bug-fix-urile (inclusiv cele de securitate/a11y) sunt invizibile vizitatorilor recurenți pe 99% din site; **(2) stratul de business este o fațadă nefuncțională** — niciun vizitator nu poate deveni lead sau client (toate CTA-urile „abonare\" duc la `/login.html`, zero captură email, premium=`isAdmin`, tier-uri în EUR cu butoane „În curând\"); **(3) erori fiscale reale** răspândite (dividende 8/10/16%, Pilon II 3,75 vs 4,75%, capital gains 10% flat vs 1/3%, impozit-investiții subevaluat ~3×) care, pe un site YMYL de educație financiară, costă userul bani și distrug increderea. Sub acestea stau defecte sistemice vizibile imediat: XSS reflectat în căutare, overflow orizontal pe mobil (majoritatea traficului), navbar/footer injectate exclusiv prin JS (400 articole fără navigație fără JS + CLS + pierdere SEO), brand „fantomă\" (auriul declarat lipsește din tot conținutul public), zero `:focus-visible` pe tot site-ul, și coruptie de text (emoji foarfecă, homoglife chirilice, diacritice sparte). Vestea bună: aproape toate sunt sistemice — același template/generator — deci un fix se propagă la sute de pagini. Vestea proastă: nimic din asta nu se vede la utilizatori până nu repari cache-ul. **Ordinea corectă: deblochează propagarea (cache) → oprește dezinformarea (fiscal) → repară securitatea (XSS) → construiește funnel-ul de email → abia apoi rafinamentul de design.**\n\n## 2. Top 10 priorități (sortate după impact/efort)\n\n| # | Problema | Temă | Severitate | Efort | Impact |\n|---|----------|------|-----------|-------|--------|\n| 1 | Cache-busting desincronizat: 411-428 pagini servesc JS/CSS vechi (`v=15`), doar home pe `v=20` | SEO/Perf + Tehnic + Design | Critic | Mic | Anulează propagarea oricărui alt fix; comportament divergent home vs rest |\n| 2 | XSS reflectat în căutarea globală (`site.js:101` `innerHTML` cu input neescapat) | Tehnic/Securitate + Design | Critic | Mic | Furt sesiune Supabase din localStorage pe site cu conturi |\n| 3 | Erori fiscale: impozit-investiții subevaluat ~3× (cote 2025 vs 3/6%+16% în 2026) + dividende/Pilon II/capital gains inconsistente | Conținut + Tehnic | Critic | Mic-Mediu | Userul ia decizii cu bani reali pe cifre greșite; distruge increderea YMYL |\n| 4 | Funnel rupt: toate CTA „abonare\" → `/login.html`, zero captură email pe tot site-ul | Business | Critic | Mediu | Activul #1 de business (lista proprie) = zero; tot traficul pleacă neconvertit |\n| 5 | Coruptie de text: emoji foarfecă (18 art.), homoglife chirilice (rup căutarea), diacritice sparte (33), adresare „dvs\" (56) | Conținut | Major | Mic-Mediu | Vizibil instant, strigă „neglijent\", rupe căutarea/SEO |\n| 6 | Navbar+footer injectate exclusiv prin JS — 400 articole fără navigație/logo fără JS, CLS, SEO slăbit | Design + SEO | Critic | Mediu | Defect structural #1 al perceptiei de premium; captivitate fără JS |\n| 7 | Premium fals: `isPremium=isAdmin`, „cursuri\" = liste de link-uri spre articole gratuite indexate | Business + Conținut | Critic | Mare | Monetizare imposibil de livrat; risc de a încasa fără a putea da acces |\n| 8 | Overflow orizontal site-wide pe mobil (conținut tăiat sub ~400px) | Design | Critic | Mediu | ~50%+ din trafic vede site-ul vizibil RUPT |\n| 9 | Zero `:focus-visible` pe tot site-ul + lipsă `<main>`/skip-link + accent emerald 2.54:1 sub WCAG | Tehnic/A11y + Design | Critic-Major | Mic | Navigare cu tastatura oarbă; perceptie „ieftin\"; nelegalitate WCAG |\n| 10 | Article JSON-LD invalid pe toate 400 (lipsă `datePublished`+`image`+`author`) + lipsă dată vizibilă | SEO + Conținut | Critic | Mediu | Zero rich results, zero semnal freshness pe conținut fiscal care îmbătrânește |\n\n## 3. Quick wins (efort mic, impact bun — fezabile într-o zi)\n\n**Deblocare & securitate (fă-le PRIMELE, în ordinea asta):**\n- Bumpează TOATE paginile la `?v=21` simultan (un singur `sed` peste `*.html` + `articole/` + `cursuri/` + `calculatoare/`) — repară bug-ul LIVE de cache stale. Fără ăsta, restul quick-wins-urilor sunt invizibile.\n- Înlocuiește `innerHTML` cu `textContent` (sau helper `esc()`) în mesajul „niciun rezultat\" + câmpurile din index (`site.js:101/104`, `article.js:107`) — elimină vectorul XSS.\n- Pinează Supabase la versiune exactă + `integrity` SRI + `crossorigin` pe toate tag-urile CDN.\n\n**Corectitudine de conținut (oprește dezinformarea):**\n- Actualizează cotele 2026 în `impozit-investiții`: 3/6% câștiguri, 16% dividende + excepția 200 lei/tranzacție sub 600 lei/an.\n- Corectează eroarea de inflație din stagflație (8.163 → 8.044) și `'acum 1 zile'` → `'acum 1 zi'` în `news_build.py`.\n\n**Design & a11y (sistemice, un fix → sute de pagini):**\n- Regulă globală `:focus-visible` (ring emerald/gold, `outline-offset`) pe a/button/.btn/.icon-btn/.card/.search-item/.glos-alpha — folosește `:focus-visible`, nu `:focus`.\n- Token `--emerald-link:#047857` (~4.6:1) aplicat pe `.more`/`.eyebrow`/`.glos-letter`/`.pill`/`.search-badge`/hover-uri — trece de WCAG AA.\n- Plasă de siguranță `html,body{overflow-x:hidden;max-width:100%}` pentru overflow-ul mobil.\n- Elimină sufixul literal `' →'` din textele `.more` din HTML (find/replace global), păstrând `::after`-ul animat — scapi de săgeata dublă sitewide.\n- Adaugă regulă globală `.disc{...}` în `style.css` (nu doar `.article .disc`) — stilizează disclaimerul pe toate 11 calculatoare.\n- `scroll-margin-top:24px` pe `.article h2/h3` + `:84px` pe `.cat-h` — ancorele nu mai aterizează sub bara fixă.\n- Nu redefini `--blue` ca auriu în `.hero` — token dedicat `--hero-accent`, ca să nu se schimbe culoarea CTA-ului principal.\n- Schimbă cererea Google Fonts în range variabil `Plus+Jakarta+Sans:wght@400..800` (face `450` valid și consistent cross-browser).\n- Include `translateY(-6px)` în transform-ul inline din `tilt.js` — hover-lift-ul cardurilor apare pe desktop.\n\n**SEO & meta (find/replace din generator):**\n- Șterge sufixul brand DUBLAT din `<title>` pe `contact/credite/despre/investiții/premium`.\n- Linkează `despre.html` în footer (acum orfană dar în sitemap) + adaugă `privacy.html`+`terms.html` în sitemap și ca `<a>` static.\n- Re-exportă `og-image.png` la 1200×630 JPEG q85 fără alpha (~125-170KB, de la 1.5MB) + comprimă `icon-512.png` cu pngquant — accelerează preview-urile pe cele 9 suprafețe sociale.\n- Adaugă `twitter:description` (reutilizând `og:description`) pe toate paginile + blocul complet de 4 taguri Twitter pe `stiri.html`.\n- `<link rel=preconnect href=https://cdn.jsdelivr.net crossorigin>` + `defer` pe `tilt.js`/`site.js`/`article.js`.\n- `'Afli'` → `'Afla'` în meta-descriptions (35) și corp (51+21).\n\n**Business (semnale instant):**\n- Afișează prețurile în RON (sau RON primar + EUR secundar).\n- Expune Telegram-ul existent ca „comunitatea Clubului\" în footer/nav (ca promisiunea de comunitate să aibă o suprafață reală).\n- Email pe domeniu `contact@clubulfinanciar.ro` în loc de Gmail.\n- Adaugă analytics ușor fără cookie (Plausible/Umami) cu evenimente pe pașii de conversie — fără asta optimizarea funnel-ului e oarbă.\n\n## 4. Pariuri strategice (efort mare, schimbă jocul)\n\n- **Pre-randează navbar+footer ca HTML static (build-time include) pe toate ~430 paginile.** Rezolvă simultan: captivitatea fără JS, CLS-ul pe first-fold, și pierderea de link equity SEO pe 400 articole. JS rămâne doar să hidrateze search/theme/account. Cel mai mare câștig de percepție-premium + SEO dintr-o singură intervenție.\n\n- **Reconstruiește produsul premium ca produs real.** Decuplează `isPremium` de `isAdmin` cu flag de abonament Supabase + flux plată→acces end-to-end (Stripe Payment Links, RLS, signed URLs server-side), apoi transformă „cursurile\" din liste de link-uri în lecții proprii cu progres/quiz/certificat și creează valoare EXCLUSIVĂ care nu există gratuit (template-uri Excel, PDF-uri, portofolii model). Fără asta, monetizarea e înșelătoare și generează rambursări. Maxim 2 tiere în RON. Până atunci: zero prețuri expuse fără checkout — doar waitlist.\n\n- **Construiește lista de email proprie (activul #1 de business).** Formular real de captură (1 câmp) în banda CTA + injectat la finalul tuturor celor 400 articole via `article.js` (un singur loc) + footer, scris în Supabase/ESP, plus 1-2 lead magnete reale + serie drip welcome de 5-7 emailuri ancorată pe cele 5 niveluri din `incepe-aici.html`. Singurul canal nedependent de Meta/X (care te-au și suspendat).\n\n- **Stabilește identitatea de autoritate / E-E-A-T.** Fondator/echipă cu nume+foto+background pe Despre, byline + `author` JSON-LD bulk pe 400 articole, entitate juridică (PFA/SRL+CUI) + clauze legale complete (abonament/rambursare/retragere 14 zile, ANPC/SOL). Anonimatul total plafonează atât conversia cât și ranking-ul exact pe nișa YMYL unde concurenții câștigă. Diferențiază pe unghiul defensibil RO (ANAF, Declarația Unică, Fidelis/Tezaur, PFA, Pilon II, BVB) + independență („nu luăm comisioane de la brokeri\").\n\n- **Refacere accesibilitate centralizată în shell.** `<main>`+skip-link injectate din `site.js`, focus-trap real pe modalul de căutare + meniuri (cont, burger) cu return-focus, semantică dialog/menu, `aria-live` pe rezultatul calculatoarelor și pe mesajele de auth, `for=` pe label-urile calculatoarelor. Rezolvă ~8 findings WCAG dintr-o intervenție pe `site.js`/`article.js`.\n\n- **Pipeline de build unic** care: versionează CSS/JS prin hash (elimină la rădăcină stale-cache-ul), generează în masă Article JSON-LD complet (date/author/image) + sursează aceleași date pentru `<lastmod>`, generează linkuri interne statice (dicționar termen→slug: 3-5 articole conexe pre-randate + auto-linking glosar + CTA către calculatoare), și emite clase în loc de inline styles (`stiri.html` are 333). Deblochează rich results + freshness + autoritate tematică pe clusterul de 400 articole și oprește drift-ul permanent.\n\n- **Conținut anti-fraudă (protejează userul de pierderi reale).** Cluster de 6-8 articole (phishing/smishing, scam investiții, Ponzi, fraudă card, recuperare bani) + 4-5 protecția consumatorului (clauze abuzive, ANPC, darea în plată Legea 77/2016) + ANPC/ASF/FGDB în glosar. Cel mai mare gol funcțional, în plină epidemie națională de fraudă RO 2024-2026.\n\n## 5. Per temă\n\n### Design & UX — *Fundație serioasă, executie „lipită din bucăți\"*\nIntenție de premium reală, dar fracturată la prima vedere. Findings cheie:\n- Navbar+footer injectate exclusiv prin JS: `index.html` + 400 articole au 0 `<nav>`/`<header>` în HTML → captivitate fără JS, CLS pe first-fold, SEO slăbit. **Defectul structural #1.**\n- Overflow orizontal pe mobil sub ~400px (dovedit la 375/320px): cauza = navbar care depășește viewportul + lipsă guard `overflow-x`.\n- Brand „fantomă\": auriul declarat are 0 apariții în conținutul public; două sisteme paralele — public emerald/blue vs auth navy/gold hardcodat inline. `.section--navy` e cod mort.\n- Defecte glitch sistemice: săgeată dublă pe toate CTA-urile (`upgrade.css:307` + sufix literal), disclaimer nestilizat pe 11 calculatoare, `--blue` redefinit ca auriu schimbând CTA-ul principal, hover-lift mort pe desktop (tilt.js suprascrie), `font-weight:450` inexistent în fontul încărcat.\n- Hero pe mobil: coloana dreaptă + `.hero-caption` (copy de conversie „Efectul compus\") `display:none` pe ~50%+ din trafic, fără fallback static când 3D nu pornește.\n\n### Conținut & Copy — *Peste media RO, dar cu erori care costă bani și o monetizare-fațadă*\n- **Erori fiscale/pensii răspândite** (dividende 8/10/16, Pilon II 4,75%, capital gains 1/3% broker rezident, pensie 77.216 lei/lună + metodologie pre-reformă, VPR 81 lei) — prioritate zero.\n- Conversie inexistentă: 400 articole + hub-urile sunt fundături fără CTA; newsletter-ul duce la `/login.html` gol.\n- Coruptie de text: emoji foarfecă (18 art. + breadcrumb „Datorii\"), homoglife chirilice (rup căutarea), diacritice sparte (33), „dvs\" (56, contrazice vocea „tu\", 51 cu disclaimer dublu auto-contradictoriu).\n- Bug funcțional: filtrul din `educatie.html` afișează carduri INVIZIBILE (`.reveal{opacity:0}` fără clasa `.in` la cardurile sub fold — userul care caută „ETF\" vede rezultate goale).\n- Conținut critic absent: anti-fraudă + protecția consumatorului. Plus `stiri.html` = agregator-zgomot (~37% non-financiar, duplicate, linkuri Google News opace).\n\n### SEO & Performanță — *Fundație tehnică solidă, 2 bug-uri LIVE + 3 pierderi structurale*\n- Cache-busting desincronizat (bug LIVE, vezi #1).\n- Supabase SDK ~70KB gzip render-blocking pe TOATE ~430 paginile doar pentru un buton de navbar — cel mai mare cost de rețea pe paginile de citit; degradează LCP/TBT pe mobil.\n- Article JSON-LD invalid pe toate 400 (`datePublished`/`image`/`author` = 0/400) → zero rich results, zero freshness.\n- Țesut de link-uri interne aproape inexistent: 0/400 articole link-uiesc static către alt articol/glosar/calculator; „Articole conexe\" doar runtime via fetch, fără `<noscript>`.\n- 213/400 titluri >70c (trunchiate în SERP); cursuri `noindex` DAR în sitemap (contradicție); og-image 1.5MB.\n\n### Tehnic, Accesibilitate & Securitate — *Baze solide, cade pe a11y + igienă deploy + corectitudine*\n- Cache-bust desincronizat (compromite implicit și remediile de a11y/securitate care trăiesc în JS).\n- A11y sistematic sub-premium: zero `:focus-visible` (WCAG 2.4.7), lipsă `<main>`/skip-link (~420 pagini), calculatoare cu label-uri nelegate de input-uri + fără `<form>` + fără `aria-live` (inima funcțională inutilizabilă la AT), modale fără focus-trap, accent emerald 2.54:1 sub AA.\n- XSS reflectat în căutare + zero CSP + CDN fără SRI + Supabase nepinat = supply-chain risk pe fluxul de login.\n- Corectitudine: `impozit-investiții` cu cote expirate (~3× subevaluat), `salariu-net` ignoră deducerea personală obligatorie.\n- Cod mort `account.js` (3.9KB, 0 pagini) + client Supabase init în 4-5 locuri (drift la rotirea cheii).\n\n### Business & Monetizare — *Produs care bate piața pe breadth, business = fațadă nefuncțională*\n- Funnel rupt: zero captură email; toate CTA „abonare\" → `/login.html`; CTA-ul minte literal.\n- Tier-uri moarte în EUR (9.99-49.99€, „În curând\" `href=#`) care erodează increderea pe pagina unde ceri bani.\n- Premium fals (`isPremium=isAdmin`, gating CSS, conținut gratuit indexat).\n- Brand anonim (zero autor/fondator/entitate) = E-E-A-T plafonat pe YMYL; „comunitate exclusivă\" vândută la 49.99€ fără nicio suprafață de comunitate (Telegram ~2 abonați).\n- Venit ratat ACUM: zero afiliere pe articolele despre brokeri/ETF/conturi economii — singurul venit care poate curge imediat, independent de paywall.\n\n## 6. Recomandare de secvențiere\n\n### Săptămâna 1 — „Oprește hemoragia + deblochează propagarea\"\n*Totul mic-efort, dependențe stricte de ordine:*\n1. **Cache `v=21` global** (PRIMUL — fără el nimic din rest nu se vede la useri).\n2. **XSS** (`textContent`/`esc()`) + pinare Supabase + SRI.\n3. **Fiscal**: `impozit-investiții` 3/6%+16%, deducere personală `salariu-net`, eroare inflație stagflație, marcaj „Actualizat la [data]\".\n4. **Val unic de curățare text**: emoji foarfecă, homoglife chirilice, diacritice (33), „dvs\"→„tu\" (56) + regenerare `search-index`.\n5. **Quick-wins a11y/design sistemice**: `:focus-visible`, `--emerald-link`, `overflow-x:hidden`, săgeată dublă, `.disc` global, `scroll-margin`, `--blue` în hero, font range, hover-lift.\n6. **Bug filtru `educatie.html`** (clasa `.in`).\n7. **Meta**: title dublat (5 pagini), despre orfană în footer, sitemap legal, og-image comprimat, twitter:description, preconnect+defer.\n8. **Analytics** (Plausible/Umami) — ca să poți măsura ce urmează.\n\n### Prima lună — „Deblochează creșterea + repară structura\"\n- **Captură email reală** (banda CTA + injectat în `article.js` pe toate 400 + footer → Supabase/ESP). Activul #1.\n- **Pre-randare navbar+footer static** pe ~430 pagini (elimină captivitatea fără JS + CLS + SEO).\n- **Refacere a11y centralizată în shell** (`<main>`+skip-link, focus-trap modale, `aria-live`, `for=` label-uri).\n- **Supabase lazy** (scoate ~70KB de pe paginile de conținut).\n- **Audit fiscal complet** pe ~15-20 articole + glosar (dincolo de quick-fix-ul din săpt. 1).\n- **Scoate prețurile EUR fără checkout** → 1 CTA waitlist; afișează RON; expune Telegram ca comunitate; email pe domeniu.\n- **Reproiectează `stiri.html`** din agregator-zgomot (filtru hard, colapsare clustere, „unghiul Clubul Financiar\").\n\n### Trimestrul următor — „Construiește produsul, autoritatea și moat-ul\"\n- **Pipeline de build unic**: versionare hash, Article JSON-LD bulk (date/author/image) + `<lastmod>` + `article:published_time`, linkuri interne statice (auto-linking glosar + conexe pre-randate), clase în loc de inline styles.\n- **Premium real**: Supabase `is_premium` + webhook Stripe + signed URLs server-side; cursuri = lecții proprii cu progres/quiz; 2 tiere RON; valoare exclusivă (template-uri/PDF/portofolii).\n- **E-E-A-T**: fondator/echipă + byline JSON-LD bulk + entitate juridică + clauze legale complete (rambursare/retragere/ANPC/SOL).\n- **Cluster anti-fraudă** (6-8) + protecția consumatorului (4-5) + termeni RO în glosar (ANPC/ASF/FGDB/ROBOR/grad îndatorare).\n- **Motor de retenție**: progres + `cf-read` sincronizate Supabase cross-device, dashboard „Contul meu\" util, serie drip welcome 5-7 emailuri, PWA + web push, RSS + abonare pe categorii la știri.\n- **Afiliere etichetată** pe articolele comerciale (venit imediat) + grafice SVG/canvas în calculatoarele de creștere (leagă funcțional „graficul brandului\" de valoarea educativă).\n- **Înlocuire hero Three.js (~266KB) cu Canvas2D (<5KB)** sau bundle local tree-shaken + OG images dinamice per-articol.",
+    "syntheses": [
+      {
+        "theme": "Design & UX",
+        "verdict": "Site-ul are o fundatie de design serioasa si o intentie clara de premium (paleta brand coerenta, sistem tipografic cu clamp, micro-interactiuni cu curbe consistente, cautare globala cu shortcut-uri, hero 3D WebGL), dar executia e fracturata si tradeaza standardul \"ultra mega premium\" prin defecte concrete, vizibile la prima vedere. Trei probleme structurale domina: (1) intreaga navigatie (navbar+footer) e injectata exclusiv prin JS, deci cele 400 de articole nu au nicio bara/logo si raman fara navigatie daca JS pica — plus CLS pe first-fold; (2) cache-busting incoerent (1 pagina pe v=20, 428 pe v=15) face ca toate modificarile de design sa NU se propage la vizitatorii recurenti pe tot site-ul in afara de homepage; (3) doua sisteme paralele lipite — site public emerald/blue vs auth navy/gold hardcodat inline, cu auriul de brand absent din tot continutul public. La acestea se adauga un bug de overflow orizontal site-wide pe mobil (majoritatea traficului), un XSS reflectat in cautare, sageata dubla pe toate CTA-urile si disclaimerul legal nestilizat pe toate calculatoarele. Niciun fix nu e singular eroic, dar cumulat dau senzatia de \"lipit din bucati\", nu de sistem unitar. Vestea buna: aproape toate sunt sistemice (acelasi template), deci un fix se propaga la sute de pagini.",
+        "topFindings": [
+          {
+            "title": "XSS reflectat in cautarea globala (mesajul 'niciun rezultat' injecteaza input brut in innerHTML)",
+            "severity": "critic",
+            "impact": "Vulnerabilitate de securitate exploatabila: site.js:101 face sRes.innerHTML cu sInput.value neescapat, iar cfOpenSearch(q) permite pre-popularea query-ului dintr-un link. Cu Supabase auth (token in localStorage), un link malitios poate executa cod si fura sesiunea. Pe un site care colecteaza conturi, e inacceptabil.",
+            "recommendation": "Inlocuieste innerHTML cu textContent pentru mesajul de 'niciun rezultat' (sau escapeaza HTML). O linie, dar elimina complet vectorul. Audit rapid si pe restul innerHTML-urilor care primesc input de user.",
+            "effort": "mic"
+          },
+          {
+            "title": "Overflow orizontal site-wide pe mobil — continut taiat la marginea dreapta (home, glosar, calculatoare, articol)",
+            "severity": "critic",
+            "impact": "Pe ecrane sub ~400px (majoritatea Android RO) headingurile, nav-right, cardurile de statistici si valorile din rezultate sunt taiate. Dovedit cu screenshot la 375px si 320px. Cauza-radacina: navbar (brand 1.2rem + 4 controale) depaseste viewportul si nu exista niciun guard overflow-x/max-width pe html/body. Pe ~50%+ din trafic site-ul arata vizibil RUPT, nu premium.",
+            "recommendation": "Plasa de siguranta html,body{overflow-x:hidden;max-width:100%} PLUS fix-ul cauzei: pe @media(max-width:600px) reduce nav-in gap, scade brand-logo la 1rem, ascunde textul brandului sub ~420px, micsoreaza butonul 'Cont' sau muta cautarea in burger. Verifica scrollWidth==innerWidth la 320/360/375px.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Navbar + footer injectate exclusiv prin JS — cele 400 de articole nu au navbar/logo, zero navigatie fara JS, CLS pe first-fold",
+            "severity": "critic",
+            "impact": "Convergenta a 4 findings (nav, article-ux, hero, mobile). index.html si toate cele 400 articole au 0 <nav>/<header> in HTML (verificat). Daca JS pica (CDN supabase 404, eroare in three3d.js, blocker), userul ramane captiv fara navigatie/footer/cautare. Pe articole singura iesire e un link mic jos. In plus prepend-ul produce layout shift exact pe elementul cel mai vizibil, iar lipsa nav-ului in HTML slabeste SEO pe 400 pagini statice. E defectul structural #1 al perceptiei de premium.",
+            "recommendation": "Pre-randeaza navbar+footer ca HTML static (build-time include) in fiecare pagina, inclusiv toate articolele; lasa JS-ul doar sa hidrateze (search, theme, account). Elimina prepend-ul care produce CLS. Bun si pentru SEO (link equity vizibil crawlerelor).",
+            "effort": "mediu"
+          },
+          {
+            "title": "Cache-busting incoerent: doar index.html pe v=20, restul de 428 pagini blocate pe v=15 cu CSS stale",
+            "severity": "major",
+            "impact": "Verificat: 1 fisier pe v=20, 428 pe v=15, cu un singur upgrade.css fizic (modificat Jun 19). Toate iteratiile de design (tipografie, culori, micro-interactiuni) NU se propaga la vizitatorii recurenti pe tot site-ul in afara de homepage. Practic munca de design e invizibila pe 99% din pagini pentru userii care au cache vechi. Anuleaza efectul oricarui alt fix de design pana se rezolva.",
+            "recommendation": "Aliniaza TOATE referintele la aceeasi versiune (?v=20 sau hash) printr-un find/replace pe docs/**/*.html, apoi muta versionarea intr-un singur build step ca sa nu mai diverge niciodata.",
+            "effort": "mic"
+          },
+          {
+            "title": "Sageata dubla pe toate CTA-urile din carduri (defect vizual sitewide)",
+            "severity": "major",
+            "impact": "upgrade.css:307 .card .more::after adauga ' →', iar textul HTML deja se termina cu ' →' (verificat). Randat ies doua sageti consecutive pe index, educatie, stiri (x110 carduri), calculatoare, investitii, credite, cursuri — orice grila de carduri. E genul de glitch pe care un ochi pretentios il vede instant si striga 'neglijent'.",
+            "recommendation": "Pastreaza ::after din CSS (are animatia de hover margin-left:4px) si elimina sufixul ' →' literal din toate textele .more din HTML (find/replace global pe *.html + subfoldere).",
+            "effort": "mediu"
+          },
+          {
+            "title": "Disclaimerul legal apare complet nestilizat pe TOATE cele 11 calculatoare",
+            "severity": "major",
+            "impact": "Regula CSS exista doar ca .article .disc (verificat: style.css:148, upgrade.css:370), dar calculatoarele pun <div class='disc'> fara wrapper .article. Avertismentul juridic ('Nu reprezinta consultanta financiara') apare ca text gri inline, fara fundal, fara border-left auriu, fara padding — opusul intentiei, pe pagini cu expunere legala.",
+            "recommendation": "Adauga o regula globala .disc{...} in style.css (nu doar .article .disc) cu acelasi styling (bg-soft, border-left gold, radius, padding). Fix unic, se propaga la toate 11.",
+            "effort": "mic"
+          },
+          {
+            "title": "Auriul (culoare de brand declarata) lipseste din tot continutul public; doua sisteme de culoare deconectate",
+            "severity": "major",
+            "impact": "Brandul e 'navy/auriu/verde' dar auriul are 0 aparitii in index/educatie/glosar/stiri/investitii/credite. Singurul loc unde e culoare-vedeta sunt paginile auth (login/account/reset) care au paleta navy+gold definita inline, deconectata de design-system. Userul trece de la o marca vizuala la alta la login. De facto brandul e emerald+blue, un 'brand fantoma'.",
+            "recommendation": "Decide rolul auriului si foloseste-l consecvent ca al treilea accent (pill 'Premium', numere cheie din .stat, eyebrow-uri premium, featured pricing). Unifica paginile auth pe acelasi design-system (foloseste .section--navy care deja exista dar e cod mort) si elimina nuantele ad-hoc (#C68F2C). Sau actualizeaza descrierea de brand.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Override --blue:GOLD in .hero schimba pe ascuns culoarea butonului CTA principal",
+            "severity": "major",
+            "impact": "upgrade.css:596 redefineste --blue ca auriu in scope-ul .hero. Butonul-vedeta .btn-primary 'Incepe gratuit' foloseste --grad-cool (emerald->blue) si e in hero, deci se randeaza emerald->auriu, DIFERIT de toate celelalte .btn-primary de pe site. Folosirea unui token semantic (--blue) pentru o culoare care nu e albastra = bomba de mentenanta + regresie vizuala pe CTA-ul principal.",
+            "recommendation": "Nu redefini --blue ca auriu. Introdu tokeni proprii in hero (--hero-accent-1/2) sau pastreaza --blue=albastru. Verifica vizual butonul CTA in hero cu screenshot headless inainte de livrare.",
+            "effort": "mic"
+          },
+          {
+            "title": "Hero pe mobil: coloana dreapta complet ascunsa, mesajul de conversie 'Efectul compus' dispare pe majoritatea traficului",
+            "severity": "major",
+            "impact": "La <880px atat #hero3d cat si .hero-caption sunt display:none. Pe desktop, daca 3D nu porneste (fara WebGL/reduced-motion/saveData), jumatatea dreapta ramane goala fara fallback. Copy-ul cheie de conversie din hero nu apare deloc pe mobil — exact pe ~50%+ din trafic. In plus heroul nu are min-height, deci inaltimea canvasului 3D depinde de coloana text (fragil la resize).",
+            "recommendation": "Pastreaza caption-ul vizibil pe mobil (sub CTA, full-width). Adauga fallback static premium (SVG/CSS bar-chart) pentru #hero3d cand 3D nu ruleaza. Seteaza min-height pe .hero (clamp 520px..760px). 3D poate ramane ascuns pe mobil (corect pentru performanta), dar mesajul nu.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Zero :focus-visible in tot CSS-ul — navigare cu tastatura fara inel de focus (accesibilitate + perceptie ieftina)",
+            "severity": "major",
+            "impact": "Singurul :focus e pe input/select de calculator. Nav, .icon-btn (buttons!), .btn, search-item, alfabetul glosarului, cardurile-link nu au nicio stare de focus. Navigarea cu Tab arata ca un site negilefuit si e o problema reala de accesibilitate (WCAG).",
+            "recommendation": "O regula globala :where(a,button,input,select,.card,.search-item,.glos-alpha button):focus-visible cu box-shadow ring emerald + extinde underline-ul nav la :focus-visible. Foloseste :focus-visible (nu :focus) ca sa nu apara inel la click cu mouse.",
+            "effort": "mic"
+          },
+          {
+            "title": "Paginile legale/auth ignora complet sistemul tipografic si CSS-ul (arata alt site)",
+            "severity": "major",
+            "impact": "privacy, terms, login, account, reset nu au niciun <link> catre style.css/upgrade.css sau fonturile brand; folosesc <style> inline cu system fonts si navy hardcodat diferit. Userul trece de la fontul si paleta premium la un site complet diferit exact in momentul de incredere (legal/login).",
+            "recommendation": "Adauga aceleasi <link> fonturi + style.css + upgrade.css in <head>-ul celor 5 pagini, sterge stilul inline, refoloseste .article/.container. Se leaga de unificarea sistemului de culoare auth.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Cuprinsul articolelor: ancore fara scroll-margin si fara scrollspy (sectiune activa)",
+            "severity": "major",
+            "impact": "Doua findings convergente pe cuprins. La click pe un item, titlul aterizeaza lipit de marginea de sus, partial sub bara de progres fixa (lipsa scroll-margin-top). Si nu exista IntersectionObserver care sa marcheze sectiunea activa — pe articole lungi cititorul nu vede unde e. Diferenta intre un cuprins decorativ si unul premium functional.",
+            "recommendation": "Adauga .article h2,.article h3{scroll-margin-top:24px} (sau 80px cu navbar sticky) — pattern-ul exista deja la .glos-card. Adauga scrollspy cu IntersectionObserver care marcheaza linkul activ in .toc; fa cuprinsul sticky pe desktop.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Hover-lift-ul cardurilor e mort pe desktop — tilt.js suprascrie transform-ul de :hover",
+            "severity": "major",
+            "impact": "upgrade.css:298 .card:hover{translateY(-6px)} dar tilt.js scrie inline el.style.transform fara translateY, doar pe pointer:fine (desktop). Efectul de ridicare 'premium lift' nu apare niciodata pe ecranul principal de interactiune — apare doar pe touch (invers fata de intentie).",
+            "recommendation": "Compune efectele intr-un singur transform: include translateY(-6px) in string-ul din tilt.js la pointerenter, revino la 0 pe pointerleave. Astfel desktopul capata lift + tilt + gloss simultan.",
+            "effort": "mic"
+          },
+          {
+            "title": "Body cere font-weight 450 dar 450 nu e o instanta incarcata din Plus Jakarta (greutate text nedeterministica)",
+            "severity": "major",
+            "impact": "upgrade.css:54 body{font-weight:450} si .lead, dar fontul e incarcat ca instante discrete 400;500;600;700;800 (nu range). 450 nu exista -> browserul face fallback la 400 sau sintetizeaza fals, deci greutatea reala a TOT textul de baza variaza intre Chrome/Safari/Firefox. Inconsistenta de baza a sistemului tipografic.",
+            "recommendation": "Schimba cererea de font in range variabil 'Plus+Jakarta+Sans:wght@400..800' (atunci 450 devine valid si consistent) — pastreaza intentia '450 light-medium' si reduce fisierele font. Alternativ font-weight:400 pe body, 500 pe .lead.",
+            "effort": "mic"
+          },
+          {
+            "title": "despre.html este pagina orfana + 5 pagini cu title dublat '— Clubul Financiar — Clubul Financiar'",
+            "severity": "major",
+            "impact": "Verificat: despre.html nu e linkata din nicio pagina (doar self + sitemap) — pagina 'Despre' = element de incredere esential pentru educatie financiara, click-path 0. Plus contact, credite, despre, investitii, premium au title-ul dublat (verificat), vizibil in tab/SERP/share pe pagini cheie din navbar. Ambele striga 'neglijent'.",
+            "recommendation": "Adauga 'Despre' in footer (si eventual navbar) si elimina sufixul duplicat din <title> pe cele 5 pagini. Verifica generatorul care a produs duplicatele.",
+            "effort": "mic"
+          },
+          {
+            "title": "Lipsa data publicare/actualizare si autor pe articole — credibilitate slaba pentru continut financiar",
+            "severity": "major",
+            "impact": "Meta articolului e doar 'Educatie · Investitii · 5 min citire'; JSON-LD nu are datePublished/author. Pentru continut care citeaza cote fiscale 'in 2025/din 2026', absenta datei face cititorul sa nu stie daca info e actuala — risc de credibilitate pe un domeniu sensibil. (Plus timpul de citire pare hardcodat: 306/400 articole arata fix '5 min'.)",
+            "recommendation": "Adauga data ultimei actualizari + autor/'Echipa Clubul Financiar' in .meta si completeaza datePublished+dateModified+author in JSON-LD (bun si SEO). Calculeaza timpul de citire real din numarul de cuvinte la build.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Glosar de 131 termeni fara bara A-Z clicabila + descrieri trunchiate brutal la 140 caractere",
+            "severity": "major",
+            "impact": "Doua findings convergente. Glosarul are deja id-uri pe litere (lit-A...) dar nicio bara de salt — userul deruleaza prin ~120 termeni pentru a gasi unul. Iar descrierile din search-index sunt taiate la fix 140 char mid-cuvant (ex '...vacan', '...tran') si afisate brut in rezultatele cautarii globale, fara ellipsis. Plus termeni duplicati care umfla fals numarul '131'.",
+            "recommendation": "Adauga bara sticky A-Z (id-urile exista deja, cost minim). La generarea index-ului, taie pe granita de cuvant + ellipsis si include textul integral intr-un camp separat pentru matching. Comaseaza duplicatele (50/30/20, SMART, Inflatie) si reactualizeaza numaratoarea.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Calculatoarele: zero validare input (produc 'Infinity lei'/'NaN'), fara recalculare live, fara grafice",
+            "severity": "major",
+            "impact": "Trei findings convergente pe acelasi template. Input-uri fara min/max/required -> credit cu perioada 0 da 'Infinity lei' afisat cu styling premium; recalcularea cere click pe buton (UX invechit); si zero vizualizari/grafice, ironic pentru un brand construit in jurul unui grafic 3D de crestere — exact unde graficul (contributii vs randament pe ani) ar avea valoare educativa maxima.",
+            "recommendation": "Adauga min/max pe input-uri + guard isFinite/isNaN cu mesaj prietenos; recalculare live pe event 'input'; si grafice simple SVG/canvas (fara librarie grea) cel putin la dobanda-compusa/FIRE/pensie/economisire. Toate sistemice — se propaga la 11 calculatoare.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Meniul mobil apare instant (display:none->flex) si nu se inchide la click pe link",
+            "severity": "minor",
+            "impact": "display nu e animabil deci panoul de meniu sare brusc — cea mai vizibila micro-interactiune pe telefon (unde tilt-ul 3D e oricum off) e si cea mai bruta. Plus nu se inchide dupa selectarea unui link (ramane deschis acoperind continutul la ancore) si lipseste aria-expanded.",
+            "recommendation": "Animeaza cu opacity+transform in loc de display; adauga listener care inchide .nav-links.open la click pe orice <a> + toggle aria-expanded pe burger.",
+            "effort": "mic"
+          },
+          {
+            "title": "Ierarhie tipografica inversata in articole (h1 pe font body, h2 pe font display) + distinctie h3/paragraf slaba",
+            "severity": "minor",
+            "impact": ".article h1 e pe Plus Jakarta (body) iar h2 pe Sora (display) — inversul ierarhiei firesti, inconsistent cu restul site-ului (toate titlurile pe Sora). Plus raport h3/paragraf de doar 1.11x, deci subtitlurile abia se disting de body in articole — citirea pare 'plata'.",
+            "recommendation": "Pune .article h1 pe var(--font-display) (Sora) consistent cu restul. Mareste .article h3 la ~1.3rem cu font-weight 700 + Sora; tinta raport h3/p >=1.25x.",
+            "effort": "mic"
+          }
+        ],
+        "quickWins": [
+          "XSS: inlocuieste innerHTML cu textContent in mesajul de cautare 'niciun rezultat' (1 linie, elimina vectorul de securitate)",
+          "Cache: aliniaza toate cele 428 pagini la ?v=20 cu un find/replace, ca toate fix-urile de design sa devina vizibile vizitatorilor recurenti",
+          "Sageata dubla: elimina sufixul ' →' literal din textele .more din HTML (find/replace global), pastrand ::after-ul animat",
+          "Disclaimer calc: adauga o regula globala .disc{...} in style.css (nu doar .article .disc) — se propaga la toate 11 calculatoare",
+          "Title dublat: sterge sufixul '— Clubul Financiar' duplicat din contact/credite/despre/investitii/premium",
+          "despre.html: adauga link in footer (coloana Platforma) ca sa nu mai fie pagina orfana",
+          "Font weight 450: schimba cererea Google Fonts in range variabil 'Plus+Jakarta+Sans:wght@400..800'",
+          "Focus: o regula globala :focus-visible cu box-shadow ring emerald pe toate elementele interactive",
+          "Hero CTA: nu redefini --blue ca auriu in .hero — foloseste un token dedicat ca sa nu se schimbe culoarea butonului principal",
+          "Caption hero pe mobil: scoate display:none de pe .hero-caption si afiseaz-o sub CTA, ca sa nu pierzi copy-ul de conversie pe ~50% din trafic",
+          "Glosar A-Z: adauga bara sticky de litere (id-urile lit-X exista deja, cost aproape zero) + .glos-card:target highlight la aterizare din cautare",
+          "Calc validare: adauga min/max pe input-uri + guard isFinite/isNaN cu mesaj prietenos in loc de 'Infinity lei'",
+          "Meniu mobil: animeaza cu opacity/transform si inchide-l la click pe link + aria-expanded",
+          "scroll-margin-top:24px pe .article h2/h3 (pattern deja folosit la .glos-card) ca ancorele cuprinsului sa nu aterizeze lipite de bara de progres",
+          "Hover-lift carduri: include translateY(-6px) in transform-ul inline din tilt.js ca lift-ul sa apara pe desktop",
+          "Overflow mobil: html,body{overflow-x:hidden;max-width:100%} ca plasa de siguranta imediata"
+        ],
+        "strategicBets": [
+          "Pre-randeaza navbar+footer ca HTML static (build-time include) pe toate cele ~430 pagini, inclusiv 400 articole — elimina captivitatea fara JS, CLS-ul pe first-fold si intareste SEO; lasa JS-ul doar sa hidrateze search/theme/account",
+          "Fix structural mobil: rezolva cauza overflow-ului (navbar care depaseste viewportul) + adauga breakpoint-uri sub 600px (420/360/320px) + padding container adaptiv — mobilul e majoritatea traficului si acum e vizibil rupt",
+          "Unifica identitatea de brand: un singur sistem de culoare (aduce auth pe design-system, foloseste .section--navy care e cod mort, introdu auriul ca al treilea accent consecvent pe pill-uri Premium/stats/eyebrow) — transforma 'brandul fantoma' navy/auriu intr-unul real",
+          "Cuprins articol premium: scrollspy cu IntersectionObserver + sticky pe desktop + scroll-margin pe ancore + prev/next secvential in categorie — ridica articolul de la 'decent' la 'premium' pe cele 400 pagini",
+          "Grafice in calculatoare (SVG/canvas, paleta brand) la dobanda-compusa/FIRE/pensie/economisire/inflatie — fix de impact mare care leaga functional 'graficul de crestere' al brandului de locul unde are valoare educativa, plus recalculare live",
+          "Build pipeline unic pentru versionare CSS (hash) + emitere de clase in loc de inline styles (stiri.html are 333 inline styles) + generare consistenta de <title>/meta/dată-citire-reala — elimina la radacina drift-ul si stale-cache-ul care anuleaza munca de design"
+        ]
+      },
+      {
+        "theme": "Continut & Copy",
+        "verdict": "Continutul are o fundatie reala peste media pietei RO (400 articole solide, glosar ingrijit, calculatoare noi exemplare, voce \"tu\" coerenta pe paginile principale), dar NU atinge standardul \"ultra mega premium\" din doua motive grave si una vizibila. Primul: erori si inconsistente FISCALE/de pensii raspandite (impozit dividende 8 vs 10 vs 16%, Pilon II 3,75 vs 4,75%, castiguri investitii prezentate ca 10% flat cand prin broker rezident sunt 1/3%, pensie 77.216 lei/luna, metodologie pre-reforma 2024) — pe un site care preda rigoare financiara, o cifra gresita costa userul bani si distruge increderea. Al doilea: monetizarea si conversia sunt un schelet inselator — cursurile sunt simple liste de link-uri catre articole publice gratuite, premium=isAdmin (niciun client nu poate plati vreodata), iar cele 400 de articole + hub-urile sunt fundaturi fara niciun CTA real. Al treilea, vizibil imediat: coruptie de text (emoji foarfeca in categoria Datorii pe 18 articole, homoglife chirilice, diacritice sparte pe 33 articole, adresare formala \"dvs\" pe 56). Prioritatea zero e auditul fiscal + curatarea textului (efort mic, impact urias), apoi reconstructia conversiei si a produsului premium.",
+        "topFindings": [
+          {
+            "title": "Erori si inconsistente fiscale/pensii raspandite pe articole, glosar si calculatoare",
+            "severity": "critic",
+            "impact": "Pe un site de educatie financiara o cifra fiscala gresita induce userul sa ia decizii cu bani reali. Acopera teme cu trafic mare (dividende, pensii, capital gains, salariu net). Sub-erori confirmate: impozit castiguri investitii prezentat ca 10% flat (real 1/3% prin broker rezident); Pilon II 3,75% in loc de 4,75% (din 2024); dividende 8% in loc de 10% (din 2025) si articol cu 8% si 10% simultan; pensie afisata 77.216 lei/luna + metodologie pre-reforma 2024 (punct 2032 in loc de VPR 81 lei); cote 2026 ramase la 10 cand urca la 16.",
+            "recommendation": "Audit fiscal dedicat al celor ~15-20 articole + glosar + salariu-net.html cu cote/plafoane. Aliniaza la legislatia 2025/2026, elimina inconsistenta intra-articol 8/10%, marcheaza explicit anul fiscal de referinta si adauga linie 'Actualizat la [data] - verifica pe anaf.ro'. Rescrie articolul de pensie pe VPR 81 lei + inghetare 2025-2026 si verifica TOATE exemplele numerice (eroare inflatie stagflatie: 8.163 vs corect 8.044).",
+            "effort": "mediu"
+          },
+          {
+            "title": "Sistem premium nefunctional + cursuri = liste de link-uri catre articole publice gratuite",
+            "severity": "critic",
+            "impact": "Monetizarea declarata e imposibil de livrat: site.js are isPremium=isAdmin si singurul admin e clubulfinanciar@gmail.com, deci niciun client platitor nu poate debloca nimic. Cele 6 'cursuri' (etichetate 'Masterclass'/'avansat') sunt template-uri identice de ~5KB ce trimit la articole de nivel incepator deja indexate public; paywall-ul e doar CSS care ascunde link-uri. Risc de a incasa bani fara a putea livra accesul (rambursari, pierdere de incredere).",
+            "recommendation": "Decupleaza isPremium de isAdmin si leaga-l de un flag real de abonament (Supabase subscriptions/profiles). Pana cand fluxul plata->acces functioneaza end-to-end, NU prezenta cursurile ca produs vandabil si NU activa CTA-urile premium. Transforma fiecare curs in produs real cu lectie proprie pe pagina (obiective, exemple in lei/broker RO, recap, quiz, progres), nu doar link care arunca userul afara din traseu.",
+            "effort": "mare"
+          },
+          {
+            "title": "Conversie inexistenta: 400 articole + hub-urile sunt fundaturi, newsletter-ul duce intr-un loc gol",
+            "severity": "critic",
+            "impact": "Cel mai mare volum de trafic organic (cele 400 articole) nu are NICIUN CTA de conversie - zero newsletter, zero captura email, doar un link '<- Toate articolele'. Singurul CTA de newsletter (homepage) duce la /login.html, o pagina de auth fara camp de email - promisiune incalcata. Toate butoanele Premium/Pro/Ultra sunt 'In curand'/href=# fara waitlist. Hub-urile mari (glosar, educatie, stiri) se termina fara CTA. Traficul intra, citeste si pleaca - nicio palnie.",
+            "recommendation": "Injecteaza din article.js, dupa continut, un bloc de conversie standard pe TOATE articolele: camp email newsletter inline + CTA contextual spre calculatorul/cursul relevant categoriei. Inlocuieste destinatia CTA newsletter cu formular email real inline (sau ascunde-l pana e live). Transforma butoanele 'In curand' in waitlist functional ('Anunta-ma') ca sa masori cererea. Adauga banda CTA partajata global la finalul hub-urilor si calculatoarelor.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Coruptie de text vizibila: emoji foarfeca, homoglife chirilice, diacritice sparte, adresare formala",
+            "severity": "major",
+            "impact": "Defecte verificabile care submineaza imediat perceptia premium si pot rupe cautarea/SEO/copy-paste. Confirmat: emoji ✂️ corupe numele categoriei 'Datorii' in breadcrumb pe 18 articole + hub + search-index.json; caractere chirilice homoglife in cuvinte romanesti (ex. 'castigi' cu i chirilic - rupe cautarea in educatie.html); 33 articole cu diacritice sparte (si/fara/pana/cand); 56 articole comuta la 'dumneavoastra/dvs' contrazicand vocea 'tu' a intregului site (51 au chiar disclaimer dublu auto-contradictoriu in aceeasi pagina).",
+            "recommendation": "Un singur val de curatare pe sursa generatoare + regenerare search-index: (1) inlocuieste ✂️ cu emoji tematic coerent peste cele 18 articole + educatie.html + search-index.json; (2) normalizator homoglife chirilic->latin pe toate 400 articole + glosar; (3) corector diacritice (hunspell ro_RO) pe cele 33; (4) find/replace formal->'tu' pe cele 56 + unificare disclaimer intr-un singur snippet. Adauga lint pre-publish care respinge codepoint-uri chirilice, 'dvs'/'dumneavoastr' si cuvinte-cheie fara diacritice.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Bug functional: filtrul de cautare din educatie.html afiseaza carduri INVIZIBILE",
+            "severity": "major",
+            "impact": "Cel mai important feature al hub-ului principal de continut e partial rupt pentru userii fara prefers-reduced-motion: cardurile au .reveal{opacity:0} si devin vizibile doar prin IntersectionObserver cand sunt scrollate in viewport; filtrul seteaza display='' dar NU adauga clasa .in, deci rezultatele aflate sub fold raman albe/goale. Userul care cauta 'ETF' (categorie cu 84 carduri sub fold) vede rezultate goale.",
+            "recommendation": "In handler-ul de filtru, la fiecare card facut vizibil adauga si clasa .in (c.classList.toggle('in', v)), sau renunta la .reveal pe acest index dens (400 carduri, animatia nu aduce valoare). O modificare mica.",
+            "effort": "mic"
+          },
+          {
+            "title": "Pagina de stiri = agregator-zgomot, nu sursa de valoare financiara",
+            "severity": "major",
+            "impact": "Eroda increderea construita de articolele fact-checked. Din 110 stiri ~37% sunt non-financiare (politica/justitie/sport/horoscop) pentru ca filtrul KW e doar bonus de scor, nu filtru hard; cluster-boost premiaza redundanta (aceeasi stire Ciucu/DNA apare de 12 ori in top); 57% din rezumate doar repeta titlul; 59/110 linkuri sunt redirect-uri opace news.google.com; clasificare pe categorii gresita sistematic (DNA in 'Bursa'). Zero legatura catre continutul propriu (articole/glosar/calculatoare).",
+            "recommendation": "Fa KW filtru HARD pentru sursele de presa generala + lista negativa (horoscop/campionat/dosar penal); transforma cluster-boost in COLAPSARE (un card reprezentativ + 'acoperit de N surse'); suprima rezumatul cand are >70% overlap cu titlul; rezolva linkurile reale din Google News. Adauga 'unghiul Clubul Financiar': leaga fiecare categorie la articolul/glosarul/calculatorul relevant. Nu promova pagina pana nu e regandita.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Continut critic absent: anti-frauda financiara si protectia consumatorului",
+            "severity": "major",
+            "impact": "Cel mai mare gol functional: zero articole dedicate despre phishing/smishing, scam-uri de investitii, scheme piramidale/Ponzi, frauda card, recuperare bani dupa frauda - exact continutul care impiedica pierderi reale de bani, intr-o perioada de epidemie nationala RO 2024-2026. Lipsesc total si clauze abuzive, ANPC, darea in plata (Legea 77/2016), drepturile fata de recuperatorii de creante.",
+            "recommendation": "Creeaza un cluster 'Protectie & Anti-frauda' (6-8 articole) + 4-5 articole de protectia consumatorului/remediu legal. Leaga-le din incepe-aici.html si din articolele de crypto/bursa. Adauga in glosar ANPC, ASF, FGDB ca termeni proprii.",
+            "effort": "mare"
+          },
+          {
+            "title": "Home copy nediferentiat + features fantoma (Comunitate, social proof zero)",
+            "severity": "major",
+            "impact": "Headline-ul 'Construieste-ti viitorul financiar' e cliché aplicabil oricarui broker/banca; zero diferentiere si zero dovada de incredere (cine scrie, cati useri, de ce noi). Beneficiile sunt feature-uri reambalate (400 articole, 11 calculatoare), nu rezultate. Are minciuni de copy: 'Comunitate' in planul gratuit nu exista, toate cele 3 planuri platite afiseaza 'In curand'. Pe pagina unde ceri bani, asta erodeaza increderea.",
+            "recommendation": "Rescrie headline-ul ca promisiune+rezultat+audienta (ex. 'Educatie financiara pe care nu ai primit-o la scoala. Gratis, in romana, de la zero'). Scoate 'Comunitate' pana exista (sau leaga la Telegram). Adauga banda de incredere reala (nr abonati social, autor/echipa verificata factual). Reframe stats catre outcome.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Zero linkuri interne statice intre articole - link-building 100% dependent de JS",
+            "severity": "major",
+            "impact": "Toate 400 articole nu au niciun href catre alte articole in HTML static; cross-linkurile sunt injectate runtime prin fetch la search-index.json. Google nu garanteaza urmarirea linkurilor injectate prin fetch - pierdere SEO reala. Lipsesc si linkuri contextuale (un articol mentioneaza 'blockchain', 'Declaratia Unica', 'wallet' - toate au pagini proprii, niciun link).",
+            "recommendation": "Genereaza la build linkuri contextuale statice in corpul articolelor catre articolele/glosarul corelat, pe baza unui dictionar termen->slug. Beneficiu SEO + timp pe site.",
+            "effort": "mediu"
+          },
+          {
+            "title": "incepe-aici.html nu e parcurs ghidat - e lista statica fara onboarding activ",
+            "severity": "major",
+            "impact": "Pagina-pilon de onboarding promite 'Traseul tau, pas cu pas' dar nu are progres salvat, CTA de start, pas urmator, sau legaturi catre cursuri/calculatoare/glosar/educatie (ZERO, desi exista). Nivelurile 4 si 5 au un singur card intins urat pe grid de 3 (arata neterminat). Incepatorul ramane fara directie dupa ce citeste un articol.",
+            "recommendation": "Adauga progres persistat (localStorage) cu bifa/bara per nivel; la fiecare nivel un 'pas activ' catre calculatorul/cursul relevant; CTA final (mini-quiz 'Afla de unde incepi' + newsletter/Telegram); umple nivelurile 4-5 cu inca 1-2 articole sau ajusteaza layout-ul.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Disclaimer generic copy-paste + randament nominal nedeclarat pe 6 calculatoare vechi",
+            "severity": "major",
+            "impact": "Calitate in doua viteze pe paginile cele mai vizitate (dobanda compusa, credit). Cele 6 calculatoare vechi (dobanda-compusa, credit, economii, inflatie, salariu-net, fire) au acelasi disclaimer copy-paste, zero ipoteze afisate langa rezultat si NU avertizeaza ca sumele sunt NOMINALE (nu tin cont de inflatie/impozit) - ironic, exista un calculator de inflatie pe acelasi site care demonstreaza eroziunea. salariu-net.html nu afiseaza anul de referinta al cotelor.",
+            "recommendation": "Rescrie disclaimerele celor 6 cu text specific (ipoteze + limite reale), in stilul celor 4 calculatoare noi. Adauga nota 'sume nominale' + link spre calculatorul de inflatie pe cele de crestere. Eticheteaza anul cotelor pe salariu-net. Adauga o linie de interpretare sub rezultat (ex. 'din X lei, doar Y i-ai depus tu').",
+            "effort": "mic"
+          },
+          {
+            "title": "JSON-LD Article fara datePublished/dateModified/author pe toate 400",
+            "severity": "minor",
+            "impact": "0/400 articole au date sau autor in schema.org Article. Google recomanda date+author pentru Article; lipsa lor reduce eligibilitatea pentru rich results si semnalul de prospetime/E-E-A-T - critic pentru articole fiscale care imbatranesc.",
+            "recommendation": "Adauga in JSON-LD datePublished, dateModified si author (Organization sau Person editorial) + afiseaza vizibil data ultimei revizuiri pe articolele sensibile la timp.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Glosar: duplicate, mit Einstein, volatilitate definita doar cripto, termeni RO esentiali lipsa",
+            "severity": "minor",
+            "impact": "Cele '131 de termeni' contin 3 duplicate (2× SMART, 50/30/20 explicat de 2 ori) - numar real ~128. Citatul 'Einstein - a opta minune a lumii' e apocrif pe un glosar care se vrea sursa de incredere. Volatilitatea e limitata gresit doar la cripto. Lipsesc termeni esentiali RO: FGDB/garantarea depozitelor, ROBOR, grad de indatorare, ANPC, ASF, deflatie, dobanda simpla, DAE vs nominala.",
+            "recommendation": "Fuzioneaza duplicatele si recalculeaza numarul afisat. Elimina/neutralizeaza atribuirea Einstein. Generalizeaza definitia volatilitatii. Adauga ~15-20 termeni in 2 grupe: institutii/reglementare RO+UE si metrici de investitii frecvent folosite in articole.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Meta description si corp folosesc 'Afli' (indicativ) in loc de 'Afla' (imperativ)",
+            "severity": "nice-to-have",
+            "impact": "35 meta-descriptions incep cu 'Afli ce este...'; in corp 'Afli ce' apare 51× si 'Afli cum' 21×. Forma idiomatica de CTA in RO e imperativul 'Afla'; 'Afli' suna stangaci in snippet-ul Google si scade perceptia premium.",
+            "recommendation": "Inlocuieste 'Afli ce/cum/de' cu 'Afla ce/cum/de' in meta-descriptions si corp, cu atentie la context (nu toate 'afli' sunt gresite).",
+            "effort": "mic"
+          }
+        ],
+        "quickWins": [
+          "Audit fiscal tintit pe articolele/glosarul/calculatoarele cu cote (dividende 8/10/16, Pilon II 4,75%, capital gains 1/3% broker rezident, pensie VPR 81 lei) + marcheaza anul de referinta - efort mic, opreste dezinformarea cu impact financiar",
+          "Un singur val de curatare text: inlocuieste emoji foarfeca pe 18 articole+hub+search-index, normalizeaza homoglifele chirilice si diacriticele sparte pe cele 33, find/replace formal->'tu' pe cele 56",
+          "Fix bug filtru educatie.html: adauga clasa .in la cardurile facute vizibile (sau scoate .reveal pe index) - rezultatele de cautare nu mai apar invizibile",
+          "Adauga scroll-margin-top:84px pe .cat-h ca titlurile de categorie sa nu mai ajunga sub navbar-ul sticky",
+          "Corecteaza eroarea de inflatie din stagflatie (8.163->8.044) si bug-ul 'acum 1 zile'->'acum 1 zi' din news_build.py",
+          "Inlocuieste 'Afli'->'Afla' in meta-descriptions si corp pentru snippet-uri SEO idiomatice",
+          "Scoate paginile de curs noindex din sitemap.xml (semnal contradictoriu) si 'Comunitate' fantoma din planul gratuit",
+          "Rescrie disclaimerele si adauga avertizarea 'sume nominale' + linie de interpretare pe cele 6 calculatoare vechi"
+        ],
+        "strategicBets": [
+          "Reconstruieste produsul premium ca produs real: decupleaza isPremium de isAdmin cu flag de abonament Supabase + flux plata->acces end-to-end, apoi transforma cursurile din liste de link-uri in lectii proprii cu progres, quiz si certificat - fara asta monetizarea e inselatoare si genereaza rambursari",
+          "Construieste stratul de conversie pe tot site-ul: bloc newsletter+CTA contextual injectat in toate cele 400 articole, formular email real (nu redirect la login), waitlist pe butoanele premium, banda CTA partajata pe hub-uri si calculatoare - traficul SEO actual pleaca fara nicio palnie",
+          "Creeaza clusterul de continut care lipseste si protejeaza userul de pierderi reale: 6-8 articole anti-frauda (phishing, scam investitii, Ponzi, frauda card, recuperare) + 4-5 protectia consumatorului (clauze abuzive, ANPC, darea in plata) + comparativ concret de brokeri RO",
+          "Adauga linkuri interne statice generate la build (dictionar termen->slug) + JSON-LD complet cu date/author pe toate 400 articole - castig SEO durabil si E-E-A-T pe care arhitectura actuala (link-building 100% JS, zero date) il pierde",
+          "Reproiecteaza pagina de stiri din agregator-zgomot in poarta de intrare: filtru hard de relevanta + lista negativa, colapsare clustere, rezolvare linkuri reale, si 'unghiul Clubul Financiar' care leaga fiecare stire la articolul/calculatorul propriu"
+        ]
+      },
+      {
+        "theme": "SEO & Performanta",
+        "verdict": "Site-ul are o fundatie tehnica solida (sitemap well-formed, canonical consistent, redirects 301 corecte, meta unic pe 400 articole, CSS lean ~11KB gzip, JS propriu mic ~35KB cu guard-uri bune pe hero 3D), dar e departe de standardul \"ultra mega premium\" promis si are doua bug-uri LIVE care fac rau acum. Cele mai grave: (1) Supabase SDK ~70KB gzip render-blocking pe TOATE cele ~430 de pagini doar pentru un buton de navbar, si (2) cache-busting desincronizat — index.html cere ?v=20 dar restul de 411 pagini cer ?v=15 desi fisierele s-au schimbat, deci utilizatorii recurenti primesc JS/CSS vechi pe 99% din site (inclusiv bug-fix-uri care nu ajung la ei). Pe SEO, pierderea structurala majora e dubla: Article JSON-LD invalid pe toate 400 articolele (lipsa datePublished+image = zero rich results) si tesutul de link-uri interne aproape inexistent (zero link-uri statice articol-articol, zero catre glosar/calculatoare). Multe findings sunt acelasi defect raportat de 4-5 agenti (og-image 1.5MB, lipsa preconnect jsdelivr, lipsa BreadcrumbList) — dupa dedup raman ~15 probleme reale, din care 3 critice.",
+        "topFindings": [
+          {
+            "title": "Cache-busting desincronizat LIVE: 411 pagini servesc JS/CSS stale (?v=15) desi fisierele s-au schimbat",
+            "severity": "critic",
+            "impact": "Bug activ ACUM. Doar index.html a fost bumpuit la ?v=20; toate celelalte 11 hub-uri + 400 articole cer ?v=15, dar site.js (mtime 02:51) si upgrade.css (mtime 03:06) s-au modificat dupa bump. Vizitatorii recurenti primesc din cache versiunea veche de site.js (navbar/footer/theme/search/auth) si upgrade.css pe 411/412 pagini — orice bug-fix facut dupa ultimul bump nu ajunge la ei. Comportament divergent intre home si rest.",
+            "recommendation": "One-shot: inlocuieste 'v=15' si 'v=20' -> 'v=21' in toate *.html + articole/ + cursuri/ + calculatoare/ (un singur sed). Pe viitor: script de build care injecteaza acelasi token (ideal hash de continut, ex. site.a1b2c3.js) in toate paginile dintr-o trecere, ca sa nu reapara mismatch-ul la fiecare iteratie de design.",
+            "effort": "mic"
+          },
+          {
+            "title": "Supabase SDK (~70KB gzip) render-blocking pe TOATE ~430 paginile pentru un buton de navbar",
+            "severity": "critic",
+            "impact": "Cel mai mare cost real de retea pe paginile de continut. SDK-ul e incarcat sincron (fara defer/async) pe fiecare articol, hub si calculator, desi singura lui utilizare in afara auth-ului e randarea butonului 'Cont' vs avatar. Blocheaza parser-ul cu 200KB JS de terta parte + un RTT CDN pe 425 pagini de citit; degradeaza direct LCP/TBT pe mobil pentru un site care traieste din distributie sociala (trafic preponderent mobil).",
+            "recommendation": "Scoate complet Supabase de pe paginile de continut. In site.js randeaza auth lazy: afiseaza static butonul 'Cont', incarca SDK-ul dinamic doar daca exista sesiune in localStorage (cheia sb-<ref>-auth-token) sau la click pe slotul de cont. Pastreaza-l doar pe login/account/reset. Daca ramane global, minim adauga defer. Castig: ~70KB gzip + 1 RTT eliminate de pe ~425 pagini.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Article JSON-LD invalid pentru rich results pe toate 400 articolele (lipsa datePublished + image)",
+            "severity": "critic",
+            "impact": "Cea mai mare pierdere SEO. Toate 400 blocurile Article au doar headline/description/publisher/mainEntityOfPage; datePublished=0/400, dateModified=0/400, author=0/400, image=0/400, plus zero meta article:published_time. datePublished+image sunt OBLIGATORII pentru Article rich results Google — fara ele markup-ul e ignorat complet, Google nu afiseaza data in SERP si nu poate evalua freshness-ul (critic pentru educatie financiara unde anul/plafoanele 2026 conteaza). Acelasi defect rezolva si lipsa de lastmod din sitemap.",
+            "recommendation": "Adauga in fiecare bloc Article (generat in masa la build): datePublished + dateModified (ISO 8601), author (Organization/Person), image (URL absolut, ideal 1200x630 per-articol). Sursaza aceleasi date pentru <lastmod> in sitemap, rezolvand doua probleme simultan. Adauga si <meta property=article:published_time>.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Cursuri cu noindex DAR listate in sitemap — contradictie directa care erodeaza increderea Google in sitemap",
+            "severity": "major",
+            "impact": "Toate 6 paginile cursuri/ au <meta robots noindex,follow> dar apar in sitemap.xml cu priority 0.6. Sitemap-ul spune 'indexeaza', meta spune 'nu indexa' — Google trateaza un sitemap cu pagini noindex ca semnal de calitate slaba si poate reduce increderea in intregul fisier. In plus aceleasi pagini sunt link-uite public din cursuri.html si n-au niciun tag OG/Twitter (preview gol la share in Telegram premium).",
+            "recommendation": "Decide intentia. Daca sunt gated/premium: scoate-le din sitemap, pastreaza noindex, dar adauga totusi og:title/description/image+twitter:card pentru preview la partajare manuala. Daca vrei trafic SEO: scoate noindex, adauga Course JSON-LD + descriere/curriculum public.",
+            "effort": "mic"
+          },
+          {
+            "title": "Tesut de link-uri interne aproape inexistent: zero link-uri statice articol-articol, glosar, calculatoare",
+            "severity": "major",
+            "impact": "Cel mai mare handicap de content-cluster pentru un site cu 400 articole + 131 termeni + 11 calculatoare. 0/400 articole link-uiesc catre alt articol in HTML static; 0 link-uri din articole catre glosar sau calculatoare; sectiunea 'Articole conexe' exista DOAR injectata runtime via fetch(search-index.json) fara <noscript> fallback, deci crawlerii o vad slab. Glosarul e quasi-orphan (link-uit doar din index.html). Link equity nu circula, autoritatea tematica nu se consolideaza.",
+            "recommendation": "Pre-renderaza la build 3-5 link-uri 'Articole conexe' direct in HTML (JS doar enhancement) + 2-3 link-uri contextuale in-body cu anchor descriptiv. Auto-linking: prima aparitie a unui termen din glosar devine link catre /glosar.html#termen; in articole relevante CTA catre calculatorul potrivit. Adauga glosar in nav-ul global.",
+            "effort": "mare"
+          },
+          {
+            "title": "og-image.png = 1.5MB necomprimat, referit pe toate 423 paginile (raportat de 5 agenti)",
+            "severity": "major",
+            "impact": "1640x856 RGBA cu alpha inutil pe un card social plat (gradient+text). Se comprima la ~125-170KB ca JPEG q82-85 (~9x reducere, ~92% irosit). E cel mai des cerut asset de scraperele social (FB/X/LinkedIn/WhatsApp/Telegram) pe care site-ul se auto-posteaza zilnic pe 9 suprafete — incetineste fiecare preview de share, exact pe canalul de distributie principal. Nu afecteaza LCP (nu e randat in pagina) dar e neglijent pentru standard premium.",
+            "recommendation": "Re-exporta la 1200x630 (raport exact 1.91:1) JPEG q82-85 fara alpha, tinta <200KB. Pastreaza numele og-image.png pentru a nu sparge referintele. Comprima si icon-512.png (284KB -> ~50-67KB) cu pngquant. Verifica cu FB Sharing Debugger + Twitter Card Validator dupa deploy.",
+            "effort": "mic"
+          },
+          {
+            "title": "Hero 3D: ~266KB Three.js+postprocessing ca waterfall de ~9 module CDN neimpachetate, doar decorativ",
+            "severity": "major",
+            "impact": "three.module.js 258KB gzip + EffectComposer/RenderPass/UnrealBloomPass care la randul lor importa Pass/ShaderPass/MaskPass/CopyShader/LuminosityHighPass = lant de ~9 cereri HTTP seriale (fiecare modul il descopera pe urmatorul dupa parse), fara preconnect la jsdelivr. Cel mai mare cost de retea al home-ului pentru un efect pur decorativ. Atenuant real: hero-ul are guard-uri bune (skip pe mobil <880px, reduced-motion, save-data) deci mobilul e protejat — de aceea major, nu critic.",
+            "recommendation": "Optiune A (recomandat): inlocuieste cu un hero Canvas2D scris manual (<5KB) — elimina ~266KB + tot waterfall-ul. Optiune B: bundle local tree-shaken (doar WebGLRenderer + ce folosesti) servit ca UN fisier din /assets, elimina cele ~9 round-trip-uri. Minim imediat: preconnect + modulepreload la cdn.jsdelivr.net.",
+            "effort": "mare"
+          },
+          {
+            "title": "213/400 titluri de articol depasesc 70 caractere -> trunchiate in Google",
+            "severity": "major",
+            "impact": "336/400 titluri >60c, 213/400 >70c, worst case 122c. Google taie la ~60-65c afisati, deci jumatate din titlu + brandul dispar din SERP — pierdere directa de CTR pe aproape jumatate din articole.",
+            "recommendation": "Scurteaza titlurile la <=60c (cu tot cu brand) sau scoate '— Clubul Financiar' din <title> pe articole (pastreaza-l doar in og:title) ca sa castigi caractere utile. Prioritizeaza cele >80c. Ideal: title SEO separat de H1 (H1 poate ramane lung).",
+            "effort": "mare"
+          },
+          {
+            "title": "Descrieri de categorie sub 40c + sufix de brand DUBLAT in title pe 5 pagini de categorie",
+            "severity": "major",
+            "impact": "investitii.html/credite.html au descrieri-slogan de 33-37c (sub minimul util de 120-160c). Plus: 5 pagini categorie au titlul '...— Clubul Financiar — Clubul Financiar' (sufix dublat, eroare vizibila in SERP). Ambele provin din acelasi generator gresit, ambele degradeaza prezenta in SERP pe paginile-hub care ar trebui sa ranking-uiasca pe termeni generici (credite, investitii).",
+            "recommendation": "Elimina sufixul redundant din cele 5 titluri (investitii/credite/despre/contact/premium) si rescrie descrierile la 140-160c cu cuvinte-cheie. Sincronizeaza cu functia de generare care le-a produs gresit.",
+            "effort": "mic"
+          },
+          {
+            "title": "Lipsa BreadcrumbList + WebSite/SearchAction pe tot site-ul",
+            "severity": "major",
+            "impact": "Zero BreadcrumbList pe articole/cursuri/calculatoare desi au ierarhie clara (Acasa>Articole>Titlu) — Google ar afisa breadcrumb in loc de URL brut, crescand CTR. Lipseste si WebSite+SearchAction pe home desi exista cautare globala reala (search-index.json 186KB) — pierzi sitelinks search box. SearchAction e efort mic cu infrastructura deja prezenta.",
+            "recommendation": "Adauga BreadcrumbList JSON-LD template-izat per tip de pagina. In index.html adauga al doilea bloc WebSite cu potentialAction SearchAction (target ?q={search_term_string}) — quick win, infra de search exista deja.",
+            "effort": "mediu"
+          },
+          {
+            "title": "382/400 articole folosesc H2 ca subtitlu/deck imediat dupa H1 (anti-pattern de outline)",
+            "severity": "minor",
+            "impact": "Deck-ul decorativ devine un H2 fals in outline-ul fiecarui articol inainte de prima sectiune reala, diluand relevanta heading-urilor de sectiune. Sistemic (382 fisiere) dar impact SEO moderat.",
+            "recommendation": "Schimba deck-ul din <h2> in <p class=lead> la nivel de template, pastrand stilul prin CSS. Refactor o data in generator + re-build cele 382 articole.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Niciun script nu foloseste defer/async + lipsa preconnect catre cdn.jsdelivr.net",
+            "severity": "minor",
+            "impact": "tilt.js/site.js/article.js + supabase sunt clasice sincrone (three3d e module deci deferred implicit). Fiind la finalul body impactul de parsing e mic, dar raman pe critical path. Lipsa preconnect la jsdelivr (sursa supabase+three) inseamna DNS+TLS handshake la rece pe cea mai grea resursa. Ambele raportate de 3 agenti.",
+            "recommendation": "Adauga defer pe tilt.js/site.js/article.js (si supabase daca ramane). Adauga <link rel=preconnect href=https://cdn.jsdelivr.net crossorigin> in head. Devine partial moot daca Supabase iese de pe continut.",
+            "effort": "mic"
+          },
+          {
+            "title": "twitter:description lipseste pe toate 400 articole + hub-uri; stiri.html fara niciun tag Twitter",
+            "severity": "minor",
+            "impact": "Pe X/Twitter (canal platit $0.45/luna + auto-postat zilnic) cardurile articolelor apar fara text sub titlu (fallback inconsistent), scazand CTR. stiri.html, hub natural de partajat, n-are niciun twitter:card deci share-ul e doar link simplu. Textul exista deja in og:description.",
+            "recommendation": "Adauga twitter:description reutilizand og:description (exista deja) la build pe toate paginile. Adauga blocul standard de 4 taguri twitter pe stiri.html (copy din educatie.html). Efort mic.",
+            "effort": "mic"
+          },
+          {
+            "title": "Glosar: 131 termeni cu DefinedTermSet gol + outline H1->H3 (lipsa H2)",
+            "severity": "minor",
+            "impact": "DefinedTermSet n-are hasDefinedTerm, deci cei 131 termeni nu exista in structured data (zero eligibilitate pentru definitii/rich results pe query-uri 'ce este X'). Plus outline-ul sare H1 direct la 131x H3 fara grupare H2, desi UI-ul are deja filtre alfabetice A-Z. Termenii sunt pe o singura pagina fara URL/meta proprii.",
+            "recommendation": "Populeaza hasDefinedTerm cu array de DefinedTerm + ancore #termen pentru deep-linking. Grupeaza pe litere cu <h2> per litera (aliniat la filtrele existente). Optim pe termen lung: pagini individuale glosar/dae.html ca landing pages.",
+            "effort": "mediu"
+          }
+        ],
+        "quickWins": [
+          "Bumpeaza TOATE paginile la ?v=21 simultan (un sed peste *.html + articole/ + cursuri/ + calculatoare/) — repara bug-ul LIVE de cache stale pe 411 pagini",
+          "Re-exporta og-image.png la 1200x630 JPEG q85 fara alpha (~125-170KB, de la 1.5MB) + comprima icon-512.png cu pngquant — accelereaza preview-urile pe cele 9 suprafete sociale auto",
+          "Elimina sufixul de brand dublat din cele 5 titluri de categorie si rescrie cele 2 descrieri sub 40c la 140-160c",
+          "Adauga twitter:description (reutilizand og:description existent) pe toate paginile + blocul complet de 4 taguri twitter pe stiri.html",
+          "Adauga <link rel=preconnect href=https://cdn.jsdelivr.net crossorigin> + defer pe tilt.js/site.js/article.js",
+          "Adauga blocul WebSite + SearchAction JSON-LD in index.html (infra de cautare exista deja) pentru sitelinks search box",
+          "Decide intentia cursurilor: scoate-le din sitemap daca raman noindex (sau scoate noindex daca vrei trafic) — repara contradictia sitemap vs meta"
+        ],
+        "strategicBets": [
+          "Refactor Supabase din global render-blocking in auth lazy (incarcare dinamica doar la sesiune existenta sau click pe cont) — scoate ~70KB gzip + 1 RTT de pe ~425 pagini de continut, cel mai mare castig de perf pe mobil",
+          "Pipeline de build care genereaza si injecteaza in masa Article JSON-LD complet (datePublished/dateModified/author/image) pe toate 400 articolele + sursaza aceleasi date pentru <lastmod> in sitemap si article:published_time — deblocheaza Article rich results + freshness signal",
+          "Construieste tesutul de link-uri interne la build: 3-5 articole conexe pre-renderate static + 2-3 link-uri contextuale in-body + auto-linking termeni glosar + CTA-uri catre calculatoare — consolideaza autoritatea tematica pe clusterul de 400 articole",
+          "Inlocuieste hero-ul Three.js (~266KB + 9 module CDN) cu un Canvas2D scris manual (<5KB) sau un bundle local tree-shaken intr-un singur fisier — elimina cel mai mare cost de retea al home-ului",
+          "Genereaza imagini OG dinamice per-articol la build (titlul pe template brand navy/auriu via satori/canvas) — diferentiere vizuala = CTR mai mare pe cele 9 suprafete auto-postate zilnic"
+        ]
+      },
+      {
+        "theme": "Tehnic, Accesibilitate & Securitate",
+        "verdict": "Site-ul are fundamente solide (un singur h1/pagina, lang=ro, prefers-reduced-motion respectat, auth Supabase real server-side, math de baza corecta in calculatoare, HTML valid in pipeline-ul automat, fara secrete reale expuse), dar pentru standardul \"ultra mega premium\" cade pe trei axe simultan: accesibilitate, igiena tehnica de deploy si corectitudine de continut. Doua defecte ataca productia ACUM: cache-bust desincronizat (428 pagini servesc JS vechi v15, doar home are v20 - deci toate iteratiile de design/cod NU ajung la useri pe 99% din site) si cote fiscale expirate in impozit-investitii (subevaluare ~3x). Accesibilitatea e sistematic sub-premium: zero focus vizibil pe tot site-ul, niciun <main>/skip-link, calculatoare cu label-uri nelegate de input-uri, modale fara focus-trap, si accentul emerald folosit ca text pe alb (2.54:1) sub minimul WCAG. Securitatea e rezonabila la baza dar are un XSS reflectat in cautare, zero CSP si CDN fara SRI. Premium-ul e iluzoriu (gating CSS, continut public indexat), dar asta e o decizie de produs, nu un bug tehnic acut.",
+        "topFindings": [
+          {
+            "title": "Cache-bust desincronizat: 428 pagini servesc JS vechi (v15), doar home are v20",
+            "severity": "critic",
+            "impact": "Cea mai severa problema operationala: toate fix-urile de cod si design facute in site.js/tilt.js/article.js (v20) NU ajung la useri pe 99% din site (educatie, glosar, toate cele 400 articole raman pe cache v15). Munca de iteratie pe design si fix-urile de bug-uri sunt invizibile in productie. Compromite implicit si remediile de a11y/securitate de mai jos, care traiesc tot in JS.",
+            "recommendation": "Script de build/sed global care reseteaza TOATE referintele JS la aceeasi versiune la fiecare deploy (un singur token inlocuit peste tot in _build_site.py + templates). Automatizeaza bump-ul ca sa nu mai apara drift intre pagini.",
+            "effort": "mic"
+          },
+          {
+            "title": "Focus vizibil complet absent pe tot site-ul (niciun :focus-visible)",
+            "severity": "critic",
+            "impact": "Confirmat de 3 dimensiuni independente (semantic, keyboard, contrast). style.css are 0 reguli de focus; upgrade.css doar suprima conturul pe inputuri (outline:none). Utilizatorul de tastatura nu vede NICIODATA unde e focusul pe link-uri, butoane, carduri-link (homepage e plina de carduri-link), bara de share. Navigarea fara mouse e practic oarba. WCAG 2.4.7.",
+            "recommendation": "Regula globala in upgrade.css: a:focus-visible,button:focus-visible,.btn:focus-visible,.icon-btn:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:inherit}. Inlocuieste outline:none de pe inputuri cu un ring vizibil (border emerald + box-shadow). Verifica contrast ring >=3:1.",
+            "effort": "mic"
+          },
+          {
+            "title": "Cote fiscale expirate 2026 in calculatorul de impozit pe investitii",
+            "severity": "critic",
+            "impact": "impozit-investitii afiseaza cote 2025 (1/3% castiguri, 10% dividende). Din iunie 2026 cotele reale sunt 3/6% si 16%. Impozitul afisat e subevaluat de ~3x - eroare de continut financiar care poate induce decizii gresite, exact contrar misiunii de educatie financiara. Erodeaza fatal credibilitatea.",
+            "recommendation": "Actualizeaza la 3/6% castiguri si 16% dividende; adauga exceptarea de 200 lei/tranzactie sub 600 lei/an. Verifica si confuzia nominal-vs-real din FIRE/pensie si asimetria pro-cumparare din chirie-vs-cumparare.",
+            "effort": "mic"
+          },
+          {
+            "title": "Calculatoarele nu sunt accesibile: label-uri nelegate de input-uri, fara <form>, fara aria-live pe rezultat",
+            "severity": "critic",
+            "impact": "Confirmat de 3 dimensiuni (semantic, keyboard, forms). Toate cele 11 calculatoare: grep 'label for=' = 0. Input-urile au id-uri dar label-urile nu au for - screen-reader anunta 'editare, blank' fara nume. Rezultatul (#out) se schimba silentios fara aria-live. Lipsa <form> = Enter nu calculeaza. Inima functionala a site-ului e inutilizabila la AT. WCAG 1.3.1/3.3.2/4.1.2/4.1.3.",
+            "recommendation": "Adauga for= pe fiecare label (id-urile exista deja, ~40 perechi); inveleste campurile+butonul in <form> cu submit handler preventDefault si buton type=submit; pune aria-live=polite pe #out in toate cele 11 calculatoare.",
+            "effort": "mediu"
+          },
+          {
+            "title": "XSS reflectat in cautarea globala (input user + date din index in innerHTML neescapat)",
+            "severity": "major",
+            "impact": "Confirmat de 3 dimensiuni (search, js-quality, security). site.js:101 interpoleaza sInput.value brut in innerHTML ('Niciun rezultat pentru ...'); site.js:104 si article.js:107 baga a.t/a.d din index in innerHTML. Self-XSS prin input + risc de stored-XSS daca un titlu viitor de articol contine markup. Pe un site cu sesiuni Supabase in localStorage, orice XSS poate fura sesiunea.",
+            "recommendation": "Helper esc() pe &<>\"' aplicat la sInput.value, a.t, a.d, a.cn, badge (site.js) si a.t/a.d (article.js); ideal createElement+textContent. La build, escapeaza titlul/descrierea cand scrii search-index.json in _build_site.py.",
+            "effort": "mic"
+          },
+          {
+            "title": "Accentul emerald #10b981 ca text pe alb = 2.54:1, esueaza WCAG AA sistemic",
+            "severity": "major",
+            "impact": "Afecteaza cele mai repetate elemente interactive: link-urile .more (Citeste/Exploreaza - 110 instante pe stiri, zeci pe index/educatie), eyebrow-uri de sectiune (toate paginile), literele glosarului, pill-uri, search-badge, btn-ghost:hover. Text mic sub pragul 4.5:1. Defect vizibil de baza pe un site care vrea premium.",
+            "recommendation": "Token nou --emerald-link:#047857 (~4.6:1 pe alb) aplicat pe .card .more, .eyebrow, .glos-letter, .pill, .search-badge, btn-ghost:hover, read-btn.done. Pastreaza emerald-ul actual doar pentru fundaluri/iconite. --emerald-d (#059669) e insuficient (3.77:1).",
+            "effort": "mic"
+          },
+          {
+            "title": "Lipseste <main> + skip-link pe toate ~420 paginile",
+            "severity": "major",
+            "impact": "Confirmat de 2 dimensiuni. grep '<main' = 0 in tot site-ul. Niciun skip-link. Utilizatorul de tastatura parcurge ~13 elemente de navbar pe FIECARE pagina inainte de continut (frictiune severa pe 400 articole) si AT nu pot sari la continut - lipseste landmark-ul principal. WCAG 1.3.1/2.4.1.",
+            "recommendation": "Inveleste continutul in <main id=main> (injectat din site.js intre header si footer; la articole <article> = copil al <main>). Adauga ca prim element prepend-at un <a class=skip-link href=#main>Sari la continut</a> + CSS .sr-only/.skip-link (vizibil doar la :focus).",
+            "effort": "mediu"
+          },
+          {
+            "title": "Modale si meniuri fara focus-trap si fara semantica (cautare, cont, burger)",
+            "severity": "major",
+            "impact": "Confirmat de 2-3 dimensiuni. Overlay-ul de cautare nu are role=dialog/aria-modal, Tab scapa in spatele lui in continutul de dedesubt, focusul nu revine pe declansator. Burger si meniul cont fara aria-expanded/aria-controls/aria-haspopup, fara Escape, fara focus returnat. Experienta de tastatura/SR rupta pe componentele de baza ale shell-ului. WCAG 2.4.3/4.1.2.",
+            "recommendation": "role=dialog+aria-modal+aria-label + focus-trap (wrap Tab) + return focus pe #searchBtn la inchidere; salveaza/restaureaza activeElement. Pe burger si avatarBtn: aria-expanded sincronizat + aria-controls; Escape inchide si readuce focus pe declansator; aria-haspopup pe avatar.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Linkuri esentiale din login (<a> fara href) inaccesibile la tastatura",
+            "severity": "major",
+            "impact": "Confirmat de 3 dimensiuni. login.html:63-64 toggleLink (Inregistreaza-te) si forgotLink (Ai uitat parola) sunt <a> fara href cu handler de click - nu intra in Tab, nu raspund la Enter. Userul de tastatura nu poate comuta pe inregistrare sau cere reset. In plus bug de re-bind: al doilea toggle face location.reload() si acumuleaza listeneri, pierzand input-ul.",
+            "recommendation": "Inlocuieste cele doua <a> cu <button type=button class=linklike>. Reproiecteaza toggle-ul ca o functie idempotenta fara reload si fara re-atasare de listeneri (event delegation pe container).",
+            "effort": "mic"
+          },
+          {
+            "title": "Lipsa totala de CSP si antete de securitate pe un site cu auth",
+            "severity": "major",
+            "impact": "Zero CSP/X-Content-Type-Options/Referrer-Policy/X-Frame-Options. Site GitHub Pages cu auth Supabase, scripturi inline si CDN extern, fara nicio politica - orice XSS (vezi search) are impact maxim, inclusiv furt de sesiune Supabase din localStorage.",
+            "recommendation": "Meta-CSP injectat in head pe toate paginile prin _build_site.py (default-src 'self'; script-src 'self' cdn.jsdelivr.net; connect-src supabase.co; frame-ancestors 'none'), + X-Content-Type-Options nosniff + referrer strict-origin-when-cross-origin. Pentru anteturi HTTP reale, muta in spatele Cloudflare.",
+            "effort": "mediu"
+          },
+          {
+            "title": "CDN Supabase fara SRI si versiune nepinata (@supabase/supabase-js@2)",
+            "severity": "major",
+            "impact": "Toate cele 432 referinte trag ultima versiune din major 2 fara integrity. Daca jsdelivr sau pachetul e compromis, codul ruleaza direct in pagina de login/reset si poate exfiltra credentiale. Supply-chain risk pe fluxul cel mai sensibil.",
+            "recommendation": "Pineaza versiune exacta (ex @2.45.0) + integrity=sha384-... + crossorigin=anonymous pe toate tag-urile CDN. Centralizeaza tag-ul in _build_site.py ca sursa unica.",
+            "effort": "mic"
+          },
+          {
+            "title": "Salariu net ignora deducerea personala obligatorie",
+            "severity": "major",
+            "impact": "salariu-net calculeaza impozitul pe baza integrala fara deducere personala (obligatorie sub ~6050 lei brut). Impozitul real e mult mai mic la salarii mici - eroare de continut financiar pe un calculator foarte folosit.",
+            "recommendation": "Adauga deducerea personala degresiva si exceptarea la salariul minim.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Relevanta cautarii: slug categorie inunda rezultatele, zero toleranta typo/forme, definitii glosar trunchiate la 140 char",
+            "severity": "major",
+            "impact": "Slug-ul 'c' in haystack da 119 hituri pentru 'investitii' (perete de rezultate irelevante). Matching substring-AND strict: 'inflatia' (articulat) vs 'inflatie' dau seturi diferite, typo = 0 rezultate. Cele 131 definitii glosar trunchiate la 140/288 char - >50% din glosar nesearchable. Plus un titlu cu caracter chirilic U+0456 face un articol negasibil.",
+            "recommendation": "Scoate slug-ul din matching (doar tie-breaker); stemming RO usor pe sufixe + fuzzy fallback Levenshtein<=1 sau MiniSearch/Fuse.js; pune textul complet al definitiei in index (afisare cu line-clamp CSS); inlocuieste chiriliul cu Latin i + lint anti non-ASCII la build.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Erorile si starea formularelor de auth nu sunt anuntate (zero aria-live/role=alert)",
+            "severity": "major",
+            "impact": "grep aria-live|role=alert|role=status|aria-invalid = 0 pe tot site-ul. Mesajele de eroare din login/account/reset (#msg, pwMsg, emailMsg) se rescriu silentios - screen-reader-ul nu afla ca a aparut o eroare (ex 'Parola gresita'). WCAG 4.1.3.",
+            "recommendation": "aria-live=polite pe containerele de mesaj din login/reset/account; role=alert pentru erori critice de auth; optional aria-invalid pe input la eroare.",
+            "effort": "mic"
+          },
+          {
+            "title": "Premium gating pur cosmetic (CSS) + premium legat doar de email admin hardcodat",
+            "severity": "minor",
+            "impact": "Confirmat de 3 dimensiuni. .course-lessons{display:none} - continutul e in DOM si pointeaza spre articole publice indexate in sitemap; data-cf-premium setabil din DevTools. isPremium=isAdmin (ADMIN_EMAILS hardcodat), niciun abonament real, premium.html afiseaza 4 planuri cu butoane 'In curand' fara Stripe. NU e bug tehnic acut (premium nu e lansat), dar e iluzie de protectie pe care nu trebuie construita monetizare.",
+            "recommendation": "Daca premium se monetizeaza: continut servit dinamic doar dupa verificare server-side (Supabase Edge Function + RLS pe tabel subscriptions populat de webhook Stripe). Pana atunci marcheaza explicit planurile ca lista de asteptare si nu construi monetizare pe gate-ul CSS.",
+            "effort": "mare"
+          },
+          {
+            "title": "account.js cod mort (3.9KB, 0 pagini il includ) + client Supabase init in 4-5 locuri",
+            "severity": "minor",
+            "impact": "account.js duplica logica avatar/auth din site.js cu chei Supabase duplicate si diverge (linkuri relative vs absolute). Cheia/createClient apar in site.js, account.js, login/account/reset.html - drift la rotirea cheii, risc de instante GoTrueClient multiple. Listeneri document-click adaugati la fiecare onAuthStateChange (leak in sesiuni lungi).",
+            "recommendation": "Sterge account.js. Centralizeaza URL+anon key+createClient intr-un singur modul (assets/supabase.js) importat peste tot. Muta listenerul de close-on-outside-click in afara renderAcct (atasat o singura data la init).",
+            "effort": "mediu"
+          },
+          {
+            "title": "Sufix dublu 'Clubul Financiar - Clubul Financiar' in <title> pe 5 pagini",
+            "severity": "minor",
+            "impact": "despre/investitii/credite/contact/premium au sufixul brand de doua ori in title - vizibil in tab si in rezultatele Google, arata neglijent pe pagini cheie.",
+            "recommendation": "Scoate al doilea sufix din cele 5 fisiere si verifica og:title; daca sunt asamblate din fragment+sufix, fixeaza sursa sa nu concateneze cand titlul il contine deja.",
+            "effort": "mic"
+          }
+        ],
+        "quickWins": [
+          "Resincronizeaza versiunea JS pe toate cele 428 pagini la v20 printr-un sed global la build (deblocheaza toate fix-urile deja facute)",
+          "Adauga regula globala :focus-visible in upgrade.css + clasa .sr-only standard",
+          "Defineste token --emerald-link:#047857 si aplica-l pe .more/.eyebrow/.glos-letter/.pill/.search-badge/hover-uri",
+          "Escapeaza input-ul si campurile de index inainte de innerHTML in cautare (helper esc())",
+          "Actualizeaza cotele fiscale 2026 in impozit-investitii (3/6% si 16% + exceptarea 200 lei)",
+          "Transforma cele doua <a> fara href din login in <button type=button> si scoate location.reload() din toggle",
+          "Adauga aria-live=polite pe rezultatul calculatoarelor (#out) si pe mesajele de auth",
+          "Adauga aria-expanded/aria-controls pe burger si avatarBtn + Escape care inchide",
+          "Pineaza Supabase la versiune exacta + integrity SRI pe toate tag-urile CDN",
+          "Adauga for= pe label-urile calculatoarelor (id-urile exista deja) + aria-label pe inputurile de cautare/filtrare",
+          "Sterge account.js (cod mort) si scoate sufixul dublu din title pe cele 5 pagini",
+          "Inlocuieste caracterul chirilic din titlul articolului + adauga lint anti non-ASCII la build"
+        ],
+        "strategicBets": [
+          "Refacere accesibilitate centralizata in shell: <main>+skip-link injectate din site.js, focus-trap real pe modalul de cautare + meniuri (cont, burger) cu return-focus, semantica dialog/menu/tablist - rezolva ~8 findings WCAG dintr-o singura interventie pe site.js/article.js",
+          "Stack de securitate pentru un site cu auth: CSP via meta (sau mutare in spatele Cloudflare pentru anteturi HTTP reale) + eliminarea/hash-uirea scripturilor inline + modul Supabase unic centralizat",
+          "Monetizare premium reala (daca e obiectiv de business): continut servit dinamic dupa verificare server-side (Supabase Edge Function + RLS + tabel subscriptions) + webhook Stripe - inlocuieste complet gate-ul CSS iluzoriu",
+          "Motor de cautare premium: inlocuieste includes() manual cu MiniSearch/Fuse.js (stemming RO + fuzzy + prefix + highlight <mark> + scoring pe titlu vs descriere vs categorie), index cu definitii complete - ridica relevanta de la mediocru la nivel command-palette"
+        ]
+      },
+      {
+        "theme": "Business & Monetizare",
+        "verdict": "Produsul (400 articole + 131 termeni glosar + 11 calculatoare + agregator stiri 34 surse + 6 cursuri, tot gratuit in RO) bate net piata RO pe breadth, dar stratul de business este o fatada nefunctionala: nu exista nicio cale prin care un vizitator sa devina lead sau client. Toate cele 3 CTA principale (\"Aboneaza-te gratuit\", \"Incepe gratuit\", \"Creeaza cont\") duc la /login.html (cont email+parola), desi promit newsletter — nu exista NICIUN formular de captura email pe tot site-ul. Monetizarea e inexistenta si chiar contraproductiva: 4 tiere pretuite in EUR (9.99-49.99€) cu butoane \"In curand\" href=#, gating premium hard-codat doar pentru admin (isPremium=isAdmin), iar \"continutul premium\" e de fapt articole 100% gratuite si indexate in Google. Pe deasupra, brandul e complet anonim (zero autor/fondator/entitate juridica = E-E-A-T plafonat pe nisa YMYL exact unde concurentii castiga) si vinde \"comunitate exclusiva\" la 49.99€ fara sa existe vreo suprafata de comunitate. Prioritatea absoluta: repara funnel-ul de captura email si elimina/inlocuieste tier-urile moarte inainte sa erodeze increderea.",
+        "topFindings": [
+          {
+            "title": "Funnel rupt: toate CTA de \"abonare\" duc la /login.html, nu exista niciun formular de captura email pe site",
+            "severity": "critic",
+            "impact": "Tot traficul din 9 canale sociale + SEO (400 articole) ajunge pe un site care nu capteaza NICIUN email. Activul #1 de business (lista proprie, singurul canal nedependent de Meta/X care te-au si suspendat) este zero. CTA-ul minte literal: promite \"o lectie pe saptamana\" dar cere cont cu parola + confirmare email pentru zero valoare. Fara captura email, intreg efortul de continut si social nu se converteste in audienta monetizabila.",
+            "recommendation": "Inlocuieste linkurile catre /login.html cu un formular inline real (un singur camp email) in banda CTA din index.html, la finalul fiecarui articol (un singur loc de modificat in article.js, acopera toate 400) si in footer. Scrie in tabel Supabase newsletter_subscribers (deja integrat) sau ESP free-tier (Brevo/MailerLite/Buttondown). Pastreaza cont+parola DOAR pentru zona cu valoare reala.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Tier-uri de pret moarte: 4 planuri in EUR cu butoane \"In curand\" href=#, fara checkout, care erodeaza increderea",
+            "severity": "critic",
+            "impact": "Site-ul afiseaza preturi (9.99/19.99/49.99€) pe care nimeni nu le poate plati — zero checkout, zero waitlist, zero lead capture. Afisarea de preturi fara posibilitate de plata + pe o piata RO care gandeste in lei + 4 tiere pre-lansare distruge credibilitatea exact pe pagina unde ceri bani, in loc sa o construiasca.",
+            "recommendation": "Pe termen scurt: redu la 1 CTA \"Intra pe lista de asteptare\" care colecteaza email (lead-uri calificate cu intentie de plata), elimina preturile concrete sau ascunde tier-urile neimplementate. La lansare reala: maxim 2 tiere (Gratuit + un Premium ~7.99-9.99€/luna cu optiune anuala), preturi in RON, Stripe Payment Links (minim viabil pentru site static, fara backend).",
+            "effort": "mare"
+          },
+          {
+            "title": "Premium fals: continutul \"premium\" e gratuit+indexat, iar gating-ul e admin-only si pur cosmetic",
+            "severity": "critic",
+            "impact": "Cele 6 cursuri \"premium\" sunt doar liste de linkuri catre articole publice (robots=index, in sitemap) — nimeni n-ar plati pentru un cuprins de continut gratuit. Gating-ul e isPremium=isAdmin (site.js:149) deci niciun user real nu poate cumpara acces, iar deblocarea e doar CSS display:none (continutul e oricum in DOM/sursa). Chiar daca repari checkout-ul, conversia ramane ~0 fara valoare exclusiva reala.",
+            "recommendation": "Creeaza valoare premium exclusiva care NU exista gratuit: template-uri Excel (buget/portofoliu), PDF-uri descarcabile, checklist-uri, portofolii model lunare, quiz cu corectie, Q&A. Introdu un rol is_premium real per-user in Supabase setat de webhook plata, citit in applyRole() in loc de isPremium=isAdmin. Serveste continutul exclusiv prin signed URLs server-side, nu display:none.",
+            "effort": "mare"
+          },
+          {
+            "title": "Brand complet anonim: zero autor/fondator/entitate juridica = E-E-A-T plafonat pe nisa YMYL",
+            "severity": "critic",
+            "impact": "Pentru educatie financiara (Your-Money-Your-Life), anonimatul total e cel mai puternic semnal de neincredere si plafoneaza atat conversia cat si ranking-ul Google. Concurentul dominant (StiintaBanilor) castiga exact aici, cu fondatori cu nume si \"10.000+ cursanti\". Despre noi e generic, orfan in navigare (nelinkat dar in sitemap), contactul e doar un Gmail gratuit fara entitate legala — care devine obligatorie inainte de prima incasare.",
+            "recommendation": "Adauga pe despre.html autor/fondator real (nume, foto, background, LinkedIn) sau declara explicit \"redactie cu experienta in finante\" + criterii editoriale. Adauga byline + author in JSON-LD pe toate 400 articolele (bulk). Email pe domeniu (contact@clubulfinanciar.ro), entitate juridica (PFA/SRL+CUI) declarata. Linkeaza Despre in footer/nav (acum e orfana).",
+            "effort": "mediu"
+          },
+          {
+            "title": "Lipseste CTA de conversie la finalul articolelor (momentul de intentie maxima)",
+            "severity": "major",
+            "impact": "Cele 400 articole = trafic-magnet principal, dar dupa \"Pe scurt\" urmeaza doar disclaimer + link \"Toate articolele\". article.js injecteaza doar \"Articole conexe\" — tine userul sa navigheze fara sa ceara vreodata emailul sau sa ofere cursul. Momentul de cea mai mare intentie e complet nevalorificat pe intreg traficul.",
+            "recommendation": "Adauga in article.js un bloc CTA injectat automat dupa </article>: captura email + buton secundar catre cursul gratuit relevant categoriei. Un singur loc de modificat, acopera instant toate 400 de articole.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Zero monetizare prin afiliere — venit ratat ACUM pe traficul existent",
+            "severity": "major",
+            "impact": "400 articole, multe despre brokeri, ETF, conturi de economii = surse naturale de afiliere total nevalorificate (zero linkuri outbound XTB/eToro/Trading212/Revolut/Lightyear). Acesta e singurul venit care poate curge IMEDIAT, independent de paywall si de infrastructura de plata.",
+            "recommendation": "Adauga afilieri relevante si etichetate transparent in articolele cu intentie comerciala (\"cum incepi sa investesti\", comparatii broker, conturi economii). Adauga disclosure de afiliere in terms/privacy. Atentie la pozitionarea de independenta (vezi mai jos) — eticheteaza onest.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Newsletter promis fara niciun mecanism: zero lista, zero drip, zero serie de onboarding",
+            "severity": "major",
+            "impact": "Newsletter-ul e vandut ca beneficiu si ca motor de retentie/crestere, dar nu exista lista, ESP sau secventa automata. incepe-aici.html are 5 niveluri de invatare perfecte pentru o serie drip dar nimic nu le foloseste. Fara newsletter functional, retentia e \"citeste si pleaca\".",
+            "recommendation": "Dupa captura email (vezi finding #1), creeaza o serie automata welcome de 5-7 emailuri ancorata pe cele 5 niveluri din incepe-aici.html. Da newsletter-ului un motiv concret de existenta si o bucla de retentie de saptamani, nu o singura vizita.",
+            "effort": "mediu"
+          },
+          {
+            "title": "\"Comunitate exclusiva\" vanduta la 49.99€ desi NU exista nicio suprafata de comunitate",
+            "severity": "major",
+            "impact": "Brandul se numeste literal \"Clubul\" si vinde comunitate/sesiuni live/Q&A lunar, dar nu exista nicio pagina, forum, grup sau link de comunitate. A promite un produs central inexistent = risc de credibilitate/reclamatie. Telegram-ul real are ~2 abonati la audit.",
+            "recommendation": "Ori expune canalul Telegram existent (t.me/clubul_financiar) ca \"comunitatea Clubului\" in nav/footer/premium.html chiar de la planul Gratuit, ori scoate bullet-urile Comunitate/Sesiuni live/Q&A pana exista. Foloseste auto-poster-ul ca sa ai 15-20 postari/canal inainte de promovare agresiva, ca profilurile sa nu para abandonate.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Zero dovada sociala: niciun testimonial, numar de membri, recenzie sau mentiune presa",
+            "severity": "major",
+            "impact": "Pe o pagina care cere abonament 9.99-49.99€/luna, absenta totala a vocii utilizatorilor scade conversia. Statisticile din hero sunt doar despre inventar de continut (400 articole), nimic despre adoptie/oameni — exact ce sustine perceptia de \"club\".",
+            "recommendation": "Pana ai date reale, foloseste \"proof of work\" obiectiv (\"400 articole verificate factual\", \"glosar 131 termeni\", \"stiri din 34 surse\") ca banda de credibilitate + micro-reasigurare la newsletter (\"o data pe saptamana, fara spam, dezabonare cu un click\"). Cand ai cifre reale din Supabase/analytics, adauga 1-2 statistici de adoptie si 3-6 testimoniale atribuite onest. Niciodata testimoniale inventate, nici contoare de follower umflate.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Contul gratuit nu deblocheaza nicio valoare — inscrierea e frecare fara rasplata",
+            "severity": "major",
+            "impact": "Un user nou care isi face cont e redirectat la index.html si nu primeste nimic in plus fata de un anonim (premium=admin-only). Pagina \"Contul meu\" e sterila (doar schimba parola/email/logout). Nu exista motiv sa-ti faci cont sau sa revii logat — retentia per-cont e zero.",
+            "recommendation": "Da un motiv real: progres salvat la cursuri/articole (leaga de cf-read existent), marcaje/salvate, dashboard cu \"Articolele tale citite\" + \"Continua cursul\" + streak. Sincronizeaza cf-read in Supabase pentru cross-device (acum se pierde la schimbarea device-ului). Altfel elimina pasul de cont si cere doar email.",
+            "effort": "mediu"
+          },
+          {
+            "title": "Preturi in EUR pe public RO — frecare cognitiva si pozitionare \"produs occidental scump\"",
+            "severity": "major",
+            "impact": "Publicul gandeste si e platit in lei (continut full RO, exemple \"in lei\"), concurentii listeaza in RON. EUR forteaza conversie mentala si ~50€ (≈250 lei) pare agresiv pentru educatie financiara RO la inceput.",
+            "recommendation": "Afiseaza preturile in RON (sau RON primar + EUR secundar), aliniat la puterea de cumparare RO. Reconsidera nivelul: testeaza praguri sub StiintaBanilor, ancoreaza pe valoare concreta.",
+            "effort": "mic"
+          },
+          {
+            "title": "Pagina de stiri dilueaza nisa cu politica generala — slabeste pozitionarea de educatie financiara",
+            "severity": "major",
+            "impact": "stiri.html e dominata de politica pura (DNA/Ciucu, Fritz/ANI, parlamentari PNL), cu duplicate evidente ale aceleiasi stiri. Te pune in concurenta cu G4Media/Spotmedia unde nu poti castiga si slabeste perceptia de \"educatie financiara\". Stirile sunt singurul motor real de revenire zilnica (update la 30 min) dar sunt ascunse pe home si fara RSS/abonare pe categorii.",
+            "recommendation": "Strange filtrul de relevanta: exclude politica pura fara impact financiar direct, dedup titluri. Pastreaza strict BVB/dobanzi BNR/taxe/imobiliare/cripto. Promoveaza stirile pe home (bloc \"Ultimele stiri\"), adauga feed RSS + abonare pe categorie + badge \"nou de la ultima vizita\".",
+            "effort": "mediu"
+          },
+          {
+            "title": "Termenii si conditiile nu acopera abonamente/plati/rambursari + lipsa ANPC/SOL",
+            "severity": "minor",
+            "impact": "Daca afisezi preturi si intentionezi vanzare, lipsa clauzelor de billing, reinnoire automata, anulare, drept de retragere 14 zile + lipsa linkurilor ANPC/SOL = risc legal + neincredere la checkout. Neblocant cat Premium e \"In curand\", obligatoriu la prima incasare.",
+            "recommendation": "Inainte de activarea platilor: extinde terms.html cu abonament/reinnoire/anulare/rambursare/drept de retragere 14 zile (sau exceptia continut digital declarata explicit), moneda+TVA clare, si adauga in footer linkuri ANPC (anpc.ro) + SOL (platforma ODR UE).",
+            "effort": "mediu"
+          },
+          {
+            "title": "Pagini legale (privacy/terms) lipsesc din sitemap si sunt doar JS-injected",
+            "severity": "minor",
+            "impact": "Paginile legale cerute de Google pentru site-uri comerciale/YMYL nu sunt declarate pentru indexare si sunt invizibile crawlerelor fara executie JS (linkate doar prin footer-ul injectat site.js:139).",
+            "recommendation": "Adauga privacy.html si terms.html in sitemap.xml si pune linkurile legale ca <a> static in HTML pe paginile cheie, crawlabile fara JS.",
+            "effort": "mic"
+          },
+          {
+            "title": "Zero tracking de conversie — funnel-ul nu poate fi masurat",
+            "severity": "minor",
+            "impact": "Niciun analytics (GA4/Plausible/Umami) in site. Fara evenimente pe click CTA newsletter, submit email, creare cont, click Premium, orice optimizare de conversie e oarba.",
+            "recommendation": "Adauga analytics usor fara cookie banner (Plausible/Umami) si trimite evenimente pe pasii cheie ai funnel-ului.",
+            "effort": "mic"
+          }
+        ],
+        "quickWins": [
+          "Linkeaza pagina Despre in footer/nav (acum e orfana in navigare dar indexata in sitemap) — o pagina About trebuie sa fie la max 1 click",
+          "Afiseaza preturile in RON (sau RON primar + EUR secundar) in loc de EUR — aliniere instant la cum gandeste publicul RO",
+          "Inlocuieste banda STATS de inventar cu o banda de credibilitate honest \"proof of work\" (400 articole verificate, 131 termeni, stiri din 34 surse) + micro-reasigurare la newsletter (\"o data pe saptamana, fara spam, dezabonare cu un click\")",
+          "Adauga privacy.html + terms.html in sitemap.xml si pune linkurile legale ca <a> static in HTML",
+          "Adauga un analytics usor fara cookie (Plausible/Umami) cu evenimente pe pasii de conversie",
+          "Defineste UN singur obiectiv primar de conversie (captura email) si fa-l consistent in hero/banda finala/nav; restul (cont, premium) raman butoane ghost subordonate",
+          "Expune canalul Telegram existent ca punct de intrare in \"comunitatea Clubului\" in footer/nav, ca promisiunea de comunitate sa aiba macar o suprafata reala",
+          "Adauga email pe domeniu (contact@clubulfinanciar.ro) in loc de Gmail gratuit — semnal instant de profesionalism"
+        ],
+        "strategicBets": [
+          "Construieste lista de email proprie: formular real de captura (1 camp) in banda CTA + injectat la finalul tuturor articolelor via article.js + footer, scris in Supabase/ESP, plus 1-2 lead magnete cu valoare reala (sablon buget Excel, checklist fond de urgenta PDF) si o serie drip welcome de 5-7 emailuri ancorata pe cele 5 niveluri din incepe-aici.html. Acesta e activul #1 de business si transforma traficul existent in audienta monetizabila.",
+          "Reconstruieste monetizarea de la zero ca produs real: redu la 2 tiere in RON (Gratuit + un Premium ~7.99-9.99€ echiv. cu optiune anuala), creeaza valoare premium EXCLUSIVA care nu exista gratuit (template-uri, PDF-uri, portofolii model lunare, quiz), rol is_premium real in Supabase setat de webhook Stripe Payment Links, gating server-side cu signed URLs. Pana atunci, zero preturi expuse fara checkout — doar waitlist.",
+          "Stabileste identitatea de autoritate si E-E-A-T: fondator/echipa cu nume+foto+background pe Despre, byline + author JSON-LD bulk pe toate 400 articolele, entitate juridica (PFA/SRL+CUI) + clauze legale complete (abonament/rambursare/retragere 14 zile, ANPC/SOL) inainte de prima incasare. Diferentiaza pozitionarea pe unghiul defensibil RO-specific (ANAF, Declaratia Unica, Fidelis/Tezaur, PFA, Pilon II, BVB) + independenta (\"nu vindem produse financiare, nu luam comisioane de la brokeri\") — moat real vs concurenta globala si vs influencerii de afiliere.",
+          "Construieste motorul de retentie/re-engagement: progres curs + cf-read sincronizate in Supabase (cross-device), dashboard \"Contul meu\" util (continua cursul, articole citite, salvate, streak), PWA instalabila + web push pentru \"lectia saptamanii\" si stiri importante, plus RSS + abonare pe categorii pe pagina de stiri (singurul continut zilnic proaspat). Transforma vizitatorii one-time in recurenti."
+        ]
+      }
+    ],
+    "dimensionsReviewed": 48,
+    "totalDimensions": 48
+  }
+}

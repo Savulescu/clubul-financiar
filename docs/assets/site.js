@@ -5,6 +5,10 @@
   const sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY) : null;
   window._sb = sb;
 
+  // escape HTML — folosit oriunde băgăm text în innerHTML (anti-XSS)
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g,
+    c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
   const NAV = [
     ["Începe aici", "/incepe-aici.html"],
     ["Educație", "/educatie.html"],
@@ -46,7 +50,7 @@
   const nav = document.createElement("header");
   nav.className = "nav";
   nav.innerHTML = `<div class="container nav-in">
-    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-512.png" alt="Clubul Financiar" width="34" height="34"> Clubul Financiar</a>
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks">${NAV.map(([t,h])=>`<a href="${h}">${t}</a>`).join("")}</nav>
     <div class="nav-right">
       <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
@@ -57,7 +61,18 @@
   </div>`;
   document.body.prepend(nav);
   document.getElementById("themeBtn").onclick = toggleTheme;
-  document.getElementById("burger").onclick = () => document.getElementById("navLinks").classList.toggle("open");
+  const burgerBtn = document.getElementById("burger");
+  const navLinksEl = document.getElementById("navLinks");
+  burgerBtn.setAttribute("aria-controls", "navLinks");
+  burgerBtn.setAttribute("aria-expanded", "false");
+  burgerBtn.onclick = () => {
+    const open = navLinksEl.classList.toggle("open");
+    burgerBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  };
+  // închide meniul după ce alegi un link (nu mai rămâne deschis peste conținut)
+  navLinksEl.addEventListener("click", e => {
+    if (e.target.closest("a")) { navLinksEl.classList.remove("open"); burgerBtn.setAttribute("aria-expanded", "false"); }
+  });
 
   // ---- căutare globală (articole + glosar) ----
   let searchIdx = null, searchLoaded = false;
@@ -72,14 +87,16 @@
   const sInput = overlay.querySelector("#searchInput");
   const sRes = overlay.querySelector("#searchRes");
   const norm = s => (s || "").toLowerCase().replace(/[ăâ]/g,"a").replace(/î/g,"i").replace(/ș|ş/g,"s").replace(/ț|ţ/g,"t");
+  let lastFocus = null;
   function openSearch() {
+    lastFocus = document.activeElement;
     overlay.hidden = false; document.body.style.overflow = "hidden"; setTimeout(() => sInput.focus(), 40);
     if (!searchLoaded) {
       searchLoaded = true;
       fetch("/search-index.json").then(r => r.json()).then(d => { searchIdx = d; runSearch(); }).catch(() => { sRes.innerHTML = `<p class="search-hint">Căutarea nu e disponibilă momentan.</p>`; });
     }
   }
-  function closeSearch() { overlay.hidden = true; document.body.style.overflow = ""; }
+  function closeSearch() { overlay.hidden = true; document.body.style.overflow = ""; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
   function runSearch() {
     const q = norm(sInput.value.trim());
     if (!searchIdx) return;
@@ -98,10 +115,10 @@
     }
     scored.sort((x, y) => y[0] - x[0]);
     const top = scored.slice(0, 24);
-    if (!top.length) { sRes.innerHTML = `<p class="search-hint">Niciun rezultat pentru „${sInput.value}".</p>`; return; }
+    if (!top.length) { sRes.innerHTML = `<p class="search-hint">Niciun rezultat pentru „${esc(sInput.value)}".</p>`; return; }
     sRes.innerHTML = top.map(([, a]) => {
       const badge = a.k === "g" ? "Glosar" : (a.k === "calc" ? "Calculator" : (a.cn || "Articol"));
-      return `<a class="search-item" href="${a.u}"><div><strong>${a.t}</strong><span class="search-badge">${badge}</span></div><p>${a.d || ""}</p></a>`;
+      return `<a class="search-item" href="${esc(a.u)}"><div><strong>${esc(a.t)}</strong><span class="search-badge">${esc(badge)}</span></div><p>${esc(a.d || "")}</p></a>`;
     }).join("");
   }
   document.getElementById("searchBtn").onclick = openSearch;
@@ -121,14 +138,14 @@
   const cols = [
     ["Educație", [["Începe aici","/incepe-aici.html"],["Buget personal","/educatie.html"],["Economisire","/educatie.html"],["Psihologia banilor","/educatie.html"]]],
     ["Investiții", [["Bursă & acțiuni","/investitii.html"],["ETF-uri","/investitii.html"],["Titluri de stat","/investitii.html"],["Calculatoare","/calculatoare.html"]]],
-    ["Platformă", [["Cursuri","/cursuri.html"],["Premium","/premium.html"],["Cont","/login.html"],["Contact","/contact.html"]]],
+    ["Platformă", [["Despre noi","/despre.html"],["Cursuri","/cursuri.html"],["Premium","/premium.html"],["Cont","/login.html"],["Contact","/contact.html"]]],
   ];
   const foot = document.createElement("footer");
   foot.className = "foot";
   foot.innerHTML = `<div class="container">
     <div class="foot-grid">
       <div>
-        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-512.png" alt="Clubul Financiar" width="34" height="34"> Clubul Financiar</a>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
         <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
         <p class="soc-h">Urmărește-ne</p><div class="soc">${SOC.map(([t,h])=>`<a href="${h}" title="${t}" aria-label="${t}" rel="noopener" target="_blank">${SOC_ICONS[t.toLowerCase()]||t[0]}</a>`).join("")}</div>
       </div>
