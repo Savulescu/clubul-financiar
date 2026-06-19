@@ -1,0 +1,71 @@
+<p>Parola singură nu îți mai apără banii. Un atacator care îți află parola de la internet banking sau de la email poate goli un cont în câteva minute, mai ales dacă acel email este și cheia de resetare pentru toate celelalte conturi. Aici intervine <strong>autentificarea în doi pași</strong> (2FA, de la „two-factor authentication") sau, mai exact, autentificarea cu mai mulți factori: pe lângă ceva ce <em>știi</em> (parola), adaugi ceva ce <em>ai</em> (telefonul, o cheie fizică) sau ceva ce <em>ești</em> (amprenta, fața).</p>
+
+<p>Vestea bună e că la bancă, în România, 2FA nu mai e opțional. Din 2019, regulamentul european PSD2 impune <strong>autentificarea strictă a clienților</strong> (SCA) pentru plățile online și accesul la cont. Practic, banca <em>te obligă</em> deja la doi factori. Vestea mai puțin bună: nu toți factorii sunt la fel de siguri, iar cele mai multe fraude din 2025 din România nu sparg 2FA, ci te păcălesc pe tine să-l aprobi singur.</p>
+
+<h2>De ce SMS-ul nu mai e suficient</h2>
+
+<p>Mulți români primesc încă pe SMS codul de autorizare a tranzacției. Funcționează, dar e cel mai slab dintre toți factorii „posesie", din câteva motive concrete:</p>
+
+<ul>
+<li><strong>SIM swap (clonarea numărului).</strong> Un escroc convinge operatorul telecom să-ți mute numărul pe cartela lui, apoi primește el codurile tale. Atacurile de tip SIM swap au o rată de succes raportată surprinzător de mare în studiile internaționale, iar tu rămâi fără semnal exact când îți golesc contul.</li>
+<li><strong>Interceptarea pe rețea (SS7).</strong> Protocolul vechi care rutează SMS-urile între operatori are defecte de proiectare cunoscute, care permit redirecționarea mesajelor.</li>
+<li><strong>Phishing în timp real.</strong> Un site fals îți cere parola și codul SMS, le preia instantaneu și le folosește pe site-ul real înainte să expire. Codul de pe SMS nu „știe" pe ce site îl tastezi.</li>
+</ul>
+
+<p>Tendința la nivel global e clară: tot mai multe țări elimină treptat SMS-ul ca metodă de autentificare pentru servicii financiare. În UE, PSD2 acceptă încă SMS-ul ca factor, dar reglementatorii și băncile împing spre metode mai sigure. Concluzia practică: dacă banca ta îți oferă o alternativă (aplicația băncii cu aprobare biometrică, un token în aplicație sau o cheie fizică), folosește-o în locul SMS-ului.</p>
+
+<h2>Ierarhia metodelor 2FA, de la cea mai slabă la cea mai puternică</h2>
+
+<h3>1. SMS / cod pe email (acceptabil, dar evită-l dacă poți)</h3>
+<p>Mai bun decât nimic. Folosește-l doar când nu ai altă opțiune. Codul pe email e și mai riscant, fiindcă dacă emailul e compromis, cade și al doilea factor.</p>
+
+<h3>2. Aplicație de autentificare (TOTP) — un standard solid</h3>
+<p>Aplicații precum <strong>Google Authenticator</strong>, <strong>Microsoft Authenticator</strong>, <strong>Authy</strong> sau <strong>Aegis</strong> (open-source, Android) generează un cod de 6 cifre care se schimbă la fiecare 30 de secunde, calculat local pe telefon, fără semnal sau internet. Avantajul față de SMS: nu trece prin rețeaua telecom, deci scapi de SIM swap și de interceptarea SS7. Limita: codul tot poate fi „furat" pe un site fals de phishing, fiindcă tu îl tastezi manual.</p>
+
+<h3>3. Aplicația băncii cu aprobare în telefon (cel mai folosit în RO)</h3>
+<p>Cele mai multe bănci românești îți cer să confirmi tranzacția direct în aplicația mobilă, cu amprenta, fața sau un cod PIN. E comod și sigur <em>dacă ești atent la ce aprobi</em> — și exact aici se nasc cele mai multe fraude din 2025 (vezi mai jos).</p>
+
+<h3>4. Passkeys / chei de securitate FIDO2 (cel mai sigur)</h3>
+<p><strong>Passkeys</strong> și cheile fizice (YubiKey, Google Titan) folosesc criptografie legată de adresa exactă a site-ului. Telefonul sau cheia verifică criptografic dacă ești pe site-ul real <em>înainte</em> să răspundă; pe un site fals, pur și simplu refuză. De aceea sunt numite „rezistente la phishing": un cod nu poate fi furat și reutilizat. Companii mari care au trecut la chei de securitate au raportat zero compromiteri de cont prin phishing. În 2026, tot mai multe servicii (Google, Microsoft, Apple, unele bănci) acceptă passkeys pentru email și conturi.</p>
+
+<h2>Cum activezi 2FA, pas cu pas</h2>
+
+<h3>La bancă</h3>
+<ul>
+<li>Verifică dacă folosești <strong>aplicația oficială</strong> a băncii (descărcată din App Store / Google Play, niciodată dintr-un link primit pe SMS sau email).</li>
+<li>Activează <strong>aprobarea biometrică</strong> (amprentă / Face ID) în setările aplicației, în loc de cod pe SMS, acolo unde banca permite.</li>
+<li>Setează un <strong>plafon zilnic de plăți</strong> mic, pe care îl ridici manual când chiar ai nevoie. O limită de, să zicem, 2.000 lei/zi reduce dramatic paguba dacă cineva îți aprobă o plată din greșeală.</li>
+<li>Activează <strong>notificările push</strong> pentru orice tranzacție, ca să vezi imediat o plată suspectă.</li>
+</ul>
+
+<h3>La email (la fel de important ca banca)</h3>
+<p>Emailul e „inelul care le conduce pe toate": cine îl controlează poate reseta parolele la bancă, broker, criptomonede. Tratează-l ca pe un seif:</p>
+<ul>
+<li>Intră în setările de securitate (la Gmail: <em>Manage your Google Account → Security</em>) și activează verificarea în doi pași.</li>
+<li>Alege ca metodă principală o <strong>aplicație de autentificare</strong> sau un <strong>passkey</strong>, nu SMS-ul.</li>
+<li>Salvează <strong>codurile de rezervă</strong> (backup codes) într-un loc sigur, offline — îți rămân ca plasă de siguranță dacă pierzi telefonul.</li>
+<li>Folosește un <strong>manager de parole</strong> ca să ai o parolă unică, lungă, pe fiecare cont.</li>
+</ul>
+
+<h2>Capcana din 2026: aprobarea pe care o dai chiar tu</h2>
+
+<p>În România, cele mai costisitoare fraude din ultima vreme nu „sparg" 2FA — te conving pe tine să apeși „Aprob". Asociația Română a Băncilor și BNR au avertizat în 2025 despre scheme în care escrocii sună sau scriu pretinzând că sunt de la bancă, ANAF, CNAS sau chiar de la BNR, invocând o „rambursare de TVA", o „verificare" sau o „tranzacție suspectă". Te roagă să instalezi o aplicație de <em>screen sharing</em> (de tip AnyDesk/TeamViewer) sau să le dictezi codul, apoi inițiază ei plata, iar tu o autorizezi crezând că o blochezi.</p>
+
+<p>Reguli de aur care te apără mai bine decât orice tehnologie:</p>
+<ul>
+<li><strong>Citește mesajul de aprobare, nu doar suma.</strong> Aplicația băncii îți arată beneficiarul și suma. Dacă nu recunoști plata, respinge.</li>
+<li><strong>Niciun cod, niciodată, nimănui.</strong> Banca, ANAF sau BNR nu îți cer la telefon parola, codul de autorizare, CVV-ul sau să le instalezi vreo aplicație de control la distanță.</li>
+<li><strong>Nu da clic pe linkuri din SMS/email.</strong> Intră în aplicația băncii sau scrie singur adresa în browser.</li>
+<li><strong>Verifică sursa.</strong> BNR comunică oficial doar prin <strong>bnr.ro</strong>, <strong>bnro.ro</strong> și conturile sale verificate de pe rețelele sociale — nu prin apeluri care îți cer date sau bani.</li>
+<li>Dacă ai aprobat ceva dubios: <strong>blochează imediat</strong> cardul și aplicația din app, sună la banca ta și contestă tranzacția cât mai repede.</li>
+</ul>
+
+<h2>Pe scurt</h2>
+<ul>
+<li>Activează 2FA peste tot, dar mai ales la <strong>email</strong> și <strong>bancă</strong>.</li>
+<li>Renunță la SMS în favoarea aplicației de autentificare, a aprobării biometrice din app sau a unui passkey.</li>
+<li>Setează un plafon zilnic și notificări la fiecare plată.</li>
+<li>Cel mai vulnerabil factor ești tot tu: citește ce aprobi și nu da niciodată codul sau acces la distanță cuiva care te sună „de la bancă".</li>
+</ul>
+
+<p><em>Detaliile de activare diferă de la o bancă la alta și se mai schimbă. Verifică pașii exacți în secțiunea de securitate de pe site-ul oficial al băncii tale și informațiile de pe bnr.ro.</em></p>
