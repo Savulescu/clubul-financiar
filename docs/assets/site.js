@@ -18,6 +18,7 @@
     ["Credite", "/credite.html"],
     ["Calculatoare", "/calculatoare.html"],
     ["Cursuri", "/cursuri.html"],
+    ["Teste", "/teste.html"],
     ["Premium", "/premium.html"],
   ];
   const SOC = [
