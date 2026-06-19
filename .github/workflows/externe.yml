@@ -1,0 +1,81 @@
+name: Stiri externe (explainer RO)
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+concurrency:
+  group: externe
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Genereaza stiri externe
+        env:
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          CEREBRAS_API_KEY_1: ${{ secrets.CEREBRAS_API_KEY_1 }}
+          CEREBRAS_API_KEY_10: ${{ secrets.CEREBRAS_API_KEY_10 }}
+          CEREBRAS_API_KEY_11: ${{ secrets.CEREBRAS_API_KEY_11 }}
+          CEREBRAS_API_KEY_2: ${{ secrets.CEREBRAS_API_KEY_2 }}
+          CEREBRAS_API_KEY_3: ${{ secrets.CEREBRAS_API_KEY_3 }}
+          CEREBRAS_API_KEY_4: ${{ secrets.CEREBRAS_API_KEY_4 }}
+          CEREBRAS_API_KEY_6: ${{ secrets.CEREBRAS_API_KEY_6 }}
+          CEREBRAS_API_KEY_7: ${{ secrets.CEREBRAS_API_KEY_7 }}
+          CEREBRAS_API_KEY_8: ${{ secrets.CEREBRAS_API_KEY_8 }}
+          CEREBRAS_API_KEY_9: ${{ secrets.CEREBRAS_API_KEY_9 }}
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_API_KEY_2: ${{ secrets.DEEPSEEK_API_KEY_2 }}
+          FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          HUGGINGFACE_API_KEY: ${{ secrets.HUGGINGFACE_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          MISTRAL_API_KEY_1: ${{ secrets.MISTRAL_API_KEY_1 }}
+          MISTRAL_API_KEY_10: ${{ secrets.MISTRAL_API_KEY_10 }}
+          MISTRAL_API_KEY_11: ${{ secrets.MISTRAL_API_KEY_11 }}
+          MISTRAL_API_KEY_12: ${{ secrets.MISTRAL_API_KEY_12 }}
+          MISTRAL_API_KEY_2: ${{ secrets.MISTRAL_API_KEY_2 }}
+          MISTRAL_API_KEY_3: ${{ secrets.MISTRAL_API_KEY_3 }}
+          MISTRAL_API_KEY_4: ${{ secrets.MISTRAL_API_KEY_4 }}
+          MISTRAL_API_KEY_5: ${{ secrets.MISTRAL_API_KEY_5 }}
+          MISTRAL_API_KEY_7: ${{ secrets.MISTRAL_API_KEY_7 }}
+          MISTRAL_API_KEY_8: ${{ secrets.MISTRAL_API_KEY_8 }}
+          MISTRAL_API_KEY_9: ${{ secrets.MISTRAL_API_KEY_9 }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          NVIDIA_API_KEY_2: ${{ secrets.NVIDIA_API_KEY_2 }}
+          NVIDIA_API_KEY_3: ${{ secrets.NVIDIA_API_KEY_3 }}
+          NVIDIA_API_KEY_4: ${{ secrets.NVIDIA_API_KEY_4 }}
+          NVIDIA_API_KEY_5: ${{ secrets.NVIDIA_API_KEY_5 }}
+          NVIDIA_API_KEY_6: ${{ secrets.NVIDIA_API_KEY_6 }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_API_KEY_2: ${{ secrets.OPENROUTER_API_KEY_2 }}
+          SAMBANOVA_API_KEY: ${{ secrets.SAMBANOVA_API_KEY }}
+          SAMBANOVA_API_KEY_2: ${{ secrets.SAMBANOVA_API_KEY_2 }}
+          SAMBANOVA_API_KEY_3: ${{ secrets.SAMBANOVA_API_KEY_3 }}
+          SAMBANOVA_API_KEY_4: ${{ secrets.SAMBANOVA_API_KEY_4 }}
+          SAMBANOVA_API_KEY_5: ${{ secrets.SAMBANOVA_API_KEY_5 }}
+          SAMBANOVA_API_KEY_6: ${{ secrets.SAMBANOVA_API_KEY_6 }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        run: python3 news_external.py
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/stiri-externe.html _external_store.json
+          if ! git diff --cached --quiet; then
+            git commit -m "auto: stiri externe (explainer RO)"
+            for i in 1 2 3; do
+              git pull --rebase -X ours origin main && git push origin main && break
+              sleep 5
+            done
+          fi

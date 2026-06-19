@@ -6,15 +6,54 @@ explainer-e NOI la fiecare rulare (dedup). Pagina = ca /stiri.html (domenii + in
 Rulează: ~/stockmarketcap/stockmarketcap/venv/bin/python news_external.py → docs/stiri-externe.html"""
 import os, sys, json, re, html, time, datetime, urllib.request, xml.etree.ElementTree as ET
 
-CF = os.path.expanduser("~/clubul-financiar")
-SC = os.path.expanduser("~/stockmarketcap/stockmarketcap")
-sys.path.insert(0, CF); sys.path.insert(0, SC)
-os.chdir(CF)
+import urllib.error
+CF = os.path.dirname(os.path.abspath(__file__))   # rădăcina repo (merge și local, și în cloud)
+sys.path.insert(0, CF); os.chdir(CF)
 from _shell import NAV_HTML, FOOTER_HTML
+# Chei LLM: LOCAL din .env-ul StockCap; în CLOUD din variabilele de mediu (GitHub Secrets)
 try:
-    from dotenv import load_dotenv; load_dotenv(os.path.join(SC, ".env"))
-except Exception as e: print("dotenv:", e)
-from backend.llm_router import chat
+    from dotenv import load_dotenv
+    _sc = os.path.expanduser("~/stockmarketcap/stockmarketcap/.env")
+    if os.path.exists(_sc): load_dotenv(_sc)
+except Exception: pass
+
+# ---- LLM self-contained: providri OpenAI-compatibili, fallback peste toți + toate cheile ----
+PROVIDERS = [
+    ("cerebras",   "https://api.cerebras.ai/v1",                       "gpt-oss-120b",                                   "CEREBRAS_API_KEY"),
+    ("groq",       "https://api.groq.com/openai/v1",                   "llama-3.3-70b-versatile",                        "GROQ_API_KEY"),
+    ("together",   "https://api.together.xyz/v1",                      "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",   "TOGETHER_API_KEY"),
+    ("gemini",     "https://generativelanguage.googleapis.com/v1beta/openai", "gemini-2.0-flash",                       "GEMINI_API_KEY"),
+    ("mistral",    "https://api.mistral.ai/v1",                        "mistral-small-latest",                           "MISTRAL_API_KEY"),
+    ("sambanova",  "https://api.sambanova.ai/v1",                      "Meta-Llama-3.3-70B-Instruct",                    "SAMBANOVA_API_KEY"),
+    ("deepseek",   "https://api.deepseek.com/v1",                      "deepseek-chat",                                  "DEEPSEEK_API_KEY"),
+    ("openrouter", "https://openrouter.ai/api/v1",                     "nvidia/nemotron-3-nano-30b-a3b:free",            "OPENROUTER_API_KEY"),
+    ("nvidia",     "https://integrate.api.nvidia.com/v1",              "meta/llama-3.3-70b-instruct",                    "NVIDIA_API_KEY"),
+    ("fireworks",  "https://api.fireworks.ai/inference/v1",            "accounts/fireworks/models/llama-v3p3-70b-instruct", "FIREWORKS_API_KEY"),
+    ("siliconflow","https://api.siliconflow.cn/v1",                    "deepseek-ai/DeepSeek-V3",                        "SILICONFLOW_API_KEY"),
+]
+def _keys(base):
+    ks = []
+    if os.getenv(base): ks.append(os.getenv(base))
+    for i in range(1, 16):
+        v = os.getenv(f"{base}_{i}")
+        if v: ks.append(v)
+    return ks
+def chat(messages, max_tokens=900, temperature=0.5):
+    last = "n/a"
+    for name, api_base, model, envb in PROVIDERS:
+        for key in _keys(envb):
+            try:
+                body = json.dumps({"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": temperature}).encode()
+                req = urllib.request.Request(api_base + "/chat/completions", data=body,
+                    headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
+                resp = urllib.request.urlopen(req, timeout=45)
+                j = json.loads(resp.read())
+                return {"content": j["choices"][0]["message"]["content"], "provider": name}
+            except urllib.error.HTTPError as e:
+                last = f"{name} HTTP {e.code}"
+            except Exception as e:
+                last = f"{name} {e}"
+    raise RuntimeError("toți providerii au eșuat: " + last)
 
 V = "23"
 MAX_NEW = 14          # explainer-e noi generate pe rulare (restul vin din store)
@@ -113,7 +152,7 @@ def main():
             f"ȘTIRE — TITLU: {it['title']}\nREZUMAT: {it['desc']}\nSURSĂ: {it['src']}"
         )
         try:
-            r = chat([{"role": "user", "content": prompt}], tier="fast", json_mode=True, max_tokens=900, temperature=0.5)
+            r = chat([{"role": "user", "content": prompt}], max_tokens=900, temperature=0.5)
             c = r.get("content", "").strip(); m = re.search(r"\{.*\}", c, re.S)
             d = json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
             cat = d.get("categorie", "").strip()
