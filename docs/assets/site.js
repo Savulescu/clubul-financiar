@@ -255,7 +255,7 @@
       let vid = localStorage.getItem("cf-vid");
       if (!vid) { vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now())+"-"+Math.random().toString(36).slice(2)); localStorage.setItem("cf-vid", vid); }
       if (!sb) return;
-      sb.from("page_views").insert({ path: location.pathname, visitor: vid, referrer: document.referrer || null });
+      sb.from("page_views").insert({ path: location.pathname, visitor: vid, referrer: document.referrer || null }).then(function(){}, function(){});
     }catch(e){}
   })();
 })();
