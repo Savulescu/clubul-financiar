@@ -53,7 +53,7 @@
   const fill2 = new THREE.PointLight(0x36D67E, 34, 40); fill2.position.set(5, 1, 4); scene.add(fill2);
 
   const chart = new THREE.Group();
-  chart.position.set(1.0, -1.2, 0);
+  chart.position.set(0.3, -1.2, 0);
   chart.rotation.y = -0.32;
   scene.add(chart);
 
@@ -112,7 +112,7 @@
   const tipGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex(), transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
   tipGlow.scale.set(2.2, 2.2, 1); chart.add(tipGlow);
   const arrowMat = new THREE.MeshBasicMaterial({ color: 0x36D67E });
-  const arrow = new THREE.Mesh(new THREE.ConeGeometry(0.27, 0.62, 26), arrowMat);
+  const arrow = new THREE.Mesh(new THREE.ConeGeometry(0.19, 0.42, 24), arrowMat);
   chart.add(arrow);
 
   const composer = new EffectComposer(renderer);
@@ -132,12 +132,12 @@
     raf = requestAnimationFrame(loop);
     const t = (performance.now() - t0) / 1000;
     cx += (tx - cx) * 0.05; cy += (ty - cy) * 0.05;
-    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(0.3, 0.95, 0);
+    camera.position.x = -0.2 + cx * 1.4; camera.position.y = 2.4 - cy * 0.8; camera.lookAt(0.55, 0.95, 0);
     // barele cresc (staggered); ULTIMA e LIVE (oscilează sus-jos)
     bars.forEach((b, i) => {
       const g = ease(Math.min(1, Math.max(0, (t - i * 0.12) / 0.7)));
       if (i === LAST) {
-        const osc = Math.sin(t * 1.5) * 0.62 * Math.min(1, Math.max(0, (t - 1.4)));
+        const osc = Math.sin(t * 0.95) * 0.62 * Math.min(1, Math.max(0, (t - 1.4)));
         const hh = Math.max(0.06, b.userData.h * g + osc);
         b.scale.y = hh; b.position.y = hh / 2; b.userData.curH = hh;
       } else {
@@ -157,7 +157,7 @@
     dynSeg.geometry = new THREE.TubeGeometry(new THREE.LineCurve3(prevTop, movingTop), 1, 0.055, 12, false);
     dynMat.color.copy(dirCol);
     tip.position.copy(movingTop); tipGlow.position.copy(movingTop);
-    arrow.position.set(lastX, curH + 0.6, 0);
+    arrow.position.set(lastX, curH + 0.5, 0);
     arrow.rotation.x = rising ? 0 : Math.PI;
     arrowMat.color.copy(dirCol);
     chart.rotation.y = -0.35 + Math.sin(t * 0.25) * 0.06;
