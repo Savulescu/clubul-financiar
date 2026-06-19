@@ -50,8 +50,8 @@ CSS = '''<style>
 .test-cta{background:linear-gradient(135deg,color-mix(in srgb,var(--emerald) 12%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--emerald) 35%,var(--border));border-radius:16px;padding:22px;text-align:center;margin:26px 0}
 </style>'''
 
-def head(title, desc, canon):
-    return f'''<!DOCTYPE html><html lang="ro"><head>
+def head(title, desc, canon, ld=""):
+    return f'''<!DOCTYPE html><html lang="ro"><head>{ld}
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title><meta name="description" content="{esc(desc)}"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
 <link rel="canonical" href="{canon}"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -87,9 +87,19 @@ for i, dom in enumerate(ORDER):
     prevb = f'<a class="btn btn-ghost" href="/manual/{prev_dom}.html">← {esc(NAMES[prev_dom].split(" ",1)[1])}</a>' if prev_dom and prev_dom in cursuri else '<span></span>'
     nextb = f'<a class="btn btn-primary" href="/manual/{next_dom}.html">{esc(NAMES[next_dom].split(" ",1)[1])} →</a>' if next_dom and next_dom in cursuri else '<a class="btn btn-ghost" href="/educatie.html">Toate capitolele</a>'
     test_free = dom in FREE_DOMAINS
-    page = head(f'Capitolul {i+1}: {NAMES[dom].split(" ",1)[1]} — Manual — Clubul Financiar',
+    cname = NAMES[dom].split(" ",1)[1]; churl = f"https://clubulfinanciar.ro/manual/{dom}.html"
+    course = {"@context":"https://schema.org","@type":"Course","name":cname,"description":c["subtitle"],
+        "url":churl,"inLanguage":"ro-RO","isAccessibleForFree":True,"educationalLevel":"începător-avansat",
+        "provider":{"@type":"Organization","name":"Clubul Financiar","url":"https://clubulfinanciar.ro"},
+        "hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":f"PT{max(1,m['lectii'])*15}M"}}
+    bc = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Acasă","item":"https://clubulfinanciar.ro/"},
+        {"@type":"ListItem","position":2,"name":"Manual","item":"https://clubulfinanciar.ro/educatie.html"},
+        {"@type":"ListItem","position":3,"name":cname,"item":churl}]}
+    ld = f'<script type="application/ld+json">{json.dumps(course,ensure_ascii=False)}</script><script type="application/ld+json">{json.dumps(bc,ensure_ascii=False)}</script>'
+    page = head(f'Capitolul {i+1}: {cname} — Manual — Clubul Financiar',
                 f'{c["subtitle"]} {m["lectii"]} lecții + test cu {m["intrebari"]} întrebări.',
-                f'https://clubulfinanciar.ro/manual/{dom}.html')
+                f'https://clubulfinanciar.ro/manual/{dom}.html', ld=ld)
     page += f'''<section class="section"><div class="container" style="max-width:820px">
 <p class="meta" style="color:var(--muted);font-size:.88rem"><a href="/educatie.html">Manual</a> · Capitolul {i+1} din {len([d for d in ORDER if d in cursuri])}</p>
 <h1 class="title" style="margin:6px 0">{NAMES[dom]}</h1>
@@ -130,9 +140,10 @@ for i, dom in enumerate(ORDER):
     c=cursuri[dom]; m=manifest.get(dom,{"lectii":0,"intrebari":0})
     dslugs=json.dumps([l["slug"] for l in c["lessons"]])
     chapters += f'''<a class="chap-card" data-slugs='{dslugs}' href="/manual/{dom}.html"><span class="cn">Capitolul {i+1}</span><h3>{NAMES[dom]}</h3><p>{esc(c["subtitle"])}</p><div class="chap-meta">{m["lectii"]} lecții · {m["intrebari"]} întrebări</div><div class="cprog"><i></i></div></a>'''
+hubld = '<script type="application/ld+json">'+json.dumps({"@context":"https://schema.org","@type":"CollectionPage","name":"Manualul de educație financiară","description":"17 capitole pe domenii, în ordine, cu 500 de lecții și teste.","url":"https://clubulfinanciar.ro/educatie.html","inLanguage":"ro-RO","isPartOf":{"@type":"WebSite","name":"Clubul Financiar","url":"https://clubulfinanciar.ro"}},ensure_ascii=False)+'</script>'
 hub = head("Manualul de educație financiară — Clubul Financiar",
            "Manual complet de educație financiară RO: 17 capitole pe domenii, în ordine, cu 500 de lecții și teste. De la buget la independența financiară.",
-           "https://clubulfinanciar.ro/educatie.html")
+           "https://clubulfinanciar.ro/educatie.html", ld=hubld)
 hub += f'''<section class="section"><div class="container" style="max-width:880px">
 <div class="center" style="margin-bottom:8px"><p class="eyebrow">Manual · învață în ordine</p><h1 class="title">Manualul de educație financiară</h1><p class="lead" style="margin-inline:auto">Totul, organizat ca un manual: 17 capitole pe domenii, în ordine logică — de la primul buget la independența financiară. Fiecare capitol are lecții + test.</p></div>
 {chapters}

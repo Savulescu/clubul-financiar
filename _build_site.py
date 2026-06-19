@@ -229,7 +229,7 @@ CALC_PAGES = [u.lstrip("/") for _, _, u in CALCS]
 COURSE_PAGES = ["cursuri/" + os.path.basename(p) for p in glob.glob(os.path.join(ROOT, "cursuri", "*.html"))]
 urls = []
 def add(loc, pr="0.6"):
-    urls.append(f"<url><loc>https://clubulfinanciar.ro/{loc}</loc><changefreq>weekly</changefreq><priority>{pr}</priority></url>")
+    urls.append(f"<url><loc>https://clubulfinanciar.ro/{loc}</loc><lastmod>{BUILD_DATE}</lastmod><changefreq>weekly</changefreq><priority>{pr}</priority></url>")
 add("", "1.0")
 for p in PAGES[1:]: add(p, "0.8")
 for p in CALC_PAGES: add(p, "0.7")
