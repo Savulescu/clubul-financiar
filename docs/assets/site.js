@@ -11,14 +11,9 @@
 
   const NAV = [
     ["Începe aici", "/incepe-aici.html"],
-    ["Educație", "/educatie.html"],
-    ["Glosar", "/glosar.html"],
-    ["Știri", "/stiri.html"],
-    ["Investiții", "/investitii.html"],
-    ["Credite", "/credite.html"],
+    ["Învață", "/educatie.html"],
     ["Calculatoare", "/calculatoare.html"],
-    ["Cursuri", "/cursuri.html"],
-    ["Teste", "/teste.html"],
+    ["Știri", "/stiri.html"],
     ["Premium", "/premium.html"],
   ];
   const SOC = [

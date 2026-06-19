@@ -176,6 +176,9 @@
   function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
   // gate inițial (în caz că cf-auth a rulat deja)
   setTimeout(gate, 1200);
+  // auto-start dintr-un capitol (/teste.html?d=domeniu)
+  var autoD=new URLSearchParams(location.search).get("d");
+  if(autoD){ var iv=setInterval(function(){ if(Object.keys(manifest).length){ clearInterval(iv); setTimeout(function(){ start(autoD); },400); } },150); setTimeout(function(){clearInterval(iv);},6000); }
 })();
 </script>
 </body></html>

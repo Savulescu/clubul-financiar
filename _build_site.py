@@ -179,7 +179,8 @@ __FOOTER__<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@
 edu = (EDU_HEAD.replace("__V__", V).replace("__QUICKNAV__", quicknav)
        .replace("__SECTIONS__", "\n".join(sections)).replace("TOTAL", str(total))
        .replace("__NAV__", NAV_HTML).replace("__FOOTER__", FOOTER_HTML))
-open(os.path.join(ROOT, "educatie.html"), "w", encoding="utf-8").write(edu)
+# educatie.html e generat acum de _build_manual.py (Manualul); nu-l mai suprascriem aici
+# open(os.path.join(ROOT, "educatie.html"), "w", encoding="utf-8").write(edu)
 print("educatie.html rebuild OK")
 
 # ---------- 4. search-index.json (articole + glosar + calculatoare) ----------
