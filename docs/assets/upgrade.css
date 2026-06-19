@@ -654,6 +654,22 @@ html, body{ overflow-x: clip; }
 .article h2, .article h3{ scroll-margin-top: 80px; }
 .cat-h{ scroll-margin-top: 84px; }
 
+/* ===== gating Premium (afișează conținutul doar pentru abonați/admin) ===== */
+.cf-premium-only{ display:none; }
+body[data-cf-premium] .cf-premium-only{ display:block; }
+body[data-cf-premium] .cf-premium-lock{ display:none; }
+.cf-premium-lock{
+  max-width:640px; margin:30px auto; padding:34px 28px; text-align:center;
+  background:linear-gradient(180deg, color-mix(in srgb,var(--gold) 8%,var(--card)), var(--card));
+  border:1px solid color-mix(in srgb,var(--gold) 40%,var(--border)); border-radius:18px; box-shadow:var(--shadow-lg);
+}
+.cf-premium-lock .lock-ic{ font-size:2rem; }
+.cf-premium-lock h2{ font-size:1.5rem; margin:8px 0 6px; }
+.cf-premium-lock p{ color:var(--muted); margin:0 auto 18px; max-width:460px; }
+.cf-premium-lock .price-line{ color:var(--gold); font-weight:800; margin-bottom:14px; }
+.cf-premium-badge{ display:inline-block; background:var(--gold); color:#3a2c06; font-weight:800;
+  font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; padding:4px 12px; border-radius:999px; }
+
 /* navbar mobil: previne depășirea viewportului (cauza overflow-ului) */
 @media(max-width: 600px){
   .nav-in{ gap: 10px; }

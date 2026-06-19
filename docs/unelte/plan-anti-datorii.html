@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan Anti-Datorii — data exactă când scapi de datorii — Clubul Financiar</title>
+<meta name="description" content="Introdu-ți datoriile și află data exactă la care scapi de ele, câți lei plătești pe dobândă și cum economisești mii de lei cu metoda avalanșă vs bulgăre.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/unelte/plan-anti-datorii.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Plan Anti-Datorii — când scapi de datorii"><meta property="og:description" content="Data exactă la care scapi de datorii + câți lei economisești cu strategia corectă."><meta property="og:url" content="https://clubulfinanciar.ro/unelte/plan-anti-datorii.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Plan Anti-Datorii"><meta name="twitter:description" content="Data exactă la care scapi de datorii + câți lei economisești."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<style>
+.debt-row{display:grid;grid-template-columns:1.4fr .9fr .8fr .9fr auto;gap:8px;align-items:end;margin-bottom:10px}
+.debt-row .field{margin-bottom:0}
+.debt-row label{font-size:.74rem}
+.rm-btn{height:44px;width:42px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:#e25555;cursor:pointer;font-size:1.1rem}
+@media(max-width:680px){.debt-row{grid-template-columns:1fr 1fr;}.debt-row .rm-btn{grid-column:2;justify-self:end}}
+.strat{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+@media(max-width:680px){.strat{grid-template-columns:1fr}}
+.strat .card.win{border-color:var(--emerald);box-shadow:0 16px 40px rgba(16,185,129,.18)}
+.verdict-box{background:color-mix(in srgb,var(--emerald) 10%,var(--card));border:1px solid color-mix(in srgb,var(--emerald) 35%,var(--border));border-radius:14px;padding:18px 20px;margin-top:18px}
+.order-list{list-style:none;margin:10px 0 0;padding:0}.order-list li{padding:5px 0;border-bottom:1px solid var(--border);font-size:.9rem;display:flex;justify-content:space-between;gap:10px}
+</style></head><body>
+<section class="section"><div class="container">
+<div class="center" style="margin-bottom:8px">
+  <span class="cf-premium-badge">Premium</span>
+  <h1 class="title" style="margin-top:10px">Plan Anti-Datorii</h1>
+  <p class="lead" style="margin-inline:auto">Introdu-ți datoriile și află <strong>data exactă</strong> la care scapi de ele — plus câți lei economisești cu strategia corectă.</p>
+</div>
+
+<!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
+<div class="cf-premium-lock">
+  <div class="lock-ic">🔓</div>
+  <h2>Vezi data exactă a libertății tale financiare</h2>
+  <p>Adaugă-ți datoriile (carduri, credite, rate) și planul îți arată <strong>ziua în care scapi de toate</strong>, cât plătești pe dobândă și cum economisești <strong>mii de lei</strong> alegând ordinea corectă de plată (avalanșă vs bulgăre).</p>
+  <p class="price-line">Inclus în Premium — 49 lei/lună</p>
+  <a class="btn btn-primary" href="/premium.html">Vezi ce conține Premium</a>
+  <p style="margin-top:14px;font-size:.85rem;color:var(--muted)">Ai deja cont Premium? <a href="/login.html" style="color:var(--emerald-link)">Conectează-te</a>.</p>
+</div>
+
+<!-- pentru cei CU premium: instrumentul -->
+<div class="cf-premium-only">
+<div class="calc">
+  <div class="panel">
+    <h3 style="margin-bottom:12px">Datoriile tale</h3>
+    <div id="debts"></div>
+    <button class="btn btn-ghost" id="addDebt" style="width:100%;justify-content:center;margin:6px 0 16px">+ Adaugă o datorie</button>
+    <div class="field"><label>Cât poți pune în plus pe lună, peste ratele minime (lei)</label><input type="number" id="extra" value="500" min="0" step="50"></div>
+    <button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center">Calculează planul</button>
+    <p style="color:var(--muted);font-size:.82rem;margin-top:10px">Avalanșă = ataci prima datoria cu dobânda cea mai mare (economisești cei mai mulți bani). Bulgăre = ataci prima datoria cea mai mică (te motivează cu victorii rapide).</p>
+  </div>
+  <div class="panel" id="out"><p style="color:var(--muted)">Completează datoriile și apasă „Calculează planul".</p></div>
+</div>
+<div class="disc">⚠️ Estimare educativă. Presupune dobânzi și plăți constante; nu include comisioane sau penalități. Verifică termenii exacți în contractele tale. Nu reprezintă consultanță financiară.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie.html#datorii">← Articole despre datorii</a></p>
+</div>
+</div></section>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+  const RO_LUNI=["ian.","feb.","mar.","apr.","mai","iun.","iul.","aug.","sep.","oct.","nov.","dec."];
+  const debtsEl=$("debts");
+  const sample=[["Card de credit",8000,28,400],["Credit nevoi personale",25000,14,650],["Rate telefon",3000,0,300]];
+  function row(d){
+    const w=document.createElement("div");w.className="debt-row";
+    w.innerHTML=`<div class="field"><label>Datorie</label><input type="text" class="d-name" value="${d?d[0]:""}" placeholder="ex: Card"></div>
+      <div class="field"><label>Sold rămas (lei)</label><input type="number" class="d-bal" value="${d?d[1]:""}" min="0" step="100"></div>
+      <div class="field"><label>Dobândă % / an</label><input type="number" class="d-apr" value="${d?d[2]:""}" min="0" step="0.1"></div>
+      <div class="field"><label>Rată minimă/lună</label><input type="number" class="d-min" value="${d?d[3]:""}" min="0" step="10"></div>
+      <button class="rm-btn" title="Șterge">✕</button>`;
+    w.querySelector(".rm-btn").onclick=()=>w.remove();
+    debtsEl.appendChild(w);
+  }
+  sample.forEach(row);
+  $("addDebt").onclick=()=>row(null);
+
+  function readDebts(){
+    const out=[];
+    debtsEl.querySelectorAll(".debt-row").forEach(r=>{
+      const bal=+r.querySelector(".d-bal").value, apr=+r.querySelector(".d-apr").value, min=+r.querySelector(".d-min").value;
+      const name=r.querySelector(".d-name").value||"Datorie";
+      if(isFinite(bal)&&bal>0) out.push({name,bal,apr:isFinite(apr)?apr:0,min:isFinite(min)?Math.max(0,min):0});
+    });
+    return out;
+  }
+  // simulare lună-cu-lună; order: 'aval' (dobândă desc) sau 'snow' (sold asc)
+  function simulate(debts,extra,order){
+    let d=debts.map(x=>({...x}));
+    const poolBase=extra+d.reduce((s,x)=>s+x.min,0);
+    let months=0,totalInterest=0,paidOffOrder=[];const MAX=1200;
+    const seen=new Set();
+    while(d.some(x=>x.bal>0.01)&&months<MAX){
+      months++;
+      for(const x of d){ if(x.bal>0){ const i=x.bal*(x.apr/100/12); x.bal+=i; totalInterest+=i; } }
+      let pool=poolBase;
+      // plătește minimele întâi (realist)
+      for(const x of d){ if(x.bal>0){ const p=Math.min(x.min,x.bal,pool); x.bal-=p; pool-=p; } }
+      // restul către ținta după strategie
+      let active=d.filter(x=>x.bal>0.01).sort(order==="aval"?(a,b)=>b.apr-a.apr:(a,b)=>a.bal-b.bal);
+      for(const x of active){ if(pool<=0)break; const p=Math.min(pool,x.bal); x.bal-=p; pool-=p; }
+      for(const x of d){ if(x.bal<=0.01 && !seen.has(x.name)){ seen.add(x.name); paidOffOrder.push({name:x.name,month:months}); } }
+    }
+    return {months,totalInterest:Math.round(totalInterest),paidOffOrder,stuck:months>=MAX};
+  }
+  function payoffDate(m){ const dt=new Date(); dt.setMonth(dt.getMonth()+m); return RO_LUNI[dt.getMonth()]+" "+dt.getFullYear(); }
+  function dur(m){ const y=Math.floor(m/12),mo=m%12; return (y?y+(y===1?" an ":" ani "):"")+(mo?mo+" luni":(y?"":"0 luni")); }
+
+  function calc(){
+    const debts=readDebts(), extra=Math.max(0,+$("extra").value||0);
+    if(!debts.length){ $("out").innerHTML=`<p style="color:var(--muted)">Adaugă cel puțin o datorie cu sold și rată minimă.</p>`; return; }
+    const totalMin=debts.reduce((s,x)=>s+x.min,0);
+    // verifică dacă pool acoperă dobânda (altfel nu se închide)
+    const a=simulate(debts,extra,"aval"), s=simulate(debts,extra,"snow");
+    if(a.stuck){ $("out").innerHTML=`<p style="color:#e25555;font-weight:700">Cu suma actuală nu reușești să acoperi dobânzile — datoria nu scade. Mărește rata minimă sau suma extra lunară.</p>`; return; }
+    const win = a.totalInterest<=s.totalInterest ? "aval":"snow";
+    const saveLei=Math.abs(a.totalInterest-s.totalInterest);
+    const card=(o,label,desc,isWin)=>`<div class="card ${isWin?'win':''}">
+      <p class="eyebrow" style="margin-bottom:4px">${label}${isWin?' · recomandat':''}</p>
+      <p style="color:var(--muted);font-size:.85rem;margin:0 0 8px">${desc}</p>
+      <p style="color:var(--muted);font-size:.85rem">Scapi de toate datoriile în</p>
+      <div class="result-big" style="font-size:1.9rem">${payoffDate(o.months)}</div>
+      <p style="color:var(--muted);font-size:.85rem">adică ${dur(o.months)}</p>
+      <div class="result-row"><span>Dobândă totală plătită</span><b>${lei(o.totalInterest)}</b></div>
+      <ol class="order-list">${o.paidOffOrder.map((p,i)=>`<li><span>${i+1}. ${p.name}</span><span style="color:var(--muted)">${payoffDate(p.month)}</span></li>`).join("")}</ol>
+    </div>`;
+    $("out").innerHTML=`
+      <p style="color:var(--muted)">Plătești în total <b>${lei(totalMin+extra)}/lună</b> (${lei(totalMin)} rate minime + ${lei(extra)} extra).</p>
+      <div class="strat">
+        ${card(a,"Avalanșă","Ataci prima dobânda cea mai mare",win==="aval")}
+        ${card(s,"Bulgăre","Ataci prima datoria cea mai mică",win==="snow")}
+      </div>
+      <div class="verdict-box">
+        ${saveLei>50
+          ? `Cu metoda <b>${win==="aval"?"Avalanșă":"Bulgăre"}</b> economisești <b style="color:var(--emerald)">${lei(saveLei)}</b> la dobândă${a.months!==s.months?` și termini cu <b>${Math.abs(a.months-s.months)} luni</b> diferență`:""}. ${win==="aval"?"Dacă ai nevoie de motivație, Bulgăre îți dă victorii mai rapide (prima datoare dispare mai devreme), dar costă ceva mai mult.":""}`
+          : `Ambele strategii ajung la aproape același rezultat în cazul tău. Alege Bulgărele dacă vrei victorii rapide pentru motivație.`}
+      </div>`;
+  }
+  $("calcBtn").addEventListener("click",calc);
+  debtsEl.addEventListener("input",()=>{ if($("out").querySelector(".strat")) calc(); });
+  $("extra").addEventListener("input",()=>{ if($("out").querySelector(".strat")) calc(); });
+  calc();
+})();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/site.js?v=23"></script>
+</body></html>
