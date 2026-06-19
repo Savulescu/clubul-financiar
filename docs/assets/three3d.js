@@ -47,10 +47,9 @@
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromEquirectangular(envTexture()).texture;
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
-  const key = new THREE.DirectionalLight(0xfff0d6, 1.0); key.position.set(3, 8, 6); scene.add(key);
-  const fill = new THREE.PointLight(0xE8C268, 42, 40); fill.position.set(-4, 3, 4); scene.add(fill);
-  const fill2 = new THREE.PointLight(0x36D67E, 34, 40); fill2.position.set(5, 1, 4); scene.add(fill2);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const key = new THREE.DirectionalLight(0xfff0d6, 1.35); key.position.set(3, 8, 6); scene.add(key);
+  const key2 = new THREE.DirectionalLight(0xbfe6ff, 0.5); key2.position.set(-5, 4, 3); scene.add(key2);
 
   const chart = new THREE.Group();
   chart.position.set(0.3, -1.2, 0);
@@ -73,7 +72,7 @@
     const col = cE.clone().lerp(cG, i / (heights.length - 1));
     const m = new THREE.Mesh(
       new THREE.BoxGeometry(bw, 1, bw),
-      new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.18, metalness: 0.6, roughness: 0.26, envMapIntensity: 1.1 })
+      new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.16, metalness: 0.35, roughness: 0.42, envMapIntensity: 0.85 })
     );
     const x = i * gap;
     m.position.set(x, 0.0005, 0);
