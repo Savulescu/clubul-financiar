@@ -1,0 +1,127 @@
+<p>Dacă vrei să înțelegi <strong>cum calculez inflația personală efectivă</strong> și de ce cifra ta reală e aproape mereu diferită de procentul anunțat de BNR, ești exact unde trebuie. Inflația ca indicator pentru consumatorul individual nu e un număr unic, ci o medie statistică pe un „coș" care nu seamănă cu al tău. Întrebarea corectă nu e „cât e inflația", ci „care e rata inflației reale pentru mine" — adică pentru omul care cumpără <em>exact</em> ce cumperi tu, în proporțiile tale.</p>
+
+<p>În 2026, BNR și INS comunică o inflație anuală în jur de <strong>6%</strong>. Dar dacă în bugetul tău mâncarea cântărește mult mai mult decât în media națională, iar prețurile la alimente cresc cu 8%, gazul cu 12%, în timp ce hainele intră în deflație (-2%), rata ta personală poate ajunge la <strong>7,5%</strong>. Aceasta este diferența dintre cifra oficială și cum afectează inflația banii tăi, concret, lună de lună. Iar diferența nu e cosmetică: dacă dobânda la economiile tale e 4%, iar inflația ta personală e 7,5%, pierzi <strong>3,5% putere de cumpărare anual</strong>, fără să muți un deget.</p>
+
+<p>În această lecție construim împreună un indice de preț pe categorie de cheltuieli pentru România, o foaie de calcul cu ponderile tale reale și un sistem de monitorizare a inflației personale care îți arată impactul real al inflației asupra economiilor. La final vei avea un template Excel funcțional și o regulă clară despre cât să transferi din depozite în investiții ca să nu pierzi teren. Asta înseamnă, în practică, să calculezi inflația ca un consumator individual, nu ca un comunicat de presă.</p>
+
+<h2>De ce cifra oficială nu e cifra ta</h2>
+
+<p>Indicele Prețurilor de Consum (IPC) publicat lunar de Institutul Național de Statistică (INS) măsoară creșterea prețurilor pentru un „coș" mediu de bunuri și servicii, ponderat după cum cheltuiește <em>gospodăria medie</em> din România. Problema e simplă: tu nu ești gospodăria medie.</p>
+
+<p>Coșul IPC are aproximativ aceste ponderi mari (structură 2025-2026, rotunjită):</p>
+
+<ul>
+<li><strong>Alimente și băuturi nealcoolice:</strong> ~30%</li>
+<li><strong>Locuință, utilități (gaz, energie, apă, întreținere):</strong> ~17%</li>
+<li><strong>Transport (carburant, transport public, auto):</strong> ~13%</li>
+<li><strong>Mărfuri nealimentare diverse (îmbrăcăminte, electronice, igienă):</strong> ~restul</li>
+<li><strong>Servicii (telecom, sănătate, educație, HoReCa):</strong> ~restul</li>
+</ul>
+
+<p>Dacă ești un tânăr din București care plătește chirie, mănâncă des în oraș și nu are mașină, structura ta nu are nimic de-a face cu media. Dacă ești o familie cu doi copii la casă, cu mașină pe motorină și factură mare la gaz, ești expus altor riscuri. <strong>Aceeași inflație oficială de 6% poate însemna 5% pentru unul și 8,5% pentru altul.</strong> De aici pleacă orice calcul serios al inflației ca indice de preț pe categorie.</p>
+
+<h2>Formula: cum se calculează rata personală</h2>
+
+<p>Matematica e o medie ponderată. Pentru fiecare categorie de cheltuială ai două numere: <strong>ponderea ei în bugetul tău</strong> (cât % din banii lunari merg acolo) și <strong>rata de inflație a acelei categorii</strong> (din datele INS). Formula este:</p>
+
+<p><strong>Inflație personală = Σ (ponderea categoriei × inflația categoriei)</strong></p>
+
+<p>Hai să o vedem cu numere reale. Presupunem un buget lunar de cheltuieli de <strong>6.000 lei</strong> și aceste ponderi personale:</p>
+
+<ul>
+<li><strong>Alimente:</strong> 2.400 lei → pondere 40% × inflație 8% = 3,20%</li>
+<li><strong>Utilități (gaz/energie):</strong> 900 lei → pondere 15% × inflație 12% = 1,80%</li>
+<li><strong>Transport (carburant):</strong> 600 lei → pondere 10% × inflație 7% = 0,70%</li>
+<li><strong>Chirie/întreținere:</strong> 1.200 lei → pondere 20% × inflație 6% = 1,20%</li>
+<li><strong>Îmbrăcăminte:</strong> 300 lei → pondere 5% × inflație -2% = -0,10%</li>
+<li><strong>Servicii/telecom/HoReCa:</strong> 600 lei → pondere 10% × inflație 6,5% = 0,65%</li>
+</ul>
+
+<p>Adunăm contribuțiile: 3,20 + 1,80 + 0,70 + 1,20 − 0,10 + 0,65 = <strong>7,45%</strong>. Inflația ta personală efectivă este 7,45%, nu 6%. Diferența de 1,45 puncte procentuale pare mică, dar pe un capital de 50.000 lei înseamnă <strong>725 lei pierdere reală în plus pe an</strong>, invizibilă în comunicatul oficial.</p>
+
+<p>Observă efectul deflației la îmbrăcăminte: prețurile care scad îți <em>reduc</em> rata, dar numai proporțional cu cât cheltui acolo. 5% din buget la -2% îți taie doar 0,10 puncte — nu te salvează de alimentele care urcă 8% pe 40% din buget.</p>
+
+<h2>De unde iei datele oficiale pe subcategorii</h2>
+
+<p>Aici e cheia care transformă exercițiul din „estimare la ochi" în calcul riguros. INS publică IPC nu doar global, ci <strong>defalcat pe sute de poziții</strong> (de la „pâine" la „energie electrică" la „servicii de telefonie"). Sursele tale, gratuite:</p>
+
+<ul>
+<li><strong>INS — comunicatul lunar IPC:</strong> apare în jurul datei de 10-12 a fiecărei luni, pentru luna precedentă. Conține tabele cu indicii pe mărfuri alimentare, nealimentare și servicii.</li>
+<li><strong>Baza de date statistică INS (Tempo Online):</strong> seria IPC100A îți dă indicii pe grupe și subgrupe, de unde extragi exact subcategoriile tale (gaze naturale, energie electrică, combustibili, carne, lactate etc.).</li>
+<li><strong>BNR — Raportul asupra inflației:</strong> trimestrial, util pentru a înțelege <em>direcția</em> (unde se duce gazul, alimentele, serviciile în lunile următoare).</li>
+</ul>
+
+<p>Practic, deschizi Tempo Online, selectezi subgrupele care contează pentru tine, descarci indicii anuali (luna curentă vs aceeași lună an anterior) și îi lipești în coloana „inflație categorie" din foaia ta. Atât. Nu inventezi numere — folosești indicele de preț pe categorie din România, oficial.</p>
+
+<p>Un detaliu tehnic care îți economisește erori: INS publică doi indici diferiți și e ușor să-i confunzi. <strong>Indicele lunar</strong> compară luna curentă cu luna anterioară (ex: mai vs aprilie) — util pentru a vedea șocuri punctuale. <strong>Indicele anual</strong> compară luna curentă cu aceeași lună din anul trecut (ex: mai 2026 vs mai 2025) — acesta e cel care corespunde noțiunii uzuale de „rata inflației" și pe care îl folosești în foaia ta. Dacă pui un indice lunar lângă unul anual în aceeași coloană, rezultatul tău nu va însemna nimic. Regula: <strong>toată coloana D pe bază anuală, fără excepție.</strong></p>
+
+<p>Dacă vrei și mai multă precizie pentru o subgrupă volatilă (carburanți, energie), poți completa datele INS cu surse de piață: prețul la pompă publicat de ANRE/distribuitori sau tarifele reglementate la energie. Dar pentru 95% dintre oameni, indicii INS pe subgrupe sunt suficient de granulari ca să obții o rată a inflației reală pentru tine, credibilă și ușor de apărat.</p>
+
+<h2>Cum construiești foaia de calcul (template Excel)</h2>
+
+<p>Template-ul are cinci coloane și se reface în 15 minute. Iată structura exactă, ca să o reconstruiești în Excel sau Google Sheets:</p>
+
+<ul>
+<li><strong>Coloana A — Categorie:</strong> alimente, utilități, transport, chirie, îmbrăcăminte, servicii, sănătate, divertisment etc. (folosește categoriile din extrasul tău de card real, nu generice).</li>
+<li><strong>Coloana B — Sumă lunară (lei):</strong> media ultimelor 3-6 luni, din extrasul bancar. Aici e cel mai important pas — ponderile tale reale ies din cheltuieli reale, nu din ce crezi că cheltui.</li>
+<li><strong>Coloana C — Pondere (%):</strong> formula <code>=B2/SUMA(B:B)</code>. Excelul calculează automat cât % reprezintă fiecare categorie.</li>
+<li><strong>Coloana D — Inflație categorie (%):</strong> indicele din INS/Tempo pentru subcategoria respectivă.</li>
+<li><strong>Coloana E — Contribuție:</strong> formula <code>=C2*D2</code>.</li>
+</ul>
+
+<p>Sub tabel pui o celulă <strong>Inflație personală = SUM(coloana E)</strong>. Asta e cifra ta. Adaugă o a doua celulă: <strong>Pierdere putere de cumpărare = Inflație personală − dobânda netă la economii</strong>. Dacă ai depozit la 4% (și ții cont că dobânda la depozite e impozitată cu 10% impozit pe venit, deci net ~3,6%), iar inflația personală e 7,45%, pierderea reală e <strong>7,45% − 3,6% = 3,85% pe an</strong>.</p>
+
+<h2>Cum se schimbă din lună în lună</h2>
+
+<p>Inflația personală nu e statică — se mișcă din două motive, și trebuie să le separi:</p>
+
+<ul>
+<li><strong>Se schimbă prețurile</strong> (coloana D): gazul urcă iarna, carburantul oscilează cu petrolul, alimentele au sezonalitate (legumele vara mai ieftine). De aceea actualizezi coloana D lunar, când iese comunicatul INS.</li>
+<li><strong>Se schimbă comportamentul tău</strong> (coloana B): iarna plătești mai mult la încălzire, deci ponderea utilităților crește și inflația de 12% pe gaz te lovește mai tare. Vara, transportul/vacanțele urcă.</li>
+</ul>
+
+<p>Recomandarea practică: <strong>reactualizează coloana B trimestrial</strong> (din extrase) și <strong>coloana D lunar</strong> (din INS). Ține un grafic simplu cu inflația ta personală pe 12 luni. Vei observa că, de regulă, e sistematic mai mare decât cea oficială dacă ai pondere mare la alimente și utilități — exact grupele care au crescut cel mai abrupt în România ultimilor ani. Aceasta e monitorizarea inflației la nivel personal, făcută corect.</p>
+
+<h2>Impactul real asupra economiilor și cât transferi în investiții</h2>
+
+<p>Aici exercițiul devine decizie financiară. Banii ținuți „la siguranță" în cont curent (dobândă ~0%) sau în depozit la 4% pierd putere de cumpărare în fiecare an în care inflația ta personală e mai mare. Pe sume concrete:</p>
+
+<ul>
+<li><strong>50.000 lei în cont curent (0%) la inflație personală 7,45%:</strong> peste un an valorează, în putere de cumpărare, cât 46.275 lei azi. Ai „pierdut" 3.725 lei fără să cheltui nimic.</li>
+<li><strong>50.000 lei în depozit la 4% net 3,6%:</strong> pierderea reală e 3,85%, adică ~1.925 lei pe an.</li>
+<li><strong>Aceiași bani la un randament de 8% (peste inflația ta):</strong> câștigi 0,55% real, adică +275 lei putere de cumpărare.</li>
+</ul>
+
+<p>Regula de alocare derivată din asta: <strong>păstrează în cash/depozit doar fondul de urgență</strong> (3-6 luni de cheltuieli — în exemplul nostru, 18.000-36.000 lei), pentru care lichiditatea contează mai mult decât randamentul. <strong>Restul, care altfel se erodează garantat, are nevoie de un randament cel puțin egal cu inflația ta personală</strong>, nu cu cea oficială.</p>
+
+<p>În România 2026, instrumentele uzuale pentru a depăși o inflație personală de ~7-8%: titlurile de stat <strong>Fidelis/Tezaur</strong> (dobânzi care în emisiunile recente au atins 7-8%, cu avantajul scutirii de impozit pe dobândă la Fidelis), ETF-uri globale de acțiuni accesibile prin brokeri (randament mediu istoric peste inflație, dar cu volatilitate și orizont 5+ ani), sau o combinație. Ideea-cheie: <strong>numărul-țintă de bătut nu e 6%, e rata ta personală</strong>. Dacă investiția ta randează 6% iar inflația ta e 7,5%, tot pierzi.</p>
+
+<p>Există și un efect subtil pe care monitorizarea inflației personale ți-l scoate la suprafață: <strong>cu cât ai pondere mai mare pe categoriile care urcă rapid, cu atât ținta ta de randament e mai sus și cu atât mai puțin îți permiți să stai în cash.</strong> Un pensionar cu 50% din buget pe medicamente și utilități are o inflație personală structural mai mare decât un tânăr cu cheltuieli pe electronice și haine (categorii cu prețuri mai stabile sau în scădere). De aceea aceeași dobândă la depozit „protejează" diferit doi oameni diferiți — și de aceea decizia de alocare nu poate fi copiată de la altcineva, ci trebuie derivată din coșul tău.</p>
+
+<p>Un test simplu de sanitate: ia <strong>diferența dintre inflația ta personală și randamentul net</strong> și înmulțeșt-o cu suma pe care o ții „degeaba" în cash peste fondul de urgență. Dacă numărul te deranjează — și de obicei te deranjează — ai răspunsul la întrebarea cât transferi în investiții. În exemplul nostru, 3,85% × (50.000 − 30.000 fond de urgență) = <strong>770 lei pe an pierduți</strong> doar din inerția de a lăsa banii în depozit.</p>
+
+<h2>Capcane și greșeli frecvente</h2>
+
+<ul>
+<li><strong>Folosești ponderi „din cap", nu din extras:</strong> aproape toți subestimează cât dau pe mâncare livrată și abonamente. Ia cifrele reale din bancă.</li>
+<li><strong>Ignori categoriile rare dar grele:</strong> reparația mașinii, dentistul, asigurările — apar o dată pe an dar distorsionează. Mediază-le pe 12 luni.</li>
+<li><strong>Compari dobânda brută cu inflația:</strong> dobânda la depozite e impozitată 10%. Folosește mereu randamentul <em>net</em> în comparație.</li>
+<li><strong>Confunzi inflația anuală cu cea lunară:</strong> indicii INS pe care îi iei trebuie să fie pe aceeași bază (an/an), altfel aduni mere cu pere.</li>
+<li><strong>Crezi că deflația la electronice te salvează:</strong> cântărește puțin în buget; nu compensează alimentele și utilitățile.</li>
+<li><strong>Reacționezi emoțional la o singură lună:</strong> o lună cu spike la gaz nu e trend. Urmărește media pe 3-12 luni înainte să muți bani.</li>
+</ul>
+
+<h2>Checklist de acțiune</h2>
+
+<ul>
+<li><strong>1.</strong> Descarcă extrasele bancare pe ultimele 6 luni și grupează cheltuielile pe 6-10 categorii reale.</li>
+<li><strong>2.</strong> Construiește foaia cu cele 5 coloane (categorie, sumă, pondere, inflație, contribuție).</li>
+<li><strong>3.</strong> Intră pe Tempo Online (INS) și extrage indicii anuali pe subcategoriile tale.</li>
+<li><strong>4.</strong> Calculează inflația ta personală = SUM(contribuții).</li>
+<li><strong>5.</strong> Scade randamentul net al economiilor tale → afli pierderea reală de putere de cumpărare.</li>
+<li><strong>6.</strong> Izolează fondul de urgență (3-6 luni); restul, alocă-l către instrumente cu randament peste rata ta personală.</li>
+<li><strong>7.</strong> Actualizează coloana D lunar (comunicat INS) și coloana B trimestrial (extrase).</li>
+<li><strong>8.</strong> Ține graficul pe 12 luni și reia decizia de alocare ori de câte ori diferența inflație-randament depășește 1-2 puncte.</li>
+</ul>
+
+<p>Concluzia care contează: inflația oficială e un termometru pentru toată țara, nu pentru bugetul tău. Singurul număr care îți spune cât pierzi cu adevărat e cel pe care îl calculezi tu, cu ponderile tale, din date oficiale. Odată ce ai cifra, decizia „cât țin în depozit și cât investesc" încetează să fie o presupunere și devine un calcul.</p>

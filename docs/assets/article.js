@@ -29,7 +29,7 @@
     const gate = document.createElement("div"); gate.className = "premium-gate";
     gate.innerHTML = '<div class="pg-fade"></div><div class="pg-card"><span class="cf-premium-badge">Premium</span><h2>Restul lecției e în Premium</h2>' +
       (heads.length ? '<p style="color:var(--muted)">Ce mai afli în această lecție:</p><ul class="pg-list">' + heads.slice(0, 6).map(h => '<li>' + esc(h) + '</li>').join("") + '</ul>' : '<p style="color:var(--muted)">Deblochează lecția completă + toate cele 500 + teste.</p>') +
-      '<p class="price-line">Toate cele 500 de lecții + teste + instrumente — 49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login.html" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
+      '<p class="price-line">Toate cele 700 de lecții + teste + instrumente — 49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login.html" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
     disc.parentNode.insertBefore(gate, disc);
     disc.parentNode.insertBefore(rest, disc);
     art.classList.add("cf-locked");

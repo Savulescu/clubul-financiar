@@ -1,0 +1,130 @@
+<p><strong>NFC skimming card contactless</strong> este metoda prin care un criminal echipat cu un simplu cititor NFC îți poate citi datele cardului direct prin geantă sau buzunar, fără să te atingă și fără să-ți ceară vreodată codul PIN. Întrebarea „cum fură oamenii cardul contactless" nu mai este teorie: în 2026, telefonul pe care îl ții în buzunar poate fi transformat, cu o aplicație gratuită, într-un dispozitiv care citește numărul cardului și data expirării de la câțiva centimetri distanță. De aici și până la plăți neautorizate din apropiere sau la un card furat din buzunar care face plăți contactless e un pas mic.</p>
+
+<p>Vestea bună e că nu ești neajutorat. Protecția RFID a cardului de credit, husa protectoare card RFID, modul în care detectezi furtul de date de pe card și pașii prin care dezactivezi contactless-ul sunt instrumente concrete, ieftine sau gratuite, pe care le poți aplica chiar azi. În plus, legislația din România îți oferă un nivel real de protecție pe care majoritatea oamenilor nu îl folosesc, pentru că nu îl cunosc.</p>
+
+<p>În această lecție îți explic exact cum funcționează aceste atacuri din punct de vedere tehnic (fără mituri), care e riscul tău real în lei, ce poți și ce nu poți pierde, și apoi îți dau un protocol de protecție pas cu pas, plus ce să faci în primele minute dacă bănuiești că ai fost vizat.</p>
+
+<h2>Cum funcționează, de fapt, NFC skimming-ul</h2>
+
+<p>Cardul tău contactless conține un cip cu antenă (tehnologia se numește generic RFID, iar varianta folosită la plăți este NFC — Near Field Communication, care lucrează pe frecvența de 13,56 MHz). Când apropii cardul de un POS, terminalul „trezește" cipul printr-un câmp electromagnetic și cardul răspunde cu anumite date. Distanța oficială de funcționare e de 2-4 cm, dar cu o antenă mai mare un atacator o poate extinde la 10-30 cm — suficient cât să citească un card aflat în buzunarul din spate sau într-o geantă în metrou.</p>
+
+<p>Important să înțelegi <strong>ce poate</strong> și <strong>ce nu poate</strong> citi un astfel de dispozitiv, pentru că aici se nasc cele mai multe panici și cele mai multe mituri:</p>
+
+<ul>
+<li><strong>Poate citi:</strong> numărul cardului (PAN-ul, cele 16 cifre) și data expirării. Acestea sunt transmise „în clar" de majoritatea cardurilor la o citire EMV contactless.</li>
+<li><strong>NU poate citi:</strong> codul CVV de pe spate (cele 3 cifre). Acesta NU este stocat în cip și nu se transmite la o citire contactless.</li>
+<li><strong>NU poate citi:</strong> codul PIN. PIN-ul nu există în cip sub o formă care să poată fi extrasă — e verificat criptografic, nu „citit".</li>
+<li><strong>NU poate clona un card funcțional pentru POS.</strong> Fiecare tranzacție contactless reală generează un criptogramă unică (cu o cheie secretă care NU părăsește niciodată cipul). Un atacator nu poate copia cipul ca să plătească la magazin.</li>
+</ul>
+
+<p>De aceea, titlul senzaționalist „îți clonează cardul în 2 minute și plătește la POS fără PIN" este, tehnic, fals pentru cardurile EMV moderne. Riscul real nu e clonarea fizică, ci <strong>folosirea online a datelor citite</strong> — exact acolo unde nu e nevoie de cip, ci doar de număr + dată + (uneori) CVV.</p>
+
+<h2>Riscul tău real, în lei: unde te doare cu adevărat</h2>
+
+<h3>1. Plăți online fără 3-D Secure</h3>
+
+<p>Cu numărul cardului și data expirării, un atacator poate încerca plăți pe site-uri internaționale care NU cer CVV și NU cer autentificare 3-D Secure (parola/SMS/aplicația băncii). Acești comercianți există încă, mai ales în afara UE. Aici e marele pericol al datelor citite prin NFC.</p>
+
+<p>Din fericire, în UE, <strong>Directiva PSD2 impune Autentificarea Strictă a Clientului (SCA)</strong> pentru majoritatea plăților online din 2021. În practică, asta înseamnă că orice plată online la un comerciant din SEE îți cere confirmare prin aplicația băncii sau cod SMS. O plată neautorizată din apropiere convertită în plată online va fi, în marea majoritate a cazurilor, blocată la pasul 3-D Secure. Slăbiciunea rămâne la comercianții din afara SEE care nu aplică SCA.</p>
+
+<h3>2. Plăți contactless cu cardul furat fizic (fără PIN, sub prag)</h3>
+
+<p>Aici e scenariul „card furat din buzunar, plăți contactless" — și e mai real decât skimming-ul. În România, <strong>pragul standard pentru plata contactless fără PIN este de 100 lei</strong> per tranzacție (aliniat la limita europeană de aproximativ 50 EUR). Dacă cineva îți fură fizic cardul, poate face plăți repetate sub 100 lei fără să introducă PIN-ul.</p>
+
+<p>Există însă o a doua limită, de cumul: regulile EMV impun ca, după un cumul de aproximativ <strong>300 EUR (în jur de 1.500 lei)</strong> sau după un anumit număr de tranzacții contactless consecutive fără PIN, terminalul SĂ ceară obligatoriu PIN-ul. Deci hoțul nu poate „goli" cardul la nesfârșit cu plăți contactless — sistemul forțează verificarea PIN-ului după pragul cumulat.</p>
+
+<p>Exemplu numeric concret: un card furat la care hoțul face plăți de 90 lei, 95 lei, 80 lei la diferite magazine. După ce cumulul depășește ~1.500 lei (adică în jur de 16-17 tranzacții), următorul POS îi va cere PIN-ul și schema se oprește. Pierderea maximă realistă într-o astfel de fereastră, înainte să blochezi cardul, e de ordinul a <strong>1.000-1.500 lei</strong> — nu „toate economiile".</p>
+
+<h3>3. Combinarea cu phishing</h3>
+
+<p>Cel mai periculos scenariu nu e NFC-ul singur, ci NFC + phishing. Atacatorul citește numărul cardului prin NFC, apoi îți trimite un SMS „de la bancă" cerând confirmarea unei tranzacții. Dacă tu introduci codul 3-D Secure pe un site fals, ai dat tu însuți autorizarea. Aici, NFC-ul a fost doar primul pas, iar greșeala fatală a fost umană.</p>
+
+<h2>Cât pierzi, de fapt: cine suportă paguba</h2>
+
+<p>Acesta e capitolul pe care aproape nimeni nu îl știe și care schimbă complet calculul fricii. Conform <strong>OUG 113/2009 și Directivei PSD2</strong>, în cazul unei plăți neautorizate (tranzacție pe care nu ai autorizat-o tu):</p>
+
+<ul>
+<li><strong>Răspunderea ta maximă este de 50 EUR</strong> (aproximativ 250 lei) pentru tranzacții neautorizate apărute înainte de a notifica banca, dacă paguba a rezultat din pierderea/furtul cardului.</li>
+<li><strong>După ce ai notificat banca</strong> (blocarea cardului), răspunderea ta scade la ZERO — orice tranzacție ulterioară e suportată integral de bancă.</li>
+<li><strong>Dacă banca nu a aplicat autentificarea strictă (SCA)</strong> acolo unde era obligatorie, răspunderea ta poate fi ZERO chiar și pentru pierderea de dinainte de notificare.</li>
+<li><strong>Excepție gravă:</strong> dacă ai acționat fraudulos sau cu neglijență gravă (de exemplu ți-ai notat PIN-ul pe card, sau ai dat tu codul 3-D Secure pe un site fals), poți suporta întreaga pagubă.</li>
+</ul>
+
+<p>Concluzie practică: dacă blochezi rapid cardul și nu ai comis o neglijență gravă, expunerea ta financiară reală e plafonată la ~250 lei, restul fiind problema băncii. Asta nu înseamnă să fii neglijent — înseamnă să nu intri în panică și să acționezi metodic.</p>
+
+<h2>Cum detectezi că ai fost vizat</h2>
+
+<p>NFC skimming-ul este invizibil — nu simți nimic când cineva îți citește cardul. De aceea detecția se face pe efecte, nu pe momentul atacului. Iată semnalele:</p>
+
+<ul>
+<li><strong>Micro-tranzacții ciudate</strong> de 1-5 lei sau echivalentul în valută, care apar „de test" — atacatorii verifică dacă cardul e valid cu sume mici înainte de o sumă mare.</li>
+<li><strong>Notificări de plată din locații în care nu ești.</strong> Activează-ți NOTIFICĂRILE INSTANT (push) pentru fiecare tranzacție — e cel mai puternic instrument de detecție gratuit.</li>
+<li><strong>Coduri 3-D Secure primite prin SMS</strong> pentru plăți pe care nu le-ai inițiat. Asta înseamnă că cineva are deja datele cardului tău și încearcă o plată online.</li>
+<li><strong>Solicitări de autentificare în aplicația băncii</strong> pe care nu le-ai declanșat tu.</li>
+</ul>
+
+<p>Regula de aur: <strong>verifică extrasul de card săptămânal</strong>, nu lunar. La băncile din România (Revolut, BT, BCR, ING etc.) ai notificări instant și istoricul în aplicație — folosește-le. Majoritatea fraudelor sunt prinse de victimă, nu de bancă.</p>
+
+<h2>Protecția fizică: husa RFID și alternativele</h2>
+
+<p>O <strong>husă protectoare card RFID</strong> (sau un portofel cu blocare RFID) este o folie metalizată care formează o „cușcă Faraday" — blochează câmpul electromagnetic și împiedică cipul să fie „trezit" la distanță. Costă între <strong>15 și 60 de lei</strong> și e cea mai ieftină măsură anti-skimming.</p>
+
+<p>Câteva precizări care îți economisesc bani și dezamăgiri:</p>
+
+<ul>
+<li>Funcționează doar pentru cardul aflat ÎN husă. Dacă scoți cardul ca să plătești, în acel moment e expus — dar atunci ești atent oricum.</li>
+<li><strong>Trucul gratuit:</strong> dacă ții două sau mai multe carduri contactless lipite spate în spate în portofel, ele se „bruiază" reciproc, iar un cititor nu poate izola unul singur. Nu e perfect, dar reduce semnificativ riscul, fără niciun cost.</li>
+<li>Folia de aluminiu casnică funcționează ca ecran improvizat — un card înfășurat în folie de aluminiu nu poate fi citit. Soluție de avarie, dar reală.</li>
+<li>Atenție la marketing: nu cumpăra „protectoare RFID" supraevaluate la sute de lei. Fizica e simplă; orice ecran metalic decent face treaba.</li>
+</ul>
+
+<h2>Cum dezactivezi contactless-ul și alte măsuri în aplicația băncii</h2>
+
+<p>Aproape toate băncile din România îți permit, din aplicație, să-ți reglezi controalele de securitate. Iată ce să faci, concret:</p>
+
+<ul>
+<li><strong>Cum dezactivez contactless:</strong> în aplicația majorității băncilor (Revolut, BT, ING, BCR) ai un comutator „Plăți contactless" pe care îl poți opri. Dacă oprești contactless-ul, cardul cere PIN la fiecare plată — disconfort mic, securitate maximă.</li>
+<li><strong>Coboară limita contactless:</strong> dacă nu vrei să-l dezactivezi complet, multe bănci îți permit să scazi pragul fără-PIN sub 100 lei sau să limitezi numărul de tranzacții contactless pe zi.</li>
+<li><strong>Dezactivează plățile online</strong> când nu cumperi nimic și reactivează-le doar la nevoie. Asta anulează aproape complet riscul datelor citite prin NFC, pentru că ele se folosesc online.</li>
+<li><strong>Folosește un card virtual de unică folosință</strong> (Revolut, dar și alte bănci) pentru cumpărături online. Numărul lui se schimbă după fiecare plată, deci datele citite devin inutile.</li>
+<li><strong>Plătește cu telefonul</strong> (Apple Pay / Google Pay) în loc de cardul fizic. Acestea folosesc tokenizare: comerciantul primește un număr-token, nu numărul real al cardului tău. Cardul fizic poate rămâne acasă, în siguranță.</li>
+</ul>
+
+<p>Plata prin telefon e, ironic, mult mai sigură decât cardul fizic contactless, deși folosește același NFC: tokenul nu poate fi reutilizat și e protejat de biometrie (amprentă/față).</p>
+
+<h2>Checklist de protecție — aplică azi</h2>
+
+<ul>
+<li>☐ Activează <strong>notificările instant push</strong> pentru fiecare tranzacție pe TOATE cardurile.</li>
+<li>☐ Scade limita contactless fără-PIN sau dezactivează contactless-ul pe cardul principal.</li>
+<li>☐ Dezactivează plățile online pe cardul fizic și folosește carduri virtuale pentru e-commerce.</li>
+<li>☐ Treci la plată cu telefonul (Apple/Google Pay) și lasă cardul fizic acasă când poți.</li>
+<li>☐ Cumpără o husă/portofel cu blocare RFID (15-60 lei) SAU ține două carduri spate-în-spate.</li>
+<li>☐ Verifică extrasul săptămânal, nu lunar.</li>
+<li>☐ Salvează în telefon numărul de blocare card al băncii tale, ca să-l ai în 10 secunde.</li>
+<li>☐ NU introduce niciodată codul 3-D Secure pe un link primit prin SMS sau e-mail.</li>
+</ul>
+
+<h2>Ce faci în primele 5 minute dacă bănuiești o fraudă</h2>
+
+<ol>
+<li><strong>Blochează imediat cardul</strong> din aplicația băncii (buton „Blochează"/„Freeze") — durează 2 secunde și e reversibil. Asta oprește instant orice plată ulterioară și, conform legii, mută răspunderea pe bancă din acel moment.</li>
+<li><strong>Verifică ultimele tranzacții</strong> și notează-le pe cele pe care nu le recunoști (sumă, comerciant, dată/oră).</li>
+<li><strong>Sună la banca</strong> (linia de fraude) și raportează tranzacțiile neautorizate. Cere deschiderea unei contestații (chargeback) pentru fiecare.</li>
+<li><strong>Solicită card nou.</strong> Numărul vechi e compromis definitiv — orice citire NFC anterioară rămâne valabilă până la reemitere.</li>
+<li><strong>Depune plângere la Poliție</strong> dacă sumele sunt mari — îți ajută la dosarul de despăgubire și e necesar pentru anumite contestații.</li>
+<li><strong>Păstrează dovezile:</strong> capturi de ecran cu tranzacțiile, numerele de înregistrare a sesizărilor. Banca are obligația legală să-ți răspundă la contestație, de regulă în maximum 15 zile lucrătoare (cu posibilă prelungire la 35 în cazuri complexe).</li>
+</ol>
+
+<h2>Greșeli frecvente de evitat</h2>
+
+<ul>
+<li><strong>Să crezi că ești neajutorat.</strong> Răspunderea ta legală e plafonată la ~250 lei dacă acționezi corect — nu îți riști economiile.</li>
+<li><strong>Să dai codul 3-D Secure cuiva sau pe un site dubios.</strong> Asta transformă o fraudă imposibilă într-una completă și îți poate anula protecția legală (neglijență gravă).</li>
+<li><strong>Să verifici extrasul doar lunar.</strong> O fereastră de 30 de zile e cadou pentru un atacator; verificarea săptămânală + notificările instant prind frauda devreme.</li>
+<li><strong>Să plătești sume mari pe „protectoare RFID minune".</strong> O husă de 20 lei sau două carduri lipite fac aceeași treabă.</li>
+<li><strong>Să ignori micro-tranzacțiile de 1-3 lei.</strong> Sunt teste de validare a cardului — semnalul că urmează o sumă mare.</li>
+<li><strong>Să folosești cardul fizic online</strong> când poți folosi un card virtual de unică folosință care face datele citite prin NFC complet inutile.</li>
+</ul>
+
+<p>Concluzia care contează: NFC skimming-ul există, dar nu îți poate „clona" cardul ca să plătească la POS fără PIN — acesta e un mit. Pericolul real e folosirea online a datelor citite și plățile contactless cu cardul furat fizic, ambele plafonabile prin notificări instant, carduri virtuale, plată cu telefonul și o blocare rapidă din aplicație. Cu protocolul de mai sus, ești mai protejat decât 95% dintre deținătorii de carduri din România.</p>

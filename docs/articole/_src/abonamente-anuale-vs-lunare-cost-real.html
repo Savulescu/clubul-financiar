@@ -1,0 +1,166 @@
+<p>Întrebarea „<strong>abonament anual vs lunar care e mai ieftin</strong>" pare să aibă un răspuns evident: plătești anual, prinzi un discount de 10-20% și gata. În realitate, costul real al unui abonament anual nu se rezumă la discount. Ca să afli adevăratul cost al planului anual, trebuie să incluzi costul de oportunitate al abonamentelor anuale (banii blocați în avans pe care i-ai fi putut investi), inflația care îți poate face plata în avans mai scumpă sau mai ieftină decât crezi, riscul de neutilizare și problema rambursării abonamentului anual atunci când vrei să renunți la lună 3.</p>
+
+<p>Această lecție îți oferă cadrul complet de analiză cost/beneficiu pentru abonamente: nu o regulă simplistă, ci un calcul holistic cu sume reale în lei pentru România 2026. Vei vedea de ce e scump un abonament anual chiar și cu discount, cum se face o evaluare corectă a discount-urilor anuale și de ce uneori e rațional să plătești lunar — pentru opționalitate. La final ai un template de decizie și un model probabilistic pe care îl poți construi în Excel pentru fiecare tip de serviciu: SaaS, streaming și asigurări.</p>
+
+<p>Ideea centrală: prețul afișat (anual sau lunar) nu este costul real. Costul real este prețul ajustat cu probabilitatea de a folosi serviciul, cu randamentul pe care l-ai pierdut imobilizând banii și cu riscul ca prețul de mâine să fie diferit. Hai să-l calculăm corect.</p>
+
+<h2>De ce discount-ul anunțat NU este economia reală</h2>
+
+<p>Companiile afișează abonamentul anual ca pe un cadou: „2 luni gratis", „economisești 17%". Matematic, un discount de „2 luni gratis" la un serviciu de 40 lei/lună înseamnă: în loc de 12 × 40 = 480 lei, plătești 10 × 40 = 400 lei. Economia brută = 80 lei, adică 16,7%.</p>
+
+<p>Dar acesta este doar <strong>discount-ul nominal</strong>. El ignoră patru costuri ascunse care îți pot înghiti integral sau parțial economia:</p>
+
+<ul>
+<li><strong>Costul de capital blocat</strong> — plătești 400 lei azi, nu eșalonat lunar. Diferența de cash-flow are un cost.</li>
+<li><strong>Riscul de neutilizare</strong> — dacă abandonezi serviciul la luna 4, ai plătit 8 luni pe care nu le folosești.</li>
+<li><strong>Inflația și riscul de preț</strong> — la lunar nu știi prețul de la luna 10; la anual te blochezi pe o singură valoare.</li>
+<li><strong>Friction la rambursare</strong> — rata reală de retragere a banilor de la companie când renunți.</li>
+</ul>
+
+<p>Economia reală = discount nominal − suma acestor patru costuri. Uneori rezultatul rămâne pozitiv (plătește anual). Alteori devine negativ sau marginal (plătește lunar). Calculul, nu intuiția, decide.</p>
+
+<h2>Costul 1: capitalul blocat (costul de oportunitate)</h2>
+
+<p>Când plătești 400 lei în avans în loc de 40 lei/lună, „împrumuți" efectiv companiei restul banilor pe parcursul anului. Costul de oportunitate al abonamentelor anuale este randamentul pe care l-ai fi obținut dacă acei bani rămâneau la tine.</p>
+
+<p><strong>Cum se calculează corect.</strong> Nu aplici dobânda pe toată suma, ci pe soldul mediu imobilizat. Dacă ai plăti lunar, ai cheltui în medie ~jumătate din sumă mai târziu. Aproximarea practică: cost de oportunitate ≈ (suma anuală ÷ 2) × rata anuală de randament.</p>
+
+<p>În România 2026, rata relevantă este una sigură și accesibilă: un depozit bancar la termen, un cont de economii sau titluri de stat <strong>Tezaur/Fidelis</strong>. Să presupunem o rată netă realistă de <strong>6% pe an</strong>.</p>
+
+<ul>
+<li>Abonament 400 lei/an, plătit în avans. Sold mediu imobilizat ≈ 200 lei.</li>
+<li>Cost de oportunitate ≈ 200 × 6% = <strong>12 lei/an</strong>.</li>
+</ul>
+
+<p>La sume mici, acest cost e modest. Dar gândește în portofel întreg: dacă ai 8 abonamente anuale (streaming, software, cloud, asigurări, antivirus, stocare, productivitate) însumând 6.000 lei/an plătiți în avans, soldul mediu imobilizat e ~3.000 lei, iar costul de oportunitate ≈ 180 lei/an. La asigurarea auto sau de locuință de 2.500 lei plătită integral vs. în rate, soldul mediu e ~1.250 lei, deci ~75 lei/an de randament pierdut — adesea mai mult decât „discount-ul" oferit pentru plata integrală.</p>
+
+<p><strong>Regula:</strong> compară discount-ul anual cu costul de oportunitate calculat la rata ta realistă de investire sigură. Dacă discountul depășește clar costul de capital, primul punct înclină spre anual.</p>
+
+<h2>Costul 2: riscul de neutilizare (cel mai mare cost ascuns)</h2>
+
+<p>Acesta este, de departe, costul care distruge cele mai multe „economii" anuale. Plata anuală presupune că vei folosi serviciul 12 luni. Dar foarte multe servicii sunt abandonate înainte: aplicații de fitness după ianuarie, platforme de cursuri după primele 3 module, tooluri SaaS pe care le „testai", al doilea-al treilea serviciu de streaming.</p>
+
+<p>Modelul corect: cost real per lună folosită = preț anual ÷ numărul de luni în care chiar îl folosești.</p>
+
+<p><strong>Exemplu numeric.</strong> Streaming la 40 lei/lună, plan anual 400 lei (2 luni „gratis"). Dacă îl folosești toate 12 lunile, costul real = 400 ÷ 12 = 33,3 lei/lună — câștigi. Dar dacă, statistic, îl abandonezi după 5 luni:</p>
+
+<ul>
+<li><strong>Anual:</strong> ai plătit 400 lei, ai folosit 5 luni → cost real 80 lei/lună folosită, plus 7 luni „moarte".</li>
+<li><strong>Lunar:</strong> 5 × 40 = 200 lei și te-ai oprit → cost real 40 lei/lună, fără pierdere.</li>
+</ul>
+
+<p>În acest scenariu, planul „mai ieftin pe hârtie" te-a costat <strong>de două ori mai mult</strong>. Discount-ul de 16,7% a fost spulberat de probabilitatea de abandon.</p>
+
+<p><strong>Cum integrezi probabilitatea.</strong> Atribuie fiecărui serviciu o probabilitate onestă de a-l folosi tot anul (p):</p>
+
+<ul>
+<li>Serviciu pe care l-ai folosit deja constant 6+ luni → p ≈ 0,9-0,95. Anualul e aproape sigur câștigător.</li>
+<li>Serviciu nou, neîncercat, „mi se pare util" → p ≈ 0,3-0,5. Lunarul protejează capitalul.</li>
+<li>Serviciu sezonier (fitness ianuarie-martie, cursuri pe un proiect punctual) → calculează doar lunile reale, nu anul.</li>
+</ul>
+
+<h2>Costul 3: inflația și riscul de preț viitor</h2>
+
+<p>Aici lucrurile devin subtile și merg în ambele direcții. La un abonament lunar nu cunoști prețul de la luna 10 — compania îl poate mări. La anual îți blochezi un preț, ceea ce te protejează de creșteri, dar te leagă dacă apare o variantă mai ieftină sau dacă nu mai ai nevoie.</p>
+
+<p><strong>Argumentul pro-anual (lock de preț):</strong> dacă inflația în România rămâne în zona 4-5% și serviciul are istoric de scumpiri anuale, plata anuală îți îngheață prețul. Pe lângă discount, eviți o eventuală majorare la mijlocul anului.</p>
+
+<p><strong>Argumentul pro-lunar (banii valorează mai puțin în viitor):</strong> 400 lei plătiți peste 6 luni „costă", în termeni reali, mai puțin decât 400 lei plătiți azi, fix din cauza inflației. Plata eșalonată mută o parte din cost în viitor, unde leul e mai ieftin. La inflație de ~5%, acest efect mai adaugă ~1-2% la „valoarea" plății lunare față de cea în avans.</p>
+
+<p><strong>Concluzia echilibrată:</strong> inflația face plata în avans ușor mai scumpă în termeni reali, dar lock-ul de preț la servicii care se scumpesc constant poate compensa. Pune ambele efecte în calcul, nu doar pe cel care îți convine. Pentru servicii cu preț stabil (multe SaaS-uri mature), efectul net al inflației înclină ușor spre lunar; pentru servicii care se scumpesc agresiv anual, lock-ul anual contează.</p>
+
+<h2>Costul 4: rambursarea și rata de retragere a companiei</h2>
+
+<p>Cel mai subestimat risc. Când plătești anual și vrei să renunți la luna 3, ce recuperezi?</p>
+
+<ul>
+<li><strong>Multe servicii SaaS și streaming:</strong> rambursare zero pe restul anului. Banii sunt pierduți integral.</li>
+<li><strong>Servicii „pro-rata":</strong> îți returnează partea neutilizată, dar adesea cu rețineri.</li>
+<li><strong>Asigurări:</strong> la reziliere ai dreptul, prin lege, la prima neutilizată proporțional, minus eventuale costuri de administrare. La RCA, returnarea primei neconsumate este reglementată; la asigurări facultative (CASCO, locuință, sănătate) verifică explicit clauza de reziliere.</li>
+</ul>
+
+<p>Pentru achiziții online, ai dreptul legal de retragere în <strong>14 zile</strong> (OUG 34/2014). Atenție însă: dacă ai cerut explicit începerea serviciului în acea perioadă, plătești proporțional pentru cât ai consumat, iar pentru conținut digital accesat poți pierde dreptul de retragere. Deci „14 zile" nu te salvează de o decizie anuală proastă luată la luna 3.</p>
+
+<p>Definește pentru fiecare serviciu o <strong>rată de recuperare (r)</strong>: cât din restul banilor primești înapoi dacă renunți la jumătatea perioadei. r = 0 (nimic), r = 0,5 (pro-rata cu rețineri), r ≈ 1 (rambursare integrală a părții neutilizate, rar). Cu cât r e mai mic, cu atât anualul e mai riscant pentru servicii cu probabilitate de abandon.</p>
+
+<h2>Formula holistică și modelul probabilistic în Excel</h2>
+
+<p>Pune totul împreună. Pentru fiecare serviciu compari <strong>costul așteptat lunar</strong> cu <strong>costul așteptat anual</strong>, ținând cont de probabilitatea de utilizare și de rata de recuperare.</p>
+
+<p><strong>Cost așteptat — plată lunară:</strong></p>
+<ul>
+<li>Plătești doar lunile în care folosești. Cost ≈ preț_lunar × (luni așteptate de utilizare).</li>
+<li>Beneficiu ascuns: opționalitate — te oprești oricând, fără bani blocați.</li>
+</ul>
+
+<p><strong>Cost așteptat — plată anuală:</strong></p>
+<ul>
+<li>Plătești preț_anual integral azi.</li>
+<li>Adaugi costul de oportunitate ≈ (preț_anual ÷ 2) × randament.</li>
+<li>Scazi recuperarea probabilă dacă abandonezi: în scenariul de abandon, recuperezi r × (lunile rămase × echivalent lunar).</li>
+</ul>
+
+<p><strong>Structura foii de calcul (un rând per serviciu):</strong></p>
+<ul>
+<li>Coloana A: preț lunar (lei)</li>
+<li>Coloana B: preț anual (lei)</li>
+<li>Coloana C: probabilitatea de utilizare completă, p (0-1)</li>
+<li>Coloana D: luni așteptate de utilizare dacă abandonezi (ex. 5)</li>
+<li>Coloana E: rata de recuperare la reziliere, r (0-1)</li>
+<li>Coloana F: randament sigur anual (ex. 0,06)</li>
+<li>Coloana G — Cost așteptat LUNAR: <code>= A*(C*12 + (1-C)*D)</code></li>
+<li>Coloana H — Cost de oportunitate anual: <code>= (B/2)*F</code></li>
+<li>Coloana I — Pierdere la abandon (anual): <code>= (1-C) * (1 - E) * B * (12 - D)/12</code></li>
+<li>Coloana J — Cost așteptat ANUAL: <code>= B + H − [partea recuperată deja inclusă în I]</code> → practic <code>= C*(B+H) + (1-C)*(B + H − E*B*(12-D)/12)</code></li>
+<li>Coloana K — Decizie: <code>=IF(J&lt;G;"ANUAL";"LUNAR")</code></li>
+</ul>
+
+<p>Scenariul probabilistic combină cele două lumi: cu probabilitate p folosești tot anul (anualul câștigă net), cu probabilitate (1−p) abandonezi la luna D (anualul pierde lunile moarte minus recuperarea). Excel face media ponderată automat. Astfel nu compari „480 vs 400", ci <strong>cost așteptat vs cost așteptat</strong> — singura comparație corectă.</p>
+
+<h3>Trei profiluri de servicii, calculate</h3>
+
+<p><strong>SaaS matur pe care îl folosești zilnic la muncă</strong> (ex. unealtă de productivitate, 50 lei/lună sau 500 lei/an). p ≈ 0,95, abandon improbabil. Cost lunar așteptat ≈ 50 × (0,95×12 + 0,05×11) ≈ 595 lei. Anual ≈ 500 + cost oportunitate ~15 lei ≈ 515 lei. <strong>Verdict: ANUAL clar.</strong> Aici discountul + utilizarea sigură bat tot.</p>
+
+<p><strong>Al doilea serviciu de streaming, „să încerc"</strong> (40 lei/lună, 400 lei/an, r = 0). p ≈ 0,4, abandon probabil la luna 5. Lunar ≈ 40 × (0,4×12 + 0,6×5) = 40 × 7,8 = 312 lei. Anual = 400 + ~12 = 412 lei, fără recuperare. <strong>Verdict: LUNAR.</strong> Optionalitatea valorează 100 lei.</p>
+
+<p><strong>Asigurare de locuință</strong> (2.400 lei/an, plată integrală cu discount 5% vs. rate). Utilizare „completă" garantată (poliță activă tot anul, p ≈ 1), dar r decent la reziliere (pro-rata legal). Aici discountul de 120 lei vs. cost de oportunitate ~72 lei → <strong>plata integrală câștigă marginal</strong>, dar dacă ai nevoie de cash-flow lunar, diferența e mică și ratele sunt rezonabile.</p>
+
+<h2>De ce merită uneori lunar: valoarea opționalității</h2>
+
+<p>Cel mai ignorat avantaj al plății lunare este <strong>opționalitatea</strong> — dreptul de a te răzgândi fără cost. Acest drept are valoare reală, mai ales când:</p>
+
+<ul>
+<li><strong>Nu ai mai folosit serviciul</strong> — incertitudinea privind utilizarea e mare, deci probabilitatea de abandon e mare.</li>
+<li><strong>Piața se mișcă rapid</strong> — apar alternative mai bune sau mai ieftine (frecvent la SaaS și AI tools).</li>
+<li><strong>Veniturile tale sunt variabile</strong> — freelancer, sezonier; flexibilitatea cash-flow-ului valorează mai mult decât 15% discount.</li>
+<li><strong>Rata de recuperare e zero</strong> — dacă renunțarea nu îți întoarce niciun ban, anualul e un pariu nereversibil.</li>
+</ul>
+
+<p>Regula practică: plătește anual doar serviciile pe care le-ai folosit deja consecvent cel puțin 3-6 luni. Pentru orice serviciu nou, plătește lunar primele luni, apoi treci la anual când utilizarea s-a confirmat. Plătești o mică „primă de opționalitate", dar eviți capcana costisitoare a abonamentelor abandonate.</p>
+
+<h2>Checklist de decizie înainte de a alege anual</h2>
+
+<ul>
+<li><strong>L-am folosit deja constant 3+ luni?</strong> Dacă nu → lunar.</li>
+<li><strong>Cât e discountul real?</strong> Calculează: 1 − (preț anual ÷ (12 × preț lunar)). Sub 10% rar merită blocarea.</li>
+<li><strong>Cât recuperez dacă renunț?</strong> Citește clauza de reziliere/rambursare ÎNAINTE de plată. r = 0 → mărește prudența.</li>
+<li><strong>Care e probabilitatea onestă de utilizare tot anul?</strong> Fii brutal de realist, nu optimist.</li>
+<li><strong>Care e costul meu de oportunitate?</strong> (preț anual ÷ 2) × rata mea de economisire sigură (Tezaur/depozit, ~6%).</li>
+<li><strong>Serviciul se scumpește agresiv anual?</strong> Dacă da, lock-ul de preț adaugă valoare anualului.</li>
+<li><strong>Am cash-flow lunar stabil?</strong> Dacă veniturile sunt variabile, opționalitatea lunară contează mai mult.</li>
+<li><strong>Trece testul Excel?</strong> Cost așteptat anual &lt; cost așteptat lunar? Doar atunci anual.</li>
+</ul>
+
+<h2>Greșeli frecvente de evitat</h2>
+
+<ul>
+<li><strong>Confunzi discountul nominal cu economia reală.</strong> 17% pe hârtie poate fi −60% în realitate dacă abandonezi serviciul.</li>
+<li><strong>Plătești anual un serviciu neîncercat.</strong> Cea mai scumpă greșeală: blochezi bani pe ceva ce s-ar putea să nu folosești.</li>
+<li><strong>Ignori clauza de rambursare.</strong> Presupui că „poți renunța oricând" — la anual, de multe ori, nu poți recupera nimic.</li>
+<li><strong>Uiți de costul de oportunitate cumulat.</strong> Un abonament e neglijabil; opt abonamente anuale plătite în avans blochează mii de lei care ar putea lucra în Tezaur sau depozit.</li>
+<li><strong>Te bazezi pe „14 zile de retragere".</strong> Pentru servicii digitale deja accesate, dreptul de retragere se pierde frecvent — nu e o plasă de siguranță.</li>
+<li><strong>Reînnoiești automat fără reevaluare.</strong> Pune un memento cu 7 zile înainte de fiecare reînnoire anuală și refă calculul: încă îl folosesc? Mai e cel mai bun preț?</li>
+<li><strong>Nu dezactivezi reînnoirea automată după ce ai decis lunar.</strong> Multe servicii te mută implicit pe anual la reînnoire.</li>
+</ul>
+
+<p><strong>Pasul de acțiune azi:</strong> deschide lista tuturor abonamentelor tale active (din extrasul de cont caută plățile recurente). Pentru fiecare, completează rândul în foaia de calcul de mai sus și aplică formula de decizie. Vei descoperi aproape sigur 1-2 abonamente anuale care, recalculate corect, ar fi trebuit să fie lunare — și unul pe care îl plătești și nu îl mai folosești deloc. Acolo sunt banii tăi.</p>

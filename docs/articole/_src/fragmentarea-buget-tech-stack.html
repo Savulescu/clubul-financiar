@@ -1,0 +1,180 @@
+<p>Dacă te-ai întrebat vreodată <strong>ce instrument de bugetare să folosesc — Excel, aplicație, telefon</strong> sau caietul — răspunsul corect nu este unul singur, ci o combinație inteligentă între ele. Cel mai bun app de bugetare din România nu te scapă de Excel, iar Excel-ul nu îți dă tracking real-time. Adevărul, în 2026, este că bugetarea hibridă analog-digital bate orice soluție unică: folosești telefonul pentru notificări de depășire buget și captură instant, aplicația pentru sincronizare conturi bancare și automatizare categorii de cheltuieli, iar Excel pentru analiza retrospectivă lunară.</p>
+
+<p>Problema nu e lipsa instrumentelor, ci fragmentarea lor. Ai un cont la BCR, cardul de salariu la Banca Transilvania, un Revolut pentru abonamente și cash pentru piață. Niciun mobile banking nu vede tot. Aici intervine integrarea Excel cu app-uri bancare și un script de sincronizare manual care leagă piesele într-un singur „creier financiar".</p>
+
+<p>În această lecție construim împreună un tech-stack complet: comparăm 8 instrumente pe 12 criterii, decidem ce rol primește fiecare în arhitectura ta (tracking real-time vs retrospectiv) și îți dau template-ul de integrare plus rutina de sincronizare exactă. La final vei avea un sistem care prinde fiecare leu, nu unul care îți cere o oră pe zi.</p>
+
+<h2>De ce un singur instrument nu e suficient niciodată</h2>
+
+<p>Orice instrument de bugetare face un compromis între trei lucruri: <strong>viteza de captură</strong> (cât de repede notezi o cheltuială), <strong>profunzimea analizei</strong> (cât de bine vezi tipare) și <strong>automatizarea</strong> (cât muncești tu manual). Niciun produs nu le maximizează pe toate trei.</p>
+
+<ul>
+<li><strong>Aplicațiile (YNAB, PocketGuard, Spendee)</strong> excelează la captură rapidă și automatizare, dar sunt cutii negre la analiză profundă și costă în valută.</li>
+<li><strong>Excel/Google Sheets</strong> îți dă control total și analiză infinită, dar captura e lentă și nu vede automat tranzacțiile.</li>
+<li><strong>Mobile banking (BT Pay, George BCR, Revolut)</strong> are datele la sursă, dar fragmentate pe bănci și fără viziune de buget pe categorii personale.</li>
+<li><strong>Pen & paper</strong> e imbatabil la conștientizare în momentul plății, dar zero analiză.</li>
+</ul>
+
+<p>Soluția nu e să alegi unul, ci să le dai fiecăruia rolul în care e cel mai bun. Asta înseamnă un <strong>tech-stack fragmentat dar integrat</strong>.</p>
+
+<h2>Matricea celor 8 instrumente pe 12 criterii</h2>
+
+<p>Am evaluat fiecare instrument pe o scară de la 1 (slab) la 5 (excelent), pentru un utilizator din România în 2026. Costurile sunt aproximative, în lei, la cursul de ~5 lei/EUR și ~4,6 lei/USD.</p>
+
+<h3>1. YNAB (You Need A Budget)</h3>
+<ul>
+<li><strong>Cost:</strong> ~99 USD/an (~455 lei) — cel mai scump.</li>
+<li><strong>Captură rapidă:</strong> 5 &nbsp;|&nbsp; <strong>Automatizare categorii:</strong> 4 &nbsp;|&nbsp; <strong>Sincronizare bancară RO:</strong> 1 (slabă pentru bănci românești) &nbsp;|&nbsp; <strong>Analiză retrospectivă:</strong> 3</li>
+<li><strong>Tracking:</strong> real-time, metodă zero-based (fiecare leu primește o destinație). &nbsp; <strong>Limbă RO:</strong> nu. &nbsp; <strong>Export:</strong> CSV, da.</li>
+<li><strong>Verdict:</strong> filozofia cea mai bună din piață, dar sincronizarea cu băncile RO e practic absentă — vei introduce manual oricum.</li>
+</ul>
+
+<h3>2. PocketGuard</h3>
+<ul>
+<li><strong>Cost:</strong> versiune gratuită + Plus ~35 USD/an (~160 lei).</li>
+<li><strong>Captură:</strong> 4 &nbsp;|&nbsp; <strong>Automatizare:</strong> 4 &nbsp;|&nbsp; <strong>Sincronizare RO:</strong> 2 &nbsp;|&nbsp; <strong>Analiză:</strong> 2</li>
+<li><strong>Tracking:</strong> real-time, accent pe „In My Pocket" (cât poți cheltui după facturi și economii). &nbsp; <strong>Notificări depășire:</strong> da.</li>
+<li><strong>Verdict:</strong> bun pentru cine vrea o singură cifră simplă „cât mai am voie azi". Slab la analiză detaliată.</li>
+</ul>
+
+<h3>3. GnuCash</h3>
+<ul>
+<li><strong>Cost:</strong> 0 lei (open-source).</li>
+<li><strong>Captură:</strong> 2 &nbsp;|&nbsp; <strong>Automatizare:</strong> 2 &nbsp;|&nbsp; <strong>Sincronizare RO:</strong> 2 (import OFX/CSV manual) &nbsp;|&nbsp; <strong>Analiză:</strong> 5</li>
+<li><strong>Tracking:</strong> retrospectiv, contabilitate în partidă dublă. &nbsp; <strong>Curbă de învățare:</strong> abruptă.</li>
+<li><strong>Verdict:</strong> pentru cine vrea rigoare contabilă reală și control total, gratuit. Nu e pentru captură pe fugă.</li>
+</ul>
+
+<h3>4. Excel / Microsoft 365</h3>
+<ul>
+<li><strong>Cost:</strong> 0 lei (LibreOffice/Sheets) până la ~340 lei/an (Microsoft 365 Personal).</li>
+<li><strong>Captură:</strong> 2 &nbsp;|&nbsp; <strong>Automatizare:</strong> 3 (cu Power Query/formule) &nbsp;|&nbsp; <strong>Sincronizare RO:</strong> 3 (import CSV bancar) &nbsp;|&nbsp; <strong>Analiză:</strong> 5</li>
+<li><strong>Tracking:</strong> retrospectiv, flexibilitate totală. &nbsp; <strong>Export:</strong> e formatul universal.</li>
+<li><strong>Verdict:</strong> coloana vertebrală a oricărui stack serios. Aici trăiește „adevărul" lunar.</li>
+</ul>
+
+<h3>5. Google Sheets</h3>
+<ul>
+<li><strong>Cost:</strong> 0 lei.</li>
+<li><strong>Captură:</strong> 3 (Google Forms pe telefon!) &nbsp;|&nbsp; <strong>Automatizare:</strong> 4 (Apps Script) &nbsp;|&nbsp; <strong>Sincronizare RO:</strong> 3 &nbsp;|&nbsp; <strong>Analiză:</strong> 5</li>
+<li><strong>Tracking:</strong> hibrid — formular pe telefon pentru captură, foaie pentru analiză. &nbsp; <strong>Colaborare:</strong> excelentă (buget de cuplu).</li>
+<li><strong>Verdict:</strong> cel mai bun raport flexibilitate/cost pentru un sistem hibrid DIY.</li>
+</ul>
+
+<h3>6. Notion</h3>
+<ul>
+<li><strong>Cost:</strong> 0 lei (plan personal generos).</li>
+<li><strong>Captură:</strong> 3 &nbsp;|&nbsp; <strong>Automatizare:</strong> 2 &nbsp;|&nbsp; <strong>Sincronizare RO:</strong> 1 &nbsp;|&nbsp; <strong>Analiză:</strong> 3</li>
+<li><strong>Tracking:</strong> manual, dar integrează bugetul cu note, obiective, abonamente. &nbsp; <strong>Calcul:</strong> formule de bază, nu pivot.</li>
+<li><strong>Verdict:</strong> bun ca „dashboard de viață financiară" și hub de documente, slab ca motor de calcul.</li>
+</ul>
+
+<h3>7. Mobile banking (George BCR / BT Pay / Revolut)</h3>
+<ul>
+<li><strong>Cost:</strong> 0 lei (inclus în cont).</li>
+<li><strong>Captură:</strong> 5 (automat, e la sursă) &nbsp;|&nbsp; <strong>Automatizare:</strong> 4 &nbsp;|&nbsp; <strong>Sincronizare RO:</strong> 5 pentru banca proprie, 1 pentru restul &nbsp;|&nbsp; <strong>Analiză:</strong> 3</li>
+<li><strong>Tracking:</strong> real-time pentru tranzacțiile băncii respective. &nbsp; <strong>Notificări depășire:</strong> Revolut/George au bugete pe categorii.</li>
+<li><strong>Verdict:</strong> sursa de date #1, dar oarbă la conturile de la alte bănci și la cash.</li>
+</ul>
+
+<h3>8. Pen &amp; paper (caiet/jurnal de cheltuieli)</h3>
+<ul>
+<li><strong>Cost:</strong> ~15 lei.</li>
+<li><strong>Captură:</strong> 4 (în momentul plății) &nbsp;|&nbsp; <strong>Automatizare:</strong> 0 &nbsp;|&nbsp; <strong>Sincronizare:</strong> 0 &nbsp;|&nbsp; <strong>Analiză:</strong> 1</li>
+<li><strong>Tracking:</strong> real-time psihologic — efectul de „durere a plății" reduce cheltuielile impulsive cu 10–20% la mulți oameni.</li>
+<li><strong>Verdict:</strong> nu pentru contabilitate, ci pentru disciplină pe categoriile-problemă (cash, mâncare în oraș).</li>
+</ul>
+
+<h2>Criteriile care contează cu adevărat în România</h2>
+
+<p>Dincolo de cele patru deja punctate, restul de 8 criterii din cele 12 fac diferența practică la noi:</p>
+
+<ul>
+<li><strong>Suport pentru lei și conturi multiple</strong> — esențial dacă ai BT + Revolut + cash.</li>
+<li><strong>Open Banking PSD2 funcțional în RO</strong> — agregatoarele licențiate BNR (ex. soluții care folosesc API-uri PSD2) pot citi conturile de la majoritatea băncilor mari, dar acoperirea variază.</li>
+<li><strong>Confidențialitatea datelor (GDPR)</strong> — un app străin îți urcă tranzacțiile pe servere externe; Excel local nu.</li>
+<li><strong>Export CSV/OFX</strong> — fără el, ești blocat în instrument (lock-in).</li>
+<li><strong>Notificări de depășire buget</strong> — push real-time vs raport la sfârșit de lună.</li>
+<li><strong>Buget pe categorii personalizate</strong> — nu doar „shopping", ci „rate IFN", „abonament sală", „RCA".</li>
+<li><strong>Reguli de auto-categorizare</strong> — „dacă comerciantul conține LIDL → Alimente".</li>
+<li><strong>Curba de învățare</strong> — un sistem pe care îl abandonezi în 3 săptămâni valorează zero.</li>
+</ul>
+
+<h2>Arhitectura recomandată: stack-ul în 3 straturi</h2>
+
+<p>Pe baza matricei, niciun instrument nu câștigă singur. Câștigă această împărțire pe roluri:</p>
+
+<h3>Stratul 1 — Captură (real-time, pe telefon)</h3>
+<p>Scopul: să nu pierzi nicio tranzacție. <strong>Mobile banking</strong> capturează automat tot ce e pe card. <strong>Pen &amp; paper</strong> sau un <strong>Google Form</strong> pe ecranul de start prinde cash-ul și plățile pe care le faci cu numerar la piață, la mecanic, la doctor. Activează notificările de depășire în George/Revolut pe categoriile sensibile (ex. plafon 800 lei/lună la „Mâncare în oraș").</p>
+
+<h3>Stratul 2 — Agregare (semi-automat)</h3>
+<p>Scopul: să aduni datele dispersate într-un loc. La final de săptămână, exporți CSV-ul din fiecare bancă și îl torni într-o foaie centrală (Excel/Google Sheets). Aici se aplică <strong>regulile de auto-categorizare</strong> care transformă haosul de descrieri bancare în categoriile tale.</p>
+
+<h3>Stratul 3 — Analiză (retrospectiv, lunar)</h3>
+<p>Scopul: să vezi tiparele și să decizi. Tabel pivot în Excel pe categorii × lună. Aici compari planificat vs realizat, vezi trendul pe 6 luni și ajustezi plafoanele lunii următoare. Tracking-ul real-time te ține în limite; tracking-ul retrospectiv te face mai deștept.</p>
+
+<h2>Template complet de integrare (foaia centrală)</h2>
+
+<p>Construiește un fișier cu 4 file (tab-uri). Iată structura exactă:</p>
+
+<ul>
+<li><strong>Fila „Tranzacții"</strong> — coloane: <em>Data | Sumă | Cont (BT/Revolut/Cash) | Descriere brută | Categorie | Subcategorie | Notă</em>. Aici imporți CSV-urile.</li>
+<li><strong>Fila „Reguli"</strong> — două coloane: <em>Conține text → Categorie</em>. Exemplu: „KAUFLAND" → Alimente; „NETFLIX" → Abonamente; „OMV/PETROM" → Transport. Vei avea 30–60 de reguli care acoperă ~90% din tranzacții.</li>
+<li><strong>Fila „Buget"</strong> — pentru fiecare categorie: <em>Plafon lunar | Cheltuit | Rămas | % consumat</em>. Exemplu pentru un venit net de 6.000 lei: Locuință 1.800, Alimente 1.200, Transport 500, Utilități 400, Abonamente 200, Distracție 600, Economii 1.000, Tampon 300.</li>
+<li><strong>Fila „Dashboard"</strong> — pivot + grafic: planificat vs realizat pe categorii, plus rata de economisire (aici: 1.000/6.000 = <strong>16,7%</strong>; ținta sănătoasă e 15–20%).</li>
+</ul>
+
+<p>Formula-cheie de auto-categorizare în fila „Tranzacții" (coloana Categorie), care caută prin lista de reguli:</p>
+
+<ul>
+<li><strong>Google Sheets:</strong> <code>=IFERROR(INDEX(Reguli!B:B; MATCH(TRUE; ISNUMBER(SEARCH(Reguli!A:A; D2)); 0)); "Necategorizat")</code> introdusă ca formulă matrice (Ctrl+Shift+Enter).</li>
+<li><strong>Excel modern:</strong> echivalent cu <code>XLOOKUP</code> + <code>SEARCH</code> sau printr-o coloană Power Query „Merge".</li>
+</ul>
+
+<p>Rezultat: 90% din rânduri se categorisesc singure. Restul de 10% (necategorizat) le rezolvi manual în 5 minute și adaugi reguli noi pentru data viitoare.</p>
+
+<h2>Scriptul de sincronizare manual (rutina săptămânală de 12 minute)</h2>
+
+<p>„Manual" nu înseamnă greoi — înseamnă controlat, repetabil și fără dependență de un agregator care se poate strica. Rutina exactă, duminică seara:</p>
+
+<ul>
+<li><strong>Minutul 0–3:</strong> deschide fiecare bancă, exportă tranzacțiile săptămânii în CSV (George, BT, Revolut au buton de export). Cash-ul îl ai în caiet/Google Form.</li>
+<li><strong>Minutul 3–6:</strong> lipește (paste) toate rândurile în fila „Tranzacții". Coloana Categorie se completează singură prin formulă.</li>
+<li><strong>Minutul 6–9:</strong> filtrează după „Necategorizat", rezolvă manual și adaugă 1–2 reguli noi în fila „Reguli".</li>
+<li><strong>Minutul 9–12:</strong> uită-te la fila „Buget". Unde ești la peste 80% din plafon și mai sunt zile în lună? Acolo frânezi săptămâna viitoare.</li>
+</ul>
+
+<p>Cei care vor automatizare totală pot folosi <strong>Google Apps Script</strong> (un trigger care procesează un Gmail cu CSV-ul atașat) sau un agregator PSD2 licențiat BNR. Dar atenție: automatizarea totală reduce <em>conștientizarea</em>. Atingerea manuală a datelor o dată pe săptămână este, paradoxal, un avantaj educativ — vezi cu ochii tăi unde se duc banii.</p>
+
+<h2>Trei profiluri, trei stack-uri recomandate</h2>
+
+<ul>
+<li><strong>Minimalist (vreau simplu, gratis):</strong> Mobile banking pentru captură + un Google Sheet cu 3 file + caiet pentru cash. Cost: 0 lei. Timp: 12 min/săptămână.</li>
+<li><strong>Optimizator (vreau control + analiză):</strong> Mobile banking + Excel/Power Query + reguli de auto-categorizare + pivot lunar. Cost: ~340 lei/an. Timp: 20 min/săptămână.</li>
+<li><strong>Adept de aplicații (vreau automat, accept costul):</strong> YNAB sau PocketGuard pentru tracking zilnic + export CSV lunar în Excel pentru arhivă și analiză profundă. Cost: ~160–455 lei/an.</li>
+</ul>
+
+<h2>Pași de acțiune — instalare în acest weekend</h2>
+
+<ul>
+<li><strong>Pasul 1.</strong> Listează toate conturile tale (bănci, e-wallet, cash). Cei mai mulți oameni uită de Revolut sau de un cont vechi cu abonamente.</li>
+<li><strong>Pasul 2.</strong> Alege stratul de captură: activează notificările pe categorii în mobile banking și pune un Google Form/caiet pentru cash.</li>
+<li><strong>Pasul 3.</strong> Creează foaia centrală cu cele 4 file de mai sus. Pornește de la 8–10 categorii, nu mai multe.</li>
+<li><strong>Pasul 4.</strong> Exportă ultimele 30 de zile din fiecare bancă și construiește primele 30 de reguli de auto-categorizare.</li>
+<li><strong>Pasul 5.</strong> Setează plafoanele lunare pornind de la venitul net real și ținta de economisire 15–20%.</li>
+<li><strong>Pasul 6.</strong> Programează rutina de 12 minute în calendar, duminică seara, recurentă. Sistemul moare fără ritual.</li>
+</ul>
+
+<h2>Greșeli frecvente de evitat</h2>
+
+<ul>
+<li><strong>Prea multe categorii.</strong> 25 de categorii = abandon în 3 săptămâni. Începe cu 8–10 și subîmparte doar ce te doare.</li>
+<li><strong>Te bazezi pe un singur app care „face tot".</strong> Niciunul nu vede toate băncile RO + cash-ul. Fragmentarea controlată e mai robustă.</li>
+<li><strong>Tracking exclusiv retrospectiv.</strong> Dacă vezi depășirea abia pe 31 ale lunii, e prea târziu. Ai nevoie de notificări real-time în stratul 1.</li>
+<li><strong>Ignori cash-ul.</strong> La piață, la frizer, la mecanic — acolo „dispar" 300–500 lei/lună necontabilizați. Caietul rezolvă asta.</li>
+<li><strong>Lock-in fără export.</strong> Dacă instrumentul nu dă CSV/OFX, ești prizonier. Verifică exportul înainte de a-l adopta.</li>
+<li><strong>Sincronizezi prea rar.</strong> O dată pe lună înseamnă 200 de tranzacții de categorisit dintr-o dată — copleșitor. Săptămânal e dulcele punct.</li>
+<li><strong>Plătești în valută fără rost.</strong> Înainte de YNAB la 455 lei/an, testează dacă un Google Sheet gratuit nu îți acoperă 90% din nevoi.</li>
+</ul>
+
+<p>Concluzia practică: nu există „cel mai bun instrument", există cel mai bun <strong>stack</strong>. Telefonul prinde, foaia adună, Excel-ul analizează, iar caietul te ține onest cu cash-ul. Construiește-l o dată, ritualizează cele 12 minute săptămânale și vei avea control real asupra fiecărui leu — fără să devii sclavul unei singure aplicații.</p>

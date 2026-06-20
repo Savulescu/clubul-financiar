@@ -1,0 +1,133 @@
+<p>Întrebarea „este <strong>crypto lending borrowing în România 2026 sigur</strong>?" nu are un răspuns simplu de tip da/nu — are un răspuns numeric. Diferența dintre o platformă de lending crypto sigură și una care îți evaporă capitalul nu stă în reclame, ci în trei cifre pe care 95% dintre români nu le verifică niciodată: randamentul anual al depozitului crypto raportat la riscul real, mărimea fondului de asigurare crypto și pragul exact la care apare riscul lichidării în lending. În această lecție le punem pe toate pe masă, cu sume în lei și calcule pas cu pas.</p>
+
+<p>În 2026, dobânzile bancare la depozite în lei orbitează în jurul a 5-6% pe an, iar inflația erodează o bună parte din ele. Asta face ca un randament anual depozit crypto de 8-12% pe stablecoins să pară irezistibil. Problema e că APY-ul afișat ascunde deseori diferența dintre APY și APR crypto, costul ascuns al riscului de smart contract și iluzia că „fonds de asigurare crypto" înseamnă același lucru cu garanția FGDB de la bancă. Nu înseamnă.</p>
+
+<p>Vom analiza concret protocoalele cu cel mai lung track record — siguranța Aave, Compound și Curve —, vom calcula exact când te lichidează colateralul și vom separa platformele care chiar îți asigură depozitele de cele care doar promit. La final ai un checklist și pașii fiscali ANAF pentru veniturile din lending, pentru că da, dobânda încasată în crypto este venit impozabil în România.</p>
+
+<h2>Lending vs borrowing: ce faci, de fapt, cu banii tăi</h2>
+
+<p>În <strong>lending</strong> (împrumutare) depui crypto într-un protocol și încasezi dobândă de la cei care împrumută. Ești în poziția băncii. În <strong>borrowing</strong> (împrumutare luată) depui un colateral (de ex. ETH) și împrumuți alt activ (de ex. stablecoins), plătind dobândă. Cele două sunt fețele aceleiași monede: dobânda pe care o încasezi ca lender vine din dobânda plătită de borrower.</p>
+
+<p>Esențial de înțeles: în DeFi (Aave, Compound, Curve) <strong>totul este supra-colateralizat</strong>. Ca să împrumuți 10.000 lei în stablecoins, trebuie să depui colateral de 15.000-20.000 lei. Nu există împrumut „pe încredere", ca la bancă. Asta elimină riscul de credit clasic (nimeni nu fuge cu banii), dar introduce un risc nou și brutal: <strong>lichidarea</strong>.</p>
+
+<h2>APY vs APR crypto: diferența care îți schimbă calculul</h2>
+
+<p>Aici cad mulți începători. <strong>APR</strong> (Annual Percentage Rate) este rata dobânzii simple, fără compunere. <strong>APY</strong> (Annual Percentage Yield) include compunerea — reinvestirea automată a dobânzii. În crypto, unde dobânda se acumulează la fiecare bloc (la câteva secunde), diferența nu e cosmetică.</p>
+
+<p>Exemplu concret pe un depozit de <strong>50.000 lei</strong> în stablecoins:</p>
+
+<ul>
+<li>La un <strong>APR de 10%</strong> simplu: primești 5.000 lei într-un an = 55.000 lei.</li>
+<li>La un <strong>APY de 10%</strong> (compus zilnic): efectul compunerii ridică randamentul real la ~10,52%, adică 5.258 lei.</li>
+<li>Dacă o platformă îți afișează „10% APY" dar plătește de fapt 10% APR fără compunere automată, pierzi cei 258 lei. Pe sume mari și pe ani, diferența devine semnificativă.</li>
+</ul>
+
+<p><strong>Capcană frecventă:</strong> platformele agresive afișează APY-uri umflate care includ token-uri de recompensă (governance tokens) cu preț volatil. Un „APY de 35%" din care 25% sunt token-uri care pot pierde 80% din valoare nu este un randament de 35% — este un pariu direcțional deghizat. Calculează întotdeauna <strong>randamentul de bază</strong> (cel plătit în același activ pe care l-ai depus) separat de recompensele în token-uri.</p>
+
+<h2>Ce randamente sunt realiste în 2026</h2>
+
+<p>Iată ordinele de mărime credibile, post-2024, după ce „randamentele de 20%" din epoca Celsius/Anchor au dispărut odată cu prăbușirile lor:</p>
+
+<ul>
+<li><strong>Stablecoins (USDC, USDT, DAI) pe Aave/Compound:</strong> 3-8% APY de bază, fluctuant cu cererea de împrumut. În perioade de euforie poate urca temporar la 10-15%.</li>
+<li><strong>ETH staking + lending:</strong> 3-5% APY, mai conservator.</li>
+<li><strong>Stablecoins pe Curve (pool-uri de stablecoins):</strong> 2-6% de bază, plus recompense variabile.</li>
+<li><strong>Orice „garantat 15%+ fix":</strong> semnal de alarmă maxim. Nu există randament fix mare fără risc fix mare ascuns. Celsius promitea 17%; investitorii au pierdut miliarde.</li>
+</ul>
+
+<p><strong>Regulă de aur:</strong> dacă cineva îți promite un randament fix garantat care depășește cu mult randamentul variabil de pe Aave/Compound, întreabă-te „de unde vine diferența?". Aproape întotdeauna răspunsul este: din riscul pe care ți-l ascund (re-hypothecation, împrumuturi necolateralizate către trading desks, sau pur și simplu o schemă Ponzi).</p>
+
+<h2>Riscul lichidării în lending: matematica exactă</h2>
+
+<p>Acesta este riscul pe care îl ignoră majoritatea celor care fac borrowing. Fiecare protocol are un <strong>LTV maxim</strong> (Loan-to-Value) și un <strong>prag de lichidare</strong> (liquidation threshold).</p>
+
+<p>Scenariu pas cu pas pe Aave. Depui colateral de <strong>10 ETH</strong>, la un preț de 12.000 lei/ETH = <strong>120.000 lei</strong> colateral.</p>
+
+<ul>
+<li>LTV maxim ETH ≈ 80%, prag de lichidare ≈ 82,5%.</li>
+<li>Împrumuți stablecoins în valoare de <strong>80.000 lei</strong> (LTV inițial 66,7% — prudent).</li>
+<li>Lichidarea se declanșează când datoria ta depășește 82,5% din valoarea colateralului.</li>
+<li>Calcul: 80.000 / 0,825 = 96.970 lei. Adică dacă valoarea colateralului scade de la 120.000 la <strong>96.970 lei</strong> — o scădere de doar ~19% a prețului ETH — ești lichidat.</li>
+</ul>
+
+<p>La lichidare, protocolul vinde automat o parte din colateralul tău pentru a acoperi datoria, plus o <strong>penalizare de lichidare de 5-15%</strong>. Pe exemplul de mai sus, o penalizare de 8% înseamnă o pierdere instantanee de câteva mii de lei, peste pierderea din scăderea prețului. ETH a scăzut deja cu 19% într-o singură zi de mai multe ori în istorie.</p>
+
+<p><strong>Cum eviți lichidarea:</strong></p>
+
+<ul>
+<li>Nu împrumuta niciodată la LTV maxim. Ține-te la 40-50% din LTV-ul permis pentru o marjă de siguranță reală.</li>
+<li>Monitorizează „Health Factor" (pe Aave): peste 2,0 = confortabil, sub 1,5 = pericol, sub 1,0 = lichidare.</li>
+<li>Folosește colateral mai puțin volatil (stablecoins sau ETH) — nu altcoins exotici cu praguri de lichidare mici.</li>
+<li>Setează alerte de preț. O scădere bruscă noaptea, când dormi, te poate lichida fără să apuci să adaugi colateral.</li>
+</ul>
+
+<h2>Siguranța Aave, Compound și Curve: track record-ul contează</h2>
+
+<p>Nu toate protocoalele sunt egale. Diferența dintre o platformă de lending crypto sigură și un experiment este timpul petrecut sub asediu fără să fie spart.</p>
+
+<h3>Aave</h3>
+<p>Lansat în 2017 (ca ETHLend), peste 6 ani de funcționare neîntreruptă, miliarde de dolari blocați, zero pierderi majore din exploit la nivel de protocol pe versiunile mature (V2/V3). Are un <strong>Safety Module</strong> — un fond de asigurare crypto format din token-uri AAVE puse la bătaie (staked) care acoperă deficitele („shortfall events"). Acoperă până la 30% din fondurile depuse de stakeri în caz de deficit. Este cel mai apropiat lucru de un fonds de asigurare crypto real din DeFi.</p>
+
+<h3>Compound</h3>
+<p>Pionierul lending-ului DeFi (2018), cod auditat intens, track record solid. Mai conservator decât Aave, cu mai puține active suportate, ceea ce reduce suprafața de atac. Nu are un fond de asigurare la fel de structurat ca Safety Module-ul Aave, dar are o trezorerie care a acoperit incidente minore.</p>
+
+<h3>Curve</h3>
+<p>Specializat pe schimburi între stablecoins și lending pe stablecoins. Eficient pentru randamente pe USDC/USDT/DAI. <strong>Atenție:</strong> Curve a suferit un exploit major în 2023 (vulnerabilitate în limbajul Vyper) cu pierderi de zeci de milioane de dolari, ulterior parțial recuperate. Lecția: chiar și protocoalele de top, cu ani de track record, pot fi sparte. Diversifică.</p>
+
+<h2>Fonduri de asigurare crypto: ce te protejează cu adevărat (și ce nu)</h2>
+
+<p>Aici se face cea mai periculoasă confuzie. „Asigurat" în crypto are minimum trei sensuri complet diferite:</p>
+
+<ul>
+<li><strong>Safety Module / fond intern al protocolului (Aave):</strong> token-uri puse deoparte care acoperă deficite. Real, dar limitat — dacă pierderea depășește fondul, tot pierzi. Nu e garanție 100%.</li>
+<li><strong>Asigurare DeFi terță (Nexus Mutual, InsurAce):</strong> cumperi o poliță separată care acoperă exploit-uri de smart contract. Costă 2-5% pe an din suma asigurată. Pentru un depozit de 100.000 lei, asta înseamnă 2.000-5.000 lei/an primă — care îți mănâncă o bună parte din randament, dar îți acoperă scenariul catastrofal.</li>
+<li><strong>„Asigurare" de marketing pe platforme centralizate (CEX):</strong> deseori vagă, fără acoperire legală clară. FTX și Celsius aveau și ele „asigurări". Au valorat zero la prăbușire.</li>
+</ul>
+
+<p><strong>Diferența critică față de bancă:</strong> în România, un depozit bancar este garantat de FGDB până la <strong>100.000 EUR per deponent per bancă</strong>, prin lege, cu stat în spate. Niciun fonds de asigurare crypto nu îți oferă asta. Garanția FGDB este o certitudine juridică; fondul Aave este o pernă, nu o plasă de siguranță absolută. Tratează orice sumă din lending crypto ca pe capital de risc, nu ca pe economii garantate.</p>
+
+<h2>CeFi vs DeFi: unde stă riscul real</h2>
+
+<p>Platformele <strong>centralizate (CeFi)</strong> — gen Nexo, sau ce a fost Celsius/BlockFi — îți iau custodia banilor. Riscul principal nu e tehnic, ci de <strong>contraparte</strong>: dacă firma face investiții proaste sau fraude, banii tăi dispar (vezi Celsius, BlockFi, Voyager — toate falimentate 2022-2023). Avantaj: interfață simplă, suport. Dezavantaj: „not your keys, not your coins".</p>
+
+<p>Protocoalele <strong>descentralizate (DeFi)</strong> — Aave, Compound, Curve — îți păstrezi custodia prin smart contract. Riscul principal este <strong>tehnic</strong>: bug în cod, exploit, manipulare de oracol de preț. Avantaj: transparență totală, nimeni nu poate „îngheța retragerile". Dezavantaj: dacă greșești o tranzacție sau te lichidezi, nu există suport care să te salveze.</p>
+
+<p>Pentru un investitor român prudent în 2026, DeFi pe protocoale cu track record lung (Aave V3, Compound V3) este, paradoxal, mai sigur decât majoritatea CeFi-urilor, pentru că elimină riscul ca o firmă să-ți fure depozitul.</p>
+
+<h2>Fiscalitate ANAF: dobânda din lending este venit impozabil</h2>
+
+<p>Mulți români cred că veniturile din crypto sunt „invizibile" pentru ANAF. Greșit și periculos. În România, în 2026:</p>
+
+<ul>
+<li>Dobânda/randamentul încasat din lending crypto este <strong>venit impozabil</strong> și se declară prin <strong>Declarația Unică</strong>, cu termen în general până la <strong>25 mai</strong> a anului următor.</li>
+<li>Câștigul din crypto se impozitează cu <strong>10% impozit pe venit</strong>. Câștigurile sub <strong>200 lei per tranzacție</strong> sunt neimpozabile dacă totalul anual nu depășește <strong>600 lei</strong>.</li>
+<li>Dacă venitul net anual din crypto depășește 6 salarii minime brute, se adaugă și <strong>CASS</strong> (contribuția la sănătate), calculată pe plafoane.</li>
+<li>Ține un <strong>registru detaliat</strong>: data, suma în lei la cursul zilei, platforma, tipul de venit. Fără evidențe, nu poți justifica nimic la un control.</li>
+</ul>
+
+<p>Exemplu: depozit 50.000 lei, randament 8% = 4.000 lei venit. Impozit 10% = 400 lei datorați ANAF. Randamentul tău net real devine ~7,2%, nu 8%.</p>
+
+<h2>Pași de acțiune: cum intri sigur în lending crypto</h2>
+
+<ul>
+<li><strong>1. Începe doar cu stablecoins majore</strong> (USDC, USDT) pe Aave V3 sau Compound V3. Evită altcoins exotici și platforme necunoscute cu randamente „prea bune".</li>
+<li><strong>2. Testează cu o sumă mică</strong> — 500-1.000 lei — ca să înțelegi mecanica (depunere, retragere, comisioane de rețea) înainte de a angaja capital serios.</li>
+<li><strong>3. Calculează randamentul de bază real</strong>, separat de recompensele în token-uri volatile. Folosește APY-ul plătit în același activ.</li>
+<li><strong>4. Dacă faci borrowing, ține LTV-ul la maxim 40-50%</strong> din cel permis și monitorizează Health Factor-ul zilnic. Setează alerte de preț.</li>
+<li><strong>5. Diversifică între protocoale</strong> — nu pune tot pe unul singur, oricât de „sigur" pare. Curve avea track record și tot a fost spart.</li>
+<li><strong>6. Consideră o poliță de asigurare DeFi</strong> (Nexus Mutual) pentru sume mari, acceptând că prima de 2-5% îți reduce randamentul.</li>
+<li><strong>7. Ține registrul fiscal de la prima tranzacție</strong> și declară la ANAF prin Declarația Unică. Nu lăsa fiscalitatea pe ultima sută de metri.</li>
+</ul>
+
+<h2>Greșeli frecvente de evitat</h2>
+
+<ul>
+<li><strong>Confuzia „asigurat = garantat ca la bancă".</strong> Niciun fond crypto nu egalează garanția FGDB. Tratează totul ca pe capital de risc.</li>
+<li><strong>Urmărirea APY-urilor de 30%+.</strong> Aproape întotdeauna sunt fie token-uri volatile, fie scheme nesustenabile. Celsius și Anchor au demonstrat asta cu pierderi de miliarde.</li>
+<li><strong>Borrowing la LTV maxim.</strong> O scădere normală de piață te lichidează cu penalizare. Lasă marjă mare.</li>
+<li><strong>Custodia pe CEX necunoscute.</strong> „Not your keys, not your coins" — riscul de contraparte a falimentat investitori complet solvabili.</li>
+<li><strong>Ignorarea fiscalității.</strong> ANAF poate cere clarificări retroactiv; lipsa evidențelor te lasă fără apărare și cu penalizări.</li>
+<li><strong>Tot capitalul într-un singur protocol.</strong> Diversificarea nu e opțională în DeFi — e supraviețuire.</li>
+</ul>
+
+<p>Concluzia rece: lending-ul crypto poate genera randamente reale de 4-8% pe stablecoins, superioare depozitelor bancare, dar numai dacă înțelegi că „sigur" în crypto înseamnă „risc gestionat", nu „risc zero". Protocoalele cu track record lung (Aave, Compound) plus diversificare, LTV prudent și fiscalitate la zi transformă un pariu într-o strategie. Restul e marketing.</p>

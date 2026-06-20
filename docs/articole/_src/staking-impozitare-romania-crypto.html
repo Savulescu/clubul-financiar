@@ -1,0 +1,158 @@
+<p><strong>Impozitarea staking-ului de criptomonede în România</strong> este una dintre cele mai prost înțelese zone fiscale ale anului 2026: recompensele apar în portofel zi de zi, par „bani gratis", dar din punctul de vedere al ANAF fiecare token primit este venit impozabil chiar din momentul în care îl poți controla. Dacă faci staking direct ca validator de Ethereum, prin delegare la un staking pool sau printr-un exchange centralizat, ai obligația să declari acel venit din staking crypto la ANAF, iar modul în care calculezi corect DAE reală (Dobânda Anuală Efectivă) îți schimbă complet imaginea despre randamentul tău net după taxe.</p>
+
+<p>În acest ghid premium îți arăt, cu cifre reale în lei, cum se face taxarea recompenselor de staking, cum compari DAE de la staking cu dobânda clasică de la bancă, ce deduceri de costuri la staking poți folosi pentru a reduce impozitul și cum declari totul corect în SPV pentru a evita riscurile unei notificări. Acoperim trei scenarii concrete: validatorul de Ethereum și impozitarea lui, impozitarea colectivă într-un staking pool și recompensele primite printr-un exchange — fiecare cu particularitățile lui de evaluare și de raportare.</p>
+
+<p>Regula de aur pe care trebuie să o reții din prima: recompensele de staking <strong>nu sunt „câștig din transfer", ci venit din alte surse</strong>, iar acest lucru schimbă atât cota, cât și momentul în care datorezi banii statului. Confuzia dintre cele două este greșeala numărul unu care duce la calcule false și la sub-declarare. Hai să o lămurim definitiv.</p>
+
+<h2>De ce staking-ul nu se impozitează ca un câștig din vânzarea de cripto</h2>
+
+<p>În România, veniturile din criptomonede se împart în două categorii fiscale complet diferite, iar tratarea lor identică este sursa majorității erorilor:</p>
+
+<ul>
+<li><strong>Câștigul din transferul de monedă virtuală</strong> — apare când <em>vinzi</em> sau schimbi cripto și obții un profit față de costul de achiziție. Atenție la o schimbare majoră: prin Legea 141/2025, începând cu <strong>1 ianuarie 2026 cota a crescut de la 10% la 16% pe câștigul net</strong> (preț de vânzare minus cost de achiziție minus costuri directe), conform art. 116 din Codul fiscal. Câștigurile realizate până la 31 decembrie 2025, declarate în 2026, rămân la 10%; cele realizate în 2026 și declarate în 2027 se taxează cu 16%.</li>
+<li><strong>Recompensa din staking</strong> — apare când <em>primești</em> tokenuri noi pentru că ai blocat (delegat sau validat) monede în rețea. Aceasta nu este o vânzare; este un <strong>venit din alte surse</strong> (art. 114 Cod fiscal), impozitat cu <strong>10% pe venit</strong> la valoarea de piață a tokenului în momentul primirii. Important: majorarea la 16% privește doar câștigul din transfer, nu și recompensa din staking, care rămâne în cota de 10% pentru alte surse.</li>
+</ul>
+
+<p>Diferența practică este uriașă. La câștigul din transfer datorezi impozit doar când vinzi și doar dacă ai profit. La staking datorezi impozit <strong>chiar dacă nu ai vândut niciun token</strong>, pentru simplul fapt că ai intrat în posesia recompensei. Mai mult: când <em>ulterior</em> vinzi tokenurile primite din staking, ai un al doilea eveniment fiscal — câștigul din transfer, impozitat în 2026 cu 16% — calculat față de valoarea pe care ai declarat-o deja ca venit. Aceeași recompensă poate fi astfel atinsă fiscal de două ori, în două momente distincte și în două categorii diferite, dar la cote diferite: 10% la primire (alte surse) și 16% la vânzarea ulterioară (transfer).</p>
+
+<p>Există și o mică scutire de care merită să ții cont: la câștigul din transfer, profiturile sub <strong>200 lei pe tranzacție nu se impozitează, cu condiția ca totalul anual al acestor câștiguri să nu depășească 600 lei</strong> (art. 116 Cod fiscal). Scutirea privește exclusiv câștigul din transfer, nu și recompensa din staking, care se declară integral ca venit din alte surse.</p>
+
+<h3>Momentul impozabil: „dominion and control"</h3>
+
+<p>ANAF reține ca moment al venitului clipa în care recompensa devine <strong>disponibilă și controlabilă</strong> de tine — adică o poți transfera, vinde sau retrage. La un validator de Ethereum, recompensele de consens se acumulează continuu, dar momentul relevant este când sunt creditate efectiv în soldul pe care îl poți retrage. La un staking pool sau exchange, momentul este data la care recompensa este creditată în contul tău, chiar dacă alegi reinvestirea automată (compounding). Reinvestirea <strong>nu amână</strong> impozitarea: tokenul primit și reinvestit este oricum venit la data primirii.</p>
+
+<h2>Cum calculezi valoarea impozabilă a fiecărei recompense</h2>
+
+<p>Pentru fiecare creditare de recompensă trebuie să stabilești valoarea în lei la momentul primirii. Formula este simplă, dar disciplina de evidență este totul:</p>
+
+<p><strong>Valoare venit (lei) = cantitate tokenuri primite × cursul tokenului în lei la data și ora primirii</strong></p>
+
+<p>Cursul în lei îl obții fie direct dintr-o piață care cotează în RON, fie convertind prețul în EUR/USD la cursul BNR din ziua respectivă. Recomandarea fermă: folosește cursul BNR valabil pentru data creditării, păstrează un export al tranzacțiilor (CSV) de la exchange sau de la nodul de validare și notează cursul aplicat. Aceasta este dovada ta în caz de control.</p>
+
+<h3>Exemplu numeric: staking ETH printr-un pool, pe un an</h3>
+
+<p>Să presupunem că ai delegat <strong>10 ETH</strong> într-un staking pool cu o rată brută anunțată de <strong>3,5% pe an</strong>, iar pool-ul oprește un comision de 10% din recompense. Pentru simplitate, recompensele se creditează lunar și prețul mediu al ETH pe parcursul anului este de <strong>15.000 lei/ETH</strong>.</p>
+
+<ul>
+<li>Recompensă brută anuală: 3,5% × 10 ETH = <strong>0,35 ETH</strong>;</li>
+<li>Comision pool 10%: 0,035 ETH reținute de pool;</li>
+<li>Recompensă netă creditată ție: <strong>0,315 ETH</strong>;</li>
+<li>Valoare venit impozabil: 0,315 × 15.000 = <strong>4.725 lei</strong>.</li>
+</ul>
+
+<p>Acest 4.725 lei este venitul brut din staking pe care îl declari. Atenție: în practică, fiecare creditare lunară se evaluează la cursul lunii respective — nu poți folosi „o medie comodă" decât ca aproximare; la control contează valoarea la fiecare dată de primire. De aceea exportul lunar este obligatoriu.</p>
+
+<h2>Cota de impozit și contribuția CASS: ce datorezi efectiv</h2>
+
+<p>Venitul din staking, fiind venit din alte surse, se impozitează cu <strong>10% impozit pe venit</strong> aplicat pe venitul brut (sau, dacă ai costuri deductibile demonstrabile, pe venitul net). Dar capcana reală pentru sumele mai mari este <strong>CASS (contribuția de sănătate de 10%)</strong>, care se datorează prin plafoane raportate la salariul minim brut.</p>
+
+<p>În 2026, CASS pentru veniturile extrasalariale (inclusiv din alte surse și din investiții) se aplică pe tranșe, în funcție de totalul veniturilor cumulate dintr-un an, raportate la <strong>6, 12 și 24 de salarii minime brute</strong>. Pentru un salariu minim brut de referință de <strong>4.050 lei</strong>, pragurile orientative sunt:</p>
+
+<ul>
+<li><strong>Sub 6 salarii minime (≈ 24.300 lei venit cumulat)</strong> — în general nu datorezi CASS pe baza acestor venituri (cu excepțiile legale aplicabile);</li>
+<li><strong>Între 6 și 12 salarii minime (≈ 24.300–48.600 lei)</strong> — CASS = 10% × 6 salarii minime = <strong>2.430 lei</strong>;</li>
+<li><strong>Între 12 și 24 salarii minime (≈ 48.600–97.200 lei)</strong> — CASS = 10% × 12 salarii minime = <strong>4.860 lei</strong>;</li>
+<li><strong>Peste 24 salarii minime (≈ 97.200 lei)</strong> — CASS = 10% × 24 salarii minime = <strong>9.720 lei</strong>.</li>
+</ul>
+
+<p>Reține: CASS se calculează pe baza de calcul plafonată (salariile minime), nu pe venitul real, și se cumulează cu alte venituri extrasalariale (chirii, dividende, dobânzi, alte cripto). Verifică plafonul exact și nivelul salariului minim valabil pentru anul de raportare, fiindcă acestea se actualizează.</p>
+
+<h3>Exemplu numeric complet, cu impozit și CASS</h3>
+
+<p>Reluăm cazul de mai sus, dar presupunem că ai în total <strong>30.000 lei venit din staking</strong> pe an (din mai multe pool-uri), fără alte venituri extrasalariale. Te încadrezi în tranșa 6–12 salarii minime:</p>
+
+<ul>
+<li>Impozit pe venit: 10% × 30.000 = <strong>3.000 lei</strong>;</li>
+<li>CASS (plafon 6 salarii minime): 10% × 24.300 = <strong>2.430 lei</strong>;</li>
+<li><strong>Total taxe: 5.430 lei</strong>;</li>
+<li>Net rămas: 30.000 − 5.430 = <strong>24.570 lei</strong>;</li>
+<li>Cota efectivă de taxare: <strong>18,1%</strong> din venitul brut.</li>
+</ul>
+
+<p>Observă cum CASS aproape dublează povara față de impozitul „de 10%" pe care îl vezi promovat peste tot. Tocmai de aceea calculul DAE real, după taxe, este esențial.</p>
+
+<h2>DAE reală la staking vs dobânda clasică de la bancă</h2>
+
+<p>DAE (Dobânda Anuală Efectivă) este indicatorul care îți spune randamentul real anualizat, ținând cont de capitalizare și de costuri. La un depozit bancar, banca îți afișează DAE deja netă de capitalizare. La staking, randamentul afișat (APR sau APY) este <strong>brut</strong> — nu include comisionul pool-ului, nu include taxele și ignoră volatilitatea prețului. Ca să compari corect cu o dobândă bancară, trebuie să construiești o <strong>DAE de staking, netă, după taxe</strong>.</p>
+
+<p>Formula simplificată a DAE nete la staking:</p>
+
+<p><strong>DAE netă = APR brut × (1 − comision pool) × (1 − cotă efectivă de taxare)</strong></p>
+
+<h3>Comparație directă, pe cifre</h3>
+
+<p>Presupunem un capital echivalent de <strong>150.000 lei</strong> plasat fie în staking ETH, fie într-un depozit bancar:</p>
+
+<ul>
+<li><strong>Staking ETH</strong>: APR brut 3,5%, comision pool 10%, cotă efectivă de taxare 18,1%. DAE netă = 3,5% × 0,90 × 0,819 = <strong>2,58% pe an</strong>, adică ≈ 3.870 lei venit net.</li>
+<li><strong>Depozit bancar</strong>: dobândă brută 6% pe an, impozit 10% pe dobândă (reținut la sursă de bancă). DAE netă = 6% × 0,90 = <strong>5,4% pe an</strong>, adică ≈ 8.100 lei venit net.</li>
+</ul>
+
+<p>Surpriza pentru mulți este că, pe randamentul curent, <strong>depozitul bancar bate net staking-ul de ETH</strong> — și asta înainte de a contabiliza riscul de preț al cripto. Concluzia nu este „staking-ul e prost", ci că DAE-ul brut promovat de platforme te poate induce în eroare: la dobânda clasică plătești doar 10% impozit reținut la sursă, fără bătaie de cap, în timp ce la staking adaugi comision, CASS și obligația de a declara singur. DAE-ul real este indicatorul corect de decizie.</p>
+
+<h2>Ce costuri poți deduce la staking</h2>
+
+<p>Pentru că staking-ul este venit din alte surse, deducerile sunt mai restrânse decât la o activitate independentă, dar nu inexistente. Costurile direct legate de obținerea venitului pot reduce baza impozabilă, cu condiția să fie documentate cu facturi sau dovezi clare. Deducerile uzuale și demonstrabile:</p>
+
+<ul>
+<li><strong>Comisionul pool-ului sau al validatorului</strong> — dacă nu a fost deja scăzut din recompensa creditată, îl poți deduce; dacă a fost reținut la sursă, declari direct recompensa netă;</li>
+<li><strong>Costurile de tranzacționare (gas fees)</strong> direct asociate operațiunilor de staking/unstaking;</li>
+<li><strong>Costurile de operare a unui validator de Ethereum propriu</strong> — energie electrică, găzduire server/VPS, amortizarea hardware-ului dedicat — proporțional cu utilizarea pentru validare;</li>
+<li><strong>Comisioane de retragere</strong> percepute de exchange pentru recompense.</li>
+</ul>
+
+<p>Nu poți deduce pierderea de valoare a tokenului (volatilitatea) ca pe un cost de staking — aceea contează doar ulterior, la momentul vânzării, în calculul câștigului din transfer. Păstrează toate facturile (VPS, energie, hardware) cel puțin 5 ani; fără ele, ANAF respinge deducerea.</p>
+
+<h2>Particularități pe tip de staking</h2>
+
+<h3>Validator de Ethereum (solo staking)</h3>
+
+<p>Dacă rulezi propriul nod și ai depus 32 ETH, ești atât beneficiar al recompenselor de consens, cât și „mic antreprenor tehnic". Ai cele mai multe deduceri posibile (hardware, energie, găzduire), dar și cea mai mare responsabilitate de evidență: trebuie să documentezi fiecare epocă de recompensă și fiecare retragere. Penalizările (slashing sau inactivity leak) <strong>nu sunt deductibile</strong> ca pierdere din venit, fiindcă nu sunt costuri de obținere a venitului, ci sancțiuni.</p>
+
+<h3>Staking pool (impozitare colectivă)</h3>
+
+<p>Într-un staking pool primești o cotă-parte din recompensele agregate, proporțional cu mizele tale. Fiscal, <strong>impozitarea rămâne individuală</strong>: pool-ul nu este un contribuabil pentru tine, deci tu declari partea ta de recompensă, în lei, la momentul creditării în contul tău din pool. „Impozitarea colectivă" se referă doar la felul în care se generează recompensa, nu la declarare — declarația o faci singur, pe felia ta.</p>
+
+<h3>Staking prin exchange centralizat</h3>
+
+<p>Exchange-ul îți creditează recompensele și de obicei reține deja comisionul. Avantaj: ai un export curat. Dezavantaj: multe exchange-uri afișează doar APY brut și nu îți oferă valoarea în lei la momentul primirii. Tu trebuie să o calculezi cu cursul BNR. Nu presupune că exchange-ul a raportat ceva în locul tău către ANAF — obligația de declarare îți aparține integral.</p>
+
+<h2>Cum declari corect veniturile din staking în SPV, pas cu pas</h2>
+
+<p>Veniturile din staking se declară prin <strong>Declarația Unică (formular 212)</strong>, depusă electronic în Spațiul Privat Virtual (SPV), până la <strong>25 mai</strong> a anului următor celui în care ai obținut veniturile.</p>
+
+<ol>
+<li><strong>Autentifică-te în SPV</strong> pe anaf.ro (cu certificat digital sau cu user/parolă obținute prin verificare).</li>
+<li><strong>Completează Declarația Unică (212)</strong>, capitolul de venituri realizate în anul precedent.</li>
+<li><strong>Selectează categoria „Venituri din alte surse"</strong> pentru recompensele de staking. Acolo înscrii venitul brut total în lei, calculat din însumarea fiecărei creditări la cursul ei.</li>
+<li><strong>Înscrie costurile deductibile</strong> (comisioane, gas, operare validator) dacă le poți documenta, pentru a obține venitul net impozabil.</li>
+<li><strong>Verifică încadrarea CASS</strong>: dacă totalul veniturilor extrasalariale depășește 6 salarii minime, bifezi obligația de CASS și sistemul calculează contribuția pe tranșa corespunzătoare.</li>
+<li><strong>Declară separat câștigurile din transfer</strong> (vânzările de cripto, inclusiv vânzarea tokenurilor primite din staking) la categoria „Câștiguri din transferul de monedă virtuală" — sunt o secțiune diferită.</li>
+<li><strong>Depune declarația și plătește</strong> impozitul și CASS până la termen. Plata se poate face tot prin SPV sau prin Trezorerie.</li>
+</ol>
+
+<h2>Capcane frecvente și greșeli de evitat</h2>
+
+<ul>
+<li><strong>Crezi că, dacă nu ai vândut, nu datorezi nimic</strong> — fals. Recompensa este venit la primire, indiferent dacă o ții sau o reinvestești.</li>
+<li><strong>Folosești un curs „comod" pentru tot anul</strong> — la control, ANAF se uită la valoarea fiecărei creditări la data ei. Diferențele mari de preț pot schimba semnificativ baza.</li>
+<li><strong>Ignori CASS</strong> — vezi „10%" și uiți contribuția de sănătate, care la sume peste 24.300 lei adaugă încă 2.430 lei sau mai mult.</li>
+<li><strong>Dubla impozitare necontrolată</strong> — nu reții valoarea declarată ca venit din staking, iar la vânzare recalculezi câștigul greșit, plătind impozit pe o sumă pe care deja ai impozitat-o o dată.</li>
+<li><strong>Lipsa exporturilor</strong> — fără CSV-uri și fără facturi pentru deduceri, pierzi atât dovada venitului, cât și dreptul la costuri.</li>
+<li><strong>Confunzi APY brut cu randamentul real</strong> — DAE netă după taxe este singura cifră pe care iei decizia.</li>
+</ul>
+
+<h2>Checklist de acțiune</h2>
+
+<ul>
+<li>Exportă lunar istoricul de recompense de la fiecare pool/exchange/validator (CSV).</li>
+<li>Notează, pentru fiecare creditare, cantitatea, data și cursul în lei (BNR) folosit.</li>
+<li>Calculează venitul brut anual în lei prin însumarea tuturor creditărilor.</li>
+<li>Adună facturile deductibile (comisioane, gas, energie, VPS, hardware validator) și păstrează-le 5 ani.</li>
+<li>Calculează DAE netă după taxe și compar-o cu alternativele (depozit, titluri de stat) înainte de a reinvesti.</li>
+<li>Verifică încadrarea CASS pe totalul veniturilor extrasalariale cumulate.</li>
+<li>Depune Declarația Unică (212) în SPV până la 25 mai, cu staking la „alte surse" și vânzările la „transfer de monedă virtuală".</li>
+<li>Plătește impozitul și CASS până la termen și păstrează recipisa de depunere.</li>
+</ul>
+
+<p>Staking-ul poate fi o sursă reală de venit pasiv, dar numai dacă îl tratezi ca pe un venit serios: evidență la zi, calcul corect al valorii în lei la fiecare primire, înțelegerea CASS și o declarare disciplinată în SPV. Diferența dintre un investitor cripto care doarme liniștit și unul care primește o notificare de la ANAF nu stă în cât a câștigat, ci în cât de riguros a documentat și declarat.</p>

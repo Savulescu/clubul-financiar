@@ -1,0 +1,131 @@
+<p>Întrebarea „<strong>cum transfer crypto între platforme fără pierderi</strong>" pare banală până când apeși butonul de retragere și realizezi că un singur caracter greșit din adresă, un fee de rețea umflat sau o rețea aleasă greșit îți pot evapora sute sau mii de lei în câteva secunde — ireversibil, fără serviciu de relații cu clienții care să-ți întoarcă banii. Migrarea unui portofoliu de pe Binance pe un wallet propriu sau pe alt exchange este una dintre cele mai frecvente operațiuni și, paradoxal, una dintre cele mai costisitoare dacă o faci pe pilot automat.</p>
+
+<p>În acest ghid premium îți arăt procedura pas-cu-pas, cu lista completă de verificări înainte de a confirma o retragere crypto, cum calculezi fee-ul de retragere al unui exchange și taxa de blockchain reală (nu cea afișată „din burtă"), cum faci verificarea adresei de wallet ca să nu trimiți pe o adresă greșită și să pierzi fondurile, plus ce înseamnă toate astea pentru impozitul pe transferul de criptomonede în relația cu ANAF.</p>
+
+<p>Vei pleca de aici cu un proces repetabil: alegerea rețelei corecte, testul cu sumă mică, calculul fee-urilor reale în lei, citirea confirmărilor pe blockchain și păstrarea dovezilor pentru declarația fiscală. Sume concrete, praguri reale din România anului 2026 și capcanele care îi costă cel mai des pe români.</p>
+
+<h2>De ce „transferul" nu e un singur lucru — și de ce contează enorm</h2>
+
+<p>Când spui „mut crypto de pe o platformă pe alta", de fapt execuți două operațiuni distincte: o <strong>retragere</strong> (withdrawal) de pe platforma sursă și un <strong>depozit</strong> (deposit) pe platforma destinație. Între ele se află blockchain-ul, care nu îți cere voie și nu poate fi anulat. Asta înseamnă trei lucruri pe care trebuie să le ai în cap permanent:</p>
+
+<ul>
+<li><strong>Tranzacția este ireversibilă.</strong> Spre deosebire de un transfer bancar SEPA, unde ai recall și poți recupera banii într-un cont greșit, o tranzacție on-chain confirmată nu se mai întoarce. Singura cale e ca destinatarul să îți retrimită voluntar — iar dacă adresa nu aparține nimănui, banii sunt pur și simplu pierduți.</li>
+<li><strong>Adresa și rețeaua trebuie să se potrivească.</strong> Aceeași monedă poate circula pe rețele diferite (USDT pe Ethereum-ERC20, pe Tron-TRC20, pe BNB Smart Chain-BEP20, pe Solana etc.). Dacă alegi rețeaua greșită, fondurile pot ajunge într-un loc din care nu le mai poți recupera.</li>
+<li><strong>Plătești de două ori „taxe", dar nu către aceeași entitate.</strong> Exchange-ul îți ia un <strong>fee de retragere</strong> (comisionul platformei), iar rețeaua îți ia o <strong>taxă de blockchain</strong> (gas/network fee) plătită minerilor/validatorilor. Multe platforme le contopesc într-o singură cifră afișată, ceea ce ascunde unde pierzi efectiv banii.</li>
+</ul>
+
+<h2>Anatomia costurilor: fee de retragere exchange vs. taxă de blockchain</h2>
+
+<p>Ca să răspunzi corect la „cât mă costă transferul", trebuie să desparți cele două componente, pentru că se comportă complet diferit.</p>
+
+<h3>Fee-ul de retragere al exchange-ului</h3>
+
+<p>Este o sumă <strong>fixă pe monedă și pe rețea</strong>, setată de platformă, nu de blockchain. Exemple orientative (verifică-le mereu în momentul retragerii, se schimbă des):</p>
+
+<ul>
+<li>USDT pe rețeaua <strong>TRC20 (Tron)</strong>: tipic ~1 USDT fee fix, indiferent dacă scoți 50 sau 5.000 USDT.</li>
+<li>USDT pe rețeaua <strong>ERC20 (Ethereum)</strong>: poate fi 3–10 USDT sau mai mult, în funcție de aglomerația rețelei.</li>
+<li>Bitcoin (BTC) on-chain: fee fix de exchange de ordinul 0,0002–0,0005 BTC, ceea ce la un curs de ~270.000 lei/BTC înseamnă <strong>54–135 lei</strong> doar comisionul platformei.</li>
+</ul>
+
+<p>Observă implicația practică: pe rețele scumpe, fee-ul fix te „arde" proporțional mult mai tare dacă transferi sume mici. Dacă muți 200 lei de USDT pe ERC20 și fee-ul echivalează cu 40 lei, ai pierdut <strong>20%</strong> din transfer pe comision. Aceeași sumă pe TRC20, cu fee de ~5 lei, înseamnă 2,5%. De aici regula de aur: <strong>alege rețeaua ieftină și compatibilă cu destinația.</strong></p>
+
+<h3>Taxa de blockchain (network/gas fee)</h3>
+
+<p>Este plata către rețea pentru includerea tranzacției. La unele lanțuri e prinsă în fee-ul exchange-ului (cazul retragerilor de pe platforme centralizate), dar devine vizibilă și separată când retragi într-un wallet propriu și apoi vrei să muți mai departe de acolo. Pe Ethereum, gas-ul fluctuează cu cererea: poate fi câțiva lei la ore liniștite și zeci de lei în vârf de activitate. Pe Tron sau Solana, costul on-chain este tipic de ordinul cenților.</p>
+
+<h3>Calculator de fee real — exemplu numeric complet</h3>
+
+<p>Să zicem că muți echivalentul a <strong>10.000 lei în USDT</strong> de pe Exchange A pe Exchange B și compari două rute:</p>
+
+<ul>
+<li><strong>Ruta ERC20:</strong> fee de retragere ~7 USDT ≈ 32 lei. Primești la destinație ~9.968 lei. Cost total: <strong>0,32%</strong>.</li>
+<li><strong>Ruta TRC20:</strong> fee de retragere ~1 USDT ≈ 4,6 lei. Primești ~9.995 lei. Cost total: <strong>0,046%</strong>.</li>
+</ul>
+
+<p>Diferența pe un singur transfer pare mică (≈27 lei), dar dacă faci rebalansări lunare, pe an aduni sute de lei pierduți inutil. Formula mentală simplă: <strong>Cost % = (fee retragere în lei + eventual fee depozit) ÷ suma transferată × 100</strong>. Dacă depășește 1–2% pentru un transfer obișnuit, oprește-te și caută o rețea mai ieftină.</p>
+
+<h2>Capcana cea mai scumpă: adresa greșită și rețeaua greșită</h2>
+
+<p>Cele mai mari pierderi nu vin din fee-uri, ci din două greșeli care duc la dispariția totală a fondurilor.</p>
+
+<h3>1. Adresă de wallet greșită</h3>
+
+<p>Adresele crypto sunt șiruri lungi de caractere. Dacă lipsește sau e schimbat un singur semn, există două scenarii: ori adresa este invalidă (și unele platforme te blochează la verificarea de format), ori — mai periculos — adresa este validă, dar aparține altcuiva sau nimănui. În al doilea caz, banii pleacă și nu se mai întorc.</p>
+
+<p>Atenție specială la <strong>malware-ul de tip clipboard-hijacker</strong>: programe care, atunci când dai copy-paste la o adresă, o înlocuiesc discret cu adresa atacatorului. De aceea verificarea adresei de wallet nu se face „din ochi", ci după o procedură.</p>
+
+<h3>2. Rețea (network/chain) greșită</h3>
+
+<p>Trimiterea unui token pe o rețea pe care platforma destinație nu o suportă pentru acel token este a doua cauză majoră de pierdere. Exemplu tipic: trimiți USDT pe BEP20 către o adresă care, pe platforma destinație, e configurată doar pentru ERC20. În unele cazuri, dacă destinația e un exchange mare, suportul îți poate recupera fondurile contra unei taxe — dar e lent, nesigur și uneori imposibil. Pe un wallet self-custody fără cheia rețelei respective, recuperarea poate fi practic exclusă.</p>
+
+<h2>Procedura corectă, pas cu pas</h2>
+
+<p>Acesta este procesul pe care merită să-l urmezi de fiecare dată, indiferent de sumă. Disciplina aici îți economisește, statistic, cei mai mulți bani.</p>
+
+<ul>
+<li><strong>Pasul 1 — Pregătește adresa de destinație.</strong> Pe platforma/wallet-ul unde vrei să primești, generează adresa de depozit pentru moneda exactă și <strong>selectează rețeaua</strong>. Copiază adresa direct de acolo, nu o scrie de mână.</li>
+<li><strong>Pasul 2 — Verifică rețeaua pe ambele capete.</strong> Rețeaua aleasă la retragere TREBUIE să fie identică cu rețeaua adresei de depozit. USDT-TRC20 merge doar către o adresă de depozit USDT-TRC20.</li>
+<li><strong>Pasul 3 — Verifică adresa cu metoda „cap-coadă-mijloc".</strong> Compară primele 5–6 caractere, ultimele 5–6 și încă un grup din mijloc între ce ai copiat și ce afișează câmpul de retragere. Dacă platforma oferă scanare QR, preferă QR-ul în locul lipirii manuale.</li>
+<li><strong>Pasul 4 — Folosește whitelist-ul de adrese (address book).</strong> Salvează adresele de încredere și, ideal, activează „retrageri doar către adrese din whitelist". Așa neutralizezi clipboard-hijacker-ul.</li>
+<li><strong>Pasul 5 — Fă un test cu sumă mică.</strong> Trimite mai întâi echivalentul a 20–50 lei. Confirmă că au sosit, apoi trimite restul. Costul testului (un fee suplimentar) este o asigurare ieftină față de riscul de a pierde tot.</li>
+<li><strong>Pasul 6 — Confirmă retragerea și autentifică-te.</strong> Aprobă cu 2FA (de preferat aplicație de autentificare, nu SMS) și răspunde la e-mailul/link-ul de confirmare a retragerii. Citește atent suma, rețeaua și adresa în ecranul final.</li>
+<li><strong>Pasul 7 — Urmărește confirmările pe blockchain.</strong> Vei primi un TXID (hash de tranzacție). Caută-l într-un explorer (Etherscan, Tronscan, Solscan, mempool.space pentru BTC) și așteaptă numărul de confirmări cerut de destinație. Până la confirmare, fondurile sunt „în tranzit".</li>
+<li><strong>Pasul 8 — Salvează dovezile.</strong> TXID, suma, data/ora, fee-ul, cursul în lei la momentul respectiv. Îți vor trebui pentru evidența fiscală.</li>
+</ul>
+
+<h2>Implicații fiscale în România: ce e și ce NU e impozabil</h2>
+
+<p>Aici se nasc cele mai multe confuzii. Mesajul-cheie: <strong>simpla mutare a propriilor criptomonede între platformele și wallet-urile tale nu este, prin ea însăși, un eveniment impozabil.</strong> Dacă transferi 1.000 USDT de pe contul tău de pe Exchange A pe contul tău de pe Exchange B, nu ai realizat niciun câștig — ai doar schimbat locul de păstrare. ANAF impozitează <strong>câștigul realizat</strong>, nu locația activelor.</p>
+
+<p>Impozitul apare atunci când <strong>înstrăinezi</strong>: vinzi crypto pe lei/valută fiat, schimbi o monedă pe alta (crypto-to-crypto e considerat eveniment de realizare a câștigului), sau plătești ceva cu crypto. În aceste momente se calculează diferența dintre prețul de vânzare/valoarea la înstrăinare și costul de achiziție.</p>
+
+<h3>Cum se calculează și cât plătești</h3>
+
+<ul>
+<li><strong>Câștigul</strong> = valoarea la înstrăinare − costul de achiziție (în lei, la cursul de la fiecare moment) − costuri aferente. Aici intră inclusiv fee-urile de tranzacționare și, după caz, costurile de transfer documentate.</li>
+<li><strong>Cota de impozit pe venit:</strong> 10% aplicat câștigului. Reține un detaliu important: câștigul sub <strong>200 de lei pe tranzacție</strong> nu se impozitează, cu condiția ca totalul acestor câștiguri mici neimpozitate să nu depășească <strong>600 de lei pe an</strong>; peste acest prag, totul devine impozabil.</li>
+<li><strong>CASS (contribuția la sănătate):</strong> dacă venitul net anual din astfel de surse depășește praguri raportate la salariul minim (6, 12 sau 24 de salarii minime brute), datorezi și CASS, calculată pe plafonul corespunzător. Pentru sume semnificative, aceasta poate fi o componentă mai mare decât impozitul de 10%.</li>
+<li><strong>Declararea:</strong> câștigul se declară prin <strong>Declarația Unică</strong>, depusă în anul următor celui în care ai realizat câștigul. Tu ești responsabil de calcul și declarare, exchange-ul nu reține impozitul în locul tău.</li>
+</ul>
+
+<p><strong>De ce contează evidența transferurilor pentru fisc:</strong> deși transferul în sine nu e taxabil, el este parte din lanțul care îți justifică <strong>costul de achiziție</strong> de mai târziu. Dacă vinzi de pe Exchange B niște crypto pe care le-ai cumpărat pe Exchange A și apoi le-ai transferat, trebuie să poți demonstra prețul inițial de achiziție. Fără TXID-uri și extrase, ANAF poate considera costul de achiziție drept zero, ceea ce îți umflă artificial câștigul impozabil.</p>
+
+<h3>Exemplu numeric fiscal</h3>
+
+<p>Ai cumpărat 0,1 BTC cu 22.000 lei pe Exchange A. Plătești ~30 lei fee de retragere și muți coinul pe Exchange B (transfer neimpozabil). Peste un an, vinzi acolo cei 0,1 BTC cu 28.000 lei.</p>
+
+<ul>
+<li>Câștig brut: 28.000 − 22.000 = 6.000 lei.</li>
+<li>Costuri deductibile documentate (fee retragere + fee tranzacționare): să zicem 80 lei. Câștig net ≈ 5.920 lei.</li>
+<li>Impozit 10%: ≈ <strong>592 lei</strong>, plus eventual CASS dacă pragurile anuale sunt depășite.</li>
+</ul>
+
+<p>Observă cum cei 80 de lei de costuri, dacă îi documentezi, îți reduc baza impozabilă. Fără dovezi, ai plăti pe 6.000 lei, nu pe 5.920.</p>
+
+<h2>Checklist final înainte de a apăsa „Confirm retragere"</h2>
+
+<ul>
+<li>☐ Am generat adresa de depozit direct pe platforma destinație, pentru moneda exactă.</li>
+<li>☐ Rețeaua de la retragere = rețeaua adresei de depozit (TRC20 = TRC20, ERC20 = ERC20 etc.).</li>
+<li>☐ Am verificat adresa cap-coadă-mijloc sau am folosit QR; ideal, e în whitelist.</li>
+<li>☐ Am calculat fee-ul real în lei și costul ca procent; sub 1–2% pentru un transfer normal.</li>
+<li>☐ Am trimis întâi un test de 20–50 lei și a sosit corect.</li>
+<li>☐ 2FA pe aplicație activ; am confirmat e-mailul de retragere.</li>
+<li>☐ Am salvat TXID-ul și l-am urmărit în explorer până la confirmare.</li>
+<li>☐ Am arhivat dovada (sumă, dată, fee, curs lei) pentru Declarația Unică.</li>
+</ul>
+
+<h2>Greșeli frecvente de evitat</h2>
+
+<ul>
+<li><strong>Lipirea adresei fără verificare.</strong> Cea mai costisitoare și cea mai des întâlnită. Verifică întotdeauna sau folosește QR/whitelist.</li>
+<li><strong>Alegerea rețelei după preț, ignorând compatibilitatea.</strong> TRC20 e ieftin, dar inutil dacă destinația nu îl acceptă pentru acel token.</li>
+<li><strong>Săritul peste testul cu sumă mică pe transferuri mari.</strong> La sume de mii de lei, 5 lei de test sunt ridicol de ieftini față de risc.</li>
+<li><strong>Confundarea „transfer" cu „vânzare" la fisc.</strong> Nu plăti impozit pe simple mutări, dar nici nu ignora câștigul real la înstrăinare.</li>
+<li><strong>Neglijarea evidenței.</strong> Fără TXID-uri și costuri de achiziție, riști să fii impozitat pe sume mai mari decât câștigul real.</li>
+<li><strong>Retragere în vârf de aglomerație a rețelei.</strong> Pe Ethereum, mutarea într-un weekend liniștit poate costa de câteva ori mai puțin decât în plin vârf de activitate.</li>
+<li><strong>Folosirea SMS în loc de aplicație pentru 2FA.</strong> SIM-swap-ul rămâne o cale reală de compromitere a conturilor.</li>
+</ul>
+
+<p>Migrarea unui portofoliu nu e despre viteză, ci despre disciplină. Rețea corectă, adresă verificată, test mic, confirmare pe blockchain și dovezi salvate — cinci reflexe care, repetate de fiecare dată, transformă o operațiune riscantă într-una previzibilă și ieftină.</p>

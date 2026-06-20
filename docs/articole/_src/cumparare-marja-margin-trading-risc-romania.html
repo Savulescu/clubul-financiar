@@ -1,0 +1,113 @@
+<p><strong>Margin trading și efectul de levier</strong> sunt printre cele mai seducătoare și mai periculoase instrumente la care un investitor român are acces în 2026: cumpărarea cu marjă îți permite să cumperi acțiuni de valoare mai mare decât banii pe care îi ai, brokerul împrumutându-ți diferența. Pare un accelerator de profit, dar efectul de levier amplifică simetric și pierderile, iar dobânzile pe marjă îți mănâncă randamentul lună de lună. Aici intervine cuvântul de care depinde supraviețuirea ta financiară: <strong>margin call</strong>.</p>
+
+<p>Ce înseamnă margin call? Este momentul în care valoarea contului tău scade sub un prag minim impus de broker, iar acesta îți cere fie bani în plus imediat, fie îți lichidează forțat pozițiile — de regulă în cel mai prost moment posibil, când piața deja a scăzut. Mulți români descoperă efectul de levier și riscul lui abia când primesc acel e-mail care le golește contul în câteva ore.</p>
+
+<p>În această lecție construim un model matematic concret: cât levier îți dă fiecare broker accesibil din România, ce se întâmplă numeric dacă piața scade 10%, 20% sau 30%, la ce preț exact te ajunge din urmă un margin call, cât te costă dobânzile pe marjă pe an și — partea cea mai importantă — în ce situații rare cumpărarea cu marjă chiar este o strategie de leverage acceptabilă, nu o capcană.</p>
+
+<h2>Ce este, de fapt, cumpărarea cu marjă</h2>
+
+<p>Cumpărarea cu marjă înseamnă că deschizi un cont de tip „margin” (nu „cash”) la broker, depui o sumă proprie numită <strong>marjă inițială</strong>, iar brokerul îți împrumută restul pentru a cumpăra acțiuni de valoare mai mare. Acțiunile cumpărate rămân gajate la broker drept garanție pentru împrumut.</p>
+
+<p>Doi termeni tehnici esențiali:</p>
+
+<ul>
+<li><strong>Marja inițială (initial margin)</strong> — procentul minim din valoarea poziției pe care trebuie să-l pui din banii tăi la deschidere. În UE, sub reglementările ESMA, pentru CFD-uri pe acțiuni levierul maxim pentru clienții retail este 1:5, adică marjă inițială de 20%. La conturile reale de tip Reg-T (model american, oferit de brokeri precum Interactive Brokers) marja inițială standard este 50%, deci levier 1:2.</li>
+<li><strong>Marja de menținere (maintenance margin)</strong> — procentul minim din valoarea curentă a poziției pe care capitalul tău trebuie să-l acopere mereu. Tipic 25-30%. Când scazi sub el, primești <strong>margin call</strong>.</li>
+</ul>
+
+<p>Distincția crucială pentru un investitor din România: <strong>marjă reală</strong> (împrumut de bani pentru acțiuni pe care chiar le deții) vs. <strong>CFD cu levier</strong> (un contract derivat speculativ, nu deții acțiunea). Sunt produse complet diferite ca risc fiscal și juridic. La acțiuni reale la BVB sau pe burse internaționale prin Interactive Brokers / XTB (cont real), deții titlul. La CFD-uri (eToro, Plus500, Capital.com, XTB cont CFD) deții doar un pariu pe preț. CFD-urile cu levier pierd bani pentru 70-85% dintre clienții retail, conform avertismentelor obligatorii afișate chiar de aceste platforme.</p>
+
+<h2>Modelul matematic: cum amplifică levierul în ambele sensuri</h2>
+
+<p>Să luăm un exemplu numeric curat. Ai <strong>20.000 lei</strong> capital propriu. Vrei expunere pe un ETF sau pe un pachet de acțiuni.</p>
+
+<h3>Fără marjă (cont cash)</h3>
+<p>Cumperi acțiuni de 20.000 lei. Dacă piața urcă 20%, ai +4.000 lei (randament +20%). Dacă scade 20%, ai -4.000 lei (-20%). Simplu, simetric, fără surprize. Nu poți pierde mai mult decât ai pus.</p>
+
+<h3>Cu marjă 1:2 (levier dublu)</h3>
+<p>Pui 20.000 lei marjă, brokerul îți mai dă 20.000 lei. Cumperi acțiuni de <strong>40.000 lei</strong>.</p>
+<ul>
+<li><strong>Piața urcă 20%</strong>: poziția valorează 48.000 lei. Returnezi împrumutul de 20.000 lei → îți rămân 28.000 lei. Profit 8.000 lei pe capitalul tău de 20.000 = <strong>+40%</strong>. Levierul a dublat câștigul.</li>
+<li><strong>Piața scade 20%</strong>: poziția valorează 32.000 lei. Datorezi tot 20.000 lei → capitalul tău e doar 12.000 lei. Pierdere <strong>-40%</strong>. Levierul a dublat și pierderea.</li>
+<li><strong>Piața scade 50%</strong>: poziția valorează 20.000 lei = exact cât datorezi. Capitalul tău este <strong>ZERO</strong>. Ai fost spălat complet, deși activul a pierdut „doar” jumătate. Fără levier ai mai fi avut 10.000 lei.</li>
+</ul>
+
+<h3>Cu levier 1:5 (CFD retail UE, marjă 20%)</h3>
+<p>Pui 20.000 lei marjă și controlezi o poziție de <strong>100.000 lei</strong>. Acum o scădere de doar <strong>20%</strong> a pieței = -20.000 lei = întreg capitalul tău șters. La levier 1:5, o corecție obișnuită de bursă îți poate evapora tot contul. Și nu uita dobânda overnight care curge zilnic.</p>
+
+<p>Regula de aur a levierului, scrie-o pe perete: <strong>pierderea procentuală pe capitalul tău = scăderea pieței × levierul</strong>. La levier 1:5, piața trebuie să scadă doar 1/5 = 20% ca să te ruineze.</p>
+
+<h2>Margin call: la ce preț exact te ajunge din urmă</h2>
+
+<p>Aici e partea pe care 90% dintre începători nu o calculează niciodată înainte să intre. Formula prețului de margin call, pentru o poziție long, este:</p>
+
+<p><strong>Preț de lichidare = Preț de cumpărare × (1 − marjă inițială) / (1 − marjă de menținere)</strong></p>
+
+<p><strong>Exemplu concret.</strong> Cumperi 100 de acțiuni la 200 lei = 20.000 lei poziție. Pui 50% marjă (10.000 lei ai tăi, 10.000 lei împrumut). Marja de menținere = 30%.</p>
+<p>Preț de lichidare = 200 × (1 − 0,50) / (1 − 0,30) = 200 × 0,50 / 0,70 = <strong>142,86 lei</strong>.</p>
+
+<p>Deci dacă acțiunea scade de la 200 la ~143 lei (o scădere de doar <strong>28,6%</strong>), brokerul îți trimite margin call. Dacă nu adaugi bani în câteva ore, îți lichidează poziția automat, fixând pierderea. Observă paradoxul brutal: ai cumpărat cu „doar” 50% levier, dar o scădere normală de bursă de sub 30% îți declanșează deja apelul. La levier mai mare, pragul e și mai aproape.</p>
+
+<p>Și mai grav: lichidarea forțată se întâmplă exact când toți ceilalți investitori cu marjă sunt lichidați simultan, ceea ce împinge prețul în jos și mai tare. Așa se nasc „cascadele de margin call” care transformă o corecție de -20% într-un crah de -35%.</p>
+
+<h2>Dobânzile pe marjă: costul ascuns care îți erodează randamentul</h2>
+
+<p>Banii împrumutați de la broker nu sunt gratis. Plătești dobândă zilnică, calculată la valoarea împrumutului. În 2026, cu BNR menținând dobânda de politică monetară în zona 6-7%, dobânzile pe marjă în lei și valută sunt semnificative.</p>
+
+<ul>
+<li><strong>Interactive Brokers</strong> — printre cele mai mici din lume: aproximativ <strong>benchmark + 1,5%</strong> pentru solduri mici. Pentru împrumuturi în RON poate depăși 7-8% pe an; în USD, în jur de 6%; în EUR, 4-5%. Tot scump pentru o poziție ținută luni de zile.</li>
+<li><strong>XTB (cont real cu levier)</strong> — dobândă overnight pe pozițiile cu levier, variabilă în funcție de instrument.</li>
+<li><strong>CFD-uri (eToro, Plus500, Capital.com)</strong> — taxă de finanțare overnight (swap) percepută zilnic pe valoarea totală a poziției, nu doar pe împrumut. Pe un an, swap-urile pot însemna 8-15% din valoarea poziției — devorează orice profit pe termen mediu.</li>
+</ul>
+
+<p><strong>Calcul de impact.</strong> Împrumuți 20.000 lei la 8% dobândă anuală. Asta înseamnă 1.600 lei/an, adică ~133 lei/lună, ~4,4 lei/zi. Dacă ții poziția un an și piața e plată (0%), ai pierdut 1.600 lei doar din dobândă, pe lângă inflație. Levierul cu dobândă mare are nevoie ca piața să urce constant și rapid doar ca să acoperi costul — un pariu pe timing pe care puțini îl câștigă.</p>
+
+<h2>Implicații fiscale în România 2026</h2>
+
+<p>Aici mulți români greșesc grav. Tratamentul fiscal diferă radical:</p>
+
+<ul>
+<li><strong>Acțiuni reale printr-un broker cu sediu în UE care reține impozitul la sursă</strong> (ex. o sucursală locală conformă): impozit pe câștig de capital de regulă 1% (deținere peste 365 de zile) sau 3% (sub 365 de zile) reținut la sursă, plus CASS dacă depășești plafoanele.</li>
+<li><strong>Acțiuni / CFD-uri prin broker străin care NU reține impozitul</strong> (Interactive Brokers, XTB, eToro, Plus500): <strong>tu ești obligat să declari câștigul în Declarația Unică</strong> și să plătești <strong>10% impozit pe venit</strong> pe câștigul net anual, plus eventual CASS (10% pe o bază plafonată la 6/12/24 de salarii minime, în funcție de nivelul venitului).</li>
+</ul>
+
+<p>Atenție: pierderile din tranzacționare se pot reporta și compensa cu câștiguri în anii următori, dar trebuie documentate riguros. Dobânzile pe marjă <strong>nu</strong> sunt în general deductibile pentru un investitor persoană fizică obișnuit. CFD-urile cu levier care produc pierderi mari nu îți „șterg” obligația de a declara — ține evidența fiecărei tranzacții, fiindcă ANAF primește tot mai multe raportări automate de la platforme prin schimbul european de informații (DAC).</p>
+
+<h2>Când este cumpărarea cu marjă acceptabilă (rar, dar real)</h2>
+
+<p>Nu este întotdeauna o nebunie. Există situații în care levierul moderat și disciplinat are sens:</p>
+
+<ul>
+<li><strong>Levier mic, sub 1:1,3</strong> (folosești cel mult 20-30% împrumut peste capital), pe active diversificate, pe termen lung — nu pe o singură acțiune volatilă.</li>
+<li><strong>Buffer enorm de cash</strong>: ții lichidități separate care îți permit să acoperi un margin call fără să vinzi nimic. Dacă nu poți acoperi o scădere de 40% fără să fii lichidat, levierul tău e prea mare.</li>
+<li><strong>Cost de finanțare scăzut</strong> (Interactive Brokers) ȘI un activ cu randament așteptat clar peste dobândă.</li>
+<li><strong>Orizont scurt și tactic, cu stop-loss strict</strong>, pentru un trader experimentat care își dimensionează poziția astfel încât pierderea maximă pe tranzacție să fie sub 1-2% din capital.</li>
+<li><strong>Levier „intern” mai sigur</strong>: în loc de marjă, un investitor pe termen lung poate folosi ETF-uri cu expunere amplă și fără riscul de margin call personal — deși nici acestea nu sunt fără capcane (decay zilnic la ETF-urile cu levier 2x/3x).</li>
+</ul>
+
+<p>Cheia este: <strong>levierul amplifică un edge real; nu creează unul</strong>. Dacă strategia ta pierde bani fără levier, cu levier va pierde mai repede. Levierul este pentru cei care au deja un proces dovedit profitabil și vor să-l scaleze controlat — nu pentru cei care speră să recupereze pierderi.</p>
+
+<h2>Pași de acțiune înainte să cumperi vreodată cu marjă</h2>
+
+<ol>
+<li><strong>Calculează prețul tău de margin call ÎNAINTE de a intra</strong>, cu formula de mai sus. Dacă o scădere obișnuită de bursă (15-25%) te lichidează, nu intra.</li>
+<li><strong>Stabilește un levier maxim personal</strong> și nu-l depăși niciodată. Pentru investitor obișnuit: maxim 1:1,3. Pentru trader avansat cu stop strict: discutabil mai mult, dar tot prudent.</li>
+<li><strong>Verifică dobânda exactă pe marjă</strong> la brokerul tău, în moneda poziției, și calculează costul anual în lei. Compară-l cu randamentul așteptat realist.</li>
+<li><strong>Ține un buffer de cash</strong> de minimum 30-40% din valoarea poziției cu marjă, separat, accesibil instant.</li>
+<li><strong>Setează alerte de preț</strong> cu mult deasupra prețului de lichidare, ca să poți reacționa înainte de margin call, nu după.</li>
+<li><strong>Documentează fiecare tranzacție</strong> pentru Declarația Unică: data, preț, comision, dobândă, curs valutar la data tranzacției.</li>
+<li><strong>Citește avertismentul brokerului</strong>: dacă scrie „70-85% dintre clienții retail pierd bani”, ia-l în serios — tu nu ești excepția statistică.</li>
+</ol>
+
+<h2>Greșeli frecvente de evitat</h2>
+
+<ul>
+<li><strong>Să confunzi marja reală cu CFD-urile</strong> — CFD-urile cu levier 1:5 nu îți dau acțiunea, doar un pariu cu cost overnight uriaș.</li>
+<li><strong>Să nu calculezi prețul de lichidare</strong> și să crezi că „mai e loc de scădere” când de fapt margin call-ul e la doar -25%.</li>
+<li><strong>Să folosești levier pe o singură acțiune</strong> volatilă — o veste proastă peste noapte (gap-down de -15%) te poate lichida instant, fără șansă să reacționezi.</li>
+<li><strong>Să adaugi bani la o poziție pierzătoare</strong> doar ca să eviți margin call — adesea ăsta e momentul când arunci bani buni după bani răi.</li>
+<li><strong>Să ignori dobânda</strong> luni de zile — costul cumulat îți poate transforma o tranzacție „pe verde” într-una pe roșu.</li>
+<li><strong>Să uiți de Declarația Unică</strong> pentru brokerii străini — neraportarea câștigurilor poate aduce penalități de la ANAF.</li>
+</ul>
+
+<p>Concluzia onestă: pentru marea majoritate a investitorilor români, cumpărarea cu marjă este o capcană deghizată în accelerator de profit. Matematica nu te iartă — levierul îți amplifică greșelile mai mult decât aptitudinile. Folosește-l doar dacă ai un edge dovedit, un buffer solid de cash, un levier mic și disciplina să calculezi fiecare scenariu înainte. În rest, construirea avuției se face cu răbdare și capital propriu, nu cu bani împrumutați care îți pot fi cerți înapoi în cel mai prost moment.</p>
