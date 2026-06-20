@@ -1,0 +1,150 @@
+<p>O <strong>PFA plus SRL combinat structură hibridă venituri variabile</strong> nu se proiectează din cote, ci din <em>flux</em>: când venitul tău urcă și coboară imprevizibil de la lună la lună, întrebarea reală nu mai e „PFA sau SRL?", ci „cine emite factura pentru contractul ăsta și de ce". Cumularea veniturilor PFA și SRL devine eficientă exact la antreprenorii cu sezonalitate puternică — consultanți, creatori, agenții mici, freelanceri B2B — unde un an poate aduce 80.000 lei și următorul 280.000 lei. Aici contează cine plătește ce și când se declanșează TVA, pentru că o singură factură greșit rutată poate trece SRL-ul în plătitor de TVA și îți strică toată marja.</p>
+
+<p>În lecția aceasta tratez modelul de operare zilnic, nu teoria. Vei vedea cum se face cumulare venituri PFA și SRL fără să plătești CASS cu două entități de două ori, cât se plătește efectiv CASS cu două entități când ai două surse, unde stă pragul de TVA pentru PFA și SRL (același plafon, dar calculat pe fiecare entitate separat), cum se face transfer venit între entități legal și care sunt riscurile ANAF la structuri hibride atunci când fluxurile par „aranjate" doar ca să scazi taxe.</p>
+
+<p>Presupun că știi deja, din cele 700 de lecții anterioare, cum se calculează separat un PFA în sistem real și o microîntreprindere pe profit/cifră. Nu reiau bazele. Mergem direct la arhitectura de rutare a venitului, la pragurile de declanșare și la capcanele subtile care fac diferența între o structură curată și un montaj reclasificabil.</p>
+
+<h2>Regula de aur: cele două entități au plafoane separate, dar persoana ta nu</h2>
+
+<p>Prima eroare costisitoare a începătorilor în hibrid este să creadă că plafoanele se cumulează. Ele <strong>nu</strong> se cumulează la nivel de entitate, dar <strong>se cumulează</strong> la nivel de persoană fizică pentru contribuții. Distincția asta guvernează tot modelul:</p>
+
+<ul>
+<li><strong>Pragul de TVA se aplică pe fiecare entitate separat.</strong> PFA-ul are propriul plafon de cifră de afaceri; SRL-ul are propriul plafon. Un PFA care încasează 350.000 lei și un SRL care încasează 300.000 lei sunt, fiscal, două subiecte distincte — niciunul nu depășește singur pragul. Plafonul de scutire de TVA în România 2026 este de <strong>395.000 lei cifră de afaceri/an</strong> (ridicat de la 300.000 lei în septembrie 2025), iar fiecare entitate îl urmărește pe cont propriu.</li>
+<li><strong>CASS și CAS se calculează pe persoana fizică, nu pe entitate.</strong> Aici plafoanele se cumulează: veniturile din activități independente (PFA) și dividendele (SRL) intră în <em>aceeași</em> bază anuală de calcul al CASS. Nu plătești CASS de două ori dacă atingi plafonul o singură dată — dar trebuie să declari corect ambele surse în Declarația Unică, altfel ANAF îți recalculează.</li>
+</ul>
+
+<p>Cu alte cuvinte: împarți cifra de afaceri ca să rămâi neplătitor de TVA pe ambele entități, dar nu poți „împărți" persoana ca să eviți CASS. Modelul hibrid bine construit exploatează prima asimetrie fără să cadă în iluzia celei de-a doua.</p>
+
+<h2>Cine emite factura: regula de rutare zilnică</h2>
+
+<p>Decizia operațională cea mai frecventă — și cea mai prost luată — este: pentru contractul X, facturez din PFA sau din SRL? Răspunsul nu e „depinde", e un algoritm pe care îl rulezi de fiecare dată.</p>
+
+<h3>Pe PFA rutezi venitul „de competență personală"</h3>
+
+<ul>
+<li>Servicii prestate strict de tine, intelectuale, cu cheltuieli reale deductibile (echipamente, software, deplasări, abonamente, parte din utilități) — PFA-ul în sistem real le deduce, dividendul nu.</li>
+<li>Venitul până la plafonul de CAS: primele <strong>~97.200 lei venit net</strong> (24 × salariul minim de 4.050 lei) sunt zona în care CAS-ul de 25% rămâne plafonat la <strong>24.300 lei/an</strong> și îți cumperi puncte de pensie reale. Aici PFA-ul e ieftin marginal.</li>
+<li>Contracte cu un singur client major — atenție, însă: dacă PFA-ul are un singur beneficiar care îți dictează program și loc, riști reîncadrarea în activitate dependentă (vezi mai jos).</li>
+</ul>
+
+<h3>Pe SRL rutezi venitul „de structură"</h3>
+
+<ul>
+<li>Venitul cu marjă mare și cheltuieli mici, unde 1% pe cifra de afaceri (microîntreprindere cu cel puțin un salariat) bate impozitul real al PFA-ului.</li>
+<li>Venitul peste plafonul de CAS al PFA-ului: orice leu marginal care, pe PFA, ar suporta CASS pe bază mare fără beneficiu — îl muți pe SRL și îl scoți ca dividend cu cotă fixă.</li>
+<li>Activități cu răspundere, subcontractări, angajați, achiziții de stoc, contracte care cer personalitate juridică sau în care vrei să limitezi răspunderea la patrimoniul firmei.</li>
+<li>Colaborări cu alți oameni: dacă livrarea implică echipă, SRL-ul e vehiculul corect — PFA-ul cu „colaboratori" pe care nu îi poți justifica e un steag roșu.</li>
+</ul>
+
+<p><strong>Algoritmul zilnic, pe scurt:</strong> dacă e munca ta personală + ai cheltuieli reale + nu ai depășit ~97.200 lei venit net pe PFA → factură PFA. Dacă e venit de structură / marjă mare / peste plafonul CAS / implică echipă sau răspundere → factură SRL. Notează decizia pe fiecare contract; rutarea trebuie să aibă o logică economică, nu doar fiscală.</p>
+
+<h2>Cum se calculează CASS și CAS la fiecare entitate</h2>
+
+<p>Aici se câștigă sau se pierde toată optimizarea, fiindcă regulile diferă radical între cele două entități și se intersectează pe persoana ta.</p>
+
+<h3>La PFA (sistem real)</h3>
+
+<ul>
+<li><strong>Impozit pe venit: 10%</strong> din venitul net anual (încasări minus cheltuieli deductibile).</li>
+<li><strong>CAS (pensie): 25%</strong>, datorat doar dacă venitul net depășește plafonul de 12 salarii minime, pe o bază aleasă (12 sau 24 de salarii). Plafonat: maximul de 24 × 4.050 × 25% = <strong>24.300 lei/an</strong>.</li>
+<li><strong>CASS (sănătate): 10%</strong>, datorat de la pragul de 6 salarii minime (6 × 4.050 = <strong>24.300 lei venit net</strong>) și aplicat pe venitul real până la plafonul superior de 72 de salarii minime; peste 72 × 4.050 = 291.600 lei, CASS rămâne plafonat la <strong>29.160 lei/an</strong>. Salariul minim de referință pentru plafoanele anului 2026 este cel de la 1 ianuarie 2026 (4.050 lei), iar majorarea la 4.325 lei din iulie 2026 nu schimbă plafoanele contribuțiilor pentru venitul din 2026.</li>
+</ul>
+
+<h3>La SRL micro (dividende)</h3>
+
+<ul>
+<li><strong>Impozit pe microîntreprindere:</strong> 1% pe cifra de afaceri dacă ai cel puțin un salariat (cu normă întreagă sau cumulul prevăzut de lege) și te încadrezi în plafonul de venituri al microîntreprinderii. Fără salariat sau peste plafon, treci la impozit pe profit 16%.</li>
+<li><strong>Impozit pe dividende: 16%</strong> în 2026 (cotă majorată de la 10% începând cu 1 ianuarie 2026), reținut la sursă de SRL când distribui.</li>
+<li><strong>CASS pe dividende: 10%</strong>, dar pe <em>aceeași</em> bază anuală cumulată cu veniturile din activități independente. Acesta e nodul hibridului.</li>
+</ul>
+
+<h3>Intersecția care contează: CASS cu două entități, cât se plătește</h3>
+
+<p>CASS nu se plătește separat pe PFA și separat pe SRL. Se ia <strong>totalul</strong> bazei de calcul din toate sursele (venit net PFA + dividende încasate) și se aplică plafonarea o singură dată, la nivel de persoană fizică. Practic:</p>
+
+<ul>
+<li>Dacă suma venitului net din PFA și a dividendelor depășește plafonul superior CASS (72 de salarii minime = <strong>291.600 lei</strong> bază cumulată în 2026), plătești <strong>CASS-ul maxim o singură dată</strong> — 29.160 lei, indiferent câte entități ai. Orice leu peste acest prag e cu adevărat „CASS-free".</li>
+<li>Dacă atingi deja plafonul de 291.600 lei din PFA, dividendele suplimentare nu mai adaugă niciun ban de CASS. Abia <em>aici</em> SRL-ul devine extrem de eficient pe felia de deasupra plafonului: 1% cifră + 16% dividend, fără CASS marginal și fără CAS.</li>
+<li>Capcana cea mai frecventă: la venituri sub 291.600 lei bază cumulată — adică majoritatea hibrizilor reali — CASS de 10% se aplică pe baza cumulată reală (venit net PFA + dividende), iar dividendele <strong>nu</strong> sunt CASS-free. Nu „dispare" CASS pentru că e împărțit între entități — se adună pe persoana ta și se plafonează o singură dată, sus de tot.</li>
+</ul>
+
+<h2>Pragul de TVA pentru PFA și SRL: când se declanșează</h2>
+
+<p>Pragul de scutire este <strong>395.000 lei cifră de afaceri/an</strong>, urmărit separat pe fiecare entitate. Trei reguli operaționale de care depinde toată structura:</p>
+
+<ul>
+<li><strong>Depășirea declanșează înregistrarea obligatorie.</strong> Când o entitate depășește plafonul, ai un termen scurt (verifică termenul curent în Codul fiscal — în general până la data de 10 a lunii următoare depășirii) să te înregistrezi în scopuri de TVA. Întârzierea aduce penalități și TVA datorat retroactiv pe facturile emise după depășire.</li>
+<li><strong>Plafonul nu se cumulează între entități</strong> — dar ANAF poate verifica dacă împărțirea e artificială. Două entități cu același obiect de activitate, aceiași clienți și fără logică economică reală pot fi tratate ca o singură persoană impozabilă (vezi riscurile ANAF mai jos).</li>
+<li><strong>TVA-ul schimbă jocul de marjă.</strong> Pe clienți B2B plătitori de TVA, înregistrarea e adesea neutră sau avantajoasă (deduci TVA-ul pe achiziții). Pe clienți B2C sau neplătitori, devenirea plătitor de TVA îți crește prețul cu 21% (cota standard în România 2026, majorată de la 19% în august 2025) sau îți mănâncă marja. De aceea rutarea contează: ții entitatea cu clienți B2C sub prag, iar volumul B2B îl lași pe entitatea care oricum deduce.</li>
+</ul>
+
+<h2>Trei scenarii cu calcule concrete</h2>
+
+<h3>Scenariul 1 — venit mic și variabil (≈ 90.000 lei/an, totul pe PFA)</h3>
+
+<p>Antreprenor la început, venituri între 4.000 și 14.000 lei/lună. La acest nivel, <strong>SRL-ul e cost mort</strong>: salariu obligatoriu pentru cota de 1%, contabilitate dublă, raportări duble. Rutezi totul pe PFA.</p>
+
+<ul>
+<li>Venit net ≈ 90.000 lei. Sub plafonul de CAS de 97.200 lei → CAS opțional pe baza de 12 salarii (12 × 4.050 × 25% = 12.150 lei) sau deloc dacă alegi să nu te asiguri suplimentar; multă lume alege 12 salarii pentru pensie minimă.</li>
+<li>CASS: 10% pe venitul net real, fiindcă 90.000 lei se află între pragul de 6 salarii (24.300 lei) și plafonul de 72 de salarii (291.600 lei) → CASS ≈ 10% × 90.000 = 9.000 lei (încă nu ai atins plafonul superior de 29.160 lei).</li>
+<li>Impozit: 10% × 90.000 = 9.000 lei.</li>
+</ul>
+
+<p><strong>Concluzie:</strong> o singură entitate, zero complexitate de hibrid. Hibridul nu merită sub ~120.000–150.000 lei venit, fiindcă costul fix al SRL-ului (salariu + contabilitate) depășește economia.</p>
+
+<h3>Scenariul 2 — an bun, venit variabil (≈ 230.000 lei, hibrid activat)</h3>
+
+<p>Anul a explodat: 230.000 lei venituri, dintre care 120.000 lei muncă personală cu cheltuieli reale și 110.000 lei proiecte cu marjă mare, echipă și un client B2B mare.</p>
+
+<ul>
+<li><strong>PFA absoarbe 95.000 lei venit net</strong> (sub plafonul CAS de 97.200 lei). Plătești CAS plafonat (24.300 lei dacă alegi baza de 24 salarii) + CASS = 10% × 95.000 ≈ 9.500 lei + 10% impozit pe net. Deduci cheltuielile reale.</li>
+<li><strong>SRL absoarbe 110.000 lei.</strong> Cu un salariat și sub plafonul micro: 1% × cifra ≈ 1.100 lei impozit micro. Profitul rămas, distribuit ca dividend, suportă 16% impozit pe dividend. <strong>Atenție la CASS pe dividende:</strong> baza ta cumulată (95.000 lei net PFA + dividende) este încă sub plafonul superior CASS de 291.600 lei, deci dividendele <em>adaugă</em> CASS de 10% până la atingerea plafonului — nu sunt „CASS-free" la acest nivel de venit. Felia chiar fără CASS marginal apare doar deasupra plafonului de 291.600 lei bază cumulată.</li>
+<li>Niciuna dintre entități nu se apropie de 395.000 lei → ambele rămân neplătitoare de TVA. Clientul B2C nu vede majorare de preț.</li>
+</ul>
+
+<p><strong>Câștigul real, calibrat corect:</strong> cei 110.000 lei trecuți pe SRL plătesc doar 1% pe cifră + 16% pe dividend și <strong>nu suportă CAS deloc</strong> (CAS-ul de 25% e specific PFA-ului în sistem real, nu dividendelor) — față de un PFA pur, care i-ar fi suportat la 10% impozit pe net plus CASS pe bază cumulată mai mare. CASS marginal pe dividende dispare abia după ce baza cumulată depășește 291.600 lei; sub acel prag, avantajul hibridului vine din eliminarea CAS pe felia de structură și din deductibilitatea cheltuielilor reale pe PFA, nu din eliminarea CASS. La acest nivel, hibridul corect calibrat poate ridica net-ul cu câteva procente bune față de un singur vehicul — câștigul devine spectaculos doar când baza ta depășește plafonul CASS și fiecare dividend marginal e cu adevărat CASS-free.</p>
+
+<h3>Scenariul 3 — an exploziv, aproape de pragul de TVA (≈ 360.000 lei pe o singură entitate)</h3>
+
+<p>Un singur SRL încasează 360.000 lei. Ești la <strong>35.000 lei sub pragul de TVA</strong>. Tentația e să muți facturile viitoare pe PFA ca să nu depășești. <em>Aici e capcana.</em></p>
+
+<ul>
+<li>Dacă PFA-ul preia, brusc, exact aceiași clienți, cu aceeași activitate, doar ca să țină SRL-ul sub 395.000 lei → ANAF poate considera împărțirea artificială și poate trata cele două entități ca o singură persoană impozabilă, cu TVA datorat retroactiv + penalități.</li>
+<li>Varianta curată: PFA-ul preia un <em>tip diferit</em> de venit (consultanță personală, training, drepturi de autor), cu clienți diferiți și logică economică proprie. Atunci împărțirea e reală, nu fiscală.</li>
+<li>Dacă nu poți justifica economic separarea, mai bine te înregistrezi în scopuri de TVA și optimizezi prin deducerea TVA-ului pe achiziții — costul real e mult mai mic decât o reîncadrare.</li>
+</ul>
+
+<h2>Transfer de venit între entități, legal vs. reclasificabil</h2>
+
+<p>„Transferul de venit între entități" sună agresiv, dar are o singură formă legală: <strong>facturare reală pentru servicii reale, la preț de piață.</strong></p>
+
+<ul>
+<li><strong>Legal:</strong> SRL-ul facturează PFA-ul (sau invers) pentru servicii efectiv prestate — de exemplu, PFA-ul îți face consultanța, SRL-ul livrarea, și se decontează între ele pe contract. Documentat, la preț de piață, cu substanță economică.</li>
+<li><strong>Reclasificabil:</strong> facturi între entități fără serviciu real, doar ca să muți profitul unde e impozitat mai ieftin. ANAF aplică principiul prevalenței economicului asupra juridicului și retratează tranzacția.</li>
+<li><strong>Prețuri de transfer:</strong> chiar și între PFA-ul și SRL-ul tău, tranzacțiile între părți afiliate trebuie să fie la valoarea de piață. Subfacturarea sau suprafacturarea între entitățile tale e exact ce caută o inspecție.</li>
+</ul>
+
+<h2>Riscuri ANAF la structuri hibride</h2>
+
+<ul>
+<li><strong>Activitate dependentă mascată:</strong> PFA cu un singur client, program impus, loc impus, fără risc economic propriu → reîncadrare în salariat, cu CAS/CASS/impozit recalculate ca pe salariu, plus accesorii. Cel mai frecvent risc al modelului.</li>
+<li><strong>Fragmentarea artificială a cifrei de afaceri:</strong> împărțirea venitului între entități doar pentru a sta sub pragul de TVA, fără substanță economică reală.</li>
+<li><strong>Tranzacții între afiliați fără preț de piață:</strong> facturi PFA↔SRL nejustificate sau la prețuri distorsionate.</li>
+<li><strong>Distribuiri de dividende fără respectarea regulilor de profit:</strong> dividend distribuit fără profit contabil real sau fără hotărâre AGA corectă.</li>
+<li><strong>Cheltuieli personale trecute pe firmă:</strong> deductibilitate forțată care, la control, devine venit asimilat impozabil.</li>
+</ul>
+
+<h2>Checklist de implementare</h2>
+
+<ul>
+<li><strong>1. Calculează pragul de rentabilitate al hibridului.</strong> Sub ~120.000–150.000 lei venit total, rămâi pe o singură entitate. Costul fix al SRL-ului (salariu + contabilitate dublă) trebuie depășit de economia fiscală.</li>
+<li><strong>2. Definește o regulă de rutare scrisă</strong> pe tipuri de contract: ce merge pe PFA, ce merge pe SRL, cu justificare economică pentru fiecare.</li>
+<li><strong>3. Monitorizează lunar cifra de afaceri pe FIECARE entitate</strong> față de pragul de 395.000 lei. Setează o alertă la 80% din prag (≈ 316.000 lei).</li>
+<li><strong>4. Urmărește baza cumulată de CASS</strong> (venit net PFA + dividende) față de plafonul de 291.600 lei — abia peste el dividendele suplimentare devin CASS-free. Sub plafon, fiecare leu de dividend încă atrage 10% CASS.</li>
+<li><strong>5. Declară corect ambele surse în Declarația Unică.</strong> CASS și CAS se plafonează la nivel de persoană; o declarare incompletă declanșează recalcularea ANAF.</li>
+<li><strong>6. Documentează orice tranzacție între entități</strong> cu contract, serviciu real și preț de piață.</li>
+<li><strong>7. Verifică testele de dependență</strong> pentru PFA: clienți multipli, risc economic propriu, libertate de program și loc.</li>
+<li><strong>8. Reevaluează anual</strong> — la venituri variabile, structura optimă din anul bun poate fi supradimensionată în anul slab. Hibridul nu e permanent; e o unealtă pe care o activezi și o dezactivezi.</li>
+</ul>
+
+<p><strong>Verifică întotdeauna</strong> cotele, plafoanele și termenele exacte pe anaf.ro și în Codul fiscal la momentul deciziei: pragurile CASS, salariul minim de referință și termenele de înregistrare TVA se modifică frecvent, iar o structură hibridă optimă se reconstruiește în jurul cifrelor curente, nu al celor din anul trecut.</p>

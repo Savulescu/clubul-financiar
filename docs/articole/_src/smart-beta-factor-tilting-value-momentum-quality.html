@@ -1,0 +1,105 @@
+<p><strong>Smart beta factor investing România value momentum quality</strong> nu mai este un concept academic, ci un cadru concret de construcție a portofoliului pe care un investitor avansat îl poate implementa azi prin ETF-uri UCITS și, parțial, pe BVB. Lecția pleacă de la ce știi deja — investiția factorială explicată și dezbaterea value vs. growth — și merge direct în profunzime: cum combini trei factori cu primele lor de risc istorice într-un singur portofoliu multi-factor, cu o alocare-țintă de 30% value, 30% momentum și 40% quality, validată mental printr-un backtest pe 10 ani pe universul BVB.</p>
+<p>Vom trata factor premiums și rentabilitățile istorice, value factor și timpul de mean reversion, momentum factor și autocorelarea returnurilor, quality factor și metricile enterprise, diversificarea factorilor și corelațiile dintre ei, precum și implementarea concretă smart beta cu ETF-uri. Vei vedea de ce 40% quality nu este o întâmplare, ci o decizie de inginerie a riscului, și cum arată performance-ul factor tilts în fereastra 2020–2026, inclusiv anii în care fiecare factor a suferit.</p>
+<p>Presupun că stăpânești deja distincția dintre beta de piață și prima de factor, mecanica unui ETF de acumulare și logica fiscală a câștigului de capital în România. De aici încolo discutăm doar arhitectura: cum măsori fiecare factor, cum îl combini ca să nu se anuleze reciproc, cum gestionezi rotația și ce capcane subtile îți erodează în liniște prima de factor pe care credeai că o capturezi.</p>
+
+<h2>Cei trei factori: definiție operațională, nu intuiție</h2>
+<p>La nivel avansat, un factor nu este o „idee de investiție”, ci o <strong>variabilă măsurabilă care a fost asociată istoric cu o primă de rentabilitate persistentă și replicabilă</strong>. Diferența contează: dacă nu poți defini factorul printr-o formulă pe care un screen o aplică identic în fiecare lună, nu ai un factor, ai o părere.</p>
+<ul>
+<li><strong>Value</strong> — definit prin metrici de evaluare relativă: P/E, P/B, EV/EBITDA, free cash flow yield. Compania este „ieftină” raportat la fundamentale. Prima value se bazează pe <strong>mean reversion</strong>: prețurile deprimate revin spre valoarea intrinsecă.</li>
+<li><strong>Momentum</strong> — definit prin randamentul relativ pe 6–12 luni, excluzând ultima lună (formula clasică 12-1). Capturează <strong>autocorelarea returnurilor</strong>: ce a urcat tinde să mai urce pe orizont scurt-mediu, până la inversare.</li>
+<li><strong>Quality</strong> — definit prin metrici enterprise: ROE și ROIC ridicate, marje stabile, datorie netă/EBITDA scăzută, accruals mici, creștere consistentă a profiturilor. Capturează prima asociată companiilor robuste, rezistente în recesiune.</li>
+</ul>
+<p>Cheia pe care mulți o ratează: <strong>value și momentum sunt aproape opuse prin construcție</strong>. Value cumpără ce a scăzut; momentum cumpără ce a crescut. Tocmai această tensiune le face complementare într-un portofoliu — corelația dintre primele lor este adesea negativă, iar asta este aurul diversificării factoriale.</p>
+
+<h2>Factor premiums și rentabilități istorice: ce poți și ce nu poți presupune</h2>
+<p>Pe seriile lungi internaționale (decenii de date pe piețe dezvoltate), primele de factor brute s-au situat istoric în zona câtorva puncte procentuale anual peste beta de piață — dar cu o variabilitate enormă și cu perioade lungi de subperformanță. Trei adevăruri pe care trebuie să le internalizezi:</p>
+<ul>
+<li><strong>Primele sunt brute, nu nete.</strong> Costurile de tranzacționare, spread-urile și taxele erodează o parte semnificativă din primă, mai ales la momentum, care are turnover mare. O primă brută de 4% poate deveni 1,5–2% net pe o piață cu lichiditate scăzută ca BVB.</li>
+<li><strong>Decenii „pierduți” sunt normali.</strong> Value a subperformat masiv în deceniul 2010–2020, cât growth-ul tech a dominat. Un investitor factorial trebuie să tolereze 5–10 ani de subperformanță relativă fără să abandoneze strategia — altfel cumpără sus și vinde jos pe factori.</li>
+<li><strong>Pe BVB primele există, dar sunt zgomotoase.</strong> Universul listat lichid este restrâns (câteva zeci de emitenți tranzacționabili decent), deci orice „backtest pe 10 ani BVB” are eșantion mic și risc de overfitting ridicat. Tratează rezultatele drept indicative, nu drept lege.</li>
+</ul>
+
+<h2>Backtest mental pe 10 ani BVB: ce ne învață, cu prudență</h2>
+<p>Să presupunem universul acțiunilor lichide de pe BVB (componentele BET și câteva mid-caps tranzacționabile) și un rebalansare lunară a scorurilor factoriale pe fereastra ~2016–2026. Concluziile robuste care apar repetat pe piețe mici ca a noastră:</p>
+<ul>
+<li><strong>Quality a fost factorul cel mai stabil.</strong> Companiile cu ROE ridicat și datorie scăzută (gândește utilități și nume cu cash flow predictibil) au avut drawdown-uri mai mici în 2020 (COVID) și în corecția 2022. De aici alocarea mai mare — 40% — pe quality: nu pentru că are cea mai mare primă, ci pentru că <strong>ancorează portofoliul în stres</strong>.</li>
+<li><strong>Value a livrat puseuri puternice după șocuri.</strong> Recuperarea 2021 și rotația din 2022 (când ratele au urcat și growth-ul a fost lovit) au favorizat numele ieftine cu dividende solide. Value pe BVB e adesea „value cu dividend”, ceea ce adaugă un strat de randament în cash.</li>
+<li><strong>Momentum a fost cel mai capricios.</strong> Pe un univers mic și mai puțin lichid, momentum funcționează în trenduri clare, dar suferă „crash-uri de momentum” la inversările bruște (martie 2020, finalul lui 2022). Turnover-ul ridicat plătește spread scump pe BVB.</li>
+</ul>
+<p>Lecția structurală: pe o piață mică, <strong>nu pariezi totul pe un singur factor</strong>. Combinația netezește exact perioadele în care fiecare factor individual ar fi fost dureros de ținut singur.</p>
+
+<h2>De ce 30/30/40 și nu egal-ponderat</h2>
+<p>O alocare naivă ar fi 1/3 fiecare. Alocarea 30% value / 30% momentum / 40% quality este o decizie deliberată de inginerie a riscului, justificată pe trei axe:</p>
+<ul>
+<li><strong>Quality reduce volatilitatea agregată.</strong> Are corelația cea mai mică cu drawdown-urile de piață și se comportă defensiv. Supraponderarea lui la 40% scade beta efectivă a portofoliului factorial și îmbunătățește Sharpe-ul, nu neapărat randamentul brut.</li>
+<li><strong>Value și momentum se echilibrează reciproc la 30/30.</strong> Fiind anti-corelate, ponderi egale între ele maximizează beneficiul de diversificare dintre cele două „motoare de randament”. Dacă supraponderezi value, ești expus la „value traps”; dacă supraponderezi momentum, ești expus la crash-uri de momentum.</li>
+<li><strong>Bugetul de turnover.</strong> Momentum este scump de implementat (rotație mare). Plafonarea lui la 30% ține costurile de tranzacționare sub control, esențial pe BVB unde spread-urile mușcă.</li>
+</ul>
+<p>Important: 30/30/40 este o <strong>alocare de buget de risc, aplicată pe partea de capital destinată strategiei factoriale</strong>, nu pe tot patrimoniul. Restul portofoliului (cash, obligațiuni/titluri de stat, eventual expunere globală pe ETF) rămâne separat.</p>
+
+<h3>Două arhitecturi de combinare: mixing vs. integrating</h3>
+<p>Există o decizie tehnică pe care 90% dintre investitorii amatori o ignoră, dar care schimbă rezultatul:</p>
+<ul>
+<li><strong>Portfolio mixing (sleeve-uri separate).</strong> Construiești trei sub-portofolii independente — unul value, unul momentum, unul quality — și le combini 30/30/40. Simplu, transparent, ușor de auditat. Dezavantaj: un titlu poate fi cumpărat în sleeve-ul value și vândut simultan în cel de momentum, generând tranzacții care se anulează (dilution).</li>
+<li><strong>Signal integrating (scor compozit).</strong> Calculezi pentru fiecare acțiune un scor combinat: z-score value × 0,30 + z-score momentum × 0,30 + z-score quality × 0,40, apoi selectezi top-ranked după scorul unic. Mai eficient (evită tranzacțiile contradictorii), capturează mai bine „titlurile bune pe mai mulți factori”, dar mai greu de explicat și de monitorizat.</li>
+</ul>
+<p>Recomandarea avansată: dacă ai sub ~20–30 de poziții și piața e mică (BVB), <strong>integrating bate mixing</strong> — concentrezi capitalul în acțiunile care punctează bine simultan pe quality și value, evitând risipa de turnover. Pe universuri mari și lichide, mixing rămâne perfect valabil și mai ușor de operat.</p>
+
+<h2>Diversificarea factorilor și corelațiile: bugetul de risc real</h2>
+<p>Beneficiul multi-factor vine din corelațiile dintre prime, nu din randamentele lor individuale. Reține matricea conceptuală:</p>
+<ul>
+<li><strong>Value × Momentum: corelație istoric negativă.</strong> Aceasta este perechea-vedetă a diversificării factoriale. Când value suferă, momentum adesea livrează, și invers. Combinarea lor reduce variația portofoliului mai mult decât oricare alta.</li>
+<li><strong>Quality × Value: corelație mixtă, uneori în tensiune.</strong> Companiile de calitate sunt rareori cele mai ieftine — quality tinde să fie „scump pe bună dreptate”. Filtrarea simultană pe ambele dă companii „bune la preț rezonabil” (GARP-like), un sweet spot rezistent.</li>
+<li><strong>Quality × Momentum: corelație ușor pozitivă.</strong> Companiile robuste cu trend bun se suprapun des. Atenție să nu dublezi expunerea fără să-ți dai seama — verifică ce titluri punctează simultan pe ambele.</li>
+</ul>
+<p>Concluzia de inginerie: cuplul <strong>value+momentum produce diversificarea</strong>, iar <strong>quality reduce volatilitatea absolută</strong>. Cele trei împreună dau un profil rentabilitate/risc superior oricărui factor singular — exact rațiunea construcției multi-factor.</p>
+
+<h2>Implementarea smart beta cu ETF-uri: ruta realistă pentru un investitor român</h2>
+<p>Construirea manuală a trei sleeve-uri factoriale pe acțiuni individuale BVB este posibilă, dar costisitoare ca timp, turnover și spread. Pentru majoritatea, ruta scalabilă este prin <strong>ETF-uri smart beta UCITS</strong>, completate eventual cu un mic sleeve direct pe BVB pentru expunerea locală.</p>
+<ul>
+<li><strong>ETF-uri single-factor UCITS</strong> (MSCI Value / Momentum / Quality, sau „Enhanced Value”, „Quality”, „Momentum”). Le combini tu 30/30/40 și rebalansezi periodic. Avantaj: control total al ponderilor și rebalansare disciplinată.</li>
+<li><strong>ETF-uri multi-factor UCITS</strong> (un singur produs care integrează value+momentum+quality, uneori +size și +low-volatility). Avantaj: zero efort de combinare și rebalansare internă automată. Dezavantaj: nu controlezi ponderile și nu vezi clar ce factor te-a ajutat sau rănit.</li>
+<li><strong>Preferă ISIN cu prefix IE (Irlanda) și varianta de acumulare (Acc)</strong> pentru optimizarea fiscală a investitorului român — transformi fluxul de dividende impozabil anual într-un câștig de capital amânat, controlabil ca moment al realizării. Reține cadrul fiscal 2026: prin broker rezident în România, care reține impozitul la sursă, câștigul de capital se impozitează cu <strong>3% pentru titlurile deținute peste 365 de zile</strong> și <strong>6% pentru cele sub un an</strong>; prin broker străin (fără reținere la sursă) ai obligația de a declara singur câștigul în Declarația Unică, impozitat cu <strong>10%</strong>. Dividendele se impozitează cu <strong>16% din 2026</strong> (în creștere de la 10% în 2025). Confirmă întotdeauna cotele și pragurile la momentul realizării.</li>
+</ul>
+<p>Capcana de cost: un ETF smart beta are TER mai mare decât un ETF de indice plain-vanilla (tipic 0,2–0,5% vs. ~0,1%). Dacă prima netă de factor pe care o capturezi nu depășește clar diferența de cost plus turnover, plătești pentru complexitate fără să fii compensat. <strong>Compară întotdeauna prima de factor netă cu costul total, nu cu cel brut.</strong></p>
+
+<h2>Performance-ul factor tilts 2020–2026: anatomia ferestrei recente</h2>
+<p>Fereastra 2020–2026 este un laborator perfect pentru că a conținut toate regimurile: șoc, redresare, inflație, dobânzi în creștere și apoi platou. Pe scurt, ce a făcut fiecare factor:</p>
+<ul>
+<li><strong>2020:</strong> crash COVID — quality și low-volatility au protejat; momentum a suferit la inversarea bruscă de martie; value a fost lovit puternic, apoi a început recuperarea spre final de an.</li>
+<li><strong>2021:</strong> reflation trade — value a livrat un an excelent, momentum a prins trendul de redresare; quality a rămas solid dar mai puțin spectaculos.</li>
+<li><strong>2022:</strong> inflație + dobânzi sus — value a strălucit (numele ieftine cu dividend), growth-ul a fost demolat; momentum a avut un al doilea crash la inversarea de la jumătatea anului; quality a limitat drawdown-ul.</li>
+<li><strong>2023–2024:</strong> dominația câtorva nume mari de creștere a împins din nou momentum și quality (suprapunere pe lideri), în timp ce value clasic a rămas în urmă în multe luni.</li>
+<li><strong>2025–2026:</strong> regim mai echilibrat, fără un câștigător dominant — exact mediul în care un portofoliu 30/30/40 bine diversificat își dovedește valoarea, netezind divergențele dintre factori.</li>
+</ul>
+<p>Lecția: <strong>niciun factor nu câștigă mereu</strong>. Investitorul care a ținut 30/30/40 disciplinat prin întreaga fereastră a avut un drum mult mai neted decât cel care a urmărit „factorul la modă” și a rotit pe el — adică a cumpărat sus și a vândut jos pe factori, eroarea clasică.</p>
+
+<h2>Capcane subtile care îți erodează prima de factor</h2>
+<ul>
+<li><strong>Factor crowding.</strong> Dacă prea mult capital se înghesuie în același factor (ex. quality-momentum pe aceiași lideri), prima se comprimă și crește riscul de unwind brusc. Verifică dacă nu ești „long consensus”.</li>
+<li><strong>Turnover ascuns.</strong> Momentum rebalansat prea des pe BVB plătește spread care îți mănâncă prima. Rebalansează rar și disciplinat (lunar pentru scoruri, dar tranzacționează doar la depășiri de prag).</li>
+<li><strong>Definiție inconsistentă a factorului.</strong> Dacă schimbi formula value de la P/B la EV/EBITDA în mijlocul strategiei, nu mai compari mere cu mere. Fixează definițiile în avans, în scris.</li>
+<li><strong>Confuzia value vs. value trap.</strong> O acțiune ieftină pe fundamentale poate fi ieftină pentru că se prăbușește structural. Filtrarea simultană prin quality (datorie, marje, ROIC) este antidotul: cumperi ieftin <em>și</em> sănătos.</li>
+<li><strong>Rebalansarea pro-ciclică.</strong> A vinde factorul care a subperformat și a cumpăra pe cel care a strălucit este invers față de logica corectă. Rebalansarea spre țintă te face să cumperi factorul deprimat — exact ce trebuie.</li>
+</ul>
+
+<h2>Pași de implementare — checklist pentru un portofoliu multi-factor</h2>
+<ul>
+<li><strong>1. Definește bugetul.</strong> Stabilește ce procent din patrimoniul de investiții alocă strategiei factoriale (restul: cash, titluri de stat, expunere globală pasivă).</li>
+<li><strong>2. Fixează în scris definițiile factorilor.</strong> Value = ce metrici; Momentum = 12-1 lună; Quality = ROE+datorie+marje. Nu le mai schimbi pe parcurs.</li>
+<li><strong>3. Alege arhitectura.</strong> Sub 20–30 de poziții pe BVB → scor compozit integrat (z-score × 0,30/0,30/0,40). Univers mare/lichid → ETF-uri single-factor combinate sau un ETF multi-factor.</li>
+<li><strong>4. Selectează instrumentele.</strong> ETF-uri UCITS Acc, ISIN prefix IE, TER cât mai mic compatibil cu factorul; compară prima netă vs. cost total.</li>
+<li><strong>5. Setează regulile de rebalansare.</strong> Frecvență fixă (ex. trimestrial) sau pe prag (când o pondere deviază >5 puncte de la țintă). Rebalansează SPRE țintă, nu spre factorul la modă.</li>
+<li><strong>6. Optimizează fiscal realizările.</strong> Preferă acumularea pentru amânarea impozitului și ține pozițiile peste 365 de zile ca să prinzi cota redusă de 3% prin broker rezident (față de 6% sub un an), respectiv 10% autodeclarat prin broker străin. Atenție și la <strong>CASS de 10%</strong>, datorată dacă veniturile din investiții și alte surse depășesc pragurile anuale raportate la salariul minim (6, 12 sau 24 de salarii minime brute). Planifică momentul vânzărilor în funcție de aceste praguri.</li>
+<li><strong>7. Ține un jurnal de regim.</strong> Notează ce factor a performat și de ce — nu ca să rotești, ci ca să-ți menții disciplina când un factor suferă 3–5 ani la rând.</li>
+<li><strong>8. Auditează corelațiile anual.</strong> Verifică dacă value+momentum încă diversifică și dacă nu ai dublat din greșeală expunerea quality-momentum pe aceleași nume.</li>
+</ul>
+
+<h2>Greșeli frecvente la investitorii avansați</h2>
+<ul>
+<li><strong>Abandonarea unui factor după 2–3 ani de subperformanță</strong> — exact când urmează adesea reversiunea. Mean reversion la value cere răbdare de ani, nu de luni.</li>
+<li><strong>Supraponderarea momentum pentru randamentul recent</strong>, ignorând că vine cu cele mai violente crash-uri.</li>
+<li><strong>Confuzia smart beta cu „garanție de overperformance”.</strong> Smart beta este o expunere sistematică la prime de risc, nu un free lunch — poate și trebuie să subperformeze în anumite regimuri.</li>
+<li><strong>Ignorarea costurilor și a fiscalității</strong>, care pot transforma o primă brută atractivă într-un rezultat net mediocru, mai ales pe o piață cu spread-uri ca BVB.</li>
+<li><strong>Backtest overfitted pe BVB</strong> — eșantion mic, perioadă scurtă; tratează orice rezultat local drept indicativ și ancorează-ți așteptările în datele lungi internaționale.</li>
+</ul>

@@ -1,0 +1,142 @@
+<p>Un <strong>margin trading account call margin leverage România</strong> 2026 nu mai este o curiozitate de manual, ci infrastructura concretă pe care brokeri ca Interactive Brokers, XTB sau Saxo o pun la dispoziția investitorilor experimentați — iar diferența dintre cei care o folosesc profitabil și cei care își golesc contul stă în mecanica fină, nu în concept. Știi deja ce este efectul de levier și ce e un margin call din lecția de bază. Aici dezasamblăm motorul: cum se calculează exact <strong>margin requirement</strong> și <strong>buying power</strong>, unde se declanșează <strong>forced liquidation</strong>, care e raportul real dintre <strong>maintenance margin și initial margin</strong> și cât din randamentul tău mănâncă, în puncte procentuale, costul dobânzii pe margin.</p>
+
+<p>Pentru un investitor avansat, întrebarea nu mai este „e periculos levierul?” — evident că este — ci „la ce nivel de leverage raportul risc/randament rămâne pozitiv după costul dobânzii și după rezerva pentru margin call, pe scenariul realist de piață, nu pe cel optimist?”. Răspunsul se obține doar cu <strong>scenario analysis</strong> rulat numeric pe mai multe niveluri de pârghie, nu din intuiție.</p>
+
+<p>De aceea construim mai jos un model complet — inclusiv un simulator conceptual pe 100.000 lei capital la 1x, 2x și 3x leverage pe scenarii diferite de piață — plus formula exactă a prețului de lichidare, impactul dobânzii asupra ROI, riscul psihologic specific tranzacționării în marjă și limitele regulatorii (ESMA, Reg-T, BNR/ASF) care îți plafonează pârghia maximă în practică.</p>
+
+<h2>Buying power și margin requirement: aritmetica exactă</h2>
+
+<p>Începem de la mărimea care contează operațional zilnic: <strong>buying power</strong>. Într-un cont Reg-T (modelul standard la Interactive Brokers și majoritatea brokerilor care îți dau acțiuni reale, nu CFD), initial margin este 50%, deci:</p>
+
+<ul>
+<li><strong>Buying power = capital propriu ÷ initial margin</strong>. La 100.000 lei și initial margin 50% → buying power 200.000 lei (pârghie maximă 2x).</li>
+<li>La un cont portfolio margin (disponibil peste un prag de capital, tipic ~110.000 USD la IBKR), cerința scade dinamic în funcție de riscul real al portofoliului și poți ajunge la 3x-4x pe poziții lichide și diversificate.</li>
+<li>Pe CFD-uri retail în UE, ESMA plafonează levierul la 1:5 pe acțiuni (margin 20%) și 1:2 pe crypto — deci buying power 500.000 lei pe acțiuni, dar cu risc de pierdere totală mult mai rapid.</li>
+</ul>
+
+<p>Atenție la o capcană subtilă: buying power afișat NU este suma pe care e înțelept să o folosești. Este plafonul tehnic la care brokerul te lasă să cumperi. Diferența dintre a folosi 200.000 lei buying power integral și a folosi 140.000 lei este diferența dintre a fi lichidat la prima corecție și a supraviețui.</p>
+
+<h3>Maintenance margin vs initial margin — de ce contează raportul, nu cifrele izolate</h3>
+
+<p><strong>Initial margin</strong> (tipic 50% Reg-T) este cât pui din buzunar la deschidere. <strong>Maintenance margin</strong> (tipic 25-30%, dar brokerul o poate ridica oricând la acțiuni volatile sau în perioade de stres de piață) este pragul sub care equity-ul tău nu mai poate coborî fără să declanșeze margin call. Spațiul dintre cele două — de la 50% la 25% — este exact „bufferul” tău de supraviețuire. Cu cât maintenance margin e mai aproape de initial margin, cu atât te lichidează mai repede.</p>
+
+<p>Capcana de avansat: brokerul nu te anunță întotdeauna cu zile înainte. La Interactive Brokers, dacă echity scade sub maintenance, sistemul poate lichida <strong>automat și fără apel telefonic</strong>, în câteva minute, pozițiile pe care algoritmul le alege el — nu cele pe care le-ai alege tu. „Call margin” ca telefon politicos este o relicvă; în practică e o lichidare automată.</p>
+
+<h2>Prețul exact de lichidare: formula pe care trebuie să o știi pe de rost</h2>
+
+<p>Aici e nucleul deciziei. Prețul la care te ajunge forced liquidation se calculează exact:</p>
+
+<p><strong>Preț de lichidare = Preț de intrare × (1 − initial margin) ÷ (1 − maintenance margin)</strong></p>
+
+<p>Exemplu numeric cu 100.000 lei capital, leverage 2x (initial margin 50%), maintenance margin 30%, cumperi un activ la 100 lei/acțiune (poziție totală 200.000 lei, 2.000 acțiuni):</p>
+
+<ul>
+<li>Preț de lichidare = 100 × (1 − 0,50) ÷ (1 − 0,30) = 100 × 0,50 ÷ 0,70 = <strong>71,4 lei</strong>.</li>
+<li>Adică o scădere de doar <strong>28,6%</strong> a activului declanșează margin call și lichidare. Nu 50% — multă lume crede greșit că la 2x rezistă până la −50%.</li>
+</ul>
+
+<p>La leverage 3x (initial margin ~33%), cu aceeași maintenance margin 30%:</p>
+
+<ul>
+<li>Preț de lichidare = 100 × (1 − 0,333) ÷ (1 − 0,30) = 100 × 0,667 ÷ 0,70 = <strong>95,2 lei</strong>.</li>
+<li>O scădere de doar <strong>4,8%</strong> te lichidează. La 3x ești la un strănut de margin call. O zi roșie obișnuită la BVB sau pe Nasdaq te scoate din joc.</li>
+</ul>
+
+<p>Regula de avansat: <strong>marja de eroare până la lichidare = (initial margin − maintenance margin) ÷ (1 − maintenance margin)</strong>. La 2x/30% îți dă 28,6%; la 3x/30% îți dă 4,8%. Acest număr, nu pârghia în sine, decide dacă o strategie e viabilă.</p>
+
+<h2>Simulator: 100.000 lei la 1x vs 2x vs 3x pe scenarii de piață</h2>
+
+<p>Acesta este miezul lecției — exact unghiul promis. Pornim de la <strong>100.000 lei capital</strong>, dobândă pe margin de <strong>7% pe an</strong> (ordin de mărime realist în lei pentru sume mici; verifică grila brokerului tău, IBKR oferă în USD/EUR dobânzi mai mici, dar pe RON costul e mai ridicat), holding 1 an. Calculăm equity final pe capitalul propriu, după dobândă.</p>
+
+<h3>Scenariul A — piață în creștere +20%</h3>
+
+<ul>
+<li><strong>1x</strong> (poziție 100.000 lei, împrumut 0): +20.000 lei. ROI = <strong>+20,0%</strong>.</li>
+<li><strong>2x</strong> (poziție 200.000 lei, împrumut 100.000 lei): câștig brut +40.000 lei − dobândă 7.000 lei = +33.000 lei. ROI = <strong>+33,0%</strong>.</li>
+<li><strong>3x</strong> (poziție 300.000 lei, împrumut 200.000 lei): câștig brut +60.000 lei − dobândă 14.000 lei = +46.000 lei. ROI = <strong>+46,0%</strong>.</li>
+</ul>
+
+<p>Pe creștere, levierul plătește — dar observă deja că ROI-ul nu crește liniar (20 → 33 → 46, nu 20 → 40 → 60), pentru că dobânda taie din vârf.</p>
+
+<h3>Scenariul B — piață laterală 0%</h3>
+
+<ul>
+<li><strong>1x</strong>: 0 lei. ROI = <strong>0,0%</strong>.</li>
+<li><strong>2x</strong>: 0 câștig − 7.000 lei dobândă = −7.000 lei. ROI = <strong>−7,0%</strong>.</li>
+<li><strong>3x</strong>: 0 câștig − 14.000 lei dobândă = −14.000 lei. ROI = <strong>−14,0%</strong>.</li>
+</ul>
+
+<p>Acesta e scenariul ucigaș pe care nimeni nu-l simulează: într-o piață care nu merge nicăieri, levierul îți garantează o pierdere egală cu costul dobânzii. Pe 2-3 ani laterali, la 3x, pierzi 30-40% din capital fără ca activul să fi scăzut un leu.</p>
+
+<h3>Scenariul C — piață în scădere −20%</h3>
+
+<ul>
+<li><strong>1x</strong>: −20.000 lei. ROI = <strong>−20,0%</strong>.</li>
+<li><strong>2x</strong>: −40.000 lei − 7.000 lei dobândă = −47.000 lei. ROI = <strong>−47,0%</strong>.</li>
+<li><strong>3x</strong>: <strong>lichidat</strong>. Prețul de lichidare la 3x/30% e atins la −4,8%; o scădere de 20% nu apucă să fie „doar pe hârtie” — ai fost scos forțat mult înainte, cu pierdere cristalizată în jurul a −85% până la −100% din capital, în funcție de cât de brusc a venit mișcarea și de slippage-ul la lichidare.</li>
+</ul>
+
+<h3>Scenariul D — crash −40% (flash, fără șansă de adăugat marjă)</h3>
+
+<ul>
+<li><strong>1x</strong>: −40.000 lei. ROI = <strong>−40,0%</strong>. Dureros, dar supraviețuiești și recuperezi în rally-ul următor.</li>
+<li><strong>2x</strong>: lichidat la −28,6%; pierderea cristalizată ≈ <strong>−65% până la −80%</strong> din capital.</li>
+<li><strong>3x</strong>: <strong>cont zero sau datorie</strong>. Dacă mișcarea e mai rapidă decât lichidarea (gap de deschidere, halt), poți rămâne dator brokerului — debit balance pe care îl execută silit.</li>
+</ul>
+
+<p>Lecția simulatorului, condensată: <strong>levierul te răsplătește doar în scenariul A, te taxează în B, te rănește grav în C și te elimină în D.</strong> Iar pe distribuția reală a randamentelor de bursă, scenariile B, C și D apar mult mai des decât crede investitorul euforic. Asimetria e brutală: la 3x, un an bun îți dă +46%, dar un singur crash îți șterge tot capitalul — și nu există +∞% care să compenseze un −100% care te scoate din joc permanent.</p>
+
+<h2>Costul dobânzii pe margin și impactul real pe ROI multianual</h2>
+
+<p>Investitorul de bază vede dobânda ca o cheltuială mică. Avansatul o vede ca pe o erodare compusă a edge-ului. La un împrumut de 100.000 lei cu 7%/an, plătești 7.000 lei/an — dar important e <strong>hurdle rate</strong>-ul: activul trebuie să producă, doar pe partea împrumutată, peste 7% randament ca dobânda să merite. Dacă așteptarea ta realistă de randament e 8-10%/an, marja de siguranță peste costul dobânzii e subțire și o singură variație de dobândă a brokerului (legată de evoluția dobânzii de referință BNR / EURIBOR) ți-o anulează.</p>
+
+<p>Calcul de hurdle pe 3x: controlezi 300.000 lei cu 200.000 lei împrumutați. Dobânda anuală 14.000 lei reprezintă <strong>14% din capitalul tău propriu</strong> de 100.000 lei. Înseamnă că, înainte de orice profit, activul tău total trebuie să crească cu ~4,7% doar ca să acoperi dobânda și să ieși pe zero. Pe orizonturi lungi, această taxă recurentă transformă levierul dintr-un accelerator într-o frână, cu excepția piețelor puternic și constant crescătoare.</p>
+
+<h2>Riscul psihologic: variabila pe care modelul nu o prinde</h2>
+
+<p>Toate cifrele de mai sus presupun un investitor rațional care execută planul. În realitate, margin trading activează cele mai distructive bias-uri exact când contează:</p>
+
+<ul>
+<li><strong>Loss aversion amplificată</strong>: la 3x, o scădere de 5% a pieței se simte ca −15% în cont. Reacția emoțională (panică, vânzare la fund) e proporțională cu pierderea procentuală resimțită, nu cu cea a activului.</li>
+<li><strong>Margin call ca șoc de cortizol</strong>: e-mailul de margin call vine de obicei în plină scădere, când deja ești stresat. Mulți adaugă bani „ca să nu fie lichidați” — adică aruncă capital proaspăt într-o poziție pe care piața deja a votat-o jos. Aruncarea de bani buni după bani răi e mecanismul prin care un cont de 100.000 lei devine o pierdere de 250.000 lei.</li>
+<li><strong>Iluzia controlului</strong>: după câteva luni profitabile cu levier, creierul atribuie câștigul priceperii, nu pârghiei. Crește expunerea exact înainte de regresia la medie.</li>
+</ul>
+
+<p>Regula de protecție psihologică: decide nivelul de leverage și pragul de cut-loss <strong>în scris, înainte de a deschide poziția</strong>, când ești calm. În toiul unui margin call nu mai ești aceeași persoană care a făcut planul.</p>
+
+<h2>Regulații și limite maxime de leverage în România 2026</h2>
+
+<p>Cadrul concret care îți plafonează pârghia, indiferent de cât ai vrea:</p>
+
+<ul>
+<li><strong>ESMA (aplicabil prin ASF în România)</strong>: pe CFD-uri retail, levier maxim 1:5 pe acțiuni, 1:2 pe crypto, 1:20-1:30 pe indici și valute majore, cu protecție de sold negativ obligatorie (nu poți rămâne dator pe CFD retail) și avertisment de risc obligatoriu.</li>
+<li><strong>Reg-T (conturi acțiuni reale, ex. Interactive Brokers)</strong>: initial margin 50% (pârghie 2x), maintenance 25% minim impus de FINRA, dar brokerul ridică frecvent pragul. Aici NU ai protecție automată de sold negativ — poți datora bani.</li>
+<li><strong>Portfolio margin</strong>: peste pragul de capital al brokerului, cerințele devin bazate pe risc și permit pârghie efectivă mai mare pe portofolii diversificate — instrument pentru avansați, nu pentru începători.</li>
+<li><strong>Statut de „professional client”</strong>: poți cere upgrade pentru a depăși limitele ESMA, dar renunți la protecțiile retail (sold negativ, plafoane). Decizie cu consecințe reale; nu o face pentru a „debloca” mai mult levier dacă încă te întrebi dacă merită.</li>
+</ul>
+
+<p>Fiscal, în România 2026: câștigul net din vânzarea titlurilor reale prin intermediar rezident se impozitează prin reținere la sursă, cu cote majorate față de anii anteriori — <strong>3% pentru titlurile deținute peste 365 de zile</strong> și <strong>6% pentru cele deținute sub 365 de zile</strong> (în creștere de la 1%, respectiv 3%). La brokeri nerezidenți, nu există reținere la sursă: declari singur în Declarația Unică, iar din 2026 cota aplicabilă câștigului net realizat prin intermediari nerezidenți este de <strong>16%</strong> (în creștere de la 10%). La CFD-uri tratamentul urmează același regim autodeclarat. Atenție și la CASS: veniturile din investiții pot intra în baza de calcul a contribuției de sănătate de 10% peste plafoanele anuale raportate la salariul minim, deci randamentul net poate fi sensibil mai mic decât cel brut. Dobânda pe margin este un cost al tranzacționării — păstrează extrasele și include-o în calculul randamentului net real, chiar dacă deductibilitatea ei fiscală pentru persoana fizică este limitată; pentru poziții mari, consultă un contabil.</p>
+
+<h2>Checklist de execuție înainte de a folosi leverage</h2>
+
+<ul>
+<li><strong>Calculează prețul exact de lichidare</strong> cu formula de mai sus ÎNAINTE de a intra. Dacă e la o scădere pe care piața o face „într-o săptămână obișnuită”, pârghia e prea mare.</li>
+<li><strong>Folosește maxim 60-70% din buying power</strong>, niciodată 100%. Bufferul nefolosit e ce te ține în joc la margin call.</li>
+<li><strong>Rulează scenariile A-D</strong> pe poziția ta concretă, cu dobânda reală a brokerului tău, și uită-te în special la scenariul B (lateral) și C (−20%), nu doar la cel optimist.</li>
+<li><strong>Verifică hurdle rate</strong>: dacă randamentul așteptat al activului nu depășește confortabil costul dobânzii pe partea împrumutată, levierul lucrează împotriva ta.</li>
+<li><strong>Setează un cut-loss automat</strong> deasupra prețului de lichidare, ca să ieși tu controlat, nu algoritmul brokerului în panică.</li>
+<li><strong>Decide în scris</strong> nivelul de pârghie și regula de margin call (adaug / nu adaug bani) cât ești calm.</li>
+<li><strong>Preferă 2x maximum</strong> pentru investiție pe acțiuni reale, ține 3x+ doar pentru poziții foarte lichide, scurte și monitorizate, conștient că ești la un strănut de lichidare.</li>
+</ul>
+
+<h2>Greșeli frecvente la investitorii care „știu deja bazele”</h2>
+
+<ul>
+<li><strong>Confundă „rezist până la −50%” cu realitatea −28,6%</strong> la 2x din cauza maintenance margin. Formula de lichidare nu iartă.</li>
+<li><strong>Ignoră dobânda în scenariul lateral</strong> — cred că „dacă nu scade, nu pierd”. Pierzi exact costul dobânzii, compus, an de an.</li>
+<li><strong>Adaugă bani la margin call</strong> în loc să fi ieșit deja la cut-loss-ul planificat.</li>
+<li><strong>Folosesc 100% buying power</strong> și se trezesc lichidați la prima volatilitate normală.</li>
+<li><strong>Tratează CFD-ul cu levier 1:5 ca pe o „investiție”</strong> — e un instrument speculativ pe termen scurt unde 70-85% dintre retail pierd; nu e versiunea „mai ieftină” a marjei reale.</li>
+</ul>
+
+<p>Concluzia de avansat: leverage-ul nu e bun sau rău în sine — e un multiplicator al deciziilor tale și al costului dobânzii, aplicat unei distribuții de randamente în care scenariile neplăcute apar des. Folosit la 2x, cu buffer, cut-loss și conștiința hurdle rate-ului, poate fi un instrument legitim. Folosit la 3x+ pe euforie și buying power integral, este matematic doar o întrebare de timp până la margin call și forced liquidation.</p>

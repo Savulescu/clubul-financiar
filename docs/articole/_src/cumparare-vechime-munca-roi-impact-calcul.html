@@ -1,0 +1,134 @@
+<p>Analiza de tip <strong>cumpărare vechime muncă CNPP ROI</strong> este testul care separă decizia emoțională („vreau să mă pensionez mai repede”) de cea financiară corectă. În lecția de bază ai văzut cum funcționează mecanismul și cât costă; aici ducem totul în zona unde se ia decizia reală: <strong>cum se calculează vechimea la pensie</strong> în lei și puncte, care este <strong>costul cumpărare an vechime 2026</strong>, când break-even-ul se atinge înainte de speranța de viață și <strong>cine are avantaj la cumpărarea de ani</strong> versus cine plătește degeaba.</p>
+
+<p>Premisa este că deja știi diferența dintre stagiul de cotizare și vârsta standard de pensionare și că ai citit despre contractul de asigurare retroactiv încheiat cu CNPP. Aici nu mai explicăm noțiunile elementare, ci construim un <strong>simulator ROI cumpărare vechime</strong> pe cazul tău: 2-3 ani cumpărați care îți aduc pensionarea mai devreme pot avea un randament intern superior unui depozit, sau pot fi o pierdere netă, în funcție de exact patru variabile pe care le vom izola numeric.</p>
+
+<p>Vei pleca de aici cu o regulă de decizie clară, un calcul de break-even pas-cu-pas, scenariile în care cumpărarea de vechime este o capcană mascată și un checklist de negociere cu casa teritorială de pensii. Toate cifrele sunt formulate pentru contextul România 2026; acolo unde un prag se actualizează anual, îți spun exact ce să verifici înainte de a semna.</p>
+
+<h2>Ce cumperi de fapt: stagiu, nu punctaj garantat</h2>
+
+<p>Confuzia care strică toate calculele este să crezi că plătești pentru „pensie mai mare”. <strong>Cumperi stagiu de cotizare</strong>, adică ani care contează la condiția de vechime, plus un punctaj calculat la nivelul venitului ales drept bază. Sunt două lucruri distincte, cu două tipuri complet diferite de randament:</p>
+
+<ul>
+<li><strong>Efectul „pensionare mai devreme”</strong> — cei 2-3 ani cumpărați completează stagiul minim sau complet și îți permit să deschizi pensia mai repede. Aici câștigul nu e pensia mai mare, ci <em>numărul suplimentar de luni</em> în care încasezi pensie. Acesta este, de regulă, ROI-ul dominant.</li>
+<li><strong>Efectul „punctaj suplimentar”</strong> — fiecare an cumpărat adaugă puncte de pensie proporțional cu venitul bază ales. Dacă alegi baza minimă (salariul minim brut), adaugi puțin punctaj; dacă alegi o bază mare, plătești proporțional mai mult. Acest efect crește pensia lunară permanent.</li>
+</ul>
+
+<p>În contractul retroactiv cu CNPP, contribuția lunară este <strong>25% (CAS) aplicat la venitul ales</strong>, care nu poate fi sub salariul minim brut pe economie. Atenție la pragul mobil din 2026: salariul minim brut este <strong>4.050 lei în prima jumătate a anului (ianuarie–iunie) și crește la 4.325 lei de la 1 iulie 2026</strong>, așa că baza minimă diferă în funcție de luna în care încheiezi contractul (verifică valoarea exactă în vigoare la data semnării). La baza minimă de 4.050 lei, costul unui an este aproximativ:</p>
+
+<ul>
+<li>25% × 4.050 lei × 12 luni ≈ <strong>12.150 lei/an</strong> la nivelul minim;</li>
+<li>pentru 3 ani: ≈ <strong>36.450 lei</strong>, plătibili integral sau în rate lunare în termen de un an de la încheierea contractului, după caz.</li>
+</ul>
+
+<p>Reține nuanța de nivel avansat: dacă plătești la baza minimă, fiecare an cumpărat îți aduce un punctaj de aproximativ <strong>0,44 puncte/an</strong> (raportul dintre venitul-bază ales și câștigul salarial mediu brut utilizat la fundamentarea bugetului asigurărilor sociale de stat, care pentru 2026 este de <strong>9.192 lei</strong>: 4.050 / 9.192 ≈ 0,44), nu un punct întreg. Cine își imaginează că plătește 12.150 lei și primește „un an plin de pensie de 5.000 lei” se înșală structural.</p>
+
+<h2>Cele patru variabile care decid ROI-ul</h2>
+
+<p>Orice simulator serios de ROI la cumpărarea de vechime se reduce la patru intrări. Schimbă oricare dintre ele și verdictul se poate inversa:</p>
+
+<ul>
+<li><strong>Costul total (C)</strong> — contribuția × ani, determinată de baza aleasă. Variabila pe care o controlezi tu cel mai mult.</li>
+<li><strong>Câștigul de pensie lunar (ΔP)</strong> — diferența dintre pensia cu și fără anii cumpărați, din punctaj suplimentar.</li>
+<li><strong>Lunile câștigate de pensionare anticipată (M)</strong> — câte luni de pensie în plus încasezi pentru că deschizi dosarul mai devreme.</li>
+<li><strong>Pensia lunară de bază (P)</strong> — pensia pe care o încasezi oricum în lunile câștigate. ROI-ul „pensionare mai devreme” este P × M, nu ΔP × M.</li>
+</ul>
+
+<p>Eroarea clasică a calculatoarelor amatoare este să ignore complet variabila M și P, măsurând doar cât crește pensia lunară. Pentru majoritatea celor care cumpără 2-3 ani, <strong>cea mai mare parte din randament vine din lunile suplimentare de pensie (P × M), nu din creșterea cuantumului (ΔP)</strong>.</p>
+
+<h2>Calculul de break-even pas-cu-pas</h2>
+
+<p>Hai să separăm cele două surse de randament și să le punem cap la cap pe un caz numeric realist.</p>
+
+<h3>Scenariul A — cumperi 3 ani ca să te pensionezi cu 3 ani mai devreme</h3>
+
+<p>Ipoteze: ești bărbat, ai stagiul complet aproape atins, îți lipsesc 3 ani pentru a îndeplini condiția de pensionare. Pensia ta estimată este <strong>3.200 lei/lună</strong>. Cumperi 3 ani la baza minimă, cost total ≈ <strong>36.450 lei</strong>. Cei 3 ani îți adaugă în jur de 1,3 puncte de pensie (≈ 0,44 × 3), ceea ce la valoarea punctului de referință din 2026 (<strong>81 lei/punct</strong>, înghețat în 2026 prin suspendarea indexării) înseamnă un ΔP de aproximativ:</p>
+
+<ul>
+<li>ΔP ≈ 1,3 puncte × 81 lei ≈ <strong>105 lei/lună</strong> creștere de pensie permanentă;</li>
+<li>M = 36 de luni încasate mai devreme, fiecare la pensia de bază P ≈ 3.200 lei (de fapt, ușor mai mică fără anii suplimentari, dar aproximăm).</li>
+</ul>
+
+<p>Acum cele două randamente:</p>
+
+<ul>
+<li><strong>Randamentul „pensionare anticipată”:</strong> P × M ≈ 3.200 × 36 ≈ <strong>115.200 lei</strong> încasați în plus pe durata vieții, pentru o investiție de 36.450 lei. Break-even pe această componentă se atinge după ≈ <strong>11–12 luni</strong> de pensie (36.450 / 3.200). Orice lună trăită peste acest prag este profit pur.</li>
+<li><strong>Randamentul „punctaj suplimentar”:</strong> ΔP × luni de viață rămase. La 105 lei/lună, recuperarea costului <em>doar</em> din creșterea de cuantum ar dura 36.450 / 105 ≈ <strong>347 luni (29 de ani)</strong> — practic niciodată. Această componentă, singură, nu justifică achiziția.</li>
+</ul>
+
+<p>Concluzia tehnică: în Scenariul A, achiziția este net pozitivă, dar <strong>aproape tot randamentul vine din anticipare, nu din cuantum</strong>. Break-even-ul real este sub 1 an. Dacă speranța de viață rămasă depășește 1 an (ceea ce e aproape sigur la vârsta pensionării), decizia este corectă financiar.</p>
+
+<h3>Scenariul B — cumperi 3 ani DAR nu te pensionezi mai devreme</h3>
+
+<p>Ipoteze: ai deja stagiul complet și vârsta. Cumperi 3 ani doar ca să crești pensia. Cost identic ≈ 36.450 lei, ΔP ≈ 105 lei/lună, dar <strong>M = 0</strong> — nu câștigi nicio lună de anticipare.</p>
+
+<p>Aici break-even-ul devine 36.450 / 105 ≈ <strong>347 luni (aproape 29 de ani)</strong>. Cu o speranță de viață de 18-20 de ani după pensionare (≈ 216-240 luni), <strong>nu apuci niciodată să recuperezi banii</strong>. Scenariul B este, în covârșitoarea majoritate a cazurilor, o <strong>pierdere netă</strong>. Excepția: dacă ai ales o bază foarte mare și/sau valoarea punctului crește agresiv prin indexare, ecuația se poate ameliora — dar pariezi pe indexări viitoare necunoscute.</p>
+
+<h2>Cine are avantaj real și cine plătește degeaba</h2>
+
+<p>Pe baza celor două scenarii, profilul rentabilității este clar:</p>
+
+<ul>
+<li><strong>Avantaj maxim:</strong> cei cărora le lipsesc 1-3 ani de stagiu pentru a deschide pensia și care altfel ar aștepta ani buni. Aici M e mare, break-even sub 1 an. <em>Aceasta este unica situație în care cumpărarea de vechime este aproape întotdeauna rentabilă.</em></li>
+<li><strong>Avantaj condiționat:</strong> cei aflați aproape de un prag de stagiu complet care declanșează un bonus (de exemplu, depășirea stagiului complet aduce majorarea punctajului pentru anii suplimentari). Verifică dacă anii cumpărați traversează un astfel de prag — efectul de prag schimbă ROI-ul.</li>
+<li><strong>Dezavantaj clar:</strong> cei care au deja stagiul și vârsta și cumpără doar pentru cuantum (Scenariul B). Pentru ei, aceiași 36.450 lei într-un depozit sau un fond cu randament real pozitiv bat aproape sigur cei 105 lei/lună.</li>
+<li><strong>Capcană:</strong> antreprenorii care s-au remunerat prin dividende și acum vor să „cumpere” o pensie decentă. Dividendele nu construiesc punctaj, iar cumpărarea la baza minimă aduce un punctaj minuscul. Pentru ei, soluția nu e cumpărarea de vechime, ci Pilonul III și investiția privată.</li>
+</ul>
+
+<h2>Optimizarea bazei: minim vs maxim</h2>
+
+<p>O subtilitate ignorată: poți alege orice venit-bază între salariul minim și plafonul legal. Care e optim?</p>
+
+<ul>
+<li><strong>Dacă scopul e anticiparea (M mare):</strong> alege <strong>baza minimă</strong>. Plătești cel mai puțin pentru același efect de deblocare a pensiei. Punctajul suplimentar e secundar; nu are sens să supraplătești pentru el.</li>
+<li><strong>Dacă scopul e cuantumul (M = 0):</strong> alegerea bazei nu schimbă verdictul de fond — ROI-ul rămâne slab. O bază mai mare aduce ΔP mai mare, dar și cost proporțional mai mare, deci raportul cost/beneficiu se mișcă marginal. Matematic, randamentul intern al componentei de cuantum este aproximativ același indiferent de bază (e proporțional), așa că nu „rezolvi” Scenariul B mărind baza.</li>
+</ul>
+
+<p>Regula de aur: <strong>baza minimă pentru anticipare, evitarea achiziției pentru cuantum pur.</strong></p>
+
+<h2>Comparația cu alternativa: 36.450 lei investiți</h2>
+
+<p>Decizia corectă se ia mereu comparativ. Aceiași bani au alternative:</p>
+
+<ul>
+<li><strong>Depozit/titluri de stat (Fidelis/Tezaur):</strong> la o dobândă reală modestă, 36.450 lei produc un flux predictibil, lichid, moștenibil. Dezavantaj: nu îți deschide pensia mai devreme.</li>
+<li><strong>Cumpărare vechime pentru anticipare:</strong> randament „intern” echivalent enorm în primul an (recuperezi costul în ~11-12 luni de pensie), apoi flux viager indexat. Dezavantaj major: <strong>nu e moștenibil</strong> — dacă decedezi devreme, banii sunt pierduți (cu excepția pensiei de urmaș, parțial).</li>
+</ul>
+
+<p>Aici intervine riscul de longevitate inversat: cumpărarea de vechime pentru anticipare este, de fapt, un <strong>pariu că vei trăi peste break-even</strong>. Cum break-even-ul e sub 1 an în Scenariul A, pariul e aproape sigur câștigător. În Scenariul B, cu break-even la aproape 29 de ani, pariul e aproape sigur pierdut.</p>
+
+<h2>Negocierea cu CNPP: ce poți și ce nu poți obține</h2>
+
+<p>„Negocierea” cu CNPP nu e despre preț (cota de 25% e fixă), ci despre <strong>configurarea contractului în favoarea ta</strong>. Iată ce ai voie să optimizezi:</p>
+
+<ul>
+<li><strong>Perioada vizată</strong> — alegi care ani „lipsă” îi acoperi, în limita perioadei retroactive permise (contractul de asigurare retroactiv acoperă, de regulă, până la 6 ani anteriori lunii încheierii). Optimizează spre anii care îți completează stagiul minim/complet sau care traversează un prag de bonus.</li>
+<li><strong>Venitul-bază</strong> — îl declari tu, între minim și plafon. Pentru anticipare, ținta e minimul.</li>
+<li><strong>Eșalonarea plății</strong> — întreabă explicit dacă poți plăti în rate fără penalizare; lichiditatea contează în ROI-ul tău real.</li>
+<li><strong>Coordonarea cu data deschiderii dosarului</strong> — contractul trebuie finalizat și plătit înainte de emiterea deciziei de pensionare, altfel anii nu intră în calcul. Sincronizarea e critică.</li>
+</ul>
+
+<p>Ce NU poți negocia: cota de 25%, faptul că dividendele/PFA-ul fără CAS nu se transformă retroactiv în punctaj, și includerea perioadelor pentru care există deja stagiu (nu cumperi de două ori același an).</p>
+
+<h2>Capcane subtile de evitat</h2>
+
+<ul>
+<li><strong>Cumpărarea „de siguranță” fără calcul de M</strong> — dacă nu câștigi luni de anticipare, plătești pentru aproape nimic. Verifică întâi dacă îți lipsește efectiv stagiu pentru deschiderea pensiei.</li>
+<li><strong>Ignorarea pragului de stagiu complet</strong> — anii cumpărați care depășesc stagiul complet pot avea efect diferit (bonificație) față de cei care doar completează minimul. Cere casei teritoriale recalcularea în ambele ipoteze.</li>
+<li><strong>Presupunerea că valoarea punctului rămâne fixă</strong> — ΔP în lei depinde de valoarea punctului din anul deschiderii; indexările viitoare îți cresc beneficiul, dar nu te baza pe ele în calculul conservator.</li>
+<li><strong>Uitarea naturii viagere și nemoștenibile</strong> — în comparația cu investiția privată, include riscul de deces timpuriu. Pentru cineva cu sănătate fragilă, investiția lichidă moștenibilă poate fi superioară chiar și în Scenariul A.</li>
+<li><strong>Plata după emiterea deciziei</strong> — anii plătiți târziu nu se mai pot adăuga la decizia deja emisă fără o recalculare separată, uneori refuzată. Finalizează ÎNAINTE.</li>
+</ul>
+
+<h2>Checklist de decizie și acțiune</h2>
+
+<ul>
+<li><strong>Pasul 1 — extrage stagiul real:</strong> cere la CNPP situația cotizării și identifică exact câți ani îți lipsesc pentru deschiderea pensiei (nu pentru „o pensie mai mare”).</li>
+<li><strong>Pasul 2 — calculează M:</strong> câte luni de pensie câștigi prin anticipare? Dacă M = 0, oprește-te aici — probabil nu e rentabil.</li>
+<li><strong>Pasul 3 — calculează costul:</strong> 25% × bază aleasă × 12 × ani. Pentru anticipare, folosește baza minimă.</li>
+<li><strong>Pasul 4 — break-even pe anticipare:</strong> Cost / pensia lunară de bază. Dacă rezultatul (în luni) e mult sub speranța ta de viață rămasă, e verde.</li>
+<li><strong>Pasul 5 — verifică pragurile:</strong> întreabă casa teritorială dacă anii cumpărați traversează stagiul complet și ce bonificație apare.</li>
+<li><strong>Pasul 6 — compară cu alternativa:</strong> ce ar produce aceiași bani investiți lichid și moștenibil? Decide pe randament ajustat la risc, nu pe emoție.</li>
+<li><strong>Pasul 7 — sincronizează plata:</strong> finalizează contractul și plata ÎNAINTE de depunerea dosarului de pensionare.</li>
+</ul>
+
+<p>Regula finală, comprimată: <strong>cumpără vechime pentru a te pensiona mai devreme, aproape niciodată doar pentru o pensie mai mare.</strong> Primul caz are break-even sub un an și un ROI care bate orice depozit; al doilea are break-even peste speranța de viață și e, de regulă, o pierdere mascată în haine de „investiție în pensie”.</p>

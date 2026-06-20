@@ -1,0 +1,201 @@
+<p><strong>DCF model evaluare fair value discount rate</strong> este momentul în care încetezi să te uiți la P/E și începi să construiești singur valoarea unei companii din viitorul ei de cash. Pe baza lecțiilor anterioare — cum citești raportul anual și cum gândești randament versus risc — aici legăm cele două: estimezi <strong>free cash flow</strong> cu ajustările lui, alegi un <strong>discount rate</strong> prin <strong>WACC</strong>, modelezi <strong>terminal value</strong> cu o <strong>perpetuity growth rate</strong> rezonabilă și ajungi la un preț intrinsec pe acțiune pe care îl compari cu cotația de la BVB.</p>
+
+<p>Vom acoperi mecanica completă: <strong>free cash flow estimation și adjustments</strong>, <strong>terminal value growth rate și perpetuity</strong>, <strong>WACC calculation și cost of capital</strong>, un <strong>sensitivity table pe rate și growth</strong>, un <strong>scenario DCF optimistic-base-pessimistic</strong>, calculul de <strong>margin of safety și Kelly criterion</strong> pentru dimensionarea poziției, plus când folosești <strong>dividend discount model versus FCF DCF</strong>. Presupun că știi deja ce e un cash flow statement, EBIT, amortizarea și diferența dintre profit contabil și cash — nu le reluăm.</p>
+
+<p>Context România 2026: vom construi un template numeric complet pe o acțiune-tip de la BVB, cu randamente reale în lei. Reperul-cheie e că discount rate-ul tău în RON nu poate fi cel din manualele americane — randamentul titlurilor de stat românești la 10 ani și prima de risc locală îl ridică mult peste ce vezi în exemplele cu Apple. Asta schimbă tot fair value-ul.</p>
+
+<h2>Pasul 1: Free cash flow estimation și adjustments — ce numeri de fapt</h2>
+
+<p>DCF-ul actualizează <strong>Free Cash Flow to Firm (FCFF)</strong> dacă folosești WACC, sau <strong>Free Cash Flow to Equity (FCFE)</strong> dacă actualizezi cu cost of equity. Cele două NU se amestecă — e greșeala numărul unu a începătorilor avansați: să actualizeze FCFF cu cost of equity și să obțină un fair value umflat. Folosim aici varianta firm-level, cea standard.</p>
+
+<p>Formula de lucru:</p>
+
+<ul>
+<li><strong>FCFF = EBIT × (1 − cota impozit) + Amortizare − CapEx − Δ Capital de lucru net.</strong></li>
+</ul>
+
+<p>În România, cota de impozit pe profit e <strong>16%</strong>, deci factorul (1 − t) = 0,84. Dar atenție la ajustări — aici se câștigă sau se pierde modelul:</p>
+
+<ul>
+<li><strong>Normalizează EBIT-ul.</strong> Scoate elementele one-off: câștiguri din vânzări de active, provizioane excepționale, despăgubiri. Un EBIT umflat de un singur an bun îți strică toate cele 5 proiecții.</li>
+<li><strong>CapEx de mentenanță vs. de creștere.</strong> Dacă CapEx-ul include o fabrică nouă, separă-l: cash flow-ul de bază trebuie să suporte doar mentenanța, iar creșterea pe care o cumpără apare în proiecția de revenue.</li>
+<li><strong>Δ Capital de lucru.</strong> O companie care crește rapid consumă cash în stocuri și creanțe. Dacă ignori asta, supraestimezi FCFF cu 10–30% la firmele în expansiune. Calculează (creanțe + stocuri − datorii comerciale) an de an și scade variația.</li>
+<li><strong>Leasing-uri operaționale (IFRS 16).</strong> Verifică dacă amortizarea și dobânda de leasing intră consistent — pot distorsiona EBIT-ul față de cash-ul real.</li>
+</ul>
+
+<p><strong>Proiecția pe 5 ani.</strong> Modelul finit standard are un orizont explicit de 5 (uneori 10) ani, după care intervine terminal value. Pornești de la un FCFF normalizat de bază — să zicem <strong>120 mil. lei</strong> — și aplici o rată de creștere descrescătoare, pentru că nicio companie nu crește etern accelerat:</p>
+
+<ul>
+<li>An 1: +10% → 132,0 mil. lei</li>
+<li>An 2: +9% → 143,9 mil. lei</li>
+<li>An 3: +7% → 154,0 mil. lei</li>
+<li>An 4: +6% → 163,2 mil. lei</li>
+<li>An 5: +5% → 171,4 mil. lei</li>
+</ul>
+
+<p>Regula de bun-simț: creșterea anului 5 trebuie să convergă spre rata de creștere pe termen lung pe care o vei folosi în perpetuitate. Un salt brusc de la 15% în anul 5 la 3% în terminal value e un semn de model prost calibrat.</p>
+
+<h2>Pasul 2: WACC calculation și cost of capital — discount rate-ul corect pentru RON</h2>
+
+<p>Discount rate-ul e cea mai sensibilă variabilă din tot DCF-ul. O eroare de 1% la WACC poate muta fair value-ul cu 15–25%. Pentru o firmă listată la BVB, îl construiești în RON, nu îl împrumuți din exemple americane.</p>
+
+<p><strong>WACC = (E/V) × Cost of equity + (D/V) × Cost of debt × (1 − t)</strong>, unde E = capitaluri proprii, D = datorii, V = E + D.</p>
+
+<h3>Cost of equity prin CAPM</h3>
+
+<p><strong>Cost of equity = Rf + β × ERP</strong></p>
+
+<ul>
+<li><strong>Rf (rata fără risc):</strong> randamentul titlurilor de stat românești la 10 ani. În 2026 acesta orbitează zona de <strong>6,5–7,5%</strong> — verifică randamentul curent al obligațiunilor de stat la momentul evaluării, pentru că BNR și piața îl mișcă. Folosim 7,0% în exemplu.</li>
+<li><strong>ERP (equity risk premium) pentru România:</strong> prima de risc a pieței de capital locale, mai mare decât a piețelor dezvoltate din cauza riscului de țară. Estimările uzuale se situează în jur de <strong>7–9%</strong> pentru România (mature ERP ~4,5% + country risk premium). Folosim 8,0%.</li>
+<li><strong>β (beta):</strong> sensibilitatea acțiunii față de indicele BET. Pentru o companie defensivă β ~0,8; pentru una ciclică ~1,3. Folosim 1,1.</li>
+</ul>
+
+<p>Cost of equity = 7,0% + 1,1 × 8,0% = <strong>15,8%</strong>. Da, e mare — și asta e realitatea pieței românești în RON. Cine actualizează o firmă de la BVB cu 9% (rata americană) îi dublează artificial valoarea.</p>
+
+<h3>Cost of debt și WACC final</h3>
+
+<p>Cost of debt = dobânda medie efectivă a datoriilor (din nota la situațiile financiare), să zicem 8,5%. După scutul fiscal: 8,5% × 0,84 = 7,14%.</p>
+
+<p>Dacă structura e 70% equity / 30% datorii:</p>
+
+<ul>
+<li>WACC = 0,70 × 15,8% + 0,30 × 7,14% = 11,06% + 2,14% = <strong>~13,2%</strong></li>
+</ul>
+
+<p>Acesta e discount rate-ul de bază. Reține numărul: <strong>13,2%</strong>.</p>
+
+<h2>Pasul 3: Terminal value growth rate și perpetuity</h2>
+
+<p>După anul 5, modelezi valoarea perpetuă cu formula Gordon:</p>
+
+<ul>
+<li><strong>TV = FCFF₅ × (1 + g) ÷ (WACC − g)</strong></li>
+</ul>
+
+<p>Unde <strong>g = perpetuity growth rate</strong>. Regula de aur: g NU poate depăși creșterea nominală pe termen lung a economiei. Pentru România în RON, asta înseamnă inflație țintă (~2,5%) + creștere reală sustenabilă — un g rezonabil e <strong>3,0–4,0%</strong>. Nu pune 6% „pentru că firma e bună” — la perpetuitate o firmă care crește mai repede decât PIB-ul ar înghiți întreaga economie. Folosim g = 3,5%.</p>
+
+<p>TV = 171,4 × 1,035 ÷ (0,132 − 0,035) = 177,4 ÷ 0,097 = <strong>1.829 mil. lei</strong> (valoare la finalul anului 5).</p>
+
+<p>Capcana subtilă: terminal value reprezintă de regulă <strong>60–80% din valoarea totală</strong> a DCF-ului. Asta înseamnă că modelul tău depinde dramatic de două cifre din viitorul îndepărtat (g și WACC) pe care le cunoști cel mai prost. De aceea sensitivity table-ul de mai jos nu e opțional — e inima evaluării.</p>
+
+<h2>Pasul 4: Actualizarea și fair value per acțiune</h2>
+
+<p>Actualizezi fiecare FCFF și TV-ul cu factorul 1/(1+WACC)^t, WACC = 13,2%:</p>
+
+<ul>
+<li>An 1: 132,0 / 1,132 = 116,6</li>
+<li>An 2: 143,9 / 1,132² = 112,3</li>
+<li>An 3: 154,0 / 1,132³ = 106,2</li>
+<li>An 4: 163,2 / 1,132⁴ = 99,4</li>
+<li>An 5: 171,4 / 1,132⁵ = 92,2</li>
+<li>TV: 1.829 / 1,132⁵ = 983,9</li>
+</ul>
+
+<p><strong>Enterprise Value (EV) = suma = 1.510,6 mil. lei.</strong></p>
+
+<p>De la EV la equity value:</p>
+
+<ul>
+<li><strong>Equity value = EV − Datorie netă</strong> (datorii financiare − cash). Dacă datoria netă = 200 mil. lei → Equity = 1.310,6 mil. lei.</li>
+<li><strong>Fair value/acțiune = Equity value ÷ nr. acțiuni.</strong> La 100 mil. acțiuni → <strong>13,11 lei/acțiune.</strong></li>
+</ul>
+
+<p>Dacă acțiunea se tranzacționează la BVB cu 9,50 lei, ai un fair value cu ~38% peste preț. Dar nu cumperi încă — întâi treci prin scenarii și marja de siguranță.</p>
+
+<h2>Pasul 5: Scenario DCF optimistic-base-pessimistic</h2>
+
+<p>Un singur număr e o iluzie de precizie. Construiește trei scenarii variind cele trei pârghii majore: creșterea FCFF, g-ul perpetual și WACC.</p>
+
+<ul>
+<li><strong>Pesimist:</strong> creștere An1–5 de 6%→2%, g = 2,5%, WACC = 14,5% → fair value ~<strong>8,40 lei</strong>.</li>
+<li><strong>Bază:</strong> scenariul de mai sus → <strong>13,11 lei</strong>.</li>
+<li><strong>Optimist:</strong> creștere 12%→7%, g = 4,0%, WACC = 12,0% → fair value ~<strong>19,80 lei</strong>.</li>
+</ul>
+
+<p><strong>Fair value ponderat probabilistic.</strong> Atribuie probabilități: 30% pesimist, 50% bază, 20% optimist:</p>
+
+<ul>
+<li>0,30 × 8,40 + 0,50 × 13,11 + 0,20 × 19,80 = 2,52 + 6,56 + 3,96 = <strong>13,04 lei.</strong></li>
+</ul>
+
+<p>Observă cât de aproape e media ponderată de scenariul de bază, dar acum ai și amplitudinea: între 8,40 și 19,80 lei. Un preț de piață de 9,50 lei e aproape de pragul pesimist — adică piața prețuiește deja un scenariu prost, ceea ce e exact ce vrei să găsești.</p>
+
+<h2>Pasul 6: Sensitivity table pe rate și growth</h2>
+
+<p>Aceasta e matricea care îți arată cât de fragil e fair value-ul. Variezi WACC pe orizontală și g pe verticală, recalculând fair value/acțiune (lei):</p>
+
+<ul>
+<li><strong>g=2,5% :</strong> WACC 12% → 13,9 | 13,2% → 12,1 | 14,5% → 10,5</li>
+<li><strong>g=3,5% :</strong> WACC 12% → 15,3 | 13,2% → 13,1 | 14,5% → 11,3</li>
+<li><strong>g=4,5% :</strong> WACC 12% → 17,0 | 13,2% → 14,3 | 14,5% → 12,2</li>
+</ul>
+
+<p>Ce citești din tabel: pe tot intervalul plauzibil (WACC 12–14,5%, g 2,5–4,5%), fair value-ul stă între <strong>10,5 și 17,0 lei</strong>. Prețul de 9,50 lei e sub întreaga matrice. Asta e un semnal puternic — nu depinzi de un colț optimist al tabelului ca să ai o teză. Dacă, dimpotrivă, prețul de piață ar fi 15 lei, ai vedea că doar colțul optimist (WACC mic + g mare) justifică achiziția, deci teza ar fi fragilă.</p>
+
+<h2>Pasul 7: Margin of safety și Kelly criterion</h2>
+
+<p>Graham cerea o <strong>marjă de siguranță</strong> tocmai pentru că DCF-ul e plin de incertitudine. Marja de siguranță = (Fair value − Preț) ÷ Fair value.</p>
+
+<p>La fair value de bază 13,11 lei și preț 9,50 lei: marja = (13,11 − 9,50)/13,11 = <strong>27,5%</strong>.</p>
+
+<p>Praguri practice pentru piața românească, mai puțin lichidă și mai volatilă:</p>
+
+<ul>
+<li><strong>Sub 20% marjă:</strong> nu cumperi — zgomotul modelului îți mănâncă marja.</li>
+<li><strong>25–40% marjă:</strong> zonă acționabilă pentru o firmă solidă, predictibilă.</li>
+<li><strong>Peste 40% marjă:</strong> fie ai găsit o oportunitate reală, fie modelul tău e prea optimist — verifică de două ori ajustările FCFF.</li>
+</ul>
+
+<h3>Kelly criterion pentru dimensionarea poziției</h3>
+
+<p>Marja de siguranță îți spune DACĂ; Kelly îți spune CÂT. Formula simplificată:</p>
+
+<ul>
+<li><strong>f* = p − (1 − p)/b</strong>, unde p = probabilitatea ca teza să fie corectă, b = raportul câștig/pierdere așteptat.</li>
+</ul>
+
+<p>Exemplu: dacă estimezi p = 60% șanse ca prețul să convergă spre fair value, cu un câștig potențial de +40% și o pierdere potențială de −20% (b = 2):</p>
+
+<ul>
+<li>f* = 0,60 − 0,40/2 = 0,60 − 0,20 = <strong>0,40 → 40% din capital.</strong></li>
+</ul>
+
+<p>Niciodată full Kelly. Standardul prudent e <strong>fractional Kelly (¼ până la ½)</strong>: 40% × 0,25 = <strong>10% din portofoliu</strong> într-o singură acțiune. Pe o piață concentrată ca BVB, unde un singur emitent poate avea lichiditate subțire, fractional Kelly te protejează de ruina din suprapariere pe un model cu input-uri incerte.</p>
+
+<h2>Când folosești dividend discount model versus FCF DCF</h2>
+
+<p>Pe BVB, multe dintre cele mai mari companii (bănci, energie, utilități) sunt plătitoare consistente de dividende mari. Aici <strong>dividend discount model (DDM)</strong> e adesea mai onest decât FCF DCF:</p>
+
+<ul>
+<li><strong>Folosește DDM</strong> când: firma are politică stabilă de dividend (payout ratio predictibil), e o utilitate/bancă matură, iar FCFE e greu de estimat (la bănci, conceptul de FCF e distorsionat de bilanț). Formula: P = D₁/(r − g), cu r = cost of equity (15,8% în exemplul nostru), nu WACC.</li>
+<li><strong>Folosește FCF DCF</strong> când: firma reinvestește agresiv, plătește dividend mic sau zero, sau e în creștere — acolo valoarea stă în cash-ul reinvestit, nu în dividend.</li>
+</ul>
+
+<p>Capcană: nu evalua o bancă românească cu FCFF clasic. La instituțiile financiare, datoria e materie primă, nu finanțare — folosește DDM sau un model pe exces de capital/ROE.</p>
+
+<h2>Checklist de execuție pentru un DCF pe acțiune BVB</h2>
+
+<ul>
+<li><strong>1.</strong> Extrage și normalizează 5 ani de FCFF din rapoartele anuale — scoate one-off-urile, separă CapEx-ul de creștere, calculează Δ capital de lucru.</li>
+<li><strong>2.</strong> Construiește Rf din randamentul titlurilor de stat RON la 10 ani (verifică valoarea curentă), adaugă ERP România 7–9% și β-ul real față de BET.</li>
+<li><strong>3.</strong> Calculează WACC cu structura reală E/D din bilanț și cost of debt din note; aplică (1−16%) la scutul fiscal.</li>
+<li><strong>4.</strong> Fixează g perpetual ≤ creșterea nominală a PIB-ului (3–4% pentru RON). Nu negocia cu această regulă.</li>
+<li><strong>5.</strong> Calculează TV cu Gordon și verifică ce procent din EV reprezintă (>80% = model fragil).</li>
+<li><strong>6.</strong> Treci de la EV la equity scăzând datoria netă; împarte la numărul corect de acțiuni (diluate, dacă există opțiuni/obligațiuni convertibile).</li>
+<li><strong>7.</strong> Rulează cele trei scenarii și ponderează-le probabilistic.</li>
+<li><strong>8.</strong> Construiește sensitivity table-ul WACC × g; verifică dacă prețul de piață e sub întreaga matrice.</li>
+<li><strong>9.</strong> Calculează marja de siguranță; sub 20% = pas.</li>
+<li><strong>10.</strong> Dimensionează cu fractional Kelly (¼), niciodată full.</li>
+</ul>
+
+<h2>Greșeli frecvente care strică fair value-ul</h2>
+
+<ul>
+<li><strong>Discount rate american pe firmă RON</strong> — supraevaluare brutală. WACC-ul local e 12–15%, nu 8–9%.</li>
+<li><strong>Mismatch FCFF/cost of equity sau FCFE/WACC</strong> — actualizezi cash flow-ul greșit cu rata greșită.</li>
+<li><strong>g perpetual prea mare</strong> — orice peste creșterea nominală a PIB-ului e matematic imposibil pe termen infinit.</li>
+<li><strong>Ignorarea Δ capitalului de lucru</strong> la firmele în creștere — umfli FCFF-ul cu 10–30%.</li>
+<li><strong>Acțiuni nediluate</strong> — uiți opțiunile pe acțiuni ale managementului și convertibilele, supraestimezi valoarea per acțiune.</li>
+<li><strong>Falsa precizie</strong> — raportezi 13,11 lei ca adevăr absolut în loc de un interval 10–18 lei. DCF-ul e o lentilă, nu un cântar.</li>
+</ul>

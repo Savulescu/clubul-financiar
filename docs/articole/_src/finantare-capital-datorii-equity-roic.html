@@ -1,0 +1,116 @@
+<p>Când scalezi o afacere, alegerea între <strong>opțiuni finanțare datorii equity scaling</strong> nu e o decizie financiară izolată, ci una care îți rescrie simultan structura de capital, controlul și fluxul de cash pe 5 ani. Lecția continuă firul deschis în „Bootstrapping vs finanțare externă” și duce discuția la nivelul de decizie al unui CFO: <strong>cost datoriei vs diluție equity</strong>, <strong>calcul diluție pentru investitori</strong> și, mai presus de toate, <strong>ROIC — return on invested capital</strong> ca arbitru obiectiv între scenarii.</p>
+
+<p>Vom construi un model complet pe 5 ani cu trei scenarii — datorie pură, equity pur și hibrid — și vom calcula pentru fiecare diluția, cash-ul disponibil, impactul pe control, plus NPV și IRR comparabile. Pentru că întrebarea „să iau credit sau să vând acțiuni?” are un singur răspuns corect numeric: depinde de <strong>ROIC vs cost marginal al capitalului</strong>, iar restul sunt povești.</p>
+
+<p>Presupun că știi deja ce e o rată a dobânzii, o emisiune de acțiuni, un cap table și un cost de capital. Mergem direct la mecanica grea: cum se compun <strong>structuri de capital optim</strong>, cum se citește <strong>impactul finanțării pe control și cash</strong>, și cum decizi între debt și equity cu un model pe care îl poți reproduce în Excel înainte să semnezi orice term sheet în România anului 2026.</p>
+
+<h2>Cadrul de decizie: ROIC vs costul marginal al capitalului</h2>
+<p>Regula-rege a finanțării de scaling e una singură și e numerică: <strong>ia datorie atâta timp cât ROIC-ul incremental al capitalului investit depășește costul după-impozit al datoriei; ia equity doar când ROIC-ul nu acoperă serviciul datoriei sau când riscul de execuție e prea mare pentru a-l împovăra cu obligații fixe.</strong></p>
+<p>ROIC se calculează ca <strong>NOPAT / Invested Capital</strong>, unde NOPAT = profit operațional × (1 − cota de impozit). În România 2026, cota standard de impozit pe profit e <strong>16%</strong>, deci scutul fiscal pe datorie se aplică la 16% (mult mai modest decât în jurisdicțiile cu 25–30%). Atenție la regimul de <strong>micro-întreprindere</strong> (din 2026 o cotă unică de <strong>1% pe venit</strong>, cota de 3% fiind eliminată, cu plafonul de eligibilitate redus la <strong>100.000 EUR</strong> cifră de afaceri): acolo dobânda <strong>nu generează scut fiscal</strong>, pentru că impozitul nu se calculează pe profit — un detaliu care răstoarnă complet aritmetica datoriei pentru firmele mici.</p>
+<ul>
+<li><strong>Dacă ROIC = 22% și costul datoriei după impozit = 11% × (1−0,16) ≈ 9,2%</strong> → fiecare leu împrumutat creează 12,8 puncte de spread care rămân integral acționarilor. Datoria e acreativă.</li>
+<li><strong>Dacă ROIC = 8% și costul datoriei după impozit = 9,2%</strong> → datoria distruge valoare; orice leu împrumutat erodează randamentul acționarilor. Aici equity sau deloc.</li>
+</ul>
+<p>Capcana subtilă: ROIC-ul relevant nu e cel istoric, ci cel <strong>marginal pe capitalul nou</strong>. O afacere cu ROIC mediu 20% poate avea ROIC marginal de 6% pe ultima tranșă de expansiune (saturație de piață, cost crescând de achiziție client). Modelează ROIC-ul tranșei pe care o finanțezi, nu media istorică.</p>
+
+<h2>Cele trei scenarii: setup comun</h2>
+<p>Pornim de la o firmă SRL profitabilă care vrea să strângă <strong>2.000.000 lei</strong> pentru a scala. Datele de bază, identice în toate scenariile:</p>
+<ul>
+<li><strong>EBIT anul 0:</strong> 1.000.000 lei; creștere proiectată 25%/an datorită capitalului injectat.</li>
+<li><strong>Capital investit existent:</strong> 4.000.000 lei. Noul capital de 2.000.000 lei generează un <strong>ROIC marginal de 20%</strong> (deci +400.000 lei EBIT incremental la maturitate, fazat pe 5 ani).</li>
+<li><strong>Cota impozit profit:</strong> 16%. <strong>Evaluare pre-money:</strong> 8.000.000 lei (multiplu 8× EBIT).</li>
+<li><strong>Fondator deține azi 100%</strong> (1.000.000 acțiuni la 8 lei valoare implicită).</li>
+</ul>
+
+<h3>Scenariul A — Datorie pură</h3>
+<p>Iei 2.000.000 lei credit bancar de investiții pe 5 ani, dobândă <strong>11% pe an</strong> (orientativ pentru un SRL solid în 2026; verifică oferta reală, indexată ROBOR/IRCC + marjă), rambursare în anuități.</p>
+<ul>
+<li><strong>Diluție:</strong> 0%. Fondatorul rămâne la 100%.</li>
+<li><strong>Cash drenat de serviciul datoriei:</strong> anuitate ≈ <strong>541.000 lei/an</strong> (principal + dobândă), total ~2.706.000 lei pe 5 ani. Dobânda totală ≈ 706.000 lei.</li>
+<li><strong>Scut fiscal:</strong> dobânda e deductibilă (în limita regulilor de deductibilitate a costurilor de îndatorare — plafonul de <strong>1.000.000 EUR/an</strong> cost excedentar al îndatorării e irelevant la această scară, dar verifică-l dacă datoria e mare). Economie de impozit ≈ 16% × 706.000 ≈ 113.000 lei.</li>
+<li><strong>Risc:</strong> obligație fixă. Dacă un an EBIT scade, anuitatea rămâne. <strong>DSCR</strong> (Debt Service Coverage Ratio) trebuie să rămână peste 1,25–1,5; sub 1,0 = default tehnic.</li>
+</ul>
+
+<h3>Scenariul B — Equity pur</h3>
+<p>Un investitor pune 2.000.000 lei la o pre-money de 8.000.000 lei.</p>
+<ul>
+<li><strong>Post-money:</strong> 10.000.000 lei. <strong>Diluție investitor:</strong> 2.000.000 / 10.000.000 = <strong>20%</strong>.</li>
+<li><strong>Cap table nou:</strong> fondator 80% (1.000.000 acțiuni), investitor 20% (250.000 acțiuni noi emise la 8 lei).</li>
+<li><strong>Cash drenat:</strong> <strong>0 lei</strong> serviciu datoriei. Tot fluxul operațional rămâne reinvestibil. Aici e marele avantaj: cash-ul disponibil pentru creștere e maxim.</li>
+<li><strong>Cost real:</strong> 20% din toate profiturile viitoare, pe vecie, plus drepturi de control (board seat, drepturi de veto, <strong>liquidation preference</strong> — tipic 1× non-participating în RO, dar negociabil).</li>
+</ul>
+<p>Calculul diluției pentru investitori se face mereu pe <strong>post-money</strong>, nu pe pre-money — greșeala clasică. Și atenție la <strong>option pool shuffle</strong>: dacă investitorul cere un pool de opțiuni de 10% creat <strong>înainte</strong> de rundă (pre-money), diluția reală a fondatorului nu e 20%, ci ~28%, pentru că poolul iese exclusiv din partea ta.</p>
+
+<h3>Scenariul C — Hibrid (50/50)</h3>
+<p>1.000.000 lei datorie (11%) + 1.000.000 lei equity la aceeași pre-money de 8.000.000 lei.</p>
+<ul>
+<li><strong>Diluție:</strong> 1.000.000 / 9.000.000 post-money = <strong>11,1%</strong>. Fondator rămâne la ~88,9%.</li>
+<li><strong>Cash drenat:</strong> anuitate ≈ <strong>270.000 lei/an</strong> — jumătate din scenariul A. DSCR mult mai confortabil.</li>
+<li><strong>Profil:</strong> compromisul clasic. Reții ~89% din upside, păstrezi control aproape integral, dar adaugi un risc fix moderat.</li>
+</ul>
+
+<h2>Tabelul comparativ pe 5 ani: NPV și IRR</h2>
+<p>Aici se vede de ce ROIC arbitrează. Proiectăm fluxul de numerar liber pentru acționar (FCFE) în fiecare scenariu, actualizat la un cost al equity-ului de <strong>15%</strong> (rata de actualizare a fondatorului, dat fiind riscul). Valoarea terminală = 8× EBIT anul 5, ajustată pentru datoria rămasă și cota acționarului.</p>
+<ul>
+<li><strong>Scenariul A (datorie):</strong> cash drenat de anuități în anii 1–5, dar fondatorul păstrează 100% din terminal value. EBIT an 5 ≈ 1,4M lei → enterprise value ~11,2M, minus datorie reziduală 0 (amortizată). <strong>NPV pentru fondator (cota 100%): cel mai mare</strong> dacă EBIT-ul rezistă. <strong>IRR pe capitalul propriu: maxim</strong>, pentru că leverage-ul amplifică randamentul când ROIC &gt; cost datorie. <strong>Dar varianța e cea mai mare.</strong></li>
+<li><strong>Scenariul B (equity):</strong> cash maxim disponibil → posibil creștere mai agresivă a EBIT (să zicem 1,5M an 5 datorită reinvestirii). Enterprise value ~12M, dar fondatorul ia doar 80% = ~9,6M. <strong>NPV mai mic pe cotă, dar cu varianță minimă</strong> — fără risc de default. IRR mai jos, downside protejat.</li>
+<li><strong>Scenariul C (hibrid):</strong> EBIT an 5 ~1,45M, enterprise value ~11,6M, fondator 88,9% = ~10,3M minus datorie reziduală redusă. <strong>NPV-ul ajustat la risc (NPV/varianță) e frecvent cel mai bun</strong> — captează ~89% din upside cu jumătate din riscul fix.</li>
+</ul>
+<p>Ierarhia tipică ce iese din model: <strong>IRR brut: A &gt; C &gt; B</strong> (leverage amplifică). <strong>NPV ajustat la risc: C ≥ A &gt; B</strong>. <strong>Probabilitate de supraviețuire la șoc: B &gt; C &gt; A.</strong> Nu există „cel mai bun” absolut — există cel mai bun <em>condiționat de toleranța ta la risc de default și de încrederea în proiecția de EBIT.</em></p>
+
+<h2>Numeric: cum amplifică leverage-ul randamentul acționarului</h2>
+<p>Acesta e miezul de care depinde toată decizia. Luăm cei 2.000.000 lei investiți la un ROIC marginal de 20% (deci +400.000 lei EBIT incremental la maturitate) și vedem ce rămâne acționarului în fiecare scenariu, an de an.</p>
+<ul>
+<li><strong>Datorie pură:</strong> incrementul brut e 400.000 lei EBIT. Scazi dobânda (an 1: ~220.000 lei pe soldul de 2M), aplici impozitul 16%, și ce rămâne — plus tot principalul rambursat care îți rămâne ca echitate — aparține integral fondatorului. Pe capital propriu suplimentar zero (banii vin din bancă), <strong>randamentul pe equity al fondatorului tinde spre infinit</strong> matematic, pentru că nu a pus capital propriu nou. Acesta e efectul de levier: spread-ul de ~10,8 puncte (ROIC 20% − cost datorie 9,2% net, la dobândă 11% și impozit 16%) se capitalizează 100% la tine.</li>
+<li><strong>Equity pur:</strong> aceiași 400.000 lei EBIT incremental, dar acum împărțiți. Fondatorul ia 80% din profitul net incremental ≈ 0,8 × 336.000 ≈ <strong>269.000 lei/an</strong>; investitorul ia 67.000 lei/an. Fondatorul nu are însă <strong>niciun risc fix</strong> și păstrează tot cash-ul operațional pentru reinvestire.</li>
+<li><strong>Hibrid:</strong> EBIT incremental 400.000 lei, dobândă pe 1M ≈ 110.000 lei an 1, impozit pe restul, iar din net fondatorul reține ~88,9%. Combinația dă un randament pe capital propriu între cele două, dar cu DSCR sănătos.</li>
+</ul>
+<p>Lecția numerică e brutală: <strong>când ROIC &gt; cost datorie, datoria e aproape întotdeauna superioară pe IRR</strong>, pentru că nu plătești capitalul cu o cotă perpetuă din afacere. Equity câștigă doar pe dimensiunile pe care IRR-ul nu le vede: supraviețuire la șoc, cash disponibil pentru creștere agresivă, și aport de competență/rețea al investitorului (smart money).</p>
+
+<h2>Impactul pe control: ce pierzi dincolo de procente</h2>
+<p>Diluția economică (cota de profit) e doar jumătate din poveste. Diluția de <strong>control</strong> e adesea mai costisitoare și nu apare în niciun tabel de IRR:</p>
+<ul>
+<li><strong>Drepturi de veto (protective provisions):</strong> chiar cu 20%, un investitor poate bloca vânzarea firmei, runde noi, distribuții de dividend, angajări de C-level sau bugete peste un prag. Ai 80% economic, dar nu mai decizi singur.</li>
+<li><strong>Board seats:</strong> un loc în board la 20% e standard; la praguri mai mari poți pierde majoritatea în consiliu chiar păstrând majoritatea acțiunilor.</li>
+<li><strong>Drag-along / tag-along:</strong> investitorul te poate forța să vinzi (drag) sau să-l incluzi la vânzarea ta (tag). Îți reduce libertatea de exit.</li>
+<li><strong>Datoria nu cere niciunul</strong> din astea — banca vrea dobânda și covenant-uri (DSCR minim, interdicție de dividend dacă scade acoperirea), dar <strong>nu intră în deciziile strategice</strong> cât timp plătești. Asta e valoarea ascunsă a datoriei: control intact.</li>
+</ul>
+
+<h2>Pragul matematic: când basculezi de la datorie la equity</h2>
+<p>Există un punct de indiferență. Datoria bate equity cât timp:</p>
+<p><strong>ROIC marginal × (1 − cota impozit) &gt; rata dobânzii × (1 − cota impozit) ÷ probabilitatea de a onora serviciul datoriei</strong></p>
+<p>În practică, traduci asta în trei teste de stop:</p>
+<ul>
+<li><strong>Test DSCR:</strong> EBIT proiectat / serviciul datoriei. Dacă scade sub 1,5 în scenariul pesimist (EBIT −20%), datoria pură e prea riscantă → mergi hibrid sau equity.</li>
+<li><strong>Test ROIC-spread:</strong> dacă ROIC marginal − cost datorie după impozit &lt; 5 puncte, marja de eroare e prea mică; equity-ul cumpără liniște care merită prețul.</li>
+<li><strong>Test diluție-cumulată:</strong> dacă prevezi mai multe runde, fiecare rundă de equity se compune. O diluție de 20% acum, urmată de încă 20% în runda următoare, te lasă cu 64% (0,8 × 0,8), nu 60%. Modelează <strong>diluția multi-rundă multiplicativ</strong>, niciodată aditiv.</li>
+</ul>
+
+<h2>Capcane subtile care strică modelul</h2>
+<ul>
+<li><strong>Confuzia ROIC vs ROE:</strong> leverage-ul umflă ROE fără să schimbe ROIC. Un ROE de 30% obținut cu datorie masivă pe un ROIC de 12% e o iluzie — la primul șoc, leverage-ul lucrează invers și ROE devine puternic negativ.</li>
+<li><strong>Liquidation preference ascunsă:</strong> un investitor cu 1× participating preference pe 20% poate lua, la un exit modest, mult mai mult decât 20%. Modelează waterfall-ul de exit, nu doar procentul din cap table.</li>
+<li><strong>Anti-dilution (ratchet):</strong> clauzele de protecție la down-round (full ratchet vs weighted average) pot transfera retroactiv acțiuni către investitor dacă strângi mai jos data viitoare. Cere mereu <strong>broad-based weighted average</strong>, nu full ratchet.</li>
+<li><strong>Costuri de îndatorare nedeductibile:</strong> la micro-întreprindere, dobânda nu reduce impozitul. Recalculează costul real al datoriei <em>fără</em> scut fiscal dacă firma e pe regim micro.</li>
+<li><strong>Garanții personale:</strong> creditul de SRL vine adesea cu garanție personală a administratorului. Asta mută riscul de pe firmă pe patrimoniul tău personal — un cost care nu apare nicăieri în tabelul de IRR, dar e real.</li>
+</ul>
+
+<h2>Checklist de decizie înainte de a semna</h2>
+<ul>
+<li><strong>Calculează ROIC-ul marginal</strong> al tranșei pe care o finanțezi (nu media istorică) și costul datoriei <em>după</em> impozit (16% sau zero scut dacă ești micro).</li>
+<li><strong>Construiește FCFE pe 5 ani</strong> pentru toate trei scenariile, cu valoare terminală la multiplu de EBIT realist (verifică multiplii sectorului tău, nu 8× generic).</li>
+<li><strong>Rulează scenariul pesimist</strong> (EBIT −20%, −30%) și verifică DSCR în scenariul de datorie. Sub 1,25 = renegociază spre hibrid.</li>
+<li><strong>Modelează diluția multiplicativ</strong> pe toate rundele anticipate, inclusiv option pool și anti-dilution.</li>
+<li><strong>Compară NPV ajustat la risc</strong>, nu doar IRR brut. IRR-ul cel mai mare e adesea cel mai fragil.</li>
+<li><strong>Citește term sheet-ul de equity pe waterfall, control și protecții</strong> — liquidation preference, board seats, drepturi de veto, anti-dilution — nu doar pe procent.</li>
+<li><strong>Verifică deductibilitatea</strong> costurilor de îndatorare și plafonul de cost excedentar dacă datoria depășește ~1M EUR cumulat.</li>
+</ul>
+
+<h2>Greșeli frecvente</h2>
+<ul>
+<li><strong>„Equity-ul e gratis pentru că nu plătesc dobândă.”</strong> Fals — e cea mai scumpă formă de capital, pentru că o plătești din toate profiturile viitoare, nelimitat în timp.</li>
+<li><strong>Diluție calculată pe pre-money.</strong> Mereu pe post-money. 2M la 8M pre nu e 25%, e 20%.</li>
+<li><strong>A confunda IRR cu valoare creată.</strong> IRR mare cu NPV mic și risc de default ridicat distruge averea pe termen lung.</li>
+<li><strong>A ignora ROIC marginal descrescător.</strong> Capitalul nou rar randează ca media istorică; modelează saturația.</li>
+<li><strong>A semna anti-dilution full ratchet.</strong> Te pedepsește brutal la prima rundă mai slabă.</li>
+</ul>

@@ -1,0 +1,118 @@
+<p>Problema de <strong>retenție angajați scaling afacere salarii</strong> nu este o problemă de HR, ci una de matematică financiară brutală: fiecare plecare îți distruge profitul mai tare decât orice mărire de salariu, iar fiecare angajare în plus, prost compensată, te face să crești cifra de afaceri în timp ce marja se prăbușește. Ai învățat deja din lecția „Cum angajezi primul angajat" anatomia costului — brut plus CAM 2,25%, raportul net/brut de circa 58,5%, contribuțiile reținute (CAS 25%, CASS 10%, impozit 10%). Acum mergem mai departe, la nivelul la care lucrează un antreprenor care scalează: cum construiești un sistem de compensație care reține oamenii cheie fără să-ți erodeze marja.</p>
+
+<p>În această lecție avansată comparăm pe cifre reale trei arhitecturi de compensație — <strong>opțiuni de acțiuni vs salariu</strong> cash, <strong>profit sharing și structura</strong> lui contractuală, și <strong>bonus pe KPI și motivație reală</strong> — fiecare cu calculul cost total vs. profit. Vei primi o simulare de <strong>cost total angajat 2026</strong> pe cinci ani cu creștere salarială compusă, o matrice KPI-bonus operațională, un model de <strong>predictor attrition și retenție</strong> și un tabel care îți arată, în lei, cât te costă un turnover de 20% față de o investiție de retenție echivalentă. Diferența dintre un antreprenor care scalează profitabil și unul care „crește" până dă faliment stă exact în aceste numere.</p>
+
+<p>Ipoteza de lucru pe care o demontăm: „dacă vreau să cresc, trebuie să plătesc mai mult la salarii." Fals. Trebuie să plătești <em>diferit</em>, legând o parte din compensație de rezultate și de longevitate, astfel încât costul tău fix să rămână sub control, iar componenta variabilă să se autofinanțeze din profitul pe care îl generează. Hai să construim modelul.</p>
+
+<h2>De ce retenția bate scalingul prin angajări: costul real al unei plecări</h2>
+
+<p>Înainte de a discuta cum compensezi, trebuie să cuantifici ce pierzi când un om pleacă. Antreprenorii subestimează masiv acest cost pentru că văd doar „recrutarea înlocuitorului". Costul real de turnover al unui angajat are cinci componente:</p>
+
+<ul>
+<li><strong>Costul de recrutare:</strong> timp managerial, eventual agenție (15-25% din salariul anual brut la poziții de specialist), anunțuri, interviuri.</li>
+<li><strong>Costul de onboarding și rampă:</strong> noul angajat produce la 30-50% capacitate în primele 2-4 luni. Pentru un specialist de 8000 lei brut/lună, asta înseamnă 12.000-20.000 lei de productivitate pierdută.</li>
+<li><strong>Costul de productivitate al echipei:</strong> colegii preiau sarcini, mentorează, fac erori în zone necunoscute.</li>
+<li><strong>Costul de cunoaștere pierdută:</strong> relații cu clienți, know-how nedocumentat, context de proiect.</li>
+<li><strong>Costul de risc:</strong> dacă pleacă spre un competitor, pierdere de clienți și de avantaj.</li>
+</ul>
+
+<p>Regula empirică validată internațional și aplicabilă și în România: înlocuirea unui angajat de specialitate costă între <strong>50% și 150% din salariul anual brut</strong>, iar pentru roluri-cheie (vânzări senior, tehnic critic, management) poate urca la 200%. Pentru un angajat cu 8000 lei brut/lună (96.000 lei brut/an), costul de turnover este realist între 48.000 și 144.000 lei. Aceasta este suma pe care o compari mai jos cu investiția de retenție.</p>
+
+<h2>Tabel: retenție vs. cost de turnover (echipă de 10, scenariu real)</h2>
+
+<p>Să luăm o firmă cu 10 angajați de specialitate, salariu mediu 8000 lei brut/lună. Comparăm două scenarii pe un an: turnover de 20% (2 plecări) fără investiție de retenție, vs. o investiție de retenție care reduce turnover-ul la 5%.</p>
+
+<ul>
+<li><strong>Scenariu A — turnover 20%, zero retenție:</strong> 2 plecări × cost mediu de turnover 96.000 lei (100% din brut anual) = <strong>192.000 lei/an pierdere</strong>. Plus erodarea moralului echipei rămase (greu de cuantificat, dar real).</li>
+<li><strong>Scenariu B — investiție de retenție:</strong> bonus de retenție + ajustare salarială țintită de circa 8.000 lei/an pe fiecare dintre cei 10 angajați = 80.000 lei/an cost suplimentar. Turnover scade la 5% (0,5 plecări statistic) = 48.000 lei cost de turnover. <strong>Total scenariu B: 128.000 lei/an.</strong></li>
+</ul>
+
+<p>Diferența: <strong>64.000 lei/an economisiți</strong> investind în retenție în loc să absorbi turnover-ul. Și asta fără să contabilizezi câștigul de productivitate al unei echipe stabile. Lecția financiară: bugetul de retenție nu este un cost, este o investiție cu ROI direct calculabil. Întrebarea corectă nu e „cât mă costă să-i țin", ci „cât mă costă să-i pierd".</p>
+
+<h2>Cele trei arhitecturi de compensație: calcul cost total vs. profit</h2>
+
+<p>Acum miezul lecției. Ai trei pârghii majore de compensație dincolo de salariul fix. Fiecare are un profil diferit cost/profit/risc. Le construim pe cifre.</p>
+
+<h3>1. Salariu cash majorat — cea mai scumpă și cea mai puțin motivantă pe termen lung</h3>
+
+<p>Mărirea de salariu este cea mai costisitoare formă de compensație pentru că este <strong>fixă, recurentă și majorată cu toate taxele aferente</strong>. O mărire de 1000 lei net pe lună costă firma circa 1709 lei brut (la raportul ~58,5%), plus CAM 2,25% = circa <strong>1747 lei cost total lunar</strong>, adică ~20.960 lei/an pentru un singur om. Și e ireversibilă psihologic: salariul mărit devine baseline, nu mai motivează după 3 luni (adaptare hedonică), iar dacă afacerea scade nu-l poți reduce ușor.</p>
+
+<p>Folosește mărirea de salariu doar pentru: corecții de piață (omul e sub-plătit față de piață și pleacă), promovări reale de rol, sau inflație. Nu o folosi ca instrument de motivare — e ineficientă fiscal și comportamental.</p>
+
+<h3>2. Bonus pe KPI — variabil, autofinanțat, fiscal flexibil</h3>
+
+<p>Bonusul legat de performanță este superior pentru că este <strong>variabil</strong> (se plătește doar dacă rezultatul există) și <strong>condiționat</strong> (se autofinanțează din profitul pe care îl generează). Fiscal, bonusul în bani se impozitează ca salariu (CAS, CASS, impozit, CAM — la fel ca brutul), deci nu economisești taxe față de salariu, dar economisești <em>angajamentul fix</em>: într-un an slab, nu îl plătești.</p>
+
+<p>Cheia este structura. Un bonus de 15.000 lei brut/an care declanșează doar la atingerea unei ținte care îți aduce 100.000 lei profit suplimentar este, net de taxe (cost total ~15.340 lei cu CAM), o investiție cu ROI de peste 6:1. Construiește bonusul astfel încât plata lui să fie întotdeauna un semn că ai câștigat. Matricea KPI de mai jos îți arată cum.</p>
+
+<h3>3. Opțiuni de acțiuni / equity (planuri de tip stock option) — cost cash zero azi, aliniere maximă</h3>
+
+<p>La <strong>opțiuni de acțiuni vs salariu</strong>, marele avantaj este că nu ies bani din cash-flow azi. Oferi angajatului-cheie dreptul de a cumpăra în viitor un procent din firmă la un preț fix (strike), de regulă cu un <strong>vesting</strong> pe 4 ani (cliff de 1 an, apoi lunar/anual). Asta leagă omul de firmă: dacă pleacă înainte de vesting, pierde dreptul. Este cel mai puternic instrument de retenție pentru roluri-cheie și pentru startup-uri care nu pot plăti cash de piață.</p>
+
+<p>În România, ai în principal două căi. (a) Pentru SRL: cesiune de părți sociale cu vesting contractual sau structuri de tip „phantom equity" (drept la o sumă calculată ca procent din valoarea firmei, plătită ca bonus la eveniment de lichiditate). (b) Pentru firme listate sau cu structură adecvată: planuri de stock options cu regim fiscal favorabil. <strong>Avertisment fiscal important: regimul fiscal al planurilor de stock option din România are condiții specifice de scutire (în special pentru planuri calificate, cu perioadă minimă de deținere) — verifică încadrarea exactă și perioada de păstrare cu un consultant fiscal înainte de a structura planul, pentru că o structurare greșită poate transforma beneficiul în venit salarial integral impozabil.</strong> Pentru SRL-uri mici, phantom equity este de obicei mai simplu de administrat decât cesiunea reală de părți sociale, pentru că eviți complicațiile de la Registrul Comerțului și dreptul de vot al noului asociat.</p>
+
+<h2>Matrice KPI-bonus operațională: cum o construiești corect</h2>
+
+<p>Un bonus pe KPI prost construit demotivează mai tare decât absența lui. Regulile de aur: KPI-urile trebuie să fie (a) sub controlul angajatului, (b) măsurabile obiectiv, (c) maximum 3-4 per persoană, (d) legate de profit, nu de indicatori de imagine fără impact financiar. Iată o matrice-cadru pentru un rol de vânzări, cu bonus țintă de 15.000 lei brut/an:</p>
+
+<ul>
+<li><strong>KPI 1 — Venit nou generat (pondere 50%):</strong> sub țintă (90%) = 0 lei; țintă atinsă = 7.500 lei; depășire 120% = 9.750 lei (accelerator 1,3×). Plafonat la 150% pentru a evita reportarea artificială a vânzărilor dintr-o perioadă în alta.</li>
+<li><strong>KPI 2 — Marja medie pe contract (pondere 30%):</strong> protejează profitul — vânzătorul nu trebuie să cumpere venit cu discount. Sub prag de marjă = 0; la țintă = 4.500 lei.</li>
+<li><strong>KPI 3 — Retenție clienți / churn (pondere 20%):</strong> sub 90% retenție = 0; peste = 3.000 lei. Te asigură că nu vinde și pleacă lăsând clienți nemulțumiți.</li>
+</ul>
+
+<p>Observă echilibrul: 50% pe creștere, 50% pe protecția profitului și a bazei de clienți. Un bonus 100% pe venit brut produce vânzători care fac discount sălbatic și aduc clienți toxici. Plătește pentru profit, nu pentru cifră de afaceri. Acesta este predictorul numărul unu al scalingului profitabil.</p>
+
+<h2>Simulare: cost total angajat pe 5 ani cu creștere</h2>
+
+<p>Aici e capcana subtilă a scalingului: costul angajatului <strong>compune</strong>. Mulți antreprenori bugetează costul de azi și se trezesc peste 5 ani cu o masă salarială dublă fără să-și dea seama când s-a întâmplat. Simulăm un angajat care pornește la 8000 lei brut/lună, cu mărire medie de 8%/an (corecție inflație + merit):</p>
+
+<ul>
+<li><strong>An 1:</strong> brut 8.000 lei/lună × 12 = 96.000 lei + CAM 2,25% (2.160 lei) = <strong>98.160 lei cost firmă.</strong></li>
+<li><strong>An 2:</strong> brut 8.640 lei/lună → 103.680 lei + CAM 2.333 lei = <strong>106.013 lei.</strong></li>
+<li><strong>An 3:</strong> brut 9.331 lei → 111.974 lei + CAM 2.519 lei = <strong>114.493 lei.</strong></li>
+<li><strong>An 4:</strong> brut 10.078 lei → 120.932 lei + CAM 2.721 lei = <strong>123.653 lei.</strong></li>
+<li><strong>An 5:</strong> brut 10.884 lei → 130.606 lei + CAM 2.939 lei = <strong>133.545 lei.</strong></li>
+</ul>
+
+<p><strong>Cost cumulat pe 5 ani: circa 575.864 lei pentru un singur angajat.</strong> Iar costul anual a crescut cu 36% față de anul 1, deși „n-ai dat decât mărirea normală". Acum înmulțește cu 10 angajați: aproape 5,76 milioane lei pe 5 ani, cu o creștere a masei salariale fixe de peste o treime. Dacă productivitatea pe angajat nu crește în același ritm, marja ta se topește în tăcere.</p>
+
+<p>Concluzia operațională: <strong>nu lăsa toată compensația în zona fixă care compune.</strong> Dacă din cei 8% creștere anuală, 4% sunt salariu fix și 4% sunt bonus variabil pe KPI, costul tău în anii slabi este dramatic mai mic, iar în anii buni bonusul se plătește singur din profitul generat. Structura de compensație este o decizie de management al riscului de cash-flow, nu doar de HR.</p>
+
+<h2>Predictor de attrition: cum identifici plecările înainte să se întâmple</h2>
+
+<p>Retenția proactivă bate retenția reactivă (contraoferta disperată când omul are deja oferta în mână — cea mai proastă și mai scumpă formă de retenție). Construiește un scor simplu de risc de attrition, evaluat trimestrial per angajat, pe semnale măsurabile:</p>
+
+<ul>
+<li><strong>Compa-ratio (salariu actual / mediana pieței pentru rol):</strong> sub 0,90 = risc mare. Omul e sub piață și o știe.</li>
+<li><strong>Timp de la ultima mărire / promovare:</strong> peste 18 luni fără mișcare = risc crescut.</li>
+<li><strong>Stagnare de rol:</strong> fără creștere de responsabilitate / învățare = plictiseală, principalul motor de plecare la performeri.</li>
+<li><strong>Semnale comportamentale:</strong> scădere a implicării, refuz de proiecte noi, întârzieri, scădere a productivității.</li>
+<li><strong>Manager:</strong> oamenii pleacă de la manageri, nu de la firme. Un manager toxic e cel mai puternic predictor de attrition al unei echipe.</li>
+</ul>
+
+<p>Calculează un scor 0-100, prioritizează intervenția pe performerii cu scor mare (regula 80/20: pierderea a 2-3 oameni-cheie face mai mult rău decât plecarea a 5 oameni medii) și acționează cu 6-12 luni înainte, când intervenția costă o fracțiune din contraoferta de panică.</p>
+
+<h2>Pași de acțiune și checklist</h2>
+
+<ul>
+<li><strong>1. Calculează-ți costul de turnover real</strong> pe rolul-cheie (50-150% din brut anual). Pune cifra pe perete. Este reperul tău pentru orice decizie de retenție.</li>
+<li><strong>2. Împarte compensația 70/30 sau 60/40</strong> (fix/variabil) pentru rolurile cu impact pe profit. Mărirea pură de salariu o rezervi doar pentru corecții de piață.</li>
+<li><strong>3. Construiește matricea KPI</strong> cu maximum 3-4 indicatori, legați de profit și marjă, nu de cifră de afaceri brută. Plafonează acceleratorii.</li>
+<li><strong>4. Pentru rolurile-cheie ireplaceabile</strong>, structurează un plan de equity / phantom equity cu vesting pe 4 ani și cliff de 1 an. Validează regimul fiscal cu un consultant ÎNAINTE de semnare.</li>
+<li><strong>5. Rulează simularea pe 5 ani</strong> a masei salariale cu creștere compusă. Verifică dacă productivitatea pe angajat crește în același ritm cu costul. Dacă nu, ai o problemă de marjă care vine din viitor.</li>
+<li><strong>6. Implementează scorul de attrition trimestrial.</strong> Intervino la 6-12 luni înainte, nu la contraofertă.</li>
+<li><strong>7. Auditează-ți managerii.</strong> Costul ascuns al unui manager slab este turnover-ul echipei lui.</li>
+</ul>
+
+<h3>Greșeli frecvente care distrug profitul la scaling</h3>
+
+<ul>
+<li><strong>Măriri lineare „ca să nu plece nimeni":</strong> umfli costul fix pentru toți, inclusiv pentru cei care oricum rămâneau. Țintește, nu stropi.</li>
+<li><strong>Bonus pe cifră de afaceri, nu pe profit:</strong> îți cumperi creștere cu marjă negativă și crezi că scalezi.</li>
+<li><strong>Equity fără vesting:</strong> dai părți sociale azi, omul pleacă peste 8 luni și rămâi cu un asociat extern care nu mai contribuie.</li>
+<li><strong>Contraoferta de panică:</strong> cel mai scump mod de a reține pe cineva — și statistic, peste jumătate dintre cei reținuți prin contraofertă pleacă oricum în 12 luni.</li>
+<li><strong>Confuzia cifră de afaceri = succes:</strong> ai crescut vânzările cu 40% dar marja netă a scăzut pentru că masa salarială fixă a explodat. Ai scalat falimentul, nu afacerea.</li>
+</ul>
+
+<p>Retenția și scalingul profitabil sunt, în esență, aceeași disciplină: să legi banii pe care îi dai oamenilor de valoarea pe care o produc și de timpul pe care îl petrec cu tine. Fă asta cu structură — fix controlat, variabil legat de profit, equity legat de longevitate — și vei crește fără să-ți vinzi marja. Sari peste ea, și vei avea o firmă mare, plină de oameni nemulțumiți, cu profit zero.</p>

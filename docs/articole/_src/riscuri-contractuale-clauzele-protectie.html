@@ -1,0 +1,134 @@
+<p><strong>Protecție contractuală, riscuri, recuperare bani</strong> — trei lucruri pe care un antreprenor experimentat le tratează ca pe un singur sistem, nu ca pe trei capitole separate. Dacă ai trecut deja prin lecția despre clauzele critice pe care nu trebuie să le semnezi, știi că un contract prost te poate costa mai mult decât o lună fără facturare. Lecția de față merge mai departe: îți dau un template complet cu 12 clauze de risc, modelul de calcul al penalităților de întârziere (clauze penalty și force majeure), arhitectura termenilor de plată (termeni de plată și late fees), plus procedura reală de recuperare prin mediere vs instanță, cu costuri și termene din România anului 2026.</p>
+
+<p>Diferența dintre un antreprenor care încasează și unul care „aleargă după bani" nu stă în noroc, ci în clauzele de desfacere pe termen, în NDA și protecție IP și în modul în care a calibrat penalitățile încă din momentul semnării. Un client mare nu îți plătește mai târziu pentru că e rău-platnic — îți plătește mai târziu pentru că poate, adică pentru că tu nu ai pus costul întârzierii în contract. Aici reparăm exact asta.</p>
+
+<p>Vei vedea cifre concrete: penalități de 0,1%–0,5% pe zi (echivalent ~3%–15% pe lună, cu plafon), taxe de timbru pe valoare, costul real al unei medieri vs un proces, și un caz pas-cu-pas în care recuperarea parțială negociată a bătut recuperarea „integrală" pe hârtie. Citește până la final: ai un checklist de implementare și lista greșelilor care anulează cele mai bune clauze.</p>
+
+<h2>Template-ul de risc: cele 12 clauze care decid dacă încasezi</h2>
+
+<p>Un contract B2B solid în România 2026 nu se construiește din șabloane copiate, ci din module de risc. Acestea sunt cele 12 clauze pe care le verific întotdeauna înainte de semnătură. Lipsa oricăreia mută riscul pe tine.</p>
+
+<ul>
+<li><strong>1. Obiect și livrabile măsurabile</strong> — definiție SMART a ce livrezi, cu criterii de acceptanță. Fără asta, clientul mare invocă „nu e ce am cerut" și blochează plata la nesfârșit.</li>
+<li><strong>2. Termeni de plată și late fees</strong> — scadență explicită (ex. 30 de zile de la factură, nu „la finalul proiectului"), penalități de întârziere și dreptul de suspendare a livrării.</li>
+<li><strong>3. Clauză penală (penalty)</strong> — cuantumul daunelor pentru neexecutare/întârziere, prestabilit, astfel încât să nu mai trebuiască să dovedești prejudiciul.</li>
+<li><strong>4. Force majeure bine delimitată</strong> — lista cazurilor și, critic, ce <em>nu</em> intră (lipsa de fonduri a clientului NU e forță majoră).</li>
+<li><strong>5. NDA și protecție IP</strong> — confidențialitate bilaterală + clarificarea că proprietatea intelectuală îți rămâne ție până la plata integrală.</li>
+<li><strong>6. Transfer al dreptului de proprietate condiționat de plată</strong> — IP și livrabilele trec la client doar la încasarea ultimei facturi. Pârghia ta cea mai puternică.</li>
+<li><strong>7. Clauză de garanție și limitare a răspunderii</strong> — plafonarea răspunderii tale la valoarea contractului (sau a unei tranșe), nu „nelimitat".</li>
+<li><strong>8. Clauze de desfacere pe termen (reziliere)</strong> — condițiile în care fiecare parte poate ieși, cu preaviz și cu plata lucrărilor efectuate până la dată.</li>
+<li><strong>9. Reziliere de plin drept (pact comisoriu)</strong> — desfacerea automată la neplată, fără să mai aștepți o hotărâre judecătorească.</li>
+<li><strong>10. Soluționarea litigiilor</strong> — clauză de mediere/escaladare obligatorie înainte de instanță + instanța competentă aleasă de tine.</li>
+<li><strong>11. Garanții de plată</strong> — avans, bilet la ordin avalizat, scrisoare de garanție bancară sau gaj, în funcție de mărimea expunerii.</li>
+<li><strong>12. Indexare și modificare de preț</strong> — la contractele pe termen lung, ajustare cu inflația/cursul, ca să nu lucrezi în pierdere în lunile 9–12.</li>
+</ul>
+
+<p>Regula de aur la nivel avansat: clauzele 6 + 9 + 11 formează „triunghiul de încasare". Dacă ai IP-ul condiționat de plată, reziliere de plin drept la neplată și o garanție lichidă (bilet la ordin sau avans), un client mare te plătește la timp pentru că alternativa lui e mai scumpă decât factura.</p>
+
+<h2>Clauza penală: cum calculezi penalitățile corect (3%–15% pe lună, cu plafon)</h2>
+
+<p>Aici greșesc cei mai mulți: scriu „penalități de 10% pe zi" și apoi instanța le reduce drastic, pentru că o clauză penală vădit excesivă poate fi <strong>redusă de judecător</strong> conform Codului civil. Penalitatea trebuie să fie descurajantă, dar proporțională, altfel o pierzi tocmai când ai nevoie de ea.</p>
+
+<p><strong>Cota uzuală defensabilă</strong> în B2B este între <strong>0,1% și 0,5% pe zi de întârziere</strong> din suma neachitată — adică aproximativ <strong>3%–15% pe lună</strong>. Multe contracte folosesc 0,15%/zi (~4,5%/lună). Pentru a fi sigur că rezistă, adaugă întotdeauna un <strong>plafon</strong>: „penalitățile nu pot depăși valoarea debitului principal". Acest plafon este și o cerință des întâlnită în jurisprudența pe penalități.</p>
+
+<h3>Model de calcul concret</h3>
+
+<p>Factură neachitată: <strong>50.000 lei</strong>. Penalitate <strong>0,15%/zi</strong>. Întârziere <strong>60 de zile</strong>:</p>
+
+<ul>
+<li>Penalitate zilnică: 50.000 × 0,15% = <strong>75 lei/zi</strong>.</li>
+<li>Total 60 de zile: 75 × 60 = <strong>4.500 lei</strong> (echivalent ~9% din debit).</li>
+<li>Plafon „maxim = debitul principal": 50.000 lei — nu se atinge, deci penalitatea integrală de 4.500 lei este datorată.</li>
+</ul>
+
+<p>La 0,5%/zi, aceeași factură ar genera 250 lei/zi × 60 = 15.000 lei. Defensabil, dar mai expus reducerii. <strong>Sfat de risc:</strong> pune 0,15%–0,2%/zi cu plafon clar — recuperezi 100% din ce ai scris, în loc să recuperezi 30% dintr-o clauză agresivă pe care instanța o taie.</p>
+
+<p>Important: dacă nu prevezi <em>nicio</em> clauză penală, ai dreptul la <strong>dobânda legală penalizatoare</strong> (conform OG 13/2011, în raporturile dintre profesioniști aceasta este rata dobânzii de referință a BNR plus 8 puncte procentuale — verifică nivelul curent al ratei de referință BNR). Aceasta este mult mai mică decât o clauză penală bine scrisă. De aceea clauza penală negociată este aproape întotdeauna superioară simplei dobânzi legale.</p>
+
+<h2>Force majeure: capcana pe care clienții mari o exploatează</h2>
+
+<p>Clauza de force majeure prost scrisă este folosită de clienții mari nu ca să te protejeze pe tine, ci ca să justifice neplata. La nivel avansat, trebuie să faci trei lucruri:</p>
+
+<ul>
+<li><strong>Listă închisă + exemple</strong>: dezastre naturale, război, decizii ale autorității, întreruperi majore de infrastructură. Adaugă explicit: „dificultățile financiare sau lipsa de lichiditate NU constituie forță majoră".</li>
+<li><strong>Notificare în termen scurt</strong> (ex. 5 zile de la apariție) cu document justificativ — fără notificare, nu se invocă.</li>
+<li><strong>Efect simetric</strong>: dacă evenimentul suspendă obligația de livrare, suspendă și termenul, dar <strong>obligațiile de plată deja scadente rămân datorate</strong>.</li>
+</ul>
+
+<p>Distincția fină: <strong>impreviziunea</strong> (schimbarea radicală a circumstanțelor — ex. creșterea bruscă a costurilor) este diferită de forța majoră și se tratează prin clauza de indexare/renegociere (clauza 12), nu prin force majeure. Confuzia dintre cele două le oferă clienților mari o portiță de renegociere a prețului în defavoarea ta.</p>
+
+<h2>NDA și protecție IP: pârghia tăcută de încasare</h2>
+
+<p>NDA-ul nu e doar despre secrete — bine construit, este și un instrument de plată. Două elemente avansate:</p>
+
+<ul>
+<li><strong>Clauză de daune lichidate în NDA</strong>: o sumă fixă datorată la dovada încălcării (ex. 20.000–50.000 lei/încălcare), ca să nu mai trebuiască să cuantifici un prejudiciu greu de probat.</li>
+<li><strong>IP retenție până la plata integrală</strong>: dreptul de utilizare/proprietate asupra livrabilelor (cod, design, materiale) se transferă <em>doar</em> la încasare. Folosirea înainte de plată = încălcare contractuală + de drept de autor. Aceasta îți dă o a doua bază legală de presiune, separată de simpla datorie comercială.</li>
+</ul>
+
+<p>Pentru servicii creative/IT, această combinație transformă o discuție despre o factură neplătită într-o discuție despre utilizare neautorizată — un teren pe care clientul mare pierde mult mai ușor și mai scump, deci preferă să plătească.</p>
+
+<h2>Recuperare prin mediere vs instanță: costuri și termene reale 2026</h2>
+
+<p>Când plata totuși întârzie, ai o scară de escaladare. Greșeala scumpă e să sari direct la executare silită fără să fi epuizat pașii ieftini.</p>
+
+<h3>Pasul 1 — Notificarea de punere în întârziere</h3>
+
+<p>O notificare scrisă (de preferat prin executor judecătoresc sau cu confirmare de primire) prin care ceri plata în 15 zile, cu calculul penalităților. Cost: zeci–sute de lei. Efect: în multe cazuri, declanșează plata sau o negociere, pentru că marchează trecerea de la „ne sună" la „intentăm acțiune". Curge dobânda/penalitatea oficial de la punerea în întârziere.</p>
+
+<h3>Pasul 2 — Medierea</h3>
+
+<p>Medierea este voluntară, dar o clauză contractuală de mediere obligatorie te ajută. Avantaje: <strong>rapidă</strong> (săptămâni, nu ani), <strong>confidențială</strong> și mult <strong>mai ieftină</strong> decât un proces (onorariu de mediator negociabil, fără taxă de timbru semnificativă). Un acord de mediere poate fi învestit pentru a deveni titlu executoriu. Verifică facilitățile fiscale la taxa de timbru pentru cazurile soluționate prin mediere.</p>
+
+<h3>Pasul 3 — Ordonanța de plată sau acțiunea de drept comun</h3>
+
+<p>Pentru creanțe certe, lichide și exigibile (o factură acceptată), <strong>ordonanța de plată</strong> este procedura rapidă, cu taxă de timbru fixă redusă (ordin de mărime: ~200 lei, verifică valoarea curentă). Pentru creanțe contestate, mergi pe acțiunea de drept comun, unde taxa de timbru este <strong>pe tranșe de valoare</strong> și poate ajunge la mii de lei la sume mari.</p>
+
+<p><strong>Comparație de cost pe o creanță de 50.000 lei:</strong></p>
+
+<ul>
+<li><strong>Mediere</strong>: cost total tipic redus, durată câteva săptămâni, rezultat: adesea recuperare parțială rapidă (ex. 70%–90% încasat în 30–60 de zile).</li>
+<li><strong>Ordonanță de plată</strong>: taxă de timbru mică, durată câteva luni dacă nu e contestată, recuperare integrală a debitului + penalități.</li>
+<li><strong>Acțiune de drept comun + executare silită</strong>: taxă de timbru pe tranșă (mii de lei la 50.000), onorariu avocat, durată 1–3 ani plus executare, plus riscul ca debitorul să devină insolvabil între timp.</li>
+</ul>
+
+<p>Concluzia avansată: pe sume medii, <strong>timpul costă mai mult decât diferența de bani</strong>. O recuperare de 85% în 45 de zile prin mediere bate frecvent o recuperare „de 100%" în 2 ani prin instanță, mai ales raportat la valoarea în timp a banilor și la riscul de insolvabilitate a debitorului.</p>
+
+<h2>Caz concret: recuperare parțială negociată care a bătut „integrala" pe hârtie</h2>
+
+<p>Furnizor de servicii software, factură <strong>120.000 lei</strong>, scadență depășită cu 90 de zile de către un client corporate care „amâna sistematic". Contractul avea, din fericire, clauza 6 (IP condiționat de plată) și clauza 2 (penalități 0,15%/zi).</p>
+
+<ul>
+<li>Penalități acumulate: 120.000 × 0,15% × 90 = <strong>16.200 lei</strong>. Total pretins: 136.200 lei.</li>
+<li>Pasul 1: notificare prin executor + calculul penalităților + reamintirea că licența de utilizare a produsului <strong>nu este transferată</strong> până la plată (utilizarea în producție devenea încălcare IP).</li>
+<li>Reacția clientului: a vrut să evite atât blocajul tehnic, cât și expunerea pe drept de autor. A propus mediere.</li>
+<li>Rezultat mediere (3 săptămâni): plata integrală a debitului de <strong>120.000 lei</strong> + <strong>8.000 lei</strong> penalități (renunțare parțială la penalități în schimbul plății imediate). Total încasat: <strong>128.000 lei în 21 de zile</strong>.</li>
+</ul>
+
+<p>Pe hârtie, furnizorul a „renunțat" la ~8.200 lei din penalități. În realitate, alternativa era un proces de 18–24 de luni, cu taxă de timbru de mii de lei, onorariu avocat și risc de insolvabilitate. <strong>128.000 lei cash în 3 săptămâni</strong> a fost decizia financiară corectă. Pârghia decisivă nu a fost penalitatea, ci clauza de IP condiționat de plată — care a transformat o factură ignorabilă într-o problemă operațională urgentă pentru client.</p>
+
+<h2>Checklist de implementare</h2>
+
+<ul>
+<li><strong>Înainte de semnare:</strong> verifică prezența celor 12 clauze; insistă pe triunghiul 6+9+11 (IP la plată, reziliere de plin drept, garanție lichidă).</li>
+<li><strong>Calibrează penalitatea</strong> la 0,15%–0,2%/zi cu plafon „maxim = debitul principal" — defensabil și recuperabil 100%.</li>
+<li><strong>Scrie force majeure cu listă închisă</strong> și excludere explicită a lipsei de lichiditate; cere notificare în 5 zile.</li>
+<li><strong>Cere garanție pe măsura expunerii:</strong> avans 30%–50% la clienți noi, bilet la ordin avalizat sau scrisoare de garanție bancară la sume mari.</li>
+<li><strong>Pune termen de plată scurt și clar</strong> (ex. 30 de zile) + dreptul de a suspenda livrarea la întârziere.</li>
+<li><strong>La întârziere:</strong> notificare de punere în întârziere → mediere → ordonanță de plată. Nu sări direct la instanța de drept comun pe creanțe necontestate.</li>
+<li><strong>Documentează tot:</strong> facturi acceptate (semnătură/ștampilă/e-mail de confirmare), procese-verbale de recepție — fără ele, „certă, lichidă, exigibilă" cade.</li>
+</ul>
+
+<h2>Greșeli frecvente care anulează cele mai bune clauze</h2>
+
+<ul>
+<li><strong>Penalități prea agresive</strong> (5%–10% pe zi) — reduse de instanță; pierzi tocmai când le invoci.</li>
+<li><strong>Force majeure deschisă</strong> care permite clientului să invoce „context economic" pentru neplată.</li>
+<li><strong>Lipsa transferului IP condiționat de plată</strong> — predai livrabilele și apoi nu mai ai nicio pârghie.</li>
+<li><strong>Termen de plată vag</strong> („la finalizare") — fără scadență clară nu curge nici penalitatea, nici termenul de prescripție în favoarea ta.</li>
+<li><strong>Reziliere doar pe cale judecătorească</strong> — fără pact comisoriu, aștepți luni o hotărâre ca să poți opri colaborarea.</li>
+<li><strong>Săritul peste mediere</strong> direct la proces — costuri și timp pierdute pe creanțe care s-ar fi rezolvat în 3 săptămâni.</li>
+<li><strong>Documentație incompletă</strong> — fără factură acceptată și recepție semnată, pierzi calea rapidă a ordonanței de plată.</li>
+</ul>
+
+<p>Reține modelul de gândire avansat: nu „cum recuperez banii după ce nu m-a plătit", ci „cum construiesc contractul astfel încât neplata să fie mai scumpă pentru client decât plata". Acolo stă diferența dintre un antreprenor care facturează și unul care chiar încasează.</p>

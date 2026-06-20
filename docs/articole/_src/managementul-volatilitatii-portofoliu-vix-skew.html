@@ -1,0 +1,149 @@
+<p><strong>Managementul volatilității VIX strategie portofoliu</strong> nu înseamnă să vinzi panicat la primul vârf de turbulență, ci să transformi volatilitatea într-o variabilă de decizie pe care o citești zilnic și o tranzacționezi sistematic. La acest nivel deja știi diferența dintre <strong>volatilitate realizată versus implicită</strong>, ai internalizat ce înseamnă beta, alfa și deviația standard din lecțiile anterioare despre risc. Aici mergem mai adânc: cum folosești <strong>VIX ca indicator pentru rotație poziții</strong>, ce îți spune cu adevărat <strong>skew în opțiuni și ce spune despre risc</strong>, și cum construiești ajustări de poziție în timp real.</p>
+
+<p>Modelul pe care îl montăm aici se sprijină pe trei piloni măsurabili: nivelul VIX raportat la volatilitatea realizată recentă, forma curbei pe scadențe (<strong>vol term structure și strategii</strong> de contango/backwardation) și panta skew-ului din lanțul de opțiuni. Aceste trei semnale, citite împreună, îți spun nu doar <em>cât</em> de speriată e piața, ci și <em>în ce direcție</em> își prețuiește frica — informație pe care un simplu indicator de tip „risk-on/risk-off" nu o conține.</p>
+
+<p>Vom acoperi <strong>volatility clustering și mean reversion</strong> (de ce turbulența vine în valuri și revine la medie), cum recunoști <strong>volatility smile și smile skew</strong> și ce semnalează asimetria lor, plus mecanica concretă de <strong>profitare din volatilitate crescândă</strong> fără să cumperi optionalitate scumpă în vârf. Totul calibrat pentru un investitor român din 2026 care operează prin broker internațional (IBKR, Saxo, Trade Republic) și raportează la ANAF, cu cifre, praguri și pași de execuție.</p>
+
+<h2>De ce volatilitatea e o clasă de active, nu doar un termometru</h2>
+
+<p>Eroarea clasică a investitorului intermediar e să trateze VIX ca pe un buton de alarmă: „peste 30 = vând, sub 15 = cumpăr". La nivel avansat, volatilitatea e o variabilă tranzacționabilă cu propriile ei proprietăți statistice robuste, care nu se regăsesc în prețul acțiunilor.</p>
+
+<p>Trei proprietăți pe care le exploatezi:</p>
+
+<ul>
+<li><strong>Volatility clustering</strong>: zilele de volatilitate mare sunt urmate de zile de volatilitate mare. Modelele GARCH formalizează asta — un șoc de azi rămâne în varianța de mâine. Practic: când VIX sare brusc, nu pariază pe „se calmează imediat"; clusterul ține zile-săptămâni.</li>
+<li><strong>Mean reversion</strong>: pe orizont mai lung, volatilitatea revine la o medie structurală (istoric, VIX gravitează în jurul a 18-20). Un VIX la 45 nu rămâne acolo; un VIX la 11 nu rămâne nici el. Asta îți dă direcția pariului <em>după</em> ce clusterul se epuizează.</li>
+<li><strong>Asimetria spot-vol</strong>: volatilitatea crește când piața scade, nu invers. Corelația dintre randamentul S&P 500 și variația VIX e puternic negativă (în jur de -0,7 până la -0,8). De aici vine valoarea VIX-ului ca hedge: cumperi optionalitate pe vol când e ieftină, nu invers.</li>
+</ul>
+
+<p>Aceste trei proprietăți, combinate, sunt fundamentul: clustering îți spune <em>cât ține</em> turbulența, mean reversion îți spune <em>încotro</em> revine, iar asimetria spot-vol îți spune <em>de ce</em> volatilitatea e un hedge natural pe partea de jos a portofoliului tău de acțiuni.</p>
+
+<h2>Realizată versus implicită: variance risk premium-ul pe care îl plătești sau îl încasezi</h2>
+
+<p>Distincția centrală a întregului model. <strong>Volatilitatea realizată</strong> (RV) e cea care s-a întâmplat efectiv — o calculezi din randamentele istorice (de obicei deviația standard anualizată a randamentelor zilnice pe 20-30 de zile). <strong>Volatilitatea implicită</strong> (IV), pe care VIX o sintetizează pentru S&P 500 pe 30 de zile, e cea pe care piața o prețuiește în opțiuni pentru viitor.</p>
+
+<p>Diferența sistematică dintre ele se numește <strong>variance risk premium</strong> (VRP): în medie, IV &gt; RV. Pe termen lung, VIX-ul tinde să fie cu ~3-4 puncte peste volatilitatea care chiar se materializează. Cu alte cuvinte, cel care <em>vinde</em> volatilitate (vinde opțiuni, vinde protecție) încasează o primă; cel care <em>cumpără</em> protecție plătește una.</p>
+
+<p>Concret, calculezi spread-ul: <strong>VIX − RV(20z)</strong>.</p>
+
+<ul>
+<li>Când VIX = 16 și RV(20z) = 11, spread-ul e +5: protecția e scumpă relativ la mișcarea recentă. E un mediu pentru a <em>vinde</em> vol sau a-ți reduce hedge-urile lungi.</li>
+<li>Când VIX = 22 și RV(20z) = 28, spread-ul e −6: piața subprețuiește riscul realizat (se întâmplă în debutul unei crize, când realizatul accelerează mai repede decât implicitul). E un mediu pentru a <em>cumpăra</em> protecție, contraintuitiv, chiar dacă VIX deja a urcat.</li>
+</ul>
+
+<p>Capcana subtilă: mulți cred că „VIX urcat = protecție scumpă = nu cumpăr". Greșit. Ce contează e VIX <em>raportat la realizat</em> și la propria sa structură de termene, nu nivelul absolut. Un VIX la 30 cu realizat la 40 e încă <em>ieftin</em>.</p>
+
+<h2>Vol term structure: ce-ți spune forma curbei</h2>
+
+<p>VIX e un punct pe 30 de zile. Dar futures pe VIX și indicii de volatilitate pe diverse scadențe (9 zile / 3 luni / 6 luni) formează o <strong>curbă</strong>. Forma ei e al doilea semnal al modelului.</p>
+
+<ul>
+<li><strong>Contango</strong> (curba urcătoare, vol pe termen scurt &lt; vol pe termen lung): starea normală, „de pace". Piața nu vede pericol imediat. Aici, dacă ai instrumente long-vol (de tip VXX), suferi un <em>roll yield</em> negativ — pierzi din erodare pe măsură ce contractele rulează în jos pe curbă. Costul de a fi mereu hedged e real și se erodează lunar.</li>
+<li><strong>Backwardation</strong> (curba descendentă, vol pe termen scurt &gt; vol pe termen lung): starea de stres. Piața prețuiește pericol <em>acum</em>, mai mult decât peste 3 luni — pentru că se așteaptă ca furtuna să treacă (mean reversion prețuit). Trecerea din contango în backwardation e unul dintre cele mai curate semnale de regim de stres.</li>
+</ul>
+
+<p>Regula operațională: <strong>raportul VIX(spot) / VIX3M</strong>. Sub ~0,90-0,95 = contango sănătos, regim calm. Peste 1,0 = backwardation, regim de stres confirmat. Bascularea peste 1,0 e momentul în care modelul comută din „risk-on" în „defensiv", indiferent de nivelul absolut al VIX.</p>
+
+<h2>Skew și smile: unde se ascunde frica direcțională</h2>
+
+<p>Aici intri în zona care separă investitorul avansat de restul. VIX e un agregat — nu-ți spune <em>unde</em> e frica pe lanțul de strike-uri. Pentru asta citești <strong>volatility smile și smile skew</strong>.</p>
+
+<p>Dacă pui IV-ul fiecărei opțiuni în funcție de strike, pe indici de acțiuni nu obții o linie dreaptă, ci o pantă: opțiunile put out-of-the-money (strike sub spot) au IV mai mare decât call-urile OTM echivalente. Asta e <strong>skew-ul</strong> (sau „smirk"-ul) tipic pe acțiuni — reflectă cererea structurală de protecție la scădere și asimetria spot-vol. Pe valute sau mărfuri, forma poate fi un „smile" mai simetric.</p>
+
+<p>Ce citești din skew:</p>
+
+<ul>
+<li><strong>Skew abrupt (steep)</strong>: put-urile OTM sunt mult mai scumpe decât call-urile. Piața plătește mult pentru protecție la tail-risk pe partea de jos. Frică de crash, dar deseori <em>fără</em> ca VIX să fie ridicat — un avertisment timpuriu pe care nivelul VIX singur nu-l prinde.</li>
+<li><strong>Skew aplatizat</strong>: complacență. Nimeni nu vrea protecție. Istoric, skew-ul foarte plat a precedat episoade de turbulență (lipsa hedge-urilor = poziționare fragilă).</li>
+<li><strong>Call skew (skew inversat)</strong>: rar pe indici, apare pe acțiuni individuale înainte de catalizatoare (buyout, biotech). Pe indice larg, semnalează melt-up speculativ.</li>
+</ul>
+
+<p>Indicatorul practic e <strong>SKEW Index</strong> (publicat de CBOE alături de VIX): măsoară cât de scumpe sunt tail-risk put-urile relativ la at-the-money. Citește-l în tandem: VIX scăzut + SKEW ridicat = liniște aparentă peste o frică ascunsă de tail. Acest combo a precedat mai multe corecții și e exact tipul de semnal pe care modelul tău trebuie să-l prindă <em>înainte</em> ca VIX să explodeze.</p>
+
+<h2>Modelul integrat de rotație: cele trei semnale într-un singur scor</h2>
+
+<p>Acum asamblăm. Modelul produce o <strong>stare de regim</strong> dintr-o citire zilnică a trei variabile, fiecare cu praguri clare. Nu e o cutie neagră — e o matrice de decizie pe care o poți rula manual în 5 minute pe zi.</p>
+
+<p><strong>Semnal 1 — Nivel & primă (VRP):</strong> spread VIX − RV(20z).</p>
+<ul>
+<li>Spread mare pozitiv (&gt; +4): protecție scumpă → reduci hedge-urile, înclini spre vânzare de vol.</li>
+<li>Spread negativ (&lt; −2): realizatul depășește implicitul → cumperi protecție chiar dacă pare târziu.</li>
+</ul>
+
+<p><strong>Semnal 2 — Structura de termene:</strong> raport VIX / VIX3M.</p>
+<ul>
+<li>&lt; 0,95: contango, regim calm → expunere normală la acțiuni.</li>
+<li>&gt; 1,00: backwardation, stres confirmat → reduci beta, ridici cash, activezi hedge.</li>
+</ul>
+
+<p><strong>Semnal 3 — Forma skew:</strong> SKEW Index și panta put-call.</p>
+<ul>
+<li>SKEW ridicat + VIX scăzut: tail-risk ascuns → cumperi protecție OTM <em>acum</em>, cât e VIX-ul (deci ATM-ul) încă ieftin.</li>
+<li>SKEW plat: complacență → nu vinde și tu protecție; fragilitate de poziționare.</li>
+</ul>
+
+<p><strong>Matricea de regim (combinația semnalelor):</strong></p>
+<ul>
+<li><strong>Regim CALM</strong> (VIX&lt;16, contango, spread VRP pozitiv, skew moderat): beta țintă maximă din mandat (ex. 1,0-1,1). Aici poți <em>încasa</em> VRP vânzând puturi acoperite cu numerar pe poziții pe care le-ai cumpăra oricum, sau covered calls. Erodarea roll yield-ului face long-vol-ul scump — nu plăti pentru hedge pe care nu-l folosești.</li>
+<li><strong>Regim DE AVERTISMENT</strong> (VIX moderat dar SKEW ridicat, term structure încă în contango): nu reduci încă acțiunile, dar <em>cumperi optionalitate ieftină</em> — puturi OTM pe indice (3-6 luni) cât IV-ul ATM e jos. E momentul în care construiești hedge-ul, nu în vârf.</li>
+<li><strong>Regim DE STRES</strong> (basculare în backwardation, VIX&gt;25, spread VRP negativ): reduci beta agresiv (țintă 0,4-0,6), ridici cash la 15-30%, hedge-urile cumpărate în avans se apreciază. NU cumperi vol nou aici — e scump. Lași hedge-urile vechi să lucreze.</li>
+<li><strong>Regim DE CAPITULARE/REVENIRE</strong> (VIX extrem &gt;40 dar începe să scadă, backwardation se aplatizează): aici <em>vinzi</em> volatilitatea (închizi hedge-urile, încasezi optionalitatea umflată) și începi reintrarea graduală în acțiuni. Mean reversion-ul VIX e cel mai puternic edge statistic din tot modelul — VRP-ul devine enorm exact când toți vor protecție.</li>
+</ul>
+
+<h2>Profitarea din volatilitate crescândă — fără să o cumperi în vârf</h2>
+
+<p>Ideea contraintuitivă: cei mai mulți „profită din volatilitate" greșit, cumpărând VXX sau puturi <em>după</em> ce VIX a explodat, plătind IV umflat. Profitul real din <strong>volatilitate crescândă</strong> se construiește în trei moduri:</p>
+
+<ul>
+<li><strong>Hedge pre-poziționat în regim de avertisment</strong>: puturi OTM pe indice cumpărate când SKEW urcă dar VIX e încă jos. Le plătești ieftin, se apreciază convex când vol-ul sare. Aceasta e singura formă de long-vol care nu te ruinează prin roll yield.</li>
+<li><strong>Convexitate prin proporție mică</strong>: aloci 1-3% din portofoliu unei poziții long-vol/long-tail care, în criză, face +300-500%, compensând o parte din pierderea pe acțiuni. Restul de 97-99% rămâne investit, deci nu sacrifici randamentul pe termen lung pentru asigurare.</li>
+<li><strong>Încasarea primei la revenire</strong>: când VIX-ul e extrem și începe reversia, vinzi protecție (puturi acoperite cu numerar, put spreads) la IV-uri pe care nu le mai vezi în mod normal. Aici se face partea cea mai mare a banilor — în reversie, nu în spike.</li>
+</ul>
+
+<p>Capcana: <em>volatility drag</em> pe instrumentele long-vol pasive. Un VXX ținut permanent pierde sistematic din contango. Long-vol e o poziție <em>tactică</em>, pre-poziționată și închisă la timp — niciodată buy-and-hold.</p>
+
+<h2>Contextul fiscal românesc 2026: nu uita de costul real</h2>
+
+<p>Strategia funcționează pe hârtie, dar randamentul net depinde de fiscalitate. Pentru investitorul român din 2026 care tranzacționează prin broker internațional (nu intermediar român cu reținere la sursă), câteva puncte de care depinde modelul:</p>
+
+<ul>
+<li>Câștigurile din tranzacții la <strong>brokeri străini fără sediu în România</strong> se declară prin <strong>Declarația Unică</strong>, iar impozitul pe câștig se autodeclară. Verifică cota și pragurile aplicabile pentru anul fiscal curent în formularul ANAF, pentru că tratamentul diferă față de intermediarii români care rețin la sursă (unde cota e mai mică pentru deținerile peste 365 de zile).</li>
+<li><strong>Frecvența tranzacționării contează enorm aici.</strong> Un model de rotație activă pe volatilitate generează multe tranzacții pe termen scurt. La intermediarii români (cu reținere la sursă), câștigul din titluri deținute peste 365 de zile este impozitat cu <strong>1%</strong>, iar cel din dețineri sub 365 de zile cu <strong>3%</strong> — rotația frecventă te scoate automat din regimul favorabil de 1%. La brokeri străini se autodeclară prin Declarația Unică și se aplică cota standard de impozit pe venit de <strong>10%</strong> pe câștigul net, fără diferențierea pe durată specifică intermediarilor rezidenți. Verifică în formularul ANAF valabil pentru anul de declarare, întrucât regulile s-au modificat în ultimii ani.</li>
+<li><strong>CASS</strong>: câștigurile din investiții pot intra în baza de calcul a contribuției de sănătate dacă depășesc pragurile raportate la salariul minim. Un an cu profit mare din strategia de vol te poate împinge peste plafon. Verifică plafoanele (exprimate în număr de salarii minime) valabile pentru anul de declarare.</li>
+<li><strong>Pierderile</strong> din tranzacții la brokeri străini autodeclarați se reportează — important într-o strategie cu hedge-uri care, în anii calmi, expiră fără valoare (cost de asigurare). Ține evidența exactă a primelor plătite pe puturi expirate.</li>
+</ul>
+
+<p>Concluzia fiscală: costul de asigurare (puturi expirate worthless) + impozitarea câștigurilor pe termen scurt pot eroda 1-2 puncte procentuale anual din randamentul brut al strategiei. Modelul trebuie să genereze edge <em>net de aceste costuri</em>, altfel ești mai bine cu un simplu buy-and-hold pe indice plus rebalansare.</p>
+
+<h2>Checklist operațional zilnic și săptămânal</h2>
+
+<p>Rutina concretă care transformă teoria în execuție disciplinată:</p>
+
+<p><strong>Zilnic (5 minute, după închiderea pieței SUA):</strong></p>
+<ul>
+<li>Citește VIX spot și calculează spread-ul față de RV(20z). Notează semnul (VRP pozitiv/negativ).</li>
+<li>Verifică raportul VIX / VIX3M. Sub 0,95 sau peste 1,00? Marchează tranziția dacă a basculat.</li>
+<li>Citește SKEW Index. Combinația VIX-jos + SKEW-ridicat = alertă de pre-poziționare hedge.</li>
+<li>Actualizează starea de regim (CALM / AVERTISMENT / STRES / REVENIRE).</li>
+</ul>
+
+<p><strong>La schimbarea de regim (acțiune):</strong></p>
+<ul>
+<li>CALM → AVERTISMENT: cumpără puturi OTM indice 3-6 luni cu 1-3% din portofoliu. NU reduce acțiunile încă.</li>
+<li>AVERTISMENT → STRES: redu beta la 0,4-0,6, ridică cash 15-30%, lasă hedge-urile vechi să lucreze, NU cumpăra vol nou.</li>
+<li>STRES → REVENIRE: închide hedge-urile (încasează optionalitatea umflată), începe reintrarea graduală, vinde protecție la IV extrem.</li>
+<li>REVENIRE → CALM: revino la beta țintă maximă, oprește long-vol, eventual încasează VRP prin covered calls / puturi acoperite.</li>
+</ul>
+
+<h2>Greșeli frecvente la nivel avansat</h2>
+
+<ul>
+<li><strong>Confuzia nivel-vs-primă</strong>: a evita protecția fiindcă „VIX e deja mare". Ce contează e VIX raportat la realizat și la term structure, nu nivelul absolut.</li>
+<li><strong>Long-vol pasiv permanent</strong>: a ține VXX/long-vol buy-and-hold. Roll yield-ul negativ în contango îți mănâncă portofoliul în anii calmi (majoritatea anilor).</li>
+<li><strong>Ignorarea skew-ului</strong>: a urmări doar VIX și a rata avertismentul timpuriu din SKEW când VIX e încă jos.</li>
+<li><strong>Vânzare de vol în stres</strong>: a vinde puturi în plin spike „pentru că prima e grasă" — exact când backwardation-ul îți spune că riscul e real și încă în creștere. Vinde vol în <em>reversie</em>, nu în accelerare.</li>
+<li><strong>Subestimarea fricțiunii fiscale</strong>: rotația frecventă te scoate din regimurile fiscale favorabile și adaugă cost; calculează edge-ul net, nu brut.</li>
+<li><strong>Reacția emoțională în loc de regulă</strong>: a abandona modelul exact la capitulare, când VRP-ul (deci edge-ul) e maxim. Disciplina pe matricea de regim e tot avantajul.</li>
+</ul>
+
+<p>Esența: volatilitatea nu se prezice ca direcție, dar proprietățile ei — clustering, mean reversion, asimetrie spot-vol și variance risk premium — sunt printre cele mai robuste regularități statistice de pe piață. Un model care citește zilnic nivelul (VRP), structura de termene (contango/backwardation) și forma skew-ului (SKEW Index) îți dă o stare de regim pe care o tranzacționezi mecanic: cumperi optionalitate ieftină în avertisment, te aperi în stres și încasezi prima în reversie — disciplinat, net de costuri și fără să cazi în capcana de a cumpăra frica în vârf.</p>

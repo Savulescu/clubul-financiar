@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Margin, call margin și leverage în România: ghid avansat 2026 — Clubul Financiar</title><meta name="description" content="Ghid avansat de margin trading: formula prețului de lichidare, buying power, cost dobândă, scenarii 1x-3x, riscul psihologic și limitele de leverage în România 2026."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/margin-account-call-margin-leveraged-investing.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Margin, call margin și leverage în România: ghid avansat 2026"><meta property="og:description" content="Ghid avansat de margin trading: formula prețului de lichidare, buying power, cost dobândă, scenarii 1x-3x, riscul psihologic și limitele de leverage în România 2026."><meta property="og:url" content="https://clubulfinanciar.ro/articole/margin-account-call-margin-leveraged-investing.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Margin, call margin și leverage în România: ghid avansat 2026"><meta name="twitter:description" content="Ghid avansat de margin trading: formula prețului de lichidare, buying power, cost dobândă, scenarii 1x-3x, riscul psihologic și limitele de leverage în România 2026."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Margin, call margin și leverage în România: ghid avansat 2026", "description": "Ghid avansat de margin trading: formula prețului de lichidare, buying power, cost dobândă, scenarii 1x-3x, riscul psihologic și limitele de leverage în România 2026.", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/margin-account-call-margin-leveraged-investing.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#investitii">📈 Investiții</a> · 12 min citire · Actualizat 19 iun. 2026</p><h1>Margin, call margin și leverage în România: ghid avansat 2026</h1><p>Un <strong>margin trading account call margin leverage România</strong> 2026 nu mai este o curiozitate de manual, ci infrastructura concretă pe care brokeri ca Interactive Brokers, XTB sau Saxo o pun la dispoziția investitorilor experimentați — iar diferența dintre cei care o folosesc profitabil și cei care își golesc contul stă în mecanica fină, nu în concept. Știi deja ce este efectul de levier și ce e un margin call din lecția de bază. Aici dezasamblăm motorul: cum se calculează exact <strong>margin requirement</strong> și <strong>buying power</strong>, unde se declanșează <strong>forced liquidation</strong>, care e raportul real dintre <strong>maintenance margin și initial margin</strong> și cât din randamentul tău mănâncă, în puncte procentuale, costul dobânzii pe margin.</p>
+
+<p>Pentru un investitor avansat, întrebarea nu mai este „e periculos levierul?” — evident că este — ci „la ce nivel de leverage raportul risc/randament rămâne pozitiv după costul dobânzii și după rezerva pentru margin call, pe scenariul realist de piață, nu pe cel optimist?”. Răspunsul se obține doar cu <strong>scenario analysis</strong> rulat numeric pe mai multe niveluri de pârghie, nu din intuiție.</p>
+
+<p>De aceea construim mai jos un model complet — inclusiv un simulator conceptual pe 100.000 lei capital la 1x, 2x și 3x leverage pe scenarii diferite de piață — plus formula exactă a prețului de lichidare, impactul dobânzii asupra ROI, riscul psihologic specific tranzacționării în marjă și limitele regulatorii (ESMA, Reg-T, BNR/ASF) care îți plafonează pârghia maximă în practică.</p>
+
+<h2>Buying power și margin requirement: aritmetica exactă</h2>
+
+<p>Începem de la mărimea care contează operațional zilnic: <strong>buying power</strong>. Într-un cont Reg-T (modelul standard la Interactive Brokers și majoritatea brokerilor care îți dau acțiuni reale, nu CFD), initial margin este 50%, deci:</p>
+
+<ul>
+<li><strong>Buying power = capital propriu ÷ initial margin</strong>. La 100.000 lei și initial margin 50% → buying power 200.000 lei (pârghie maximă 2x).</li>
+<li>La un cont portfolio margin (disponibil peste un prag de capital, tipic ~110.000 USD la IBKR), cerința scade dinamic în funcție de riscul real al portofoliului și poți ajunge la 3x-4x pe poziții lichide și diversificate.</li>
+<li>Pe CFD-uri retail în UE, ESMA plafonează levierul la 1:5 pe acțiuni (margin 20%) și 1:2 pe crypto — deci buying power 500.000 lei pe acțiuni, dar cu risc de pierdere totală mult mai rapid.</li>
+</ul>
+
+<p>Atenție la o capcană subtilă: buying power afișat NU este suma pe care e înțelept să o folosești. Este plafonul tehnic la care brokerul te lasă să cumperi. Diferența dintre a folosi 200.000 lei buying power integral și a folosi 140.000 lei este diferența dintre a fi lichidat la prima corecție și a supraviețui.</p>
+
+<h3>Maintenance margin vs initial margin — de ce contează raportul, nu cifrele izolate</h3>
+
+<p><strong>Initial margin</strong> (tipic 50% Reg-T) este cât pui din buzunar la deschidere. <strong>Maintenance margin</strong> (tipic 25-30%, dar brokerul o poate ridica oricând la acțiuni volatile sau în perioade de stres de piață) este pragul sub care equity-ul tău nu mai poate coborî fără să declanșeze margin call. Spațiul dintre cele două — de la 50% la 25% — este exact „bufferul” tău de supraviețuire. Cu cât maintenance margin e mai aproape de initial margin, cu atât te lichidează mai repede.</p>
+
+<p>Capcana de avansat: brokerul nu te anunță întotdeauna cu zile înainte. La Interactive Brokers, dacă echity scade sub maintenance, sistemul poate lichida <strong>automat și fără apel telefonic</strong>, în câteva minute, pozițiile pe care algoritmul le alege el — nu cele pe care le-ai alege tu. „Call margin” ca telefon politicos este o relicvă; în practică e o lichidare automată.</p>
+
+<h2>Prețul exact de lichidare: formula pe care trebuie să o știi pe de rost</h2>
+
+<p>Aici e nucleul deciziei. Prețul la care te ajunge forced liquidation se calculează exact:</p>
+
+<p><strong>Preț de lichidare = Preț de intrare × (1 − initial margin) ÷ (1 − maintenance margin)</strong></p>
+
+<p>Exemplu numeric cu 100.000 lei capital, leverage 2x (initial margin 50%), maintenance margin 30%, cumperi un activ la 100 lei/acțiune (poziție totală 200.000 lei, 2.000 acțiuni):</p>
+
+<ul>
+<li>Preț de lichidare = 100 × (1 − 0,50) ÷ (1 − 0,30) = 100 × 0,50 ÷ 0,70 = <strong>71,4 lei</strong>.</li>
+<li>Adică o scădere de doar <strong>28,6%</strong> a activului declanșează margin call și lichidare. Nu 50% — multă lume crede greșit că la 2x rezistă până la −50%.</li>
+</ul>
+
+<p>La leverage 3x (initial margin ~33%), cu aceeași maintenance margin 30%:</p>
+
+<ul>
+<li>Preț de lichidare = 100 × (1 − 0,333) ÷ (1 − 0,30) = 100 × 0,667 ÷ 0,70 = <strong>95,2 lei</strong>.</li>
+<li>O scădere de doar <strong>4,8%</strong> te lichidează. La 3x ești la un strănut de margin call. O zi roșie obișnuită la BVB sau pe Nasdaq te scoate din joc.</li>
+</ul>
+
+<p>Regula de avansat: <strong>marja de eroare până la lichidare = (initial margin − maintenance margin) ÷ (1 − maintenance margin)</strong>. La 2x/30% îți dă 28,6%; la 3x/30% îți dă 4,8%. Acest număr, nu pârghia în sine, decide dacă o strategie e viabilă.</p>
+
+<h2>Simulator: 100.000 lei la 1x vs 2x vs 3x pe scenarii de piață</h2>
+
+<p>Acesta este miezul lecției — exact unghiul promis. Pornim de la <strong>100.000 lei capital</strong>, dobândă pe margin de <strong>7% pe an</strong> (ordin de mărime realist în lei pentru sume mici; verifică grila brokerului tău, IBKR oferă în USD/EUR dobânzi mai mici, dar pe RON costul e mai ridicat), holding 1 an. Calculăm equity final pe capitalul propriu, după dobândă.</p>
+
+<h3>Scenariul A — piață în creștere +20%</h3>
+
+<ul>
+<li><strong>1x</strong> (poziție 100.000 lei, împrumut 0): +20.000 lei. ROI = <strong>+20,0%</strong>.</li>
+<li><strong>2x</strong> (poziție 200.000 lei, împrumut 100.000 lei): câștig brut +40.000 lei − dobândă 7.000 lei = +33.000 lei. ROI = <strong>+33,0%</strong>.</li>
+<li><strong>3x</strong> (poziție 300.000 lei, împrumut 200.000 lei): câștig brut +60.000 lei − dobândă 14.000 lei = +46.000 lei. ROI = <strong>+46,0%</strong>.</li>
+</ul>
+
+<p>Pe creștere, levierul plătește — dar observă deja că ROI-ul nu crește liniar (20 → 33 → 46, nu 20 → 40 → 60), pentru că dobânda taie din vârf.</p>
+
+<h3>Scenariul B — piață laterală 0%</h3>
+
+<ul>
+<li><strong>1x</strong>: 0 lei. ROI = <strong>0,0%</strong>.</li>
+<li><strong>2x</strong>: 0 câștig − 7.000 lei dobândă = −7.000 lei. ROI = <strong>−7,0%</strong>.</li>
+<li><strong>3x</strong>: 0 câștig − 14.000 lei dobândă = −14.000 lei. ROI = <strong>−14,0%</strong>.</li>
+</ul>
+
+<p>Acesta e scenariul ucigaș pe care nimeni nu-l simulează: într-o piață care nu merge nicăieri, levierul îți garantează o pierdere egală cu costul dobânzii. Pe 2-3 ani laterali, la 3x, pierzi 30-40% din capital fără ca activul să fi scăzut un leu.</p>
+
+<h3>Scenariul C — piață în scădere −20%</h3>
+
+<ul>
+<li><strong>1x</strong>: −20.000 lei. ROI = <strong>−20,0%</strong>.</li>
+<li><strong>2x</strong>: −40.000 lei − 7.000 lei dobândă = −47.000 lei. ROI = <strong>−47,0%</strong>.</li>
+<li><strong>3x</strong>: <strong>lichidat</strong>. Prețul de lichidare la 3x/30% e atins la −4,8%; o scădere de 20% nu apucă să fie „doar pe hârtie” — ai fost scos forțat mult înainte, cu pierdere cristalizată în jurul a −85% până la −100% din capital, în funcție de cât de brusc a venit mișcarea și de slippage-ul la lichidare.</li>
+</ul>
+
+<h3>Scenariul D — crash −40% (flash, fără șansă de adăugat marjă)</h3>
+
+<ul>
+<li><strong>1x</strong>: −40.000 lei. ROI = <strong>−40,0%</strong>. Dureros, dar supraviețuiești și recuperezi în rally-ul următor.</li>
+<li><strong>2x</strong>: lichidat la −28,6%; pierderea cristalizată ≈ <strong>−65% până la −80%</strong> din capital.</li>
+<li><strong>3x</strong>: <strong>cont zero sau datorie</strong>. Dacă mișcarea e mai rapidă decât lichidarea (gap de deschidere, halt), poți rămâne dator brokerului — debit balance pe care îl execută silit.</li>
+</ul>
+
+<p>Lecția simulatorului, condensată: <strong>levierul te răsplătește doar în scenariul A, te taxează în B, te rănește grav în C și te elimină în D.</strong> Iar pe distribuția reală a randamentelor de bursă, scenariile B, C și D apar mult mai des decât crede investitorul euforic. Asimetria e brutală: la 3x, un an bun îți dă +46%, dar un singur crash îți șterge tot capitalul — și nu există +∞% care să compenseze un −100% care te scoate din joc permanent.</p>
+
+<h2>Costul dobânzii pe margin și impactul real pe ROI multianual</h2>
+
+<p>Investitorul de bază vede dobânda ca o cheltuială mică. Avansatul o vede ca pe o erodare compusă a edge-ului. La un împrumut de 100.000 lei cu 7%/an, plătești 7.000 lei/an — dar important e <strong>hurdle rate</strong>-ul: activul trebuie să producă, doar pe partea împrumutată, peste 7% randament ca dobânda să merite. Dacă așteptarea ta realistă de randament e 8-10%/an, marja de siguranță peste costul dobânzii e subțire și o singură variație de dobândă a brokerului (legată de evoluția dobânzii de referință BNR / EURIBOR) ți-o anulează.</p>
+
+<p>Calcul de hurdle pe 3x: controlezi 300.000 lei cu 200.000 lei împrumutați. Dobânda anuală 14.000 lei reprezintă <strong>14% din capitalul tău propriu</strong> de 100.000 lei. Înseamnă că, înainte de orice profit, activul tău total trebuie să crească cu ~4,7% doar ca să acoperi dobânda și să ieși pe zero. Pe orizonturi lungi, această taxă recurentă transformă levierul dintr-un accelerator într-o frână, cu excepția piețelor puternic și constant crescătoare.</p>
+
+<h2>Riscul psihologic: variabila pe care modelul nu o prinde</h2>
+
+<p>Toate cifrele de mai sus presupun un investitor rațional care execută planul. În realitate, margin trading activează cele mai distructive bias-uri exact când contează:</p>
+
+<ul>
+<li><strong>Loss aversion amplificată</strong>: la 3x, o scădere de 5% a pieței se simte ca −15% în cont. Reacția emoțională (panică, vânzare la fund) e proporțională cu pierderea procentuală resimțită, nu cu cea a activului.</li>
+<li><strong>Margin call ca șoc de cortizol</strong>: e-mailul de margin call vine de obicei în plină scădere, când deja ești stresat. Mulți adaugă bani „ca să nu fie lichidați” — adică aruncă capital proaspăt într-o poziție pe care piața deja a votat-o jos. Aruncarea de bani buni după bani răi e mecanismul prin care un cont de 100.000 lei devine o pierdere de 250.000 lei.</li>
+<li><strong>Iluzia controlului</strong>: după câteva luni profitabile cu levier, creierul atribuie câștigul priceperii, nu pârghiei. Crește expunerea exact înainte de regresia la medie.</li>
+</ul>
+
+<p>Regula de protecție psihologică: decide nivelul de leverage și pragul de cut-loss <strong>în scris, înainte de a deschide poziția</strong>, când ești calm. În toiul unui margin call nu mai ești aceeași persoană care a făcut planul.</p>
+
+<h2>Regulații și limite maxime de leverage în România 2026</h2>
+
+<p>Cadrul concret care îți plafonează pârghia, indiferent de cât ai vrea:</p>
+
+<ul>
+<li><strong>ESMA (aplicabil prin ASF în România)</strong>: pe CFD-uri retail, levier maxim 1:5 pe acțiuni, 1:2 pe crypto, 1:20-1:30 pe indici și valute majore, cu protecție de sold negativ obligatorie (nu poți rămâne dator pe CFD retail) și avertisment de risc obligatoriu.</li>
+<li><strong>Reg-T (conturi acțiuni reale, ex. Interactive Brokers)</strong>: initial margin 50% (pârghie 2x), maintenance 25% minim impus de FINRA, dar brokerul ridică frecvent pragul. Aici NU ai protecție automată de sold negativ — poți datora bani.</li>
+<li><strong>Portfolio margin</strong>: peste pragul de capital al brokerului, cerințele devin bazate pe risc și permit pârghie efectivă mai mare pe portofolii diversificate — instrument pentru avansați, nu pentru începători.</li>
+<li><strong>Statut de „professional client”</strong>: poți cere upgrade pentru a depăși limitele ESMA, dar renunți la protecțiile retail (sold negativ, plafoane). Decizie cu consecințe reale; nu o face pentru a „debloca” mai mult levier dacă încă te întrebi dacă merită.</li>
+</ul>
+
+<p>Fiscal, în România 2026: câștigul net din vânzarea titlurilor reale prin intermediar rezident se impozitează prin reținere la sursă, cu cote majorate față de anii anteriori — <strong>3% pentru titlurile deținute peste 365 de zile</strong> și <strong>6% pentru cele deținute sub 365 de zile</strong> (în creștere de la 1%, respectiv 3%). La brokeri nerezidenți, nu există reținere la sursă: declari singur în Declarația Unică, iar din 2026 cota aplicabilă câștigului net realizat prin intermediari nerezidenți este de <strong>16%</strong> (în creștere de la 10%). La CFD-uri tratamentul urmează același regim autodeclarat. Atenție și la CASS: veniturile din investiții pot intra în baza de calcul a contribuției de sănătate de 10% peste plafoanele anuale raportate la salariul minim, deci randamentul net poate fi sensibil mai mic decât cel brut. Dobânda pe margin este un cost al tranzacționării — păstrează extrasele și include-o în calculul randamentului net real, chiar dacă deductibilitatea ei fiscală pentru persoana fizică este limitată; pentru poziții mari, consultă un contabil.</p>
+
+<h2>Checklist de execuție înainte de a folosi leverage</h2>
+
+<ul>
+<li><strong>Calculează prețul exact de lichidare</strong> cu formula de mai sus ÎNAINTE de a intra. Dacă e la o scădere pe care piața o face „într-o săptămână obișnuită”, pârghia e prea mare.</li>
+<li><strong>Folosește maxim 60-70% din buying power</strong>, niciodată 100%. Bufferul nefolosit e ce te ține în joc la margin call.</li>
+<li><strong>Rulează scenariile A-D</strong> pe poziția ta concretă, cu dobânda reală a brokerului tău, și uită-te în special la scenariul B (lateral) și C (−20%), nu doar la cel optimist.</li>
+<li><strong>Verifică hurdle rate</strong>: dacă randamentul așteptat al activului nu depășește confortabil costul dobânzii pe partea împrumutată, levierul lucrează împotriva ta.</li>
+<li><strong>Setează un cut-loss automat</strong> deasupra prețului de lichidare, ca să ieși tu controlat, nu algoritmul brokerului în panică.</li>
+<li><strong>Decide în scris</strong> nivelul de pârghie și regula de margin call (adaug / nu adaug bani) cât ești calm.</li>
+<li><strong>Preferă 2x maximum</strong> pentru investiție pe acțiuni reale, ține 3x+ doar pentru poziții foarte lichide, scurte și monitorizate, conștient că ești la un strănut de lichidare.</li>
+</ul>
+
+<h2>Greșeli frecvente la investitorii care „știu deja bazele”</h2>
+
+<ul>
+<li><strong>Confundă „rezist până la −50%” cu realitatea −28,6%</strong> la 2x din cauza maintenance margin. Formula de lichidare nu iartă.</li>
+<li><strong>Ignoră dobânda în scenariul lateral</strong> — cred că „dacă nu scade, nu pierd”. Pierzi exact costul dobânzii, compus, an de an.</li>
+<li><strong>Adaugă bani la margin call</strong> în loc să fi ieșit deja la cut-loss-ul planificat.</li>
+<li><strong>Folosesc 100% buying power</strong> și se trezesc lichidați la prima volatilitate normală.</li>
+<li><strong>Tratează CFD-ul cu levier 1:5 ca pe o „investiție”</strong> — e un instrument speculativ pe termen scurt unde 70-85% dintre retail pierd; nu e versiunea „mai ieftină” a marjei reale.</li>
+</ul>
+
+<p>Concluzia de avansat: leverage-ul nu e bun sau rău în sine — e un multiplicator al deciziilor tale și al costului dobânzii, aplicat unei distribuții de randamente în care scenariile neplăcute apar des. Folosit la 2x, cu buffer, cut-loss și conștiința hurdle rate-ului, poate fi un instrument legitim. Folosit la 3x+ pe euforie și buying power integral, este matematic doar o întrebare de timp până la margin call și forced liquidation.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

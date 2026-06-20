@@ -1,0 +1,110 @@
+<p>O <strong>defi lending borrowing ltv liquidare strategie</strong> bine construită poate transforma un depozit pasiv în randament compus de două cifre — sau te poate lichida în câteva minute pe volatilitate extremă. Dacă ai parcurs deja lecția despre riscurile staking-ului și ale DeFi-ului, știi mecanica de bază: depui colateral, împrumuți contra lui, încasezi dobândă. Acum trecem la profunzime: cum calculezi exact LTV-ul (loan to value) pe un protocol de lending, când se declanșează liquidation risk și de ce o strategie de yield farming cu compounding poate deveni o capcană letală.</p>
+
+<p>Promisiunea „20% pe depozit" nu e o minciună — e o jumătate de adevăr. Acel randament vine aproape întotdeauna din leverage (împrumuți ca să depui din nou), iar fiecare nivel de leverage multiplică nu doar câștigul, ci și expunerea la o cascadă de lichidări. În acest articol construim un loan to value calculator defi pas-cu-pas, vedem o yield farming compounding strategie cu 3 nivele de leverage, analizăm liquidation risk lending protocol în detaliu, înțelegem cum funcționează interest rate defi variabil și unde apare flash loan risc în atacurile care îți pot evapora colateralul.</p>
+
+<p>Vom lucra cu cifre reale în lei și scenarii pas-cu-pas, în context România 2026 — inclusiv impozitarea de 16% pe câștigurile crypto și CASS, fiindcă o strategie de farming care arată genial brut poate fi mediocră net. Obiectivul: să ieși din articol cu un model de calcul pe care îl poți aplica înainte de a apăsa „confirm", nu după ce primești notificarea de lichidare.</p>
+
+<h2>LTV, health factor și pragul de lichidare: matematica exactă</h2>
+
+<p>Pe un lending protocol matur (Aave, Compound, Morpho și similare), trei numere îți dictează supraviețuirea: <strong>LTV maxim</strong>, <strong>liquidation threshold</strong> și <strong>health factor</strong>. Confuzia dintre ele e cea mai scumpă greșeală a începătorului „avansat".</p>
+
+<ul>
+<li><strong>Max LTV</strong> — cât poți împrumuta în momentul deschiderii poziției. Pentru ETH e tipic în jur de 80%, pentru stablecoin-uri poate urca spre 90%, pentru active volatile coboară la 50-70%. E un parametru per-activ, setat de guvernanța protocolului.</li>
+<li><strong>Liquidation threshold</strong> — pragul la care poziția devine lichidabilă, mereu <em>peste</em> max LTV (ex. 82,5% pentru ETH când max LTV e 80%). Diferența dintre cele două e zona ta tampon.</li>
+<li><strong>Health factor (HF)</strong> = (colateral × liquidation threshold) ÷ datorie. Câtă vreme HF &gt; 1, ești în siguranță. La HF = 1 se declanșează lichidarea.</li>
+</ul>
+
+<h3>Exemplu numeric concret</h3>
+
+<p>Depui colateral ETH echivalent cu <strong>50.000 lei</strong>, pe un protocol cu liquidation threshold de 82,5%. Împrumuți stablecoin echivalent cu <strong>30.000 lei</strong>.</p>
+
+<ul>
+<li>LTV curent = 30.000 ÷ 50.000 = <strong>60%</strong>.</li>
+<li>Health factor = (50.000 × 0,825) ÷ 30.000 = 41.250 ÷ 30.000 = <strong>1,375</strong>.</li>
+<li>Prețul de lichidare: ETH-ul tău poate scădea până când colateralul ajunge la 30.000 ÷ 0,825 = <strong>36.364 lei</strong>. Adică o scădere de aproximativ <strong>27%</strong> a prețului ETH te aduce la HF = 1.</li>
+</ul>
+
+<p>Concluzia operațională: la 60% LTV ai tampon de ~27% mișcare adversă. Sună confortabil — până înțelegi ce face leverage-ul cu acel tampon.</p>
+
+<h2>Penalitatea de lichidare: nu pierzi „doar diferența"</h2>
+
+<p>Mulți cred că lichidarea înseamnă „mi se vinde colateralul cât să acopere datoria". Greșit. Lichidatorul primește un <strong>bonus de lichidare</strong> (liquidation penalty), tipic <strong>5-15%</strong> din colateralul lichidat, ca recompensă pentru că execută poziția. Acel bonus iese din buzunarul tău.</p>
+
+<p>În exemplul de mai sus, dacă ești lichidat cu o penalitate de 8%, protocolul vinde colateral suficient cât să acopere datoria <em>plus</em> bonusul lichidatorului. La o poziție de 30.000 lei datorie, asta înseamnă ~2.400 lei pierduți instant doar din penalitate — peste pierderea din scăderea pieței. Pe lichidări parțiale (close factor 50%) se închide jumătate din datorie odată; pe poziții mici sau în condiții de criză, unele protocoale lichidează integral.</p>
+
+<p><strong>Regula avansată:</strong> nu opera niciodată la HF sub 1,5 pe colateral volatil. Pe stablecoin contra stablecoin poți coborî spre 1,1-1,2, dar pe ETH/BTC un HF de 1,2 e o invitație la dezastru pe un weekend cu gap de 20%.</p>
+
+<h3>De ce contează viteza de execuție a lichidării</h3>
+
+<p>Lichidarea în DeFi nu așteaptă să-ți suni brokerul. E declanșată de un bot care monitorizează HF-ul tău 24/7 și execută în secunda în care scade sub 1, pentru că lichidatorul are profit imediat din bonus. Asta înseamnă două lucruri pe care un operator avansat le internalizează: (1) nu există „grace period" — nu primești apel de margine ca la un broker tradițional; (2) în perioadele de congestie a rețelei, gas-ul explodează și uneori nici lichidatorii nu reușesc să execute la timp, ceea ce poate lăsa protocolul cu <strong>bad debt</strong> (datorie neacoperită). Bad debt-ul e socializat: dacă protocolul rămâne cu datorii neacoperite, în cele din urmă pierderea cade pe deponenții pool-ului, deci chiar dacă tu ești lender (nu borrower), riscul te atinge indirect.</p>
+
+<h2>Leveraged farming cu compounding: cum apare „20% APY"</h2>
+
+<p>Aici e miezul diferențiatorului. Randamentul de 20% rareori vine dintr-un singur depozit. Vine din <strong>looping</strong> (recursive borrowing): depui colateral, împrumuți contra lui, redepui ce ai împrumutat, împrumuți din nou — repeți de 2-3 ori. Fiecare buclă amplifică expunerea și, implicit, randamentul net din diferența de dobândă plus reward-uri.</p>
+
+<h3>Exemplu pas-cu-pas: 3 nivele de leverage</h3>
+
+<p>Capital propriu: <strong>50.000 lei</strong> în stETH (sau alt LST care produce randament). Max LTV 80%, dar tu folosești prudent 75% per buclă.</p>
+
+<ul>
+<li><strong>Nivel 0:</strong> depui 50.000 lei stETH.</li>
+<li><strong>Nivel 1:</strong> împrumuți 37.500 lei (75%), îi reconvertești în stETH și redepui → colateral total 87.500 lei.</li>
+<li><strong>Nivel 2:</strong> împrumuți 28.125 lei contra noului colateral, redepui → colateral total 115.625 lei.</li>
+<li><strong>Nivel 3:</strong> împrumuți 21.094 lei, redepui → colateral total ~136.719 lei, datorie totală ~86.719 lei.</li>
+</ul>
+
+<p>Ai pornit cu 50.000 lei și controlezi acum o poziție de ~137.000 lei — leverage efectiv ~2,7x. Dacă spread-ul (randament stETH minus dobânda de împrumut) e +3%, pe poziția brută de 137.000 lei câștigi ~4.100 lei/an pe un capital de 50.000 → un APY net de ~8,2%. Adaugi reward-uri în token de protocol și ai „20%". Compounding-ul (reinvestirea automată a reward-urilor) îți crește efectiv rata, dar și expunerea.</p>
+
+<h3>De ce te poate ruina în 1 oră</h3>
+
+<p>La leverage 2,7x, tamponul tău real s-a prăbușit. Health factor-ul agregat al unei poziții looped se apropie periculos de 1. O depegare a stETH față de ETH de doar câteva procente — sau o scădere bruscă a ETH — mișcă întreaga structură simultan, fiindcă <em>colateralul și datoria sunt corelate</em>. Iar lichidarea unei poziții looped declanșează o <strong>cascadă</strong>: când ești lichidat, colateralul se vinde pe piață, prețul scade și mai mult, ceea ce împinge alți useri loop-uiți sub prag, care la rândul lor sunt lichidați. Pe volatilitate extremă, acest feedback loop golește lichiditatea în minute.</p>
+
+<p>Pune cifrele cap la cap. La leverage 2,7x, o scădere de doar ~10% a colateralului net îți erodează capitalul propriu cu ~27% (2,7 × 10%). O scădere de 20% îți ia peste jumătate din capital — și asta <em>înainte</em> de penalitatea de lichidare. Adaugă bonusul lichidatorului de 8% pe poziția brută de ~137.000 lei și vorbim de mii de lei evaporați suplimentar. Acesta e mecanismul prin care „farming-ul de 20%" se transformă în pierdere de 60-80% din capital într-o singură mișcare adversă bruscă: leverage-ul amplifică în jos exact cu factorul cu care amplifica în sus, iar lichidarea adaugă un cost fix peste.</p>
+
+<h3>LST depeg: riscul corelat pe care îl ignoră majoritatea</h3>
+
+<p>Bucla clasică de looping folosește un liquid staking token (stETH, rETH) drept colateral și împrumută ETH sau un stablecoin. Pariul implicit e că stETH ≈ ETH. Istoric, însă, stETH s-a tranzacționat la discount față de ETH în perioade de stres (retrageri în coadă, panică de lichiditate). Un discount de 5-7% pe colateralul tău looped, combinat cu un HF deja subțire, e suficient ca să declanșeze lichidarea — nu pentru că ETH a căzut, ci pentru că <em>raportul</em> stETH/ETH s-a rupt temporar. Operatorul avansat tratează depeg-ul ca pe o variabilă de stres separată, nu ca pe o imposibilitate.</p>
+
+<h2>Interest rate variabil: dobânda care explodează exact când nu trebuie</h2>
+
+<p>Pe DeFi, interest rate-ul nu e fix — e determinat algoritmic de gradul de utilizare al pool-ului (utilization rate). Cu cât mai mulți useri împrumută din pool, cu atât dobânda crește, cu un <strong>kink</strong> (punct de inflexiune) tipic la 80-90% utilizare, după care rata urcă abrupt.</p>
+
+<p>Capcana subtilă: în panică de piață, toți vor să-și retragă lichiditatea sau să-și acopere pozițiile. Utilizarea pool-ului sare la 95-100%, iar interest rate-ul de împrumut poate trece de la 4% la 30-50% APR în câteva ore. Strategia ta de farming cu spread de +3% devine instant negativă, dobânda îți mănâncă colateralul, HF-ul scade — și ajungi lichidat nu din cauza prețului, ci din cauza dobânzii. Mereu modelează scenariul „kink": ce se întâmplă cu spread-ul tău dacă rata de împrumut se triplează?</p>
+
+<h2>Flash loan: vectorul de atac care nu îți cere colateral</h2>
+
+<p>Un <strong>flash loan</strong> permite împrumutarea unei sume uriașe fără colateral, cu condiția să fie returnată în aceeași tranzacție (același bloc). Legitim, e folosit pentru arbitraj și refinanțare. Periculos, e arma preferată pentru <strong>manipularea oraculelor de preț</strong>: atacatorul împrumută flash, umflă sau prăbușește artificial prețul unui activ pe un pool cu lichiditate subțire, forțează lichidări sau drenează un protocol, apoi returnează împrumutul — tot într-un bloc.</p>
+
+<p>Pentru tine ca farmer, riscul de flash loan nu e că îl folosești tu, ci că <em>protocolul în care ești</em> e vulnerabil. Întrebarea de due diligence: protocolul folosește oracole robuste (medii ponderate în timp, surse multiple) sau citește prețul spot dintr-un singur pool ușor de manipulat? Istoricul DeFi e plin de exploit-uri de flash loan de zeci de milioane exact pe protocoale cu oracole naive.</p>
+
+<h2>Impactul fiscal România 2026: brut vs. net</h2>
+
+<p>O strategie de leveraged farming generează evenimente fiscale multiple, ușor de ratat. În România, începând cu <strong>1 ianuarie 2026</strong>, câștigul din transferul de criptomonede se impozitează cu <strong>16%</strong> (cotă majorată de la 10% prin pachetul fiscal-bugetar din 2025, aplicabilă veniturilor obținute de la 1 ianuarie 2026), iar reward-urile primite din farming/lending sunt, de regulă, venit impozabil la primire, apoi din nou la vânzare pe diferența de preț. Reține și pragul de neimpozitare: câștigul sub 200 lei pe tranzacție rămâne neimpozabil dacă totalul câștigurilor din anul fiscal nu depășește 600 lei. Peste asta poate intra <strong>CASS de 10%</strong> pe plafoane raportate la salariul minim (6, 12 sau 24 de salarii minime, în funcție de venitul total din investiții). Verifică încadrarea și plafoanele exacte pe <strong>anaf.ro</strong>, fiindcă detaliile contează.</p>
+
+<p>Implicația operațională: fiecare buclă de compounding care „harvest"-uiește și reinvestește reward-uri poate fi un eveniment impozabil. Un APY brut de 20% pe care reinvestești des poate scădea net considerabil după impozit, CASS și gas. Calculează <em>net, în lei</em>, nu brut în token.</p>
+
+<h2>Model de decizie: checklist înainte de a deschide poziția</h2>
+
+<ul>
+<li><strong>Calculează HF-ul țintă și prețul de lichidare</strong> pentru fiecare nivel de leverage. Notează la ce scădere procentuală a colateralului ești lichidat.</li>
+<li><strong>Stres-testează la -30% și -50%</strong> pe colateralul volatil, și la o depegare de 5-10% pentru LST-uri (stETH, rETH). Dacă oricare scenariu te lichidează, reduci leverage-ul.</li>
+<li><strong>Modelează kink-ul de dobândă:</strong> recalculează spread-ul dacă interest rate-ul de împrumut se triplează. Spread negativ în stres = strategie respinsă.</li>
+<li><strong>Verifică oracolul protocolului</strong> (TWAP/multi-sursă vs. spot) pentru rezistență la flash loan.</li>
+<li><strong>Verifică liquidation penalty și close factor</strong> ale activului tău — nu toate sunt 5%.</li>
+<li><strong>Calculează randamentul NET</strong> după 16% impozit, CASS aplicabil și costuri de gas/harvest.</li>
+<li><strong>Diversifică protocoalele și păstrează „dry powder"</strong> — capital de rezervă pe care îl poți injecta rapid ca să-ți crești HF-ul în criză.</li>
+<li><strong>Ține evidența în lei din prima zi</strong> (dată, sumă, tip eveniment) pentru Declarația Unică; cu raportarea DAC8 din 2026, reconcilierea trebuie să fie corectă.</li>
+</ul>
+
+<h2>Greșeli frecvente ale farmer-ului „avansat"</h2>
+
+<ul>
+<li><strong>Confundă max LTV cu liquidation threshold</strong> și operează fără să știe unde e pragul real.</li>
+<li><strong>Ignoră corelația colateral-datorie</strong> în pozițiile looped — crede că are tampon de 27% când are, agregat, mult mai puțin.</li>
+<li><strong>Nu modelează dobânda variabilă</strong> și e surprins când spread-ul devine negativ în panică.</li>
+<li><strong>Folosește LST-uri ca și cum ar fi ETH 1:1</strong>, ignorând riscul de depeg care declanșează cascade.</li>
+<li><strong>Reinvestește compounding fără să calculeze impactul fiscal</strong>, raportând la ANAF abia la final — cu evidențe incomplete.</li>
+<li><strong>Nu păstrează rezervă de colateral</strong> și nu poate reacționa în fereastra de câteva minute dintre semnal și lichidare.</li>
+</ul>
+
+<p>Leveraged farming cu compounding nu e o schemă de îmbogățire — e un instrument de inginerie financiară care recompensează disciplina și pedepsește brutal lipsa de model. Randamentul de 20% e real exact în măsura în care riscul de lichidare e real. Diferența dintre un randament compus sănătos și o lichidare în cascadă într-o oră nu stă în noroc, ci în trei numere pe care le-ai calculat <em>înainte</em>: health factor, prețul de lichidare și spread-ul net în scenariul de stres.</p>

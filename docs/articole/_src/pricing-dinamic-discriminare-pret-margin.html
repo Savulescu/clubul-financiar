@@ -1,0 +1,147 @@
+<p><strong>Pricing dinamic, discriminare de preț și segmentare clienți</strong> sunt cele trei pârghii prin care același produs, vândut la patru prețuri diferite, generează cu 20–40% mai mult margin decât un preț unic „corect". Dacă ai învățat deja cum stabilești prețul de bază al unui produs sau serviciu, această lecție îți arată pasul avansat: cum descompui piața pe segmente cu <strong>willingness to pay</strong> diferit, cum calculezi <strong>elasticitatea prețului față de cerere</strong> și cum extragi din fiecare grup exact cât e dispus să plătească, fără să pierzi clienții sensibili la preț.</p>
+
+<p>Vei lucra cu un model matematic complet: o curbă de elasticitate aplicată pe date reale, patru segmente de clienți cu preț diferit, calculul exact al revenue și al marjei per segment, plus formulele de <strong>psychological pricing</strong> (charm pricing, efectul prezenței alternativelor) cu efectele lor măsurate. Totul în lei, cu cote de TVA și impozit valabile în România 2026, plus un protocol de <strong>test A/B de preț și marjă</strong> care îți spune când o creștere de preț îți aduce mai mulți bani, chiar dacă pierzi clienți.</p>
+
+<p>Premisa avansată: prețul unic este aproape întotdeauna suboptim. Există clienți care ar fi plătit dublu și au plecat cu „chilipir", și clienți care n-au cumpărat deloc pentru că prețul tău fix era cu 30 de lei peste pragul lor. <strong>Segmentarea pieței și prețul diferit</strong> recuperează ambele pierderi simultan. Hai să construim modelul.</p>
+
+<h2>Curba de cerere și elasticitatea: fundamentul matematic</h2>
+
+<p>Înainte de orice segmentare, ai nevoie de forma cererii tale. <strong>Elasticitatea prețului față de cerere</strong> (E) măsoară cu cât scade cantitatea vândută când crești prețul cu 1%:</p>
+
+<ul>
+<li><strong>E = (% modificare cantitate) ÷ (% modificare preț)</strong></li>
+<li>Practic, din două puncte de date: E = [(Q₂−Q₁)/Q₁] ÷ [(P₂−P₁)/P₁]</li>
+</ul>
+
+<p>Exemplu concret. Vinzi un curs online. La 400 lei vinzi 200 de locuri/lună; ai testat 480 lei și ai vândut 160. Modificarea de cantitate: (160−200)/200 = −20%. Modificarea de preț: (480−400)/400 = +20%. <strong>E = −20% ÷ +20% = −1,0.</strong> O elasticitate de −1 înseamnă revenue constant: pierzi în volum exact cât câștigi în preț. Dacă |E| &lt; 1 (cerere inelastică), creșterea de preț îți crește revenue-ul. Dacă |E| &gt; 1 (elastic), te ruinează.</p>
+
+<p>Regula de aur a optimizării: <strong>la elasticitate constantă, marja crește mereu dacă urci prețul cât timp |E| &lt; cota de margin inversă</strong>. Concret, prețul care maximizează profitul respectă formula Lerner:</p>
+
+<ul>
+<li><strong>(P − C) / P = 1 / |E|</strong>, unde C = costul marginal</li>
+<li>Rearanjat: <strong>P optim = C × |E| / (|E| − 1)</strong></li>
+</ul>
+
+<p>Dacă produsul tău are cost marginal C = 50 lei și elasticitatea segmentului este |E| = 2, atunci P optim = 50 × 2/(2−1) = 100 lei. Dacă elasticitatea scade la |E| = 1,5, P optim = 50 × 1,5/0,5 = 150 lei. <strong>Cu cât un segment e mai puțin sensibil la preț, cu atât prețul optim e mai mare</strong> — și aici intervine segmentarea: fiecare segment are propriul |E|, deci propriul preț optim.</p>
+
+<h2>Cele patru segmente: model complet de discriminare de preț</h2>
+
+<p>Discriminarea de preț de gradul al treilea (legală și ubicuă) înseamnă să separi clienții pe grupuri identificabile și să le oferi prețuri diferite. Iată un model funcțional cu patru segmente, aplicat pe un produs SaaS / serviciu cu cost marginal C = 40 lei și o piață totală de 1.000 de clienți potențiali/lună. Costul marginal este costul suplimentar de a servi un client în plus (hosting, suport, livrare), nu costurile fixe.</p>
+
+<h3>Distribuția willingness to pay</h3>
+
+<p>Din interviuri, date istorice și teste, estimezi câți clienți au fiecare prag de plată maxim (WTP):</p>
+
+<ul>
+<li><strong>Segment A — Premium / „price-blind"</strong>: 100 clienți, WTP ≥ 250 lei, elasticitate joasă (|E| ≈ 0,8). Cumpără pe valoare, nu pe preț.</li>
+<li><strong>Segment B — Profesioniști</strong>: 250 clienți, WTP ≈ 150 lei, |E| ≈ 1,3.</li>
+<li><strong>Segment C — Mainstream sensibil</strong>: 400 clienți, WTP ≈ 90 lei, |E| ≈ 2,2.</li>
+<li><strong>Segment D — Bugetar / studenți</strong>: 250 clienți, WTP ≈ 55 lei, |E| ≈ 3,5. Foarte elastic.</li>
+</ul>
+
+<h3>Scenariul „preț unic" (baseline)</h3>
+
+<p>Dacă pui un preț unic „corect" de 120 lei, cumpără doar segmentele cu WTP ≥ 120: tot A (100) + cei mai mulți din B (să zicem 200 din 250). Total ≈ 300 clienți. Revenue = 300 × 120 = 36.000 lei. Margin = 300 × (120 − 40) = <strong>24.000 lei/lună</strong>. Segmentele C și D — 650 de clienți — pleacă neserviți. Asta e pierderea ascunsă a prețului unic.</p>
+
+<h3>Scenariul segmentat (4 prețuri, fenced)</h3>
+
+<p>Folosești „garduri" (fences) care fac ca fiecare segment să-și aleagă natural nivelul: plan Enterprise pentru A, plan Pro pentru B, plan Standard pentru C, plan Student/anual-redus pentru D.</p>
+
+<ul>
+<li><strong>A → 240 lei</strong>: 100 clienți × (240−40) = 20.000 lei margin</li>
+<li><strong>B → 145 lei</strong>: 250 clienți × (145−40) = 26.250 lei margin</li>
+<li><strong>C → 89 lei</strong>: 400 clienți × (89−40) = 19.600 lei margin</li>
+<li><strong>D → 49 lei</strong>: 250 clienți × (49−40) = 2.250 lei margin</li>
+</ul>
+
+<p>Total margin segmentat = 20.000 + 26.250 + 19.600 + 2.250 = <strong>68.100 lei/lună</strong>, față de 24.000 lei la preț unic. Chiar dacă scoți segmentul D (margin doar 2.250 lei, dar îți aduce volum, recenzii și referrals) margin rămâne 65.850 lei — de aproape 2,7× peste baseline. Aceasta este puterea matematică a segmentării: <strong>extragi surplusul de la cei care plăteau prea puțin și recuperezi clienții care plecau</strong>.</p>
+
+<p><strong>Atenție la TVA și la „prețul afișat":</strong> dacă ești plătitor de TVA, cota standard în vigoare din august 2025 este de 21%. Marja se calculează pe prețul fără TVA. Un plan afișat „145 lei" către consumatori finali (B2C) include TVA: baza = 145 / 1,21 ≈ 119,8 lei, deci margin real per client = 119,8 − 40 = 79,8 lei, nu 105. Verifică întotdeauna dacă lucrezi cu prețuri cu sau fără TVA înainte de a optimiza marja, altfel supraestimezi profitul cu ~21%.</p>
+
+<h2>Fences: cum împiedici arbitrajul între segmente</h2>
+
+<p>Discriminarea de preț funcționează doar dacă segmentul premium nu poate cumpăra la prețul segmentului ieftin. Mecanismele care „închid gardul":</p>
+
+<ul>
+<li><strong>Versionare</strong>: planul ieftin are mai puține funcții, limite de utilizare, fără suport prioritar. Segmentul premium plătește pentru a scăpa de fricțiune.</li>
+<li><strong>Criteriu de identitate verificabil</strong>: reducere de student (carnet), preț pentru ONG-uri, preț pentru firme sub un anumit număr de angajați.</li>
+<li><strong>Fereastră temporală</strong>: early-bird, reducere de lansare, preț de Black Friday — separă clienții răbdători (elastici) de cei nerăbdători (inelastici).</li>
+<li><strong>Canal</strong>: preț diferit pe site vs. marketplace vs. vânzare directă cu negociere B2B.</li>
+<li><strong>Cantitate / angajament</strong>: prețul anual mai mic decât 12× lunarul separă clienții cu lifetime value mare.</li>
+</ul>
+
+<p>Regula: <strong>un gard bun e ușor de sărit pentru segmentul vizat și costisitor pentru ceilalți</strong>. Dacă oricine îți poate lua reducerea de student fără să fie student, gardul nu există și prețul tău colapsează la cel mai mic nivel.</p>
+
+<h2>Pricing dinamic: ajustarea în timp real</h2>
+
+<p>Segmentarea statică (4 planuri) e fundamentul. <strong>Pricing-ul dinamic</strong> adaugă variația prețului în funcție de cerere, timp, stoc sau profilul cumpărătorului. Cazuri în care merită:</p>
+
+<ul>
+<li><strong>Capacitate perisabilă</strong>: locuri la un eveniment, sloturi de consultanță, camere — prețul urcă pe măsură ce se umple (yield management). Primele 30% din locuri la 200 lei, următoarele la 280, ultimele la 350.</li>
+<li><strong>Sezonalitate a cererii</strong>: servicii cu vârfuri (contabilitate în perioada bilanțului, traininguri în Q4).</li>
+<li><strong>Semnal de intenție</strong>: un client care revine de 3 ori pe pagina de checkout are WTP mai mare — dar atenție la discriminarea pe baza datelor personale.</li>
+</ul>
+
+<p><strong>Capcană juridică România/UE 2026:</strong> pricing-ul dinamic bazat pe profilarea individuală a consumatorului intră sub Directiva Omnibus și GDPR. Trebuie să informezi clientul dacă prețul afișat este personalizat pe baza unei decizii automate. La reduceri, prețul „înainte" trebuie să fie cel mai mic preț practicat în ultimele 30 de zile (regula prețului de referință din Directiva 98/6/CE modificată) — altfel reducerea afișată e amendabilă de ANPC. Dynamic pricing pe capacitate/timp e permis; discriminarea pe identitate protejată (sex, etnie etc.) e ilegală.</p>
+
+<h2>Psychological pricing: efectele reale, măsurate</h2>
+
+<p>Peste modelul matematic se suprapune psihologia percepției. <strong>Psychological pricing</strong> nu schimbă valoarea reală, dar mută punctul de decizie. Cele cu efect documentat:</p>
+
+<h3>Charm pricing (terminația 9)</h3>
+
+<p>Prețurile terminate în 9 (89 lei vs. 90 lei) cresc conversia măsurabil — efectul „cifrei din stânga": creierul ancorează pe „8x", nu pe „9x". Studiile de teren (inclusiv experimentele clasice MIT/Chicago) arată creșteri de vânzări de ordinul a 8–24% la trecerea de la o cifră rotundă la una terminată în 9, în categorii sensibile la preț. <strong>Important: funcționează la segmentele elastice (C, D), dar la premium (A) prețul rotund — 250 lei vs. 249 lei — semnalează calitate.</strong> Nu folosi charm pricing pe segmentul premium; rotunjește.</p>
+
+<h3>Efectul prezenței alternativelor (decoy / anchoring)</h3>
+
+<p>Introducerea unei a treia opțiuni „momeală" mută alegerea spre opțiunea pe care o vrei tu. Exemplul clasic: dacă oferi doar Standard 89 lei și Pro 145 lei, mulți aleg Standard. Adaugi un al treilea plan, Premium 240 lei. Acum Pro pare „rezonabil prin comparație" și o parte din clienți migrează din Standard în Pro. <strong>Ancora superioară (240 lei) ridică WTP perceput pentru întreaga gamă.</strong> Mecanismul: oamenii nu evaluează prețul absolut, ci prețul relativ la opțiunile vizibile.</p>
+
+<h3>Alte pârghii cu efect real</h3>
+
+<ul>
+<li><strong>Decompoziția prețului</strong>: „99 lei/lună" convertește mai bine decât „1.188 lei/an", chiar la cost anual identic — reduce „durerea plății".</li>
+<li><strong>Ancorarea cu preț tăiat</strong>: afișarea unui preț de referință mai mare (legal: cel mai mic din ultimele 30 zile) crește valoarea percepută a reducerii.</li>
+<li><strong>Cifre precise pentru sume mari</strong>: la oferte B2B mari, un preț de 47.300 lei pare mai „calculat" și negociabil mai greu decât 47.000 lei rotund.</li>
+</ul>
+
+<h2>Test A/B de preț: cum decizi cu date, nu cu intuiție</h2>
+
+<p>Orice schimbare de preț trebuie validată. Testul A/B de preț e diferit de cel de UX: nu măsori conversia, ci <strong>revenue și margin per vizitator</strong>, pentru că un preț mai mare convertește mai puțin dar poate aduce mai mult.</p>
+
+<h3>Protocol corect</h3>
+
+<ul>
+<li><strong>Metrica țintă = margin per vizitator</strong> = (conversie × (preț fără TVA − cost)). NU optimiza conversia singură.</li>
+<li>Împarte traficul aleator (50/50), pe perioade suficient de lungi cât să prinzi un ciclu de cumpărare complet și să eviți sezonalitatea.</li>
+<li>Asigură mărimea de eșantion: pentru a detecta o diferență de conversie de ~2 puncte la o bază de 5%, ai nevoie de mii de vizitatori per variantă. Sub acest prag, rezultatul e zgomot.</li>
+<li><strong>Capcană etică/legală</strong>: nu arăta simultan prețuri diferite acelorași tip de clienți pe același canal fără justificare (versionare, timp) — riști acuzații de discriminare și erodezi încrederea dacă se află.</li>
+</ul>
+
+<h3>Exemplu de decizie numerică</h3>
+
+<p>Varianta A: preț 89 lei, conversie 4%, cost 40 lei. Margin/vizitator = 0,04 × (89/1,21 − 40) = 0,04 × 33,5 = 1,34 lei. Varianta B: preț 109 lei, conversie 3,2%. Margin/vizitator = 0,032 × (109/1,21 − 40) = 0,032 × 50,1 = 1,60 lei. <strong>B câștigă, deși are conversie mai mică</strong>: +19% margin per vizitator, deși 0,8 puncte de conversie pierdute. Fără calculul pe margin, ai fi ales greșit A.</p>
+
+<h2>Pași de implementare (checklist)</h2>
+
+<ul>
+<li><strong>1.</strong> Estimează WTP pe segmente: din date istorice, interviuri și un mic test de preț (van Westendorp sau Gabor-Granger pe 100+ respondenți).</li>
+<li><strong>2.</strong> Calculează elasticitatea pe cel puțin două puncte de preț reale, per segment.</li>
+<li><strong>3.</strong> Aplică formula Lerner (P = C×|E|/(|E|−1)) pentru prețul optim al fiecărui segment.</li>
+<li><strong>4.</strong> Construiește 3–4 planuri cu fences clare; verifică să nu existe arbitraj.</li>
+<li><strong>5.</strong> Lucrează marja pe prețuri FĂRĂ TVA (cota standard 21% din august 2025); separă B2B de B2C.</li>
+<li><strong>6.</strong> Adaugă o ancoră premium rotundă și charm pricing doar pe planurile elastice.</li>
+<li><strong>7.</strong> Validează prin A/B pe margin per vizitator, nu pe conversie.</li>
+<li><strong>8.</strong> Verifică conformitatea: regula prețului de referință 30 zile (ANPC/Omnibus), GDPR la pricing personalizat.</li>
+<li><strong>9.</strong> Reevaluează elasticitatea trimestrial — se schimbă cu inflația, concurența și puterea de cumpărare.</li>
+</ul>
+
+<h2>Greșeli frecvente</h2>
+
+<ul>
+<li><strong>Optimizarea conversiei în loc de margin</strong> — cel mai scump bug de pricing.</li>
+<li><strong>Charm pricing pe segmentul premium</strong> — distruge semnalul de calitate.</li>
+<li><strong>Fences slabe</strong> — toți migrează spre planul ieftin și prețul colapsează.</li>
+<li><strong>Ignorarea TVA</strong> — supraestimezi marja cu ~21% și iei decizii pe cifre false.</li>
+<li><strong>Reduceri „false"</strong> — preț de referință umflat = amendă ANPC sub Directiva Omnibus.</li>
+<li><strong>Un singur preț pentru toată piața</strong> — lași 30–50% din margin pe masă, neîncasat.</li>
+</ul>

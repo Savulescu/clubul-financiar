@@ -1,0 +1,129 @@
+<p>Mecanismul <strong>bonus-malus punct pensie vârstă pensionare</strong> este, sub Legea 360/2023, principala pârghie prin care decizia ta de a te retrage cu 2-4 ani mai devreme sau mai târziu se transformă în mii de lei diferență pe fiecare lună de pensie. Dacă în lecția precedentă ai văzut <em>cum crește vârsta standard de pensionare în România până în 2035</em>, aici intrăm în matematica fină: cum se calculează concret <strong>penalizarea pentru pensionarea anticipată în procent</strong>, cum funcționează <strong>bonusul anual de pensionare după vârsta standard</strong> prin punctele de stabilitate, și de ce cele două nu sunt simetrice.</p>
+
+<p>Vei vedea un model de calcul pe care îl poți folosi ca <strong>simulator de bonus-malus al punctului de pensie în 2026</strong>, aplicat pe deceniul 2020-2050, cu valoarea punctului de referință înghețată la 81 de lei și etapizarea vârstelor pe cohorte. Pe scurt: cât te costă, cumulat pe 20 de ani de pensie, o anticipare de 2-4 ani — și de ce, pentru mulți contribuabili experimentați, decizia corectă nu e cea intuitivă.</p>
+
+<p>Premisa e că deja stăpânești bazele: punctaj, stagiu de cotizare, valoarea punctului de referință (VPR). Nu le re-explicăm. Trecem direct la <strong>impactul vârstei de pensionare asupra pensiei totale</strong> — zona unde o eroare de raționament costă, realist, un autoturism întreg pe durata pensiei.</p>
+
+<h2>Arhitectura bonus-malus sub Legea 360/2023: două sisteme separate, nu unul</h2>
+
+<p>Prima capcană conceptuală: în România nu există un singur „coeficient de vârstă” care urcă și coboară simetric în jurul vârstei standard, cum funcționează în sistemele actuariale clasice (germane sau scandinave). Avem <strong>două mecanisme distincte</strong>, cu logici și magnitudini diferite:</p>
+
+<ul>
+<li><strong>MALUS (penalizarea anticipată)</strong> — un coeficient de diminuare aplicat <em>lunar</em> pe numărul de luni de anticipare, conform Tabelului nr. 4 din lege. Atenție la terminologie: Legea 360/2023 a <strong>desființat denumirea „pensie anticipată parțială”</strong> din vechea Lege 263/2010 și o numește simplu „pensie anticipată” (cu penalizare). Plafonul maxim de penalizare a scăzut, totodată, de la 30% la <strong>24%</strong>.</li>
+<li><strong>BONUS (punctele de stabilitate)</strong> — puncte suplimentare acordate <em>pentru fiecare an de stagiu peste 25 de ani</em>, nu direct „pentru că ai amânat”. Bonusul nu e un procent pe lună, ci puncte adăugate la punctajul total.</li>
+</ul>
+
+<p>Diferența e fundamentală pentru optimizare. Malusul depinde de <strong>cât de devreme</strong> ieși. Bonusul depinde de <strong>cât de mult ai cotizat</strong> — deci, indirect, de cât de târziu ieși, dar pe o cu totul altă curbă. Cine confundă cele două subestimează sistematic câștigul din amânare și supraestimează „simetria” penalizării.</p>
+
+<h3>Malusul: coeficienții descrescători din Tabelul nr. 4</h3>
+
+<p>Pensia anticipată (cu penalizare) se acordă cu cel mult 5 ani înainte de vârsta standard, dacă ai realizat stagiul complet de cotizare. Coeficientul lunar de diminuare <strong>scade pe măsură ce ai un stagiu mai mare peste stagiul complet</strong> — sistemul te „iartă” mai mult dacă ai muncit mai mult:</p>
+
+<ul>
+<li>Fără depășire a stagiului complet (0-1 an peste): <strong>0,40% pe lună</strong> de anticipare</li>
+<li>Depășire 1-2 ani: <strong>0,35% pe lună</strong></li>
+<li>Depășire 2-3 ani: <strong>0,30% pe lună</strong></li>
+<li>Depășire 3-4 ani: <strong>0,25% pe lună</strong></li>
+<li>Depășire 4-5 ani: <strong>0,20% pe lună</strong></li>
+</ul>
+
+<p>Formula de bază: <strong>Pensie anticipată = Pensie pentru limită de vârstă × (1 − coeficient lunar × număr luni anticipare)</strong>. Verifică întotdeauna tranșa exactă din anexa în vigoare la data cererii, pentru că depinde de cât de mult depășești stagiul complet — nu de stagiul minim. Reține și pragul superior: cine depășește stagiul complet cu <strong>cel puțin 5 ani</strong> poate accesa pensia anticipată <em>fără penalizare</em> — adică malus zero pe lunile de anticipare. Este granița care separă o retragere „scumpă” de una gratuită.</p>
+
+<h3>Bonusul: punctele de stabilitate pe tranșe</h3>
+
+<p>Pentru fiecare an de stagiu de cotizare <em>contributiv</em> realizat peste 25 de ani, primești puncte de stabilitate, pe trei tranșe:</p>
+
+<ul>
+<li><strong>0,50 puncte/an</strong> pentru fiecare an între 26 și 30 de ani de stagiu (≈ 0,04167 pct/lună)</li>
+<li><strong>0,75 puncte/an</strong> pentru fiecare an între 31 și 35 de ani (≈ 0,06250 pct/lună)</li>
+<li><strong>1,00 punct/an</strong> pentru fiecare an peste 35 de ani (≈ 0,08333 pct/lună)</li>
+</ul>
+
+<p>Atenție la <strong>capcana subtilă</strong>: punctele de stabilitate se acordă DOAR pentru stagiul <em>contributiv</em> — perioadele asimilate (studii, armata, șomaj) și perioadele în care primești deja pensie nu generează puncte de stabilitate. Cei cu grupe de muncă și stagiu redus de vârstă sunt dezavantajați aici, pentru că o parte din stagiul lor „util” nu contează la bonus.</p>
+
+<h2>Modelul de calcul: cuantificarea pe 20 de ani</h2>
+
+<p>Acum traducem totul în lei, cu VPR = <strong>81 lei în 2026</strong> (valoare menținută prin Legea 141/2025, indexarea automată fiind amânată până în 2027 — deci nu presupune creșteri în proiecțiile pe termen scurt). Folosim un contribuabil-tip: bărbat, cu un punctaj mediu anual de 1,2 (peste media salarială), cu vârstă standard 65 de ani și 35 de ani stagiu complet.</p>
+
+<h3>Scenariul A — Pensionare la termen (65 ani, 35 ani stagiu)</h3>
+
+<p>Punctaj de bază: 35 ani × 1,2 = 42 puncte contributive. Puncte de stabilitate pentru anii 26-35 (10 ani „peste 25”): 5 ani × 0,50 + 5 ani × 0,75 = 2,5 + 3,75 = <strong>6,25 puncte de stabilitate</strong>. Total ≈ 48,25 puncte. Pensie lunară ≈ 48,25 × 81 = <strong>3.908 lei</strong>. (Cifrele sunt ilustrative pentru model; punctajul real se calculează pe întreaga carieră.)</p>
+
+<h3>Scenariul B — Anticipare cu 2 ani (63 ani, 33 ani stagiu)</h3>
+
+<p>Ai 33 ani stagiu, deci depășești stagiul complet cu... <strong>zero</strong> dacă stagiul complet e 35 — caz în care nici nu te califici pentru pensia anticipată fără stagiu complet realizat. Aceasta e prima capcană: <strong>anticiparea cu penalizare cere stagiu complet realizat</strong>. Presupunem deci că ai cei 35 de ani la 63 (carieră începută devreme). Anticipare = 24 luni. Cu 0 ani depășire peste complet → coeficient 0,40%/lună → malus = 24 × 0,40% = <strong>9,6%</strong>. Pierzi și 2 ani de puncte de stabilitate (≈ 1,5 puncte din tranșele superioare).</p>
+
+<p>Pensie ≈ (48,25 − 1,5) × 81 × (1 − 0,096) ≈ 46,75 × 81 × 0,904 ≈ <strong>3.424 lei</strong>. Diferență față de A: ≈ <strong>484 lei/lună</strong>.</p>
+
+<h3>Scenariul C — Anticipare cu 4 ani (61 ani)</h3>
+
+<p>Anticipare = 48 luni. Dacă ai un stagiu generos (depășire 3-4 ani peste complet), coeficientul scade la 0,25%/lună → malus = 48 × 0,25% = <strong>12%</strong>. Dar dacă ai exact stagiul complet, coeficientul rămâne 0,40% → malus = 48 × 0,40% = <strong>19,2%</strong>. Iată de ce <strong>cu cât ai un stagiu mai mare, cu atât anticiparea te costă proporțional mai puțin</strong> — sistemul răsplătește vechimea de două ori (bonus + malus mai blând).</p>
+
+<p>Cu malus 19,2% și pierderea a ≈ 3 puncte de stabilitate: pensie ≈ 45,25 × 81 × 0,808 ≈ <strong>2.962 lei</strong>. Diferență față de A: ≈ <strong>946 lei/lună</strong>.</p>
+
+<h3>Cumulul pe 20 de ani — cifra care contează</h3>
+
+<p>Aici raționamentul naiv eșuează. Mulți compară doar pensia lunară, ignorând că anticiparea îți dă <strong>luni suplimentare de încasare</strong>. Calculul corect e pe valoarea cumulată, cu un orizont realist (speranța de viață la 65 ani în România ≈ 16-18 ani; folosim 20 de ani de la prima încasare pentru cel care iese la 65):</p>
+
+<ul>
+<li><strong>Scenariul A</strong> (65 ani, 20 ani încasare): 3.908 × 12 × 20 ≈ <strong>938.000 lei</strong></li>
+<li><strong>Scenariul B</strong> (63 ani, 22 ani încasare): 3.424 × 12 × 22 ≈ <strong>904.000 lei</strong> → pierdere netă ≈ <strong>34.000 lei</strong></li>
+<li><strong>Scenariul C</strong> (61 ani, 24 ani încasare): 2.962 × 12 × 24 ≈ <strong>853.000 lei</strong> → pierdere netă ≈ <strong>85.000 lei</strong></li>
+</ul>
+
+<p>Concluzia contraintuitivă: <strong>pe valoarea cumulată brută, anticiparea de 2 ani te costă mult mai puțin decât pare</strong> (≈ 34.000 lei, nu cei 484 lei/lună × infinit), pentru că recuperezi parțial prin lunile câștigate. Dar anticiparea de 4 ani, cu malus 19,2%, devine o pierdere reală semnificativă. Pragul de basculare e undeva între 2 și 3 ani de anticipare, foarte sensibil la stagiul tău peste cel complet.</p>
+
+<h2>Optimizări sofisticate și cazuri-limită</h2>
+
+<h3>1. Arbitrajul „un an în plus de stagiu” înainte de a ieși</h3>
+
+<p>Dacă ești la limita unei tranșe de stabilitate (de ex. ai 30 de ani și 10 luni stagiu), încă <strong>2 luni de muncă</strong> te aruncă în tranșa de 0,75 pct/an pentru tot ce urmează. Mai important, un an în plus de stagiu poate coborî coeficientul de malus cu o treaptă întreagă (de la 0,40% la 0,35%), reducând penalizarea pe TOATE lunile de anticipare. Acest efect de prag e cel mai subevaluat lever din tot sistemul.</p>
+
+<h3>2. Costul de oportunitate al salariului vs. malusul evitat</h3>
+
+<p>Decizia „mai muncesc un an” are două fețe: încasezi salariul (net, plus contribuții care îți cresc punctajul) DAR amâni încasarea pensiei. Pentru un antreprenor/contribuabil cu venit mare, fiecare an lucrat peste 35 de ani aduce 1,00 punct de stabilitate (81 lei/lună pe viață) plus punctajul contributiv al anului — un randament implicit greu de bătut de orice instrument cu risc comparabil. Pentru cineva cu salariu mic și sănătate fragilă, calculul se inversează.</p>
+
+<p>Pune cifra în context: 81 lei/lună pe viață, capitalizat pe 20 de ani, înseamnă ≈ 19.440 lei valoare cumulată brută pentru UN SINGUR punct de stabilitate. Un an peste 35 de ani de stagiu generează exact acest punct — fără să mai numărăm punctajul contributiv al anului respectiv. Comparat cu randamentul Pilonului III sau al unui depozit, „amânarea” ultimului an de carieră se comportă, financiar, ca o anuitate viageră indexabilă cu cost zero. Foarte puțini contribuabili experimentați conștientizează că ultimul an lucrat e, de regulă, cel mai bine „plătit” din întreaga carieră, dacă îl evaluezi pe orizontul pensiei.</p>
+
+<h3>3. Capcana stagiului incomplet la anticipată</h3>
+
+<p>Pensia anticipată (cu penalizare) cere <strong>stagiul complet realizat</strong> (nu doar minim). Dacă ai doar stagiul minim, nu poți accesa anticipata în condițiile standard — verifică situația exactă, pentru că aici se pierd cele mai multe planuri de retragere timpurie.</p>
+
+<h3>4. Asimetria VPR înghețat</h3>
+
+<p>Cu VPR blocat la 81 lei până în 2027, malusul aplicat azi se „cristalizează” pe o bază nominală mică. Când indexarea revine (2027+), procentul de penalizare rămâne fix, dar baza crește — deci malusul în lei absoluți va fi mai mare în viitor. Cine anticipează acum „închide” penalizarea pe o bază mai mică în lei, ceea ce, paradoxal, joacă ușor în favoarea anticipării într-un context de VPR înghețat urmat de indexare.</p>
+
+<h2>Evoluția pe deceniu: ce se schimbă 2020-2050</h2>
+
+<p>Mecanismul bonus-malus în sine (coeficienții Tabelului 4 și tranșele de stabilitate) este, sub Legea 360/2023, relativ stabil. Ce se schimbă pe deceniu este <strong>baza de aplicare</strong>:</p>
+
+<ul>
+<li><strong>Vârsta standard</strong> crește etapizat pentru femei (spre 65 de ani), schimbând „punctul zero” față de care se măsoară anticiparea. O femeie din cohorta 2030 are altă vârstă standard decât una din 2024 — deci alt număr de luni de anticipare pentru aceeași vârstă efectivă de ieșire.</li>
+<li><strong>Stagiul complet</strong> se majorează gradual, ceea ce mută tranșele de stabilitate și poate schimba coeficientul de malus aplicabil.</li>
+<li><strong>VPR</strong>: înghețat la 81 lei (2024-2026), cu indexare amânată la 2027. Proiecțiile pe 2030-2050 trebuie să presupună o reluare a formulei de indexare (inflație + 50% din creșterea reală a salariului mediu), dar fără a inventa cifre exacte — modelează scenarii, nu certitudini.</li>
+</ul>
+
+<p>Regula practică: <strong>recalculează-ți vârsta standard și stagiul complet pentru cohorta TA exactă</strong> (în funcție de anul nașterii), pentru că de aici pornesc toate cele 48 de luni potențiale de anticipare. O eroare de 7 luni la vârsta standard mută malusul cu ≈ 2,8 puncte procentuale.</p>
+
+<h2>Pași de acțiune și checklist decizional</h2>
+
+<ul>
+<li><strong>Pasul 1 — Identifică-ți cohorta:</strong> caută în anexele Legii 360/2023 vârsta standard și stagiul complet EXACT pentru anul tău de naștere și sex. Nu folosi „65 de ani” generic dacă ești femeie din cohortele de tranziție.</li>
+<li><strong>Pasul 2 — Stabilește depășirea stagiului complet:</strong> calculează câți ani ai peste stagiul complet la momentul ieșirii dorite. Acest număr determină coeficientul de malus (0,40% → 0,20%).</li>
+<li><strong>Pasul 3 — Numără punctele de stabilitate:</strong> aplică 0,50 / 0,75 / 1,00 pe tranșe, DOAR pe stagiul contributiv (exclude perioadele asimilate).</li>
+<li><strong>Pasul 4 — Calculează ambele scenarii în lei:</strong> pensie la termen vs. pensie anticipată, lunar ȘI cumulat pe 20 de ani, incluzând lunile suplimentare câștigate prin anticipare.</li>
+<li><strong>Pasul 5 — Testează efectul de prag:</strong> verifică dacă încă 2-12 luni de muncă coboară coeficientul de malus o treaptă întreagă. Adesea da — și e cea mai profitabilă mișcare.</li>
+<li><strong>Pasul 6 — Cere o estimare oficială la CNPP/Casa de pensii:</strong> simulatoarele online sunt orientative; punctajul real depinde de întregul tău istoric. Solicită o estimare scrisă înainte de a depune cererea de anticipată.</li>
+</ul>
+
+<h2>Greșeli frecvente</h2>
+
+<ul>
+<li><strong>Compari doar pensia lunară</strong>, ignorând lunile suplimentare câștigate prin anticipare — supraestimezi grosolan costul anticipării de 2 ani.</li>
+<li><strong>Presupui simetrie</strong> bonus-malus: bonusul (puncte de stabilitate) și malusul (procent lunar) au mecanisme complet diferite, nu se anulează reciproc cap-coadă.</li>
+<li><strong>Folosești coeficientul de malus greșit:</strong> el depinde de depășirea stagiului COMPLET, nu a celui minim. Mulți aplică 0,40% când au dreptul la 0,25%.</li>
+<li><strong>Numeri perioade asimilate la punctele de stabilitate</strong> — nu generează bonus; doar stagiul contributiv.</li>
+<li><strong>Ignori înghețarea VPR:</strong> proiectezi creșteri ale punctului de pensie în 2026 când valoarea e fixată la 81 lei până în 2027.</li>
+<li><strong>Uiți condiția de stagiu complet</strong> pentru pensia anticipată (cu penalizare) și descoperi prea târziu că nu te califici.</li>
+<li><strong>Folosești terminologia veche:</strong> „anticipată parțială” este din Legea 263/2010; sub Legea 360/2023 există doar „pensie anticipată” (cu sau fără penalizare), iar plafonul de malus a coborât de la 30% la 24%.</li>
+</ul>

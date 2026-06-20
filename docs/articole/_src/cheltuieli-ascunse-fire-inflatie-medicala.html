@@ -1,0 +1,112 @@
+<p>Dacă în lecția anterioară am inventariat <strong>cheltuielile ascunse FIRE</strong> — categoriile pe care le uiți din buget la pensia timpurie — aici trecem la mecanismul care le face cu adevărat periculoase: rata cu care cresc. <strong>Inflația medicală</strong> și <strong>lifestyle creep</strong>-ul nu sunt linii noi de buget, ci multiplicatori care lucrează asupra liniilor existente, an de an, vreme de 30-50 de ani. Pe scurt, ne ocupăm de cheltuieli ascunse FIRE inflație medicală lifestyle creep: trei forțe care împart aceeași semnătură — nu apar ca șoc, ci ca derivă lentă (consumption drift after FIRE) care îți erodează rata de retragere fără să-ți dai seama.</p>
+
+<p>Aici nu te mai întreb <em>ce</em> uiți din buget, ci <em>cu cât crește</em> fiecare categorie. Construim împreună modele de inflație pe categorii pentru un buget FIRE românesc, demonstrăm de ce medical inflation depășește general inflation (medical inflation vs general inflation) cu un factor de 2-3x, și calibrăm un buffer pentru surprize FIRE de 10-15% care nu e o pernă psihologică, ci o cifră derivată din date. Vom acoperi și hedging-ul costului de trai (hedging living cost FIRE) și capcanele consumption drift-ului post-pensionare.</p>
+
+<p>Presupun că ai deja numărul FIRE, rata de retragere și auditul de cheltuieli neplanificate FIRE din lecțiile precedente. Nu reluăm bazele: indexarea cu inflația, multiplicatorul 25x, riscul de secvență — le știi. Le folosim ca substrat și mergem direct în modelarea pe categorii, partea pe care 95% dintre calculatoarele FIRE o ratează folosind o singură rată de inflație plată pentru tot.</p>
+
+<h2>De ce o singură rată de inflație îți strică modelul</h2>
+<p>Calculatorul FIRE standard ia cheltuiala anuală și o indexează cu o rată unică — să zicem 3,5%. Problema: bugetul tău nu e un bloc omogen. E un coș cu ponderi foarte diferite pe categorii, iar fiecare categorie are propria traiectorie de inflație. Sănătatea crește istoric cu mult peste medie; tehnologia scade nominal; serviciile cu intensitate de muncă (îngrijire, reparații, HoReCa) cresc peste IPC pentru că salariile reale urcă; mâncarea e volatilă; chiria urmează imobiliarele.</p>
+<p>Când ponderea categoriilor cu inflație mare crește în timp — și asta se întâmplă mecanic la FIRE, pentru că îmbătrânești și sănătatea + serviciile devin o felie tot mai groasă — rata ta de inflație efectivă <strong>accelerează</strong>. Un FIRE-ist de 45 de ani are poate 8% din buget pe sănătate; același om la 75 are 20-25%. Chiar dacă fiecare categorie individuală ar avea o rată constantă, <strong>reponderarea singură îți ridică inflația agregată cu 0,5-1 punct procentual pe deceniu</strong>. Asta e prima capcană subtilă: inflația ta personală nu e o constantă, e o funcție crescătoare de vârstă.</p>
+
+<h3>Cum construiești un coș de inflație pe categorii</h3>
+<p>Modelul corect e o sumă ponderată. Pentru fiecare categorie <em>i</em> ai o pondere <em>w<sub>i</sub></em> (cât % din buget) și o rată de inflație proprie <em>r<sub>i</sub></em>. Inflația agregată a anului e Σ(w<sub>i</sub> × r<sub>i</sub>). Iată un coș-șablon realist pentru un FIRE-ist român, cu rate prudente peste IPC-ul general (presupus ~4-5% pe orizont lung în România):</p>
+<ul>
+<li><strong>Locuire + utilități</strong> (~25%): inflație ~IPC, cu spike-uri pe energie. Folosește IPC general.</li>
+<li><strong>Alimente</strong> (~18%): volatil, istoric ușor peste IPC. IPC +0,5-1%.</li>
+<li><strong>Sănătate</strong> (~10%, crescând la 20%+): <strong>IPC × 2 până la × 3</strong> — vezi secțiunea dedicată.</li>
+<li><strong>Transport / auto</strong> (~12%): aproape de IPC, dar înlocuirea mașinii crește cu prețul auto.</li>
+<li><strong>Servicii cu muncă intensivă</strong> (~10%, crescând): peste IPC +1-2%, urmează salariile.</li>
+<li><strong>Lifestyle / călătorii / hobby</strong> (~15%): aici lovește lifestyle creep — vezi mai jos.</li>
+<li><strong>Tehnologie / abonamente</strong> (~5%): nominal aproape plat sau în scădere, dar atenție la „subscription creep".</li>
+<li><strong>Taxe / asigurări</strong> (~5%): cresc cu plafoanele și cu valoarea activelor.</li>
+</ul>
+<p>Rulează acest coș an de an, reponderând sănătatea în sus pe măsură ce înaintezi în vârstă. Vei obține o curbă de inflație personală care pornește în jur de IPC dar urcă vizibil — și asta e cifra cu care trebuie să-ți indexezi retragerile, nu IPC-ul oficial.</p>
+
+<h2>Inflația medicală: de ce crește de 2-3x mai repede</h2>
+<p>Aceasta e inima lecției. În aproape toate economiile dezvoltate, indicele costurilor medicale crește persistent peste inflația generală. În SUA, medical CPI a depășit istoric general CPI cu 1,5-2,5 puncte procentuale pe an pe perioade lungi. În România, unde sistemul public maschează o parte din cost, presiunea apare în zona privată: consultații, stomatologie, intervenții, medicamente neacoperite, îngrijire de lungă durată. Aceste prețuri urcă agresiv pentru că:</p>
+<ul>
+<li><strong>Sunt servicii cu intensitate mare de muncă calificată</strong> — medici, asistenți, fizioterapeuți — iar salariile lor reale cresc peste medie, mai ales cu deficitul de personal medical din România.</li>
+<li><strong>Cererea ta crește exact când inflația lovește</strong>: consumi mult mai multă sănătate la 70 de ani decât la 45. E o dublă lovitură — preț per unitate mai mare ȘI mai multe unități.</li>
+<li><strong>Tehnologia medicală adaugă cost, nu îl scade</strong>: proceduri noi, mai bune și mai scumpe, pe care le vei vrea.</li>
+<li><strong>Îngrijirea de lungă durată</strong> (azil privat, îngrijitor la domiciliu) e categoria cu cea mai brutală inflație — în România centrele private serioase au crescut tarifele cu mult peste IPC în ultimii ani.</li>
+</ul>
+<p>Regula de modelare: <strong>indexează categoria sănătate cu IPC × 2 ca scenariu de bază și IPC × 3 ca scenariu prudent.</strong> Dacă presupui IPC general de 4,5% în România pe termen lung, sănătatea o indexezi cu <strong>9-13,5% pe an</strong>. Pare extrem până vezi efectul compus.</p>
+
+<h3>Demonstrația numerică a divergenței</h3>
+<p>Să luăm un FIRE-ist român cu 800 lei/lună sănătate amortizată azi (CASS voluntar + privat + dentar + rezervă îngrijire), adică 9.600 lei/an, într-un buget total de 120.000 lei/an unde sănătatea e 8%.</p>
+<p>Restul bugetului (110.400 lei) crește cu IPC 4,5%. Sănătatea (9.600 lei) crește cu 11% (IPC × 2,4). Peste <strong>20 de ani</strong>:</p>
+<ul>
+<li>Restul bugetului: 110.400 × 1,045²⁰ ≈ <strong>266.000 lei/an</strong> (×2,4).</li>
+<li>Sănătatea: 9.600 × 1,11²⁰ ≈ <strong>77.400 lei/an</strong> (×8,1!).</li>
+<li>Buget total: ~343.000 lei/an, din care sănătatea e acum <strong>22,6%</strong>, nu 8%.</li>
+</ul>
+<p>Cu o singură rată de 4,5% pe tot, calculatorul naiv ar fi spus 120.000 × 1,045²⁰ ≈ 289.000 lei/an. Diferența de <strong>~54.000 lei/an</strong> e exact eroarea pe care o introduce ignorarea inflației diferențiate pe categorii — și la o rată de retragere de 3,5% înseamnă <strong>peste 1,5 milioane lei de capital lipsă</strong> pe care planul tău nu îl prevede.</p>
+
+<h2>Lifestyle creep în FIRE: deriva care nu se vede</h2>
+<p>Inflația medicală e impusă din afară. Lifestyle creep (consumption drift after FIRE) e generat de tine — și tocmai de aceea e mai insidios, pentru că nu apare în nicio statistică oficială. Mecanismul: ai timp nelimitat, capital aparent suficient și o creștere lentă, an de an, a standardului de viață pe care o normalizezi imediat. Vinul de masă devine vin bun. Economy devine business pe zboruri lungi. Renovezi „o dată" la 3 ani. Fiecare upgrade pare justificat individual; cumulativ, e o a doua inflație suprapusă peste cea reală.</p>
+<p>Datele din comunitatea FIRE arată un tipar clar: cheltuielile <strong>cresc</strong> în primii 3-5 ani post-FIRE, nu scad. Oamenii care credeau că vor cheltui mai puțin „că au timp să gătească" ajung să cheltuie mai mult pentru că au timp să trăiască. Riscul real: dacă lifestyle creep-ul adaugă doar 2% real pe an peste inflație, asta se compune la fel ca medical inflation și îți poate dubla bugetul „de bază" în 35 de ani — fără niciun eveniment, doar prin derivă.</p>
+
+<h3>Cum măsori și plafonezi consumption drift-ul</h3>
+<ul>
+<li><strong>Calculează rata ta de creștere reală</strong>: compară cheltuiala anuală deflatată cu IPC, an de an. Dacă bugetul tău real (ajustat la inflație) crește, ai lifestyle creep, indiferent de scuze.</li>
+<li><strong>Separă „one-off" de recurent</strong>: o vacanță scumpă o dată e ok. Aceeași vacanță devenită standard anual e creep — și se înmulțește cu 25-28 în capital necesar.</li>
+<li><strong>Setează un plafon de creștere reală</strong>: regula practică e ca bugetul real (peste inflație) să nu crească mai mult de 0,5-1% pe an. Tot ce depășește trebuie finanțat din randament excedentar, nu din capital de bază.</li>
+<li><strong>Folosește o regulă dinamică de cheltuială</strong> (de tip „guardrails"): leagă upgrade-urile de performanța portofoliului. Crești lifestyle-ul doar în anii buni, îl îngheți în anii slabi. Asta transformă creep-ul dintr-un risc într-o pârghie controlată.</li>
+</ul>
+
+<h2>Calibrarea buffer-ului de 10-15% pentru real</h2>
+<p>Acum punem totul împreună. Buffer-ul pentru surprize FIRE nu e o cifră rotundă aleasă din burtă — e suma a trei surse de eroare pe care modelul de bază le subestimează sistematic:</p>
+<ul>
+<li><strong>Eroarea de inflație diferențiată</strong> (sănătate + servicii peste IPC): ~3-5% din buget pe orizont lung.</li>
+<li><strong>Consumption drift involuntar</strong> (lifestyle creep rezidual, chiar controlat): ~2-4%.</li>
+<li><strong>Cheltuieli neplanificate FIRE genuine</strong> (șocuri rare: medical major, sprijin familie, reparație capitală): ~3-5% amortizat.</li>
+</ul>
+<p>Suma: <strong>8-14%</strong>, de unde regula de 10-15% buffer peste bugetul „curat". Concret: dacă auditul tău dă 120.000 lei/an, planifici și finanțezi <strong>132.000-138.000 lei/an</strong>. La o rată de retragere de 3,5%, acel buffer de 12-18.000 lei/an înseamnă <strong>340.000-510.000 lei de capital suplimentar</strong>. Sună enorm — dar e fix capitalul care face diferența între un plan care rezistă inflației medicale și unul care te trimite înapoi la muncă la 62 de ani.</p>
+
+<h3>Unde ții buffer-ul: nu ca un cont separat mort</h3>
+<p>Buffer-ul nu trebuie să stea în cash neproductiv (asta l-ar face un cost dublu prin inflație). Mai degrabă e o <strong>capacitate</strong> integrată în numărul tău FIRE: îl exprimi ca rată de retragere mai conservatoare. În loc de 4% pe bugetul curat, retragi 3,5% pe bugetul curat — diferența de 0,5% e exact buffer-ul tău încorporat, care lucrează în portofoliu până când chiar ai nevoie de el. Astfel buffer-ul rămâne investit, beneficiază de randament și e disponibil când inflația medicală îl reclamă.</p>
+
+<h2>Hedging-ul costului de trai în FIRE</h2>
+<p>Buffer-ul absoarbe erori; hedging-ul reduce expunerea la sursa lor. Câteva pârghii pentru un FIRE-ist român:</p>
+<ul>
+<li><strong>Hedge pentru inflația medicală</strong>: o asigurare privată de sănătate cu primă fixată contractual pe câțiva ani transferă o parte din riscul de inflație asiguratorului. Verifică clauzele de reînnoire — multe cresc prima cu vârsta, ceea ce anulează hedge-ul.</li>
+<li><strong>Active corelate cu inflația</strong>: acțiunile pe orizont lung sunt cel mai bun hedge real (companiile transferă inflația în prețuri); o componentă de imobiliare/REIT acoperă inflația de locuire; instrumentele legate de inflație (acolo unde sunt disponibile, ex. titluri de stat indexate) acoperă coșul general.</li>
+<li><strong>Hedge geografic</strong>: o parte din sănătatea ne-urgentă (stomatologie, intervenții programabile) o poți face în piețe cu cost mai mic, ceea ce te decuplează parțial de inflația medicală locală.</li>
+<li><strong>Hedge prin diversificare valutară</strong>: dacă o parte din cheltuieli (călătorii, sănătate transfrontalieră) sunt în EUR, ține o porțiune din capital în EUR ca să nu suprapui riscul valutar peste cel de inflație.</li>
+<li><strong>Hedge structural pe servicii</strong>: cele mai inflaționiste categorii sunt cele cu muncă intensivă. Pe cât poți, „internalizează" devreme abilitățile (mici reparații, gătit) ca să nu fii captiv al inflației serviciilor la 75 de ani — sau bugetează generos pentru externalizare, știind că ea crește peste IPC.</li>
+</ul>
+
+<h2>Capcane subtile pentru FIRE-istul avansat</h2>
+<ul>
+<li><strong>Money illusion la retrageri</strong>: indexezi retragerea cu IPC oficial, dar coșul tău real crește mai repede. Pe 20 de ani, pierzi putere de cumpărare lent, fără un eveniment vizibil.</li>
+<li><strong>Reponderarea ignorată</strong>: presupui ponderi de buget constante. În realitate sănătatea + serviciile cresc ca pondere, urcându-ți inflația agregată — modelează ponderi variabile, nu fixe.</li>
+<li><strong>Buffer mâncat de lifestyle creep</strong>: îți construiești un buffer de 12%, apoi îl consumi tăcut prin upgrade-uri de stil de viață, rămânând expus pe surprize reale. Buffer-ul trebuie protejat prin regula de creștere reală.</li>
+<li><strong>Sub-estimarea îngrijirii de lungă durată</strong>: e categoria cu cea mai mare inflație și cea mai mare incertitudine. Un buget separat, indexat cel mai agresiv, e obligatoriu.</li>
+<li><strong>Confuzia hedge ≠ buffer</strong>: hedge-ul reduce probabilitatea/amplitudinea șocului; buffer-ul plătește șocul rămas. Ai nevoie de ambele, nu unul în locul celuilalt.</li>
+</ul>
+
+<h2>Checklist: model de inflație pe categorii + buffer</h2>
+<ul>
+<li>☐ Mi-am spart bugetul pe categorii cu ponderi (w<sub>i</sub>) și rate proprii (r<sub>i</sub>)?</li>
+<li>☐ Am indexat sănătatea cu IPC × 2 (bază) sau × 3 (prudent), nu cu IPC plat?</li>
+<li>☐ Am modelat ponderea sănătății + serviciilor crescând cu vârsta (reponderare)?</li>
+<li>☐ Am calculat inflația mea agregată ca Σ(w<sub>i</sub> × r<sub>i</sub>), nu ca rată unică?</li>
+<li>☐ Am izolat și plafonat lifestyle creep-ul la max 0,5-1% creștere reală/an?</li>
+<li>☐ Am adăugat un buffer de 10-15% peste bugetul curat?</li>
+<li>☐ Am încorporat buffer-ul ca rată de retragere mai joasă (ex. 3,5% în loc de 4%), nu ca cash mort?</li>
+<li>☐ Am cel puțin un hedge real pentru inflație (acțiuni/imobiliare/indexate)?</li>
+<li>☐ Am un buget separat, agresiv indexat, pentru îngrijirea de lungă durată?</li>
+<li>☐ Folosesc o regulă dinamică (guardrails) care îngheață upgrade-urile în anii slabi?</li>
+</ul>
+
+<h2>Greșeli frecvente de evitat</h2>
+<ul>
+<li><strong>O singură rată de inflație pentru tot bugetul.</strong> E eroarea-mamă; tot restul derivă din ea.</li>
+<li><strong>Tratezi sănătatea ca pe orice linie.</strong> E categoria cu inflație 2-3x și consum crescând — merită propriul model.</li>
+<li><strong>Crezi că vei cheltui mai puțin la FIRE.</strong> Datele spun invers în primii ani — bugetează pentru creștere, nu scădere.</li>
+<li><strong>Pui buffer-ul în cash și îl lași să fie erodat de inflație.</strong> Buffer-ul trebuie să lucreze până e folosit.</li>
+<li><strong>Confunzi buffer-ul cu hedge-ul.</strong> Unul plătește șocul, celălalt îl reduce — ai nevoie de amândouă.</li>
+<li><strong>Ignori reponderarea pe vârstă.</strong> Inflația ta personală nu e constantă; accelerează pe măsură ce îmbătrânești.</li>
+</ul>
+
+<p>Concluzia: un plan FIRE care folosește o rată de inflație plată e un plan care arată bine pe hârtie și cedează în realitate, pentru că realitatea inflației nu e plată — e diferențiată pe categorii, accelerată de reponderarea pe vârstă și amplificată de propriul tău consumption drift. Modelează inflația pe categorii, indexează sănătatea de 2-3x mai agresiv, plafonează lifestyle creep-ul, rezervă-ți un buffer de 10-15% încorporat în rata de retragere și adaugă cel puțin un hedge real. Asta nu e pesimism — e exact felul în care un plan FIRE trece testul a 40 de ani fără să te trimită înapoi la muncă.</p>

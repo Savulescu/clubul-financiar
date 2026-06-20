@@ -1,0 +1,148 @@
+<p><strong>Diluarea acțiunilor prin warrant, opțiuni și impactul pe valoare</strong> este testul real al unui investitor avansat: nu te uiți doar la profitul companiei, ci la <em>câte felii</em> se vor împărți acel profit mâine. Peste cele două lecții anterioare — răscumpărarea de acțiuni (buyback), care <em>reduce</em> numărul de titluri, și split-ul, care doar <em>taie aceeași felie în bucăți</em> — diluarea face opusul buyback-ului: creează acțiuni noi, transferă valoare de la acționarii existenți către noii deținători de warrant-uri, opțiuni sau obligațiuni convertibile și mută EPS-ul în jos.</p>
+
+<p>Această lecție despre <strong>diluare acțiuni warrant opțiuni impact valoare</strong> calculează concret, pas cu pas, diferența dintre <strong>weighted average shares și diluted EPS</strong>, vom modela <strong>warrant exercise scenarios și pricing</strong>, vom evalua <strong>convertible dilution și in-the-money risk</strong>, vom măsura <strong>option pool și dilution din incentive</strong>, vom citi <strong>anti-dilution provisions și protecția</strong> lor, vom înțelege de ce <strong>overhang volatility și announcement impact</strong> lovesc prețul înainte de orice conversie efectivă și cum un <strong>share buyback offset dilution</strong> doar parțial. Presupun că știi deja ce e o acțiune, EPS-ul de bază, capitalizarea și diferența preț–valoare — nu le reluăm.</p>
+
+<p>Context România 2026: pe BVB diluarea apare cel mai des prin majorări de capital cu drepturi de preferință, emisiuni de warrant-uri legate de obligațiuni corporative și, mai rar, planuri de stock option pentru management. Lichiditatea subțire amplifică efectul de overhang, iar tratamentul fiscal al câștigului din vânzarea acțiunilor contează: prin broker rezident, câștigul net se impozitează cu <strong>3% pentru titlurile deținute peste un an</strong> și <strong>6% pentru cele sub un an</strong>, impozitul fiind reținut și virat de broker (la brokerii străini, câștigul se autodeclară prin Declarația Unică, cu cotă de 10%). Momentul exercitării și al vânzării influențează direct cota aplicată. Construim totul pe un caz BVB cu warrant issue.</p>
+
+<h2>Ce este de fapt diluarea — și de ce nu e doar „mai multe acțiuni”</h2>
+
+<p>Diluarea nu e un eveniment binar la momentul emiterii noilor acțiuni. E un proces în trei straturi pe care un investitor avansat le separă mental:</p>
+
+<ul>
+<li><strong>Diluare economică (pe valoare):</strong> aceeași companie, mai mulți proprietari. Felia ta din capitalul propriu și din profiturile viitoare scade proporțional. Asta contează doar dacă banii aduși de noile acțiuni <em>nu</em> generează un randament cel puțin egal cu cel al capitalului existent.</li>
+<li><strong>Diluare contabilă (pe EPS):</strong> profitul net se împarte la mai multe acțiuni. Diluted EPS scade chiar dacă valoarea intrinsecă rămâne neschimbată, pentru că numitorul crește.</li>
+<li><strong>Diluare de control (pe vot):</strong> procentul tău de vot scade. Relevant la praguri legale (5%, 33%, 50%, 66% pe Legea societăților și regulamentele ASF pentru emitenți).</li>
+</ul>
+
+<p>Capcana esențială: diluarea distruge valoare <strong>doar dacă</strong> acțiunile noi sunt emise sub valoarea intrinsecă pe acțiune sau dacă capitalul atras randează mai puțin decât costul lui. O majorare la preț corect, cu bani reinvestiți într-un proiect cu ROIC peste WACC, e <em>creatoare</em> de valoare în ciuda creșterii numărului de acțiuni. Nu numărul de acțiuni e dușmanul, ci <strong>prețul de emisiune raportat la valoarea reală</strong>.</p>
+
+<h2>Weighted average shares și diluted EPS — calculul corect</h2>
+
+<p>Prima greșeală de amator e să iei numărul de acțiuni de la sfârșitul anului. EPS-ul corect folosește <strong>media ponderată în timp</strong> a acțiunilor, pentru că o emisiune din luna a noua nu a „diluat” profitul din primele opt luni.</p>
+
+<h3>Weighted average shares — exemplu</h3>
+
+<p>O companie BVB intră în an cu 10.000.000 acțiuni. La 1 octombrie emite 2.000.000 acțiuni noi printr-o majorare de capital. Numărul de la final e 12.000.000, dar media ponderată e:</p>
+
+<ul>
+<li>10.000.000 × 9/12 (ian–sep) = 7.500.000</li>
+<li>12.000.000 × 3/12 (oct–dec) = 3.000.000</li>
+<li><strong>Weighted average = 10.500.000 acțiuni</strong></li>
+</ul>
+
+<p>Dacă profitul net e 21.000.000 lei, <strong>basic EPS = 21.000.000 / 10.500.000 = 2,00 lei/acțiune</strong>, nu 1,75 lei (cum ar ieși greșit cu 12 milioane). Diferența de 14% e exact tipul de eroare care strică un model de evaluare.</p>
+
+<h3>Diluted EPS — metoda treasury stock</h3>
+
+<p>Diluted EPS adaugă la numitor acțiunile <em>potențiale</em> din warrant-uri și opțiuni in-the-money, prin metoda <strong>treasury stock</strong>: presupui că toate sunt exercitate, banii încasați din exercitare răscumpără acțiuni la prețul mediu de piață, iar diferența netă diluează.</p>
+
+<p>Exemplu: 1.000.000 warrant-uri cu preț de exercitare 8 lei, prețul mediu de piață al acțiunii fiind 12 lei.</p>
+
+<ul>
+<li>Bani încasați din exercitare: 1.000.000 × 8 = 8.000.000 lei</li>
+<li>Acțiuni „răscumpărate” cu acești bani: 8.000.000 / 12 = 666.667</li>
+<li><strong>Acțiuni nete adăugate = 1.000.000 − 666.667 = 333.333</strong></li>
+</ul>
+
+<p>Numitorul diluat devine 10.500.000 + 333.333 = 10.833.333. <strong>Diluted EPS = 21.000.000 / 10.833.333 = 1,938 lei.</strong> Diluarea reală a EPS = (2,00 − 1,938) / 2,00 = <strong>3,1%</strong>, nu cei 9,1% pe care i-ar sugera împărțirea naivă a 1 milion de warrant-uri la totalul de acțiuni. Cu cât warrant-ul e mai puțin in-the-money (preț de exercitare aproape de piață), cu atât diluarea netă e mai mică. Aici se ascunde marea diferență dintre <em>diluarea pe hârtie</em> și <em>diluarea efectivă</em>.</p>
+
+<h2>Warrant exercise scenarios și pricing</h2>
+
+<p>Un warrant nu diluează la fel în toate scenariile de preț. Modelează trei stări și ponderează-le, nu lua cazul cel mai rău drept singurul.</p>
+
+<ul>
+<li><strong>Out-of-the-money (preț piață &lt; preț exercitare):</strong> warrant-ul nu se exercită, diluare zero. Dar overhang-ul rămâne — piața știe că <em>poate</em> deveni ITM.</li>
+<li><strong>At-the-money:</strong> diluare netă minimă prin treasury stock; banii încasați aproape acoperă acțiunile noi.</li>
+<li><strong>Deep in-the-money:</strong> diluare netă maximă; cu cât gap-ul preț–exercitare e mai mare, cu atât mai puține acțiuni „răscumpără” banii încasați.</li>
+</ul>
+
+<p>Capcană subtilă de pricing: valoarea unui warrant nu e doar valoarea intrinsecă (preț − exercitare), ci include o <strong>primă de timp</strong> calculabilă Black-Scholes. Un warrant la 5 ani cu volatilitate ridicată poate valora 3–4 lei chiar fiind at-the-money. Pentru tine ca acționar existent, această primă de timp e exact valoarea pe care o pierzi — e transferul de la tine la deținătorul de warrant. Evaluează un emitent cu warrant-uri pe termen lung și volatilitate mare cu o rezervă proporțional mai mare.</p>
+
+<h2>Convertible dilution și in-the-money risk</h2>
+
+<p>Obligațiunile convertibile, frecvente pe BVB la emitenții care vor cupon mai mic în schimbul opționalității, ascund o diluare condiționată. Mecanica: deținătorul renunță la rambursarea în cash dacă acțiunea trece de prețul de conversie.</p>
+
+<p>Exemplu: emisiune de 20.000.000 lei obligațiuni convertibile, preț de conversie 10 lei/acțiune. Dacă se convertesc toate: 20.000.000 / 10 = 2.000.000 acțiuni noi. Pentru diluted EPS folosești metoda <strong>if-converted</strong>: adaugi acțiunile la numitor ȘI adaugi înapoi la profit dobânda economisită (netă de impozit), pentru că dacă s-au convertit, compania nu mai plătește cupon.</p>
+
+<ul>
+<li>Dobândă anuală economisită: 20.000.000 × 6% = 1.200.000 lei</li>
+<li>Net de impozit (16% impozit pe profit): 1.200.000 × 0,84 = 1.008.000 lei</li>
+<li>Diluted EPS if-converted = (21.000.000 + 1.008.000) / (10.500.000 + 2.000.000) = 22.008.000 / 12.500.000 = <strong>1,761 lei</strong></li>
+</ul>
+
+<p><strong>In-the-money risk-ul</strong> e asimetric: dacă acțiunea e sub prețul de conversie, deținătorii cer cash și diluarea nu apare, dar compania trebuie să găsească 20 de milioane lichiditate. Dacă acțiunea e mult peste, diluarea e maximă fix când compania merge bine. Modelează ambele capete și verifică <strong>prețul de conversie raportat la prețul curent</strong> — sub 80% din prețul de conversie, tratează convertibila ca datorie pură; peste 120%, ca acțiuni cvasi-emise deja.</p>
+
+<h2>Option pool și dilution din incentive</h2>
+
+<p>Planurile de stock option pentru management (rare la BVB, dar tot mai prezente la companiile tech listate) creează o diluare programată în timp, prin vesting. Aici greșeala e să te uiți doar la opțiunile deja vestate.</p>
+
+<p>Investitorul avansat citește din raportul anual: dimensiunea totală a <strong>option pool-ului aprobat</strong> (ex. 10% din capital), câte sunt acordate, câte vestate, prețul mediu de exercitare. Un pool de 10% aprobat dar doar 3% acordat înseamnă încă 7% diluare latentă, plus reîncărcări viitoare (refresh-uri) pe care AGA le aprobă recurent. Un semnal de alarmă: companii care <em>refresh-uiesc</em> pool-ul anual cu 2–3% — diluarea devine o taxă permanentă pe acționar, nu un eveniment unic.</p>
+
+<h2>Anti-dilution provisions și protecția</h2>
+
+<p>Clauzele anti-diluare protejează anumiți deținători (de obicei investitori privați sau deținători de convertibile/preferențiale) când compania emite acțiuni noi sub un preț de referință. Două tipuri pe care trebuie să le recunoști:</p>
+
+<ul>
+<li><strong>Full ratchet:</strong> prețul de conversie al protejatului se ajustează la cel mai mic preț al noii emisiuni, indiferent de volum. Brutal pentru acționarii obișnuiți — o emisiune mică la preț scăzut rescrie tot.</li>
+<li><strong>Weighted average (broad/narrow-based):</strong> ajustarea ponderată cu volumul noii emisiuni. Mult mai blândă; standardul de piață.</li>
+</ul>
+
+<p>De ce contează pentru tine, acționar minoritar fără protecție: <strong>tu absorbi toată diluarea de care alții sunt scutiți</strong>. Dacă o companie are clase de acțiuni cu full ratchet, citește scenariul unei runde „down” — diluarea ta poate fi de 2–3× cea aparentă, pentru că recalibrarea protejaților se face pe spinarea ta. Pe BVB, verifică în actul constitutiv și prospectele de emisiune dacă există clase preferențiale cu astfel de clauze.</p>
+
+<h2>Overhang volatility și announcement impact</h2>
+
+<p>Prețul nu așteaptă conversia. Un <strong>overhang</strong> de warrant-uri și convertibile in-the-money acționează ca o rezistență permanentă: piața știe că la fiecare creștere apar acțiuni noi de vânzare. Empiric, anunțul unei majorări de capital sau al unei emisiuni de warrant-uri produce un drop imediat de 3–8% pe BVB, înainte de orice diluare contabilă efectivă, pentru că:</p>
+
+<ul>
+<li>Semnalul: managementul vinde acțiuni când le crede supraevaluate (selecție adversă).</li>
+<li>Arbitrajul: deținătorii de convertibile shortează acțiunea ca hedge (delta hedging), apăsând prețul.</li>
+<li>Reașezarea EPS: estimările analiștilor scad numitorul imediat.</li>
+</ul>
+
+<p>Pentru un investitor avansat, anunțul e momentul de decizie, nu conversia. Volatilitatea crește în jurul datelor de exercitare și al ferestrelor de conversie — un pattern exploatabil dacă urmărești calendarul din prospect.</p>
+
+<h2>Share buyback offset dilution — cât compensează de fapt</h2>
+
+<p>Conducerile prezintă buyback-ul ca „neutralizare” a diluării din option pool. Verifică cifra, nu narativul. Un buyback offset-uiește diluarea <strong>doar</strong> dacă acțiunile răscumpărate ≥ acțiunile nou emise ȘI dacă răscumpărarea se face sub valoarea intrinsecă.</p>
+
+<p>Capcană clasică: compania emite opțiuni la 8 lei (cost pentru management) și răscumpără la 14 lei de pe piață ca să „neutralizeze”. Numărul de acțiuni rămâne plat, dar <strong>s-a transferat cash de la acționari (14 lei) către management (diferența 6 lei × volum)</strong>. Net-share-count neutru ascunde o scurgere reală de valoare. Calculează întotdeauna: (preț răscumpărare − preț exercitare) × număr acțiuni = transferul real, indiferent de net-count.</p>
+
+<h2>Caz integrat: companie BVB cu warrant issue — impact pas cu pas</h2>
+
+<p>Companie ipotetică „TechRo SA”, listată BVB: 10.500.000 acțiuni (weighted average), profit net 21.000.000 lei, preț piață 12 lei, capitalizare ~126 mil. lei. Emite 1.000.000 warrant-uri (exercitare 8 lei, scadență 5 ani) atașate unei emisiuni de obligațiuni de 8 mil. lei.</p>
+
+<ul>
+<li><strong>Pas 1 — EPS pre:</strong> 21.000.000 / 10.500.000 = 2,00 lei. P/E = 6.</li>
+<li><strong>Pas 2 — diluted EPS (treasury stock, calcul anterior):</strong> 1,938 lei → diluare EPS 3,1%.</li>
+<li><strong>Pas 3 — impact teoretic pe preț:</strong> la P/E constant 6, prețul „corect” diluat = 6 × 1,938 = 11,63 lei, adică −3,1% pe valoarea fundamentală.</li>
+<li><strong>Pas 4 — announcement impact real:</strong> piața reacționează la semnal + overhang, drop observat 6% (12 → 11,28 lei), peste diluarea pură. Diferența de −2,9 puncte e prima de incertitudine/overhang.</li>
+<li><strong>Pas 5 — banii atrași:</strong> 8 mil. lei (obligațiuni) reinvestiți. Dacă randează 15% (ROIC) peste WACC de ~10%, valoarea adăugată în 2–3 ani depășește diluarea de 3,1% — net pozitiv. Dacă randează sub 10%, diluarea e definitivă.</li>
+</ul>
+
+<p>Concluzia cazului: warrant-ul a transferat ~333.333 acțiuni-echivalent (valoarea primei de timp Black-Scholes, ~3 lei × 1 mil. = ~3 mil. lei de la acționari la deținătorii de obligațiuni, drept compensație pentru cuponul redus). Întrebarea finală nu e „cu cât scade EPS”, ci „randează cei 8 milioane peste costul real al diluării de ~3 milioane?”.</p>
+
+<h2>Pași de acțiune și checklist</h2>
+
+<ul>
+<li><strong>1. Calculează fully diluted share count</strong>, nu basic: adună acțiuni de bază + warrant-uri ITM (net treasury stock) + convertibile if-converted + opțiuni vestate și nevestate din pool.</li>
+<li><strong>2. Recalculează EPS și P/E pe baza diluată.</strong> Orice evaluare pe basic EPS e optimistă artificial.</li>
+<li><strong>3. Pentru fiecare instrument, stabilește moneyness:</strong> preț piață vs. preț exercitare/conversie. Sub 80% = ignoră diluarea; peste 100% = include-o integral.</li>
+<li><strong>4. Cuantifică prima de timp</strong> a warrant-urilor pe termen lung (Black-Scholes) — e valoarea reală transferată, nu doar intrinsecul.</li>
+<li><strong>5. Citește clauzele anti-diluare</strong> din act constitutiv/prospect. Full ratchet = multiplicator de risc pe tine.</li>
+<li><strong>6. Verifică option pool-ul aprobat vs. acordat</strong> și istoricul de refresh-uri. Diluare latentă + recurentă.</li>
+<li><strong>7. Testează ROIC vs. WACC pe banii atrași.</strong> Diluare + capital bine reinvestit = creator de valoare; diluare + capital prost reinvestit = distrugere permanentă.</li>
+<li><strong>8. Demontează narativul de buyback:</strong> calculează transferul (preț răscumpărare − preț emisiune) × volum, nu doar net-share-count.</li>
+<li><strong>9. Cronometrează cu calendarul de exercitare/conversie</strong> din prospect — overhang-ul și volatilitatea sunt previzibile.</li>
+<li><strong>10. Fiscal:</strong> planifică momentul vânzării raportat la pragul de deținere — prin broker rezident, câștigul se impozitează cu 3% peste un an față de 6% sub un an (reținut la sursă); prin broker străin, 10% autodeclarat în Declarația Unică. Diferența dintre 3% și 6% poate fi semnificativă pe poziții mari.</li>
+</ul>
+
+<h3>Greșeli frecvente</h3>
+
+<ul>
+<li>Folosirea basic EPS în evaluare când există overhang semnificativ de warrant-uri/convertibile.</li>
+<li>Tratarea diluării ca distrugere automată de valoare, ignorând randamentul capitalului atras.</li>
+<li>Numărarea integrală a warrant-urilor out-of-the-money (diluare zero până devin ITM).</li>
+<li>Încrederea în „buyback neutralizează diluarea” fără calculul transferului real de cash.</li>
+<li>Ignorarea clauzelor anti-diluare ale altor clase, care îți amplifică diluarea într-o rundă down.</li>
+<li>Confundarea diluării contabile (EPS) cu cea economică (valoare) — sunt variabile diferite cu cauze diferite.</li>
+</ul>

@@ -1,0 +1,171 @@
+<p><strong>Arbitrajul de obligații pe yield curve cu spread compression</strong> este saltul de la a citi curba randamentelor la a o tranzacționa: nu mai cumperi un titlu și aștepți cuponul, ci pariezi pe <em>forma</em> curbei și pe îngustarea spread-urilor. Pe baza celor două lecții anterioare — citirea curbei și scara de obligațiuni — această lecție îți dă trei trade-uri concrete pe curba titlurilor de stat românești, cu reguli de intrare, timing bazat pe semnale BNR reale și exit-uri clare, plus matematica de breakeven care decide dacă poziția merită.</p>
+
+<p>Vom acoperi exact mecanica avansată: <strong>butterfly trade pe obligații și pick-up</strong> de randament, decizia <strong>steepener versus flattener</strong>, <strong>credit spread arbitrage și default risk</strong> pe diferența corporativ–suveran, <strong>breakeven analysis în obligații arbitrage</strong>, costul de finanțare prin <strong>repo</strong> al pozițiilor, rolul <strong>convexity și price appreciation</strong> și, peste tot, <strong>impactul BNR asupra formei curbei</strong>. Presupun că știi deja ce e duration, cuponul, randamentul la maturitate și prețul invers proporțional cu randamentul — nu le reluăm.</p>
+
+<p>Context România 2026: piața noastră de titluri de stat e mai puțin lichidă decât bund-urile sau Treasuries, repo-ul retail e practic inexistent, iar cotele fiscale și pragurile se schimbă. De aceea fiecare trade de mai jos e adaptat la ce poate face realist un investitor avansat român — prin titluri listate la BVB, Fidelis, fonduri de obligațiuni și, unde e cazul, instrumente externe — nu o copie a unui desk de pe Wall Street.</p>
+
+<h2>De ce un arbitraj „pur” pe curba românească e relativ, nu absolut</h2>
+
+<p>În jargon, „arbitraj” înseamnă profit fără risc dintr-o dezaliniere de preț. În practica obligațiunilor, ce numim arbitraj e aproape întotdeauna un <strong>relative-value trade</strong>: pariezi că două puncte de pe curbă, sau două spread-uri, vor reveni la o relație „normală”. Riscul de piață al fiecărui picior există; tu îl neutralizezi parțial prin construcția poziției, nu îl elimini.</p>
+
+<p>Diferența-cheie față de a cumpăra un singur titlu: într-un trade de curbă ai <strong>cel puțin două picioare</strong> — unul long (cumperi), unul short (vinzi/eviți). Câștigul vine din <em>diferența</em> dintre ele, nu din direcția generală a ratelor. Dacă BNR taie 50 de puncte de bază (bps) și toată curba scade paralel, un steepener bine construit poate rămâne aproape neutru pe nivel și să câștige doar din schimbarea de pantă. Asta e esența: izolezi o variabilă (panta, curbura, spread-ul de credit) și o tranzacționezi separat.</p>
+
+<p>Pentru investitorul român, cele trei limitări structurale pe care trebuie să le internalizezi înainte de orice trade:</p>
+
+<ul>
+<li><strong>Short-ul e greu.</strong> Nu poți vinde în lipsă titluri de stat românești ca un fond. Înlocuiești piciorul short cu: subponderare, instrumente cu duration negativă (rare), ETF-uri externe inverse pe obligațiuni, sau pur și simplu nu deții acel segment.</li>
+<li><strong>Repo retail aproape inexistent.</strong> Finanțarea poziției long prin repo (împrumuți cash punând titlul gaj) e domeniul instituțiilor. Pentru tine, „costul de finanțare” devine costul de oportunitate al capitalului propriu sau dobânda marginului la broker.</li>
+<li><strong>Lichiditate subțire.</strong> Spread-urile bid-ask pe titlurile listate la BVB pot fi de 50–150 bps de preț, ceea ce mănâncă un pick-up de randament fin. Trade-urile de curbă au sens doar pe sume care nu te fac market-maker involuntar.</li>
+</ul>
+
+<h2>Fundația matematică: pick-up, breakeven și convexity</h2>
+
+<h3>Pick-up de randament și breakeven analysis</h3>
+
+<p>Orice trade de curbă pleacă de la un <strong>pick-up</strong>: cu cât te plătește în plus poziția, exprimat în bps de randament pe an. Dar pick-up-ul brut nu spune nimic singur. Întrebarea reală e <strong>breakeven</strong>: cât trebuie să se miște randamentul împotriva ta înainte să pierzi pick-up-ul acumulat?</p>
+
+<p>Formula de lucru pe care o folosești mental:</p>
+
+<ul>
+<li><strong>Breakeven în bps de randament ≈ Pick-up (bps/an) × Orizont (ani) ÷ Duration netă a poziției.</strong></li>
+</ul>
+
+<p>Exemplu concret. Cumperi un titlu de stat la 7 ani cu randament 7,40% și „shortezi” (subponderezi) zona de 2 ani la 6,90%. Pick-up brut = 50 bps/an. Dacă duration netă a structurii e ~3,5 ani și orizontul tău e 1 an, breakeven-ul pe randamentul relativ = 50 × 1 ÷ 3,5 ≈ <strong>14 bps</strong>. Adică: panta 7y–2y se poate aplatiza cu până la 14 bps într-un an înainte ca trade-ul să intre pe minus. Peste 14 bps de aplatizare adversă, pierderea de preț depășește carry-ul. Ăsta e numărul pe care îl scrii pe poziție, nu randamentul brut.</p>
+
+<h3>Convexity — prietenul tăcut al piciorului lung</h3>
+
+<p>La scadențe lungi, relația preț–randament e curbată: când randamentul scade, prețul crește mai mult decât pierde când randamentul urcă la fel de mult. Asta e <strong>convexity</strong>, și e gratuită dacă o ai de partea ta. Într-un trade unde long-ul tău e pe 10 ani și short-ul pe 2 ani, ai convexity netă pozitivă: la mișcări mari de rate, structura câștigă un extra de <strong>price appreciation</strong> peste ce ar prezice duration singură.</p>
+
+<p>Regula practică: convexity contează doar la mișcări mari (peste ~75–100 bps). Pentru oscilații mici, ignoră-o. Dar într-un scenariu de tăieri agresive BNR (vezi mai jos), convexity-ul piciorului lung poate adăuga 0,5–1,5% de randament suplimentar pe care breakeven-ul liniar nu îl vede — un margin de siguranță real.</p>
+
+<h2>Trade 1 — Steepener pe ciclul de relaxare BNR (2s10s)</h2>
+
+<p>Acesta e trade-ul macro al deceniului pentru curba românească și cel mai accesibil retail.</p>
+
+<h3>Teza</h3>
+
+<p>Când BNR intră în ciclu de <strong>tăieri de dobândă</strong>, capătul scurt al curbei (controlat direct de rata-cheie) scade rapid, în timp ce capătul lung scade mai lent sau chiar urcă, fiindcă piața anticipează inflație/deficit pe termen lung. Rezultatul: curba se <strong>înclină</strong> (steepens), spread-ul 2s10s crește. Tu vrei să fii poziționat <strong>long capătul scurt, subponderat capătul lung</strong> — câștigi din scăderea rapidă a randamentelor scurte (preț în sus pe segmentul scurt) și eviți pierderea pe segmentul lung.</p>
+
+<h3>Semnalul de intrare (timing real)</h3>
+
+<ul>
+<li><strong>Trigger primar:</strong> prima ședință de politică monetară BNR în care comunicatul trece de la limbaj „prudent/restrictiv” la „dependent de date / spațiu de relaxare”. Citește exact minutele și comunicatul, nu titlurile din presă.</li>
+<li><strong>Confirmare:</strong> inflația anuală (IPC) coboară sub dobânda-cheie BNR și menține trend descendent 2 luni consecutiv — condiția clasică pentru tăieri.</li>
+<li><strong>Filtru de curbă:</strong> intri doar dacă spread-ul 2s10s e <em>plat sau ușor invers</em> (sub +30 bps). Dacă e deja abrupt (+150 bps), trade-ul e matur, nu îl deschizi.</li>
+</ul>
+
+<h3>Construcția pentru retail român</h3>
+
+<ul>
+<li><strong>Piciorul long (scurt pe curbă):</strong> Tezaur/Fidelis pe 1–3 ani sau fond de obligațiuni cu duration mică (3–4). Beneficiezi de scăderea randamentelor scurte și încasezi cuponul.</li>
+<li><strong>Piciorul „short” (lung pe curbă):</strong> nu cumperi titluri pe 10 ani; le eviți activ sau, dacă ai deja, reduci. Cine vrea expunere reală inversă folosește un ETF extern pe obligațiuni guvernamentale lungi în varianta short — dar atenție, e expunere pe altă curbă (euro/dolar), nu pe BNR.</li>
+</ul>
+
+<h3>Exit rules</h3>
+
+<ul>
+<li><strong>Take-profit:</strong> când 2s10s ajunge la +120…+150 bps (panta „normală” istorică) — ciclul de steepening e consumat.</li>
+<li><strong>Stop teză:</strong> dacă BNR semnalează pauză sau reluarea majorărilor (șoc inflaționist, presiune pe leu), teza moare — ieși indiferent de P&L.</li>
+<li><strong>Stop timp:</strong> dacă în 6 luni panta nu s-a mișcat cu cel puțin breakeven-ul calculat, capitalul stă degeaba — realocă.</li>
+</ul>
+
+<h2>Trade 2 — Butterfly: pick-up din curbura curbei (2s-5s-10s)</h2>
+
+<p>Butterfly e trade-ul de finețe: nu pariezi pe nivel, nici doar pe pantă, ci pe <strong>curbură</strong> — dacă punctul de mijloc al curbei e „prea scump” sau „prea ieftin” față de capete.</p>
+
+<h3>Mecanica</h3>
+
+<p>Un butterfly clasic are trei picioare: <strong>long aripile (2y și 10y), short corpul (5y)</strong> — sau invers. Construit duration-neutral: ponderezi aripile astfel încât duration totală long ≈ duration short pe corp. Atunci ești imun la mișcări paralele și la schimbări simple de pantă; câștigi doar dacă <em>curbura</em> revine la medie.</p>
+
+<p>Indicatorul pe care îl urmărești e spread-ul butterfly:</p>
+
+<ul>
+<li><strong>Butterfly spread = (2 × randament 5y) − randament 2y − randament 10y.</strong></li>
+</ul>
+
+<p>Exemplu numeric. Randamente: 2y = 6,90%, 5y = 7,55%, 10y = 7,30%. Butterfly = (2 × 7,55) − 6,90 − 7,30 = 15,10 − 14,20 = <strong>+0,90% = 90 bps</strong>. Un butterfly de +90 bps spune că zona de 5 ani e <em>ieftină</em> (randament prea mare) față de capete — corpul e sub-evaluat. Trade: <strong>long 5y, short aripile</strong>, mizând pe revenirea butterfly-ului spre media istorică (să zicem +40 bps). Câștigul tău = compresia de ~50 bps a curburii, plus orice pick-up de carry dacă corpul randează mai mult ponderat.</p>
+
+<h3>Pick-up și capcana</h3>
+
+<p>Atracția butterfly-ului e <strong>carry-ul pozitiv</strong>: long pe corpul cu randament mare, short pe aripi cu randament mai mic, pe o structură aproape neutră la rate. Încasezi pick-up cât aștepți reversiunea. Capcana subtilă: butterfly-ul poate rămâne „dislocat” mult timp dacă există un motiv structural (BNR emite masiv pe 5 ani, lichiditate slabă pe corp). Verifică <strong>de ce</strong> e dislocat înainte să presupui că revine.</p>
+
+<h3>Pentru retail</h3>
+
+<p>Butterfly-ul pur e greu fără short real. Versiunea realizabilă: <strong>supraponderezi puternic scadența ieftină (corpul) și subponderezi capetele</strong> în portofoliul tău de titluri/fonduri. Nu e duration-neutral perfect, dar captezi direcția curburii. Exit: când butterfly spread revine în zona mediei sau când motivul dislocării dispare (calendar de emisiuni MFP, ședință BNR).</p>
+
+<h2>Trade 3 — Credit spread arbitrage: compresia corporativ–suveran</h2>
+
+<p>Aici intervine <strong>credit spread arbitrage și default risk</strong>. Spread-ul de credit = randamentul unei obligațiuni corporative minus randamentul titlului de stat de aceeași scadență. E prima pe care o ceri pentru riscul de default al emitentului.</p>
+
+<h3>Teza de spread compression</h3>
+
+<p>În perioade de stres (recesiune temută, criză de lichiditate), spread-urile de credit se <strong>lărgesc</strong> — corporativele cad mai mult decât suveranele. Când stresul trece și apetitul de risc revine, spread-urile se <strong>comprimă</strong>: corporativele recuperează față de suverane. Trade-ul de compresie: <strong>cumperi corporativ când spread-ul e larg, mizând pe revenire</strong>, finanțat conceptual prin evitarea/reducerea suveranului echivalent.</p>
+
+<p>Exemplu BVB. O obligațiune corporativă listată (emitent solid, bancă sau utility) randează 8,80% pe 5 ani; titlul de stat la 5 ani randează 7,55%. Spread = <strong>125 bps</strong>. Dacă media istorică a acelui emitent față de suveran e 70–80 bps, ai ~45–55 bps de compresie potențială. Pe duration ~4, asta înseamnă ~1,8–2,2% câștig de preț dacă spread-ul revine, peste pick-up-ul de 125 bps/an cât deții.</p>
+
+<h3>Default risk — linia roșie</h3>
+
+<p>Diferența dintre arbitraj de spread și prinderea unui cuțit care cade e <strong>analiza de default</strong>. Spread-ul larg poate fi corect: piața știe ceva. Înainte de orice trade de compresie verifici:</p>
+
+<ul>
+<li><strong>Acoperirea dobânzii</strong> (EBIT/cheltuieli cu dobânda) a emitentului — sub 2x e zonă de alarmă.</li>
+<li><strong>Scadențele apropiate</strong> de refinanțat — un wall of maturity în 12 luni pe o piață scumpă = risc real.</li>
+<li><strong>Rating / evoluția lui</strong> și dacă spread-ul s-a lărgit din contagiune sectorială (oportunitate) sau din probleme idiosincratice (capcană).</li>
+</ul>
+
+<p>Regula: tranzacționezi compresie doar pe emitenți pe care i-ai cumpăra <em>oricum</em> la maturitate. Dacă nu ești confortabil să-l ții până la scadență în caz că spread-ul nu revine, nu e arbitraj, e speculație pe default.</p>
+
+<h2>Costul de finanțare: repo și carry net real</h2>
+
+<p>Un trade arată profitabil pe pick-up brut și pierde pe carry net dacă ignori finanțarea. La instituții, piciorul long se finanțează prin <strong>repo</strong>: dai titlul gaj, primești cash la o rată repo, cu care cumperi. Carry-ul net = randamentul titlului − rata repo. Dacă repo-ul e mai scump decât randamentul (curba inversă, criză de finanțare), carry-ul e negativ chiar dacă trade-ul direcțional are sens.</p>
+
+<p>Pentru retailul român, „repo” se traduce în:</p>
+
+<ul>
+<li><strong>Cost de oportunitate:</strong> dacă banii din long ar fi stat într-un depozit la 6,5%, ăla e costul tău de finanțare implicit. Pick-up-ul real al trade-ului = randamentul poziției − 6,5%.</li>
+<li><strong>Dobânda de margin</strong> dacă folosești efect de levier la broker — adesea 7–10%+, ceea ce poate anula complet un pick-up de curbă de 50 bps. Levierul pe trade-uri de curbă fine la retail e, de regulă, o capcană.</li>
+<li><strong>Comisioane și bid-ask:</strong> 50–150 bps round-trip pe BVB pe titluri puțin lichide. Un trade cu breakeven de 14 bps și cost de tranzacție de 80 bps e mort la naștere.</li>
+</ul>
+
+<p>Concluzia operațională: înainte de orice trade, scazi din pick-up-ul brut (a) finanțarea/oportunitatea, (b) bid-ask round-trip amortizat pe orizont, (c) impozitul pe câștig. Ce rămâne e edge-ul real.</p>
+
+<h2>Fiscalitate România 2026 — verifică pragurile curente</h2>
+
+<p>Câștigul din vânzarea obligațiunilor și cupoanele intră, în general, în impozitul pe venituri din investiții, cu reținere prin intermediar pentru instrumentele tranzacționate printr-un broker rezident, plus posibile contribuții sociale peste anumite plafoane de venit. <strong>Cotele și pragurile (inclusiv plafonul CASS) se modifică frecvent — verifică valorile exacte valabile la data trade-ului</strong> pe site-ul ANAF și cu brokerul, nu te baza pe o cifră memorată. Titlurile de stat pentru populație (Tezaur, Fidelis) au tratament fiscal propriu, adesea mai favorabil pe cupon — confirmă regimul curent înainte să compari randamente nete între un Fidelis și o corporativă BVB. Un trade de compresie care arată +50 bps brut poate fi sub un Tezaur scutit, odată ce aplici impozitul corect pe corporativă.</p>
+
+<h2>Cum decid BNR-ul forma curbei — citește regimul corect</h2>
+
+<p>Toate cele trei trade-uri depind de <strong>impactul BNR asupra formei curbei</strong>. Sintetizat:</p>
+
+<ul>
+<li><strong>BNR în majorare → bear flattener:</strong> capătul scurt urcă mai repede, curba se aplatizează. Favorizează: NU steepener; pregătește butterfly și aștepți inversiunea pentru viitorul steepener.</li>
+<li><strong>BNR în pauză înaltă, inflație coboară → curba se poate inversa:</strong> semnal de recesiune anticipată. Punct de intrare pentru <em>pregătirea</em> steepener-ului.</li>
+<li><strong>BNR taie → bull steepener:</strong> capătul scurt cade, curba se înclină. Trade 1 e activ.</li>
+<li><strong>Presiune pe leu / risc fiscal (deficit, downgrade) → bear steepener:</strong> capătul lung urcă din primă de risc, deși BNR n-a mișcat. Aici credit spread-urile se lărgesc — pregătești Trade 3 de compresie pentru când stresul trece.</li>
+</ul>
+
+<h2>Checklist de execuție pentru fiecare trade</h2>
+
+<ul>
+<li><strong>1. Identifică regimul BNR</strong> din ultimul comunicat și minute — majorare / pauză / tăiere / risc fiscal.</li>
+<li><strong>2. Măsoară spread-ul relevant</strong> azi: 2s10s pentru steepener, butterfly spread pentru curbură, corporativ–suveran pentru credit.</li>
+<li><strong>3. Compară cu media istorică</strong> a acelui spread — intri doar dacă e dislocat semnificativ (>1 abatere).</li>
+<li><strong>4. Calculează breakeven</strong> = pick-up × orizont ÷ duration netă. Scrie numărul pe poziție.</li>
+<li><strong>5. Scazi costurile reale</strong>: finanțare/oportunitate, bid-ask round-trip, impozit. Edge net pozitiv sau nu intri.</li>
+<li><strong>6. Verifică default risk</strong> (doar Trade 3): acoperire dobândă, wall of maturity, sursa lărgirii spread-ului.</li>
+<li><strong>7. Definește exit-urile ÎNAINTE</strong>: take-profit (spread la medie), stop-teză (BNR schimbă direcția), stop-timp (6 luni fără mișcare).</li>
+<li><strong>8. Dimensionează pentru lichiditate</strong>: nu deveni tu market-ul pe titlul respectiv la BVB.</li>
+</ul>
+
+<h2>Greșeli frecvente care distrug edge-ul</h2>
+
+<ul>
+<li><strong>Confunzi pick-up brut cu profit.</strong> 50 bps brut − 30 bps costuri − impozit = aproape zero. Calculează net, mereu.</li>
+<li><strong>Ignori convexity la mișcări mari</strong> și ratezi take-profit-ul: structura ta câștiga mai mult decât arăta duration liniară.</li>
+<li><strong>Tratezi spread-ul larg de credit ca pe un cadou.</strong> De cele mai multe ori piața are dreptate — verifică default-ul întâi.</li>
+<li><strong>Folosești levier pe un trade de curbă fin.</strong> Dobânda de margin de 8–10% anulează un pick-up de zeci de bps.</li>
+<li><strong>Nu definești stop-teza.</strong> Un steepener ținut după ce BNR a reluat majorările se transformă din arbitraj în pierdere lentă.</li>
+<li><strong>Tranzacționezi în titluri ilichide</strong> unde bid-ask-ul de 100+ bps îți mănâncă tot breakeven-ul la intrare și la ieșire.</li>
+</ul>
+
+<p>Esența nivelului avansat: pe curba românească nu faci arbitraj pur, faci relative-value disciplinat. Câștigul nu vine din a ghici unde merg ratele, ci din a izola panta, curbura sau spread-ul de credit, a calcula breakeven-ul net după finanțare și fiscalitate, și a respecta exit-urile legate de semnale BNR reale — nu de emoție.</p>

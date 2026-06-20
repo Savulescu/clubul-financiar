@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scoring avansat: algoritmul real al băncii și capacitatea de plată la IRCC — Clubul Financiar</title><meta name="description" content="Cum funcționează scoringul intern al băncii: ponderile reale, formula capacity to pay cu IRCC stresat, soft vs hard inquiries și cum renegociezi după o respingere."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/scoring-avansat-capacitate-plata-algoritm-banca-aprobare.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Scoring avansat: algoritmul real al băncii și capacitatea de plată la IRCC"><meta property="og:description" content="Cum funcționează scoringul intern al băncii: ponderile reale, formula capacity to pay cu IRCC stresat, soft vs hard inquiries și cum renegociezi după o respingere."><meta property="og:url" content="https://clubulfinanciar.ro/articole/scoring-avansat-capacitate-plata-algoritm-banca-aprobare.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Scoring avansat: algoritmul real al băncii și capacitatea de plată la IRCC"><meta name="twitter:description" content="Cum funcționează scoringul intern al băncii: ponderile reale, formula capacity to pay cu IRCC stresat, soft vs hard inquiries și cum renegociezi după o respingere."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Scoring avansat: algoritmul real al băncii și capacitatea de plată la IRCC", "description": "Cum funcționează scoringul intern al băncii: ponderile reale, formula capacity to pay cu IRCC stresat, soft vs hard inquiries și cum renegociezi după o respingere.", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/scoring-avansat-capacitate-plata-algoritm-banca-aprobare.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#credite">🏦 Credite</a> · 12 min citire · Actualizat 19 iun. 2026</p><h1>Scoring avansat: algoritmul real al băncii și capacitatea de plată la IRCC</h1><p>Acest ghid de <strong>scoring credit, algoritm banca, capacitate plata IRCC România</strong> îți arată ce se ascunde, de fapt, în spatele unei respingeri și cum decodezi propriul scor ca să știi exact ce să schimbi înainte de a reaplica. Ai învățat deja bazele — gradul de îndatorare de 40%, testul de venit rezidual, rolul Biroului de Credit. Aici trecem la mecanica fină: ce metrici folosește banca de fapt (raport datorii/venit recalculat la șoc de dobândă, vechime și experiență de muncă, comportament pe cont), cum se calculează capacity to pay cu formula reală pe care o aplică modelele interne și cum funcționează stress test-ul la IRCC.</p>
+
+<p>Vei vedea diferența critică dintre <strong>soft inquiries și hard inquiries</strong> — adică exact cum compari oferte fără să-ți strici scorul — și ce-ți crește scorul pe termen lung: istoricul de plăți, vârsta medie a creditelor și diversitatea lor. Apoi intrăm în partea de tactică: cum negociezi cu banca direct după ce ai fost respins, prin apel și renegociere documentată, și ce se întâmplă matematic dacă ai 5 aplicații de credit în paralel, cu un experiment numeric pas cu pas.</p>
+
+<p>Totul ancorat în contextul României 2026: dobânda de referință IRCC, pragurile BNR, comportamentul real al motoarelor de decizie automate și pârghiile pe care le poți mișca în 30–90 de zile. Fără teorie de umplutură — doar mecanica deciziei și ce faci tu cu ea.</p>
+
+<h2>Anatomia scorului intern: cele 5 blocuri și ponderile lor reale</h2>
+<p>Scorul de risc (PD — probability of default) pe care îl calculează banca peste cel de la Biroul de Credit este un model logistic alimentat cu zeci de variabile, dar grupate în 5 blocuri cu ponderi remarcabil de stabile între instituții. Le redau în ordinea impactului tipic, ca să știi unde merită să investești efort:</p>
+<ul>
+<li><strong>Istoricul de plăți (~35% din scor).</strong> Cea mai grea pondere. O singură întârziere de peste 30 de zile în ultimele 12 luni poate tăia 60–100 de puncte dintr-un scor pe scală 300–850. Întârzierile recente cântăresc exponențial mai mult decât cele vechi: o restanță de acum 3 luni doare de câteva ori mai tare decât una de acum 3 ani.</li>
+<li><strong>Gradul de utilizare și expunerea (~30%).</strong> Aici contează raportul sold/limită pe carduri și liniile de credit. Sub 30% utilizare = pozitiv; peste 50% = semnal de stres; peste 90% = roșu aprins. Atenție: contează utilizarea raportată la data extrasului, nu media lunii.</li>
+<li><strong>Vârsta și vechimea creditelor (~15%).</strong> Vârsta medie a conturilor de credit deschise și vechimea celui mai vechi cont. Un istoric de 8 ani bate unul de 8 luni, chiar la aceeași disciplină.</li>
+<li><strong>Interogări și conturi noi (~10%).</strong> Numărul de hard inquiries și de conturi deschise recent. Aici se ascund respingerile „aplicantului disperat".</li>
+<li><strong>Diversitatea creditelor — credit mix (~10%).</strong> Un amestec de credite de consum, card și ipotecă, toate plătite la timp, scorează mai bine decât un singur tip de produs.</li>
+</ul>
+<p>Aceste ponderi nu sunt publicate de nicio bancă din România, dar arhitectura modelelor de scoring folosite la noi urmează îndeaproape acest tipar. Concluzia operațională: 65% din scorul tău stă în două lucruri pe care le controlezi direct — <strong>plătești la timp</strong> și <strong>ții utilizarea cardurilor jos</strong>.</p>
+
+<h2>Capacity to pay: formula reală, nu cea din pliant</h2>
+<p>Băncile nu verifică un singur prag de 40%. Rulează un calcul în cascadă. Iată forma reală a deciziei de capacitate, pas cu pas:</p>
+<p><strong>Pasul 1 — Venitul net ajustat.</strong> Pleacă de la venitul net demonstrabil, dar îl „taie" defensiv pentru sursele instabile. Reperele interne uzuale:</p>
+<ul>
+<li>salariu pe contract permanent: luat aproape integral (haircut mic, eventual media pe 3–6 luni dacă variază);</li>
+<li>bonusuri/comisioane: deseori ponderate la 50–80%, sau ignorate dacă nu sunt recurente;</li>
+<li>venit din chirii: luat parțial (frecvent ~75–80%), pentru a acoperi vacanța locativă și impozitul;</li>
+<li>venit PFA/freelancing: mediat pe 1–2 ani din declarațiile ANAF, nu pe luna bună.</li>
+</ul>
+<p><strong>Pasul 2 — Total rate existente.</strong> Suma ratelor lunare raportate la Biroul de Credit, PLUS o rată potențială pe limitele neutilizate. O regulă-cheie pe care mulți o ratează: o limită de card sau de overdraft contează la îndatorare ca și cum ar fi folosită, tipic la <strong>3–5% din limită ca rată lunară echivalentă</strong>. O limită de 20.000 lei poate „mânca" 600–1.000 lei/lună din plafon, deși soldul e zero.</p>
+<p><strong>Pasul 3 — Rata stresată a noului credit.</strong> Aici intervine IRCC.</p>
+
+<h3>Cum intră IRCC în stress test</h3>
+<p>La creditele cu dobândă variabilă în lei, dobânda = IRCC + marja fixă a băncii. IRCC (Indicele de Referință pentru Creditele Consumatorilor) se calculează trimestrial de BNR ca medie a tranzacțiilor de pe piața monetară interbancară din trimestrul anterior, ceea ce înseamnă că reacționează cu întârziere la mișcările de politică monetară — un detaliu pe care îl exploatezi în arbitrajul de dobândă, dar care la scoring lucrează împotriva ta: banca nu îți calculează rata la IRCC-ul de azi, ci la un <strong>IRCC stresat</strong>. Adaugă un șoc de dobândă (tipic câteva puncte procentuale) și verifică încadrarea în plafon la rata mai mare.</p>
+<p><strong>Exemplu numeric.</strong> Credit 200.000 lei, 25 ani, marjă 2,5%, IRCC curent ~5,6% (valoarea în vigoare în 2026, publicată de BNR — verifică trimestrul curent). Dobânda reală ≈ 8,1%, deci rata ≈ 1.555 lei. Dar banca testează încadrarea la, să zicem, 10,5–11% (IRCC + șoc + marjă), unde rata urcă spre 1.890–1.960 lei. Dacă „pe hârtie" erai la 39% din venit la rata reală, la rata stresată ajungi la 47% și pici — deși azi ți-ai permite-o lejer. De aici regula practică: <strong>plafonul tău real de îndatorare e adesea 30–35%, nu 40%</strong>, fix din cauza șocului IRCC.</p>
+
+<h3>Formula condensată</h3>
+<p>Aproximarea care reproduce decizia băncii:</p>
+<ul>
+<li><strong>DTI stresat</strong> = (rate existente + rată potențială pe limite + rată nouă stresată) / venit net ajustat ≤ 40% (lei, general) / 45% (prima locuință) / 20% (valută).</li>
+<li><strong>Venit rezidual</strong> = venit net ajustat − toate ratele ≥ pragul de subzistență per membru de gospodărie. Practic: rate + cheltuieli de bază ≤ ~60% din venit.</li>
+</ul>
+<p>Treci doar dacă ambele inegalități sunt adevărate <em>simultan</em>. Majoritatea aplicanților calculează doar prima și se miră de respingere.</p>
+
+<h2>Soft inquiries vs. hard inquiries: cum compari oferte fără să-ți strici scorul</h2>
+<p>Aceasta e tactica cea mai prost înțeleasă și cea mai ușor de exploatat. Sunt două tipuri de interogare:</p>
+<ul>
+<li><strong>Soft inquiry.</strong> Verificare „de informare": pre-calificări, simulatoare, când banca ta îți verifică propriul profil pentru o ofertă, sau când tu îți ceri raportul. <strong>NU apare în scorul văzut de alți creditori și NU îți scade scorul.</strong> Poți face oricâte.</li>
+<li><strong>Hard inquiry.</strong> Verificare „de decizie": apare când depui o cerere reală și banca interoghează Biroul de Credit ca să decidă. <strong>Apare în istoric și îți poate scădea câteva puncte fiecare.</strong> Mai multe într-un interval scurt = semnal de risc.</li>
+</ul>
+<p><strong>Cum compari corect:</strong></p>
+<ul>
+<li>Folosește simulatoarele online și pre-calificările (soft) pentru a îngusta lista la 1–2 bănci. Acestea nu lasă urmă.</li>
+<li>Cere ofertă fermă scrisă pe baza pre-calificării înainte de cererea oficială.</li>
+<li>Depune cererile reale (hard) grupat, în aceeași fereastră scurtă (ideal sub 14–30 de zile). Multe modele tratează interogările multiple de același tip, în fereastra de rate-shopping, ca pe o singură interogare — pentru că recunosc că „cauți o ipotecă", nu 5 credite.</li>
+<li>Niciodată nu împrăștia hard inquiries pe luni întregi „să vezi dacă merge undeva". Asta e exact tiparul pe care algoritmul îl penalizează.</li>
+</ul>
+
+<h2>Experiment: ce se întâmplă cu 5 aplicații de credit în paralel</h2>
+<p>Hai să cuantificăm. Două scenarii, același aplicant cu scor de plecare ~720.</p>
+<p><strong>Scenariul A — 5 cereri ipotecare în 10 zile (rate-shopping corect).</strong> Toate sunt hard inquiries de același tip, în fereastra de comparare. Modelul le colapsează aproape la o singură interogare. Impact pe scor: minim, eventual −5 puncte. Rezultat: ai 5 oferte ferme de comparat, scorul aproape neatins. Aceasta e folosirea inteligentă.</p>
+<p><strong>Scenariul B — 5 cereri de tip diferit în 6 săptămâni</strong> (un card, un credit de nevoi personale, un overdraft, un credit auto, o ipotecă), împrăștiate. Aici fereastra de rate-shopping nu se aplică — sunt produse diferite. Fiecare contează separat:</p>
+<ul>
+<li>5 hard inquiries distincte: −15 până la −40 de puncte cumulat;</li>
+<li>algoritmul citește tiparul „caută cash din mai multe direcții" → urcă PD-ul intern dincolo de pierderea brută de puncte;</li>
+<li>dacă vreuna se aprobă, conturile noi îți scad vârsta medie a creditelor (blocul de 15%) și îți cresc expunerea totală — al doilea val de penalizare;</li>
+<li>efect compus realist: poți coborî de la 720 la sub 670 în șase săptămâni, exact când ai cea mai mare nevoie de scor bun.</li>
+</ul>
+<p><strong>Lecția:</strong> nu numărul de aplicații te omoară, ci <em>diversitatea și împrăștierea lor</em>. Cinci cereri identice, grupate = aproape gratis. Cinci cereri diferite, întinse = autodistrugere de scor.</p>
+
+<h2>Ce-ți crește scorul pe termen lung: cele trei pârghii care contează</h2>
+<p>Dincolo de „plătește la timp", iată mișcările cu cel mai bun raport efort/impact:</p>
+<ul>
+<li><strong>Istoricul de plăți impecabil pe 12+ luni.</strong> Pune toate ratele pe debit direct ca să elimini riscul uitării. O singură întârziere ratată anulează luni de disciplină.</li>
+<li><strong>Vârsta medie a creditelor — nu închide cardul vechi.</strong> Contraintuitiv: dacă ai un card vechi de 7 ani cu disciplină bună, păstrarea lui deschis (chiar nefolosit, fără cost de administrare) îți ridică vârsta medie. Închiderea lui îți poate scădea scorul. Închide cardurile <em>noi</em> și costisitoare, păstrează istoricul vechi curat.</li>
+<li><strong>Diversitatea controlată.</strong> Un mix sănătos — o ipotecă + un card folosit sub 30% și plătit integral lunar — scorează mai bine decât un singur produs. Nu deschizi credite de dragul mix-ului, dar dacă le ai deja, gestionează-le ca portofoliu.</li>
+</ul>
+<p>Și pârghia de utilizare, repede de mișcat: <strong>plătește cardul ÎNAINTE de data extrasului</strong>, nu doar înainte de scadență. Soldul raportat la Birou e cel din ziua extrasului; dacă îl aduci la zero atunci, raportezi utilizare 0% chiar dacă folosești cardul intens în restul lunii.</p>
+
+<h2>Ai fost respins: apelul și renegocierea directă cu banca</h2>
+<p>Respingerea nu e finală. Decizia inițială vine adesea de la un motor automat; ai dreptul, conform GDPR, la reevaluare cu intervenție umană și la motivele care au stat la bază. Iată protocolul de recuperare:</p>
+<h3>Pasul 1 — Cere motivul în scris</h3>
+<p>Solicită formal „motivul respingerii și categoriile de date care au stat la baza deciziei". Deseori afli că te-a picat un singur flag corectabil: o limită de card uitată, un venit ne-luat în calcul, o restanță veche nemarcată „închisă", sau un haircut prea agresiv pe un venit pe care îl poți documenta mai bine.</p>
+<h3>Pasul 2 — Atacă cauza specifică, nu generic</h3>
+<ul>
+<li><strong>Dacă ai picat la DTI:</strong> vino cu reducerea unei limite de card sau închiderea unui overdraft (eliberezi plafon imediat), sau propune o sumă mai mică / perioadă mai lungă ca să cobori rata sub prag.</li>
+<li><strong>Dacă ai picat la venit:</strong> adu documente suplimentare — adeverință cu sporuri recurente, declarații ANAF pe 2 ani pentru chirii/PFA, contracte care dovedesc recurența. Cere reanalizarea cu venitul complet.</li>
+<li><strong>Dacă ai picat la rezidual:</strong> adu un co-debitor cu venit stabil sau redu suma. Reziduul per membru de gospodărie e aritmetică pură — un al doilea venit schimbă ecuația.</li>
+</ul>
+<h3>Pasul 3 — Renegociază parametrii, nu doar „da/nu"</h3>
+<p>Băncile au marjă de manevră pe care n-o oferă din proprie inițiativă. Lucruri pe care le poți cere direct după o respingere la limită:</p>
+<ul>
+<li>o <strong>perioadă mai lungă</strong> (scade rata lunară, te bagă sub DTI — atenție la costul total mai mare);</li>
+<li>un <strong>avans mai mare</strong> la ipotecă (scade suma finanțată și rata);</li>
+<li>reducerea marjei băncii dacă îți aduci salariul și produsele la ei (cross-sell — au pârghie să-ți dea condiții mai bune);</li>
+<li>trecerea la o sumă care încape exact sub pragul stresat, calculată invers de la rata maximă acceptată.</li>
+</ul>
+<h3>Pasul 4 — Dacă tot nu merge, schimbă banca, dar inteligent</h3>
+<p>Modelele de risc și haircut-urile pe venit diferă între bănci. O bancă unde ai deja istoric și salariul domiciliat te va trata mai bine decât una rece. Dacă mergi la altă instituție, fă-o cu o nouă pre-calificare (soft) întâi, nu cu hard inquiry oarbă.</p>
+
+<h2>Checklist: optimizare în 30–90 de zile înainte de a (re)aplica</h2>
+<ul>
+<li>Mi-am cerut raportul la Biroul de Credit (soft, gratuit) și am corectat orice eroare sau restanță nemarcată „închisă".</li>
+<li>Am redus utilizarea cardurilor sub 30% și am plătit soldul înainte de data extrasului.</li>
+<li>Am închis cardurile/overdraft-urile NOI și inutile; am păstrat deschis cel mai vechi card cu istoric bun.</li>
+<li>Toate ratele sunt pe debit direct; am 12 luni fără nicio întârziere.</li>
+<li>Nu am hard inquiries în ultimele 60–90 de zile (am folosit doar pre-calificări soft).</li>
+<li>Mi-am calculat singur DTI stresat (rată la dobândă +2–3 p.p. față de afiș) și e sub 40%.</li>
+<li>Mi-am calculat reziduul per membru de gospodărie și rămâne confortabil.</li>
+<li>Mi-am documentat venitul complet, inclusiv sporuri recurente și chirii declarate la ANAF.</li>
+<li>Voi grupa cererile reale (hard) în aceeași fereastră scurtă, doar la 1–2 bănci pre-calificate.</li>
+</ul>
+
+<h2>Greșeli frecvente de evitat</h2>
+<ul>
+<li><strong>Confunzi soft cu hard inquiry</strong> și eviți să compari oferte „ca să nu strici scorul" — pierzi mii de lei pe o dobândă mai proastă. Soft-urile sunt gratis, folosește-le.</li>
+<li><strong>Închizi cardul vechi</strong> crezând că „ajută" — îți scade vârsta medie a creditelor și scorul.</li>
+<li><strong>Calculezi DTI la dobânda de azi.</strong> Banca îl calculează la IRCC stresat; tu testează cu +2–3 puncte.</li>
+<li><strong>Aplici la 5 produse diferite</strong> când ești respins, „să prinzi undeva". Îți prăbușești scorul exact când ai nevoie de el.</li>
+<li><strong>Accepți respingerea fără să ceri motivul.</strong> Ai dreptul la datele care au stat la bază și la reevaluare umană — uneori e un flag de 80 de lei.</li>
+<li><strong>Ignori limitele neutilizate.</strong> O limită mare de card te poate respinge fără să fi datorat un leu, pentru că intră ca rată potențială.</li>
+<li><strong>Negociezi doar „da/nu".</strong> Perioada, avansul și marja sunt toate negociabile după o respingere la limită.</li>
+</ul>
+
+<p>Concluzia practică: respingerea nu e o cutie neagră, ci suma a două teste pe care le poți reproduce singur — un model de risc dominat de istoric și utilizare, și un test de capacitate ancorat în IRCC stresat și venit rezidual. Decodezi care test te-a picat, ataci cauza specifică în 30–90 de zile, compari oferte cu soft inquiries și grupezi cererile reale într-o singură fereastră. Confirmă pragurile și IRCC-ul curent pe <strong>bnr.ro</strong> și raportul tău pe <strong>birouldecredit.ro</strong>, apoi transformă „respins" într-un „aprobat" pe care l-ai construit deliberat.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

@@ -1,0 +1,96 @@
+<p>Această lecție de <strong>analiză credit avansat: Biroul de Credit, risc și negociere</strong> îți arată cum citești pe fund un raport de credit — al tău și, indirect, al băncii — ca să identifici punctele slabe ale lender-ului și să negociezi din poziție de putere, cu dovezi pe masă. Știi deja bazele din lecțiile anterioare despre Biroul de Credit și cariera, despre restructurarea unui credit și despre gradul de îndatorare. Aici trecem dincolo: <strong>cum citesc un raport Biroul de Credit profund și fac o analiză adevărată</strong>, ce este un <strong>predictor de faliment financiar de tip P/F-Score</strong> aplicat pe propriul flux de numerar și cum construiești un <strong>rating intern de credit pentru o PME sau o persoană fizică</strong> identic cu cel pe care îl rulează banca.</p>
+
+<p>Vei învăța să citești <strong>semnalele de alarmă care indică un viitor faliment</strong> — ale tale, dar și ale unui partener comercial — și să le folosești ofensiv: când îți cunoști exact rating-ul, intri într-o <strong>negociere din poziție de putere cu banca, sprijinită pe dovezi</strong>, nu pe rugăminți. Adăugăm un <strong>studiu de credit al competitorului</strong> — cum analizezi oferta concurentă a altei bănci ca să forțezi un contraofert — și o privire asupra <strong>modelelor de rating de credit folosite în România, de la datele ANAF la cele de la Biroul de Credit</strong>.</p>
+
+<p>Totul ancorat în România 2026: dobânda de referință IRCC, pragurile BNR de îndatorare, scorul FICO-like folosit local, structura raportului Biroului de Credit (CRC al BNR pentru sume mari) și pârghiile reale pe care le miști în 30–90 de zile. Fără teorie — doar mecanica deciziei și cum o întorci în favoarea ta.</p>
+
+<h2>Citirea profundă a raportului Biroului de Credit: ce văd analiștii, nu tu</h2>
+<p>Raportul pe care îl primești tu de la Biroul de Credit (cerere gratuită o dată pe an, conform GDPR și regulamentului propriu) arată conturile, restanțele și interogările. Analistul băncii citește același document cu altă grilă. Iată ce decodează el și ce trebuie să decodezi și tu:</p>
+<ul>
+<li><strong>Vectorul de comportament (payment string).</strong> Pentru fiecare credit, BC stochează un șir lunar codat: 0 = la zi, apoi întârzieri pe paliere (1–15 zile, 16–30, 31–60, 61–90, peste 90). Nu contează doar <em>dacă</em> ai întârziat, ci <strong>tendința</strong>: un șir care se înrăutățește lună de lună (0-0-1-1-2) e citit ca pre-default, chiar dacă nu ești încă în restanță gravă. Un șir care se vindecă (2-1-1-0-0) e citit ca redresare.</li>
+<li><strong>Densitatea interogărilor (hard inquiries) pe fereastră scurtă.</strong> 4–5 interogări de credit nou în 30 de zile = „aplicant disperat", penalizare severă. Excepție: interogările pentru același tip de produs (ipotecă, auto) într-o fereastră de 14–45 de zile sunt deseori tratate ca o singură intenție de cumpărare (deduplicate), nu ca aplicări separate.</li>
+<li><strong>Soldul vs. limita pe produse revolving.</strong> Utilizarea peste 50% pe carduri/overdraft e semnal de stres de lichiditate; peste 90%, semnal roșu. Contează soldul la data raportării, nu media lunii — deci poți „curăța" raportul plătind înainte de data extrasului.</li>
+<li><strong>Pozițiile FGB/restructurate marcate.</strong> Un credit restructurat rămâne flag-uit ca atare o perioadă; analistul îl citește ca istoric de dificultate, chiar dacă acum plătești impecabil.</li>
+</ul>
+<p>Pentru expuneri mari, există și <strong>Centrala Riscului de Credit (CRC) a BNR</strong>, care agregă expunerile peste pragul de raportare (verifică pragul curent — de ordinul a câteva zeci de mii de lei per debitor-bancă). Aici banca vede expunerea ta totală în sistem, inclusiv garanții și angajamente. Concluzia operațională: nu poți ascunde un credit de la o bancă declarând altceva — sistemul îl vede oricum.</p>
+<p>Un detaliu pe care puțini îl exploatează: <strong>dreptul de rectificare GDPR</strong>. Dacă găsești în raport o întârziere raportată greșit (plată făcută la timp dar marcată cu o zi de restanță din cauza decalajului de procesare), poți cere în scris băncii corectarea către Biroul de Credit. O singură întârziere ștearsă corect poate muta scorul cu zeci de puncte, exact pragul care te trece dintr-o clasă de risc în alta. Verifică raportul cu 60–90 de zile înainte de orice negociere majoră, tocmai ca să ai timp de rectificări.</p>
+
+<h2>Construiește-ți propriul rating intern: scorul pe care îl vei negocia</h2>
+<p>Ca să negociezi de pe poziție de putere, trebuie să știi numărul pe care îl vede banca <em>înainte</em> de ședință. Replică modelul lor. Băncile din România rulează un scor de risc (PD — probability of default) pe scală tip 300–850, alimentat de un model logistic cu blocuri stabile:</p>
+<ul>
+<li><strong>Istoric de plăți (~35%).</strong> O întârziere peste 30 de zile în ultimele 12 luni taie 60–100 de puncte. Restanțele recente cântăresc exponențial mai mult decât cele vechi.</li>
+<li><strong>Utilizare / expunere (~30%).</strong> Raportul sold/limită agregat. Sub 30% = verde.</li>
+<li><strong>Vechimea creditelor (~15%).</strong> Vârsta medie a conturilor.</li>
+<li><strong>Interogări și conturi noi (~10%).</strong></li>
+<li><strong>Credit mix (~10%).</strong></li>
+</ul>
+<p>Peste acest scor de comportament, banca adaugă <strong>capacitatea de plată recalculată la șoc de dobândă</strong>. Reține mecanica reală: la creditele în lei legate de IRCC, banca stress-testează rata la IRCC + 2 puncte procentuale (verifică marja de stres curentă cerută de BNR), iar gradul de îndatorare total trebuie să rămână sub plafoanele BNR. Reține plafonul real în vigoare: gradul maxim de îndatorare este <strong>40% din venitul net pentru creditele în lei</strong> (atât de consum, cât și ipotecare) și doar <strong>20% pentru creditele în valută</strong>, cu un bonus de <strong>+5 puncte procentuale (deci până la 45%) pentru primul credit ipotecar destinat achiziției unei locuințe</strong>. Nu există un prag separat mai mic pentru creditele de consum — același 40% se aplică pe ansamblul ratelor în lei. Pârghia reală nu e diferența de plafon pe tip de produs, ci moneda (lei vs. valută) și bonusul de primă locuință: structurarea corectă a dosarului în lei, cu prima ipotecă încadrată ca achiziție de locuință, îți deschide cei 5 puncte procentuale suplimentari de capacitate.</p>
+
+<h3>P/F-Score adaptat: predictorul tău de faliment</h3>
+<p>Pentru o PME (sau un PFA cu contabilitate), băncile rulează variante de modele tip Altman Z-Score și Piotroski F-Score peste bilanțul depus la ANAF/Ministerul Finanțelor. Le poți rula singur, pentru că datele sunt publice (bilanțurile firmelor sunt accesibile pe portalul Ministerului Finanțelor):</p>
+<ul>
+<li><strong>Lichiditate curentă</strong> = active circulante / datorii curente. Sub 1 = nu acoperi datoria pe termen scurt din active lichide — semnal de alarmă.</li>
+<li><strong>Grad de îndatorare</strong> = datorii totale / capitaluri proprii. Peste 2–3 (în funcție de sector) intri în zona de risc; capitaluri proprii negative = zonă de insolvență iminentă, citită ca pre-faliment.</li>
+<li><strong>Acoperirea dobânzii</strong> = EBIT / cheltuieli cu dobânzile. Sub 1,5 = profitul abia acoperă dobânda; sub 1 = nu o acoperă deloc.</li>
+<li><strong>Trend pe 3 ani</strong> (esența Piotroski): cresc marja, scade levierul, crește lichiditatea? Un trend pozitiv pe 9 criterii F-Score (0–9) peste 6 = sănătos; sub 3 = candidat la default.</li>
+</ul>
+<p>Pentru persoană fizică, predictorul tău de faliment personal e mai simplu, dar la fel de dur: <strong>rezerva de lichiditate în luni</strong> (cash disponibil / cheltuieli lunare fixe — sub 3 luni e fragil), <strong>rata efort post-șoc</strong> (toate ratele recalculate la +2pp IRCC, raportate la venitul net — peste 50% e pre-default) și <strong>raportul datorie nouă/venit anual</strong>. Dacă rulezi aceste numere înainte de bancă, intri în cameră știind exact dacă ești un risc bun pe care banca <em>vrea</em> să-l păstreze — și asta e fundamentul puterii de negociere.</p>
+
+<h2>Citirea punctelor slabe ale lender-ului: unde e banca vulnerabilă</h2>
+<p>Negocierea din poziție de putere nu înseamnă doar să-ți cunoști scorul, ci să citești și constrângerile băncii. Lender-ul are propriile presiuni, iar tu le poți exploata legitim:</p>
+<ul>
+<li><strong>Costul retenției vs. costul achiziției.</strong> A pierde un client bun și a-l înlocui costă banca mult mai mult decât o reducere de marjă. Dacă scorul tău e solid și ai istoric curat, ești exact clientul pe care nu vor să-l piardă la refinanțare.</li>
+<li><strong>Provizioanele IFRS 9.</strong> Un credit performant cere provizioane minime; unul care alunecă în „Stage 2" (risc crescut) forțează banca să provizioneze mult mai mult, lovind în profit. Un debitor care amenință credibil cu refinanțarea la altă bancă, dar are istoric bun, e mai valoros menținut decât pierdut.</li>
+<li><strong>Ținta comercială a ofițerului de credit.</strong> Sucursalele au targeturi de volum. Spre sfârșit de trimestru, apetitul pentru a închide un dosar (chiar cu marjă redusă) crește. Timing-ul contează.</li>
+<li><strong>Marja peste IRCC, nu IRCC-ul.</strong> Nu poți negocia indicele de referință, dar <strong>marja fixă</strong> a băncii peste IRCC este 100% negociabilă. Aici e tot terenul de luptă. O reducere de 0,3–0,5 pp pe marjă pe un sold de 300.000 lei pe 20 de ani înseamnă mii de lei economisiți.</li>
+</ul>
+
+<h3>Studiul de credit al competitorului: arma decisivă</h3>
+<p>Cea mai puternică dovadă într-o negociere este o ofertă concurentă reală, scrisă. Procesul:</p>
+<ul>
+<li><strong>Obține 2–3 oferte de refinanțare scrise</strong> de la bănci concurente (folosind o singură fereastră de interogări pentru a nu-ți strica scorul). Cere-le defalcat: marjă peste IRCC, DAE, comisioane, costuri de transfer.</li>
+<li><strong>Calculează costul total al transferului</strong> pentru banca actuală: ce pierde dacă pleci (dobânda viitoare pe sold) vs. ce câștigă dacă te ține cu o marjă mai mică. Dacă reducerea cerută de tine e mai mică decât profitul pe care îl pierde, banca raționează în favoarea ta.</li>
+<li><strong>Prezintă oferta concurentă ca fapt, nu ca amenințare.</strong> „Am aprobare la X cu marjă cu 0,4 pp mai mică. Prefer să rămân la voi. Puteți alinia?" Tonul e de partener care oferă băncii șansa să rețină un client bun.</li>
+</ul>
+
+<h2>Semnale de alarmă: citește-le la tine și la partenerii tăi</h2>
+<p>Aceleași metrici care îți spun rating-ul îți semnalează și falimentul iminent — al tău sau al unui client/furnizor cu care lucrezi pe credit comercial. Roșii care anunță default:</p>
+<ul>
+<li>Payment string în deteriorare progresivă (0→1→2) pe mai multe credite simultan.</li>
+<li>Utilizare revolving sărită brusc peste 80% — semn de criză de lichiditate acoperită cu card.</li>
+<li>Burst de interogări de credit nou (5+ în 30 de zile) — cineva caută disperat finanțare.</li>
+<li>La firme: capitaluri proprii în scădere accelerată, datorii la stat/ANAF restante (vizibile public), termene de plată furnizori care se lungesc.</li>
+<li>Restructurări repetate ale aceluiași credit — masca dificultății cronice.</li>
+</ul>
+<p>Pe partenerii comerciali, verifică bilanțul depus la Ministerul Finanțelor și eventualele datorii ANAF publicate. Un partener cu Z-Score în zona de pericol și acoperire de dobândă sub 1 e un risc de neîncasare — ajustează-ți termenele de plată sau cere garanții <em>înainte</em> să devină problema ta.</p>
+<p>Combinația de semnale contează mai mult decât oricare luat singur. Un payment string care se deteriorează <em>și</em> un burst de interogări <em>și</em> utilizare revolving peste 80% în aceeași lună descrie aproape sigur o persoană care a pierdut venitul și acoperă golul cu datorie scumpă — modelele de scoring tratează această combinație ca probabilitate de default mult peste suma componentelor. Inversul e la fel de util ofensiv: dacă <em>tu</em> ești curat pe toate aceste axe, ești statistic în top-ul portofoliului băncii, iar a te pierde înseamnă a pierde exact clientul care îi ține rata de default sub control.</p>
+
+<h2>Exemplu numeric: negocierea unei refinanțări ipotecare</h2>
+<p>Sold rămas: 300.000 lei, 20 de ani rămași, marjă actuală IRCC + 2,5 pp. IRCC ipotetic 5,8% → dobândă curentă 8,3%, rată ~2.560 lei/lună.</p>
+<ul>
+<li><strong>Rating-ul tău recalculat:</strong> scor estimat ~780/850, zero restanțe 24 luni, utilizare carduri 15%, rezervă de lichiditate 6 luni, rată efort post-șoc 33%. Ești client „prime".</li>
+<li><strong>Oferta competitorului:</strong> bancă B oferă marjă IRCC + 2,0 pp → dobândă 7,8%, rată ~2.480 lei/lună. Diferență ~80 lei/lună × 240 luni ≈ <strong>19.200 lei</strong> pe durata creditului, minus costuri de transfer (evaluare, comisioane — orientativ 1.500–3.000 lei).</li>
+<li><strong>Calculul băncii actuale:</strong> dacă pleci, pierde toată dobânda viitoare pe sold. Dacă te ține aliniind marja la 2,0 pp, pierde 80 lei/lună din venit, dar evită provizionul de pierdere a clientului și costul de înlocuire. Rațional, aliniază.</li>
+<li><strong>Rezultatul tipic:</strong> banca actuală oferă 2,1–2,2 pp (întâlnire la mijloc), economie ~12.000–15.000 lei fără costuri de transfer. Adesea bate refinanțarea efectivă, pentru că eviți comisioanele de mutare.</li>
+</ul>
+
+<h2>Checklist: cum intri în negociere din poziție de putere</h2>
+<ul>
+<li><strong>Trage raportul Biroul de Credit</strong> (gratuit anual) și decodează payment string-ul, utilizarea și interogările. Curăță utilizarea cardurilor sub 30% înainte de aplicare.</li>
+<li><strong>Calculează-ți scorul intern estimat și rata efort post-șoc</strong> (+2pp IRCC). Știi numărul înainte de bancă.</li>
+<li><strong>Rulează predictorul de faliment</strong> pe propriul flux (rezervă în luni, datorie/venit) — sau Z/F-Score pe firma ta din bilanțul ANAF.</li>
+<li><strong>Obține 2–3 oferte de refinanțare scrise</strong> într-o singură fereastră de interogări; cere defalcarea marjă/DAE/comisioane.</li>
+<li><strong>Cuantifică ce pierde banca</strong> dacă pleci vs. ce pierde dacă reduce marja. Negociezi marja peste IRCC, nu IRCC-ul.</li>
+<li><strong>Programează discuția spre final de trimestru</strong>, cu oferta concurentă scrisă pe masă, ton de partener.</li>
+<li><strong>Cere în scris</strong> noua marjă și recalcularea — verifică DAE finală, nu doar dobânda nominală.</li>
+</ul>
+
+<h2>Greșeli frecvente la nivel avansat</h2>
+<ul>
+<li><strong>Aplici la 5 bănci fără să grupezi interogările</strong> — îți tai scorul exact când ai nevoie de el sus.</li>
+<li><strong>Negociezi IRCC-ul</strong> (imposibil) în loc de marja fixă (negociabilă).</li>
+<li><strong>Te uiți la dobânda nominală, nu la DAE</strong> — comisioanele ascunse pot anula economia pe marjă.</li>
+<li><strong>Amenință că pleci fără ofertă scrisă</strong> — fără dovadă, banca nu mișcă marja.</li>
+<li><strong>Ignori soldul la data raportării</strong> — un card plătit cu o zi după data extrasului raportează utilizare mare luni întregi.</li>
+<li><strong>Negociezi când scorul tău e jos</strong> — fără rating solid nu ai pârghie; întâi redresează 60–90 de zile, apoi negociază.</li>
+</ul>

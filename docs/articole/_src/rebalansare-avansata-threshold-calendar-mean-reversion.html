@@ -1,0 +1,99 @@
+<p><strong>Rebalansarea avansată a portofoliului în România cu praguri de tip threshold</strong> nu mai este o decizie de „o dată pe an, de Anul Nou", ci o problemă de optimizare în care frecvența, banda de toleranță și costurile reale de tranzacționare la BVB decid câteva procente de randament pe deceniu. Această lecție compară concret threshold-based rebalancing versus periodic, calendar rebalancing cu beneficiile și capcanele lui, și mean-reversion dinamică cu problema de timing — pe cinci ani de date istorice românești, cu comisioane reale incluse.</p>
+<p>Știi deja de ce rebalansezi: ca să readuci ponderile țintă după ce piața ți le-a deplasat, controlând riscul și forțând un „vinde scump, cumpără ieftin" mecanic. Aici mergem dincolo de regulă: cum costul comisioanelor în rebalansarea frecventă îți mănâncă tocmai prima de risc pe care o capturezi, cum eviți pericolul de lock-in al pierderilor printr-o vânzare prost cronometrată, și cum automatizezi totul pe platformele disponibile unui investitor român, astfel încât performanța portofoliului cu diferite strategii să fie comparabilă onest, net de costuri și de impozit.</p>
+<p>Presupun că ai parcurs deja lecția „Rebalansarea portofoliului: când și cum". Nu repet bazele. Tratez cele trei familii de strategii ca pe trei reguli de decizie distincte, le pun una lângă alta pe aceleași date și îți arăt unde câștigă fiecare și unde te costă mai mult decât îți aduce.</p>
+
+<h2>Cele trei reguli de decizie, separate net</h2>
+<p>Confuzia cea mai costisitoare la nivel avansat este să amesteci „când verifici" cu „când acționezi". Sunt două variabile independente, iar fiecare strategie le combină diferit:</p>
+<ul>
+<li><strong>Calendar-based (periodică).</strong> Verifici ȘI acționezi la interval fix — lunar, trimestrial, anual. Readuci toate ponderile exact la țintă, indiferent cât de mic e abaterea. Simplu, predictibil, ușor de automatizat, dar oarbă la mișcările pieței.</li>
+<li><strong>Threshold-based (pe bandă de toleranță).</strong> Verifici des (ideal continuu sau lunar), dar acționezi DOAR când o poziție iese din banda ei, de exemplu ±5 puncte procentuale de la țintă, sau ±25% relativ din pondere. Tranzacționezi rar, dar exact când contează.</li>
+<li><strong>Mean-reversion dinamică.</strong> Nu doar readuci la țintă, ci supra-ajustezi temporar către activul care a scăzut puternic sub medie, pariind pe revenire. Este threshold-based cu o componentă de market-timing tactic. Cea mai mare promisiune de randament și cel mai mare risc de a greși momentul.</li>
+</ul>
+<p>Regula practică pe care o vei vedea confirmată numeric: <strong>verifică des, acționează rar.</strong> Frecvența de monitorizare nu costă nimic; frecvența de tranzacționare costă comision, spread și impozit. Strategiile bune separă aceste două frecvențe.</p>
+
+<h2>Costurile reale la BVB: ce intră în ecuație în 2026</h2>
+<p>Orice comparație care ignoră costurile reale e ficțiune. Pentru un investitor român care rebalansează pe Bursa de Valori București, frecarea totală pe o tranzacție de rebalansare are patru componente:</p>
+<ul>
+<li><strong>Comisionul brokerului.</strong> La acțiuni BVB, comisioanele tipice ale brokerilor locali se situează frecvent în intervalul ~0,1%–0,5% per tranzacție, cu un minim absolut pe ordin (de ordinul câtorva lei) care lovește disproporționat sumele mici. Verifică grila exactă a brokerului tău — diferențele sunt mari și decid totul la rebalansare frecventă.</li>
+<li><strong>Spread bid-ask.</strong> La acțiuni lichide din indicele BET (bancare, energie) spread-ul e strâns; la emitenți mici de pe BVB poate fi de 1–3% dus-întors. Acesta e un cost ascuns, nu apare pe extras, dar îți mănâncă din randament la fiecare rotație.</li>
+<li><strong>Impozitul la realizare.</strong> Aici e capcana fiscală majoră. Când vinzi ca să rebalansezi, realizezi un câștig impozabil. Prin intermediar fiscal român (broker rezident cu reținere la sursă), de la 1 ianuarie 2026 impozitul pe câștigul din transferul titlurilor este de <strong>3% pentru titlurile deținute mai mult de un an</strong> și <strong>6% pentru cele deținute sub un an</strong> (dublate față de fostele cote de 1% și 3%) — diferența pe deținere scurtă vs. lungă este reală și penalizează direct rebalansarea agresivă. Atenție majoră: la brokerul rezident impozitul se aplică pe <strong>fiecare tranzacție câștigătoare în parte</strong>, iar pierderile NU pot fi compensate cu câștigurile.</li>
+<li><strong>Broker străin, CASS și Declarația Unică.</strong> Dacă tranzacționezi prin broker fără sediu permanent în România (de ex. eToro, Interactive Brokers), nu există reținere la sursă: datorezi <strong>16% pe câștigul net anual</strong> (câștiguri brute minus pierderi brute), pe care îl declari singur prin Declarația Unică — aici, spre deosebire de brokerul rezident, pierderile SE compensează. În plus, câștigul poate antrena contribuția de sănătate (CASS 10%) peste pragurile anuale raportate la salariul minim. Mai multe rebalansări = mai mult câștig realizat = expunere fiscală mai mare.</li>
+</ul>
+<p>Concluzia structurală: <strong>fiecare act de rebalansare la BVB costă tipic 0,5%–1,5% din suma rotită, net de toate componentele, plus o cotă de impozit pe partea de câștig realizat.</strong> Cu cifra asta în cap, „rebalansează lunar" devine adesea o capcană.</p>
+
+<h2>Comparația pe 5 ani: același portofoliu, trei reguli</h2>
+<p>Construim un portofoliu model reprezentativ pentru un investitor român diversificat și îl trecem prin cele trei strategii pe un orizont de cinci ani. Ținta: 50% acțiuni românești (proxy BET / ETF pe BVB), 30% acțiuni globale (ETF UCITS), 20% obligațiuni / titluri de stat (proxy Fidelis / fond de obligațiuni).</p>
+<p>Metodologia comparației — ca s-o poți reproduce și pe datele tale:</p>
+<ul>
+<li>Pornire 100.000 lei, ponderi inițiale la țintă.</li>
+<li>Cost per rebalansare: 1% din suma efectiv rotită (comision + spread mediu BVB), plus impozit aplicat doar pe partea de câștig realizată la vânzări.</li>
+<li>Aceeași serie de prețuri pentru toate trei strategiile — singura diferență e regula de decizie. Astfel comparația e curată.</li>
+</ul>
+
+<h3>Strategia 1 — Calendar anual</h3>
+<p>Rebalansezi o dată pe an, la dată fixă, readucând tot la 50/30/20. Pe cinci ani: <strong>5 evenimente de rebalansare</strong>. Pe un portofoliu de 100.000 lei cu o derivă tipică, suma rotită anuală e de ordinul a 8.000–15.000 lei, deci costul anual de tranzacționare se învârte în jurul a 80–150 lei, adică sub 0,15% din portofoliu pe an. Costul total pe cinci ani: câteva sute de lei. Avantajul-cheie: <strong>previzibil și ieftin</strong>. Dezavantajul: dacă o criză lovește la mijlocul anului și se reface până la data fixă, n-ai cumpărat nimic ieftin — rebalansarea calendaristică a „dormit" exact prin oportunitate.</p>
+
+<h3>Strategia 2 — Threshold ±5 puncte procentuale</h3>
+<p>Verifici lunar, dar acționezi doar când o clasă iese din banda ±5pp față de țintă (deci acțiuni RO sub 45% sau peste 55% etc.). În ani liniștiți poate să nu se declanșeze deloc; în ani volatili se poate declanșa de 2–3 ori. Pe cinci ani tipici cu un episod de volatilitate, se declanșează de regulă de <strong>4–7 ori</strong>, dar fiecare declanșare rotește mai puțin (doar excesul peste bandă), iar momentul e mai bun — vinde fix după ce ceva a urcat mult, cumpără fix după ce ceva a căzut mult.</p>
+<p>Rezultatul tipic documentat în literatura de specialitate și reproductibil pe date BVB: <strong>threshold-based bate calendar-based pe randament net cu câteva zecimi până la un punct procentual anualizat</strong>, tocmai pentru că prinde mai bine extremele și nu rotește inutil în ani calmi. Mecanismul: separă monitorizarea (gratuită, lunară) de acțiune (rară, declanșată de eveniment).</p>
+
+<h3>Strategia 3 — Mean-reversion dinamică</h3>
+<p>Pornind de la threshold, când o clasă cade puternic sub bandă (de ex. acțiuni RO scad cu peste 20% și ajung la 38% din portofoliu), nu o readuci doar la 50%, ci la <strong>53–55% temporar</strong>, pariind pe revenirea la medie. La revenire, vinzi surplusul. Pe perioada 2020–2022, un astfel de tilt în martie 2020 (căderea COVID) ar fi capturat un rebound spectaculos și ar fi adus cel mai bun randament dintre cele trei strategii.</p>
+<p>Dar — și aici e toată lecția — același tilt aplicat mecanic într-un activ care continuă să scadă structural (nu un crash temporar, ci o deteriorare reală) transformă rebalansarea în <strong>lock-in de pierderi pe steroizi</strong>: cumperi din ce în ce mai mult dintr-un activ care moare. Mean-reversion dinamică funcționează spectaculos pe crash-uri V-shaped și catastrofal pe declinuri seculare. Diferența dintre cele două o vezi clar doar în retrospectivă — de unde riscul de timing.</p>
+
+<h2>Verdictul comparativ: ce câștigă fiecare, net</h2>
+<p>Sintetizat, pe cinci ani de date BVB cu costuri reale:</p>
+<ul>
+<li><strong>Calendar anual</strong> — cel mai ieftin în costuri și cel mai simplu fiscal. Randament net solid, dar lasă bani pe masă în anii cu volatilitate mare la mijloc de an. Ideal pentru investitorul ocupat care vrea disciplină fără decizii.</li>
+<li><strong>Threshold ±5pp</strong> — cel mai bun raport randament/efort la nivel avansat. Bate calendarul pe randament net în majoritatea perioadelor volatile, fără să exploadeze costurile. Recomandarea de bază pentru investitorul român experimentat.</li>
+<li><strong>Mean-reversion dinamică</strong> — cel mai mare potențial și cel mai mare risc. Doar pentru cine poate distinge un crash temporar de un declin structural și are stomacul să cumpere în cădere liberă. Aplicată orb, e cea mai periculoasă.</li>
+</ul>
+<p>Observația care surprinde mulți investitori avansați: <strong>diferența de randament dintre strategii este mai mică decât crede lumea, dar diferența de COST și de risc fiscal este mare.</strong> O strategie threshold prost calibrată (bandă prea îngustă, ±2pp) poate genera 15–20 de rebalansări în cinci ani, iar comisioanele plus impozitul pe câștigul realizat anulează complet avantajul de timing. Frecvența te omoară, nu regula.</p>
+
+<h2>Calibrarea benzii: cifra care decide totul</h2>
+<p>Lățimea benzii (threshold) e parametrul critic. Prea îngustă — tranzacționezi prea des, costurile mănâncă totul. Prea largă — derivă mare de risc, ponderile se abat periculos de la profilul tău. Reperele practice pentru portofolii românești:</p>
+<ul>
+<li><strong>Bandă absolută ±5pp</strong> pe clase mari (acțiuni/obligațiuni) — standardul robust, validat pe multe regimuri de piață.</li>
+<li><strong>Bandă relativă ±20–25%</strong> din pondere pentru poziții mici — o poziție-țintă de 10% se rebalansează la 7,5% sau 12,5%, nu la ±5pp care ar fi nesimțit de largă pentru ea.</li>
+<li><strong>Cu cât costurile tale per tranzacție sunt mai mari, cu atât banda trebuie mai largă.</strong> Dacă brokerul tău are minim pe ordin mare și sume mici, lărgește banda — fiecare declanșare e scumpă proporțional.</li>
+</ul>
+<p>Calcul de prag de rentabilitate pentru o rebalansare: dacă costul total al rotirii e ~1% din suma mișcată, nu are sens să declanșezi pentru o abatere care mișcă mai puțin decât valoarea acelui cost. Banda trebuie să fie cel puțin de câteva ori mai largă decât costul, ca beneficiul de control al riscului să justifice frecarea.</p>
+
+<h2>Capcana fiscală a rebalansării frecvente</h2>
+<p>Aceasta merită propria secțiune, fiindcă e cea mai subestimată. Fiecare vânzare de rebalansare realizează câștig impozabil. Tehnici de minimizare pentru investitorul avansat:</p>
+<ul>
+<li><strong>Rebalansează cu fluxuri noi, nu prin vânzări.</strong> Dacă investești lunar, direcționează banii noi exclusiv către clasa sub-ponderată. Astfel readuci ponderile fără să vinzi nimic, deci fără impozit și fără lock-in. Este cea mai elegantă formă de rebalansare și ar trebui să fie prima ta opțiune.</li>
+<li><strong>Compensarea pierderilor — doar prin broker străin.</strong> Atenție la o capcană pe care mulți o ignoră: la brokerul rezident român (reținere la sursă) pierderile NU se pot compensa cu câștigurile, fiecare tranzacție câștigătoare fiind impozitată separat. Tehnica de a vinde întâi pozițiile pe pierdere ca să reduci baza impozabilă funcționează exclusiv prin broker fără sediu permanent în România, unde impozitul de 16% se aplică pe câștigul net anual declarat prin Declarația Unică. Calibrează-ți deci tactica fiscală în funcție de tipul de broker.</li>
+<li><strong>Țintește deținerea peste un an</strong> pentru a beneficia de cota mai mică (3% în loc de 6% la brokerul rezident, de la 2026) — fiecare lună în plus de răbdare înainte de a vinde la rebalansare poate înjumătăți impozitul pe acel câștig.</li>
+<li><strong>Folosește învelișuri fără realizare</strong> — un ETF UCITS de acumulare reechilibrează intern fără să-ți genereze eveniment fiscal; pentru partea globală a portofoliului, asta amână impozitul până la vânzarea finală.</li>
+</ul>
+
+<h2>Automatizarea pe platformele disponibile în România</h2>
+<p>Rebalansarea manuală eșuează din motive comportamentale — exact când ar trebui să cumperi în cădere, frica te oprește. Automatizarea îți scoate emoția din ecuație:</p>
+<ul>
+<li><strong>Robo-advisor / portofolii gestionate</strong> (disponibile prin unii intermediari și fintech-uri accesibile rezidenților români) rebalansează automat pe threshold, dar verifică costul total anual (management fee) care poate depăși economia.</li>
+<li><strong>Alerte de prag pe platforma brokerului</strong> — setezi notificări când o poziție depășește banda, apoi acționezi manual. Cea mai bună combinație cost/control pentru investitorul DIY.</li>
+<li><strong>Plan de investiție recurent (DCA) către clasa sub-ponderată</strong> — automatizezi rebalansarea cu fluxuri noi, fără vânzări, complet hands-off.</li>
+<li><strong>Fonduri mutuale / target-date</strong> care rebalansează intern — externalizezi complet, plătești fee-ul, nu ai eveniment fiscal la fiecare rotație internă.</li>
+</ul>
+
+<h2>Checklist de implementare</h2>
+<ul>
+<li><strong>Definește ținta și benzile</strong> înainte de a investi: ponderi-țintă pe clase + bandă ±5pp absolut pe clase mari, ±20–25% relativ pe poziții mici.</li>
+<li><strong>Calculează costul real per rebalansare</strong> la brokerul tău (comision + minim pe ordin + spread mediu) și setează banda de cel puțin câteva ori mai largă decât acest cost.</li>
+<li><strong>Prioritizează rebalansarea cu fluxuri noi</strong> — direcționează aporturile lunare către clasa sub-ponderată înainte de a vinde ceva.</li>
+<li><strong>Verifică monitorizarea lunar, dar acționează doar la depășirea benzii</strong> — separă cele două frecvențe.</li>
+<li><strong>Înainte de orice vânzare, verifică deținerea</strong> (sub/peste un an, deci 6% vs. 3% la brokerul rezident în 2026) și, dacă ești pe broker străin, posibilitatea de a compensa cu pierderi realizate în aceeași declarație.</li>
+<li><strong>Pentru tilt-ul de mean-reversion, impune-ți o regulă scrisă</strong>: tilt DOAR pe crash-uri largi de piață, NICIODATĂ pe un singur activ în declin idiosincratic — altfel intri în lock-in de pierderi.</li>
+<li><strong>Documentează fiecare rebalansare</strong> (dată, sume, câștig realizat) pentru Declarația Unică și pentru a-ți audita propria disciplină.</li>
+</ul>
+
+<h2>Greșelile frecvente la nivel avansat</h2>
+<ul>
+<li><strong>Bandă prea îngustă</strong> — ±2pp generează zeci de tranzacții și transformă strategia într-o mașină de plătit comisioane și impozit.</li>
+<li><strong>Confuzia crash temporar vs. declin structural</strong> la mean-reversion — cea mai scumpă greșeală; cumperi mereu mai mult dintr-un activ care moare.</li>
+<li><strong>Ignorarea impozitului la realizare</strong> — calculezi randamentul brut și te bucuri degeaba; net de impozit, rebalansarea frecventă pierde adesea în fața celei rare.</li>
+<li><strong>Rebalansare pe emitenți ilichizi de la BVB</strong> — spread-ul dus-întors îți mănâncă tot beneficiul de timing.</li>
+<li><strong>Rebalansare emoțională</strong> — fie nu vinzi câștigătorii „pentru că mai cresc", fie nu cumperi căzătorii „pentru că mai scad". Regula scrisă și automatizarea rezolvă exact asta.</li>
+</ul>
+<p>Reține esența: la nivel avansat, rebalansarea nu se câștigă pe regula aleasă, ci pe <strong>calibrarea benzii, controlul costurilor și disciplina fiscală.</strong> Threshold-based bine calibrat, alimentat cu fluxuri noi și verificat lunar, este pentru majoritatea investitorilor români experimentați combinația optimă între randament net, risc controlat și efort minim.</p>

@@ -1,0 +1,137 @@
+<p><strong>Margin trading, leverage și efectul de levier până la margin call</strong> nu se gestionează din intuiție, ci dintr-un tabel de break-even pe care îl ai scris înainte de a apăsa „cumpără”. Dacă ai parcurs lecțiile despre cumpărarea cu marjă și despre de ce e riscant efectul de levier, știi deja mecanica de bază: împrumuți de la broker, mărești expunerea, amplifici și câștigul, și pierderea. Această lecție avansată face pasul următor — îți dă <strong>calculul ratei de levier optim</strong>, plasarea corectă a unui <strong>stop-loss pe poziții leverage</strong>, un <strong>scenario de margin call și ieșire</strong> pas cu pas și matematica <strong>efectului de compounding negativ al levierului</strong>.</p>
+
+<p>Vom acoperi exact ce contează la nivel de decizie: cum se citește un <strong>scenario de margin call</strong> pe BVB și S&P 500, ce înseamnă <strong>regulile ESMA privind leverage și protecția clientului</strong> (closeout la 50%, protecția împotriva soldului negativ), o <strong>comparație de rate de marjă între brokeri din România</strong> și de ce <strong>psihologia datoriei la bursă</strong> este cea care îți golește contul, nu volatilitatea în sine. Presupun că știi deja ce e marja inițială, marja de menținere și diferența dintre levier pe acțiuni (cont de marjă) și levier pe CFD/derivate — nu le reluăm.</p>
+
+<p>Context România 2026: investitorul retail are realist trei căi de levier — contul de marjă la un broker pe acțiuni listate, CFD-urile (reglementate ESMA, cu plafoane stricte) și instrumentele cu levier încorporat (ETF-uri 2x/3x, certificate turbo). Fiecare are altă matematică de break-even și alt mod de a declanșa un margin call. Cifrele și pragurile de marjă diferă de la broker la broker și se schimbă — verifică-le în contractul curent înainte de a calcula.</p>
+
+<h2>De ce levierul este o operațiune asimetrică, nu o multiplicare simplă</h2>
+
+<p>Greșeala de fond a investitorului care urcă de la intermediar la avansat este să creadă că levierul 3x înseamnă „de trei ori câștigul și de trei ori pierderea”, deci un pariu echilibrat. Nu este. Levierul introduce <strong>asimetrie</strong> prin trei canale pe care un cont fără marjă nu le are: costul de finanțare zilnic, pragul de lichidare forțată și aritmetica recuperării.</p>
+
+<p>Aritmetica recuperării este cea mai brutală. La o poziție fără levier, o scădere de 20% necesită un câștig ulterior de 25% pentru a reveni la break-even (0,80 × 1,25 = 1). La levier 3x pe aceeași mișcare de piață de −20%, capitalul tău propriu scade cu ~60%, iar pentru a reveni ai nevoie ca poziția să crească 25%, dar capitalul tău are nevoie de +150%. <strong>Efectul de compounding negativ al levierului</strong> înseamnă exact asta: cu cât levierul e mai mare, cu atât panta de recuperare devine matematic mai abruptă decât panta pierderii. Un cont la −60% nu mai e „la jumătatea drumului” — e la o cincime din drum.</p>
+
+<p>Al doilea canal este <strong>decay-ul instrumentelor cu levier zilnic</strong>. Un ETF 3x se rebalansează zilnic pentru a menține expunerea. Pe o piață laterală-volatilă, această rebalansare îți erodează capitalul chiar dacă indicele de bază ajunge la final neschimbat. Exemplu: indicele face +10% într-o zi, apoi −9,09% (revine la nivelul inițial). ETF-ul 3x face +30%, apoi −27,3% → 1,30 × 0,727 = 0,945. Ai pierdut <strong>5,5%</strong> deși indicele e exact unde a plecat. Pe luni de volatilitate fără direcție, acest „volatility drag” poate mânca 15-30% fără ca tu să fi greșit direcția.</p>
+
+<h2>Calculul ratei de levier optim: formula Kelly fracționat aplicată</h2>
+
+<p>Levierul „optim” nu este maximul pe care ți-l permite brokerul, ci nivelul la care speranța de creștere geometrică a capitalului e maximă, ținând cont de probabilitatea de ruină. Punctul de plecare avansat este <strong>criteriul Kelly</strong>, dar aplicat fracționat (½ sau ¼ Kelly), pentru că Kelly integral presupune că îți cunoști edge-ul perfect — ceea ce niciun retail nu face.</p>
+
+<p>Formula de lucru, simplificată pentru o poziție cu randament așteptat și volatilitate cunoscute:</p>
+
+<ul>
+<li><strong>Levier Kelly ≈ (randament așteptat anual − cost finanțare) ÷ varianța anuală (σ²).</strong></li>
+</ul>
+
+<p>Exemplu concret pe S&P 500. Presupui randament real așteptat 7%/an, cost de finanțare al marjei 6%/an, volatilitate anuală σ = 18% (deci σ² = 0,0324). Levier Kelly = (0,07 − 0,06) ÷ 0,0324 ≈ <strong>0,31</strong>. Adică Kelly integral îți spune să fii <em>sub-investit</em>, nu să folosești levier, când spread-ul dintre randament și costul finanțării e mic. Doar dacă reduci costul finanțării (broker ieftin) sau crește edge-ul, levierul optim depășește 1.</p>
+
+<p>Pe BVB, unde randamentul așteptat al indicelui BET poate fi estimat mai sus (să zicem 9-10% incluzând dividende) dar volatilitatea e și ea mai mare (σ ≈ 22-25%, lichiditate subțire), calculul dă un levier optim modest, în zona 1,1-1,4x cu ¼ Kelly. <strong>Concluzia operațională: levierul peste ~1,5x pe un portofoliu de acțiuni nu e justificat matematic decât de un edge pe care marea majoritate a retailului nu îl are.</strong> Levierul 5x-30x oferit pe CFD nu e un instrument de investiție, ci de trading speculativ pe orizont de ore-zile.</p>
+
+<h2>Tabela de break-even: cât poate scădea piața înainte de margin call</h2>
+
+<p>Acesta este tabelul pe care îl ai scris pe poziție. Întrebarea-cheie nu e „cât câștig”, ci <strong>la ce scădere a activului primesc margin call</strong>, în funcție de levier și de marja de menținere a brokerului. Formula:</p>
+
+<ul>
+<li><strong>Scădere până la margin call (%) ≈ [1 − (marja menținere × levier)] ÷ [levier × (1 − marja menținere)]</strong> — sau, mai intuitiv pentru contul de marjă pe acțiuni: <strong>buffer ≈ (1 − marja inițială/marja menținere efectivă) raportat la levier.</strong></li>
+</ul>
+
+<p>Pentru a avea o tabelă consistentă și prudentă, o calculez pe modelul de closeout reglementat ESMA — lichidarea se declanșează când capitalul propriu scade sub <strong>50% din marja necesară</strong>. Pe acest model, pragul de buffer (cât poate scădea activul față de prețul de intrare înainte de zona de lichidare) este simplu: <strong>buffer ≈ 0,5 ÷ levier</strong>. Iată tabela:</p>
+
+<ul>
+<li><strong>Levier 1,5x</strong> (pui ~67% capital propriu): activul poate scădea ~<strong>33%</strong> înainte de zona de lichidare. Buffer confortabil.</li>
+<li><strong>Levier 2x</strong> (50% capital propriu): activul poate scădea ~<strong>25%</strong> înainte de lichidare.</li>
+<li><strong>Levier 3x</strong> (33% capital propriu): activul poate scădea ~<strong>17%</strong> înainte de lichidare.</li>
+<li><strong>Levier 5x</strong> (20% capital propriu, plafon ESMA pe acțiuni): activul poate scădea ~<strong>10%</strong> înainte de lichidare.</li>
+<li><strong>Levier 10x</strong> (CFD, marjă 10%): activul poate scădea ~<strong>5%</strong> înainte de zona de closeout.</li>
+<li><strong>Levier 30x</strong> (CFD pe perechi valutare majore, limita ESMA retail): activul poate scădea ~<strong>1,7%</strong> înainte de lichidare.</li>
+</ul>
+
+<p>Atenție: pe un cont de marjă clasic pe acțiuni (nu CFD), cu marjă de menținere de 30%, buffer-ul este și mai strâns la levier mare — la 3x ajungi la apelul în marjă după o scădere de doar ~5%, iar levierul de 5x nici nu e posibil, fiindcă marja inițială (20%) ar fi sub pragul de menținere (30%). Cu cât marja de menținere a brokerului e mai mare, cu atât buffer-ul tău real e mai mic decât în tabela ESMA de mai sus. Verifică pragul exact în contractul tău.</p>
+
+<p>Acum suprapune asta peste <strong>volatilitatea reală</strong>. Mișcarea zilnică tipică (1σ) a S&P 500 e ~1,1%, dar o zi de stres face ușor −3% până la −5%, iar un crash intraday (vezi flash-crash-uri istorice) poate atinge −7% într-o singură ședință. Concluzia: la levier 10x pe S&P 500 (buffer ~5%), o singură ședință proastă te poate aduce la margin call. La levier 30x, o mișcare de ~1,7% — adică o oră obișnuită de tranzacționare — te lichidează.</p>
+
+<p>Pe BVB, unde o acțiune individuală (nu indicele) poate face −10% până la −15% într-o zi pe o știre proastă sau pe lichiditate subțire, <strong>levierul peste 2x pe o singură acțiune românească este o invitație la lichidare</strong>. Buffer-ul de ~17% al levierului 3x (și mai puțin pe un cont de marjă cu menținere ridicată) dispare la prima ședință cu gap negativ.</p>
+
+<h3>Exemplu numeric complet: aceeași mișcare, două levere</h3>
+
+<p>Capital propriu 50.000 lei. Cumperi acțiuni dintr-un emitent BVB. Scenariul: acțiunea scade 12% într-o săptămână, apoi revine.</p>
+
+<ul>
+<li><strong>Fără levier (1x):</strong> expunere 50.000 lei → pierdere temporară 6.000 lei (−12% pe capital). Stai liniștit, aștepți revenirea, ieși la zero.</li>
+<li><strong>Levier 3x (cont de marjă pe acțiuni):</strong> expunere 150.000 lei (100.000 lei împrumutați) → la −12% pierderea pe poziție e 18.000 lei, adică −36% pe capitalul propriu. Pe un cont de marjă cu menținere de ~30%, pragul e atins repede și primești margin call. Dacă nu alimentezi în 24-48h, brokerul lichidează la fundul mișcării. Revenirea ulterioară a acțiunii nu te mai ajută — ai fost scos forțat. <strong>Ai avut dreptate pe direcție și tot ai pierdut.</strong></li>
+</ul>
+
+<h2>Stop-loss pe poziții leverage: de ce stop-ul „normal” nu te salvează</h2>
+
+<p>La levier, stop-loss-ul nu se calculează ca procent din prețul activului, ci ca procent din <strong>capitalul tău propriu</strong> raportat la levier. Regula avansată: stop-ul în prețul activului = (toleranța ta de pierdere pe capital propriu) ÷ levier.</p>
+
+<p>Dacă ești dispus să riști maxim 2% din capital pe un trade (regula clasică de risc management) și folosești levier 5x, stop-ul tău în prețul activului trebuie să fie la doar <strong>0,4%</strong> sub intrare (2% ÷ 5). Pe S&P 500, 0,4% e zgomot pur — vei fi stopat de oscilația obișnuită înainte ca teza ta să aibă timp să se materializeze. Aici e capcana subtilă: <strong>cu cât levierul e mai mare, cu atât stop-ul trebuie să fie mai strâns, dar cu atât e mai probabil să fii stopat de zgomot.</strong> Levierul mare și stop-loss-ul rațional sunt incompatibile pe orizont de investiție.</p>
+
+<p>Reguli operaționale pentru stop-loss pe poziții cu levier:</p>
+
+<ul>
+<li><strong>Stop garantat (guaranteed stop), nu simplu.</strong> Pe CFD, un stop-loss obișnuit nu te protejează la gap. Dacă piața deschide cu −5% peste stop-ul tău, ieși la prețul de gap, nu la stop. Guaranteed stop (cu primă plătită) garantează execuția — singura protecție reală împotriva gap-urilor și a soldului negativ teoretic.</li>
+<li><strong>Stop pe volatilitate (ATR), nu pe procent fix.</strong> Plasează stop-ul la 1,5-2× ATR sub intrare, apoi calculează levierul maxim compatibil, nu invers. Dacă levierul cerut de stop depășește ce permite riscul, reduci poziția, nu lărgești stop-ul.</li>
+<li><strong>Niciodată stop mental la levier.</strong> Pe poziție fără levier un stop mental e tolerabil. La levier, viteza de pierdere e prea mare pentru reacția umană — stop-ul trebuie să fie un ordin plasat în piață, nu o intenție.</li>
+</ul>
+
+<h2>Scenario de margin call și ieșire: cronologia exactă</h2>
+
+<p>Un margin call nu e un eveniment, e o secvență. Iat-o pas cu pas, pe un cont de marjă cu lichidare la marja de menținere:</p>
+
+<ul>
+<li><strong>T0 — alerta de marjă.</strong> Capitalul propriu scade sub un prag de avertizare (de ex. echity raportat la expunere sub ~40%). Primești notificare. Încă nu ești lichidat. Aici se decide totul.</li>
+<li><strong>T0+ore — margin call efectiv.</strong> Equity sub marja de menținere. Brokerul cere fie alimentare (depui cash), fie reducere poziție. Termenul e scurt: ore până la 1-2 zile, uneori imediat pe CFD.</li>
+<li><strong>Closeout/lichidare forțată.</strong> Pe CFD reglementat ESMA, când equity scade sub <strong>50% din marja necesară totală</strong>, brokerul închide automat poziții, începând de obicei cu cea mai pierzătoare. Nu negociezi, nu alegi. Lichidarea se face la prețul pieței în acel moment — de regulă cel mai prost.</li>
+<li><strong>Protecția împotriva soldului negativ.</strong> Tot prin ESMA, clientul retail nu poate ajunge cu contul sub zero — nu datorezi mai mult decât ai depus. Aceasta NU se aplică automat clienților „profesionali” care au renunțat la protecție.</li>
+</ul>
+
+<p>Decizia critică la T0: <strong>alimentezi sau ieși?</strong> Capcana psihologică e să alimentezi (să „aperi” poziția) pentru că ieșirea cristalizează pierderea. Regula rece: alimentezi DOAR dacă, recalculând de la zero cu prețul curent, ai cumpăra poziția acum la acel levier. Dacă răspunsul e nu, alimentarea e doar aruncare de bani buni după bani răi (sunk cost fallacy aplicat la datorie). În 80% din cazuri, ieșirea la margin call e decizia corectă; alimentarea repetată e cum conturile mor.</p>
+
+<h2>Regulile ESMA, protecția clientului și comparația de marje în România</h2>
+
+<p>Brokerii care deservesc retailul român sub reglementare ESMA aplică plafoane de levier pe CFD: tipic <strong>30:1 pe perechi valutare majore, 20:1 pe indici majori și aur, 5:1 pe acțiuni individuale, 2:1 pe cripto</strong>. Aceste plafoane sunt protecții, nu limitări arbitrare — sunt calibrate exact pe volatilitatea fiecărei clase. Faptul că acțiunile individuale au plafon 5:1 (vs. 20:1 pe indici) îți spune direct că riscul de gap pe o singură acțiune e considerat de ~4 ori mai mare.</p>
+
+<p>Pentru investiția pe acțiuni listate (cont de marjă, nu CFD), ratele de marjă și dobânda diferă semnificativ între brokeri. La comparație, urmărește trei cifre, nu doar levierul oferit:</p>
+
+<ul>
+<li><strong>Dobânda anuală a marjei.</strong> Aceasta îți erodează randamentul zilnic. O diferență de 3 puncte procentuale între brokeri schimbă complet calculul Kelly de mai sus — la cost de finanțare mai mic, levierul optim crește.</li>
+<li><strong>Marja de menținere efectivă.</strong> Pragul la care primești margin call. Cu cât e mai mare, cu atât buffer-ul tău e mai mic la același levier.</li>
+<li><strong>Politica de lichidare.</strong> Unii lichidează automat și instant; alții dau fereastră de alimentare. La volatilitate mare, diferența asta poate însemna salvarea sau pierderea poziției.</li>
+</ul>
+
+<p>Notă fiscală România: câștigul din tranzacții cu levier prin broker cu sediu în România beneficiază de reținere la sursă; pe broker extern, declari în Declarația Unică. Dobânda marjei NU e deductibilă din câștigul de capital pentru retail — o pierdere „ascunsă” pe care break-even-ul tău trebuie să o includă. Verifică cotele și pragurile curente la ANAF, pentru că regimul se modifică.</p>
+
+<h2>Psihologia datoriei la bursă: dușmanul real</h2>
+
+<p>Volatilitatea nu golește conturile cu levier — comportamentul sub datorie o face. Mecanismele psihologice specifice levierului, pe care un investitor avansat trebuie să le recunoască la el însuși:</p>
+
+<ul>
+<li><strong>Anxietatea de poziție amplificată.</strong> O pierdere de 6% pe capital fără levier doare; aceeași mișcare la 3x doare ca 18% și împinge la decizii de panică — vânzare la fund, exact ce nu trebuie.</li>
+<li><strong>Iluzia de control prin alimentare.</strong> Adăugarea de capital la margin call dă senzație de „acțiune” și control, dar e statistic decizia care accelerează ruina.</li>
+<li><strong>Reziliența asimetrică.</strong> După un trade leverage câștigător, creierul subestimează riscul și crește levierul. După unul pierzător, intervine revenge trading cu levier și mai mare. Ambele direcții duc la ruină.</li>
+<li><strong>Datoria ca presiune temporală.</strong> Costul finanțării rulează zilnic, deci levierul transformă o teză de investiție pe ani într-un pariu cu ceas — te forțează să ai dreptate <em>repede</em>, nu doar să ai dreptate.</li>
+</ul>
+
+<h2>Checklist de execuție înainte de orice poziție cu levier</h2>
+
+<ul>
+<li><strong>Am calculat levierul optim (¼ Kelly), nu am luat maximul oferit?</strong> Dacă levierul depășește 1,5-2x pe acțiuni, am un edge real care îl justifică?</li>
+<li><strong>Am scris tabela de break-even?</strong> Știu exact, în procente, cât poate scădea activul înainte de margin call la levierul meu.</li>
+<li><strong>Buffer-ul meu de margin call e mai mare decât o mișcare de stres de 1 zi?</strong> Pe S&P 500 minim −5%, pe o acțiune BVB minim −12%.</li>
+<li><strong>Stop-loss-ul e ordin plasat în piață (de preferat garantat), nu mental?</strong></li>
+<li><strong>Stop-ul calculat din risc (2% capital) ÷ levier e mai larg decât zgomotul zilnic?</strong> Dacă nu, levierul e prea mare pentru orizontul meu.</li>
+<li><strong>Am inclus dobânda marjei în break-even?</strong> Costul de finanțare anual × orizont = randamentul minim doar ca să nu pierd.</li>
+<li><strong>Am regula scrisă: la margin call, ieșire by default; alimentare DOAR dacă aș cumpăra acum de la zero?</strong></li>
+<li><strong>Pe instrument cu levier zilnic (ETF 2x/3x), am limitat orizontul la zile, conștient de volatility drag?</strong></li>
+<li><strong>Sunt încă client retail (cu protecție sold negativ ESMA), nu am renunțat la statutul de protecție pentru levier mai mare?</strong></li>
+</ul>
+
+<h2>Greșeli frecvente care lichidează conturile cu levier</h2>
+
+<ul>
+<li><strong>Confundarea levierului maxim cu levierul recomandat.</strong> Brokerul oferă 30x ca posibilitate, nu ca sugestie. 30x e un instrument de scalping, nu de investiție.</li>
+<li><strong>Stop-loss larg „ca să nu fiu stopat de zgomot” combinat cu levier mare.</strong> E cea mai frecventă rețetă de margin call: stop-ul larg înseamnă pierdere mare pe capital la levier mare.</li>
+<li><strong>Ignorarea costului de finanțare pe poziții ținute săptămâni.</strong> Levierul e ieftin pe ore, scump pe luni; o teză de investiție pe levier devine negativă doar din carry.</li>
+<li><strong>Folosirea instrumentelor 3x ca „buy and hold”.</strong> Volatility drag-ul le transformă în mașini de erodat capital pe orizont lung.</li>
+<li><strong>Alimentarea repetată a unei poziții pierzătoare.</strong> Sunk cost fallacy aplicat la datorie — modul numărul unu în care conturile cu levier ajung la zero.</li>
+</ul>

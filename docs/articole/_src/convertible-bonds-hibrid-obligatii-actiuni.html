@@ -1,0 +1,111 @@
+<p><strong>Convertible bonds România strategie investiție</strong> este un subiect pe care puțini investitori locali îl stăpânesc cu adevărat, deși obligațiunile convertibile sunt printre cele mai elegante instrumente hibride din piață: îți oferă protecție downside ca o obligațiune obișnuită și upside equity ca o acțiune. Practic, plătești un cupon mai mic în schimbul unei opțiuni de conversie în acțiuni — iar întreaga artă constă în a evalua corect diferența între un straight bond și conversion value, în a gestiona credit spread vs conversion spread și în a decide timingul conversiei și strategia vânzării.</p>
+<p>Această lecție merge direct în profunzime, presupunând că deja cunoști diferența dintre o obligațiune și o acțiune din lecțiile de bază. Vom analiza un caz real cu calcule de paritate de conversie și drift, vom construi scenarii de profit/pierdere, vom discuta convertible arbitrage și hedging, riscul de call provisions și dilution risk, callable convertibles și riscul de call, plus impozitarea conversiei obligațiunilor convertibile pentru un rezident român în 2026.</p>
+<p>Pentru investitorul român, accesul direct la convertibile listate la BVB este limitat — majoritatea oportunităților sunt pe piețele externe, prin brokeri pan-europeni. De aceea accentul cade pe înțelegerea mecanicii și pe deciziile multi-variabile: cât plătești de fapt pentru opțiune, când conversia bate vânzarea pe piață și cum modelezi callable convertibles care îți pot scurta brutal orizontul de profit.</p>
+
+<h2>Anatomia unei obligațiuni convertibile: cele patru valori care contează</h2>
+<p>O convertibilă nu se evaluează ca un singur preț. Trebuie să separi mental patru mărimi, pentru că decizia ta depinde de relația dintre ele:</p>
+<ul>
+<li><strong>Conversion ratio</strong> — numărul de acțiuni pe care le primești pe o obligațiune la conversie. Dacă valoarea nominală e 1.000 € și conversion ratio = 20, conversia îți dă 20 de acțiuni.</li>
+<li><strong>Conversion price</strong> — prețul implicit per acțiune la care convertești: nominal / conversion ratio = 1.000 / 20 = <strong>50 € per acțiune</strong>. Acesta este pragul de la care conversia începe să aibă sens economic.</li>
+<li><strong>Conversion value (parity)</strong> — valoarea pachetului de acțiuni dacă ai converti ACUM: conversion ratio × prețul curent al acțiunii. La 45 €/acțiune înseamnă 20 × 45 = <strong>900 €</strong>.</li>
+<li><strong>Straight bond value (bond floor)</strong> — cât ar valora obligațiunea fără opțiunea de conversie, adică valoarea actualizată a cupoanelor și principalului la randamentul cerut pentru riscul de credit al emitentului. Acesta este planșeul tău de protecție downside.</li>
+</ul>
+<p>Prețul de piață al convertibilei stă <em>mereu peste</em> maximul dintre bond floor și conversion value. Diferența peste acest maxim este <strong>premium-ul de conversie</strong> — exact prețul opțiunii încorporate. Investitorul avansat nu cumpără niciodată o convertibilă fără să descompună acest premium.</p>
+
+<h2>Caz real cu calcule: convertibila „Alfa SA" la 50 €</h2>
+<p>Construim un caz numeric concret, de tip european, pe care îl poți replica pentru orice emisiune reală pe care o analizezi.</p>
+<p><strong>Datele emisiunii:</strong></p>
+<ul>
+<li>Valoare nominală: 1.000 € per obligațiune</li>
+<li>Cupon: 2,0% pe an (vs 5,5% pe care l-ar cere piața pentru un straight bond comparabil al aceluiași emitent)</li>
+<li>Scadență: 5 ani</li>
+<li>Conversion ratio: 20 acțiuni</li>
+<li>Conversion price: 50 €/acțiune</li>
+<li>Preț acțiune la emisiune: 40 €/acțiune (deci convertibila se emite „out of the money", cu acțiunea sub conversion price)</li>
+</ul>
+<p><strong>Pasul 1 — bond floor.</strong> Actualizăm cupoanele de 20 € pe an plus principalul de 1.000 € la randamentul de credit de 5,5%. Rezultatul e aproximativ <strong>850 €</strong> (suma valorilor prezente ale celor cinci cupoane plus principalul, scontate la 5,5%). Acesta e planșeul: dacă acțiunea se prăbușește, obligațiunea tinde spre ~850 € la termen scurt și converge spre principalul de 1.000 € pe măsură ce se apropie scadența, nu spre zero.</p>
+<p><strong>Pasul 2 — conversion value azi.</strong> La 40 €/acțiune: 20 × 40 = <strong>800 €</strong>. Conversia azi ar fi o pierdere față de bond floor — deci nimeni nu convertește acum; valoarea de obligațiune domină.</p>
+<p><strong>Pasul 3 — premium-ul plătit.</strong> Să presupunem că obligațiunea se tranzacționează la <strong>980 €</strong>. Atunci:</p>
+<ul>
+<li>Premium peste bond floor = 980 − 850 = <strong>130 €</strong> (prețul opțiunii equity).</li>
+<li>Conversion premium peste parity = (980 − 800) / 800 = <strong>22,5%</strong>. Adică acțiunea trebuie să urce cu ~22,5% doar ca paritatea să prindă din urmă prețul plătit azi.</li>
+</ul>
+
+<h3>Scenarii de profit/pierdere la scadență</h3>
+<p>Iată de ce hibridul e atractiv — analizăm trei drumuri ale acțiunii, plecând de la cele 980 € plătite:</p>
+<ul>
+<li><strong>Scenariu bull — acțiunea la 75 € în anul 5.</strong> Conversion value = 20 × 75 = 1.500 €. Convertești și obții 1.500 € (plus cupoanele încasate pe parcurs). Profit ≈ 1.500 − 980 = <strong>+520 €</strong>, adică ~+53% pe instrument, capturând upside equity aproape integral.</li>
+<li><strong>Scenariu flat — acțiunea la 48 € (sub conversion price).</strong> Nu convertești; primești principalul 1.000 € la scadență plus cupoanele de 2%/an. Profit ≈ 1.000 − 980 = +20 € capital, plus ~100 € cupoane pe 5 ani. Modest, dar pozitiv — protecția downside a funcționat.</li>
+<li><strong>Scenariu bear — acțiunea la 15 €, emitent încă solvabil.</strong> Conversia e absurdă (300 €); primești principalul 1.000 €. Pierderea ta față de 980 € e zero — ai fost protejat de bond floor. Riscul real aici NU e prețul acțiunii, ci <strong>riscul de credit</strong>: dacă emitentul intră în default, bond floor-ul se prăbușește și el. De aceea convertibilele de emitenți fragili sunt obligațiuni cu floor iluzoriu.</li>
+</ul>
+<p>Concluzia structurală: convertibila îți dă un payoff <strong>convex</strong> — pierdere limitată la riscul de credit, câștig nelimitat pe equity. Plătești convexitatea prin cupon redus (2% vs 5,5%) și prin premium-ul de 130 €.</p>
+
+<h2>Drift: de ce premium-ul se erodează în timp</h2>
+<p>Opțiunea încorporată într-o convertibilă are <strong>theta</strong> — își pierde valoare-timp pe măsură ce se apropie scadența, exact ca orice opțiune. Acesta e <em>driftul</em> pe care trebuie să-l modelezi:</p>
+<ul>
+<li>Dacă acțiunea rămâne sub conversion price, premium-ul de conversie se topește treptat spre zero pe măsură ce obligațiunea „coboară" spre bond floor și apoi spre principal la scadență.</li>
+<li>Dacă acțiunea urcă mult peste conversion price, convertibila devine „in the money" și se comportă aproape ca acțiunea (delta → 1), premium-ul de conversie comprimându-se pentru că opțiunea e adânc în bani.</li>
+<li>Zona periculoasă e cea „at the money", unde plătești cel mai mare premium și unde theta lucrează cel mai agresiv împotriva ta dacă acțiunea stagnează.</li>
+</ul>
+<p>Pentru un deținut pe termen lung, driftul înseamnă că o convertibilă cumpărată scump „at the money" și ținută printr-o piață laterală îți erodează randamentul chiar dacă acțiunea nu scade. Costul de oportunitate al cuponului mic (2% vs 5,5%) se adună la erodarea premium-ului — un dublu cost tăcut.</p>
+
+<h2>Credit spread vs conversion spread: cele două surse de risc</h2>
+<p>O convertibilă are practic două „motoare" de preț, iar arbitrajistul le tranzacționează separat:</p>
+<ul>
+<li><strong>Credit spread</strong> — randamentul suplimentar peste rata fără risc cerut pentru riscul de default al emitentului. Lărgirea spread-ului de credit împinge bond floor-ul în jos și lovește convertibila <em>indiferent</em> de prețul acțiunii. Aceasta e componenta de „obligațiune".</li>
+<li><strong>Conversion spread</strong> — distanța dintre prețul acțiunii și conversion price, care guvernează cât de „echity-like" e instrumentul. Aceasta e componenta de „acțiune", condusă de prețul acțiunii și de volatilitatea ei implicită.</li>
+</ul>
+<p>Capcana subtilă: într-o criză, ambele se mișcă advers simultan — acțiunea cade (conversion value scade) ȘI credit spread-ul se lărgește (bond floor scade). Convertibilele, care „în teorie" te protejează, pot pierde mult în stres acut tocmai pentru că floor-ul presupus solid se subțiază exact când ai nevoie de el. Convexitatea promisă devine corelație negativă în coadă.</p>
+
+<h2>Convertible arbitrage și hedging</h2>
+<p>Strategia clasică de hedge fund: <strong>cumperi convertibila și shortezi acțiunea suport</strong> în proporția dată de delta opțiunii (delta hedging). Logica:</p>
+<ul>
+<li>Cumperi convertibila la 980 €, cu o delta estimată de, să zicem, 0,5 (jumătate din mișcarea acțiunii se transmite în convertibilă).</li>
+<li>Shortezi 0,5 × 20 = 10 acțiuni per obligațiune ca acoperire.</li>
+<li>Dacă acțiunea scade, pierderea pe convertibilă e parțial compensată de câștigul pe short; dacă urcă, invers. Rămâi expus la <strong>volatilitate</strong> și la <strong>carry</strong> (cupon încasat minus costul împrumutului de acțiuni pentru short).</li>
+</ul>
+<p>Pe scurt, convertible arbitrage e o pariere pe „volatilitate ieftină": cumperi opțiunea încorporată mai ieftin decât o reevaluează piața și recalibrezi continuu delta hedge-ul (gamma trading). Pentru investitorul român retail, replicarea pură e dificilă — short-ul pe acțiunea suport necesită broker cu securities lending și costuri de finanțare care adesea anulează edge-ul. Mai realist e să folosești hedge-ul <em>parțial</em>, defensiv, pe poziții mari, nu ca strategie pură de randament.</p>
+
+<h2>Call provisions, dilution risk și callable convertibles</h2>
+<p>Cele mai brutale capcane stau în clauzele contractuale, nu în matematica de bază.</p>
+<h3>Riscul de call (callable convertibles)</h3>
+<p>Multe convertibile sunt <strong>callable</strong> — emitentul poate răscumpăra obligațiunea înainte de scadență, de regulă când acțiunea a urcat mult peste conversion price. Mecanismul forțează un „soft call": emitentul anunță răscumpărarea la un preț apropiat de nominal, iar tu ești obligat să alegi între a accepta răscumpărarea (la nominal, ratând upside-ul) sau a converti imediat în acțiuni. Practic, <strong>call provision-ul plafonează upside-ul tău</strong> și scurtează durata opțiunii exact când era cel mai valoroasă. O convertibilă cu protecție de call slabă (perioadă scurtă de no-call) valorează mai puțin decât una cu protecție lungă, chiar la aceiași parametri.</p>
+<h3>Dilution risk</h3>
+<p>Conversia creează acțiuni noi, deci <strong>diluează acționarii existenți</strong>. Dacă tu ești deja acționar al emitentului, conversia masivă a unei emisiuni de convertibile îți reduce cota și EPS-ul (profit pe acțiune). Investitorul avansat verifică <em>câte</em> acțiuni potențiale poate genera conversia raportat la numărul de acțiuni în circulație — un overhang de dilution mare apasă prețul acțiunii și, indirect, conversion value-ul propriei tale convertibile.</p>
+
+<h2>Timingul conversiei și strategia vânzării</h2>
+<p>Regula de fier: <strong>aproape niciodată nu convertești voluntar înainte de scadență sau de un call forțat.</strong> Motivul — atâta timp cât deții convertibila „in the money", capturezi deja întreaga apreciere a acțiunii prin preț (delta ≈ 1), DAR păstrezi cuponul și planșeul de protecție. Conversia anticipată renunță la cupon și la protecție fără a câștiga nimic în plus. Deci:</p>
+<ul>
+<li><strong>Dacă vrei să ieși, VINZI convertibila pe piață</strong> — încasezi conversion value plus orice premium rezidual — în loc să convertești și apoi să vinzi acțiunile (la care renunți la premium).</li>
+<li><strong>Convertești doar dacă</strong> ești forțat de un call ȘI conversion value > prețul de call, sau dacă urmează un dividend mare pe acțiune care depășește valoarea-timp rămasă a opțiunii (cazul rar de conversie optimă timpurie).</li>
+</ul>
+
+<h2>Impozitarea conversiei și a câștigului — rezident român 2026</h2>
+<p>Aici se ascund cele mai multe erori. Tratează separat trei evenimente:</p>
+<ul>
+<li><strong>Cupoanele</strong> (venit din dobânzi) sunt impozabile în România cu cota standard de <strong>10%</strong> impozit pe venit, reținut de regulă la sursă de plătitorul intern sau declarat în Declarația Unică pentru venituri din străinătate. În plus, veniturile din investiții pot atrage <strong>CASS de 10%</strong> dacă totalul lor anual depășește pragurile raportate la salariul minim brut (6, 12 sau 24 de salarii minime). Pragurile și cota CASS se ajustează frecvent — confirmă-le pentru anul fiscal curent.</li>
+<li><strong>Conversia propriu-zisă</strong> — punctul delicat. În principiu, schimbul obligațiunii pe acțiuni nu e neapărat un eveniment de realizare a câștigului în toate jurisdicțiile, dar tratamentul ANAF poate considera momentul conversiei sau al vânzării ulterioare ca moment al realizării. <strong>Nu presupune neutralitate fiscală a conversiei — verifică tratamentul exact</strong> cu un consultant fiscal, pentru că baza de cost a acțiunilor rezultate (prețul de conversie vs prețul de piață la conversie) îți determină câștigul viitor.</li>
+<li><strong>Vânzarea acțiunilor rezultate</strong> — câștigul de capital se impozitează ca orice câștig din titluri. Prin <strong>broker român cu reținere la sursă</strong>, impozitul e gestionat automat, cu cote reduse în funcție de perioada de deținere (în 2026 aproximativ <strong>3% pentru titluri deținute peste 1 an</strong> și <strong>6% pentru cele sub 1 an</strong>). Prin <strong>broker străin</strong>, declari câștigul în Declarația Unică, unde se aplică în general cota de impozit pe venit de <strong>10%</strong> prin autodeclarare. Diferența de tratament între broker intern și extern poate fi materială — confirmă cotele exacte pentru anul fiscal curent.</li>
+</ul>
+<p>Capcana fiscală tipică: investitorul presupune că baza de cost a acțiunilor e prețul de conversie (50 €), când de fapt poate fi prețul plătit pe convertibilă alocat per acțiune. O bază greșită umflă sau subestimează câștigul impozabil. Documentează fiecare pas cu extrase de broker.</p>
+
+<h2>Checklist practic înainte de a cumpăra o convertibilă</h2>
+<ul>
+<li><strong>Descompune prețul:</strong> calculează bond floor, conversion value și premium-ul. Premium peste 30–40% „at the money" e scump — plătești prea mult pe opțiune.</li>
+<li><strong>Verifică riscul de credit:</strong> bond floor-ul valorează doar cât solvabilitatea emitentului. Citește rating-ul și credit spread-ul; un floor de la un emitent fragil e fictiv.</li>
+<li><strong>Citește clauzele de call:</strong> identifică perioada de no-call și pragul soft-call. Protecție scurtă = upside plafonat. Tratează callable convertibles cu prudență.</li>
+<li><strong>Estimează dilution overhang:</strong> câte acțiuni noi poate crea emisiunea vs free float; un overhang mare apasă acțiunea.</li>
+<li><strong>Modelează driftul:</strong> dacă scenariul de bază e piață laterală, theta + cuponul mic îți pot eroda randamentul real chiar fără ca acțiunea să scadă.</li>
+<li><strong>Planifică ieșirea:</strong> regula e VINZI convertibila, NU converti-și-vinzi, ca să nu lași premium pe masă.</li>
+<li><strong>Clarifică fiscalitatea ÎNAINTE:</strong> cupoane, moment al conversiei, bază de cost a acțiunilor, broker intern vs extern. Confirmă cotele și pragurile 2026 la sursă.</li>
+</ul>
+
+<h2>Greșeli frecvente ale investitorului avansat</h2>
+<ul>
+<li><strong>Confundă „protecție downside" cu „fără risc".</strong> Bond floor-ul cedează în default — riscul de credit e riscul real, nu prețul acțiunii.</li>
+<li><strong>Cumpără premium scump at-the-money</strong> și apoi stagnează într-o piață laterală, pierzând pe theta și pe cuponul mic simultan.</li>
+<li><strong>Ignoră call provision-ul</strong> și e surprins când upside-ul i se plafonează printr-un soft call forțat.</li>
+<li><strong>Convertește anticipat</strong> și renunță inutil la cupon, protecție și premium rezidual, când vânzarea pe piață era superioară.</li>
+<li><strong>Presupune neutralitate fiscală a conversiei</strong> și calculează greșit baza de cost, plătind impozit umflat la vânzarea acțiunilor.</li>
+</ul>
+<p>Stăpânite corect, convertibilele sunt unul dintre puținele instrumente care îți oferă convexitate reală — pierdere limitată, câștig deschis. Dar întreaga valoare stă în descompunerea premium-ului, în citirea clauzelor de call și în disciplina de ieșire prin vânzare, nu prin conversie pripită.</p>

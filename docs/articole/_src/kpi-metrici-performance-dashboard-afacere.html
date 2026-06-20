@@ -1,0 +1,189 @@
+<p>Un sistem solid de <strong>KPI, metrice performanță afacere și dashboard</strong> este ceea ce separă antreprenorul care conduce „după burtă" de cel care ia decizii pe baza unui tablou de bord în timp real. Dacă ai parcurs deja lecția despre analitica de afacere și știi ce metrici importante trebuie urmărite, aici trecem la nivelul de profunzime: cum construiești un set complet de indicatori diferențiat pe tip de business, cu formule de calcul exacte, benchmark-uri de industrie și trigger-uri de acțiune.</p>
+
+<p>Vom acoperi diferențele dintre <strong>KPI SaaS vs servicii vs retail</strong>, vom calcula riguros <strong>CAC, LTV și churn rate</strong>, vom descompune <strong>unit economics</strong> cu exemple numerice în lei, vom discuta când un <strong>dashboard real-time chiar duce la decizii</strong> (și când e doar zgomot vizual), și vom stabili o <strong>frecvență de review</strong> disciplinată — zilnic, săptămânal, lunar — fiecare cu propriile acțiuni declanșate. Scopul nu e o listă de 50 de metrici pe care nu le vei privi niciodată, ci 15 KPI-uri relevante per model de afacere, fiecare legat de o decizie concretă.</p>
+
+<p>Pe scurt, un sistem de <strong>KPI metrice performanță afacere dashboard</strong> nu e o colecție de grafice frumoase, ci infrastructura ta de decizie. Diferența dintre un raport și un dashboard nu e cosmetică. Un raport descrie trecutul; un dashboard semnalează când trebuie să acționezi. În 2026, cu costurile de capital încă ridicate în România (dobânzile la creditele pentru IMM se mențin la niveluri duble față de perioada 2021), eficiența capitalului — nu doar creșterea cifrei de afaceri — este metrica supremă. O afacere care crește 40% pe an dar arde numerar la un CAC nesustenabil e mai fragilă decât una care crește 15% cu unit economics pozitive.</p>
+
+<h2>Anatomia unui KPI care chiar contează</h2>
+
+<p>Un KPI util respectă patru condiții simultan, altfel e doar o „vanity metric": (1) este <strong>acționabil</strong> — schimbarea lui declanșează o decizie; (2) este <strong>controlabil</strong> — echipa ta poate influența valoarea; (3) este <strong>raportabil la o țintă</strong> — ai un benchmark sau un buget față de care îl compari; (4) are o <strong>frecvență naturală de citire</strong> — nu te uiți zilnic la o metrică ce se mișcă trimestrial.</p>
+
+<p>Numărul total de utilizatori înregistrați, numărul de like-uri sau „afișări" sunt vanity metrics clasice. În schimb, <em>utilizatori activi care au efectuat acțiunea care generează valoare</em>, marja de contribuție per client sau viteza de încasare a creanțelor sunt KPI-uri reale. Regula practică: dacă nu poți completa propoziția „dacă acest număr scade sub X, atunci fac Y", atunci nu e un KPI, e o statistică.</p>
+
+<h2>Cele 3 metrici-fundament transversale: CAC, LTV, churn</h2>
+
+<p>Indiferent de model, trei indicatori formează coloana vertebrală a unit economics. Le definim cu formule exacte.</p>
+
+<h3>CAC — Cost de Achiziție Client</h3>
+
+<p><strong>Formula:</strong> CAC = (cheltuieli totale de marketing și vânzări într-o perioadă) / (numărul de clienți noi achiziționați în aceeași perioadă). Atenție la capcana clasică: trebuie să incluzi <strong>salariile echipei de vânzări și marketing, comisioanele, costul instrumentelor (CRM, ads), agențiile</strong> — nu doar bugetul de reclame.</p>
+
+<p><strong>Exemplu:</strong> o agenție de servicii cheltuie într-un trimestru 18.000 lei pe Google/Meta Ads, 30.000 lei salarii pentru un om de vânzări + jumătate de marketer, 4.000 lei pe unelte. Total 52.000 lei. A semnat 8 clienți noi. CAC = 52.000 / 8 = <strong>6.500 lei/client</strong>. Dacă valoarea medie a unui contract e 9.000 lei, raportul e periculos.</p>
+
+<h3>LTV — Lifetime Value (valoarea pe durata de viață)</h3>
+
+<p><strong>Formula simplificată:</strong> LTV = (venit mediu per client per perioadă × marja brută %) / churn rate. Sau, echivalent, LTV = marja brută per client per lună × durata medie de retenție în luni.</p>
+
+<p><strong>Exemplu SaaS:</strong> abonament mediu 250 lei/lună, marjă brută 80%, churn lunar 4%. Durata medie = 1/0,04 = 25 luni. LTV = 250 × 0,80 × 25 = <strong>5.000 lei</strong>. Raportul de aur: <strong>LTV/CAC ≥ 3</strong>. Sub 3 ești fragil; sub 1 plătești ca să pierzi bani. Peste 5, paradoxal, e posibil să subinvestești în creștere.</p>
+
+<h3>Churn rate (rata de pierdere a clienților)</h3>
+
+<p><strong>Formula (churn de clienți):</strong> clienți pierduți în perioadă / clienți la începutul perioadei. <strong>Churn de venit (revenue churn):</strong> venit recurent pierdut / venit recurent la început. Distincția e crucială: poți pierde mulți clienți mici (churn de clienți mare) dar venit stabil, sau invers. Pentru SaaS B2B, <strong>net revenue retention (NRR)</strong> — care include și upsell-urile la clienții existenți — e regele indicatorilor; un NRR peste 100% înseamnă că afacerea crește chiar și fără clienți noi.</p>
+
+<h2>15 KPI-uri pentru SaaS / produs digital recurent</h2>
+
+<p>Pentru un model de abonament recurent, set complet de urmărit:</p>
+
+<ul>
+<li><strong>MRR / ARR</strong> (venit recurent lunar/anual) — și descompunerea în new MRR, expansion MRR, contraction MRR, churned MRR.</li>
+<li><strong>Net Revenue Retention (NRR)</strong> — țintă &gt;100%, excelent &gt;110%.</li>
+<li><strong>Gross churn de venit lunar</strong> — sub 2%/lună e sănătos pentru B2B.</li>
+<li><strong>LTV/CAC</strong> — țintă ≥3.</li>
+<li><strong>CAC Payback Period</strong> — luni până recuperezi CAC = CAC / (MRR per client × marjă brută). Țintă &lt;12 luni.</li>
+<li><strong>Gross margin %</strong> — SaaS sănătos 70–85%.</li>
+<li><strong>Activation rate</strong> — % din înscriși care ajung la momentul „aha" / prima valoare.</li>
+<li><strong>DAU/MAU</strong> (stickiness) — cât de des revin utilizatorii.</li>
+<li><strong>Trial-to-paid conversion</strong> — % din trial-uri care devin plătitoare.</li>
+<li><strong>Expansion revenue %</strong> — cât din creștere vine din clienții existenți.</li>
+<li><strong>Burn multiple</strong> — net burn / net new ARR; sub 1 e excelent, peste 2 e îngrijorător.</li>
+<li><strong>Runway (lunile de numerar rămase)</strong> — numerar / burn lunar.</li>
+<li><strong>Rule of 40</strong> — creștere % + marjă profit % ≥ 40.</li>
+<li><strong>Time to value (TTV)</strong> — cât durează până clientul obține rezultatul promis.</li>
+<li><strong>Magic Number</strong> — net new ARR / cheltuieli S&amp;M din trimestrul anterior; &gt;0,75 indică scalare eficientă.</li>
+</ul>
+
+<h2>15 KPI-uri pentru afaceri de servicii (agenții, consultanță, profesii)</h2>
+
+<p>Aici logica e fundamental diferită: vinzi timp și expertiză, deci <strong>utilizarea capacității și marja per proiect</strong> contează mai mult decât recurența.</p>
+
+<ul>
+<li><strong>Utilization rate (rata de utilizare)</strong> — ore facturabile / ore disponibile. Țintă 70–85%; peste 90% sustenabil înseamnă burnout iminent.</li>
+<li><strong>Billable rate efectiv (realized rate)</strong> — venit încasat / ore lucrate; diferă de tariful nominal din cauza reducerilor și a orelor nefacturate.</li>
+<li><strong>Marja brută per proiect / per client</strong> — și identificarea clienților care „mănâncă" marja.</li>
+<li><strong>Project profitability variance</strong> — buget de ore vs. ore reale.</li>
+<li><strong>Revenue per angajat (FTE)</strong> — productivitatea structurii.</li>
+<li><strong>Pipeline value &amp; win rate</strong> — oferte trimise vs. câștigate.</li>
+<li><strong>Sales cycle length</strong> — zile de la lead la contract semnat.</li>
+<li><strong>CAC și LTV pe client</strong> (servicii recurente / retainere).</li>
+<li><strong>Client concentration</strong> — % din venit de la top 1–3 clienți; peste 30% de la un singur client = risc major.</li>
+<li><strong>DSO (Days Sales Outstanding)</strong> — zile medii de încasare a facturilor; vezi secțiunea de cash.</li>
+<li><strong>Backlog / contracted future revenue</strong> — venit deja contractat pentru lunile viitoare.</li>
+<li><strong>Net Promoter Score (NPS)</strong> și rata de referral.</li>
+<li><strong>Retainer retention rate</strong> — % retaineri reînnoiți.</li>
+<li><strong>Scope creep ratio</strong> — ore peste scop / ore contractate.</li>
+<li><strong>EBITDA margin</strong> — sănătatea operațională reală.</li>
+</ul>
+
+<h2>15 KPI-uri pentru retail / comerț (fizic și e-commerce)</h2>
+
+<p>Retailul trăiește din <strong>rotația stocului, marja și costul de achiziție per comandă</strong>. Cifra de afaceri mare cu marjă subțire și stoc blocat e o capcană de lichiditate clasică.</p>
+
+<ul>
+<li><strong>Gross margin % și marja per categorie/SKU</strong>.</li>
+<li><strong>Inventory turnover (rotația stocului)</strong> — cost bunuri vândute / stoc mediu; cu cât mai mare, cu atât capitalul lucrează mai bine.</li>
+<li><strong>Days Inventory Outstanding (DIO)</strong> — zile în care stocul stă pe raft.</li>
+<li><strong>Sell-through rate</strong> — unități vândute / unități primite, pe perioadă.</li>
+<li><strong>AOV (Average Order Value)</strong> — valoarea medie a coșului.</li>
+<li><strong>Conversion rate</strong> — comenzi / vizitatori (e-commerce) sau cumpărători / vizitatori (magazin fizic).</li>
+<li><strong>CAC per comandă și ROAS</strong> (return on ad spend) — venit din reclame / cost reclame; țintă variabilă, dar sub 2–3 ROAS rar e profitabil după toate costurile.</li>
+<li><strong>Contribution margin per comandă</strong> — preț − COGS − cost transport − cost achiziție − comisioane plată.</li>
+<li><strong>Return rate (rata de retur)</strong> — critică în fashion, unde poate depăși 30%.</li>
+<li><strong>Repeat purchase rate / customer lifetime orders</strong>.</li>
+<li><strong>Stockout rate</strong> — % din timp în care produsele-vedetă lipsesc.</li>
+<li><strong>Gross margin return on inventory (GMROI)</strong> — marjă brută / cost mediu stoc.</li>
+<li><strong>Cash conversion cycle</strong> — DIO + DSO − DPO.</li>
+<li><strong>Sales per mp</strong> (retail fizic) sau per vizitator (online).</li>
+<li><strong>Shrinkage</strong> — pierderi de stoc (furt, deteriorare, erori).</li>
+</ul>
+
+<h2>Unit economics: descompunerea care decide totul</h2>
+
+<p>Unit economics răspunde la întrebarea simplă: <em>câștigi sau pierzi bani la fiecare unitate vândută, după ce numeri TOATE costurile variabile?</em> Aici se ascund cele mai multe iluzii de profitabilitate.</p>
+
+<p><strong>Exemplu e-commerce — un produs vândut la 199 lei:</strong></p>
+<ul>
+<li>Preț de vânzare: 199 lei</li>
+<li>TVA colectat (21%, cota standard în România din august 2025): produsul se raportează net, deci venit net ≈ 164,5 lei</li>
+<li>Cost produs (COGS): 70 lei</li>
+<li>Transport (parțial subvenționat): 18 lei</li>
+<li>Comision procesator plată (~2%): 4 lei</li>
+<li>Cost achiziție alocat (CAC/comandă): 35 lei</li>
+<li>Cost ambalare/fulfillment: 8 lei</li>
+<li>Retur alocat (rata 12% × cost retur): ~6 lei</li>
+</ul>
+<p><strong>Contribuție per comandă = 164,5 − 70 − 18 − 4 − 35 − 8 − 6 ≈ 23,5 lei.</strong> Marjă de contribuție ~14,3% din venitul net. Pare ok — până observi că din aceste 23 lei trebuie să acoperi chiria, salariile fixe, software-ul. Dacă AOV ar fi 199 lei și ai nevoie de 50.000 lei/lună costuri fixe, ai nevoie de ~2.130 comenzi/lună doar pentru break-even. <strong>Decizia de strategie</strong>: fie crești AOV (bundle-uri, cross-sell), fie scazi CAC, fie negociezi COGS — nu „mai multe vânzări" la aceeași contribuție subțire, pentru că scalarea pierderii nu o transformă în profit.</p>
+
+<h2>Tabel benchmark orientativ pe industrie (2026)</h2>
+
+<p>Folosește aceste praguri ca repere de calibrare, nu ca adevăruri absolute — variază mult cu maturitatea și piața. Verifică-le față de propriile date istorice.</p>
+
+<ul>
+<li><strong>SaaS B2B sănătos:</strong> LTV/CAC ≥ 3, CAC payback &lt;12 luni, churn lunar &lt;2%, gross margin 70–85%, NRR &gt;100%, Rule of 40 ≥40.</li>
+<li><strong>SaaS B2C:</strong> churn lunar adesea 4–7%, payback mai scurt necesar, accent pe activation și viralitate.</li>
+<li><strong>Servicii / agenții:</strong> utilization 70–85%, EBITDA margin 15–25% (consultanță poate depăși), revenue/FTE relevant intern, concentrare client &lt;30%.</li>
+<li><strong>E-commerce:</strong> gross margin 35–60% (variază enorm pe nișă), contribution margin pozitivă obligatorie, inventory turnover 4–8×/an pentru produse standard, return rate &lt;10% (excepție fashion).</li>
+<li><strong>Retail fizic:</strong> GMROI &gt;2, sales per mp în funcție de format, shrinkage &lt;2% din vânzări.</li>
+</ul>
+
+<h2>Frecvența de review: zilnic / săptămânal / lunar</h2>
+
+<p>O greșeală frecventă e să citești totul zilnic — generează panică pe zgomot statistic — sau totul lunar, ratând semnale critice. Stratifică pe orizont natural:</p>
+
+<h3>Zilnic (operațional, „pulse")</h3>
+<p>Numerar disponibil, vânzări vs. țintă zilnică, ROAS pe campaniile active, comenzi/lead-uri noi, stockout-uri la produsele-vedetă, incidente operaționale. Acestea se mișcă rapid și o deviație necesită acțiune azi. <strong>Trigger:</strong> dacă ROAS scade sub pragul de break-even două zile la rând, pune campania pe pauză și analizează.</p>
+
+<h3>Săptămânal (tactic)</h3>
+<p>Pipeline și win rate, MRR new/churned, utilization rate (servicii), conversion rate, DSO/creanțe restante, burn vs. buget. Aici corectezi cursul înainte ca o lună întreagă să fie compromisă. <strong>Trigger:</strong> dacă utilization scade sub 65% două săptămâni, mută oameni pe pre-vânzare sau dezvoltare; dacă urcă peste 90%, e semnal de angajare.</p>
+
+<h3>Lunar / trimestrial (strategic)</h3>
+<p>LTV/CAC, NRR, cohort retention, EBITDA, marja per client/categorie, GMROI, Rule of 40, runway. Acestea ghidează deciziile mari: angajări, ridicare de capital, abandonarea unei linii de produs. <strong>Trigger:</strong> dacă LTV/CAC scade sub 3 două trimestre consecutiv, oprește scalarea cheltuielilor de achiziție până repari unit economics.</p>
+
+<h2>Când dashboard-ul duce la decizii (și când e doar decor)</h2>
+
+<p>Un dashboard real-time e justificat doar pentru metrici care (a) se mișcă în interval scurt și (b) au o acțiune imediată asociată: numerar, ROAS, stoc la produse critice, uptime. Pentru LTV, NRR sau cohorturi, real-time e inutil — sunt metrici de tendință care se citesc lunar și se interpretează pe cohorte, nu pe ziua curentă.</p>
+
+<p><strong>Regula „un dashboard = o decizie":</strong> fiecare ecran ar trebui să corespundă unui rol și unei decizii. Dashboard-ul fondatorului ≠ dashboard-ul echipei de vânzări ≠ dashboard-ul de operațiuni. Un singur dashboard cu 40 de widget-uri nu e folosit de nimeni. Adaugă mereu <strong>contextul</strong>: o cifră fără țintă, fără trend și fără perioadă de comparație nu spune nimic — afișează valoarea, ținta și variația % față de perioada anterioară.</p>
+
+<h2>Trigger-uri de acțiune și semnale de schimbare a strategiei</h2>
+
+<p>Definește din timp pragurile la care iei măsuri, ca să nu decizi emoțional în criză:</p>
+
+<ul>
+<li><strong>LTV/CAC &lt; 1</strong> → oprește imediat scalarea achiziției; pierzi bani la fiecare client.</li>
+<li><strong>CAC payback &gt; 18 luni</strong> (SaaS) → revizuiește prețul sau canalele de achiziție.</li>
+<li><strong>Churn lunar &gt; 5%</strong> (B2B) → problemă de produs/onboarding, nu de marketing; investește în retenție.</li>
+<li><strong>NRR &lt; 90%</strong> → afacerea se scurge; nicio achiziție nu compensează o găleată cu fund spart.</li>
+<li><strong>Concentrare client &gt; 30%</strong> → diversifică portofoliul înainte ca acel client să plece.</li>
+<li><strong>DSO &gt; 60 zile</strong> → criză de lichiditate iminentă; strânge condițiile de plată, cere avansuri.</li>
+<li><strong>Inventory turnover în scădere + DIO în creștere</strong> → capital blocat; lichidează stocul mort cu discount, nu cumpăra mai mult.</li>
+<li><strong>Burn multiple &gt; 2</strong> → arzi prea mult per leu de creștere; taie costuri sau încetinește.</li>
+<li><strong>Runway &lt; 6 luni</strong> → modul de criză: oprește orice cheltuială neesențială, accelerează încasările, pregătește finanțare.</li>
+</ul>
+
+<h2>Capcane subtile pe care le ratează chiar și antreprenorii experimentați</h2>
+
+<ul>
+<li><strong>CAC subevaluat</strong> — uitarea salariilor și a costurilor de unelte; CAC real e adesea dublu față de cel „raportat".</li>
+<li><strong>LTV supraevaluat</strong> — folosirea churn-ului din lunile bune sau ignorarea faptului că churn-ul timpuriu (în primele 90 de zile) e mult mai mare decât cel matur.</li>
+<li><strong>Mediile care ascund cohorte</strong> — un churn mediu de 3% poate masca 8% la clienții noi și 0,5% la cei vechi. Privește pe cohorte de achiziție.</li>
+<li><strong>Confundarea profitului cu numerarul</strong> — o afacere profitabilă pe hârtie poate intra în incapacitate de plată dacă DSO și stocul îi blochează cash-ul (cash conversion cycle negativ e ideal, ca la retailerii care încasează înainte să plătească furnizorii).</li>
+<li><strong>Vanity dashboards</strong> — măsurarea a ce e ușor de măsurat (trafic, afișări) în locul a ce e greu dar relevant (contribuție per cohortă).</li>
+<li><strong>Goodhart's law</strong> — când o metrică devine țintă, încetează să mai fie o bună măsură: dacă plătești vânzătorii doar pe număr de contracte, vor semna clienți proști care vor face churn.</li>
+</ul>
+
+<h2>Checklist de implementare a sistemului de KPI</h2>
+
+<ul>
+<li>Identifică modelul tău (SaaS / servicii / retail) și alege 8–12 KPI-uri din setul relevant — nu toate 15, ci cele legate de constrângerea ta actuală.</li>
+<li>Definește pentru fiecare KPI: formula exactă, sursa de date, proprietarul (cine răspunde), ținta și frecvența de citire.</li>
+<li>Calculează corect CAC (cu salarii și unelte) și LTV (cu churn de cohortă, nu mediu).</li>
+<li>Verifică unit economics la nivel de unitate vândută — pozitiv ÎNAINTE de a scala achiziția.</li>
+<li>Stratifică review-ul: pulse zilnic, tactic săptămânal, strategic lunar.</li>
+<li>Scrie pentru fiecare KPI critic trigger-ul de acțiune („dacă X, atunci Y") înainte de criză.</li>
+<li>Construiește dashboard-uri per rol, fiecare cifră cu țintă + trend + variație.</li>
+<li>Privește metricile pe cohorte, nu doar pe medii agregate.</li>
+<li>Reconciliază lunar KPI-urile operaționale cu contabilitatea (P&amp;L, cash-flow) — discrepanțele indică erori de definiție sau de date.</li>
+<li>Revizuiește setul de KPI trimestrial: elimină ce nu a generat nicio decizie, adaugă ce îți lipsește.</li>
+</ul>
+
+<p>Un sistem de KPI matur nu îți spune doar „cum a mers", ci „ce trebuie să faci acum și de ce". Construit corect — pe tipul tău de afacere, cu formule riguroase, benchmark-uri realiste, frecvențe stratificate și trigger-uri predefinite — dashboard-ul devine instrumentul prin care iei decizii mai bune, mai rapid și mai puțin emoțional decât competiția care încă conduce după intuiție.</p>

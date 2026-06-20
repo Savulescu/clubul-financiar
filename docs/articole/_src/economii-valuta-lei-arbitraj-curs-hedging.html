@@ -1,0 +1,127 @@
+<p><strong>Economii valută versus lei arbitraj hedging</strong> înseamnă să nu mai alegi „leu sau euro" pe instinct, ci să cuantifici matematic dacă diferența de dobândă dintre un depozit în lei și unul în EUR compensează riscul valutar pe care ți-l asumi. Această lecție îți arată cum construiești o strategie de arbitraj cambial cu minimizare de risc: cum citești spread-ul EUR-lei și profitabilitatea lui reală, cum folosești un hedging natural pentru economii, când are sens un forward contract pentru un economisitor mic și cum decizi timing-ul de convertire a valutei într-un depozit mixt.</p>
+
+<p>Presupun că știi deja bazele din lecția „Economii în valută străină și riscul de curs": un depozit în EUR te expune la riscul ca leul să se aprecieze și să pierzi la convertire, iar dobânzile în lei sunt structural mai mari decât cele în euro tocmai pentru a compensa riscul de depreciere a monedei naționale. Aici nu re-explicăm ce e cursul de referință BNR sau ce e o dobândă anuală — trecem direct la profunzimea pe care nu o găsești în articolele de bază: arbitrajul de dobândă (carry) între lei și EUR, riscul valutar pentru economii EUR exprimat în cifre, și instrumentele concrete de hedging accesibile unui economisitor român în 2026.</p>
+
+<p>Ideea centrală a întregii lecții: <em>dobânda mai mare în lei nu e un cadou, ci prețul plătit de bancă pentru riscul de curs pe care ți-l transferă ție.</em> Întrebarea profesionistă nu este „unde e dobânda mai mare", ci „este spread-ul de dobândă suficient cât să acopere deprecierea așteptată plus o marjă de siguranță?". Cine răspunde corect la asta câștigă din carry; cine nu, crede că face arbitraj dar de fapt vinde asigurare ieftin.</p>
+
+<p>Pe scurt, acoperim mai jos cinci piloni: cum citești corect relația dintre <strong>curs lei euro și arbitrajul de dobândă</strong>, cum dimensionezi <strong>riscul valutar al economiilor în EUR</strong>, cum construiești o <strong>strategie de curs cu depozit mixt</strong>, cum verifici dacă <strong>spread-ul EUR-lei chiar e profitabil</strong> și cum stabilești <strong>timing-ul convertirii valutei în depozit</strong> fără să-ți mănânci câștigul pe comisioane.</p>
+
+<h2>Mecanica carry-ului lei vs EUR: ce arbitrezi de fapt</h2>
+
+<p>Arbitrajul valutar al economisitorului nu e arbitraj „pur" (fără risc), ci un <strong>carry trade</strong>: împrumuți/deții valuta cu dobândă mică (EUR) și plasezi în valuta cu dobândă mare (lei), încasând diferența. Profitul brut este spread-ul de dobândă; pierderea posibilă este deprecierea leului. Formula de decizie:</p>
+
+<ul>
+<li><strong>Carry net așteptat = (dobândă lei − dobândă EUR) − depreciere anuală așteptată a leului.</strong></li>
+<li>Dacă rezultatul e pozitiv și mai mare decât o marjă de prudență (3-4 luni), depozitul în lei e superior.</li>
+<li>Dacă e negativ sau marginal, EUR-ul te protejează mai bine decât te costă dobânda pierdută.</li>
+</ul>
+
+<p>În 2026, ordinea de mărime relevantă: depozitele la termen în lei oferă tipic în zona 6-7% pe an la bănci mari (verifică oferta exactă, variază lunar și pe maturitate), în timp ce depozitele în EUR rar depășesc 2-2,5%. Spread-ul brut este deci de ordinul a <strong>4-4,5 puncte procentuale pe an</strong>. Aceasta este materia primă a arbitrajului — dar este brută.</p>
+
+<h3>De ce spread-ul brut minte: paritatea dobânzilor</h3>
+
+<p>Teoria parității acoperite a dobânzilor (CIP) spune că, pe o piață eficientă, diferența de dobândă dintre două monede ar trebui să fie egală cu deprecierea așteptată a monedei cu dobândă mare. Cu alte cuvinte, piața forward „prețuiește" deja faptul că leul se va deprecia aproximativ cu cât e spread-ul de dobândă. Dacă ai putea cumpăra un forward EUR/RON la 12 luni, ai vedea că prețul forward al EUR este mai mare decât cursul spot exact cu acel diferențial.</p>
+
+<p>Consecința practică, contraintuitivă: <strong>printr-un forward acoperit complet, arbitrajul dispare</strong> — câștigi din dobândă fix cât pierzi pe forward. Profitul real al economisitorului care ține lei <em>neacoperit</em> vine din pariul că leul se va deprecia <em>mai puțin</em> decât anticipează spread-ul. Istoric, leul s-a depreciat lent și controlat față de EUR (BNR gestionează un curs de facto cvasi-stabil, cu deprecieri de ordinul 1-3% pe an în regimuri calme), deci carry-ul neacoperit a fost frecvent profitabil — dar nu garantat, și cu cozi de risc la episoade de stres.</p>
+
+<h2>Riscul valutar pentru economii EUR, în cifre</h2>
+
+<p>Să fixăm scenariul cu un exemplu numeric pe 50.000 EUR pe orizont de 12 luni, curs spot ipotetic 1 EUR = 5,00 RON (verifică cursul real BNR la momentul deciziei).</p>
+
+<ul>
+<li><strong>Varianta A — depozit EUR la 2,2%:</strong> ai 51.100 EUR la final. În lei, la curs neschimbat, ≈ 255.500 RON.</li>
+<li><strong>Varianta B — convertești în lei (250.000 RON) și plasezi la 6,5%:</strong> ai 266.250 RON la final.</li>
+<li><strong>Diferența brută în favoarea leilor:</strong> ≈ 10.750 RON, adică ~2.150 EUR la curs neschimbat.</li>
+</ul>
+
+<p>Acum testul de stres. La ce depreciere a leului cele două variante se egalează? Punctul de echilibru (break-even) este când cursul de la final urcă suficient cât profitul extra în lei să fie șters de convertirea înapoi mai scumpă. Calcul: leii tăi finali (266.250) împărțiți la euro din varianta EUR (51.100) = curs break-even ≈ <strong>5,21 RON/EUR</strong>. Asta înseamnă o depreciere de ~4,2% într-un an.</p>
+
+<p>Concluzia operațională: <em>dacă te aștepți ca leul să se deprecieze cu mai puțin de ~4,2% în 12 luni, depozitul în lei câștigă; dacă te aștepți la mai mult, EUR-ul câștigă.</em> Break-even-ul este, deloc întâmplător, aproape egal cu spread-ul de dobândă — exact ce prezice paritatea. Diferența ta de edge este cât de bine estimezi deprecierea reală vs cea „prețuită".</p>
+
+<h2>Hedging natural pentru economii: instrumentul cel mai subestimat</h2>
+
+<p>Înainte de instrumente financiare scumpe, prima linie de hedging este gratuită și se numește <strong>hedging natural</strong>: aliniezi valuta economiilor cu valuta cheltuielilor și obligațiilor tale viitoare. Principiul: nu te expui la riscul de curs pe partea de bani pe care oricum îi vei cheltui în acea valută.</p>
+
+<ul>
+<li><strong>Ai un credit ipotecar în EUR sau o rată indexată la EUR?</strong> Atunci economiile în EUR sunt hedging natural — dacă leul se depreciază, rata ta crește, dar și economiile tale în EUR cresc în lei, compensând. Aici NU faci carry în lei pe banii destinați ratei.</li>
+<li><strong>Plănuiești o cheltuială majoră în EUR</strong> (taxă școlară în străinătate, achiziție imobil în zona euro, vacanță scumpă, echipament importat pentru firmă)? Banii pentru acea cheltuială stau în EUR, indiferent de dobândă. Carry-ul în lei pe ei e un pariu, nu o optimizare.</li>
+<li><strong>Venituri în EUR</strong> (freelancing internațional, dividende, chirii de la nerezidenți)? Ai deja un flux care „cumpără" EUR ieftin în timp — poți permite mai mult lei pe partea de economii pentru că fluxul te re-alimentează în valută.</li>
+</ul>
+
+<p>Regula de partiționare: <strong>împarte economiile în trei găleți</strong> — (1) obligații/cheltuieli viitoare cunoscute în EUR → stau în EUR, fără excepție; (2) fond de urgență în lei → stă în lei, pentru că plătești facturi în lei; (3) surplus discreționar → aici, și numai aici, faci decizia de arbitraj carry pe baza spread-ului.</p>
+
+<h2>Strategia depozitului mixt: cum dimensionezi expunerea</h2>
+
+<p>Soluția matură nu e binară (tot lei sau tot EUR), ci un <strong>depozit mixt</strong> cu pondere calibrată pe convingerea ta și pe toleranța la risc. Metoda în trei pași:</p>
+
+<h3>Pasul 1 — calculează carry-ul net ajustat la risc</h3>
+
+<p>Pornește de la spread-ul brut (ex. 4,3 pp). Scade deprecierea ta așteptată (ex. estimezi 2% pe an). Carry net așteptat = 2,3 pp. Apoi aplică o ajustare de incertitudine: cu cât ești mai puțin sigur de estimare, cu atât scazi mai mult. Dacă rămâne pozitiv solid (>1,5 pp), înclini spre lei.</p>
+
+<h3>Pasul 2 — stabilește ponderea EUR ca „asigurare"</h3>
+
+<p>Privește partea în EUR ca poliță de asigurare contra unui șoc de depreciere. O regulă practică robustă: <strong>ponderea în valuta tare = procentul din cheltuielile tale anuale viitoare expuse la EUR + un tampon de stres.</strong> Pentru cineva fără obligații în EUR, 20-40% EUR pe partea discreționară e un compromis rezonabil; pentru cineva cu rată în EUR, poate fi 70-100%.</p>
+
+<h3>Pasul 3 — scalonează maturitățile (laddering valutar)</h3>
+
+<p>Nu bloca tot pe 12 luni. Folosește o scară de depozite (3, 6, 12 luni) astfel încât la fiecare scadență să poți re-evalua spread-ul și cursul și să rebalansezi raportul lei/EUR fără penalități de retragere anticipată. Laddering-ul îți dă opțiuni de timing fără să sacrifici dobânda.</p>
+
+<h2>Forward contract pentru economisitorul mic: când și cum</h2>
+
+<p>Un <strong>forward EUR/RON</strong> fixează azi cursul la care vei converti în viitor — eliminând complet riscul de curs pe acea sumă. Marile companii îl folosesc curent; economisitorul mic, rar, din trei motive: praguri minime, nevoia unei linii la bancă și costul de oportunitate (forward-ul anulează exact carry-ul, conform parității).</p>
+
+<ul>
+<li><strong>Pragul real:</strong> majoritatea băncilor comerciale din România oferă forward-uri de la sume de ordinul a 10.000-25.000 EUR în sus, dar îți cer o relație/linie de trezorerie (verifică la banca ta — condițiile diferă mult). Sub aceste sume, instrumentul nu e accesibil sau nu merită.</li>
+<li><strong>Când are sens totuși:</strong> nu pentru a face profit, ci pentru a <em>garanta</em> o sumă necesară la o dată fixă în EUR (ex. plata unei facturi de import sau a unei taxe). Atunci forward-ul îți blochează costul și dormi liniștit — accepți să renunți la carry în schimbul certitudinii.</li>
+<li><strong>Alternativa accesibilă:</strong> dacă nu ai acces la forward, hedging-ul natural (a ține efectiv EUR) realizează același efect economic — fără linie bancară, fără prag. Pentru sume mici, „ține EUR cash/depozit" ESTE forward-ul tău.</li>
+</ul>
+
+<p>Capcană subtilă: nu confunda forward-ul cu un cont de schimb valutar la termen promovat de fintech-uri. Multe „rate fixe garantate" ascund un spread de schimb (markup pe curs) care îți mănâncă exact beneficiul. Compară întotdeauna cursul forward oferit cu cursul forward teoretic (spot + diferențial de dobândă) — diferența e comisionul ascuns.</p>
+
+<h2>Timing-ul convertirii: cum eviți capcanele clasice</h2>
+
+<p>Decizia de <em>când</em> convertești poate conta mai mult decât decizia de <em>dacă</em> convertești. Capcane frecvente și antidotul:</p>
+
+<ul>
+<li><strong>Spread-ul de schimb la casa/banca.</strong> Convertirea EUR↔RON la ghișeu poate avea spread de 1-3% (uneori mai mult la sume mici). Pe un carry de 2-2,5%, un spread de 1,5% dus-întors îți poate șterge jumătate din profit. Convertește prin platforme cu spread mic și cât mai rar — fiecare convertire e un cost.</li>
+<li><strong>Convertirea la vârf de panică.</strong> Cea mai scumpă greșeală e să fugi din EUR în lei (sau invers) exact când cursul a sărit din cauza unui șoc. Deciziile de partiționare se iau la rece, nu reactiv. De aceea ai găleți și laddering — ca să nu fii forțat să convertești la momentul prost.</li>
+<li><strong>Ignorarea costului dus-întors.</strong> Carry-ul trebuie calculat NET de ambele convertiri (intrare în lei și ieșire în EUR la final, dacă ai nevoie de EUR la final). Dacă vei avea oricum nevoie de lei la final, scoți o convertire din ecuație — încă un motiv pentru hedging natural pe valuta cheltuielilor.</li>
+<li><strong>Penalitatea de retragere anticipată.</strong> Dacă blochezi un depozit la termen și apoi cursul te obligă să ieși înainte, pierzi dobânda acumulată — poate tot carry-ul. Laddering-ul și un tampon lichid previn asta.</li>
+</ul>
+
+<h2>Tratamentul fiscal: nu uita de impozit pe câștig</h2>
+
+<p>Carry-ul tău e brut <em>înainte</em> de impozit. În România, dobânda la depozite este venit din investiții și se impozitează — verifică cota și pragurile curente la ANAF pentru anul fiscal în curs, plus eventualele contribuții de sănătate (CASS) dacă veniturile din investiții depășesc plafoanele bazate pe salariul minim. Două implicații pentru arbitraj:</p>
+
+<ul>
+<li><strong>Impozitul se aplică pe dobândă, nu pe câștigul valutar al unui simplu depozit</strong> — dar dacă tranzacționezi valută cu intenție speculativă, regimul poate diferi; clarifică-ți statutul.</li>
+<li><strong>Compară carry-ul NET de impozit cu break-even-ul de curs.</strong> Dacă impozitul îți reduce spread-ul net de la 4,3 la ~3,6 pp, atunci și deprecierea pe care o poți „înghiți" scade — recalculează break-even-ul după impozit, nu înainte.</li>
+</ul>
+
+<h2>Checklist de decizie — economisitorul-arbitror</h2>
+
+<ul>
+<li><strong>Partiționează</strong> economiile în cele trei găleți (obligații EUR / urgență lei / discreționar) ÎNAINTE de orice calcul de dobândă.</li>
+<li><strong>Calculează spread-ul brut</strong> real (cea mai bună dobândă lei la termen − cea mai bună dobândă EUR) la maturitatea ta țintă.</li>
+<li><strong>Estimează deprecierea</strong> așteptată a leului pe orizontul tău și adaugă o marjă de prudență (cel puțin 1-2 pp).</li>
+<li><strong>Verifică break-even-ul de curs</strong>: lei finali / euro din varianta EUR. Dacă deprecierea ta așteptată &lt; depreciere break-even, leii câștigă.</li>
+<li><strong>Ajustează după impozit și CASS</strong> și recalculează break-even-ul net.</li>
+<li><strong>Dimensionează ponderea EUR</strong> ca asigurare = expunere viitoare la cheltuieli EUR + tampon de stres.</li>
+<li><strong>Scalonează maturitățile</strong> (3/6/12 luni) ca să poți rebalansa fără penalități.</li>
+<li><strong>Minimizează convertirile</strong> și folosește canale cu spread mic; calculează carry NET de costuri de schimb dus-întors.</li>
+<li><strong>Decide la rece, nu la șoc</strong>: scrie-ți pragurile dinainte și respectă-le când cursul se mișcă.</li>
+<li><strong>Pentru sume mari cu dată fixă</strong>, evaluează un forward la banca ta; pentru sume mici, hedging-ul natural (ține efectiv EUR) este echivalentul tău de forward.</li>
+</ul>
+
+<h2>Greșeli frecvente care anulează arbitrajul</h2>
+
+<ul>
+<li><strong>Confuzi dobânda mare cu profit garantat.</strong> Spread-ul de dobândă este prețul riscului de curs, nu un cadou. Dacă nu modelezi deprecierea, nu faci arbitraj — vinzi asigurare ieftin.</li>
+<li><strong>Faci carry pe bani de care vei avea nevoie în EUR.</strong> Pe acea găleată nu există decizie de arbitraj; e doar risc gratuit asumat.</li>
+<li><strong>Convertești des și prin canale scumpe.</strong> Spread-ul de schimb dus-întors poate depăși carry-ul anual. Fiecare convertire trebuie justificată.</li>
+<li><strong>Ignori impozitul și CASS</strong> și compari un carry brut cu un break-even brut — o eroare care face ca decizii marginale să pară clar câștigătoare.</li>
+<li><strong>Cumperi „rate forward garantate" de la fintech-uri fără să compari cu forward-ul teoretic</strong> — markup-ul ascuns pe curs poate fi mai mare decât carry-ul pe care îl protejezi.</li>
+<li><strong>Mizezi tot pe o singură maturitate</strong> și ajungi forțat să retragi anticipat la momentul prost, pierzând dobânda acumulată.</li>
+</ul>
+
+<p>Esența pentru economisitorul avansat: arbitrajul lei vs EUR nu e despre a ghici cursul, ci despre a separa partea pe care o poți expune (discreționarul) de partea pe care nu o poți (obligațiile în valută), a cuantifica spread-ul net de impozit și costuri, și a-l compara cu break-even-ul de depreciere. Când carry-ul net depășește clar deprecierea așteptată plus o marjă, leii câștigă — dar pondereaza mereu cu o asigurare în valută tare, pentru că cea mai mare pierdere nu vine din dobânda ratată, ci din convertirea forțată la momentul greșit.</p>

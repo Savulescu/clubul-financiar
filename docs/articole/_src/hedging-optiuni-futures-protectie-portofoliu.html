@@ -1,0 +1,143 @@
+<p>Subiectul <strong>hedging opțiuni futures protecție portofoliu România</strong> nu mai este teritoriul exclusiv al fondurilor: cu un cont la un broker care îți dă acces la opțiuni americane sau europene și la contracte futures pe index, poți cumpăra asigurare exactă pentru un portofoliu de acțiuni fără să adaugi leverage net. Această lecție duce mai departe ce ai învățat deja despre <em>collar strategy opțiuni pentru acțiuni</em>, despre diferența <em>put spread vs long put</em> și despre cele patru metode de bază — și intră în calculul rece: <strong>cost de hedging versus draw-down evitat</strong>, în cifre reale.</p>
+
+<p>Premisa este una de investitor intermediar disciplinat: vrei protecție, nu pariu. Asta înseamnă că folosești <em>futures pentru hedging index portfolio</em> în nominal egal cu expunerea ta (nu mai mare), preferi <em>put spread vs long put</em> când volatilitatea implicită e scumpă, și tratezi <em>timing-ul de intrare și ieșire din hedges</em> ca pe o decizie de cost, nu de predicție. Vom parcurge cinci scenarii concrete de criză cu calcule exacte, comparația dintre <strong>hedging cu opțiuni sau obligații</strong>, și capcanele de <em>impozitare a strategiilor derivate</em> care pot transforma un hedge profitabil într-o pierdere netă după ANAF.</p>
+
+<p>Regula avansată de pornire: un hedge se evaluează ca o poliță de asigurare, nu ca o investiție. Întrebarea corectă nu e „va cădea piața?", ci „cât plătesc pe an pentru a tăia coada stângă a distribuției și merită prima față de draw-down-ul pe care l-aș suferi altfel?". Restul lecției îți dă instrumentele să răspunzi numeric.</p>
+
+<h2>Cadrul de decizie: hedge ratio, beta și nominal exact</h2>
+
+<p>Înainte de orice instrument, trebuie să știi <strong>cât</strong> hedge-uiești. Greșeala clasică a intermediarului este să cumpere „niște puturi" fără să lege nominalul de expunere. Calculul corect pleacă de la <strong>beta-ajustat exposure</strong>:</p>
+
+<ul>
+<li><strong>Expunere de acoperit</strong> = valoarea portofoliului × beta față de indexul pe care îl folosești drept hedge. Un portofoliu de 200.000 lei cu beta 1,2 față de S&P 500 are o expunere efectivă de 240.000 lei pe acel index.</li>
+<li><strong>Nominal per contract futures</strong> = preț index × multiplicator. Un Micro E-mini S&P 500 (MES) are multiplicator 5 USD; la un index de 6.000 puncte, un contract acoperă ~30.000 USD nominal. Pentru 240.000 lei (~48.000 USD la 5 lei/USD) ai nevoie de ~1,6 contracte MES — adică 2 contracte, ușor over-hedged, sau folosești un mix.</li>
+<li><strong>Delta per opțiune</strong> = un put cu delta -0,30 pe un ETF de 600 USD acoperă efectiv ~180 USD de expunere per 100 de unități subiacente (contractul standard). Pentru a neutraliza delta portofoliului, însumezi delta × multiplicator.</li>
+</ul>
+
+<p>Principiul de aur al investitorului fără leverage: <strong>nominalul hedge-ului ≤ expunerea reală</strong>. Dacă vinzi mai multe contracte futures decât expunerea ta, ai trecut de la hedging la speculație short și ai introdus leverage net. Un hedge pe index nu trebuie niciodată să producă profit dacă piața urcă — dacă o face, ești supra-acoperit.</p>
+
+<h3>De ce contează beta-drift-ul</h3>
+
+<p>Un portofoliu de acțiuni românești (Hidroelectrica, Romgaz, bănci) hedge-uit cu futures pe S&P 500 are <strong>basis risk</strong> enorm: corelația BVB–S&P în criză poate fi 0,5, nu 0,95. În 2020 (COVID) și 2022 (război + inflație), BET a căzut diferit de indicii americani. Concluzia practică: hedge-ul pe index străin protejează beta globală, nu idiosincrazia locală. Pentru un portofoliu majoritar BVB, hedge-ul curat e mai degrabă pe <strong>EURO STOXX 50</strong> sau pe ETF-uri regionale, nu pe S&P.</p>
+
+<h2>Scenariul 1: Long put pur — asigurare directă, scumpă în volatilitate</h2>
+
+<p>Portofoliu: 200.000 lei, beta 1,0 pe un ETF tip MSCI World (preț ipotetic 100 USD/unitate, ~40.000 USD = 200.000 lei). Cumperi puturi ATM (strike 100) la 6 luni. Cu volatilitate implicită „normală" (VIX ~16-18), un put ATM la 6 luni costă tipic <strong>4-5% din nominal</strong>.</p>
+
+<ul>
+<li><strong>Cost hedge</strong>: 4,5% × 200.000 = 9.000 lei pentru 6 luni (~18.000 lei/an dacă rulezi continuu).</li>
+<li><strong>Scenariu crash -35%</strong>: portofoliul pierde 70.000 lei pe acțiuni; putul ATM îți recuperează ~35.000 (de la strike până la prețul de jos, minus prima deja plătită). Net protejat: pierderea efectivă scade de la -70.000 la ~-9.000 lei (costul primei) plus franciza dintre strike și nivelul exact.</li>
+<li><strong>Scenariu piață plată</strong>: pierzi toți cei 9.000 lei de primă. Acesta e dezavantajul long put — <strong>theta decay</strong> te mănâncă în lateral.</li>
+</ul>
+
+<p><strong>Verdict</strong>: long put pur e protecție maximă, dar 9% pe an cost continuu e prohibitiv. Se justifică doar pe ferestre scurte de risc cunoscut (înainte de alegeri, de o decizie BNR/Fed, de un raport major), nu permanent.</p>
+
+<h2>Scenariul 2: Put spread vs long put — tai costul pe jumătate</h2>
+
+<p>Aici e una dintre cele mai importante optimizări de cost. În loc de un long put ATM scump, cumperi un <strong>put spread</strong>: long put la strike 100, short put la strike 85. Renunți la protecția sub -15% în schimbul reducerii primei.</p>
+
+<ul>
+<li><strong>Cost long put ATM</strong>: ~9.000 lei (ca în Scenariul 1).</li>
+<li><strong>Cost put spread 100/85</strong>: prima netă tipic <strong>2.500-3.500 lei</strong> — vinzi putul 85 și încasezi ~5.500 lei, deci costul net scade ~60-65%.</li>
+<li><strong>Crash -15%</strong>: spread-ul plătește la maxim (15 puncte × nominal) = ~30.000 lei protecție. Excelent pe acest interval.</li>
+<li><strong>Crash -45%</strong> (gen 2008): spread-ul e plafonat la -15%; sub 85 ești din nou expus complet. Pierdere efectivă mare. Asta e prețul ascuns al put spread-ului — <strong>te lasă descoperit exact în coada extremă</strong>, unde aveai cea mai mare nevoie.</li>
+</ul>
+
+<p><strong>Regula de selecție</strong>: put spread când volatilitatea implicită e scumpă (VIX >25, prima de skew mare) și aștepți o corecție „normală" -10…-20%. Long put pur (sau put + ceva acoperire tail) când te temi de o ruptură sistemică. Nu confunda cele două: put spread-ul e protecție de corecție, nu de criză.</p>
+
+<h2>Scenariul 3: Collar — hedging cu cost zero (dar plafonezi câștigul)</h2>
+
+<p><strong>Collar strategy</strong> este preferatul investitorului intermediar care nu vrea să plătească primă: cumperi un put de protecție și finanțezi prima <strong>vânzând un call</strong> peste prețul curent. Cost net ≈ 0.</p>
+
+<p>Exemplu pe 200.000 lei: cumperi put strike 95 (-5%), vinzi call strike 110 (+10%), la 6 luni. Prima încasată din call ≈ prima plătită pe put → cost zero sau aproape.</p>
+
+<ul>
+<li><strong>Crash -30%</strong>: ești protejat de la -5% în jos. Pierderea ta e plafonată la ~-5% (10.000 lei) în loc de -60.000. Protecție excelentă, gratis.</li>
+<li><strong>Rally +25%</strong>: aici plătești factura. Call-ul vândut la 110 te plafonează — câștigul tău e tăiat la +10%. Ratezi 15% din upside = ~30.000 lei „cost de oportunitate".</li>
+</ul>
+
+<p><strong>Capcana subtilă</strong>: collar-ul nu e gratis; plătești în upside renunțat, nu în cash. Pe orizont lung, plafonarea repetată a câștigului poate costa mai mult decât primele unui long put ocazional, pentru că trunchiezi exact anii buni care fac randamentul compus. Collar-ul e ideal pe ferestre scurte (ai un câștig nerealizat mare pe care vrei să-l blochezi înainte de un eveniment), nu ca strategie permanentă.</p>
+
+<h2>Scenariul 4: Futures pe index — hedge ieftin, dar fără asimetrie</h2>
+
+<p><em>Futures pentru hedging index portfolio</em> e cea mai capital-eficientă acoperire: vinzi short futures pe index în nominal egal cu expunerea. Costul nu e o primă, ci <strong>costul de carry</strong> (rata fără risc minus dividendele) plus comisioane — de regulă sub 1% pe an pe indici dezvoltați.</p>
+
+<ul>
+<li><strong>Cost</strong>: pentru 240.000 lei expunere, ~1-2 contracte MES; comision dus-întors ~2-5 USD/contract; margin inițial ~2.000-2.500 USD/contract (blocat, nu cheltuit). Carry net câteva sute de lei pe lună.</li>
+<li><strong>Crash -35%</strong>: short futures câștigă ~84.000 lei, compensând aproape exact pierderea pe acțiuni. Hedge aproape perfect liniar.</li>
+<li><strong>Rally +20%</strong>: short futures pierde ~48.000 lei, anulând câștigul pe acțiuni. <strong>Aici e capcana</strong>: futures e simetric — îți taie și pierderea, și câștigul. Practic ai ieșit din piață cât ține hedge-ul.</li>
+</ul>
+
+<p><strong>Atenție la margin call-uri</strong>: chiar fără leverage net, dacă piața urcă puternic, poziția short futures generează apeluri în marjă pe care trebuie să le acoperi cu cash, deși portofoliul tău de acțiuni a crescut (dar nu e lichid instant). Ține întotdeauna o rezervă de cash de 2-3× marja inițială pentru a nu fi forțat să închizi hedge-ul în pierdere. Futures e instrumentul corect pentru acoperiri tactice de durată definită (vreau să fiu plat 3 luni), nu pentru asigurare asimetrică.</p>
+
+<h2>Scenariul 5: Hedging cu opțiuni sau obligații — comparația de fond</h2>
+
+<p>Întrebarea strategică: în loc de derivate, nu e mai simplu să muți bani în <strong>titluri de stat</strong> și să reduci expunerea? Asta e dezbaterea <em>hedging cu opțiuni sau obligații</em>.</p>
+
+<ul>
+<li><strong>Varianta obligații</strong>: muți 30% din portofoliu (60.000 lei) în titluri Tezaur/FIDELIS la ~6,25-7,25% pe lei (cotele uzuale 2026), cu dobândă <strong>neimpozabilă și fără CASS</strong> indiferent de sumă. În crash, acea felie nu cade și produce dobândă. Cost: randamentul ratat pe acțiuni în anii buni (opportunity cost), nu o primă.</li>
+<li><strong>Varianta opțiuni</strong>: ții 100% acțiuni și cumperi puturi/put spread. Păstrezi tot upside-ul, dar plătești primă cash continuu.</li>
+</ul>
+
+<p><strong>Calculul comparativ pe 5 ani</strong>: dacă piața urcă 8%/an, felia de obligații la 6,5% te costă ~1,5%/an opportunity cost pe acea felie (0,45% pe portofoliul total la 30% alocare). Un program de put spread continuu costă ~1,5-2,5%/an pe tot portofoliul. <strong>Pe orizont lung, alocarea în obligații e structural mai ieftină</strong> și nu are theta decay. Opțiunile câștigă doar când vrei să rămâi 100% expus la upside pe o fereastră scurtă de risc. Concluzia pentru intermediar: <strong>obligații pentru protecție de bază permanentă, opțiuni pentru acoperire tactică de eveniment</strong>.</p>
+
+<h2>Timing-ul: când intri și când ieși din hedges</h2>
+
+<p><em>Timing-ul de intrare și ieșire din hedges</em> determină dacă protecția e ieftină sau aruncată pe geam. Reguli avansate:</p>
+
+<ul>
+<li><strong>Nu cumpăra protecție în panică</strong>. Când VIX e deja la 35-40, puturile sunt de 3-4× mai scumpe (volatilitate implicită umflată). Hedge-ul cumpărat în mijlocul crahului e cel mai prost preț posibil — plătești asigurarea după ce a ars casa.</li>
+<li><strong>Cumpără când e calm și scump să nu-ți pese</strong>: VIX 13-16 = puturi ieftine. Acoperă-te înainte de catalizatori cunoscuți (decizii Fed/BNR, alegeri, rapoarte trimestriale mari, expirări de praguri fiscale).</li>
+<li><strong>Ieșire</strong>: monetizează hedge-ul când și-a făcut treaba. Dacă piața a căzut și putul tău valorează 3× prima, închide-l și re-alocă — nu lăsa profitul de hedge să se evapore în revenire. Roll down (mută strike-ul mai jos) ca să blochezi câștigul și să păstrezi o protecție mai ieftină.</li>
+<li><strong>Vol targeting</strong>: dimensionează hedge-ul invers cu volatilitatea. Vol mică = protecție ieftină, cumpără mai mult; vol mare = scumpă, redu sau treci pe put spread/collar.</li>
+</ul>
+
+<h2>Impozitarea strategiilor derivate în România 2026 — capcana care anulează hedge-ul</h2>
+
+<p>Aici mor multe hedge-uri „profitabile" pe hârtie. <em>Impozitarea strategiilor derivate</em> în România depinde crucial de cum sunt încasate câștigurile:</p>
+
+<ul>
+<li><strong>Prin broker cu sediu/raportare în România</strong>: pentru instrumente tranzacționate, brokerul rezident reține impozitul la sursă pe câștig. Din 2026 cotele pe câștigul din transferul titlurilor sunt <strong>3% pentru dețineri de peste un an și 6% pentru dețineri sub un an</strong> (majorate față de 1% / 3% valabile anterior). Avantaj: simplitate, reținere la sursă, fără declarație separată — dar atenție, la reținerea la sursă <strong>pierderile nu se compensează</strong> între tranzacții.</li>
+<li><strong>Prin broker extern (fără sediu/raportare în RO)</strong>: câștigul din opțiuni și futures intră în <strong>Declarația Unică</strong>, ca venit din investiții. Din 1 ianuarie 2026 cota este de <strong>16% pe câștigul net anual</strong> (suma câștigurilor brute minus suma pierderilor brute pe an calendaristic), nu cota redusă de la brokerul rezident. <strong>Tu calculezi, tu declari, tu plătești</strong> — și datorezi și <strong>CASS de 10%</strong> dacă venitul total din investiții și alte surse depășește pragul de 6, 12 sau 24 de salarii minime brute. La un salariu minim de 4.050 lei în 2026, primul prag (6 salarii) este de <strong>24.300 lei</strong>.</li>
+<li><strong>Capcana de compensare</strong>: pierderea pe acțiuni și câștigul pe hedge (sau invers) <strong>nu se compensează automat</strong> dacă sunt pe categorii/conturi diferite sau la brokeri diferiți. Poți ajunge să plătești impozit pe câștigul de hedge într-un an în care portofoliul total a fost pe minus. Ține toate pozițiile la același broker raportor sau planifică realizarea pierderilor în același an fiscal.</li>
+</ul>
+
+<p><strong>Regula de aur fiscală</strong>: calculează costul real al hedge-ului <em>după impozit</em>. Un hedge care îți aduce 35.000 lei câștig brut, dar pe care plătești impozit + eventual CASS, are un randament net mai mic — iar dacă pierderea pe acțiuni nu e deductibilă în aceeași categorie, randamentul după taxe poate fi cu 10-15% mai prost decât pe hârtie. Nu evalua niciodată un hedge la brut.</p>
+
+<h2>Tabloul comparativ: cost vs draw-down evitat</h2>
+
+<p>Sinteza pe care trebuie să o ai în cap (portofoliu 200.000 lei, crash -35% = -70.000 lei nesprijinit):</p>
+
+<ul>
+<li><strong>Long put ATM</strong>: cost ~9.000 lei/6 luni; draw-down evitat ~60.000 lei; eficient doar tactic.</li>
+<li><strong>Put spread 100/85</strong>: cost ~3.000 lei; evită ~30.000 lei (plafonat la -15%); descoperit în tail.</li>
+<li><strong>Collar 95/110</strong>: cost ~0 cash; evită ~50.000 lei; plătești în upside plafonat.</li>
+<li><strong>Short futures index</strong>: cost <1%/an; evită ~84.000 lei aproape liniar; dar taie și upside-ul + risc de margin call.</li>
+<li><strong>Alocare obligații 30%</strong>: cost = opportunity, ~0,45%/an pe total; evită ~21.000 lei pe felia protejată; cea mai ieftină protecție permanentă.</li>
+</ul>
+
+<h2>Checklist de execuție pentru hedge-ul tău</h2>
+
+<ul>
+<li><strong>1. Definește riscul</strong>: orizont, sumă, eveniment specific. Hedge permanent sau tactic?</li>
+<li><strong>2. Calculează nominalul</strong>: valoare portofoliu × beta față de indexul de hedge. Nominal hedge ≤ expunere reală (zero leverage net).</li>
+<li><strong>3. Verifică basis risk</strong>: portofoliu BVB → hedge pe EURO STOXX/regional, nu pe S&P.</li>
+<li><strong>4. Alege instrumentul după volatilitate</strong>: VIX mic → long put; VIX mare → put spread/collar; durată definită → futures.</li>
+<li><strong>5. Cronometrează</strong>: cumpără în calm, înainte de catalizator; nu în panică.</li>
+<li><strong>6. Rezervă de cash</strong>: pentru futures, ține 2-3× marja inițială ca să reziști la margin call-uri.</li>
+<li><strong>7. Planifică ieșirea</strong>: monetizează/roll down când hedge-ul a plătit; nu-l lăsa să se evapore.</li>
+<li><strong>8. Calculează după impozit</strong>: același broker raportor, compensare în același an fiscal, ține cont de CASS și de Declarația Unică.</li>
+</ul>
+
+<h2>Greșeli frecvente ale investitorului intermediar</h2>
+
+<ul>
+<li><strong>Supra-hedging</strong>: vinzi mai multe futures decât expunerea → ai devenit short speculativ, nu hedge-uit.</li>
+<li><strong>Hedge permanent cu long put</strong>: theta decay-ul te sărăcește în anii laterali; 9%/an cost continuu distruge compunerea.</li>
+<li><strong>Cumpărarea protecției în mijlocul crahului</strong>: plătești IV umflat, asigurarea după incendiu.</li>
+<li><strong>Ignorarea basis risk-ului</strong>: hedge pe S&P pentru portofoliu românesc care nu se mișcă la fel.</li>
+<li><strong>Uitarea fiscalității</strong>: câștig de hedge impozitat fără să poți compensa pierderea pe acțiuni → hedge net pierzător.</li>
+<li><strong>Niciun plan de ieșire</strong>: lași putul profitabil să revină la zero pe măsură ce piața își revine.</li>
+</ul>
+
+<p>Hedging-ul corect pentru intermediarul fără leverage nu e o căutare de profit, ci o disciplină de cost: dimensionezi exact, alegi instrumentul după volatilitate, cronometrezi intrarea în calm și calculezi totul după impozit. Pe protecție permanentă, obligațiile bat de regulă opțiunile; opțiunile și futures-urile sunt arma ta tactică pentru ferestrele de risc cunoscut. Ține tabloul cost-vs-draw-down în minte și nu vei plăti niciodată mai mult pe asigurare decât valorează liniștea reală pe care ți-o cumpără.</p>

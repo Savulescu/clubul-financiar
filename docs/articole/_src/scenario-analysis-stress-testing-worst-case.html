@@ -1,0 +1,155 @@
+<p><strong>Scenario analysis stress testing portofoliu worst-case</strong> înseamnă să nu mai întrebi „cât poate scădea piața?”, ci „ce-mi face MIE acest scenariu, în lei, săptămâna asta și în următorii trei ani?”. Pe baza celor două lecții anterioare — riscul și volatilitatea, plus protecția în criză — aici trecem de la a măsura volatilitatea istorică la a construi un laborator de catastrofe controlate: <strong>historical scenario replay și learning</strong>, <strong>Monte Carlo simulation și confidence interval</strong>, <strong>sensitivity analysis pe variabile cheie</strong> și un <strong>portfolio resilience score</strong> pe care îl recalculezi trimestrial.</p>
+
+<p>Vom rula un portofoliu real de 200.000 USD prin zece scenarii istorice de criză, fiecare cu drawdown și <strong>recovery paths și rebound dynamics</strong> documentate, apoi adăugăm stratul greu: <strong>geopolitical shock modeling</strong>, <strong>combined scenarios și tail correlation</strong> (de ce, în panică, totul cade odată), și cum traduci ieșirea simulării într-o decizie de alocare. Presupun că știi deja ce sunt deviația standard, beta, corelația și max drawdown — nu le reluăm.</p>
+
+<p>Context România 2026: portofoliul tipic al investitorului avansat român amestecă active în USD/EUR (ETF-uri globale prin broker) cu expunere locală (acțiuni BVB, titluri de stat Fidelis, depozite în lei). Asta adaugă un strat de risc valutar pe care un stress test american nu-l vede. Worst-case-ul tău nu e doar S&P-ul la −50%, ci S&P −50% ȘI leul depreciat ȘI lichiditatea BVB evaporată în aceeași lună.</p>
+
+<h2>De ce volatilitatea istorică te minte la worst-case</h2>
+
+<p>Deviația standard presupune o distribuție aproximativ normală. Crizele nu sunt normale — au <strong>cozi groase</strong> (fat tails). O mișcare „de 5 sigma”, care statistic ar trebui să apară o dată la mii de ani, apare în practică o dată la câțiva ani. În octombrie 1987 piața a căzut peste 20% într-o zi: sub ipoteza normală, probabilitatea era practic zero. Asta înseamnă că un VaR (Value at Risk) calculat pe volatilitate normală îți spune sistematic că ești mai în siguranță decât ești.</p>
+
+<p>Stress testing-ul rezolvă exact asta: nu îți cere o probabilitate, ci un scenariu fix. Nu întrebi „care e pierderea la 99% încredere?”, ci „dacă MÂINE se repetă 2008, cât pierd?”. E diferența dintre o estimare statistică fragilă și o simulare concretă pe care o poți acționa.</p>
+
+<p>Cele trei întrebări pe care orice stress test trebuie să le răspundă, în această ordine:</p>
+
+<ul>
+<li><strong>Magnitudinea drawdown-ului</strong> — cât pierzi la vârf-la-fund (peak-to-trough), în lei, nu în procente abstracte.</li>
+<li><strong>Durata până la recuperare</strong> — în câte luni/ani revii la valoarea de start. Un −30% care revine în 8 luni e altceva decât un −30% care revine în 6 ani.</li>
+<li><strong>Lichiditatea în scenariu</strong> — poți vinde fără să muți piața? Pe BVB, în panică, spread-ul bid-ask se lărgește brutal, iar „valoarea de portofoliu” devine teoretică.</li>
+</ul>
+
+<h2>Simulare: 200.000 USD prin zece scenarii istorice de criză</h2>
+
+<p>Pornim de la un portofoliu-tip de investitor avansat, echilibrat-agresiv:</p>
+
+<ul>
+<li>50% acțiuni globale (ETF tip VWCE/echivalent) = 100.000 USD</li>
+<li>20% acțiuni BVB (blue chips, dividend) = 40.000 USD</li>
+<li>15% obligațiuni (titluri de stat Fidelis + ETF obligațiuni) = 30.000 USD</li>
+<li>10% aur/mărfuri (ETF aur) = 20.000 USD</li>
+<li>5% cash/depozit lei = 10.000 USD</li>
+</ul>
+
+<p>Pentru fiecare scenariu aplic drawdown-ul istoric real pe fiecare clasă, ponderat. Cifrele de mai jos sunt aproximări ale mișcărilor de piață documentate — folosește-le ca ordine de mărime, nu ca predicție.</p>
+
+<h3>Tabelul celor zece scenarii</h3>
+
+<ul>
+<li><strong>1. Marea Criză 1929–1932.</strong> Acțiuni globale −85%, BVB ar fi căzut similar sau mai rău (piață mică, fără lichiditate). Pierdere portofoliu ≈ −58%, până la ~140.000 USD în termeni reali. Recovery: peste 15 ani la prețuri reale. Lecția: o singură astfel de decadă justifică să nu fii 100% acțiuni niciodată.</li>
+<li><strong>2. Stagflația 1973–1974.</strong> Acțiuni −45%, dar AURUL a explodat (+100%+), obligațiunile au pierdut din inflație. Portofoliu ≈ −22%, salvat parțial de aur. Recovery acțiuni: ~7 ani nominal. Lecția: aurul e singura clasă care a livrat în stagflație — diversificarea reală contează la inflație, nu doar la recesiune.</li>
+<li><strong>3. Lunea Neagră 1987.</strong> Acțiuni −22% într-o zi, −30% peak-to-trough. Portofoliu ≈ −16%. Recovery: ~2 ani. Lecția: șocurile rapide tehnice se recuperează rapid dacă fundamentele economice rezistă.</li>
+<li><strong>4. Criza asiatică 1997–1998.</strong> Piețele dezvoltate −15/−20%, emergente −60%. Pentru tine, expunerea BVB ar fi suferit disproporționat. Portofoliu ≈ −18%. Recovery: ~1,5 ani pe dezvoltate.</li>
+<li><strong>5. Dot-com 2000–2002.</strong> Acțiuni globale −49%, tech −78%. Obligațiunile au câștigat. Portofoliu ≈ −26%, amortizat de bonduri. Recovery: ~5 ani. Lecția: concentrarea sectorială (tech azi) e cel mai subevaluat risc de cozi.</li>
+<li><strong>6. Marea Criză Financiară 2008–2009.</strong> Acțiuni −56% peak-to-trough, BVB −70%+ (BET a căzut catastrofal), obligațiuni de stat +câștig, aur +rezistent. Portofoliu ≈ −38%, până la ~124.000 USD. Recovery acțiuni globale: ~4 ani. Recovery BVB: peste un deceniu. Lecția centrală a acestei simulări.</li>
+<li><strong>7. Criza datoriilor europene 2011.</strong> Acțiuni −20%, periferia EU mult mai rău. Portofoliu ≈ −13%. Recovery: ~1 an.</li>
+<li><strong>8. Flash crash valutar / 2015–2016.</strong> Volatilitate pe emergente și mărfuri (petrol −70%). Portofoliu ≈ −10%. Recovery: <1 an.</li>
+<li><strong>9. COVID martie 2020.</strong> Acțiuni −34% în 33 de zile — cel mai rapid bear market din istorie. Aur a oscilat, apoi a urcat. Portofoliu ≈ −24%. Recovery: ~5 luni (cea mai rapidă revenire din istorie, datorită stimulului fiscal masiv).</li>
+<li><strong>10. Șocul inflație + rate 2022.</strong> Atipic: acțiuni −25% ȘI obligațiuni −15% simultan (corelația 60/40 s-a rupt). Aurul plat. Portofoliu ≈ −20%, fără refugiul clasic al bondurilor. Recovery acțiuni: ~1,5 ani. Lecția: scenariul care îți distruge diversificarea clasică.</li>
+</ul>
+
+<p>Observă pattern-ul: drawdown-ul mediu al portofoliului diversificat e ~−24%, dar cu o coadă (1929, 2008) care depășește −38%. Un portofoliu 100% acțiuni ar fi avut drawdown-uri de −50/−85%. Diversificarea NU previne pierderea — îți taie coada și îți scurtează recovery-ul.</p>
+
+<h2>Historical scenario replay și learning: ce extragi dincolo de cifre</h2>
+
+<p>Replay-ul istoric nu e nostalgie. Pentru fiecare scenariu, notează trei date care se repetă:</p>
+
+<ul>
+<li><strong>Ce a funcționat ca refugiu</strong> — în 2008 obligațiunile de stat, în 1973 aurul, în 2022 NIMIC clasic (doar cash și mărfuri). Refugiul variază; de aici nevoia de a deține mai multe.</li>
+<li><strong>Cât a durat panica vs. cât a durat recovery-ul</strong> — căderea e rapidă (luni), recuperarea e lentă (ani). Asimetria asta îți spune că rebalansarea în timpul căderii capturează cea mai mare parte a rebound-ului.</li>
+<li><strong>Ce a accelerat revenirea</strong> — stimul fiscal (2020), tăieri de rate (2009). Rebound dynamics depind de răspunsul politicii, nu doar de evaluări.</li>
+</ul>
+
+<p><strong>Recovery paths și rebound dynamics</strong> au o regulă matematică nemiloasă: un −50% cere +100% ca să revii. Un −30% cere +43%. De aceea evitarea cozii valorează mai mult decât maximizarea câștigului în ani buni. Dacă tai un drawdown de la −50% la −35%, scurtezi recovery-ul cu ani, nu cu luni.</p>
+
+<h2>Monte Carlo simulation și confidence interval</h2>
+
+<p>Replay-ul istoric are un defect: presupune că viitorul repetă exact trecutul. Monte Carlo rezolvă asta generând mii de viitoruri posibile din distribuția randamentelor (cu cozi groase, nu normale).</p>
+
+<p>Procedeul, conceptual:</p>
+
+<ul>
+<li>Iei randamentele anuale ale fiecărei clase + volatilitatea + corelațiile.</li>
+<li>Generezi 10.000 de traiectorii pe 10–20 de ani, fiecare an tras aleator din distribuție.</li>
+<li>Citești percentilele: mediana (P50), scenariul rău (P10), catastrofa (P5/P1).</li>
+</ul>
+
+<p>Output-ul util nu e media — e <strong>confidence interval</strong>-ul. Exemplu: portofoliul de 200.000 USD pe 10 ani poate avea o mediană de ~360.000 USD, dar un P10 (cel mai rău 10%) de doar ~180.000 USD și un P5 sub capitalul inițial. Asta îți spune: în 1 caz din 20, după 10 ani ești pe minus în termeni nominali. Dacă acel P5 te-ar falimenta sau te-ar forța să vinzi în pierdere, alocarea e prea agresivă pentru toleranța ta reală.</p>
+
+<p>Capcana clasică Monte Carlo: dacă folosești volatilitate normală și corelații de timp normal, simularea SUBESTIMEAZĂ tail-ul exact ca VaR-ul. Trebuie să injectezi manual <strong>tail correlation</strong> — vezi mai jos.</p>
+
+<h2>Sensitivity analysis pe variabile cheie</h2>
+
+<p>Stress testing-ul scenariu-cu-scenariu e static. <strong>Sensitivity analysis</strong> îți arată cât de mult contează FIECARE variabilă, izolat. Mișcă o variabilă, ține restul fix, vezi impactul.</p>
+
+<p>Pentru investitorul român, cele patru variabile-cheie de testat:</p>
+
+<ul>
+<li><strong>Cursul EUR/RON și USD/RON.</strong> Dacă 70% din portofoliu e în valută, o depreciere de 10% a leului îți crește valoarea în lei cu ~7% — dar e un câștig fals dacă cheltuielile tale sunt în lei și inflația a urcat. Testează ±15% pe curs.</li>
+<li><strong>Rata dobânzii BNR.</strong> +200 bps lovește obligațiunile lungi și acțiunile growth, ajută depozitele. Testează ±300 bps.</li>
+<li><strong>Inflația.</strong> Lovește activele nominale (cash, bonduri fixe), poate ajuta acțiunile de valoare și aurul. Testează scenariu 10%+ inflație.</li>
+<li><strong>Lichiditatea BVB.</strong> Aplică un haircut de 15–30% pe valoarea poziției locale ca să modelezi „nu pot vinde la prețul afișat”.</li>
+</ul>
+
+<p>Output-ul: o listă ordonată a variabilelor după impact. Pentru cei mai mulți investitori avansați români, cursul valutar și concentrarea sectorială bat ca impact orice altceva — exact variabilele pe care nimeni nu le testează.</p>
+
+<h2>Geopolitical shock modeling și combined scenarios</h2>
+
+<p>Șocurile geopolitice nu vin în tabele istorice curate. Le modelezi ca <strong>scenarii combinate</strong>: un eveniment care declanșează simultan mai multe variabile adverse.</p>
+
+<p>Exemplu de scenariu combinat relevant pentru România 2026 — escaladare regională în vecinătate:</p>
+
+<ul>
+<li>Acțiuni globale −20% (risk-off)</li>
+<li>BVB −35% (proximitate geografică, fugă de capital)</li>
+<li>Leu −12% față de EUR (presiune valutară pe frontieră)</li>
+<li>Aur +15% (refugiu)</li>
+<li>Energie +40% (șoc de aprovizionare)</li>
+<li>Lichiditate BVB practic înghețată 2–3 săptămâni</li>
+</ul>
+
+<p>Aplicat pe portofoliul de 200.000 USD: pierderea pe acțiuni și BVB e parțial compensată de aur și de aprecierea valutei străine (în termeni de lei). Dar partea locală (40.000 USD BVB) devine ilichidă — nu o poți vinde ca să rebalansezi. Asta e lecția scenariului combinat: nu pierderea contabilă te omoară, ci imposibilitatea de a acționa în mijlocul ei.</p>
+
+<h3>Combined scenarios și tail correlation</h3>
+
+<p>Cheia tehnică: în timpuri normale, clasele tale au corelații moderate (acțiuni-bonduri pot fi chiar negative). În panică, <strong>corelațiile converg spre +1</strong> — totul cade odată pentru că toți vând tot ca să facă rost de cash. Asta e <strong>tail correlation</strong>, și e motivul pentru care „sunt diversificat” devine o iluzie exact când ai cea mai mare nevoie de diversificare.</p>
+
+<p>2008 și 2020 au demonstrat-o: în vârful panicii, aur, acțiuni, obligațiuni corporative, imobiliare — toate au căzut câteva zile, în margin calls. Doar cash-ul și titlurile de stat de top au ținut. Concluzie de modelare: în orice stress test serios, ridică artificial corelațiile la 0,8–0,9 între active riscante. Dacă portofoliul rezistă SUB acea ipoteză, e robust. Dacă rezistă doar la corelații normale, e fragil.</p>
+
+<h2>Portfolio resilience score: traduci totul într-un singur număr</h2>
+
+<p>Ca să nu rămâi cu zece tabele și nicio decizie, comprimă rezultatele într-un <strong>portfolio resilience score</strong> de la 0 la 100. O construcție practică, ponderată:</p>
+
+<ul>
+<li><strong>Drawdown worst-case (35%)</strong> — cu cât pierderea în cel mai rău scenariu e mai mică, scor mai mare. −20% → bun; −40%+ → slab.</li>
+<li><strong>Recovery time median (25%)</strong> — sub 2 ani = excelent; peste 5 ani = roșu.</li>
+<li><strong>Tail correlation resilience (20%)</strong> — câtă protecție rămâne când corelațiile urcă la 0,9.</li>
+<li><strong>Lichiditate în criză (10%)</strong> — % din portofoliu vandabil în 48h fără haircut major.</li>
+<li><strong>Sensibilitate la variabila dominantă (10%)</strong> — cât de expus ești la o singură variabilă (curs, un sector).</li>
+</ul>
+
+<p>Un portofoliu cu resilience score sub 50 nu înseamnă „prost” — înseamnă „proiectat pentru creștere maximă, vulnerabil la coadă”. Decizia e a ta și a orizontului tău. Dar acum o iei cu cifre, nu cu speranță. Recalculezi scorul trimestrial; o scădere de scor fără o schimbare de alocare înseamnă că PIAȚA a devenit mai riscantă (corelații în creștere, evaluări întinse) — un semnal de avertizare în sine.</p>
+
+<h2>Pași de acțiune: construiește-ți stress test-ul în 7 pași</h2>
+
+<ul>
+<li><strong>1. Inventariază expunerile reale, nu etichetele.</strong> Nu „50% acțiuni”, ci „38% tech US, 12% Europa, 20% BVB concentrat pe 3 nume”. Riscul stă în concentrarea ascunsă.</li>
+<li><strong>2. Aplică cele zece scenarii istorice</strong> pe alocarea ta exactă. Calculează pierderea în LEI și timpul de recovery pentru fiecare.</li>
+<li><strong>3. Rulează un Monte Carlo</strong> (chiar și un model simplu în Excel/Google Sheets cu funcția aleatoare) și citește P10 și P5, nu media.</li>
+<li><strong>4. Fă sensitivity analysis</strong> pe curs valutar, rată, inflație, lichiditate BVB. Identifică variabila dominantă.</li>
+<li><strong>5. Construiește un scenariu combinat geopolitic</strong> realist pentru poziția României și aplică-l cu corelații ridicate (0,8–0,9).</li>
+<li><strong>6. Calculează resilience score-ul</strong> și compară-l cu pragul tău minim (sugestie pentru investitor cu orizont 10+ ani: minim 55).</li>
+<li><strong>7. Decide UNA-DOUĂ ajustări</strong> — adaugă cash/titluri de stat de top pentru lichiditate în criză, sau reduce concentrarea sectorială. Nu reproiecta tot; cozile se taie marginal.</li>
+</ul>
+
+<h2>Greșeli frecvente la stress testing</h2>
+
+<ul>
+<li><strong>Testezi doar acțiunile, ignori cursul.</strong> Pentru un român cu portofoliu în valută, mișcarea EUR/RON poate domina rezultatul. E variabila cel mai des uitată.</li>
+<li><strong>Folosești corelații de timp normal.</strong> Subestimezi sistematic coada. În stress, totul cade odată — modelează asta explicit.</li>
+<li><strong>Te uiți la drawdown, ignori recovery time.</strong> Un −25% care revine în 8 luni e infinit mai bun decât un −25% care revine în 6 ani dacă ai nevoie de bani la mijloc.</li>
+<li><strong>Ignori lichiditatea.</strong> „Valoarea de portofoliu” în panică e teoretică dacă nu poți vinde. Aplică haircut pe pozițiile ilichide.</li>
+<li><strong>Stress test o singură dată.</strong> Riscul e dinamic. Recalculează trimestrial; resilience score-ul în scădere e un semnal de piață, nu doar de portofoliu.</li>
+<li><strong>Confunzi probabilitatea cu mărimea.</strong> Un scenariu „improbabil” care te falimentează contează mai mult decât zece scenarii probabile pe care le supraviețuiești. Optimizezi pentru supraviețuirea cozii, nu pentru cazul mediu.</li>
+</ul>
+
+<p>Stress testing-ul nu prezice criza următoare — niciun model nu o face. Îți garantează însă că, atunci când vine (și vine), știi deja exact cât pierzi, cât durează să revii, ce poți vinde și ce ajustare ai pregătit dinainte. Asta e diferența dintre un investitor care intră în panică și unul care execută un plan scris în liniște, cu un an înainte.</p>

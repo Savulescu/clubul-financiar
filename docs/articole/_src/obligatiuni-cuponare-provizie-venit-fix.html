@@ -1,0 +1,137 @@
+<p>Dacă ai construit deja o scară clasică pe Tezaur și Fidelis, pasul avansat este să stăpânești <strong>obligațiuni cuponare România strategie venit fix</strong> ca disciplină de sine stătătoare: un generator de cash flow proiectat la nivel de leu, în care fiecare cupon încasat e o decizie de reinvestire, nu un eveniment pasiv. Aici intervin instrumente mai sofisticate — obligațiuni corporative cu provizie de <em>call</em> (rambursare anticipată), scaling pe termene multiple și gestionarea conștientă a <strong>drift-ului randamentului</strong> la reinvestire.</p>
+
+<p>În această lecție trecem dincolo de laddering-ul de bază: scaling de obligații corporative pe termene, reinvestire cupon și drift-ul randamentului, riscul de refinanțare la titlurile cu provizie, <em>callable bonds</em> și early redemption, combinația permanent portfolio obligații și acțiuni, impozitarea cuponului la obligațiunile corporative și, esențial, duration matching al pasivelor tale viitoare. Cititorul țintă cunoaște deja YTM, cuponul și scadența — aici discutăm despre cum le folosești ca pârghii de optimizare.</p>
+
+<p>Diferența practică e una de bani reali: un cupon de 8,5% la o corporativă listată la BVB nu e echivalent cu 7,25% la Tezaur, fiindcă la corporativă plătești <strong>10% impozit</strong> și ai risc de credit și de <em>call</em>. Hai să transformăm aceste nuanțe într-un model de decizie.</p>
+
+<h2>De la laddering pasiv la generator de cash flow proiectat</h2>
+
+<p>La nivel de bază, scara îți spune „cumpără scadențe eșalonate și reinvestește". La nivel avansat, proiectezi întâi <strong>pasivul</strong> — fluxul de cheltuieli pe care vrei să-l acoperi — și abia apoi construiești activul care îl oglindește. Aceasta este logica de <strong>duration matching</strong>: nu maximizezi randamentul în abstract, ci sincronizezi încasările cu obligațiile tale viitoare.</p>
+
+<p>Exemplu concret. Vrei să acoperi 24.000 lei pe an de cheltuieli „fixe" (taxe, asigurări, școală) timp de 5 ani, fără să atingi capitalul. Asta înseamnă un pasiv cu durată medie de aproximativ 2,7–3 ani. Construiești un portofoliu de obligații a cărui <strong>durată modificată</strong> e egală cu cea a pasivului. Dacă duratele se potrivesc, o mișcare a dobânzilor afectează la fel valoarea activelor și valoarea prezentă a pasivelor — ești <em>imunizat</em>.</p>
+
+<h3>Cum calculezi durata pe care o țintești</h3>
+
+<p>Durata Macaulay e media ponderată a momentelor în care primești bani (cupoane + principal), ponderată cu valoarea prezentă a fiecărui flux. Durata modificată ≈ Macaulay / (1 + YTM). Regula practică: la o durată modificată de 3, o creștere de 1 punct procentual a randamentului îți scade prețul cu ~3%. Pentru un investitor de venit care ține până la scadență, această fluctuație de preț e zgomot — dar devine reală în clipa în care ești forțat să vinzi sau emitentul te răscumpără.</p>
+
+<h2>Scaling de obligații corporative pe termene</h2>
+
+<p>La BVB ai un univers real de corporative în lei și euro: emitenți precum bănci, companii de utilități și firme listate emit periodic obligațiuni cu cupon fix, de regulă plătit <strong>semestrial sau anual</strong>. Cupoanele tipice în 2026 se situează frecvent peste titlurile de stat, tocmai pentru că poartă risc de credit — orientativ 8–10% la emitenți solizi pe lei. <strong>Verifică prospectul fiecărei emisiuni</strong>, fiindcă cifrele variază mult de la emitent la emitent.</p>
+
+<p>Scaling-ul pe termene înseamnă să nu pui toată expunerea corporativă pe o singură scadență sau un singur emitent. Construiești o sub-scară corporativă în paralel cu cea de stat:</p>
+
+<ul>
+<li><strong>Termen scurt (1–2 ani):</strong> emitenți cu rating bun, rol de „buffer" lichid și reinvestibil rapid.</li>
+<li><strong>Termen mediu (3–5 ani):</strong> miezul de randament, unde cuponul compensează cel mai bine riscul.</li>
+<li><strong>Termen lung (6–10 ani):</strong> doar cu emitenți de top și acceptând că aici riscul de <em>call</em> și de refinanțare e maxim.</li>
+</ul>
+
+<p>Regulă de concentrare: limitează expunerea pe un singur emitent la max. 10–15% din sleeve-ul de obligații și pe un singur sector la max. 25–30%. O corporativă nu e garantată de stat — dacă emitentul intră în default, recuperezi doar o fracțiune, după rangul tău în structura de capital (senior vs. subordonat contează enorm).</p>
+
+<h2>Provizia de call: callable bonds și early redemption</h2>
+
+<p>O <strong>obligațiune cu provizie de call</strong> dă emitentului dreptul (nu obligația) să te răscumpere înainte de scadență, de regulă la par sau cu o mică primă, după o perioadă de protecție (<em>non-call period</em>). Pentru tine, deținătorul, asta e un risc asimetric prost: emitentul te cheamă exact când nu vrei.</p>
+
+<h3>Mecanica capcanei</h3>
+
+<p>Emitentul exercită call-ul când dobânzile au scăzut și el se poate refinanța mai ieftin. În acel moment îți întoarce capitalul, iar tu trebuie să reinvestești într-o piață cu randamente mai mici — exact <strong>drift-ul negativ al randamentului</strong>. Practic, ai un câștig plafonat (prețul nu urcă mult peste prețul de call) și o pierdere neplafonată dacă dobânzile cresc. De aceea o callable trebuie să-ți ofere un <strong>spread suplimentar</strong> față de una comparabilă non-callable; altfel emitentul îți vinde gratis o opțiune pe care o plătești tu.</p>
+
+<h3>Ce randament privești de fapt</h3>
+
+<ul>
+<li><strong>YTC (Yield to Call):</strong> randamentul dacă ești răscumpărat la prima dată de call. Dacă obligațiunea se tranzacționează peste par, YTC &lt; YTM — randamentul real probabil e cel mai mic dintre cele două.</li>
+<li><strong>Yield to Worst (YTW):</strong> minimul dintre YTM și toate YTC-urile posibile. La o callable, <strong>aceasta e cifra pe care o folosești în decizie</strong>, nu YTM-ul optimist din titlu.</li>
+<li><strong>Make-whole call:</strong> unele emisiuni prevăd o despăgubire calculată ca valoare prezentă a cupoanelor rămase — mai prietenoasă cu investitorul. Verifică în prospect dacă call-ul e „par call" sau „make-whole".</li>
+</ul>
+
+<h2>Riscul de refinanțare și obligațiunile cu provizie</h2>
+
+<p>Riscul de refinanțare are două fețe. A ta: când o tranșă ajunge la scadență (sau e called), trebuie să „refinanțezi" propriul venit reinvestind la dobânda curentă. A emitentului: dacă el nu-și poate rostogoli datoria la scadență, crește riscul de default — iar emitenții cu mult <em>call</em> și maturități concentrate sunt cei mai expuși. Tu vrei emitenți cu profil de scadențe eșalonat, nu cu un „zid de maturități" într-un singur an.</p>
+
+<p>Apărarea practică împotriva drift-ului de reinvestire:</p>
+
+<ul>
+<li><strong>Barbell parțial:</strong> combină scadențe scurte (flexibilitate) cu câteva lungi non-callable (blochezi randamentul actual pe durată).</li>
+<li><strong>Preferă non-callable</strong> pentru tranșele lungi, unde call-ul te-ar răni cel mai tare.</li>
+<li><strong>Eșalonează datele de call</strong>, nu doar scadențele, ca să nu fii „chemat" pe tot portofoliul în aceeași lună de scădere a dobânzilor.</li>
+</ul>
+
+<h2>Reinvestirea cuponului și drift-ul randamentului</h2>
+
+<p>Randamentul afișat (YTM) presupune, matematic, că reinvestești fiecare cupon exact la acel YTM. În realitate, reinvestești la dobânda pieței din ziua încasării — acesta e <strong>riscul de reinvestire</strong>, motorul drift-ului. Într-un ciclu de scădere a dobânzilor, randamentul tău efectiv realizat va fi sub YTM-ul inițial; într-unul de creștere, peste.</p>
+
+<h3>Model numeric simplu de drift</h3>
+
+<p>Ai 100.000 lei în corporative cu cupon mediu 9% pe lei, plătit anual = 9.000 lei brut/an. După impozitul de 10%, încasezi <strong>8.100 lei net/an</strong>. Dacă reinvestești acel cupon:</p>
+
+<ul>
+<li>La 9% (mediu stabil): venitul compus crește geometric, iar pe 5 ani randamentul realizat ≈ YTM.</li>
+<li>La 6% (drift negativ): cupoanele reinvestite produc mai puțin; randamentul realizat scade orientativ cu ~0,4–0,6 puncte procentuale pe orizont de 5 ani, în funcție de mărimea cuponului.</li>
+<li>La 12% (drift pozitiv): efect invers, în favoarea ta.</li>
+</ul>
+
+<p>Concluzie operațională: cu cât cuponul e mai mare și orizontul mai lung, cu atât randamentul tău depinde mai mult de <strong>unde reinvestești cupoanele</strong>, nu de prețul de cumpărare. De aici importanța de a avea mereu o „treaptă de sus" pregătită pentru reinvestire.</p>
+
+<h3>Cum măsori drift-ul realizat, nu cel teoretic</h3>
+
+<p>Mulți investitori avansați urmăresc doar YTM-ul de la cumpărare și nu verifică niciodată ce randament au realizat de fapt. Calculul corect e <strong>randamentul intern (IRR) al fluxurilor efective</strong>: capitalul investit la început, cu semn negativ, apoi fiecare cupon net încasat și reinvestit, plus principalul la scadență sau la call. Dacă IRR-ul realizat e sub YTM-ul inițial, ai suferit drift negativ — ai reinvestit la dobânzi mai mici. Recomandarea practică: ține un tabel simplu cu data și valoarea fiecărui flux net și recalculează IRR-ul anual; e singura cifră onestă despre performanța sleeve-ului tău de venit fix.</p>
+
+<p>O capcană subtilă: cuponul semestrial vs. anual schimbă rezultatul. Două obligațiuni cu același cupon nominal de 9% dau randamente efective diferite dacă una plătește o dată pe an, iar cealaltă de două ori — cea semestrială îți pune banii mai devreme la muncă (efect de compunere) și reduce ușor durata. La paritate de risc, preferi frecvența de plată mai mare, mai ales dacă ai unde reinvesti imediat.</p>
+
+<h2>Impozitarea cuponului la obligațiunile corporative</h2>
+
+<p>Aici e diferența esențială față de titlurile de stat pentru populație. Tezaur și Fidelis au dobânda <strong>neimpozabilă</strong>. La obligațiunile corporative, situația în România 2026 e diferită:</p>
+
+<ul>
+<li><strong>Cuponul (dobânda)</strong> e venit din investiții, impozitat cu <strong>10% impozit pe venit</strong>. La instrumentele tranzacționate printr-un intermediar fiscal din România, intermediarul reține de regulă impozitul la sursă; verifică acest aspect pentru fiecare broker.</li>
+<li><strong>Câștigul de capital</strong> (dacă vinzi peste prețul de achiziție) e impozitat după regimul curent al câștigurilor din titluri — cu cote care diferă în funcție de perioada de deținere și de intermediar. <strong>Verifică pragul și cota curentă</strong> la ANAF, fiindcă regimul s-a modificat în anii recenți.</li>
+<li><strong>CASS:</strong> veniturile din investiții pot intra în baza de calcul a contribuției de sănătate dacă depășești plafoanele anuale raportate la salariul minim. <strong>Verifică plafonul curent</strong> și cumulul cu alte venituri — poate eroda semnificativ randamentul net.</li>
+</ul>
+
+<p>Compară mereu pe bază <strong>net, nu brut</strong>. Un Tezaur 5 ani la 7,25% neimpozabil ≈ o corporativă brută de ~8,05% impozitată cu 10% (7,25 / 0,9). Dacă o corporativă riscantă îți dă doar 8%, primești compensație aproape nulă pentru riscul de credit și de call — semnal că nu merită.</p>
+
+<h2>Permanent portfolio: obligații și acțiuni împreună</h2>
+
+<p>Sleeve-ul de obligații cuponare nu trăiește singur. În logica unui <strong>permanent portfolio</strong>, obligațiunile cu venit fix sunt ancora de stabilitate lângă acțiuni/ETF-uri (creștere) și eventual aur/cash (protecție). Ideea avansată: cuponul net încasat poate alimenta automat partea de acțiuni printr-un <em>rebalancing</em> regulat, transformând venitul fix într-un flux de cumpărare disciplinat în piața de acțiuni — inclusiv în corecții.</p>
+
+<ul>
+<li>Folosește cupoanele ca „muniție" de rebalansare: când acțiunile scad sub ținta de alocare, direcționezi cuponul net acolo.</li>
+<li>Ține partea non-callable lungă drept contrapondere la volatilitatea acțiunilor — în recesiune, dobânzile scad și prețul ei urcă, exact când acțiunile sângerează.</li>
+<li>Nu suprapune riscul: dacă deții și acțiunile, și obligațiunile aceluiași emitent, ești dublu expus la default-ul lui.</li>
+</ul>
+
+<h2>Pași de acțiune și model de decizie</h2>
+
+<ol>
+<li><strong>Definește pasivul.</strong> Scrie fluxul de cheltuieli pe ani și calculează durata-țintă; aceasta dictează scadențele, nu invers.</li>
+<li><strong>Construiește două sub-scări:</strong> una de stat (Tezaur/Fidelis, neimpozabilă, ancoră) și una corporativă scalată pe termene (randament, dar net de 10% impozit).</li>
+<li><strong>La fiecare corporativă, citește prospectul</strong> pentru: provizie de call (par sau make-whole), non-call period, rang (senior/subordonat), frecvența cuponului și covenants.</li>
+<li><strong>Decide pe YTW, nu pe YTM.</strong> Dacă titlul e peste par și callable, presupune că vei fi răscumpărat la prima dată de call.</li>
+<li><strong>Compară net.</strong> Adu corporativele la echivalent net (×0,9 pentru cupon) și cere un spread real față de Tezaurul echivalent — minim ~150–250 puncte de bază pentru a-ți plăti riscul de credit și de call.</li>
+<li><strong>Eșalonează call-urile</strong> și ține tranșele lungi non-callable, ca să limitezi drift-ul de reinvestire.</li>
+<li><strong>Planifică reinvestirea cuponului</strong> din timp: ai mereu o destinație pregătită (treapta de sus a scării sau rebalansarea spre acțiuni).</li>
+</ol>
+
+<h3>Checklist înainte de cumpărare</h3>
+
+<ul>
+<li>Am calculat <strong>YTW</strong> și nu doar cuponul afișat?</li>
+<li>Știu dacă e <strong>callable</strong>, de la ce dată și la ce preț?</li>
+<li>Cunosc <strong>rangul</strong> meu în structura de capital la default?</li>
+<li>Am adus randamentul la <strong>net de impozit și CASS</strong> și l-am comparat cu Tezaur/Fidelis?</li>
+<li>Respect limitele de <strong>concentrare</strong> pe emitent și sector?</li>
+<li>Durata portofoliului se potrivește cu <strong>durata pasivului</strong> meu?</li>
+<li>Am un plan scris de <strong>reinvestire a cuponului</strong> pentru fiecare scadență?</li>
+</ul>
+
+<h3>Greșeli frecvente la nivel avansat</h3>
+
+<ul>
+<li><strong>Cumpărarea pe cupon, nu pe YTW:</strong> un cupon mare la preț peste par poate ascunde un randament real mediocru după call.</li>
+<li><strong>Ignorarea impozitului:</strong> compari corporativ brut cu titluri de stat net și crezi că ai găsit valoare unde nu e.</li>
+<li><strong>Concentrarea pe un emitent „de încredere":</strong> riscul de credit e tăcut până în ziua default-ului.</li>
+<li><strong>Reinvestire neplanificată:</strong> cupoanele care stau în cont anulează compunerea și introduc drift de randament involuntar.</li>
+<li><strong>Mismatch de durată:</strong> active prea scurte față de pasive lungi (refinanțezi la dobânzi mai mici) sau invers (forțat să vinzi în pierdere).</li>
+</ul>
+
+<p>Tratată așa, biblioteca ta de obligațiuni cuponare devine un instrument de inginerie de venit: nu colectezi pasiv dobânzi, ci proiectezi un flux net, imunizat pe durată, conștient de provizia de call și de drift-ul reinvestirii — exact diferența dintre un deținător de obligațiuni și un constructor de cash flow.</p>

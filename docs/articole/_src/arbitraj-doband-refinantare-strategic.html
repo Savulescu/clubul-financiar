@@ -1,0 +1,121 @@
+<p><strong>Arbitrajul de dobândă prin refinanțare strategică pentru antreprenori</strong> este pasul următor după ce ai învățat să separi datoriile bune de cele rele: aici nu mai întrebi „e bună sau rea datoria asta?”, ci „cât de mare e spread-ul dintre costul finanțării și randamentul pe care îl produc banii — și când îl reașez prin refinanțare ca să-l maximizez?”. Practic, transformi pasivul într-un instrument activ: muți soldul de la un cost mai mare la unul mai mic, deplasezi scadențe ca să eliberezi cash flow, și exploatezi diferența de cost dintre un credit IFN și unul bancar atunci când scoring-ul tău s-a îmbunătățit.</p>
+
+<p>În lecția asta primești un model concret de arbitraj pentru 2026: un algoritm lunar de decizie când refinanțezi, regulile ANAF de deductibilitate a dobânzii pentru o firmă, cum se calculează corect spread-ul de dobândă, când e optim să refinanțezi un credit și cum citești deciziile BNR ca să anticipezi impactul pe credite. Vei vedea și diferența reală IFN versus bancă, și unde tehnicile legitime de cash flow prin datorii se transformă în capcane care îți distrug bilanțul.</p>
+
+<p>Presupun că știi deja ce e DAE, soldul, perioada de grație, dobânda variabilă legată de IRCC și diferența de bază dintre o linie de credit și un credit la termen — nu le reluăm. Mergem direct la matematica deciziei și la cazurile-limită pe care un antreprenor experimentat le întâlnește real în România anului 2026.</p>
+
+<h2>Spread-ul de dobândă: numărul pe care îl optimizezi, nu DAE-ul</h2>
+
+<p>Greșeala clasică e să compari două credite după DAE. DAE-ul îți spune cât te costă banii în izolare. Arbitrajul te interesează de <strong>spread</strong>: diferența dintre randamentul pe care îl produce capitalul împrumutat (ROIC la nivel de proiect sau firmă) și costul lui <em>net de deductibilitate</em>.</p>
+
+<p>Formula de lucru pe care o ții în cap:</p>
+
+<ul>
+<li><strong>Spread net = ROIC pe proiect − Cost dobândă × (1 − cotă impozit deductibilă)</strong></li>
+</ul>
+
+<p>Pentru un SRL pe profit (16% impozit), o dobândă nominală de 10% deductibilă integral te costă efectiv <strong>10% × (1 − 0,16) = 8,4%</strong>. Dacă acel capital generează în firmă un ROIC de 18%, spread-ul tău net este <strong>18% − 8,4% = 9,6 puncte procentuale</strong>. Asta e marja din care trăiește efectul de levier. Pentru o microîntreprindere (cotă unică de 1% pe venit din 2026, cu plafonul de încadrare coborât la 100.000 EUR cifră de afaceri), deductibilitatea dobânzii nu reduce un impozit pe profit pe care nu îl plătești — efectul fiscal e aproape nul, deci costul efectiv ≈ costul nominal. Acest singur detaliu schimbă complet calculul de arbitraj între microîntreprindere și SRL pe profit.</p>
+
+<h3>De ce contează regimul fiscal înainte de orice refinanțare</h3>
+
+<p>Un antreprenor pe microîntreprindere care se uită la deductibilitate ca la un avantaj face o eroare scumpă: dobânda lui nu e deductibilă în sens economic, fiindcă baza de impozitare e venitul (impozitat cu 1% din 2026), nu profitul. Pentru el, arbitrajul real e pur pe costul nominal — trebuie să caute cel mai mic cost brut, fiindcă scutul fiscal nu există. Pentru SRL pe profit, scutul fiscal de 16% (cota de impozit pe profit) face ca un credit mai scump dar deductibil să poată bate un credit mai ieftin dar contractat pe persoană fizică (unde dobânda nu reduce niciun impozit de firmă).</p>
+
+<h2>Deductibilitatea dobânzii la ANAF: regulile care decid arbitrajul real</h2>
+
+<p>Aici se câștigă sau se pierde jumătate din avantaj. Pentru o firmă plătitoare de impozit pe profit, dobânda nu e automat 100% deductibilă. Se aplică regulile de <strong>limitare a deductibilității costurilor excedentare ale îndatorării</strong> (transpunerea directivei ATAD în Codul fiscal):</p>
+
+<ul>
+<li><strong>Plafonul de deducere imediată.</strong> Costurile excedentare ale îndatorării (dobânzi + costuri asimilate, minus veniturile din dobânzi) sunt deductibile integral până la un plafon anual exprimat în euro, per contribuabil. Pragul general este echivalentul în lei a <strong>1.000.000 EUR</strong>; pentru costurile excedentare aferente tranzacțiilor cu persoane afiliate care nu finanțează achiziția/producția de active eligibile (imobilizări în curs etc.), plafonul de deducere imediată este mai restrictiv — echivalentul a <strong>500.000 EUR</strong>. Aceste plafoane se calculează la nivelul întregului grup pentru entitățile afiliate.</li>
+<li><strong>Limita de 30% din EBITDA fiscală.</strong> Peste plafonul de deducere imediată, costul excedentar se deduce doar până la 30% din baza de calcul (un EBITDA ajustat fiscal). Ce depășește se reportează în anii următori, fără limită de timp.</li>
+<li><strong>Tranzacții cu afiliați.</strong> Dacă te finanțezi de la firma-mamă sau de la asociat, intri sub lupa prețurilor de transfer: dobânda trebuie să fie „la nivelul pieței”, altfel partea peste piață e nedeductibilă și se reîncadrează.</li>
+</ul>
+
+<p>Consecința strategică: dacă firma ta are EBITDA mică și îndatorare mare, o parte din dobândă <em>nu</em> e deductibilă în anul curent, iar scutul fiscal pe care l-ai presupus în formula de spread dispare temporar. Înainte de orice refinanțare care crește soldul, calculează: <strong>costul excedentar al îndatorării ≤ plafon imediat, sau ≤ 30% × EBITDA fiscală?</strong> Dacă nu, costul efectiv al noului credit nu e dobânda × 0,84, ci aproape dobânda întreagă pentru tranșa nedeductibilă.</p>
+
+<h2>IFN versus bancă: arbitrajul de scoring</h2>
+
+<p>Diferența fundamentală nu e doar dobânda mai mare la IFN. Sunt trei axe pe care faci arbitraj:</p>
+
+<ul>
+<li><strong>Viteza și criteriile.</strong> IFN-ul finanțează rapid, cu scoring mai permisiv, fără istoric lung — dar la dobânzi semnificativ mai mari și uneori cu comisioane de acordare consistente. Banca e mai lentă, mai exigentă pe bonitate și vechime, dar mult mai ieftină.</li>
+<li><strong>DAE real, nu rata afișată.</strong> Un IFN poate afișa o rată lunară mică care, anualizată cu comisioanele, ajunge la un DAE de zeci de procente. Compară mereu DAE complet, inclusiv comisionul de acordare amortizat pe durata reală până la refinanțare, nu pe toată maturitatea.</li>
+<li><strong>Raportarea la Biroul de Credit / Centrala Riscului.</strong> Un credit IFN plătit impecabil 6–12 luni îți construiește istoric și îți crește scoring-ul — exact materia primă pentru pasul de arbitraj: refinanțarea la bancă.</li>
+</ul>
+
+<p><strong>Mecanica arbitrajului de scoring, pas cu pas:</strong> pornești cu un credit IFN pentru că ai nevoie acum de capital și banca te-ar refuza. Plătești la timp, îți consolidezi cifra de afaceri și bonitatea. După 6–12 luni, profilul tău de risc s-a îmbunătățit obiectiv. Atunci refinanțezi soldul IFN cu un credit bancar mult mai ieftin. Spread-ul pe care îl câștigi nu vine din piață, ci din <em>repoziționarea ta în grila de risc</em>. Acesta e cel mai accesibil arbitraj de dobândă pentru un antreprenor român.</p>
+
+<h2>Algoritmul lunar de decizie: refinanțezi sau nu?</h2>
+
+<p>Refinanțarea are un cost ascuns — comisioane de acordare la noul credit, eventual comision de rambursare anticipată la cel vechi, evaluări, notar la garanții reale. Decizia corectă nu e „dobânda nouă e mai mică?”, ci „economia totală depășește costul total de tranzacție, în orizontul în care chiar voi păstra creditul?”. Iată algoritmul pe care îl rulezi lunar:</p>
+
+<ul>
+<li><strong>Pas 1 — Calculează economia lunară brută.</strong> Δ rată = rata actuală − rata refinanțată, pe același sold și aceeași perioadă rămasă. Folosește dobânda, nu rata totală (principalul nu e economie).</li>
+<li><strong>Pas 2 — Sumează costul de tranzacție.</strong> Comision rambursare anticipată (la credite firmă poate lipsi sau fi negociabil; la persoană fizică e plafonat legal) + comision acordare nou + costuri garanții.</li>
+<li><strong>Pas 3 — Calculează pragul de break-even în luni.</strong> <strong>Luni până la break-even = Cost total tranzacție ÷ Economia lunară de dobândă.</strong></li>
+<li><strong>Pas 4 — Compară cu orizontul real.</strong> Dacă vei păstra creditul mai mult decât pragul de break-even, refinanțezi. Dacă plănuiești să rambursezi sau să vinzi activul înainte, NU refinanțezi — plătești costul fără să recuperezi.</li>
+<li><strong>Pas 5 — Verifică triggerul de spread.</strong> Refinanțează doar dacă noua dobândă e mai mică cu cel puțin un prag (regula practică: ≥ 1–1,5 puncte procentuale pe sold mediu, mai mult pe solduri mici unde comisioanele cântăresc proporțional mai greu).</li>
+</ul>
+
+<h3>Exemplu numeric complet</h3>
+
+<p>Sold rămas 200.000 lei, perioadă rămasă 5 ani. Credit actual la 11% dobândă, ofertă de refinanțare la 8,5%.</p>
+
+<ul>
+<li>Dobânda din prima lună la vechiul credit ≈ 200.000 × 11% ÷ 12 ≈ <strong>1.833 lei</strong>.</li>
+<li>La cel nou ≈ 200.000 × 8,5% ÷ 12 ≈ <strong>1.417 lei</strong>. Economie de dobândă în prima lună ≈ <strong>416 lei</strong> (scade pe măsură ce soldul scade).</li>
+<li>Cost tranzacție: comision acordare 1% × 200.000 = 2.000 lei + evaluare/notar garanție ≈ 1.500 lei = <strong>3.500 lei</strong>.</li>
+<li>Break-even ≈ 3.500 ÷ 416 ≈ <strong>~8–9 luni</strong> (conservator, fiindcă economia scade în timp, rotunjește la 10–11 luni).</li>
+</ul>
+
+<p>Concluzie: dacă păstrezi creditul peste un an, refinanțarea produce spread pozitiv clar. Dacă plănuiești o vânzare a activului în 6 luni, pierzi 3.500 lei degeaba. Algoritmul, nu instinctul, decide.</p>
+
+<h2>BNR și citirea ratelor: când e momentul</h2>
+
+<p>Costul majorității creditelor în lei e legat de <strong>IRCC</strong> (indicele de referință pentru creditele consumatorilor, calculat din tranzacțiile interbancare) sau de ROBOR pentru contractele mai vechi. IRCC se recalculează trimestrial și reflectă cu întârziere mișcările de pe piața monetară, care la rândul lor urmează <strong>dobânda de politică monetară a BNR</strong>.</p>
+
+<p>Mecanica de anticipare pentru un antreprenor:</p>
+
+<ul>
+<li><strong>BNR taie dobânda de politică → piața monetară scade → IRCC scade cu un trimestru-două întârziere.</strong> Dacă vezi un ciclu clar de relaxare, un credit cu dobândă variabilă pe IRCC devine mai ieftin automat — uneori e mai bine să aștepți recalcularea decât să refinanțezi pe fix acum.</li>
+<li><strong>BNR majorează → fixarea devine valoroasă.</strong> Într-un ciclu de înăsprire, arbitrajul e invers: refinanțezi din variabil în <em>dobândă fixă</em> cât timp fixul e încă jos, „înghețând” costul înainte de creșteri.</li>
+<li><strong>Decizia variabil vs fix e un trade pe direcția BNR,</strong> nu o preferință. Variabil = pariezi pe scădere/stabilitate. Fix = cumperi asigurare contra creșterii, plătind de regulă o primă (fixul pornește mai sus decât variabilul curent).</li>
+</ul>
+
+<h2>Cash flow prin datorii: tehnici legitime și capcana subțire</h2>
+
+<p>Un antreprenor avansat folosește datoria și pentru a netezi cash flow-ul, nu doar pentru a finanța creștere. Diferența dintre o tehnică sănătoasă și o manipulare care îți ascunde insolvența:</p>
+
+<ul>
+<li><strong>Legitim — extinderea maturității.</strong> Refinanțezi un credit la termen pe o perioadă mai lungă: rata lunară scade, eliberezi cash flow operațional. Plătești mai multă dobândă totală, dar câștigi lichiditate când ai un ROIC bun pe capitalul eliberat.</li>
+<li><strong>Legitim — match maturity-asset.</strong> Finanțezi active de durată lungă cu datorie lungă, iar nevoile de capital de lucru cu linii revolving scurte. Nu finanțezi stocuri perisabile cu un credit pe 7 ani și nici utilaje pe 10 ani cu un descoperit de cont reînnoit lunar.</li>
+<li><strong>Capcană — rostogolirea care ascunde pierderea.</strong> Refinanțezi constant ca să eviți să recunoști că proiectul nu produce ROIC peste cost. Spread-ul tău net e negativ, dar îl maschezi mutând datoria și prelungind scadențele. Asta nu e arbitraj, e compounding negativ amânat: dobânda se acumulează, levierul crește, iar la prima recalculare IRCC adversă sau refuz de refinanțare, totul se prăbușește.</li>
+<li><strong>Capcană — finanțarea distribuirilor.</strong> Te împrumuți ca să scoți dividende/retrageri în loc să reinvestești. Crește pasivul fără a crește capacitatea de a-l plăti.</li>
+</ul>
+
+<p>Testul unic care separă cele două: <strong>spread-ul net este pozitiv pe orizontul creditului?</strong> Dacă da, datoria construiește valoare. Dacă nu, orice refinanțare nu face decât să întârzie momentul adevărului și să crească factura.</p>
+
+<h2>Capcane subtile de evitat</h2>
+
+<ul>
+<li><strong>Compari rata, nu DAE-ul complet până la refinanțare.</strong> Comisionul de acordare amortizat pe 6 luni (până refinanțezi) e mult mai scump procentual decât același comision pe toată maturitatea.</li>
+<li><strong>Presupui scut fiscal pe microîntreprindere.</strong> Nu există — deductibilitatea reduce profitul, iar tu ești impozitat pe venit.</li>
+<li><strong>Ignori plafonul ATAD de 30% EBITDA.</strong> La îndatorare mare, o parte din dobândă nu e deductibilă în anul curent, deci scutul fiscal pe care l-ai pus în formula de spread nu se materializează imediat.</li>
+<li><strong>Garanții încrucișate.</strong> Refinanțezi punând garanție un activ personal (casa) pentru o datorie de firmă — transferi riscul de business asupra patrimoniului personal. Spread-ul nu compensează niciodată riscul de a rămâne pe stradă.</li>
+<li><strong>Refinanțezi prea des.</strong> Fiecare refinanțare are cost de tranzacție; sub pragul de break-even pierzi bani chiar dacă dobânda scade.</li>
+</ul>
+
+<h2>Checklist de acțiune înainte de orice refinanțare</h2>
+
+<ul>
+<li><strong>1.</strong> Calculează ROIC-ul real al capitalului împrumutat. Dacă e sub costul net al dobânzii, oprește-te — niciun arbitraj nu salvează un spread negativ.</li>
+<li><strong>2.</strong> Stabilește regimul fiscal (micro vs profit) și aplică scutul de 16% DOAR dacă ești pe profit și sub plafonul de deductibilitate.</li>
+<li><strong>3.</strong> Verifică limita ATAD (plafon imediat și 30% EBITDA) dacă soldul crește semnificativ.</li>
+<li><strong>4.</strong> Adună TOATE costurile de tranzacție: comision rambursare anticipată + acordare + evaluare + notar.</li>
+<li><strong>5.</strong> Rulează algoritmul: break-even (luni) = cost total ÷ economie lunară de dobândă.</li>
+<li><strong>6.</strong> Compară cu orizontul real în care vei păstra creditul. Refinanțezi doar dacă orizontul depășește break-even-ul.</li>
+<li><strong>7.</strong> Citește ciclul BNR: în relaxare, ia în calcul să aștepți recalcularea IRCC; în înăsprire, evaluează fixarea dobânzii.</li>
+<li><strong>8.</strong> Nu pune niciodată garanție personală pentru o datorie de firmă fără un plan clar de ieșire.</li>
+<li><strong>9.</strong> Reevaluează lunar: refinanțarea nu e o decizie unică, e o disciplină recurentă de monitorizare a spread-ului.</li>
+</ul>
+
+<p>Arbitrajul de dobândă nu e despre a găsi cea mai mică rată afișată. E despre a ști, în fiecare lună, dacă spread-ul tău net e pozitiv, dacă scutul fiscal e real, și dacă momentul de a muta datoria a sosit — apoi a acționa cu un algoritm, nu cu emoție. Asta separă antreprenorul care folosește datoria ca instrument de cel care e folosit de ea.</p>

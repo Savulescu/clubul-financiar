@@ -1,0 +1,159 @@
+<p>Pentru un <strong>antreprenor cu venit volatil, stabilizarea cash flow-ului și remunerarea</strong> sunt cele două variabile pe care le optimizezi simultan: una îți ține firma în viață când veniturile cad, cealaltă decide cât scoți tu acasă fără să sufoci creșterea. După ce ai învățat să gestionezi venituri sezoniere și fluxul de numerar al unei afaceri mici, pasul avansat e să transformi intuiția în model: o prognoză de venit pe 18 luni, un fond de rulment dimensionat corect și o regulă clară de distribuire dividend vs reinvestire.</p>
+
+<p>Lecția asta îți dă instrumentarul complet pentru România 2026: un calculator de cash burn rate cu scenarii bas-mid-top, o strategie de remunerare risk-adjusted salariu + dividend, reguli pentru buffer de cash și credit de lucru, tratarea corectă a impozitării pe venit variabil și un plan de urgență pe 6 luni cash care se declanșează automat, nu emoțional. Totul cu cifre, praguri și pași concreți.</p>
+
+<p>Presupun că deja știi ce e cash flow-ul operațional, diferența dintre profit și lichiditate, ce e un sezon slab și de ce un P&L pozitiv poate ascunde o criză de numerar. Nu le mai reluăm. Mergem direct la modelele de calcul și la deciziile multi-variabile pe care un antreprenor experimentat le ia real când luna viitoare nu seamănă cu cea trecută.</p>
+
+<h2>Burn rate cu scenarii: numărul care îți spune câte luni mai ai</h2>
+
+<p>Prima eroare a antreprenorului cu venit volatil e să raporteze totul la o lună „medie” care nu există niciodată. Media e o ficțiune statistică; tu trăiești din distribuție, nu din medie. De aceea modelul corect nu pornește de la venit, ci de la <strong>cheltuielile fixe lunare</strong> — singurul număr stabil din ecuație.</p>
+
+<p>Definește două tipuri de burn:</p>
+
+<ul>
+<li><strong>Burn brut</strong> = totalul cheltuielilor fixe lunare obligatorii (chirie, salarii nete + contribuții, abonamente, leasing, dobânzi, contabilitate, utilități, costul minim de funcționare). Acesta e cât „arzi” chiar dacă vânzările sunt zero.</li>
+<li><strong>Burn net</strong> = burn brut − încasarea realistă a lunii. Când burn net e pozitiv, consumi din buffer.</li>
+</ul>
+
+<p><strong>Runway = Buffer de cash disponibil ÷ Burn net mediu pe scenariu.</strong> Asta e numărul-rege. Îți spune câte luni rezistă firma dacă scenariul respectiv se materializează.</p>
+
+<h3>Calculatorul pe trei scenarii bas-mid-top</h3>
+
+<p>Construiește trei coloane pentru următoarele 12-18 luni. Exemplu numeric pentru un SRL de servicii cu burn brut de <strong>40.000 lei/lună</strong> și buffer de <strong>120.000 lei</strong>:</p>
+
+<ul>
+<li><strong>Scenariul bas (pesimist, ~percentila 20 a istoricului tău)</strong>: încasare 25.000 lei/lună. Burn net = 40.000 − 25.000 = <strong>15.000 lei/lună</strong>. Runway = 120.000 ÷ 15.000 = <strong>8 luni</strong>.</li>
+<li><strong>Scenariul mid (median, ~percentila 50)</strong>: încasare 42.000 lei/lună. Burn net = −2.000 lei (generezi cash). Runway „infinit” cât ține scenariul — buffer-ul crește.</li>
+<li><strong>Scenariul top (optimist, ~percentila 80)</strong>: încasare 70.000 lei/lună. Surplus 30.000 lei/lună de alocat (reinvestire, dividend, buffer).</li>
+</ul>
+
+<p>Regula de decizie: <strong>nu te conduci după mid, ci după bas.</strong> Toate angajamentele fixe noi (o angajare, un leasing, o mărire de chirie) le testezi în scenariul bas. Dacă în bas runway-ul scade sub pragul tău minim, angajamentul e interzis indiferent cât de frumos arată în mid și top. Asta e diferența între un antreprenor care supraviețuiește ciclurilor și unul care se trezește fără bani în luna a patra de sezon slab.</p>
+
+<p>Calibrarea scenariilor nu e arbitrară: ia istoricul tău de încasări lunare pe ultimii 2-3 ani, sortează-l, și citește percentilele 20/50/80. Dacă nu ai istoric suficient, folosește percentile pe portofoliul de clienți (rata de churn, ciclul de plată mediu, concentrarea pe top-3 clienți).</p>
+
+<h2>Prognoza de venit pe 18 luni: modelul rolling, nu bugetul anual</h2>
+
+<p>Bugetul anual fix e inutil pentru venit volatil — la sfârșitul lunii 2 e deja fals. Modelul corect e o <strong>prognoză rolling pe 18 luni</strong>, actualizată în prima zi a fiecărei luni, în care luna care tocmai s-a încheiat iese și se adaugă o lună nouă la coadă. Așa privești mereu un orizont complet de 18 luni, suficient să prinzi două sezoane întregi și să vezi golurile de lichiditate înainte să te lovească.</p>
+
+<p>Structura modelului, pe linii lunare:</p>
+
+<ul>
+<li><strong>Încasări estimate</strong> defalcate pe scenariu (bas/mid/top), nu o singură cifră. Pondere recomandată pentru decizii: bazează-te pe bas pentru obligații, pe mid pentru planificare, pe top doar pentru oportunism.</li>
+<li><strong>Plăți contractate ferm</strong> (le știi: salarii, chirii, rate, furnizori cu termen).</li>
+<li><strong>Obligații fiscale defalcate pe scadențe reale</strong> — nu uniform. TVA-ul, impozitul și contribuțiile au date fixe și pot crea vârfuri de plată într-o lună cu încasări mici.</li>
+<li><strong>Sold de numerar la final de lună</strong> = sold inițial + încasări − plăți. Linia roșie: orice lună în care soldul proiectat în scenariul bas scade sub burn-ul unei luni e o alertă de lichiditate care cere acțiune azi.</li>
+</ul>
+
+<p>Cel mai valoros output al modelului nu e cifra finală, ci <strong>identificarea lunii-gol</strong>: luna în care, în scenariul bas, rămâi fără buffer. Dacă o vezi cu 6 luni înainte, ai timp să negociezi termene, să tragi o linie de credit sau să amâni o investiție. Dacă o vezi cu 3 săptămâni înainte, ai doar panică.</p>
+
+<h2>Fondul de rulment și lichiditatea: cât buffer e suficient</h2>
+
+<p>Buffer-ul de cash nu e un număr rotund inspirațional („să am 100k”), ci o funcție a volatilității tale și a burn-ului. Regula de dimensionare pentru venit volatil:</p>
+
+<ul>
+<li><strong>Buffer minim de supraviețuire</strong> = burn brut × numărul de luni al celui mai lung sezon slab istoric + 1 lună marjă. Dacă cel mai lung gol a fost 4 luni, ținta minimă e 5 × burn brut.</li>
+<li><strong>Buffer de operare confortabil</strong> = 6 × burn brut. Sub acest prag, deciziile devin defensive și pierzi oportunități.</li>
+<li><strong>Capital de lucru (fond de rulment net)</strong> = active curente − datorii curente. Pentru o firmă cu venit volatil, ținta sănătoasă e un raport curent (current ratio) clar peste 1,5 și un quick ratio peste 1, ca să nu depinzi de vânzarea stocului pentru a-ți plăti furnizorii.</li>
+</ul>
+
+<p>Atenție la o capcană subtilă: <strong>buffer-ul firmei și buffer-ul tău personal sunt două lucruri distincte.</strong> Mulți antreprenori își golesc firma de cash ca să își alimenteze viața personală, apoi se împrumută la dobândă mare când vine sezonul slab. Corect e invers: firma își ține fondul de urgență separat, iar tu îți construiești propriul fond personal de 6 luni de cheltuieli de trai din salariu/dividend, nu prin „retrageri ad-hoc” care decapitalizează firma exact când are nevoie de oxigen.</p>
+
+<h3>Unde ții buffer-ul ca să nu fie bani morți</h3>
+
+<p>Buffer-ul nu trebuie să stea în cont curent cu randament zero. Structurează-l pe scadențe:</p>
+
+<ul>
+<li><strong>Tranșa imediată (1-2 luni de burn)</strong>: cont curent, accesibil instant.</li>
+<li><strong>Tranșa pe termen scurt (2-3 luni de burn)</strong>: depozite la 1-3 luni sau titluri de stat cu lichiditate bună (de tip Tezaur/Fidelis, atenție la fereastra de răscumpărare).</li>
+<li><strong>Linia de credit de lucru pre-aprobată</strong>: nu e buffer, dar e plasă de siguranță. O linie de credit (overdraft / capital de lucru) o negociezi <em>când nu ai nevoie de ea</em> — în sezon bun, cu bilanț frumos — și o ții netrasă. Tras doar punctual, ea acoperă decalajul de încasare fără să-ți consumi buffer-ul propriu. Costă un comision de neutilizare, dar e cea mai ieftină asigurare de lichiditate.</li>
+</ul>
+
+<h2>Strategia de remunerare: risk-adjusted salariu + dividend</h2>
+
+<p>Aici e decizia cea mai prost luată de antreprenorii români: ori se plătesc cu firimituri „ca să nu plătească taxe”, ori își golesc firma în dividende mari în anii buni și rămân fără capital în cei slabi. Strategia avansată separă remunerarea în trei straturi cu profile de risc diferite.</p>
+
+<h3>Stratul 1 — salariul de bază (componenta sigură)</h3>
+
+<p>Plătește-ți un <strong>salariu fix, modest dar real</strong>, dimensionat să acopere cheltuielile tale personale esențiale din scenariul bas. Salariul are avantaje pe care dividendul nu le are: îți construiește stagiu și punctaj de pensie (prin CAS), îți dă acces la concediu medical și indemnizații, îți susține scoringul bancar pentru creditul personal, și e o cheltuială deductibilă la firmă — fiind cost, reduce baza impozabilă, deci la un SRL plătitor de impozit pe profit economisești cei <strong>16% impozit pe profit</strong> pe suma respectivă. Pe partea de cost, salariul atrage contribuțiile sociale și impozitul pe venit: <strong>CAS 25%</strong> și <strong>CASS 10%</strong> reținute din salariul brut, plus <strong>impozit pe venit 10%</strong> pe baza rămasă după contribuții, iar firma datorează în plus contribuția asiguratorie pentru muncă (CAM) de <strong>2,25%</strong>. Cota efectivă de taxare a salariului este, în consecință, ridicată — de aceea salariul rămâne stratul „sigur”, nu cel prin care optimizezi fiscal.</p>
+
+<h3>Stratul 2 — dividendul (componenta variabilă, doar din surplus real)</h3>
+
+<p>Dividendul îl tratezi ca <strong>distribuție de surplus, nu ca venit lunar.</strong> Reguli de disciplină:</p>
+
+<ul>
+<li>Distribui dividend doar din profit care a rămas <em>după</em> ce buffer-ul firmei e la țintă. Niciodată din capitalul de lucru.</li>
+<li>În 2026, impozitul pe dividende este de <strong>16%</strong> — a urcat în trepte de la 8% (până în 2024) la 10% (2025) și la 16% (2026), aplicat pe dividendul brut, cu reținere la sursă. Peste impozit poate apărea <strong>CASS de 10%</strong> datorată pe venitul din dividende dacă veniturile anuale din astfel de surse depășesc plafoanele raportate la salariul minim brut (pragurile de 6, 12 și 24 de salarii minime, cu bază de calcul plafonată corespunzător). Nu presupune 8% din obișnuință: cota efectivă combinată poate ajunge sensibil mai sus odată cu CASS.</li>
+<li>Distribuirea trimestrială e posibilă din profitul contabil al trimestrului, cu regularizare la final de an — dar e o capcană de lichiditate: dacă distribui trimestrial pe baza unui profit care apoi se erodează în trimestrul slab, ajungi să fi scos bani pe care firma nu-i mai are. Pentru venit volatil, distribuirea anuală, după închiderea exercițiului și după ce buffer-ul e plin, e mult mai sigură.</li>
+</ul>
+
+<h3>Stratul 3 — bonusul de oportunitate (doar din scenariul top)</h3>
+
+<p>Surplusul peste mid (banii din scenariul top care chiar s-au materializat) îl împarți după o regulă fixă, decisă din timp, ca să nu o decizi emoțional în euforia unei luni bune. O alocare echilibrată creștere-vs-siguranță:</p>
+
+<ul>
+<li><strong>40% reinvestire</strong> (oameni, marketing, capacitate — ce produce venit viitor).</li>
+<li><strong>30% buffer / fond de urgență al firmei</strong> (până la țintă, apoi redirecționezi).</li>
+<li><strong>30% remunerare suplimentară</strong> (dividend de oportunitate către tine).</li>
+</ul>
+
+<p>Procentele sunt punct de plecare; le calibrezi după cât de aproape ești de ținta de buffer. Sub țintă, buffer-ul ia partea leului. Peste țintă, reinvestirea și remunerarea cresc. Esențial e că regula e scrisă <em>înainte</em> de luna bună, nu inventată în mijlocul ei.</p>
+
+<h2>Distribuire dividend vs reinvestire: arbitrajul randamentului</h2>
+
+<p>Decizia nu e morală („e bine să reinvestești”), ci de randament marginal. Compari două lucruri:</p>
+
+<ul>
+<li><strong>Randamentul net al banilor scoși ca dividend</strong>: dividend brut × (1 − cota impozit dividende − eventual CASS), apoi investit în afara firmei (titluri de stat, ETF, depozit). Net-net, după impozitare, poate fi modest.</li>
+<li><strong>ROIC-ul marginal al reinvestirii în firmă</strong>: cât produce următorul leu băgat în firmă. Dacă o angajare sau o campanie generează un ROIC clar peste randamentul net post-impozit al alternativei externe, reinvestirea câștigă.</li>
+</ul>
+
+<p>Capcana: ROIC-ul marginal scade pe măsură ce firma crește (primii angajați produc mult, al zecelea mai puțin). La un moment dat, randamentul reinvestirii coboară sub al unui simplu titlu de stat — acela e semnalul matematic că e timpul să distribui dividend și să diversifici averea în afara firmei. Concentrarea întregii averi într-o singură firmă cu venit volatil e cel mai mare risc nediversificat din viața ta financiară.</p>
+
+<h2>Impozitarea pe venit variabil: gestionează vârfurile, nu media</h2>
+
+<p>Venitul volatil creează o problemă fiscală specifică: poți avea o lună cu încasare mare care declanșează o scadență de TVA sau de impozit chiar într-o lună următoare cu încasări mici. Reguli de gestionare:</p>
+
+<ul>
+<li><strong>Provizionează taxele pe măsură ce încasezi, nu la scadență.</strong> La fiecare încasare, mută imediat procentul estimat de TVA + impozit + contribuții într-un cont separat („cont de taxe”). Banii din contul de taxe nu există pentru tine. Asta elimină scenariul clasic în care la scadență firma a cheltuit deja banii statului.</li>
+<li><strong>Atenție la pragul de TVA și la regimul micro vs profit.</strong> Trecerea peste plafonul de înregistrare în scopuri de TVA, sau ieșirea din regimul de microîntreprindere, schimbă complet matematica. Plafonul de scutire de TVA a fost ridicat la <strong>395.000 lei</strong> cifră de afaceri anuală, iar pentru microîntreprindere plafonul de venituri a fost coborât la <strong>250.000 euro</strong> (cu țintă de 100.000 euro), cu condiția de a avea <strong>cel puțin un salariat</strong> și de a nu depăși limitele privind structura veniturilor din consultanță/management. Cotele de impozit pe veniturile microîntreprinderii sunt <strong>1%</strong> și <strong>3%</strong>, în funcție de activitate și de pragul de venit. O depășire neanticipată îți poate muta firma pe impozit pe profit (16%) la mijlocul anului — motiv în plus să marchezi pragurile în prognoză.</li>
+<li><strong>Sincronizează scadențele cu prognoza.</strong> În modelul rolling, marchează lunile cu vârf de plată fiscală. Dacă un vârf de TVA cade peste un sezon slab, e exact luna-gol pe care o ataci din timp.</li>
+</ul>
+
+<h2>Planul de urgență pe 6 luni cash: trigger-e automate</h2>
+
+<p>Un plan de urgență care depinde de cât de calm ești în criză e inutil — în criză nimeni nu e calm. De aceea îl construiești ca o cascadă de <strong>trigger-e legate de runway</strong>, nu de emoții. Exemplu pe scenariul bas:</p>
+
+<ul>
+<li><strong>Runway 6 luni (nivel verde)</strong>: funcționare normală. Distribuiri de dividend permise dacă buffer-ul e la țintă.</li>
+<li><strong>Runway 4-5 luni (nivel galben)</strong>: îngheți distribuirile de dividend și angajările noi. Începi să tragi linia de credit pre-aprobată dacă decalajul de încasare o cere. Renegociezi termene de plată cu furnizorii.</li>
+<li><strong>Runway 2-3 luni (nivel portocaliu)</strong>: tai cheltuielile discreționare (marketing neesențial, abonamente, deplasări). Accelerezi încasările (discount pentru plata în avans, factoring pe creanțele sigure). Reduci temporar propriul salariu la minimul de supraviețuire personal.</li>
+<li><strong>Runway sub 2 luni (nivel roșu)</strong>: măsuri structurale — reduceri de personal, renegociere chirie/leasing, conversie a unor costuri fixe în variabile, eventual aport de capital de la asociat. Aici fiecare zi de întârziere costă.</li>
+</ul>
+
+<p>Frumusețea acestui sistem e că deciziile dureroase sunt pre-aprobate de tine însuți în starea ta rațională. Când runway-ul atinge pragul galben, nu te întrebi „să îngheț dividendul?” — e deja decis. Eliminarea deciziei emoționale în criză e jumătate din supraviețuire.</p>
+
+<h2>Pași de acțiune și checklist</h2>
+
+<ul>
+<li><strong>Calculează-ți burn brut și burn net</strong> reale, pe baza ultimelor 6 luni de cheltuieli efective, nu estimări.</li>
+<li><strong>Extrage percentilele 20/50/80</strong> din istoricul tău de încasări lunare și definește scenariile bas/mid/top.</li>
+<li><strong>Construiește prognoza rolling pe 18 luni</strong> și identifică luna-gol în scenariul bas.</li>
+<li><strong>Dimensionează buffer-ul</strong>: minim = burn brut × (cel mai lung sezon slab + 1); confort = 6 × burn brut.</li>
+<li><strong>Negociază acum o linie de credit de lucru</strong> pre-aprobată, în sezon bun, și ține-o netrasă.</li>
+<li><strong>Structurează remunerarea pe 3 straturi</strong>: salariu fix de supraviețuire + dividend din surplus real + bonus de oportunitate cu alocare 40/30/30 scrisă din timp.</li>
+<li><strong>Deschide un cont de taxe</strong> și provizionează TVA + impozit + contribuții la fiecare încasare.</li>
+<li><strong>Lucrează cu cifrele 2026</strong>: impozit pe dividende 16% (plus CASS 10% peste plafoane), salariu cu CAS 25% + CASS 10% + impozit 10% și CAM 2,25% la firmă, impozit pe profit 16%, plafon scutire TVA 395.000 lei, plafon micro 250.000 euro cu minim un salariat. Confirmă cu contabilul orice modificare de ultim moment înainte de a semna decizii.</li>
+<li><strong>Scrie planul de urgență pe 6 luni</strong> cu trigger-e pe runway (verde/galben/portocaliu/roșu) și pre-aprobă măsurile.</li>
+<li><strong>Aplică testul scenariului bas</strong> la orice angajament fix nou înainte de a-l semna.</li>
+</ul>
+
+<h3>Greșeli frecvente de evitat</h3>
+
+<ul>
+<li><strong>Planificarea după luna medie</strong> care nu există — te conduci după mid, te lovește bas.</li>
+<li><strong>Decapitalizarea firmei prin retrageri ad-hoc</strong> în loc de salariu/dividend disciplinat.</li>
+<li><strong>Dividend trimestrial pe profit volatil</strong>, scos înainte ca anul să se închidă pozitiv.</li>
+<li><strong>Linia de credit cerută în criză</strong>, când scoringul e prost și banca refuză — exact când ai nevoie.</li>
+<li><strong>Banii statului cheltuiți</strong> pentru că taxele nu au fost provizionate la încasare.</li>
+<li><strong>Toată averea concentrată în firmă</strong>, fără fond personal și fără diversificare externă.</li>
+</ul>

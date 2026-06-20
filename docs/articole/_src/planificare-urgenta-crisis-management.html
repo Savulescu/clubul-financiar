@@ -1,0 +1,128 @@
+<p><strong>Planificarea de urgență prin criza afacerii și scenario planning</strong> este saltul de la „ce fac dacă pierd jobul” la „ce fac dacă pierd 40% din venitul firmei într-o singură lună” — și e o disciplină complet diferită. Tehnica de scenario planning, stress testing-ul afacerii și un disaster recovery plan serios nu pornesc de la întrebarea „o să fie bine?”, ci de la calculul rece: pentru fiecare scenariu de criză — pierderea unui client mare cu impact major, căderea tehnologiei, criza economică — care e probabilitatea, care e impactul în lei, cât cash runway îmi mai rămâne și în cât timp și cu ce cost îmi revin.</p>
+
+<p>În lecția anterioară ai învățat să-ți calculezi runway-ul personal când pierzi jobul, cu buget de criză și plan B. Acum mutăm aceeași logică la nivel de business, unde mizele sunt mai mari și variabilele se multiplică: ai costuri fixe care nu se opresc, angajați, TVA și impozite scadente, clienți cu concentrare de venit periculoasă și o infrastructură tehnică de care depinzi orbește. Un calcul de cash runway critic per scenariu, plus mai multe surse de backup de revenue, fac diferența între o firmă care supraviețuiește unui șoc și una care intră în insolvență în 90 de zile.</p>
+
+<p>Presupun că știi deja ce înseamnă cash flow, costuri fixe versus variabile, marjă, EBITDA și diferența dintre lichiditate și solvabilitate. Nu le reluăm. Mergem direct la framework-ul de 5 scenarii cu probabilitate și impact, la modelul de calcul al runway-ului pe fiecare, la recovery time și cost, și la checklist-ul de acțiuni pe 24 de ore și pe o săptămână.</p>
+
+<h2>Framework-ul: 5 scenarii cu probabilitate × impact</h2>
+
+<p>Scenario planning serios nu înseamnă o listă vagă de „riscuri”. Înseamnă o matrice unde fiecare scenariu primește trei numere: <strong>probabilitate anuală (%)</strong>, <strong>impact pe venit (% și lei)</strong> și <strong>scor de expunere = probabilitate × impact</strong>. Scorul îți spune unde investești efort de pregătire. Iată cele 5 scenarii canonice pentru un business românesc în 2026, cu valori orientative pe care le calibrezi cu datele tale reale.</p>
+
+<ul>
+<li><strong>S1 — Pierderea clientului mare:</strong> dispare clientul care aduce 30–50% din venit. Probabilitate 15–25%/an dacă ai concentrare mare. Impact: scădere imediată de venit egală cu ponderea lui. Scor de expunere cel mai des cel mai mare.</li>
+<li><strong>S2 — Cădere tehnologică / atac cibernetic:</strong> ransomware, pierdere de date, cădere platformă pe care vinzi, blocare cont de procesare plăți. Probabilitate 8–15%/an. Impact: 1–4 săptămâni de venit zero plus cost de recuperare.</li>
+<li><strong>S3 — Criză economică / recesiune sectorială:</strong> contracție de cerere 20–40% pe 2–4 trimestre. Probabilitate 10–20%/an. Impact difuz, dar prelungit — cel mai periculos pentru runway.</li>
+<li><strong>S4 — Șoc de cost / lichiditate:</strong> creștere bruscă la energie, chirie, dobândă variabilă (IRCC), sau un client care plătește la 120 de zile în loc de 30. Probabilitate 20–35%/an. Impact pe cash flow, nu neapărat pe profit.</li>
+<li><strong>S5 — Pierdere de persoană-cheie:</strong> pleacă fondatorul tehnic, omul de vânzări care ține 60% din relații, sau contabilul-șef. Probabilitate 10–15%/an. Impact: erodare lentă dar structurală.</li>
+</ul>
+
+<p>Construiește matricea ca tabel mental: înmulțești probabilitatea cu impactul în lei și ordonezi descrescător. Vei descoperi aproape mereu că <strong>S1 (concentrarea de client) și S4 (lichiditatea) domină</strong> — nu falimentul dramatic, ci scurgerea de cash. Acolo pui Planul B și C întâi.</p>
+
+<h2>Cash runway critic per scenariu: modelul de calcul</h2>
+
+<p>Runway-ul de business nu e „câți bani am în cont împărțit la cheltuieli”. E un calcul condiționat de scenariu, fiindcă fiecare șoc lovește alt rând din P&L. Formula de bază rămâne:</p>
+
+<ul>
+<li><strong>Runway (luni) = Cash disponibil ÷ Burn rate net lunar în scenariu</strong></li>
+</ul>
+
+<p>Unde <strong>burn rate net = costuri fixe rămase + costuri variabile reziduale − venitul care supraviețuiește scenariului − reducerile de cost activabile</strong>. Diferența față de calculul naiv e că în criză poți tăia o parte din costuri, dar nu instant și nu pe toate.</p>
+
+<h3>Exemplu numeric — S1, pierderea clientului mare</h3>
+
+<p>Firmă cu venit lunar 100.000 lei, costuri fixe 55.000 lei (salarii 35.000, chirie 8.000, software/abonamente 5.000, alte fixe 7.000), costuri variabile 25.000 lei, profit lunar 20.000 lei. Cash în cont: 120.000 lei. Pierzi clientul care aducea 40% din venit.</p>
+
+<ul>
+<li>Venit nou: 60.000 lei/lună.</li>
+<li>Costuri variabile scad proporțional cu activitatea pierdută: ~15.000 lei.</li>
+<li>Costuri fixe rămân 55.000 lei (nu poți concedia instant — în România preavizul minim e de 20 de zile lucrătoare la concediere pentru motive ce nu țin de persoana salariatului, plus eventual plăți compensatorii).</li>
+<li>Burn net = 60.000 − 55.000 − 15.000 = <strong>minus 10.000 lei/lună</strong>.</li>
+<li>Runway = 120.000 ÷ 10.000 = <strong>12 luni</strong>.</li>
+</ul>
+
+<p>Douăsprezece luni par confortabile — dar e o iluzie, fiindcă nu ai contabilizat <strong>scadențele fiscale care nu așteaptă</strong>: TVA trimestrial sau lunar, impozit pe profit/microîntreprindere, contribuții salariale. Un burn de „−10.000 lei/lună” devine brusc −40.000 lei în luna în care pici TVA-ul. Runway-ul real măsurat pe cea mai proastă lună, nu pe medie, e <strong>regula de aur</strong>: planifică pe trough-ul de cash, nu pe media lunară.</p>
+
+<h3>Exemplu — S4, șoc de lichiditate (clientul mută plata la 90 de zile)</h3>
+
+<p>Aici venitul contabil nu scade deloc — profitul pe hârtie e neschimbat. Dar cash-ul intră cu 2 luni întârziere. Dacă acel client e 40% din facturare, ai un gol temporar de ~80.000 lei de acoperit timp de 2–3 luni până se sincronizează ciclul. Runway-ul de lichiditate = cash + linie de credit nefolosită ÷ golul lunar. Mulți antreprenori profitabili intră în insolvență exact aici: profit pozitiv, cash zero. <strong>Stress testing-ul corect rulează scenariul pe cash, nu pe profit.</strong></p>
+
+<h2>Recovery time și recovery cost: a doua axă pe care toți o uită</h2>
+
+<p>Probabilitate × impact îți spune cât de rău e șocul. Dar două scenarii cu același impact se comportă radical diferit dacă unul se rezolvă în 2 săptămâni și altul în 9 luni. Adaugă pentru fiecare scenariu:</p>
+
+<ul>
+<li><strong>RTO (Recovery Time Objective):</strong> în cât timp revii la 90% din venit. La S1 (client mare) recovery-ul real e ciclul tău de vânzare — dacă vinzi cu 4 luni de la prim contact la contract, recovery time minim e 4 luni, indiferent cât de bun ești.</li>
+<li><strong>Recovery cost:</strong> cât te costă revenirea. La S2 (tehnologie), costul de restaurare date, audit de securitate, despăgubiri GDPR potențiale (amenzile pot ajunge la praguri foarte mari sub regulament — verifică expunerea reală), reconstrucție infrastructură.</li>
+</ul>
+
+<p><strong>Regula:</strong> dacă RTO &gt; runway în scenariul respectiv, ai un plan care nu funcționează — vei rămâne fără bani înainte să-ți revii. Atunci Planul B nu e „să-mi revin mai repede” (de multe ori imposibil), ci „să-mi prelungesc runway-ul” prin rezervă, linie de credit pre-aprobată sau reducere de cost pregătită din timp.</p>
+
+<h3>Tabelul de decizie runway versus RTO</h3>
+
+<ul>
+<li><strong>Runway &gt; 2× RTO:</strong> zonă verde. Ai timp să execuți recovery-ul fără panică. Planul B = execuție operațională.</li>
+<li><strong>Runway între 1× și 2× RTO:</strong> zonă galbenă. Ai nevoie de un Plan B activabil în 24–48h plus măsuri de conservare cash imediate.</li>
+<li><strong>Runway &lt; RTO:</strong> zonă roșie. Aici intervine <strong>Planul C</strong>: finanțare de urgență, vânzare de active, restructurare radicală sau negociere de standstill cu creditorii. Dacă ești cronic în zona roșie pe S1, problema reală e concentrarea de client, nu criza.</li>
+</ul>
+
+<h2>Backup de revenue: redundanța care îți reduce probabilitatea, nu doar impactul</h2>
+
+<p>Cel mai puternic levier nu e să-ți crești cash-ul, ci să-ți construiești <strong>surse multiple de venit</strong> care reduc direct probabilitatea și impactul scenariilor. Gândește redundanță ca un inginer, nu ca un optimist.</p>
+
+<ul>
+<li><strong>Diversificare de clienți:</strong> regula informală sănătoasă e ca niciun client să nu depășească 15–20% din venit. Dacă unul e la 40%, expunerea ta pe S1 e structural inacceptabilă — orice altă optimizare e secundară. Țintă concretă: top 3 clienți &lt; 50% din venit.</li>
+<li><strong>Diversificare de tip de venit:</strong> combină recurent (abonamente, retainer, mentenanță) cu proiecte. Venitul recurent e runway încorporat — el supraviețuiește mai bine la S3 (recesiune).</li>
+<li><strong>Backup de canal:</strong> dacă vinzi pe o singură platformă (un marketplace, un cont de ads, un singur procesator de plăți), ai un single point of failure pe S2. Pregătește un canal alternativ înainte să-l blocheze cineva.</li>
+<li><strong>Linie de credit pre-aprobată:</strong> se obține când nu ai nevoie de ea, nu în criză. O linie de capital de lucru nefolosită e cea mai ieftină formă de runway suplimentar. Negociaz-o din poziție de forță, cu bilanț sănătos.</li>
+</ul>
+
+<p>Matematic, dacă treci concentrarea clientului de top de la 40% la 18%, impactul S1 scade de la „−40% venit catastrofal” la „−18% gestionabil”, iar probabilitatea ca pierderea oricărui singur client să fie fatală scade dramatic. Asta e mai valoros decât orice rezervă de cash, pentru că schimbă forma riscului, nu doar tamponul.</p>
+
+<h2>Plan B și Plan C: ce înseamnă concret diferența</h2>
+
+<p>Confuzia clasică e să numești „Plan B” orice idee de salvare. Distincția operațională:</p>
+
+<ul>
+<li><strong>Plan A:</strong> business-ul în regim normal.</li>
+<li><strong>Plan B (degradare controlată):</strong> activat la primul semnal de șoc. Tai costuri discreționare, îngheți angajări, prioritizezi clienții care plătesc la timp, activezi sursele de backup de revenue. Obiectiv: prelungești runway-ul și cumperi timp pentru recovery. Trebuie scris din timp, nu improvizat.</li>
+<li><strong>Plan C (supraviețuire / restructurare):</strong> activat în zona roșie. Renegociere de datorii, eventual concediere structurală, vânzare de active neesențiale, capital de urgență, sau — la limită — mecanismele legale de protecție (în România, procedura de <strong>concordat preventiv</strong> sau, mai departe, insolvența cu reorganizare pot opri executările și restructura datoriile; verifică condițiile actuale cu un specialist). Obiectiv: nu maximizezi profitul, eviți moartea firmei.</li>
+</ul>
+
+<p><strong>Trigger-ele trebuie definite în avans, numeric.</strong> Exemplu: „Plan B se activează automat dacă venitul lunar scade sub 80% din medie pe 2 luni consecutive SAU dacă un client de peste 25% anunță plecarea. Plan C se activează dacă runway-ul proiectat scade sub 3 luni.” Praguri obiective, nu emoții — fiindcă în mijlocul crizei judecata e cea mai proastă.</p>
+
+<h2>Checklist de acțiuni: primele 24 de ore</h2>
+
+<p>Când scenariul lovește, viteza de execuție pe cash bate orice strategie elegantă. În primele 24 de ore:</p>
+
+<ul>
+<li><strong>Calculează runway-ul real în noul scenariu</strong> — cash în cont minus scadențele fiscale și salariale din următoarele 8 săptămâni, împărțit la burn-ul net recalculat. Numărul ăsta dictează totul.</li>
+<li><strong>Îngheață toate cheltuielile discreționare</strong> — abonamente, marketing neperformant, achiziții amânabile, deplasări. Lista trebuie să existe deja, pregătită.</li>
+<li><strong>Identifică și protejează cash-ul intrabil</strong> — sună clienții cu facturi scadente, accelerează încasările, oferă mic discount pentru plată imediată dacă ai nevoie acută de lichiditate.</li>
+<li><strong>Activează linia de credit pre-aprobată</strong> dacă proiecția te duce în galben/roșu. Mai bine tragi și nu folosești decât invers.</li>
+<li><strong>Comunică intern, controlat</strong> — echipa simte oricum tensiunea; un mesaj clar previne plecările de panică (care declanșează S5 peste S1).</li>
+<li><strong>La S2 (tehnologic):</strong> izolează sistemele afectate, activează backup-urile, evaluează obligația de notificare a incidentului (pentru date personale, notificarea autorității poate fi obligatorie în termene scurte — verifică termenul legal actual).</li>
+</ul>
+
+<h2>Checklist de acțiuni: prima săptămână</h2>
+
+<ul>
+<li><strong>Recalculează matricea probabilitate × impact</strong> cu situația reală, nu cu cea ipotetică. Scenariul activat poate crește probabilitatea altora (recesiunea S3 face S1 și S4 mai probabile simultan — corelația scenariilor e capcana subtilă).</li>
+<li><strong>Renegociază termenele cu furnizorii și creditorii</strong> proactiv, înainte să întârzii o plată. Un acord de eșalonare cerut din timp e semn de control; unul cerut după ce ai întârziat e semn de disperare.</li>
+<li><strong>Eșalonează datoriile la ANAF dacă e cazul</strong> — există mecanisme de eșalonare la plată a obligațiilor fiscale; verifică condiția actuală de eligibilitate. Mai bine negociezi decât acumulezi penalități și risc de poprire.</li>
+<li><strong>Decide structura de cost permanentă versus temporară</strong> — ce tai pentru 3 luni și ce tai definitiv. Concedierile au cost imediat (preaviz, compensatorii) și beneficiu întârziat; calculează break-even-ul tăierii.</li>
+<li><strong>Reactivează pipeline-ul de vânzări</strong> dacă scenariul a fost pierdere de venit — recovery time-ul tău e ciclul de vânzare, deci pornește-l în prima săptămână, nu în a treia.</li>
+<li><strong>Documentează deciziile și pragurile</strong> — vei avea nevoie de istoricul ăsta dacă ajungi la negociere bancară, concordat sau investitor de urgență.</li>
+</ul>
+
+<h2>Greșeli frecvente la planificarea de urgență</h2>
+
+<ul>
+<li><strong>Calcul de runway pe medie, nu pe trough.</strong> Mediile ascund luna în care pici TVA-ul, plătești salariile și un furnizor mare simultan. Planifică pe cea mai proastă lună din proiecție.</li>
+<li><strong>Confuzia profit-cash.</strong> Firme profitabile mor din lichiditate. Stress testing-ul trebuie rulat pe fluxul de numerar, nu pe contul de profit.</li>
+<li><strong>Ignorarea corelației între scenarii.</strong> Recesiunea nu vine singură: aduce pierdere de clienți, întârzieri la plată și șoc de cost împreună. Modelează cel puțin un scenariu compus.</li>
+<li><strong>Plan B nescris.</strong> Dacă lista de costuri de tăiat și trigger-ele numerice nu există pe hârtie înainte de criză, le vei improviza prost sub stres.</li>
+<li><strong>Concentrarea de client tratată ca optimizare, nu ca risc existențial.</strong> Un singur client la 40% din venit e o bombă cu ceas — niciun cash buffer nu compensează lipsa de diversificare.</li>
+<li><strong>Linie de credit cerută în criză.</strong> Băncile dau credit când nu ai nevoie. Pregătește finanțarea de rezervă din vreme, din poziție de bilanț sănătos.</li>
+</ul>
+
+<p>Esența: planificarea de urgență nu e despre frică, e despre matematică pregătită dinainte. Cinci scenarii cu probabilitate și impact, un runway calculat pe trough per scenariu, RTO comparat cu runway-ul, surse multiple de venit care reduc probabilitatea la sursă, și două checklist-uri — 24 de ore și o săptămână — pe care le poți executa fără să gândești în momentul în care chiar nu mai poți gândi limpede. Asta separă firma care trece printr-o criză de cea care e îngropată de ea.</p>

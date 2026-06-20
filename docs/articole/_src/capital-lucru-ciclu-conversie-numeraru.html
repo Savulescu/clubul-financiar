@@ -1,0 +1,171 @@
+<p><strong>Capital de lucru, ciclu conversie numerar, optimizare</strong> — aceasta este axa pe care se construiește sau se prăbușește lichiditatea unei firme românești în 2026. Știi deja ce este capitalul de lucru (active circulante minus datorii curente) și ai înțeles din lecțiile anterioare de ce o firmă profitabilă pe hârtie poate intra în incapacitate de plată. Acum trecem la mecanica fină: ciclul de conversie a numerarului (CCC — Cash Conversion Cycle), calculul exact al componentelor DIO, DSO și DPO, și modul în care fiecare zi de optimizare îți eliberează cash blocat în operațiuni.</p>
+
+<p>Ideea centrală: fiecare zi din ciclul de conversie a numerarului costă bani reali. Gestiunea stocurilor vs cash flow, negocierea termenelor cu furnizori și clienți și float-ul gratuit din furnizori nu sunt subtilități contabile — sunt sursa cea mai ieftină de finanțare pe care o ai, mai ieftină decât orice credit bancar la dobânzile din 2026. O firmă cu un CCC de 75 de zile finanțează permanent 75 de zile de operațiuni din buzunar propriu sau din linie de credit.</p>
+
+<p>În această lecție construim modelul exact: calculul CCC pe trei scenarii, impactul fiecărei zile asupra cash flow-ului, un tabel pe 12 luni cu optimizări cumulate și o simulare de negociere a termenelor 30/60/90 de zile cu rezultat final cuantificat în lei. Calcul DIO DSO DPO complet, aplicat pe o firmă reală cu cifră de afaceri de 6 milioane lei.</p>
+
+<h2>Anatomia ciclului de conversie a numerarului</h2>
+
+<p>CCC măsoară câte zile trec între momentul în care plătești furnizorul pentru marfă/materie primă și momentul în care încasezi banii de la client. Formula este compactă:</p>
+
+<p><strong>CCC = DIO + DSO − DPO</strong></p>
+
+<ul>
+<li><strong>DIO (Days Inventory Outstanding)</strong> = câte zile stă marfa pe stoc. Formula: <strong>DIO = (Stoc mediu / Cost mărfuri vândute) × 365</strong>.</li>
+<li><strong>DSO (Days Sales Outstanding)</strong> = câte zile durează până încasezi de la clienți. Formula: <strong>DSO = (Creanțe comerciale medii / Cifra de afaceri) × 365</strong>.</li>
+<li><strong>DPO (Days Payable Outstanding)</strong> = câte zile întârzii plata către furnizori (legal, în baza termenelor negociate). Formula: <strong>DPO = (Datorii furnizori medii / Cost mărfuri vândute) × 365</strong>.</li>
+</ul>
+
+<p>DIO și DSO sunt bani care „ies" din tine; DPO sunt bani pe care îi „ții" tu. De aceea DPO se scade: cu cât întârzii mai mult plata furnizorilor (în termenii agreați, fără penalități), cu atât finanțezi gratis operațiunile din float-ul lor.</p>
+
+<h3>Exemplu de bază — firma de referință</h3>
+
+<p>Lucrăm pe o firmă de distribuție FMCG, plătitoare de TVA, cu următoarele date anuale 2025:</p>
+
+<ul>
+<li>Cifră de afaceri: <strong>6.000.000 lei</strong></li>
+<li>Cost mărfuri vândute (COGS): <strong>4.500.000 lei</strong> (marjă brută 25%)</li>
+<li>Stoc mediu: <strong>740.000 lei</strong></li>
+<li>Creanțe comerciale medii: <strong>820.000 lei</strong></li>
+<li>Datorii furnizori medii: <strong>560.000 lei</strong></li>
+</ul>
+
+<p>Calcul:</p>
+
+<ul>
+<li>DIO = (740.000 / 4.500.000) × 365 = <strong>60 zile</strong></li>
+<li>DSO = (820.000 / 6.000.000) × 365 = <strong>50 zile</strong></li>
+<li>DPO = (560.000 / 4.500.000) × 365 = <strong>45 zile</strong></li>
+<li><strong>CCC = 60 + 50 − 45 = 65 zile</strong></li>
+</ul>
+
+<p>Interpretare: firma are 65 de zile de operațiuni neacoperite, pe care trebuie să le finanțeze din capital propriu sau din linie de credit. Cât costă asta? Vezi mai jos cuantificarea exactă pe zi.</p>
+
+<h2>Cât valorează o singură zi din CCC — în lei</h2>
+
+<p>Aici stă tot. Valoarea unei zile de CCC se calculează raportând capitalul de lucru blocat la rotația lui. Regula de aproximare robustă:</p>
+
+<p><strong>Cash blocat per zi de CCC ≈ COGS zilnic</strong> pentru componenta stoc/furnizori și <strong>Cifră de afaceri zilnică</strong> pentru componenta creanțe. Pentru o estimare globală, folosim o medie ponderată operațională.</p>
+
+<p>Pentru firma noastră:</p>
+
+<ul>
+<li>COGS zilnic = 4.500.000 / 365 = <strong>12.329 lei/zi</strong></li>
+<li>Cifră de afaceri zilnică = 6.000.000 / 365 = <strong>16.438 lei/zi</strong></li>
+</ul>
+
+<p>Estimarea netă a cash-ului blocat de cele 65 de zile de CCC, calculată pe baza valorilor de bilanț, este suma activelor circulante operaționale minus datoriile furnizori: 740.000 + 820.000 − 560.000 = <strong>1.000.000 lei imobilizați permanent</strong> în ciclul operațional.</p>
+
+<p><strong>Costul de oportunitate al acestui milion</strong>, în condițiile 2026, depinde de sursa de finanțare:</p>
+
+<ul>
+<li>Dacă e finanțat din linie de credit (dobândă orientativă ROBOR/IRCC + marjă, să zicem ~9-11% pe an — verifică oferta băncii tale), costul anual ≈ <strong>90.000-110.000 lei/an</strong>.</li>
+<li>Dacă e finanțat din capital propriu cu cost de oportunitate de 8% (randament alternativ, ex. titluri de stat / depozite), costul ≈ <strong>80.000 lei/an</strong>.</li>
+</ul>
+
+<p>Concluzie operațională: la acest profil, <strong>fiecare zi tăiată din CCC eliberează ~15.000 lei cash one-time și reduce costul de finanțare cu ~1.400-1.700 lei/an permanent</strong>. Zece zile tăiate = ~150.000 lei cash eliberat instant + ~15.000 lei/an economisiți la dobândă, la nesfârșit.</p>
+
+<h2>CCC pe trei scenarii</h2>
+
+<p>Construim trei scenarii pornind de la aceeași firmă, pentru a vedea elasticitatea cash flow-ului.</p>
+
+<h3>Scenariul A — STATUS QUO (baseline)</h3>
+<ul>
+<li>DIO = 60, DSO = 50, DPO = 45 → <strong>CCC = 65 zile</strong></li>
+<li>Cash blocat: <strong>1.000.000 lei</strong></li>
+</ul>
+
+<h3>Scenariul B — OPTIMIZARE MODERATĂ (realist, 6 luni)</h3>
+<p>Acțiuni: rotație stoc îmbunătățită prin reducerea SKU-urilor lente (DIO 60→45), încasare mai disciplinată cu discount pentru plata la 15 zile (DSO 50→38), renegociere termen furnizor principal (DPO 45→55).</p>
+<ul>
+<li>DIO = 45, DSO = 38, DPO = 55 → <strong>CCC = 28 zile</strong></li>
+<li>Recalcul stocuri: DIO 45 → stoc mediu = 45 × 12.329 = 554.795 lei; creanțe DSO 38 → 38 × 16.438 = 624.658 lei; furnizori DPO 55 → 55 × 12.329 = 678.082 lei</li>
+<li>Cash blocat: 554.795 + 624.658 − 678.082 = <strong>501.371 lei</strong></li>
+<li><strong>Cash eliberat față de baseline: ~498.000 lei</strong></li>
+</ul>
+
+<h3>Scenariul C — OPTIMIZARE AGRESIVĂ (țintă ambițioasă, 12-18 luni)</h3>
+<p>Acțiuni: stoc just-in-time pe linia principală (DIO 30), încasare cu plată în avans parțial + factoring pe clienții mari (DSO 25), DPO maxim legal negociat la 75 de zile cu furnizorii strategici.</p>
+<ul>
+<li>DIO = 30, DSO = 25, DPO = 75 → <strong>CCC = −20 zile</strong></li>
+<li>Stoc = 30 × 12.329 = 369.863 lei; creanțe = 25 × 16.438 = 410.959 lei; furnizori = 75 × 12.329 = 924.658 lei</li>
+<li>Cash blocat: 369.863 + 410.959 − 924.658 = <strong>−143.836 lei</strong></li>
+</ul>
+<p>CCC negativ înseamnă că <strong>furnizorii și clienții îți finanțează operațiunile</strong> — încasezi înainte de a plăti. Este modelul retailului mare (Lidl, Dedeman) și al firmelor cu putere de negociere. Cash flow-ul devine motor de creștere, nu frână.</p>
+
+<h2>Tabel 12 luni — optimizări cumulate</h2>
+
+<p>Plan realist de tranziție de la CCC 65 la CCC 28, lună cu lună, cu impactul cumulat în cash:</p>
+
+<ul>
+<li><strong>Luna 1:</strong> Audit SKU + raport vechime creanțe (aging). Identifici 18% stoc mort și 12% creanțe peste 60 zile. Cash eliberat: 0 (diagnostic).</li>
+<li><strong>Luna 2:</strong> Lichidare stoc mort cu discount 30%. DIO 60→56. Cash: +49.000 lei.</li>
+<li><strong>Luna 3:</strong> Politică de încasare: discount 2% pentru plată în 10 zile. 30% din clienți acceptă. DSO 50→46. Cash: +66.000 lei (cumulat +115.000).</li>
+<li><strong>Luna 4:</strong> Renegociere furnizor #1 (40% din achiziții): 30→45 zile în schimbul volum garantat. DPO 45→51. Cash: +74.000 lei (cumulat +189.000).</li>
+<li><strong>Luna 5:</strong> Reducere stoc de siguranță pe categorii cu cerere stabilă. DIO 56→50. Cash: +74.000 lei (cumulat +263.000).</li>
+<li><strong>Luna 6:</strong> Factoring fără regres pe 2 clienți mari (cost ~1,2-1,8%/lună — verifică oferta). DSO 46→40. Cash: +99.000 lei (cumulat +362.000).</li>
+<li><strong>Luna 7-8:</strong> Sistem de penalități contractuale 0,1%/zi întârziere (max legal) + automatizare facturare. DSO 40→38. Cash: +33.000.</li>
+<li><strong>Luna 9-10:</strong> Renegociere furnizor #2 și #3. DPO 51→55. Cash: +49.000.</li>
+<li><strong>Luna 11-12:</strong> Optimizare finală mix stoc + monitorizare săptămânală KPI. DIO 50→45. Cash: +62.000.</li>
+</ul>
+
+<p><strong>Total cash eliberat în 12 luni: ~506.000 lei</strong>, fără niciun leu de credit nou și fără aport de capital. Aceasta este cea mai ieftină finanțare disponibilă.</p>
+
+<h2>Simulare: negocierea termenelor 30/60/90 zile</h2>
+
+<p>Aici se decide jocul. Să cuantificăm exact ce înseamnă mutarea termenelor pe componenta furnizori (DPO), unde stă <strong>float-ul gratuit din furnizori</strong>.</p>
+
+<p>Achiziții anuale de la furnizori = COGS = 4.500.000 lei. Achiziție medie zilnică = 12.329 lei.</p>
+
+<ul>
+<li><strong>Termen 30 zile (DPO 30):</strong> float furnizor = 30 × 12.329 = <strong>369.863 lei</strong> finanțați de furnizor.</li>
+<li><strong>Termen 60 zile (DPO 60):</strong> float = 60 × 12.329 = <strong>739.726 lei</strong>. Câștig vs 30 zile: <strong>+369.863 lei cash</strong> care rămân în firmă.</li>
+<li><strong>Termen 90 zile (DPO 90):</strong> float = 90 × 12.329 = <strong>1.109.589 lei</strong>. Câștig vs 30 zile: <strong>+739.726 lei cash</strong>.</li>
+</ul>
+
+<p><strong>Capcana de cost.</strong> Mulți furnizori oferă discount de plată anticipată (ex. „2% dacă plătești la 10 zile în loc de 60"). Trebuie să compari corect:</p>
+
+<ul>
+<li>Un discount de 2% pentru plată cu 50 de zile mai devreme echivalează cu o dobândă anuală de aproximativ <strong>2% × (365/50) ≈ 14,6% pe an</strong>.</li>
+<li>Dacă finanțarea ta alternativă (linia de credit) costă sub 14,6%, atunci <strong>renunți la termenul lung și iei discountul</strong> — e mai ieftin să plătești repede cu bani de credit ieftin decât să „finanțezi" prin furnizor la 14,6%.</li>
+<li>Dacă nu primești discount pentru plată rapidă, atunci <strong>termenul lung e float pur gratuit</strong> — întinde-l cât poți legal, fără penalități.</li>
+</ul>
+
+<p>Regula de decizie: <strong>extinde DPO doar când furnizorul NU penalizează termenul lung prin preț mai mare sau discount pierdut peste costul tău de finanțare</strong>. Altfel, „float-ul gratuit" devine credit scump deghizat.</p>
+
+<h3>Atenție la legislația termenelor de plată în România</h3>
+
+<p>În relațiile B2B din România se aplică reguli privind termenele de plată (transpunerea directivei UE împotriva întârzierilor la plată). Termenul standard este orientativ de 30 de zile, extensibil contractual până la 60 de zile, iar peste acest prag doar dacă nu este vădit inechitabil pentru creditor. În relația cu autoritățile publice termenele sunt mai stricte. <strong>Verifică prevederile exacte în vigoare la momentul contractării</strong>, pentru că extinderea agresivă a DPO peste pragurile legale poate genera dobânzi penalizatoare automate și risc reputațional. Float-ul gratuit se exploatează în interiorul legii, nu împotriva ei.</p>
+
+<h2>Gestiunea stocurilor vs cash flow — capcanele subtile</h2>
+
+<ul>
+<li><strong>Stocul de siguranță supradimensionat</strong> este cel mai frecvent cash blocat invizibil. Fiecare 10 zile de DIO în plus la firma noastră = ~123.000 lei imobilizați. Calculează stocul de siguranță pe baza variabilității cererii și a lead-time-ului furnizorului, nu „din burtă".</li>
+<li><strong>Discounturile de volum la achiziție</strong> par avantaj, dar dacă te obligă să ții marfa 90 de zile în plus, costul de finanțare a stocului poate depăși discountul. Calculează discountul net de cost de carry.</li>
+<li><strong>TVA-ul pe stoc.</strong> Atenție: TVA-ul deductibil pe achiziții se recuperează, dar până la rambursare/compensare imobilizează cash. La stocuri mari, decalajul TVA colectat vs deductibil afectează direct trezoreria. Coordonează ciclul de cumpărare cu termenele declarative ANAF.</li>
+<li><strong>Sezonalitatea</strong> distorsionează DIO/DSO mediat anual. Calculează CCC și pe trimestre, nu doar anual, ca să nu ratezi vârfurile de cash blocat.</li>
+</ul>
+
+<h2>Pași de acțiune — implementare în 90 de zile</h2>
+
+<ul>
+<li><strong>1. Calculează CCC-ul real</strong> pe ultimele 12 luni, cu medii lunare (nu valori de bilanț la 31 decembrie, care pot fi distorsionate). Sparge pe DIO/DSO/DPO.</li>
+<li><strong>2. Cuantifică valoarea unei zile</strong> (COGS zilnic și CA zilnică) și costul de finanțare actual. Pune un preț în lei pe fiecare zi de CCC.</li>
+<li><strong>3. Fă aging-ul creanțelor și stocurilor.</strong> Identifică top 20% creanțe restante și SKU-urile cu rotație sub țintă.</li>
+<li><strong>4. Atac pe DSO:</strong> discount de plată anticipată, penalități contractuale, facturare automată în ziua livrării, factoring selectiv pe clienții mari și siguri.</li>
+<li><strong>5. Atac pe DIO:</strong> elimină stocul mort, dimensionează științific stocul de siguranță, negociază livrări mai dese cu loturi mai mici.</li>
+<li><strong>6. Atac pe DPO:</strong> renegociază termenele cu furnizorii strategici oferind volum garantat; exploatează float-ul gratuit unde nu există discount de plată rapidă; respectă pragurile legale.</li>
+<li><strong>7. Monitorizează lunar</strong> CCC ca KPI de board, alături de profit. O firmă care urmărește doar profitul și ignoră CCC poate da faliment profitabilă.</li>
+</ul>
+
+<h2>Greșeli frecvente la nivel avansat</h2>
+
+<ul>
+<li><strong>Calculezi CCC pe cifre de bilanț punctuale</strong> în loc de medii — rezultatul e nereprezentativ pentru o firmă sezonieră.</li>
+<li><strong>Extinzi DPO orbește</strong> pierzând discounturi care erau mai valoroase decât float-ul, sau distrugând relația cu furnizori critici care îți pot tăia aprovizionarea la vârf de cerere.</li>
+<li><strong>Tai DSO prin discounturi prea mari</strong> — un discount de 4% pentru plată rapidă echivalează cu peste 25-30% dobândă anuală; rar merită.</li>
+<li><strong>Confunzi cash eliberat one-time cu economie recurentă.</strong> Reducerea CCC eliberează cash o singură dată (efect de nivel); economia recurentă e doar dobânda pe acel cash. Ambele contează, dar sunt naturi diferite.</li>
+<li><strong>Ignori riscul operațional al optimizării agresive:</strong> stoc prea mic = stockout și vânzări pierdute; termene prea dure cu clienții = pierdere de clienți. Optimul nu e CCC minim, ci CCC minim compatibil cu continuitatea vânzărilor.</li>
+</ul>
+
+<p>Reține esența: capitalul de lucru optimizat prin ciclul de conversie a numerarului este cea mai ieftină linie de finanțare a firmei tale. La profilul analizat, trecerea de la 65 la 28 de zile de CCC eliberează peste 500.000 lei fără un leu de credit nou. Pune un preț în lei pe fiecare zi, atacă metodic DIO, DSO și DPO, exploatează float-ul gratuit în limita legii și monitorizează CCC lunar ca pe un indicator vital — pentru că este.</p>

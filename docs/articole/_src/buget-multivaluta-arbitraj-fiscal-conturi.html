@@ -1,0 +1,106 @@
+<p><strong>Bugetul multi-valută și arbitrajul fiscal în România</strong> nu sunt un lux pentru câțiva norocoși plătiți în euro, ci o disciplină obligatorie pentru orice antreprenor sau freelancer cu venit în mai multe valute. Când încasezi în EUR și USD, dar cheltuiești și te impozitezi în RON, fiecare schimb valutar prost cronometrat și fiecare spread valutar ignorat erodează randamentul tău net mai brutal decât majoritatea taxelor. Aici intră în joc managementul venitului în mai multe valute: timing-ul schimburilor, alegerea brokerilor, optimizarea fiscală a veniturilor mixed-currency și calculul real al pierderilor din curs.</p>
+
+<p>Această lecție tratează strategiile de economisire prin controlul spread-ului valutar, dezavantajele ascunse ale conturilor în multiple monede și logica timing-ului schimbului valutar în bugetul personal. Presupun că stăpânești deja bazele din lecțiile anterioare — gestionarea banilor cu venituri sezoniere și impozitul pe venitul din străinătate impozitat în România. Aici mergem direct în profunzime tehnică.</p>
+
+<p>Diferența dintre un freelancer care „lasă banca să convertească" și unul care orchestrează conștient fluxurile RON/EUR/USD poate ajunge la 3-6% din venitul anual brut — adică, pentru un venit de 200.000 RON, undeva între 6.000 și 12.000 RON pierduți tăcut, an de an. Hai să blocăm scurgerea.</p>
+
+<h2>De ce conversia este cel mai scump impozit invizibil</h2>
+<p>Spread-ul valutar este diferența dintre cursul la care banca/brokerul <em>cumpără</em> valuta și cel la care o <em>vinde</em>. Pentru o bancă comercială clasică din România, acest spread pe EUR/RON la conversia unui cont poate fi de <strong>1,5%-3%</strong>, iar pe USD/RON și mai larg, deseori dublat de un comision fix de transfer. Comparația cheie: un curs interbancar (mid-market) EUR/RON la valoarea X înseamnă că banca îți dă X−1,5% când vinzi euro și îți cere X+1,5% când cumperi. Faci ambele într-un an și ai pierdut ~3% din capitalul rulat doar pe conversie.</p>
+
+<p>Concret: dacă rulezi 100.000 EUR de venit prin conversii bancare clasice la 3% spread efectiv anual, plătești <strong>3.000 EUR (≈15.000 RON)</strong> unei bănci — o sumă comparabilă cu impozitul tău pe profit pe o parte din venit. Acesta este „impozitul invizibil" pe care nimeni nu-l înscrie într-un buget, dar care e perfect cuantificabil.</p>
+
+<p>Regula structurală: <strong>conversia valutară trebuie tratată ca o linie bugetară explicită</strong>, cu un target de cost (ex. sub 0,5% all-in) și un furnizor ales pe spread, nu pe comoditate.</p>
+
+<h2>Arhitectura conturilor: cine convertește și unde</h2>
+<p>Există trei configurații tipice pentru un freelancer/antreprenor român cu venituri în EUR și USD:</p>
+
+<ul>
+<li><strong>Tot prin banca tradițională.</strong> Încasezi EUR în contul valutar, banca convertește la cursul ei intern. Avantaj: zero efort, totul într-un loc. Dezavantaj: spread-ul cel mai mare din piață și curs aplicat la momentul ales de bancă, nu de tine.</li>
+<li><strong>Cont valutar multi-currency la o fintech</strong> (tip neobancă cu IBAN-uri în mai multe valute). Avantaj: spread aproape de mid-market în interval normal, conversii la cerere, control pe timing. Dezavantaj: cota cu spread-ul real crește în weekend și la sume mari (markup peste plan), iar garantarea depozitelor diferă de cea bancară clasică din RO.</li>
+<li><strong>Broker/casă de schimb specializată FX</strong> pentru sume mari (peste ~10.000 EUR/transfer). Avantaj: spread negociabil, deseori sub 0,3%. Dezavantaj: setup mai birocratic și nepotrivit pentru micro-conversii frecvente.</li>
+</ul>
+
+<p>Arhitectura optimă pentru majoritatea este <strong>hibridă</strong>: bancă RO pentru relația fiscală și plățile interne, fintech multi-currency ca „hub" de conversie, și un furnizor FX dedicat pentru transferurile mari ocazionale. Niciodată un singur canal pentru tot.</p>
+
+<h3>Capcana IBAN-ului local vs SHA/OUR pe transferuri</h3>
+<p>Când un client din afara UE (ex. SUA) îți plătește în USD, ai grijă la codul de comisionare al transferului. La opțiunea <strong>SHA</strong>, băncile corespondente îți pot reține 15-40 USD din suma primită; la <strong>OUR</strong>, plătitorul suportă tot. Pentru contractele recurente, negociază OUR cu clientul sau cere-i să plătească într-un IBAN local USD (oferit de unele fintech-uri), evitând complet ruta SWIFT cu bănci corespondente. O singură clauză în contract îți salvează zeci de dolari pe fiecare factură.</p>
+
+<h2>Timing-ul schimbului: arbitraj temporal, nu speculație</h2>
+<p>Atenție la distincție: nu vorbim despre a paria pe direcția cursului (asta e speculație și nu are loc într-un buget personal). Vorbim despre <strong>arbitrajul temporal disciplinat</strong> — a alege <em>când</em> convertești, în limitele nevoilor tale reale de cash, ca să nu fii forțat să vinzi valută în cel mai prost moment.</p>
+
+<p>Principiile operaționale:</p>
+
+<ul>
+<li><strong>Nu converti reactiv, la fiecare încasare.</strong> Acumulează valuta într-un cont dedicat și convertește în tranșe planificate (ex. lunar/trimestrial), pe baza nevoii reale de RON pentru cheltuieli și impozite.</li>
+<li><strong>Menține o „rezervă de RON" de 3-6 luni de cheltuieli</strong>, ca să nu fii niciodată obligat să convertești într-un moment defavorabil doar ca să plătești o factură.</li>
+<li><strong>Evită conversiile în weekend și sărbători</strong>, când fintech-urile aplică un markup suplimentar pe spread pentru a se acoperi de riscul de gap la deschidere.</li>
+<li><strong>Folosește ordine de conversie la curs-țintă</strong> (limit orders), unde furnizorul permite, ca să convertești automat dacă cursul atinge un nivel pe care tu îl consideri bun pentru bugetul tău — nu ca pariu, ci ca execuție disciplinată.</li>
+</ul>
+
+<p>Model de calcul al impactului timing-ului: pe un venit de 100.000 EUR convertit eșalonat vs. „tot la final de an într-o singură tranșă", o variație tipică intra-anuală EUR/RON de 2-4% înseamnă că momentul greșit te poate costa <strong>2.000-4.000 EUR</strong>. Eșalonarea (cost-averaging pe conversie) nu maximizează câștigul, dar elimină riscul de a prinde fundul, ceea ce într-un buget contează mai mult.</p>
+
+<h2>Dimensiunea fiscală: cursul BNR și momentul impozabil</h2>
+<p>Aici e miezul arbitrajului fiscal românesc, și e o subtilitate pe care mulți o ratează. Pentru contribuabilii români, veniturile în valută se <strong>convertesc fiscal la cursul BNR</strong> de la o dată precisă, indiferent de cursul real la care tu ai schimbat efectiv banii la bancă/fintech.</p>
+
+<p>Aceasta creează un decalaj sistematic între <strong>cursul fiscal (BNR)</strong> și <strong>cursul tău de execuție</strong>. Implicații:</p>
+
+<ul>
+<li>Pentru venitul în valută, se aplică regula cursului oficial la data prevăzută de lege (verifică în Codul fiscal regula exactă aplicabilă formei tale — PFA, microîntreprindere, SRL — pentru anul în curs, deoarece momentul de referință diferă pe categorii de venit).</li>
+<li>Diferențele de curs valutar la persoanele juridice (SRL) generează <strong>venituri/cheltuieli din diferențe de curs</strong> care intră în baza impozabilă. La microîntreprindere logica diferă de cea de la impozit pe profit — confirmă tratamentul pentru regimul tău.</li>
+<li>Pentru PFA în sistem real, conversia veniturilor și cheltuielilor la cursul oficial la datele relevante poate genera diferențe favorabile sau nefavorabile pe care le poți gestiona prin sincronizarea facturării și a încasării.</li>
+</ul>
+
+<p><strong>Arbitrajul fiscal legal</strong> apare exact la intersecția acestor reguli: timing-ul facturării și al încasării influențează cursul BNR aplicabil, deci baza impozabilă în RON. Nu manipulezi cursul — îl alegi din opțiuni legitime de timing comercial.</p>
+
+<h3>Exemplu numeric pas-cu-pas</h3>
+<p>Presupunem un PFA care facturează 10.000 EUR. La data emiterii facturii, cursul BNR e 4,97 RON/EUR; la data încasării, 5,02 RON/EUR. În funcție de regula aplicabilă categoriei de venit, baza ta în RON poate fi 49.700 RON sau 50.200 RON — o diferență de <strong>500 RON</strong> doar din care dată „prinde" fiscul. La un volum de zeci de facturi pe an, sincronizarea conștientă a momentelor mută mii de lei în baza impozabilă. Verifică în Codul fiscal regula exactă pentru categoria ta înainte de a planifica, pentru că aplicarea greșită este o eroare, nu o optimizare.</p>
+
+<h2>CASS, plafoane și fluxul valutar</h2>
+<p>Un punct critic pentru freelanceri: contribuția de asigurări sociale de sănătate (CASS) și cea de pensie (CAS) se raportează la <strong>plafoane exprimate în multipli de salariu minim</strong>, calculate pe venitul net <em>în RON</em>. Asta înseamnă că volatilitatea cursului îți poate împinge venitul peste sau sub un plafon, cu efect de prag (cliff effect) asupra contribuției datorate.</p>
+
+<p>Implicația practică: dacă ești aproape de un plafon de contribuție, momentul conversiei și al recunoașterii veniturilor (la cursul oficial) poate decide dacă datorezi sau nu o tranșă suplimentară. Calculează-ți poziția față de praguri <strong>înainte</strong> de finalul anului, nu după.</p>
+
+<p>Concret, pentru 2026 plafoanele de contribuții ale persoanelor cu venituri din activități independente se raportează la salariul minim brut de <strong>4.050 lei</strong>. Pe acest reper:</p>
+
+<ul>
+<li><strong>CASS (10%)</strong> se datorează în trepte, în funcție de venitul net anual: la 6 salarii minime (<strong>24.300 lei</strong>), 12 salarii (<strong>48.600 lei</strong>) și 24 de salarii (<strong>97.200 lei</strong>) — baza de calcul fiind plafonată la nivelul venitului realizat, dar nu mai mult de 24 de salarii minime. Sub 6 salarii minime ai opțiunea de a contribui voluntar la nivelul de 6 salarii (baza minimă) pentru a păstra calitatea de asigurat.</li>
+<li><strong>CAS (25%)</strong> devine obligatorie de la 12 salarii minime (48.600 lei), cu un al doilea prag la 24 de salarii (97.200 lei); contribuabilul își alege baza de calcul (cele 12 sau 24 de salarii minime) în funcție de pragul depășit.</li>
+</ul>
+
+<p>Efectul de prag e brutal tocmai pentru că este discret, nu liniar: un venit net de 97.500 lei recunoscut la cursul BNR te poate împinge peste pragul de 24 de salarii, declanșând o tranșă întreagă de contribuție care nu există la 96.900 lei. Aici, câțiva bani de curs valutar prost cronometrat la finalul anului pot „costa" o treaptă completă. De aceea sincronizarea momentului de recunoaștere a venitului (data facturii/încasării și cursul BNR aferent) nu e cosmetică, ci poate face diferența între două regimuri de contribuție. Verifică încadrarea exactă pentru forma ta în Codul fiscal pentru anul în curs.</p>
+
+<h2>Calculul real al pierderii din curs: formula completă</h2>
+<p>Majoritatea oamenilor măsoară greșit costul valutar pentru că privesc doar spread-ul afișat. Costul real all-in pe un flux valutar are patru componente:</p>
+
+<ul>
+<li><strong>Spread-ul de conversie</strong> (diferența față de mid-market), de regulă 0,2%-3% în funcție de canal.</li>
+<li><strong>Comisioane fixe de transfer</strong> (SWIFT, corespondent, retragere) — pot fi 0 la fintech sau 20-40 EUR/USD la bancă pe transfer internațional.</li>
+<li><strong>Costul de oportunitate al timing-ului</strong> — diferența între cursul tău efectiv și cursul mediu rezonabil pe perioada în care ai fi putut converti.</li>
+<li><strong>Decalajul fiscal</strong> — diferența între cursul BNR aplicat fiscal și cursul tău real de execuție, care se traduce în impozit plătit pe „venit" care, la conversie, nu s-a materializat în RON.</li>
+</ul>
+
+<p>Formula mentală: <strong>Cost total = Volum × (Spread% + Comision_fix/Volum + Drift_timing% + Decalaj_fiscal%)</strong>. Doar însumând toate cele patru vezi adevărul. Un canal cu spread mic dar comision fix mare poate fi mai scump pe sume mici decât o bancă; invers pe sume mari.</p>
+
+<h2>Pași de acțiune (checklist operațional)</h2>
+<ul>
+<li><strong>Mapează-ți fluxurile.</strong> Listează fiecare sursă de venit pe valută (EUR/USD) și fiecare obligație de plată pe valută (RON impozite, EUR furnizori etc.). Identifică „matching-urile naturale" — cheltuieli în EUR plătite direct din EUR fără conversie.</li>
+<li><strong>Deschide arhitectura hibridă:</strong> bancă RO (fiscal + plăți interne) + cont multi-currency fintech (hub conversie) + furnizor FX pentru transferuri mari.</li>
+<li><strong>Setează un target de cost de conversie</strong> (ex. ≤0,5% all-in) și măsoară-l lunar față de mid-market. Ce nu măsori, nu controlezi.</li>
+<li><strong>Construiește rezerva de RON</strong> de 3-6 luni de cheltuieli, ca să elimini conversiile forțate.</li>
+<li><strong>Eșalonează conversiile</strong> (lunar/trimestrial), evită weekendul, folosește ordine la curs-țintă unde e posibil.</li>
+<li><strong>Negociază codul de comisionare</strong> (OUR) și IBAN-uri locale cu clienții recurenți pentru a tăia comisioanele corespondente.</li>
+<li><strong>Sincronizează facturarea/încasarea</strong> cu o privire la cursul BNR și la plafoanele CASS/CAS, în limitele legale — verifică regula fiscală exactă pentru forma ta.</li>
+<li><strong>Ține un registru al cursurilor</strong>: data, cursul BNR, cursul tău real, canalul. La final de an ai dovada deciziilor și baza pentru Declarația Unică.</li>
+</ul>
+
+<h2>Greșeli frecvente la nivel avansat</h2>
+<ul>
+<li><strong>Conversia reactivă</strong> a fiecărei încasări — maximizează spread-ul plătit și expunerea la timing prost.</li>
+<li><strong>Ignorarea decalajului BNR vs. curs real</strong> — plătești impozit pe un „venit" în RON pe care nu l-ai obținut efectiv la conversie.</li>
+<li><strong>Un singur canal pentru tot</strong> — folosirea băncii și pentru micro-conversii, și pentru transferuri mari, când fiecare are economia lui optimă.</li>
+<li><strong>Uitarea creditului fiscal extern</strong> când venitul a fost deja impozitat la sursă în străinătate — verifică tratatul aplicabil și revendică-l în Declarația Unică.</li>
+<li><strong>Confundarea arbitrajului de timing cu speculația</strong> — a paria pe direcția cursului cu banii de cheltuieli e o greșeală de risc, nu o optimizare.</li>
+<li><strong>Lipsa unui registru</strong> — fără date proprii, nu poți nici optimiza, nici justifica în fața ANAF.</li>
+</ul>
+
+<p>Concluzia avansată: pentru un venit mixed-currency, randamentul tău net se decide la fel de mult la nivelul conversiei și al timing-ului fiscal cât la nivelul prețului serviciilor tale. Tratează fluxul valutar ca pe un activ administrat activ, nu ca pe o operațiune bancară de fundal — diferența se vede direct în profitul net rămas în buzunar.</p>

@@ -1,0 +1,117 @@
+<p>Despre <strong>hedging valuta credit ipotecar EUR CHF curs protecție România</strong> nu vorbește aproape nimeni la semnarea unei ipoteci pe 30 de ani — și exact aici se ascunde diferența dintre un debitor care suferă pasiv riscul valutar și unul care îl gestionează ca un trezorier de corporație. Dacă deja știi ce a fost criza CHF din 2007-2015 și cum funcționează un credit în devize, lecția asta merge mai departe: <strong>cum calculezi real expunerea ta la risc valutar la un credit în EUR</strong>, cum funcționează în practică <strong>forward contracts și swaps</strong> ca instrumente de hedging, și ce te costă concret <strong>rata de curs fixing</strong> atunci când banca îți dă un curs cu 2-3% mai prost decât piața.</p>
+
+<p>Vei vedea <strong>scenarii CHF 2007-2025</strong> rulate numeric pe un credit de 100k CHF, vei învăța <strong>cum evaluezi dacă un credit în devize merită riscul comparativ cu RON</strong> și care este <strong>alternativa conversiei creditului EUR în RON</strong> — cu condițiile și capcanele ei. Ținta nu e doar protecția defensivă, ci optimizarea: să-ți maximizezi rata de rentabilitate netă de valută, tratând datoria ipotecară în devize ca o poziție short pe o monedă, pe care fie o acoperi, fie, dacă ai convingere și capital, o exploatezi invers.</p>
+
+<p>Premisa avansată: o ipotecă de 100.000 EUR pe 25 de ani nu este „un credit", ci o poziție short valutară de o jumătate de milion de lei pe care ai deschis-o fără să-ți dea nimeni un avertisment de margine. Întrebarea matură nu este „ce monedă urcă", ci „cât plătesc ca să dorm liniștit, și e prețul ăsta corect raportat la riscul real".</p>
+
+<h2>Pasul 1: cuantifică expunerea — datoria în devize este o poziție short</h2>
+
+<p>Înainte de orice hedging, trebuie să măsori exact ce ai. Un credit ipotecar denominat în valută, rambursat dintr-un venit în lei, este economic identic cu o <strong>poziție short pe valuta respectivă față de RON</strong>. Câștigi când leul se apreciază, pierzi când se depreciază. Expunerea ta nu este suma împrumutată inițial, ci <strong>soldul rămas în valută la fiecare moment</strong>, care scade pe măsură ce amortizezi principalul.</p>
+
+<p>Calcul concret. Credit de 100.000 EUR, sold curent 92.000 EUR, curs BNR 5,05 lei/EUR. Expunerea ta valutară brută este <strong>92.000 × 5,05 = 464.600 lei</strong>. Sensibilitatea (delta valutară) se calculează imediat: la o mișcare de 1% a cursului, soldul tău în lei se schimbă cu 92.000 × 0,0505 = <strong>4.646 lei</strong>. La o depreciere de 15% a leului — mișcare deloc extremă într-o țară cu deficit gemelar — datoria ta crește cu aproximativ <strong>69.700 lei</strong> peste noapte, fără să fi întârziat o rată.</p>
+
+<p>Există însă o nuanță pe care mulți o ratează: expunerea reală nu este doar soldul, ci și <strong>fluxul de rate viitoare</strong>. Fiecare rată lunară este o mică tranzacție de cumpărare de valută la curs viitor necunoscut. Pe un orizont de 25 de ani, valoarea prezentă a riscului din rate poate fi semnificativă. Pentru o estimare practică, expunerea totală relevantă pentru decizia de hedging = soldul în valută (riscul pe principal, cel mai mare) + valoarea actualizată a componentei valutare din rate.</p>
+
+<h3>Tabloul de bord minim</h3>
+
+<ul>
+<li><strong>Sold în valută</strong> (din ultimul extras) × curs BNR azi = expunere brută în lei.</li>
+<li><strong>Delta 1%</strong> = sold în valută × curs × 0,01. Cât te costă fiecare procent de depreciere.</li>
+<li><strong>Stress test −20% / −30% / −50% leu</strong> = sold × curs × (0,20 / 0,30 / 0,50). Pierderea în scenariul de criză.</li>
+<li><strong>Raportul rată-șocată / venit net</strong>: recalculează rata la curs +30% și împarte la venitul lunar. Dacă depășește 40-45%, ești în zona de incapacitate de plată.</li>
+</ul>
+
+<h2>Pasul 2: instrumentele reale de hedging și de ce ipotecarul nu le poate folosi simplu</h2>
+
+<p>Trezorierul unei firme care are datorie în EUR și venituri în RON își acoperă riscul cu instrumente standard. Le descriem pe scurt, pentru că vocabularul contează, apoi explicăm de ce persoana fizică se lovește de fricțiuni reale.</p>
+
+<ul>
+<li><strong>Forward valutar (FX forward):</strong> un contract prin care fixezi azi cursul la care vei cumpăra EUR la o dată viitoare. Prețul forward nu este o predicție; el rezultă din <strong>paritatea ratelor dobânzii</strong>: forward ≈ curs spot × (1 + dobânda RON) / (1 + dobânda EUR). Pentru că dobânda în lei este structural mai mare decât cea în euro, <strong>forward-ul EUR/RON este mereu mai scump decât spot</strong> — plătești un „cost de report" care reflectă exact diferențialul de dobândă pe care l-ai economisit luând credit în euro. Aici se închide cercul: avantajul de dobândă al creditului în valută și costul acoperirii lui sunt, teoretic, aceeași cifră.</li>
+<li><strong>Swap valutar (cross-currency swap):</strong> schimbi un flux de plăți în EUR contra unui flux în RON pe toată durata. Este instrumentul corect pentru a transforma economic un credit EUR într-unul RON fără refinanțare. Practic, însă, băncile nu oferă cross-currency swaps retail unei persoane fizice.</li>
+<li><strong>Opțiuni valutare (FX call pe EUR):</strong> plătești o primă și obții dreptul, nu obligația, de a cumpăra EUR la un curs-prag. Te protejează de catastrofă (leul care explodează) păstrând beneficiul dacă leul se apreciază. Este „asigurarea" corectă conceptual, dar prima pe 25 de ani este prohibitivă și produsul e indisponibil retail în RON.</li>
+</ul>
+
+<p>Concluzia dură a acestei secțiuni: <strong>hedging-ul „pur", cu derivate, nu este disponibil practic persoanei fizice din România</strong> pe orizontul unei ipoteci. Cine îți promite un forward EUR/RON pe 25 de ani pentru un credit personal te minte sau te duce într-un produs scump și opac. De aceea, hedging-ul real al unui ipotecar se face prin <strong>înlocuitori (proxy hedges)</strong>, pe care îi tratăm mai jos.</p>
+
+<h2>Pasul 3: hedging-ul practic accesibil — patru strategii reale</h2>
+
+<h3>A. Hedging natural: construiește venituri în moneda datoriei</h3>
+
+<p>Cel mai ieftin și mai robust hedge nu costă nicio primă: <strong>aliniază moneda venitului cu moneda datoriei</strong>. Dacă ai un credit în EUR, orice flux de venit în EUR (chirie de la un imobil închiriat în euro, contract de freelancing facturat în euro, dividende dintr-un ETF acumulativ în euro) reduce expunerea netă. Dacă rata ta lunară este 600 EUR și încasezi 600 EUR chirie, expunerea pe flux este zero — îți rămâne doar riscul pe soldul de principal.</p>
+
+<p>Pentru cei cu capital, varianta agresivă: <strong>constituie un activ în EUR egal cu soldul datoriei</strong>. Un portofoliu de obligațiuni sau un ETF de obligațiuni guvernamentale europene în EUR, de mărimea soldului, transformă poziția într-una valutar-neutră. Câștigul: dacă leul se prăbușește, activul tău în euro crește în lei exact cât crește datoria. Costul: imobilizezi capital și plătești diferența dintre dobânda creditului și randamentul activului — care, din nou, e prețul real al acoperirii.</p>
+
+<h3>B. Conversia în RON: hedge-ul „nuclear" — condiții și capcane</h3>
+
+<p><strong>Alternativa conversiei creditului EUR în RON</strong> este cel mai folosit hedge real de către persoane fizice. OUG 52/2016 îți dă, pentru creditele imobiliare în valută, <strong>dreptul de a cere conversia în lei oricând pe durata contractului</strong> — acest drept nu este condiționat de un nivel minim de depreciere a cursului; îl poți exercita chiar dacă nu ai suferit nicio pierdere. Pragul de 20% din lege este, de fapt, doar pragul de la care banca e obligată să te avertizeze periodic (cel puțin lunar) că valoarea totală de plată variază cu peste 20% față de cursul de la semnare — un semnal, nu o precondiție. Conversia se face la un curs de schimb echitabil (cursul publicat de BNR la data cererii) și elimină 100% riscul valutar viitor. Dar are capcane pe care un debitor avansat le verifică obligatoriu:</p>
+
+<ul>
+<li><strong>Cursul de conversie:</strong> pentru conversia statutară din OUG 52/2016 banca trebuie să folosească un curs echitabil — cursul BNR de la data cererii — fără spread comercial. Verifică acest lucru în ofertă: dacă banca îți propune o conversie „voluntară" sau o refinanțare la propriul ei curs comercial, intervine <strong>rata de curs fixing</strong>, iar un spread de 2-3% aplicat la soldul de 92.000 EUR înseamnă un cost ascuns instant de 9.300-14.000 lei, mascat în soldul nou în RON. Cere mereu, în scris, cursul exact la care se face conversia.</li>
+<li><strong>Noua dobândă:</strong> treci de la EURIBOR + marjă la IRCC + marjă (sau dobândă fixă în lei). Dobânda în lei este structural mai mare. Conversia îți crește rata lunară imediat — plătești previzibilitate cu cash-flow.</li>
+<li><strong>Resetarea graficului:</strong> verifică dacă perioada rămasă și comisioanele se recalculează. Cere noul scadențar complet și costul total al creditului (DAE) înainte, nu după semnare.</li>
+<li><strong>Momentul:</strong> dacă convertești după ce leul s-a depreciat deja, „pietrifici" pierderea. Conversia este protecție pentru viitor, nu recuperare a trecutului. Decizia corectă se ia pe baza riscului rezidual, nu a regretului.</li>
+</ul>
+
+<h3>C. Refinanțarea într-un credit RON la altă bancă</h3>
+
+<p>Alternativă la conversia internă: refinanțezi la o bancă concurentă direct într-un credit în lei. Avantaj: poți negocia marjă și costuri de la zero și eviți cursul de fixing dezavantajos al băncii actuale dacă obții o ofertă mai bună. Dezavantaj: costuri de refinanțare (evaluare, notar, eventual comisioane), și tot treci pe dobândă în lei. Compară mereu <strong>costul total pe durata rămasă</strong>, nu rata lunară.</p>
+
+<h3>D. Amortizare accelerată ca de-risking</h3>
+
+<p>Fiecare leu de principal rambursat anticipat la un credit în valută reduce direct expunerea ta short. Dacă nu vrei să convertești dar ai cash, rambursarea parțială anticipată este un hedge perfect și fără spread: tai din soldul în valută. La creditele ipotecare cu dobândă variabilă, rambursarea anticipată este, prin lege, fără comision. Strategia „barbell": păstrezi dobânda mică în euro, dar reduci agresiv principalul ca să micșorezi baza de risc valutar.</p>
+
+<h2>Pasul 4: scenarii CHF 2007-2025 rulate pe 100k CHF — ce te învață numeric</h2>
+
+<p>Reluăm cazul-școală, dar din unghiul deciziei de hedging, ca să extragem regula generală. Credit ipotecar 100.000 CHF în 2007, curs ~2,1 lei/CHF, deci ~210.000 lei la origine.</p>
+
+<ul>
+<li><strong>Scenariul „nimic" (nehedge-at):</strong> în ianuarie 2015, după șocul SNB, curs ~4,4 lei/CHF. Sold rămas ~80.000 CHF × 4,4 = <strong>352.000 lei</strong>. Plătiseși 8 ani de rate și datorai cu ~142.000 lei mai mult decât împrumutaseși. Pierdere de curs cumulată (rate + sold) frecvent peste 150.000 lei.</li>
+<li><strong>Scenariul „conversie timpurie în 2009-2010":</strong> cei care au convertit în RON când cursul era ~2,8-3,0 lei/CHF au pietrificat o pierdere moderată (~30-40% peste origine) dar au evitat complet șocul din 2015. Lecția: conversia nu trebuie să aștepte fundul; conversia la o pierdere mică e mai bună decât speranța la o pierdere mare.</li>
+<li><strong>Scenariul „hedge natural cu activ în CHF":</strong> cine ar fi ținut un activ în franci de mărimea soldului ar fi fost neutru — dar nimeni nu deține active în CHF pe salariu românesc, ceea ce arată de ce CHF era cel mai toxic: <strong>monedă-refugiu, imposibil de hedge-at natural</strong>, care se apreciază exact când venitul tău e sub presiune. Corelația lucrează împotriva ta.</li>
+<li><strong>Scenariul „speculează invers" (avansat, periculos):</strong> un debitor cu convingere că leul se va aprecia ar fi putut, teoretic, să nu hedge-eze și să beneficieze. În realitate, leul nu s-a apreciat niciodată durabil față de CHF — pariul invers a fost greșit pe tot intervalul. Concluzie sobră: „speculația inversă" pe datoria valutară câștigă doar dacă ai un avantaj informațional real asupra BNR și a fluxurilor de capital, ceea ce un debitor retail nu are. Tratează-o ca pe excepția documentată, nu ca pe strategie.</li>
+</ul>
+
+<p>Regula extrasă din 2007-2025: <strong>creditul în devize fără hedging este un short valutar fără stop-loss</strong>. Singurul „stop-loss" real disponibil retail este conversia/refinanțarea în RON — și el funcționează doar dacă îl declanșezi din timp, nu după ce paguba e făcută.</p>
+
+<h2>Pasul 5: cum decizi rațional — modelul cost-beneficiu al hedging-ului</h2>
+
+<p><strong>Cum evaluezi dacă un credit în devize merită riscul comparativ cu RON</strong> se reduce la o comparație de valoare așteptată, ajustată la risc. Pașii modelului:</p>
+
+<ul>
+<li><strong>1. Calculează economia de dobândă</strong> a creditului în valută vs. RON, pe toată durata. Ex.: diferențial de 2 puncte procentuale pe 100.000 EUR ≈ 2.000 EUR/an în primii ani, scăzând pe măsură ce amortizezi. Aceasta este „prima de risc" pe care o încasezi pentru că ții poziția short deschisă.</li>
+<li><strong>2. Estimează pierderea așteptată din valută.</strong> Atribuie probabilități scenariilor: depreciere lentă (cea mai probabilă într-o economie cu deficite), stabilitate, șoc. Chiar și o depreciere medie de 1,5-2% pe an a leului erodează rapid economia de dobândă.</li>
+<li><strong>3. Adaugă riscul de coadă (tail risk).</strong> Spre deosebire de un calcul de valoare medie, decizia ipotecară trebuie să supraviețuiască scenariului prost. Întrebarea-cheie: la o depreciere de 30-50%, încă plătești rata fără să-ți pierzi casa? Dacă răspunsul e „nu", riscul valutar e inacceptabil indiferent de economia de dobândă — utilitatea ruinei domină.</li>
+<li><strong>4. Compară prima de risc încasată (economia de dobândă) cu pierderea așteptată + valoarea protecției contra cozii.</strong> Dacă economia de dobândă nu acoperă confortabil pierderea așteptată plus costul „asigurării" psihologice și financiare, creditul RON e superior chiar dacă rata lunară de start e mai mare.</li>
+</ul>
+
+<p>Asimetria fundamentală: economia de dobândă este mărginită și cunoscută; pierderea valutară este, practic, nemărginită pe orizont lung. Un risk manager nu vinde niciodată volatilitate nemărginită pentru o primă mărginită fără un motiv excepțional. Pentru salariatul cu venit în lei, motivul excepțional aproape nu există.</p>
+
+<h2>Pasul 6: capcana cursului de fixing — costul ascuns care se acumulează</h2>
+
+<p>Chiar și fără hedging activ, plătești un cost valutar lunar invizibil. Când rambursezi o rată într-o monedă pe care nu o deții, banca îți vinde valuta la <strong>cursul ei de vânzare</strong>, nu la mid-market BNR. Un spread tipic de <strong>1,5-3%</strong> pe fiecare conversie înseamnă, pe o rată de 600 EUR, un cost ascuns de 45-90 lei lunar — adică <strong>540-1.080 lei pe an</strong>, repetat pe 25 de ani. Verifică în contract la ce curs se face fixingul ratei (BNR ±x% sau cursul comercial al băncii) și negociază sau alimentează contul de credit direct în valută cumpărată mai ieftin de la o casă de schimb / broker valutar competitiv, dacă produsul permite.</p>
+
+<h2>Checklist de execuție pentru un debitor avansat</h2>
+
+<ul>
+<li><strong>Recalculează azi:</strong> sold în valută × curs BNR = expunere; delta 1%; pierderea la −20/−30/−50%.</li>
+<li><strong>Testează rata-șocată:</strong> rata la curs +30% / venit net. Peste 40-45% = zonă roșie, prioritizează de-risking.</li>
+<li><strong>Verifică fixingul:</strong> la ce curs convertește banca rata lunară și care e spreadul real față de BNR.</li>
+<li><strong>Cere oferta de conversie în RON</strong> în scris: curs aplicat, noua dobândă, DAE, scadențar nou, toate comisioanele. Compară DAE pe durata rămasă.</li>
+<li><strong>Cere o ofertă de refinanțare RON</strong> la minim două bănci concurente; folosește-o ca pârghie.</li>
+<li><strong>Construiește hedge natural:</strong> orice venit sau activ în moneda creditului reduce expunerea — caută-l deliberat.</li>
+<li><strong>Planifică amortizare anticipată</strong> a principalului ca de-risking fără spread (fără comision la creditele cu dobândă variabilă).</li>
+<li><strong>Decide pe model, nu pe emoție:</strong> economia de dobândă vs. pierderea așteptată + supraviețuirea scenariului-coadă.</li>
+</ul>
+
+<h2>Greșeli frecvente la nivel avansat</h2>
+
+<ul>
+<li><strong>Confunzi hedging cu predicție.</strong> Hedging-ul nu prezice cursul; îl neutralizează. Cine „nu hedge-ează pentru că leul pare stabil" face o predicție mascată în inacțiune.</li>
+<li><strong>Ignori paritatea dobânzilor.</strong> Avantajul de dobândă al creditului în valută ESTE prima de risc valutar. Nu există prânz gratis: rata mică e plătită cu volatilitate.</li>
+<li><strong>Aștepți „fundul" ca să convertești.</strong> Conversia e protecție pentru viitor, nu recuperarea trecutului. La un risc rezidual mare, conversia la o pierdere mică bate speranța la o pierdere mare.</li>
+<li><strong>Crezi că poți „specula invers" fără avantaj real.</strong> Pariul că leul se apreciază durabil a pierdut pe tot 2007-2025. Fără edge informațional asupra BNR și fluxurilor, e gambling cu casa drept miză.</li>
+<li><strong>Nu cuantifici fixingul.</strong> 2-3% spread × 25 de ani de rate e un cost de mii de lei pe care nu-l vezi în rata afișată.</li>
+<li><strong>Tratezi soldul fix, nu fluxul.</strong> Riscul tău nu e doar principalul; fiecare rată viitoare e o cumpărare de valută la curs necunoscut.</li>
+</ul>
+
+<p>Linia de fond pentru debitorul experimentat: o ipotecă în devize este o poziție de trezorerie, nu un simplu credit. O gestionezi cu aceeași disciplină ca un short valutar — măsori delta, rulezi stress-teste, cuantifici costul fixingului și ai un plan de de-risking (conversie, refinanțare sau amortizare) pe care îl declanșezi din timp. Hedging-ul real disponibil retail nu e elegant ca un forward de bancă, dar e suficient: aliniază moneda venitului cu a datoriei, ține un tampon care supraviețuiește unui șoc de 30-50%, și nu vinde niciodată volatilitate nemărginită pentru o economie de dobândă mărginită fără un motiv pe care l-ai scris pe hârtie.</p>

@@ -1,0 +1,94 @@
+<p><strong>ETF distributie acumulare impozit fiscal</strong> — această ecuație decide, pe 20 de ani, dacă portofoliul tău termină cu zeci de mii de euro în plus sau în minus, complet legal. Dacă ai înțeles deja mecanismul de bază (acumularea reinvestește intern, distribuția îți plătește dividende periodic), aici trecem la nivelul în care contează cu adevărat: impozitarea efectivă a ETF-urilor cu dividende reinvestite vs. distribuite, comparația broker rezident vs străin la impozitare și calculul cost total proprietate ETF 2026 pe randament net după impozit.</p>
+<p>Construim un model numeric concret: un ETF de acumulare deținut într-o PFA versus un ETF distribuitor ținut în broker străin, urmărit pe 20 de ani, cu randament net după impozit calculat la fiecare prag fiscal. Vom măsura cash drag-ul distribuției, vom vedea cum alegi ETF pe bază de impozite, nu de marketing, și unde diferă fiscal un ETF UCITS de unul extra-UCITS pentru un rezident român în 2026.</p>
+<p>Presupun că stăpânești bazele din lecția anterioară despre acumulare vs distribuție. Aici mergem direct în profunzime: structura de cont (persoană fizică vs PFA vs broker străin), interacțiunea cu CASS, momentul realizării câștigului și capcanele subtile care anulează în liniște optimizarea pe care credeai că o ai.</p>
+
+<h2>Punctul de plecare: ce te taxează de fapt, și când</h2>
+<p>Pentru un rezident român în 2026, un ETF te poate atinge fiscal în trei momente distincte, și optimizarea înseamnă să controlezi <strong>care</strong> dintre ele se activează și <strong>când</strong>:</p>
+<ul>
+<li><strong>La dividend (doar distribuție).</strong> Un ETF de distribuție îți plătește cash periodic; acel venit din dividende din surse externe este impozabil anual la <strong>16% în 2026</strong> (cotă majorată de la 10% în 2025 prin Legea 141/2025), indiferent dacă îl reinvestești manual sau nu. Aici apare evenimentul fiscal pe care acumularea îl evită complet.</li>
+<li><strong>La vânzare (ambele).</strong> Câștigul de capital realizat se impozitează la cedare. Cota efectivă depinde de tipul de cont și de perioada de deținere — un intermediar român aplică reținere la sursă diferențiată pe deținere sub/peste 1 an, în timp ce un broker străin nu reține nimic și declari tu în Declarația Unică.</li>
+<li><strong>La nivel de contribuție (CASS, cotă 10%).</strong> Veniturile din investiții (dividende, dobânzi, câștiguri) intră în baza CASS dacă depășesc pragul anual de <strong>6 salarii minime brute</strong> — calculat la salariul minim în vigoare pe 1 ianuarie 2026 (4.050 lei), deci aproximativ <strong>24.300 lei venit net cumulat</strong>. Peste prag, baza de calcul urcă în trepte (6, 12 și 24 de salarii minime), iar CASS de 10% se aplică pe nivelul-treaptă, nu pe venitul exact. Acesta este stratul pe care investitorii avansați îl uită cel mai des și care poate transforma o decizie „neutră fiscal" într-una costisitoare.</li>
+</ul>
+<p>Diferența fundamentală dintre acumulare și distribuție nu este randamentul brut — la nivel de fond, ambele captează aceleași dividende. Diferența este <strong>momentul</strong> impozitării și <strong>dobânda compusă pe impozitul amânat</strong>. Acumularea transformă un flux de dividende impozabil anual într-un câștig de capital amânat până la vânzare. Pe 20 de ani, acest tax deferral este motorul principal al diferenței de randament net.</p>
+
+<h2>Cash drag-ul distribuției: costul ascuns care nu apare în niciun comision</h2>
+<p>Cash drag-ul are două componente, una operațională și una fiscală, și ambele lucrează împotriva ETF-ului de distribuție în faza de acumulare a averii.</p>
+<p><strong>Componenta operațională:</strong> dividendul cash stă neinvestit câteva zile/săptămâni între data ex-dividend, plată și reinvestirea ta manuală. La un randament de dividend de 2% și reinvestire cu întârziere medie, pierderea de compounding este mică pe un an, dar se acumulează. ETF-ul de acumulare reinvestește intern instantaneu, la cost zero, fără spread și fără comision de reinvestire.</p>
+<p><strong>Componenta fiscală (cea grea):</strong> la distribuție, plătești impozit pe dividend <em>înainte</em> de a reinvesti. Reinvestești deci o sumă netă, nu brută. La acumulare, întreaga sumă brută rămâne investită și compune; impozitul îl plătești o singură dată, mult mai târziu, pe câștigul total. Diferența nu este liniară — este exponențială, pentru că impozitul amânat continuă să producă randament 20 de ani.</p>
+
+<h2>Modelul de calcul pe 20 de ani: PFA cu acumulare vs broker străin cu distribuție</h2>
+<p>Construim scenariul cap-coadă. Ipoteze comune, ținute constante pentru a izola efectul fiscal:</p>
+<ul>
+<li>Investiție inițială: <strong>100.000 €</strong>, fără contribuții ulterioare (ca să vezi pur efectul structurii).</li>
+<li>Randament total brut al pieței: <strong>7%/an</strong>, din care <strong>2% dividend brut</strong> și 5% apreciere de preț.</li>
+<li>Orizont: <strong>20 de ani</strong>. Realizare integrală (vânzare) la final.</li>
+<li>Cotele de impozit pentru 2026 (verificate, conform Legii 141/2025): <strong>impozit pe dividende 16%</strong> (majorat de la 10% în 2025); <strong>câștig de capital prin intermediar rezident</strong> reținut la sursă <strong>3%</strong> pentru dețineri de peste 365 de zile și <strong>6%</strong> sub 365 de zile, fără posibilitatea de a compensa pierderile; <strong>câștig de capital prin broker străin 16%</strong> pe profitul net anual, autodeclarat în Declarația Unică (cu report de pierdere 5 ani).</li>
+</ul>
+
+<h3>Varianta A — ETF de acumulare (UCITS irlandez, Acc) deținut în PFA</h3>
+<p>Logica: PFA-ul nu schimbă natura câștigului de capital dintr-un ETF de acumulare — câștigul rămâne impozitat la vânzare. Ce schimbă PFA-ul este <strong>cadrul de cheltuieli deductibile și interacțiunea cu CASS/CAS</strong>, nu cota pe câștigul ETF în sine. Avantajul principal rămâne tax deferral-ul: timp de 20 de ani, niciun eveniment fiscal anual pe dividende.</p>
+<ul>
+<li><strong>Pe parcurs (anii 1–20):</strong> zero impozit pe dividende, zero reținere la distribuție (UCITS irlandez Acc nu distribuie), zero declarație anuală pe dividende. Întreaga sumă brută compune.</li>
+<li><strong>La final (anul 20):</strong> un singur eveniment — impozit pe câștigul de capital realizat, calculat pe diferența preț vânzare minus cost de achiziție.</li>
+<li><strong>Capitalul brut la 20 de ani:</strong> 100.000 € × 1,07²⁰ ≈ <strong>386.968 €</strong>. Câștig brut ≈ 286.968 €. Impozitul se aplică o singură dată pe acest câștig, la finalul perioadei.</li>
+</ul>
+<p>Atenție la capcana PFA: dacă scopul declarat al PFA-ului nu include activitate de investiții și activele ETF nu sunt corect încadrate, riști recalificare la control. PFA-ul nu este o „cutie magică" care reduce automat impozitul pe câștigul ETF — beneficiul real apare doar dacă ai oricum o PFA activă și folosești cheltuielile deductibile și structura contribuțiilor în mod coerent. Pentru un investitor pur (fără activitate economică reală), deținerea în PFA poate adăuga complexitate și risc fără beneficiu fiscal net pe câștigul de capital.</p>
+
+<h3>Varianta B — ETF de distribuție prin broker străin (persoană fizică)</h3>
+<ul>
+<li><strong>Pe parcurs (anii 1–20):</strong> primești ~2% dividend brut anual. Plătești impozit pe dividend <em>în fiecare an</em>, apoi reinvestești suma netă. Dacă reținerea externă la sursă există (depinde de domiciliul fondului — la UCITS irlandez de distribuție către nerezidenți reținerea este de regulă zero), revendici creditul fiscal extern în Declarația Unică. Dacă fondul e extra-UCITS (ex. US-listed), withholding-ul de 15% pe dividend devine relevant și apare riscul de US estate tax pe activele americane directe.</li>
+<li><strong>Efectul de erodare:</strong> fiecare an, impozitul pe dividend reduce baza care compune. Pe 2% dividend impozitat anual, randamentul net efectiv scade vizibil. Câștigul de preț (5%) rămâne amânat ca la acumulare, dar componenta de dividend este „ciuruită" anual.</li>
+<li><strong>La final:</strong> impozit pe câștigul de capital pe aprecierea de preț, declarat tot de tine în Declarația Unică, plus eventuala CASS dacă veniturile din investiții (dividende + câștig) au depășit pragurile anuale.</li>
+</ul>
+<p><strong>Comparația cheie:</strong> chiar dacă cota pe dividend ar fi egală cu cota pe câștig de capital, varianta A câștigă pentru că <em>amână</em> și <em>compune impozitul neplătit</em>. Pe un dividend de 2.000 €/an impozitat anual versus aceeași sumă lăsată să compună 20 de ani la 7%, diferența cumulată din simpla amânare a impozitului pe dividende se traduce frecvent în <strong>mii până la zeci de mii de euro</strong> la final, în funcție de cota exactă. La asta adaugi eliminarea birocrației anuale și a riscului de eroare în 20 de declarații succesive.</p>
+
+<h3>Tabel comparativ sintetic (100.000 €, 20 ani, 7% total / 2% dividend)</h3>
+<ul>
+<li><strong>Evenimente fiscale anuale</strong> — A (acumulare/PFA): <em>zero</em>. B (distribuție/broker străin): <em>20 de impozitări pe dividend + 20 de declarații</em>.</li>
+<li><strong>Bază care compune</strong> — A: <em>suma brută integrală</em>. B: <em>suma netă după impozit pe dividend</em>.</li>
+<li><strong>Cash drag operațional</strong> — A: <em>zero (reinvestire internă)</em>. B: <em>prezent (reinvestire manuală cu întârziere + spread/comision)</em>.</li>
+<li><strong>Birocrație</strong> — A: <em>o declarație la vânzare</em>. B: <em>declarație anuală pe toată perioada</em>.</li>
+<li><strong>Risc US estate tax</strong> — A (UCITS IE): <em>eliminat</em>. B: <em>prezent dacă ETF e US-listed extra-UCITS</em>.</li>
+<li><strong>Expunere CASS anuală</strong> — A: <em>doar în anul vânzării</em>. B: <em>potențial în fiecare an cu dividende peste prag</em>.</li>
+</ul>
+<p>Concluzia structurală: pentru <strong>faza de acumulare</strong> a averii, ETF-ul de acumulare câștigă aproape întotdeauna pe randament net după impozit. Distribuția își justifică locul în <strong>faza de consum</strong> (pensionare, venit pasiv recurent), unde cash-flow-ul predictibil contează mai mult decât maximizarea compounding-ului net.</p>
+
+<h2>UCITS vs extra-UCITS: stratul fiscal pe care îl ratează majoritatea</h2>
+<p>Un ETF UCITS (domiciliat de regulă în Irlanda sau Luxemburg) și unul extra-UCITS (tipic US-listed) nu se compară doar la cota de impozit personal, ci la trei straturi simultane:</p>
+<ul>
+<li><strong>Reținerea la sursă în fond:</strong> UCITS irlandez beneficiază de tratatul SUA–Irlanda (15% pe dividende americane vs 30% standard). Câștigul de eficiență se vede direct în randamentul fondului, înainte să ajungă la tine.</li>
+<li><strong>Reținerea la distribuție către tine:</strong> UCITS irlandez nu reține nimic la distribuția către nerezidenți — deci la varianta de distribuție eviți pasul de credit fiscal extern și riscul de surplus nerecuperabil. Extra-UCITS US-listed poate reține 15% (cu W-8BEN) sau 30% (fără), pe care apoi trebuie să-l creditezi corect.</li>
+<li><strong>Riscul de succesiune (US estate tax):</strong> activele americane directe ale unui nerezident peste un prag de scutire foarte mic (de ordinul a 60.000 USD în active situate în SUA) pot fi lovite cu cote care urcă spre 40%. Un ETF UCITS irlandez este o unitate de fond irlandeză, nu o acțiune americană — deci acest risc dispare complet. Majoritatea investitorilor români îl ignoră.</li>
+</ul>
+<p>Regula practică: <strong>verifică ISIN-ul.</strong> Prefixul <strong>IE</strong> (Irlanda) este standardul pentru expunere globală/SUA optimizată fiscal pentru un rezident român. Un ETF US-listed (extra-UCITS) este aproape întotdeauna inferior pe net-după-impozit și pe risc de succesiune, oricât de mic ar fi comisionul de administrare afișat.</p>
+
+<h2>Broker rezident vs broker străin: cine plătește prețul birocrației</h2>
+<p>Decizia de broker nu schimbă natura fiscală a ETF-ului, dar schimbă radical <strong>cine calculează, declară și suportă erorile</strong>:</p>
+<ul>
+<li><strong>Intermediar român (cu reținere la sursă):</strong> reține și virează impozitul pe câștig în numele tău — <strong>3% pentru dețineri de peste 1 an, 6% sub 1 an</strong> — aplică diferențierea pe perioada de deținere și raportează. Avantaj: zero birocrație personală, zero risc de eroare în Declarația Unică, plus cote nominale mai mici decât cei 16% de la broker străin. Dezavantaj: <strong>nu poți compensa pierderile</strong> (impozitul se aplică pe fiecare câștig, indiferent de tranzacțiile în pierdere), ofertă de ETF-uri uneori mai limitată și costuri de tranzacționare potențial mai mari — componentă de cost total proprietate ETF 2026.</li>
+<li><strong>Broker străin (fără reținere română):</strong> primești câștigul brut și ești <strong>integral responsabil</strong> de Declarația Unică și plata către ANAF — cota este <strong>16% pe câștigul net anual</strong>, dar cu un avantaj real: poți compensa pierderile și le poți reporta 5 ani, ceea ce la intermediarul rezident (3%/6% reținut la sursă) nu se poate. Avantaj suplimentar: acces complet la gama UCITS și comisioane mici. Dezavantaj: 20 de ani de declarații, calcul de credit fiscal extern și risc de penalități la orice eroare. Pentru un ETF de distribuție, asta înseamnă declarație în fiecare an, nu doar la vânzare.</li>
+</ul>
+<p>Arbitrajul real: combinația optimă pentru faza de acumulare este de regulă <strong>ETF UCITS irlandez de acumulare + broker european low-cost</strong> — pentru că acumularea elimină evenimentele fiscale anuale, deci dezavantajul birocratic al brokerului străin aproape dispare (declari doar la vânzare). Combinația cea mai proastă este <strong>ETF extra-UCITS de distribuție prin broker străin</strong>: withholding suboptim + declarații anuale + risc de succesiune + credit fiscal de revendicat manual.</p>
+
+<h2>Capcane subtile la nivel avansat</h2>
+<ul>
+<li><strong>CASS-ul invizibil:</strong> un portofoliu de distribuție care generează dividende peste pragul anual te poate împinge în baza CASS în fiecare an, în timp ce un portofoliu de acumulare declanșează CASS doar în anul vânzării — și poți chiar planifica anul realizării ca să gestionezi pragul.</li>
+<li><strong>Reinvestirea netă confundată cu cea brută:</strong> mulți investitori cred că reinvestesc „tot" dividendul. Reinvestesc suma netă după impozit — diferența pierdută compune împotriva lor 20 de ani.</li>
+<li><strong>PFA tratată ca scutire automată:</strong> PFA-ul nu reduce cota pe câștigul de capital al ETF-ului. Beneficiul vine din cheltuieli deductibile și structura contribuțiilor, nu din magie fiscală — și vine cu risc de recalificare dacă activitatea nu e coerentă.</li>
+<li><strong>Creditul fiscal extern nerevendicat:</strong> la ETF-uri extra-UCITS de distribuție, withholding-ul de 15% deja reținut trebuie creditat în Declarația Unică. Cine nu-l revendică plătește efectiv dublu.</li>
+<li><strong>Confundarea comisionului de administrare (TER) cu costul fiscal total:</strong> un ETF cu TER cu 0,05% mai mare dar UCITS irlandez Acc bate ușor un US-listed mai ieftin, odată ce incluzi withholding, succesiune și impozit amânat.</li>
+<li><strong>Optimizarea greșită a fazei:</strong> a alege distribuție în faza de acumulare (generezi impozit anual evitabil) sau acumulare în faza de consum (ești forțat să vinzi unități pentru cash, declanșând câștig de capital la momente nepotrivite).</li>
+</ul>
+
+<h2>Checklist de acțiune</h2>
+<ul>
+<li>Stabilește <strong>faza</strong>: acumulare → ETF de acumulare (Acc); consum/venit pasiv → distribuție. Nu inversa.</li>
+<li>Verifică <strong>ISIN-ul</strong>: prioritizează prefixul <strong>IE</strong> (UCITS irlandez) pentru expunere globală/SUA; evită extra-UCITS US-listed pentru deținere pe termen lung.</li>
+<li>Alege brokerul conștient: intermediar român (zero birocrație, reținere la sursă) vs broker european low-cost (tu declari în Declarația Unică). Cu acumulare, dezavantajul brokerului străin aproape dispare.</li>
+<li>Dacă ai dividende cu reținere externă, <strong>revendică creditul fiscal extern</strong> cu documente justificative — nu-l lăsa pe masă.</li>
+<li>Modelează <strong>CASS</strong>-ul (10%): estimează dacă veniturile anuale din investiții (distribuție) trec pragul de intrare de 6 salarii minime (~24.300 lei în 2026) și în ce treaptă (6/12/24) cazi; acumularea îți dă control asupra anului de declanșare.</li>
+<li>Nu folosi PFA ca pretext fiscal pentru ETF-uri dacă nu ai activitate economică reală — beneficiul pe câștigul de capital este iluzoriu și riscul de recalificare e real.</li>
+<li>Lucrează cu cotele verificate pentru <strong>2026</strong>: dividende 16%, câștig de capital la intermediar rezident 3% (peste 1 an) / 6% (sub 1 an) reținut la sursă, broker străin 16% autodeclarat cu report de pierdere, CASS 10% peste pragul de 6 salarii minime — nu calcula pe cifrele de dinainte de Legea 141/2025.</li>
+<li>Calculează <strong>cost total proprietate</strong>: TER + spread + comisioane + withholding + impozit personal + cost birocratic, nu doar TER-ul afișat.</li>
+<li>Păstrează arhiva: extrase broker, certificate de reținere, dovezi de cost de achiziție — fără ele, orice optimizare pică la control.</li>
+</ul>

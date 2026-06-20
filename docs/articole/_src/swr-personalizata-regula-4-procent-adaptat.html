@@ -1,0 +1,135 @@
+<p>O <strong>SWR personalizată regula 4% adaptat profil FIRE</strong> nu se citește dintr-un tabel de manual, ci se <em>calculează</em> pe propriul tău portofoliu: rulezi 100 (sau 10.000) de scenarii Monte Carlo pe alocarea ta reală, cu inflația leului și cu structura ta de cheltuieli, și extragi rata de retragere care îți dă <strong>90% probability of success</strong>. Asta înseamnă, în lecția de față, să treci de la „regula de 4%" ca dogmă la un <strong>safe withdrawal rate calculator</strong> propriu, calibrat pe durata ta de viață, nu pe a unui pensionar american din 1994.</p>
+
+<p>Ai învățat deja din lecțiile de bază de ce 3% vs 4% vs 5% withdrawal nu sunt interschimbabile, ce este riscul de secvență și cum funcționează un coș de numerar. Aici mergem mai adânc: construim împreună modelul probabilistic, definim o <strong>dynamic SWR FIRE</strong> cu guardrails strategy FIRE (Guyton-Klinger), așezăm un sistem floor and ceiling spending FIRE și calibrăm un SWR pe portofolii imixte (acțiuni globale + titluri de stat în lei + imobiliar), citit corect ca SWR pe durată viață. Vei vedea exact ce input-uri intră în simulare, cum interpretezi rata de succes și unde se ascund capcanele care fac un model frumos pe Excel să mintă.</p>
+
+<p>Contextul e România 2026: randamente reale în lei, fiscalitate ANAF pe retrageri, dobânzi Tezaur/Fidelis și o inflație care nu seamănă cu cea din SUA. La final ai un protocol pas-cu-pas ca să-ți rulezi singur testul și un checklist de validare. Numărul care iese e al tău — și, spre deosebire de „4%", îl poți apăra cu o distribuție de probabilitate.</p>
+
+<h2>De ce Monte Carlo bate orice „rată din tabel"</h2>
+
+<p>Regula de 4% clasică (Bengen / Trinity Study) e un rezultat <strong>istoric și determinist</strong>: ia secvențele reale de randamente americane 1926-1995, le testează pe ferestre de 30 de ani și raportează ce rată a supraviețuit în cele mai proaste cazuri. Două limite o fac periculoasă pentru un FIRE românesc timpuriu: folosește un singur istoric (SUA) și un singur orizont (30 de ani).</p>
+
+<p>Monte Carlo rezolvă altfel problema. În loc de o singură linie istorică, <strong>generezi mii de viitoruri posibile</strong>: la fiecare an extragi un randament dintr-o distribuție (medie, volatilitate, eventual corelații între clase de active), aplici retragerea, ajustezi cu inflația, și vezi dacă portofoliul ajunge la zero înainte de finalul orizontului. Repeți de 10.000 de ori. <strong>Probability of success = procentul de simulări în care nu rămâi fără bani.</strong> O țintă de 90% înseamnă: în 9 din 10 viitoruri plauzibile, capitalul ține până la capăt.</p>
+
+<p>Diferența practică e uriașă. Un istoric îți spune „a mers". O distribuție îți spune <em>cât de des</em> merge și cât de urât e când nu merge. Pentru cineva care iese din câmpul muncii la 42 de ani și are nevoie ca banii să țină 50 de ani, „a mers o dată în SUA" nu e o garanție — o rată de succes de 90% pe propriul portofoliu, da.</p>
+
+<h3>Ce input-uri intră efectiv în simulare</h3>
+
+<ul>
+<li><strong>Randament real așteptat per clasă de activ</strong> (nu nominal — Monte Carlo pe SWR se rulează aproape întotdeauna în termeni reali, ca să nu te încurci cu inflația). Repere prudente 2026 în lei: acțiuni globale ~4-5% real; titluri de stat în lei ~0,5-2% real (dobândă nominală 6,5-7,5% minus inflația de lucru); imobiliar de randament ~2-3% real net de impozite și vacanțe locative.</li>
+<li><strong>Volatilitatea</strong> fiecărei clase (deviația standard anuală). Acțiunile globale: ~15-18%. Obligațiunile/titlurile de stat: mult mai mică, ~3-6%. Volatilitatea e cea care „omoară" prin riscul de secvență, nu media.</li>
+<li><strong>Inflația de lucru.</strong> Pentru lei, 3,5-5% e prudent (peste ținta BNR de ~2,5% ±1pp), pentru că media istorică a leului e mai ridicată. Poți chiar modela inflația ca variabilă aleatoare proprie.</li>
+<li><strong>Orizontul</strong> în ani (până la 90-95 de ani, prudent).</li>
+<li><strong>Cheltuielile anuale nete</strong> și partea flexibilă vs. rigidă din ele.</li>
+<li><strong>Regula de retragere</strong>: fixă indexată, procent din sold, sau guardrails (vezi mai jos). Aceasta schimbă dramatic rezultatul.</li>
+</ul>
+
+<h2>Cum citești corect „90% probability of success"</h2>
+
+<p>Aici e prima capcană subtilă. O rată de succes de 90% pe 50 de ani <strong>nu</strong> e echivalentă cu 90% pe 30 de ani — pe orizont mai lung, fiecare procent de SWR „costă" mai mult în rată de succes. De aceea aceeași țintă de 90% îți dă SWR-uri diferite în funcție de orizont:</p>
+
+<ul>
+<li><strong>Orizont 30 de ani</strong>, portofoliu 60/40: 90% success cade de regulă în jurul a <strong>3,8-4,2%</strong> SWR de pornire.</li>
+<li><strong>Orizont 40 de ani</strong>: 90% success coboară spre <strong>3,4-3,8%</strong>.</li>
+<li><strong>Orizont 50 de ani</strong> (FIRE la 40-45): 90% success se așază tipic la <strong>3,0-3,4%</strong>, apropiindu-se de „rata perpetuă" (trăiești aproape exclusiv din randamentul real).</li>
+</ul>
+
+<p>A doua capcană: <strong>ce înseamnă „eșec"</strong> în modelul tău. Eșecul matematic (cont la zero) e brutal și ireversibil — dar în viața reală nimeni nu retrage rigid până la ultimul leu fără să reacționeze. De aceea un model care presupune retragere fixă subestimează sever rata reală de succes a unei persoane flexibile. Cu guardrails și flexibilitate, aceeași rată de pornire poate avea 95%+ success, nu 85%. Pe scurt: <strong>nu compara mere cu pere</strong> — o rată de succes are sens doar împreună cu regula de retragere care a generat-o.</p>
+
+<p>A treia capcană: <strong>nu țintești 100%</strong>. O rată de succes de 100% pe model înseamnă, aproape sigur, că lași la moarte un capital enorm neconsumat — adică ai muncit ani în plus degeaba sau trăiești sub posibilități. Ținta sănătoasă pentru FIRE e <strong>85-95%</strong>, cu un plan documentat de ajustare pentru scenariile rele. 90% e echilibrul bun: rezistă la stres fără să te condamne la frugalitate inutilă.</p>
+
+<h2>Guardrails strategy FIRE: cum transformi 90% în 95%+ gratuit</h2>
+
+<p>Metoda Guyton-Klinger e cea mai puternică pârghie dintr-un dynamic SWR FIRE, pentru că schimbă modelul din „retragere oarbă" în „retragere reactivă". Mecanismul, calibrat pentru un FIRE românesc:</p>
+
+<ul>
+<li><strong>Rata de pornire</strong>: pornești mai agresiv decât ți-ar permite modelul rigid — de exemplu 4,5-5%, nu 3,3%.</li>
+<li><strong>Banda superioară (capital preservation)</strong>: dacă rata efectivă (suma retrasă ÷ valoarea curentă) urcă cu peste ~20% față de țintă — pentru că portofoliul a scăzut — <strong>tai retragerea cu 10%</strong>.</li>
+<li><strong>Banda inferioară (prosperity)</strong>: dacă rata efectivă scade cu peste ~20% sub țintă (portofoliul a crescut mult), <strong>îți mărești retragerea cu 10%</strong>.</li>
+<li><strong>Regula inflației</strong>: în orice an în care portofoliul a scăzut, <strong>nu indexezi cu inflația</strong>. Pare mic, dar compus pe anii de stres e decisiv.</li>
+</ul>
+
+<p>În simulările Monte Carlo, adăugarea acestor guardrails ridică rata de succes a unei rate de pornire „prea mari" cu 5-15 puncte procentuale, exact pentru că elimină scenariile de eșec catastrofal (cele în care vindeai la minim, an după an). Costul: venitul tău fluctuează. De aceea guardrails se cuplează cu floor and ceiling.</p>
+
+<h2>Floor and ceiling spending FIRE: podea garantată, plafon flexibil</h2>
+
+<p>Sistemul floor & ceiling rezolvă problema umană a guardrails-urilor („ce fac dacă îmi taie modelul venitul cu 10% într-un an prost?"). Îți împarți cheltuielile în două:</p>
+
+<ul>
+<li><strong>Podeaua (floor)</strong> — traiul de bază negociabil zero: locuință, utilități, mâncare, sănătate, asigurări. Aceasta o acoperi din <strong>surse stabile, necorelate cu bursa</strong>: titluri de stat Tezaur/Fidelis, depozite (FGDB până la 100.000 EUR/bancă), și mai târziu pensia de stat / Pilon II-III. Podeaua trebuie să fie sigură <em>indiferent</em> de ce face piața.</li>
+<li><strong>Plafonul (ceiling)</strong> — lifestyle-ul discreționar: concedii, mașină, restaurante, upgrade-uri. Acesta se finanțează din partea de acțiuni/ETF și <strong>flotează cu piața</strong>: în anii buni cheltuiești spre plafon, în anii proști cobori spre podea.</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> Buget total 72.000 lei/an (6.000/lună). Podea = 45.000 lei/an (esențial). Plafon = 72.000 lei/an. Felia variabilă e 27.000 lei. Într-un crash, poți comprima până la 45.000 lei (−37,5% din buget) fără să atingi traiul de bază. În Monte Carlo, modelarea acestei comprimări mută o rată de succes de la, să zicem, 84% la peste 95% — pentru că simularea „știe" că în anii catastrofali retragi mai puțin.</p>
+
+<h3>Dimensionarea podelei în lei (2026)</h3>
+
+<p>Dacă podeaua ta e 45.000 lei/an și o vrei acoperită din randament real sigur, ai nevoie de o felie de titluri de stat/depozite care să o susțină. La un randament real de ~1,5% pe partea sigură, podeaua „perpetuă" ar cere 45.000 / 0,015 = 3.000.000 lei doar pentru floor — nerealist. De aceea floor-ul practic e <strong>un coș scalonat pe 5-10 ani</strong> (un fel de „bond ladder" Tezaur/Fidelis), nu un capital perpetuu: îți acoperă podeaua până când partea de acțiuni își revine și o reumple.</p>
+
+<h2>SWR pe portofolii imixte: corelații și rebalansare</h2>
+
+<p>Un safe withdrawal rate pe portofolii imixte (acțiuni globale + obligațiuni/titluri în lei + imobiliar) nu e media SWR-urilor componentelor. Ce contează în Monte Carlo e <strong>cum se mișcă împreună</strong>:</p>
+
+<ul>
+<li><strong>Acțiuni + titluri de stat</strong>: tradițional slab corelate sau anticorelate — exact ce vrei, pentru că în crash-ul de acțiuni titlurile țin (sau cresc), oferind din ce retrage fără să vinzi acțiuni la minim. Asta ridică SWR-ul sustenabil.</li>
+<li><strong>Riscul valutar</strong>: dacă cheltuiești în lei dar ai active globale în EUR/USD, adaugi volatilitate valutară. Modeleaz-o sau acoper-o parțial — felia care plătește podeaua e bine să fie în lei (Tezaur, Fidelis RON).</li>
+<li><strong>Imobiliarul de randament</strong> aduce cash-flow necorelat cu bursa (chirie), dar e nelichid și are propriile riscuri (vacanță, întreținere, impozit local). În model îl tratezi ca venit relativ stabil care reduce retragerea din portofoliul lichid — nu ca activ ușor de lichidat la nevoie.</li>
+<li><strong>Rebalansarea</strong> e parte din strategia de retragere: retragi preferențial din clasa care a crescut, vinzi „scump" și menții alocarea-țintă. În Monte Carlo, o regulă de rebalansare anuală + retragere din clasa supraponderată adaugă tipic câteva zecimi de procent la SWR-ul sustenabil.</li>
+</ul>
+
+<h2>Fiscalitatea ANAF 2026: SWR-ul se calculează NET</h2>
+
+<p>Modelul tău trebuie să retragă <strong>brut</strong> suma care, după impozite și contribuții, îți lasă cheltuielile nete. Repere România 2026 (verifică mereu la sursă, ANAF/legislația în vigoare):</p>
+
+<ul>
+<li><strong>Câștiguri de capital</strong> prin intermediari fiscali din România (brokeri cu reținere la sursă): cote reduse, cu tratament mai favorabil pentru deținerile peste un an — relevant pentru un portofoliu de retragere pe termen lung.</li>
+<li><strong>Dividende</strong>: impozit reținut la sursă, plus posibil CASS dacă veniturile din investiții depășesc plafoanele anuale raportate la salariul minim. Un venit FIRE bazat pe dividende mari poate atrage CASS suplimentar.</li>
+<li><strong>CASS pe investiții</strong>: se datorează la plafoane raportate la 6, 12 și 24 de salarii minime brute. Dacă retragerile generează venituri din investiții peste aceste praguri, datorezi CASS la nivelul plafonului atins — bugeteaz-o explicit în model.</li>
+<li><strong>Titluri de stat Tezaur</strong>: dobânda este scutită de impozit — avantaj real pentru felia de floor.</li>
+</ul>
+
+<p><strong>Impactul pe capital-țintă</strong>: dacă ai nevoie net de 72.000 lei și efortul fiscal mediu pe retrageri e ~8-14%, trebuie să retragi brut ~78.000-82.000 lei. La un SWR de 3,3%, asta urcă capitalul-țintă de la 2,18M la ~2,42-2,49M lei. Rulează Monte Carlo pe suma <em>brută</em>, altfel rata de succes e fictiv de optimistă.</p>
+
+<h2>Protocol pas-cu-pas: rulează-ți cele 100 (sau 10.000) de scenarii</h2>
+
+<ol>
+<li><strong>Definește orizontul</strong>: vârsta de ieșire → ani până la 90-95. Ex.: ieșire la 45 → 50 de ani.</li>
+<li><strong>Inventariază portofoliul imixt</strong>: ponderi reale acțiuni globale / titluri în lei / imobiliar / cash, și pentru fiecare estimează randament <em>real</em> și volatilitate (vezi reperele de mai sus).</li>
+<li><strong>Stabilește cheltuielile NETE</strong> și împarte-le în podea (esențial) și plafon (discreționar). Adaugă marja fiscală pentru a obține retragerea brută.</li>
+<li><strong>Alege regula de retragere</strong>: începe cu fixă indexată ca referință pesimistă, apoi rulează din nou cu guardrails Guyton-Klinger + floor/ceiling.</li>
+<li><strong>Rulează simularea</strong>: minim 1.000 de iterații (10.000 e ideal) pe orizontul tău. Folosește un calculator de SWR Monte Carlo (de tip Portfolio Visualizer, ficalc, sau un model propriu în Excel/Python cu randamente extrase din distribuția aleasă).</li>
+<li><strong>Caută SWR-ul la 90% success</strong>: pornește de la o rată, citește rata de succes, ajustează în sus/jos până ajungi la ținta de 90%. Aceea e SWR-ul tău de bază.</li>
+<li><strong>Testează robustețea</strong>: rulează și pe scenarii istorice reale dure (2000-2002, 2008, stagflația anilor '70) și pe o inflație de lucru mai mare cu 1-2pp. Dacă rata de succes nu se prăbușește, ești solid.</li>
+<li><strong>Convertește în capital-țintă</strong>: cheltuieli brute / SWR găsit, plus coșul de criză (2-5 ani de cheltuieli în Tezaur/Fidelis/depozite), separat de portofoliul investit.</li>
+<li><strong>Documentează regulile de ajustare</strong>: praguri guardrails exacte, ce tai din plafon la −20% piață, când sari peste indexarea cu inflația.</li>
+<li><strong>Reevaluează anual</strong> și după orice mișcare majoră de piață — Monte Carlo nu e un calcul unic, ci un instrument de recalibrare.</li>
+</ol>
+
+<h2>Greșeli frecvente care fac modelul să mintă</h2>
+
+<ul>
+<li><strong>Randamente nominale într-un model „real".</strong> Amesteci 7% nominal cu inflație ascunsă și obții un SWR fals de mare. Lucrează consecvent în termeni reali.</li>
+<li><strong>Volatilitate prea mică.</strong> Dacă subestimezi deviația standard a acțiunilor, modelul ascunde tocmai riscul de secvență care te omoară. Folosește 15-18% pentru acțiuni globale, nu 8%.</li>
+<li><strong>Țintă de 100% success.</strong> Te condamnă la a muri cu un capital uriaș neconsumat. 85-95% e zona rațională.</li>
+<li><strong>Retragere rigidă în model, flexibilitate în viață (sau invers).</strong> Modelezi pesimist și apoi îți negi propria flexibilitate — sau modelezi optimist guardrails pe care nu ai disciplina să le aplici. Fii consecvent cu ce vei face real.</li>
+<li><strong>Ignori fiscalitatea și CASS.</strong> Rulezi pe sume nete și descoperi la pensie că retragerea brută reală sparge modelul.</li>
+<li><strong>Distribuție normală fără „fat tails".</strong> Crash-urile reale sunt mai dese și mai severe decât prezice o normală. Adaugă scenarii istorice dure ca verificare.</li>
+<li><strong>Un singur run.</strong> 100 de scenarii dau o estimare zgomotoasă; pentru o cifră stabilă de probabilitate, rulează 10.000.</li>
+</ul>
+
+<h2>Checklist: SWR-ul tău validat probabilistic</h2>
+
+<ul>
+<li>☐ Am orizontul real (până la 90-95 ani) și l-am introdus în model.</li>
+<li>☐ Am randament real și volatilitate pentru fiecare clasă din portofoliul imixt.</li>
+<li>☐ Folosesc inflația de lucru a leului (3,5-5%), nu cifre din SUA.</li>
+<li>☐ Am separat cheltuielile în podea (esențial) și plafon (discreționar).</li>
+<li>☐ Am adăugat marja fiscală ANAF (impozit + CASS) → retragere brută.</li>
+<li>☐ Am rulat ≥1.000 iterații (ideal 10.000) și am citit rata de succes.</li>
+<li>☐ Am calibrat SWR-ul la 90% probability of success, nu la 100%.</li>
+<li>☐ Am rulat și cu guardrails Guyton-Klinger + floor/ceiling și am comparat.</li>
+<li>☐ Am stress-testat pe 2000-2002, 2008 și o inflație +1-2pp.</li>
+<li>☐ Am un coș de criză de 2-5 ani în Tezaur/Fidelis/depozite, separat.</li>
+<li>☐ Am reguli scrise de ajustare și un calendar de reevaluare anuală.</li>
+</ul>
+
+<p>Independența financiară matură nu se sprijină pe o cifră învățată dintr-un titlu, ci pe o <strong>distribuție de probabilitate calculată pe viața ta</strong>. „4%" e ipoteza nulă. Rata ta — extrasă din 10.000 de viitoruri pe propriul portofoliu, în lei, cu fiscalitatea ta și cu guardrails care o apără — e răspunsul pe care îl poți susține în fața celui mai prost an din carieră. Aceea e diferența dintre a spera că ești liber și a ști, cu 90% probabilitate, că ești.</p>

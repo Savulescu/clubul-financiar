@@ -1,0 +1,125 @@
+<p>Bugetul indexare IPC EURIBOR ajustare automată înseamnă să încetezi să mai rescrii manual cheltuielile la fiecare val de scumpiri și să construiești un buget dinamic atașat indicilor economici care chiar îți erodează puterea de cumpărare. În loc să ghicești cu cât a crescut viața, legi fiecare categorie de cheltuieli de variabila macro care o mișcă: IPC sectorial pentru consum, EURIBOR pentru datoriile cu dobândă variabilă, iar cursul EUR/RON pentru tot ce e importat sau denominat în euro. Diferența dintre inflația reală vs oficială impactul asupra bugetului devine astfel un parametru pe care îl controlezi, nu o surpriză la final de lună.</p>
+
+<p>Această lecție duce mai departe ce ai învățat în „Buget anti-inflație 2026" și „Cum se măsoară inflația în România (IPC, INS)". Presupun că deja știi ce e IPC-ul, cum îl publică INS-ul și de ce coșul mediu nu e coșul tău. Aici trecem la nivelul avansat: ajustare cheltuieli după curs EUR și dobânzi prin formule concrete, calcul categorie de buget corelat macro și protecție putere cumpărare buget avansat — cu cifre reale pentru România 2026, praguri și un model de recalculare automată pe care îl poți rula în orice spreadsheet.</p>
+
+<p>Ideea centrală: un buget bun nu are „o rată a inflației", ci un vector de indici. Mâncarea ta crește cu IPC alimentar, rata la credit cu EURIBOR sau IRCC, abonamentele SaaS și vacanțele cu cursul EUR, iar economiile trebuie să bată media ponderată a tuturor. Hai să construim mecanismul.</p>
+
+<h2>De ce un singur procent de inflație îți distruge bugetul</h2>
+
+<p>Capcana clasică a bugetarului intermediar este să ia IPC-ul total anual comunicat de INS (un singur număr) și să-l aplice uniform pe toate categoriile. Problema: structura ta de consum nu seamănă cu coșul mediu pe care e calculat IPC-ul național. Dacă tu cheltui 35% din venit pe locuire și energie, dar coșul INS pune locuirea la ~17-20%, inflația ta personală poate fi cu câteva puncte procentuale peste cea „oficială" — exact fenomenul de inflație reală vs oficială.</p>
+
+<p>Soluția avansată este să-ți construiești un <strong>IPC personal ponderat</strong>: iei subindicii sectoriali pe care INS îi publică lunar (mărfuri alimentare, mărfuri nealimentare, servicii) și îi ponderezi cu structura ta reală de cheltuieli, nu cu cea medie națională.</p>
+
+<h3>Formula IPC-ului personal</h3>
+
+<p>Pentru fiecare categorie <em>i</em> din bugetul tău, cu ponderea <em>w<sub>i</sub></em> (cât % din cheltuieli reprezintă) și variația ei sectorială anuală <em>π<sub>i</sub></em>:</p>
+
+<ul>
+<li><strong>Inflația ta personală = Σ (w<sub>i</sub> × π<sub>i</sub>)</strong></li>
+</ul>
+
+<p>Exemplu numeric concret. Presupunem o familie cu cheltuieli lunare de 8.000 lei, structurată astfel, cu variații sectoriale ipotetice pe ultimele 12 luni (verifică valorile curente pe insse.ro, secțiunea IPC):</p>
+
+<ul>
+<li>Alimente: 30% pondere × inflație alimentară (să zicem 6%) = 1,80 puncte</li>
+<li>Locuire + utilități: 25% × 8% (energie încă volatilă post-plafonare) = 2,00 puncte</li>
+<li>Transport/combustibil: 15% × 4% = 0,60 puncte</li>
+<li>Servicii (sănătate, educație, telecom): 20% × 7% = 1,40 puncte</li>
+<li>Diverse/nealimentar: 10% × 3% = 0,30 puncte</li>
+</ul>
+
+<p>Inflația personală = 1,80 + 2,00 + 0,60 + 1,40 + 0,30 = <strong>6,10%</strong>. Dacă IPC-ul oficial total ar fi, de exemplu, 5,0%, această familie pierde anual <strong>1,1 puncte procentuale de putere de cumpărare în plus</strong> față de ce „spune statistica" — adică ~88 lei/lună sau ~1.056 lei/an pe care un buget indexat la cifra oficială nu i-ar fi compensat.</p>
+
+<h2>EURIBOR și IRCC: indexarea părții de datorii</h2>
+
+<p>Partea de venit care merge spre rate nu se ajustează cu IPC, ci cu rata dobânzii de referință a creditului tău. Aici trebuie să distingi clar trei regimuri în România 2026:</p>
+
+<ul>
+<li><strong>Credite în lei cu IRCC</strong>: indicele de referință pentru creditele de consum și majoritatea ipotecarelor noi în lei. IRCC se actualizează trimestrial și reflectă, cu decalaj, tranzacțiile interbancare din trimestrul anterior. Decalajul de ~2 trimestre e cheia: când BNR mișcă dobânda de politică monetară, IRCC-ul tău o simte abia peste 3-6 luni.</li>
+<li><strong>Credite în euro</strong> (mai rare azi, dar existente la refinanțări sau leasing): indexate la <strong>EURIBOR</strong> (de regulă EURIBOR 3M sau 6M) plus marja băncii. Aici intri pe dublă expunere: rata de dobândă <em>și</em> cursul EUR/RON.</li>
+<li><strong>Credite vechi cu ROBOR</strong>: dacă mai ai un contract pre-2019 nemigrat, încă depinzi de ROBOR. Majoritatea au fost migrate la IRCC, dar verifică-ți contractul.</li>
+</ul>
+
+<h3>Formula de stres pentru rata variabilă</h3>
+
+<p>Pentru un credit cu sold <em>S</em>, marjă fixă <em>m</em> și indice de referință <em>r</em>, rata lunară aproximativă la o durată rămasă <em>n</em> luni se recalculează ori de câte ori se schimbă <em>r</em>. Ce te interesează în buget nu e rata exactă, ci <strong>sensibilitatea</strong>: cu cât crește rata dacă indicele urcă cu 1 punct procentual.</p>
+
+<p>Regula practică: pentru un credit ipotecar pe ~25 de ani, fiecare <strong>+1 p.p. la indicele de referință crește rata lunară cu aproximativ 6-7%</strong>. Exemplu: la un sold de 300.000 lei și o rată curentă de 1.900 lei/lună, o creștere a IRCC cu 1,5 p.p. îți poate adăuga aproximativ 170-200 lei/lună la rată. Bugetul tău trebuie să aibă această linie pre-calculată ca scenariu, nu să o descopere când vine notificarea de la bancă.</p>
+
+<h2>Cursul EUR/RON: indexarea cheltuielilor importate</h2>
+
+<p>O parte din bugetul tău e denominată implicit în euro, chiar dacă plătești în lei: abonamente software internaționale, electronice, vacanțe externe, combustibil (prețul țițeiului e în dolari/euro), o parte din alimentele de import. RON-ul a fost relativ stabil în jurul pragului de 5 lei/euro în banda gestionată de BNR, dar nu fix — o dereglare de câțiva bani la curs se propagă în prețuri cu decalaj de săptămâni.</p>
+
+<p>Pentru categoria „cheltuieli sensibile la curs", formula de ajustare e directă:</p>
+
+<ul>
+<li><strong>Cost ajustat = Cost de bază × (Curs nou / Curs de referință)</strong></li>
+</ul>
+
+<p>Exemplu: ai 600 lei/lună de cheltuieli efectiv legate de euro la un curs de referință de 5,05. Dacă RON-ul slăbește la 5,15 (~+2%), bugetul acelei categorii trebuie să urce automat la 600 × (5,15/5,05) ≈ <strong>612 lei</strong>. Pare puțin, dar pe an înseamnă ~144 lei și, mai important, te avertizează că o eventuală depreciere de 5-6% (scenariu de criză valutară) ți-ar adăuga ~30-36 lei/lună <em>doar</em> pe această felie.</p>
+
+<h2>Construirea bugetului dinamic: matricea indice-categorie</h2>
+
+<p>Esența unui buget dinamic atașat indicilor economici este o <strong>matrice de mapare</strong>: fiecare categorie de cheltuială primește un „driver" macro și un coeficient de transmisie (cât din variația indicelui ajunge efectiv în cheltuiala ta). Acesta e cel mai important tabel pe care îl vei avea.</p>
+
+<ul>
+<li><strong>Alimente</strong> → driver: IPC alimentar (INS) → coeficient transmisie: ~1,0</li>
+<li><strong>Utilități/energie</strong> → driver: IPC servicii energie + politica de plafonare → coeficient: variabil, 0,7-1,0</li>
+<li><strong>Rată credit lei</strong> → driver: IRCC (cu decalaj de 1 trimestru) → coeficient: 1,0 pe partea variabilă</li>
+<li><strong>Rată credit euro/leasing</strong> → driver: EURIBOR × curs EUR → coeficient: 1,0</li>
+<li><strong>Software/streaming/import</strong> → driver: curs EUR/RON → coeficient: ~1,0</li>
+<li><strong>Vacanțe externe</strong> → driver: curs EUR (sau alt curs destinație) → coeficient: 1,0</li>
+<li><strong>Combustibil</strong> → driver: preț Brent × curs + accize → coeficient: ~0,5-0,7</li>
+<li><strong>Servicii locale (frizer, reparații)</strong> → driver: IPC servicii (urmărește salariile) → coeficient: ~0,8</li>
+</ul>
+
+<p>Coeficientul de transmisie e ce separă bugetarul avansat de cel naiv: nu tot ce crește în indice ajunge 1:1 la tine. Combustibilul, de exemplu, are o componentă mare de accize fixe în lei, deci o creștere de 10% a țițeiului nu îți crește factura cu 10%, ci cu poate 5-7%.</p>
+
+<h3>Formula de recalculare lunară automată</h3>
+
+<p>Pentru fiecare categorie, noua sumă bugetată se calculează ca:</p>
+
+<ul>
+<li><strong>Buget<sub>luna nouă</sub> = Buget<sub>bază</sub> × [1 + (Δindice × coeficient transmisie)]</strong></li>
+</ul>
+
+<p>Într-un spreadsheet, pui pe coloane: suma de bază, indicele-driver, valoarea de referință a indicelui, valoarea curentă, coeficientul de transmisie, iar într-o singură formulă obții bugetul ajustat. Actualizezi doar valorile curente ale indicilor (5-6 numere) o dată pe lună sau pe trimestru, și întreg bugetul se rescrie singur. Acesta e mecanismul de ajustare automată — nu mai negociezi cu tine fiecare categorie.</p>
+
+<h2>Indexarea veniturilor și a economiilor: cealaltă jumătate</h2>
+
+<p>Un buget indexat pe cheltuieli, dar cu venituri și economii neindexate, e doar jumătate de protecție. Trei mecanisme avansate:</p>
+
+<ul>
+<li><strong>Salariul</strong>: dacă nu ai clauză de indexare cu inflația în contract, negocierea anuală trebuie să țintească <em>cel puțin inflația ta personală</em> (6,10% în exemplul de mai sus), nu IPC-ul oficial. Vino la discuția salarială cu cifra ta, calculată, nu cu cea din presă.</li>
+<li><strong>Economiile de siguranță</strong>: fondul de urgență își pierde valoarea dacă stă în cont curent. Ținta minimă de randament = inflația ta personală. Instrumentele lichide cu protecție în România 2026 includ depozitele la termen (verifică DAE curentă), titlurile de stat Fidelis/Tezaur (cupon fix cunoscut, scutite de impozit pe dobândă la persoane fizice) și fondurile monetare.</li>
+<li><strong>Componenta de inflație-hedge</strong>: titlurile de stat indexate la inflație, dacă sunt disponibile în emisiunile curente, leagă direct randamentul de IPC. Pentru expunerea EUR, o felie din portofoliu denominată în euro acoperă natural cheltuielile tale legate de curs.</li>
+</ul>
+
+<p>Regula de aur a indexării complete: <strong>randamentul net al economiilor ≥ media ponderată a tuturor indicilor care îți mișcă cheltuielile</strong>. Dacă inflația ta personală e 6,1% și un depozit îți dă, de exemplu, 5% brut (din care banca reține la sursă impozitul pe venitul din dobânzi, cota standard de 10% în România 2026), randamentul net real e negativ și de fapt sărăcești încet, chiar dacă „economisești".</p>
+
+<h2>Capcane subtile la nivel avansat</h2>
+
+<ul>
+<li><strong>Decalajul de transmisie</strong>: IRCC se mișcă cu ~2 trimestre întârziere față de politica monetară, iar prețurile de raft urmează cursul cu săptămâni-luni de decalaj. Dacă indexezi instant, supra-reacționezi. Folosește valorile <em>publicate</em> ale indicilor, nu anticipări.</li>
+<li><strong>Dubla numărare EURIBOR + curs</strong>: la un credit în euro, dacă aplici separat creșterea EURIBOR <em>și</em> deprecierea cursului ca două ajustări independente, le poți suprapune greșit. Rata în lei = (sold × dobândă în euro) × curs — ajustează-le împreună, multiplicativ, nu aditiv.</li>
+<li><strong>Coeficientul de transmisie 1,0 implicit</strong>: presupunerea că orice creștere de indice ajunge integral la tine umflă artificial bugetul și te face să tai prea agresiv. Calibrează coeficienții pe datele tale reale din ultimele 12 luni.</li>
+<li><strong>IPC oficial ca ancoră a negocierii salariale</strong>: angajatorii citează IPC-ul oficial; tu trebuie să vii cu IPC-ul personal, demonstrat numeric, mai ales dacă ai pondere mare pe locuire/energie.</li>
+<li><strong>Indexarea pe vârful de ciclu</strong>: dacă recalibrezi referințele indicilor exact pe un maxim conjunctural (ex. spike energetic), îți „îngheți" un buget umflat. Folosește medii pe 12 luni pentru valorile de referință, nu valori spot.</li>
+</ul>
+
+<h2>Pași de implementare (checklist)</h2>
+
+<ul>
+<li><strong>1.</strong> Extrage structura ta reală de cheltuieli pe ultimele 6-12 luni și calculează ponderile <em>w<sub>i</sub></em> pe categorii (nu folosi coșul INS).</li>
+<li><strong>2.</strong> Atribuie fiecărei categorii un driver macro (IPC sectorial, IRCC, EURIBOR, curs EUR, Brent) din matricea de mapare.</li>
+<li><strong>3.</strong> Stabilește coeficientul de transmisie pe baza istoricului tău (nu presupune 1,0 peste tot).</li>
+<li><strong>4.</strong> Fixează valorile de referință ale indicilor ca medii pe 12 luni, nu valori spot, pentru a evita ancorarea pe vârf.</li>
+<li><strong>5.</strong> Construiește formula <em>Buget<sub>nou</sub> = Buget<sub>bază</sub> × [1 + (Δindice × coef)]</em> în spreadsheet, o linie per categorie.</li>
+<li><strong>6.</strong> Pre-calculează scenariul de stres: +1,5 p.p. IRCC și -5% RON simultan — cât crește bugetul total?</li>
+<li><strong>7.</strong> Calculează inflația ta personală ponderată și compar-o cu IPC-ul oficial; diferența e ținta ta de protecție.</li>
+<li><strong>8.</strong> Setează randamentul-țintă al economiilor ≥ inflația personală, net de impozit pe dobândă.</li>
+<li><strong>9.</strong> Programează o recalculare lunară: actualizezi 5-6 valori de indici, bugetul se rescrie singur.</li>
+<li><strong>10.</strong> Revizuiește ponderile și coeficienții o dată pe an — structura ta de consum se schimbă.</li>
+</ul>
+
+<p>Un buget indexat corect nu îți spune doar cu cât au crescut prețurile; îți spune <em>care</em> indice ți-a făcut rău și cu cât, transformând inflația dintr-o forță difuză într-un set de parametri pe care îi monitorizezi și îi acoperi deliberat. Asta e diferența dintre a reacționa la scumpiri și a le anticipa.</p>
