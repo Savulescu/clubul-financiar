@@ -1,0 +1,146 @@
+<p>Întrebarea care separă analistul de specialist nu este <em>cum</em> creează banca centrală bani, ci <em>de ce nu îi poate controla</em>. Teoria <strong>money multiplier fractional reserve banking România</strong> pe care ai învățat-o — banca centrală injectează bază monetară, băncile o multiplică printr-un coeficient fix dictat de rezerve minime obligatorii BNR — este, în formularea ei mecanicistă, falsă. Nu aproximativă: falsă în sensul cauzal. Băncile comerciale nu așteaptă rezerve ca să dea credit; ele creează depozite <em>ex nihilo</em> când acordă împrumutul, iar rezervele le procură ulterior. Acest detaliu de secvențiere răstoarnă arhitectura prin care îți imaginezi <strong>multiplicatorul banilor economia</strong> reală îl produce și explică de ce eficacitatea controlului monetar BNR prin dobândă este mult mai slabă decât sugerează modelele de manual.</p>
+
+<p>În această lecție disecăm cantitativ <strong>credit creation mechanismul</strong> real, măsurăm <strong>leverage bancar sistemul</strong> românesc prin raportul base money vs broad money M3, calculăm multiplicatorul efectiv ex-post (nu cel teoretic), și legăm tema <strong>expansiune creditară și inflație</strong> de ciclurile 2008, 2015 și 2022. Vom trata rezervele minime obligatorii BNR ca pe un cost, nu ca pe un plafon, vom evalua controlul monetar BNR eficacitate prin instrumentele macroprudențiale, și vom arăta de ce volatilitatea EUR/RON este simptomul unei mase monetare endogene pe care nicio bancă centrală nu o pilotează direct.</p>
+
+<p>Presupun stăpânite: contabilitatea în partidă dublă a bilanțului bancar, distincția outside/inside money, mecanica IRCC vs ROBOR, și transmisia ratei de politică monetară. Mergem direct la modele.</p>
+
+<h2>Multiplicatorul de manual vs. multiplicatorul observat: o discrepanță de ordin de mărime</h2>
+
+<p>Modelul exogen clasic postulează M = (1/r) × B, unde r este rata de rezervă și B baza monetară. Cu rezervele minime obligatorii BNR la <strong>8% pentru pasivele în lei</strong> și <strong>5% pentru pasivele în valută</strong> cu scadență sub 2 ani (nivelurile reduse succesiv din maximul istoric de 18% lei / 40% valută din 2008-2009), multiplicatorul „teoretic" maxim ar fi 1/0,08 = 12,5. Acesta este numărul pe care îl recită manualele.</p>
+
+<p>Acum măsurăm realitatea. Raportul corect este multiplicatorul M3, definit ca:</p>
+
+<ul>
+<li><strong>m = M3 / B</strong>, unde B = bază monetară (numerar în circulație + rezerve ale instituțiilor de credit la BNR)</li>
+<li>M3 al României se situează în zona <strong>700-740 miliarde lei</strong> la finele lui 2025 (agregatul larg, incluzând depozite la termen sub 2 ani și instrumente negociabile)</li>
+<li>Baza monetară se află în jur de <strong>180-200 miliarde lei</strong></li>
+</ul>
+
+<p>Rezultă m ≈ 3,7-3,9. Nu 12,5. Cu alte cuvinte, <strong>multiplicatorul banilor economia</strong> reală îl generează este mai puțin de o treime din plafonul de manual. Discrepanța nu este o eroare de calibrare a coeficientului de rezervă — este dovada că relația cauzală e inversată. Dacă multiplicatorul ar fi un parametru tehnologic fix derivat din r, el ar trebui să fie stabil. În realitate, multiplicatorul efectiv a oscilat masiv: a urcat în expansiunea 2005-2008, s-a prăbușit în 2009-2012 (deleveraging, deși r-ul a fost <em>redus</em> de BNR — exact invers față de predicția modelului), și a fluctuat cu cererea de credit, nu cu oferta de rezerve.</p>
+
+<h3>De ce coeficientul de rezervă nu este un plafon</h3>
+
+<p>Mecanismul real, în secvență contabilă:</p>
+
+<ul>
+<li><strong>Pasul 1 — acordarea creditului.</strong> Banca X aprobă un credit ipotecar de 500.000 lei. Ea creează simultan, în partidă dublă, un activ (creanța asupra debitorului, 500.000) și un pasiv (depozitul la vedere al debitorului, 500.000). Niciun depozit preexistent nu a fost „împrumutat mai departe". Banii au apărut prin tastarea înregistrării. Acesta este <strong>credit creation mechanismul</strong> în forma sa pură.</li>
+<li><strong>Pasul 2 — procurarea rezervelor.</strong> Când debitorul transferă cei 500.000 către vânzătorul imobilului, care are cont la banca Y, banca X trebuie să decontoze prin rezervele de la BNR. Dacă nu le are, le împrumută pe piața interbancară (la ROBOR) sau de la BNR prin facilitatea de creditare (lombard, la rata de politică +1 punct procentual — în 2026 rata de politică monetară fiind <strong>6,50%</strong>, deci lombard la 7,50%).</li>
+<li><strong>Pasul 3 — rezerva minimă.</strong> Cei 8% se aplică <em>ex-post</em> mediei depozitelor pe perioada de aplicare. Banca nu este blocată de rezervă; este penalizată cu un cost de finanțare dacă i-a creat depozite pentru care trebuie să găsească rezerve scumpe.</li>
+</ul>
+
+<p>Concluzia operațională: rezervele minime obligatorii BNR funcționează ca o <em>taxă</em> proporțională pe expansiunea bilanțului, nu ca un <em>plafon</em> cantitativ. BNR remunerează rezervele obligatorii la o rată sub cea de politică (istoric, dobânda la RMO în lei a fost mult sub rata-cheie), creând un cost de oportunitate. Constrângerea reală a creditării este capitalul reglementat (Basel III / CRR), nu rezervele.</p>
+
+<h2>Constrângerea adevărată: capitalul, nu rezervele</h2>
+
+<p>Dacă rezervele nu plafonează creditul, ce o face? Răspunsul de specialist: cerințele de capital. Sub CRR/CRD în vigoare în 2026, o bancă din România trebuie să mențină:</p>
+
+<ul>
+<li><strong>CET1 minim 4,5%</strong> din activele ponderate la risc (RWA)</li>
+<li><strong>Tier 1 total 6%</strong>, fonduri proprii totale <strong>8%</strong></li>
+<li><strong>Amortizor de conservare a capitalului 2,5%</strong></li>
+<li><strong>Amortizor anticiclic (CCyB)</strong> setat de BNR — element-cheie, ridicat la <strong>1%</strong> aplicabil din octombrie 2023, calibrat ulterior, instrument macroprudențial activ pentru a tempera expansiunea creditară</li>
+<li><strong>Amortizor pentru risc sistemic și O-SII</strong> pentru băncile sistemice</li>
+</ul>
+
+<p>Aici se află adevăratul „multiplicator". Pentru un credit ipotecar rezidențial cu garanție eligibilă, ponderea de risc poate coborî spre 35% sub abordarea standard. Modelul de leverage devine:</p>
+
+<ul>
+<li>Capacitatea maximă de active ponderate la risc = Fonduri proprii / Cerința totală de capital</li>
+<li>Cu o bancă având 10 miliarde lei capital reglementat și o cerință efectivă (cu amortizoare) de ~13%, capacitatea RWA ≈ 10 / 0,13 ≈ <strong>76,9 miliarde lei</strong></li>
+<li>Aplicând o pondere medie de risc de 50% pe portofoliu, expunerea brută (activul nominal) ≈ 76,9 / 0,50 ≈ <strong>153,8 miliarde lei</strong></li>
+<li>Leverage efectiv pe acest exemplu ≈ 15,4×</li>
+</ul>
+
+<p><strong>Leverage bancar sistemul</strong> este, prin urmare, guvernat de raportul capital/RWA și de ponderile de risc, nu de 1/r. BNR controlează creditul mult mai eficient prin CCyB, prin limitele DSTI (rata de îndatorare maximă <strong>40% din venitul net</strong> pentru credite în lei, <strong>20%</strong> pentru valută, conform Regulamentului BNR nr. 17/2012 cu modificările ulterioare) și prin LTV, decât prin rata de dobândă sau rezervele.</p>
+
+<h3>Edge-case: de ce reducerea RMO în criză nu repornește creditul</h3>
+
+<p>În 2009-2012, BNR a redus dramatic RMO pentru a elibera lichiditate. Creditul nu a repornit. Modelul exogen ar fi prezis o explozie de M3 (mai multă bază liberă × multiplicator). În schimb, multiplicatorul s-a contractat. Motivul: în recesiune, constrângerea nu e oferta de rezerve, ci (a) cererea solvabilă de credit colapsată, (b) capitalul erodat de provizioane pe credite neperformante (NPL-urile au depășit 20% în 2014), și (c) aversiunea la risc. Rezervele „eliberate" au stat ca exces nefolosit. Aceasta este capcana lichidității în formă bancară: poți împinge rezerve, nu poți forța credit creation.</p>
+
+<h2>Endogenitatea banilor și de ce inflația scapă controlului prin dobândă</h2>
+
+<p>Dacă masa monetară este creată de băncile comerciale în funcție de cererea de credit profitabil, atunci BNR nu controlează cantitatea de bani — controlează doar <em>prețul</em> rezervelor marginale (rata de politică). Transmisia spre M3 trece printr-un lanț lung și elastic:</p>
+
+<ul>
+<li>Rata de politică (6,50% în 2026) → ROBOR/IRCC → costul creditului nou → cererea de credit → expansiunea bilanțurilor bancare → M3 → cerere agregată → inflație</li>
+</ul>
+
+<p>Fiecare verigă are elasticitate sub 1 și întârzieri (lag-uri de 4-6 trimestre). De aceea BNR poate ține rata la 6,50% și totuși inflația IPC să rămână peste țintă (ținta este <strong>2,5% ±1 punct procentual</strong>; inflația anuală a fost în 2025 în zona 4,5-5,5%, presată de scoaterea plafonării la energie, ajustări fiscale TVA și salariu minim). Dobânda lovește marginea, nu stocul.</p>
+
+<h3>Modelul cantitativ al transmisiei slabe</h3>
+
+<p>Fie ΔCredit_nou = sensibilitatea cererii × Δrată. Empiric pentru România, o creștere de 100 puncte de bază a ratei reduce fluxul de credit nou cu un ordin de 3-6% pe orizont anual — modest, fiindcă:</p>
+
+<ul>
+<li>O parte semnificativă a stocului de credite ipotecare este la dobândă fixă inițial sau legată de IRCC (care e o medie trimestrială întârziată a tranzacțiilor, deci se mișcă lent — IRCC din 2026 reflectă mediile din trimestrele anterioare)</li>
+<li>Creditul corporativ în valută scapă parțial ratei în lei (de aici legătura cu EUR/RON)</li>
+<li>Statul, prin emisiuni masive de titluri pentru un deficit bugetar care a depășit <strong>8% din PIB în 2024</strong> și a rămas ridicat în 2025-2026, injectează cerere și „crowd-in" prin cheltuială, contracarând restrictivitatea monetară</li>
+</ul>
+
+<p>Rezultatul: politica monetară restrictivă coexistă cu fiscalitate expansionistă, iar M3 continuă să crească pentru că creditul guvernamental și cel în valută nu răspund la rata în lei. Base money vs broad money M3 diverg: BNR poate ține baza strânsă, dar broad money e dictat de comportamentul de creditare.</p>
+
+<h2>Cele trei cicluri de credit: 2008, 2015, 2022</h2>
+
+<p>Aplicăm modelul endogen pe istoria recentă.</p>
+
+<h3>2008 — expansiunea exogenă valutară</h3>
+
+<ul>
+<li>Boom-ul a fost alimentat de credit creation în valută (EUR și CHF), finanțat din liniile băncilor-mamă străine. Creditul în valută a atins ~60% din total. RMO la valută era 40% — un nivel exorbitant — și totuși nu a oprit expansiunea, fiindcă finanțarea venea din afara perimetrului de rezerve al BNR.</li>
+<li>EUR/RON a sărit de la ~3,6 (2007) spre 4,2-4,3 (2009) la oprirea bruscă a fluxurilor. Volatilitatea EUR/RON a fost simptomul colapsului creditării valutare, nu cauza.</li>
+<li>Lecția: multiplicatorul valutar românesc era determinat de bilanțurile grupurilor europene, complet în afara controlului monetar BNR.</li>
+</ul>
+
+<h3>2015 — deleveraging și conversia CHF</h3>
+
+<ul>
+<li>Multiplicatorul s-a comprimat post-criză. Creditul în valută a fost stigmatizat regulator (DSTI 20% pe valută a sufocat oferta). Drama creditelor în CHF (francul a explodat în ianuarie 2015 la abandonarea pragului SNB) a demonstrat că riscul valutar transferat populației era o bombă în bilanțul gospodăriilor, nu al băncilor.</li>
+<li>M3 stagna în ciuda ratei de politică reduse spre minime istorice (1,75% în 2015). Iarăși: ofertă ieftină de rezerve, cerere de credit anemică, multiplicator jos.</li>
+</ul>
+
+<h3>2022 — șocul inflaționist și ciclul de înăsprire</h3>
+
+<ul>
+<li>BNR a urcat rata de la 1,25% (2021) la 7,00% (începutul lui 2023), ulterior coborând spre 6,50%. Inflația IPC a vârfuit la <strong>16,8% în noiembrie 2022</strong>, departe peste orice nivel pe care rata-cheie l-ar fi putut conține prompt.</li>
+<li>Cauza inflației a fost predominant de ofertă (energie, alimente, lanțuri logistice) — exact tipul de șoc față de care dobânda este aproape impotentă. Expansiunea creditară și inflație au fost decuplate temporar: inflația venea din costuri, nu din credit excesiv.</li>
+<li>EUR/RON a fost ținut artificial stabil (managed float strâns, ~4,94-4,98) prin intervenții și ROBOR ridicat care a atras capital, masând volatilitatea — un control de preț, nu de cantitate.</li>
+</ul>
+
+<p>Pattern-ul comun al celor trei cicluri: multiplicatorul efectiv a urmat cererea de credit și starea bilanțurilor, niciodată coeficientul de rezervă. Controlul monetar BNR eficacitate a fost cel mai mare prin instrumente macroprudențiale (DSTI, LTV, CCyB) și prin gestiunea cursului, nu prin rata-cheie sau RMO.</p>
+
+<h2>Reflexivitatea ofertei de rezerve: de ce BNR acomodează, nu plafonează</h2>
+
+<p>Un punct fin pe care îl ratează modelul exogen: banca centrală operează un regim de țintire a ratei, nu a cantității. Asta înseamnă că BNR este obligată să furnizeze rezervele cerute la rata de politică, altfel ROBOR overnight ar exploda peste coridorul de dobândă. Coridorul în 2026 este simetric ±1 punct procentual în jurul ratei-cheie de 6,50% — deci facilitatea de depozit la <strong>5,50%</strong> și cea de creditare (lombard) la <strong>7,50%</strong>. Pentru a ține ROBOR ON în interiorul coridorului, BNR rulează operațiuni repo sau de depozit în funcție de poziția netă de lichiditate a sistemului.</p>
+
+<p>Consecința teoretică e decisivă: dacă banca centrală fixează prețul rezervelor, atunci cantitatea de rezerve devine endogenă — se ajustează la cererea generată de creditare. Inversiunea cauzală e completă. Nu „rezerve → credit", ci „credit → depozite → cerere de rezerve → BNR le furnizează la rata-țintă". Money multiplier-ul, în acest cadru, nu este un multiplicator de cauzalitate, ci un simplu raport contabil ex-post fără conținut de control. Orice strategie de politică monetară care presupune controlul cantitativ al M3 prin baza monetară este, în regimul actual de inflation targeting, inoperantă prin construcție.</p>
+
+<h3>Implicația pentru semnalul ROBOR vs IRCC</h3>
+
+<ul>
+<li><strong>ROBOR</strong> reflectă prompt costul marginal al rezervelor — se mișcă în pas cu rata-cheie și cu tensiunile de lichiditate interbancară.</li>
+<li><strong>IRCC</strong> este o medie trimestrială a tranzacțiilor interbancare efective, publicată cu decalaj — deci stocul de credite ipotecare noi (legate de IRCC din 2019 încoace) răspunde la rată cu întârziere structurală de două-trei trimestre. Aceasta este o sursă suplimentară de slăbire a transmisiei: chiar și creditele cu dobândă variabilă se reașează lent.</li>
+</ul>
+
+<h2>Implicații cantitative pentru specialist</h2>
+
+<p>Cum operaționalizezi acest model în analiză?</p>
+
+<ul>
+<li><strong>Monitorizează fluxul de credit nou, nu stocul.</strong> Variația lunară a creditului neguvernamental (date BNR) este indicatorul avansat al M3, cu lag de ~1 trimestru față de inflația de cerere.</li>
+<li><strong>Urmărește CCyB ca semnal de plafon.</strong> O creștere a amortizorului anticiclic semnalizează că BNR vrea să frâneze leverage-ul — efect mai rapid pe ofertă de credit decât 100 pb pe rată.</li>
+<li><strong>Descompune M3 pe componenta valutară.</strong> Ponderea creditului în valută anticipează sensibilitatea EUR/RON. Sub ~30% (nivelul actual, mult redus față de 2008), șocurile valutare au transmisie internă mai mică.</li>
+<li><strong>Calculează multiplicatorul rulant.</strong> m = M3/B trimestrial; o pantă ascendentă peste 4 cu CCyB neschimbat = avertisment de supraîncălzire pe care rata singură nu o va opri.</li>
+<li><strong>Citește deficitul fiscal ca ofertă de bani.</strong> La un deficit peste 7% din PIB, emisiunile de titluri și cheltuiala publică contracarează restrictivitatea, menținând M3 în creștere indiferent de rata-cheie.</li>
+</ul>
+
+<h2>Checklist operațional al analistului monetar</h2>
+
+<ul>
+<li><strong>Pas 1.</strong> Calculează m = M3/B pe ultimele 8 trimestre și trasează panta — caută divergența față de rata-cheie (semn de endogenitate activă).</li>
+<li><strong>Pas 2.</strong> Verifică nivelul CCyB și anunțurile BNR — instrumentul real de control al expansiunii creditare.</li>
+<li><strong>Pas 3.</strong> Descompune fluxul de credit nou: lei vs valută, gospodării vs corporativ vs guvernamental. Identifică sursa care nu răspunde ratei.</li>
+<li><strong>Pas 4.</strong> Estimează capacitatea de leverage agregată = Fonduri proprii sistem / (cerință capital cu amortizoare); compară cu RWA actuale pentru spațiul de creditare rămas.</li>
+<li><strong>Pas 5.</strong> Cuantifică transmisia: aplică elasticitate 3-6% per 100 pb pe fluxul de credit nou, nu pe stoc, și adaugă lag-ul de 4-6 trimestre.</li>
+<li><strong>Pas 6.</strong> Suprapune deficitul fiscal proiectat — corectează prognoza M3 în sus cu impulsul fiscal dacă deficitul depășește 7% din PIB.</li>
+<li><strong>Pas 7.</strong> Concluzie de poziționare: dacă inflația e de ofertă (energie/fiscal) iar M3 crește din credit guvernamental și valutar, nu te baza pe BNR să o aducă la țintă prin dobândă — orizontul de revenire la 2,5% se extinde, iar volatilitatea EUR/RON rămâne riscul rezidual gestionat administrativ, nu de piață.</li>
+</ul>

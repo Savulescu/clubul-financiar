@@ -1,0 +1,83 @@
+<p>Strategia de <strong>credit default swap CDS basis trading spread</strong> se află la intersecția dintre piața de obligațiuni cash și piața de protecție sintetică, iar la nivel de specialist nu o abordezi ca pe o pariere direcțională pe default, ci ca pe un arbitraj fin pe <strong>baza credit</strong>: diferența dintre spread-ul CDS al unui emitent și spread-ul ajustat (Z-spread sau asset-swap spread) al obligațiunii lui cash. Când cele două diverg fără justificare fundamentală, ai o dislocare exploatabilă.</p>
+
+<p>Pleci de la ce stăpânești deja — cum se construiește spread-ul peste o rată fără risc și cum protejezi un portofoliu cu opțiuni și futures — și treci la nivelul de trader de credit instituțional: <strong>pricing CDS cu formula exactă și componentele de risc</strong>, construcția unei <strong>curbe CDS</strong> ca indicator de stress pe piață, diferența operațională între <strong>single-name CDS și indici (iTraxx, CDX.NA)</strong>, și mecanica unui <strong>basis trade clasic: long credit (obligațiunea cash) plus short CDS</strong> pentru a captura carry pozitiv aproape fără risc direct pe credit. Vom trata și <strong>hedging-ul expunerii la defaultul emitentului</strong> ca soluție alternativă la vânzarea expunerii în criză, când lichiditatea cash dispare dar piața de protecție rămâne tranzacționabilă.</p>
+
+<p>Rigoarea aici este cantitativă: fiecare punct de bază contează, iar profitul vine din modelarea corectă a probabilității de default implicite, a recovery rate-ului și a costului de finanțare al poziției cash. Lucrăm pas cu pas, cu cifre concrete, în contextul pieței 2026.</p>
+
+<h2>Pricing-ul CDS: formula exactă și descompunerea pe componente de risc</h2>
+<p>Un CDS este un swap în care cumpărătorul de protecție plătește un cupon periodic (premium leg) în schimbul unei plăți condiționate la default (protection leg). Convenția post-Big Bang (2009) standardizează cuponul la 100 bps (investment grade) sau 500 bps (high yield), cu upfront care ajustează diferența față de fair spread. Prețul fair al spread-ului se obține egalând valoarea prezentă a celor două picioare.</p>
+<p>Valoarea prezentă a premium leg, pentru un spread <em>s</em>, este:</p>
+<p><strong>PV(premium) = s × Σ [ Δ<sub>i</sub> × DF(t<sub>i</sub>) × Q(t<sub>i</sub>) ]</strong>, unde Δ<sub>i</sub> este fracțiunea de an (Actual/360), DF(t<sub>i</sub>) factorul de discount din curba OIS, iar Q(t<sub>i</sub>) probabilitatea de supraviețuire până la t<sub>i</sub>.</p>
+<p>Valoarea prezentă a protection leg, cu recovery rate <em>R</em> (standard 40% pentru senior unsecured corporate), este:</p>
+<p><strong>PV(protection) = (1 − R) × Σ [ DF(t<sub>i</sub>) × ( Q(t<sub>i−1</sub>) − Q(t<sub>i</sub>) ) ]</strong></p>
+<p>Egalând cele două și rezolvând pentru <em>s</em>, fair spread-ul aproximativ pe un orizont scurt devine relația de credit-triangle:</p>
+<p><strong>s ≈ λ × (1 − R)</strong>, unde λ este hazard rate-ul (intensitatea de default instantanee). Inversând: <strong>λ ≈ s / (1 − R)</strong>. Probabilitatea de supraviețuire pe orizont T sub model cu hazard constant este Q(T) = e<sup>−λT</sup>.</p>
+
+<h3>Exemplu numeric de bootstrapping al probabilității de default</h3>
+<p>Presupunem un emitent corporate cu CDS 5 ani la 250 bps și recovery rate 40%. Hazard rate implicit: λ = 0,0250 / (1 − 0,40) = 0,0417, adică 4,17% pe an. Probabilitatea de supraviețuire la 5 ani: Q(5) = e<sup>−0,0417×5</sup> = e<sup>−0,2083</sup> = 0,8120. Deci probabilitatea cumulativă de default implicită pe 5 ani este 1 − 0,8120 = <strong>18,8%</strong>.</p>
+<p>Acum sensibilitatea care contează în trading: <strong>CS01</strong> (credit spread DV01) — variația valorii poziției la mutarea spread-ului cu 1 bp. Pentru un CDS de 10 mil. EUR notional la 5 ani, risky annuity (suma factorilor discount × supraviețuire × accrual) este tipic ~4,3. CS01 ≈ Notional × RiskyAnnuity × 0,0001 = 10.000.000 × 4,3 × 0,0001 = <strong>4.300 EUR/bp</strong>. Aceasta este unitatea ta de risc: dacă spread-ul se lărgește cu 10 bp, cumpărătorul de protecție câștigă ~43.000 EUR, vânzătorul pierde simetric.</p>
+<p>Componentele de risc pe care le izolezi în pricing sunt: (1) <strong>riscul de spread</strong> — mutarea curbei CDS la recovery constant; (2) <strong>riscul de recovery</strong> — cât din notional pierzi la default, modelat prin recovery rate sensitivity (RecRisk01); (3) <strong>riscul de rată</strong> — discount factor-ul din OIS, de obicei dominat de spread; (4) <strong>riscul de corelație</strong> — relevant doar pe indici și tranșe, nu pe single-name.</p>
+
+<h2>Curba CDS și citirea stress-ului de piață</h2>
+<p>Curba CDS (3M, 6M, 1Y, 3Y, 5Y, 7Y, 10Y) nu e doar input de pricing — este un termometru al riscului de credit perceput. Forma ei spune ce crede piața despre <em>timing-ul</em> defaultului.</p>
+<ul>
+<li><strong>Curbă upward-sloping (normală):</strong> 5Y peste 1Y. Emitent sănătos — riscul de default e împins în viitor. Diferența 5Y−1Y de 60–120 bp e tipică pentru un investment grade solid.</li>
+<li><strong>Curbă flat:</strong> piața vede risc uniform pe orizont — semn de incertitudine sau tranziție de rating.</li>
+<li><strong>Curbă inversată (downward-sloping):</strong> 1Y mult peste 5Y. Semnal de stress acut — piața prețuiește un default <em>iminent</em>. Când 1Y trece de 1.000 bp și depășește 5Y, emitentul e în distress; recovery-ul implicit începe să fie repreciat sub 40%.</li>
+</ul>
+<p>Pe agregat, indicii sunt indicatorii macro: <strong>iTraxx Europe Main</strong> (125 nume IG europene) și <strong>CDX.NA.IG</strong> (125 nume IG nord-americane) la nivel de 50–70 bp semnalează regim calm; peste 120–150 bp indică risk-off; vârfuri de 200+ bp (cum s-a întâmplat în episoadele de criză) marchează panică sistemică. <strong>iTraxx Crossover</strong> (75 nume sub-investment-grade) este barometrul de high yield — în 2026 oscilează tipic în zona 280–380 bp, iar o lărgire bruscă peste 450 bp e semnal de fuga capitalului din credit speculativ.</p>
+
+<h2>Basis trade-ul: definiția exactă a bazei și de ce apare</h2>
+<p>Baza CDS-bond se definește ca: <strong>Basis = CDS spread − Z-spread al obligațiunii cash</strong> (sau, mai precis, asset-swap spread / par-equivalent CDS spread pentru comparabilitate corectă).</p>
+<ul>
+<li><strong>Bază negativă (CDS &lt; spread cash):</strong> protecția e ieftină relativ la randamentul oferit de obligațiune. Aici stă trade-ul clasic — <strong>negative basis trade</strong>: cumperi obligațiunea (long credit, încasezi spread-ul cash) și cumperi protecție CDS (plătești spread-ul CDS, mai mic). Net carry pozitiv, cu riscul de credit teoretic neutralizat: la default încasezi par pe CDS și predai obligațiunea (sau cash settlement la prețul de recovery).</li>
+<li><strong>Bază pozitivă (CDS &gt; spread cash):</strong> protecția e scumpă. Trade-ul invers — short obligațiune (sau short via repo) plus vânzare de protecție — e mai greu de executat din cauza costului de a face short pe credit cash.</li>
+</ul>
+<p>De ce apare baza negativă? Cauze structurale, nu „bani gratis”: presiunea de vânzare a obligațiunilor cash în episoade de deleveraging (care lărgește Z-spread-ul mai repede decât CDS), costul de finanțare/repo al poziției cash, costul de capital reglementar (Basel III) pentru a deține bondul în bilanț, și riscul de bază la default (CTD — cheapest-to-deliver — și diferența dintre recovery-ul fizic și cel teoretic de 40%).</p>
+
+<h3>Construcția pas-cu-pas a unui negative basis trade</h3>
+<p>Date concrete: obligațiune corporate senior, scadență 5 ani, cu Z-spread de 280 bp peste curba swap. CDS 5Y pe același emitent la 230 bp. Baza = 230 − 280 = <strong>−50 bp</strong> (bază negativă, atractivă).</p>
+<ol>
+<li><strong>Long obligațiunea:</strong> cumperi 10 mil. EUR notional. Încasezi cuponul + 280 bp spread peste swap.</li>
+<li><strong>Finanțezi poziția în repo:</strong> dai obligațiunea ca garanție, plătești rata repo. Dacă repo e la OIS + 15 bp, costul de finanțare îți mănâncă 15 bp din carry. Acesta e factorul critic — un repo special (greu de finanțat) poate distruge trade-ul.</li>
+<li><strong>Cumperi protecție CDS:</strong> 10 mil. EUR notional la 230 bp. Plătești 230 bp.</li>
+<li><strong>Carry net = 280 − 230 − 15 (repo) = +35 bp anual</strong>, adică ~35.000 EUR/an pe 10 mil., încasați cu risc de credit neutralizat (long bond + long protection se compensează la default).</li>
+<li><strong>Convergența bazei:</strong> dacă baza revine de la −50 bp spre 0 (CDS urcă sau Z-spread coboară), câștigi suplimentar din mark-to-market: 50 bp × CS01 ≈ 50 × 4.300 = ~215.000 EUR capital gain pe lângă carry.</li>
+</ol>
+<p>Atenție la <strong>jump-to-default (JTD)</strong>: la un default real, încasezi par − recovery pe CDS, dar pierzi (par − recovery) pe obligațiune. Teoretic se anulează, dar diferența de recovery (bondul tău specific vs. cheapest-to-deliver din CDS auction) și accrued-ul pot lăsa un mismatch de câteva puncte. Acesta e riscul rezidual real al trade-ului „fără risc”.</p>
+
+<h2>Single-name vs. index: alegerea instrumentului de hedge</h2>
+<p>Când hedge-uiești expunerea la defaultul unui emitent specific (de exemplu o expunere de obligațiuni sau un credit comercial mare în portofoliu), ai două rute:</p>
+<ul>
+<li><strong>Single-name CDS:</strong> hedge precis, fără basis risk de constituent. Dezavantaj — lichiditate fragmentată, bid-ask larg (5–15 bp pe nume IG, 20–50 bp pe nume distressed), uneori inexistent pentru emitenți mici sau corporate românești (care nu au CDS lichid).</li>
+<li><strong>Index (iTraxx/CDX):</strong> lichid, bid-ask strâns (0,25–0,5 bp pe Main), execuție instant, ideal pentru hedge macro de portofoliu. Dezavantaj — <strong>basis risk de constituent</strong>: indexul mișcă pe sentiment agregat, nu pe povestea idiosincratică a emitentului tău. Hedge imperfect dacă riscul tău e nume-specific.</li>
+</ul>
+<p>Regula de specialist: <strong>hedge idiosincratic → single-name; hedge sistemic/de regim → index</strong>. Pentru un fond cu 40 de poziții de credit, cumperi protecție pe iTraxx Main ca să acoperi beta de credit (riscul de lărgire generală a spread-urilor), apoi suprapui single-name doar pe cele 3–4 nume cu risc de default concentrat. Hedge-ratio-ul pe index se calculează prin <strong>beta-adjustment</strong>: Notional_index = (CS01_portofoliu / CS01_index) × beta, unde beta măsoară cât de mult mișcă spread-ul portofoliului tău relativ la index.</p>
+
+<h3>Soluția alternativă la vânzarea expunerii în criză</h3>
+<p>În stress sever, piața cash de obligațiuni îngheață — bid-ask-urile explodează, lichiditatea dispare, iar a vinde forțat înseamnă a accepta un haircut brutal. Aici CDS-ul devine instrumentul de salvare: <strong>cumperi protecție în loc să vinzi expunerea</strong>. Păstrezi obligațiunea (eviți cristalizarea unei pierderi de lichiditate), dar neutralizezi sintetic riscul de credit. Costul e spread-ul CDS plătit — dar într-o criză, piața CDS rămâne tranzacționabilă când cea cash nu mai e, pentru că nu necesită transfer de principal. Când criza trece, închizi protecția (vânzând CDS-ul) și rămâi cu obligațiunea intactă, fără a fi realizat pierderea de fire-sale.</p>
+
+<h2>Edge-cases și capcane de specialist</h2>
+<ul>
+<li><strong>Recovery risk asimetric:</strong> dacă piața repreciază recovery-ul de la 40% la 20% (emitent în distress), spread-ul CDS sare disproporționat. λ = s/(1−R) — la R mai mic, același λ implică s mai mare. Modelarea cu recovery fix subestimează severitatea în distress.</li>
+<li><strong>Curve roll-down și carry:</strong> pe o curbă upward-sloping, o poziție short protection câștigă din roll-down (spread-ul scade pe măsură ce instrumentul „coboară” curba). Cuantifică-l separat de carry-ul pur.</li>
+<li><strong>Quanto și diferențe de jurisdicție:</strong> CDS în EUR pe un emitent cu datorie în USD introduce risc quanto (corelația FX-default). Relevant pentru sovereign și corporate multi-currency.</li>
+<li><strong>Succession events și CDS orphaning:</strong> la fuziuni/spin-off, ISDA Determinations Committee decide cui „migrează” contractul CDS. Un hedge pe entitatea greșită post-restructurare devine inutil.</li>
+<li><strong>Basis trade și costul de capital:</strong> chiar dacă PnL-ul economic e pozitiv, cerința de capital reglementar (RWA pe bond + counterparty risk pe CDS) poate face trade-ul neeconomic pentru o instituție supravegheată. Pentru un investitor privat sofisticat, accesul la single-name CDS este oricum limitat — piața e OTC, instituțională.</li>
+</ul>
+
+<h2>Aplicabilitate în context România 2026</h2>
+<p>Realist: piața CDS single-name pe emitenți corporate românești nu e lichidă — nu vei tranzacționa CDS pe firme listate la BVB. Ce este relevant și tranzacționabil este <strong>CDS-ul suveran pe România</strong> (5Y), care în 2026 funcționează ca barometru al riscului de țară și se mișcă în relație cu rating-ul (România este la limita inferioară a investment grade, BBB−/Baa3 cu perspectivă monitorizată de Fitch, S&P și Moody's). O lărgire a CDS-ului suveran românesc se transmite direct în spread-ul titlurilor de stat (Fidelis, benchmark-uri în EUR) și în costul de finanțare al întregului sistem.</p>
+<p>Pentru un investitor român sofisticat, utilitatea practică e dublă: (1) <strong>citește CDS-ul suveran RO și iTraxx ca semnale de regim</strong> înainte de a-ți construi expunerea pe obligațiuni — corelat cu deciziile BNR pe dobânda de politică monetară și cu randamentele titlurilor de stat; (2) pentru expunere internațională, accesează indicii CDS (iTraxx/CDX) prin ETF-uri de credit sau instrumente sintetice oferite de brokeri instituționali, ca hedge macro de regim. Tratamentul fiscal al unui eventual câștig din transferul instrumentelor financiare diferă în funcție de intermediar. Printr-un <strong>broker rezident (intermediar autorizat/avizat de ASF)</strong>, impozitul se reține la sursă pe câștigul realizat în cotă de <strong>3%</strong> pentru titlurile deținute peste un an și <strong>6%</strong> pentru cele deținute sub un an (cotele de reținere aplicabile câștigului prin intermediar rezident în 2026). Printr-un <strong>broker nerezident</strong>, câștigul net anual se autodeclară prin Declarația Unică și se impozitează cu <strong>10%</strong>. Pentru instrumente derivate complexe precum CDS-ul, încadrarea concretă depinde de natura instrumentului și de modul de decontare, motiv pentru care confirmarea cu un consultant fiscal este obligatorie înainte de a deschide o astfel de poziție.</p>
+
+<h2>Checklist operațional pentru un basis trade</h2>
+<ol>
+<li><strong>Calculează baza corect:</strong> compară CDS spread cu par-equivalent CDS / asset-swap spread al bondului, nu cu yield-ul brut. Ajustează pentru cupon și convenții de zile.</li>
+<li><strong>Bootstrap hazard rate-ul:</strong> λ = s/(1−R); verifică recovery-ul implicit vs. cel istoric al sectorului. Nu folosi 40% orbește pentru un emitent în distress.</li>
+<li><strong>Cuantifică CS01 și JTD:</strong> dimensionează poziția astfel încât pierderea la default rezidual (mismatch de recovery) să fie sub limita ta de risc.</li>
+<li><strong>Verifică repo-ul bondului:</strong> dacă e special/greu de finanțat, recalculează carry-ul net — un repo scump anulează baza negativă.</li>
+<li><strong>Definește exit-ul:</strong> țintă de convergență a bazei (ex. de la −50 bp la −10 bp) și stop pe lărgire suplimentară (riscul ca baza să devină și mai negativă în deleveraging).</li>
+<li><strong>Monitorizează curba CDS:</strong> inversarea curbei pe numele tău = semnal de distress; reevaluează recovery și ieși înainte de auction.</li>
+<li><strong>Documentează counterparty risk:</strong> protecția CDS valorează doar cât solvabilitatea vânzătorului de protecție — colateralizare zilnică (CSA) obligatorie.</li>
+</ol>
+<p>Mesajul de specialist: basis trading-ul nu produce „profit fără risc” în sens absolut, ci transformă riscul de credit direcțional într-un risc de bază, de recovery și de finanțare — mult mai mic, mai modelabil și mai exploatabil dacă stăpânești fiecare componentă cantitativ. Edge-ul stă în precizia pricing-ului, nu în direcția pariului.</p>

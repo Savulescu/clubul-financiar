@@ -1,0 +1,163 @@
+<p>La nivel de specialist, bugetul personal nu este o listă de categorii cu plafoane fixe, ci un <strong>sistem de cerere</strong> care reacționează predictibil la prețuri și la venit. Construirea unui model de <strong>elasticitate cheltuieli buget model econometric România</strong> înseamnă exact asta: să tratezi fiecare categorie de cheltuială ca pe o funcție de cerere, cu propria elasticitate-venit și propriile cross-price effects bugetare, și să poți rula o simulare a elasticității venit care îți spune, cantitativ, cum se rearanjează întreg bugetul tău sub diverse șocuri economice și șocuri salariale. Este pasul firesc după ce ai internalizat costul de oportunitate pe buget — fiecare cheltuială ca decizie de capital: acum nu mai evaluezi decizii izolat, ci modelezi răspunsul agregat al portofoliului de cheltuieli.</p>
+
+<p>Presupun că stăpânești deja descompunerea pe categorii fixe/variabile, indexarea la inflație și logica de cost de oportunitate marginal. Aici mergem direct în econometria cheltuielilor personale: cum estimezi coeficienți de elasticitate România 2026 cu datele tale, cum separi efectul de venit elasticitate vs preț, cum încorporezi cross-price effects bugetare într-o matrice de substituție și cum derulezi analiza sensibilității buget pe scenarii multi-variabile. Toate calibrate pe contextul RO 2026 — cota unică 10% pe salariu, CASS 10%, CAS 25%, TVA standard 21% și redusă 11% (cu o cotă tranzitorie de 9% rămasă doar pentru anumite locuințe noi până la 31 iulie 2026), IRCC și dobânda de politică monetară BNR — cu marcarea explicită a ipotezelor incerte.</p>
+
+<p>Scopul final: o foaie de calcul în care introduci un șoc (−15% venit net, +20% preț energie, +2 pp IRCC) și obții instantaneu noul vector de cheltuieli optimizat, cu impactul pe rata de economisire și pe runway-ul lichidităților.</p>
+
+<h2>Fundamentul: bugetul ca sistem de ecuații de cerere</h2>
+
+<p>Mărimea centrală este <strong>elasticitatea</strong>, definită ca raport de variații procentuale. Pentru o categorie i, elasticitatea-venit este:</p>
+
+<ul>
+<li><strong>η<sub>i</sub> = (∂C<sub>i</sub>/C<sub>i</sub>) / (∂Y/Y) = (∂ ln C<sub>i</sub>) / (∂ ln Y)</strong> — variația procentuală a cheltuielii i la o variație de 1% a venitului disponibil Y.</li>
+</ul>
+
+<p>Clasificarea operațională a categoriilor decurge direct din semnul și mărimea lui η<sub>i</sub>:</p>
+
+<ul>
+<li><strong>Inelastice (η < 1):</strong> bunuri necesare — chirie/rată, utilități, alimente de bază, asigurări obligatorii. Tipic η ≈ 0,2–0,7. Cresc sub-proporțional cu venitul.</li>
+<li><strong>Elastice (η > 1):</strong> bunuri de lux/discreționare — restaurante, vacanțe, electronice, abonamente premium. Tipic η ≈ 1,3–2,5. Cresc supra-proporțional.</li>
+<li><strong>Inferioare (η < 0):</strong> cheltuieli care SCAD când crește venitul — transport public substituit de mașină/taxi, mâncare ieftină substituită de calitate. Rare dar reale în bugetul personal.</li>
+</ul>
+
+<p>Verificarea de coerență (constrângerea bugetară Engel) este obligatorie: <strong>Σ w<sub>i</sub> · η<sub>i</sub> = 1</strong>, unde w<sub>i</sub> = C<sub>i</sub>/ΣC<sub>j</sub> este ponderea categoriei în cheltuiala totală. Suma elasticităților-venit ponderate cu cota de buget trebuie să dea 1. Dacă în estimarea ta nu dă ~1, ai o eroare de specificare sau o categorie „economisire” pe care ai uitat-o.</p>
+
+<h3>Forma funcțională: de ce alegem Working-Leser</h3>
+
+<p>Pentru date personale (serii lunare scurte, 24–48 de luni), regresia liniară pe niveluri este instabilă. Standardul de specialist este specificația <strong>Working-Leser</strong>, care modelează cota de buget ca funcție liniară de logaritmul cheltuielii totale:</p>
+
+<ul>
+<li><strong>w<sub>i</sub> = α<sub>i</sub> + β<sub>i</sub> · ln(X) + Σ<sub>j</sub> γ<sub>ij</sub> · ln(p<sub>j</sub>) + ε<sub>i</sub></strong></li>
+</ul>
+
+<p>unde X este cheltuiala totală (proxy pentru venitul permanent), p<sub>j</sub> sunt prețurile (proxiate prin subindici IPC ai INS pe grupe), iar elasticitatea-venit se recuperează direct: <strong>η<sub>i</sub> = 1 + β<sub>i</sub>/w<sub>i</sub></strong>. Dacă β<sub>i</sub> > 0, categoria este de lux (cota crește cu bogăția); dacă β<sub>i</sub> < 0, este de necesitate. Este aceeași logică din modelul AIDS (Almost Ideal Demand System) al lui Deaton–Muellbauer, adusă la scara unui singur gospodar.</p>
+
+<h2>Estimarea coeficienților din propriile date</h2>
+
+<p>Nu ai nevoie de un panel național. Ai nevoie de minimum 24 de luni de extras de cont curățat, deduplicat și clasificat pe 6–10 grupe. Procedura:</p>
+
+<ul>
+<li><strong>Pas 1 — Deflatare.</strong> Convertești fiecare cheltuială nominală în lei reali folosind subindicele IPC corespunzător (INS publică lunar grupele: alimentar, nealimentar, servicii). Folosirea IPC general pe toate categoriile este o eroare — energia și serviciile au avut dinamici diferite în 2024–2026.</li>
+<li><strong>Pas 2 — Construirea cotelor.</strong> Calculezi w<sub>i,t</sub> pentru fiecare lună t.</li>
+<li><strong>Pas 3 — Regresia.</strong> Estimezi sistemul Working-Leser prin OLS pe fiecare ecuație (cu corecție SUR — Seemingly Unrelated Regressions — dacă vrei rigoare, fiindcă erorile ε<sub>i</sub> sunt corelate prin constrângerea Σw<sub>i</sub>=1).</li>
+<li><strong>Pas 4 — Impunerea restricțiilor de teorie.</strong> Adunare (Σβ<sub>i</sub>=0, Σα<sub>i</sub>=1), omogenitate (Σ<sub>j</sub>γ<sub>ij</sub>=0) și simetrie Slutsky (γ<sub>ij</sub>=γ<sub>ji</sub>). Fără acestea, modelul tău poate produce elasticități absurde pe extrapolare.</li>
+</ul>
+
+<p><strong>Exemplu numeric concret.</strong> Buget lunar, venit net 8.500 lei (salariu brut ~14.500 lei după cota 10% + CAS 25% + CASS 10%). Cheltuială totală medie X = 7.200 lei. Estimezi din 30 de luni:</p>
+
+<ul>
+<li><strong>Locuire (chirie+utilități):</strong> w = 0,34; β = −0,06 → η = 1 + (−0,06/0,34) = <strong>0,82</strong> (inelastic, necesitate).</li>
+<li><strong>Alimente acasă:</strong> w = 0,22; β = −0,09 → η = 1 − 0,41 = <strong>0,59</strong> (inelastic puternic).</li>
+<li><strong>Restaurante/livrare:</strong> w = 0,11; β = +0,05 → η = 1 + 0,45 = <strong>1,45</strong> (lux).</li>
+<li><strong>Vacanțe/călătorii:</strong> w = 0,08; β = +0,07 → η = 1 + 0,875 = <strong>1,88</strong> (lux puternic).</li>
+<li><strong>Transport:</strong> w = 0,10; β = +0,01 → η = <strong>1,10</strong>.</li>
+<li><strong>Abonamente/discreționar:</strong> w = 0,07; β = +0,03 → η = <strong>1,43</strong>.</li>
+<li><strong>Economisire/investiții (rezidual):</strong> w = 0,08; tratată ca η ≈ 2,5+ (absoarbe surplusul marginal).</li>
+</ul>
+
+<p>Verificare Engel: 0,34·0,82 + 0,22·0,59 + 0,11·1,45 + 0,08·1,88 + 0,10·1,10 + 0,07·1,43 + 0,08·2,5 ≈ 0,279 + 0,130 + 0,160 + 0,150 + 0,110 + 0,100 + 0,200 = <strong>1,13</strong>. Ușor peste 1 — semn că economisirea reziduală e supra-ponderată în η; recalibrezi η<sub>econ</sub> la ~1,9 pentru a închide identitatea. Acest tip de auto-verificare este ce separă modelul de o ghiceală.</p>
+
+<h2>Cross-price effects: matricea de substituție</h2>
+
+<p>Elasticitatea-venit singură ratează jumătate din dinamică. Când prețul energiei crește, nu doar cheltuiala cu utilitățile se mișcă — se rearanjează tot bugetul prin <strong>cross-price effects bugetare</strong>. Elasticitatea încrucișată este:</p>
+
+<ul>
+<li><strong>ε<sub>ij</sub> = (∂ ln C<sub>i</sub>) / (∂ ln p<sub>j</sub>)</strong> — variația % a cheltuielii i la +1% în prețul bunului j.</li>
+<li><strong>ε<sub>ij</sub> > 0:</strong> substitute (energie scumpă → mai puține restaurante, banii migrează spre necesități).</li>
+<li><strong>ε<sub>ij</sub> < 0:</strong> complemente (combustibil scump → mai puține călătorii cu mașina, deci și mai puține cazări).</li>
+</ul>
+
+<p>Recuperarea din coeficienții γ<sub>ij</sub> (forma Marshalliană, neacompensată):</p>
+
+<ul>
+<li><strong>ε<sub>ij</sub> = (γ<sub>ij</sub>/w<sub>i</sub>) − β<sub>i</sub>·(w<sub>j</sub>/w<sub>i</sub>) − δ<sub>ij</sub></strong>, unde δ<sub>ij</sub> este delta Kronecker (1 dacă i=j, 0 altfel).</li>
+</ul>
+
+<p>Pentru elasticitatea-preț proprie (i=j) obții termenul −1 din delta, ceea ce dă tipic ε<sub>ii</sub> negativ (cerere care scade când prețul propriu crește), așa cum cere teoria.</p>
+
+<p>O distincție pe care amatorii o ratează: elasticitatea <strong>Marshalliană</strong> (neacompensată) amestecă efectul de substituție cu efectul de venit, în timp ce cea <strong>Hicksiană</strong> (compensată) izolează doar substituția. Conversia se face prin ecuația Slutsky: <strong>ε<sub>ij</sub><sup>H</sup> = ε<sub>ij</sub><sup>M</sup> + w<sub>j</sub>·η<sub>i</sub></strong>. Pentru decizii bugetare practice — „dacă energia se scumpește 20%, cât pierd din puterea de cumpărare reală?” — vrei versiunea Marshalliană, fiindcă ea include și efectul de sărăcire reală. Pentru a întreba „cât aș substitui dacă aș fi compensat să rămân la aceeași utilitate?” folosești Hicksiana. Modelul tău trebuie să eticheteze clar care e care; confuzia lor produce subestimări de 20–40% ale impactului real al unui șoc de preț.</p>
+
+<h3>Matricea operațională (calibrare RO 2026)</h3>
+
+<p>O matrice 4×4 redusă, suficientă pentru decizii reale. Rândul = categoria afectată, coloana = prețul care se mișcă:</p>
+
+<ul>
+<li><strong>Energie → Energie:</strong> ε ≈ −0,25 (puternic inelastic — nu poți tăia căldura ușor).</li>
+<li><strong>Restaurante → Energie:</strong> ε ≈ +0,30 (substituție defensivă: scumpirea facturilor taie ieșirile).</li>
+<li><strong>Alimente acasă → Restaurante:</strong> ε ≈ +0,40 (substitut clar: gătești mai mult).</li>
+<li><strong>Călătorii → Combustibil:</strong> ε ≈ −0,55 (complement: benzina scumpă ucide road-trip-ul).</li>
+</ul>
+
+<p>Aceste valori sunt ipoteze plauzibile calibrate pe ordinul de mărime din literatura de cerere; pe datele tale le vei estima precis. Le marchez ca ipoteze de lucru, nu ca cifre oficiale.</p>
+
+<h2>Simularea șocurilor: de la coeficienți la scenarii</h2>
+
+<p>Acum modelul devine motor de decizie. Un șoc se propagă astfel: <strong>ΔlnC<sub>i</sub> = η<sub>i</sub>·ΔlnY + Σ<sub>j</sub> ε<sub>ij</sub>·Δlnp<sub>j</sub></strong>. Construiești un vector de șoc și obții vectorul de răspuns.</p>
+
+<h3>Scenariul A — șoc salarial negativ (−15% venit net)</h3>
+
+<p>ΔlnY = ln(0,85) = −0,1625. Cu η-urile estimate:</p>
+
+<ul>
+<li><strong>Locuire:</strong> 0,82·(−0,1625) = −13,3% → de la 2.448 la 2.122 lei. Dar chiria e contractual rigidă pe termen scurt — aici elasticitatea estimată e <em>de echilibru lung</em>; pe 1–3 luni ajustarea reală e ~0 (downward rigidity). Critic de înțeles: η-ul tău e ținta de renegociere/relocare, nu reacția automată.</li>
+<li><strong>Alimente:</strong> 0,59·(−0,1625) = −9,6% → −152 lei.</li>
+<li><strong>Restaurante:</strong> 1,45·(−0,1625) = −23,6% → −187 lei (prima victimă, corect).</li>
+<li><strong>Vacanțe:</strong> 1,88·(−0,1625) = −30,6% → −176 lei.</li>
+<li><strong>Economisire:</strong> 1,9·(−0,1625) = −30,9% → colapsul ratei de economisire, semnalul de alarmă.</li>
+</ul>
+
+<p>Concluzie cantitativă: din cele −1.275 lei pierdute, modelul îți arată că ~63% se absorb din categoriile elastice (lux + economisire) și doar ~37% ating necesitățile. Acesta este <strong>indicele de reziliență bugetară</strong>: cu cât ponderea absorbită de categoriile elastice e mai mare, cu atât bugetul tău e mai rezistent la șocuri fără a atinge nucleul de subzistență.</p>
+
+<h3>Scenariul B — șoc de preț stagflaționist (energie +20%, alimente +8%)</h3>
+
+<p>Venit constant, dar prețuri în sus. Δlnp<sub>energie</sub> = +0,182, Δlnp<sub>alim</sub> = +0,077. Cheltuiala reală cu energia crește (ε proprie −0,25 înseamnă volum −5%, dar valoare = +20%−5% ≈ +14% în lei). Cross-effect: restaurante −0,30·0,182 = −5,5% suplimentar. Bugetul total nominal necesar crește, iar dacă venitul e indexat sub inflație (cazul real 2024–2026, când majorările salariale au rămas frecvent în urma IPC pe energie), suferi o eroziune dublă: șoc de preț + șoc de venit real implicit.</p>
+
+<h3>Scenariul C — șoc de dobândă (IRCC/credite +2 pp)</h3>
+
+<p>Pentru cei cu credit variabil legat de IRCC, +2 pp pe un sold de 300.000 lei înseamnă ~+500 lei/lună la rată. Tratezi rata ca o categorie cu η ≈ 0 (perfect inelastică, obligatorie) și un cross-price effect care „canibalizează” toate categoriile elastice. Modelul îți spune exact câte luni de runway pierzi și ce categorii trebuie comprimate pentru a menține rata de economisire pozitivă.</p>
+
+<p>Subtilitatea de specialist aici e că IRCC este un indice <em>de trimestrul anterior</em> — se actualizează cu lag, deci șocul de dobândă pe care îl modelezi nu e instantaneu, ci sosește cu o întârziere de unul-două trimestre după mișcarea ratei de politică monetară BNR. În motorul de simulare, acest lag se modelează ca un termen autoregresiv pe componenta de rată: Δrată<sub>t</sub> = ρ·Δpolitică<sub>t−2</sub>. Ignorarea lag-ului face ca scenariul tău de stres să fie corect ca magnitudine, dar greșit ca timing — și timing-ul e exact ce determină dacă fondul de urgență acoperă golul până când categoriile elastice se ajustează.</p>
+
+<p>Combinând cele trei șocuri simultan (recesiune tipică: −15% venit + energie scumpă + dobândă în creștere), efectele nu se adună liniar — se compun multiplicativ în spațiul logaritmic. Un buget care rezistă individual la fiecare șoc poate ceda la suprapunere, fiindcă toate categoriile elastice sunt deja comprimate la maximum și nu mai există „pernă” pentru următorul șoc. De aceea analiza de sensibilitate trebuie rulată pe șocuri corelate, nu independente.</p>
+
+<h2>Analiza de sensibilitate și optimizarea sub constrângere</h2>
+
+<p>Pasul de specialist: nu doar simulezi, ci <strong>optimizezi</strong> răspunsul la șoc. Problema este minimizarea pierderii de utilitate la o reducere impusă a cheltuielii totale ΔX. Cu o funcție de utilitate cvasi-liniară și cost de oportunitate marginal egal la optim, regula de tăiere este:</p>
+
+<ul>
+<li><strong>Taie întâi categoriile cu cea mai mare elasticitate-venit ȘI cea mai mică utilitate marginală per leu.</strong> Ordonezi categoriile după raportul η<sub>i</sub>/(utilitate marginală), tai de sus în jos până închizi gap-ul ΔX.</li>
+<li>Constrângere de plafon inferior: fiecare necesitate are un C<sub>i</sub><sup>min</sup> (subzistență) sub care nu cobori — energie minimă, alimente minime, rată. Optimizarea e cu inegalități, rezolvabilă cu un solver simplu (Excel Solver / scipy).</li>
+</ul>
+
+<p>Pentru robustețe, rulezi <strong>Monte Carlo</strong>: extragi 10.000 de combinații de șocuri (ΔY ~ Normal(−5%, 12%), Δp<sub>energie</sub> ~ Normal(8%, 15%), ΔIRCC ~ triunghiular) și obții distribuția ratei de economisire. Metricile de decizie:</p>
+
+<ul>
+<li><strong>P(rata economisire < 0):</strong> probabilitatea de a intra în deficit lunar. Țintă < 10%.</li>
+<li><strong>Economisire la cuantila 5% (VaR bugetar):</strong> scenariul advers — îți spune cât fond de urgență acoperă coada stângă.</li>
+<li><strong>Sensibilitatea (∂economisire/∂Y):</strong> derivata totală, care îți spune cât de „beta” e bugetul tău la venit. Buget bine construit = beta sub 0,5 pe nucleu.</li>
+</ul>
+
+<h2>Edge-cases și capcane de specialist</h2>
+
+<ul>
+<li><strong>Endogenitate venit-cheltuială:</strong> dacă lunile cu venit mare coincid cu evenimente (bonus de Crăciun + vacanță), regresia supraestimează η pe lux. Corecție: variabile dummy sezoniere sau instrumentare cu venit lag-uit.</li>
+<li><strong>Rigiditate descendentă:</strong> elasticitățile estimate sunt simetrice, dar comportamentul real nu e — e mai ușor să crești cheltuiala la +venit decât să o tai la −venit (efect de „cliquet”/lifestyle creep). Estimează separat η<sup>+</sup> și η<sup>−</sup> cu interacțiune pe semnul ΔY.</li>
+<li><strong>Non-staționaritate:</strong> seriile de cheltuieli au trend (inflație) și schimbări de regim (mutare, copil). Testezi staționaritatea (ADF) pe reziduuri; dacă nu, lucrezi în diferențe sau cu break-uri structurale.</li>
+<li><strong>Agregarea cont curent vs realitate:</strong> transferurile între conturi proprii și plățile cu card de credit deplasate temporal pot crea cheltuieli fantomă. Reconciliezi pe bază de cash-flow real, nu pe tranzacții brute.</li>
+<li><strong>Plafonul minim dinamic:</strong> C<sub>i</sub><sup>min</sup> nu e fix — energia minimă iarna ≠ vara. Modelezi subzistența sezonier, altfel optimizarea taie sub prag în lunile reci.</li>
+</ul>
+
+<h2>Checklist de implementare</h2>
+
+<ul>
+<li><strong>1.</strong> Exportă 24–36 luni de extras, clasifică pe 6–10 grupe, deduplică transferurile interne.</li>
+<li><strong>2.</strong> Deflatează fiecare grupă cu subindicele IPC INS corespunzător (nu cu IPC general).</li>
+<li><strong>3.</strong> Construiește cotele w<sub>i,t</sub> și estimează sistemul Working-Leser (OLS pe ecuație, SUR pentru rigoare).</li>
+<li><strong>4.</strong> Recuperează η<sub>i</sub> = 1 + β<sub>i</sub>/w<sub>i</sub> și verifică identitatea Engel Σw<sub>i</sub>η<sub>i</sub> ≈ 1; recalibrează reziduul de economisire.</li>
+<li><strong>5.</strong> Estimează matricea cross-price ε<sub>ij</sub> și impune omogenitatea + simetria Slutsky.</li>
+<li><strong>6.</strong> Codează motorul de șoc ΔlnC<sub>i</sub> = η<sub>i</sub>ΔlnY + Σε<sub>ij</sub>Δlnp<sub>j</sub> într-o foaie de calcul cu vector de input.</li>
+<li><strong>7.</strong> Rulează cele trei scenarii canonice: −15% venit, stagflație preț, +2 pp IRCC.</li>
+<li><strong>8.</strong> Adaugă Monte Carlo (10.000 trageri) și raportează P(deficit), VaR bugetar la 5% și beta-ul de venit.</li>
+<li><strong>9.</strong> Definește C<sub>i</sub><sup>min</sup> sezonier și rulează optimizarea de tăiere sub constrângere.</li>
+<li><strong>10.</strong> Re-estimează trimestrial cu fereastră glisantă; tratează orice η care derivă peste 0,3 pp ca semnal de schimbare de regim de viață.</li>
+</ul>

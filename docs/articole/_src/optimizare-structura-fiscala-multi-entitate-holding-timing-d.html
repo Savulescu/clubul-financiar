@@ -1,0 +1,137 @@
+<p>La nivel de specialist, o <strong>structură fiscală multi-entitate holding dividende timing</strong> nu mai este o chestiune de „PFA vs SRL", ci de proiectare a unui sistem cu 3-5 entități care distribuie venitul pe ani fiscali și linii de impozitare diferite, exact ca un fond care își etalează realizările pe ferestre de optimizare. Aici combinăm <strong>PFA + SRL + holding optimizare</strong> într-o arhitectură consolidată, în care fiecare entitate joacă un rol distinct — generator de venit, container de capitalizare, vehicul de extracție — și în care levierul principal devine <strong>timing dividend tax planning</strong>.</p>
+
+<p>Contextul RO 2026 forțează rescrierea modelelor: impozitul pe dividende a urcat la <strong>16%</strong> de la 1 ianuarie 2026 (după traseul istoric 5% → 8% → 10% → 16%), plafonul de microîntreprindere s-a comprimat la 100.000 EUR și cota de 3% a fost eliminată, rămânând doar 1% pe venit. Trucurile de <strong>cumul impozit pe dividend</strong> pe <strong>retenție sursă 5% vs 10%</strong> aparțin trecutului. Patru pârghii rămân valabile: <strong>transfer pricing legal ANAF</strong> ca instrument de alocare a profitului (nu de evaziune), <strong>microîntreprindere profit non-distribuit</strong> capitalizat fără fricțiune la 1%, scutirea de participații (0% pe segmentul OpCo→HoldCo dacă deținerea ≥10% durează ≥1 an) și evitarea a ceea ce numim <strong>efectul sandwich fiscal</strong>. Toate cifrele sunt 2026; unde legislația lasă marjă, formulăm prudent.</p>
+
+<p>Avertisment metodologic, identic cu doctrina seriei: nicio tehnică de mai jos nu funcționează izolat. Valoarea apare cumulativ, pe ani consecutivi, și exclusiv dacă fiecare entitate trece testul de substanță economică (art. 11 Cod fiscal — antiabuz) și testul prețului de piață pe tranzacțiile intra-grup. Modelăm impactul, nu garantăm rezultatul.</p>
+
+<h2>Topologia structurii: cele cinci roluri funcționale</h2>
+
+<p>Spre deosebire de schema simplă OpCo → HoldCo → persoană fizică, structura de specialist alocă roluri, nu doar entități. Într-o arhitectură matură de 3-5 entități întâlnim:</p>
+
+<ul>
+<li><strong>OpCo (operaționala):</strong> SRL pe profit (16%) sau microîntreprindere (1% pe venit), unde se generează cifra de afaceri reală. Pragul micro 2026 = 100.000 EUR, evaluat la cursul BNR din 31.12.2025; verificați cursul publicat, dar reperul de lucru ≈ 510.000 lei.</li>
+<li><strong>PFA (linia de venit din muncă proprie):</strong> nu un substitut al SRL, ci o linie fiscală paralelă — venit net impozitat cu 10% impozit + CAS și CASS pe baza plafoanelor în salarii minime. Rolul ei strategic este să absoarbă o tranșă de venit personal care nu „contaminează" pragul micro și care folosește o deductibilitate diferită (cheltuieli reale sau cotă forfetară, după caz).</li>
+<li><strong>HoldCo (holdingul):</strong> persoană juridică română care deține ≥10% din OpCo. Dividendul OpCo→HoldCo urcă <strong>integral neimpozabil</strong> (scutire de participații, art. 23 / art. 43 Cod fiscal) dacă pragul de 10% s-a menținut neîntrerupt ≥1 an la data plății. Acesta este stratul de imunitate totală.</li>
+<li><strong>PropCo / AssetCo (containerul de active):</strong> a 4-a entitate, opțională, care deține imobile, IP, echipamente și le închiriază OpCo la preț de piață — mecanism de <strong>transfer pricing legal ANAF</strong> care mută profit din zona de 16% în zona de chirie deductibilă, izolând totodată activele de riscul operațional.</li>
+<li><strong>Persoana fizică (asociatul final):</strong> singurul punct de fricțiune reală — 16% impozit pe dividende + CASS plafonat. Toată arta sequencing-ului constă în a-l atinge rar, controlat și sub praguri.</li>
+</ul>
+
+<p>Diferența de mentalitate față de nivelul avansat: nu mai optimizăm o entitate, ci <strong>alocăm fluxuri</strong> între linii fiscale cu pante marginale diferite. Venitul personal care intră prin PFA suportă 10% + contribuții plafonate; cel care iese ca dividend suportă 16% + CASS plafonat; cel reinvestit prin holding suportă 0% pe segmentul intermediar. Optimizarea = a împinge fiecare leu pe linia cu costul marginal cel mai mic, dată fiind nevoia reală de lichiditate.</p>
+
+<h2>Modelul cantitativ: rata efectivă consolidată pe lanț (RET)</h2>
+
+<p>Definim Rata Efectivă de Taxare consolidată ca raport între totalul prelevărilor (impozit OpCo + impozit dividend + contribuții + impozit PFA) și venitul brut total generat de grup, înainte de orice distribuire. Notăm:</p>
+
+<ul>
+<li><strong>P</strong> = profit brut OpCo (post-cheltuieli, pre-impozit);</li>
+<li><strong>t₀</strong> = cota OpCo (0,01 pe venit pentru micro; 0,16 pe profit pentru SRL standard);</li>
+<li><strong>t_d</strong> = 0,16 impozit pe dividend la extracția finală (2026);</li>
+<li><strong>c</strong> = CASS la nivel persoană fizică, plafonat la 10% × baza, cu plafoane în salarii minime (6 / 12 / 24 SM, după nivelul venitului);</li>
+<li><strong>α</strong> = fracțiunea din profitul cumulat extras către persoana fizică într-un an dat — <strong>levierul de timing</strong>;</li>
+<li><strong>β</strong> = fracțiunea de venit rutată prin PFA (linie paralelă, taxată separat la 10% + CAS/CASS plafonate).</li>
+</ul>
+
+<h3>Scenariul-etalon „naiv" (SRL care distribuie integral)</h3>
+
+<p>SRL pe profit, fără holding, distribuire integrală (α = 1):</p>
+
+<p><strong>Net persoană fizică = P × (1 − 0,16) × (1 − 0,16) = P × 0,7056.</strong> RET ≈ 29,4% (ignorând CASS). Adăugând CASS pe un dividend mare (plafon 24 SM, salariul minim 2026 ≈ 4.050 lei, deci bază plafon ≈ 97.200 lei × 10% = 9.720 lei CASS), RET efectivă urcă spre 30-31% pe distribuiri ample. Acesta este punctul de plecare pe care îl batem.</p>
+
+<h3>Efectul holdingului asupra timing-ului</h3>
+
+<p>Introducem HoldCo. Dividendul OpCo→HoldCo este 0%. Profitul (deja net de t₀) se acumulează în holding. Doar fracțiunea α extrasă către persoana fizică suportă 16% + CASS într-un an dat. RET multi-anuală devine funcție de profilul de extracție {α₁, …, α₁₀}:</p>
+
+<p><strong>RET(10 ani) = [t₀ + (1 − t₀) × ᾱ × (t_d + c_efectiv)] / 1</strong>, unde ᾱ = media ponderată a extracțiilor anuale.</p>
+
+<p>Dacă antreprenorul are nevoie de doar X lei lichiditate personală/an, holdingul calibrează distribuirea exact la X, lăsând surplusul să compună fără cei 16%. Pe profit reinvestit 100% (ᾱ → 0), RET tinde către t₀ singur — adică 16% (SRL) sau ~1% (micro), nu 29,4%.</p>
+
+<h2>Efectul sandwich fiscal: capcana pe care o evităm</h2>
+
+<p><strong>Efectul sandwich fiscal</strong> apare când o entitate intermediară este prinsă între două straturi de impozitare fără a beneficia de scutirea de participații — tipic, un holding care deține sub 10% sau care nu a împlinit anul de deținere la data plății dividendului. În acel caz, dividendul OpCo→HoldCo suportă 16%, apoi extracția HoldCo→persoană fizică suportă din nou 16%: <strong>cumul impozit pe dividend = 1 − (0,84 × 0,84) = 27,4%</strong> doar pe segmentul de transfer, peste t₀. RET sare la ~39%. Sandwich-ul transformă holdingul din avantaj în handicap.</p>
+
+<p>Regula de specialist: <strong>holdingul nu se activează ca rută de distribuire înainte de a fi îndeplinite ambele condiții — ≥10% deținere ȘI ≥12 luni neîntrerupt.</strong> Până atunci, profitul rămâne capitalizat la OpCo sau extras direct, evitând stratul intermediar. Calendarul de constituire al holdingului devine astfel un parametru fiscal, nu administrativ: dacă achiziția participației se face în T1 2026, fereastra de scutire se deschide abia în T1 2027.</p>
+
+<h3>Regula întreprinderilor legate — capcana micro</h3>
+
+<p>Atenție la al doilea sandwich: regula întreprinderilor legate la microîntreprindere. Din 2024-2025, plafonul de 100.000 EUR se evaluează <strong>la nivel de grup de întreprinderi legate</strong>, iar un asociat care deține >25% în mai multe micro poate fi forțat să consolideze. O structură cu 3 micro „surori" deținute de aceeași persoană fizică nu multiplică plafonul — îl cumulează. De aceea separarea acționariatului (PFA pe o linie, holding pe alta, persoane fizice distincte unde substanța o permite) este parte din design, nu cosmetic.</p>
+
+<h2>Transfer pricing legal ANAF: alocarea profitului între linii</h2>
+
+<p>Tranzacțiile intra-grup — chirii PropCo→OpCo, redevențe IP, management fees HoldCo→OpCo, dobânzi la împrumuturi acționar — sunt instrumente legitime de alocare a profitului, cu o singură condiție absolută: <strong>prețul de piață (arm's length)</strong> și dosarul prețurilor de transfer pentru pragurile prevăzute de OPANAF. Un specialist le folosește pentru a muta venit din zona de 16% (profit OpCo) în zone cu tratament diferit:</p>
+
+<ul>
+<li><strong>Chirie PropCo→OpCo:</strong> deductibilă la OpCo (reduce baza de 16%), venit la PropCo. Dacă PropCo e micro pe venit, chiria se taxează la 1% — arbitraj de 15 puncte, complet legal dacă chiria reflectă piața.</li>
+<li><strong>Management fee HoldCo→OpCo:</strong> mută profit în sus, dar atenție — la HoldCo redevine venit impozabil; util doar dacă HoldCo are pierderi de absorbit sau costuri reale de structură.</li>
+<li><strong>Dobândă la împrumut acționar:</strong> deductibilă în limita regulilor de subcapitalizare (deductibilitate limitată a costurilor excedentare ale îndatorării — plafon ATAD ~1.000.000 EUR / 30% EBITDA), venit la persoana fizică taxat 10% — sub cei 16% ai dividendului.</li>
+</ul>
+
+<p>Linia roșie: orice preț în afara intervalului de piață, fără substanță (PropCo fără active reale, management fee fără servicii prestate efectiv), declanșează art. 11 antiabuz și reîncadrarea integrală. Transfer pricing-ul legal mută profit; nu îl face să dispară.</p>
+
+<h2>Studiu de caz numeric: antreprenor cu 600.000 lei profit anual</h2>
+
+<p>Structurăm un caz cu cifre RO 2026. OpCo generează <strong>600.000 lei profit brut anual</strong>. Antreprenorul are nevoie de <strong>180.000 lei/an lichiditate personală</strong>. Comparăm trei arhitecturi pe orizont 5 ani.</p>
+
+<h3>Varianta A — SRL simplu, distribuire integrală</h3>
+
+<ul>
+<li>Impozit profit: 600.000 × 16% = 96.000 lei → profit net 504.000 lei.</li>
+<li>Dividend distribuit integral: 504.000 × 16% = 80.640 lei impozit dividend.</li>
+<li>CASS plafonat (24 SM ≈ 97.200 lei bază): 9.720 lei.</li>
+<li><strong>Total prelevări = 186.360 lei. RET ≈ 31,1%. Net în mână = 413.640 lei/an</strong> — mult peste nevoia de 180.000, deci surplus taxat inutil.</li>
+</ul>
+
+<h3>Varianta B — holding + distribuire calibrată la nevoie</h3>
+
+<ul>
+<li>Impozit profit OpCo: 96.000 lei → 504.000 lei urcă în HoldCo la 0% (scutire participații, an împlinit).</li>
+<li>Extracție calibrată: persoana fizică ridică doar 180.000 lei dividend din HoldCo.</li>
+<li>Impozit dividend: 180.000 × 16% = 28.800 lei; CASS plafonat 9.720 lei.</li>
+<li>Restul de 324.000 lei rămâne capitalizat în holding, disponibil pentru reinvestire (acțiuni BVB, obligațiuni, real estate prin PropCo) <strong>fără cei 16%</strong>.</li>
+<li><strong>Prelevări anul curent = 96.000 + 28.800 + 9.720 = 134.520 lei. RET pe anul curent ≈ 22,4%</strong> vs 31,1% în varianta A — o economie de ~52.000 lei/an, capital care compune.</li>
+</ul>
+
+<h3>Varianta C — holding + PFA + PropCo (structura completă)</h3>
+
+<p>Adăugăm două linii. O parte a activității (consultanță proprie a fondatorului) se facturează prin <strong>PFA</strong>: 120.000 lei venit, taxat 10% impozit + CAS/CASS plafonate (~12 SM) ≈ 9.720 + bază CAS — efectiv ~25-28% pe linia aceasta, dar care <strong>nu trece prin pragul micro și nu suportă dublul strat dividend</strong>. PropCo deține un spațiu și facturează OpCo chirie de piață 60.000 lei/an (deductibilă la OpCo, taxată 1% la PropCo-micro = 600 lei).</p>
+
+<ul>
+<li>Profit OpCo redus de chirie: 600.000 − 60.000 = 540.000 → impozit 16% = 86.400 lei (economie 9.600 lei față de B).</li>
+<li>Chirie taxată la PropCo: 600 lei. Venit PFA taxat separat acoperă o parte din nevoia personală, reducând dividendul necesar de la HoldCo.</li>
+<li>Nevoie de lichiditate acoperită mix: ~90.000 lei net din PFA + dividend redus din HoldCo pentru restul.</li>
+<li><strong>RET consolidată ≈ 21-22%, dar cu diversificare a riscului fiscal pe 3 linii și izolarea activelor în PropCo.</strong></li>
+</ul>
+
+<p>Diferența A vs C pe 5 ani, cu reinvestirea surplusului capitalizat la 6% randament, depășește 350.000 lei valoare terminală — exclusiv din timing și alocare, fără un singur leu de venit suplimentar generat.</p>
+
+<h2>Timing strategic: ferestrele de extracție</h2>
+
+<p>Levierul α nu se aplică uniform. Tehnici de sequencing pentru specialiști:</p>
+
+<ul>
+<li><strong>Front-loading înaintea unei majorări anunțate:</strong> dacă se anunță o nouă creștere a cotei de dividend (cum a fost saltul la 16% din 2026), distribuirea masivă în decembrie anul precedent, la cota veche, este arbitraj pur de calendar — exact ce a recompensat extragerea în 2025 la 10% vs 2026 la 16%.</li>
+<li><strong>Smoothing CASS:</strong> CASS pe dividend este plafonat în trepte (6/12/24 SM). Distribuirea care depășește pragul de 24 SM nu mai adaugă CASS — deci, odată depășit plafonul într-un an, este eficient să se extragă mai mult în acel an decât să se reia plata plafonului în anul următor. Optimizarea CASS favorizează extracții „în valuri", nu liniare.</li>
+<li><strong>Capitalizare micro pe venit:</strong> <strong>microîntreprindere profit non-distribuit</strong> reinvestit beneficiază de 1% la sursă; menținut sub plafon și nedistribuit, costul fiscal pe capitalul de lucru este minim. Distribuirea se amână până când entitatea iese oricum din micro.</li>
+<li><strong>Sincronizarea cu fereastra de participații:</strong> nicio distribuire majoră prin HoldCo în primele 12 luni de la atingerea pragului de 10% — altfel se ratează scutirea și se intră în sandwich.</li>
+</ul>
+
+<h2>Edge-cases și riscuri de specialist</h2>
+
+<ul>
+<li><strong>Reîncadrarea PFA-ului ca activitate dependentă:</strong> dacă PFA facturează un singur client (propriul SRL) cu cele 7 criterii de dependență întrunite, ANAF reîncadrează la salariu — pierzi întreaga eficiență. PFA-ul are nevoie de clienți reali și autonomie.</li>
+<li><strong>Substanța holdingului:</strong> un holding pur pasiv, fără decizii de management documentate, este vulnerabil la art. 11. Minimul de substanță: hotărâri AGA reale, conturi separate, decizii de investiție trasabile.</li>
+<li><strong>Lichidarea și impozitul la dizolvare:</strong> capitalul acumulat în holding nu este „gratuit" la final — la lichidare, surplusul peste aportul de capital se impozitează ca dividend (16%). Timing-ul ieșirii (eșalonat vs. o singură tranșă) contează la fel ca timing-ul intrării.</li>
+<li><strong>Modificări legislative:</strong> structura trebuie să fie robustă la schimbarea cotelor. O arhitectură care depinde critic de cota exactă de 16% este fragilă; una care se bazează pe <em>amânare</em> și <em>scutire de participații</em> rămâne valabilă chiar dacă dividendul urcă la 20%.</li>
+</ul>
+
+<h2>Checklist de implementare</h2>
+
+<ul>
+<li><strong>Pas 1 — Cartografiază fluxurile reale:</strong> separă venitul din muncă proprie (candidat PFA), profitul operațional (OpCo), activele (candidat PropCo) și capitalul de reinvestit (HoldCo). Nu crea entități fără rol funcțional.</li>
+<li><strong>Pas 2 — Verifică pragul micro consolidat:</strong> confirmă că întreprinderile legate nu cumulează peste 100.000 EUR; ajustează acționariatul înainte, nu după.</li>
+<li><strong>Pas 3 — Constituie holdingul cu ≥12 luni înainte de prima distribuire majoră:</strong> înscrie fereastra de scutire de participații în calendar fiscal.</li>
+<li><strong>Pas 4 — Documentează prețurile de transfer:</strong> chirii, management fees, dobânzi la preț de piață; pregătește dosarul pentru pragurile OPANAF.</li>
+<li><strong>Pas 5 — Calibrează α la nevoia reală de lichiditate:</strong> distribuie exact cât consumi personal; restul capitalizează în holding la 0%.</li>
+<li><strong>Pas 6 — Optimizează CASS în valuri:</strong> grupează extracțiile peste plafonul de 24 SM în ani alternativi, nu liniar.</li>
+<li><strong>Pas 7 — Stress-testează la schimbarea cotelor:</strong> recalculează RET la dividend 18-20% și verifică dacă structura rămâne avantajoasă pe amânare, nu pe cota curentă.</li>
+<li><strong>Pas 8 — Validează substanța cu un consultant fiscal:</strong> fiecare entitate trebuie să treacă testul art. 11. Modelarea de mai sus orientează decizia; nu o substituie consultanței profesionale individualizate.</li>
+</ul>

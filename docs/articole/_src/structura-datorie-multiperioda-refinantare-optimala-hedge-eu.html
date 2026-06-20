@@ -1,0 +1,110 @@
+<p>La nivel de specialist, o decizie de <strong>structurare datorie multiperioadă refinanțare EURIBOR</strong> nu se rezolvă cu o foaie de break-even pe un singur credit, ci cu un model integrat de cost efectiv al datoriei pe întreg orizontul de viață al pasivelor. Tratezi portofoliul de datorii exact cum tratează un trezorier de fond pasivul unei companii: o curbă de cost marginal pe perioade, o curbă de randament citită din forward-uri, opțiuni de refinanțare exercitate la praguri și un strat de hedge EURIBOR pentru piciorul în euro. Această lecție îți dă aparatul cantitativ complet — funcția-obiectiv, formulele de actualizare, structura unui cap pe dobândă și regula de arbitraj de dobândă prin timing — pentru a profita din lag-urile de transmisie dintre IRCC, ROBOR și EURIBOR în România 2026.</p>
+
+<p>Presupun internalizate refinanțarea simplă, mecanica IRCC + marjă și calculul DAE. Aici lucrăm strict la nivel de portofoliu: cum citești curba de randament (yield curve), cum decizi optimal când refinanțezi printr-o regulă de opțiune americană, cum construiești un hedge EURIBOR cu opțiuni cap și cum descompui cost efectiv datoriei în componenta de indice, componenta de marjă și componenta de timing. Termenii cheie — curba randament yield curve, arbitraj dobândă timing, opțiuni cap pe dobândă, hedge EURIBOR România 2026 — sunt aici unelte de modelare, nu definiții.</p>
+
+<p>Ancorele numerice de la care pornim, valabile mijlocul lui 2026: rata de politică monetară BNR la <strong>6,50%</strong> (ședința din 6 iunie 2026), ROBOR 3M în jur de <strong>6,85%</strong> și în coborâre, IRCC trimestrial aplicat <strong>5,72%</strong> (T2 2026, indice întârziat), marje ipotecare noi în banda <strong>2,5–4,0%</strong> și DAE rezultat de 8–10%. Pe piciorul euro lucrăm cu un EURIBOR 3M într-o zonă mult mai joasă, în ciclul de relaxare BCE — folosește valoarea de fixing din ziua deciziei, nu o cifră memorată.</p>
+
+<h2>Funcția-obiectiv: cost efectiv al datoriei pe multiperioadă</h2>
+
+<p>Greșeala de amator e să minimizezi rata afișată. Obiectivul corect este minimizarea valorii actualizate a tuturor fluxurilor de serviciu al datoriei, plus costurile de tranzacție ale fiecărei refinanțări, sub constrângeri de lichiditate și de risc de rată. Formal, pentru un portofoliu de <em>N</em> credite și un orizont de <em>T</em> perioade:</p>
+
+<ul>
+<li><strong>Minimizezi</strong> Σ<sub>t=1..T</sub> [ D<sub>t</sub> / (1 + r<sub>t</sub>)<sup>t</sup> ] + Σ<sub>k</sub> [ C<sub>k</sub> / (1 + r<sub>τk</sub>)<sup>τk</sup> ]</li>
+<li>unde <strong>D<sub>t</sub></strong> = serviciul total al datoriei în perioada <em>t</em> (dobândă + principal), <strong>r<sub>t</sub></strong> = rata de actualizare aferentă perioadei (costul tău marginal de oportunitate, nu dobânda creditului), <strong>C<sub>k</sub></strong> = costul total al refinanțării <em>k</em> (comisioane de analiză, evaluare, notar, asigurare, radiere/reînscriere ipotecă) și <strong>τ<sub>k</sub></strong> = momentul refinanțării.</li>
+</ul>
+
+<p>Rata de actualizare merită grijă: pentru un debitor cu plasamente disponibile, costul de oportunitate corect e randamentul net pe care l-ai obține alocând cash-ul către rambursare anticipată versus o alternativă lichidă comparabilă ca risc (de pildă titluri de stat Fidelis sau depozit). În 2026, cu titluri de stat în lei (Fidelis, Tezaur) oferind dobânzi în zona ratei de politică și — important — <strong>scutite de impozit pe venitul din dobândă</strong>, randamentul net coincide practic cu cel brut; rata de actualizare relevantă pentru decizii în lei se așază adesea în jur de 6–6,5% net — exact pragul care decide dacă rambursarea anticipată „bate” reinvestirea. (Atenție la confuzia clasică: dobânda de titlu de stat e scutită, dar un câștig de capital realizat prin tranzacționare la broker rezident intră în regimul de <strong>3%</strong> pentru deținere peste 1 an / <strong>6%</strong> sub 1 an, nu în impozitul standard de 10% pe venit.)</p>
+
+<h3>Descompunerea costului: indice, marjă, timing</h3>
+
+<p>Cost efectiv datoriei se descompune aditiv în trei surse de variație, fiecare cu un mecanism diferit de control:</p>
+
+<ul>
+<li><strong>Componenta de indice</strong> (IRCC / ROBOR / EURIBOR): nu o controlezi, dar o anticipezi din curbă. Aici câștigi prin <em>timing</em> și prin alegerea indicelui mai favorabil pe faza ciclului.</li>
+<li><strong>Componenta de marjă</strong> (fixă contractual): o controlezi DOAR la momentul refinanțării, prin negociere. E singura piesă permanent în mâna ta — un IRCC mai mic anulat de o marjă mai mare e o capcană clasică în 2026, când marjele s-au lărgit.</li>
+<li><strong>Componenta de timing</strong>: valoarea opțiunii de a aștepta. Refinanțarea e o opțiune americană — o exerciți doar când valoarea actualizată a economiei depășește costul plus <em>valoarea de continuare</em> a opțiunii (dreptul de a aștepta o fereastră mai bună).</li>
+</ul>
+
+<h2>Citirea curbei: lag-urile de transmisie ca sursă de edge</h2>
+
+<p>Cei trei indici relevanți în România 2026 reacționează cu viteze structural diferite, iar din această asimetrie extragi arbitraj de dobândă prin timing:</p>
+
+<ul>
+<li><strong>EURIBOR</strong> este <em>anticipativ</em>: încorporează așteptările de politică BCE prin curba OIS €STR. Se mișcă înaintea faptelor.</li>
+<li><strong>ROBOR</strong> este <em>aproape-spot</em>: urmărește îndeaproape rata de politică BNR și lichiditatea interbancară; transmisia e de ordinul săptămânilor.</li>
+<li><strong>IRCC</strong> este <em>puternic întârziat</em>: se calculează ca medie a tranzacțiilor interbancare dintr-un trimestru încheiat și se aplică cu un trimestru decalaj. În practică, IRCC aplicat azi reflectă piața de acum 4–6 luni.</li>
+</ul>
+
+<p>Consecința operațională în mijlocul lui 2026: BNR a coborât la 6,50% și ROBOR 3M deja a alunecat spre 6,85%, dar IRCC aplicat e încă 5,72% și — atenție — <strong>va scădea mai departe</strong> în T3, fiindcă încorporează lent coborârea. Cu alte cuvinte, IRCC are „inerție de coborâre” deja încasată: dacă ești pe IRCC + marjă, o parte din economie vine gratis în 1–2 trimestre, fără să plătești niciun comision de refinanțare. Regula: <em>nu plăti pentru o scădere pe care indicele întârziat ți-o livrează oricum.</em></p>
+
+<h3>Forward-ul implicit ca predictor, nu cifra de azi</h3>
+
+<p>Decizia multiperioadă se ia pe forward, nu pe spot. Construiești curba forward implicită din structura la termen: dacă rata spot pe 1 an este <em>r<sub>1</sub></em> și pe 2 ani <em>r<sub>2</sub></em>, forward-ul pe anul 2 satisface (1 + r<sub>2</sub>)<sup>2</sup> = (1 + r<sub>1</sub>)(1 + f<sub>1,2</sub>), deci <strong>f<sub>1,2</sub> = (1 + r<sub>2</sub>)<sup>2</sup> / (1 + r<sub>1</sub>) − 1</strong>. Pe piciorul euro folosești direct forward-ul EURIBOR din OIS; pe leu aproximezi structura din titlurile de stat și din panta dobânzilor la depozite la termen. Dacă forward-ul de peste 12 luni este clar sub indicele tău aplicat azi, valoarea de continuare a opțiunii de a aștepta crește — semn că NU exerciți refinanțarea acum.</p>
+
+<h2>Regula de decizie: refinanțarea ca opțiune americană</h2>
+
+<p>Exerciți refinanțarea în perioada <em>τ</em> doar dacă economia actualizată depășește costul <em>și</em> valoarea de a aștepta. Praguri operaționale:</p>
+
+<ul>
+<li><strong>VA economie</strong> = Σ<sub>t=τ..T</sub> [ (D<sub>t</sub><sup>vechi</sup> − D<sub>t</sub><sup>nou</sup>) / (1 + r<sub>t</sub>)<sup>t−τ</sup> ]</li>
+<li><strong>Condiția de exercițiu</strong>: VA economie − C<sub>refi</sub> ≥ <strong>θ</strong>, unde <strong>θ</strong> = valoarea de continuare (opțiunea de a refinanța mai bine ulterior). θ crește când forward-ul indică scăderi viitoare și scade când ciclul e aproape de podea.</li>
+</ul>
+
+<p><strong>Exemplu pas-cu-pas.</strong> Sold rămas 300.000 lei, 22 ani rămași, ești pe un fix vechi de 7,4%. Ofertă nouă: IRCC 5,72% + marjă negociată 2,3% = 8,02% efectiv — mai mare decât fixul, deci refuzi pe componenta indice+marjă curentă. DAR forward-ul spune că IRCC va coborî spre ~5,0% în 2–3 trimestre, ducând oferta la ~7,3%. Calculezi două scenarii:</p>
+
+<ul>
+<li><strong>Scenariu A (refinanțezi acum la 8,02%)</strong>: VA economie negativă → respins.</li>
+<li><strong>Scenariu B (aștepți 2 trimestre, refinanțezi la ~7,3%)</strong>: la 7,3% vs 7,4%, economia anuală de dobândă în primul an ≈ 0,1% × ~290.000 ≈ 290 lei — sub costul tipic de refinanțare (evaluare + notar + radiere/reînscriere ipotecă, ușor de depășit 2.000–3.500 lei). VA economie pe orizont rămâne sub C<sub>refi</sub> → tot respins, dar nu plătești nimic ca să aștepți.</li>
+</ul>
+
+<p>Învățătura de specialist: când fixul tău e deja competitiv, refinanțarea internă (transfer la altă bancă) e adesea inferioară simplei <em>renegocieri a marjei</em> cu banca actuală, care nu declanșează costuri notariale. Pragul de acțiune real e diferențialul de marjă, nu cel de indice.</p>
+
+<h2>Hedge EURIBOR: structurarea piciorului în euro</h2>
+
+<p>Dacă ai expunere reală în euro — venituri în lei dar credit Euribor + marjă, sau invers, venituri în euro și credit în lei — porți două riscuri suprapuse: riscul de rată (EURIBOR urcă) și riscul valutar (EUR/RON). Le tratezi separat. Pentru riscul de rată, instrumentul de specialist este <strong>opțiunea cap pe dobândă</strong> (interest rate cap): plătești o primă upfront și primești decontări de fiecare dată când EURIBOR de referință depășește strike-ul (cap rate), pe fiecare perioadă de fixing.</p>
+
+<h3>Anatomia unui cap și calculul payoff-ului</h3>
+
+<ul>
+<li>Un cap e un coș de <em>caplets</em>, câte unul per perioadă de fixing. Payoff per caplet = <strong>Nominal × max(0; EURIBOR<sub>fixing</sub> − Strike) × (zile / 360)</strong>.</li>
+<li>Convenția pieței monetare euro e <strong>Actual/360</strong> — relevantă în calculul exact al decontării.</li>
+<li>Prima totală a capului = suma valorilor actualizate ale caplet-elor, fiecare evaluat ca o opțiune pe rată (model Black pentru caplets). Cu cât strike-ul e mai aproape de forward, cu atât prima e mai mare.</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> Credit echivalent 100.000 EUR, EURIBOR 3M + marjă 3,0%, vrei să-ți plafonezi indicele la un <strong>strike de 3,5%</strong>. Pe un fixing trimestrial în care EURIBOR ajunge la 4,2%: payoff caplet = 100.000 × (4,2% − 3,5%) × (90/360) = 100.000 × 0,7% × 0,25 = <strong>175 EUR</strong> încasare, care compensează exact dobânda în plus față de plafon pe acel trimestru. Sub strike, capul nu plătește, dar nici nu te costă peste prima inițială — exact ca o asigurare. Pentru un debitor persoană fizică în România, capul OTC e rareori accesibil direct; alternativa practică e produsul bancar de <em>dobândă fixă pe perioadă</em> (care e economic un cap la strike = rata fixă) sau, mai elegant, structurarea sintetică prin alegerea unui credit cu plafonare contractuală a indicelui acolo unde e oferită.</p>
+
+<h3>Riscul valutar nu se hedgează cu capul</h3>
+
+<p>Capul acoperă doar rata. Dacă serviciul datoriei e în euro și veniturile în lei, deprecierea RON îți umflă rata în lei independent de EURIBOR. În România 2026, cu RON administrat dar sub presiune structurală (deficit fiscal ridicat), regula de prudență este: <strong>nu purta datorie pe termen lung în euro fără un flux de venit natural în euro.</strong> „Avantajul” de dobândă mai mică în euro (EURIBOR + marjă efectiv mai jos decât IRCC + marjă în lei) este, de fapt, prima de risc valutar pe care o încasezi doar dacă ai matching natural de monedă. Pentru un debitor fără venituri în euro, costul așteptat ajustat la risc al datoriei în euro depășește frecvent costul în lei.</p>
+
+<h2>Arbitrajul de structură: laddering și barbell pe pasive</h2>
+
+<p>Aplici pe pasive tehnicile de portofoliu de la active. În loc să refinanțezi tot soldul într-o singură structură, îl segmentezi:</p>
+
+<ul>
+<li><strong>Laddering</strong>: dacă ai mai multe credite sau poți tranșa, eșalonezi scadențele de re-fixare ca să nu re-fixezi tot soldul în vârful unui ciclu de dobândă. Diversifici riscul de timing pe care altfel îl concentrezi.</li>
+<li><strong>Barbell indice</strong>: combini o tranșă pe indice anticipativ (EURIBOR, dacă ai matching valutar) cu una pe indice întârziat (IRCC). Când ciclul coboară, EURIBOR îți livrează scăderea imediat, iar IRCC o livrează cu lag dar îți netezește volatilitatea de fixing. E un hedge intern de transmisie.</li>
+<li><strong>Prioritizarea rambursării anticipate</strong>: aloci cash-ul liber către creditul cu cea mai mare rată efectivă <em>peste</em> rata ta de actualizare net. În 2026, un credit de consum la 11–14% se rambursează anticipat înaintea unui ipotecar la 7–8%, fiindcă „randamentul garantat fără risc” al rambursării e chiar rata creditului stins.</li>
+</ul>
+
+<h3>Edge-case: prepayment penalty și costul de oportunitate al lichidității</h3>
+
+<p>La creditele ipotecare pentru consumatori, legislația română (OUG 52/2016, transpunerea Directivei de credit ipotecar) limitează strict comisioanele de rambursare anticipată — la rate variabile comisionul de rambursare anticipată este, de regulă, <strong>zero</strong>. Asta îți dă o opțiune de prepayment foarte ieftină pe partea variabilă: poți rambursa parțial oricând fără penalizare, deci optimizarea de cash devine continuă, nu discretă. La componenta cu dobândă fixă pot exista comisioane mai mari — verifică în contract înainte de a modela. Costul real ascuns al rambursării anticipate nu e penalizarea, ci <strong>pierderea de lichiditate</strong>: cash-ul băgat în ipotecă nu mai e disponibil pentru o urgență sau o oportunitate. De aceea rata de actualizare în model trebuie să încorporeze și o primă de lichiditate, nu doar randamentul alternativ.</p>
+
+<h2>Sinteză: protocolul de decizie pas-cu-pas</h2>
+
+<p>Rulează acest protocol înainte de orice mișcare de refinanțare sau hedge, în această ordine:</p>
+
+<ul>
+<li><strong>1. Cartografiază pasivele.</strong> Pentru fiecare credit notează: sold, scadență rămasă, tip indice (IRCC/ROBOR/EURIBOR/fix), marja, rata efectivă curentă, comisionul de rambursare anticipată.</li>
+<li><strong>2. Stabilește rata de actualizare.</strong> Randamentul net al alternativei lichide comparabile (titluri de stat — dobândă scutită de impozit; sau depozit, cu dobândă impozitată ca venit din investiții), plus primă de lichiditate. În 2026, tipic ~6–6,5% net în lei.</li>
+<li><strong>3. Construiește curba forward.</strong> Pe euro din OIS €STR; pe leu din panta titlurilor de stat și tonul BNR. Identifică direcția fiecărui indice pe 2–4 trimestre.</li>
+<li><strong>4. Aplică regula de opțiune.</strong> Calculează VA economie pentru fiecare alternativă de refinanțare; exerciți doar dacă VA economie − C<sub>refi</sub> ≥ valoarea de continuare. Dacă indicele întârziat (IRCC) coboară oricum, default-ul e <em>așteaptă</em>.</li>
+<li><strong>5. Atacă marja, nu indicele.</strong> Renegocierea marjei cu banca actuală (fără costuri notariale) bate adesea transferul. Compari mereu dobândă totală vs dobândă totală.</li>
+<li><strong>6. Hedgează doar riscul pe care îl porți efectiv.</strong> Cap pe dobândă (sau fix-pe-perioadă echivalent) pentru riscul de rată; matching natural de monedă pentru riscul valutar. Nu purta datorie euro fără venit euro.</li>
+<li><strong>7. Structurează, nu monolitiza.</strong> Laddering scadențelor de re-fixare și barbell de indici pentru a difuza riscul de timing.</li>
+<li><strong>8. Prioritizează prepayment-ul.</strong> Cash liber → creditul cu rata efectivă cea mai mare peste rata ta de actualizare, cu prepayment penalty zero unde e cazul.</li>
+<li><strong>9. Reevaluează la fiecare fixing și la fiecare ședință BNR.</strong> Decizia e dinamică: o opțiune americană se reevaluează continuu, nu o dată pe an.</li>
+</ul>
+
+<p>Internalizat corect, acest aparat transformă datoria dintr-un cost pasiv într-un portofoliu pe care îl structurezi activ — extragând valoare exact din lag-urile de transmisie pe care debitorul mediu le ignoră. Edge-ul nu e o rată mai mică, ci disciplina de a exercita opțiunea de refinanțare în fereastra îngustă în care VA economie depășește atât costul, cât și valoarea de a mai aștepta.</p>

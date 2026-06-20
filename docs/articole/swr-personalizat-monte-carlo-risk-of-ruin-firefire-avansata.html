@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SWR personalizat Monte Carlo: risk of ruin pentru FIRE avansat — Clubul Financiar</title><meta name="description" content="Construiește un SWR personalizat cu Monte Carlo și risk of ruin pe 100k scenarii: glidepath FIRE, inflație medicală, șocuri și taxa de retragere optimă 2026."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/swr-personalizat-monte-carlo-risk-of-ruin-firefire-avansata.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="SWR personalizat Monte Carlo: risk of ruin pentru FIRE avansat"><meta property="og:description" content="Construiește un SWR personalizat cu Monte Carlo și risk of ruin pe 100k scenarii: glidepath FIRE, inflație medicală, șocuri și taxa de retragere optimă 2026."><meta property="og:url" content="https://clubulfinanciar.ro/articole/swr-personalizat-monte-carlo-risk-of-ruin-firefire-avansata.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="SWR personalizat Monte Carlo: risk of ruin pentru FIRE avansat"><meta name="twitter:description" content="Construiește un SWR personalizat cu Monte Carlo și risk of ruin pe 100k scenarii: glidepath FIRE, inflație medicală, șocuri și taxa de retragere optimă 2026."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SWR personalizat Monte Carlo: risk of ruin pentru FIRE avansat", "description": "Construiește un SWR personalizat cu Monte Carlo și risk of ruin pe 100k scenarii: glidepath FIRE, inflație medicală, șocuri și taxa de retragere optimă 2026.", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/swr-personalizat-monte-carlo-risk-of-ruin-firefire-avansata.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#planificare">🗺️ Planificare financiară</a> · 13 min citire · Actualizat 19 iun. 2026</p><h1>SWR personalizat Monte Carlo: risk of ruin pentru FIRE avansat</h1><p>Un <strong>SWR personalizat Monte Carlo risk of ruin</strong> înlocuiește regula 4% cu un model stohastic în care rata de retragere nu mai e o constantă moștenită din studiul Trinity, ci o variabilă optimizată pe distribuția ta reală de randamente, cheltuieli și longevitate. Dacă ai parcurs deja regula 4% și calculele FIRE de bază, știi că procentul fix maschează exact riscul care contează: secvența randamentelor. Această lecție duce calculul de la euristică la <em>simulare randamente 100k scenarii</em>, unde fiecare traiectorie testează dacă portofoliul tău supraviețuiește unei serii proaste de ani la început, cu inflație medicală șocuri și taxe ANAF aplicate corect pe lei reali.</p>
+
+<p>Vom construi un model complet de <em>ruin probability calculator</em> pentru investitorul român 2026: bootstrap pe randamente istorice, glidepath retrageri FIRE care urcă alocarea în acțiuni pe măsură ce înaintezi în pensionare, șocuri corelate de inflație medicală, și taxa retragere optimă fiscal calibrată pe impozitul de 16% pe dividende, pe cota de câștig de capital prin intermediar fiscal rezident (3% la dețineri peste un an, 6% sub un an) și CASS plafonat. Scopul nu e un număr magic, ci o frontieră: ce rată de retragere îți dă o probabilitate de ruină sub pragul tău de toleranță, pe orizontul tău, cu cheltuielile tale.</p>
+
+<p>Presupun stăpânite valoarea actuală, deviația standard a randamentelor, corelația activelor și conceptul de sequence-of-returns risk. Nu le reluăm. Mergem direct în motorul de simulare, în calibrarea inputurilor pe date românești și în transformarea ieșirii într-o regulă de retragere dinamică pe care o poți executa real.</p>
+
+<h2>De ce regula 4% e o euristică greșit aplicată în România</h2>
+
+<p>Studiul original (Bengen 1994, apoi Trinity 1998) a derivat 4% pe un portofoliu 50/50 acțiuni-obligațiuni american, pe orizont de 30 de ani, cu inflație CPI SUA. Trei dintre aceste ipoteze se rup pentru un FIRE-er român:</p>
+
+<ul>
+<li><strong>Orizontul.</strong> FIRE la 40 de ani înseamnă 50+ ani de retrageri, nu 30. Rata de eșec a regulii 4% crește neliniar cu orizontul: la 30 de ani ~5% eșec istoric, la 50 de ani sare la 15–20% chiar și pe date SUA. Pe fiecare deceniu suplimentar, SWR sustenabil scade cu aproximativ 0,3–0,4 puncte procentuale.</li>
+<li><strong>Inflația.</strong> CPI SUA istoric ~3%. România a trăit 2022–2023 cu inflație de 13–16%, iar BNR țintește 2,5% ±1pp, dar cu varianță mult mai mare decât piețele dezvoltate. Un model care folosește un singur σ de inflație subestimează grav coada.</li>
+<li><strong>Fiscalitatea.</strong> Regula 4% presupune retragere brută = cheltuială. În realitate, fiecare leu retras dintr-un portofoliu de acțiuni trece prin impozit pe câștig de capital (prin intermediar fiscal rezident, care reține la sursă: 3% pentru titluri deținute peste un an, 6% sub un an; prin broker străin, 16% autodeclarat anual prin Declarația Unică), prin impozit pe dividende (16% din 2026) și prin CASS dacă venitul anual din investiții depășește pragurile de 6/12/24 salarii minime brute.</li>
+</ul>
+
+<p>Consecința: SWR-ul tău real, net de taxe și ajustat la orizont și la varianța inflației locale, e aproape sigur sub 4%. Întrebarea nu e „cât scad sub 4%”, ci „care e distribuția probabilității de ruină la fiecare rată candidat”. Asta cere simulare.</p>
+
+<h2>Arhitectura motorului Monte Carlo</h2>
+
+<p>Un motor corect de risk of ruin are cinci straturi. Le tratez pe rând cu specificațiile cantitative.</p>
+
+<h3>1. Generatorul de randamente: bootstrap în loc de normal i.i.d.</h3>
+
+<p>Eroarea de începător avansat: a simula randamente dintr-o distribuție normală cu medie μ și deviație σ. Piețele nu sunt normale — au cozi groase (kurtosis > 3) și autocorelație negativă pe orizonturi lungi (mean reversion). Două abordări superioare:</p>
+
+<ul>
+<li><strong>Block bootstrap.</strong> În loc să tragi un an la întâmplare, tragi <em>blocuri</em> contigue de 3–5 ani din istoricul real. Asta păstrează autocorelația și clusterele de volatilitate (crizele vin în serii). Pentru 100.000 de scenarii pe 50 de ani, asamblezi traiectorii din blocuri suprapuse ale seriei istorice 1900–2025 (date globale developed markets, pentru că istoricul BVB e prea scurt și nereprezentativ).</li>
+<li><strong>Bootstrap staționar (Politis-Romano).</strong> Lungimea blocului devine ea însăși aleatoare (distribuție geometrică cu lungime medie L), eliminând artefactul de tăiere fixă a blocului. Recomandat ca standard.</li>
+</ul>
+
+<p>De ce <em>simulare randamente 100k scenarii</em> și nu 1.000: eroarea standard a estimării unei probabilități de ruină p este √(p(1−p)/N). La p ≈ 5% și N = 1.000, eroarea standard e ~0,7pp — adică un interval de încredere care acoperă 3,6%–6,4%, inutil pentru decizie. La N = 100.000, eroarea standard scade la ~0,07pp. Pentru cozile pe care le testezi (probabilitate de ruină 2–10%), ai nevoie de cel puțin 50.000–100.000 de traiectorii ca intervalul să fie strâns.</p>
+
+<h3>2. Modelul de cheltuieli: nu o constantă reală</h3>
+
+<p>Cheltuielile în pensionare nu sunt o linie orizontală indexată la inflație. Empiric, urmează un „smile”: scad în mijlocul pensionării (faza activă se calmează) și explodează la final din cauza costurilor medicale. Modelarea de specialist:</p>
+
+<ul>
+<li><strong>Cheltuieli de bază</strong> indexate la inflația generală (IPC).</li>
+<li><strong>Componentă medicală</strong> indexată la o <em>inflație medicală</em> separată, sistematic mai mare decât IPC general (în România, costul serviciilor medicale private și al medicamentelor inovative crește cu 2–4pp peste IPC). Aceasta e o variabilă-cheie ignorată în 99% din calculatoarele FIRE.</li>
+<li><strong>Șocuri medicale</strong> ca evenimente Poisson: probabilitate anuală crescătoare cu vârsta (de la ~1% la 50 de ani la ~8–10% la 80+) de un eveniment care adaugă o cheltuială lump-sum (intervenție, îngrijire pe termen lung). Un an de îngrijire la domiciliu sau în centru privat în România 2026 costă realist 60.000–120.000 lei.</li>
+</ul>
+
+<h3>3. Stratul fiscal: retragerea brută necesară</h3>
+
+<p>Aici se rupe fiecare model naiv. Pentru a acoperi o cheltuială netă C, trebuie să retragi o sumă brută R > C astfel încât R minus impozitul pe partea de câștig din R să egaleze C. Dacă portofoliul are un cost-bază mediu și o cotă de apreciere a, fracțiunea impozabilă a fiecărei retrageri e a, iar impozitul efectiv pe retragere e a × cota de câștig de capital aplicabilă (3% prin intermediar fiscal rezident pentru dețineri peste un an, 6% sub un an, 16% autodeclarat prin broker străin).</p>
+
+<ul>
+<li>Exemplu: portofoliu cu apreciere medie a = 60% (deci 60% din fiecare leu retras e câștig impozabil), deținut peste un an prin intermediar fiscal rezident (cotă 3%). Impozit efectiv pe retragere = 0,60 × 3% = 1,8%. Pentru o cheltuială netă de 100.000 lei, retragerea brută necesară = 100.000 / (1 − 0,018) ≈ <strong>101.833 lei</strong>. Atenție: dacă investești prin broker străin (cotă 16% autodeclarată), impozitul efectiv sare la 0,60 × 16% = 9,6%, iar retragerea brută urcă la ≈ 110.620 lei — alegerea intermediarului devine ea însăși o variabilă de optimizare fiscală.</li>
+<li>Adaugă CASS: dacă venitul total din investiții (câștig de capital + dividende) depășește 6 salarii minime brute (în 2026, salariul minim brut e 4.050 lei → prag de 24.300 lei), datorezi CASS 10% pe baza plafonată la 6, 12 sau 24 de salarii minime, în funcție de tranșă. La venituri din investiții peste 24 de salarii minime (97.200 lei), CASS = 10% × 97.200 = <strong>9.720 lei</strong> fix, indiferent cât depășești.</li>
+</ul>
+
+<p>Modelul corect tratează CASS ca o funcție-treaptă pe venitul anual realizat, nu ca un procent liniar. Asta favorizează retragerile concentrate (realizezi mult într-un an, plătești CASS plafonat o dată) versus retrageri uniforme an de an care lovesc plafonul în fiecare an — canalul real prin care găsești taxa retragere optimă a portofoliului tău.</p>
+
+<h3>4. Glidepath-ul: alocare variabilă în timp</h3>
+
+<p>Contraintuitiv, cercetarea (Kitces-Pfau, „rising equity glidepath”) arată că în pensionare ar trebui să <em>crești</em> alocarea în acțiuni, nu să o scazi. Logica: riscul de secvență e concentrat în primii 10–15 ani. Dacă intri în pensionare cu alocare mai conservatoare (de ex. 60% acțiuni / 40% obligațiuni-cash) și urci treptat spre 80–90% acțiuni pe parcurs, reduci expunerea la exact perioada când un crash te-ar ruina, păstrând în același timp randamentul așteptat pe coada lungă. Modelul tău Monte Carlo trebuie să accepte un vector de alocare w(t) ca input, nu o singură pondere.</p>
+
+<h3>5. Definiția ruinei și metrica de ieșire</h3>
+
+<p>„Ruină” = portofoliul atinge zero înainte de finalul orizontului în cel puțin un an. Dar metrica binară (ruină da/nu) ascunde informație. Ieșiri mai bogate:</p>
+
+<ul>
+<li><strong>Probabilitate de ruină</strong> = fracțiunea traiectoriilor care ating zero.</li>
+<li><strong>Ruin-aware: anul median de epuizare</strong> în scenariile care eșuează (cât de devreme te lovește).</li>
+<li><strong>Magnitudinea shortfall-ului</strong> (cu cât rămâi dator în scenariile rele) — analog cu Conditional Value at Risk.</li>
+<li><strong>Distribuția averii terminale</strong> — moștenirea în percentila 10, 50, 90.</li>
+</ul>
+
+<h2>Exemplu numeric complet pas cu pas</h2>
+
+<p>Construim cazul de bază al unui FIRE-er român, 2026.</p>
+
+<ul>
+<li>Vârstă pensionare: 45 de ani. Orizont: 50 de ani (până la 95).</li>
+<li>Portofoliu: 2.500.000 lei într-un ETF global de acțiuni (UCITS, acumulare) + obligațiuni.</li>
+<li>Cheltuieli nete dorite: 100.000 lei/an (≈ 8.300 lei/lună).</li>
+<li>Alocare inițială: 70% acțiuni / 30% obligațiuni-cash, glidepath spre 85/15 până la vârsta 65.</li>
+</ul>
+
+<p><strong>Pasul 1 — rata de retragere brută inițială.</strong> Cheltuială netă 100.000 lei → retragere brută ~101.800 lei (impozit efectiv 1,8% pe partea de câștig, prin intermediar fiscal rezident, cotă 3% la deținere peste un an). Raportat la portofoliul de 2.500.000 lei, rata de retragere brută = 101.800 / 2.500.000 = <strong>4,07%</strong>. Deja peste pragul „sigur” intuitiv de 4%, înainte de a adăuga CASS, inflația medicală și — dacă ai folosi un broker străin la 16% — un strat fiscal de încă circa 0,35pp pe rata de retragere.</p>
+
+<p><strong>Pasul 2 — parametrii distribuției.</strong> Pentru blocul de acțiuni globale: randament real mediu istoric ~5% (developed markets, net de inflație), σ ~17%. Obligațiuni: real ~1,5%, σ ~7%. Inflația generală: medie 3%, σ 4% (calibrat pe varianța mai mare a României). Inflație medicală: IPC + 3pp, deci medie 6%.</p>
+
+<p><strong>Pasul 3 — rulează 100.000 de traiectorii block-bootstrap.</strong> În fiecare an t: trage randamentul portofoliului din blocul curent, aplică alocarea w(t), scade retragerea brută indexată la inflația realizată în acel scenariu, adaugă șoc medical Poisson dacă apare, recalculează soldul. Marchează ruina dacă soldul ≤ 0.</p>
+
+<p><strong>Pasul 4 — citește ieșirea.</strong> Pentru acest caz, un motor calibrat astfel produce tipic o probabilitate de ruină în zona 12–18% la rata de 4,07% brută pe 50 de ani — mult peste pragul de toleranță rezonabil de 5–10%. Concluzia: rata e prea agresivă. Cobori iterativ.</p>
+
+<p><strong>Pasul 5 — găsește SWR-ul la pragul tău.</strong> Rulezi modelul pe o grilă de rate (3,0%, 3,25%, 3,5%, ...) și cauți rata maximă la care probabilitatea de ruină ≤ 5%. Pentru profilul de mai sus, acea rată cade tipic în jur de <strong>3,2–3,5% brut</strong> pe orizont de 50 de ani — adică un portofoliu țintă mai aproape de 3.000.000–3.300.000 lei pentru aceeași cheltuială, nu 2.500.000. Diferența între 4% naiv și SWR-ul simulat e capitalul suplimentar de care ai nevoie ca să nu fii ruinat de secvență.</p>
+
+<h2>Reguli de retragere dinamice: superioare procentului fix</h2>
+
+<p>Un SWR fix e suboptimal pentru că ignoră informația care apare în timp. Trei reguli dinamice care reduc dramatic riscul de ruină la aceeași rată inițială:</p>
+
+<h3>Guardrails (Guyton-Klinger)</h3>
+
+<p>Definești o bandă în jurul ratei de retragere curente (rata = retragere / portofoliu curent). Dacă rata curentă urcă peste banda superioară (portofoliul a scăzut, deci retragerea ca % a crescut) — tai cheltuiala cu 10%. Dacă scade sub banda inferioară (portofoliul a crescut) — mărești cheltuiala cu 10%. Aceste „prosperity/capital preservation rules” transformă o ruină de 15% într-una de 2–4% la aceeași rată inițială, cu prețul unei variabilități de venit. Modelul Monte Carlo trebuie să implementeze regula <em>endogen</em>: retragerea în anul t depinde de soldul în t, nu de un plan static.</p>
+
+<h3>Floor-and-ceiling</h3>
+
+<p>Indexezi retragerea la inflație, dar impui un plafon (nu crești cu mai mult de X% chiar dacă portofoliul explodează) și un prag-podea (nu scazi sub un minim absolut de subzistență). Podeaua poate fi acoperită separat de pensia de stat CNPP și de Pilonul II/III, care în acest model devin o <em>anuitate de bază</em> ce reduce suma pe care portofoliul de risc trebuie să o producă.</p>
+
+<h3>Integrarea pensiei de stat și a Pilonului II</h3>
+
+<p>Un model serios scade din cheltuielile finanțate de portofoliu fluxurile garantate care încep mai târziu. Pensia CNPP și Pilonul II (plată la 65 de ani) acoperă o parte din podea după acea vârstă. Asta înseamnă că portofoliul trebuie să ducă greul doar pentru fereastra 45–65 (faza de „pre-pensie” cea mai vulnerabilă la secvență) plus suplimentul peste pensie după 65. Modelarea acestui flux întârziat reduce semnificativ rata de retragere necesară din portofoliul lichid în primii ani.</p>
+
+<h2>Edge-cases și capcane de modelare</h2>
+
+<ul>
+<li><strong>Corelația inflație-randamente.</strong> Inflația mare lovește simultan puterea de cumpărare (cheltuieli sus) și valoarea reală a obligațiunilor (jos). Dacă modelezi inflația și randamentele ca independente, subestimezi coada. Block bootstrap pe perioade reale captează corelația automat — alt motiv să-l preferi față de generarea i.i.d.</li>
+<li><strong>Inflația medicală necorelată cu IPC.</strong> În anii de IPC mic, costurile medicale pot crește în continuare. Tratează-le ca procese separate cu o corelație parțială (~0,5), nu perfect legate.</li>
+<li><strong>Riscul valutar.</strong> Portofoliul e în EUR/USD (ETF UCITS), cheltuielile în lei. O depreciere a leului îți crește puterea de cumpărare a portofoliului în lei, dar și prețul importurilor (inclusiv medical). Modelul trebuie să includă cursul ca variabilă stohastică, nu să presupună paritate fixă.</li>
+<li><strong>Modificări fiscale.</strong> Cotele (3%/6% câștig de capital prin intermediar rezident, 16% prin broker străin sau autodeclarat, 16% pe dividende din 2026) și pragurile CASS sunt politice. Un model robust testează sensibilitatea: ce se întâmplă cu SWR dacă impozitul efectiv pe câștig urcă la 16% permanent (eliminarea cotelor reduse de 3%/6%)? Tipic, fiecare +5pp de impozit efectiv pe câștig ridică rata de retragere brută necesară cu ~0,2–0,3pp și cere capital suplimentar.</li>
+<li><strong>Reziduul de overfitting pe istoric.</strong> Block bootstrap pe 1900–2025 presupune că viitorul seamănă cu trecutul. Stress-testează cu un „regime shift” pessimist: scade media randamentului real cu 1–1,5pp față de istoric (ipoteza randamentelor viitoare mai mici din evaluări actuale ridicate) și re-rulează. SWR-ul scade tipic cu încă 0,3–0,5pp.</li>
+</ul>
+
+<h2>De la probabilitate de ruină la decizie</h2>
+
+<p>Probabilitatea de ruină nu e o țintă de minimizat la zero — costul de a o duce sub 1% e un portofoliu atât de mare încât amâni FIRE cu ani. E un parametru de optimizat împotriva utilității tale: cât suplimentar de muncă valorează reducerea ruinei de la 8% la 4%? Cadrul corect e o frontieră ruină–capital–flexibilitate, unde regulile dinamice (guardrails) cumpără reducere de ruină nu cu capital, ci cu acceptarea variabilității de venit. Pentru majoritatea, combinația optimă e: SWR inițial simulat la prag 5–8%, plus guardrails, plus integrarea pensiei după 65 — nu un procent fix mai mic.</p>
+
+<h2>Checklist de implementare</h2>
+
+<ul>
+<li><strong>1.</strong> Calibrează inputurile pe date reale, nu pe presupuneri: randament real și σ pe activ (block bootstrap, nu normal i.i.d.), inflație generală medie 3% σ 4%, inflație medicală IPC+3pp.</li>
+<li><strong>2.</strong> Modelează cheltuielile ca „smile”: bază indexată IPC + componentă medicală indexată separat + șocuri Poisson crescătoare cu vârsta (60.000–120.000 lei/eveniment).</li>
+<li><strong>3.</strong> Adaugă stratul fiscal: retragere brută = netă / (1 − a×c), unde c = cota de câștig de capital (3% intermediar rezident >1an, 6% <1an, 16% broker străin/autodeclarat) și a = fracțiunea apreciată; impozit pe dividende 16%; CASS ca funcție-treaptă pe venitul anual (praguri 6/12/24 salarii minime, 4.050 lei brut în 2026).</li>
+<li><strong>4.</strong> Definește glidepath-ul w(t): pleacă conservator (60–70% acțiuni), urcă spre 80–90% până la 65, ca să aperi primii 10–15 ani de risc de secvență.</li>
+<li><strong>5.</strong> Rulează minimum 50.000–100.000 de traiectorii (eroare standard sub 0,1pp pe probabilitatea de ruină).</li>
+<li><strong>6.</strong> Caută pe grilă rata maximă cu probabilitate de ruină ≤ pragul tău (5–8%); raportează și anul median de epuizare și distribuția averii terminale.</li>
+<li><strong>7.</strong> Implementează guardrails endogen în motor (tai 10% peste banda superioară, mărești 10% sub cea inferioară) și re-evaluează ruina — așteaptă-te la o reducere de 8–10pp.</li>
+<li><strong>8.</strong> Scade fluxurile garantate (CNPP + Pilon II de la 65) din cheltuielile finanțate de portofoliu.</li>
+<li><strong>9.</strong> Stress-test: regime shift pesimist (−1,5pp randament real), impozit pe câștig la 16%, depreciere leu de 20%; verifică dacă SWR-ul rămâne în pragul de toleranță.</li>
+<li><strong>10.</strong> Reia simularea anual cu soldul real și inputurile actualizate — SWR-ul personalizat e un proces viu, nu un număr fixat la pensionare.</li>
+</ul><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

@@ -1,0 +1,149 @@
+<p>Dacă în lecția despre randamentul chiriei ai învățat să calculezi un yield brut și net pe un an, aici facem saltul către instrumentul pe care îl folosesc fondurile de real estate și evaluatorii ANEVAR: <strong>valorizare imobiliară DCF cash flow pensie</strong>. Adică un model financiar al proprietății construit ca o serie de fluxuri de numerar actualizate pe 30-40 de ani, în care rata de scont nu mai e o cifră smulsă din aer, ci un WACC personalizat pe situația ta de proprietar român.</p>
+
+<p>Diferența esențială pe care o tratăm aici este între faza de <strong>viață activă</strong> — când ai salariu, deci chiria e capital reinvestibil și un excedent peste consum — și faza de <strong>rentă la pensie</strong>, când același flux devine venit de subzistență, cu un cost de oportunitate complet diferit. Aceeași proprietate are două valori prezente distincte, în funcție de momentul din viață în care discounting-ul „mușcă". Vom integra discount rate real pe imobiliare, terminal value-ul proprietății la orizont, scenario analysis pe vârste de pensionare și comportamentul inflației reale pe materiale și servicii de bloc, care erodează NOI-ul mult mai agresiv decât IPC-ul oficial.</p>
+
+<p>Tot ce urmează presupune că stăpânești deja yield-ul, cap rate-ul și diferența brut/net. Nu le re-explicăm. Construim modelul de la zero ca structură de calcul, cu cifre RO 2026.</p>
+
+<h2>De ce DCF și nu cap rate pentru un orizont de pensie</h2>
+
+<p>Cap rate-ul (NOI / valoare) este o fotografie a unui singur an, valabilă pentru o tranzacție de tip „intru-ies în 3-5 ani". Pentru un proprietar care ține apartamentul ca pilon de pensie, fotografia e inutilă: trebuie să modelezi explicit cum evoluează NOI-ul timp de patru decenii, cum se comportă cheltuielile de capital (CapEx) periodic și cât valorează proprietatea la final.</p>
+
+<p>Formula de bază a modelului este valoarea prezentă a fluxurilor libere plus terminal value:</p>
+
+<ul>
+<li><strong>VP = Σ [CF<sub>t</sub> / (1 + r)<sup>t</sup>] + TV<sub>n</sub> / (1 + r)<sup>n</sup></strong>, unde CF<sub>t</sub> este cash flow-ul net după impozit și CapEx în anul t, r este rata de scont (WACC personalizat), iar TV<sub>n</sub> este valoarea terminală la anul n.</li>
+</ul>
+
+<p>Capcana #1 a amatorului: confundă NOI cu CF. NOI-ul exclude CapEx-ul și serviciul datoriei. Într-un model de pensie pe 35 de ani, CapEx-ul (recondiționare la 8-12 ani, înlocuire centrală, fațadă, instalații) poate consuma 12-18% din NOI-ul cumulat. Dacă îl ignori, supraevaluezi proprietatea cu 15-25%.</p>
+
+<h2>Construirea WACC-ului personalizat ca discount rate</h2>
+
+<p>Rata de scont nu este randamentul cerut de piață în mod abstract, ci costul tău real de capital, ponderat între datorie și capital propriu. Pentru un proprietar român în 2026, componentele sunt:</p>
+
+<h3>Componenta de datorie (Kd)</h3>
+
+<ul>
+<li>Dobânda efectivă la creditul ipotecar. IRCC-ul de referință în 2026 se situează în zona <strong>5,5-5,75%</strong> (în trend descendent față de 2025), la care băncile adaugă o marjă tipică de 1,5-2,5 pp, rezultând un Kd brut de aprox. <strong>7-8,3%</strong>.</li>
+<li>Dobânda la credit este, pentru persoana fizică ce închiriază în regim forfetar, <strong>nedeductibilă</strong> (forfetarul de 20% înlocuiește orice cheltuială reală), deci nu aplici scutul fiscal clasic Kd × (1 − cota impozit). Asta urcă efectiv costul datoriei față de un investitor corporativ.</li>
+</ul>
+
+<h3>Componenta de capital propriu (Ke)</h3>
+
+<p>Aici folosim un build-up adaptat pieței RO 2026, nu CAPM-ul de manual:</p>
+
+<ul>
+<li><strong>Rata fără risc</strong>: randamentul titlurilor de stat RO pe 10 ani, în jur de <strong>7-7,5%</strong> în 2026 (titlurile Tezaur/Fidelis oferă cupoane în această zonă).</li>
+<li><strong>Primă de ilichiditate imobiliară</strong>: +2-3 pp. Un apartament nu se vinde în 2 zile; lichidarea reală durează 3-9 luni cu un discount de urgență de 5-10%.</li>
+<li><strong>Primă de risc specific activului</strong> (vacanță, chiriaș rău-platnic, schimbare legislativă pe chirii): +1,5-2,5 pp.</li>
+<li><strong>Ke rezultat</strong>: tipic <strong>11-13%</strong> pentru un apartament rezidențial standard într-un oraș mare.</li>
+</ul>
+
+<p>Ponderând cu LTV-ul (loan-to-value) la achiziție — să zicem 60% datorie / 40% capital propriu:</p>
+
+<ul>
+<li><strong>WACC = 0,6 × 8% + 0,4 × 12% = 4,8% + 4,8% = 9,6% nominal.</strong></li>
+</ul>
+
+<p>Pe măsură ce amortizezi creditul, ponderea datoriei scade, iar WACC-ul migrează către Ke. Modelatorii serioși folosesc un WACC <strong>variabil pe an</strong>, recalculat pe baza soldului rămas. Pentru un model de pensie, după ce creditul e stins (de regulă înainte de pensionare), discount rate-ul devine pur Ke, adică ~12% nominal.</p>
+
+<h2>Nominal vs. real: capcana inflației pe servicii de bloc</h2>
+
+<p>Aici e cea mai subtilă eroare a modelelor de proprietari. Dacă scontezi fluxuri nominale cu WACC nominal, e corect. Dacă vrei să raționezi în putere de cumpărare (esențial pentru pensie), treci pe discount rate real prin Fisher:</p>
+
+<ul>
+<li><strong>r<sub>real</sub> = (1 + r<sub>nominal</sub>) / (1 + i) − 1.</strong></li>
+</ul>
+
+<p>Inflația oficială (IPC) proiectată de BNR pentru 2026 se ancorează în zona <strong>3-4%</strong> spre ținta de 2,5% ±1pp. Dar — și aici e cheia de specialist — inflația relevantă pentru NOI-ul tău nu este IPC-ul general, ci un coș specific:</p>
+
+<ul>
+<li><strong>Chiria încasată</strong> crește cu inflația generală sau sub ea (chiriile sunt „sticky", reacționează cu lag de 1-2 ani și sunt plafonate de puterea de cumpărare a chiriașilor).</li>
+<li><strong>Cheltuielile de bloc</strong> (mentenanță, salarii administrator, energie pe părți comune, reparații) cresc cu inflația pe servicii și materiale de construcții, istoric <strong>cu 1,5-3 pp peste IPC</strong> în RO.</li>
+</ul>
+
+<p>Rezultatul: există un <strong>foarfece de marjă</strong>. Dacă modelezi chiria crescând cu 3,5%/an și cheltuielile cu 5,5%/an, NOI-ul tău ca procent din chirie scade de la, să zicem, 75% azi la sub 62% peste 25 de ani. Un model care folosește o singură rată de inflație pentru toate liniile supraevaluează sistematic fluxul de pensie. Folosește <strong>inflații diferențiate pe linie</strong> (revenue inflation vs. cost inflation).</p>
+
+<h2>Modelarea CF-ului: viață activă vs. rentă la pensie</h2>
+
+<p>Aceeași chirie generează fluxuri tratate diferit în cele două faze, pentru că impozitarea și destinația banilor diferă.</p>
+
+<h3>Faza activă (ai salariu)</h3>
+
+<ul>
+<li>Chiria e venit forfetar: impozit 10% pe 80% din brut = efectiv <strong>8%</strong> din chiria brută.</li>
+<li><strong>CASS</strong>: dacă baza anuală cumulată din chirii (plus alte venituri pasive — dividende, dobânzi, câștiguri de capital) depășește plafoanele de 6 / 12 / 24 salarii minime, datorezi 10% CASS aplicat la <em>plafonul-treaptă atins</em> (nu la venitul efectiv). Pentru praguri se folosește salariul minim brut în vigoare la 1 ianuarie 2026 — 4.050 lei — chiar dacă acesta crește la 1 iulie 2026: pragul de 6 salarii = 24.300 lei (CASS 2.430 lei), 12 salarii = 48.600 lei (CASS 4.860 lei), 24 salarii = 97.200 lei (CASS 9.720 lei).</li>
+<li>CF-ul net e reinvestibil: îl poți capitaliza într-un model de acumulare, deci costul de oportunitate e Ke (12%).</li>
+</ul>
+
+<h3>Faza de rentă (pensionat)</h3>
+
+<ul>
+<li>Creditul e (ideal) stins → dispare serviciul datoriei, CF-ul net urcă semnificativ.</li>
+<li>Chiria devine venit de consum, nu de reinvestire. Costul de oportunitate scade către rata fără risc plus o primă mică (orizont de consum, nu de creștere) — folosești un discount rate mai mic, <strong>6-8% nominal</strong>, pentru că alternativa nu mai e bursa, ci subzistența.</li>
+<li>CASS-ul rămâne datorat pe venitul din chirii și la pensie (nu e scutit), un detaliu pe care mulți îl ratează.</li>
+</ul>
+
+<p><strong>Implicația de modelare</strong>: aceeași proprietate trebuie evaluată cu un discount rate care „comută" la pensionare. În faza activă scontezi cu ~10-12%; în faza de rentă, fluxurile de consum se scontează cu ~7%. Asta înseamnă că un flux de 1.000 lei/lună „valorează" mai mult la pensie decât pare din perspectiva activă, pentru că rata de scont mai mică îi mărește valoarea prezentă.</p>
+
+<h2>Terminal value: cum NU exagerezi valoarea finală</h2>
+
+<p>TV-ul domină modelele lungi — la 35 de ani, dacă scontezi cu 10%, factorul de actualizare este 1/(1,10)<sup>35</sup> ≈ 0,036, deci o valoare terminală de 600.000 lei contribuie cu doar ~21.500 lei la VP-ul de azi. Paradoxal, pe orizont lung TV-ul actualizat e mic; pe orizont scurt domină. Două metode:</p>
+
+<ul>
+<li><strong>Gordon growth (perpetuitate)</strong>: TV = CF<sub>n+1</sub> / (r − g). Periculoasă pentru imobiliare, pentru că g (creșterea perpetuă a chiriei) trebuie să fie sub r și realist sub 2-3%. Dacă pui g = 4% și r = 9%, TV-ul explodează nerealist.</li>
+<li><strong>Exit multiple (cap rate de ieșire)</strong>: TV = NOI<sub>n</sub> / cap rate de ieșire. Mai disciplinat. Cap rate-ul de ieșire ar trebui să fie <strong>cu 0,5-1,5 pp mai mare</strong> decât cel de intrare, pentru că activul îmbătrânește (un bloc de 35 de ani se tranzacționează la randament cerut mai mare).</li>
+</ul>
+
+<p>Capcana #2: să presupui exit la cap rate de intrare. Un apartament cumpărat azi la cap rate 5% nu se vinde peste 35 de ani tot la 5% — clădirea e veche, eficiența energetică e slabă (penalizată tot mai mult de reglementări UE EPBD), deci modelezi exit la 6,5-7%.</p>
+
+<h2>Scenario analysis pe vârste de pensionare</h2>
+
+<p>Decizia critică nu e doar „cât valorează", ci „când comut faza". Modelăm trei scenarii pe aceeași proprietate (apartament 2 camere, chirie 3.000 lei/lună, valoare azi 500.000 lei, credit 300.000 lei restant pe 20 ani):</p>
+
+<ul>
+<li><strong>Pensionare la 60 (anticipată)</strong>: creditul nu e stins → în primii 5 ani de pensie încă plătești rate, deci CF de consum e mic și volatil. Discount rate hibrid. Valoarea de utilitate la pensie e mai joasă.</li>
+<li><strong>Pensionare la 65 (standard)</strong>: credit aproape stins, CF net plin chiar la momentul în care ai nevoie de el. Sweet spot — alinierea maturității creditului cu pensionarea maximizează renta netă.</li>
+<li><strong>Pensionare la 70 (amânată)</strong>: credit stins de mult, 5 ani suplimentari de chirie reinvestită în faza activă (capitalizată la 12%), dar orizont de viață mai scurt pentru a beneficia de rentă.</li>
+</ul>
+
+<p>Tehnica de specialist: calculezi VP-ul total pentru fiecare vârstă de comutare și identifici punctul unde derivata valorii în raport cu vârsta se anulează. În practică, pentru un credit cu maturitate aliniată, optimul cade aproape întotdeauna la <strong>pensionare = anul stingerii creditului</strong>, pentru că salt-ul de CF (dispariția ratei) coincide cu schimbarea destinației banilor.</p>
+
+<h2>Exemplu numeric integrat (pas cu pas)</h2>
+
+<p>Apartament: valoare 500.000 lei, chirie brută 36.000 lei/an, credit 300.000 lei la 8% pe 20 ani (rată anuală ≈ 30.150 lei).</p>
+
+<ul>
+<li><strong>An 1, fază activă</strong>: chirie brută 36.000; impozit forfetar efectiv 8% = 2.880; CASS — baza impozabilă (80% din brut = 28.800 lei) depășește pragul de 6 salarii minime (24.300 lei) dar e sub cel de 12 salarii (48.600 lei), deci CASS se datorează la prima treaptă: 10% × 24.300 = 2.430 lei; cheltuieli bloc + vacanță 15% = 5.400; CapEx provizion 5% = 1.800. NOI după taxe ≈ 23.490. Minus serviciul datoriei 30.150 → <strong>CF de capital propriu = −6.660 lei</strong> (negativ! aporți bani, dar construiești echitate).</li>
+<li><strong>An 21, credit stins, încă activ</strong>: chiria a crescut la ~3,5%/an la ~70.000 lei; cheltuieli crescute la 5,5%/an erodează marja; CF net ≈ 45.000 lei, fără rată → flux pozitiv robust.</li>
+<li><strong>An 25, pensionare</strong>: comuți discount rate de la 11% (activ) la 7% (consum). CF de consum ~48.000 lei/an, valoare prezentă la pensie mult mai mare datorită ratei mai mici.</li>
+<li><strong>Terminal value an 35</strong>: NOI ≈ 60.000 lei, exit cap rate 6,5% → TV = 923.000 lei; actualizat la 35 ani cu 10% ≈ 33.000 lei VP.</li>
+</ul>
+
+<p>Concluzia modelului: în faza activă proprietatea cu credit are CF negativ (e o investiție de acumulare de echitate/capital propriu, nu de cash), iar valoarea ei reală pentru tine se materializează abia după stingerea creditului. Modelele care arată „randament pozitiv de la an 1" ignoră serviciul datoriei și CapEx-ul.</p>
+
+<h2>Edge-cases și optimizări de specialist</h2>
+
+<ul>
+<li><strong>Refinanțare la mijloc de drum</strong>: dacă IRCC scade cu 1,5+ pp, refinanțarea reduce Kd, urcă CF-ul în faza activă și schimbă punctul optim de pensionare. Re-rulezi modelul la fiecare ciclu de dobândă.</li>
+<li><strong>Sensibilitate la vacanță</strong>: o lună goală/an = 8,3% din venit. Pe 35 de ani, diferența între 5% și 10% vacanță medie schimbă VP-ul cu 6-9%. Modelează vacanța ca variabilă stocastică, nu constantă.</li>
+<li><strong>Riscul de plafonare legislativă a chiriilor</strong>: aplică o probabilitate × impact pe TV. Nu e cuantificabil precis, dar îl tratezi ca pe o primă suplimentară de risc în Ke (+0,5 pp).</li>
+<li><strong>Optimizare fiscală la moștenire</strong>: dacă proprietatea trece la pensie ca pilon de transfer, randamentul după impozit pe moștenitor (impozit pe transfer dacă vânzarea < 3 ani de la deces) intră în TV-ul net.</li>
+<li><strong>Reîncheierea contractului (model financiar de reîncheiere)</strong>: la fiecare expirare a contractului de chirie modelezi un mic „reset" de NOI — re-negocierea poate aduce chiria la nivelul pieței după ani de creșteri sub-inflaționiste, dar implică și o lună de tranziție și eventuale cheltuieli de recondiționare. Un model financiar de reîncheiere serios tratează fiecare expirare ca pe un nod de decizie: păstrezi chiriașul la chirie ușor sub-piață (vacanță zero, dar marjă erodată) sau forțezi re-alinierea (salt de NOI, dar risc de gol).</li>
+</ul>
+
+<h3>Pre-calcularea derivatei valorii pe scenario analysis vârste pensionare</h3>
+
+<p>Când rulezi scenario analysis pe vârste de pensionare, nu te opri la trei puncte discrete (60/65/70). Construiește o curbă continuă a VP-ului total în funcție de anul de comutare și caută inflexiunea. Practic, pentru fiecare an candidat de pensionare aplici discount rate-ul activ până în acel an și discount rate-ul de consum după, apoi compari VP-urile. Curba are de regulă un platou în jurul anului de stingere a creditului — orice an înainte penalizează prin rate restante în faza de consum, orice an după sacrifică ani de viață de rentă. Acest tip de optimizare pe nod de decizie este exact ce separă un model de pensie de specialist de o simplă proiecție liniară de chirii.</p>
+
+<h2>Pași de aplicare a modelului</h2>
+
+<ul>
+<li><strong>1. Construiește WACC-ul tău</strong>: notează IRCC + marja (Kd), rata fără risc RO 10y + primele (Ke), ponderează cu LTV-ul actual. Recalculează WACC pe ani, pe măsură ce amortizezi.</li>
+<li><strong>2. Separă două inflații</strong>: o rată pentru venit (chirie, ~IPC) și una pentru costuri (bloc/materiale, IPC + 1,5-3 pp). Aplică-le diferențiat pe liniile de CF.</li>
+<li><strong>3. Modelează CF-ul net real</strong>: chirie − impozit forfetar efectiv (8%) − CASS la plafonul atins − cheltuieli bloc − provizion CapEx − serviciul datoriei. Acceptă că poate fi negativ în faza activă.</li>
+<li><strong>4. Setează comutarea de discount rate</strong> la anul pensionării: ~11% activ → ~7% consum.</li>
+<li><strong>5. Calculează terminal value cu exit cap rate</strong> mai mare cu 0,5-1,5 pp decât intrarea; verifică prin Gordon doar ca sanity check (g sub 3%).</li>
+<li><strong>6. Rulează scenario analysis pe 60/65/70</strong> și identifică vârsta de pensionare care maximizează VP-ul total — de regulă alinierea cu stingerea creditului.</li>
+<li><strong>7. Stres-testează</strong>: vacanță +5pp, IRCC +2pp, exit cap rate +1pp. Dacă VP-ul rezistă pozitiv în scenariul advers, proprietatea e robustă ca pilon de pensie.</li>
+<li><strong>8. Re-rulează anual</strong>: WACC-ul, inflațiile și soldul creditului se schimbă; un model de pensie este un document viu, nu un calcul unic la achiziție.</li>
+</ul>

@@ -1,0 +1,116 @@
+<p>Un <strong>transfer patrimonial tax-free FIRE</strong> bine construit nu este o singură mișcare, ci o secvență coordonată care exploatează simultan trei pârghii: <strong>donație avere scutire fiscală România</strong> (cota 0% între rude apropiate), <strong>repartizare profit impozit redus</strong> prin dividende calibrate pe trepte, și <strong>planificarea succesorală FIRE pre-pensionare</strong> calendarizată pe fereastra dinaintea retragerii anticipate. Adăugăm <strong>convenții de Familie ANAF minimizare</strong> documentate la milimetru și tratăm <strong>averea intergenerațională în timp</strong> ca pe variabila de design centrală. Pentru un investitor care a atins deja independența financiară și operează printr-un SRL holding, problema reală nu este „cum mut banii", ci cum extragi capital intergenerațional pe orizont lung minimizând atât impozitul efectiv cumulat, cât și probabilitatea de declanșare a unei verificări ANAF — fără insolvență și fără scheme artificiale care cad la testul anti-abuz.</p>
+
+<p>Această lecție tratează arhitectura cantitativă a unei restructurări de tip rapid-fire, calibrată pe pragul de un milion de euro la care instituțiile financiare și Oficiul Național de Prevenire și Combatere a Spălării Banilor intensifică raportarea. Vom modela convenții de familie în care fiecare leu transferat este documentat ca substanță economică reală, vom calcula costul fiscal marginal al fiecărui canal și vom construi un calendar multi-anual care evită clustering-ul de tranzacții — semnalul numărul unu care atrage controlul fiscal. Presupun că stăpânești deja diferența cadou–moștenire, mecanica dividendelor și bazele succesiunii; mergem direct la modelele de optimizare.</p>
+
+<h2>Harta canalelor de transfer și costul fiscal marginal</h2>
+
+<p>Înainte de orice optimizare, fixează matricea de costuri. În România anului 2026, cele patru canale principale prin care capitalul trece de la generația care a acumulat (tu, post-FIRE) la următoarea sau lateral (soț/soție) au profiluri fiscale radical diferite. Cheia este că <strong>costul marginal nu este constant</strong>: el depinde de natura activului, de gradul de rudenie și de momentul transferului raportat la deces.</p>
+
+<ul>
+<li><strong>Donație de bani sau bunuri mobile între rude de gradul I–II</strong> (părinți–copii, frați, soți): scutită integral de impozit pe venit pentru beneficiar. Nu există impozit pe donație ca atare în Codul fiscal — donația de bani între persoane fizice nu generează venit impozabil la donatar indiferent de rudenie, dar pentru imobile se aplică taxa notarială și, eventual, impozitul pe transferul proprietăților.</li>
+<li><strong>Donație de imobile</strong>: la rude apropiate impozitul pe transferul proprietăților imobiliare nu se aplică la donație în linie directă în aceleași condiții ca la moștenire; rămân onorariul notarial (procentual, regresiv pe tranșe) și taxele de carte funciară.</li>
+<li><strong>Dividend din SRL</strong>: cota de impozit pe dividende este <strong>16%</strong> începând cu 1 ianuarie 2026 (majorată de la 10% în 2025), reținută la sursă. Atenție la regula tranzitorie: dividendele repartizate prin hotărâre AGA în 2025 dar plătite în 2026 păstrează cota de 10%; cele distribuite din 2026 se impozitează cu 16%. Peste plafonul de 6 salarii minime brute pe an se adaugă CASS 10% pe venitul din dividende, plafonată pe trepte.</li>
+<li><strong>Moștenire</strong>: dezbaterea succesorală finalizată în termen de 2 ani de la deces este scutită de impozit; peste 2 ani se aplică 1% pe valoarea masei succesorale. Acesta este reperul de comparat cu transferul inter vivos.</li>
+</ul>
+
+<p>Insight de specialist: pentru capitalul lichid deja extras din firmă, donația directă în numerar la copii este canalul cu cost fiscal marginal <strong>zero</strong>. Eroarea frecventă a investitorului avansat este să lase capitalul captiv în holding și să-l miște abia prin succesiune, plătind 1% pe toată masa dacă dezbaterea întârzie — când ar fi putut transfera 0% inter vivos, etalat pe ani.</p>
+
+<h2>Modelul de bază: extragere vs. donație directă</h2>
+
+<p>Să cuantificăm. Presupunem un holding SRL cu profit reportat și rezerve nedistribuite echivalente cu <strong>2.000.000 lei</strong>, pe care vrei să-l mobilizezi către doi copii înainte de FIRE complet, pe un orizont de 5 ani. Două rute:</p>
+
+<h3>Ruta A — dividend integral, apoi donație</h3>
+
+<p>Distribui întreg profitul ca dividend. Impozitul pe dividende 16% (cota 2026) = <strong>320.000 lei</strong>. La acest nivel de venit din dividende, CASS-ul nu se aplică pe întreaga sumă: contribuția se calculează pe trepte fixe în funcție de care prag de salariu minim este depășit, plafonată la treapta superioară de 24 de salarii minime brute. Cu salariul minim brut de 4.050 lei în 2026, cele trei trepte sunt 6 salarii (24.300 lei), 12 salarii (48.600 lei) și 24 salarii (97.200 lei); la un venit de 2.000.000 lei se depășește treapta maximă, deci baza CASS este plafonată la 97.200 lei, iar CASS 10% pe acest plafon = <strong>9.720 lei</strong>. Cost total de extragere: 329.720 lei. Suma netă în mâna ta: 1.670.280 lei. Donația ulterioară către copii: cost fiscal <strong>0</strong>.</p>
+
+<p>Costul efectiv al transferului: 329.720 / 2.000.000 = <strong>16,49%</strong>. Întreg acest cost provine din extragerea din firmă, nu din transferul în sine.</p>
+
+<h3>Ruta B — etalare multi-anuală pentru a comprima CASS</h3>
+
+<p>Dacă distribui dividendele în tranșe anuale astfel încât baza CASS să atingă plafonul o singură dată dar venitul total să rămână același, economia pe CASS este marginală (plafonul e atins oricum la sume mari). Adevărata economie din etalare nu vine din CASS, ci din <strong>evitarea clustering-ului de tranzacții</strong> și din menținerea capitalului productiv în firmă mai mult timp (cost de oportunitate). Modelează astfel:</p>
+
+<ul>
+<li>An 1–5: dividend 400.000 lei/an. Impozit 16% = 64.000 lei/an. CASS plafonat anual la 9.720 lei. Cost anual: 73.720 lei.</li>
+<li>Cost cumulat pe 5 ani: 368.600 lei — <strong>mai mare</strong> nominal decât Ruta A (329.720 lei), fiindcă plafonul CASS se atinge în fiecare an, nu o singură dată.</li>
+</ul>
+
+<p>Concluzia contraintuitivă: pentru sume mari, <strong>distribuția într-un singur an minimizează CASS-ul cumulat</strong> fiindcă plafonul anual se plătește o singură dată. Etalarea are sens doar dacă valoarea capitalului rămas productiv în firmă (la randamentul tău compus) depășește diferența de CASS. Dacă randamentul intern al holdingului este r și diferența de CASS este ΔC ≈ 38.880 lei pe 4 ani suplimentari, etalarea devine rațională doar dacă capitalul reținut generează peste această sumă net de impozit — un calcul de NPV care, la r > 6%, înclină ușor spre etalare moderată (2 ani), nu spre 5.</p>
+
+<h2>Convenția de familie: substanță economică vs. semnal de control</h2>
+
+<p>ANAF nu impozitează donațiile între rude, dar examinează <strong>fluxurile bancare neexplicate</strong>. Pentru <strong>convenții de familie ANAF minimizare</strong>, principiul director este: fiecare transfer trebuie să aibă un document care îi atestă natura juridică (contract de donație autentic sau cu dată certă) și o trasabilitate care leagă sursa de capital (dividend impozitat, salariu, vânzare de activ declarat) de destinație.</p>
+
+<p>Pragurile care declanșează raportare automată — independent de impozitare — sunt operaționale, nu fiscale:</p>
+
+<ul>
+<li><strong>Tranzacții în numerar peste 10.000 lei</strong>: interzise între persoane fizice conform legislației privind disciplina financiară; plafonul zilnic și per-tranzacție trebuie respectat. Donațiile mari se fac obligatoriu prin transfer bancar.</li>
+<li><strong>Raportare antispălare</strong>: instituțiile financiare raportează automat tranzacțiile suspecte și pe cele care depășesc pragul echivalent de 10.000 euro; transferurile mari trebuie să aibă o explicație documentară coerentă.</li>
+<li><strong>Verificarea situației fiscale personale (VSFP)</strong>: ANAF poate declanșa control dacă există o discrepanță semnificativă (pragul de risc uzual ~50.000 lei) între veniturile declarate și creșterea de patrimoniu/cheltuieli. Aici se prinde transferul nedocumentat.</li>
+</ul>
+
+<p><strong>Tehnica de specialist</strong>: donația documentată notarial neutralizează VSFP-ul, fiindcă răspunde la întrebarea „de unde provine creșterea de patrimoniu a copilului?" cu un titlu juridic legitim. Capitalul vine din sursă deja impozitată (dividendul tău, pe care ai plătit deja 16% impozit plus CASS plafonat), iar donația transferă proprietatea fără a genera venit nou impozabil. Lanțul probator complet: <em>profit firmă → dividend impozitat 16% → cont personal → contract donație autentic → cont copil</em>. Fiecare verigă este verificabilă și legală.</p>
+
+<h2>Calibrarea pragului de un milion și fereastra pre-FIRE</h2>
+
+<p>Reperul de un milion de euro nu este un prag fiscal, ci unul de <strong>vizibilitate sistemică</strong>. Transferurile care apropie patrimoniul unei persoane de acest nivel într-un interval scurt cresc probabilitatea selecției pentru control prin algoritmii de risc ANAF. Strategia de avere intergenerațională în timp tratează timpul ca variabilă de design, nu ca o constrângere.</p>
+
+<h3>Modelul de etalare cu buget de risc</h3>
+
+<p>Definește un „buget de risc anual" R = transfer maxim per beneficiar care nu activează scor de risc înalt. Empiric, transferurile sub ~50.000–100.000 lei/an per beneficiar, documentate, rămân sub radarul VSFP. Pentru a muta 2.000.000 lei către doi copii fără a declanșa controale, distribuie:</p>
+
+<ul>
+<li>Per copil: 1.000.000 lei. La 100.000 lei/an documentat = 10 ani per copil.</li>
+<li>Folosind ambii copii și soțul/soția ca beneficiari intermediari (toți rude de gradul I, toate donațiile scutite), capacitatea anuală de transfer crește la 3 × 100.000 = 300.000 lei/an fără clustering.</li>
+<li>Orizont efectiv pentru 2.000.000 lei: ~7 ani — care se aliniază natural cu fereastra pre-FIRE de 5–10 ani.</li>
+</ul>
+
+<p>Aici timpul devine activul cheie: cine începe planificarea succesorală FIRE cu 8–10 ani înainte de retragerea efectivă transferă întreaga avere prin canale 0% impozit, etalat sub pragurile de risc, fără să atingă vreodată impozitul de 1% pe moștenire și fără insolvență. Cine amână până la deces plătește 1% pe toată masa dacă dezbaterea trece de 2 ani — și pierde flexibilitatea de a alege destinatarul tranșă cu tranșă.</p>
+
+<h2>Edge-cases și capcane de specialist</h2>
+
+<h3>1. Donația în imobile vs. lichidități</h3>
+
+<p>Donația de bani este curată fiscal. Donația de imobile aduce onorariu notarial regresiv (procent pe tranșe, descrescător la valori mari) plus taxe de carte funciară. Pentru imobile cu plusvaloare latentă, decizia inter vivos vs. moștenire schimbă <strong>baza fiscală la o eventuală vânzare ulterioară</strong> de către moștenitor. Calculează: dacă imobilul va fi vândut de copil, transferul prin moștenire poate fi preferabil pentru tratamentul plusvalorii, în timp ce pentru active păstrate pe termen lung donația inter vivos accelerează controlul.</p>
+
+<h3>2. Reținerea CASS pe dividende la beneficiari multipli</h3>
+
+<p>Dacă structurezi astfel încât dividendul să fie distribuit către mai mulți asociați persoane fizice (copii deja co-asociați în holding), fiecare are propriul plafon CASS. Trei asociați = trei plafoane CASS de 9.720 lei, dar și trei baze de impozit pe dividende de 16%. Avantajul nu este pe impozitul de 16% (proporțional, neschimbat), ci pe faptul că fiecare beneficiar își gestionează propriul flux — reducând clustering-ul pe un singur cont. Capcana: aducerea copiilor ca asociați este ea însăși o donație de părți sociale, care trebuie evaluată și documentată la valoarea de piață a participației, nu la valoarea nominală.</p>
+
+<h3>3. Testul anti-abuz pe substanță economică</h3>
+
+<p>ANAF poate recalifica o operațiune dacă forma juridică nu corespunde substanței economice. O „donație" urmată imediat de returnarea fondurilor (round-tripping) este recalificabilă. Regula de aur: după donație, capitalul trebuie să rămână efectiv în patrimoniul beneficiarului — fără mandat ascuns, fără cont controlat de donator. Dacă păstrezi control de facto, structura cade la primul control aprofundat.</p>
+
+<h3>4. Interacțiunea cu pensia anticipată CNPP</h3>
+
+<p>Pentru cine combină FIRE cu pensie anticipată parțială, veniturile din dividende nu afectează calculul pensiei din pilonul public, dar cumulul pensie-anticipată + activitate poate suspenda plata. Dividendele nu sunt „activitate", deci sunt compatibile — un avantaj structural al extragerii prin dividend față de salariu în faza de tranziție. Cine își planifică ieșirea trebuie totuși să verifice că ordinul de extragere nu generează venituri care, raportate la baza de calcul a contribuțiilor, ridică artificial CASS-ul într-un an în care intenționează și valorificarea pilonului II — sincronizarea celor două fluxuri evită suprapuneri costisitoare.</p>
+
+<h3>5. Donația de portofoliu de instrumente financiare</h3>
+
+<p>Pentru investitorul FIRE care deține un portofoliu la BVB sau internațional, donația de titluri (acțiuni, ETF-uri, unități de fond) între rude apropiate transferă <strong>și plusvaloarea latentă</strong> împreună cu activul. Spre deosebire de vânzare — care, prin intermediar fiscal rezident, cristalizează câștigul de capital impozabil cu 3% (titluri deținute peste 365 de zile) sau 6% (sub 365 de zile) la cotele majorate din 2026, ori cu 16% autodeclarat în Declarația Unică pentru câștigurile prin broker străin — donația nu este eveniment fiscal de realizare pentru donator. Beneficiarul preia titlurile; impozitul pe câștig se va calcula doar la o eventuală vânzare ulterioară de către el, pe propria perioadă de deținere. Aceasta este una dintre cele mai eficiente forme de transfer patrimonial: muți avere apreciată fără a declanșa impozitul pe câștiguri și fără a recurge la nicio formă de insolvență sau lichidare forțată.</p>
+
+<h2>Model integrat: secvența rapid-fire optimă</h2>
+
+<p>Punând totul împreună, secvența cu cel mai mic cost fiscal cumulat și cea mai joasă probabilitate de control, pentru 2.000.000 lei și 2 copii + soț/soție, pe 7 ani:</p>
+
+<ul>
+<li><strong>Faza 0 (an -8 față de FIRE)</strong>: consolidează capitalul în holding, calculează rezervele distribuibile, stabilește calendarul.</li>
+<li><strong>Faza 1 (ani 1–2)</strong>: distribuie dividende concentrat în primii ani pentru a plăti plafonul CASS de cât mai puține ori (plafonul anual e fix, deci comprimă în puține tranșe). Impozit efectiv ~16,5%.</li>
+<li><strong>Faza 2 (ani 1–7)</strong>: donează din capitalul net extras către cei 3 beneficiari, ~300.000 lei/an total, fiecare cu contract de donație autentificat, prin transfer bancar, sub pragul de risc VSFP per beneficiar.</li>
+<li><strong>Faza 3 (an 7+)</strong>: capitalul a migrat integral la cost fiscal ~16,5% (doar pasul de extragere prin dividend), zero impozit pe transfer, impozitul de 1% pe moștenire evitat, fără insolvență.</li>
+</ul>
+
+<p>Compară cu scenariul „nu fac nimic, las prin moștenire": dacă moștenitorii dezbat succesiunea în 2 ani, impozitul direct e 0%, dar pierzi complet controlul asupra distribuției, riști blocaje succesorale, și capitalul rămâne captiv în firmă (cu obligațiile ei) până la deces. Costul real nu e fiscal, ci de optionalitate și risc operațional.</p>
+
+<h2>Checklist de execuție</h2>
+
+<ul>
+<li><strong>Documentează sursa</strong>: fiecare dividend cu hotărâre AGA, impozit reținut și declarat (declarația de impozit pe dividende depusă la termen).</li>
+<li><strong>Autentifică donațiile</strong>: contract de donație cu dată certă sau notarial pentru sume mari; transfer exclusiv bancar, niciodată numerar peste plafon.</li>
+<li><strong>Etalează sub pragul de risc</strong>: ~100.000 lei/an per beneficiar; folosește toți beneficiarii de gradul I pentru a crește capacitatea fără clustering.</li>
+<li><strong>Comprimă extragerea CASS</strong>: distribuie dividende în puține tranșe mari pentru a plăti plafonul anual de CASS de cât mai puține ori.</li>
+<li><strong>Nu face round-tripping</strong>: capitalul donat rămâne efectiv al beneficiarului; zero mandat ascuns, zero cont controlat.</li>
+<li><strong>Începe devreme</strong>: 8–10 ani înainte de FIRE complet; timpul este variabila care transformă un transfer de 1% (sau mai mult cu control) într-unul de 0% pe partea de transfer.</li>
+<li><strong>Validează cu specialist</strong>: înainte de execuție, confirmă cotele și pragurile exacte ale anului fiscal curent cu un consultant fiscal autorizat — cotele de dividend, plafoanele CASS și pragurile VSFP se modifică anual.</li>
+</ul>
+
+<p>Esența arhitecturii: separi cei doi pași care sunt adesea confundați. Pasul scump este <strong>extragerea</strong> din firmă (16% dividend la cota 2026 + CASS plafonat). Pasul de <strong>transfer</strong> între rude apropiate este gratuit fiscal. Optimizezi extragerea prin concentrare temporală (plafon CASS plătit minim de ori) și optimizezi transferul prin etalare temporală (sub pragurile de risc). Cele două logici sunt opuse — concentrezi extragerea, distribui transferul — și exact această asimetrie, executată pe o fereastră de 7–10 ani pre-FIRE, produce migrarea integrală a averii la cost minim și risc de control aproape nul.</p>

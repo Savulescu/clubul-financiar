@@ -1,0 +1,121 @@
+<p>Plafonul de Pilon III nu este o constantă pe care o „bifezi" mecanic în fiecare decembrie. Este o <strong>fereastră fiscală cu valoare variabilă</strong>, iar valoarea ei reală depinde de cota marginală la care recuperezi impozitul în anul respectiv și de momentul în care imobilizezi cash-ul. Pentru un specialist, întrebarea relevantă nu mai este „cât deduc?", ci optimizarea propriu-zisă: <strong>contribuții Pilon III eșalonate timing optimizare</strong> — adică în ce ani fiscali și în ce luni plasezi contribuțiile pentru a extrage deducerea maximă pe orizont multianual, nu pe an izolat.</p>
+
+<p>Această lecție tratează problema ca pe un model de alocare temporală sub constrângeri. Vei lucra cu plafonul anual de echivalent 400 EUR/persoană (Legea 204/2006), cu cele două ferestre fiscale Pilon III în România — componenta proprie și cea suportată de angajator — și cu structurile de venit unde marja se schimbă de la an la an: angajat cu bonus ciclic, PFA în sistem real cu venit volatil și administrator-asociat de SRL care arbitrează între salariu și dividend. Pe deasupra, vei calcula <strong>valoarea actualizată netă Pilon III</strong> a deducerii, ca să decizi nu doar *dacă*, ci *când* plătești.</p>
+
+<p>Premisa: stăpânești deja mecanica deducerii și plafonul. Aici intrăm direct în eșalonare contribuții Pilon III ani fiscali, în logica „maxim deducere 400 EUR Pilon III strategie" aplicată multianual, în harta de ferestre fiscale Pilon III România per structură de venit și în tehnicile de specialist pentru optimizare randament Pilon III deducere atunci când venitul nu este plat. Vei vedea formule de min(C, P), modelul VAN al recuperării întârziate, arbitrajul cotei marginale la pragurile CASS și deciziile de lună (ianuarie vs. decembrie) calibrate pe orizont.</p>
+
+<h2>1. De ce deducerea nu valorează la fel în fiecare an</h2>
+
+<p>Eroarea clasică a investitorului avansat este să trateze cei ~2.000 lei deductibili anual ca pe un beneficiu fix de ~200 lei (10% impozit pe venit). Este greșit din trei motive cuantificabile.</p>
+
+<ul>
+<li><strong>Cota efectivă de recuperare diferă de structură.</strong> La salariat și la PFA, impozitul pe venit este 10% — deci deducerea valorează 10% din suma dedusă. Dar la <strong>SRL</strong>, contribuția suportată de companie ca beneficiu salarial (în limita 400 EUR/persoană, neimpozabilă) „economisește" întregul wedge fiscal pe acea felie de remunerație: impozit 10% + CAS 25% + CASS 10% pe care i-ai fi plătit dacă acei bani treceau ca salariu net obișnuit. Aceeași sumă nominală are deci valori de recuperare radical diferite.</li>
+<li><strong>Plafonul este în EUR, dar plătești în lei.</strong> Echivalentul în lei se calculează la cursul BNR, deci suma maximă deductibilă în lei <strong>se mișcă de la an la an</strong>. Eșalonarea care ignoră cursul lasă bani pe masă în anii cu leu slab.</li>
+<li><strong>Deducerea nereportabilă.</strong> Plafonul anual <strong>nu se reportează</strong>: dacă într-un an contribui sub plafon, diferența se pierde definitiv. Aceasta este constrângerea-cheie a întregului model de eșalonare.</li>
+</ul>
+
+<h3>Constrângerea „use-it-or-lose-it" formalizată</h3>
+
+<p>Fie <em>P</em> = plafonul anual în lei (echivalent 400 EUR la cursul BNR), <em>C<sub>t</sub></em> = contribuția în anul <em>t</em> și <em>τ<sub>t</sub></em> = cota efectivă de recuperare în anul <em>t</em> (10% la salariat/PFA pe componenta proprie; până la ~45% wedge la componenta plătită de SRL/angajator). Beneficiul fiscal recuperat în anul <em>t</em> este:</p>
+
+<p><strong>B<sub>t</sub> = min(C<sub>t</sub>, P) × τ<sub>t</sub></strong></p>
+
+<p>Suma peste plafon (<em>C<sub>t</sub> > P</em>) intră tot în fond și produce randament, dar <strong>nu mai produce deducere</strong>. De aici regula de bază a eșalonării: niciodată nu „înghesui" doi ani de plafon într-un singur an fiscal sperând la dublu — al doilea plafon se evaporă. Eșalonarea corectă înseamnă <strong>câte un plafon plin pe fiecare an fiscal deschis</strong>, plus arbitrajul cotei <em>τ<sub>t</sub></em>.</p>
+
+<h2>2. Cele două ferestre fiscale Pilon III și cum le combini</h2>
+
+<p>În România ai, per participant, <strong>două plafoane distincte de 400 EUR</strong>: unul pe contribuția proprie (dedusă din baza impozitului pe venit) și unul pe contribuția suportată de angajator (neimpozabilă la nivelul tău, în limita echivalentului a 400 EUR/an). Asta înseamnă până la 800 EUR/an tratament fiscal favorabil per persoană. Pentru ferestre fiscale Pilon III România, cheia de specialist este să mapezi fiecare structură de venit pe fereastra care îi maximizează <em>τ</em>:</p>
+
+<ul>
+<li><strong>Angajat cu beneficiu de la firmă:</strong> umpli mai întâi fereastra angajatorului (neimpozabilă — scapi de wedge-ul pe care firma l-ar fi suportat oricum) și abia apoi fereastra proprie (recuperare 10%).</li>
+<li><strong>PFA în sistem real:</strong> ai doar fereastra proprie, deci recuperare 10%, dar o aplici prin Declarația Unică pe venitul net anual.</li>
+<li><strong>Administrator-asociat SRL:</strong> ai ambele ferestre dacă îți faci contract de mandat/CIM cu salariu — fereastra „angajatorului" o suportă propriul SRL, deci recuperezi wedge-ul integral pe acea felie.</li>
+</ul>
+
+<h2>3. Modelul de timing: în ce LUNĂ contribui</h2>
+
+<p>După ce stabilești <em>câți</em> bani pe an, urmează <em>când</em> în interiorul anului. Aici intervine valoarea actualizată netă Pilon III, pentru că deducerea nu este încasată în momentul plății, ci <strong>recuperată mai târziu</strong> — iar întârzierea are cost.</p>
+
+<h3>3.1. Salariatul prin angajator: contribuie ianuarie, nu decembrie</h3>
+
+<p>Când contribuția trece prin statul de plată, deducerea se aplică <strong>lunar</strong>, la calculul impozitului pe venit. Dacă împarți plafonul în 12 tranșe egale începând cu ianuarie, primești beneficiul fiscal pe parcursul anului. Dacă, în schimb, contribui o singură dată în decembrie, deducerea lunară maximă este limitată de echivalentul 1/12 din plafon pe lună — și riști să <strong>nu poți consuma tot plafonul</strong> într-o singură lună de salariu. Concluzie: prin angajator, <strong>eșalonarea lunară începută din ianuarie</strong> este simultan optimă fiscal (consumi sigur tot plafonul) și optimă VAN (recuperezi devreme).</p>
+
+<h3>3.2. PFA și plata directă: contribuie devreme, deduci anul următor</h3>
+
+<p>Pentru PFA și pentru salariații care plătesc din cont propriu, deducerea se cere prin <strong>Declarația Unică</strong>, depusă în anul <em>t+1</em> pentru contribuțiile din anul <em>t</em>. Există un decalaj de recuperare de până la ~15 luni între o plată făcută în ianuarie <em>t</em> și impozitul redus achitat în <em>t+1</em>.</p>
+
+<p>Modelul VAN al unei contribuții de plafon <em>P</em> recuperată cu cota <em>τ</em> la <em>n</em> luni distanță, la rata de actualizare lunară <em>r</em>:</p>
+
+<p><strong>VAN<sub>deducere</sub> = (P × τ) / (1 + r)<sup>n</sup></strong></p>
+
+<p>Exemplu numeric. Plafon <em>P</em> ≈ 2.000 lei, <em>τ</em> = 10%, deci beneficiu nominal 200 lei. La o rată de actualizare reală de ~6%/an (≈ 0,5%/lună, ancorată în randamentul fără risc — titluri de stat / dobânda de politică monetară BNR în 2026):</p>
+
+<ul>
+<li>Plată în <strong>ianuarie t</strong>, recuperare în <strong>mai t+1</strong> (declarația depusă la termen) → <em>n</em> ≈ 16 luni → VAN ≈ 200 / 1,005<sup>16</sup> ≈ <strong>184,7 lei</strong>.</li>
+<li>Plată în <strong>decembrie t</strong>, recuperare în <strong>mai t+1</strong> → <em>n</em> ≈ 5 luni → VAN ≈ 200 / 1,005<sup>5</sup> ≈ <strong>195,1 lei</strong>.</li>
+</ul>
+
+<p>Surpriza contra-intuitivă: pentru cine deduce <strong>anual prin Declarația Unică</strong>, plata <em>târzie</em> (decembrie) bate plata timpurie pe latura deducerii, pentru că momentul recuperării este fix (mai <em>t+1</em>), iar contribuind mai târziu scurtezi imobilizarea cash-ului. Dar atenție — aceasta este DOAR latura deducerii.</p>
+
+<h3>3.3. Arbitrajul deducere vs. randament al fondului</h3>
+
+<p>Decizia completă trebuie să cântărească și <strong>randamentul intern al fondului</strong> pierdut prin plata târzie. Dacă plătești în decembrie în loc de ianuarie, fondul tău a stat 11 luni nefructificat. VAN total al unei contribuții este:</p>
+
+<p><strong>VAN<sub>total</sub> = VAN<sub>deducere</sub> + (randament fond pe perioada suplimentară de expunere)</strong></p>
+
+<p>Pe orizont lung, componenta de creștere a fondului (capitalizată zeci de ani) <strong>domină</strong> componenta de deducere. Regula de specialist se inversează în funcție de orizont:</p>
+
+<ul>
+<li><strong>Orizont lung (acumulare, >10 ani până la 60 de ani):</strong> contribuie <strong>devreme</strong> (ianuarie), pentru că randamentul compus al fondului depășește micul cost de actualizare al deducerii întârziate. Pierderea de ~10 lei pe VAN-ul deducerii este nesemnificativă față de 11 luni de expunere la piață.</li>
+<li><strong>Orizont scurt (aproape de retragere, deducerea e principalul beneficiu):</strong> contribuie <strong>târziu</strong> (decembrie), pentru că recuperarea fiscală devine motivul dominant și vrei să minimizezi imobilizarea cash-ului.</li>
+</ul>
+
+<h2>4. Eșalonarea pe ani fiscali când venitul este volatil</h2>
+
+<p>Aici se vede diferența dintre un cititor avansat și un specialist. Plafonul este nereportabil, dar <strong>tu controlezi parțial în ce an „cade" venitul tău</strong> — mai ales ca PFA în sistem real și ca SRL. Logica „eșalonare contribuții Pilon III ani fiscali" devine un joc de potrivire între anii cu deducere și anii cu cea mai mare cotă marginală de recuperare.</p>
+
+<h3>4.1. PFA cu venit ciclic — exemplu pe trei ani</h3>
+
+<p>Un PFA în sistem real are: anul 1 venit net mic (sub plafonul CASS de 6 salarii minime), anul 2 venit mediu, anul 3 venit mare (peste 24 de salarii minime). Aici trebuie făcută o distincție tehnică pe care mulți o ratează: deducerea Pilon III reduce <strong>baza impozitului pe venit</strong> (cei 10% impozit), dar <strong>nu</strong> reduce baza de calcul a CASS la PFA. CASS pentru PFA în sistem real se așază pe venitul net anual <em>înainte</em> de deducerea Pilon III, pe tranșele de 6 / 12 / 24 salarii minime. Cu alte cuvinte, plata de Pilon III <strong>nu</strong> te coboară sub un prag de CASS — economia directă, an de an, rămâne cei 10% impozit pe venit.</p>
+
+<p>Atunci unde mai există optimizare multianuală pentru PFA, dacă <em>τ</em> = 10% e constant? În două locuri subtile:</p>
+
+<ul>
+<li><strong>Suficiența bazei impozabile.</strong> Deducerea valorează 10% doar dacă ai venit net impozabil suficient în acel an. Într-un an cu venit mic sau pe pierdere, o parte din deducere se poate „risipi" pe o bază deja redusă. Plasează plafonul plin cu prioritate în anii cu venit net solid, unde recuperarea de 10% este sigură și completă.</li>
+<li><strong>Sincronizarea cu alte structuri.</strong> Dacă în paralel ai și salariu sau ești și administrator de SRL, mută efortul de plafonare către fereastra cu cota efectivă cea mai mare în anul respectiv (vezi 4.2), nu către componenta PFA unde <em>τ</em> rămâne plafonat la 10%.</li>
+</ul>
+
+<p>Concluzia de timing: ca PFA, nu plătești orbește plafonul în fiecare decembrie. <strong>Estimezi la final de an dacă vei avea venit net impozabil suficient</strong> și, dacă ai și alte structuri, direcționezi plafonul către fereastra cu <em>τ</em> maxim — fără să te bazezi pe un „bonus CASS" care, la PFA, nu se produce.</p>
+
+<h3>4.2. Administrator SRL — arbitrajul salariu/dividend pe ani</h3>
+
+<p>La SRL, cota efectivă de recuperare a contribuției plătite de companie ca beneficiu Pilon III este cea mai mare din întreaga schemă. Dacă acei bani ar fi trecut prin salariu, ar fi suportat impozit 10% + CAS 25% + CASS 10%; dacă ar fi trecut prin dividend, ar fi suportat impozit pe profit + impozit pe dividend (cotă majorată la <strong>16%</strong> începând cu 2026). Contribuția Pilon III de la firmă, în limita 400 EUR/persoană, ocolește o parte din aceste straturi.</p>
+
+<p>De aceea, în anii în care SRL-ul are <strong>profit ridicat</strong> (deci ai presiune de distribuire), umpli cu prioritate <strong>ambele ferestre</strong> (a ta + a „angajatorului" = propriul SRL) pentru fiecare administrator-asociat participant. În anii slabi de profit, fereastra angajatorului are valoare mai mică (firma oricum nu distribuie mult) — dar nu o sări, fiindcă plafonul nereportabil dispare.</p>
+
+<h2>5. Eșalonarea pe mai mulți participanți (cuplu / firmă de familie)</h2>
+
+<p>Plafonul este <strong>per persoană</strong>, nu per gospodărie. Un cuplu are 2 × 400 EUR fereastră proprie + 2 × 400 EUR fereastră angajator dacă ambii sunt salariați/administratori cu beneficiu. Optimizarea multianuală a unei gospodării sau a unei firme de familie înseamnă:</p>
+
+<ul>
+<li>Deschizi <strong>câte un cont Pilon III pentru fiecare membru cu venit impozabil</strong> (inclusiv soțul/soția dacă au venituri proprii) — fiecare cont activează o fereastră de 400 EUR.</li>
+<li>În anul în care unul dintre soți are cota efectivă mai mare (administrator SRL profitabil care recuperează wedge-ul integral prin fereastra angajatorului, vs. PFA cu recuperare plafonată la 10%), <strong>încarci prioritar plafonul acelui participant</strong>.</li>
+<li>Pentru un SRL de familie, fiecare administrator-asociat cu CIM/mandat și salariu activează propria fereastră de angajator suportată de firmă — multiplici beneficiul cu wedge integral, an de an.</li>
+</ul>
+
+<h2>6. Plan operațional de eșalonare multianuală</h2>
+
+<p>Pune cap la cap modelul într-o procedură repetabilă, pe care o rulezi în fiecare noiembrie–decembrie pentru anul curent și o calibrezi pentru următorii ani.</p>
+
+<ul>
+<li><strong>Pas 1 — Mapează structura.</strong> Identifică fiecare flux de venit (salariu, PFA real, dividend SRL) și fereastra disponibilă: proprie (10%), angajator (wedge integral), sau ambele. Deschide câte un cont Pilon III pentru fiecare participant fără cont.</li>
+<li><strong>Pas 2 — Fixează plafonul în lei.</strong> Verifică pe <a href="https://www.bnr.ro" target="_blank" rel="noopener">bnr.ro</a> cursul de referință și calculează echivalentul în lei al celor 400 EUR/fereastră pentru anul curent. Plafonul exact se modifică anual cu cursul.</li>
+<li><strong>Pas 3 — Estimează venitul anual și cota efectivă.</strong> Pentru PFA, verifică doar că vei avea venit net impozabil suficient ca deducerea de 10% să fie consumată integral (deducerea Pilon III nu modifică tranșa CASS de 6/12/24 salarii minime). Pentru SRL, proiectează profitul distribuibil și presiunea de distribuire. Identifică anii și ferestrele cu cotă efectivă de recuperare crescută (tipic fereastra angajatorului la SRL).</li>
+<li><strong>Pas 4 — Alege fereastra cu τ maxim.</strong> Umple întâi fereastra angajatorului (SRL/firmă), apoi fereastra proprie. Nu lăsa niciun plafon negolit — este nereportabil.</li>
+<li><strong>Pas 5 — Decide luna în funcție de orizont.</strong> Acumulare lungă (>10 ani) → contribuie din <strong>ianuarie</strong>, prin statul de plată dacă ești salariat, pentru maximizarea randamentului compus. Aproape de retragere → contribuie în <strong>decembrie</strong> pentru a minimiza imobilizarea cash-ului înainte de recuperarea fiscală din mai <em>t+1</em>.</li>
+<li><strong>Pas 6 — Documentează pentru deducere.</strong> Prin angajator: act de aderare + reținere din salariu, deducere automată lunară. Prin plată directă: păstrează dovezile de plată și declară prin <a href="https://www.anaf.ro/SpatiulPrivatVirtual/" target="_blank" rel="noopener">SPV</a> în Declarația Unică, în anul următor.</li>
+<li><strong>Pas 7 — Verifică lista de fonduri autorizate.</strong> Folosește doar fonduri de pensii facultative autorizate de ASF — confirmă pe <a href="https://www.asfromania.ro" target="_blank" rel="noopener">asfromania.ro</a> înainte de aderare.</li>
+<li><strong>Pas 8 — Recalibrează anual.</strong> Plafonul (curs EUR/lei), pragurile CASS (salariul minim) și cota de dividend se schimbă. Re-rulează modelul în fiecare an; nu copia decizia de anul trecut.</li>
+</ul>
+
+<p>Reține esența: Pilonul III nu este o decizie binară anuală, ci o serie de ferestre nereportabile pe care le sincronizezi cu propriul profil de venit. Cine tratează plafonul ca pe o constantă lasă bani pe masă în fiecare an cu venit volatil; cine îl tratează ca pe un model de timing multianual extrage și deducerea maximă, și valoarea actualizată netă optimă. Pentru cifrele exacte ale anului în care depui — curs BNR, salariul minim de referință, cotele — confirmă întotdeauna pe <a href="https://www.anaf.ro" target="_blank" rel="noopener">anaf.ro</a> înainte de a executa planul.</p>

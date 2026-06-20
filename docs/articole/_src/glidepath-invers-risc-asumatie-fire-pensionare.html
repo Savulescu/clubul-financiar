@@ -1,0 +1,115 @@
+<p>Cea mai contraintuitivă decizie de alocare din întreaga arhitectură FIRE este aceasta: cu trei până la cinci ani înainte de ieșire, un investitor disciplinat trebuie deseori să <em>crească</em> ponderea de acțiuni, nu să o reducă. Acesta este <strong>glidepath invers risc fire pensionare</strong> — opusul exact al glidepath-ului clasic descendent (descending equity glide). Lecția tratează frontal <strong>trecerea de la siguranță la risc</strong> controlată, <strong>rebalansarea dinamică pre-fire</strong> pilotată de funded ratio, dimensionarea unui <strong>cash ladder obligațiuni fire</strong> ca amortizor, și construirea unui <strong>ristourn securitate fire anticipare</strong> care neutralizează <strong>sequencing risk FIRE invers</strong> exact în fereastra critică din jurul exit-ului. Premisa: stăpânești deja conceptul de sequencing risk, știi de ce un portofoliu prea agresiv în primii ani de retragere poate distruge un plan altfel solid, și ai modelat deja un bond tent în jurul datei de exit.</p>
+
+<p>Problema reală pe care o rezolvăm este una de optimizare sub constrângere dublă. Pe de o parte, <strong>trecerea de la siguranță la risc</strong> prematură te expune la un drawdown major exact în fereastra în care nu mai ai venit din muncă pentru a face dollar-cost averaging. Pe de altă parte, un „veganism fiscal” — adică un portofoliu de obligațiuni pure și cash în ultimii ani de acumulare, motivat de teama de volatilitate — sacrifică tocmai randamentul compus de care depinde atingerea numărului FIRE. Lecția construiește un model cu patru faze, cu <strong>cash ladder obligațiuni fire</strong> ca amortizor, cu o regulă de timing legată de EURIBOR și de dobânda de politică monetară BNR, și cu un stress-test pe scenarii adverse de secvență.</p>
+
+<p>Vom acoperi: de ce U-shaped equity glidepath bate atât descending, cât și static; cum calibrezi <strong>rebalansare dinamică pre-fire</strong> pe baza distanței până la numărul-țintă; cum dimensionezi scara de obligațiuni și depozite pentru a tampona <strong>sequencing risk FIRE invers</strong>; și cum construiești un <strong>ristourn securitate fire anticipare</strong> — adică momentul calibrat în care reduci la loc riscul după ce ai capturat upside-ul. Totul ancorat în realitatea fiscală și monetară RO 2026.</p>
+
+<h2>De ce glidepath invers: anatomia bond tent-ului și a U-shape-ului</h2>
+
+<p>Cercetarea fondatoare aici este Kitces & Pfau (2014), „Reducing Retirement Risk with a Rising Equity Glidepath”. Concluzia replicată pe serii lungi: un portofoliu care <em>pornește</em> retragerea la o pondere scăzută de acțiuni (~30-40%) și o ridică gradual spre ~60-70% în deceniul următor produce o rată de eșec inferioară și un terminal wealth median superior față de un static 60/40, în condiții de sequencing risk advers. Mecanismul: pierderile contează cel mai mult când portofoliul e cel mai mare și retragerile abia încep; deci minimizezi expunerea exact în fereastra critică (anii -2 până la +5 față de exit), apoi o reconstruiești.</p>
+
+<p>Glidepath-ul invers pre-FIRE este partea ascendentă a acestui „bond tent”, dar mutată în faza de acumulare. Logica: dacă în ultimii 5 ani înainte de exit stai în obligațiuni pure pentru că ți-e frică de volatilitate, plătești un cost de oportunitate brutal. Pe un activ de 1.500.000 lei, diferența dintre un randament real așteptat de 1,5% (obligațiuni) și 5,5% (acțiuni) pe 5 ani înseamnă, compus, aproximativ <strong>320.000 lei</strong> de avere terminală pierdută — adică deseori chiar diferența dintre Lean FIRE și Fat FIRE.</p>
+
+<p>Cheia care face distincția față de o simplă „supra-expunere imprudentă” este că glidepath-ul invers pre-FIRE este <strong>condiționat de distanța față de țintă</strong>, nu calendaristic. Nu crești riscul orbește pentru că „mai ai 5 ani”; îl crești doar atât cât funded ratio îți permite. Asta e nucleul cantitativ.</p>
+
+<h3>Funded ratio ca guvernator al ponderii de acțiuni</h3>
+
+<p>Definește <strong>funded ratio (FR)</strong> = activ curent / valoarea prezentă a țintei FIRE actualizate. Ținta o exprimi ca multiplu de cheltuieli (regula 25× pentru SWR 4%, sau 28,5× pentru un SWR mai conservator de 3,5% adaptat RO, unde inflația medie e structural mai ridicată). Formula de pondere de acțiuni țintă:</p>
+
+<ul>
+<li><strong>w_equity = w_floor + (w_cap − w_floor) × f(FR)</strong>, unde f este o funcție de saturație a distanței.</li>
+<li>w_floor = 25% (planșeu, nu cobori sub el nici în veganism fiscal), w_cap = 75% (plafonul pe care nu îl depășești în faza pre-exit, oricât de tentant).</li>
+<li>f(FR) crește când FR e sub 1 (ești subfinanțat → ai nevoie de randament → asumi mai mult risc) și scade brusc când FR depășește ~1,10 (ești deja finanțat → nu mai ai de ce să riști secvența).</li>
+</ul>
+
+<p>Aceasta este versiunea matură a ideii de „<strong>trecere de la siguranță la risc</strong>”: riscul nu e un buton on/off legat de vârstă, ci o variabilă continuă pilotată de cât de aproape ești de țintă. Un investitor cu FR = 0,82 la 5 ani de exit are nevoie structurală de echity ca să închidă gap-ul; unul cu FR = 1,15 nu — el a câștigat deja jocul și orice risc suplimentar e doar varianță negativă.</p>
+
+<h2>Modelul cu patru faze</h2>
+
+<p>Structurăm ultimii ~5 ani în patru faze, cu reguli de tranziție explicite. Ancorăm pe un caz numeric: investitor de 47 de ani, țintă FIRE la 52, cheltuieli anuale nete de 96.000 lei (8.000 lei/lună), țintă 28,5× = <strong>2.736.000 lei</strong>, activ curent la T-5 ani = 1.950.000 lei → FR_inițial ≈ 0,71.</p>
+
+<h3>Faza 1 (T-5 → T-4): Captura — ridicarea controlată a riscului</h3>
+
+<p>FR sub 0,80 te pune categoric în zona „ai nevoie de randament”. Aici aplici glidepath-ul invers propriu-zis: ridici ponderea de acțiuni de la un eventual 50% spre w_cap. Cu f(FR=0,71) ≈ 0,90, w_equity ≈ 25% + 50% × 0,90 = <strong>70%</strong>. Restul de 30% rămâne în obligațiuni și cash, dar nu oricum — îl structurezi deja ca prima treaptă a scării.</p>
+
+<ul>
+<li>Tranziția nu se face dintr-o singură mișcare. Folosești <strong>tranching pe 4 trimestre</strong> (value-averaging spre ținta de pondere), ca să nu cumperi tot la un vârf de piață. Fiecare tranșă mută ~5 puncte de pondere.</li>
+<li>Vehiculul fiscal contează enorm. În RO 2026, câștigurile de capital din acțiuni/ETF deținute prin <strong>intermediar fiscal rezident</strong> (broker care reține la sursă) sunt impozitate la <strong>3% pentru dețineri peste 365 de zile</strong> și 6% sub 365 de zile. Deci ridicarea expunerii prin instrumente pe care le vei ține lung profită de cota redusă de 3% (jumătate față de cea pentru dețineri scurte) — un argument suplimentar pentru a face mutarea <em>devreme</em> și a lăsa timpul să curgă. Atenție: la un <strong>broker străin</strong> (fără reținere la sursă) câștigul nu beneficiază de cotele preferențiale, ci se autodeclară prin Declarația Unică și se impozitează la <strong>10%</strong>, indiferent de perioada de deținere — un motiv în plus să rulezi expunerea pe termen lung printr-un intermediar rezident.</li>
+</ul>
+
+<h3>Faza 2 (T-4 → T-2): Acumularea agresivă a randamentului</h3>
+
+<p>Aceasta e fereastra în care lași echity să lucreze. Menții w_equity la nivelul-țintă, dar reaplici regula funded-ratio la fiecare rebalansare semestrială. Pe măsură ce FR urcă spre 0,95-1,00, f(FR) începe să scadă, deci ponderea-țintă de acțiuni <em>scade automat</em> — vinzi din câștiguri și transferi în scara de obligațiuni. Aceasta este esența <strong>rebalansării dinamice pre-fire</strong>: nu rebalansezi spre o pondere fixă, ci spre o pondere care alunecă în jos pe măsură ce te apropii de finanțarea completă.</p>
+
+<p>Numeric: dacă în Faza 2 piața urcă și activul ajunge la 2.450.000 lei, FR ≈ 0,90. f(0,90) ≈ 0,60 → w_equity țintă scade la 25% + 50% × 0,60 = <strong>55%</strong>. Diferența de 15 puncte (≈ 367.000 lei) o muți din acțiuni în prima și a doua treaptă a cash ladder-ului. Ai capturat upside-ul și începi să-l blochezi.</p>
+
+<h3>Faza 3 (T-2 → T-0): De-risking-ul — ristournul de securitate</h3>
+
+<p>Aici intervine <strong>ristourn securitate fire anticipare</strong>: indiferent de funded ratio, cu maximum 24 de luni înainte de exit aplici un plafon dur descrescător pe echity, ca să nu intri în primul an de retragere cu o expunere care, în caz de criză, ar declanșa sequencing risk. Regula: w_equity_max(luni rămase) = min(w_funded, 35% + 1% × luni_rămase). La 24 de luni → max 59%; la 12 luni → max 47%; la exit → max 35%.</p>
+
+<ul>
+<li>Acesta e momentul în care construiești <strong>partea de jos a U-shape-ului</strong>: portofoliul atinge minimul de echity exact la data exit-ului (anul cel mai vulnerabil la secvență).</li>
+<li>Transferul se face preferențial din pozițiile cu cea mai mare apreciere ținute peste un an (recoltezi câștiguri la cota redusă de 3% via intermediar rezident, nu 6%) și calendaristic, nu „la dip” — nu încerci market timing la de-risking, pentru că obiectivul e reducerea varianței, nu maximizarea.</li>
+</ul>
+
+<h3>Faza 4 (T-0 → T+5): Reconstrucția — partea ascendentă post-exit</h3>
+
+<p>După exit, dacă nu apare o criză majoră, reiei urcarea ponderii de acțiuni dinspre ~35% spre ~60-65% pe parcursul a 5-7 ani (rising equity glidepath clasic Kitces/Pfau). Cash ladder-ul construit în fazele 2-3 finanțează cheltuielile în acești ani, astfel încât nu vinzi acțiuni în pierdere dacă piața e jos. Aceasta închide întregul „bond tent”: jos la acumulare târzie via U-shape, minim la exit, urcare după.</p>
+
+<h2>Cash ladder de obligațiuni: dimensionarea amortizorului</h2>
+
+<p>Scara de obligațiuni (<strong>cash ladder obligațiuni fire</strong>) are un singur scop: să furnizeze 100% din cheltuielile primilor ani de retragere fără a atinge vreodată acțiunile într-o piață scăzută. Dimensionarea: acoperi <strong>5-7 ani de cheltuieli</strong> în treptele scării, scalonat anual.</p>
+
+<ul>
+<li><strong>Treapta 0-1 an:</strong> depozite bancare și cash. În RO 2026, dobânzile la depozite urmăresc dobânda de politică monetară BNR; câștigul din dobândă este impozitat cu <strong>10% impozit pe venit</strong> plus, atenție, <strong>CASS 10%</strong> dacă veniturile extrasalariale cumulate depășesc pragurile pe trepte de 6/12/24 salarii minime. La salariul minim brut de 4.050 lei valabil în 2026, pragurile sunt de <strong>24.300 / 48.600 / 97.200 lei</strong> pe an, iar baza de calcul a CASS este plafonată la nivelul fiecărei trepte atinse (nu se aplică pe tot venitul). În FIRE, fără salariu, e foarte probabil să intri sub incidența CASS pe veniturile din investiții — modelează-l explicit, e o erodare reală de până la ~10% pe cupon, în limita plafonului de 97.200 lei.</li>
+<li><strong>Treptele 2-3 ani:</strong> titluri de stat. Programul <strong>Fidelis</strong> (BVB) oferă cupoane cu un avantaj fiscal-cheie: dobânda este <strong>neimpozabilă</strong> (scutită de impozit pe venit), iar la titlurile de stat câștigul din dobândă nu intră în baza CASS. Acesta e instrumentul ideal pentru treptele medii ale scării — randament net superior unui depozit la aceeași dobândă brută.</li>
+<li><strong>Treptele 4-7 ani:</strong> obligațiuni cu maturitate mai lungă sau ETF de obligațiuni guvernamentale. Aici accepți puțin risc de durată în schimbul cuponului mai mare; le poziționezi pe partea îndepărtată a scării unde ai timp să le ții până la maturitate.</li>
+</ul>
+
+<p>Numeric, pentru 96.000 lei/an cheltuieli și o scară de 6 ani: ~576.000 lei alocați scării. Distribuit eșalonat (an 1 în cash, anii 2-3 în Fidelis, anii 4-6 în obligațiuni mai lungi). Restul portofoliului (echity + buffer) rămâne expus pentru creștere. Pe măsură ce trece fiecare an din retragere, treapta cea mai apropiată se „consumă”, iar tu o reumpli din câștigurile de echity <em>doar dacă</em> piața e pozitivă (refill condiționat — regula Guyton-Klinger de prosperity rule).</p>
+
+<h2>Timing pe EURIBOR și dobânda BNR</h2>
+
+<p>Glidepath-ul invers nu se execută în vid macroeconomic. Două ancore de timing:</p>
+
+<ul>
+<li><strong>EURIBOR / IRCC ca semnal de cost al siguranței:</strong> când EURIBOR 3M și dobânda de politică BNR sunt ridicate, obligațiunile și depozitele oferă un randament real pozitiv atractiv — costul de oportunitate al <em>siguranței</em> scade. Asta înseamnă că poți permite un w_floor mai sus și o tranziție spre echity mai lentă (cumperi obligațiuni cu randament bun acum). Invers, când dobânzile coboară spre niveluri scăzute, siguranța devine scumpă (randament real aproape zero), iar argumentul pentru glidepath invers spre echity se întărește.</li>
+<li><strong>Inversiunea curbei ca semnal de fază:</strong> dacă curba randamentelor e inversată (titluri scurte randează mai mult decât cele lungi), favorizezi treptele scurte ale scării — blochezi randament fără risc de durată. Asta îți schimbă <em>compoziția</em> scării, nu ponderea de echity.</li>
+</ul>
+
+<p>Regulă operațională: legi <em>ritmul</em> de tranching de echity de nivelul real al ratelor. Când randamentul real al titlurilor de stat depășește ~2,5%, încetinești ridicarea echity (deja ai un randament-fără-risc decent). Când scade sub ~1%, accelerezi. EURIBOR nu schimbă regula funded-ratio — o modulează ca viteză.</p>
+
+<h2>Stress-test pe scenarii adverse de secvență</h2>
+
+<p>Niciun glidepath invers nu se aprobă fără un stress-test pe cel mai rău an de start. Rulezi portofoliul prin trei secvențe istorice adverse plasate <em>la exit</em>:</p>
+
+<ul>
+<li><strong>Scenariu A — crash la T-1:</strong> piața cade 35% cu un an înainte de exit. Verifici că ristournul de securitate (Faza 3) a coborât deja echity la ≤47%, deci pierderea pe activul total e ~16%, nu 35%. Cash ladder-ul intact finanțează primii ani; nu ești forțat să vinzi acțiuni. Verdict: planul rezistă dacă scara acoperă ≥5 ani.</li>
+<li><strong>Scenariu B — „lost decade”:</strong> echity randează 0% real timp de 10 ani de la exit. Aici partea ascendentă a U-shape-ului (Faza 4) e cea care te salvează: cumperi echity ieftin cu refill-urile, iar când revine, ai pondere mare. Veganismul fiscal (obligațiuni pure) ar fi pierdut aici, pentru că n-ar fi avut echity de cumpărat la preț mic.</li>
+<li><strong>Scenariu C — șoc inflaționist + dobânzi în creștere:</strong> obligațiunile lungi pierd din valoarea de piață, dar pentru că le ții până la maturitate în scară, încasezi nominalul. Riscul real e eroziunea puterii de cumpărare — de aceea SWR-ul RO e calibrat la 3,5%, nu 4%, și de aceea ții o tranșă de echity ca hedge de inflație pe termen lung.</li>
+</ul>
+
+<p>Metrica de acceptare: rata de eșec (probabilitatea de epuizare a capitalului pe 35 de ani) sub <strong>5%</strong> pe toate cele trei scenarii, cu un terminal-wealth median pozitiv. Dacă un scenariu trece de 10%, fie cobori w_cap, fie extinzi scara la 7 ani, fie întârzii exit-ul cu 12 luni (fiecare lună suplimentară de acumulare la FR < 1 e disproporționat de valoroasă).</p>
+
+<h2>Edge-cases și capcane de specialist</h2>
+
+<ul>
+<li><strong>FR deja peste 1,10 la T-5:</strong> ești supra-finanțat. Aici glidepath-ul invers NU se aplică — n-ai de ce să crești riscul. Treci direct în mod de conservare și execuți doar bond tent-ul descendent clasic. A crește echity când ai câștigat deja jocul e eroare de „greed creep”.</li>
+<li><strong>Confuzia rebalansare vs. glidepath:</strong> rebalansarea readuce la o pondere; glidepath-ul mută ținta de pondere în timp. În pre-FIRE le combini: rebalansezi spre o țintă care alunecă. Implementarea greșită (rebalansare spre o țintă fixă) anulează tot efectul.</li>
+<li><strong>Pilon II/III în ecuație:</strong> activele din Pilon II (contribuție obligatorie de <strong>4,75%</strong> din venitul brut) și Pilon III nu sunt complet lichide la exit (acces parțial/condiționat, de regulă la 60 de ani). Le tratezi ca tranșa cea mai îndepărtată a scării și le menții cu pondere de echity mai mare, pentru că orizontul lor de acces e mai lung — nu le incluzi în calculul cash ladder-ului din primii ani. În faza de acumulare pre-FIRE, Pilon III rămâne un vehicul eficient: contribuțiile sunt deductibile la calculul impozitului pe venit în limita a <strong>400 EUR pe an</strong>, deci finanțarea lui până la plafon este, în esență, randament fiscal garantat de 10% pe suma dedusă — un complement, nu un substitut, al glidepath-ului invers din contul lichid.</li>
+<li><strong>CASS-ul ca scurgere ascunsă:</strong> mulți modelează randamentul brut și uită că, fără salariu în FIRE, dividendele și dobânzile la depozite atrag CASS 10% peste praguri. Asta favorizează structural Fidelis (scutit) și echity care nu plătește dividend mare (acumulare prin apreciere, impozitată la 3% la deținere peste 365 de zile, prin intermediar rezident). Reamintim contextul de cote 2026: impozit pe venit 10%, dividende 16%, câștig de capital 3%/6% la broker rezident (peste/sub 1 an), 10% autodeclarat la broker străin.</li>
+</ul>
+
+<h2>Checklist de execuție</h2>
+
+<ul>
+<li><strong>Pas 1 — Calculează FR:</strong> activ curent / (cheltuieli anuale × 28,5). Stabilește în care din cele patru faze ești după distanța-timp ȘI după FR.</li>
+<li><strong>Pas 2 — Setează w_floor=25%, w_cap=75%, calculează w_equity țintă</strong> din f(FR). Dacă FR > 1,10, abandonează glidepath-ul invers și treci la conservare.</li>
+<li><strong>Pas 3 — Execută tranching pe 4 trimestre</strong> spre ținta de echity, folosind instrumente pe care le vei ține > 365 zile prin intermediar rezident (impozit 3%, vs. 6% sub un an sau 10% la broker străin).</li>
+<li><strong>Pas 4 — Construiește cash ladder de 5-7 ani:</strong> an 1 cash/depozit, anii 2-3 Fidelis (dobândă neimpozabilă, fără CASS), anii 4+ obligațiuni mai lungi ținute la maturitate.</li>
+<li><strong>Pas 5 — Reaplică regula funded-ratio semestrial:</strong> pe măsură ce FR urcă, scade w_equity țintă și mută surplusul în scară (rebalansare dinamică spre țintă alunecătoare).</li>
+<li><strong>Pas 6 — Activează ristournul de securitate la T-24 luni:</strong> aplică plafonul dur w_equity_max = 35% + 1% × luni_rămase, ca să atingi minimul de echity la exit.</li>
+<li><strong>Pas 7 — Modulează ritmul pe EURIBOR/BNR:</strong> dobânzi reale mari → încetinești ridicarea echity; dobânzi reale mici → accelerezi.</li>
+<li><strong>Pas 8 — Stress-test obligatoriu:</strong> rulează scenariile A/B/C; cere rată de eșec < 5%. Dacă pică, scazi w_cap, extinzi scara sau întârzii exit-ul cu 12 luni.</li>
+<li><strong>Pas 9 — Planifică Faza 4 (post-exit):</strong> rising glidepath de la ~35% spre ~60-65% pe 5-7 ani, cu refill condiționat al scării (cumperi echity din câștiguri doar în ani pozitivi).</li>
+</ul>

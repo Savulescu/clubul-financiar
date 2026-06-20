@@ -1,0 +1,123 @@
+<p>La nivel de specialist, problema de <strong>impozitare cripto cross-border dual residency România</strong> nu mai este „cât plătesc", ci <em>cui</em> plătesc, în ce ordine și cum demontezi o pretenție concurentă a două administrații fiscale care, fiecare, te consideră rezident. Cazul tipic 2026: developer cu cetățenie dublă (RO + un stat membru sau US), salariu activ încasat în UK, plus venit din crypto staking generat de un nod operat din România. Două state revendică worldwide taxation pe aceeași bază. Aici intră în joc dual citizenship tax treaty OECD (treaty tie-breaker conform OECD Model Tax Convention), foreign tax credit calculation, substantial presence test US (183 zile ponderate), Romania tax residency conflict, active income exemption cripto vs. venit pasiv și mecanica treaty benefits pe withholding tax.</p>
+
+<p>Vom trata frontal conflictul de jurisdicție („conflict of laws") IRS vs. ANAF, distincția dintre active income exemption și pasiv, precum și transfer pricing crypto transactions atunci când staking-ul curge printr-o structură interpusă. Pe parcurs folosim un mecanism de tip ACE (Allowance for Corporate Equity, în varianta-i de neutralitate fiscală a capitalului propriu) pentru a arăta cum o structură societară corect capitalizată mută punctul de impozitare și reduce dubla povară reziduală rămasă după credit. Premisa: stăpânești deja D212, cota de 16% pe câștigul crypto (Legea 239/2025) și raportarea DAC8/CARF — mergem direct în arhitectura conflictului.</p>
+
+<p>Materialul presupune fluență în conceptele de dual citizenship tax treaty OECD, în calculul creditului fiscal cu limitare per-basket și în diferența dintre rezidență de drept intern și rezidență de convenție. Nu re-explicăm nimic elementar.</p>
+
+<h2>Pasul 1 — Stabilirea rezidenței: drept intern vs. tie-breaker convențional</h2>
+
+<p>Eroarea de începător este să cauți direct în convenție. Rezidența se determină în două straturi. <strong>Stratul 1, drept intern</strong>: fiecare stat aplică propriul test. România (Codul fiscal, art. 7 și art. 59) declanșează rezidența pe centrul intereselor vitale, domiciliu, sau prezență &gt; 183 de zile într-o perioadă de 12 luni consecutive. US aplică substantial presence test: <code>zile_an_curent + (1/3)×zile_an−1 + (1/6)×zile_an−2 ≥ 183</code>, cu pragul minim de 31 de zile în anul curent. UK aplică Statutory Residence Test (automatic + ties).</p>
+
+<p>Când două state te declară rezident în drept intern simultan — <strong>Romania tax residency conflict</strong> — treci la <strong>stratul 2, tie-breaker</strong>-ul din art. 4(2) al convenției aplicabile (modelată pe OECD MTC). Cascada este strict ordonată și se oprește la primul criteriu decis:</p>
+
+<ul>
+  <li><strong>(a) Locuință permanentă</strong> (permanent home available) — dacă ai casă disponibilă într-un singur stat, acolo ești rezident de convenție.</li>
+  <li><strong>(b) Centrul intereselor vitale</strong> — relații personale și economice mai strânse. Aici se câștigă sau se pierde cazul: contul de salariu UK, contractul de muncă, contul exchange-ului, locul nodului de staking.</li>
+  <li><strong>(c) Ședere obișnuită</strong> (habitual abode).</li>
+  <li><strong>(d) Naționalitate</strong> — relevant doar la cetățenie dublă, unde criteriul devine inoperant și se trece la (e).</li>
+  <li><strong>(e) Procedură amiabilă (MAP)</strong> între autorități competente.</li>
+</ul>
+
+<p>Pentru developer-ul nostru cu RO + UK, dacă închiriază la Londra dar are apartament proprietate în București, criteriul (a) e indecis (locuință în ambele), deci totul se mută pe (b). Documentația care fixează centrul intereselor vitale — contract de muncă UK, familie în RO, locația operațională a nodului — devine arma probatorie.</p>
+
+<h3>Capcana US: saving clause anulează tie-breaker-ul</h3>
+
+<p>Atenție critică pentru cetățenia dublă RO+US: convenția RO–US (1973, încă în vigoare în 2026) conține o <strong>saving clause</strong>. SUA își rezervă dreptul de a impozita propriii cetățeni <em>ca și cum convenția nu ar exista</em>, indiferent de unde îi plasează tie-breaker-ul. Practic, un cetățean american rămâne supus worldwide taxation IRS chiar dacă tie-breaker-ul îl face rezident român de convenție. Aici conflictul de jurisdicție IRS vs. ANAF nu se rezolvă prin alocare exclusivă, ci prin <strong>foreign tax credit</strong> acordat de SUA pe impozitul plătit în RO. Pentru cetățenia UE, nu există saving clause echivalentă — alocarea convențională e respectată.</p>
+
+<h2>Pasul 2 — Cartografierea veniturilor pe articole convenționale</h2>
+
+<p>Fiecare flux de venit se „lipește" de un articol distinct al convenției, fiecare cu propria regulă de alocare. A trata tot venitul unitar este greșeala care produce dublă impunere evitabilă.</p>
+
+<ul>
+  <li><strong>Salariu remote (active income)</strong> — art. 15 (income from employment). Regula: impozitat unde se <em>prestează fizic</em> munca. Dacă developer-ul lucrează fizic din UK pentru firma UK, UK are dreptul primar; RO impozitează doar dacă e rezident de convenție, cu credit pe impozitul UK. Active income exemption (regula celor 183 de zile + plătitor nerezident + fără sediu permanent) poate exonera complet statul-gazdă pentru misiuni scurte.</li>
+  <li><strong>Crypto staking din RO</strong> — calificare ambiguă. Recompensa de staking nu e clar „dobândă" (art. 11), nici „redevență" (art. 12), nici dividend (art. 10). În practica ANAF 2026 se tratează ca <em>venit din alte surse</em> la momentul primirii (valoare de piață în lei la cursul BNR al zilei), apoi câștigul la cedare se impozitează separat la 16%. Articolul de alocare aplicabil este art. 21 (other income) — regulă: impozabil exclusiv în statul de rezidență de convenție.</li>
+  <li><strong>Câștig din transferul crypto (capital gains)</strong> — art. 13. Pentru active financiare nelegate de imobiliare/sediu permanent, dreptul de impunere revine statului de rezidență de convenție.</li>
+</ul>
+
+<p>Concluzia structurală: dacă tie-breaker-ul îl face rezident RO de convenție, atât staking-ul (art. 21) cât și gain-ul crypto (art. 13) se impozitează <strong>exclusiv în România</strong> la 16% — UK nu are pretenție pe ele. Salariul rămâne la UK (art. 15) cu credit în RO. Acesta este split-ul corect.</p>
+
+<h2>Pasul 3 — Caz numeric complet: split-ul fiscal pe an</h2>
+
+<p>Date de intrare pentru anul fiscal 2026 (rezident RO de convenție, cetățenie RO+UK, fără saving clause):</p>
+
+<ul>
+  <li>Salariu UK brut: 84.000 GBP/an. Impozit UK efectiv (după personal allowance + basic/higher rate, simplificat): ~21.400 GBP. Curs mediu de calcul: 1 GBP ≈ 5,90 lei (ipoteză de lucru — folosește cursul BNR de la data fiecărei plăți, nu media).</li>
+  <li>Recompense staking primite în 2026: echivalent 48.000 lei (sumă a valorilor de piață la fiecare distribuție, cursul BNR al zilei).</li>
+  <li>Câștig din transferul crypto (vânzări 2026): bază de câștig 130.000 lei (preț cedare − cost basis, metodă FIFO/SAC documentată).</li>
+</ul>
+
+<p><strong>Componenta RO — staking + gain crypto.</strong> Staking ca venit din alte surse: 48.000 × 16% = <strong>7.680 lei</strong>. Atenție la CASS: venitul din alte surse + investiții intră în baza de contribuție la sănătate dacă depășește pragurile (6/12/24 salarii minime brute). La 4.050 lei salariu minim 2026, plafonul de 24 salarii = 97.200 lei; cumulul venitului non-salarial (48.000 + 130.000 = 178.000 lei) depășește pragul de 24 SM, deci CASS = 10% × 97.200 = <strong>9.720 lei</strong> (plafonată la cea mai mare tranșă). Câștig crypto: 130.000 × 16% = <strong>20.800 lei</strong>. Total datorat ANAF (impozit + CASS) ≈ 7.680 + 20.800 + 9.720 = <strong>38.200 lei</strong>.</p>
+
+<p><strong>Componenta salariu — credit fiscal.</strong> Salariul (494.000 lei la 5,90) e impozitat în UK. România, dacă aplică metoda creditului (nu scutirea progresivă), recalculează un impozit RO ipotetic pe salariu și acordă credit până la limita acelui impozit. Cum impozitul UK efectiv (~126.000 lei) depășește 16% RO (~79.000 lei), <strong>foreign tax credit este limitat la impozitul RO datorat</strong>: <code>credit = min(impozit_străin, impozit_RO_pe_acel_venit)</code> = min(126.000; 79.000) = 79.000 lei. Reziduul de 47.000 lei impozit UK <em>nu</em> se recuperează — e excess foreign tax credit, pierdut (RO nu permite carryforward al excesului către alte basket-uri).</p>
+
+<h3>Formula creditului cu limitare per-sursă</h3>
+
+<p>Mecanica de limitare per-country/per-basket este nucleul foreign tax credit calculation:</p>
+
+<ul>
+  <li><code>impozit_RO_atribuibil = venit_străin_net × cota_RO_pe_categorie</code></li>
+  <li><code>credit_admis = min(impozit_plătit_în_străinătate; impozit_RO_atribuibil)</code></li>
+  <li><code>impozit_RO_final = impozit_RO_total − Σ credit_admis</code></li>
+</ul>
+
+<p>Eroarea de specialist evitabilă: să aplici un credit „global" combinând salariul (overtaxed în UK) cu staking-ul (taxat doar în RO). Categoriile sunt etanșe — excesul de credit pe salariu nu compensează impozitul pe staking. Asta poate produce o povară reziduală pe care o reduci doar prin restructurare, nu prin declarație.</p>
+
+<h3>Edge-case: split-ul intra-anual de rezidență (residency starting/ending)</h3>
+
+<p>Un caz pe care declarațiile naive îl ratează: developer-ul se mută fizic la jumătatea anului. Multe jurisdicții (UK prin split-year treatment, US prin dual-status alien) împart anul în două perioade de rezidență, fiecare cu propriul perimetru de impunere. Implicația cantitativă: staking-ul primit în perioada pre-mutare se alocă unui stat, cel post-mutare altuia, iar gain-ul crypto se atribuie statului de rezidență <em>la data cedării</em>, nu la data achiziției. Dacă vinzi 1 BTC pe 10 ianuarie ca rezident RO și alt 1 BTC pe 10 noiembrie ca rezident UK (după mutare), cele două gain-uri merg în declarații diferite, în state diferite. Eroarea de a raporta tot gain-ul anual într-un singur stat declanșează exact pretenția dublă pe care o combați apoi în contestație. Regula de aur: <strong>ancorează fiecare eveniment de venit la timestamp și verifică perimetrul de rezidență valabil la acel timestamp</strong>.</p>
+
+<h3>Exit tax și capcana de re-domiciliere</h3>
+
+<p>Mutarea rezidenței poate declanșa, în unele state, un <strong>exit tax</strong> (deemed disposal): se consideră că ai vândut tot portofoliul crypto la valoarea de piață în ziua plecării, generând un câștig latent impozabil chiar dacă n-ai vândut nimic. România nu aplică un exit tax general pe persoane fizice în 2026, dar dacă pleci dintr-un stat care îl aplică (ex. variante de „deemed disposal" la încetarea rezidenței), basis-ul tău se „step-up"-ează la spot-ul de la plecare. Specialistul folosește asta tactic: dacă noul stat recunoaște basis-ul re-evaluat, câștigul ulterior se calculează de la spot-ul de exit, nu de la costul istoric — reset de basis legal, nu evaziune. Documentează valoarea de piață la data exit-ului cu aceeași rigoare blockchain ca orice altă cedare.</p>
+
+<h2>Pasul 4 — Mecanismul ACE: relocarea punctului de impozitare prin capital propriu</h2>
+
+<p>Aici intervine optimizarea de structură. Dacă staking-ul nu mai curge prin persoana fizică, ci printr-o societate (RO micro/profit sau o holding într-o jurisdicție cu ACE), schimbi atât articolul convențional, cât și baza impozabilă. Un <strong>ACE mechanism</strong> (Allowance for Corporate Equity) acordă o deducere noțională la profitul impozabil egală cu <code>rata_noțională × capital_propriu</code>, neutralizând fiscal returul „normal" al capitalului și impozitând doar renta economică (profitul peste cost of equity).</p>
+
+<p>Numeric: societate cu echity de 500.000 lei, rată noțională ACE 5%, profit din staking 90.000 lei.</p>
+
+<ul>
+  <li>Deducere ACE = 5% × 500.000 = 25.000 lei.</li>
+  <li>Bază impozabilă = 90.000 − 25.000 = 65.000 lei.</li>
+  <li>Impozit la 16% (profit) = 10.400 lei, vs. 14.400 lei fără ACE — economie de 4.000 lei/an, plus neutralitatea finanțării prin echity vs. datorie (ACE elimină avantajul fiscal artificial al îndatorării).</li>
+</ul>
+
+<p>Atenție: ACE clasic nu există în Codul fiscal român; e relevant doar dacă holding-ul e plasat într-o jurisdicție care l-a implementat (istoric: Belgia — notional interest deduction, Italia — vechiul ACE, Malta, Cipru — variante de NID). Interpunerea unei societăți nu e gratuită fiscal: declanșează <strong>transfer pricing crypto transactions</strong> — orice transfer de active digitale între tine și societatea ta controlată trebuie la valoare de piață (arm's length), documentat cu dosar de prețuri de transfer dacă depășești pragurile (tranzacții cu afiliați &gt; 50.000 EUR/categorie pentru contribuabili mici-mijlocii). Un staking transferat la basis subevaluat e re-evaluat de ANAF la spot, cu ajustare de venit și penalități.</p>
+
+<h3>Withholding tax și treaty benefits pe fluxul societate→persoană</h3>
+
+<p>Dacă holding-ul distribuie dividend către tine (persoana fizică rezidentă RO), apare withholding tax. Treaty benefits reduc reținerea la sursă de la cota internă a statului-sursă la cota convențională (tipic 5%/15% pe dividende, art. 10 OECD MTC), cu condiția prezentării certificatului de rezidență fiscală și a testului de beneficiar efectiv (beneficial owner). Fără certificat, statul-sursă reține la cota internă completă, iar tu recuperezi diferența greoi, prin rambursare. <strong>Regula operațională</strong>: certificatul de rezidență trebuie obținut <em>înainte</em> de plată, nu retroactiv.</p>
+
+<p>Numeric, pe un dividend de 100.000 lei distribuit dintr-o jurisdicție cu reținere internă de 25%: fără tratat, reținere la sursă = 25.000 lei, apoi RO impozitează dividendul la cota internă majorată în 2026 de 16% = 16.000 lei, cu credit limitat la min(25.000; 16.000) = 16.000 lei, deci impozit RO rezidual 0 și povară totală 25.000 lei, din care 9.000 lei sunt excess foreign tax credit pierdut (RO nu rambursează surplusul de reținere străină). Cu treaty benefit la 5%: reținere = 5.000 lei, impozit RO 16.000 lei, credit = min(5.000; 16.000) = 5.000 lei, impozit RO rezidual 11.000 lei, povară totală 16.000 lei. <strong>Diferența — 9.000 lei pe an — provine exclusiv din prezentarea la timp a certificatului de rezidență, care comprimă reținerea la sursă de la 25% la 5% și elimină surplusul nerecuperabil.</strong> Aceasta este renta pură a conformării procedurale, fără niciun risc fiscal. Atenție: distribuția de dividend declanșează și CASS dacă, cumulat cu restul venitului non-salarial, depășești pragurile de 6/12/24 salarii minime.</p>
+
+<h3>Beneficial owner și clauza anti-abuz (PPT)</h3>
+
+<p>Convenția post-BEPS conține Principal Purpose Test (PPT, art. 29 MTC / instrumentul multilateral MLI): treaty benefits se refuză dacă unul dintre scopurile principale ale aranjamentului a fost obținerea avantajului convențional. O holding goală, fără substanță economică (fără personal, fără birou, fără decizie reală), e o conduit care pică testul de beneficiar efectiv — ANAF sau statul-sursă recalifică și refuză reducerea de withholding. <strong>Substanța nu e opțională</strong>: pentru ca structura ACE/NID să țină, holding-ul trebuie să aibă decizie de management efectivă în jurisdicția respectivă, altfel place of effective management (art. 4(3)) îl re-rezidentiază în RO și întreaga arhitectură colapsează la impunerea românească.</p>
+
+<h2>Pasul 5 — Apărarea la contestație: cum demontezi pretenția ANAF</h2>
+
+<p>Scenariul de conflict: ANAF emite decizie de impunere considerându-te rezident RO și impozitând <em>și</em> salariul UK ca worldwide income, fără a recunoaște creditul, sau refuzând tie-breaker-ul. Linia de apărare, în ordinea forței probatorii:</p>
+
+<ul>
+  <li><strong>Certificat de rezidență fiscală</strong> emis de autoritatea competentă a celuilalt stat (HMRC pentru UK) — proba regină pentru rezidența de convenție.</li>
+  <li><strong>Dosar de tie-breaker</strong>: contract de muncă, extrase de cont salariu, contract de închiriere/proprietate, dovezi de prezență fizică (zile), care fixează centrul intereselor vitale conform art. 4(2).</li>
+  <li><strong>Reconciliere cantitativă</strong>: tabel pe articole convenționale (15 / 13 / 21) arătând alocarea fiecărui flux și creditul aplicat, cu formula <code>min(impozit_străin; impozit_RO)</code> per sursă.</li>
+  <li><strong>Dovada plății impozitului străin</strong> (tax computation HMRC + payslips) pentru a susține foreign tax credit.</li>
+</ul>
+
+<p>Termenul de contestație administrativă la ANAF este <strong>45 de zile</strong> de la comunicarea deciziei (Cod procedură fiscală). Dacă contestația e respinsă, ai cale la instanța de contencios administrativ. Paralel, dacă dubla impunere persistă, poți declanșa <strong>procedura amiabilă (MAP)</strong> sub convenție sau Directiva UE 2017/1852 (dispute resolution) — termen de 3 ani de la prima notificare a măsurii.</p>
+
+<h2>Checklist de specialist — secvența operațională</h2>
+
+<ul>
+  <li><strong>1.</strong> Determină rezidența în drept intern în ambele state (art. 7/59 CF; substantial presence test US; SRT UK).</li>
+  <li><strong>2.</strong> Dacă dublu-rezident, aplică tie-breaker art. 4(2) în cascadă; verifică saving clause dacă US e implicat.</li>
+  <li><strong>3.</strong> Obține certificatul de rezidență fiscală din statul de convenție <em>înainte</em> de orice plată cu withholding.</li>
+  <li><strong>4.</strong> Cartografiază fiecare venit pe articol (15 salariu / 13 gain / 21 staking) și stabilește statul de impunere.</li>
+  <li><strong>5.</strong> Calculează creditul per-sursă cu <code>min(impozit_străin; impozit_RO)</code>; nu combina basket-urile.</li>
+  <li><strong>6.</strong> Verifică pragurile CASS (6/12/24 salarii minime) pe cumulul venitului non-salarial.</li>
+  <li><strong>7.</strong> Dacă restructurezi prin holding cu ACE/NID, documentează transfer pricing-ul la arm's length și păstrează dosarul prețurilor de transfer.</li>
+  <li><strong>8.</strong> Depune D212 cu anexa de credit fiscal extern și atașează tax computation-ul străin.</li>
+  <li><strong>9.</strong> La decizie de impunere adversă: contestație în 45 de zile cu dosarul de tie-breaker; rezervă MAP/Directiva 2017/1852 ca a doua linie.</li>
+  <li><strong>10.</strong> Arhivează blockchain evidence (timestamp-uri on-chain, cursuri BNR la fiecare distribuție de staking) reproductibil bit-cu-bit, pentru orice expertiză contradictorie.</li>
+</ul>

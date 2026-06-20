@@ -1,0 +1,116 @@
+<p>O <strong>securitizare credit tranching waterfall structură</strong> bine disecată separă investitorul individual care înțelege ce cumpără de cel care confundă un rating cu o garanție. La acest nivel nu mai discutăm „ce este o obligațiune” sau cum un instrument convertibil amestecă datorie cu opționalitate pe capital — pleci de la acele baze și treci direct în mecanica internă: <strong>tranșe seniore, mezzanine și equity în cash flow waterfall</strong>, <strong>calculul WAL (weighted average life) și duration pentru fiecare tranșă</strong>, <strong>riscul de prepayment și extension în structurile sintetice</strong>, plus rolurile de <strong>origination, servicer și trustee în securitizări</strong> care determină cine primește banii și în ce ordine.</p>
+
+<p>Diferența dintre randamentul promis și randamentul realizat al unei tranșe stă aproape în întregime în două lucruri pe care marea majoritate a investitorilor nu le modelează: ordinea exactă a plăților în waterfall (subordonarea contractuală) și viteza reală de amortizare a colateralului. De aici și nevoia de <strong>cash flow modeling și stress testing al tranșelor</strong>, fără de care o <strong>investiție în tranșe mezzanine cu risc-randament optim</strong> rămâne un pariu orb. Această lecție îți dă modelul cantitativ pas-cu-pas.</p>
+
+<p>Lucrăm cu cifre concrete, o structură-tip de securitizare a unui portofoliu de credite și un model de waterfall pe care îl poți reproduce în orice spreadsheet. Contextul RO 2026: securitizările tradiționale denominate în lei sunt rare pentru investitorul retail, dar expunerile sintetice (CLN, tranșe de CDS pe indici, ABS europene prin fonduri și obligațiuni structurate distribuite de bănci) sunt accesibile — și exact acolo greșelile de evaluare costă cel mai mult.</p>
+
+<h2>Anatomia structurii: SPV, colateral și pasivul tranșat</h2>
+<p>O securitizare „cash” mută un pool de active generatoare de cash (credite ipotecare, leasing, credite de consum, creanțe comerciale) de la <strong>originator</strong> către un vehicul special (SPV / Special Purpose Vehicle), izolat de falimentul originatorului. SPV-ul finanțează achiziția emițând tranșe de pasiv cu prioritate diferită. Activul (pool-ul) generează un cash flow brut; pasivul (tranșele) îl distribuie după o regulă strictă — waterfall-ul.</p>
+<p>Cheia tehnică pe care trebuie să o internalizezi: pierderile lovesc de jos în sus (bottom-up), iar cash-ul de principal curge de sus în jos (top-down). Equity absoarbe prima pierdere; senior încasează prima rambursare. Între ele, mezzanine. Acest dublu sens este sursa întregului profil risc-randament.</p>
+<ul>
+<li><strong>Tranșa Senior (Clasa A):</strong> tipic 75-88% din pasiv, rating țintă AAA/AA, primește dobândă și principal prima, suferă pierderi ultima. Spread mic (ex. EURIBOR 3M + 80-130 bp).</li>
+<li><strong>Tranșa Mezzanine (Clasa B/C):</strong> tipic 7-18% cumulat, rating BBB/BB, subordonată seniorului. Aici se câștigă spread-ul real (250-650 bp), dar și convexitatea negativă a pierderilor.</li>
+<li><strong>Tranșa Equity / First-Loss (residual):</strong> 2-8%, fără rating, primește reziduul după ce toate celelalte au fost servite. Randament țintă 12-25% IRR, dar binar.</li>
+</ul>
+
+<h3>Credit enhancement: cele patru pârghii</h3>
+<p>Înainte de orice waterfall, structura încorporează amplificatoare de protecție care determină câtă pierdere absoarbe fiecare nivel:</p>
+<ul>
+<li><strong>Subordonarea (subordination):</strong> grosimea tranșelor de sub tine. Pentru senior, attachment point = 12% înseamnă că suportă pierderi doar după ce primele 12% din pool au fost șterse.</li>
+<li><strong>Excess spread:</strong> diferența dintre randamentul ponderat al pool-ului (ex. 8,5%) și costul ponderat al tranșelor + fees (ex. 4,2%). Acest excess de ~4,3% pe an este prima linie de absorbție, înainte de a atinge equity.</li>
+<li><strong>Overcollateralization (OC):</strong> valoarea colateralului depășește valoarea pasivului (ex. pool 105 mil. lei vs. tranșe 100 mil. lei). Cele 5 mil. lei sunt buffer.</li>
+<li><strong>Reserve account:</strong> cash blocat la SPV pentru a acoperi întârzieri temporare de încasare.</li>
+</ul>
+<p>Attachment și detachment point definesc tranșa ca pe un spread de opțiuni pe pierderea cumulată a pool-ului. O tranșă mezzanine cu attachment 5% și detachment 12% are grosime 7% și este complet ștearsă dacă pierderea cumulată a pool-ului depășește 12%.</p>
+
+<h2>Waterfall-ul de plăți: ordinea exactă, lună de lună</h2>
+<p>Waterfall-ul este algoritmul contractual care alocă încasările fiecărei perioade. Distincția critică, pe care 90% dintre retail o ratează: există <strong>două cascade separate</strong> — una pentru dobândă (interest waterfall) și una pentru principal (principal waterfall) — plus teste de performanță (triggers) care le pot deturna.</p>
+<p>Cascada tipică de <strong>dobândă</strong>, în ordine de prioritate strictă:</p>
+<ul>
+<li>1. Taxe și comisioane senior: trustee, servicer fee (0,25-0,50%/an din soldul pool-ului), agent de calcul.</li>
+<li>2. Dobânda către tranșa Senior A.</li>
+<li>3. Testele de coverage (OC test și IC test). Dacă pică, cash-ul este deturnat pentru a rambursa principalul seniorului (de-leveraging) ÎNAINTE de a plăti mezzanine.</li>
+<li>4. Dobânda către Mezzanine B, apoi C (dacă testele trec).</li>
+<li>5. Reaprovizionarea reserve account la nivelul țintă.</li>
+<li>6. Excess spread / reziduul către tranșa Equity.</li>
+</ul>
+<p>Cascada de <strong>principal</strong> determină viteza de amortizare. În structurile <strong>sequential-pay</strong>, tot principalul încasat merge la Senior A până la rambursare integrală, apoi la B, apoi C. În structurile <strong>pro-rata</strong>, principalul se împarte proporțional între tranșe atâta timp cât triggerele de performanță trec; la primul breach, structura comută automat în sequential (turbo către senior). Această comutare este motorul riscului de extension pentru mezzanine.</p>
+
+<h3>Triggerele OC și IC: comutatorul ascuns</h3>
+<p>Testul de <strong>overcollateralization (OC test)</strong> = (Valoarea pool-ului performant) / (Soldul tranșelor senior + mezzanine vizate). Prag tipic 105-115%. Testul de <strong>interest coverage (IC test)</strong> = (Dobânda colectată) / (Dobânda datorată tranșelor senior). Prag ~110-120%.</p>
+<p>Când un test pică, cash-ul care ar fi mers la mezzanine și equity este redirecționat pentru a rambursa principalul seniorului până când testul revine peste prag. Consecința pentru investitorul în mezzanine: nu doar că nu primești principal mai devreme — riști să nu primești nici dobândă, iar maturitatea ta efectivă se lungește. Asta este exact <strong>riscul de extension</strong>, materializat prin clauza contractuală, nu prin comportamentul debitorilor.</p>
+
+<h2>Calculul WAL pentru fiecare tranșă, pas cu pas</h2>
+<p>WAL (Weighted Average Life) măsoară numărul mediu de ani în care rămâne nerambursat un leu de principal. Spre deosebire de maturitatea legală (data finală contractuală), WAL reflectă viteza reală de amortizare — singura măsură onestă a expunerii tale temporale și a riscului de reinvestire.</p>
+<p>Formula:</p>
+<p><strong>WAL = Σ (tᵢ × Pᵢ) / Σ Pᵢ</strong>, unde tᵢ = timpul (în ani) până la plata i, iar Pᵢ = principalul rambursat la momentul i.</p>
+<p>Exemplu numeric complet. Tranșă cu principal 10.000.000 lei, rambursat astfel (principal, nu dobândă):</p>
+<ul>
+<li>An 1: 1.000.000 lei → 1 × 1.000.000 = 1.000.000</li>
+<li>An 2: 2.000.000 lei → 2 × 2.000.000 = 4.000.000</li>
+<li>An 3: 3.000.000 lei → 3 × 3.000.000 = 9.000.000</li>
+<li>An 4: 4.000.000 lei → 4 × 4.000.000 = 16.000.000</li>
+</ul>
+<p>Σ (tᵢ × Pᵢ) = 30.000.000; Σ Pᵢ = 10.000.000. <strong>WAL = 30.000.000 / 10.000.000 = 3,0 ani</strong>, deși maturitatea legală este de 4 ani. Diferența de un an este exact ce nu vezi dacă te uiți doar la scadența finală.</p>
+
+<h3>De ce WAL ≠ duration și cum le combini</h3>
+<p>WAL ponderează cu principalul; duration (Macaulay) ponderează cu valoarea prezentă a tuturor fluxurilor (dobândă + principal) și se folosește pentru senzitivitatea la rată. Pentru o tranșă floating-rate (indexată EURIBOR/IRCC), duration la rata de referință este aproape de zero (cuponul se resetează), dar <strong>spread duration</strong> rămâne mare și aproximativ egală cu WAL. Concluzia operațională: pentru ABS-uri floating, riscul tău dominant nu este cel de rată, ci senzitivitatea valorii la lărgirea spread-ului de credit, iar WAL este proxy-ul corect pentru ea.</p>
+<p>Regulă de buzunar: <strong>ΔPreț ≈ − Spread Duration × ΔSpread</strong>. O tranșă mezzanine cu WAL 4,2 ani, dacă spread-ul ei se lărgește cu 150 bp într-o criză, pierde aproximativ 4,2 × 1,5% = 6,3% din preț, instantaneu, independent de orice default.</p>
+
+<h2>Prepayment și extension: cum se mișcă WAL-ul în realitate</h2>
+<p>WAL-ul calculat mai sus presupune un grafic fix. În practică, viteza de rambursare variază cu rambursările anticipate (prepayment) și cu defaulturile. Modelul standard:</p>
+<ul>
+<li><strong>CPR (Conditional Prepayment Rate):</strong> procentul anualizat din soldul rămas care se rambursează anticipat. Un CPR de 12% înseamnă că 12% din sold dispare în plus față de amortizarea programată, în fiecare an.</li>
+<li><strong>SMM (Single Monthly Mortality):</strong> echivalentul lunar. SMM = 1 − (1 − CPR)^(1/12).</li>
+<li><strong>CDR (Conditional Default Rate):</strong> rata anualizată de intrare în default a soldului performant.</li>
+</ul>
+<p>Mecanica de impact pe tranșe:</p>
+<ul>
+<li><strong>Prepayment ridicat (CPR↑):</strong> scurtează WAL. Bun pentru senior (recuperezi banii repede, dar pierzi spread-ul viitor — risc de reinvestire). Pentru o tranșă cumpărată cu primă, prepayment-ul rapid îți distruge randamentul, pentru că rambursezi la par activul plătit peste par.</li>
+<li><strong>Prepayment scăzut + economie slabă (CPR↓):</strong> lungește WAL — riscul de extension. Mezzanine rămâne expusă mai mult timp, exact când mediul de credit se deteriorează. Convexitate negativă: tranșa se scurtează când nu vrei și se lungește când nu vrei.</li>
+</ul>
+<p>În structurile <strong>sintetice</strong> (CLN, tranșe pe indici CDS gen iTraxx/CDX), nu există principal fizic care să curgă: protecția este declanșată de evenimente de credit pe entitățile de referință. „Extension” aici înseamnă rostogolirea seriei de index și ajustarea factorului, iar „prepayment” practic dispare — în schimb apare <strong>jump-to-default</strong>: o singură entitate de referință care intră în default poate consuma instantaneu o felie din tranșa ta subțire de mezzanine. Subtilitatea: corelația de default între entități contează enorm. Corelație mare = tranșele mezzanine sunt relativ mai sigure (pierderile vin „all or nothing”, lovind direct equity sau senior); corelație mică = mezzanine este cea mai expusă la primele câteva defaulturi izolate.</p>
+
+<h2>Cash flow modeling și stress testing: modelul complet</h2>
+<p>Un model corect pentru o tranșă rulează, lună de lună, următoarea buclă pe soldul pool-ului:</p>
+<ul>
+<li>1. Sold inițial al pool-ului în luna t.</li>
+<li>2. Amortizare programată (scheduled principal) conform graficului contractual.</li>
+<li>3. Prepayment = SMM × (sold rămas după amortizarea programată).</li>
+<li>4. Default = (CDR lunar) × sold performant; aplici severity (1 − recovery rate). Cu recovery 40%, severity = 60%.</li>
+<li>5. Dobândă colectată = randament pool × sold performant.</li>
+<li>6. Aplici cele două waterfall-uri și triggerele OC/IC.</li>
+<li>7. Înregistrezi cash-ul efectiv primit de tranșa ta (dobândă + principal); recalculezi WAL și IRR realizat.</li>
+</ul>
+<p>Exemplu de stress pe o mezzanine cu attachment 5% / detachment 12% (grosime 7%), pool 100 mil. lei, recovery 40%:</p>
+<ul>
+<li><strong>Scenariu de bază:</strong> pierdere cumulată a pool-ului 3,5% (sub attachment). Mezzanine intactă, primește cupon integral, IRR realizat ≈ cuponul, ex. EURIBOR + 400 bp.</li>
+<li><strong>Scenariu advers:</strong> pierdere cumulată 8%. Equity (primii 5%) e ștearsă; mezzanine absoarbe 3% din cei 7% ai săi → pierde ~43% din principal. IRR realizat devine negativ chiar dacă a încasat cupoane câțiva ani.</li>
+<li><strong>Scenariu sever:</strong> pierdere cumulată 13%. Mezzanine complet ștearsă (peste detachment 12%), recuperare zero. Senior începe să fie atins.</li>
+</ul>
+<p>Observă neliniaritatea brutală: între o pierdere de pool de 3,5% și una de 8% — o diferență de 4,5 puncte pe colateral — randamentul tău trece de la +X% la −43%. Aceasta este convexitatea negativă a mezzanine-ului și de ce spread-ul mare nu este „masă gratis”, ci compensație pentru un profil de tip opțiune short put pe pierderea pool-ului.</p>
+
+<h3>Calibrarea CDR/CPR: nu folosi un singur număr</h3>
+<p>Stress testing serios înseamnă o grilă: rulezi WAL-ul și IRR-ul tranșei pe o matrice CPR × CDR (ex. CPR ∈ {6%, 12%, 20%}, CDR ∈ {1%, 3%, 6%}) și un vector de recovery (30%, 40%, 50%). Pentru fiecare combinație obții (WAL realizat, principal pierdut, IRR). Decizia de cumpărare se ia pe forma întregii suprafețe, nu pe scenariul de bază. O mezzanine „bună” are IRR pozitiv pe majoritatea celulei și pierderi tolerabile în colțul advers; una „proastă” colapsează la prima deteriorare de CDR.</p>
+
+<h2>Rolurile operaționale: cine îți poate strica investiția</h2>
+<p>În securitizare riscul nu vine doar din colateral, ci din lanțul de servisare. Trebuie să evaluezi explicit:</p>
+<ul>
+<li><strong>Originator:</strong> cine a acordat creditele și ce „skin in the game” păstrează. Reglementarea europeană (Regulamentul UE 2017/2402 privind securitizarea, aplicabil și în RO prin ASF) impune <strong>risk retention de minim 5%</strong> reținut de originator/sponsor — verifică forma reținerii (verticală, prima pierdere etc.). Lipsa aliniajului = adverse selection în pool.</li>
+<li><strong>Servicer:</strong> colectează ratele, gestionează delincvențele și recuperările. Calitatea servicer-ului mișcă direct recovery rate-ul și deci severity-ul. Un servicer slab transformă un CDR moderat într-o pierdere mare.</li>
+<li><strong>Trustee:</strong> apără interesele deținătorilor de tranșe, calculează și aplică waterfall-ul și triggerele. Independența lui contează când structura intră în stres.</li>
+</ul>
+<p>Pentru investitorul individual din RO 2026, expunerea practică vine prin: tranșe ABS/CLO europene cumpărate prin cont de brokeraj (denominate în EUR, lot minim adesea 100.000 EUR pentru emisiuni instituționale — barieră reală), <strong>credit-linked notes</strong> distribuite de bănci ca produse structurate, sau fonduri specializate (UCITS de credit structurat). Atenție la regimul fiscal: pentru câștigurile din instrumente financiare realizate în 2026 printr-un intermediar fiscal rezident (broker autorizat din România), impozitul se reține la sursă cu cota redusă pe câștig de capital — <strong>3% pentru titlurile deținute peste un an</strong> și <strong>6% pentru cele deținute sub un an</strong>. Dacă tranzacționezi printr-un broker străin (fără intermediar fiscal român), câștigul se autodeclară prin Declarația Unică și se impozitează cu <strong>cota standard de 16%</strong>. Peste impozit poate apărea contribuția de sănătate (CASS 10%, datorată pe trepte de 6/12/24 salarii minime — adică praguri de 24.300 / 48.600 / 97.200 lei la salariul minim de 4.050 lei în 2026) dacă veniturile extrasalariale cumulate depășesc plafoanele. Atenție: produsele structurate complexe (CLN, note pe indici) pot fi încadrate fiscal diferit de acțiunile simple — uneori ca venit din alte surse impozitat cu 10%, nu ca strict câștig de capital. Verifică încadrarea exactă cu un consultant fiscal înainte de a cumpăra.</p>
+
+<h2>Pași practici: cum evaluezi o tranșă înainte de a cumpăra</h2>
+<ul>
+<li><strong>1. Citește term sheet-ul pentru attachment/detachment.</strong> Calculează grosimea tranșei și raportează-o la pierderea istorică maximă a clasei de activ similare. Dacă grosimea &lt; pierderea de criză, tranșa e structural fragilă.</li>
+<li><strong>2. Reconstituie ambele waterfall-uri.</strong> Identifică pragurile OC/IC și ce se întâmplă la breach. Marchează dacă structura e sequential sau pro-rata și unde comută.</li>
+<li><strong>3. Calculează WAL la trei viteze de prepayment</strong> (lent / bază / rapid) pentru a-ți vedea fereastra de extension. Pentru tranșe la primă, modelează explicit pierderea de randament la prepayment rapid.</li>
+<li><strong>4. Derivă spread duration ≈ WAL</strong> și testează ΔPreț la o lărgire de spread de 100-200 bp. Asta e pierderea ta mark-to-market într-o criză, înainte de orice default.</li>
+<li><strong>5. Rulează matricea de stress CPR × CDR × recovery.</strong> Cere IRR pozitiv pe cel puțin 70% din celule și pierdere maximă suportabilă în colțul advers.</li>
+<li><strong>6. Verifică lanțul operațional:</strong> risk retention 5% confirmat, identitatea și track record-ul servicer-ului, independența trustee-ului.</li>
+<li><strong>7. Pentru sintetice, verifică corelația de default și jump-to-default.</strong> Întreabă-te ce se întâmplă cu tranșa ta dacă una-două entități de referință pică izolat.</li>
+<li><strong>8. Decide sizing-ul ca pe o poziție short-put:</strong> niciodată mai mult capital pe o mezzanine decât ești dispus să pierzi integral în scenariul sever, pentru că exact asta se poate întâmpla.</li>
+</ul>
+<p>Regula finală: într-o securitizare, randamentul afișat este o promisiune condiționată de ordinea waterfall-ului și de viteza colateralului. Cine modelează WAL-ul, triggerele și matricea de stress cumpără risc cuantificat; cine se uită doar la cupon și rating cumpără o opțiune short pe care nu știe că a vândut-o.</p>

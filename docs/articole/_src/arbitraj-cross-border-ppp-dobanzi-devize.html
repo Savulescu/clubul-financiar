@@ -1,0 +1,128 @@
+<p>Întrebarea aparent simplă — „dacă RON plătește 6% și EUR plătește 3%, nu cumpăr automat dobânda în lei?” — ascunde întregul aparat al disciplinei <strong>arbitraj dobândă IRP parity EUR RON carry trade</strong>. La nivel de specialist, diferențialul de dobândă nu este un câștig, ci prețul pieței pentru riscul valutar așteptat. Întregul <strong>interest rate parity model</strong> (covered și uncovered) impune ca acest diferențial să fie, în echilibru, anihilat de <strong>forward premium</strong>-ul EUR/RON. Ce rămâne după spread, forward, impozit și deviația de la PPP nu este alpha — este reziduul unei piețe incomplete.</p>
+
+<p>În această lecție tratăm cantitativ <strong>carry trade strategia forex</strong> aplicată rezidentului român: descompunem randamentul în componente (dobândă, forward, spread, fiscalitate), modelăm convergența vs. divergența față de <strong>paritatea puterii cumpărare PPP</strong>, comparăm <strong>depozite devize vs lei spread</strong> reale și construim un cadru de <strong>hedging valutar opțiuni forward</strong>. Tratăm condițiile precise în care <strong>interest rate arbitrage profitabil</strong> devine pozitiv — și de ce, sub regimul de <strong>impozitare venituri forex România</strong>, costul fiscal asimetric (10% pe câștig vs. nedeductibilitatea integrală a pierderii valutare la persoana fizică) deplasează pragul de rentabilitate cu sute de puncte de bază. Folosim cifre RON 2026: dobânda-cheie BNR, IRCC, cotele ANAF, plafoanele CASS și mecanica de declarare D212.</p>
+
+<p>Premisa de lucru: cititorul stăpânește deja CIP, UIP și mecanica forward-ului. Mergem direct la descompunerea de randament, la edge-case-uri (forward points negative, asimetria fiscală, plafon CASS) și la optimizarea poziției pentru orizontul 2026.</p>
+
+<h2>Descompunerea exactă a randamentului carry RON vs. EUR</h2>
+
+<p>Pornim de la identitatea covered interest rate parity (CIP). Pentru un orizont anual, cu dobânzi simple, forward-ul de echilibru este:</p>
+
+<p><strong>F = S × (1 + i_RON) / (1 + i_EUR)</strong></p>
+
+<p>unde S este cursul spot EUR/RON. Forward premium-ul (RON face discount, pentru că are dobândă mai mare) este aproximativ <strong>i_RON − i_EUR</strong>. Aici stă întregul paradox: piața forward îți va „lua înapoi” exact diferențialul de dobândă dacă te hedge-uiești complet. Carry trade-ul există tocmai pentru că <em>nu</em> te hedge-uiești — adică pariezi pe uncovered interest parity (UIP) că deprecierea realizată va fi mai mică decât forward premium-ul.</p>
+
+<h3>Modelul pas-cu-pas cu cifrele din enunț</h3>
+
+<p>Să formalizăm scenariul: i_EUR = 3,0%, i_RON = 6,0%, spread bid/ask cumulat (intrare + ieșire din RON) = 0,7%, forward premium efectiv plătit pentru hedge = 0,5%, cotă impozit pe câștig = 10%. Lucrăm pe 100.000 RON, orizont 12 luni, spot ipotetic 1 EUR = 5,07 RON (nivel plauzibil 2026 sub regimul de flotare gestionată al BNR).</p>
+
+<ul>
+<li><strong>Carry brut nominal:</strong> diferențialul de dobândă = 6,0% − 3,0% = 3,0 puncte procentuale. Pe 100.000 RON, brut = 3.000 RON față de alternativa EUR.</li>
+<li><strong>Minus spread tranzacțional:</strong> 0,7% × 100.000 = 700 RON. Atenție: spread-ul se aplică pe nominalul convertit, nu pe câștig. La rulaje repetate (roll-over de depozit), acest cost se cumulează multiplicativ.</li>
+<li><strong>Minus forward premium (dacă hedge-uiești):</strong> 0,5% × 100.000 = 500 RON. Dacă te hedge-uiești complet, în teorie pierzi întreg diferențialul; aici 0,5% este componenta „basis” reziduală peste CIP perfectă (deviația de bază, cross-currency basis).</li>
+<li><strong>Sub-total pre-impozit (poziție parțial acoperită):</strong> 3.000 − 700 − 500 = 1.800 RON.</li>
+<li><strong>Minus impozit 10%:</strong> dobânda din depozit RON este venit din dobânzi, impozitat 10% prin reținere la sursă de bancă. Pe câștigul net relevant: ~180 RON. Randament net ≈ 1.620 RON, adică 1,62%.</li>
+</ul>
+
+<p>Concluzia cantitativă: din 3,0% diferențial aparent, rezidentul reține efectiv ~1,6% <em>doar dacă</em> deprecierea RON realizată este zero. Aceasta este iluzia centrală a carry-ului: tot calculul de mai sus presupune curs stabil. Reintroducerea deprecierii schimbă semnul.</p>
+
+<h3>Scenariul în care carry-ul devine negativ</h3>
+
+<p>Dacă RON se depreciază cu 2,5% într-un an (perfect plauzibil istoric — RON a pierdut frecvent 2–6% anual față de EUR în episoade de presiune), iar tu deții poziția <em>neacoperită</em> în RON dintr-o bază EUR:</p>
+
+<ul>
+<li>Câștig dobândă RON: +6,0%</li>
+<li>Pierdere din depreciere RON vs. EUR (măsurată în EUR): −2,5%</li>
+<li>Spread: −0,7%</li>
+<li><strong>Randament net pre-impozit: 6,0 − 2,5 − 0,7 − 3,0 (costul de oportunitate EUR) = −0,2%.</strong></li>
+</ul>
+
+<p>Aici intervine asimetria fiscală brutală: dobânda de 6% este impozitată cu 10%, dar pierderea de curs (−2,5%) la o persoană fizică <strong>nu este deductibilă</strong> din venitul din dobânzi. Plătești impozit pe componenta pozitivă, dar nu compensezi cu cea negativă. Randamentul net post-impozit devine vizibil sub-zero. Acesta este motivul pentru care, peste un ciclu complet, carry-ul RON neacoperit are speranță matematică negativă pentru rezidentul român.</p>
+
+<h2>De ce IRP nu „ține” perfect: basis-ul EUR/RON și sursele de profitabilitate reziduală</h2>
+
+<p>CIP perfectă ar elimina orice arbitraj. În realitate, există un <strong>cross-currency basis</strong> EUR/RON — o deviație de la paritate generată de constrângeri de bilanț bancar, lichiditate redusă pe forward-ul RON la scadențe lungi și primă de credit. Acest basis este unica sursă legitimă de <em>arbitraj acoperit</em>, dar pentru a-l capta ai nevoie de acces la piața forward interbancară (preț la mid, nu la spread-ul de retail de 0,7%). Pentru persoana fizică, spread-ul de retail anulează aproape întotdeauna basis-ul disponibil.</p>
+
+<h3>Sursele reale unde carry devine pozitiv</h3>
+
+<ul>
+<li><strong>Regimuri de stabilitate gestionată:</strong> când BNR menține RON într-un coridor strâns (politica de facto a ultimilor ani), deprecierea realizată este sub forward premium, iar carry-ul neacoperit livrează diferențialul minus spread. Aici, 2–3% net pe an este realizabil — dar ești expus unui risc de „tail”: o reajustare de curs.</li>
+<li><strong>Compresia spread-ului prin volum:</strong> la sume mari (peste echivalentul a ~50.000 EUR) sau prin platforme cu execuție la curs interbancar + comision fix, spread-ul efectiv scade de la 0,7% la 0,1–0,2%, recuperând 50 bps de randament.</li>
+<li><strong>Roll-over la momentul potrivit pe curba dobânzii:</strong> când curba RON este inversată (dobânzi scurte > lungi), depozitele scurte cu reînnoire captează vârful, în timp ce forward-ul pe termen lung subestimează deprecierea — fereastra clasică de carry profitabil.</li>
+</ul>
+
+<h3>Cuantificarea basis-ului: exemplu numeric</h3>
+
+<p>Presupunem CIP teoretică: cu i_RON = 6,0%, i_EUR = 3,0% și spot 5,07, forward-ul de echilibru pe 12 luni este F = 5,07 × 1,06 / 1,03 ≈ 5,2177, adică un forward premium de ~2,91% (RON la discount). Dacă forward-ul cotat efectiv pe piață este 5,235 (premium 3,25%), basis-ul implicit este +0,34% în favoarea celui care plasează RON acoperit — o sursă reală, dar minusculă, de arbitraj acoperit. Problema: pentru a-l capta trebuie să execuți spot + forward la mid, fără spread-ul de retail de 0,7%. La spread retail, basis-ul de 34 bps este șters de patru ori. De aceea arbitrajul CIP pur rămâne teritoriul trezoreriilor bancare, nu al persoanei fizice. Pentru retail, singura variabilă cu adevărat exploatabilă este compresia spread-ului prin volum și alegerea contrapărții, nu basis-ul în sine.</p>
+
+<h2>Paritatea puterii de cumpărare ca ancoră de regim, nu ca semnal de timing</h2>
+
+<p>PPP nu prezice cursul pe 12 luni — convergența PPP operează pe orizonturi de 3–5 ani (half-life empiric al deviațiilor PPP ≈ 3–4 ani, „puzzle-ul PPP”). Pentru specialist, PPP este filtrul de regim: îți spune dacă RON este sub- sau supra-evaluat în termeni reali, deci care este <em>direcția probabilă</em> a presiunii pe termen mediu.</p>
+
+<h3>Modelul de curs real de echilibru</h3>
+
+<p>Cursul real efectiv (REER) ajustează cursul nominal cu diferențialul de inflație. Dacă inflația RO 2026 rulează semnificativ peste cea din zona euro, RON se apreciază în termeni reali chiar dacă rămâne stabil nominal — ceea ce erodează exact carry-ul, pentru că presiunea de corecție nominală se acumulează.</p>
+
+<p><strong>Regula de specialist:</strong> carry RON neacoperit are speranță pozitivă <em>doar</em> când (a) RON este sub-evaluat în termeni PPP (deci corecția probabilă e de apreciere, nu depreciere) ȘI (b) diferențialul de dobândă depășește deprecierea PPP-implicată. Când RON este la fair-value sau supra-evaluat PPP, diferențialul de dobândă este pură compensație pentru deprecierea viitoare — și carry-ul e o capcană. Verifică întotdeauna semnul deviației PPP înainte de a pune poziția.</p>
+
+<h2>Depozite devize vs. lei: spread-ul real și structura fiscală 2026</h2>
+
+<p>Comparația operațională nu este „6% vs. 3%”, ci randamentul net post-cost-post-fiscal al fiecărei alternative pentru rezidentul român.</p>
+
+<ul>
+<li><strong>Depozit RON:</strong> dobândă nominală mai mare (aliniată la dobânda-cheie BNR și IRCC), impozit 10% pe dobândă reținut la sursă, fără risc valutar dacă cheltuielile tale sunt în RON.</li>
+<li><strong>Depozit EUR la bancă din RO:</strong> dobândă nominal mică, dar fără risc de depreciere RON dacă ai pasive/cheltuieli viitoare în EUR; impozit tot 10% pe dobândă.</li>
+<li><strong>Spread de conversie:</strong> la fiecare intrare/ieșire din valută plătești spread-ul bancar (tipic 0,5–1,5% retail, ~0,1% la casele de schimb competitive sau platforme fintech). Acesta este costul ascuns care decide totul la orizont scurt.</li>
+</ul>
+
+<h3>Fiscalitatea exactă a câștigului valutar și forex (RO 2026)</h3>
+
+<p>Detalii care schimbă pragul de rentabilitate:</p>
+
+<ul>
+<li><strong>Dobânzi din depozite (RON sau valută):</strong> impozit 10%, reținut la sursă de bancă. Nu declari separat dacă banca a reținut.</li>
+<li><strong>Câștiguri din tranzacții forex / contracte pe diferență de curs:</strong> dacă realizate prin intermediar nerezident (broker forex tip eToro, Interactive Brokers, XTB cu entitate externă), <em>nu</em> există reținere la sursă — declari prin <strong>Declarația Unică (D212)</strong>, iar din 2026 cota este <strong>16% pe câștigul net anual</strong> (diferența brut câștiguri − brut pierderi realizate în an). Atenție: pentru câștigurile de capital realizate prin <em>broker rezident</em> român, regimul e diferit — reținere la sursă 3% (deținere > 1 an) sau 6% (deținere < 1 an), fără compensarea pierderilor; doar la brokerul nerezident câștigul net se autodeclară și se impozitează cu 16%.</li>
+<li><strong>CASS (contribuția de sănătate):</strong> veniturile din investiții (inclusiv dobânzi și câștiguri de capital) intră în baza CASS dacă totalul veniturilor extrasalariale depășește pragurile raportate la salariul minim brut. Cu salariul minim 2026 de 4.050 lei, cele trei plafoane de 6 / 12 / 24 salarii minime corespund la <strong>24.300 / 48.600 / 97.200 lei</strong> venit anual. Peste prag, datorezi CASS 10% aplicat pe baza de calcul aferentă plafonului atins (deci, la depășirea primului prag, 10% × 24.300 ≈ 2.430 lei) — un cost-treaptă fix și real care poate adăuga mii de lei și care erodează suplimentar carry-ul net.</li>
+<li><strong>Asimetria pierderii:</strong> pierderile de curs pe poziții nehedge-uite la persoana fizică nu se compensează cu dobânzile. La instrumente forex declarate în D212, pierderile se pot reporta în limitele legale pe câștiguri de aceeași natură — verifică încadrarea exactă a instrumentului.</li>
+</ul>
+
+<p>Implicație de optimizare: pentru a face carry-ul fiscal-eficient, separă componenta de dobândă (impozitată simplu 10% la sursă) de componenta valutară (volatilă, fiscal asimetrică). Hedge-ul forward transformă un câștig valutar incert într-un cost determinat (forward points) — fiscal mai curat, dar elimină exact alpha-ul carry.</p>
+
+<h2>Hedging cu forward și opțiuni: când să acoperi și cât</h2>
+
+<p>Decizia de hedge nu este binară. Modelăm trei regimuri de acoperire pe poziția de 100.000 RON echivalent.</p>
+
+<h3>1. Forward outright (acoperire totală)</h3>
+
+<p>Blochezi cursul la scadență. Câștigi diferențialul de dobândă <em>numai</em> dacă există cross-currency basis pozitiv în favoarea ta; altfel, forward-ul îți „ia” întreg carry-ul (asta e CIP). Util defensiv: când ai un pasiv viitor în EUR și vrei certitudine, nu alpha.</p>
+
+<h3>2. Opțiune (collar / put de protecție)</h3>
+
+<p>Cumperi un put pe RON (protecție la depreciere) finanțat prin vânzarea unui call (collar), păstrând upside-ul carry până la un plafon. Costul = prima netă a collar-ului. Regula: <strong>collar-ul are sens când volatilitatea implicită EUR/RON este scăzută</strong> (prime ieftine) și diferențialul de dobândă e gras. Pe o piață RON cu lichiditate redusă pe opțiuni, prima de iliquiditate poate face collar-ul mai scump decât forward-ul — verifică quote-ul efectiv.</p>
+
+<h3>3. Hedge parțial dinamic (ratio hedge)</h3>
+
+<p>Acoperi un procent h din nominal, calibrat astfel încât pierderea maximă tolerată la o depreciere de „tail” (ex. −6%) să rămână sub bugetul de risc. Dacă tolerezi maxim −2.000 RON pierdere și deprecierea-tail e 6%, acoperi h ≈ 1 − (2.000 / 6.000) ≈ 67% din poziție. Restul de 33% rămâne expus pentru a capta carry-ul. Aceasta este structura cea mai eficientă pentru rezidentul care vrea carry, dar cu coadă tăiată.</p>
+
+<h2>Pragul exact de profitabilitate: formula de specialist</h2>
+
+<p>Carry-ul net neacoperit, post-cost-post-fiscal, pentru rezidentul român, este pozitiv dacă și numai dacă:</p>
+
+<p><strong>(i_RON − i_EUR) × (1 − t) − ΔS_depreciere − spread − CASS_marginal > 0</strong></p>
+
+<p>unde t = 10% (pe componenta de dobândă), ΔS = deprecierea realizată RON/EUR, iar CASS_marginal este costul de sănătate per leu de venit peste plafon. Cu cifrele bazei (3,0% diferențial × 0,9 = 2,7%) și spread 0,7%, ai un buget de doar <strong>2,0% pentru depreciere</strong> înainte de zero — și asta ignorând CASS. Orice depreciere RON peste ~2% pe an anulează poziția. Istoricul EUR/RON spune că acest prag e atins frecvent. Concluzia operațională: carry RON neacoperit este o strategie de „cules monede în fața tăvălugului” — pozitiv în majoritatea anilor, dar cu pierderi rare și mari care domină media multi-anuală.</p>
+
+<h2>Checklist de execuție pentru poziția 2026</h2>
+
+<ul>
+<li><strong>Pas 1 — Verifică semnul PPP:</strong> calculează deviația REER. Pune carry RON neacoperit doar dacă RON e sub-evaluat sau la fair-value în termeni PPP. Dacă e supra-evaluat, abține-te sau hedge-uiește total.</li>
+<li><strong>Pas 2 — Cuantifică diferențialul real:</strong> ia dobânda netă a depozitului RON (post 10% la sursă) minus dobânda netă EUR, nu ratele afișate. Acesta e carry-ul tău brut adevărat.</li>
+<li><strong>Pas 3 — Măsoară spread-ul efectiv:</strong> obține cotația reală de conversie (intrare + ieșire). Dacă > 0,5% cumulat, negociază volum sau folosește platformă la curs interbancar; altfel spread-ul mănâncă jumătate din carry.</li>
+<li><strong>Pas 4 — Compară cu forward points:</strong> dacă forward premium ≈ diferențial dobândă (CIP ține), nu există arbitraj acoperit — orice câștig vine din risc valutar asumat. Decide conștient dacă vrei riscul.</li>
+<li><strong>Pas 5 — Calibrează hedge-ul:</strong> aplică ratio hedge h = 1 − (pierdere_tolerată / pierdere_tail). Acoperă h%, lasă restul expus.</li>
+<li><strong>Pas 6 — Modelează fiscalitatea completă:</strong> 10% pe dobândă (reținut la sursă) + 16% prin D212 pe câștigul net forex la broker nerezident (sau 3%/6% reținut la sursă la broker rezident) + CASS dacă depășești plafonul de salarii minime. Reține că pierderea de curs nehedge-uită NU compensează dobânda impozitată.</li>
+<li><strong>Pas 7 — Stabilește regula de roll-over:</strong> reînnoiește doar cât timp deviația PPP rămâne favorabilă și diferențialul net > prag. La inversarea semnului PPP sau la compresia diferențialului sub 2% net, închide.</li>
+<li><strong>Pas 8 — Documentează pentru D212:</strong> păstrează extrasele de curs și dobânzi; declară până la termenul anual (25 mai) câștigurile din forex realizate prin intermediari nerezidenți.</li>
+</ul>
+
+<p>Sinteza de specialist: <strong>arbitrajul de dobândă EUR/RON nu este arbitraj</strong> în sens strict — este o poziție de carry remunerată pentru risc valutar, plafonată de IRP și taxată asimetric. Devine genuin profitabilă doar la confluența rară a trei condiții: RON sub-evaluat PPP, spread de execuție comprimat sub 0,2%, și un regim de stabilitate de curs care ține deprecierea sub diferențialul net post-fiscal. În rest, forward-ul îți confirmă matematic că prânzul gratis nu există.</p>

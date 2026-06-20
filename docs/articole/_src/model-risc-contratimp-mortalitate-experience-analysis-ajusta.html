@@ -1,0 +1,172 @@
+<p>La nivel de specialist, <strong>modelarea riscului contratimp asigurări tabele mortalitate</strong> nu înseamnă să „alegi o tabelă potrivită”, ci să construiești un mecanism care recalibrează continuu prima încasată în funcție de decalajul dintre mortalitatea observată în portofoliul tău și cea presupusă la subscriere. Riscul de <em>contratimp</em> (timing risk) este exact acest decalaj temporal: încasezi prime calibrate pe o ipoteză actuarială fixată azi, dar decesele, anulările și anti-selecția se produc pe o traiectorie pe care nu o controlezi. Această lecție tratează rigoros <strong>experience analysis asigurări calcul actuarial</strong>, mecanica de <strong>ajustare prime pe bază de date actuariale</strong> și logica de <strong>reajustare dinamică prime asigurări risc</strong>, pe coreturi (cohorte) demografice fine.</p>
+
+<p>Presupun că stăpânești deja construcția unei prime nete (valoare actualizată a daunelor așteptate), încărcarea de siguranță și diferența dintre tabele de selecție și tabele de mortalitate agregată. Aici mergem mai adânc: cum măsori raportul A/E pe felii demografice, cum tratezi <strong>volatilitate experiență asigurări clustering</strong> (corelația deceselor pe regiune, vârstă, canal de distribuție), cum decizi <strong>granularity risc demografie calcul</strong> fără să fragmentezi baza de credibilitate, și cum reajustezi primele când experiența reală divergează de <strong>tábele de mortalitate România asigurări 2026</strong>. Toate exemplele sunt calibrate pe cadrul ASF și pe realitatea demografică INS/Eurostat 2026.</p>
+
+<p>Unde un parametru de piață este incert — de pildă tabela exactă folosită intern de un asigurător sau cota de mortality improvement adoptată — formulez prudent și marchez ipoteza. Nu inventez cifre; lucrez cu intervale defendabile actuarial.</p>
+
+<h2>Riscul de contratimp ca eroare structurală a primei statice</h2>
+
+<p>Prima brută clasică se construiește pe o ipoteză „înghețată” la momentul subscrierii: o tabelă de mortalitate q<sub>x</sub>, o rată tehnică de actualizare i și un set de încărcări. Problema este că polița trăiește 10-30 de ani, iar trei procese se mișcă <em>independent</em> de ipoteza inițială:</p>
+
+<ul>
+<li><strong>Drift de mortalitate</strong> — îmbunătățirea anuală a mortalității (mortality improvement) face ca q<sub>x</sub> efectiv să scadă față de tabelă pe produsele de viață, dar să crească față de tabelă pe rentele viagere (risc de longevitate).</li>
+<li><strong>Anti-selecție dinamică</strong> — anulările (lapses) nu sunt aleatorii: cei sănătoși renunță (sau se reasigură mai ieftin), cei cu risc agravat persistă. Portofoliul rezidual se „îmbolnăvește” în timp.</li>
+<li><strong>Clustering de daune</strong> — decesele nu sunt independente. Un val gripal sever, un episod de caniculă, o concentrare geografică sau ocupațională produc corelație pozitivă care îngroașă coada distribuției agregate.</li>
+</ul>
+
+<p>Formal, definim <strong>riscul de contratimp</strong> ca diferența actualizată dintre fluxul de daune realizat și cel presupus:</p>
+
+<p><strong>TR<sub>t</sub> = Σ<sub>k≥t</sub> v<sup>k−t</sup> · (D<sub>k</sub><sup>real</sup> − D<sub>k</sub><sup>ipoteză</sup>)</strong></p>
+
+<p>unde D<sub>k</sub> este fluxul net de daune în anul k și v = 1/(1+i). O primă statică presupune implicit TR = 0 pe toată durata. În realitate, TR este un proces stocastic cu trend (driftul de mortalitate) și varianță (clustering). Sarcina specialistului este să estimeze TR în timp real prin experience analysis și să-l neutralizeze prin reajustare.</p>
+
+<h2>Experience analysis: raportul Actual/Expected pe coreturi</h2>
+
+<p>Instrumentul central este <strong>raportul A/E</strong> (Actual to Expected). Pentru fiecare celulă demografică (cohortă) c, pe o perioadă de observație, calculezi:</p>
+
+<ul>
+<li><strong>Expected deaths</strong>: E<sub>c</sub> = Σ<sub>i∈c</sub> q<sub>x<sub>i</sub></sub> · E<sub>i</sub><sup>expo</sup>, unde E<sub>i</sub><sup>expo</sup> este expunerea centrală a poliței i (timpul efectiv petrecut „în risc” în perioadă, în ani-persoană).</li>
+<li><strong>Actual deaths</strong>: A<sub>c</sub> = numărul real de decese observate în celulă.</li>
+<li><strong>Raport A/E</strong>: <strong>A/E<sub>c</sub> = A<sub>c</sub> / E<sub>c</sub></strong>.</li>
+</ul>
+
+<p>Un A/E = 1,00 înseamnă că tabela ta prezice perfect. A/E = 1,15 înseamnă că ai 15% mai multe decese decât presupus — prima e subtarifată pe acea felie. A/E = 0,82 înseamnă că tabela e prudentă cu 18% — ai marjă, dar și risc competitiv (ești scump).</p>
+
+<h3>Calculul corect al expunerii centrale</h3>
+
+<p>Eroarea clasică de junior este să numere „polițe la început de an”. Expunerea corectă este <em>central exposure</em>: o poliță intrată pe 1 aprilie contribuie cu 0,75 ani-persoană în acel an; o poliță unde decesul survine pe 1 octombrie contribuie, prin convenție actuarială, cu expunerea <strong>până la finalul anului de vârstă</strong> (nu se „oprește” la deces), pentru ca estimatorul q<sub>x</sub> = A/E·q<sub>x</sub><sup>tab</sup> să rămână nedeplasat. Concret:</p>
+
+<ul>
+<li>Poliță sănătoasă activă tot anul: expunere 1,00.</li>
+<li>Poliță anulată pe 30 iunie: expunere 0,50.</li>
+<li>Poliță cu deces pe 30 septembrie: expunere 1,00 (deces = expunere completă pe anul de vârstă, prin metoda actuarială clasică).</li>
+</ul>
+
+<p>Această convenție evită subestimarea sistematică a expunerii și deci supraestimarea lui q<sub>x</sub>.</p>
+
+<h3>Exemplu numeric: o cohortă de 8.000 polițe</h3>
+
+<p>Considerăm cohorta <em>bărbați 50-54 ani, fumători, polițe term-life subscrise prin broker</em>, pe un an de observație. Tabela internă presupune q<sub>52</sub> = 0,0042 (4,2‰). Expunerea centrală agregată: E<sup>expo</sup> = 7.640 ani-persoană (din 8.000 polițe, după ajustarea anulărilor și intrărilor parțiale).</p>
+
+<ul>
+<li><strong>Expected deaths</strong>: E = 0,0042 × 7.640 ≈ <strong>32,1</strong>.</li>
+<li><strong>Actual deaths observate</strong>: A = 41.</li>
+<li><strong>A/E</strong> = 41 / 32,1 = <strong>1,277</strong>.</li>
+</ul>
+
+<p>Citirea de specialist: pe această felie, mortalitatea reală e cu ~28% peste tabelă. Dar înainte de a reajusta prima, trebuie să verifici dacă diferența este <strong>semnificativă statistic</strong> sau zgomot.</p>
+
+<h2>Credibilitatea: când ai voie să reacționezi la A/E</h2>
+
+<p>Numărul de decese pe celulă urmează aproximativ o distribuție Poisson cu media E. Deviația standard a numărului de decese este √E. Pentru exemplul de mai sus, √32,1 ≈ 5,67. Intervalul de încredere 95% pentru A este aproximativ 32,1 ± 1,96 × 5,67 = [21,0; 43,2]. Valoarea observată A = 41 este în interiorul intervalului, deci <strong>NU este semnificativă la 95%</strong> — deși pare alarmantă, încă poate fi fluctuație de eșantion.</p>
+
+<p>Aici intervine <strong>credibilitatea actuarială</strong> (formula Bühlmann / limited fluctuation). Definim factorul de credibilitate Z aplicat experienței proprii vs. tabela de bază:</p>
+
+<p><strong>q<sub>x</sub><sup>ajustat</sup> = Z · q<sub>x</sub><sup>experiență</sup> + (1 − Z) · q<sub>x</sub><sup>tabelă</sup></strong></p>
+
+<p>Pragul clasic de credibilitate completă (Z = 1) în metoda limited fluctuation, pentru o toleranță de ±5% cu probabilitate 90%, este de aproximativ <strong>1.082 de evenimente de daună</strong> (decese). Sub acest prag, credibilitatea parțială este:</p>
+
+<p><strong>Z = √(A<sub>obs</sub> / 1.082)</strong></p>
+
+<p>Pentru celula noastră cu 41 de decese: Z = √(41 / 1.082) = √0,0379 = <strong>0,195</strong>. Deci ai voie să muți tabela doar ~19,5% în direcția experienței proprii:</p>
+
+<ul>
+<li>q<sub>x</sub><sup>experiență</sup> = A/E × q<sub>tab</sub> = 1,277 × 0,0042 = 0,005363.</li>
+<li>q<sub>x</sub><sup>ajustat</sup> = 0,195 × 0,005363 + 0,805 × 0,0042 = 0,001046 + 0,003381 = <strong>0,004427</strong>.</li>
+</ul>
+
+<p>Adică un A/E ajustat de ~1,054, nu 1,277. Reacția corectă este o majorare de tarif de ~5,4% pe felie, nu de ~28%. <strong>Aceasta este diferența dintre amator și actuar:</strong> amatorul reacționează la valoarea brută, profesionistul o ponderează cu credibilitatea.</p>
+
+<h2>Granularitate vs. credibilitate: dilema feliilor demografice</h2>
+
+<p>Cu cât feliile sunt mai fine (vârstă × sex × fumător × ocupație × regiune × canal), cu atât A/E e mai precis ca semnal — dar fiecare celulă are mai puține decese, deci credibilitate mai mică. Aceasta este tensiunea centrală a <strong>granularity risc demografie calcul</strong>.</p>
+
+<p>Regula operațională: caută felii care ating cel puțin ~1.082 decese pentru credibilitate completă, sau acceptă credibilitate parțială explicită. Practic, asigurătorii folosesc o structură ierarhică:</p>
+
+<ul>
+<li><strong>Nivel 0 (portofoliu total)</strong> — credibilitate maximă, semnal mediu, ascunde divergențe.</li>
+<li><strong>Nivel 1 (vârstă × sex)</strong> — pivotul standard, de regulă peste pragul de credibilitate.</li>
+<li><strong>Nivel 2 (+ fumător + clasă de risc medical)</strong> — încă credibil pe portofolii mari (>50.000 polițe).</li>
+<li><strong>Nivel 3 (+ regiune + canal + ocupație)</strong> — rar credibil singur; se tratează prin shrinkage către nivelul superior.</li>
+</ul>
+
+<h3>Shrinkage ierarhic (credibility borrowing)</h3>
+
+<p>Când o celulă de nivel 3 are puține decese, nu o lași „pe cont propriu” și nici nu o ignori. Aplici shrinkage Bayesian: estimatorul celulei fine este atras către media nivelului părinte, proporțional cu lipsa ei de credibilitate. Formal, dacă celula fină c are credibilitate Z<sub>c</sub> și părintele are A/E<sub>p</sub>:</p>
+
+<p><strong>A/E<sub>c</sub><sup>final</sup> = Z<sub>c</sub> · A/E<sub>c</sub><sup>brut</sup> + (1 − Z<sub>c</sub>) · A/E<sub>p</sub></strong></p>
+
+<p>Astfel o regiune cu 9 decese observate (Z mic) nu generează o primă regională aberantă, ci moștenește în mare parte nivelul ei demografic, cu o mică corecție locală. Acesta este antidotul împotriva overfitting-ului tarifar.</p>
+
+<h2>Clustering și volatilitatea experienței</h2>
+
+<p>Ipoteza Poisson presupune decese independente. În realitate, există <strong>volatilitate experiență asigurări clustering</strong>: corelație pozitivă între decese din cauze comune (pandemie, val de căldură, concentrare geografică/ocupațională). Sub corelație ρ > 0, varianța numărului agregat de decese nu mai e E, ci:</p>
+
+<p><strong>Var(A) ≈ E + ρ · E · (E − 1)</strong></p>
+
+<p>Pentru E = 32 și o corelație modestă ρ = 0,02, Var(A) ≈ 32 + 0,02 × 32 × 31 = 32 + 19,8 = 51,8, deci deviația standard urcă de la 5,67 la <strong>7,2</strong> — cu ~27% mai mare. Consecința directă: intervalele de încredere se lărgesc, pragul de credibilitate completă crește, iar capitalul de solvabilitate cerut pe riscul de mortalitate (sub-modulul de mortalitate/catastrofă din cadrul Solvency II, aplicat de ASF) trebuie să acopere șocul de cluster, nu doar varianța independentă.</p>
+
+<p>Un caz numeric concret de cluster geografic: presupune că din cele 41 de decese, 11 provin dintr-un singur județ în care un val de caniculă din vara observată a ridicat mortalitatea seniorilor. Dacă tratezi naiv aceste 11 ca evenimente independente, A/E pe județul respectiv „explodează” și ai fi tentat să tarifezi punitiv toată regiunea. Corect: izolezi cauza comună (eveniment de catastrofă), o aloci la sub-modulul de mortalitate-catastrofă (acoperit de reasigurare și de SCR-cat), și o <em>excluzi</em> din baza de experiență recurentă folosită la recalibrarea trendului. Altfel contaminezi ipoteza de bază cu un șoc nerecurent — o eroare clasică de contratimp în sens invers: reacționezi la zgomot catastrofic ca și cum ar fi tendință structurală.</p>
+
+<p>Tehnica de detecție a clusteringului este testul de supra-dispersie: compari varianța empirică a deceselor între celule omogene cu media lor. Dacă raportul varianță/medie (indicele de dispersie) depășește semnificativ 1, ai dovada că modelul Poisson independent e respins și că ρ > 0 trebuie estimat și încorporat. Pe portofolii românești cu expunere concentrată regional (de pildă polițe vândute preponderent prin câteva sucursale), supra-dispersia este regula, nu excepția.</p>
+
+<p>În practică, separi două componente:</p>
+
+<ul>
+<li><strong>Risc de proces (idiosincratic)</strong> — fluctuația de eșantion, diversificabilă prin volum.</li>
+<li><strong>Risc de parametru/tendință (sistematic)</strong> — driftul de mortalitate și clustering-ul, <em>nediversificabil</em>: nu dispare oricât de mare e portofoliul. Acesta este miezul riscului de contratimp.</li>
+</ul>
+
+<p>Pentru riscul sistematic, reajustarea primei nu e suficientă — trebuie reasigurare (excess-of-loss pe mortalitate catastrofică) și marjă de risc explicită în rezerve.</p>
+
+<h2>Reajustarea dinamică a primelor</h2>
+
+<p>Odată ce ai A/E ajustat prin credibilitate și shrinkage, derivi noua primă. Pe un produs cu primă reajustabilă (reviewable premium term), bucla de reajustare are patru pași:</p>
+
+<ul>
+<li><strong>1. Recalibrare q<sub>x</sub></strong> — q<sub>x</sub><sup>nou</sup> = A/E<sup>final</sup> × q<sub>x</sub><sup>tabelă de bază</sup>, pe fiecare celulă.</li>
+<li><strong>2. Recalcul primă netă</strong> — valoarea actualizată a daunelor cu noul q<sub>x</sub> și rata tehnică curentă.</li>
+<li><strong>3. Reaplicare încărcări</strong> — cheltuieli, marjă de risc, comision broker.</li>
+<li><strong>4. Plafonare contractuală</strong> — majorarea efectivă nu poate depăși plafonul de reajustare din poliță (tipic max 25-50% pe o reajustare, cu preaviz).</li>
+</ul>
+
+<h3>Exemplu pas-cu-pas de reajustare</h3>
+
+<p>Felia term-life de mai sus, sumă asigurată medie 200.000 lei, primă netă anuală inițială (simplificat, model anual):</p>
+
+<ul>
+<li><strong>Primă netă inițială</strong> ≈ q<sub>x</sub><sup>tab</sup> × SA × v = 0,0042 × 200.000 × 0,962 ≈ <strong>808 lei</strong> (cu i = 4%).</li>
+<li><strong>q<sub>x</sub> ajustat</strong> = 0,004427 (din credibilitate parțială Z = 0,195).</li>
+<li><strong>Primă netă reajustată</strong> ≈ 0,004427 × 200.000 × 0,962 ≈ <strong>852 lei</strong>.</li>
+<li><strong>Majorare netă</strong> = (852 − 808)/808 = <strong>+5,4%</strong>, sub plafonul contractual.</li>
+</ul>
+
+<p>Dacă, în schimb, ai fi avut credibilitate completă (>1.082 decese pe felie, A/E = 1,277 robust), q<sub>x</sub><sup>nou</sup> = 0,005363, primă netă ≈ 1.032 lei, majorare +27,7% — care ar lovi plafonul și ar declanșa preaviz și risc masiv de lapse al clienților buni (anti-selecție în reajustare). De aceea reajustările mari se etapizează pe 2-3 cicluri.</p>
+
+<h2>Bucla de monitorizare și cadrul de reglementare ASF</h2>
+
+<p>Sub regimul Solvency II transpus de ASF, asigurătorul de viață rulează o <strong>analiză de experiență periodică</strong> (anuală sau trianuală pentru ipotezele biometrice), documentată în raportul actuarial și validată în cadrul funcției actuariale. Reperele cadru relevante 2026:</p>
+
+<ul>
+<li><strong>Best estimate liabilities</strong> calculate cu ipoteze realiste, nu prudente — prudența merge separat în <em>risk margin</em>.</li>
+<li><strong>SCR mortalitate</strong> — șoc instant de +15% pe ratele de mortalitate (sub-modulul de viață), plus sub-modulul de catastrofă (șoc absolut +0,15‰ pe un an), care prinde exact riscul de cluster.</li>
+<li><strong>Longevity</strong> — șoc de −20% pe mortalitate pentru produsele unde longevitatea e adversă (rente).</li>
+<li><strong>Lapse</strong> — șocuri de mass-lapse, relevante pentru anti-selecția din reajustare.</li>
+</ul>
+
+<p>Riscul de contratimp se manifestă tehnic ca <em>experience variance</em> în analiza P&L de atribuire (analysis of surplus): cât din profit/pierdere provine din abaterea mortalității reale față de ipoteză. Un <strong>experience variance</strong> sistematic negativ pe o felie este semnalul-declanșator pentru reajustare.</p>
+
+<h2>Checklist operațional de specialist</h2>
+
+<ul>
+<li><strong>Definește coreturile</strong> pe minimum vârstă × sex × fumător; adaugă regiune/canal doar cu shrinkage către părinte.</li>
+<li><strong>Calculează expunerea centrală corect</strong> (deces = expunere completă pe anul de vârstă; anulări = pro-rata temporală).</li>
+<li><strong>Determină A/E pe fiecare celulă</strong> și marchează celulele cu interval de încredere care exclude 1,00.</li>
+<li><strong>Aplică credibilitatea</strong> Z = √(A/1.082); nu reacționa niciodată la A/E brut pe celule cu sub ~1.082 decese.</li>
+<li><strong>Ajustează pentru clustering</strong>: inflatează varianța cu ρ·E·(E−1) înainte de a declara semnificație.</li>
+<li><strong>Separă procesul de parametru</strong>: process risk → reajustare primă; parameter/trend risk → reasigurare + risk margin.</li>
+<li><strong>Reajustează q<sub>x</sub></strong> = A/E<sup>final</sup> × q<sub>tab</sub>, recalculează prima netă, reaplică încărcările.</li>
+<li><strong>Plafonează majorarea</strong> contractual și etapizează reajustările mari pe 2-3 cicluri pentru a evita lapse-ul selectiv al riscurilor bune.</li>
+<li><strong>Documentează</strong> în raportul funcției actuariale (cerință ASF) fiecare schimbare de ipoteză biometrică și impactul pe SCR.</li>
+<li><strong>Re-rulează anual</strong> bucla A/E → credibilitate → reajustare; tratează-o ca proces continuu, nu ca eveniment punctual.</li>
+</ul>

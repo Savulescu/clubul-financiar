@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risc de longevitate la decumularea pensiei: optimizare actuarială (România 2026) — Clubul Financiar</title><meta name="description" content="Cadru actuarial complet pentru riscul de longevitate la decumularea pensiei: tabele de mortalitate CNPP, anuități viagere, VAN ponderat și Pilon II în România 2026."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/actuarial-longevity-risk-pension-optimization.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Risc de longevitate la decumularea pensiei: optimizare actuarială (România 2026)"><meta property="og:description" content="Cadru actuarial complet pentru riscul de longevitate la decumularea pensiei: tabele de mortalitate CNPP, anuități viagere, VAN ponderat și Pilon II în România 2026."><meta property="og:url" content="https://clubulfinanciar.ro/articole/actuarial-longevity-risk-pension-optimization.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Risc de longevitate la decumularea pensiei: optimizare actuarială (România 2026)"><meta name="twitter:description" content="Cadru actuarial complet pentru riscul de longevitate la decumularea pensiei: tabele de mortalitate CNPP, anuități viagere, VAN ponderat și Pilon II în România 2026."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Risc de longevitate la decumularea pensiei: optimizare actuarială (România 2026)", "description": "Cadru actuarial complet pentru riscul de longevitate la decumularea pensiei: tabele de mortalitate CNPP, anuități viagere, VAN ponderat și Pilon II în România 2026.", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/actuarial-longevity-risk-pension-optimization.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#pensii">🪙 Pensii</a> · 14 min citire · Actualizat 19 iun. 2026</p><h1>Risc de longevitate la decumularea pensiei: optimizare actuarială (România 2026)</h1><p>La nivel de specialist, <strong>riscul de longevitate în decumularea pensiei</strong> nu este o grijă vagă — „să nu trăiesc mai mult decât banii” — ci o variabilă aleatoare cu distribuție cunoscută, pe care o poți cuantifica actuarial. Diferența dintre planificarea amatorului și cea a profesionistului este exact aceasta: amatorul folosește o singură speranță de viață (un punct), profesionistul folosește o întreagă <strong>tabelă de mortalitate</strong> și raționează pe <strong>probabilități de supraviețuire condiționate</strong>, integrate într-o valoare actualizată netă. În această lecție construim cadrul actuarial complet pentru <strong>modelarea duratei de viață la pensie în România</strong>, plecând de la tabelele de mortalitate ale CNPP și INS, trecând prin calculul VAN al fluxurilor de decumulare ponderate cu probabilitatea de supraviețuire la vârsta de pensionare, și ajungând la optimizarea secvenței de retragere pe orizonturi de 30-40 de ani. Tratat ca atare, <strong>riscul de longevitate în decumularea pensiei, actuarial</strong> măsurat, devine un parametru optimizabil, nu o necunoscută.</p>
+
+<p>Presupun că stăpânești deja arbitrajul <em>lump-sum vs rente</em> din Pilonul II și conceptul de rată de înlocuire reală ajustată la <em>lifestyle inflation</em>. Aici mergem mai adânc: cum separi <strong>riscul de longevitate de riscul de investiție în Pilon II</strong>, de ce media speranței de viață este o capcană sistematică, și cum calculezi <strong>optimizarea valorii actualizate a pensiei</strong> când durata orizontului este ea însăși stocastică. Vom lucra cu factori de actualizare, anuități viagere, mortalitate forward și un model de ruină pe care îl poți reconstrui în orice foaie de calcul.</p>
+
+<p>Toate cifrele sunt calibrate pe România 2026: speranțe de viață INS, ipoteze de randament real prudente și noul cadru juridic de plată a pensiilor private. Reține contextul fiscal și legal relevant: <strong>Legea 2/2026</strong> (publicată în Monitorul Oficial pe 5 ianuarie 2026, în vigoare de la 5 ianuarie 2027) elimină retragerea integrală a sumei acumulate în Pilon II — participantul poate lua o singură dată un avans de cel mult <strong>30%</strong> din activul personal, iar restul se plătește fie ca pensie cu plăți programate (orizont determinat, uzual până la 10 ani), fie ca pensie viageră, prin furnizori autorizați ASF. Fiscal, impozitul pe venit de <strong>10%</strong> se aplică doar pe câștigul (randamentul) din pensia privată, nu pe tot capitalul retras, iar <strong>CASS 10%</strong> se reține pe partea de pensie privată care depășește 3.000 lei/lună (regim aplicabil din august 2025). Unde un parametru este incert (de pildă tabela exactă de anuitizare a unui administrator), formulez prudent și marchez ipoteza.</p>
+
+<h2>De ce media speranței de viață este o eroare actuarială</h2>
+
+<p>Eroarea fundamentală a planificării non-actuariale este planificarea „până la speranța de viață medie”. Dacă INS spune că un bărbat de 65 de ani din România mai are, în medie, ~15-16 ani de trăit, iar tu îți construiești decumularea ca să se termine fix la 80-81 de ani, ai construit un plan care eșuează cu probabilitate de aproximativ <strong>50%</strong>. Speranța de viață este o <em>medie a unei distribuții puternic asimetrice</em>: aproape jumătate din cohortă o depășește, iar coada dreaptă (95+) este lungă și grasă.</p>
+
+<p>Mărimea corectă pe care o folosește un actuar nu este media, ci <strong>cuantilele de supraviețuire condiționate</strong>. Notăm:</p>
+
+<ul>
+<li><strong>l<sub>x</sub></strong> — numărul de supraviețuitori la vârsta x dintr-o cohortă inițială (radix, tipic l<sub>0</sub> = 100.000).</li>
+<li><strong><sub>t</sub>p<sub>x</sub> = l<sub>x+t</sub> / l<sub>x</sub></strong> — probabilitatea ca o persoană de vârstă x să supraviețuiască încă t ani.</li>
+<li><strong>q<sub>x</sub> = 1 − p<sub>x</sub></strong> — probabilitatea de deces între x și x+1.</li>
+</ul>
+
+<p>Pentru un pensionar care iese la <strong>x = 65</strong>, întrebarea operațională nu e „câți ani trăiesc în medie”, ci „care e probabilitatea să mai trăiesc 30 de ani, adică să ajung la 95”. Aceasta este <strong><sub>30</sub>p<sub>65</sub></strong>. Pentru România 2026, folosind o tabelă de mortalitate de tip INS ajustată cu îmbunătățire de mortalitate (mortality improvement de ~1%/an), ipotezele rezonabile sunt:</p>
+
+<ul>
+<li><strong>Bărbat 65 ani:</strong> <sub>20</sub>p<sub>65</sub> ≈ 0,42 (probabil 42% ajung la 85); <sub>25</sub>p<sub>65</sub> ≈ 0,24; <sub>30</sub>p<sub>65</sub> ≈ 0,10.</li>
+<li><strong>Femeie 65 ani:</strong> <sub>20</sub>p<sub>65</sub> ≈ 0,58; <sub>25</sub>p<sub>65</sub> ≈ 0,40; <sub>30</sub>p<sub>65</sub> ≈ 0,20.</li>
+</ul>
+
+<p>Concluzia tehnică: o femeie de 65 de ani din România are <strong>aproximativ 1 șansă din 5</strong> să atingă 95 de ani. Dacă planul tău de decumulare „se termină” la 88-90, ai ignorat coada în care se concentrează cel mai mare risc financiar. Planificarea de specialist se face la o <strong>cuantilă de siguranță</strong> (de regulă percentila 90 sau 95 de supraviețuire), nu la mediană, și apoi se acoperă coada cu un instrument viager.</p>
+
+<h3>Vârsta de planificare bazată pe cuantilă, nu pe medie</h3>
+
+<p>Definim <strong>vârsta de epuizare a planului</strong> (x*) ca vârsta la care probabilitatea de supraviețuire scade sub un prag de ruină acceptabil α. Dacă tolerezi un risc de longevitate de 10% (adică accepți 10% șansă să trăiești mai mult decât banii din decumularea programată), cauți x* astfel încât <sub>(x*−65)</sub>p<sub>65</sub> = 0,10.</p>
+
+<p>Pentru femeia din exemplul de mai sus, acel prag de 10% se atinge undeva în jurul a <strong>97 de ani</strong>; pentru bărbat, în jurul a <strong>92-93 ani</strong>. Deci un cuplu prudent își dimensionează partea de decumulare programată pe un orizont de ~30-32 de ani de la 65, nu pe 15-16 ani. Aceasta dublează orizontul față de planificarea naivă — și implicit dublează necesarul de capital pentru aceeași rentă reală.</p>
+
+<h2>Tabela de mortalitate operațională și factorii actuariali</h2>
+
+<p>Profesionistul nu lucrează direct cu l<sub>x</sub>, ci derivă <strong>funcțiile de comutație</strong> care comprimă tabela și rata de actualizare într-un singur set de coloane. Cu rata tehnică de actualizare i (folosim factorul v = 1/(1+i)), definim:</p>
+
+<ul>
+<li><strong>D<sub>x</sub> = v<sup>x</sup> · l<sub>x</sub></strong> — supraviețuitori actualizați.</li>
+<li><strong>N<sub>x</sub> = Σ<sub>k≥0</sub> D<sub>x+k</sub></strong> — suma cumulată, baza anuităților.</li>
+<li><strong>C<sub>x</sub> = v<sup>x+1</sup> · d<sub>x</sub></strong> (unde d<sub>x</sub> = l<sub>x</sub> − l<sub>x+1</sub>) și <strong>M<sub>x</sub> = Σ C<sub>x+k</sub></strong> — baza asigurărilor de deces.</li>
+</ul>
+
+<p>Cu acestea, <strong>valoarea actuarială a unei anuități viagere</strong> de 1 leu/an, plătită anticipat începând de la vârsta x, este:</p>
+
+<p><strong>ä<sub>x</sub> = N<sub>x</sub> / D<sub>x</sub></strong></p>
+
+<p>Aceasta este piesa centrală. ä<sub>x</sub> îți spune câți lei de capital trebuie să rezervi azi pentru a garanta 1 leu/an pe viață, ținând cont simultan de actualizare ȘI de probabilitatea de a mai fi în viață în fiecare an. Comparați cu o anuitate <em>certă</em> pe n ani, ä<sub>n¬</sub> = (1 − v<sup>n</sup>)/(1 − v) · (1+i), care ignoră mortalitatea. Diferența ä<sub>n¬</sub> − ä<sub>x</sub> este exact <strong>creditul de mortalitate</strong> (mortality credit) — randamentul „suplimentar” pe care îl produce o rentă viageră prin redistribuirea capitalului celor care mor devreme către cei care supraviețuiesc.</p>
+
+<h3>Exemplu numeric: cât valorează 1 leu/an pe viață la 65 de ani</h3>
+
+<p>Cu o rată tehnică reală i = 2% (prudentă pentru România 2026, după impozit și inflație), și tabela de mortalitate de mai sus:</p>
+
+<ul>
+<li><strong>Femeie 65:</strong> ä<sub>65</sub> ≈ 16,8. Adică pentru 1.000 lei/an pe viață ai nevoie de ~16.800 lei capital azi.</li>
+<li><strong>Bărbat 65:</strong> ä<sub>65</sub> ≈ 14,2. Pentru 1.000 lei/an pe viață, ~14.200 lei.</li>
+<li><strong>Anuitate certă 30 ani la 2%:</strong> ä<sub>30¬</sub> ≈ 22,8 — mult mai scumpă, fiindcă plătește 30 de ani garantat indiferent de supraviețuire.</li>
+</ul>
+
+<p>Mortality credit-ul femeii (22,8 vs 16,8) este de ~26%: o rentă viageră îți „economisește” un sfert din capital față de a rezerva bani pentru toți cei 30 de ani ca și cum ai trăi sigur. Acesta este argumentul actuarial dur în favoarea anuitizării parțiale — și exact mecanismul pe care decumularea programată pură nu îl poate replica.</p>
+
+<h2>VAN-ul decumulării ponderat cu supraviețuirea</h2>
+
+<p>Acum integrăm. Fie un plan de retrageri W<sub>t</sub> (fluxul net pe care îl scoți în anul t din capital), un randament real net r al portofoliului rămas investit, și <sub>t</sub>p<sub>65</sub> probabilitatea de a mai fi în viață în anul t. <strong>Valoarea actualizată netă, ponderată cu supraviețuirea</strong>, a fluxului de consum este:</p>
+
+<p><strong>VAN<sub>supr</sub> = Σ<sub>t=0</sub><sup>T</sup> <sub>t</sub>p<sub>65</sub> · W<sub>t</sub> / (1+r)<sup>t</sup></strong></p>
+
+<p>Diferența-cheie față de un VAN clasic: fiecare flux viitor este ponderat nu doar cu factorul de actualizare 1/(1+r)<sup>t</sup>, ci și cu probabilitatea <sub>t</sub>p<sub>65</sub> de a mai trăi să-l consumi. Un flux la 95 de ani are pondere ~0,10 pentru femeie — contează, dar de zece ori mai puțin decât un flux la 70 de ani (pondere ~0,93).</p>
+
+<p>Aceasta rezolvă un paradox practic: de ce nu e rațional să rezervi capital deplin pentru a-ți finanța consumul la 100 de ani la fel ca la 70. Nu pentru că nu contează, ci pentru că <em>probabilitatea de a ajunge acolo este mică și trebuie ponderată ca atare</em>. Capitalul are un cost de oportunitate; a-l îngheța pentru un scenariu cu probabilitate 5% înseamnă a-ți subdimensiona consumul în deceniile cu probabilitate 90%.</p>
+
+<h3>Construcția pas-cu-pas a coloanelor de model</h3>
+
+<p>Modelul pe care îl poți reface în orice foaie de calcul are șapte coloane, pe orizont t = 0…35 (vârste 65…100):</p>
+
+<ul>
+<li><strong>Coloana 1 — vârsta:</strong> 65, 66, … 100.</li>
+<li><strong>Coloana 2 — q<sub>x</sub>:</strong> probabilitatea de deces pe an, din tabela INS/CNPP, ajustată cu mortality improvement.</li>
+<li><strong>Coloana 3 — <sub>t</sub>p<sub>65</sub>:</strong> produsul cumulat (1−q<sub>65</sub>)(1−q<sub>66</sub>)…(1−q<sub>64+t</sub>).</li>
+<li><strong>Coloana 4 — W<sub>t</sub> nominal:</strong> retragerea-țintă, indexată la inflație (creșterea consumului real).</li>
+<li><strong>Coloana 5 — factor actualizare:</strong> 1/(1+r)<sup>t</sup>.</li>
+<li><strong>Coloana 6 — flux ponderat:</strong> Coloana 3 × Coloana 4 × Coloana 5.</li>
+<li><strong>Coloana 7 — sold portofoliu:</strong> sold<sub>t</sub> = sold<sub>t−1</sub>·(1+r) − W<sub>t</sub>, pentru testul de ruină.</li>
+</ul>
+
+<p>Suma Coloanei 6 = VAN<sub>supr</sub>. Iar prima vârstă la care Coloana 7 devine negativă = <strong>vârsta de ruină a planului</strong>; o citești împotriva Coloanei 3 ca să afli probabilitatea de a mai fi în viață în acel moment — adică <em>probabilitatea efectivă de ruină</em>.</p>
+
+<h2>Riscul de longevitate vs riscul de investiție în Pilon II</h2>
+
+<p>Cele două riscuri sunt fundamental diferite și se acoperă cu instrumente diferite — confundarea lor este greșeala de specialist care strică planuri întregi.</p>
+
+<ul>
+<li><strong>Riscul de investiție</strong> (randamentul real r este volatil) este <em>diversificabil în timp și pe active</em> și se atenuează printr-un glidepath, prin obligațiuni indexate la inflație și prin rezervă de lichiditate (bucket de 2-3 ani de cheltuieli). Este un risc cu medie zero pe orizonturi lungi.</li>
+<li><strong>Riscul de longevitate</strong> (T este stocastic) este <em>nediversificabil pentru un individ</em> — nu poți „diversifica” faptul că tu personal trăiești 100 de ani. El se transferă doar prin <strong>pooling actuarial</strong>: o rentă viageră, unde supraviețuitorii sunt finanțați de cei care mor devreme.</li>
+</ul>
+
+<p>De aici regula de portofoliu a specialistului: <strong>finanțează coada de longevitate (după x*) cu un instrument viager, și mijlocul (65 → x*) cu decumulare programată investită</strong>. Concret, în noua arhitectură românească a Pilonului II (Legea 2/2026), nu mai există opțiunea de a retrage 100% ca <em>lump-sum</em>: poți lua o singură dată un avans de cel mult <strong>30%</strong> — care îți dă lichiditate, control și potențial de transmitere prin moștenire, dar îți lasă riscul de longevitate pe acea felie — iar restul de minimum 70% se canalizează pe <em>plăți programate</em> (orizont determinat, fără mortality credit) sau pe <em>pensie viageră</em> prin furnizor autorizat ASF. Renta viageră cumpără mortality credit, dar îți ia lichiditatea și moștenirea pe partea anuitizată. Cu alte cuvinte, legiuitorul a transferat deja o parte din decizia de anuitizare din mâna ta în arhitectura obligatorie a produsului — motiv în plus să optimizezi conștient felia de 30% și alegerea programat-vs-viager.</p>
+
+<h3>Sizing-ul anuitizării parțiale</h3>
+
+<p>Nu anuitizezi nici 0%, nici 100%. Fracțiunea optimă de anuitizare se derivă din acoperirea <strong>cheltuielilor esențiale nenegociabile</strong> (mâncare, utilități, medical de bază, întreținere) cu venit viager garantat (Pilon I + rentă), lăsând cheltuielile discreționare pe decumulare programată flexibilă. Procedura:</p>
+
+<ul>
+<li><strong>Pas 1:</strong> calculează podeaua de cheltuieli esențiale reale, indexată la inflație — să zicem 3.500 lei/lună = 42.000 lei/an.</li>
+<li><strong>Pas 2:</strong> scade venitul viager deja existent (pensia Pilon I indexată) — să zicem 2.400 lei/lună = 28.800 lei/an.</li>
+<li><strong>Pas 3:</strong> deficitul viager de acoperit = 13.200 lei/an. Capitalul necesar pentru a-l anuitiza la ä<sub>65</sub> = 16,8 (femeie) este 13.200 × 16,8 ≈ <strong>221.760 lei</strong>.</li>
+<li><strong>Pas 4:</strong> restul capitalului din Pilon II/III rămâne în decumulare programată investită, pentru consum discreționar și moștenire.</li>
+</ul>
+
+<p>Dacă fondul tău de Pilon II la 65 este, să zicem, 480.000 lei, aloci ~222.000 lei pe podea viageră și ~258.000 lei pe decumulare flexibilă. Aceasta este structura care minimizează simultan probabilitatea de ruină pe esențial ȘI costul de oportunitate al capitalului înghețat.</p>
+
+<h2>Optimizarea secvenței de decumulare pe orizont stocastic</h2>
+
+<p>Întrebarea finală de optimizare: dat fiind capitalul C la 65, ce profil de retrageri {W<sub>t</sub>} maximizează utilitatea consumului ponderat cu supraviețuirea, sub constrângerea de a nu rămâne fără bani cu probabilitate mai mare decât α? Formal, maximizezi Σ <sub>t</sub>p<sub>65</sub> · u(W<sub>t</sub>) / (1+ρ)<sup>t</sup> (cu u funcție de utilitate concavă și ρ rata de preferință temporală), sub constrângerea P(ruină înainte de deces) ≤ α.</p>
+
+<p>Trei rezultate operaționale care decurg din această optimizare:</p>
+
+<ul>
+<li><strong>Rata sigură de retragere depinde de orizont, deci de cuantila de longevitate.</strong> O „regulă de 4%” calibrată pe 30 de ani devine <em>nesigură</em> dacă planifici la percentila 90 de supraviețuire pentru o femeie (orizont ~32 ani). La acel orizont, cu r real ~2-3%, rata sustenabilă scade spre <strong>3,3-3,6%</strong> pe decumularea programată.</li>
+<li><strong>Retragerea optimă nu e plată — scade ușor în termeni reali cu vârsta</strong>, urmărind curba de consum a pensionarului (faza activă 65-75 sus, faza lentă 75-85 jos, faza de îngrijire 85+ sus din cauza costurilor medicale). Un profil în formă de „smile” bate un profil plat în VAN<sub>supr</sub>.</li>
+<li><strong>Mortality credit-ul crește cu vârsta</strong>, deci anuitizarea „amânată” (cumpărarea unei rente viagere la 75 sau 80, nu la 65) este adesea mai eficientă — capitalul lucrează investit în deceniul cu cea mai mare probabilitate de supraviețuire, iar renta cumpărată mai târziu are ä mult mai mic și credit de mortalitate mai mare.</li>
+</ul>
+
+<h3>Capcane de specialist (edge-cases)</h3>
+
+<ul>
+<li><strong>Selecția adversă în anuitizare:</strong> cine cumpără rente viagere e, în medie, mai sănătos decât populația generală. Tabelele de anuitizare ale asigurătorilor încorporează acest lucru (mortalitate de „annuitant”, mai ușoară), deci ä-ul ofertat e mai mare decât cel calculat pe tabela INS de populație. Dacă te știi cu sănătate fragilă, anuitizarea e un pariu prost pentru tine.</li>
+<li><strong>Risc de bază pe inflație:</strong> majoritatea rentelor disponibile în România sunt nominale, nu indexate. O rentă viageră nominală rezolvă riscul de longevitate dar reintroduce riscul de inflație — exact eroarea de a vinde un risc cumpărând altul. Tratează-le separat.</li>
+<li><strong>Mortalitate cuplată (joint life):</strong> pentru un cuplu, mărimea relevantă e <sub>t</sub>p<sub>last</sub> — probabilitatea ca <em>cel puțin unul</em> să fie în viață. Aceasta e mult mai mare decât a oricărui individ: <sub>t</sub>p<sub>last</sub> = p<sub>x</sub> + p<sub>y</sub> − p<sub>x</sub>·p<sub>y</sub>. Un cuplu de 65 de ani are ~35% șansă ca măcar unul să atingă 95. Planul de cuplu se dimensionează pe „last survivor”, nu pe medie.</li>
+<li><strong>Improvement de mortalitate:</strong> tabelele statice subestimează longevitatea cohortelor tinere. Aplică un factor de îmbunătățire (~1%/an reducere q<sub>x</sub>) altfel îți subdimensionezi orizontul cu 2-3 ani.</li>
+</ul>
+
+<h2>Checklist de implementare actuarială</h2>
+
+<ul>
+<li><strong>1.</strong> Obține tabela de mortalitate relevantă (INS/CNPP pentru populație, tabela de annuitant a asigurătorului pentru ofertele de rentă) și aplică un mortality improvement de ~1%/an.</li>
+<li><strong>2.</strong> Calculează <sub>t</sub>p<sub>65</sub> ca produs cumulat al lui (1−q<sub>x</sub>) și determină x* la pragul tău de ruină α (recomandat 10%, deci percentila 90 de supraviețuire).</li>
+<li><strong>3.</strong> Construiește cele șapte coloane ale modelului de decumulare și citește VAN<sub>supr</sub> și vârsta de ruină a planului.</li>
+<li><strong>4.</strong> Separă explicit riscul de longevitate (acoperit prin pooling/rentă) de riscul de investiție (acoperit prin glidepath + bucket de lichiditate).</li>
+<li><strong>5.</strong> Dimensionează podeaua de cheltuieli esențiale și calculează fracțiunea de anuitizare = (deficit viager × ä<sub>x</sub>) / capital total.</li>
+<li><strong>6.</strong> Evaluează anuitizarea amânată (la 75-80) vs imediată, comparând mortality credit-ul și costul de oportunitate al capitalului în deceniul 65-75.</li>
+<li><strong>7.</strong> Pentru cuplu, recalculează totul pe <sub>t</sub>p<sub>last</sub> (last survivor), nu pe individ.</li>
+<li><strong>8.</strong> Modelează profilul de retragere în „smile” (real, nu plat) și verifică sustenabilitatea la cuantila de longevitate, nu la medie.</li>
+<li><strong>9.</strong> Ajustează pentru fiscalitate și pentru noul cadru legal: impozitul pe venit de 10% se aplică pe câștigul (randamentul) din pensia privată, nu pe tot capitalul, iar CASS 10% se reține pe partea de pensie privată ce depășește 3.000 lei/lună; sub Legea 2/2026, avansul este plafonat la 30% o singură dată, restul mergând pe plăți programate sau rentă viageră — încorporează aceste rețineri în r-ul net real și în orizontul de plată.</li>
+<li><strong>10.</strong> Refă întregul model anual, reactualizând q<sub>x</sub>, soldul realizat și inflația resimțită — decumularea este un proces dinamic, nu o decizie unică la 65.</li>
+</ul>
+
+<p>Cine stăpânește acest cadru încetează să mai întrebe „câți bani îmi ajung” și începe să răspundă la întrebarea corectă: „cu ce probabilitate îmi ajung, pe ce orizont, și ce instrument acoperă coada”. Aceasta este diferența dintre a estima o pensie și a o <strong>ingineri</strong> actuarial.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

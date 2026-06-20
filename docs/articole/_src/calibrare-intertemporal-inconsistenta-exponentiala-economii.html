@@ -1,0 +1,128 @@
+<p>La nivel de specialist, <strong>inconsistența exponențială și discounting hiperbolic în planificarea financiară</strong> nu mai sunt observații de popularizare — „toți avem present-bias” — ci o structură matematică pe care un investitor expert o <em>parametrizează</em> pe propria persoană. Diferența dintre cel care „știe că amână” și cel care își stăpânește comportamentul pe decenii este că al doilea își estimează coeficienții β și δ ai propriei <strong>funcții de înclinație temporală personală</strong>, prevede momentul de inflexie la care viitorul său Self va fi tentat să se abată de la plan și instalează <em>ex ante</em> mecanisme de „pre-commitment” și structuri contractuale care forțează consistență, făcând abaterea costisitoare sau imposibilă. Întreaga lecție gravitează în jurul funcției de înclinație temporală personală și a parametrului β-δ, instrumentul cu care traducem nerăbdarea subiectivă în cifre operabile.</p>
+
+<p>Lecția aceasta tratează cantitativ <strong>discounting rate hiperbolic vs exponențial pe 30 de ani</strong>, problema „prezent-bias” în DCA și rebalansare, dinamica preferințelor în timp și momentul de inflexie tipic la 50 de ani, arbitrajul temporal în pensionări anticipate și timing-ul retragerii, precum și <strong>modelul Phelps-Pollak al inconsistenței temporale între Self-uri succesive</strong>. Pornim de la premisa că stăpânești deja exponențialul standard (NPV, factor de actualizare, dobândă compusă) și nivelul avansat al psihologiei economisirii. Aici construim cealaltă curbă — cea hiperbolică (quasi-hiperbolică β-δ) — și o folosim ca instrument de inginerie a deciziei, nu ca scuză.</p>
+
+<p>Toate exemplele sunt calibrate pe România 2026: cota unică de 10% pe venit, impozitul majorat la 16% pe dividende (de la 10% în 2025), randamente reale prudente după inflația țintită BNR (~2,5% ±1 p.p.), și instrumentele contractuale disponibile sub dreptul civil RO și supravegherea ASF. Deducerea pentru pensii facultative (Pilon III), produse PEPP și pensii ocupaționale este, începând cu 2026, plafonată la echivalentul a <strong>400 EUR/an per persoană cumulat</strong> pe toate aceste scheme — nu 400 EUR pe fiecare; tratează plafonul ca un buget fiscal unic. Unde un parametru comportamental este intrinsec incert (β-ul tău exact), arăt cum îl estimezi, nu îl inventez.</p>
+
+<h2>Cele două curbe: de ce exponențialul este consistent și hiperbolicul nu</h2>
+
+<p>Actualizarea exponențială, singura compatibilă cu consistența intertemporală, are forma <strong>D(t) = δ<sup>t</sup></strong>, cu δ = 1/(1+ρ), unde ρ este rata pură de preferință temporală. Proprietatea ei definitorie este <em>staționaritatea</em>: raportul de actualizare între două momente depinde doar de distanța dintre ele, nu de cât de departe sunt de „acum”. D(t+k)/D(t) = δ<sup>k</sup>, constant. Un agent exponențial care preferă azi 100 lei peste un an în loc de 110 lei peste doi ani va prefera, peste un an, exact aceeași ordonare. Planul lui de la 30 de ani este executat fără regret de Self-ul de la 50.</p>
+
+<p>Actualizarea hiperbolică încalcă fix această staționaritate. Forma generalizată (Loewenstein-Prelec) este <strong>D(t) = (1 + α·t)<sup>−γ/α</sup></strong>, dar pentru lucru cantitativ aproape toți practicienii folosesc forma <strong>quasi-hiperbolică β-δ</strong> a lui Phelps-Pollak (popularizată de Laibson):</p>
+
+<ul>
+<li><strong>D(0) = 1</strong> pentru momentul prezent;</li>
+<li><strong>D(t) = β · δ<sup>t</sup></strong> pentru orice t ≥ 1.</li>
+</ul>
+
+<p>Aici δ este actualizarea „normală”, pe termen lung (apropiată de cea a unei persoane raționale, δ ≈ 0,95–0,98 anual), iar <strong>β ∈ (0, 1]</strong> este <em>factorul de present-bias</em>: o reducere bruscă, discontinuă, aplicată tuturor momentelor viitoare în raport cu prezentul. Dacă β = 1, agentul este exponențial pur. Cu cât β este mai mic, cu atât prezentul este supraponderat față de orice viitor. Empiric, β median pentru deciziile financiare ale adulților se situează în zona <strong>0,6–0,8</strong>; un investitor disciplinat are β mai aproape de 0,85–0,9, dar rareori 1.</p>
+
+<h3>Inversarea preferinței: semnătura matematică a inconsistenței</h3>
+
+<p>Fenomenul cheie pe care îl exploatează un specialist este <strong>preference reversal</strong>. Considerăm două recompense: o sumă mică-devreme (SS) și o sumă mare-târziu (LL). Privite de la distanță, ambele fiind în viitor, agentul β-δ le evaluează ambele cu factorul β, care se anulează în comparație — deci alege rațional LL. Dar pe măsură ce SS se apropie de „acum”, factorul β dispare de pe SS (devine prezent, D=1) și rămâne pe LL. Raportul de evaluare se inversează.</p>
+
+<p>Concret, fie SS = 1.000 lei la momentul τ și LL = 1.150 lei la τ+1, cu β = 0,7 și δ = 0,96. Evaluate azi, de la distanța de 5 ani față de SS:</p>
+
+<ul>
+<li>V(SS) = 0,7 · 0,96<sup>5</sup> · 1.000 = 0,7 · 0,8154 · 1.000 = <strong>570,8 lei</strong>;</li>
+<li>V(LL) = 0,7 · 0,96<sup>6</sup> · 1.150 = 0,7 · 0,7828 · 1.150 = <strong>630,1 lei</strong> → alege LL.</li>
+</ul>
+
+<p>Acum mutăm „acum” cu 5 ani înainte, când SS este iminent (τ = 0):</p>
+
+<ul>
+<li>V(SS) = 1 · 1.000 = <strong>1.000 lei</strong> (prezent, fără β);</li>
+<li>V(LL) = 0,7 · 0,96<sup>1</sup> · 1.150 = 0,7 · 0,96 · 1.150 = <strong>772,8 lei</strong> → alege SS.</li>
+</ul>
+
+<p>Același individ, aceleași sume, a inversat decizia <em>doar pentru că trecerea timpului a adus SS în prezent</em>. Aceasta este, literalmente, inconsistența temporală: Self-ul de azi semnează un plan pe care Self-ul de mâine îl va sabota nu din lipsă de informație, ci din structura propriei funcții de actualizare. Investitorul expert nu se ceartă cu acest fapt — îl programează în model.</p>
+
+<h2>Estimarea propriilor β și δ: calibrarea curbei tale</h2>
+
+<p>Nu poți instala pre-commitment proporțional cu o eroare pe care nu ai măsurat-o. Estimarea coeficienților se face prin <strong>indiferență la titularea sumei amânate</strong>. Procedura, replicabilă într-o foaie de calcul:</p>
+
+<ul>
+<li><strong>Pasul 1 — calibrezi δ pe orizont lung (fără prezent).</strong> Întrebi: „Pentru ce sumă X la <em>2 ani</em> ești indiferent față de 10.000 lei la <em>1 an</em>?” Ambele fiind viitoare, β se anulează. Dacă răspunsul tău este 10.500 lei, atunci δ = 10.000/10.500 = 0,952, deci ρ ≈ 5%. Repeți pentru perechi (3 ani vs 2 ani), (5 vs 4) și mediezi — δ trebuie să fie aproximativ stabil pe perechi îndepărtate (test de staționaritate al cozii).</li>
+<li><strong>Pasul 2 — extragi β din prima treaptă.</strong> Întrebi: „Pentru ce sumă Y la <em>1 an</em> ești indiferent față de 10.000 lei <em>acum</em>?” Aici intervine β. Indiferența cere: 10.000 = β · δ · Y. Dacă răspunzi Y = 14.500 lei, atunci β = 10.000 / (0,952 · 14.500) = <strong>0,725</strong>.</li>
+<li><strong>Pasul 3 — validare încrucișată.</strong> Folosești β și δ estimate ca să prezici o a treia indiferență (de pildă acum vs 3 ani) și verifici eroarea. O eroare sub ~8% confirmă că modelul β-δ te descrie suficient; peste, ai nevoie de forma hiperbolică completă cu α.</li>
+</ul>
+
+<p>Cu β = 0,725 și δ = 0,952, „prima de prezent” pe care ți-o ceri pentru a amâna orice consum cu un an este de <strong>1/β − 1 = 37,9% peste</strong> ceea ce ar cere un agent rațional. Acesta este, cuantificat, costul tău psihologic de a economisi. Orice mecanism de pre-commitment trebuie să genereze o fricțiune mai mare decât această primă, altfel Self-ul prezent o învinge.</p>
+
+<h3>Diferența exponențial-hiperbolic pe 30 de ani: cât te costă</h3>
+
+<p>Discrepanța pare mică pe un an, dar pe orizont de planificare a pensiei devine dominantă. Comparăm factorii de actualizare la t = 30 pentru un plan început la 35 de ani și evaluat la 65:</p>
+
+<ul>
+<li><strong>Exponențial (β=1, δ=0,952):</strong> D(30) = 0,952<sup>30</sup> = 0,229.</li>
+<li><strong>Quasi-hiperbolic (β=0,725, δ=0,952):</strong> D(30) = 0,725 · 0,229 = 0,166.</li>
+</ul>
+
+<p>Pe termen lung, cele două curbe sunt <em>paralele</em> — au aceeași pantă δ. Capcana nu e la t=30, unde diferența e doar nivelul β. Capcana este la <strong>t=0 vs t=1</strong>: panta instantanee a curbei hiperbolice între prezent și primul an este −(1 − βδ) = −(1 − 0,690) = −31%, în timp ce panta exponențialului este doar −(1−δ) = −4,8%. Cu alte cuvinte, <strong>discounting-ul hiperbolic vs exponențial pe 30 de ani</strong> diferă brutal exact la frontiera „azi/mâine”, unde se iau deciziile de contribuție. Acolo, și numai acolo, se sabotează planul: nu peste 30 de ani, ci în fiecare lună când alegi între a vira la Pilon III sau a consuma acum.</p>
+
+<h2>Prezent-bias în DCA și rebalansare</h2>
+
+<p>Strategiile mecanice — <em>dollar-cost averaging</em> și rebalansarea periodică — sunt, din punct de vedere comportamental, încercări implicite de a neutraliza β. Dar ele eșuează dacă rămân voluntare, fiindcă fiecare execuție este o nouă decizie supusă present-bias.</p>
+
+<p>Modelăm un plan DCA de 1.500 lei/lună timp de 30 de ani. Self-ul rațional (β=1) execută toate cele 360 de virări. Self-ul β-δ „naiv” (care nu știe că este inconsistent) crede că le va executa, dar la fiecare lună compară utilitatea marginală a consumului prezent (ponderată cu 1) versus economisirea (ponderată cu βδ). Când apare o tentație de consum cu valoare percepută C, virarea se face doar dacă <strong>U'(economisire) · δ ≥ U'(consum) / β</strong>. Cu β = 0,725, pragul de tentație care anulează o virare scade cu ~27,5% — adică o cheltuială care „normal” n-ar merita amânarea câștigă conflictul.</p>
+
+<p>Pe 360 de luni, dacă probabilitatea de „skip” indus de present-bias este chiar și 8% pe lună, numărul așteptat de virări efectuate scade la ~331, iar capitalul final, presupunând randament real 5%/an, scade din proporțional cu contribuțiile lipsă <em>plus</em> dobânda compusă pierdută pe ele — tipic o erodare de <strong>9–14%</strong> a soldului la 65 de ani. Aceasta este taxa pe inconsistență, plătită nu o dată, ci ca scurgere continuă.</p>
+
+<h3>Naiv vs sofisticat: de ce contează autocunoașterea</h3>
+
+<p>Phelps-Pollak și apoi O'Donoghue-Rabin separă două tipuri de agent inconsistent:</p>
+
+<ul>
+<li><strong>Naivul</strong> crede că Self-urile viitoare vor avea β = 1. Își face un plan optim exponențial și e surprins de fiecare abatere. Procrastinează indefinit fiindcă „mâine voi fi disciplinat”.</li>
+<li><strong>Sofisticatul</strong> știe că Self-urile viitoare vor avea același β &lt; 1. Își rezolvă planul ca pe un <em>joc între Self-uri succesive</em>, căutând un echilibru perfect în subjoc, și — crucial — <strong>cumpără pre-commitment</strong> fiindcă anticipează corect propria slăbiciune.</li>
+</ul>
+
+<p>Investitorul expert este, prin definiție, sofisticat: nu se bazează pe voință, ci pe arhitectură. El acceptă că Self-ul de la 50 de ani va vrea să spargă planul și construiește pereți astăzi.</p>
+
+<h2>Momentul de inflexie la ~50 de ani și arbitrajul pensionării anticipate</h2>
+
+<p>Empiric, riscul de abatere nu este uniform în viață. Există un <strong>moment de inflexie</strong>, tipic în jurul a 48–52 de ani, când se combină trei forțe: (1) orizontul rămas până la pensie devine suficient de scurt încât „să mă bucur acum” pare rezonabil; (2) apare lichiditate semnificativă (Pilon II maturizat, eventual vânzări de active, moșteniri); (3) δ-ul subiectiv crește (devii mai nerăbdător pe măsură ce mortalitatea percepută urcă). Rezultatul este o creștere tranzitorie a present-bias-ului efectiv — un β care scade local.</p>
+
+<p>Aici intervine <strong>arbitrajul temporal în pensionări anticipate</strong>. Sub Legea 360/2023, aplicabilă în 2026, pensionarea anticipată permite ieșirea cu cel mult 5 ani înainte de vârsta standard, condiționat de un stagiu de cotizare cu cel puțin 5 ani peste stagiul complet (deci minimum ~40 de ani contribuiți). Penalizarea nu mai este vechiul „până la 0,75%/lună” și nici reducerea fixă de ~30% din regimul anterior: noua diminuare este <em>progresivă și descrescătoare</em> cu surplusul de stagiu — 0,40%/lună pentru anii fără depășire a stagiului complet, apoi 0,35% (1–2 ani peste), 0,30% (2–3 ani), 0,25% (3–4 ani) și 0,20%/lună pentru depășirile de 4–5 ani. Self-ul de la 50 de ani, sub vârf de present-bias, supraevaluează masiv accesul timpuriu la pensie și subevaluează penalizarea cumulată până la vârsta standard. Un agent β-δ cu β local 0,65 va evalua o pensie redusă acum ca fiind preferabilă pensiei integrale peste câțiva ani — exact eroarea de inversare a preferinței, doar că greu reversibilă actuarial.</p>
+
+<p>Calcul de control pe care Self-ul de la 35 de ani trebuie să-l înghețe în scris pentru Self-ul de la 50, cu cifre reale 2026: presupunem o ieșire cu 24 de luni mai devreme și un surplus de stagiu de 1–2 ani, deci tranșa de 0,35%/lună. Penalizarea este 24 × 0,35% = <strong>8,4%</strong> din pensie, aplicată până la împlinirea vârstei standard (moment în care, conform legii, pensia se recalculează ca pensie pentru limită de vârstă). Chiar și o reducere temporară de 8,4% pe ~2 ani, plus contribuțiile și creșterile punctajului ratate prin retragerea timpurie, însumează în valoare actualizată zeci de mii de lei. Pentru o ieșire mai agresivă, cu 48 de luni mai devreme și surplus mic de stagiu (tranșe de ~0,40–0,30%/lună), reducerea cumulată depășește 15% și se resimte pe toți anii până la vârsta standard. Pre-angajamentul aici ia forma unei <strong>reguli scrise</strong> condiționate (vezi mai jos), nu a unui simplu „voi rezista”.</p>
+
+<h2>Mecanisme de pre-commitment: a-l forța pe viitorul Self</h2>
+
+<p>Esența ingineriei comportamentale de specialist: transformi o decizie viitoare repetată (supusă β) într-o <em>decizie unică, prezentă, irevocabilă</em>. Mecanismele, în ordinea fricțiunii pe care o creează, în context RO 2026:</p>
+
+<ul>
+<li><strong>Plăți fixe automate cu cost de oprire.</strong> Cea mai slabă, dar prima linie: ordin de plată programat către Pilon III/PEPP în ziua salariului. Fricțiunea de oprire trebuie ridicată artificial — ex. cont la o instituție unde modificarea cere prezență fizică sau perioadă de preaviz. Neutralizează present-bias-ul lunar din DCA prin default-ul de inerție.</li>
+<li><strong>Produse cu penalizare de retragere anticipată.</strong> Pilonul III și PEPP nu permit retragerea înainte de 60 de ani decât în condiții stricte (invaliditate); aceasta este o fricțiune <em>legală</em>, nu doar psihologică. Deducerea fiscală (plafon de 400 EUR/an per persoană, <em>cumulat</em> peste Pilon III, PEPP și pensii ocupaționale — nu pe fiecare) adaugă un cost de oportunitate la abandon. Asigurările de viață cu componentă de economisire (unit-linked) impun, prin structura de comisioane <em>front-loaded</em>, o penalizare de răscumpărare în primii ani — fricțiune deliberată care îl pedepsește pe Self-ul nerăbdător.</li>
+<li><strong>Asigurări cu rentă fixă / anuitizare.</strong> Conversia capitalului într-o rentă viageră ASF transformă un stoc lichid (tentant) într-un flux nelichid. Self-ul de la 50 nu poate „sparge” o anuitate deja constituită. Costul: pierzi optionalitatea și suporți load-ul actuarial. Beneficiul comportamental: imuni la inversarea preferinței.</li>
+<li><strong>Structuri contractuale care forțează consistență — trust-uri și fiducia.</strong> În dreptul RO, <strong>fiducia</strong> (art. 773 și urm. Cod civil) permite transferul unor active către un fiduciar (instituție de credit, SSIF, avocat, notar — categorii limitate legal) cu mandat de administrare conform unui contract autentic, irevocabil în limitele stipulate. Constituitorul (Self-ul prezent) fixează condițiile de distribuție; Self-ul viitor devine simplu beneficiar, fără drept de a rescrie unilateral mandatul. Aceasta este forma cea mai puternică de pre-commitment legal disponibilă: îți externalizezi disciplina către un terț cu obligație fiduciară.</li>
+</ul>
+
+<h3>Regula de proporționalitate: cât pre-commitment este optim</h3>
+
+<p>Mai mult pre-commitment nu e mereu mai bine — nelichiditatea are cost real (riscul de șoc de venit neacoperit). Optimul leagă <em>fracțiunea de avere blocată</em> de mărimea propriei inconsistențe. Euristica de specialist:</p>
+
+<ul>
+<li>Estimează prima de present-bias (1/β − 1). La β = 0,725, e ~38%.</li>
+<li>Blochează (în instrumente cu fricțiune legală) acea fracțiune din capitalul destinat orizontului lung care, dacă ar rămâne lichidă, ar fi cea mai expusă inversării — tipic <strong>capitalul de pensie net de un fond de urgență de 6–12 luni</strong> și net de obligațiile previzibile (educație copii, achiziție imobiliară planificată).</li>
+<li>Plafonează blocarea astfel încât nelichiditatea totală să nu te expună la lichidare forțată în percentila 95 a șocurilor de venit (test de stres pe cash-flow).</li>
+</ul>
+
+<p>Regula practică: cu cât β este mai mic, cu atât mai mare partea care trebuie scoasă din mâna Self-ului viitor — dar niciodată dincolo de pragul la care un șoc real te-ar forța să spargi structura cu penalizări care depășesc economia comportamentală.</p>
+
+<h2>Punerea în ecuație: planul ca echilibru între Self-uri</h2>
+
+<p>Self-ul sofisticat rezolvă, formal, un joc secvențial: fiecare Self<sub>t</sub> alege consumul c<sub>t</sub> maximizând u(c<sub>t</sub>) + β·Σ<sub>k≥1</sub> δ<sup>k</sup>·u(c<sub>t+k</sub>), știind că Self<sub>t+1</sub> va face la fel cu propriul β. Echilibrul perfect în subjoc dă o rată de economisire mai mică decât optimul exponențial — gap-ul fiind exact ceea ce pre-commitment-ul recuperează. Operațional, nu rezolvi jocul analitic; îl <em>scurtcircuitezi</em>: muți deciziile din mâna Self-urilor viitoare în contracte semnate de Self-ul prezent, reducând numărul de noduri de decizie de la 360 (lunar) la 1 (semnătura inițială).</p>
+
+<h2>Checklist de implementare pentru specialist</h2>
+
+<ul>
+<li><strong>1. Calibrează-ți β și δ</strong> prin cele 3 perechi de indiferență (coadă lungă pentru δ, prima treaptă pentru β, a treia pentru validare). Notează prima de present-bias 1/β − 1.</li>
+<li><strong>2. Trasează ambele curbe</strong> (exponențială și β-δ) pe 30 de ani și marchează panta t=0→t=1 — acolo se pierde planul, nu în coadă.</li>
+<li><strong>3. Cuantifică taxa pe inconsistență</strong> în DCA: simulează rata de „skip” lunară și erodarea soldului la 65 cu randament real prudent.</li>
+<li><strong>4. Identifică-ți momentul de inflexie</strong> (tipic 48–52 ani) și scrie azi, datat, regula condiționată anti-pensionare-anticipată cu calculul VAN al penalizării viagere.</li>
+<li><strong>5. Instalează pre-commitment proporțional cu β:</strong> default automat pe Pilon III/PEPP (deducere plafonată la 400 EUR/an per persoană, cumulat pe toate schemele) → produse cu penalizare de răscumpărare → anuitizare ASF a cozii de longevitate → fiducia (art. 773 C. civ.) pentru capitalul cel mai expus inversării.</li>
+<li><strong>6. Stres-testează nelichiditatea:</strong> verifică să poți absorbi percentila 95 a șocurilor de venit fără a sparge structurile blocate. Plafonează blocarea la acest prag.</li>
+<li><strong>7. Redu nodurile de decizie de la 360 la 1:</strong> orice flux pe care îl lași „voluntar lunar” este teritoriu al present-bias-ului. Automatizează sau contractualizează tot ce poate fi.</li>
+<li><strong>8. Reevaluează β la fiecare 5 ani.</strong> Inconsistența se modifică cu vârsta și avuția; recalibrarea ține arhitectura de pre-commitment dimensionată corect.</li>
+</ul>

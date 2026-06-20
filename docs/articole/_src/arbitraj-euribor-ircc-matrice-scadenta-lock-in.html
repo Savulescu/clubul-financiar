@@ -1,0 +1,130 @@
+<p>Aici nu mai vorbim despre „ce este IRCC” sau cum îți crește rata. Tu stăpânești deja mecanica: dobânda = indice + marjă fixă, IRCC se publică trimestrial de BNR cu un trimestru întârziere, EURIBOR 3M se fixează zilnic. Lecția asta tratează <strong>arbitraj EURIBOR IRCC curve matrice scadență</strong> și acoperă, în ordine: <strong>forward rate locking la restructurare de credit</strong>, <strong>basis trading pe spread EURIBOR vs IRCC</strong>, <strong>timing refinanțării pe curba yield a indicilor</strong>, <strong>volatilitate termică EURIBOR și moment de acționare</strong>, <strong>multi-leg refinancing architecture optimal</strong> și <strong>cap-floor optimizare pe curba forward</strong>. Scopul: să exploatezi lag-ul dintre cei doi indici și să-ți asiguri o margine pozitivă pe toată durata rămasă.</p>
+
+<p>Premisa de lucru pentru 2026: IRCC publicat de BNR pentru T2 2026 este <strong>5,58%</strong> (în scădere de la 5,68% în T1, calculat pe tranzacțiile interbancare deja vechi de un trimestru), ROBOR 3M se așază în jurul a <strong>5,6%</strong> (dobânda de politică monetară BNR menținută la 6,50%), iar EURIBOR 3M, după ciclul de relaxare al BCE, se așază pe la <strong>2,0%–2,1%</strong>. Spread-ul brut între indicele lei și cel euro este deci de ordinul a <strong>3,5 puncte procentuale</strong> — dar acel spread NU este profitul tău, fiindcă include riscul valutar leu-euro și diferența structurală de marjă. Toată arta stă în a descompune spread-ul în componenta de <em>timing</em> (lag temporal, exploatabilă) și componenta de <em>bază</em> (risc valutar + lichiditate, neexploatabilă fără hedging).</p>
+
+<p>Avertismentul metodologic dinainte de a începe: nimic din ce urmează nu presupune că poți „prezice” BNR sau BCE. Presupune doar că structura IRCC — mediere trimestrială plus decalaj de un trimestru — creează un comportament <em>cunoscut și deterministic</em> al indicelui față de piața monetară curentă, iar acel comportament poate fi citit pe o matrice forward și transformat în reguli de execuție. Rigoare cantitativă, edge-cases incluse, fără promisiuni de market-timing magic.</p>
+
+<h2>Diferența termică: de ce IRCC și EURIBOR nu „respiră” în același timp</h2>
+
+<p>Cheia întregii strategii este <strong>volatilitatea termică</strong> — faptul că IRCC reacționează cu întârziere structurală, în timp ce EURIBOR e instantaneu. IRCC publicat azi reflectă media ROBID/tranzacțiilor interbancare din <em>trimestrul anterior</em>. Asta înseamnă că IRCC are un <strong>lag efectiv de 3–6 luni</strong> față de rata reală de piață monetară din lei. Practic, IRCC este un EURIBOR-pe-lei trecut prin două filtre: (1) un filtru de mediere trimestrială (smoothing care taie vârfurile) și (2) un filtru de întârziere de un trimestru (decalaj pur).</p>
+
+<p>Consecința operațională: într-un ciclu de scădere a dobânzilor, IRCC rămâne „blocat sus” încă două-trei trimestre după ce EURIBOR și ROBOR au început deja să cadă. Invers, într-un ciclu de creștere, IRCC urcă cu întârziere — deci debitorul pe IRCC are o „pernă” gratuită în prima fază a șocului. Această asimetrie temporală este materia primă a arbitrajului.</p>
+
+<h3>Descompunerea spread-ului în trei componente</h3>
+
+<p>Modelează spread-ul brut <em>S = IRCC − EURIBOR_3M</em> ca sumă de trei termeni:</p>
+<ul>
+<li><strong>Componenta de bază (basis FX)</strong>: diferența structurală de risc între a te împrumuta în lei vs euro. Aproximabilă prin diferențialul de politică monetară BNR–BCE și prin punctele forward EUR/RON. În 2026, BNR ține rata de politică la 6,50%, BCE pe la 2%, deci basis-ul „natural” e de ordinul a 3,5–4pp. Aceasta NU e exploatabilă: e prețul corect al riscului valutar.</li>
+<li><strong>Componenta de timing (lag)</strong>: porțiunea din spread care există doar pentru că IRCC reflectă trecutul. Se calculează ca <em>IRCC_publicat − IRCC_estimat-pe-date-curente</em>. Când piața monetară lei azi e, să zicem, la 5,9% dar IRCC publicat e 5,58% (calculat pe trimestrul precedent, mai ridicat), citești direcția lag-ului: dacă piața curentă e SUB IRCC publicat, IRCC are presiune de coborâre; dacă e DEASUPRA, are presiune de urcare. ASTA e exploatabilă.</li>
+<li><strong>Componenta de noise (mediere)</strong>: distorsiunea din smoothing-ul trimestrial. Mică în regim stabil, mare la inflexiuni de ciclu.</li>
+</ul>
+
+<p>Regula de aur: <strong>nu acționezi pe spread-ul brut, ci pe componenta de timing</strong>. Un debitor care vede „IRCC 5,58% vs EURIBOR 2,1%” și sare orbește pe credit în euro confundă basis-ul valutar (risc real) cu un profit (inexistent). Profitul de arbitraj se naște doar când lag-ul IRCC lucrează pentru tine ȘI ai blocat costul înainte ca lag-ul să se închidă.</p>
+
+<h2>Matricea de scadență forward: cum o construiești</h2>
+
+<p>O <strong>curve matrice de scadență</strong> este un tabel în care, pe orizontală, pui punctele de pe curba forward (1M, 3M, 6M, 12M, 2Y, 5Y) și, pe verticală, pui indicii (IRCC implicit, EURIBOR forward, ROBOR forward). Fiecare celulă conține rata <em>forward</em> implicită pentru acel indice la acel orizont, dedusă din curba spot prin relația standard:</p>
+
+<p><strong>f(t₁, t₂) = [(1 + r₂·t₂) / (1 + r₁·t₁)] − 1</strong>, anualizat pe intervalul (t₂ − t₁).</p>
+
+<p>unde r₁, r₂ sunt ratele spot pentru maturitățile t₁ și t₂. Pentru EURIBOR ai cotații forward observabile direct (futures EURIBOR pe Eurex, swap-uri OIS €STR). Pentru IRCC NU există piață forward lichidă — îl <strong>proxy-ezi</strong> din curba ROBOR forward, apoi aplici operatorul de lag și smoothing: <em>IRCC_forward(T) ≈ medie(ROBOR_forward de la T−2 trimestre la T−1 trimestru)</em>.</p>
+
+<h3>Exemplu de matrice, date 2026 (ilustrativ)</h3>
+<ul>
+<li><strong>Spot azi:</strong> IRCC 5,58% | EURIBOR 3M 2,10% | ROBOR 3M ~5,6% | dobândă de politică BNR 6,50%.</li>
+<li><strong>Forward 6M:</strong> piața de swap-uri lei semnalează ROBOR 6M-forward ~5,4% (curbă ușor inversată, BNR în relaxare lentă pe fond de inflație încă peste țintă). Aplici lag-ul → IRCC implicit la 6M ≈ 5,6% (lipicios, prinde media trimestrelor recente). EURIBOR 6M-forward ~1,9%.</li>
+<li><strong>Forward 12M:</strong> ROBOR 12M-forward ~5,1% → IRCC implicit ≈ 5,4%. EURIBOR 12M-forward ~1,8%.</li>
+<li><strong>Forward 24M:</strong> ROBOR-forward ~4,8% → IRCC implicit ≈ 5,0%. EURIBOR ~2,0% (curba euro începe să urce ușor).</li>
+</ul>
+
+<p>Citirea matricei: IRCC va rămâne lipicios în jurul a 5,5–5,6% în următoarele 2–3 trimestre <em>chiar dacă</em> piața monetară lei coboară lent, fiindcă medierea trimestrială întârzie translatarea scăderii. Spread-ul IRCC−EURIBOR se va menține <strong>larg</strong> la 6M (5,6−1,9 = 3,7pp) înainte să se comprime ușor spre 24M (5,0−2,0 = 3,0pp). Aceasta este forma exploatabilă: dacă ești pe IRCC și anticipezi reluarea urcării ratelor, fereastra optimă de lock-in spre fix NU e neapărat azi, ci la <em>vârful de jos</em> al ciclului — momentul în care IRCC încă reflectă media joasă, iar banca nu și-a recotat încă oferta fixă în sus. În regimul actual, cu IRCC și ROBOR aproape în fază (lag aproape închis), fereastra de timing pur e îngustă, iar decizia se mută preponderent pe criterii de margine, nu de speculație pe lag.</p>
+
+<h2>Lock-in forward la restructurare: regula de execuție</h2>
+
+<p><strong>Forward rate locking la restructurare de credit</strong> înseamnă să fixezi astăzi o dobândă viitoare, înainte ca evenimentul de restructurare (refinanțare, novație, conversie variabilă→fixă) să te prindă cu indicele la un nivel nefavorabil. Persoanele fizice nu au acces direct la swap-uri OTC, dar au trei instrumente echivalente funcțional:</p>
+<ul>
+<li><strong>Oferta fixă pe 3–5 ani din contractul actual</strong>: multe bănci RO permit trecerea variabilă→fix pe o perioadă, cu o dobândă cotată azi. Aceasta ESTE un lock forward implicit — banca îți vinde un swap împachetat în clauză.</li>
+<li><strong>Pre-aprobarea de refinanțare cu dobândă garantată pe X zile</strong>: oferta de refinanțare are de regulă valabilitate 30–60 de zile cu rata blocată. Asta e un mini-lock pe care îl poți programa fix la inflexiunea curbei.</li>
+<li><strong>Conversia în EUR hedge-uită natural</strong>: dacă ai venituri în euro (sau încasări legate de euro), creditul în euro pe EURIBOR + marjă elimină basis-ul FX și îți lasă doar spread-ul de timing curat.</li>
+</ul>
+
+<h3>Algoritmul de decizie lock-in</h3>
+<ul>
+<li><strong>Pas 1 — calculează break-even:</strong> rata fixă oferită azi (ex. 6,9% pe 5 ani) vs traiectoria așteptată a ratei variabile. Dacă media ponderată a IRCC+marjă pe orizontul de lock e sub fix, NU blochezi încă.</li>
+<li><strong>Pas 2 — măsoară lag-ul curent:</strong> dacă IRCC publicat &gt; ROBOR forward 6M cu peste 0,4pp, IRCC e „prins în trecut sus” și va coborî — amâni lock-ul fix, mai prinzi câteva trimestre ieftine pe variabilă în scădere.</li>
+<li><strong>Pas 3 — identifică inflexiunea:</strong> blochezi fix exact când curba forward semnalează că ROBOR va începe să URCE din nou (vârful de jos al ciclului). Atunci IRCC încă e jos (lag în favoarea ta la blocare), iar fixul cotat de bancă încă reflectă regimul de jos.</li>
+<li><strong>Pas 4 — execută cu marjă de siguranță:</strong> nu prinde fix vârful exact; intră cu 1 trimestru avans. Costul ratării unei treimi de trimestru e mic față de riscul de a rata complet fereastra.</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> Sold 350.000 lei, 22 ani rămași, contract IRCC + 2,2% (azi 5,58+2,2 = 7,78%). Banca îți oferă conversie fix 6,95% pe 5 ani. Matricea forward spune: IRCC coboară spre 5,0% în 18 luni (→ variabilă 7,2%), apoi reia urcarea spre 5,6% (→ 7,8%). Media variabilei pe 5 ani ≈ 7,4%. Fixul de 6,95% e SUB media variabilei cu ~0,45pp. Pe 350.000 lei sold mediu, asta înseamnă o economie de ordinul a ~1.500 lei/an, ~7.500 lei pe orizontul de 5 ani. Verdict: lock-in fix justificat — dar execuți la <em>vârful de jos</em> al ciclului, când banca nu și-a recotat încă fixul în sus.</p>
+
+<h2>Basis trading pe spread EURIBOR vs IRCC</h2>
+
+<p><strong>Basis trading pe spread EURIBOR vs IRCC</strong> pentru un debitor retail nu e o tranzacție de piață, ci o <em>structurare a propriei datorii</em> astfel încât să fii „long” pe indicele care va performa și „short” pe cel care te costă. Concret: dacă ai și un credit pe IRCC (ipotecar lei) și capacitatea de a contracta unul pe EURIBOR (sau de a converti), poziționezi mixul în funcție de panta relativă a celor doi indici.</p>
+
+<h3>Cele trei regimuri de basis</h3>
+<ul>
+<li><strong>Basis lărgindu-se (IRCC sus, lag pozitiv):</strong> EURIBOR a coborât, IRCC încă nu. Aici NU muți încă în euro — basis-ul larg înseamnă că plătești scump diferența valutară. Aștepți comprimarea.</li>
+<li><strong>Basis comprimându-se (convergență):</strong> IRCC prinde din urmă scăderea. Fereastra de conversie lei→euro sau de lock fix se deschide. Profitul de timing se materializează aici.</li>
+<li><strong>Basis negativ tranzitoriu (rar):</strong> șoc inflaționist brusc — EURIBOR sare (BCE strânge), IRCC încă reflectă trecutul liniștit. Debitorul pe IRCC are temporar dobânda mai mică decât echivalentul euro. Atunci IRCC e poziția câștigătoare; NU converti.</li>
+</ul>
+
+<p><strong>Capcana valutară fatală.</strong> Orice basis trade lei↔euro care nu e hedge-uit prin venituri în euro NU este arbitraj, ci pariu valutar deghizat. Diferența de 3,5pp dintre IRCC și EURIBOR reflectă <em>exact</em> deprecierea așteptată a leului față de euro (paritatea ratelor dobânzii descoperită). Dacă leul se depreciază cu 3,5%/an, întreg „avantajul” EURIBOR e șters de creșterea soldului în lei. Regula de fier: <strong>basis trading pe FX se face DOAR cu acoperire naturală în moneda de expunere</strong>. Fără ea, nu atingi creditul în euro.</p>
+
+<h2>Timing pe curba yield a indicilor și volatilitatea termică</h2>
+
+<p><strong>Timing-ul refinanțării pe curba yield a indicilor</strong> se reduce la o singură întrebare: în ce punct al ciclului e fiecare indice ȘI cât de mare e decalajul de fază dintre ei? Construiește un indicator de fază:</p>
+
+<p><strong>Φ = (ROBOR_3M_azi − IRCC_publicat_azi)</strong></p>
+<ul>
+<li><strong>Φ &gt; +0,5pp:</strong> piața monetară lei e peste IRCC → suntem în fază de creștere, IRCC va urca în 1–2 trimestre. <em>Acțiune:</em> blochează fix/refinanțează ACUM, înainte ca IRCC să prindă din urmă.</li>
+<li><strong>Φ &lt; −0,5pp:</strong> ROBOR a căzut sub IRCC → fază de relaxare, IRCC va coborî. <em>Acțiune:</em> rămâi pe variabilă, amână lock-ul, culege scăderea.</li>
+<li><strong>Φ ≈ 0:</strong> indicii sunt în fază, lag-ul închis. Fereastra de arbitraj de timing e închisă — decizia se ia pe criterii de margine pură, nu de timing.</li>
+</ul>
+
+<p>În 2026, cu ROBOR 3M ~5,6% și IRCC 5,58%, <strong>Φ ≈ 0</strong> — indicii sunt practic în fază, lag-ul aproape închis. Acesta este un regim în care fereastra de arbitraj de timing pur este îngustă: piața monetară lei și IRCC publicat aproape coincid, deci nu există nici lag pozitiv exploatabil care să justifice un lock-in agresiv, nici un lag negativ care să răsplătească așteptarea. Decizia se mută pe criterii de margine pură (fix oferit vs media variabilei așteptate) și pe semnalul direcției BNR: cu dobânda de politică menținută la 6,50% pe fond de inflație încă peste țintă (prognoză BNR ~5,5% pentru 2026), riscul de coadă rămâne spre urcare, ceea ce înclină ușor balanța spre fixare oportunistă la orice recotare favorabilă a fixului.</p>
+
+<h2>Arhitectura multi-leg de refinanțare optimă</h2>
+
+<p>O <strong>multi-leg refinancing architecture</strong> împarte datoria în „picioare” cu profiluri de rată diferite, în loc să muți tot soldul într-un singur produs. Pentru un debitor mare (sold &gt; 500.000 lei) sau cu mai multe credite, structura optimă tipică e pe trei picioare:</p>
+<ul>
+<li><strong>Leg 1 — ancoră fixă (40–60% din sold):</strong> blocată la fixul cel mai bun din ciclu, prin lock-in la inflexiune. Imunizează rata de bază contra șocului de dobândă. Ținta: cea mai mare felie pe care fixul o face mai ieftin decât media variabilei așteptate.</li>
+<li><strong>Leg 2 — variabilă IRCC tactică (20–40%):</strong> rămâne pe IRCC pentru a culege scăderile de ciclu și pentru flexibilitatea de rambursare anticipată fără penalizare (creditele variabile RO nu au comision de rambursare anticipată — Leg 2 e și „supapa” ta de lichiditate).</li>
+<li><strong>Leg 3 — EURIBOR hedge-uit (0–20%, condiționat):</strong> activ DOAR dacă ai venituri în euro. Captează componenta de timing curată fără basis FX.</li>
+</ul>
+
+<h3>De ce împărțirea bate concentrarea</h3>
+<p>Argumentul cantitativ e diversificarea pe sursa de rată. Dacă pui 100% fix și apoi dobânzile cad puternic, ai pierdut toată scăderea (cost de oportunitate). Dacă pui 100% variabilă și vine șocul inflaționist, rata explodează. Mixul 50/35/15 minimizează varianța ratei medii ponderate pe portofoliu. Matematic: rata ta efectivă devine <em>w₁·fix + w₂·(IRCC+m₂) + w₃·(EURIBOR+m₃)</em>, iar derivata varianței în funcție de ponderi îți dă alocarea care minimizează volatilitatea plății lunare la o margine-țintă dată — exact problema de portofoliu Markowitz aplicată pe datorie, nu pe active.</p>
+
+<h2>Optimizarea cap-floor pe curba forward</h2>
+
+<p><strong>Cap-floor optimizarea pe curba forward</strong> e ultima piesă: dat fiind că marile bănci RO oferă rar cap-uri explicite, valoarea reală a unei clauze de cap/floor se evaluează ca preț al unei opțiuni pe rată. Un <strong>cap</strong> la 8% pe partea variabilă e, economic, o serie de opțiuni call pe IRCC (caplet-uri) cu strike 8%. Valoarea lui crește cu (a) volatilitatea așteptată a IRCC și (b) probabilitatea, citită din curba forward, ca IRCC să depășească strike-ul.</p>
+
+<ul>
+<li><strong>Când cap-ul merită plătit (prin marjă mai mare):</strong> dacă curba forward + smoothing-ul IRCC indică o probabilitate non-trivială (&gt;15–20%) ca IRCC să treacă de strike pe orizontul creditului. În 2026, cu IRCC 5,58% și un cap la 8%, distanța la strike e 2,42pp — plauzibil într-un nou val inflaționist. Un cap la 8% poate valora 0,2–0,4pp de marjă suplimentară. Dacă banca ți-l dă „gratis” sau pe sub atât, ia-l.</li>
+<li><strong>Floor-ul lucrează contra ta:</strong> un floor de 1% pe indice e o opțiune put pe care o vinzi băncii. Valorează ceva DOAR în scenarii de dobânzi sub ~1,5% — în 2026 e „adormit” (out-of-the-money cu 4,5pp). Nu plăti marjă pentru a-l elimina acum; negociază-l doar dacă anticipezi un ciclu lung de relaxare profundă.</li>
+<li><strong>Collar (cap + floor):</strong> structura optimă pe credit lung e un collar îngust — accepți un floor moderat (care nu te costă în regimul actual) în schimbul unui cap real care te protejează de coadă. Pe curba forward 2026, un collar 1%–8% are valoare netă pozitivă pentru debitor fiindcă cap-ul e mult mai aproape de a fi util decât floor-ul.</li>
+</ul>
+
+<h2>Edge-cases și capcane de specialist</h2>
+<ul>
+<li><strong>Recotarea fixului în timp real:</strong> banca își ajustează oferta fixă pe măsură ce curba se mișcă. Fereastra ta de lock e îngustă — oferta de azi poate dispărea în 2–3 săptămâni. Acționează în interiorul valabilității scrise (de regulă 30–60 zile).</li>
+<li><strong>Asimetria smoothing-ului la inflexiune:</strong> medierea trimestrială a IRCC distorsionează cel mai mult exact la vârfuri și văi de ciclu — adică fix când iei decizia. Nu te baza pe IRCC publicat ca proxy pentru piață în acele momente; folosește ROBOR forward.</li>
+<li><strong>Costul ascuns al refinanțării:</strong> taxe de evaluare imobil (~400–600 lei), notar/intabulare ipotecă nouă, comision de analiză. La sub ~0,5pp economie reală, costurile de tranzacție mănâncă arbitrajul — calculează break-even-ul net, nu brut.</li>
+<li><strong>Gradul de îndatorare:</strong> orice refinanțare re-trece prin testul DTI BNR (Regulament 17/2012): max 40% pentru creditele în lei, 20% la valută, cu +5pp (deci 45%) pentru prima locuință ocupată de debitor. Dacă lock-ul fix urcă rata lunară peste prag, banca refuză — testează eligibilitatea ÎNAINTE de a planifica timing-ul.</li>
+<li><strong>Paritatea descoperită a dobânzii nu „se rupe” pentru tine:</strong> dacă spread-ul IRCC−EURIBOR pare un profit gratuit, întreabă-te ce risc plătești. Aproape întotdeauna e riscul valutar leu. Arbitrajul real e pe TIMING (lag), nu pe NIVEL (spread brut).</li>
+</ul>
+
+<h2>Checklist de execuție</h2>
+<ul>
+<li><strong>1.</strong> Construiește matricea forward: IRCC implicit (din ROBOR forward + lag/smoothing), EURIBOR forward, ROBOR forward, pe 6M/12M/24M.</li>
+<li><strong>2.</strong> Descompune spread-ul: separă componenta de basis FX (neexploatabilă) de componenta de timing/lag (exploatabilă).</li>
+<li><strong>3.</strong> Calculează indicatorul de fază Φ = ROBOR_3M − IRCC_publicat. Φ&gt;+0,5 → blochează; Φ&lt;−0,5 → așteaptă.</li>
+<li><strong>4.</strong> Identifică inflexiunea curbei forward; programează lock-in fix cu 1 trimestru avans față de vârful de jos.</li>
+<li><strong>5.</strong> Verifică break-even net (după taxe notar/evaluare/analiză) — pragul minim ~0,5pp economie reală.</li>
+<li><strong>6.</strong> Testează eligibilitatea DTI ÎNAINTE de a fixa timing-ul (max 40% lei, 45% prima locuință, 20% valută).</li>
+<li><strong>7.</strong> Structurează multi-leg (ex. 50% fix / 35% IRCC tactic / 15% EURIBOR hedge-uit doar cu venituri în euro).</li>
+<li><strong>8.</strong> Optimizează collar-ul: acceptă floor adormit (1%), pretinde cap real (8%); evaluează-le ca opțiuni pe curba forward.</li>
+<li><strong>9.</strong> Execută în interiorul valabilității ofertei (30–60 zile); nu prinde vârful exact — intră cu marjă de siguranță.</li>
+<li><strong>10.</strong> Re-rulează matricea la fiecare publicare trimestrială BNR a IRCC; lag-ul se reîmprospătează și fereastra de arbitraj se redeschide periodic.</li>
+</ul>

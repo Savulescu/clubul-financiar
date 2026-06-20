@@ -1,0 +1,178 @@
+<p><strong>Sequence risk immunization prin obligațiuni pe durație egală cu orizontul de retragere</strong> este tehnica prin care transformi o scară de obligațiuni dintr-un simplu generator de venit într-un instrument matematic care neutralizează complet riscul de dobândă pentru o dată-țintă. Pe baza celor două lecții anterioare — scara clasică de obligațiuni și glidepath-ul anti-secvență din FIRE — această lecție îți dă modelul cantitativ exact: <strong>macaulay duration matching strategy</strong>, calculul scării pe orizont și <strong>convexity bond immunization</strong> ca al doilea ordin de protecție.</p>
+
+<p>Vom construi un <strong>bond ladder immunization model</strong> funcțional pe titluri de stat românești 2026, vom demonstra <strong>interest rate risk neutralization</strong> punct-cu-punct și vom rezolva problema de <strong>liability matching strategie pensie</strong>: ai o serie de retrageri viitoare (pasive) și vrei un portofoliu (active) care le acoperă indiferent de ce face BNR cu rata-cheie. Asta înseamnă <strong>retirada certificată obligatiuni</strong> — fiecare leu de cheltuit are deja un titlu rezervat — și o <strong>duratie scara obligatiuni orizont</strong> calibrată astfel încât prima parte a deceniului de pensionare, cea în care riscul de secvență e letal, devine indiferentă la traiectoria ratelor.</p>
+
+<p>Presupun că stăpânești deja Macaulay duration, modified duration, yield-to-maturity, prețul invers proporțional cu randamentul și logica scării clasice. Nu le reluăm. Mergem direct la imunizare ca egalitate matematică între durata activelor și durata pasivelor, cu toate edge-case-urile pe care literatura le ignoră și cu cifrele reale ale pieței românești de la mijlocul lui 2026.</p>
+
+<h2>De ce scara clasică NU imunizează — și ce schimbă imunizarea</h2>
+
+<p>O scară clasică (titluri care scad în trepte anuale, reinvestești principalul la fiecare scadență) îți dă predictibilitate de cash-flow, dar are o vulnerabilitate ascunsă: <strong>riscul de reinvestire</strong>. Dacă ratele scad, fiecare tranșă care ajunge la maturitate se reinvestește la randament mai mic. Pentru cineva în faza de acumulare e tolerabil; pentru cineva care a început retragerile, combinat cu vânzări la prețuri deprimate, devine exact <em>sequence-of-returns risk</em>.</p>
+
+<p>Imunizarea rezolvă altă problemă, mai precisă: <strong>garantează valoarea unui portofoliu la o dată-țintă, indiferent de o mișcare paralelă a ratelor.</strong> Mecanismul e o compensare exactă între două efecte de semn opus:</p>
+
+<ul>
+<li><strong>Riscul de preț:</strong> ratele cresc → prețul obligațiunilor scade (pierdere de capital).</li>
+<li><strong>Riscul de reinvestire:</strong> ratele cresc → cupoanele se reinvestesc la randament mai mare (câștig).</li>
+</ul>
+
+<p>Cele două se anulează <em>exact</em> la un singur orizont temporal: <strong>punctul în care durata Macaulay a portofoliului egalează orizontul de investiție.</strong> Înainte de acel punct domină riscul de reinvestire; după el domină riscul de preț. La punctul de durație, derivata valorii finale în raport cu randamentul este zero — portofoliul e local insensibil la rate.</p>
+
+<h3>Teorema fundamentală a imunizării</h3>
+
+<p>Condiția de imunizare pentru o singură obligație-țintă (single-liability) are trei cerințe simultane:</p>
+
+<ul>
+<li><strong>Condiția 1 — Durata:</strong> Macaulay duration a portofoliului de active = orizontul pasivului (în ani). Aceasta anulează prima derivată (sensibilitatea de ordin 1).</li>
+<li><strong>Condiția 2 — Valoarea prezentă:</strong> PV(active) ≥ PV(pasiv), la curba de randament curentă. Nu poți imuniza ce nu finanțezi.</li>
+<li><strong>Condiția 3 — Convexitatea:</strong> convexitatea activelor ≥ convexitatea pasivului. Aceasta asigură că, la mișcări mari și non-paralele, surplusul se mărește, nu se micșorează.</li>
+</ul>
+
+<p>Punctul de subtilitate pe care îl ratează 90% din materiale: o singură obligație cu maturitatea egală cu orizontul <em>nu</em> e imunizată, pentru că durata ei (care include cupoanele intermediare) e mai mică decât maturitatea. Doar un zero-cupon are durată = maturitate. Pentru orice obligație cu cupon, ai nevoie de o <em>combinație</em> (barbell sau bullet) care să-ți aducă durata ponderată fix la orizont.</p>
+
+<h2>Modelul de calcul pas-cu-pas: imunizarea unei retrageri unice</h2>
+
+<p>Să construim concret. Ești la 5 ani de prima retragere mare: ai nevoie de <strong>200.000 lei</strong> peste exact 5 ani (de exemplu, suma-tampon care acoperă primii doi ani de cheltuieli de pensionare, segregată de portofoliul de creștere). Orizont-țintă = 5,00 ani.</p>
+
+<h3>Pasul 1 — Curba și instrumentele 2026</h3>
+
+<p>La mijlocul lui 2026, după ciclul de relaxare BNR (rata-cheie coborâtă în trepte de la vârful de 7% spre zona 6%–6,5%), randamentele titlurilor de stat românești la maturitate sunt orientativ:</p>
+
+<ul>
+<li>Titluri scurte (~2 ani): YTM ~6,7%</li>
+<li>Titluri medii (~5 ani): YTM ~7,1%</li>
+<li>Titluri lungi (~10 ani): YTM ~7,5%</li>
+</ul>
+
+<p>Folosești instrumentele realiste accesibile retailului român: titluri Fidelis / titluri de stat listate la BVB și, pentru tranșele lungi, eventual fonduri de obligațiuni cu durată-țintă. (Cifrele de mai jos sunt model didactic — verifică YTM-ul exact la momentul construcției, fiindcă mută rezultatul.)</p>
+
+<h3>Pasul 2 — PV-ul pasivului</h3>
+
+<p>Pasivul = 200.000 lei la t=5. Actualizat la randamentul de 5 ani (7,1%):</p>
+
+<ul>
+<li>PV(pasiv) = 200.000 / (1,071)^5 = 200.000 / 1,4091 ≈ <strong>141.930 lei</strong></li>
+</ul>
+
+<p>Acesta e capitalul minim pe care trebuie să-l aloci azi. Durata pasivului = 5,00 ani (e un singur flux, deci durată = maturitate).</p>
+
+<h3>Pasul 3 — Construcția barbell pentru durată = 5,00</h3>
+
+<p>Vrei durata activelor = 5,00. Niciun titlu cu cupon la 5 ani nu are durată 5 (are ~4,3). Soluția: combini un titlu scurt (durată ~1,9) cu unul lung (durată ~7,8) astfel încât media ponderată = 5,00.</p>
+
+<p>Fie <strong>w</strong> ponderea în titlul lung. Ecuația de durație:</p>
+
+<ul>
+<li>1,9 × (1 − w) + 7,8 × w = 5,00</li>
+<li>1,9 + 5,9w = 5,00 → w = 3,10 / 5,9 = <strong>0,525</strong></li>
+</ul>
+
+<p>Deci ~52,5% în titlul lung (10 ani) și ~47,5% în titlul scurt (2 ani). Aplicat pe cei ~141.930 lei:</p>
+
+<ul>
+<li>Titlu scurt (2 ani): ~67.400 lei</li>
+<li>Titlu lung (10 ani): ~74.500 lei</li>
+</ul>
+
+<h3>Pasul 4 — Verificarea imunizării (stress test ±100 bps)</h3>
+
+<p>Testezi: dacă mâine curba se mută paralel cu +100 bps sau −100 bps, valoarea acumulată la t=5 (preț + cupoane reinvestite) trebuie să rămână ≈ 200.000 lei în ambele scenarii. Asta e <strong>interest rate risk neutralization</strong> demonstrabilă:</p>
+
+<ul>
+<li><strong>+100 bps:</strong> titlul lung pierde preț, dar cupoanele ambelor se reinvestesc la 8,1%; câștigul de reinvestire compensează pierderea de preț. Valoare la t=5 ≈ 200.100 lei.</li>
+<li><strong>−100 bps:</strong> titlul lung câștigă preț, dar reinvestești cupoanele la 6,1%; câștigul de preț compensează pierderea de reinvestire. Valoare la t=5 ≈ 200.080 lei.</li>
+</ul>
+
+<p>Diferența de câteva zeci de lei față de țintă, <em>pozitivă în ambele direcții</em>, este semnătura convexității: barbell-ul are convexitate mai mare decât pasivul, deci la mișcări mari produce un mic surplus în loc de deficit. Acesta e al doilea ordin de protecție — <strong>convexity bond immunization</strong>.</p>
+
+<h2>Convexitatea: de ce barbell-ul bate bullet-ul</h2>
+
+<p>Două portofolii cu aceeași durată 5,00 nu sunt echivalente. Un <strong>bullet</strong> (concentrat pe 5 ani) și un <strong>barbell</strong> (2 ani + 10 ani) au prima derivată identică, dar convexități diferite. Barbell-ul are convexitate mai mare pentru că dispersia maturităților e mai mare.</p>
+
+<p>Implicații practice pentru imunizare:</p>
+
+<ul>
+<li><strong>La șocuri paralele mari:</strong> barbell-ul produce surplus (convexitate netă pozitivă vs. pasiv). Avantaj barbell.</li>
+<li><strong>La twist-uri de curbă (non-paralele):</strong> aici e capcana. Imunizarea clasică presupune mișcări <em>paralele</em>. Dacă curba se aplatizează (scurtul urcă, lungul scade), barbell-ul poate suferi mai mult decât bullet-ul, fiindcă greutatea lui e la extreme. Bullet-ul, concentrat la orizont, e mai robust la twist.</li>
+</ul>
+
+<p>Regula de specialist: pentru o singură țintă, alege barbell cu dispersie <em>minimă</em> care îți dă durata cerută. Nu exagera spread-ul maturităților „ca să maximizezi convexitatea” — plătești în risc de twist mai mult decât câștigi în convexitate. Convexitatea e o pernă, nu un obiectiv de maximizat.</p>
+
+<h2>De la o țintă la multi-țintă: liability matching pentru întreaga pensie</h2>
+
+<p>O singură retragere e exercițiu. Realitatea pensionării e o serie de pasive: ai nevoie de X lei pe an, timp de 25–30 de ani. Aici intră <strong>liability matching strategie pensie</strong> în formă completă. Două arhitecturi:</p>
+
+<h3>Arhitectura A — Cash-flow matching pur (dedicare)</h3>
+
+<p>Pentru fiecare an de retragere, deții un titlu (sau o tranșă) care ajunge la maturitate exact atunci, în suma cheltuielilor acelui an. Zero risc de reinvestire pe principal, zero risc de preț (ții la maturitate). Avantaj: imunizare perfectă, niciun calcul de durată necesar. Dezavantaj: rigid, scump, greu de construit pe 30 de ani cu instrumente românești lichide (nu există titluri RON la orice maturitate).</p>
+
+<h3>Arhitectura B — Imunizare multi-perioadă (recomandată în practică)</h3>
+
+<p>Tratezi fluxul de pasive ca un singur pasiv compozit cu o durată Macaulay agregată, și imunizezi acea durată. Pași:</p>
+
+<ul>
+<li><strong>1.</strong> Calculezi PV-ul fiecărei retrageri anuale și PV-ul total al pasivelor.</li>
+<li><strong>2.</strong> Calculezi durata Macaulay a fluxului de pasive (media ponderată a momentelor de plată, ponderată cu PV-urile).</li>
+<li><strong>3.</strong> Construiești un portofoliu de obligațiuni cu aceeași durată agregată și PV ≥ PV-pasive.</li>
+<li><strong>4.</strong> Impui constrângerea de convexitate: convexitate active ≥ convexitate pasive (altfel imunizarea cedează la șocuri mari).</li>
+</ul>
+
+<p>Exemplu sintetic: retrageri de 60.000 lei/an timp de 20 de ani (anuitate uniformă, prima plată la t=1). La un randament de actualizare de 7%, durata Macaulay a acestui flux e ~8,3 ani (nu 10 — fluxurile timpurii cântăresc mai mult în PV). Deci imunizezi la durată ~8,3, nu la jumătatea orizontului. Greșeala tipică e să imunizezi „la 10 ani” fiindcă orizontul e 20; durata corectă a pasivului e semnificativ sub asta.</p>
+
+<h2>Edge-case-urile pe care le ignoră manualele</h2>
+
+<h3>1. Rebalansarea — imunizarea nu e „set and forget”</h3>
+
+<p>Durata se modifică în timp în ritm diferit de orizont. Pe măsură ce trece timpul, orizontul scade cu 1,00 an/an, dar durata portofoliului scade <em>mai lent</em> (cupoanele și efectul de capitalizare). În plus, fiecare mișcare de rate schimbă durata. Rezultat: <strong>portofoliul se „dezimunizează” treptat.</strong> Trebuie rebalansat — vinzi/cumperi pentru a readuce durata = orizontul rămas.</p>
+
+<p>Frecvența optimă e un trade-off: prea des → costuri de tranzacționare și spread bid-ask (50–150 bps pe titlurile BVB mai puțin lichide); prea rar → drift de durată. Regula practică: rebalansezi când |durată − orizont rămas| > 0,25 ani, sau cel puțin anual și după orice mișcare BNR de ≥50 bps.</p>
+
+<h3>2. Twist-ul de curbă invalidează imunizarea paralelă</h3>
+
+<p>Toată matematica de mai sus presupune shift paralel. Curba românească 2026 nu se mișcă paralel — segmentul scurt e ancorat de rata BNR, lungul de prima de risc fiscal și de apetitul investitorilor pentru datoria suverană RON. Protecție: minimizează dispersia maturităților (preferă bullet/quasi-bullet pentru ținte apropiate) și, pentru multi-perioadă, folosește mai multe „buckets” de durație în loc de un singur barbell extrem.</p>
+
+<h3>3. Inflația — imunizarea nominală nu protejează puterea de cumpărare</h3>
+
+<p>Imunizezi o sumă <em>nominală</em>. Dacă pasivul tău real (cheltuieli) e indexat la inflație, ai imunizat ținta greșită. România nu are o piață lichidă de obligațiuni indexate la inflație pentru retail, deci protecția reală e parțială. Soluție de specialist: imunizează nominal segmentul de cheltuieli pe termen scurt (1–5 ani, unde inflația e mai predictibilă) și ține partea lungă în active reale (acțiuni, imobiliare) — exact glidepath-ul anti-secvență din lecția FIRE.</p>
+
+<h3>4. Fiscalitatea 2026 — randamentul net e cel care contează</h3>
+
+<p>Imunizarea optimizează YTM brut, dar cash-flow-ul tău e net. Distinge două fluxuri fiscale diferite în 2026:</p>
+
+<ul>
+<li><strong>Dobânda/cuponul</strong> este venit din investiții impozitat cu <strong>impozit pe venit 10%</strong> (reținut la sursă de plătitor/broker).</li>
+<li><strong>Câștigul de capital</strong> din vânzarea titlului înainte de scadență, printr-un broker rezident, se impozitează la <strong>3%</strong> dacă instrumentul a fost deținut peste un an și <strong>6%</strong> dacă sub un an (reținut de broker). Prin broker străin, declari singur și plătești <strong>10%</strong> pe câștigul net, prin Declarația Unică.</li>
+</ul>
+
+<p>Peste impozit se adaugă, în funcție de venitul total anual din investiții și alte surse, <strong>CASS 10%</strong> aplicată pe plafoane raportate la salariul minim (în 2026, salariu minim 4.050 lei → praguri de 6/12/24 salarii minime, adică <strong>24.300 / 48.600 / 97.200 lei</strong>): treci pragul de 6 salarii minime și CASS se aplică la baza corespunzătoare treptei atinse. Pentru titlurile de stat dedicate populației (gen Fidelis/Tezaur), tratamentul fiscal al dobânzii a fost istoric mai favorabil — verifică regimul exact la ANAF pentru emisiunea concretă, fiindcă o scutire sau o cotă diferită mută PV-ul pasivului și ponderile barbell-ului. Construiește scara pe randamente <strong>nete</strong>, nu brute.</p>
+
+<h3>5. Riscul de credit suveran nu e zero</h3>
+
+<p>„Imunizat la dobândă” nu înseamnă „fără risc”. Un șoc de spread de credit pe datoria RON (downgrade, stres fiscal) lovește titlurile lungi mai tare decât pe cele scurte — un risc care nu apare în modelul de durație. Pentru ținte critice de pensie, plafonează expunerea pe maturitățile foarte lungi și acceptă un mic cost de carry pentru robustețe.</p>
+
+<h2>Modelul integrat: două buckets pentru retirada certificată</h2>
+
+<p>Sinteza practică pentru un pensionar român, combinând tot:</p>
+
+<ul>
+<li><strong>Bucket 1 — Imunizat (anii 1–10 de retragere):</strong> scară/imunizare pe titluri de stat RON, durată agregată = durata Macaulay a pasivelor din acest segment (tipic 4–6 ani pentru un flux de 10 ani). Acesta e segmentul în care riscul de secvență e fatal; îl faci indiferent la rate. Fiecare leu de cheltuit în acest deceniu are un titlu rezervat — <strong>retirada certificată</strong>.</li>
+<li><strong>Bucket 2 — Creștere (anii 11+):</strong> portofoliu de acțiuni/active reale, care are timp să-și revină după orice criză. Glidepath-ul mută gradual capital din Bucket 2 în Bucket 1 pe măsură ce anii avansează.</li>
+</ul>
+
+<p>De ce funcționează: secvența proastă a randamentelor face daune ireversibile <em>doar</em> dacă ești forțat să vinzi active volatile în scădere ca să-ți finanțezi cheltuielile. Dacă primul deceniu e finanțat din obligațiuni imunizate, nu vinzi niciodată acțiuni la fund. Ai cumpărat timp — exact ce neutralizează riscul de secvență.</p>
+
+<h2>Checklist de construcție — pas cu pas</h2>
+
+<ul>
+<li><strong>1.</strong> Definește pasivele: lista exactă de retrageri (sumă × an), pe primul deceniu de pensionare. Folosește sume <em>nete</em> de impozit.</li>
+<li><strong>2.</strong> Stabilește curba de randament curentă (YTM net pe maturitățile RON accesibile: 2y / 5y / 10y), la momentul construcției — nu cifrele didactice de aici.</li>
+<li><strong>3.</strong> Calculează PV-ul total al pasivelor și durata Macaulay agregată a fluxului. Aceasta e durata-țintă, nu jumătatea orizontului.</li>
+<li><strong>4.</strong> Verifică PV(active disponibile) ≥ PV(pasive). Dacă nu, ținta e subfinanțată — ajustează retragerile sau capitalul.</li>
+<li><strong>5.</strong> Rezolvă ponderile (w) ale tranșelor scurte/lungi din ecuația de durație ponderată = durata-țintă. Preferă dispersia minimă care atinge ținta.</li>
+<li><strong>6.</strong> Confirmă constrângerea de convexitate: convexitate active ≥ convexitate pasive.</li>
+<li><strong>7.</strong> Stress-test paralel ±100 bps și un twist (aplatizare/abruptizare): valoarea la orizont trebuie să rămână ≥ pasiv în toate scenariile.</li>
+<li><strong>8.</strong> Documentează regula de rebalansare: prag |durată − orizont rămas| > 0,25 ani, plus revizuire după orice mișcare BNR ≥50 bps.</li>
+<li><strong>9.</strong> Segregă în Bucket 1 (imunizat) vs. Bucket 2 (creștere) și definește glidepath-ul de transfer anual.</li>
+<li><strong>10.</strong> Recalculează anual: durata pasivului rămas, randamentele nete curente, expunerea de credit pe maturitățile lungi. Imunizarea e un proces continuu, nu un eveniment.</li>
+</ul>
+
+<p>Imunizarea nu îți promite cel mai mare randament — îți promite <em>certitudine la o dată</em>. Pentru capitalul de care depinde supraviețuirea financiară a primului deceniu de pensie, certitudinea bate randamentul de fiecare dată. Restul portofoliului poate să-și asume risc, fiindcă imunizarea i-a cumpărat luxul de a aștepta.</p>

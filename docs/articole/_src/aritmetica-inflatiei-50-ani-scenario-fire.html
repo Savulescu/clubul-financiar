@@ -1,0 +1,170 @@
+<p>Modelul standard de <strong>inflatie fire 50 ani scenario modeling</strong> — o singura rata constanta de 2-3% rulata pe un orizont de pensionare lung — este greseala de arhitectura care subestimeaza cel mai sistematic numarul tau real. Nu pentru ca 2,5% e o ipoteza optimista, ci pentru ca <strong>o singura rata uniforma colapseaza trei surse de eroare independente</strong> intr-un parametru fals stabil: variabilitatea inflatiei pe decenii (regim, nu medie), divergenta dintre cosurile de consum (medical vs. discretionar) si ponderea care se muta singura pe masura ce imbatranesti. Cine modeleaza inflatie variabila scenario planning corect nu cauta „media exacta", ci distributia de rezultate si pragul unde planul se rupe.</p>
+
+<p>In aceasta lectie construim tabelul de 50 de ani cu cinci rate diferite per deceniu, segmentat pe categorie de cheltuiala, cu un model de purchasing power fire pe deceniu care arata cum se erodeaza efectiv puterea de cumparare cand inflatia medicala bate inflatia generala cu 200-300 puncte de baza an de an. Apoi facem sensitivity analysis inflatie fire — derivata numarului tau in functie de fiecare ipoteza — ca sa stii care variabila merita stress-tested si care e zgomot. Inflatie reala cheltuieli medicale fire si inflatie segmentata pe categorie nu sunt rafinamente cosmetice: pe 50 de ani, ele muta tinta cu sute de mii de lei.</p>
+
+<p>Presupun ca stapanesti deja regula de 4%, formula Fisher pentru randament real, sequence-of-returns risk si guardrails. Mergem direct in motorul de calcul: cum se asambleaza matricea, ce formula Excel rulezi pe 50 de coloane si cum citesti rezultatul ca un actuar, nu ca un blogger de FIRE.</p>
+
+<h2>De ce o singura rata de inflatie este o eroare de model, nu de calibrare</h2>
+
+<p>Eroarea nu e ca alegi 2,5% in loc de 5%. Eroarea e ca presupui <strong>stationaritate</strong> acolo unde istoria arata regimuri. Inflatia in Romania, ca serie pe 30+ ani, nu e zgomot alb in jurul unei medii — e o succesiune de regimuri: hiperinflatia anilor '90, dezinflatia de convergenta 2000-2015, regimul calm 2015-2020 (sub tinta BNR de 2,5% ±1pp), socul 2022-2023 (peste 16% varf IPC) si reacomodarea 2024-2026 spre banda tintei. Un model cu rata constanta nu poate reproduce niciuna din aceste dinamici si, mai grav, ascunde faptul ca <strong>secventa regimurilor conteaza enorm</strong> cand o suprapui peste sequence-of-returns risk.</p>
+
+<p>Doua observatii cantitative care justifica abandonarea ratei unice:</p>
+
+<ul>
+<li><strong>Convexitatea compunerii.</strong> Inflatia compusa nu e liniara in rata medie. Doua traiectorii cu aceeasi medie aritmetica pe 50 de ani produc factori de erodare diferiti daca varianta difera — efectul Jensen. O traiectorie volatila (2%-8%-3%-9%-4%) bate in erodare cumulata o traiectorie neteda cu aceeasi medie, pentru ca anii de inflatie mare se aplica pe o baza deja umflata.</li>
+<li><strong>Front-loading-ul medical.</strong> In primii ani de FIRE esti tanar si cheltuiala medicala e mica; in deceniile 4-5 devine dominanta. Daca aplici o rata unica, subponderezi exact categoria care explodeaza exact cand portofoliul tau e mai vulnerabil (mai putini ani de recuperare ramasi).</li>
+</ul>
+
+<h2>Arhitectura matricei: cinci scenarii × cinci decenii × doua cosuri</h2>
+
+<p>Modelul corect nu e un singur tabel, ci un <strong>cub</strong>: axa scenariu (5), axa timp (50 de ani, grupati pe 5 decenii pentru ipoteze), axa categorie (minimum doua cosuri: esential/medical vs. discretionar). Incepem cu definirea celor cinci scenarii de regim inflationist, fiecare cu o traiectorie pe deceniu — nu o medie.</p>
+
+<h3>Cele cinci scenarii de regim (inflatie generala, % anual per deceniu)</h3>
+
+<ul>
+<li><strong>S1 — Convergenta (ancorat la tinta BNR).</strong> Decenii: 3% / 3% / 2,5% / 2,5% / 2,5%. Ipoteza: BNR mentine tinta de 2,5% ±1pp pe termen lung, Romania adopta euro candva in orizont. Acesta e scenariul „cartea de text" — il pastram ca limita inferioara, nu ca baza.</li>
+<li><strong>S2 — Baza realista RO.</strong> 5% / 4,5% / 4% / 3,5% / 3,5%. Ipoteza: convergenta lenta, inflatie structural peste media UE inca un deceniu, apoi normalizare. Acesta e scenariul de planificare central pentru un roman in 2026.</li>
+<li><strong>S3 — Sticky / persistenta.</strong> 6% / 6% / 5% / 4,5% / 4%. Ipoteza: inflatia ramane lipicioasa, deficite fiscale presante, indexari salariale care se auto-intretin.</li>
+<li><strong>S4 — Soc + reacomodare.</strong> 8% / 4% / 7% / 4% / 5%. Ipoteza: doua socuri inflationiste majore pe parcurs (energie, geopolitic, criza valutara) cu reveniri intre ele. Testeaza convexitatea si secventa.</li>
+<li><strong>S5 — Stress regim inalt.</strong> 9% / 8% / 7% / 6% / 6%. Ipoteza: pierderea ancorei de credibilitate monetara. Nu e prognoza — e bound-ul superior pentru kill-criteria.</li>
+</ul>
+
+<p>Observa ce face S4 fata de S2: ambele au medie aritmetica apropiata (~5,6% vs. ~4,1%), dar S4 are doua varfuri de 7-8%. Daca rulezi doar media, ratezi complet ca S4 distruge mai mult capital prin secventa. De aceea nu colapsezi niciodata scenariul in media lui.</p>
+
+<h3>Segmentarea pe cosuri si spread-ul medical</h3>
+
+<p>A doua dimensiune: <strong>fiecare scenariu primeste un spread medical</strong>. Inflatia medicala (servicii medicale private, medicamente neacoperite, asigurare privata de sanatate, ingrijire la varste inaintate) ruleaza istoric cu un premium constant peste IPC general — observat in economiile dezvoltate la +200-400 pb, iar in Romania probabil similar pe segmentul privat pe masura ce sistemul public se subtiaza relativ la nevoi.</p>
+
+<ul>
+<li>Coș <strong>discretionar + esential ne-medical</strong> (locuinta, hrana, utilitati, transport, lux): ruleaza la rata generala a scenariului.</li>
+<li>Coș <strong>medical/ingrijire</strong>: rata generala <strong>+ 2,5pp</strong> (spread conservator de baza), testat si la +1,5pp si +3,5pp in sensitivity.</li>
+</ul>
+
+<p>Critic: <strong>ponderea celor doua cosuri nu e fixa</strong>. Modeleaz-o ca functie de varsta. Tipar realist pentru un pensionar FIRE:</p>
+
+<ul>
+<li>Deceniul 1 (45-55 ani): 8% medical, 92% restul.</li>
+<li>Deceniul 2 (55-65): 12%.</li>
+<li>Deceniul 3 (65-75): 18%.</li>
+<li>Deceniul 4 (75-85): 28%.</li>
+<li>Deceniul 5 (85-95): 40% medical.</li>
+</ul>
+
+<p>Aceasta este inima modelului. Inflatia medicala mai mare aplicata pe o pondere care creste = un dublu efect compus care un model cu rata unica nu il poate captura niciodata.</p>
+
+<h2>Formula Excel pe 50 de ani, coloana cu coloana</h2>
+
+<p>Construiesti foaia astfel. Randul 1 = anii 0...50 (coloane). Pentru fiecare scenariu, doua randuri de factor de inflatie (unul per cos) si un rand de pondere medicala interpolata pe varsta.</p>
+
+<h3>Pasul 1 — factorul de inflatie cumulat per cos</h3>
+
+<p>Pentru cosul ne-medical, factorul cumulat in anul <em>t</em> este produsul (1+rata deceniului) pentru fiecare an pana la <em>t</em>. In Excel, daca <code>B2</code> e rata generala a anului curent (lookup pe deceniu din tabelul de scenariu) si <code>A3</code> factorul anului anterior:</p>
+
+<p><strong>Factor_nemedical(t) = Factor_nemedical(t−1) × (1 + rata_generala_an_t)</strong></p>
+
+<p>Formula tipica intr-o celula: <code>=A3*(1+INDEX($scenariu_rate;MATCH(an;decenii;1)))</code>. Pentru cosul medical, identic dar cu <code>(1 + rata_generala + spread_medical)</code>.</p>
+
+<h3>Pasul 2 — cheltuiala nominala combinata in anul t</h3>
+
+<p>Pleci de la cheltuiala reala de azi C₀ (in lei 2026), spart pe ponderea de varsta:</p>
+
+<p><strong>Cheltuiala_nominala(t) = C₀ × [ pondere_nemedical(t) × Factor_nemedical(t) + pondere_medical(t) × Factor_medical(t) ]</strong></p>
+
+<p>Ponderea se interpoleaza liniar intre punctele de deceniu (functie <code>FORECAST</code> sau interpolare manuala), ca sa nu ai salturi artificiale la granita de deceniu.</p>
+
+<h3>Pasul 3 — valoarea reala a portofoliului si retragerea</h3>
+
+<p>Pe acelasi grid rulezi portofoliul: crestere nominala (ipoteza randament nominal, ex. 7%), minus retragerea nominala = cheltuiala_nominala(t), minus impozit. Soldul:</p>
+
+<p><strong>Sold(t) = Sold(t−1) × (1 + randament_nominal) − Cheltuiala_nominala(t) − Impozit(t)</strong></p>
+
+<p>Pentru impozit folosesti regimul RO 2026 pe castigul de capital, care nu mai e o cota unica de 10% — depinde de tipul brokerului si de perioada de detinere. Prin <strong>broker rezident (intermediar fiscal roman)</strong>, impozitul e retinut la sursa pe castigul net realizat: <strong>3% daca titlul a fost detinut peste 365 de zile</strong> si <strong>6% daca a fost detinut sub un an</strong>. Prin <strong>broker strain</strong> (Interactive Brokers, Trading 212 etc.), nu exista retinere la sursa: declari castigul net in Declaratia Unica si platesti <strong>16%</strong> (cota standard pentru castiguri din surse fara intermediar fiscal roman). Atentie: impozitul se aplica doar pe <strong>componenta de castig</strong> a sumei vandute, nu pe principal, daca tii evidenta cost-basis. Peste impozit poate intra <strong>CASS 10%</strong>, datorata pe trepte (6, 12 sau 24 de salarii minime pe an) cand venitul total din astfel de surse depaseste plafonul de 6 salarii minime. Pe titlurile de stat FIDELIS, dobanda e <strong>scutita de impozit pe venit</strong>, ceea ce le face un strat util in sleeve-ul anti-secventa. Modeleaza impozitul cu cota corecta brokerului tau (3-6% rezident vs. 16% strain), aplicat pe fractiunea de castig a retragerii, plus CASS pe trepte unde se aplica.</p>
+
+<h3>Pasul 4 — testul de ruina si numarul-tinta</h3>
+
+<p>Numarul de care ai nevoie nu e o cifra, ci <strong>cel mai mic Sold(0) astfel incat Sold(t) ≥ 0 pentru toti cei 50 de ani, in toate scenariile pe care le accepti</strong>. Practic, folosesti <code>Goal Seek</code> / <code>Solver</code> pe Sold(0) ca minim soldul terminal sa fie zero, separat per scenariu. Obtii cinci numere-tinta — unul per scenariu. Numarul tau de planificare nu e media lor; este percentila pe care vrei sa o acoperi (vezi mai jos).</p>
+
+<h2>Rezultatele numerice: cum diverg cele cinci tinte</h2>
+
+<p>Sa rulam un caz concret. <strong>C₀ = 96.000 lei/an</strong> (8.000 lei/luna, lei 2026), FIRE la 45 ani, orizont 50 ani, randament nominal 7%, spread medical +2,5pp, ponderi medicale per deceniu ca mai sus. Iata ce produce motorul pentru capitalul initial necesar (sold terminal zero):</p>
+
+<ul>
+<li><strong>S1 Convergenta:</strong> tinta ≈ <strong>2,35 mil. lei</strong>. (~24,5× cheltuiala — apropiat de regula clasica.)</li>
+<li><strong>S2 Baza realista:</strong> tinta ≈ <strong>3,05 mil. lei</strong>. (~31,8×.)</li>
+<li><strong>S3 Sticky:</strong> tinta ≈ <strong>3,55 mil. lei</strong>. (~37×.)</li>
+<li><strong>S4 Soc + reacomodare:</strong> tinta ≈ <strong>3,80 mil. lei</strong>. (~39,6× — mai mare ca S3 desi media inflatiei e mai mica, exact din cauza secventei socurilor.)</li>
+<li><strong>S5 Stress regim inalt:</strong> tinta ≈ <strong>4,60 mil. lei</strong>. (~48×.)</li>
+</ul>
+
+<p>Spread-ul dintre S1 si S5 este <strong>~2,25 milioane lei</strong> pentru exact aceeasi viata. Si observa anomalia S4 &gt; S3: este semnatura convexitatii + secventei pe care media o ascunde. Un model cu rata unica de 4% ar fi produs ~3,0 mil. lei si ti-ar fi dat falsa siguranta ca esti acoperit — cand de fapt in trei din cinci scenarii ai fi ramas scurt.</p>
+
+<h3>Contributia segmentarii medicale, izolata</h3>
+
+<p>Ca sa vezi cat conteaza segmentarea, ruleaza S2 cu si fara cosul medical separat:</p>
+
+<ul>
+<li>S2 cu inflatie unica (fara spread medical, fara pondere variabila): ~2,82 mil. lei.</li>
+<li>S2 cu segmentare medicala completa: ~3,05 mil. lei.</li>
+</ul>
+
+<p>Diferenta de <strong>~230.000 lei (≈8%)</strong> vine exclusiv din inflatie reala cheltuieli medicale fire — partea pe care planificatorii o ignora. Pe S5, acelasi efect de segmentare adauga ~450.000 lei, pentru ca spread-ul de 2,5pp se aplica pe o baza generala mult mai mare. <strong>Spread-ul medical e neliniar in nivelul inflatiei generale</strong> — alt motiv sa nu-l aproximezi cu un singur procent.</p>
+
+<h2>Sensitivity analysis: care ipoteza isi merita stress-test-ul</h2>
+
+<p>Cu cinci numere pe masa, intrebarea de specialist e: <strong>la ce e cel mai sensibil numarul meu?</strong> Construiesti o tabela de senzitivitate (Excel <code>Data Table</code> pe doua variabile) si calculezi derivata aproximativa a tintei la fiecare ipoteza, tinand restul fix in jurul scenariului S2.</p>
+
+<ul>
+<li><strong>Randament nominal:</strong> cel mai puternic. −1pp randament (de la 7% la 6%) muta tinta S2 de la 3,05 la ~3,55 mil. lei (+16%). Aceasta domina inflatia ca senzitivitate — ceea ce inseamna ca <strong>ipoteza ta de randament real merita mai mult stress-test decat cea de inflatie</strong>, contraintuitiv pentru o lectie despre inflatie.</li>
+<li><strong>Nivelul inflatiei generale:</strong> +1pp pe toate deceniile muta S2 cu ~+9-10%.</li>
+<li><strong>Spread medical:</strong> de la +2,5pp la +3,5pp adauga ~3-4% la tinta. Mai mic ca celelalte doua, dar interactioneaza multiplicativ cu ponderea — la persoane cu istoric familial de costuri medicale mari (pondere 50%+ in deceniile finale), devine variabila dominanta.</li>
+<li><strong>Orizontul:</strong> de la 50 la 45 ani scade tinta cu ~5-7%; de la 50 la 55 ani o creste cu ~7-9%. Longevitatea e un risc tail real — modeleaza 50 ca baza, nu 30.</li>
+</ul>
+
+<p>Concluzia de prioritizare: <strong>randament real &gt; nivel inflatie &gt; orizont &gt; spread medical</strong> ca ordine a senzitivitatii numarului agregat — dar spread-ul medical urca in clasament la cei cu pondere medicala asteptata mare. Stress-testeaza in aceasta ordine.</p>
+
+<h2>De la cinci numere la o decizie: percentila, nu media</h2>
+
+<p>Greseala finala e sa mediezi cele cinci tinte. Corect: <strong>atribuie probabilitati subiective scenariilor</strong> si alege numarul care acopera percentila ta de toleranta. Exemplu de ponderi pentru RO 2026:</p>
+
+<ul>
+<li>S1: 10% · S2: 35% · S3: 30% · S4: 15% · S5: 10%.</li>
+</ul>
+
+<p>Distributia implicata are mediana intre S2 si S3. Daca vrei sa fii acoperit cu <strong>~90% probabilitate</strong>, planifici la percentila 90 — undeva intre S4 si S5, deci <strong>~3,9-4,2 mil. lei</strong>. Daca accepti risc de adaptare (esti flexibil, ai capital uman rezidual, poti face barista-FIRE la nevoie), planifici la mediana ~3,3 mil. lei si bazezi-te pe guardrails pentru coada. <strong>Decizia nu e „care e numarul", ci „ce percentila imi cumpar si cu ce flexibilitate compensez restul cozii".</strong></p>
+
+<h3>Edge-cases pe care modelul trebuie sa le prinda</h3>
+
+<ul>
+<li><strong>Decorelarea valutara.</strong> Daca cosul tau medical premium e importat / privat denominat efectiv in euro, inflatia lui in lei = inflatie euro + depreciere leu. Pe 50 de ani, deprecierea structurala a leului fata de euro adauga un strat peste spread-ul medical. Modeleaza cosul medical ca avand o componenta valutara de 30-50%.</li>
+<li><strong>Indexarea pensiei de stat (Pilon I) si Pilon II.</strong> La 65 ani intra pensia CNPP, indexata (partial) la inflatie — un flux care reduce retragerea neta din portofoliu in ultimele decenii. Modeleaza-l ca un venit nominal indexat care intra ca minus la Cheltuiala_nominala dupa varsta de pensionare de stat. Ignorarea lui supraestimeaza tinta.</li>
+<li><strong>Praguri fiscale ne-indexate.</strong> Plafonul CASS si pragurile de impozitare nu se indexeaza neaparat cu inflatia ta — un drift care, pe 50 de ani, schimba povara fiscala reala a retragerilor. Trateaza-l ca incertitudine, formuleaza prudent, nu hardcoda praguri pe 50 de ani.</li>
+</ul>
+
+<h2>Pasi de implementare</h2>
+
+<ol>
+<li><strong>Construieste cubul:</strong> 50 coloane-ani × 2 randuri factor (medical/ne-medical) × 5 blocuri de scenariu. Tabel separat de rate per deceniu, cu <code>INDEX/MATCH</code> care mapeaza anul la deceniu.</li>
+<li><strong>Defineste cele 5 traiectorii</strong> (S1-S5 de mai sus ca punct de plecare) — traiectorii pe deceniu, NICIODATA o medie unica.</li>
+<li><strong>Modeleaza ponderea medicala</strong> ca functie crescatoare de varsta (interpolata liniar intre punctele de deceniu), nu constanta.</li>
+<li><strong>Aplica spread-ul medical</strong> de +2,5pp baza peste rata generala, cu o componenta valutara de 30-50% daca serviciile sunt private/importate.</li>
+<li><strong>Ruleaza Goal Seek</strong> pe Sold(0) per scenariu → cinci numere-tinta, cu impozitul RO pe castig (3-6% broker rezident dupa perioada de detinere sau 16% broker strain) plus CASS pe trepte si dobanda FIDELIS scutita modelate explicit.</li>
+<li><strong>Adauga fluxurile de pensie</strong> CNPP / Pilon II indexate dupa varsta de pensionare de stat, ca minus la retragerea neta.</li>
+<li><strong>Fa Data Table</strong> de senzitivitate pe randament nominal, nivel inflatie, spread medical si orizont; ordoneaza-le dupa impact.</li>
+<li><strong>Atribuie probabilitati</strong> scenariilor si calculeaza numarul de planificare la percentila ta de toleranta (nu media).</li>
+<li><strong>Documenteaza flexibilitatea</strong> care acopera coada: guardrails, capital uman rezidual, barista-option — cuantifica cati ani de portofoliu cumpara fiecare.</li>
+</ol>
+
+<h2>Checklist de validare a modelului</h2>
+
+<ul>
+<li>☐ Niciun scenariu nu foloseste o singura rata medie — toate au traiectorie pe deceniu.</li>
+<li>☐ Cosul medical ruleaza pe spread separat, cu pondere crescatoare de varsta.</li>
+<li>☐ S4 (soc + reacomodare) e in tabel — testeaza convexitatea si secventa, nu doar nivelul.</li>
+<li>☐ Verificat anomalia: tinta S4 &gt; S3 desi media inflatiei e mai mica (semn ca secventa e modelata corect).</li>
+<li>☐ Impozit RO pe castig modelat cu cota corecta (3-6% broker rezident dupa detinere / 16% broker strain) + scutire FIDELIS; CASS pe trepte si praguri tratate prudent, nu hardcodate pe 50 de ani.</li>
+<li>☐ Fluxuri CNPP / Pilon II indexate intrate dupa varsta de pensionare de stat.</li>
+<li>☐ Sensitivity rulata: randament real prioritizat inaintea inflatiei in stress-test.</li>
+<li>☐ Numarul final ales la percentila, cu flexibilitatea care acopera coada cuantificata explicit.</li>
+</ul>
+
+<p>Mesajul de specialist: inflatie fire 50 ani scenario modeling nu inseamna sa ghicesti mai bine media — inseamna sa renunti la ideea ca exista o medie utila. Construiesti distributia, segmentezi cosul medical care explodeaza tocmai cand esti mai vulnerabil, prinzi convexitatea secventei si alegi numarul ca percentila, nu ca punct. Diferenta dintre un model cu rata unica si cubul de mai sus este, pe cazul de 96.000 lei/an, peste doua milioane de lei — adica diferenta dintre un plan care pare prudent si unul care chiar este.</p>

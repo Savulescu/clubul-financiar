@@ -1,0 +1,166 @@
+<p>O <strong>indexare buget indicatori macro rebalanțare automată</strong> de nivel expert nu mai înseamnă ajustarea anuală a cheltuielilor la rata IPC, ci un sistem viu care recalibrează alocările lunar pe baza unui vector de 15 variabile macro corelate. Dacă în lecția anterioară ai construit indexarea pe trei piloni — IPC, EURIBOR și curs EUR — aici extindem arhitectura la un <strong>dashboard buget real-time</strong> care citește <em>expected inflation buget</em> din proiecțiile BNR, transformă <em>IRCC impact buget</em> și șomajul în coeficienți de risc și execută rebalanțarea pe reguli, nu pe intuiție.</p>
+
+<p>Premisa de specialist: bugetul personal este un portofoliu de obligații cu durate și senzitivități diferite. Rata la creditul ipotecar are duration mare și beta ridicat la IRCC; coșul alimentar are pass-through rapid din IPC alimente; abonamentele EUR sunt expuse cursului; iar venitul, prin <em>șomaj variabilă buget</em>, devine factorul de discount al întregului sistem. Folosind <em>macro indicators buget</em> ca semnale și o logică de <em>rebalanțare probabilistică cheltuieli</em>, minimizezi devierea dintre buget planificat și execuție reală.</p>
+
+<p>Vom construi pas cu pas matricea de senzitivitate, regulile de declanșare, ponderarea probabilistică pe scenarii și <em>scenario analysis buget România</em> calibrat pe datele 2026, astfel încât dashboardul să propună automat realocări atunci când un indicator depășește pragul său de control.</p>
+
+<h2>1. Vectorul celor 15 indicatori macro și sursele lor oficiale</h2>
+
+<p>Selecția indicatorilor nu este arbitrară: fiecare trebuie să aibă (a) o sursă publică de încredere cu cadență cunoscută, (b) un canal de transmisie demonstrabil către o linie de buget și (c) o latență de publicare acceptabilă. Iată setul de control:</p>
+
+<ul>
+<li><strong>IPC total (INS)</strong> — publicat lunar, ~ziua 12-14 a lunii următoare; ancora indexării generale.</li>
+<li><strong>IPC alimente / IPC mărfuri nealimentare / IPC servicii (INS)</strong> — trei sub-indici cu pass-through diferit; serviciile au inerție mare, alimentele volatilitate mare.</li>
+<li><strong>Inflația anticipată BNR (Raportul trimestrial asupra inflației)</strong> — proiecția centrală + intervalul de incertitudine; sursa pentru <em>expected inflation buget</em>.</li>
+<li><strong>Rata cheie BNR</strong> — staționată la 6,50% în 2026; determină costul marginal al lichidității.</li>
+<li><strong>IRCC (BNR, trimestrial)</strong> — indicele de referință pentru creditele în lei; se aplică cu decalaj de un trimestru.</li>
+<li><strong>ROBOR 3M / IRCC spread</strong> — măsoară tensiunea pieței monetare interbancare.</li>
+<li><strong>EURIBOR 3M</strong> — pentru expunerile în euro și benchmarkul abonamentelor.</li>
+<li><strong>Curs EUR/RON (BNR, referință zilnică)</strong> — ancorat în jur de 5,00-5,08 în 2026, cu trend de depreciere lentă.</li>
+<li><strong>Curs USD/RON</strong> — relevant pentru servicii cloud, electronice, combustibil.</li>
+<li><strong>Rata șomajului (INS, BIM)</strong> — proxy pentru riscul de venit; intră în factorul de discount.</li>
+<li><strong>Câștigul salarial mediu net (INS)</strong> — pentru indexarea proiecției de venit.</li>
+<li><strong>Randamentul titlurilor de stat 10Y (curba de randament)</strong> — semnal forward asupra inflației și primei de risc.</li>
+<li><strong>Spread 10Y-2Y (panta curbei)</strong> — inversiunea anticipează stres macro și presiune pe venit.</li>
+<li><strong>Prețul energiei / gaze (piața PZU, OPCOM)</strong> — driver direct al utilităților după liberalizare.</li>
+</ul>
+
+<p>Pentru fiecare indicator definești o <strong>cadență de citire</strong> și o <strong>latență</strong>. Dashboardul nu rebalanțează la fiecare tick, ci pe o fereastră lunară de decizie, cu excepția cursului și a energiei, care primesc un canal de alertă intra-lunar (vezi secțiunea 5).</p>
+
+<h2>2. Matricea de senzitivitate buget × indicatori</h2>
+
+<p>Inima sistemului este matricea de senzitivitate <strong>S</strong>, de dimensiune <em>n linii de buget × 15 indicatori</em>. Fiecare element <strong>S(i,j)</strong> este beta-ul liniei de buget <em>i</em> la o variație de +1 unitate (sau +1 punct procentual) a indicatorului <em>j</em>. Beta se exprimă ca elasticitate: procentul cu care se modifică linia de cheltuială la o variație de 1 pp a indicatorului.</p>
+
+<h3>Estimarea coeficienților de senzitivitate</h3>
+
+<p>Pentru linii cu legătură mecanică (rata creditului), beta este analitic. Pentru linii cu pass-through statistic (alimente, utilități), îl estimezi prin regresie pe propriile date de cheltuieli din ultimele 24-36 de luni. Exemplu de matrice parțială (valori ilustrative, calibrate pe un gospodărie urbană tipică 2026):</p>
+
+<ul>
+<li><strong>Rata ipotecar (lei, IRCC+2,0%)</strong>: beta la IRCC ≈ +0,42% per +1 pp IRCC pe partea de dobândă a anuității; beta la celelalte ≈ 0.</li>
+<li><strong>Coș alimentar</strong>: beta la IPC alimente ≈ +0,85; beta la curs EUR ≈ +0,15 (import indirect); beta la energie ≈ +0,10.</li>
+<li><strong>Utilități</strong>: beta la preț energie PZU ≈ +0,55; beta la IPC servicii ≈ +0,20.</li>
+<li><strong>Abonamente EUR/USD</strong>: beta la EUR/RON ≈ +1,00 (pass-through integral); beta la USD/RON ≈ +1,00 pe sub-coșul USD.</li>
+<li><strong>Transport/combustibil</strong>: beta la USD/RON ≈ +0,40; beta la energie ≈ +0,25.</li>
+</ul>
+
+<h3>Calculul mecanic al beta pentru rata ipotecară</h3>
+
+<p>Fie un sold rămas <strong>D = 320.000 lei</strong>, maturitate reziduală 22 ani (264 luni), marjă fixă 2,0% peste IRCC. Cu IRCC la 5,55% (nivel ipotetic pentru trimestrul de aplicare), dobânda nominală anuală este 7,55%, deci rata lunară <em>r</em> = 0,0755/12 = 0,006292. Anuitatea:</p>
+
+<p><strong>A = D × r × (1+r)^n / ((1+r)^n − 1)</strong> = 320.000 × 0,006292 × (1,006292)^264 / ((1,006292)^264 − 1) ≈ <strong>2.488 lei/lună</strong>.</p>
+
+<p>La un IRCC nou de 6,55% (deci +1 pp), dobânda devine 8,55%, <em>r</em> = 0,007125, iar anuitatea recalculată ≈ <strong>2.693 lei/lună</strong>. Variația absolută este +205 lei, adică +8,2% pe rată. Beta empiric al ratei la IRCC ≈ +8,2% per +1 pp — semnificativ mai mare decât intuiția lineară, pentru că efectul se concentrează pe componenta de dobândă. Acest beta îl introduci în matrice și el devine cel mai mare contributor de risc din buget.</p>
+
+<h2>3. Funcția de indexare și recalcularea alocărilor</h2>
+
+<p>Bugetul indexat pentru luna <em>t</em> se obține aplicând vectorul de variații macro Δ asupra alocării de bază <strong>B₀</strong> prin matricea S:</p>
+
+<p><strong>B(t) = B₀ ∘ (1 + S · Δ(t))</strong></p>
+
+<p>unde Δ(t) este vectorul de variații procentuale ale celor 15 indicatori față de momentul de calibrare, „∘" este produsul element-cu-element, iar S·Δ produce vectorul de ajustare per linie. Important: variațiile se aplică <strong>YoY anualizat sau față de baza de calibrare</strong>, nu acumulat la infinit — altfel sistemul drifturează. Recalibrarea bazei B₀ se face de două ori pe an, la publicarea proiecțiilor BNR din februarie și august.</p>
+
+<h3>Exemplu numeric integrat</h3>
+
+<p>Buget de bază lunar B₀ = 12.000 lei, defalcat: rată 2.488, alimente 2.400, utilități 1.300, abonamente EUR 600, transport 900, economii/investiții 2.500, discreționar 1.812. Vectorul de variații observat pe o lună:</p>
+
+<ul>
+<li>IRCC +1,0 pp → rată: +8,2% → +204 lei.</li>
+<li>IPC alimente +0,9% → alimente: +0,85 × 0,9% = +0,77% → +18 lei.</li>
+<li>Preț energie +6% → utilități: +0,55 × 6% = +3,3% → +43 lei.</li>
+<li>EUR/RON +0,8% → abonamente: +1,0 × 0,8% → +5 lei.</li>
+<li>USD/RON +1,2% → transport: +0,40 × 1,2% = +0,48% → +4 lei.</li>
+</ul>
+
+<p>Creșterea totală indusă macro = <strong>+274 lei/lună</strong>, concentrată ~74% pe rata ipotecară. Sistemul semnalează că, fără realocare, economiile vor fi erodate cu 274 lei. <em>Rebalanțarea automată</em> propune: reduce discreționarul cu 200 lei și economiile cu 74 lei, sau — dacă regula de protecție a investițiilor este activă — taie integral 274 din discreționar. Aceasta este logica de minimizare a devierii.</p>
+
+<h2>4. Rebalanțare probabilistică pe scenarii — scenario analysis buget România</h2>
+
+<p>Indexarea pe valori realizate este reactivă. Stratul de specialist adaugă <strong>rebalanțare probabilistică cheltuieli</strong>: în loc să aștepți ca IRCC să crească, aloci un buffer ponderat cu probabilitatea scenariului. Construiești trei stări macro pentru orizontul următoarelor 3-6 luni, fiecare cu o probabilitate și un impact:</p>
+
+<table>
+<tr><td><strong>Scenariu</strong></td><td><strong>Prob.</strong></td><td><strong>IPC</strong></td><td><strong>IRCC</strong></td><td><strong>EUR/RON</strong></td><td><strong>Impact buget</strong></td></tr>
+<tr><td>Bază (dezinflație lentă)</td><td>0,55</td><td>4,5%</td><td>5,6%</td><td>5,00</td><td>+150 lei</td></tr>
+<tr><td>Advers (presiune fiscală + depreciere)</td><td>0,30</td><td>6,0%</td><td>6,3%</td><td>5,12</td><td>+520 lei</td></tr>
+<tr><td>Favorabil (relaxare BNR)</td><td>0,15</td><td>3,5%</td><td>5,0%</td><td>4,95</td><td>−90 lei</td></tr>
+</table>
+
+<p>Impactul așteptat (Expected Shortfall pe buget) = Σ pᵢ × impactᵢ = 0,55×150 + 0,30×520 + 0,15×(−90) = 82,5 + 156 − 13,5 = <strong>+225 lei/lună</strong>. Acesta este bufferul macro pe care îl rezervi proactiv, înainte ca evenimentul să se realizeze.</p>
+
+<h3>Buffer la coadă (tail buffer)</h3>
+
+<p>Dacă vrei protecție la scenariul advers, nu la medie, folosești un <strong>CVaR la 70%</strong>: media impacturilor din ramurile cu probabilitate cumulată în coada superioară. Aici, ramura adversă singură (+520) ponderată în coada de 30% îți dă un buffer de prudență de ~520 lei. Politica recomandată: rezervă bufferul așteptat (225 lei) ca alocare fermă și marchează diferența până la CVaR (520−225 = 295 lei) drept <em>contingență</em> care se activează doar la confirmarea trendului de către doi indicatori independenți (ex. IRCC publicat + curba de randament inversată).</p>
+
+<h2>5. Praguri de control și reguli de declanșare</h2>
+
+<p>Un dashboard care rebalanțează la fiecare oscilație generează zgomot și costuri de tranzacționare comportamentale. Definești <strong>benzi de control</strong> (control bands) per indicator, inspirate din SPC industrial:</p>
+
+<ul>
+<li><strong>Bandă verde</strong>: variație sub 0,5 pp / 0,5% → nicio acțiune, doar log.</li>
+<li><strong>Bandă galbenă</strong>: 0,5-1,0 pp → recalculezi B(t), dar realoci doar din discreționar.</li>
+<li><strong>Bandă roșie</strong>: peste 1,0 pp sau breach pe doi indicatori corelați → rebalanțare completă + revizuirea bazei B₀.</li>
+</ul>
+
+<h3>Regula de confirmare dublă</h3>
+
+<p>Pentru a evita whipsaw, o realocare majoră necesită confirmare din două surse necorelate. Exemplu: o creștere a IRCC (semnal de cost al creditului) plus o aplatizare/inversare a spreadului 10Y-2Y (semnal de stres macro forward) declanșează împreună politica de tăiere a discreționarului cu 100%. Un singur semnal rămâne în bandă galbenă. Aceasta filtrează aproximativ 60-70% din falsele alarme generate de volatilitatea lunară a IPC.</p>
+
+<h3>Histerezis pentru a preveni flip-flop</h3>
+
+<p>Adaugi histerezis: o linie de buget care a fost crescută rămâne crescută până când indicatorul declanșator scade <strong>cu cel puțin 0,3 pp sub</strong> pragul de intrare, nu doar până sub prag. Fără histerezis, un indicator care oscilează în jurul pragului produce realocări repetate (flip-flop) și costuri comportamentale.</p>
+
+<h2>6. Discountarea venitului prin șomaj — șomaj variabilă buget</h2>
+
+<p>Cea mai subtilă componentă este tratarea venitului ca flux riscant. Definești un <strong>factor de discount al venitului</strong> derivat din rata șomajului și panta curbei:</p>
+
+<p><strong>d(t) = 1 − (β_u × Δșomaj + β_curbă × inversiune)</strong></p>
+
+<p>Dacă rata șomajului crește cu 0,4 pp și β_u = 0,5, iar curba se inversează cu o contribuție de 0,02, atunci d = 1 − (0,5×0,004 + 0,02) = 1 − 0,022 = 0,978. Venitul planificat de 14.000 lei se citește prudent ca <strong>14.000 × 0,978 = 13.692 lei</strong>. Diferența de 308 lei nu se cheltuie — devine buffer de lichiditate suplimentar peste fondul de urgență. Astfel, deteriorarea pieței muncii contractează automat partea discreționară a bugetului, fără decizie manuală.</p>
+
+<h2>7. Arhitectura dashboardului real-time</h2>
+
+<p>La nivel de implementare, dashboardul are patru straturi:</p>
+
+<ul>
+<li><strong>Ingestie</strong>: scripturi care preiau IPC din comunicatele INS, cursul de referință BNR (publicat zilnic ~13:00), IRCC trimestrial, randamentele din cotațiile pieței secundare și prețul PZU de la OPCOM. Cadență mixtă: zilnică pentru curs/energie, lunară pentru IPC, trimestrială pentru IRCC.</li>
+<li><strong>Stocare normalizată</strong>: fiecare indicator cu timestamp, valoare, sursă și revizie (INS revizuiește IPC retroactiv — păstrezi versiunile point-in-time).</li>
+<li><strong>Motor de calcul</strong>: aplică matricea S, evaluează benzile de control, calculează bufferul probabilistic și factorul de discount al venitului.</li>
+<li><strong>Stratul de decizie</strong>: generează propunerile de realocare cu justificare (care indicator a declanșat, cu cât) și le trimite spre aprobare sau le execută automat sub un prag de magnitudine.</li>
+</ul>
+
+<h3>Point-in-time și anti-look-ahead</h3>
+
+<p>Atenție de specialist: IPC se revizuiește. Dacă recalculezi istoricul cu valorile revizuite, introduci look-ahead bias în calibrarea matricei S. Păstrezi întotdeauna valoarea <em>cunoscută la momentul t</em> (point-in-time), nu valoarea revizuită ulterior. Aceeași disciplină se aplică proiecțiilor BNR: folosești proiecția disponibilă la data deciziei.</p>
+
+<h2>8. Edge-cases și capcane de specialist</h2>
+
+<ul>
+<li><strong>Coliniaritate</strong>: IPC, IRCC și randamentele 10Y sunt puternic corelate. Dacă aplici beta separat la fiecare fără a controla pentru corelație, dublezi impactul. Soluție: ortogonalizezi indicatorii (PCA pe blocul monetar) sau aplici un factor de atenuare la indicatorii redundanți.</li>
+<li><strong>Decalajul IRCC</strong>: IRCC se calculează pe media trimestrului anterior și se aplică cu un trimestru întârziere. Rata ta nu se mișcă instant cu piața — modelul trebuie să folosească IRCC <em>care se va aplica</em>, nu cel curent de piață.</li>
+<li><strong>Pass-through asimetric</strong>: prețurile cresc rapid și scad lent. Beta la creșteri ≠ beta la scăderi pentru alimente și combustibil. Folosești beta asimetric (două valori) acolo unde ai suficiente date.</li>
+<li><strong>Plafoane administrate</strong>: unele utilități pot fi sub scheme de plafonare; pass-through-ul energiei nu este liber atunci. Verifici cadrul de reglementare în vigoare înainte de a seta beta la energie.</li>
+<li><strong>Drift de bază</strong>: dacă aplici variații YoY peste o bază nereactualizată, după 12 luni dublezi indexarea. Reancorezi B₀ semestrial.</li>
+</ul>
+
+<h2>9. Validarea sistemului — backtest de buget</h2>
+
+<p>Înainte de a-l rula live, validezi pe istoricul propriu de 24-36 luni. Metrica-țintă este <strong>devierea absolută medie</strong> dintre buget indexat și execuția reală:</p>
+
+<p><strong>MAD = (1/T) Σ |B_indexat(t) − cheltuială_reală(t)|</strong></p>
+
+<p>Compari trei strategii: (a) buget fix, (b) indexare anuală simplă pe IPC, (c) indexare dinamică pe 15 indicatori. Țintă realistă: indexarea dinamică reduce MAD cu 35-50% față de bugetul fix și cu 15-25% față de indexarea anuală simplă, pentru că prinde rebalanțarea IRCC și șocurile de energie pe care indexarea IPC le ratează. Dacă reducerea e sub 10%, matricea S e prost calibrată sau ai prea mulți indicatori redundanți.</p>
+
+<h2>Checklist de implementare</h2>
+
+<ul>
+<li><strong>Pas 1</strong> — Defalcă bugetul B₀ pe linii cu senzitivitate omogenă (nu amesteca rată cu alimente).</li>
+<li><strong>Pas 2</strong> — Estimează matricea S: analitic pentru credit, regresie pe 24-36 luni pentru pass-through.</li>
+<li><strong>Pas 3</strong> — Conectează cele 15 fluxuri de date cu cadență și latență corecte, păstrând valori point-in-time.</li>
+<li><strong>Pas 4</strong> — Setează benzile de control (verde/galben/roșu) și regula de confirmare dublă + histerezis.</li>
+<li><strong>Pas 5</strong> — Construiește cele trei scenarii macro cu probabilități și calculează bufferul așteptat + tail buffer CVaR.</li>
+<li><strong>Pas 6</strong> — Aplică factorul de discount al venitului bazat pe șomaj și panta curbei.</li>
+<li><strong>Pas 7</strong> — Backtestează pe istoric, măsoară MAD vs. cele două benchmarkuri, calibrează până la reducere de minim 30%.</li>
+<li><strong>Pas 8</strong> — Lansează în mod „shadow" o lună (calculează, dar nu execută), apoi activează rebalanțarea automată sub pragul de magnitudine și aprobare manuală peste el.</li>
+<li><strong>Pas 9</strong> — Reancorează B₀ semestrial la proiecțiile BNR și reestimează matricea S anual.</li>
+</ul>
+
+<p>Rezultatul este un buget care nu mai reacționează cu întârziere la inflație, ci anticipează probabilistic presiunile macro, protejează rata de investiție prin tăieri chirurgicale în discreționar și transformă deteriorarea pieței muncii într-un buffer de lichiditate automat — disciplina cantitativă a unui trezorier de fond aplicată finanțelor personale.</p>

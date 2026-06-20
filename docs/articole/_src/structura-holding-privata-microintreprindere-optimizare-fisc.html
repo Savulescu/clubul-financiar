@@ -1,0 +1,158 @@
+<p>Lecția aceasta nu mai discută alegerea unei forme juridice, ci arhitectura unei <strong>structură holding microîntreprindere impozit efectiv România</strong> construită din trei entități care funcționează ca un singur sistem fiscal dinamic pe un orizont de 8–10 ani. Pornim de unde s-au oprit lecțiile despre hibridul PFA-SRL și despre Pilonul III: presupunem că stăpânești deja scutirea de participații, plafonul micro și cotele sale de 1%/3%, plafoanele CASS 6/12/24 salarii minime și cota de 16% pe dividende valabilă în 2026. Aici asamblăm aceste piese într-o <strong>cascadă de dividende holding-SRL și optimizare a retenției</strong>: un HoldCo care deține un SRL operațional pe profit, care la rândul lui facturează o microîntreprindere-satelit.</p>
+
+<p>Vom modela cantitativ <strong>cascada de dividende holding-SRL și optimizare</strong> a retenției, <strong>transfer preț intra-grup și ANAF compliance</strong> (dosarul prețurilor de transfer), <strong>timing reinvestiții și reticență dividende</strong>, <strong>schema acțiuni privilegiate și capital ordinare</strong> pentru a separa dreptul la dividend de controlul de vot, <strong>transfer pierderi fiscale între entități</strong> și <strong>minimizare CAS CASS structură hibridă</strong> cu trei niveluri. Tratăm explicit <strong>reglementare ANAF și risci contractuale holding</strong>, pentru că exact aici se pierde structura la control — nu pe cote, ci pe substanță economică și pe documentație.</p>
+
+<p>Înainte de orice cifră, fixează reperele fiscale 2026 pe care se sprijină întreaga arhitectură, pentru că ele determină fiecare prag al modelului: impozit pe venitul persoanei fizice 10%, impozit pe dividende 16%, impozit pe profit 16%, micro 1% (sau 3% peste pragul de venit ori pe anumite activități), CAS 25% (irelevant pe dividende, dar decisiv pentru rutarea prin entități juridice în loc de PFA), CASS 10% aplicat în trepte de 6/12/24 salarii minime, salariu minim de referință 4.050 lei (deci praguri CASS de 24.300, 48.600 și 97.200 lei venit anual), iar la exit câștigul de capital prin broker rezident 3% pentru titluri deținute peste un an și 6% sub un an. Aceste valori sunt scheletul cantitativ al lecției.</p>
+
+<p>Avertisment metodologic identic cu restul bibliotecii: niciuna dintre tehnici nu este un truc izolat. Valoarea apare doar cumulativ, pe ani fiscali consecutivi, și doar dacă fiecare flux trece testul de substanță economică al art. 11 din Codul fiscal (antiabuz). Modelăm impactul; nu garantăm rezultatul. Verifică fiecare cifră la momentul aplicării — 2026 este un an cu legislație în mișcare.</p>
+
+<h2>Topologia celor trei entități: rolul fiscal al fiecărui nivel</h2>
+
+<p>Spre deosebire de structura clasică pe două niveluri (OpCo → HoldCo → persoană fizică), aici introducem o a treia entitate cu rol funcțional distinct. Topologia-țintă:</p>
+
+<ul>
+<li><strong>Nivelul 0 — MicroCo (microîntreprinderea-satelit):</strong> persoană juridică pe regim micro, 1% pe venit (cu cel puțin un salariat și sub plafonul de venit aplicabil). Cota micro este 1% sub pragul de venit și 3% peste el ori pentru anumite activități (consultanță/management peste limita de pondere etc.) — confirmă cota și plafonul exact valabile la data aplicării, fiindcă plafonul micro a fost coborât succesiv în ultimii ani. Rol: încasează venitul cu marjă mare și cheltuieli mici, unde 1% pe cifră bate impozitul pe profit de 16%. Pragul micro în lei se evaluează la cursul BNR din 31.12 al anului anterior — recalculează-l anual, nu îl fixa.</li>
+<li><strong>Nivelul 1 — SRL operațional pe profit (OpCo):</strong> entitatea care poartă volumul mare, angajații, stocul, răspunderea și — critic — care <strong>facturează servicii către MicroCo</strong> (sau invers). Pe profit, deduce cheltuielile reale, inclusiv cele facturate intra-grup. Rol: motorul deductibilității și locul unde se concentrează masa profitabilă.</li>
+<li><strong>Nivelul 2 — HoldCo (holdingul privat):</strong> persoană juridică română care deține ≥10% atât în OpCo, cât și (direct sau indirect) în MicroCo. Rol: colector de dividende imune și reinvestitor. Dividendul OpCo→HoldCo și MicroCo→HoldCo este <strong>integral neimpozabil</strong> dacă deținerea ≥10% a fost menținută neîntrerupt ≥1 an la data plății (regimul scutirii de participații).</li>
+<li><strong>Nivelul 3 — persoana fizică:</strong> singurul punct de fricțiune reală: 16% impozit pe dividend + CASS plafonat la extracția finală din HoldCo.</li>
+</ul>
+
+<p>Diferența față de modelul pe două niveluri stă în Nivelul 0–1: prin separarea MicroCo (1% pe venit) de OpCo (16% pe profit, dar cu deducere integrală), poți ruta fiecare flux de venit acolo unde rata marginală e minimă, iar facturarea intra-grup mută masa impozabilă într-o direcție controlată. HoldCo de deasupra colectează ambele dividende necontaminat.</p>
+
+<h2>Cascada de dividende și formula ratei efective consolidate</h2>
+
+<p>Definim Rata Efectivă de Taxare consolidată (RET) ca raport între totalul prelevărilor pe lanț (impozit MicroCo + impozit OpCo + impozit dividend + CASS) și profitul brut agregat al grupului, înainte de orice distribuire către persoana fizică. Notăm:</p>
+
+<ul>
+<li><strong>V_m</strong> = venitul rutat prin MicroCo; <strong>t_m</strong> = 0,01 (impozit micro pe venit);</li>
+<li><strong>P_o</strong> = profitul brut al OpCo; <strong>t_o</strong> = 0,16 (impozit pe profit);</li>
+<li><strong>t_d</strong> = 0,16 (impozit pe dividend la extracția finală, 2026);</li>
+<li><strong>α</strong> = fracțiunea distribuită efectiv din HoldCo către persoana fizică într-un an dat (lever-ul de timing);</li>
+<li><strong>F</strong> = fluxul facturat intra-grup (OpCo↔MicroCo), care deplasează masa impozabilă.</li>
+</ul>
+
+<p>Cheia cascadei: dividendele MicroCo→HoldCo și OpCo→HoldCo urcă la <strong>0% pe segmentul intermediar</strong> (scutire de participații). Singura fricțiune apare la α extras în Nivelul 3. RET multi-anuală devine o funcție de profilul de extracție {α₁, ..., α₁₀} și de rutarea F. Pentru fracțiunea reținută și reinvestită în HoldCo, povara celor 16% este <strong>amânată, nu plătită</strong>.</p>
+
+<h3>Valoarea-prezentă a taxei amânate</h3>
+
+<p>Motorul matematic care transformă cota nominală de 16% într-o povară efectivă sub 10% este amânarea. Valoarea-prezentă a impozitului pe dividend amânat n ani la cost de oportunitate r este <strong>t_d / (1+r)ⁿ</strong>. La n = 9 ani și r = 6%, factorul (1,06)⁹ ≈ 1,689, deci sarcina prezentă a celor 16% scade la ~9,5% în valoare actuală. Cu cât HoldCo reține mai mult și mai mult timp, cu atât rata efectivă pe segmentul reinvestit converge spre acest minim. Aceasta este esența „timing-ului reinvestițiilor și reticenței la dividende": fiecare leu nedistribuit este un împrumut fără dobândă de la stat pe taxa viitoare.</p>
+
+<h2>Transferul de preț intra-grup: motorul de optimizare și principalul risc ANAF</h2>
+
+<p>Inima structurii pe trei entități este facturarea OpCo↔MicroCo. Aici se deplasează masa impozabilă între un regim de 1% pe venit și unul de 16% pe profit, dar tocmai aici se concentrează și riscul de control. Logica de optimizare și constrângerile:</p>
+
+<ul>
+<li><strong>Direcția deplasării:</strong> dacă OpCo (16% pe profit) facturează servicii reale către MicroCo, OpCo își crește venitul taxat la 16% — contraproductiv. Direcția eficientă este inversă: <strong>MicroCo (sau OpCo) facturează acolo unde reduce baza pe profit și o crește acolo unde regimul e mai blând.</strong> Practic: serviciile cu marjă mare se concentrează în MicroCo (1% pe cifră), iar OpCo deduce facturile primite, scăzându-și baza pe profit.</li>
+<li><strong>Constrângerea de preț de piață (arm's length):</strong> orice tranzacție între părți afiliate trebuie evaluată la valoarea de piață (principiul prețului de piață, art. 11 Cod fiscal). Sub- sau suprafacturarea între entitățile tale este exact ce caută o inspecție.</li>
+<li><strong>Dosarul prețurilor de transfer:</strong> grupurile care depășesc pragurile de materialitate au obligația de a întocmi dosarul prețurilor de transfer (cf. Ordinului ANAF 442/2016). Verifică pragurile aplicabile — pentru contribuabilii mici, dosarul poate fi cerut doar la inspecție, dar tranzacțiile afiliate rămân oricând verificabile. Documentează metoda de stabilire a prețului (comparabile, cost-plus etc.) pentru fiecare flux F.</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> OpCo are profit brut operațional 800.000 lei. MicroCo prestează real servicii de marketing/IT către OpCo, facturate la preț de piață 200.000 lei/an. Efect: OpCo deduce 200.000 lei → baza pe profit scade la 600.000 lei, impozit 16% = 96.000 lei (față de 128.000 lei fără factură). MicroCo încasează 200.000 lei, impozit micro 1% = 2.000 lei. <strong>Economie brută pe flux: 128.000 − 96.000 − 2.000 = 30.000 lei/an</strong> (16% − 1% pe felia de 200.000, minus efectul de bază). Pe 10 ani, ~300.000 lei doar din rutarea corectă a unui singur flux — condiționat de serviciu real și preț de piață documentat.</p>
+
+<h2>Schema de acțiuni privilegiate vs. ordinare: separarea dividendului de control</h2>
+
+<p>Tehnica avansată care permite calibrarea fină a cascadei este structurarea capitalului social al OpCo în două clase de părți sociale (în SRL, prin act constitutiv care prevede categorii distincte de drepturi — atenție, dreptul societăților din România limitează clasele de părți sociale mai mult decât la SA; pentru structuri sofisticate se folosește frecvent SA, unde acțiunile preferențiale fără drept de vot sunt explicit reglementate de Legea 31/1990).</p>
+
+<ul>
+<li><strong>Acțiuni ordinare:</strong> drept de vot + drept la dividend proporțional. Le poate deține persoana fizică pentru a păstra controlul.</li>
+<li><strong>Acțiuni privilegiate (preferențiale fără drept de vot):</strong> drept prioritar la dividend (dividend prioritar), fără vot, plafonate legal la maximum o pătrime din capitalul social pentru SA. Le deține HoldCo.</li>
+</ul>
+
+<p>Efectul fiscal-structural: poți direcționa o cotă disproporționat de mare a dividendului către HoldCo (unde urcă imun, scutire de participații), păstrând în același timp controlul de vot la persoana fizică prin acțiuni ordinare. Astfel separi <strong>dreptul economic la flux</strong> de <strong>dreptul de control</strong> — exact ce permite să maximizezi felia care urcă necontaminat în holding, fără a ceda guvernanța. Condiția critică rămâne ≥10% deținere de minimum 12 luni pentru scutire; structura de clase nu o ocolește, ci o optimizează ca pondere a fluxului.</p>
+
+<h2>Transferul de pierderi fiscale între entități: limita reală în România</h2>
+
+<p>O întrebare frecventă a specialiștilor: pot consolida fiscal pierderile MicroCo/OpCo? România <strong>nu</strong> are consolidare fiscală liberă de tip grup pentru impozitul pe profit în sensul compensării automate a pierderii unei entități cu profitul alteia, decât prin regimul opțional al grupului fiscal în domeniul impozitului pe profit (introdus din 2021), cu condiții stricte de deținere (≥75%, menținută ≥1 an) și de perioadă minimă de aplicare (5 ani fiscali).</p>
+
+<ul>
+<li><strong>Regimul grupului fiscal (impozit pe profit):</strong> entitățile cu deținere ≥75% pot opta să consolideze rezultatul fiscal — profiturile unora se compensează cu pierderile altora, impozit 16% pe rezultatul net consolidat. MicroCo pe regim micro <strong>nu</strong> poate face parte din grupul fiscal pe profit (regimuri incompatibile) — doar entitățile pe impozit pe profit.</li>
+<li><strong>Reportarea pierderii fiscale individuale:</strong> pierderea fiscală a OpCo se reportează pe maximum 5 ani consecutivi (regim aplicabil pierderilor recente; verifică tratamentul pierderilor mai vechi, care aveau 7 ani). Compensarea e limitată la 70% din profitul impozabil al anilor următori (regulă introdusă recent — confirmă procentul exact aplicabil anului fiscal).</li>
+<li><strong>Implicația de design:</strong> nu poți „muta" liber o pierdere din MicroCo în OpCo. Singura cale legală de a folosi pierderea unei entități este fie reportarea ei individuală, fie aderarea la grupul fiscal pe profit (deci OpCo + alte entități pe profit cu ≥75% deținere comună prin HoldCo). Designul matur plasează entitățile profitabile și cele cu pierdere previzibilă (de exemplu o entitate în faza de investiție) sub același HoldCo cu ≥75%, exact pentru a putea opta pentru grupul fiscal când are sens.</li>
+</ul>
+
+<h2>Minimizarea CAS-CASS în structura cu trei niveluri</h2>
+
+<p>Avantajul decisiv al rutării venitului prin entități juridice (în loc de PFA) este eliminarea CAS-ului de 25%: dividendele <strong>nu</strong> suportă CAS. Rămâne doar CASS de 10%, plafonat. Pragurile se raportează la salariul minim de referință (4.050 lei pentru calculul bazei anuale), iar CASS se datorează pe baze fixe, nu pe întregul venit, pe sistemul 6/12/24 salarii minime pentru dividende:</p>
+
+<ul>
+<li><strong>sub 6 salarii (sub 24.300 lei venit anual):</strong> CASS = 0;</li>
+<li><strong>între 6 și 12 salarii (24.300–48.600 lei):</strong> CASS = 10% × 6 salarii minime = 10% × 24.300 = <strong>2.430 lei</strong>;</li>
+<li><strong>între 12 și 24 salarii (48.600–97.200 lei):</strong> CASS = 10% × 12 salarii minime = 10% × 48.600 = <strong>4.860 lei</strong>;</li>
+<li><strong>peste 24 salarii (peste 97.200 lei):</strong> CASS = 10% × 24 salarii minime = 10% × 97.200 = <strong>9.720 lei</strong> (plafon maxim).</li>
+</ul>
+
+<p>Implicația contraintuitivă, identică cu structura clasică, dar amplificată aici: <strong>plafonarea CASS face distribuirile mari și rare mai eficiente decât cele mici și frecvente.</strong> La un puls de extracție de 1.000.000 lei din HoldCo, CASS-ul plafonat (la 24 salarii) reprezintă sub 1,1% — neglijabil. Distribuind în picături anuale, atingi plafonul de fiecare an. De aceea, profilul optim este: acumulare imună în HoldCo pe mai mulți ani, extracție-puls plafonată o singură dată.</p>
+
+<h3>Comparație de profil de extracție pe 10 ani</h3>
+
+<ul>
+<li><strong>Profil A (liniar):</strong> 120.000 lei/an × 10 ani din HoldCo. CASS plafonat ~la 24 salarii fiecare an → CASS total mare pe deceniu.</li>
+<li><strong>Profil B (puls):</strong> acumulare 9 ani în HoldCo (reinvestit la 6% compus), extracție unică în anul 10. CASS = un singur plafon. Economie CASS + randament compus pe sumele care în Profilul A părăseau perimetrul corporativ taxabil. Pe 9 ani la 6%, avantajul de compunere depășește frecvent economia nominală de CASS.</li>
+</ul>
+
+<h2>Capcana întreprinderilor legate: de ce MicroCo nu se multiplică</h2>
+
+<p>Tentația naivă: fragmentezi în mai multe MicroCo sub 100.000 EUR fiecare, ca să păstrezi 1%. Regula întreprinderilor legate o anulează:</p>
+
+<ul>
+<li>Plafonul de 100.000 EUR se verifică <strong>cumulat</strong> pe entitatea română plus toate întreprinderile legate cu ea;</li>
+<li>O persoană (fizică sau juridică) care deține <strong>peste 25%</strong> în mai multe societăți le face „legate" — veniturile se însumează;</li>
+<li>Un asociat cu >25% poate beneficia de regimul micro pentru <strong>o singură</strong> microîntreprindere.</li>
+</ul>
+
+<p>Consecința pentru structura noastră: HoldCo deține atât OpCo, cât și MicroCo. Dacă HoldCo deține >25% în mai multe micro, acestea devin legate prin lanțul de control, iar veniturile se cumulează → toate trec la 16% profit. Prin urmare, în arhitectura pe trei niveluri ai în mod realist <strong>o singură</strong> MicroCo viabilă, plus OpCo pe profit. HoldCo nu „spală" legătura; el doar mută unde se face testul. La scară, OpCo migrează inevitabil pe 16% profit, iar rolul HoldCo se mută din „protector de cotă micro" în „colector de dividende imune".</p>
+
+<h2>Calendarul multi-anual de transformări juridice</h2>
+
+<ol>
+<li><strong>Anul 1 (constituire + ceasul de 12 luni):</strong> constituie HoldCo și subscrie ≥10% (ideal ≥75% pentru opțiunea de grup fiscal) în OpCo și MicroCo. Pornește ceasul scutirii de participații. Aceasta este singura „taxă de setup" temporală a întregii structuri.</li>
+<li><strong>Anii 1–2 (faza micro):</strong> rulează MicroCo la 1% pe venit cât CA &lt; 100.000 EUR și ponderea consultanță/management ≤ 20%. OpCo pornește facturarea intra-grup documentată.</li>
+<li><strong>Anul 3 (tranziția de prag):</strong> când MicroCo depășește 100.000 EUR sau ponderea consultanței atinge 20%, trece la profit 16% din trimestrul depășirii. Reevaluează opțiunea grupului fiscal pe profit (OpCo + fosta MicroCo, dacă ≥75% prin HoldCo).</li>
+<li><strong>Anii 4–9 (acumulare imună):</strong> dividende OpCo→HoldCo și MicroCo→HoldCo 100% imune (condiția de 1 an împlinită). α minim către persoana fizică, exact cât acoperă nevoia de lichiditate. Surplusul se reinvestește din HoldCo.</li>
+<li><strong>Anul 10 (extracție-puls sau exit):</strong> dacă obiectivul e lichiditate, puls unic plafonat CASS; dacă e exit, vânzarea participației din HoldCo poate beneficia de regimul scutirii pentru cesiunea de titluri de participare (deținere ≥10% timp de ≥1 an, condiție de verificat la momentul tranzacției). Alternativ, dacă persoana fizică vinde direct titluri prin broker, reține că un broker rezident reține la sursă <strong>3% pe câștig pentru titluri deținute peste un an și 6% pentru cele deținute sub un an</strong>, în timp ce printr-un broker străin câștigul se autodeclară la 16% — diferență care contează enorm la calibrarea rutei de exit.</li>
+</ol>
+
+<h3>Condiția critică a celor 12 luni</h3>
+
+<p>Scutirea de participații cere deținere ≥10% timp de ≥1 an împlinit până la data plății dividendului, inclusiv. Eroarea clasică: constitui HoldCo și distribui dividend în aceeași lună → cei 16% se aplică integral, pentru că ceasul de 12 luni nu a pornit. <strong>Regula de aur: HoldCo trebuie să dețină ≥10% cu cel puțin 12 luni înainte de prima distribuire imună.</strong> Planifică din anul 1.</p>
+
+<h2>Studiu de caz integrat: 1.000.000 lei profit agregat, 10 ani</h2>
+
+<p>Grup cu OpCo + MicroCo, profit brut agregat 1.000.000 lei/an, nevoie de lichiditate personală 100.000 lei net/an. Comparăm arhitectura naivă (un SRL, distribuire integrală anuală) cu arhitectura pe trei niveluri cu α calibrat.</p>
+
+<ul>
+<li><strong>Arhitectura naivă (un SRL pe profit, distribuire integrală):</strong> profit net post-impozit 840.000 lei/an; distribuit integral cu 16% dividend = 705.600 lei − CASS plafonat ≈ ~700.000 lei/an net. Pe 10 ani: ~7,0 mil. lei net consumat, zero capital reinvestit corporativ.</li>
+<li><strong>Arhitectura pe trei niveluri (HoldCo + α calibrat + rutare F):</strong> rutarea intra-grup reduce baza pe profit (vezi exemplul de 30.000 lei/an economie pe un singur flux). Dividendele urcă imun la HoldCo. Persoana fizică extrage doar ~119.000 lei brut/an (pentru ~100.000 lei net după 16% + CASS). Restul ~720.000+ lei/an rămâne în HoldCo, reinvestit la 6% compus. Pe 10 ani, capitalul fiscal-amânat acumulat în HoldCo depășește 9,5 mil. lei valoare brută reinvestită.</li>
+</ul>
+
+<p>Diferența reală nu este în net-ul anual de cash (similar ~100.000 lei), ci în <strong>capitalul de lucru fiscal-amânat</strong> care compune în interiorul holdingului. Cei 16% pe partea reinvestită sunt amânați; amânarea pe 9 ani la 6% reduce povara prezentă a acelui segment la ~9,5% în valoare actuală. Asimetria esențială: avantajul e maxim pentru cine consumă puțin relativ la profit (α mic). Pentru cine consumă tot (α≈1), structura adaugă puțin — fricțiunea de 16% se plătește oricum integral. Tehnica este instrument de acumulare de avere, nu de venit curent.</p>
+
+<h2>Reglementare ANAF și riscuri contractuale ale holdingului</h2>
+
+<ul>
+<li><strong>Substanță economică (art. 11):</strong> HoldCo gol, fără activitate reală, creat exclusiv fiscal, poate fi recalificat. HoldCo trebuie să aibă funcție reală: management de participații, trezorerie, decizii AGA documentate, reinvestire efectivă.</li>
+<li><strong>Prețuri de transfer:</strong> fluxul F (OpCo↔MicroCo) este primul vizat la inspecție. Documentează metoda, comparabilele și serviciul real. Subfacturarea/suprafacturarea = retratare + accesorii.</li>
+<li><strong>Fragmentare artificială:</strong> împărțirea venitului între MicroCo și OpCo doar pentru a sta sub praguri, fără logică economică, poate fi tratată ca o singură persoană impozabilă.</li>
+<li><strong>Data hotărârii AGA vs. data plății:</strong> cota de 16% se aplică dividendelor a căror hotărâre de distribuire este din 2026; distribuirile hotărâte în 2025 (chiar plătite în 2026) păstrează regimul 2025.</li>
+<li><strong>Acțiuni privilegiate:</strong> respectă plafonul legal (≤1/4 din capital pentru preferențiale fără vot la SA) și clauzele actului constitutiv; o clasă prost redactată poate fi contestată sau ineficientă fiscal.</li>
+<li><strong>Holding străin / directiva mamă-fiică:</strong> rute alternative UE există, dar adaugă rezidență fiscală, substanță, DAC6 — rareori justificat sub câteva milioane EUR.</li>
+</ul>
+
+<h2>Checklist operațional — implementare pe 10 ani</h2>
+
+<ol>
+<li>Anul 1: constituie HoldCo; subscrie ≥10% (ideal ≥75%) în OpCo și MicroCo; pornește ceasul de 12 luni al scutirii.</li>
+<li>Stabilește clasele de capital (ordinare la persoana fizică pentru vot, privilegiate la HoldCo pentru flux prioritar) — preferabil în vehicul SA dacă vrei acțiuni preferențiale fără vot.</li>
+<li>Documentează substanța HoldCo: obiect management participații, trezorerie, AGA reale, evidență reinvestiții.</li>
+<li>Definește fluxul intra-grup F printr-un contract real, la preț de piață, cu metoda de transfer pricing documentată; pregătește dosarul prețurilor de transfer la pragurile aplicabile.</li>
+<li>Monitorizează trimestrial pragul micro 100.000 EUR (curs BNR 31.12) și ponderea consultanță/management ≤20% pentru MicroCo.</li>
+<li>Verifică regula întreprinderilor legate (>25%) înainte de orice entitate suplimentară — o singură MicroCo viabilă.</li>
+<li>Pentru entități pe profit cu ≥75% deținere comună, evaluează opțiunea grupului fiscal pentru compensarea pierderilor (5 ani angajament).</li>
+<li>Calibrează α la nevoia reală de lichiditate; lasă surplusul să compună în HoldCo (reticență la dividende).</li>
+<li>Programează extracțiile în pulsuri mari și rare pentru a dilua CASS-ul plafonat și a maximiza amânarea celor 16%.</li>
+<li>Confirmă data hotărârii AGA pentru încadrarea cotei (16% post-2026); reverifică anual cursul BNR și salariul minim de referință pentru praguri.</li>
+<li>Revizuiește anual cu consultant fiscal substanța economică și fluxurile intra-grup pentru a rezista testului antiabuz art. 11.</li>
+<li>În anul-țintă de exit, compară vânzarea participației din HoldCo (câștig de capital) cu extracția-puls de dividend — alege ruta cu valoare-prezentă netă maximă.</li>
+</ol>
+
+<p>Structura pe trei niveluri nu este un truc, ci un sistem disciplinat de rutare, amânare și consolidare. Valoarea ei reală se măsoară în capitalul fiscal-amânat care compune în interiorul holdingului și în masa impozabilă deplasată corect — legal și documentat — între regimul de 1% și cel de 16%. Verifică fiecare cifră, prag și termen la momentul aplicării, cu un consultant autorizat: la scară de grup, pe 10 ani, marja de eroare se amplifică, iar reglementarea ANAF din 2026 este în plină mișcare.</p>

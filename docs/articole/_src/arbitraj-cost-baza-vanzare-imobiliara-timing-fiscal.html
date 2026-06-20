@@ -1,0 +1,138 @@
+<p>La nivel de expert, marele paradox al fiscalității imobiliare românești este că <strong>arbitrajul de cost bază la vânzare imobiliară prin timing</strong> fiscal nu funcționează deloc în patrimoniul personal. Aici impozitul se aplică pe valoarea declarată a tranzacției (1% peste trei ani de deținere, 3% sub trei ani, fără plafon neimpozabil din 2023), reținut de notar — nu pe câștig. Nu există cost de achiziție deductibil, nu există pierdere de recunoscut, deci nici tax loss harvesting imobiliare. Arbitrajul real se naște exclusiv în momentul în care activitatea ta este — sau este reîncadrată de ANAF — drept activitate economică: PFA în sistem real sau SRL plătitor de impozit pe profit (cota de 16% în 2026).</p>
+
+<p>Acolo, și numai acolo, intervin cele patru pârghii pe care le exploatează profesioniștii: trecerea de la <strong>cost complet vs. cost de achiziție</strong> (achiziție + îmbunătățiri + costuri de tranzacție + dobândă capitalizabilă), <strong>planificarea vânzării pe ani fiscali</strong> separați pentru a sincroniza câștigurile cu pierderile, <strong>transferul datoriei ipotecare la nouă proprietate</strong> prin refinanțare cu garanție mutată, și recunoașterea controlată a <strong>pierderilor din speculație imobiliară</strong>. Lecția de față demontează aceste mecanisme cantitativ, pe cifre RO 2026, și arată unde se rupe iluzia că „amânarea pe alt an” te scapă de taxe.</p>
+
+<p>Premisa este că stăpânești deja recuperarea fiscală prin tax loss harvesting imobiliar și diferența elementară între impozitul tranzacțional și impozitul pe profit. Mergem direct în structurile de optimizare multi-an, edge-case-urile de reîncadrare și modelele de novație a datoriei.</p>
+
+<h2>1. Pragul de reîncadrare: când dispare 1%/3% și apare cost complet</h2>
+
+<p>Întreaga arhitectură de arbitraj depinde de un singur punct de bascular: <strong>cui i se aplică art. 111 CF (impozit tranzacțional) versus cine este tratat ca desfășurând activitate independentă</strong> (art. 67-68 CF) sau persoană juridică (Titlul II, impozit pe profit). Reîncadrarea se face pe testul celor 7 criterii ale activității independente — îndeplinirea a minimum 4 din 7 (autonomie, risc economic asumat, mai mulți clienți, capital propriu, organizare proprie etc.) reclasifică tranzacțiile repetate ca activitate economică.</p>
+
+<p>Consecința numerică este brutală și contraintuitivă. Pentru un flip cu marjă mică, impozitul tranzacțional poate fi <em>mai mic</em> decât impozitul pe profit; pentru un flip cu marjă mare, este invers. Exemplu pe o vânzare de 900.000 lei:</p>
+
+<ul>
+<li><strong>Patrimoniu personal, deținere &lt;3 ani:</strong> 3% × 900.000 = 27.000 lei, indiferent de câștig.</li>
+<li><strong>Cost complet 720.000 lei, profit brut 180.000 lei:</strong> dacă ești reîncadrat ca activitate independentă, impozit pe venit 10% pe net + CASS plafonată; ca SRL, 16% × profit (după cost complet deductibil) = 28.800 lei, plus TVA dacă depășești plafonul de scutire.</li>
+</ul>
+
+<p>Aici se vede pârghia centrală: la marjă brută de 20%, structura impozabilă (cost complet) produce o sarcină comparabilă cu cea tranzacțională, dar <strong>numai structura impozabilă permite deducerea pierderii și reportarea ei</strong>. Profesionistul nu alege regimul pentru taxa pe o singură tranzacție — îl alege pentru opționalitatea multi-an pe care o deschide.</p>
+
+<h3>1.1 Cost de achiziție vs. cost complet — componența fiscală</h3>
+
+<p>În regim impozabil (PFA real sau SRL), baza de cost nu este prețul din actul de cumpărare, ci costul complet recunoscut fiscal:</p>
+
+<ul>
+<li><strong>Preț de achiziție</strong> + taxe notariale și impozit la cumpărare suportat;</li>
+<li><strong>Îmbunătățiri capitalizabile</strong> (structurale, autorizate) — distincte de cheltuielile de întreținere, care sunt deductibile în anul curent;</li>
+<li><strong>Costuri de tranzacție</strong> la vânzare (comisioane, evaluare, due diligence);</li>
+<li><strong>Dobânda la creditul de achiziție</strong>, deductibilă/capitalizabilă în limitele art. 402 CF (regula de deductibilitate limitată a costurilor excedentare ale îndatorării — plafon de 1.000.000 EUR/an și 30% din EBITDA fiscal pentru ce depășește).</li>
+</ul>
+
+<p>Diferența dintre cost de achiziție și cost complet poate fi de 12-18% din bază pe un proiect renovat substanțial — exact zona în care se construiește pierderea fiscală controlată.</p>
+
+<h2>2. Modelul de timing pe ani fiscali: sincronizarea câștig–pierdere</h2>
+
+<p>Esența <strong>planificării vânzării pe ani fiscali</strong> nu este amânarea (amânarea simplă nu reduce taxa), ci <strong>colocarea în același an fiscal a unui câștig impozabil cu o pierdere deductibilă</strong>, astfel încât baza netă să fie minimizată. În regim de impozit pe profit, pierderea fiscală anuală se reportează pe maximum 5 ani consecutivi, dar recuperarea este plafonată la <strong>70% din profitul impozabil</strong> al fiecărui an (regulă aplicabilă pierderilor înregistrate din 2024/2025), în ordinea înregistrării.</p>
+
+<p>Această plafonare la 70% este edge-case-ul pe care amatorii îl ratează: nu poți „șterge” integral un câștig mare cu o pierdere reportată dintr-un an anterior. Modelăm.</p>
+
+<h3>2.1 Scenariu A — pierdere și câștig în ani separați (suboptim)</h3>
+
+<ul>
+<li><strong>An N:</strong> vânzare Proprietate X în pierdere fiscală de 200.000 lei. Profit total an N: −200.000 lei → pierdere reportabilă 200.000 lei.</li>
+<li><strong>An N+1:</strong> vânzare Proprietate Y cu profit impozabil 300.000 lei. Recuperare pierdere plafonată la 70% × 300.000 = 210.000 lei, dar pierderea e doar 200.000 → recuperezi tot 200.000.</li>
+<li>Bază impozabilă N+1: 300.000 − 200.000 = 100.000 lei → impozit 16% = 16.000 lei.</li>
+</ul>
+
+<p>Aici plafonul 70% nu te-a lovit (210.000 &gt; 200.000). Dar schimbă cifrele: pierdere reportată 400.000, profit 300.000.</p>
+
+<h3>2.2 Scenariu B — pierderea reportată depășește 70% din profit (capcana)</h3>
+
+<ul>
+<li><strong>An N:</strong> pierdere fiscală 400.000 lei.</li>
+<li><strong>An N+1:</strong> profit impozabil 300.000 lei. Recuperare maximă = 70% × 300.000 = <strong>210.000 lei</strong>, NU 300.000.</li>
+<li>Bază impozabilă N+1: 300.000 − 210.000 = 90.000 lei → impozit 16% × 90.000 = 14.400 lei <em>chiar dacă ai pierdere acumulată mai mare decât profitul anului</em>.</li>
+<li>Pierdere rămasă de reportat: 400.000 − 210.000 = 190.000 lei (mai ai 4 ani).</li>
+</ul>
+
+<p><strong>Concluzia de specialist:</strong> dacă ai o pierdere mare „în depozit”, profesionistul <em>fragmentează vânzarea câștigătoare pe mai mulți ani fiscali</em> astfel încât în fiecare an pierderea reportată să rămână sub 70% din profitul acelui an și să se consume integral, evitând atât impozitul rezidual de 30%, cât și expirarea pierderii la 5 ani. Aceasta este logica inversă a amatorului care „vrea totul într-un an”.</p>
+
+<h3>2.3 Regula de aur a fragmentării</h3>
+
+<p>Pentru a consuma integral o pierdere reportată <em>P</em> fără a plăti impozit rezidual, profitul impozabil anual țintă <em>π</em> trebuie să satisfacă: <strong>P ≤ 0,7 × π</strong>, adică <strong>π ≥ P / 0,7 ≈ 1,43 × P</strong>. Dacă vinzi cu un câștig care generează profit sub acest prag, o parte din pierdere rămâne neutilizată în acel an și migrează spre expirare. Calendarul de vânzări se construiește înapoi din acest raport.</p>
+
+<h2>3. Transferul datoriei ipotecare la noua proprietate</h2>
+
+<p>A doua pârghie este <strong>transferul datoriei ipotecare către o nouă locație</strong>, prin care profesionistul păstrează levierul (și deducerea dobânzii) fără a declanșa un eveniment fiscal de „achitare integrală”. În România nu există portabilitate legală automată a ipotecii ca în alte jurisdicții; rollover-ul se construiește prin unul din trei mecanisme:</p>
+
+<ul>
+<li><strong>Refinanțare cu garanție nouă</strong> — credit nou pe Proprietatea Z, din care se stinge soldul de pe Proprietatea X vândută; garanția se constituie pe noul activ. Dobânda rămâne deductibilă fiscal în regim real, integrală până la plafonul costurilor excedentare ale îndatorării (art. 402 CF).</li>
+<li><strong>Novație de creditor/obiect</strong> — același sold, garanție mutată prin act adițional și radiere/reînscriere ipotecă la cartea funciară; mai rapid, dar depinde de acceptul băncii.</li>
+<li><strong>Credit-punte (bridge)</strong> — finanțare temporară care permite cumpărarea lui Z înainte de vânzarea lui X, esențială pentru a controla anul fiscal al vânzării lui X.</li>
+</ul>
+
+<p>Costul de rollover (comisioane de acordare 0–1%, evaluare ~500-900 lei, radiere/reînscriere CF, eventual comision de rambursare anticipată) trebuie comparat cu valoarea prezentă a scutului fiscal pe dobândă păstrat.</p>
+
+<h3>3.1 Modelul scutului fiscal pe dobândă transferată</h3>
+
+<p>Pe un sold transferat de 600.000 lei la dobândă 5,5% (ofertele ipotecare RO 2026 pornesc de la ~4,99% fix introductiv), dobânda anuală ≈ 33.000 lei. În regim impozit pe profit 16%, <strong>scutul fiscal anual</strong> = 16% × 33.000 = 5.280 lei. Pe un orizont de 4 ani, valoarea nominală a scutului ≈ 21.120 lei. Dacă rollover-ul costă ~6.000 lei one-off, decizia de a transfera datoria (în loc de a o stinge și a relua) este net pozitivă cu un randament al deciziei &gt; 250% pe orizont, înainte de actualizare.</p>
+
+<p><strong>Edge-case:</strong> dacă creditul inițial era pe persoană fizică pentru locuință și activul migrează în regim de afaceri, dobânda devine deductibilă doar de la momentul în care bunul este afectat activității și înregistrat ca atare — un decalaj de regim care trebuie documentat la zi, altfel ANAF refuză deducerea.</p>
+
+<h3>3.2 Sincronizarea rollover-ului cu anul fiscal al vânzării</h3>
+
+<p>Subtilitatea pe care o ratează majoritatea este că rollover-ul nu este doar o decizie de finanțare, ci un <strong>instrument de control al anului fiscal</strong>. Dacă vrei să muți câștigul din vânzarea lui X dintr-un an aglomerat fiscal (cu profituri mari deja realizate) într-un an cu pierdere reportată disponibilă, ai nevoie de un credit-punte care să-ți permită să cumperi Z fără să fii forțat să vinzi X imediat. Costul bridge-ului (dobândă punte pe 3-9 luni, ~6-8% anualizat) este, practic, <em>prețul opțiunii de timing</em> — îl compari direct cu impozitul economisit prin mutarea câștigului în anul cu pierdere. Pe un câștig de 250.000 lei mutat într-un an unde pierderea reportată îl absoarbe în limita 70%, economia de impozit poate atinge 28.000-40.000 lei, în timp ce dobânda-punte pe 6 luni la 700.000 lei ≈ 24.500 lei. Marja este pozitivă, dar îngustă — calculul trebuie făcut, nu intuit.</p>
+
+<h2>4. Tehnica „3-5 ani”: deținerea ca instrument fiscal, nu doar de piață</h2>
+
+<p>Unghiul de specialist — „profesioniștii scapă de taxe la 3-5 ani” — are două traduceri fiscale distincte, care nu trebuie confundate:</p>
+
+<ul>
+<li><strong>În patrimoniu personal:</strong> pragul de 3 ani de deținere coboară cota tranzacțională de la 3% la 1%. Pe 900.000 lei, diferența = 18.000 lei. Dacă vinzi la 2 ani și 11 luni, plătești dublu degeaba. Tehnica: ții actul de vânzare-cumpărare cu data autentificării ca reper exact și programezi autentificarea vânzării <em>după</em> aniversarea de 36 de luni.</li>
+<li><strong>În regim de afaceri:</strong> nu cota se schimbă la 3-5 ani, ci <strong>fereastra de reportare a pierderii</strong> (5 ani) și posibilitatea de a netiza profituri viitoare. „A scăpa de taxe la 3-5 ani” înseamnă a alinia ciclul de vânzări la fereastra de recuperare a pierderilor acumulate, nu a beneficia de o scutire automată.</li>
+</ul>
+
+<h3>4.1 Matricea de decizie regim × orizont</h3>
+
+<ul>
+<li><strong>Tranzacție unică, marjă mare, deținere &gt;3 ani:</strong> patrimoniu personal, cotă 1% — imbatabil, fără cost complet.</li>
+<li><strong>Flip rapid &lt;1 an, marjă mare:</strong> risc de reîncadrare ca activitate independentă; mai bine structurat din start ca SRL, cu cost complet deductibil și pierderi reportabile.</li>
+<li><strong>Portofoliu cu proprietăți divergente (unele în pierdere):</strong> SRL obligatoriu, pentru a putea harvesta pierderile contra câștigurilor — singurul regim în care pierderea „valorează” ceva.</li>
+</ul>
+
+<h2>5. Edge-case-uri pe care le ratează chiar și consultanții</h2>
+
+<ul>
+<li><strong>Pierderea „de hârtie” nu este deductibilă fără realizare:</strong> o scădere de valoare a unui imobil neînregistrat ca stoc/marfă în SRL nu generează pierdere fiscală până la vânzarea efectivă. Tax loss harvesting imobiliar cere realizare juridică, nu reevaluare.</li>
+<li><strong>Vânzarea către parte afiliată</strong> pentru a „crea” pierderea: prețul trebuie să respecte valoarea de piață (regulile prețurilor de transfer); o pierdere fabricată sub piață este reîncadrabilă, iar dosarul prețurilor de transfer devine obligatoriu peste praguri.</li>
+<li><strong>Plafonul TVA și scutirea pentru construcții vechi:</strong> vânzarea unei construcții „vechi” (peste anumită vechime de la prima ocupare) este, în principiu, scutită de TVA — dar dacă ai dedus TVA la achiziție/renovare, apare ajustarea TVA pe 20 de ani pentru bunuri imobile, care poate anula avantajul de timing.</li>
+<li><strong>Expirarea pierderii la 5 ani</strong> are prioritate de consum în ordinea înregistrării: dacă ai pierderi din mai mulți ani, modelul de fragmentare trebuie să consume întâi pierderea cea mai veche, altfel o pierzi definitiv.</li>
+<li><strong>Decalajul de regim al dobânzii:</strong> dobânda capitalizată în costul complet vs. dobânda dedusă curent — nu o poți număra de două ori; alegerea afectează atât baza de cost la vânzare, cât și deductibilul anual.</li>
+</ul>
+
+<h2>6. Model integrat pas-cu-pas (multi-an, multi-proprietate)</h2>
+
+<ul>
+<li><strong>Pas 1 — Diagnostic de regim:</strong> aplică testul 7-criterii. Dacă ≥4/7 sau ai &gt;1 tranzacție/an cu profit, asumă regim de afaceri și structurează SRL <em>înainte</em> de prima achiziție, nu după.</li>
+<li><strong>Pas 2 — Inventar cost complet:</strong> pentru fiecare activ, calculează baza completă (achiziție + capex autorizat + costuri tranzacție + dobândă capitalizabilă). Documentează cu facturi e-Factura pentru deductibilitate 2026.</li>
+<li><strong>Pas 3 — Cartografia pierderi/câștiguri latente:</strong> estimează profitul/pierderea fiscală la vânzare pentru fiecare activ și anul-cel-mai-devreme de realizare.</li>
+<li><strong>Pas 4 — Calendar de realizare:</strong> aplică regula π ≥ P / 0,7. Programează vânzările câștigătoare în anii în care pierderea reportată ≤ 70% din profit, consumând întâi pierderile cele mai vechi (înainte de expirarea la 5 ani).</li>
+<li><strong>Pas 5 — Rollover datorie:</strong> pentru fiecare vânzare, decide stingere vs. refinanțare/novație. Calculează VP a scutului fiscal pe dobândă vs. costul de rollover; transferă datoria dacă scutul net &gt; cost.</li>
+<li><strong>Pas 6 — Verificare TVA și ajustare:</strong> testează fiecare vânzare pentru scutire (construcție veche) și calculează eventuala ajustare TVA pe 20 ani dacă ai dedus la intrare.</li>
+<li><strong>Pas 7 — Test parte afiliată:</strong> dacă vinzi intra-grup pentru a realiza pierderea, atașează evaluare de piață și verifică pragurile dosarului prețurilor de transfer.</li>
+</ul>
+
+<h3>Checklist final de execuție</h3>
+
+<ul>
+<li>☐ Regim confirmat (personal 1%/3% vs. PFA real vs. SRL profit 16%) — decis înainte de achiziție.</li>
+<li>☐ Bază de cost complet documentată cu facturi e-Factura pentru fiecare activ.</li>
+<li>☐ Registru de pierderi reportate cu anul de înregistrare și data de expirare (an+5).</li>
+<li>☐ Calendar de vânzări calibrat pe regula π ≥ 1,43 × P, consum FIFO al pierderilor.</li>
+<li>☐ Decizie de rollover ipotecar cu VP scut fiscal vs. cost, per tranzacție.</li>
+<li>☐ Verificare scutire/ajustare TVA pe 20 ani pentru fiecare construcție vândută.</li>
+<li>☐ Dosar prețuri de transfer dacă există vânzări intra-grup.</li>
+<li>☐ Pentru patrimoniu personal: autentificare vânzare programată după 36 de luni de deținere.</li>
+</ul>
+
+<p><strong>Sinteza de expert:</strong> arbitrajul nu există în 1%/3% — acolo plătești pe valoare, punct. El se naște în regimul impozabil, unde cost complet, pierdere realizată, reportare 5 ani plafonată la 70% și rollover de datorie devin variabile de optimizare. Profesionistul nu „amână ca să scape”; el aliniază câștigurile cu pierderile pe ani fiscali, păstrează levierul prin transfer de ipotecă și consumă pierderile FIFO înainte de expirare. Restul este cosmetică.</p>

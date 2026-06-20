@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parity Swap Hedging EUR/RON: Structuri Fără Vega Risk și Pricing Dual-Curve — Clubul Financiar</title><meta name="description" content="Ghid avansat de parity swap hedging EUR RON: pricing dual-curve, cross-currency basis swap, DV01, fără vega risk, execuție ISDA/EMIR și fiscalitate ANAF 2026."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/hedging-parity-swaps-eur-ron-vega-risk.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Parity Swap Hedging EUR/RON: Structuri Fără Vega Risk și Pricing Dual-Curve"><meta property="og:description" content="Ghid avansat de parity swap hedging EUR RON: pricing dual-curve, cross-currency basis swap, DV01, fără vega risk, execuție ISDA/EMIR și fiscalitate ANAF 2026."><meta property="og:url" content="https://clubulfinanciar.ro/articole/hedging-parity-swaps-eur-ron-vega-risk.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Parity Swap Hedging EUR/RON: Structuri Fără Vega Risk și Pricing Dual-Curve"><meta name="twitter:description" content="Ghid avansat de parity swap hedging EUR RON: pricing dual-curve, cross-currency basis swap, DV01, fără vega risk, execuție ISDA/EMIR și fiscalitate ANAF 2026."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Parity Swap Hedging EUR/RON: Structuri Fără Vega Risk și Pricing Dual-Curve", "description": "Ghid avansat de parity swap hedging EUR RON: pricing dual-curve, cross-currency basis swap, DV01, fără vega risk, execuție ISDA/EMIR și fiscalitate ANAF 2026.", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/hedging-parity-swaps-eur-ron-vega-risk.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#investitii">📈 Investiții</a> · 13 min citire · Actualizat 19 iun. 2026</p><h1>Parity Swap Hedging EUR/RON: Structuri Fără Vega Risk și Pricing Dual-Curve</h1><p>Construcția de <strong>parity swap hedging EUR RON structuri financiare</strong> este teritoriul de vârf al managementului de risc valutar pe un bilanț real: acolo unde forward-ul simplu și opțiunea vanilla nu mai sunt suficiente pentru că vrei să tai expunerea de curs și de dobândă fără să introduci <em>vega risk</em> și fără să plătești prima negativă a unei structuri optionale. Pleci de la ce ai stăpânit deja — diversificarea valutară USD/EUR/RON și momentul în care faci hedging, plus mecanica de bază a opțiunilor și futures — și treci direct în inginerie: <em>cross-currency basis swap Romania</em>, <em>fixed-for-floating swap strategii</em> și pricing exact pe doi picioare de cash-flow.</p>
+
+<p>Diferența de altitudine aici este că lucrezi cu un <em>interest rate swap EUR RON pricing</em> bazat pe două curbe de discount distincte (ESTR/EURIBOR pe leg-ul euro, ROBOR/curba BNR pe leg-ul lei), pe care le calibrezi simultan prin <em>interbank swap valuation model</em>. Vom construi un <em>currency parity swap structuri</em> multi-legged care neutralizează concomitent riscul de curs și pe cel de rată — adică <strong>hedging fără vega risk derivate</strong>, pentru că nu folosești opționalitate, ci doar swap-uri liniare. Vom calcula PV-ul exact al fiecărui leg, vom izola <em>basis risk</em>-ul rezidual și vom trata <em>swap execution settlement Romania</em>: documentația ISDA, CSA-ul de colateral, raportarea EMIR și tratamentul ANAF al rezultatului din derivate.</p>
+
+<p>Premisa de specialist: un parity swap nu se evaluează ca un pariu direcțional, ci ca o replicare sintetică a unei poziții fără curs și fără durată. Dacă structura ta produce P&L atunci când nimic fundamental nu s-a schimbat în portofoliul subiacent, ai un mismatch de pricing sau de basis — nu un hedge. Restul lecției îți dă modelul cantitativ complet ca să verifici asta numeric.</p>
+
+<h2>De ce un parity swap și nu un forward sau un collar</h2>
+
+<p>Un portofoliu hibrid EUR/RON tipic la un fond local sau la o trezorerie corporate are trei surse de risc cuplate: <strong>cursul spot</strong> EUR/RON, <strong>diferențialul de dobândă</strong> dintre cele două zone valutare și <strong>basis-ul</strong> de finanțare în valută (cât te costă efectiv să te finanțezi în EUR vs. RON dincolo de paritatea teoretică a ratelor). Forward-ul FX clasic acoperă doar primul risc, la o singură scadență. Collarul cu opțiuni acoperă cursul, dar îți injectează <em>vega</em> — sensibilitate la volatilitatea implicită — pe care, dacă vrei un hedge curat de bilanț, nu o dorești.</p>
+
+<p>Parity swap-ul rezolvă toate cele trei printr-o structură liniară. În forma sa de bază este un <strong>cross-currency swap</strong> fixed-for-floating cu schimb de notional la inițiere și la maturitate, peste care suprapui un <em>basis spread</em> care reflectă cererea relativă de finanțare. Pentru că toate leg-urile sunt liniare în rată și în curs, derivata a doua față de volatilitate este zero: nu ai vega, nu ai gamma, nu plătești theta. Acesta este sensul tehnic al „protecției fără vega risk".</p>
+
+<h3>Anatomia celor patru picioare</h3>
+
+<ul>
+<li><strong>Leg 1 — schimb de notional inițial:</strong> primești N_EUR și plătești N_RON = N_EUR × S₀, unde S₀ este spot-ul de execuție. La un notional de 10.000.000 EUR și S₀ = 4,98 RON/EUR, schimbi 10.000.000 EUR contra 49.800.000 RON.</li>
+<li><strong>Leg 2 — plăți periodice pe leg-ul EUR:</strong> tipic floating, EURIBOR 3M (sau ESTR compus) plus/minus un spread, pe notionalul în euro.</li>
+<li><strong>Leg 3 — plăți periodice pe leg-ul RON:</strong> floating ROBOR 3M (sau IRCC, dacă vrei aliniere la indexul de credit retail), pe notionalul în lei, plus <em>cross-currency basis spread</em>.</li>
+<li><strong>Leg 4 — schimb de notional final:</strong> la maturitate inversezi schimbul inițial la <strong>aceeași</strong> S₀ (nu la spotul de atunci) — exact aici se naște protecția de curs: cursul de re-exchange este fixat din ziua 1.</li>
+</ul>
+
+<p>Faptul că re-exchange-ul final se face la S₀, nu la spotul viitor, este motorul hedge-ului. Indiferent unde ajunge EUR/RON în T, fluxul tău de capital este predeterminat. Riscul de curs pe principal dispare complet; rămâne doar riscul de basis pe cuponul floating, pe care îl cuantificăm mai jos.</p>
+
+<h2>Interbank swap valuation model: cele două curbe</h2>
+
+<p>Pricing-ul corect al unui <em>interest rate swap EUR RON</em> nu se mai face cu o singură curbă (eroarea pre-2008). Folosești <strong>OIS discounting cu collateral</strong>: discount-ul pe fiecare leg se face cu curba ratei la care se remunerează colateralul din CSA, în moneda colateralului. Practic, în piața interbancară românească:</p>
+
+<ul>
+<li><strong>Leg EUR</strong> — discount cu curba <strong>€STR</strong> (ESTR), proiecția cupoanelor floating cu curba EURIBOR 3M (curbă de forward distinctă de cea de discount, de aici „dual-curve").</li>
+<li><strong>Leg RON</strong> — discount cu curba construită din <strong>ROBOR</strong> și din randamentele titlurilor de stat (curba BNR / curba pieței secundare a obligațiunilor de stat), proiecția cupoanelor cu forward-urile ROBOR 3M.</li>
+</ul>
+
+<p>Valoarea prezentă a unui leg floating se scrie ca sumă de cash-flow-uri actualizate cu factorii de discount din curba relevantă:</p>
+
+<p><strong>PV_leg = Σᵢ Nᵢ × (Lᵢ + s) × τᵢ × DF(tᵢ) + N × DF(T)</strong></p>
+
+<p>unde Lᵢ este forward-ul indexului pe perioada i (extras din curba de proiecție), s este spread-ul contractual, τᵢ este fracțiunea de an după convenția day-count (Act/360 pe leg-urile money-market EUR și RON), DF(tᵢ) este factorul de discount din curba OIS la momentul plății, iar ultimul termen este returul de principal. Pentru leg-ul fix, înlocuiești (Lᵢ + s) cu rata fixă K.</p>
+
+<h3>Construcția factorilor de discount</h3>
+
+<p>Factorul de discount se derivă din zero-rate-ul continuu compus: <strong>DF(t) = e^(−z(t)·t)</strong>. Curba zero o bootstrap-uiești din instrumentele lichide: depozite la termen scurt, FRA și swap-uri par la diverse scadențe. Pe leg-ul RON, lichiditatea cade dramatic peste 3-5 ani, motiv pentru care basis-ul pe scadențe lungi este nesigur — un edge-case pe care îl tratăm explicit în secțiunea de basis risk.</p>
+
+<p>Convenția corectă de calendar: ambele leg-uri folosesc <strong>Modified Following</strong> cu calendarele combinate TARGET2 (pentru EUR) și calendarul BNR de zile lucrătoare (pentru RON). O zi de sărbătoare legală românească ce nu este și TARGET2 holiday — frecvent în piața locală — deplasează data de plată pe leg-ul RON, ceea ce introduce un mic mismatch de actualizare pe care un model serios îl prinde, nu îl ignoră.</p>
+
+<h2>Calcul pas-cu-pas: PV-ul unui parity swap de 10 mil. EUR la 3 ani</h2>
+
+<p>Construim numeric. Parametri de pornire, calibrare ilustrativă mid-2026 (cifrele de curbă sunt orientative, le re-citezi din pagina ta de market data în ziua execuției):</p>
+
+<ul>
+<li>Notional: 10.000.000 EUR; S₀ = 4,98 RON/EUR → 49.800.000 RON.</li>
+<li>Maturitate: 3 ani, cupoane trimestriale (12 perioade), Act/360.</li>
+<li>Leg EUR: EURIBOR 3M floating, nivel forward mediu ipotetic ~2,30% p.a.</li>
+<li>Leg RON: ROBOR 3M floating, nivel forward mediu ipotetic ~5,80% p.a. (ROBOR 3M gravitează în jurul dobânzii-cheie BNR, care în 2025–2026 s-a situat în intervalul ~6,25%–6,50% — citește valoarea oficială BNR la data execuției, nu o presupune).</li>
+<li>Cross-currency basis spread RON/EUR: să zicem +35 bps adăugat pe leg-ul RON (semn și mărime determinate de cererea de finanțare în EUR a băncilor locale).</li>
+</ul>
+
+<h3>Pasul 1 — fluxul nominal pe fiecare cupon</h3>
+
+<p>Pe leg-ul EUR, cuponul trimestrial aproximativ: 10.000.000 × 2,30% × (90/360) = <strong>57.500 EUR</strong> per perioadă. Pe leg-ul RON cu basis inclus: 49.800.000 × (5,80% + 0,35%) × (90/360) = 49.800.000 × 6,15% × 0,25 = <strong>765.675 RON</strong> per perioadă. Acestea sunt brute, ne-actualizate; forward-urile reale diferă de la o perioadă la alta, deci în modelul exact fiecare cupon are propriul Lᵢ.</p>
+
+<h3>Pasul 2 — actualizarea</h3>
+
+<p>Fiecare cupon EUR se discontează cu DF_ESTR(tᵢ), fiecare cupon RON cu DF_RON(tᵢ). Cu o curbă RON la ~5,9% zero-rate mediu, DF_RON(3 ani) ≈ e^(−0,059×3) ≈ 0,838. Cu ESTR la ~2,2%, DF_EUR(3 ani) ≈ e^(−0,022×3) ≈ 0,936. Suma PV a cupoanelor plus PV-ul re-exchange-ului de principal pe fiecare leg îți dă valoarea fiecărui picior în moneda lui.</p>
+
+<h3>Pasul 3 — aducerea pe aceeași monedă și par-condition</h3>
+
+<p>Converti PV_leg_RON în EUR la spot și verifici condiția de echilibru: la inițiere, valoarea netă a structurii trebuie să fie ≈ 0. Dacă PV_EUR − (PV_RON / S₀) ≠ 0, atunci basis spread-ul de echilibru (cel care anulează diferența) este chiar prețul de piață al swap-ului. Inversând: <strong>basis-ul par</strong> este spread-ul s* care satisface PV_leg_RON(s*) = PV_leg_EUR × S₀. Aceasta este, de fapt, cotația pe care o negociezi cu banca — nu rata fixă, ci basis-ul.</p>
+
+<p>Concluzia cantitativă: într-un parity swap calibrat corect, P&L-ul la inițiere este zero prin construcție, iar singura sursă de valoare ulterioară este mișcarea curbelor și a basis-ului — nu cursul spot pe principal, care e neutralizat.</p>
+
+<h2>Izolarea și măsurarea basis risk-ului</h2>
+
+<p>Aici se câștigă sau se pierde un hedge de specialist. Riscul rezidual al unui parity swap nu este cursul (l-ai fixat), ci <strong>cross-currency basis risk</strong>: spread-ul s se mișcă în timp și marchează la piață poziția ta zilnic în CSA. Trei surse:</p>
+
+<ul>
+<li><strong>Funding basis:</strong> în perioade de stres (de exemplu, presiune pe lichiditatea în EUR a băncilor locale), basis-ul RON/EUR se lărgește, iar un hedger care primește basis câștigă, cel care plătește pierde mark-to-market.</li>
+<li><strong>Tenor basis:</strong> diferența dintre ROBOR 3M și ROBOR 6M ca index de proiecție. Dacă swap-ul tău e indexat 3M dar expunerea de bilanț e pe 6M, ai un tenor mismatch.</li>
+<li><strong>Discounting basis:</strong> dacă CSA-ul permite colateral în EUR dar leg-ul tău e RON, discount-ul „greșit" creează o sensibilitate la spread-ul EUR/RON al curbei de colateral.</li>
+</ul>
+
+<h3>Sensibilitatea: DV01 pe fiecare leg</h3>
+
+<p>Cuantifici riscul cu <strong>DV01</strong> (variația PV la +1 bp pe curbă) separat pe leg-ul EUR și pe cel RON. Pentru un swap de 10 mil. EUR la 3 ani, DV01-ul pe leg-ul RON, în lei, este aproximativ N_RON × durată_modificată × 0,0001. Cu durată ~2,8 ani: 49.800.000 × 2,8 × 0,0001 ≈ <strong>13.944 RON</strong> per bp. Pe leg-ul EUR, similar în euro: 10.000.000 × 2,85 × 0,0001 ≈ <strong>2.850 EUR</strong> per bp. Aceste două DV01-uri NU se anulează automat — sunt în monede diferite și pe curbe diferite. Hedge-ul de basis pur cere ca expunerea ta de DV01 pe fiecare curbă să fie egală cu cea a bilanțului subiacent, nu zero global.</p>
+
+<p>Edge-case important: pe un portofoliu hibrid, vrei adesea <strong>să păstrezi</strong> o parte din DV01-ul RON (ești remunerat pentru durata în lei) și să tai doar cursul + basis-ul. Atunci nu folosești un fixed-for-floating complet, ci un <em>float-for-float cross-currency basis swap</em> pur: ambele leg-uri floating, doar basis-ul tranzacționat. Aceasta este cea mai curată formă de <strong>hedging fără vega risk derivate</strong>, pentru că nu introduce nici risc de durată direcțional, nici opționalitate.</p>
+
+<h2>Optimizarea structurii: matching de cash-flow și roll</h2>
+
+<p>O structură de specialist se optimizează pe trei axe simultan, cu o mică problemă de minimizare:</p>
+
+<ul>
+<li><strong>Minimizezi cash-flow mismatch:</strong> alegi frecvența cupoanelor și day-count-ul ca plățile swap-ului să cadă pe aceleași date cu fluxurile reale ale portofoliului (dividende EUR, cupoane obligațiuni RON, scadențe de credit). Fiecare zi de decalaj e basis de actualizare.</li>
+<li><strong>Minimizezi roll cost:</strong> dacă maturitatea hedge-ului e mai scurtă decât a expunerii, vei rula (roll) swap-ul. Costul de roll = basis-ul forward la momentul reînnoirii, necunoscut azi. Soluția pentru expuneri lungi pe piață ilichidă RON: o scară (ladder) de swap-uri la 1, 2, 3 ani, nu un singur swap la termen lung cu basis nesigur.</li>
+<li><strong>Optimizezi colateralul:</strong> CSA-ul cu threshold zero și remunerare la rata corectă reduce funding-ul implicit. Un CSA cu colateral exclusiv EUR pe un swap predominant RON îți schimbă curba de discount și deci PV-ul — alege moneda de colateral conștient.</li>
+</ul>
+
+<h3>Scenariu multi-variabil: stress test pe trei axe</h3>
+
+<p>Testezi structura simultan la: (a) +10% EUR/RON (depreciere leu), (b) +100 bps paralel pe curba RON, (c) +50 bps lărgire de basis. Pe principal, axa (a) nu produce P&L — re-exchange-ul e fixat la S₀, deci hedge-ul funcționează. Axa (b) lovește PV-ul prin DV01-ul RON: −100 × 13.944 ≈ −1,39 mil. RON pe leg, compensat parțial de poziția de durată a portofoliului dacă l-ai calibrat. Axa (c) e riscul rezidual real: +50 bps × DV01_basis te marchează la piață. Dacă acest mark depășește toleranța CSA, primești margin call — riscul de lichiditate al hedge-ului, distinct de riscul de piață.</p>
+
+<h2>Swap execution settlement Romania: documentație și fiscalitate</h2>
+
+<p>Partea de execuție separă teoria de bilanțul real. Elementele non-negociabile:</p>
+
+<ul>
+<li><strong>ISDA Master Agreement + Schedule + CSA:</strong> orice swap interbancar serios pe EUR/RON se documentează ISDA. CSA-ul definește moneda colateralului, thresholdul, frecvența de margin și rata de remunerare. Fără CSA, ai risc de credit de contrapartidă brut și un cost mai mare în prețul cotat.</li>
+<li><strong>Raportare EMIR:</strong> derivatele OTC se raportează la un trade repository conform regulamentului EMIR (aplicabil și entităților din România prin ASF/regimul UE). Contrapartidele non-financiare peste pragurile de clearing au obligații suplimentare; sub prag, doar raportare. Verifică statutul tău NFC+/NFC− la data tranzacției.</li>
+<li><strong>Clearing central:</strong> anumite clase de IRS standardizate intră sub obligația de clearing prin CCP. Cross-currency basis swap-urile pe RON, fiind mai puțin standardizate, rămân tipic în bilateral cu colateralizare CSA.</li>
+<li><strong>Fiscalitate ANAF:</strong> rezultatul din instrumente financiare derivate la o persoană juridică intră în rezultatul fiscal și se impozitează ca parte a profitului impozabil (cota standard impozit pe profit 16%, dacă entitatea nu se află în regimul de micro­întreprindere); la persoana fizică, câștigul din derivate este venit din investiții și se declară prin Declarația Unică, cu impozit pe venit de 10% pe câștigul net anual (regimul derivatelor tranzacționate printr-un intermediar nerezident sau OTC este, de regulă, autodeclarativ — nu beneficiază de reținerea la sursă cu cota redusă aplicabilă acțiunilor printr-un broker rezident). Câștigul net din derivate poate atrage și CASS de 10% dacă, împreună cu celelalte venituri non-salariale, depășește pragurile anuale (6/12/24 salarii minime). Marcarea la piață și momentul recunoașterii (realizat vs. nerealizat) urmează tratamentul contabil aplicabil (IFRS 9 pentru entitățile care îl aplică — hedge accounting cu desemnare formală de relație de acoperire, altfel impact în P&L). Hedge accounting corect cere documentație de eficacitate de la inițiere.</li>
+</ul>
+
+<h3>Capcana de eficacitate a hedge accounting-ului</h3>
+
+<p>Sub IFRS 9, ca să eviți volatilitatea în contul de profit, desemnezi formal swap-ul ca instrument de acoperire și demonstrezi o relație economică între hedge și elementul acoperit. Pe un parity swap, sursa tipică de ineficacitate este chiar <strong>basis-ul</strong>: dacă elementul acoperit nu conține cross-currency basis, iar instrumentul da, partea de basis devine ineficacitate recunoscută în P&L. Soluția de specialist: desemnezi ca element de risc acoperit doar componenta de curs + rată, izolând basis-ul ca o componentă separată, sau folosești metoda <em>cost of hedging</em> pentru basis sub IFRS 9, care permite parcarea variației de basis în OCI.</p>
+
+<h2>Checklist de execuție pas-cu-pas</h2>
+
+<ul>
+<li><strong>Pas 1 — cuantifică expunerea netă:</strong> calculează expunerea EUR/RON pe principal și DV01-ul pe fiecare curbă al portofoliului subiacent. Stabilește ce vrei să tai (curs + basis) și ce vrei să păstrezi (eventual durata RON).</li>
+<li><strong>Pas 2 — alege forma:</strong> fixed-for-floating dacă vrei să elimini și durata; float-for-float (basis swap pur) dacă vrei doar curs + basis fără vega și fără direcțional de rată.</li>
+<li><strong>Pas 3 — construiește cele două curbe:</strong> bootstrap OIS-ESTR pe EUR și ROBOR/titluri de stat pe RON, cu calendarele TARGET2 + BNR și Act/360.</li>
+<li><strong>Pas 4 — calculează PV par și basis-ul de echilibru s*</strong> care aduce valoarea netă la zero la inițiere; aceasta e cotația pe care o negociezi.</li>
+<li><strong>Pas 5 — rulează stress test pe trei axe</strong> (curs, paralel de rată, lărgire de basis) și verifică margin call-ul maxim plauzibil contra liniei tale de lichiditate.</li>
+<li><strong>Pas 6 — fixează documentația:</strong> ISDA + Schedule + CSA cu moneda de colateral aleasă conștient; confirmă obligațiile EMIR și statutul de clearing.</li>
+<li><strong>Pas 7 — desemnează hedge accounting</strong> la inițiere (IFRS 9), izolând componenta de basis în OCI prin tratamentul de cost of hedging pentru a evita ineficacitatea în P&L.</li>
+<li><strong>Pas 8 — monitorizează DV01 pe fiecare curbă și basis-ul zilnic;</strong> re-balansezi doar când driftul de DV01 depășește pragul tău, nu pe mișcări de curs (care, prin construcție, nu te ating pe principal).</li>
+<li><strong>Pas 9 — planifică roll-ul</strong> dacă maturitatea hedge-ului e sub cea a expunerii: scară de scadențe, nu un singur tenor lung pe basis ilichid.</li>
+<li><strong>Pas 10 — închide fiscal corect:</strong> rezultatul realizat din derivate intră în profitul impozabil 16% (PJ) sau se declară prin Declarația Unică cu impozit pe venit 10% și eventual CASS 10% pe trepte (PF), cu evidența clară realizat vs. nerealizat.</li>
+</ul>
+
+<p>Regula finală de verificare: dacă, la o mișcare pură de curs EUR/RON fără nimic altceva, parity swap-ul tău produce P&L pe principal, structura e greșit calibrată — re-exchange-ul nu e fixat la S₀. Un hedge curat e tăcut când nimic fundamental nu se schimbă; vorbește doar prin basis, exact componenta pe care ai ales conștient să o porți sau să o vinzi.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

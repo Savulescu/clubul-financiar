@@ -1,0 +1,191 @@
+<p>La nivel de specialist, <strong>securitizarea venitului din chirie într-o obligațiune personală</strong> nu este o metaforă, ci o operație de inginerie financiară pe care o poți reproduce structural, cu rigoare cantitativă, chiar și ca persoană fizică sau prin propria firmă. Ideea de bază a unui <strong>income cash flow securitization individual</strong> este aceasta: izolezi un flux de venit stabil și documentat — tipic chirii — îl muți într-un vehicul dedicat (<strong>SPV special purpose vehicle rental income</strong>), emiți pe el o creanță structurată pe tranches, o evaluezi printr-un <strong>self-rating credit score de flux</strong> și vinzi parțial drepturile asupra fluxului viitor (<strong>partial sale future income rights</strong>) unui investitor, pentru cash imediat, fără să vinzi activul-suport.</p>
+
+<p>Această lecție construiește mecanismul complet al unei operațiuni de <strong>securitizare venit chirie obligațiune personală</strong> în context România 2026: cum așezi fluxul de chirii într-un SPV, cum tai emisiunea într-o <strong>structură de tranche senior mezzanine junior</strong> cu subordonare și waterfall, cum îți calibrezi un rating intern prin metode de credit rating simpliste (probabilitate de default × loss given default × corelație cu riscul imobiliar), și cum prețuiești vânzarea parțială a tranșei junior. Lucrăm cu cifre reale: impozit 10% pe venitul din chirii, CASS la plafoanele 2026, cote de impozit pe profit micro/16%, randamente de închiriere brute realiste pe piața RO și un model de corelație default–real estate pe care îl reconstruiești în orice foaie de calcul.</p>
+
+<p>Presupun că stăpânești deja randamentul net din chirii, amortizarea fiscală și logica unui credit ipotecar. Aici mergem direct în structurarea creditului: subordonare, overcollateralization, DSCR, reserve account, debt service coverage și prețuirea unei creanțe cu rating intern. Unde un parametru juridic este incert (de pildă tratamentul exact al cesiunii de creanță viitoare la ANAF), formulez prudent și marchez ipoteza — nu inventez praguri.</p>
+
+<h2>De ce un flux de chirii este securitizabil — și ce îl califică</h2>
+
+<p>Securitizarea funcționează doar pe fluxuri care au trei proprietăți: <strong>predictibilitate</strong> (variație scăzută a încasării lunare), <strong>diversificare</strong> (mai mulți plătitori reduc riscul idiosincratic) și <strong>documentabilitate</strong> (contracte, extrase, istoric ANAF prin declarația unică). Un singur apartament cu un singur chiriaș nu este, tehnic, un activ securitizabil robust — este o expunere concentrată. Un portofoliu de 4-8 unități cu chiriași necorelați se apropie de pragul unde tranșarea are sens economic.</p>
+
+<p>Definim fluxul brut lunar agregat <strong>R</strong> ca sumă a chiriilor contractate, iar fluxul net distribuibil <strong>NCF</strong> (net cash flow) după costuri operaționale și fiscale:</p>
+
+<ul>
+<li><strong>NCF = R − OPEX − Impozit − Provizion vacanță − Provizion neîncasare</strong></li>
+<li><strong>OPEX</strong> = întreținere, asigurare, management, reparații recurente (tipic 12-20% din R pentru rezidențial RO).</li>
+<li><strong>Impozit</strong> = 10% pe venitul net din cedarea folosinței bunurilor, după regimul aplicabil 2026 (regim real sau cu deducerea forfetară acolo unde mai e permisă; pentru contracte raportate, baza este venitul brut, impozitul fiind 10%).</li>
+<li><strong>Provizion vacanță</strong> = rata de neocupare anualizată (5-10% rezidențial urban RO) aplicată pe R.</li>
+<li><strong>Provizion neîncasare</strong> = pierderea statistică din chiriași rău-platnici (2-4%).</li>
+</ul>
+
+<p>Exemplu de calibrare. Portofoliu de 6 apartamente, chirie medie 2.500 lei/lună fiecare, deci R = 15.000 lei/lună = 180.000 lei/an. OPEX 16% = 28.800 lei. Vacanță 7% = 12.600 lei. Neîncasare 3% = 5.400 lei. Bază impozabilă aproximativă pe venitul brut: impozitul de 10% se aplică pe venitul net fiscal — pentru simplitate, presupunem impozit efectiv ~10% din R ajustat = ~16.000 lei/an (marcat ca ipoteză, depinde de regimul fiscal ales și de deductibilități). Rezultă:</p>
+
+<ul>
+<li><strong>NCF ≈ 180.000 − 28.800 − 12.600 − 5.400 − 16.000 = 117.200 lei/an</strong> (≈ 9.767 lei/lună).</li>
+</ul>
+
+<p>Acest NCF de ~117.200 lei/an este <strong>colateralul de flux</strong>. El, nu apartamentele, este ce securitizezi. Activul rămâne în proprietatea ta; ce vinzi este un drept condiționat asupra unei felii din fluxul viitor.</p>
+
+<h2>Structura SPV și separarea de patrimoniu (bankruptcy remoteness)</h2>
+
+<p>Esența unei securitizări reale este <strong>izolarea fluxului de riscul de faliment al originatorului</strong>. În jargon: <em>bankruptcy remoteness</em>. La persoană fizică pură acest lucru e imperfect — patrimoniul nu se poate separa absolut. De aceea, structura curată în RO 2026 folosește un <strong>SPV de tip SRL dedicat</strong> (special purpose vehicle), al cărui unic obiect este deținerea contractelor de închiriere cesionate și colectarea chiriilor.</p>
+
+<h3>Cesiunea fluxului către SPV</h3>
+
+<p>Transferi către SRL-ul-SPV fie proprietatea apartamentelor (aport în natură — atenție la impozitarea transferului și la TVA pe imobiliare), fie, mai uzual și mai ieftin, doar <strong>cesiunea drepturilor de creanță din contractele de închiriere</strong> (cesiune de creanță viitoare, art. 1.572 Cod civil). A doua variantă păstrează proprietatea la tine și mută doar fluxul — exact ce trebuie pentru securitizare.</p>
+
+<ul>
+<li><strong>Avantaj fiscal SPV micro:</strong> dacă SRL-ul se califică drept microîntreprindere (plafon 2026 redus la <strong>100.000 EUR</strong> cifră de afaceri — coborât succesiv de la 500.000 EUR în 2024, la 250.000 EUR în 2025 și la 100.000 EUR de la 1 ianuarie 2026 — cu condiția de a avea cel puțin un salariat și cu cerințe privind structura veniturilor), impozitul este <strong>1% pe venit</strong> (cota de 3% se aplica anumitor activități precum IT, HoReCa, consultanță/management, dar de la 2026 distincția 1%/3% și plafonul însuși sunt în plină reformă — verifică forma în vigoare la momentul constituirii). Atenție: veniturile din chirii/redevențe sunt venituri pasive și pot fi tratate restrictiv în regimul micro — dacă veniturile pasive (inclusiv din închiriere, redevențe, dobânzi) depășesc 20% din total, SRL-ul nu se mai califică și trece la <strong>16% impozit pe profit</strong>. Marchez aceasta ca verificare obligatorie cu un consultant fiscal, fiindcă regimul micro pentru chirii este atât sensibil, cât și în schimbare legislativă rapidă.</li>
+<li><strong>Reserve account (cont de rezervă):</strong> SPV-ul reține o rezervă de lichiditate, tipic 3-6 luni de serviciu al datoriei, ca prim tampon de credit.</li>
+</ul>
+
+<p>Fără SPV poți face doar o <strong>cesiune privată de drepturi viitoare</strong> direct ca persoană fizică — mai simplu, dar cu izolare slabă și cu un cost de credit (randament cerut de investitor) mai mare, fiindcă investitorul preia riscul tău personal de faliment.</p>
+
+<h2>Tranching: senior / mezzanine / junior și waterfall-ul</h2>
+
+<p>Tăierea în tranches este inima securitizării. Iei NCF-ul și îl împarți în clase cu <strong>prioritate diferită la plată</strong> (subordonare structurală). Construim o emisiune cu valoare nominală totală derivată din capacitatea fluxului de a susține serviciul datoriei.</p>
+
+<h3>Dimensionarea prin DSCR și capacitatea de îndatorare a fluxului</h3>
+
+<p>Mărimea-cheie este <strong>DSCR</strong> (Debt Service Coverage Ratio) = NCF / Serviciul anual al datoriei. Investitorii de tranșă senior cer tipic DSCR ≥ 1,25-1,40. Inversăm formula pentru a afla cât poate susține fluxul:</p>
+
+<ul>
+<li><strong>Serviciu maxim senior = NCF / DSCR_țintă</strong></li>
+<li>Cu NCF = 117.200 lei și DSCR_țintă = 1,35: <strong>serviciu senior maxim ≈ 86.815 lei/an</strong>.</li>
+</ul>
+
+<p>Dacă tranșa senior are cupon 7% (apropiat de yield-ul unei obligațiuni corporative RO de calitate medie 2026) și amortizare pe 7 ani, valoarea nominală a tranșei senior care produce un serviciu anual de ~86.815 lei este, prin anuitate constantă cu factorul de anuitate a₇,7% ≈ 5,389:</p>
+
+<ul>
+<li><strong>Nominal senior ≈ 86.815 × 5,389 ≈ 467.850 lei.</strong></li>
+</ul>
+
+<p>Acum stratificăm capitalul total al emisiunii. Să spunem că valoarea totală securitizată țintă este de <strong>700.000 lei</strong> (sub valoarea de piață a celor 6 apartamente, ca să existe overcollateralization pe activ). Atunci structura tipică:</p>
+
+<ul>
+<li><strong>Tranșa Senior (A) — 467.850 lei ≈ 67%:</strong> primul rang la încasare, cupon 7%, rating intern cel mai bun, DSCR robust 1,35.</li>
+<li><strong>Tranșa Mezzanine (B) — ~157.000 lei ≈ 22%:</strong> al doilea rang, cupon 11-12%, absoarbe pierderile după ce junior e epuizat.</li>
+<li><strong>Tranșa Junior / Equity (C) — ~75.150 lei ≈ 11%:</strong> ultimul rang, „first loss”, cupon rezidual/variabil; aceasta este felia pe care o vinzi parțial pentru cash imediat sau pe care o reții ca <em>skin in the game</em>.</li>
+</ul>
+
+<h3>Waterfall-ul de plată (cascada)</h3>
+
+<p>Lunar, NCF intră în SPV și se distribuie în ordine strictă — aceasta este subordonarea care creează ratinguri diferite din același flux:</p>
+
+<ul>
+<li><strong>1.</strong> Cheltuieli SPV + alimentare reserve account la nivelul țintă.</li>
+<li><strong>2.</strong> Cupon + amortizare <strong>Senior A</strong>.</li>
+<li><strong>3.</strong> Cupon <strong>Mezzanine B</strong> (numai dacă testele de acoperire — OC test, IC test — sunt îndeplinite).</li>
+<li><strong>4.</strong> Reziduu către <strong>Junior C</strong> (deținut de tine sau de investitorul care a cumpărat felia).</li>
+</ul>
+
+<p>Mecanismul de protecție senior este <strong>cash trapping</strong>: dacă DSCR scade sub un prag (de pildă 1,15), plățile către mezzanine și junior se opresc și fluxul e redirecționat la amortizarea senior. Astfel, tranșa A „vede” un risc mult mai mic decât fluxul brut, deși vine din exact același portofoliu de chirii.</p>
+
+<h2>Self-rating: probabilitate de default, LGD și corelația cu riscul imobiliar</h2>
+
+<p>Un <strong>self-rating credit score de flux</strong> nu necesită o agenție; necesită un model. Pierderea așteptată pe fiecare tranșă este:</p>
+
+<ul>
+<li><strong>EL = PD × LGD × EAD</strong></li>
+<li><strong>PD</strong> = probabilitatea de default a fluxului pe orizont (chiriași care nu plătesc + vacanță prelungită).</li>
+<li><strong>LGD</strong> = loss given default = procentul pierdut dacă defaultul se produce.</li>
+<li><strong>EAD</strong> = exposure at default = nominalul tranșei.</li>
+</ul>
+
+<h3>Estimarea PD a fluxului de chirii</h3>
+
+<p>PD-ul fluxului nu e PD-ul unui chiriaș, ci probabilitatea ca <strong>NCF agregat să scadă sub serviciul datoriei unei tranșe</strong>. Cu 6 chiriași independenți, fiecare cu probabilitate anuală de neplată prelungită q ≈ 5%, probabilitatea ca, de pildă, ≥2 din 6 să intre simultan în default (pragul care sparge mezzanine) se calculează binomial:</p>
+
+<ul>
+<li><strong>P(X ≥ 2) = 1 − P(0) − P(1)</strong>, cu P(k) = C(6,k)·q^k·(1−q)^(6−k).</li>
+<li>P(0) = 0,95⁶ ≈ 0,735; P(1) = 6·0,05·0,95⁵ ≈ 0,232. Deci <strong>P(X ≥ 2) ≈ 3,3%</strong> — în ipoteza de independență.</li>
+</ul>
+
+<p>Aici intervine corecția critică de specialist: chiriașii <strong>nu sunt independenți</strong>. Într-un șoc imobiliar/macro (recesiune, creștere a șomajului, scădere a chiriilor de piață), defaulturile se corelează. Modelăm aceasta cu un <strong>factor comun</strong> (one-factor Gaussian copula, varianta simplificată Vasicek):</p>
+
+<ul>
+<li>Fiecare chiriaș intră în default dacă o variabilă latentă A<sub>i</sub> = √ρ·M + √(1−ρ)·ε<sub>i</sub> scade sub pragul Φ⁻¹(q), unde <strong>M</strong> = factorul comun „real estate / macro”, <strong>ε<sub>i</sub></strong> = riscul idiosincratic, iar <strong>ρ</strong> = corelația cu riscul imobiliar.</li>
+<li>La ρ = 0 obții binomialul de mai sus (3,3%). La <strong>ρ = 0,3</strong> (rezonabil pentru rezidențial urban într-un oraș-piață precum București/Cluj), probabilitatea cozii — adică ≥3-4 defaulturi simultane — crește semnificativ, iar PD-ul tranșei mezzanine se poate dubla față de ipoteza de independență.</li>
+</ul>
+
+<p>Intuiția cantitativă: corelația nu schimbă mult media pierderilor, dar îngroașă coada. De aceea tranșa senior, protejată de subordonare, rămâne robustă chiar la ρ ridicat, în timp ce mezzanine și junior sunt extrem de sensibile la ρ — exact ce a explodat în criza 2008 când corelația din pool-urile de credite ipotecare a fost subestimată sistematic.</p>
+
+<h3>Maparea PD → rating intern</h3>
+
+<p>Construiește o scară internă simplă, calibrată pe matricele agențiilor (ordine de mărime, nu valori exacte):</p>
+
+<ul>
+<li><strong>PD &lt; 0,3%/an → rating intern „A” (senior bine protejat).</strong></li>
+<li><strong>PD 0,3-1,5% → „BBB” (investment grade marginal).</strong></li>
+<li><strong>PD 1,5-5% → „BB” (mezzanine tipic).</strong></li>
+<li><strong>PD 5-15% → „B” (junior).</strong></li>
+<li><strong>PD &gt; 15% → „CCC” (equity / first loss pur).</strong></li>
+</ul>
+
+<p>Aplicând subordonarea: chiar dacă fluxul brut are PD ~3,3%, tranșa senior „vede” un PD efectiv sub 0,3% (fiindcă junior + mezzanine absorb primele pierderi), deci se autoclasifică „A”. Mezzanine preia PD-ul de bandă mijlocie („BB”), iar junior preia coada („B/CCC”). Aceasta este magia tranching-ului: din același flux scoți o creanță sigură vandabilă scump și una riscantă vandabilă cu randament mare.</p>
+
+<h2>Prețuirea vânzării parțiale a tranșei junior</h2>
+
+<p>Vinzi parțial — de pildă <strong>50% din tranșa Junior C</strong> (75.150 lei nominal → vinzi 37.575 lei nominal) — unui investitor, pentru cash imediat. Prețul nu e nominalul; e valoarea actualizată a fluxurilor reziduale ponderate cu riscul, plus discount pentru iliciditate și pentru first-loss.</p>
+
+<h3>Modelul de preț</h3>
+
+<ul>
+<li><strong>Preț = Σ [ NCF_rezidual_t × (1 − EL_t) ] / (1 + r)^t</strong>, unde r = randamentul cerut de investitorul de junior (tipic 18-25% pentru first-loss RO 2026, reflectând riscul + iliciditatea).</li>
+</ul>
+
+<p>Exemplu: fluxul rezidual anual către junior (după senior + mezzanine) ≈ 18.000 lei/an. Investitorul cumpără 50%, deci pretenția lui = 9.000 lei/an pe 5 ani. La r = 20% și EL ajustat ~8%/an, factorul de anuitate la 20% pe 5 ani ≈ 2,991. Preț aproximativ:</p>
+
+<ul>
+<li><strong>Preț ≈ 9.000 × 0,92 × 2,991 ≈ 24.770 lei cash azi</strong>, pentru un nominal junior de 37.575 lei — adică un discount de ~34% față de nominal, care este chiar randamentul cerut de investitorul de first-loss.</li>
+</ul>
+
+<p>Ai obținut ~24.770 lei cash imediat fără să vinzi niciun apartament, fără să te împrumuti la bancă cu ipotecă, și păstrând controlul activului și jumătatea superioară a fluxului. Diferența față de un credit clasic: nu ai o datorie cu garanție reală pe imobil și executare silită — ai vândut un drept condiționat la flux, iar riscul de neplată al chiriașilor a fost transferat parțial cumpărătorului de junior.</p>
+
+<h3>Implicații fiscale ale vânzării parțiale (prudent)</h3>
+
+<ul>
+<li>Cesiunea cu titlu oneros a unui drept de creanță viitoare generează, de regulă, <strong>venit impozabil</strong> la cedent. Tratamentul exact (venit din alte surse 10%, sau câștig în SPV impozitat 16%/1% micro) depinde de structură. Marchez ca obligatoriu de validat cu fiscalist înainte de execuție — aici se pierd cele mai multe scheme prost structurate.</li>
+<li>Dacă fluxul trece prin SPV-SRL, investitorul poate primi felia de junior fie ca <strong>creanță cesionată</strong>, fie ca <strong>părți sociale într-o clasă subordonată</strong> — a doua variantă e mai elegantă juridic, dar cere act constitutiv cu clase de participare.</li>
+</ul>
+
+<h2>Spreadsheet: corelația default vs real estate risk</h2>
+
+<p>Construiește o foaie de calcul cu următoarele blocuri, pentru a vizualiza sensibilitatea tranșelor la ρ:</p>
+
+<ul>
+<li><strong>Bloc 1 — Inputuri:</strong> R lunar, OPEX%, vacanță%, neîncasare%, impozit%, q (PD/chiriaș), ρ (corelație imobiliar), număr chiriași n, cupoane A/B/C, DSCR_țintă.</li>
+<li><strong>Bloc 2 — NCF:</strong> calculează NCF anual și lunar din inputuri.</li>
+<li><strong>Bloc 3 — Structura:</strong> derivă nominal senior din NCF/DSCR și anuitate; alocă B și C ca % rezidual.</li>
+<li><strong>Bloc 4 — Distribuția pierderilor:</strong> simulează 10.000 de scenarii Monte Carlo. Pentru fiecare scenariu: trage M ~ N(0,1) (factor imobiliar), apoi pentru fiecare chiriaș A<sub>i</sub> = √ρ·M + √(1−ρ)·ε<sub>i</sub>; default dacă A<sub>i</sub> &lt; Φ⁻¹(q). Numără defaulturile, calculează pierderea pool și aloc-o pe waterfall (întâi C, apoi B, apoi A).</li>
+<li><strong>Bloc 5 — PD și EL pe tranșă:</strong> din scenarii, % în care fiecare tranșă suferă pierdere (= PD efectiv) și pierderea medie (= EL).</li>
+<li><strong>Bloc 6 — Tabel de senzitivitate:</strong> rulează blocul 4 pentru ρ ∈ {0; 0,1; 0,2; 0,3; 0,4; 0,5} și afișează PD_senior, PD_mezz, PD_junior. Vei vedea că <strong>PD_senior rămâne sub 0,5% până la ρ ~0,4</strong>, în timp ce <strong>PD_junior crește de la ~30% la &gt;60%</strong> pe același interval.</li>
+<li><strong>Bloc 7 — Preț junior:</strong> aplică modelul de preț (r, EL_t) pe fluxul rezidual junior și afișează prețul de vânzare la diferite r și ρ.</li>
+</ul>
+
+<p>Funcția Φ⁻¹ (inversa normalei) se obține în Excel cu <code>NORM.S.INV()</code>, simularea M și ε cu <code>NORM.S.INV(RAND())</code>. Rezultatul-cheie de citit din tabel: <strong>banda de subordonare (mezzanine + junior) trebuie dimensionată exact cât coada de pierdere la ρ-ul tău realist</strong>, altfel rating-ul „A” al senior-ului este fictiv — eroarea fatală a securitizărilor din 2008.</p>
+
+<h2>Edge-cases și capcane de specialist</h2>
+
+<ul>
+<li><strong>Concentrare:</strong> sub 4-5 chiriași, modelul binomial/copula e instabil; PD-ul tranșelor e dominat de un singur eveniment. Securitizarea reală cere diversificare.</li>
+<li><strong>Reset de chirie:</strong> contractele scurte (1 an) reintroduc risc de re-locare la fiecare reînnoire; modelează vacanța de tranziție explicit, nu doar default.</li>
+<li><strong>Wrong-way risk:</strong> dacă apartamentele sunt în același cartier/oraș, ρ real e mai mare decât crezi (toți chiriașii expuși aceluiași șoc local de muncă). Geo-diversificarea reduce ρ.</li>
+<li><strong>Recurs la originator:</strong> dacă investitorul cere garanție personală, ai distrus bankruptcy remoteness — atunci e un împrumut deghizat, nu o securitizare, și se impozitează/tratează diferit.</li>
+<li><strong>Lichiditate:</strong> tranșa junior e nelichidă; investitorul cere prima de iliciditate, care e cea mai mare parte a randamentului de 18-25%.</li>
+<li><strong>ASF/ofertă publică:</strong> dacă vinzi tranșe către mulți investitori sau public, riști să intri sub regimul ASF de ofertă de valori mobiliare. Vânzarea către <strong>un singur investitor calificat / privat</strong> (private placement, plasament privat) evită acest regim. Marchez ca verificare obligatorie de conformitate.</li>
+</ul>
+
+<h2>Checklist de execuție — securitizare flux chirie</h2>
+
+<ul>
+<li><strong>Pasul 1.</strong> Agregă fluxul: minim 4-6 chiriași documentați, contracte înregistrate, istoric de încasare 12-24 luni, calculează R și NCF realist (cu provizion vacanță + neîncasare).</li>
+<li><strong>Pasul 2.</strong> Decide vehiculul: SPV-SRL dedicat (izolare bună, cost setup + contabilitate) vs cesiune privată directă (ieftin, izolare slabă). Validează regimul fiscal micro vs 16% cu fiscalist.</li>
+<li><strong>Pasul 3.</strong> Cesionează drepturile de creanță viitoare către vehicul (art. 1.572 Cod civil) sau aportează unitățile; constituie reserve account 3-6 luni.</li>
+<li><strong>Pasul 4.</strong> Dimensionează senior din DSCR ≥ 1,30-1,40; alocă mezzanine și junior cât coada de pierdere la ρ-ul realist (din spreadsheet).</li>
+<li><strong>Pasul 5.</strong> Construiește waterfall-ul cu cash trapping (DSCR &lt; 1,15) și teste OC/IC pentru subordonare reală.</li>
+<li><strong>Pasul 6.</strong> Rulează Monte Carlo (10.000 scenarii) pe ρ ∈ {0…0,5}, derivă PD/EL pe tranșă, mapează la rating intern A/BBB/BB/B/CCC.</li>
+<li><strong>Pasul 7.</strong> Prețuiește junior la r = 18-25%, ajustat cu EL; vinzi parțial (ex. 50%) prin <strong>plasament privat către un singur investitor calificat</strong> pentru a evita regimul ASF.</li>
+<li><strong>Pasul 8.</strong> Documentează fiscal cesiunea/vânzarea, reține impozitul corect, păstrează skin in the game (reții cel puțin o parte din junior) ca semnal de credibilitate pentru investitor.</li>
+<li><strong>Pasul 9.</strong> Monitorizează lunar DSCR și reserve account; re-rating intern la fiecare reînnoire de contract sau șoc de piață.</li>
+</ul>

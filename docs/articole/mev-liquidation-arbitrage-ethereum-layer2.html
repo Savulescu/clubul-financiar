@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEV Liquidation Arbitrage pe Ethereum și Layer 2: Ghid de Specialist — Clubul Financiar</title><meta name="description" content="MEV liquidation arbitrage pe Ethereum și Layer 2: model de profit, flash loan, slippage AMM, sequencer FCFS Arbitrum/Optimism și fiscalitate ANAF crypto 16% 2026."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/mev-liquidation-arbitrage-ethereum-layer2.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="MEV Liquidation Arbitrage pe Ethereum și Layer 2: Ghid de Specialist"><meta property="og:description" content="MEV liquidation arbitrage pe Ethereum și Layer 2: model de profit, flash loan, slippage AMM, sequencer FCFS Arbitrum/Optimism și fiscalitate ANAF crypto 16% 2026."><meta property="og:url" content="https://clubulfinanciar.ro/articole/mev-liquidation-arbitrage-ethereum-layer2.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="MEV Liquidation Arbitrage pe Ethereum și Layer 2: Ghid de Specialist"><meta name="twitter:description" content="MEV liquidation arbitrage pe Ethereum și Layer 2: model de profit, flash loan, slippage AMM, sequencer FCFS Arbitrum/Optimism și fiscalitate ANAF crypto 16% 2026."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MEV Liquidation Arbitrage pe Ethereum și Layer 2: Ghid de Specialist", "description": "MEV liquidation arbitrage pe Ethereum și Layer 2: model de profit, flash loan, slippage AMM, sequencer FCFS Arbitrum/Optimism și fiscalitate ANAF crypto 16% 2026.", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/mev-liquidation-arbitrage-ethereum-layer2.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#crypto">₿ Criptomonede</a> · 12 min citire · Actualizat 19 iun. 2026</p><h1>MEV Liquidation Arbitrage pe Ethereum și Layer 2: Ghid de Specialist</h1><p>Strategia de <strong>MEV liquidation arbitrage Ethereum DeFi</strong> nu mai e teritoriul searcher-ilor cu acces privilegiat la mempool de pe L1 — s-a mutat masiv pe Layer 2, unde economia execuției e fundamental diferită. Dacă ai construit deja modelul de LTV, health factor și cascadă de lichidări din lecția anterioară despre DeFi lending, acum inversezi perspectiva: nu mai ești borrower-ul care evită pragul, ci operatorul care extrage <strong>maximal extractable value smart contract</strong> din pozițiile altora, executând lichidarea înainte ca un rival să te front-runeze.</p>
+
+<p>Această lecție tratează playbook-ul de specialist pentru <strong>layer 2 MEV Arbitrum Optimism</strong>: cum cuantifici exact profitul brut al unei lichidări, cum integrezi un <strong>flash loan arbitrage strategie</strong> ca să operezi fără capital propriu, de ce <strong>sandwich attack profit calculation</strong> e aproape neviabil pe rollup-uri cu sequencer FCFS, și ce înseamnă <strong>automated market maker slippage</strong> atunci când dezambalezi colateralul lichidat pe un AMM. Acoperim arhitectura de <strong>liquidation bot development</strong>, <strong>DeFi protocol risks extraction</strong> (revert-uri, gas wars, reorg pe L2) și partea pe care 95% dintre searcheri o ignoră: raportarea ANAF a unui profit care, contractual, nu are o „contraparte” clasică și e ușor de calificat greșit în Declarația Unică.</p>
+
+<p>Lucrăm cantitativ, în lei, cu praguri și cote reale România 2026. Premisa: stăpânești deja EVM, Solidity la nivel de inline assembly, mecanica oracolelor și diferența dintre o lichidare integrală și una parțială. Mergem direct la modelul de profit, edge-case-uri și optimizare.</p>
+
+<h2>Anatomia economică a unei lichidări profitabile pe L2</h2>
+
+<p>Profitul unei lichidări nu e bonusul afișat de protocol. E un reziduu, după ce scazi toate fricțiunile. Formula de lucru pe care o folosesc searcher-ii serioși:</p>
+
+<p><strong>Profit net = (Colateral_sechestrat × Bonus_lichidare) − Slippage_dezambalare − Gas_L2 − Cost_DA_L1 − Cost_flash_loan − Cost_oportunitate_revert</strong></p>
+
+<p>Fiecare termen are o structură proprie pe care un specialist o modelează separat:</p>
+
+<ul>
+<li><strong>Colateral_sechestrat</strong> = Datorie_repayată × Close_factor. Pe Aave v3, close factor-ul e 50% în zona „soft” (HF între 0,95 și 1) și 100% sub HF 0,95 — deci pe o poziție profund subacvatică poți închide integral datoria într-un singur tx.</li>
+<li><strong>Bonus_lichidare</strong> — liquidation bonus per-activ, tipic 5–8,5% pe Aave v3 (ETH ~5%, active volatile/long-tail 7,5–10%). Pe Compound v3 (Comet) bonusul e exprimat ca discount factor pe colateral, nu ca penalitate pe datorie — calculezi diferit.</li>
+<li><strong>Gas_L2</strong> — pe Arbitrum/Optimism, execuția propriu-zisă e ieftină (cenți), dar termenul dominant e costul de a publica calldata pe L1 (data availability). Post-EIP-4844 (blob-uri), costul DA a scăzut cu un ordin de mărime, dar rămâne variabila care decide profitabilitatea lichidărilor mici.</li>
+</ul>
+
+<h3>Calcul numeric: lichidare ETH pe Arbitrum</h3>
+
+<p>O poziție cu colateral wstETH echivalent <strong>180.000 lei</strong> și datorie USDC echivalent <strong>150.000 lei</strong> cade la HF = 0,98. Liquidation threshold 82,5%, close factor 50%, liquidation bonus 5%.</p>
+
+<ul>
+<li>Datorie repayabilă = 150.000 × 50% = <strong>75.000 lei</strong>.</li>
+<li>Colateral sechestrat = 75.000 × (1 + 0,05) = <strong>78.750 lei</strong> primiți în wstETH.</li>
+<li>Bonus brut = <strong>3.750 lei</strong>.</li>
+<li>Slippage la swap wstETH→USDC pe un pool cu lichiditate decentă, mărime 78.750 lei: la 0,3% → <strong>−236 lei</strong>.</li>
+<li>Gas L2 + DA pe Arbitrum, tx complex (flash loan + liquidationCall + swap), estimat <strong>−40…−90 lei</strong> în condiții normale, dar poate sări la 400+ lei într-o fereastră de congestie post-crash, exact când apar lichidările.</li>
+<li>Profit net realist: <strong>~3.400 lei</strong> pe un tx care nu îți imobilizează capital propriu dacă folosești flash loan.</li>
+</ul>
+
+<p>Marja arată generos. Capcana e că <em>nu ești singur</em>: zeci de boți văd aceeași poziție. Pe L2 cu sequencer first-come-first-served (FCFS), nu cel cu cel mai mare tip câștigă, ci cel care livrează tx-ul valid primul la sequencer. Asta schimbă complet strategia de optimizare.</p>
+
+<h2>De ce Arbitrum și Optimism schimbă regulile MEV</h2>
+
+<p>Pe Ethereum L1, MEV-ul e mediat de Flashbots/MEV-Boost: licitezi prin priority fee și bundle-uri private, builder-ul ordonează blocul. Pe rollup-urile actuale există un <strong>sequencer centralizat</strong>, iar acest detaliu rescrie întreaga teorie a jocului:</p>
+
+<ul>
+<li><strong>Mempool privat / lipsa mempool-ului public.</strong> Arbitrum nu expune un mempool public — tx-urile merg direct la sequencer și sunt ordonate FCFS pe timpul de sosire. Nu poți observa tx-ul victimei și nu poți licita prin gas peste el. Front-running-ul clasic devine o cursă de latență de rețea, nu de fee.</li>
+<li><strong>Sandwich attack profit calculation devine marginal.</strong> Fără mempool public observabil și cu ordonare temporală, sandwich-ul (intercalarea unui buy înainte și sell după swap-ul victimei) e structural greu pe Arbitrum. Optimism, cu sequencer-ul Bedrock, e similar. Profitul de sandwich migrează spre lichidări și arbitraj CEX-DEX, unde semnalul vine din afara lanțului.</li>
+<li><strong>Reorg și finalitate.</strong> Sequencer-ul oferă soft-confirmation rapidă, dar finalitatea reală depinde de batch-ul postat pe L1. Pe optimistic rollups există o fereastră teoretică de reordonare la nivel de sequencer downtime/force-inclusion. Un searcher prudent nu tratează o lichidare ca finală până nu e inclusă în batch-ul L1.</li>
+</ul>
+
+<p>Concluzia operațională: pe L2, edge-ul tău nu e capitalul sau dispoziția de a plăti tip, ci <strong>infrastructura</strong> — colocare lângă sequencer, conexiuni RPC dedicate, detecție sub-bloc a scăderii HF prin simulare locală a oracolului, și un contract care revertează ieftin dacă cineva te-a prins primul.</p>
+
+<h2>Flash loan ca primitivă de capital-zero</h2>
+
+<p>Un searcher matur nu lichidează din buzunar. Construiește un <strong>flash loan arbitrage strategie</strong> în care întregul ciclu — împrumut, repay datoria victimei, primește colateral, dezambalează, returnează flash loan-ul plus comision — rulează atomic într-un singur tx. Dacă orice pas eșuează (altcineva a lichidat primul, slippage prea mare), tot tx-ul revertează și nu pierzi decât gas-ul.</p>
+
+<h3>Structura contractului proprietar</h3>
+
+<ul>
+<li><strong>Sursa de flash loan.</strong> Aave v3 percepe 0,05% premium pe flash loan; un flash din pool-ul Balancer e gratuit (0%) dacă lichiditatea acoperă suma — preferat pentru lichidări mari unde 0,05% mănâncă marja. Pe 75.000 lei, 0,05% = 37,5 lei: nu omoară tranzacția, dar pe lichidări de 5.000 lei contează.</li>
+<li><strong>Callback-ul.</strong> În <code>executeOperation</code> apelezi <code>liquidationCall</code> pe protocolul țintă, primești colateralul, faci swap pe AMM-ul cu cea mai bună adâncime, apoi aprobi repay-ul flash loan-ului. Tot în assembly pentru a minimiza gas-ul.</li>
+<li><strong>Gard anti-revert costly.</strong> Verifici on-chain HF-ul victimei la începutul tx-ului; dacă a fost deja lichidat (HF urcat peste prag), faci un <code>revert</code> imediat, înainte de a consuma gas pe restul logicii. Diferența între un revert la opcode 200 și unul la opcode 90.000 e bani reali la scară.</li>
+<li><strong>Protecție slippage.</strong> <code>minAmountOut</code> calculat din oracol, nu din pool-ul în care faci swap-ul — altfel devii tu însuți victima unui sandwich pe L1 bridge sau a unei depegări momentane.</li>
+</ul>
+
+<h3>Automated market maker slippage la dezambalare</h3>
+
+<p>Termenul cel mai prost modelat de începătorii „avansați” e <strong>automated market maker slippage</strong>. Colateralul sechestrat trebuie vândut, iar pe un pool xy=k slippage-ul crește neliniar cu mărimea. Pentru un swap de mărime ΔX într-un pool cu rezervă X:</p>
+
+<p><strong>Slippage ≈ ΔX / (X + ΔX)</strong> (aproximare de ordin întâi, ignorând fee-ul).</p>
+
+<p>Dacă lichidezi colateral de 200.000 lei într-un pool cu rezervă efectivă de 4.000.000 lei pe partea relevantă, impactul de preț e ~5% — adică 10.000 lei evaporați, mai mult decât tot bonusul de lichidare de 5%. Specialistul fragmentează (split-routing pe Uniswap v3 + Curve), folosește pool-uri concentrate (v3) unde adâncimea la preț e mult mai mare, sau, pe lichidări mari, păstrează colateralul și îl dezambalează în tranșe ulterioare — acceptând risc de preț în schimbul reducerii impactului. Pe stETH/wstETH, Curve oferă cel mai adânc swap; pe long-tail, slippage-ul poate face lichidarea neprofitabilă chiar dacă bonusul e 10%.</p>
+
+<h2>Edge-case-uri și DeFi protocol risks extraction</h2>
+
+<p>Profitul teoretic e ușor. Supraviețuirea operațională e grea. Riscurile pe care un searcher le internalizează:</p>
+
+<ul>
+<li><strong>Gas war / failed bid pe L2.</strong> Pe FCFS, dacă pierzi cursa de latență, tx-ul tău revertează (HF deja restabilit). 50 de reverturi pe zi × 60 lei = 3.000 lei/zi cost pur de a participa. Rata ta de win trebuie să acopere acest „rake”.</li>
+<li><strong>Oracol stale / desincronizat.</strong> Lichidarea se declanșează pe prețul oracolului, dar tu vinzi pe prețul AMM-ului. Într-un crash rapid, oracolul (TWAP sau Chainlink cu heartbeat/deviation threshold) poate fi în urma spotului — colateralul „valorează” 78.750 lei pe oracol, dar AMM-ul îl cumpără la 72.000. Profitul evaporă. Modelează mereu basis-ul oracol-AMM.</li>
+<li><strong>Sequencer downtime.</strong> Dacă sequencer-ul Arbitrum/Optimism pică (s-a întâmplat istoric), lichidările se opresc, dar prețurile pe L1/CEX continuă. La revenire, un val de lichidări iese simultan — oportunitate uriașă, dar și risc de bad debt necolectabil dacă protocolul nu poate executa la timp.</li>
+<li><strong>Bad debt și socializare.</strong> Dacă lichidezi o poziție deja subacvatică (colateral &lt; datorie), bonusul tău poate fi neacoperit — protocolul îți dă mai puțin decât promite, sau funcția revertează. Pe poziții cu HF prăbușit brusc (gap down), verifică dacă mai există suficient colateral pentru bonus.</li>
+<li><strong>Decentralizarea sequencer-ului (2026).</strong> Tranziția anunțată spre sequencere descentralizate / shared sequencing (Espresso și similare) va reintroduce o piață de ordonare a tx-urilor pe L2 — adică va apărea o formă de MEV-Boost pe rollup. Cine își construiește azi infra de latență trebuie să planifice migrarea spre licitație de ordonare.</li>
+</ul>
+
+<h2>Modelul de profitabilitate la scară: rake, win-rate, breakeven</h2>
+
+<p>Un bot nu se evaluează pe o lichidare, ci pe distribuția lui. Modelul minim:</p>
+
+<ul>
+<li><strong>Profit așteptat per oportunitate</strong> = P(win) × Profit_net_mediu − (1 − P(win)) × Gas_revert.</li>
+<li>Exemplu: P(win) = 35% (competiție serioasă pe Arbitrum), Profit_net_mediu = 3.400 lei, Gas_revert = 60 lei.</li>
+<li>E[profit] = 0,35 × 3.400 − 0,65 × 60 = 1.190 − 39 = <strong>1.151 lei/oportunitate</strong>.</li>
+<li>La 4 oportunități mari/zi → ~4.600 lei/zi brut, dar volatil: lunile fără volatilitate aduc zero lichidări, iar capitalul de infra (RPC dedicat, server colocat) e cost fix continuu.</li>
+</ul>
+
+<p>Breakeven-ul real se mută când crește competiția: dacă P(win) scade la 15%, E[profit] devine 0,15 × 3.400 − 0,85 × 60 = 510 − 51 = 459 lei — încă pozitiv, dar pe lichidări mici (profit net 300 lei) cu același gas, ecuația trece în negativ. Pragul: <strong>operezi doar oportunități unde Profit_net × P(win) &gt; Gas_revert × (1 − P(win))</strong>, filtrat în pre-simulare locală.</p>
+
+<h2>ANAF: profitul MEV ca venit impozabil în România 2026</h2>
+
+<p>Aici e zona unde searcher-ii tehnici greșesc costisitor. Un profit din lichidare/MEV <strong>nu</strong> e „venit fără contraparte” și <strong>nu</strong> e scutibil pentru că „e doar arbitraj”. Pentru fisc, fiecare swap pe care îl execuți (colateral primit → stablecoin) e un <strong>transfer de criptomonede</strong>, eveniment impozabil.</p>
+
+<ul>
+<li><strong>Cota.</strong> Câștigul din transferul de criptomonede realizat de la <strong>1 ianuarie 2026</strong> se impozitează cu <strong>16%</strong> (majorat de la 10% prin Legea nr. 141/2025). Câștigul = preț vânzare − cost de achiziție − comisioane directe. La MEV, „costul de achiziție” al colateralului e valoarea datoriei pe care ai repayat-o (în lei la cursul momentului), iar „vânzarea” e dezambalarea pe AMM.</li>
+<li><strong>Scutirea de minimis nu te ajută.</strong> Pragul de 200 lei/tranzacție se aplică doar dacă totalul câștigurilor anuale ≤ 600 lei. Un bot face mii de tranzacții; depășești instant — toate câștigurile devin impozabile, inclusiv cele sub 200 lei.</li>
+<li><strong>CASS de 10%.</strong> Veniturile din investiții (crypto + dividende + dobânzi etc.) peste pragul de 6 salarii minime declanșează CASS pe baze fixe. La salariul minim de referință de <strong>4.050 lei</strong> în 2026: bază 24.300 lei (CASS 2.430 lei) la 6–12 salarii, 48.600 lei (CASS 4.860 lei) la 12–24, și 97.200 lei (CASS 9.720 lei) peste 24 de salarii minime. Un searcher profitabil aterizează aproape sigur în plafonul maxim.</li>
+<li><strong>DAC8.</strong> Din 2026, raportarea automată a platformelor către ANAF acoperă on-ramp/off-ramp-urile tale. Profitul „on-chain” pare invizibil, dar momentul în care convertești în lei printr-un CASP (Binance, Revolut) e raportat. Reconcilierea trebuie să fie impecabilă.</li>
+</ul>
+
+<h3>Calcul fiscal pe un an de operare</h3>
+
+<p>Presupunem profit net realizat <strong>180.000 lei</strong> dintr-un an de lichidări (după gas și slippage, brut fiscal).</p>
+
+<ul>
+<li>Impozit pe venit: 180.000 × 16% = <strong>28.800 lei</strong>.</li>
+<li>CASS (peste 24 salarii minime): bază 97.200 lei × 10% = <strong>9.720 lei</strong>.</li>
+<li>Sarcină fiscală totală: <strong>38.520 lei</strong> → randament net real ~141.480 lei.</li>
+</ul>
+
+<p>Verifică plafoanele și cota exactă pe <strong>anaf.ro</strong> înainte de depunerea Declarației Unice; pachetele fiscale se pot ajusta, iar încadrarea câștigului din MEV ca „transfer de monedă virtuală” vs. „alte surse” are consecințe asupra bazei de CASS. Pentru un volum de mii de tranzacții/an, tratamentul corect FIFO și evidența în lei la cursul fiecărui eveniment nu sunt opționale — sunt singura ta apărare la un control.</p>
+
+<h2>Checklist de specialist înainte de a deploya botul</h2>
+
+<ul>
+<li><strong>Simulează local fiecare oportunitate</strong> (fork de stat, eth_call) și calculează Profit_net complet — bonus, slippage AMM real pe adâncimea curentă, gas L2+DA, premium flash loan — înainte de a trimite tx-ul.</li>
+<li><strong>Filtrează pe pragul E[profit]:</strong> trimite doar dacă Profit_net × P(win) estimat &gt; Gas_revert × (1 − P(win)). Nu participa la curse pe care le pierzi sistematic.</li>
+<li><strong>Folosește flash loan 0% (Balancer) când acoperă suma</strong>, Aave 0,05% doar ca fallback; calculează premium-ul în marjă.</li>
+<li><strong>Setează minAmountOut din oracol, nu din pool</strong>, și fragmentează swap-urile mari (v3 + Curve) ca să ții slippage-ul sub bonus.</li>
+<li><strong>Programează revert ieftin precoce</strong> dacă HF-ul victimei e deja restabilit — economisești gas pe cursele pierdute.</li>
+<li><strong>Modelează basis-ul oracol-AMM</strong> și abține-te în ferestrele de crash unde oracolul e stale și AMM-ul a fugit.</li>
+<li><strong>Planifică pentru sequencer descentralizat 2026</strong> — infra de latență pură devine o piață de ordonare; pregătește migrarea spre licitație.</li>
+<li><strong>Ține evidența în lei din primul tx</strong> (dată, eveniment, curs, cost de bază = datoria repayată), aplică FIFO, provizionează 16% + CASS, reconciliază cu raportările DAC8 ale CASP-urilor.</li>
+<li><strong>Stres-testează contractul</strong> la reentrancy, oracol manipulat prin flash loan și revert parțial pe protocoale cu close factor dinamic — un bug la searcher e drenarea propriului capital de gas/operare.</li>
+</ul>
+
+<p>MEV-ul de lichidare pe Layer 2 nu e bani gratis — e o nișă de inginerie unde marja e reală exact în măsura în care modelul tău de fricțiune e exact. Diferența dintre un searcher profitabil și unul care arde gas la nesfârșit nu stă în bonusul afișat de protocol, ci în trei numere calculate <em>înainte</em> de fiecare tx: profitul net după slippage și gas, probabilitatea de win pe latență, și sarcina fiscală pe care o datorezi în lei la final de an. Cine optimizează doar codul și ignoră oricare dintre cele trei pierde — fie pe lanț, fie la control.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

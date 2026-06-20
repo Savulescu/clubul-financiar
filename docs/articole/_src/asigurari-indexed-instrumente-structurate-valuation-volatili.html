@@ -1,0 +1,109 @@
+<p>Evaluarea riguroasă a unei <strong>asigurări indexed instrumente structurate Black-Scholes valuation</strong> nu este un exercițiu de marketing actuarial, ci o problemă de descompunere a unui produs hibrid în componentele sale fundamentale: o obligațiune zero-cupon emisă (implicit) de asigurător plus un coș de opțiuni exotice. Orice contract de tip index-linked sau structured note îmbrăcat în poliță reprezintă, sub vălul juridic, un derivat colateralizat de bilanțul unui asigurător, iar valoarea lui economică reală se obține doar replicând fluxurile cu instrumente tranzacționabile.</p>
+
+<p>Pornind de la nivelul deja stăpânit al unit-linked-ului și al evaluării DCF cu WACC și marjă de siguranță, ridicăm aici miza la modelarea cantitativă completă: <strong>formula Black-Scholes pentru unit-linked valuation</strong> și extensiile ei, rolul <strong>volatilității implicite în asigurări linked indici</strong>, costul ascuns al opționalității într-o <strong>asigurare cu participare la index</strong>, structura de <strong>cap și collar în produsele de asigurări legate de indici</strong>, precum și cuantificarea <strong>riscului de counterparty în asigurări structurate cu garanție</strong> prin spread de credit și rating. Vom arăta cum se calculează participation rate de echilibru, cum se traduce un <strong>rating de credit al asigurătorului în profitabilitatea produsului</strong> și unde dispare, de fapt, randamentul promis clientului.</p>
+
+<p>Cadrul de referință este România 2026: Solvency II transpus prin Legea 237/2015 și regulamentele ASF, supraveghere ASF, cotare BVB pentru subiacentul autohton, dar majoritatea produselor indexed se sprijină pe indici globali (S&P 500, EURO STOXX 50). Lucrăm în lei și euro, cu praguri și cote fiscale aplicabile la data redactării.</p>
+
+<h2>Descompunerea produsului: obligațiune + coș de opțiuni</h2>
+
+<p>Un contract indexed/structured cu garanție de capital se descompune canonic în două picioare. Fie <strong>P</strong> prima netă investită, <strong>T</strong> maturitatea, <strong>r</strong> rata fără risc continuă, <strong>G</strong> nivelul garantat la maturitate (de regulă G = P, deci 100% protecție nominală). Asigurătorul trebuie să dețină la t=0 o obligațiune zero-cupon care la T plătește G:</p>
+
+<ul>
+<li><strong>Componenta de protecție (ZCB):</strong> PV(G) = G · e^(−(r+s)·T), unde <strong>s</strong> este spread-ul de credit al asigurătorului. Atenție: nu folosiți r pur, ci r+s, fiindcă garanția este o creanță chirografară pe bilanțul asigurătorului, nu un titlu de stat.</li>
+<li><strong>Componenta de upside (opționalitate):</strong> budget-ul rămas O = P − PV(G) − c, unde c sunt costurile încărcate (acquisition, administrare, marja). Acest budget cumpără participarea la index sub forma unei opțiuni call (sau a unei structuri cap/collar).</li>
+</ul>
+
+<p>Exemplu numeric. P = 100.000 lei, T = 6 ani, r = 6,5% (curba RON 2026, randamentele titlurilor de stat pe 5-7 ani gravitează în zona 6,5-7,2%), s = 1,2% pentru un asigurător solid. PV(G) = 100.000 · e^(−0,077·6) = 100.000 · e^(−0,462) = 62.987 lei. Dacă încărcările cumulate c reprezintă 4% din primă = 4.000 lei, budget-ul de opționalitate este O = 100.000 − 62.987 − 4.000 = 33.013 lei. Întreaga „participare la index" pe care o veți cumpăra clientului costă maximum 33.013 lei — orice promisiune de upside trebuie să încapă în acest plic.</p>
+
+<h2>Black-Scholes și pricing-ul participation rate</h2>
+
+<p>Participarea la randamentul indexului se modelează ca o opțiune call europeană pe index, normalizată la 1 unitate de notional. Valoarea call-ului per unitate de primă, în formula Black-Scholes pentru subiacent fără dividende discrete (folosim yield de dividend q):</p>
+
+<p><strong>C = S₀·e^(−qT)·N(d₁) − K·e^(−rT)·N(d₂)</strong>, cu <strong>d₁ = [ln(S₀/K) + (r − q + σ²/2)·T] / (σ·√T)</strong> și <strong>d₂ = d₁ − σ·√T</strong>.</p>
+
+<p>Pentru un produs at-the-money (K = S₀, randamentul se măsoară de la nivelul de start al indexului), call-ul ATM forward se aproximează elegant cu <strong>C ≈ S₀·e^(−qT)·0,4·σ·√T</strong> (aproximarea Brenner-Subrahmanyam), foarte utilă pentru sanity-check rapid.</p>
+
+<p>Numeric, pe EURO STOXX 50 cu q = 3,2% dividend yield, σ = 18% (volatilitate implicită ATM pe 6 ani din suprafața de vol, vezi mai jos), r = 3,2% (curba EUR), T = 6, S₀ normalizat la 1: C ≈ 1 · e^(−0,032·6) · 0,4 · 0,18 · √6 = 0,8253 · 0,4 · 0,18 · 2,449 = 0,1456. Deci o unitate de call ATM pe 6 ani costă ~14,56% din notional.</p>
+
+<h3>Participation rate de echilibru</h3>
+
+<p>Participation rate (PR) este factorul cu care clientul participă la creșterea indexului. Asigurătorul îl setează astfel încât costul opțiunilor să fie egal cu budget-ul disponibil: <strong>PR = O / (P · C_unit)</strong>, unde C_unit este prețul opțiunii per unitate de notional pe maturitate.</p>
+
+<p>Cu O = 33.013 lei, P = 100.000 lei și C_unit = 0,1456: PR = 33.013 / (100.000 · 0,1456) = 33.013 / 14.560 = <strong>2,267 → 226%</strong>. Sună spectaculos, dar atenție: 226% participare ATM fără cap înseamnă că asigurătorul nu poate finanța oferta decât plafonând upside-ul. Reciproc, dacă produsul promite PR = 100% cu un cap, surplusul de budget (O − cost_real) este marja ascunsă a asigurătorului. Aici se naște prima asimetrie de valoare.</p>
+
+<h2>Cap și collar: costul real al opționalității</h2>
+
+<p>Cele mai multe produse indexed nu oferă call pur, ci un <strong>call spread</strong> (cap pe upside) sau un collar. Un cap la nivelul H se replică printr-o poziție long call la K și short call la K+H — adică <strong>vânzarea unei opțiuni</strong> de către structurator, al cărei preț este capturat de asigurător, nu de client.</p>
+
+<ul>
+<li><strong>Call spread (cap):</strong> valoare = C(K) − C(K+H). Pe exemplul de mai sus, dacă produsul promite PR=100% cu cap la +60% pe 6 ani: long call ATM (0,1456) minus short call la strike 1,60. Short call-ul OTM 60% pe 6 ani valorează ~0,045. Costul net = 0,1456 − 0,045 = 0,1006 per unitate.</li>
+<li>Budget disponibil pentru PR=100% și 100.000 notional = 10.060 lei. Dar budget-ul real O = 33.013 lei. Diferența de <strong>22.953 lei rămâne la asigurător</strong> — acesta este „costul opționalității" pe care clientul îl plătește invizibil prin renunțarea la upside-ul de peste cap.</li>
+<li><strong>Collar:</strong> pentru a finanța un floor mai bun (garanție > 100%), structuratorul vinde și un put OTM, transferând riscul de coadă inferioară către client sub forma unui buffer/floor parțial. Valoarea put-ului vândut reduce costul net, dar introduce expunere downside necontabilizată în „garanția 100%" anunțată.</li>
+</ul>
+
+<p>Lecția cantitativă: niciun produs cap-at nu valorează pentru client mai mult decât <strong>min(budget, valoare call spread la nivel echitabil)</strong>. Reconstituiți întotdeauna call spread-ul din suprafața de volatilitate și comparați cu budget-ul implicit — diferența pozitivă este transferul de valoare către emitent.</p>
+
+<h2>Volatilitatea implicită: ce vinde de fapt asigurătorul</h2>
+
+<p>Volatilitatea implicită este variabila cea mai manipulabilă în pricing. Asigurătorul cumpără opțiunile la vol-ul de piață (suprafața de vol cu skew și term structure), dar prețuiește produsul pentru client la un vol „de prudență" mai ridicat, ceea ce scade artificial participation rate-ul oferit.</p>
+
+<h3>Skew, smile și term structure</h3>
+
+<p>Pe indici de acțiuni domină <strong>volatility skew</strong> negativ: put-urile OTM (strike-uri joase) au vol implicit mai mare decât call-urile OTM. Pentru un produs cu floor (clientul e long un put implicit de la garanție), skew-ul face protecția scumpă; pentru cap (client short call OTM), skew-ul face short-ul ieftin — ambele defavorabile clientului. Term structure pe 6 ani este de regulă upward-sloping în regim normal: vol-ul long-dated > vol-ul short-dated.</p>
+
+<p>Sensibilitatea valorii la vol — vega — pentru call ATM pe 6 ani: <strong>vega = S₀·e^(−qT)·√T·φ(d₁)</strong>. Cu d₁ ≈ (r−q+σ²/2)·√T/σ ≈ 0,22, φ(0,22)=0,389: vega = 0,8253 · 2,449 · 0,389 = 0,786 per 1,00 (100 puncte de vol), deci ~0,00786 per 1% vol. Dacă asigurătorul prețuiește la 22% în loc de 18% real, costul „aparent" al call-ului crește cu 4 · 0,00786 = 0,0314, adică +21% peste costul real. Acest markup de volatilitate scade PR oferit de la 226% la ~187% — pierdere directă de valoare pentru client, invizibilă fără reconstrucția suprafeței de vol.</p>
+
+<h2>Riscul de counterparty: garanția valorează cât emitentul</h2>
+
+<p>„Garanție 100% capital" este o afirmație condiționată de solvabilitatea asigurătorului. Componenta ZCB nu e garantată de stat; este o creanță pe bilanțul emitentului. <strong>Riscul de counterparty în asigurări structurate cu garanție</strong> se cuantifică prin Credit Valuation Adjustment.</p>
+
+<p><strong>CVA = (1 − R) · Σ PD(tᵢ) · EE(tᵢ) · DF(tᵢ)</strong>, unde R = recovery rate (tipic 40% pentru creanțe senior unsecured), PD = probabilitatea marginală de default derivată din spread, EE = expunerea așteptată, DF = factor de actualizare. Aproximarea de prim ordin pentru o garanție bullet: <strong>CVA ≈ G · e^(−rT) · (1 − e^(−(s/(1−R))·T·(1−R))) ≈ G·e^(−rT)·(1 − e^(−PD_cum·LGD))</strong>.</p>
+
+<h3>Din spread în haircut al garanției</h3>
+
+<p>Spread-ul de credit s reflectă tocmai PD ajustată: <strong>s ≈ PD_anual · (1 − R)</strong> → PD_anual ≈ s/(1−R). Pentru un asigurător cu s = 1,2% și R = 40%: PD_anual = 0,012/0,60 = 2,0%. PD cumulat pe 6 ani ≈ 1 − (1−0,02)⁶ = 1 − 0,886 = 11,4%. Pierderea așteptată pe garanție = PD_cum · LGD · PV(G) = 0,114 · 0,60 · 62.987 = <strong>4.308 lei</strong>. Garanția de 100.000 lei valorează deci, ajustată de credit, cu peste 4.300 lei mai puțin decât anunțul nominal — un haircut de ~4,3% pe care prospectul nu îl menționează.</p>
+
+<h3>Rating de credit al asigurătorului vs. profitabilitatea produsului</h3>
+
+<p>Există un trade-off direct între calitatea emitentului și randamentul oferit. Un asigurător A-/BBB+ are spread mai larg (s mai mare), deci PV(G) mai mic, deci budget de opționalitate O mai mare, deci PR sau cap mai atractive — dar clientul plătește această „generozitate" cu risc de credit mai ridicat. Tabelul mental al specialistului:</p>
+
+<ul>
+<li><strong>AA (s≈0,4%):</strong> PV(G) ridicat, O mic, PR modest, dar haircut de credit ~1,5%. Valoare ajustată de risc superioară.</li>
+<li><strong>A (s≈0,9%):</strong> echilibru; PR mediu, haircut ~3%.</li>
+<li><strong>BBB (s≈1,6%):</strong> PR/cap atractive comercial, dar haircut de credit ~6-7% pe maturitate lungă. Upside-ul aparent e finanțat din riscul de default.</li>
+</ul>
+
+<p>Regula: comparați mereu <strong>PR_oferit · valoare_call − CVA</strong> între emitenți. Un BBB cu PR 150% poate avea valoare ajustată inferioară unui AA cu PR 110%. Solvency II ajută: cereți SCR coverage ratio (raportul fonduri proprii eligibile / SCR). Sub 130% = semnal de fragilitate; peste 180% = confort. ASF publică rapoartele de solvabilitate și situație financiară (SFCR) ale asigurătorilor români.</p>
+
+<h2>Asamblarea valuation-ului complet</h2>
+
+<p>Valoarea economică reală pentru client a unui produs indexed cu garanție:</p>
+
+<p><strong>V_client = PV(G) − CVA + PR · C_unit_net · P</strong></p>
+
+<p>Pe cifrele noastre, scenariul cap-at PR=100%: PV(G) = 62.987, CVA = 4.308, picior de upside = 1,00 · 0,1006 · 100.000 = 10.060. V_client = 62.987 − 4.308 + 10.060 = <strong>68.739 lei</strong> valoare economică pentru o primă de 100.000 lei. Diferența de 31.261 lei = costuri explicite (4.000) + marja de structurare/opționalitate capturată (~22.953) + haircut de credit (4.308). Raportul valoare/preț = 0,687: clientul cumpără 68,7 cenți de valoare reală pentru fiecare leu de primă.</p>
+
+<h3>Greci de portofoliu și hedging dinamic</h3>
+
+<p>Asigurătorul care nu cumpără opțiuni back-to-back de la o bancă de investiții (ci hedge-uiește dinamic) preia risc de gamma și vega. Delta call ATM 6 ani ≈ e^(−qT)·N(d₁) = 0,8253·N(0,22) ≈ 0,8253·0,587 = 0,485 ≈ 0,50. Gamma = e^(−qT)·φ(d₁)/(S₀·σ·√T) = 0,8253·0,393/(1·0,18·2,449) = 0,735. Un asigurător sub-capitalizat care vinde garanții pe care le hedge-uiește imperfect transferă riscul de re-hedging tot către pool-ul de asigurați — relevant pentru evaluarea solvabilității pe termen lung.</p>
+
+<h2>Tratament fiscal RO 2026 — randamentul net</h2>
+
+<p>Aici trebuie inversată o eroare frecventă de modelare. Pentru o asigurare de viață autentică cu componentă investițională (unit-linked/indexed) la care <strong>primele sunt suportate de persoana fizică asigurată</strong>, sumele plătite de asigurător — indemnizații, sume asigurate, răscumpărări parțiale/totale, rente, precum și veniturile rezultate din investirea rezervelor constituite din primele plătite — sunt <strong>venituri neimpozabile</strong> conform Codului fiscal (art. 62 lit. g). Cu alte cuvinte, câștigul la maturitate al unui contract veritabil de asigurare de viață cu componentă investițională nu este, ca regulă, supus impozitului pe venit de 10%, iar pentru aceste sume neimpozabile nu se datorează nici <strong>CASS</strong> (contribuția de sănătate, cotă 10%, se calculează pe trepte de 6/12/24 de salarii minime brute pe economie — la un salariu minim de 4.050 lei în 2026, praguri orientative de 24.300/48.600/97.200 lei — și se aplică veniturilor extra-salariale impozabile, nu sumelor scutite din asigurare).</p>
+
+<p><strong>Capcana fiscală reală este însă inversă celei intuitive.</strong> Tocmai pentru că wrapper-ul de asigurare este avantajat fiscal față de un ETF index direct — unde câștigul de capital realizat se impozitează (3% pentru deținerile peste un an, respectiv 6% sub un an, prin reținere la broker rezident; 16% autodeclarat la broker nerezident, plus eventual CASS pe plafoane) — diferența de impozit nu trebuie tratată ca un avantaj „gratuit" al poliței. Avantajul fiscal de câteva procente trebuie pus în balanță cu drenajul de valoare deja cuantificat: marja de structurare/opționalitate capturată, markup-ul de volatilitate și haircut-ul de credit (CVA). Modelul corect: <strong>V_after_tax(poliță) ≈ V_client</strong> (fără strat de impozit pe câștig la maturitate, dar grevată de costurile de mai sus) versus <strong>V_after_tax(ETF) = primă · (1 + randament brut index) − impozit pe câștig (3%/6%) − costuri ETF (TER ~0,1-0,3%)</strong>. În cele mai multe scenarii, economia de impozit de 3-6% nu compensează transferul de valoare de 25-35% identificat în secțiunea de valuation: avantajul fiscal este real, dar marginal față de costul opționalității și al riscului de counterparty. Atenție și la excepție: dacă primele sunt suportate de un terț care desfășoară o activitate (angajator, persoană juridică), prima devine venit impozabil pentru beneficiar — caz în care arhitectura fiscală se schimbă complet.</p>
+
+<h2>Pași și checklist de evaluare a unui produs indexed</h2>
+
+<ul>
+<li><strong>1. Descompune produsul:</strong> izolează ZCB-ul (PV(G) = G·e^(−(r+s)T)) și budget-ul de opționalitate O = P − PV(G) − c. Cere c-ul explicit din prospect (acquisition + admin + management).</li>
+<li><strong>2. Reconstruiește opționalitatea:</strong> identifică structura reală (call pur, call spread cu cap, collar). Prețuiește fiecare picior cu Black-Scholes folosind vol implicit de piață (suprafața de vol, NU vol-ul din prospect).</li>
+<li><strong>3. Calculează participation rate de echilibru:</strong> PR_fair = O/(P·C_unit). Compară cu PR/cap-ul oferit. Surplusul = marja capturată de emitent.</li>
+<li><strong>4. Aplică haircut de volatilitate:</strong> verifică ce vol a folosit asigurătorul; orice supra-evaluare a vol scade PR oferit (vega · Δσ).</li>
+<li><strong>5. Cuantifică riscul de counterparty:</strong> derivă PD din spread (PD≈s/(1−R)), calculează CVA = PD_cum·LGD·PV(G). Cere rating și SCR coverage ratio din SFCR-ul ASF.</li>
+<li><strong>6. Asamblează V_client:</strong> PV(G) − CVA + PR·C_net·P. Calculează raportul valoare/preț; sub 0,90 = transfer semnificativ de valoare către emitent.</li>
+<li><strong>7. Ajustează fiscal:</strong> reține că la o poliță veritabilă cu prime suportate de asigurat câștigul la maturitate este neimpozabil (art. 62 lit. g Cod fiscal), fără CASS pe sumele scutite; compară net-cu-net cu un ETF index direct (impozit câștig de capital 3% peste un an / 6% sub un an la broker rezident, 16% autodeclarat la broker nerezident, plus TER) — economia fiscală de câteva procente rareori compensează transferul de valoare de 25-35% din valuation.</li>
+<li><strong>8. Stress-test:</strong> rulează scenarii pe σ (+/−5 vol), pe s (downgrade cu 1 notch), pe index la cap/floor/0. Dacă valoarea ajustată de risc rămâne sub costul unui call spread replicabil pe piață, produsul nu merită prima.</li>
+</ul>
+
+<p>Concluzia specialistului: orice asigurare indexed/structurată este replicabilă cu un coș de instrumente tranzacționabile, iar valoarea ei reală pentru client rareori depășește 85-90% din primă după costuri, markup de volatilitate și haircut de credit. Disciplina valuation — descompunere, Black-Scholes pe suprafața reală de vol, CVA din spread — transformă un produs opac într-un calcul transparent în care știți exact cine capturează ce.</p>

@@ -1,0 +1,129 @@
+<p>Specialiștii FIRE care construiesc fluxul de venit pe distribuții discută la nesfârșit despre <strong>dividend income FIRE timing fiscal CNPP</strong>, dar tratează retragerea ca pe un eveniment continuu, neted, când în realitate ea se ciocnește de calendare administrative discrete: anul fiscal ANAF, plafoanele de contribuție recalculate de CNPP/CASS la 1 ianuarie pe salariul minim brut, scadența Declarației Unice și ritmul de revizuire a dobânzii de politică monetară a BNR. Cine ignoră aceste praguri anuale plătește, în proiecție pe 30 de ani, zeci de mii de lei în plus — nu din cote mai mari, ci din proastă sincronizare a momentului încasării.</p>
+
+<p>Această lecție tratează planning dividend retrageri FIRE ca pe o problemă de optimizare temporală discretă: cum poziționezi luna încasării în raport cu prag CNPP FIRE timing anual, cum citești calendarul fiscal CNPP pentru FIRE împreună cu fereastra de recalculare a CASS, cum structurezi în proiecție impozitare dividend vs vânzare FIRE (16% pe brut vs 3–10% pe câștig) și cum aplici optimizare impozit dividend FIRE sincronizând cu ajustările de dobândă ale BNR influențate de mișcările EURIBOR. Presupun cunoscute bazele și nivelul avansat — mergem direct la modele de calcul, formule de plafonare și edge-cases.</p>
+
+<p>Premisa de lucru: cotele 2026, deja consolidate în lecția-mamă — dividende <strong>16%</strong> reținut la sursă pentru titluri românești, câștig de capital <strong>3%</strong> (deținere &gt;365 zile) sau <strong>6%</strong> (&lt;365 zile) prin broker rezident, <strong>10%</strong> prin broker străin via Declarația Unică, plus CASS 10% pe plafoanele de 6/12/24 salarii minime. Restul construcției pleacă de aici.</p>
+
+<h2>De ce „calendarul" contează: discretizarea pragurilor CASS pe salariul minim</h2>
+
+<p>Eroarea conceptuală a FIRE-istului mediu este să modeleze retragerea ca o funcție continuă de venit anual. Sistemul de contribuții îți impune însă o funcție-treaptă. CASS pe veniturile din investiții se datorează pe baza anuală, nu lunar, dar plafonul de declanșare se <strong>recalculează la 1 ianuarie</strong> în funcție de salariul minim brut în vigoare la acea dată. Aici intervine prima sincronizare critică: dacă guvernul majorează salariul minim între doi ani fiscali, pragurile tale se deplasează, iar o retragere planificată „mecanic" la nivelul anului trecut te poate împinge într-o treaptă superioară.</p>
+
+<p>Pentru 2026, cu salariul minim brut de referință de <strong>4.050 lei</strong>, structura plafoanelor este:</p>
+
+<ul>
+<li><strong>6 salarii = 24.300 lei</strong> venit din investiții → CASS 10% × 24.300 = <strong>2.430 lei</strong>;</li>
+<li><strong>12 salarii = 48.600 lei</strong> → CASS 10% × 48.600 = <strong>4.860 lei</strong>;</li>
+<li><strong>24 salarii = 97.200 lei</strong> → CASS 10% × 97.200 = <strong>9.720 lei</strong>.</li>
+</ul>
+
+<p>Mecanica de plafon este esențială pentru optimizare: CASS nu este un procent nelimitat pe tot venitul, ci se aplică la <em>baza-plafon</em> a treptei atinse. Asta înseamnă că între praguri, CASS-ul tău marginal este <strong>zero</strong> — venitul suplimentar nu costă contribuție până nu atingi treapta următoare, moment în care plătești dintr-o dată diferența de bază (de la 24.300 la 48.600 lei = +2.430 lei CASS pentru a depăși 6 salarii spre 12). Funcția de cost CASS este, deci, o scară cu trei trepte, nu o rampă.</p>
+
+<h3>Implicația pentru timing: efectul de prag și „bunching"-ul invers</h3>
+
+<p>Pentru cineva care trăiește din dividende, venitul anual din investiții este aproape sigur peste 24.300 lei, deci treapta 1 este garantată. Jocul real se dă la <strong>granița 12 salarii (48.600 lei)</strong>. Dacă necesarul tău net de trai este, să zicem, 50.000 lei, brut-ul din dividende necesar (la 16% reținere) este aproximativ 50.000 / 0,84 ≈ <strong>59.524 lei</strong> — cu mult peste 48.600 lei, deci treapta 12 salarii este și ea declanșată, +4.860 lei CASS. Întrebarea de specialist nu este „cum scad cota", ci „<strong>pot menține venitul din investiții al unui an fiscal sub o treaptă, deplasând încasarea peste 1 ianuarie?</strong>".</p>
+
+<p>Tehnica este <em>income shifting</em> peste granița anului fiscal. Dividendele cu data de plată (payment date) în decembrie vs ianuarie cad în ani fiscali diferiți. Dacă în anul N ai deja venit din investiții aproape de 48.600 lei și o distribuție mare urmează să fie plătită la final de decembrie, o încasare care alunecă în ianuarie anul N+1 îți repartizează venitul pe doi ani, putând menține fiecare an sub treapta 12 salarii — economisind 4.860 lei CASS într-un an în care altfel ai fi sărit treapta degeaba pentru câteva mii de lei marginale.</p>
+
+<h2>Modelul de calcul: costul fiscal total pe leu net retras</h2>
+
+<p>Pentru a decide structura, ai nevoie de o funcție de cost unificată. Definim <strong>rata fiscală efectivă pe leu net</strong> (RFEN) ca raport între tot ce pierzi (impozit + CASS marginal) și ce-ți rămâne în buzunar. Pentru ruta dividende:</p>
+
+<ul>
+<li>Brut necesar pentru N lei net (ignorând CASS): <strong>B = N / 0,84</strong> (16% reținere la sursă).</li>
+<li>CASS-ul este aditiv și plafonat: îl adaugi ca termen fix al treptei, nu ca procent pe brut.</li>
+</ul>
+
+<p>Exemplu numeric complet, necesar net 50.000 lei/an, ruta 100% dividende RO:</p>
+
+<ul>
+<li>Pentru a obține <strong>50.000 lei net</strong> trebuie rezolvată ecuația de venit: net = 0,84 × Brut − CASS<sub>plafon</sub>. Cu CASS plafonat la treapta 12 salarii (4.860 lei, fix): 0,84 × Brut − 4.860 = 50.000 → <strong>Brut ≈ 65.310 lei</strong>.</li>
+<li>Impozit 16% = 0,16 × 65.310 ≈ <strong>10.450 lei</strong>.</li>
+<li>Venit din investiții (baza CASS) = 65.310 lei → peste 48.600, sub 97.200 → treapta 12 salarii → CASS = <strong>4.860 lei</strong> (sumă fixă a treptei).</li>
+<li>Cost fiscal total = 10.450 + 4.860 = <strong>15.310 lei</strong>; net rezultat = 65.310 − 10.450 − 4.860 = 50.000 lei. ✓</li>
+<li><strong>RFEN = 15.310 / 50.000 ≈ 30,6%</strong> raportat la net.</li>
+</ul>
+
+<p>Aceeași nevoie, ruta vânzare treptată din ETF de acumulare, broker RO, titluri &gt;365 zile, presupunând că din 50.000 lei retrași 30.000 sunt capital și 20.000 câștig:</p>
+
+<ul>
+<li>Impozit câștig = 3% × 20.000 = <strong>600 lei</strong>.</li>
+<li>Baza CASS = doar <strong>câștigul</strong> de 20.000 lei (nu toți cei 50.000), deci sub 24.300 → CASS posibil <strong>0</strong> dacă nu ai alte venituri din investiții; sau treapta 1 (2.430 lei) dacă mai ai dividende reziduale care împing baza peste 24.300.</li>
+<li>Cost fiscal total = 600 lei (sau 600 + 2.430 = 3.030 lei). <strong>RFEN ≈ 1,2%–6%</strong>.</li>
+</ul>
+
+<p>Diferența RFEN ~30,6% vs ~6% este enormă și provine din două surse cumulate: baza de impozitare (brut total vs doar câștig) și baza CASS (venitul brut din dividende intră integral în plafon, în timp ce la vânzare doar câștigul net contează). Acesta este miezul cantitativ al deciziei impozitare dividend vs vânzare FIRE: nu cota nominală, ci baza pe care cad cota și plafonul.</p>
+
+<h2>Calendarul fiscal: cele patru ferestre care îți dictează luna retragerii</h2>
+
+<p>Optimizarea timing-ului presupune să suprapui patru calendare distincte și să acționezi în intervalele lor de overlap.</p>
+
+<h3>Fereastra 1 — granița anului fiscal (31 dec / 1 ian)</h3>
+
+<p>Determină în ce an cade venitul, deci ce treaptă CASS atinge fiecare an. Instrumentul de control este <strong>payment date</strong> al distribuției (nu ex-date), pentru că impozitarea se leagă de momentul punerii efective la dispoziție a sumei. Pentru distribuții străine via broker, decisiv este și momentul creditării în cont, relevant pentru cursul de schimb aplicat.</p>
+
+<h3>Fereastra 2 — recalcularea plafoanelor (1 ianuarie)</h3>
+
+<p>La 1 ianuarie se fixează salariul minim brut care va guverna plafoanele CASS ale întregului an. Dacă afli (din proiectul de buget, de regulă publicat în Q4) că salariul minim crește, pragurile tale urcă proporțional. Un FIRE-ist prudent <strong>nu finalizează planul de retragere al anului N+1 înainte de a confirma salariul minim de la 1 ianuarie N+1</strong>, pentru că tot tabelul de trepte se rescrie.</p>
+
+<h3>Fereastra 3 — Declarația Unică (scadență 25 mai anul următor)</h3>
+
+<p>Veniturile din străinătate și câștigurile prin broker non-rezident se autodeclară prin Declarația Unică, cu termen de regulă <strong>25 mai</strong> al anului următor celui de realizare. Aceasta îți dă o fereastră de ~5 luni de la închiderea anului în care îți poți optimiza, prin reportarea pierderilor, baza de câștig declarată. Atenție la regimul diferit pe tip de broker: la <strong>broker rezident</strong> pierderile <em>nu</em> se mai reportează (sunt definitive, pentru că impozitul e reținut tranzacție cu tranzacție); la <strong>broker străin</strong> pierderea netă anuală se reportează pe <strong>5 ani fiscali consecutivi</strong>, dar compensarea este plafonată la <strong>70% din câștigul net anual</strong> al anilor următori — deci nu poți anula integral un câștig viitor cu o pierdere reportată. Tehnica de specialist: <strong>tax-loss harvesting în decembrie</strong> (doar pe broker străin) pentru a comprima câștigul net al anului în curs, declarat ulterior în mai.</p>
+
+<h3>Fereastra 4 — revizuirea dobânzii BNR (deciziile de politică monetară)</h3>
+
+<p>BNR își revizuiește dobânda de politică monetară în ședințe programate periodic peste an. Această dobândă, alături de mișcările EURIBOR/IRCC, repreciază randamentul cash-ului și al titlurilor de stat (Tezaur, Fidelis) în care îți ții buffer-ul anti-secvență. <strong>Sincronizarea</strong>: într-un ciclu de dobânzi în creștere influențat de EURIBOR, randamentul real al buffer-ului crește, ceea ce-ți permite să amâni vânzările de ETF (deci să eviți cristalizarea câștigului impozabil într-un an cu treaptă CASS nefavorabilă) trăind temporar din randamentul buffer-ului. Invers, când BNR coboară rata, buffer-ul devine mai puțin productiv și revii la retrageri planificate din portofoliu.</p>
+
+<h2>Structura recomandată: secvențierea lunară a fluxului de venit</h2>
+
+<p>Combinând cele patru ferestre, structura optimă pentru un portofoliu mixt (dividende + ETF acumulare + buffer titluri de stat) urmează o secvență lunară, nu un flux uniform.</p>
+
+<ul>
+<li><strong>Ianuarie–februarie:</strong> confirmi salariul minim nou și recalculezi cele trei trepte CASS pentru anul curent. Stabilești „bugetul de venit din investiții" țintă, sub treapta pe care vrei să o eviți.</li>
+<li><strong>Trimestrele cu distribuții:</strong> încasezi dividendele cu reținere la sursă; le contorizezi cumulat față de plafonul-țintă. Când te apropii de o treaptă, comuți partea de cheltuieli pe buffer/vânzare de capital (RFEN mai mică), nu pe dividende suplimentare.</li>
+<li><strong>Octombrie–noiembrie:</strong> proiecția de an-întreg. Dacă venitul din investiții se apropie periculos de o treaptă pentru câteva mii de lei, deplasezi încasările controlabile (distribuții cu payment date flexibil, vânzări de capital) peste 1 ianuarie.</li>
+<li><strong>Decembrie:</strong> tax-loss harvesting pe pozițiile pe pierdere (broker străin, reportabile 5 ani), pentru a comprima câștigul net declarabil în Declarația Unică din mai.</li>
+<li><strong>Până la 25 mai (anul următor):</strong> depui Declarația Unică cu baza optimizată, aplicând reportările și creditul fiscal pentru impozitul reținut în străinătate (tratate de evitare a dublei impuneri).</li>
+</ul>
+
+<h2>Edge-cases și capcane de specialist</h2>
+
+<h3>Capcana încasării marginale peste prag</h3>
+
+<p>Cel mai costisitor edge-case: depășești treapta de 12 salarii (48.600 lei) cu doar 500 lei venit marginal din investiții și plătești dintr-o dată diferența de bază CASS. Întrebarea de control înainte de orice retragere de final de an: „<strong>această încasare îmi schimbă treapta CASS?</strong>". Dacă da, costul real al ultimilor 500 lei poate fi de 2.430 lei contribuție — o rată marginală efectivă de sute de procente pe leul care a depășit pragul.</p>
+
+<h3>Dividende străine și dubla bază</h3>
+
+<p>La dividende de la companii străine, ți se reține în statul-sursă (frecvent 15% prin tratat), iar în România datorezi diferența până la 16%, cu credit fiscal pentru cât s-a reținut afară — declarat prin Declarația Unică. Edge-case de timing: cursul BNR la data plății determină echivalentul în lei al bazei CASS. O distribuție mare încasată într-o lună cu EUR/RON ridicat poate inflama artificial baza-lei și te poate împinge peste o treaptă; uneori merită corelată încasarea cu o fereastră de curs mai favorabilă, în limita controlului real.</p>
+
+<p>Exemplu de calcul al diferenței de plată: dividend brut străin de 10.000 lei echivalent, reținut afară 15% (1.500 lei) prin tratat. În România datorezi 16% × 10.000 = 1.600 lei, dar primești credit fiscal pentru cei 1.500 lei reținuți, deci achiți doar diferența de <strong>100 lei</strong> prin Declarația Unică. Atenție: tot brutul de 10.000 lei intră în baza CASS, nu doar diferența — exact mecanismul care face dividendul scump pe partea de plafon de contribuție, independent de creditul fiscal pe impozitul propriu-zis.</p>
+
+<h3>Confuzia ex-date vs payment date</h3>
+
+<p>Pentru optimizarea peste granița anului contează <strong>payment date</strong> (punerea efectivă la dispoziție), nu ex-date-ul (care doar îți dă dreptul la dividend). O acțiune cu ex-date în decembrie și payment date în ianuarie îți repartizează venitul în anul N+1, chiar dacă „ai dreptul" din N. Verifică întotdeauna calendarul concret al emitentului/fondului.</p>
+
+<h3>Buffer-ul ca instrument de smoothing fiscal, nu doar anti-secvență</h3>
+
+<p>Lecția-mamă tratează buffer-ul de 1–2 ani ca apărare împotriva riscului de secvență. La nivel expert, el este și un <strong>instrument de netezire a treptelor CASS</strong>: într-un an în care ai fi sărit o treaptă din cauza unei vânzări necesare, trăiești din buffer (titluri de stat Tezaur/Fidelis, a căror dobândă este pentru persoane fizice <strong>scutită atât de impozit pe venit, cât și de CASS</strong>, randament reprețuit de ciclul BNR/EURIBOR) și amâni vânzarea impozabilă pentru un an cu treaptă mai favorabilă. Dubla scutire (impozit + contribuție) face din buffer-ul în titluri de stat nu doar un tampon de lichiditate, ci o sursă de venit care <em>nu</em> intră deloc în baza de plafon CASS — exact opusul dividendului.</p>
+
+<h2>Sinteza cantitativă: când domină fiecare rută</h2>
+
+<p>Regula de decizie, derivată din RFEN:</p>
+
+<ul>
+<li><strong>În primii ani de FIRE</strong>, când proporția capital/câștig în ce vinzi este mare (capitalul nu se reimpozitează), ruta vânzare treptată are RFEN dramatic mai mică (~1–6%) și menține baza CASS jos. Domină clar.</li>
+<li><strong>Pe măsură ce câștigul nerealizat crește</strong> (deceniile târzii), proporția câștig în vânzări crește, iar diferența față de dividende se îngustează — dar rareori se inversează, pentru că dividendul rămâne taxat pe brut integral cu 16% + bază CASS plină.</li>
+<li><strong>Dividendele rămân justificate</strong> doar pentru porțiunea de portofoliu unde disciplina psihologică și fluxul automat compensează RFEN-ul superior, sau ca tampon de venit garantat în ani cu vânzări nefavorabile fiscal.</li>
+</ul>
+
+<h2>Checklist operațional anual</h2>
+
+<ul>
+<li><strong>Ianuarie:</strong> confirmă salariul minim de la 1 ianuarie și recalculează cele trei trepte CASS (6/12/24 salarii). Fixează plafonul-țintă de venit din investiții.</li>
+<li><strong>Continuu:</strong> ține un registru cumulat al venitului din investiții vs treapta-țintă; marchează luna în care te apropii la &lt;10% de o treaptă.</li>
+<li><strong>La fiecare distribuție:</strong> verifică <strong>payment date</strong> (nu ex-date) și impactul pe an fiscal; pentru dividende străine, notează cursul BNR la data plății și impozitul reținut la sursă.</li>
+<li><strong>Octombrie–noiembrie:</strong> rulează proiecția de an-întreg; dacă o treaptă se declanșează marginal, deplasează încasările controlabile peste 1 ianuarie.</li>
+<li><strong>Decembrie:</strong> execută tax-loss harvesting <em>doar pe broker străin</em> (reportare 5 ani, compensare plafonată la 70% din câștigul net al anilor următori) pentru a comprima câștigul net; la broker rezident pierderile sunt definitive și nu compensează nimic.</li>
+<li><strong>Aliniere BNR:</strong> la fiecare decizie de politică monetară, reevaluează randamentul buffer-ului (titluri de stat) și decide dacă amâni vânzări de capital impozabile.</li>
+<li><strong>Până la 25 mai:</strong> depune Declarația Unică cu baza optimizată, aplicând reportările și creditul pentru impozitul reținut în străinătate.</li>
+<li><strong>Înainte de orice retragere mare:</strong> rulează întrebarea-filtru „îmi schimbă treapta CASS?" și validează cifrele cu un consultant fiscal — pragurile și cotele se actualizează, iar o eroare la prag costă disproporționat.</li>
+</ul>

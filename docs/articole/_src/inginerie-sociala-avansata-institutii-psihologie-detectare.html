@@ -1,0 +1,140 @@
+<p>La nivel de specialist, <strong>ingineria socială avansată în instituții financiare</strong> nu mai este un repertoriu de mesaje-momeală, ci o disciplină operațională: atacatorul construiește un model psihologic al țintei, calibrează un vector (e-mail, voce, SMS, chat intern) și optimizează rata de conversie printr-un ciclu de încercare-eroare cu memorie. Această lecție disecă mecanica fină — <strong>pretexting bancar și manipularea psihologică a angajaților</strong>, <strong>vishing avansat cu tone spoofing și falsificarea caller ID</strong>, persistența comportamentală tip spear-phishing — și trece direct la cuantificare: cum modelezi probabilitatea de cedare, cum scorezi semnale de <strong>detecție a ingineriei sociale prin tonul și vocea verbală</strong> și cum dimensionezi <strong>contramăsuri de inginerie socială și training pentru angajați</strong> cu un randament demonstrabil. Tot ce urmează se sprijină pe <strong>analiză comportamentală a exploatării psihologice</strong> și pe <strong>persistența comportamentală tip phishing și spear-phishing</strong>, cu accent pe <strong>vishing avansat, tone spoofing și falsificarea caller ID</strong> prin caller ID falsificat.</p>
+
+<p>Premisa este că stăpânești deja nivelul elementar și intermediar: nu vom re-explica ce este phishing-ul sau de ce nu dai codul OTP. Mergem în profunzime pe arhitectura cognitivă exploatată, pe formule de risc, pe protocoale de <strong>analiză comportamentală a exploatării psihologice</strong> și pe edge-case-uri unde apărarea clasică (filtru SPF/DMARC, blackliste) eșuează prin construcție.</p>
+
+<p>Cadrul de referință este România 2026: GDPR și Legea 190/2018, Directiva NIS2 transpusă prin OUG 155/2024 (aprobată cu modificări prin Legea 124/2025), regulamentul DORA aplicabil din 17 ianuarie 2025 entităților financiare, normele BNR privind reziliența operațională și obligațiile PSD2 de autentificare puternică (SCA). Toate cifrele și pragurile de mai jos sunt fie reale, fie prudent încadrate.</p>
+
+<h2>De ce eșuează modelul clasic „un singur semnal de alarmă"</h2>
+
+<p>Apărarea de nivel intermediar tratează frauda ca pe o listă de indicatori: link suspect, urgență, greșeli de limbă. Problema, la nivel de specialist, este că un atac matur este construit tocmai pentru a nu declanșa niciun indicator izolat. Diacriticele sunt corecte, domeniul are DMARC valid, tonul este profesional, suma este verosimilă. Detecția fiabilă nu mai poate fi binară (semnal prezent / absent), ci trebuie să fie <strong>probabilistică și compusă</strong>: aduni microsemnale slabe, le ponderezi și treci un prag. Acesta este saltul conceptual între un angajat „atent" și un sistem de apărare măsurabil.</p>
+
+<p>În plus, ofensatorul are o buclă de feedback pe care apărarea adesea nu o are: el testează variante (A/B pe linia de subiect, pe ora trimiterii, pe pretext) și păstrează ce convertește. Dacă apărarea ta este statică, asimetria îți este structural defavorabilă. Concluzia operațională: contramăsurile trebuie recalibrate periodic, nu instalate o dată.</p>
+
+<h2>Arhitectura cognitivă exploatată: de la principii Cialdini la model de stare</h2>
+
+<p>La nivel expert, cele șase principii ale lui Cialdini (reciprocitate, angajament, dovadă socială, autoritate, simpatie, raritate) nu se aplică izolat, ci se compun multiplicativ. Un atac matur de pretexting bancar nu apasă un singur buton; secvențiază buton după buton pentru a deplasa ținta de la o stare cognitivă deliberativă (Sistem 2) la una reactivă (Sistem 1). Modelarea utilă este una de tip <strong>stare-tranziție</strong>: ținta începe în starea S0 (vigilent), iar fiecare tactică crește probabilitatea de tranziție către S1 (cooperare necritică).</p>
+
+<p>Un model operațional simplu, dar suficient pentru calibrare, exprimă probabilitatea de cedare ca o funcție logistică de presiuni acumulate:</p>
+
+<ul>
+<li><strong>P(cedare) = 1 / (1 + e^(−z))</strong>, unde <strong>z = β₀ + β₁·Autoritate + β₂·Urgență + β₃·Pretext_plauzibil + β₄·Sarcină_cognitivă − β₅·Vigilență_bazală</strong>.</li>
+<li>Coeficienții β se estimează empiric din campaniile de simulare internă (vezi mai jos), nu se postulează. Tipic, în populații bancare neantrenate, <strong>Autoritate</strong> și <strong>Urgență</strong> au cea mai mare pondere marginală.</li>
+<li><strong>Sarcina cognitivă</strong> (β₄) este levierul subtil: atacatorul suprasolicită memoria de lucru (cere simultan un cod, o confirmare verbală și o acțiune în sistem) pentru a degrada verificarea critică. Capacitatea memoriei de lucru ~4±1 elemente; depășirea ei forțează euristici.</li>
+</ul>
+
+<h3>Pretexting bancar: construcția pretextului și exploatarea ierarhiei</h3>
+
+<p>Pretexting-ul instituțional vizează asimetria de putere internă. Vectorul clasic „CEO fraud" / business email compromise nu funcționează prin credulitate, ci prin <strong>frica de cost ierarhic</strong>: angajatul estimează implicit costul de a refuza o cerere aparent venită de la conducere ca fiind mai mare decât costul de a o executa. Modelarea: angajatul execută dacă <strong>C_refuz_perceput &gt; C_execuție_perceput</strong>. Atacatorul lucrează ambii termeni — ridică C_refuz (ton de autoritate, deadline, confidențialitate impusă) și coboară C_execuție (sumă „normală", proces „de rutină", „am vorbit deja cu Finanțele").</p>
+
+<p>Edge-case rar discutat: <strong>pretextul de a doua mișcare</strong>. Atacatorul nu cere transferul direct, ci cere mai întâi o informație inocuă (confirmarea unui IBAN furnizor, programul cuiva). Acel prim „da" activează principiul de angajament-consecvență; al doilea „da" (transferul) devine consecvent cu primul. Apărarea trebuie să trateze fiecare interacțiune ca independentă, nu ca o continuare logică.</p>
+
+<h2>Vishing avansat: tone spoofing, caller ID falsificat și deepfake vocal</h2>
+
+<p>Vishing-ul de nivel expert combină trei straturi tehnice cu un strat psihologic. Tehnic: falsificarea caller ID (CLI spoofing prin gateway VoIP cu SIP header manipulat), eventual clonare vocală în timp real (sub 30 de secunde de audio sursă sunt suficiente pentru modele moderne de sinteză) și manipularea prozodiei — <strong>tone spoofing</strong>, adică imitarea calmului profesional al unui operator bancar real. Psihologic: scriptul exploatează tiparul de „operator care te ajută împotriva unei fraude", inversând rolul — victima crede că este apărată.</p>
+
+<p>BNR și ARB au avertizat repetat că nicio bancă nu cere prin telefon coduri, parole sau mutarea banilor „într-un cont sigur". Apărarea matură nu se bazează însă pe această regulă (atacatorul o cunoaște și o ocolește), ci pe <strong>protocoale de detecție vocală</strong> și pe verificare out-of-band obligatorie.</p>
+
+<h3>Protocol de detecție prin analiză verbală și de ton</h3>
+
+<p>Un agent uman antrenat sau un sistem de monitorizare poate scora un apel pe semnale care corelează cu manipularea. Construiește un <strong>scor de risc al apelului</strong> ca sumă ponderată de indicatori binari:</p>
+
+<ul>
+<li><strong>Compresie temporală</strong> (presiune de timp explicită „acum, în următoarele 2 minute"): +0,25.</li>
+<li><strong>Inhibiție de verificare</strong> (descurajarea de a închide și a suna înapoi la numărul oficial de pe card): +0,30. Acesta este semnalul cu cea mai mare valoare diagnostică — un operator real nu te descurajează niciodată să verifici.</li>
+<li><strong>Cerere de secret</strong> („nu spuneți colegilor", „nu pomeniți la ghișeu"): +0,20.</li>
+<li><strong>Anomalie prozodică</strong>: ton excesiv de neted, lipsa disfluențelor naturale, latențe de răspuns prea regulate (semn de sinteză sau script citit): +0,15.</li>
+<li><strong>Cerere de date sau acțiuni protejate SCA</strong> (cod OTP, instalare aplicație de „suport", aprobare în app): +0,40 — singur, declanșează prag.</li>
+</ul>
+
+<p>Regulă de decizie: dacă <strong>scor ≥ 0,40</strong>, apelul se tratează ca ostil — închidere și callback la numărul oficial. Pragul jos este intenționat: în detecția fraudei, costul fals-negativului (transfer pierdut) domină masiv costul fals-pozitivului (un apel legitim întrerupt și verificat). Acesta este un compromis explicit pe matricea de confuzie, nu o scăpare.</p>
+
+<h2>Spear-phishing și persistența comportamentală: modelul ofensatorului avansat</h2>
+
+<p>La nivel avansat, distincția dintre phishing de masă și spear-phishing nu este în conținut, ci în <strong>funcția de cost a atacatorului</strong>. Phishing-ul de masă optimizează volum (rată de conversie mică × număr mare). Spear-phishing-ul optimizează valoare per țintă, acceptând cost mare de reconnaissance (OSINT pe LinkedIn, registrul comerțului, scurgeri de date). Persistența — atacuri repetate, multi-canal, eșalonate în timp — este semnătura grupurilor cu motivație financiară ridicată.</p>
+
+<p>Cuantificarea utilă pentru apărare este <strong>expunerea așteptată anuală</strong>:</p>
+
+<ul>
+<li><strong>ALE = ARO × SLE</strong>, unde ARO = frecvența anuală a evenimentelor reușite, iar SLE = pierderea pe eveniment.</li>
+<li>Exemplu numeric: o instituție cu 1.000 de angajați, rată de cedare neantrenată de 12% la o campanie credibilă, și 6 campanii ostile pe an, are ~720 de „evenimente de risc" anuale. Dacă doar 1 din 200 escaladează la pierdere reală, ARO ≈ 3,6. Cu SLE mediu de 80.000 lei (transfer mediu fraudat în segment IMM/corporate), <strong>ALE ≈ 288.000 lei/an</strong>.</li>
+<li>Dacă trainingul reduce rata de cedare de la 12% la 3% (factor 0,25), ALE scade proporțional la ~72.000 lei/an — economie brută de 216.000 lei. Compară cu costul programului de training pentru a calcula ROSI (return on security investment).</li>
+</ul>
+
+<h3>De ce eșuează apărarea pur tehnică (edge-cases)</h3>
+
+<ul>
+<li><strong>Domenii „cousin" cu DMARC valid propriu</strong>: atacatorul cumpără un domeniu similar vizual (homoglife, sufixe adăugate), îi configurează corect SPF/DKIM/DMARC, deci e-mailul trece autentificarea — apărarea pe DMARC nu prinde nimic, fiindcă domeniul nu uzurpă, ci imită.</li>
+<li><strong>Thread hijacking</strong>: atacatorul răspunde într-un fir de e-mail real, compromis anterior; contextul autentic dezarmează suspiciunea. Niciun filtru de conținut nu marchează un răspuns într-o conversație legitimă.</li>
+<li><strong>QR-phishing (quishing)</strong>: payload-ul e o imagine; gateway-urile de URL nu parsează codul QR, iar deschiderea se face pe dispozitivul mobil personal, în afara perimetrului monitorizat.</li>
+<li><strong>Canale interne</strong>: mesaj pe Teams/Slack de la un cont coleg compromis — în afara scopului filtrelor de e-mail.</li>
+</ul>
+
+<h2>Analiza comportamentală a exploatării: profilarea țintei și a momentului</h2>
+
+<p>Atacatorul avansat nu lovește aleator; selectează ținta și fereastra temporală pe baza unei <strong>analize comportamentale</strong>. Trei vectori de profilare sunt dominanți și, simetric, sunt și locurile unde apărarea trebuie să-și concentreze atenția.</p>
+
+<ul>
+<li><strong>Profilare de rol și acces</strong>: țintele preferate nu sunt neapărat cele mai senior, ci cele cu <strong>acces × presiune × izolare</strong> ridicate — de ex. un angajat din trezorerie care lucrează singur, la sfârșit de program, cu autoritate de inițiere a plăților. Modelarea internă a riscului ar trebui să eticheteze astfel de poziții ca „high-value target" și să le aloce controale și training suplimentar disproporționat.</li>
+<li><strong>Profilare temporală</strong>: rata de cedare crește măsurabil la finalul zilei, înainte de concedii și în perioade de vârf (închidere de lună, raportări). Sarcina cognitivă bazală este deja ridicată, deci β₄ din model este saturat — atacul împinge ținta peste prag mai ușor. Programele de apărare ar trebui să crească pragurile de verificare exact în aceste ferestre, nu să le relaxeze „pentru viteză".</li>
+<li><strong>Profilare emoțională</strong>: pretextele care exploatează frica (sancțiune, audit, pierderea jobului) au rată de conversie mai mare decât cele care exploatează lăcomia, fiindcă aversiunea la pierdere depășește, în medie cu un factor de ~2 (Kahneman–Tversky), atracția unui câștig echivalent. Un pretext de tip „eviți o penalizare" este, deci, sistematic mai periculos decât unul de tip „câștigi un bonus".</li>
+</ul>
+
+<h3>Cuantificarea reconnaissance-ului: scorul de expunere OSINT</h3>
+
+<p>Înainte de atac, ofensatorul construiește un dosar. Poți evalua proactiv cât de „atacabil" este un angajat printr-un <strong>scor de expunere OSINT</strong>, util pentru a prioritiza trainingul:</p>
+
+<ul>
+<li>Funcție și nume vizibile public (LinkedIn, site corporativ): +2.</li>
+<li>Relații ierarhice deductibile (cine raportează cui — materie primă pentru pretexting): +3.</li>
+<li>Adresă de e-mail după tipar predictibil (prenume.nume@): +2.</li>
+<li>Apariție în scurgeri de date cunoscute (verificabil prin servicii de tip „have I been pwned" la nivel de domeniu): +3.</li>
+<li>Expunere de calendar/program (out-of-office, evenimente publice): +2.</li>
+</ul>
+
+<p>Un scor agregat ridicat nu înseamnă vină, ci <strong>suprafață de atac</strong>. Operațional: angajații din coada superioară a distribuției scorului primesc verificare out-of-band obligatorie pe toate plățile și training intensificat — alocare de resurse pe risc, nu uniformă.</p>
+
+<h2>Contramăsuri și training pentru angajați: arhitectură măsurabilă</h2>
+
+<p>Contramăsurile eficace nu sunt „mai multă conștientizare", ci un sistem cu bucle de feedback și metrici. Trei niveluri se compun.</p>
+
+<h3>Stratul de proces (controale care nu depind de vigilența umană)</h3>
+
+<ul>
+<li><strong>Verificare out-of-band obligatorie</strong> pentru orice cerere de plată sau modificare de cont/IBAN furnizor, peste un prag (de ex. 5.000 lei): callback la un număr din baza de date verificată, nu la cel furnizat în cerere.</li>
+<li><strong>Dual control / segregare</strong>: două persoane independente aprobă transferurile peste prag; un atac trebuie să compromită doi oameni simultan, ridicând costul ofensiv exponențial.</li>
+<li><strong>Time-delay deliberat</strong> pe transferurile noi către beneficiari nemaiîntâlniți (fereastră de retragere de câteva ore) — anulează levierul de urgență prin construcție.</li>
+</ul>
+
+<h3>Stratul uman (training calibrat, nu generic)</h3>
+
+<ul>
+<li>Simulări de phishing/vishing realiste, eșalonate, cu măsurarea ratei de click și a ratei de raportare. Metrica-cheie nu este rata de click, ci <strong>raportul raportare/click</strong> — vrei să crească raportarea, semnal că angajații au internalizat reflexul „raportez la SOC".</li>
+<li>Difficulty-ramping: campaniile încep ușor și cresc în plauzibilitate; măsori curba de învățare individuală și ținta-țintești remedierea pe cei din coada distribuției (repeat-clickers), nu media.</li>
+<li><strong>Tabletop drills</strong> pe scenarii de pretexting CEO și deepfake vocal, cu rol-play, pentru a antrena reflexul de verificare sub presiune ierarhică reală.</li>
+</ul>
+
+<h3>Stratul de detecție și răspuns</h3>
+
+<ul>
+<li>Buton de raportare cu un clic integrat în clientul de e-mail, cu triaj automat în SOC; măsori <strong>timpul median de raportare</strong> (țintă sub 10 minute de la livrare) — fereastra în care un atac e încă „viu".</li>
+<li>Monitorizare comportamentală a apelurilor către clienți cu scorul prozodic-verbal descris mai sus, pentru a detecta și apelurile în care propriul personal este manipulat să acționeze.</li>
+<li>Înregistrarea incidentelor și raportarea conform NIS2/DORA către autoritatea competentă în termenele legale, plus notificarea ANSPDCP în 72 de ore dacă există breșă de date personale.</li>
+</ul>
+
+<h2>Edge-case avansat: când ținta este ofițerul de conformitate</h2>
+
+<p>Un scenariu rar, dar de impact maxim, este atacul asupra exact a persoanei antrenate să detecteze fraude. Aici, atacatorul nu folosește urgență grosolană, ci <strong>congruență profesională</strong>: un pretext perfect aliniat la fluxul de lucru al țintei (o „solicitare de audit", o „verificare AML"). Apărarea împotriva acestui caz nu poate fi cognitivă — chiar și expertul cedează când pretextul e impecabil. Singura apărare reziduală este structurală: <strong>controale care nu pot fi suspendate de o singură persoană, oricât de senior</strong>. Acesta este motivul pentru care dual control și verificarea out-of-band nu admit excepții „pe baza autorității" — exact excepția pe care o cere atacatorul.</p>
+
+<h2>Pași și checklist de implementare</h2>
+
+<ul>
+<li><strong>1. Calibrează modelul de risc.</strong> Rulează 3-6 campanii de simulare/an și estimează empiric coeficienții β și rata de cedare per departament. Nu folosi cifre din literatură ca atare.</li>
+<li><strong>2. Calculează ALE și ROSI.</strong> Fixează SLE pe baza istoricului propriu de incidente; justifică bugetul de training cu reducerea ALE, nu cu „bune practici".</li>
+<li><strong>3. Impune verificarea out-of-band și dual control</strong> peste praguri clare (de ex. 5.000 lei modificare IBAN, dual control peste o sumă definită de comitetul de risc). Fără excepții pe autoritate.</li>
+<li><strong>4. Instalează scorul de detecție vocală</strong> (prag ≥ 0,40 = ostil) și antrenează frontline-ul pe semnalul dominant: descurajarea verificării.</li>
+<li><strong>5. Adaugă time-delay</strong> pe beneficiari noi; măsoară câte transferuri ostile cad în fereastra de retragere.</li>
+<li><strong>6. Monitorizează raportul raportare/click și timpul median de raportare</strong>, nu rata de click izolat. Țintește coada (repeat-clickers).</li>
+<li><strong>7. Rulează tabletop pe pretexting CEO și deepfake vocal</strong> trimestrial; testează că dual control rezistă presiunii ierarhice simulate.</li>
+<li><strong>8. Aliniază raportarea</strong> incidentelor la NIS2/DORA și notificarea ANSPDCP în 72 de ore pentru breșe de date personale; documentează lanțul de custodie pentru eventuale cercetări penale.</li>
+<li><strong>9. Re-estimează trimestrial</strong>: ofensatorii evoluează, deci coeficienții și pragurile trebuie recalibrate, nu înghețate.</li>
+</ul>

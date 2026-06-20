@@ -1,0 +1,136 @@
+<p><strong>Un trezorier corporativ cu expunere EUR de 50 de milioane nu „diversifică pe devize" și nu „așteaptă un curs bun"</strong>: el construiește o curbă forward, descompune costul de hedging în componenta de paritate a ratelor și componenta de <em>cross-currency basis</em>, calculează un <strong>optimal hedge ratio</strong> dintr-o matrice de covarianță cu <strong>corelație dinamică devize</strong> EUR/USD/RON și apoi decide structura — forward simplu, cross-currency swap sau opțiune — pe baza unei funcții de cost explicite. Această lecție ia exact acel aparat de <strong>hedging cross-currency swap forward curve România</strong> și îl coboară la scara unei persoane fizice cu expunere EUR semnificativă — <strong>hedging ipotecă EUR</strong> cu venituri în RON și economii mixte.</p>
+
+<p>Plecăm de unde s-a oprit lecția despre riscul valutar la credite și diversificarea pe devize și mutăm focusul de la <em>conștientizarea</em> riscului la <em>cuantificarea și acoperirea</em> lui. Vom trata <strong>forward curve analysis EUR/RON</strong> pornind de la diferențialul de dobândă BNR–BCE, vom măsura <strong>cross-currency basis cost</strong>-ul real plătit de retail, vom estima un <strong>optimal hedge ratio</strong> prin minimizarea varianței și prin regresie pe randamente, vom modela <strong>corelația dinamică devize</strong> EUR/USD/RON cu un EWMA, și vom construi un program concret de <strong>hedging ipotecă EUR</strong> pentru cineva care își încasează salariul în lei. Presupun stăpânite paritatea acoperită a ratelor (CIP), noțiunile de duratie, VaR și deviație standard anualizată — nu le reluăm. Context România 2026: BNR menține dobânda de politică monetară la 6,50%, facilitatea de depozit la 5,50%, BCE a urcat rata depozitului la 2,25% în iunie 2026, iar EUR/RON a atins maximul istoric de 5,2688 pe 6 mai 2026, cu o medie lunară de 5,2313 lei în mai.</p>
+
+<p>Diferența dintre un trezorier și un retail nu e accesul la informație, ci disciplina de a transforma o expunere brută într-o expunere netă, acoperită optim, cu un cost de carry explicit și un buget de risc cuantificat. Asta construim mai jos, pas cu pas, cantitativ.</p>
+
+<h2>Forward curve EUR/RON: ce plătești de fapt când fixezi cursul</h2>
+
+<p>Punctul de pornire e paritatea acoperită a ratelor. Cursul forward teoretic la orizont <em>T</em> (în ani) rezultă din diferențialul de dobândă dintre cele două devize:</p>
+
+<ul>
+<li><strong>F = S × (1 + r<sub>RON</sub> × T) / (1 + r<sub>EUR</sub> × T)</strong>, unde S e cursul spot, r<sub>RON</sub> rata RON și r<sub>EUR</sub> rata EUR pe orizontul T.</li>
+</ul>
+
+<p>Cu spotul la 5,23, o rată RON pe 1 an în jur de 6,3% (ROBOR/yield titluri de stat scurte) și o rată EUR pe 1 an în jur de 2,3% (EURIBOR/depozit BCE), forward-ul teoretic la 12 luni este:</p>
+
+<ul>
+<li>F = 5,23 × (1 + 0,063) / (1 + 0,023) = 5,23 × 1,063 / 1,023 = 5,23 × 1,0391 = <strong>5,434 lei/euro</strong>.</li>
+</ul>
+
+<p>Citirea de specialist: <strong>forward-ul EUR/RON este structural mai mare decât spotul</strong>, pentru că RON e devize cu dobândă superioară. Asta înseamnă că cine cumpără euro la termen (cazul tipic al debitorului cu ipotecă EUR care vrea să-și fixeze costul) plătește un <em>carry pozitiv</em> de aproximativ 4% pe an — cei 40 de bani diferență. Acesta nu e o predicție că RON se va deprecia cu 4%; este pur și simplu prețul de echilibru fără arbitraj. Eroarea clasică a investitorului avansat e să interpreteze panta curbei forward ca prognoză de curs. Nu este — e diferențialul de dobândă, atât.</p>
+
+<h3>Curba completă și descompunerea pe scadențe</h3>
+
+<p>Extinzând formula pe mai multe puncte, obținem o curbă forward EUR/RON ascendentă. Cu diferențialul de ~4 puncte procentuale menținut, punctele forward (în bani peste spot) se aproximează liniar pe orizonturi scurte:</p>
+
+<ul>
+<li><strong>3 luni:</strong> 5,23 × (1 + 0,063×0,25)/(1 + 0,023×0,25) ≈ 5,281 (+5,1 bani)</li>
+<li><strong>6 luni:</strong> ≈ 5,331 (+10,1 bani)</li>
+<li><strong>12 luni:</strong> ≈ 5,434 (+20,4 bani)</li>
+<li><strong>24 luni:</strong> compus, ≈ 5,64 (+41 bani)</li>
+</ul>
+
+<p>Panta curbei e direct proporțională cu diferențialul de dobândă. Implicația operațională: dacă BNR taie agresiv în 2026–2027 (improbabil la inflație de 10,7% în aprilie 2026, dar nu imposibil în 2027), diferențialul se comprimă, curba forward se aplatizează și costul de a-ți fixa cursul scade. Invers, dacă BCE coboară iar și BNR rămâne sus, carry-ul de hedging se scumpește. <strong>Decizia de hedging nu e statică — e funcție de panta curbei la momentul execuției.</strong></p>
+
+<h2>Cross-currency basis: costul ascuns pe care retail-ul nu-l vede</h2>
+
+<p>Aici intervine prima tehnică de specialist absentă din literatura retail. Paritatea acoperită teoretică presupune că poți să te împrumuți și să plasezi la ratele „pure" de dobândă. În realitate, pe piața de swap valutar există un <strong>cross-currency basis cost</strong> — un spread care reflectă dezechilibrul cerere/ofertă de finanțare într-o devize și riscul de contrapartidă. Pentru perechi care includ EUR contra USD, basis-ul EUR/USD este negativ cronic (cererea de dolari în finanțarea globală împinge prețul). Pentru RON, accesul la un cross-currency swap propriu-zis e instituțional, dar <em>echivalentul</em> de basis pentru retail e spread-ul bid-ask și marja băncii la operațiunile forward.</p>
+
+<p>Modelul complet de cost devine:</p>
+
+<ul>
+<li><strong>Cost forward efectiv retail = punct forward teoretic + cross-currency basis + spread bancar + comision.</strong></li>
+</ul>
+
+<p>Numeric, pentru un forward EUR/RON la 12 luni: punct teoretic +20,4 bani, basis echivalent (estimat din spread-ul instituțional) +2 până la +5 bani, spread bancar retail +3 până la +8 bani, comision fix. Costul „all-in" pe care îl plătește o persoană fizică e deci nu 20 de bani, ci frecvent <strong>28–35 de bani peste spot</strong> pe orizont de 1 an — adică un carry efectiv de 5,4–6,7%, nu 4%. Acesta e motivul pentru care, la scară retail, hedging-ul complet prin forward bancar e adesea neeconomic, și de ce trezorierii folosesc structuri de swap care neutralizează basis-ul prin compensare bilaterală.</p>
+
+<h3>De ce un cross-currency swap bate forward-ul la expunere recurentă</h3>
+
+<p>Cross-currency swap-ul schimbă două fluxuri de principal și dobândă în devize diferite pe toată durata. Avantajul față de un lanț de forward-uri rostogolite: <strong>elimină riscul de rollover</strong> (nu reexpui basis-ul la fiecare scadență) și fixează costul total pe orizontul integral. Pentru cineva cu ipotecă EUR pe 20 de ani și venit RON, echivalentul personal al unui CCS nu e un contract pe care îl semnezi la bancă, ci o <em>structură sintetică</em>: menții un activ tampon în EUR care „plătește" rata în euro a ipotecii, finanțat dintr-un flux RON convertit programat. Construim asta în secțiunea de program operațional.</p>
+
+<h2>Optimal hedge ratio: cât din expunere acoperi, exact</h2>
+
+<p>Greșeala binară — „mă acopăr 100% sau deloc" — costă bani în ambele direcții. Acoperirea integrală plătește carry-ul pe toată expunerea; acoperirea zero lasă riscul valutar nelimitat. Soluția cantitativă e <strong>optimal hedge ratio</strong> (h*), raportul care minimizează varianța poziției nete. Forma clasică, minimum-variance hedge ratio:</p>
+
+<ul>
+<li><strong>h* = ρ × (σ<sub>expunere</sub> / σ<sub>instrument</sub>)</strong>, unde ρ e corelația dintre variația expunerii și variația instrumentului de hedging, iar σ deviațiile standard ale randamentelor.</li>
+</ul>
+
+<p>Când instrumentul de hedging e exact aceeași pereche (forward EUR/RON pentru o expunere EUR/RON), ρ ≈ 1 și σ-urile sunt egale, deci h* ≈ 1 (hedge perfect). Dar la <em>cross-hedging</em> — de exemplu acoperi o expunere RON folosind un instrument EUR/USD lichid, fiindcă RON e parțial ancorat de euro — h* devine sub-unitar și calculul contează.</p>
+
+<h3>Estimare prin regresie OLS pe randamente</h3>
+
+<p>În practica de desk, h* se estimează ca panta β dintr-o regresie a randamentelor expunerii pe randamentele instrumentului:</p>
+
+<ul>
+<li><strong>Δ(valoare expunere) = α + β × Δ(preț instrument) + ε</strong>; coeficientul β estimat este chiar hedge ratio-ul optim.</li>
+</ul>
+
+<p>Exemplu numeric. Presupune că ai o expunere de 100.000 EUR (ipotecă) și vrei să o acoperi cu un instrument EUR/USD (un ETF valutar sau o poziție în dolari), deoarece nu ai acces facil la forward RON. Pe 250 de zile de randamente zilnice, regresia variației valorii-în-RON a datoriei tale pe variația EUR/USD dă β = 0,72 și R² = 0,52. Interpretare:</p>
+
+<ul>
+<li><strong>h* = 0,72:</strong> acoperi 72% din expunere, adică 72.000 EUR-echivalent, nu 100%. Restul de 28% e risc idiosincratic RON necorelat cu EUR/USD.</li>
+<li><strong>R² = 0,52:</strong> doar 52% din varianța expunerii e explicată de instrument. <strong>Eficiența hedge-ului = 1 − (varianța reziduală / varianța inițială) = R² = 52%.</strong> Reduci riscul la jumătate, nu îl elimini. Asta e onestitatea cantitativă pe care retail-ul nu o vede.</li>
+</ul>
+
+<h2>Corelația dinamică EUR/USD/RON: de ce coeficientul fix minte</h2>
+
+<p>Corelațiile valutare nu sunt constante — cresc în crize și se relaxează în calm. A folosi o corelație istorică unică e ca a folosi viteza medie ca să prezici accidentul. Trezorierii folosesc <strong>corelație dinamică devize</strong> estimată cu modele de tip EWMA sau DCC-GARCH. Versiunea EWMA (RiskMetrics) e direct calculabilă:</p>
+
+<ul>
+<li><strong>σ²<sub>t</sub> = λ × σ²<sub>t−1</sub> + (1 − λ) × r²<sub>t−1</sub></strong> pentru varianță, și analog pentru covarianță, cu λ = 0,94 (zilnic).</li>
+<li><strong>ρ<sub>t</sub> = Cov<sub>t</sub> / (σ<sub>1,t</sub> × σ<sub>2,t</sub>).</strong></li>
+</ul>
+
+<p>Esența pentru cineva cu expunere EUR și economii parțial în USD: RON urmărește euro mult mai strâns decât dolarul, dar <em>nu perfect</em>. Corelația EUR/RON e structural ridicată (BNR gestionează implicit un coridor față de euro), în zona 0,7–0,9 pe orizonturi lunare, dar se rupe în episoade de stres — exact ca pe 6 mai 2026, când EUR/RON a sărit la 5,2688 pe presiune politică internă, decuplat de mișcarea EUR/USD. Aici e lecția de risc: <strong>diversificarea EUR/USD nu te protejează de un șoc RON-specific.</strong> Dacă riscul tău e depreciere RON, instrumentul corect e expunere EUR, nu USD.</p>
+
+<h3>Matricea de covarianță și riscul de portofoliu valutar</h3>
+
+<p>Pentru o persoană cu active în 3 devize (RON salariu, EUR economii, USD investiții), riscul valutar al patrimoniului net se calculează matricial. Cu ponderile w și matricea de covarianță Σ a randamentelor valutare:</p>
+
+<ul>
+<li><strong>σ²<sub>portofoliu</sub> = wᵀ Σ w.</strong></li>
+</ul>
+
+<p>Exemplu: 40% RON, 40% EUR, 20% USD; volatilități anualizate aproximative σ<sub>EUR/RON</sub> = 5%, σ<sub>USD/RON</sub> = 9%, corelație 0,6 între ele. Calculezi contribuția fiecărei poziții la varianța totală (component VaR) și descoperi că, deși USD e doar 20% din portofoliu, contribuie disproporționat la risc fiindcă e cea mai volatilă față de moneda ta de consum (RON). Concluzia de alocare: la cineva care cheltuie în lei, <strong>USD e poziția cea mai riscantă, nu cea mai sigură</strong> — contraintuitiv pentru reflexul „dolarul = refugiu".</p>
+
+<h2>Modelul de hedging pentru ipoteca EUR cu venit RON</h2>
+
+<p>Cazul cel mai frecvent la noi: credit ipotecar în euro, rate lunare în euro, salariu în lei. Expunerea e o serie de plăți viitoare în EUR pe care le finanțezi din RON. Aceasta e exact o poziție <em>short EUR forward</em> structurală — pierzi când euro se apreciază. Programul de <strong>hedging ipotecă EUR</strong> de tip trezorier:</p>
+
+<ul>
+<li><strong>Pas 1 — cuantifică expunerea.</strong> Rată lunară 600 EUR × 240 luni rămase = 144.000 EUR nominal. Valoarea prezentă a fluxului, actualizată la rata EUR de ~3%, e expunerea reală care contează pentru sizing.</li>
+<li><strong>Pas 2 — definește bugetul de risc.</strong> O depreciere RON de 10% (de la 5,23 la 5,75) urcă rata lunară de la ~3.138 lei la ~3.450 lei, +312 lei/lună, +3.744 lei/an. Întreabă: poate cash-flow-ul tău absorbi asta fără hedging? Dacă da, h* poate fi mic.</li>
+<li><strong>Pas 3 — alege h* prin minimizare varianță, nu emoțional.</strong> Pentru un debitor cu marjă de cash-flow strânsă, h* țintit 0,5–0,7 (acoperi jumătate–două treimi), nu 1,0, fiindcă carry-ul de 5–6% pe acoperirea integrală e prohibitiv pe 20 de ani.</li>
+<li><strong>Pas 4 — construcția sintetică.</strong> În loc de forward bancar scump, menții un tampon de active EUR (depozit EUR, obligațiuni EUR, ETF EUR-denominat) egal cu h* × valoarea prezentă a fluxului. Acest „activ care plătește în euro" e CCS-ul tău personal: când euro se apreciază și rata crește, tamponul EUR crește în lei și compensează.</li>
+<li><strong>Pas 5 — rebalansare dinamică.</strong> Recalculezi h* trimestrial pe baza corelației EWMA actualizate și a pantei curbei forward. Dacă diferențialul BNR–BCE se comprimă, scazi tamponul; dacă se lărgește și volatilitatea crește, îl mărești.</li>
+</ul>
+
+<h3>Tratamentul fiscal — componenta pe care modelele instituționale o ignoră</h3>
+
+<p>La persoană fizică din România, câștigul din diferențe de curs realizat pe instrumente financiare se impozitează ca venit din investiții. Pentru titlurile tranzacționate prin intermediari fiscali rezidenți, cotele s-au majorat din 2026 la <strong>3% pentru dețineri peste un an și 6% sub un an</strong> (de la 1%, respectiv 3% în 2025), aplicate câștigului și reținute la sursă; pentru intermediari nerezidenți fără sediu permanent în România, impozitul este 16% pe câștigul net anual, autodeclarat prin Declarația Unică, fără reținere la sursă. Câștigul din diferențe de curs pe active deținute direct (de exemplu lichidarea unui depozit EUR cu profit valutar) intră, prudent formulat, în categoria veniturilor din alte surse / câștiguri din transferul de valori și se declară prin Declarația Unică 212, cu impozit 10% și posibil CASS. Pragurile CASS 2026 rămân legate de salariul minim brut (4.050 lei): contribuția de 10% se datorează pe trepte, la o bază de 6, 12 sau 24 de salarii minime, adică <strong>24.300, 48.600 sau 97.200 lei</strong> pe an, în funcție de nivelul cumulat al veniturilor neasimilate salariului (investiții + alte surse). Dacă venitul tău din investiții și diferențe de curs depășește primul prag de 24.300 lei, datorezi CASS 10% la baza aferentă treptei atinse. <strong>Costul fiscal al unui hedging „realizat" prea des erodează beneficiul</strong> — de aceea structura buy-and-hold a tamponului EUR e fiscal superioară forward-urilor rostogolite care cristalizează câștig la fiecare rollover. Verifică cotele exacte și încadrarea cu un consultant fiscal, fiindcă tratamentul diferențelor de curs pe active deținute direct e sensibil la natura instrumentului.</p>
+
+<h2>Scenariu multi-variabil integrat</h2>
+
+<p>Punem totul împreună. Debitor: ipotecă 144.000 EUR rămasă, salariu net 9.000 lei/lună, economii 30.000 EUR + 8.000 USD. Spot 5,23.</p>
+
+<ul>
+<li><strong>Expunere netă valutară:</strong> short EUR de 144.000 (datorie) compensat parțial de 30.000 EUR active = <strong>short net 114.000 EUR</strong>. Plus 8.000 USD long, slab corelat cu riscul RON real.</li>
+<li><strong>h* recomandat:</strong> 0,6 pe expunerea netă ⇒ țintă tampon EUR ~68.000 EUR-echivalent. Ai deja 30.000 EUR; deficitul de acoperire e ~38.000 EUR de construit gradual din economisire lunară.</li>
+<li><strong>Cost de carry evitat:</strong> nefolosind forward bancar (carry all-in 5,4–6,7%) ci tampon EUR remunerat la ~3% în obligațiuni EUR, „plătești" pentru hedge doar diferențialul net, nu spread-ul retail complet.</li>
+<li><strong>Stress test:</strong> RON −10% (spot 5,75). Datoria în lei urcă cu ~74.500 lei pe nominal rămas; tamponul de 68.000 EUR câștigă ~35.000 lei. Acoperire ~47% din șocul de bilanț — coerent cu h* = 0,6 ajustat pentru R² al instrumentului. Reziduul rămas e riscul pe care l-ai <em>ales</em> conștient să-l porți, nu unul pe care nu l-ai văzut.</li>
+</ul>
+
+<h2>Checklist operațional de specialist</h2>
+
+<ul>
+<li><strong>Construiește curba forward EUR/RON</strong> din diferențialul BNR (6,50% / depozit 5,50%) vs BCE (2,25%); citește panta ca diferențial de dobândă, NU ca prognoză de curs.</li>
+<li><strong>Adaugă cross-currency basis + spread retail</strong> la costul forward teoretic înainte de a decide; carry-ul real e 5–7%, nu 4%.</li>
+<li><strong>Estimează h* prin regresie OLS</strong> a randamentelor expunerii pe instrument; folosește R² ca măsură onestă de eficiență a hedge-ului.</li>
+<li><strong>Actualizează corelațiile EWMA (λ=0,94)</strong> trimestrial; nu presupune corelație EUR/USD/RON fixă — se rupe în șocuri RON-specifice.</li>
+<li><strong>Calculează matricea de covarianță</strong> a patrimoniului în RON, EUR, USD; identifică poziția cu cea mai mare contribuție marginală la risc (frecvent USD la cine consumă în lei).</li>
+<li><strong>Construiește un CCS sintetic</strong> prin tampon de active EUR egal cu h* × PV-ul fluxului ipotecar, în loc de forward bancar scump.</li>
+<li><strong>Preferă buy-and-hold</strong> pentru eficiență fiscală (3% peste 1 an / 6% sub 1 an la titluri prin intermediar rezident; 16% autodeclarat prin intermediar nerezident; 10% + eventual CASS la diferențe de curs directe via DU 212); evită rollover-urile care cristalizează câștig.</li>
+<li><strong>Rebalansează h*</strong> la fiecare schimbare de regim BNR/BCE și la creșteri de volatilitate; documentează bugetul de risc rezidual asumat conștient.</li>
+</ul>

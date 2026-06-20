@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Predictive cash flow și volatilitatea venitului: modelare stocastică, Monte Carlo și VaR pentru antreprenori — Clubul Financiar</title><meta name="description" content="Ghid avansat de predictive cash flow și volatilitate venit: simulare Monte Carlo, Value at Risk, Expected Shortfall, buffer din probabilitate de ruină și…"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/predictive-cash-flow-volatilitate-venit.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Predictive cash flow și volatilitatea venitului: modelare stocastică, Monte Carlo și VaR pentru antreprenori"><meta property="og:description" content="Ghid avansat de predictive cash flow și volatilitate venit: simulare Monte Carlo, Value at Risk, Expected Shortfall, buffer din probabilitate de ruină și…"><meta property="og:url" content="https://clubulfinanciar.ro/articole/predictive-cash-flow-volatilitate-venit.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Predictive cash flow și volatilitatea venitului: modelare stocastică, Monte Carlo și VaR pentru antreprenori"><meta name="twitter:description" content="Ghid avansat de predictive cash flow și volatilitate venit: simulare Monte Carlo, Value at Risk, Expected Shortfall, buffer din probabilitate de ruină și…"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Predictive cash flow și volatilitatea venitului: modelare stocastică, Monte Carlo și VaR pentru antreprenori", "description": "Ghid avansat de predictive cash flow și volatilitate venit: simulare Monte Carlo, Value at Risk, Expected Shortfall, buffer din probabilitate de ruină și…", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/predictive-cash-flow-volatilitate-venit.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#venituri">💵 Venituri</a> · 13 min citire · Actualizat 19 iun. 2026</p><h1>Predictive cash flow și volatilitatea venitului: modelare stocastică, Monte Carlo și VaR pentru antreprenori</h1><p>La nivel de specialist, <strong>predictive cash flow și volatilitatea venitului</strong> nu se tratează cu o singură prognoză „medie”, ci cu o întreagă distribuție de scenarii generate stocastic. Diferența dintre antreprenorul avansat și cel expert este metodologică: avansatul lucrează cu trei coloane bas-mid-top; expertul rulează <strong>Monte Carlo simulation income</strong> pe 1000+ traiectorii, citește percentilele și transformă incertitudinea într-un parametru optimizabil. În această lecție construim cadrul complet de <strong>stochastic scenario modeling venit</strong>: calibrarea procesului generator, simularea fluxului de numerar, calculul de <strong>Value at Risk cash flow</strong> la 95% și al Expected Shortfall, apoi traducerea acestor mărimi în reguli de <strong>contingency planning volatil venit</strong>, de <strong>income smoothing și remunerare</strong> și de <strong>downside protection venit variabil</strong>.</p>
+
+<p>Presupun că stăpânești deja burn rate-ul pe scenarii, prognoza rolling pe 18 luni și logica salariu vs dividend dintr-un SRL românesc — nu le reluăm. Aici mergem la <strong>probabilistic forecasting freelancer</strong> și firmă mică: cum modelezi venitul ca proces aleator cu drift, sezonalitate și salturi, cum propagi această distribuție prin contul de cash, și cum derivi pragul minim de buffer dintr-o constrângere explicită de probabilitate de ruină, nu din intuiție.</p>
+
+<p>Toate cifrele sunt calibrate pe România 2026: cote de impozitare PFA/SRL, plafoane CASS/CAS, dobânzi de referință BNR și praguri reale în lei. Unde un parametru depinde de istoricul tău concret (volatilitatea încasărilor, autocorelația lunară), îl marchez ca ipoteză de calibrat, nu îl inventez.</p>
+
+<h2>De ce media venitului este o capcană și ce înlocuiește prognoza punctuală</h2>
+
+<p>Eroarea fundamentală a planificării non-stocastice este reducerea venitului la un singur număr așteptat. Dacă încasezi în medie 45.000 lei/lună dar cu o deviație standard de 18.000 lei și o asimetrie negativă (cozi de luni proaste mai lungi decât cele bune), atunci un plan construit pe medie eșuează exact în lunile care contează. Tu nu trăiești din E[V], ci din <strong>distribuția completă</strong> a cash flow-ului cumulat.</p>
+
+<p>Mărimea corectă nu e media, ci funcția de repartiție a soldului de cash la fiecare orizont. Notăm:</p>
+
+<ul>
+<li><strong>V<sub>t</sub></strong> — încasarea (cash-in) din luna t, variabilă aleatoare.</li>
+<li><strong>F<sub>t</sub></strong> — cheltuielile fixe + variabile angajate în luna t (în mare parte deterministe pe orizont scurt).</li>
+<li><strong>C<sub>t</sub> = C<sub>t−1</sub> + V<sub>t</sub> − F<sub>t</sub></strong> — soldul de cash la finalul lunii t, un proces cumulat (random walk cu drift și sezonalitate).</li>
+<li><strong>τ = min{t : C<sub>t</sub> &lt; 0}</strong> — momentul de ruină de lichiditate (primul moment în care rămâi fără bani).</li>
+</ul>
+
+<p>Obiectivul nu mai este „să prognozez venitul lunii viitoare”, ci „să mențin <strong>P(τ ≤ 12) sub un prag de toleranță</strong>” — de exemplu sub 2%. Aceasta este o constrângere de probabilitate de ruină, și ea dictează cât buffer ții, cât scoți acasă și când reinvestești.</p>
+
+<h2>Calibrarea procesului generator al venitului</h2>
+
+<p>Înainte de orice simulare, trebuie să descompui seria ta istorică de încasări lunare în componente. Modelul minimal recomandat pentru un venit antreprenorial volatil are patru blocuri.</p>
+
+<h3>1. Drift, sezonalitate, autocorelație</h3>
+
+<p>Pe logaritmul încasărilor (log pentru a captura multiplicativitatea și a evita valori negative), estimează:</p>
+
+<ul>
+<li><strong>Drift μ</strong> — creșterea medie lunară. Dacă afacerea ta crește ~10%/an, μ ≈ ln(1,10)/12 ≈ 0,0079/lună.</li>
+<li><strong>Sezonalitate s<sub>m</sub></strong> — 12 coeficienți lunari (ex. august −25%, decembrie −15%, mai +20%) estimați ca medii lunare deviate de la trend.</li>
+<li><strong>Autocorelație φ</strong> — un client bun azi tinde să producă o lună bună și mâine. Estimează un AR(1): ln V<sub>t</sub> = c + φ·ln V<sub>t−1</sub> + ε<sub>t</sub>. Tipic φ ∈ [0,3; 0,6] pentru servicii cu clienți recurenți; φ ≈ 0 pentru proiecte one-off.</li>
+<li><strong>Volatilitate σ</strong> — deviația standard a reziduurilor ε<sub>t</sub>. Aceasta este inima volatilității venitului; o subestimezi sistematic dacă ai doar 12-18 luni de istoric.</li>
+</ul>
+
+<h3>2. Salturi (jump component) — clientul mare care pleacă</h3>
+
+<p>Volatilitatea normală nu surprinde evenimentele rare: pierderea unui client de 40% din cifră, o factură mare neîncasată, un sezon ratat complet. Acestea sunt <strong>salturi</strong> (regime jumps) și se modelează cu un proces Poisson: cu probabilitate λ pe lună, venitul scade cu un factor de șoc J (ex. −35%). Pentru un freelancer cu top-3 clienți = 70% din cifră, λ ≈ 0,05-0,10/lună (un șoc serios la fiecare 10-20 luni) este o calibrare prudentă. Ignorarea jump-ului este cauza #1 pentru care simulările naive subestimează grosolan riscul de coadă.</p>
+
+<h3>3. Întârzieri de încasare (DSO stocastic)</h3>
+
+<p>Venitul facturat ≠ cash încasat. Modelează separat lag-ul de plată: fiecare factură se încasează după d zile, unde d e și el aleator (ex. lognormal cu mediană 30 și coadă până la 90+). Pe venit B2B în România, un DSO mediu de 45-60 zile cu cozi la 90 zile este realist. Acest lag transformă o lună bună pe hârtie într-o criză de lichiditate reală două luni mai târziu — și doar simularea cash-ului (nu a venitului) o prinde.</p>
+
+<h3>4. Componenta deterministă a cheltuielilor</h3>
+
+<p>F<sub>t</sub> are o parte fixă (chirie, salarii nete + contribuții, leasing, contabilitate) și una variabilă-proporțională (comisioane, costuri direct legate de proiect). Modelează F<sub>t</sub> = F<sub>fix</sub> + β·V<sub>t</sub>, unde β e fracția variabilă (ex. 0,15). Atenție: impozitarea e o cheltuială stocastică derivată — la SRL micro plătești 1% sau 3% pe venit, la SRL pe profit 16% pe profit, la PFA real 10% impozit + CAS/CASS pe baze plafonate. Tratamentul fiscal corect intră în F<sub>t</sub>, altfel umfli cash-ul net.</p>
+
+<h2>Motorul Monte Carlo: de la proces la 1000+ traiectorii</h2>
+
+<p>Cu procesul calibrat, simularea este mecanică. Algoritmul, pas cu pas, pentru N = 5.000 traiectorii pe orizont H = 18 luni:</p>
+
+<ul>
+<li><strong>Pas 1.</strong> Pentru fiecare traiectorie n și fiecare lună t, trage ε<sub>t</sub> ~ N(0, σ²) și aplică recursiv ln V<sub>t</sub> = c + φ·ln V<sub>t−1</sub> + s<sub>m</sub> + μ·t + ε<sub>t</sub>.</li>
+<li><strong>Pas 2.</strong> Trage indicatorul de salt B<sub>t</sub> ~ Bernoulli(λ); dacă B<sub>t</sub> = 1, multiplică V<sub>t</sub> cu (1 + J), J negativ.</li>
+<li><strong>Pas 3.</strong> Aplică lag-ul de încasare: distribuie V<sub>t</sub> (facturat) pe lunile t, t+1, t+2 conform distribuției DSO.</li>
+<li><strong>Pas 4.</strong> Calculează F<sub>t</sub> și impozitul aferent regimului tău, apoi C<sub>t</sub> = C<sub>t−1</sub> + cash-in<sub>t</sub> − F<sub>t</sub>.</li>
+<li><strong>Pas 5.</strong> Înregistrează întreaga traiectorie {C<sub>t</sub>} și marchează dacă a atins ruina (min C<sub>t</sub> &lt; 0).</li>
+</ul>
+
+<p>După N rulări ai o matrice H × N de solduri. Din ea citești totul: percentilele soldului la fiecare lună, probabilitatea de ruină, distribuția surplusului anual distribuibil. Un laptop rulează 5.000 × 18 în sub o secundă într-o foaie de calcul vectorizată sau câteva linii de Python; nu e nevoie de infrastructură.</p>
+
+<h3>Cât de multe traiectorii? Eroarea Monte Carlo</h3>
+
+<p>Pentru a estima o probabilitate de coadă p (ex. P(ruină) ≈ 2%), eroarea standard a estimatorului este √(p(1−p)/N). La N = 1.000 și p = 0,02, SE ≈ 0,44% — adică estimezi 2% ± ~0,9% cu 95% încredere, prea imprecis pentru o decizie de buffer. La N = 5.000, SE ≈ 0,20%; la N = 10.000, SE ≈ 0,14%. Regula practică: pentru cuantile la 95% folosește minim 5.000 traiectorii, pentru cozi la 99% urcă la 20.000+. Aceasta este justificarea cantitativă a lui „1000+ scenarii”: pentru VaR 95% e pragul de jos, nu confortul.</p>
+
+<h2>VaR și Expected Shortfall pe cash flow</h2>
+
+<p>Adaptăm cele două mărimi clasice de risc la fluxul tău de numerar. Definește pierderea de lichiditate la orizont H ca deficitul față de soldul inițial: L = C<sub>0</sub> − min<sub>t≤H</sub> C<sub>t</sub> (cea mai adâncă scădere atinsă, un drawdown de cash).</p>
+
+<ul>
+<li><strong>VaR 95% (Value at Risk cash flow)</strong> = percentila 95 a lui L. Citită din simulare: sortezi cele 5.000 de valori L crescător și iei valoarea de la poziția 4.750. Interpretare: „în 95% din lunile-scenariu nu pierd mai mult de VaR<sub>95</sub> lei din cash; în 5% pierd cel puțin atât”.</li>
+<li><strong>Expected Shortfall (ES / CVaR 95%)</strong> = media celor mai proaste 5% scenarii, adică media valorilor L de la poziția 4.751 la 5.000. ES răspunde la întrebarea pe care VaR o ocolește: „<em>când</em> lucrurile merg prost (coada de 5%), cât de prost în medie?”.</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> SRL de servicii, C<sub>0</sub> = 120.000 lei buffer, burn fix 40.000 lei/lună, încasare medie 45.000 lei cu σ ≈ 18.000 și λ = 0,07. Dintr-o rulare tipic calibrată poți obține: VaR<sub>95</sub> al drawdown-ului de cash ≈ 88.000 lei, ES<sub>95</sub> ≈ 121.000 lei. Citirea critică: ES depășește buffer-ul. Înseamnă că în coada de 5% a anului următor rămâi fără cash. VaR singur (88.000 &lt; 120.000) te-ar fi liniștit fals — exact de aceea expertul raportează la ES, nu la VaR.</p>
+
+<h3>Pragul de buffer derivat din constrângere, nu din tradiție</h3>
+
+<p>Regula amatorului — „ține 3-6 luni de cheltuieli” — este o aproximare grosieră a unei mărimi pe care acum o poți calcula exact. Buffer-ul minim B* este cel mai mic C<sub>0</sub> pentru care P(ruină pe H) ≤ toleranța ta. Procedural: rulezi simularea pentru valori crescătoare ale lui C<sub>0</sub> și cauți pragul. Dacă la 120.000 lei P(ruină) = 6%, iar ținta ta e 2%, crești C<sub>0</sub> până găsești, de pildă, B* ≈ 165.000 lei. Diferența de 45.000 lei nu e „prudență” vagă, e prețul cuantificat al unei reduceri de 4 puncte procentuale în probabilitatea de a rămâne fără bani. Echivalentul în luni de burn (165.000/40.000 ≈ 4,1 luni) iese ca rezultat, nu ca regulă impusă.</p>
+
+<h2>Income smoothing și remunerare risk-adjusted</h2>
+
+<p><strong>Income smoothing și remunerare</strong> înseamnă să-ți plătești ție un venit personal stabil dintr-un cash flow instabil, fără să golești buffer-ul în lunile proaste. Modelul stocastic îți dă regula de extracție optimă.</p>
+
+<h3>Salariul personal-țintă ca rentă din buffer</h3>
+
+<p>Stabilește un <strong>salariu personal fix lunar W</strong> pe care îl scoți indiferent de lună (acesta e smoothing-ul). W se calibrează astfel încât, în simulare, P(C<sub>t</sub> rămâne peste pragul de siguranță S pe tot orizontul | extragi W lunar) ≥ 98%. Cu cât W e mai mare, cu atât probabilitatea scade — există un W maxim sustenabil, exact ca o rată de retragere sigură la pensie. Tipic, W sustenabil ≈ percentila 25 a încasării nete lunare, nu media: te plătești din lunile proaste, nu din cele bune.</p>
+
+<h3>Surplusul condiționat: bonus doar din coada bună</h3>
+
+<p>Diferența pozitivă față de W o tratezi în două straturi:</p>
+
+<ul>
+<li><strong>Stratul de reumplere buffer:</strong> orice surplus se duce prioritar în buffer până când C<sub>t</sub> ≥ B*. Sub B* nu există dividend personal, oricât de bună e luna.</li>
+<li><strong>Stratul de distribuție:</strong> peste B*, distribui un procent p al surplusului (ex. 50%) ca dividend/bonus personal, și reții restul. Regula „distribui doar din ce depășește percentila 60 a anului” evită extracția pro-ciclică (eroarea de a scoate bani exact înainte de sezonul slab).</li>
+</ul>
+
+<p><strong>Atenție fiscală RO 2026.</strong> Dividendul din SRL e impozitat cu <strong>16% impozit pe dividend</strong> (cotă majorată de la 10% începând cu 2026), plus CASS de 10% dacă venitul anual din dividende depășește pragul raportat la salariul minim. Plafoanele CASS sunt structurate pe trepte — 6, 12 și 24 de salarii minime brute — iar la un salariu minim de 4.050 lei în 2026 înseamnă praguri de 24.300 lei, 48.600 lei și 97.200 lei venit anual, la care CASS datorat este 10% din baza-prag (2.430 / 4.860 / 9.720 lei). Mixul optim salariu/dividend nu se decide static, ci se re-optimizează la fiecare prag CASS: aproape de un prag, încasarea unui leu suplimentar de dividend poate declanșa saltul la o bază CASS superioară, adică sute de lei de contribuție pentru câțiva lei de venit brut. Modelează acest cost ca o funcție în trepte în F<sub>t</sub>, altfel optimul tău de remunerare e fals.</p>
+
+<h2>Timing optim pentru reinvestiții și retrageri</h2>
+
+<p>Întrebarea „când reinvestesc și când scot bani” devine, în limbaj stocastic, o problemă de <strong>opțiune reală</strong>: cash-ul ținut în buffer are o valoare de asigurare (evită ruina), iar reinvestirea îl consumă. Decizia optimă nu e calendaristică, ci condiționată de stare.</p>
+
+<ul>
+<li><strong>Regulă de reinvestire condiționată:</strong> reinvestești o cheltuială discreționară (angajare, echipament, marketing) doar dacă, <em>după</em> reinvestire, simularea arată P(ruină pe 12 luni) ≤ toleranță. Testezi angajamentul în scenariul de coadă (percentila 20 a venitului), nu în median. Dacă angajarea de 8.000 lei/lună mută P(ruină) de la 2% la 9%, e interzisă, oricât de profitabilă pare în mid.</li>
+<li><strong>Timing de retragere personală:</strong> retragerile mari (dividend extraordinar) se programează în fereastra post-sezon-bun, când C<sub>t</sub> e la percentila superioară <em>și</em> orizontul rămas până la următorul sezon slab e acoperit de buffer. Concret: retragi doar dacă C<sub>t</sub> − (W × luni până la următorul vârf sezonier) ≥ B*.</li>
+<li><strong>Asimetria opțiunii:</strong> costul de a reinvesti prea devreme (ruină) e mult mai mare decât costul de a aștepta o lună (oportunitate ratată). Această asimetrie justifică o regulă conservatoare: în dubiu, întârzie reinvestirea, nu retragerea de buffer.</li>
+</ul>
+
+<h2>Downside protection: instrumente concrete RO 2026</h2>
+
+<p><strong>Downside protection venit variabil</strong> nu e doar buffer pasiv. Straturile de apărare, în ordinea costului:</p>
+
+<ul>
+<li><strong>Linie de credit de lucru (overdraft / capital de lucru)</strong> — pre-aprobată, ne-trasă. E un buffer „virtual” care reduce B* necesar în cash propriu. Cost: dobândă doar pe sumele trase, indexată tipic la IRCC/ROBOR + marjă. Modeleaz-o ca buffer suplimentar disponibil în simulare, dar penalizat cu costul dobânzii în lunile de tragere.</li>
+<li><strong>Diversificarea clienților</strong> — reducerea concentrării top-3 scade direct λ și mărimea șocului J. E cea mai ieftină reducere de volatilitate: nu costă dobândă, ci efort comercial. Cuantific-o: trecerea de la 70% la 50% concentrare top-3 poate halvea λ în calibrare.</li>
+<li><strong>Contracte de retainer / abonament</strong> — transformă venit episodic în venit recurent, crescând φ (autocorelația) și scăzând σ. Fiecare retainer mută o parte din venit din coada stocastică în baza deterministă a lui F-acoperit.</li>
+<li><strong>Buffer fiscal segregat</strong> — la PFA real și SRL pe profit, provizionează lunar impozitul estimat într-un cont separat. Eroarea clasică e să cheltui cash-ul brut și să te trezești cu obligația fiscală în coada anului. Tratează impozitul ca pe o cheltuială deja angajată în C<sub>t</sub>.</li>
+</ul>
+
+<h2>Backtest și validare: nu te încrede în simulare oarbă</h2>
+
+<p>O simulare necalibrată e doar o părere îmbrăcată în cifre. Validează modelul înainte să-i asculți VaR-ul:</p>
+
+<ul>
+<li><strong>Out-of-sample.</strong> Calibrează pe primele 70% din istoric, simulează, și verifică dacă realitatea ultimelor 30% cade în benzile prezise. Dacă 30% din lunile reale ies din banda de 95%, modelul subestimează σ — probabil ignori jump-ul.</li>
+<li><strong>Backtest de acoperire VaR.</strong> Numără de câte ori pierderea reală a depășit VaR<sub>95</sub> prezis. Ar trebui să fie ~5% din observații. Semnificativ peste = model prea optimist; semnificativ sub = prea conservator (ții buffer scump degeaba).</li>
+<li><strong>Stress test determinist.</strong> Pe lângă Monte Carlo, rulează scenarii numite: „pierd clientul #1 + DSO se dublează + sezon slab simultan”. Dacă supraviețuiești corelației maxime, ești robust la cozile pe care simularea cu corelații moderate le subestimează.</li>
+</ul>
+
+<h2>Pași de implementare</h2>
+
+<ul>
+<li><strong>1.</strong> Exportă seria de încasări lunare pe minim 24-36 luni; separă facturat de încasat (pentru DSO).</li>
+<li><strong>2.</strong> Estimează μ, sezonalitatea s<sub>m</sub>, autocorelația φ și σ pe log-venit; calibrează λ și J din evenimentele rare istorice.</li>
+<li><strong>3.</strong> Construiește F<sub>t</sub> cu partea fixă, variabilă (β) și impozitul exact al regimului tău RO 2026 (micro 1%/3%, profit 16%, sau PFA 10% + CAS/CASS pe plafoane).</li>
+<li><strong>4.</strong> Rulează minim 5.000 traiectorii pe 18 luni; salvează matricea de solduri C<sub>t</sub>.</li>
+<li><strong>5.</strong> Citește VaR<sub>95</sub> și ES<sub>95</sub> ale drawdown-ului de cash; verifică dacă ES &lt; buffer.</li>
+<li><strong>6.</strong> Derivă B* din constrângerea P(ruină ≤ 12 luni) ≤ 2%; ajustează-l cu linia de credit pre-aprobată.</li>
+<li><strong>7.</strong> Fixează salariul personal W la nivelul sustenabil (≈ percentila 25 a venitului net), nu la medie.</li>
+<li><strong>8.</strong> Definește regula de surplus în două straturi: reumplere buffer până la B*, apoi distribuție condiționată de pragurile CASS.</li>
+<li><strong>9.</strong> Programează reinvestițiile și retragerile prin testul de coadă, nu prin calendar.</li>
+<li><strong>10.</strong> Re-calibrează lunar (rolling) și fă backtest de acoperire VaR trimestrial; dacă încălcările &gt; 5%, urcă σ și λ.</li>
+</ul>
+
+<p><strong>Checklist de control lunar:</strong> seria actualizată ▸ parametri re-estimați ▸ 5.000+ traiectorii rulate ▸ VaR<sub>95</sub> și ES<sub>95</sub> citite ▸ C<sub>t</sub> curent vs B* ▸ W confirmat sustenabil ▸ surplus alocat pe straturi ▸ orice angajament nou testat în coada de 20% ▸ buffer fiscal segregat la zi ▸ linia de credit rămasă ne-trasă.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

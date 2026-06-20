@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aritmetica inflatiei pe 50 de ani: scenario modeling pentru FIRE — Clubul Financiar</title><meta name="description" content="Model avansat de inflatie pe 50 de ani pentru FIRE: cinci scenarii de regim, cos medical segmentat, purchasing power pe deceniu si sensitivity analysis pe…"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/aritmetica-inflatiei-50-ani-scenario-fire.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Aritmetica inflatiei pe 50 de ani: scenario modeling pentru FIRE"><meta property="og:description" content="Model avansat de inflatie pe 50 de ani pentru FIRE: cinci scenarii de regim, cos medical segmentat, purchasing power pe deceniu si sensitivity analysis pe…"><meta property="og:url" content="https://clubulfinanciar.ro/articole/aritmetica-inflatiei-50-ani-scenario-fire.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Aritmetica inflatiei pe 50 de ani: scenario modeling pentru FIRE"><meta name="twitter:description" content="Model avansat de inflatie pe 50 de ani pentru FIRE: cinci scenarii de regim, cos medical segmentat, purchasing power pe deceniu si sensitivity analysis pe…"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Aritmetica inflatiei pe 50 de ani: scenario modeling pentru FIRE", "description": "Model avansat de inflatie pe 50 de ani pentru FIRE: cinci scenarii de regim, cos medical segmentat, purchasing power pe deceniu si sensitivity analysis pe…", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/aritmetica-inflatiei-50-ani-scenario-fire.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#fire">🔥 Independență financiară (FIRE)</a> · 13 min citire · Actualizat 19 iun. 2026</p><h1>Aritmetica inflatiei pe 50 de ani: scenario modeling pentru FIRE</h1><p>Modelul standard de <strong>inflatie fire 50 ani scenario modeling</strong> — o singura rata constanta de 2-3% rulata pe un orizont de pensionare lung — este greseala de arhitectura care subestimeaza cel mai sistematic numarul tau real. Nu pentru ca 2,5% e o ipoteza optimista, ci pentru ca <strong>o singura rata uniforma colapseaza trei surse de eroare independente</strong> intr-un parametru fals stabil: variabilitatea inflatiei pe decenii (regim, nu medie), divergenta dintre cosurile de consum (medical vs. discretionar) si ponderea care se muta singura pe masura ce imbatranesti. Cine modeleaza inflatie variabila scenario planning corect nu cauta „media exacta", ci distributia de rezultate si pragul unde planul se rupe.</p>
+
+<p>In aceasta lectie construim tabelul de 50 de ani cu cinci rate diferite per deceniu, segmentat pe categorie de cheltuiala, cu un model de purchasing power fire pe deceniu care arata cum se erodeaza efectiv puterea de cumparare cand inflatia medicala bate inflatia generala cu 200-300 puncte de baza an de an. Apoi facem sensitivity analysis inflatie fire — derivata numarului tau in functie de fiecare ipoteza — ca sa stii care variabila merita stress-tested si care e zgomot. Inflatie reala cheltuieli medicale fire si inflatie segmentata pe categorie nu sunt rafinamente cosmetice: pe 50 de ani, ele muta tinta cu sute de mii de lei.</p>
+
+<p>Presupun ca stapanesti deja regula de 4%, formula Fisher pentru randament real, sequence-of-returns risk si guardrails. Mergem direct in motorul de calcul: cum se asambleaza matricea, ce formula Excel rulezi pe 50 de coloane si cum citesti rezultatul ca un actuar, nu ca un blogger de FIRE.</p>
+
+<h2>De ce o singura rata de inflatie este o eroare de model, nu de calibrare</h2>
+
+<p>Eroarea nu e ca alegi 2,5% in loc de 5%. Eroarea e ca presupui <strong>stationaritate</strong> acolo unde istoria arata regimuri. Inflatia in Romania, ca serie pe 30+ ani, nu e zgomot alb in jurul unei medii — e o succesiune de regimuri: hiperinflatia anilor '90, dezinflatia de convergenta 2000-2015, regimul calm 2015-2020 (sub tinta BNR de 2,5% ±1pp), socul 2022-2023 (peste 16% varf IPC) si reacomodarea 2024-2026 spre banda tintei. Un model cu rata constanta nu poate reproduce niciuna din aceste dinamici si, mai grav, ascunde faptul ca <strong>secventa regimurilor conteaza enorm</strong> cand o suprapui peste sequence-of-returns risk.</p>
+
+<p>Doua observatii cantitative care justifica abandonarea ratei unice:</p>
+
+<ul>
+<li><strong>Convexitatea compunerii.</strong> Inflatia compusa nu e liniara in rata medie. Doua traiectorii cu aceeasi medie aritmetica pe 50 de ani produc factori de erodare diferiti daca varianta difera — efectul Jensen. O traiectorie volatila (2%-8%-3%-9%-4%) bate in erodare cumulata o traiectorie neteda cu aceeasi medie, pentru ca anii de inflatie mare se aplica pe o baza deja umflata.</li>
+<li><strong>Front-loading-ul medical.</strong> In primii ani de FIRE esti tanar si cheltuiala medicala e mica; in deceniile 4-5 devine dominanta. Daca aplici o rata unica, subponderezi exact categoria care explodeaza exact cand portofoliul tau e mai vulnerabil (mai putini ani de recuperare ramasi).</li>
+</ul>
+
+<h2>Arhitectura matricei: cinci scenarii × cinci decenii × doua cosuri</h2>
+
+<p>Modelul corect nu e un singur tabel, ci un <strong>cub</strong>: axa scenariu (5), axa timp (50 de ani, grupati pe 5 decenii pentru ipoteze), axa categorie (minimum doua cosuri: esential/medical vs. discretionar). Incepem cu definirea celor cinci scenarii de regim inflationist, fiecare cu o traiectorie pe deceniu — nu o medie.</p>
+
+<h3>Cele cinci scenarii de regim (inflatie generala, % anual per deceniu)</h3>
+
+<ul>
+<li><strong>S1 — Convergenta (ancorat la tinta BNR).</strong> Decenii: 3% / 3% / 2,5% / 2,5% / 2,5%. Ipoteza: BNR mentine tinta de 2,5% ±1pp pe termen lung, Romania adopta euro candva in orizont. Acesta e scenariul „cartea de text" — il pastram ca limita inferioara, nu ca baza.</li>
+<li><strong>S2 — Baza realista RO.</strong> 5% / 4,5% / 4% / 3,5% / 3,5%. Ipoteza: convergenta lenta, inflatie structural peste media UE inca un deceniu, apoi normalizare. Acesta e scenariul de planificare central pentru un roman in 2026.</li>
+<li><strong>S3 — Sticky / persistenta.</strong> 6% / 6% / 5% / 4,5% / 4%. Ipoteza: inflatia ramane lipicioasa, deficite fiscale presante, indexari salariale care se auto-intretin.</li>
+<li><strong>S4 — Soc + reacomodare.</strong> 8% / 4% / 7% / 4% / 5%. Ipoteza: doua socuri inflationiste majore pe parcurs (energie, geopolitic, criza valutara) cu reveniri intre ele. Testeaza convexitatea si secventa.</li>
+<li><strong>S5 — Stress regim inalt.</strong> 9% / 8% / 7% / 6% / 6%. Ipoteza: pierderea ancorei de credibilitate monetara. Nu e prognoza — e bound-ul superior pentru kill-criteria.</li>
+</ul>
+
+<p>Observa ce face S4 fata de S2: ambele au medie aritmetica apropiata (~5,6% vs. ~4,1%), dar S4 are doua varfuri de 7-8%. Daca rulezi doar media, ratezi complet ca S4 distruge mai mult capital prin secventa. De aceea nu colapsezi niciodata scenariul in media lui.</p>
+
+<h3>Segmentarea pe cosuri si spread-ul medical</h3>
+
+<p>A doua dimensiune: <strong>fiecare scenariu primeste un spread medical</strong>. Inflatia medicala (servicii medicale private, medicamente neacoperite, asigurare privata de sanatate, ingrijire la varste inaintate) ruleaza istoric cu un premium constant peste IPC general — observat in economiile dezvoltate la +200-400 pb, iar in Romania probabil similar pe segmentul privat pe masura ce sistemul public se subtiaza relativ la nevoi.</p>
+
+<ul>
+<li>Coș <strong>discretionar + esential ne-medical</strong> (locuinta, hrana, utilitati, transport, lux): ruleaza la rata generala a scenariului.</li>
+<li>Coș <strong>medical/ingrijire</strong>: rata generala <strong>+ 2,5pp</strong> (spread conservator de baza), testat si la +1,5pp si +3,5pp in sensitivity.</li>
+</ul>
+
+<p>Critic: <strong>ponderea celor doua cosuri nu e fixa</strong>. Modeleaz-o ca functie de varsta. Tipar realist pentru un pensionar FIRE:</p>
+
+<ul>
+<li>Deceniul 1 (45-55 ani): 8% medical, 92% restul.</li>
+<li>Deceniul 2 (55-65): 12%.</li>
+<li>Deceniul 3 (65-75): 18%.</li>
+<li>Deceniul 4 (75-85): 28%.</li>
+<li>Deceniul 5 (85-95): 40% medical.</li>
+</ul>
+
+<p>Aceasta este inima modelului. Inflatia medicala mai mare aplicata pe o pondere care creste = un dublu efect compus care un model cu rata unica nu il poate captura niciodata.</p>
+
+<h2>Formula Excel pe 50 de ani, coloana cu coloana</h2>
+
+<p>Construiesti foaia astfel. Randul 1 = anii 0...50 (coloane). Pentru fiecare scenariu, doua randuri de factor de inflatie (unul per cos) si un rand de pondere medicala interpolata pe varsta.</p>
+
+<h3>Pasul 1 — factorul de inflatie cumulat per cos</h3>
+
+<p>Pentru cosul ne-medical, factorul cumulat in anul <em>t</em> este produsul (1+rata deceniului) pentru fiecare an pana la <em>t</em>. In Excel, daca <code>B2</code> e rata generala a anului curent (lookup pe deceniu din tabelul de scenariu) si <code>A3</code> factorul anului anterior:</p>
+
+<p><strong>Factor_nemedical(t) = Factor_nemedical(t−1) × (1 + rata_generala_an_t)</strong></p>
+
+<p>Formula tipica intr-o celula: <code>=A3*(1+INDEX($scenariu_rate;MATCH(an;decenii;1)))</code>. Pentru cosul medical, identic dar cu <code>(1 + rata_generala + spread_medical)</code>.</p>
+
+<h3>Pasul 2 — cheltuiala nominala combinata in anul t</h3>
+
+<p>Pleci de la cheltuiala reala de azi C₀ (in lei 2026), spart pe ponderea de varsta:</p>
+
+<p><strong>Cheltuiala_nominala(t) = C₀ × [ pondere_nemedical(t) × Factor_nemedical(t) + pondere_medical(t) × Factor_medical(t) ]</strong></p>
+
+<p>Ponderea se interpoleaza liniar intre punctele de deceniu (functie <code>FORECAST</code> sau interpolare manuala), ca sa nu ai salturi artificiale la granita de deceniu.</p>
+
+<h3>Pasul 3 — valoarea reala a portofoliului si retragerea</h3>
+
+<p>Pe acelasi grid rulezi portofoliul: crestere nominala (ipoteza randament nominal, ex. 7%), minus retragerea nominala = cheltuiala_nominala(t), minus impozit. Soldul:</p>
+
+<p><strong>Sold(t) = Sold(t−1) × (1 + randament_nominal) − Cheltuiala_nominala(t) − Impozit(t)</strong></p>
+
+<p>Pentru impozit folosesti regimul RO 2026 pe castigul de capital, care nu mai e o cota unica de 10% — depinde de tipul brokerului si de perioada de detinere. Prin <strong>broker rezident (intermediar fiscal roman)</strong>, impozitul e retinut la sursa pe castigul net realizat: <strong>3% daca titlul a fost detinut peste 365 de zile</strong> si <strong>6% daca a fost detinut sub un an</strong>. Prin <strong>broker strain</strong> (Interactive Brokers, Trading 212 etc.), nu exista retinere la sursa: declari castigul net in Declaratia Unica si platesti <strong>16%</strong> (cota standard pentru castiguri din surse fara intermediar fiscal roman). Atentie: impozitul se aplica doar pe <strong>componenta de castig</strong> a sumei vandute, nu pe principal, daca tii evidenta cost-basis. Peste impozit poate intra <strong>CASS 10%</strong>, datorata pe trepte (6, 12 sau 24 de salarii minime pe an) cand venitul total din astfel de surse depaseste plafonul de 6 salarii minime. Pe titlurile de stat FIDELIS, dobanda e <strong>scutita de impozit pe venit</strong>, ceea ce le face un strat util in sleeve-ul anti-secventa. Modeleaza impozitul cu cota corecta brokerului tau (3-6% rezident vs. 16% strain), aplicat pe fractiunea de castig a retragerii, plus CASS pe trepte unde se aplica.</p>
+
+<h3>Pasul 4 — testul de ruina si numarul-tinta</h3>
+
+<p>Numarul de care ai nevoie nu e o cifra, ci <strong>cel mai mic Sold(0) astfel incat Sold(t) ≥ 0 pentru toti cei 50 de ani, in toate scenariile pe care le accepti</strong>. Practic, folosesti <code>Goal Seek</code> / <code>Solver</code> pe Sold(0) ca minim soldul terminal sa fie zero, separat per scenariu. Obtii cinci numere-tinta — unul per scenariu. Numarul tau de planificare nu e media lor; este percentila pe care vrei sa o acoperi (vezi mai jos).</p>
+
+<h2>Rezultatele numerice: cum diverg cele cinci tinte</h2>
+
+<p>Sa rulam un caz concret. <strong>C₀ = 96.000 lei/an</strong> (8.000 lei/luna, lei 2026), FIRE la 45 ani, orizont 50 ani, randament nominal 7%, spread medical +2,5pp, ponderi medicale per deceniu ca mai sus. Iata ce produce motorul pentru capitalul initial necesar (sold terminal zero):</p>
+
+<ul>
+<li><strong>S1 Convergenta:</strong> tinta ≈ <strong>2,35 mil. lei</strong>. (~24,5× cheltuiala — apropiat de regula clasica.)</li>
+<li><strong>S2 Baza realista:</strong> tinta ≈ <strong>3,05 mil. lei</strong>. (~31,8×.)</li>
+<li><strong>S3 Sticky:</strong> tinta ≈ <strong>3,55 mil. lei</strong>. (~37×.)</li>
+<li><strong>S4 Soc + reacomodare:</strong> tinta ≈ <strong>3,80 mil. lei</strong>. (~39,6× — mai mare ca S3 desi media inflatiei e mai mica, exact din cauza secventei socurilor.)</li>
+<li><strong>S5 Stress regim inalt:</strong> tinta ≈ <strong>4,60 mil. lei</strong>. (~48×.)</li>
+</ul>
+
+<p>Spread-ul dintre S1 si S5 este <strong>~2,25 milioane lei</strong> pentru exact aceeasi viata. Si observa anomalia S4 &gt; S3: este semnatura convexitatii + secventei pe care media o ascunde. Un model cu rata unica de 4% ar fi produs ~3,0 mil. lei si ti-ar fi dat falsa siguranta ca esti acoperit — cand de fapt in trei din cinci scenarii ai fi ramas scurt.</p>
+
+<h3>Contributia segmentarii medicale, izolata</h3>
+
+<p>Ca sa vezi cat conteaza segmentarea, ruleaza S2 cu si fara cosul medical separat:</p>
+
+<ul>
+<li>S2 cu inflatie unica (fara spread medical, fara pondere variabila): ~2,82 mil. lei.</li>
+<li>S2 cu segmentare medicala completa: ~3,05 mil. lei.</li>
+</ul>
+
+<p>Diferenta de <strong>~230.000 lei (≈8%)</strong> vine exclusiv din inflatie reala cheltuieli medicale fire — partea pe care planificatorii o ignora. Pe S5, acelasi efect de segmentare adauga ~450.000 lei, pentru ca spread-ul de 2,5pp se aplica pe o baza generala mult mai mare. <strong>Spread-ul medical e neliniar in nivelul inflatiei generale</strong> — alt motiv sa nu-l aproximezi cu un singur procent.</p>
+
+<h2>Sensitivity analysis: care ipoteza isi merita stress-test-ul</h2>
+
+<p>Cu cinci numere pe masa, intrebarea de specialist e: <strong>la ce e cel mai sensibil numarul meu?</strong> Construiesti o tabela de senzitivitate (Excel <code>Data Table</code> pe doua variabile) si calculezi derivata aproximativa a tintei la fiecare ipoteza, tinand restul fix in jurul scenariului S2.</p>
+
+<ul>
+<li><strong>Randament nominal:</strong> cel mai puternic. −1pp randament (de la 7% la 6%) muta tinta S2 de la 3,05 la ~3,55 mil. lei (+16%). Aceasta domina inflatia ca senzitivitate — ceea ce inseamna ca <strong>ipoteza ta de randament real merita mai mult stress-test decat cea de inflatie</strong>, contraintuitiv pentru o lectie despre inflatie.</li>
+<li><strong>Nivelul inflatiei generale:</strong> +1pp pe toate deceniile muta S2 cu ~+9-10%.</li>
+<li><strong>Spread medical:</strong> de la +2,5pp la +3,5pp adauga ~3-4% la tinta. Mai mic ca celelalte doua, dar interactioneaza multiplicativ cu ponderea — la persoane cu istoric familial de costuri medicale mari (pondere 50%+ in deceniile finale), devine variabila dominanta.</li>
+<li><strong>Orizontul:</strong> de la 50 la 45 ani scade tinta cu ~5-7%; de la 50 la 55 ani o creste cu ~7-9%. Longevitatea e un risc tail real — modeleaza 50 ca baza, nu 30.</li>
+</ul>
+
+<p>Concluzia de prioritizare: <strong>randament real &gt; nivel inflatie &gt; orizont &gt; spread medical</strong> ca ordine a senzitivitatii numarului agregat — dar spread-ul medical urca in clasament la cei cu pondere medicala asteptata mare. Stress-testeaza in aceasta ordine.</p>
+
+<h2>De la cinci numere la o decizie: percentila, nu media</h2>
+
+<p>Greseala finala e sa mediezi cele cinci tinte. Corect: <strong>atribuie probabilitati subiective scenariilor</strong> si alege numarul care acopera percentila ta de toleranta. Exemplu de ponderi pentru RO 2026:</p>
+
+<ul>
+<li>S1: 10% · S2: 35% · S3: 30% · S4: 15% · S5: 10%.</li>
+</ul>
+
+<p>Distributia implicata are mediana intre S2 si S3. Daca vrei sa fii acoperit cu <strong>~90% probabilitate</strong>, planifici la percentila 90 — undeva intre S4 si S5, deci <strong>~3,9-4,2 mil. lei</strong>. Daca accepti risc de adaptare (esti flexibil, ai capital uman rezidual, poti face barista-FIRE la nevoie), planifici la mediana ~3,3 mil. lei si bazezi-te pe guardrails pentru coada. <strong>Decizia nu e „care e numarul", ci „ce percentila imi cumpar si cu ce flexibilitate compensez restul cozii".</strong></p>
+
+<h3>Edge-cases pe care modelul trebuie sa le prinda</h3>
+
+<ul>
+<li><strong>Decorelarea valutara.</strong> Daca cosul tau medical premium e importat / privat denominat efectiv in euro, inflatia lui in lei = inflatie euro + depreciere leu. Pe 50 de ani, deprecierea structurala a leului fata de euro adauga un strat peste spread-ul medical. Modeleaza cosul medical ca avand o componenta valutara de 30-50%.</li>
+<li><strong>Indexarea pensiei de stat (Pilon I) si Pilon II.</strong> La 65 ani intra pensia CNPP, indexata (partial) la inflatie — un flux care reduce retragerea neta din portofoliu in ultimele decenii. Modeleaza-l ca un venit nominal indexat care intra ca minus la Cheltuiala_nominala dupa varsta de pensionare de stat. Ignorarea lui supraestimeaza tinta.</li>
+<li><strong>Praguri fiscale ne-indexate.</strong> Plafonul CASS si pragurile de impozitare nu se indexeaza neaparat cu inflatia ta — un drift care, pe 50 de ani, schimba povara fiscala reala a retragerilor. Trateaza-l ca incertitudine, formuleaza prudent, nu hardcoda praguri pe 50 de ani.</li>
+</ul>
+
+<h2>Pasi de implementare</h2>
+
+<ol>
+<li><strong>Construieste cubul:</strong> 50 coloane-ani × 2 randuri factor (medical/ne-medical) × 5 blocuri de scenariu. Tabel separat de rate per deceniu, cu <code>INDEX/MATCH</code> care mapeaza anul la deceniu.</li>
+<li><strong>Defineste cele 5 traiectorii</strong> (S1-S5 de mai sus ca punct de plecare) — traiectorii pe deceniu, NICIODATA o medie unica.</li>
+<li><strong>Modeleaza ponderea medicala</strong> ca functie crescatoare de varsta (interpolata liniar intre punctele de deceniu), nu constanta.</li>
+<li><strong>Aplica spread-ul medical</strong> de +2,5pp baza peste rata generala, cu o componenta valutara de 30-50% daca serviciile sunt private/importate.</li>
+<li><strong>Ruleaza Goal Seek</strong> pe Sold(0) per scenariu → cinci numere-tinta, cu impozitul RO pe castig (3-6% broker rezident dupa perioada de detinere sau 16% broker strain) plus CASS pe trepte si dobanda FIDELIS scutita modelate explicit.</li>
+<li><strong>Adauga fluxurile de pensie</strong> CNPP / Pilon II indexate dupa varsta de pensionare de stat, ca minus la retragerea neta.</li>
+<li><strong>Fa Data Table</strong> de senzitivitate pe randament nominal, nivel inflatie, spread medical si orizont; ordoneaza-le dupa impact.</li>
+<li><strong>Atribuie probabilitati</strong> scenariilor si calculeaza numarul de planificare la percentila ta de toleranta (nu media).</li>
+<li><strong>Documenteaza flexibilitatea</strong> care acopera coada: guardrails, capital uman rezidual, barista-option — cuantifica cati ani de portofoliu cumpara fiecare.</li>
+</ol>
+
+<h2>Checklist de validare a modelului</h2>
+
+<ul>
+<li>☐ Niciun scenariu nu foloseste o singura rata medie — toate au traiectorie pe deceniu.</li>
+<li>☐ Cosul medical ruleaza pe spread separat, cu pondere crescatoare de varsta.</li>
+<li>☐ S4 (soc + reacomodare) e in tabel — testeaza convexitatea si secventa, nu doar nivelul.</li>
+<li>☐ Verificat anomalia: tinta S4 &gt; S3 desi media inflatiei e mai mica (semn ca secventa e modelata corect).</li>
+<li>☐ Impozit RO pe castig modelat cu cota corecta (3-6% broker rezident dupa detinere / 16% broker strain) + scutire FIDELIS; CASS pe trepte si praguri tratate prudent, nu hardcodate pe 50 de ani.</li>
+<li>☐ Fluxuri CNPP / Pilon II indexate intrate dupa varsta de pensionare de stat.</li>
+<li>☐ Sensitivity rulata: randament real prioritizat inaintea inflatiei in stress-test.</li>
+<li>☐ Numarul final ales la percentila, cu flexibilitatea care acopera coada cuantificata explicit.</li>
+</ul>
+
+<p>Mesajul de specialist: inflatie fire 50 ani scenario modeling nu inseamna sa ghicesti mai bine media — inseamna sa renunti la ideea ca exista o medie utila. Construiesti distributia, segmentezi cosul medical care explodeaza tocmai cand esti mai vulnerabil, prinzi convexitatea secventei si alegi numarul ca percentila, nu ca punct. Diferenta dintre un model cu rata unica si cubul de mai sus este, pe cazul de 96.000 lei/an, peste doua milioane de lei — adica diferenta dintre un plan care pare prudent si unul care chiar este.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

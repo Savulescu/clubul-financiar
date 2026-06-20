@@ -1,0 +1,111 @@
+<p>Această lecție de <strong>momentum factor trading BVB options calls vânzare</strong> îmbină două competențe pe care le stăpânești deja separat — selecția acțiunilor cu momentum ridicat din modelul smart beta multi-factor și construcția de structuri multi-leg cu management de gamma — într-o singură tehnică operațională: vânzarea protejată de call short ATM pe titlurile care au epuizat statistic prima de momentum, calibrată chirurgical pe fereastra de reversion de 15-30 de zile. Nu mai vorbim de a paria pe direcție, ci de a captura matematic mean-reversion-ul de scurtă durată al factorului, monetizând simultan theta decay options strategy BVB.</p>
+
+<p>Premisa cantitativă este următoarea: momentum-ul ca factor are autocorelație pozitivă pe orizont de 6-12 luni, dar la rezoluție săptămânală, după un sprint de 8-12 ședințe în care un titlu lichid (TLV, SNP, H2O, BRD) bate indicele cu peste 2 abateri standard, probabilitatea de pauză sau retragere parțială crește semnificativ. Aici intervine momentum reversion fereastra 15-30 zile: vinzi un <strong>call short ATM profitabilitate</strong> ridicată pe acel vârf de epuizare, încasezi prima umflată de IV crescut, și lași theta să lucreze în timp ce delta neutral positioning options îți protejează contra zgomotului direcțional. Vom trata vega risk management Call options pe contracția de volatilitate post-spike, profit taking theta decay BVB la praguri exacte de captură, și position sizing momentum strategies pe un cont real în lei. Presupun că stăpânești deja sensul fiecărui grec, mecanica unui spread multi-leg și logica primei de factor — de aici intrăm doar în inginerie fină.</p>
+
+<p>O notă structurală indispensabilă: lichiditatea de opțiuni listate pe acțiuni individuale BVB este în 2026 marginală spre inexistentă pentru retail. Tehnica reală se execută fie pe <strong>indicele BET</strong> și produse derivate listate, fie — cazul practic dominant — pe expunerea echivalentă prin opțiuni pe ETF-uri UCITS și ADR/proxy internațional corelat cu titlul-țintă, ori prin structuri OTC/CFD la brokeri care le oferă. Tratăm BVB ca semnal-sursă (selecția momentum), iar execuția de greci o calibrăm pe instrumentul lichid de hedge. Acest decuplaj este însăși esența arbitrajului factor-momentum descris aici.</p>
+
+<h2>Anatomia semnalului: când un titlu de momentum devine candidat de vânzare</h2>
+
+<p>Selecția nu pleacă de la preț, ci de la <strong>z-score-ul de exces de randament factorial</strong>. Pentru fiecare titlu din sleeve-ul de momentum (cele cu cel mai bun raport randament 12-1 luni din universul lichid BVB), calculezi excesul săptămânal față de BET și îl normalizezi:</p>
+
+<ul>
+<li><strong>z = (R<sub>5z</sub> − μ<sub>52s</sub>) / σ<sub>52s</sub></strong>, unde R<sub>5z</sub> este randamentul ultimelor 5 ședințe minus randamentul BET pe aceeași fereastră, iar μ și σ sunt media și abaterea standard ale acestui exces pe 52 de săptămâni.</li>
+<li>Prag de armare: <strong>z ≥ +2,0</strong>. Sub +1,5 nu există epuizare statistică; intri prea devreme și momentum-ul te calcă.</li>
+<li>Filtru de confirmare RSI(14) > 72 pe titlul-sursă și volum în ultimele 3 ședințe sub media spike-ului (volumul scade înainte ca prețul să cedeze — divergența clasică de epuizare).</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> TLV are pe 5 ședințe +6,8%, BET +1,1% în aceeași perioadă, deci exces +5,7%. Media istorică a excesului pe 52 de săptămâni este +0,4% cu σ = 2,6%. Atunci z = (5,7 − 0,4) / 2,6 = <strong>+2,04</strong>. Semnal armat. Aceasta este fereastra de intrare; momentum reversion fereastra 15-30 zile spune că, statistic, cea mai mare parte a corecției sau plafonării se consumă în următoarele 3-6 săptămâni calendaristice, motiv pentru care selectăm o expirare care acoperă exact acest interval.</p>
+
+<h3>De ce ATM și de ce scurt</h3>
+
+<p>Vinzi <strong>call ATM</strong> (strike cel mai apropiat de spot), nu OTM, dintr-un motiv de structură a Greeks: ATM maximizează atât theta (decay-ul absolut e cel mai mare la strike = spot), cât și vega — exact ce vrei dacă teza ta include și contracția de IV post-spike. Un OTM încasează primă mică și te lasă expus la continuarea momentum-ului fără compensație suficientă. Scadența scurtă (DTE între 21 și 35 de zile la intrare) este zona în care theta începe accelerarea non-liniară, dar fără gamma-ul exploziv al ultimei săptămâni. Practic, vinzi un call cu <strong>21-35 DTE</strong> și planifici exitul în jur de 7-12 DTE, înainte ca gamma să devină ingestionabil.</p>
+
+<h2>Calendarul geometric: arhitectura pe zile a poziției</h2>
+
+<p>Tehnica trăiește sau moare din timing. Iată calendarul exact, pe zile calendaristice de la armare (ziua 0):</p>
+
+<ul>
+<li><strong>Ziua 0 (armare):</strong> z ≥ +2,0 confirmat. Vinzi 1 call ATM cu 28-35 DTE. IV implicit la vârf (de regulă cu 8-15 puncte IV peste media titlului). Încasezi prima maximă.</li>
+<li><strong>Zilele 1-5:</strong> faza de captură IV-crush. Dacă spike-ul a fost pur emoțional, IV se contractă în 3-5 ședințe, iar vega-leg-ul îți aduce 25-40% din profitul țintă fără ca prețul să se miște. Aici, profit taking theta decay BVB poate declanșa deja un exit parțial.</li>
+<li><strong>Zilele 6-15:</strong> faza de theta pură. Reversion-ul de preț (dacă vine) plus decay-ul liniarizat lucrează împreună. Acesta este miezul ferestrei 15-30 zile.</li>
+<li><strong>Zilele 16-25:</strong> theta accelerează (≤14 DTE rămase). Dar și gamma crește — monitorizare zilnică obligatorie a delta.</li>
+<li><strong>Ziua-țintă de exit: când captezi 55-65% din primă SAU la 10 DTE,</strong> oricare survine prima. Nu duci niciodată un call short vândut în ultima săptămână de viață fără hedge dinamic.</li>
+</ul>
+
+<h3>Cuantificarea theta și a țintei de captură</h3>
+
+<p><strong>Exemplu complet.</strong> Spot TLV-proxy = 30,00 lei. Vinzi call strike 30 cu 28 DTE. IV la intrare 38% (spike), prima încasată ≈ 1,18 lei/acțiune. La un contract de 100 de acțiuni, încasezi <strong>118 lei</strong> brut. Theta inițial ≈ −0,021 lei/zi (în favoarea ta ca vânzător), accelerând spre −0,035 sub 14 DTE. Dacă IV se contractă de la 38% la 30% în primele 5 zile (vega ≈ 0,032 per punct IV), câștigi din vega ≈ 8 × 0,032 = 0,256 lei/acțiune = <strong>25,6 lei</strong>, plus ~5 zile × 0,021 = 0,105 lei = 10,5 lei din theta. Total ziua 5 ≈ 36 lei pe o primă de 118 lei, adică ~30% capturat fără mișcare de preț. Ținta de exit la 60% înseamnă răscumpărarea call-ului la ≈ 0,47 lei (47 lei), profit ≈ 71 lei brut pe contract.</p>
+
+<h2>Delta neutral positioning options: protecția care face tehnica „arbitraj"</h2>
+
+<p>Un call vândut nud are delta negativă (≈ −0,50 la ATM) — ești scurt direcțional. Dacă momentum-ul continuă încă 2-3 ședințe înainte să cedeze, pierderea pe delta poate șterge captura de theta. Aici intervine <strong>delta neutral positioning options</strong>: neutralizezi delta cumpărând Δ × 100 acțiuni din instrumentul-suport (sau proxy) pentru fiecare contract vândut.</p>
+
+<ul>
+<li>La call ATM vândut cu Δ = −0,50, cumperi <strong>50 de acțiuni</strong> per contract. Poziția netă devine delta-neutral: profiți din theta + vega indiferent de direcție pe zgomot mic.</li>
+<li><strong>Rehedge dinamic:</strong> gamma face ca delta să se miște. Re-balansezi când |Δ net| depășește un prag-bandă, de regulă <strong>±0,15</strong> per contract (15 acțiuni). Re-hedge la fiecare ±0,10 e prea costisitor pe spread-urile BVB; ±0,20 te lasă prea expus. Banda de ±0,15 este compromisul optim între cost de tranzacționare și protecție.</li>
+<li>Costul gamma: dacă rebalanezi de 4 ori pe durata poziției la un spread mediu de 0,02 lei × 15 acțiuni, plătești ≈ 4 × 0,30 = 1,20 lei — neglijabil față de captura de 71 lei, dar îl bugetezi explicit.</li>
+</ul>
+
+<h3>Edge-case: gamma-squeeze și reversal asimetric</h3>
+
+<p>Pericolul real nu e reversion-ul lent, ci continuarea bruscă a momentum-ului (un upgrade, un rezultat trimestrial peste așteptări). Atunci delta call-ului vândut sare spre −0,80, gamma te forțează să cumperi acțiuni din ce în ce mai sus — clasica spirală negativă a vânzătorului de gamma. Regula de protecție:</p>
+
+<ul>
+<li><strong>Stop pe pierdere = 1,8× prima încasată.</strong> Dacă valoarea de răscumpărare a call-ului ajunge la 1,8 × 1,18 = 2,12 lei, închizi totul (call + hedge) necondiționat. Limitezi pierderea structural, înainte ca gamma să o facă nelimitată.</li>
+<li>Convertire defensivă opțională: în loc de stop sec, transformi call short nud într-un <strong>call vertical spread</strong> cumpărând un call OTM superior, plafonând pierderea maximă la diferența de strike − prima netă. Sacrifici upside-ul de theta dar elimini coada catastrofală.</li>
+</ul>
+
+<h2>Vega risk management Call options: dimensiunea ascunsă</h2>
+
+<p>Vega este motorul subapreciat al acestei tehnici. Vinzi exact când IV este umflat de spike, deci ești <strong>scurt vega</strong> la maxim local de volatilitate — poziție statistic favorabilă, fiindcă IV are mean-reversion mai puternic decât prețul. Dar vega te poate și ucide: dacă spike-ul de preț e însoțit de un eveniment care ridică IV și mai mult (criză sectorială, contagiune), pierzi pe vega chiar dacă prețul nu se mișcă.</p>
+
+<ul>
+<li>Măsoară <strong>IV Rank</strong> al titlului-proxy: armează vânzarea doar dacă IV Rank > 60 (IV curent în treimea superioară a intervalului pe 52 de săptămâni). Sub 40, prima e prea slabă și vega-edge-ul dispare.</li>
+<li>Bugetează expunerea netă de vega la nivel de portofoliu: dacă vinzi 5 call-uri ATM cu vega ≈ −0,032 fiecare, ai −0,16 vega net. Un șoc de +10 puncte IV pe întreaga piață te costă ≈ 1,6 lei/acțiune × 100 × 5 = 800 lei. Plafonează vega net de portofoliu la o pierdere maximă tolerabilă de ~2% din capital pe un șoc de +10 IV.</li>
+</ul>
+
+<h2>Position sizing momentum strategies: modelul în lei pe cont real</h2>
+
+<p>Dimensionarea corectă este diferența dintre o strategie de specialist și un cont lichidat. Folosește <strong>risc-pe-poziție fix</strong>, nu primă-fixă.</p>
+
+<ul>
+<li><strong>Capital de lucru:</strong> 200.000 lei. Risc maxim per poziție = 0,75% = 1.500 lei (pierderea la stop, nu prima).</li>
+<li>Cu stop la 1,8× primă, pierderea per contract = (2,12 − 1,18) × 100 = 94 lei pe leg-ul de opțiune, plus slippage hedge ≈ 20 lei → ~114 lei risc real per contract.</li>
+<li>Număr de contracte = 1.500 / 114 ≈ <strong>13 contracte</strong>. Dar aplici un plafon de concentrare: maximum 5 contracte pe un singur emitent și maximum 3 emitenți simultani, ca să nu corelezi reversion-uri care pot eșua împreună într-un regim de momentum puternic.</li>
+<li><strong>Corelația semnalelor:</strong> dacă armezi simultan TLV și BRD (ambele bancare, corelație ~0,7), tratează-le ca o poziție de 1,5×, nu 2× — altfel subestimezi riscul de coadă comun.</li>
+</ul>
+
+<h3>Fiscalitate și costuri RO 2026 — impactul pe profitabilitatea netă</h3>
+
+<p>Aspectul pe care îl ignoră majoritatea: tratamentul fiscal erodează edge-ul mai mult decât spread-ul. În România, în 2026, câștigurile din instrumente derivate și opțiuni realizate prin <strong>intermediar nerezident</strong> (cazul tipic pentru opțiuni lichide pe proxy internațional) se declară prin <strong>Declarația Unică</strong> și se impozitează cu <strong>16%</strong> pe câștigul net, întrucât cotele reduse cu reținere la sursă nu se aplică prin broker care nu reține impozitul în România. La acestea se adaugă, dacă venitul net anual din investiții depășește plafonul de 6 salarii minime brute, <strong>CASS</strong> de 10% datorată la baze plafonate (6, 12 sau 24 salarii minime, în funcție de nivelul venitului). Cu salariul minim de 4.050 lei în 2026, pragurile de bază CASS sunt aproximativ <strong>24.300 / 48.600 / 97.200 lei</strong>, iar CASS aferentă fiecărei trepte ≈ 2.430 / 4.860 / 9.720 lei. Prin <strong>intermediar rezident</strong> autorizat ASF, cu reținere la sursă pe titlurile de capital, se aplică cotele de <strong>3% (deținere &gt; 365 zile) sau 6% (&lt; 365 zile)</strong>, dar aceste cote reduse vizează strict titlurile de capital, NU se extind automat la derivate, iar majoritatea brokerilor de opțiuni nu rețin impozitul în România — deci ține de regulă regimul declarativ de 16%. Verifică încadrarea exactă a instrumentului tău, fiindcă tratamentul unei opțiuni vândute (primă încasată) vs. un câștig de capital clasic poate diferi; când ești incert, tratează prudent la 16% și declară prin Declarația Unică.</p>
+
+<ul>
+<li>Pe profitul brut estimat de 71 lei/contract: impozit 16% ≈ 11,4 lei → <strong>net ≈ 60 lei/contract</strong>, înainte de comisioane (plus eventuala CASS de 10% datorată la nivel agregat anual dacă depășești pragul de 6 salarii minime).</li>
+<li>Comisioane: la un broker tipic, ~0,65 USD/contract intrare + ieșire ≈ 1,3 USD ≈ 6 lei + comision pe acțiunile de hedge. Net real ≈ <strong>52-54 lei/contract</strong>. Edge-ul rămâne pozitiv, dar marja brută de 60% devine ~44% net — de aceea pragul de captură și disciplina de exit nu sunt opționale.</li>
+</ul>
+
+<h2>Backtest mental și așteptări de regim</h2>
+
+<p>Pe un univers de 6-8 titluri lichide BVB ca sursă de semnal, ferestre de armare z ≥ +2,0 apar realist de <strong>15-25 de ori pe an</strong>. Cu o rată istorică de succes a reversion-ului pe 15-30 zile în jur de 60-65% (mai mare în regimuri de volatilitate medie, mai mică în trend-uri puternice de bull unde momentum-ul se auto-întreține), profil tipic anual:</p>
+
+<ul>
+<li>~20 poziții × 60% câștig × 53 lei − 40% pierdere × 114 lei = (12 × 53) − (8 × 114) = 636 − 912... <strong>atenție:</strong> cu stop sec naiv, expectancy-ul devine NEGATIV. Tocmai de aceea conversia în vertical spread și exitul disciplinat la 55-60% captură (nu lăsarea pierderilor să atingă 1,8×) sunt obligatorii.</li>
+<li>Cu exit parțial pe IV-crush și management de delta care reduce pierderea medie la ~70 lei: (12 × 53) − (8 × 70) = 636 − 560 = <strong>+76 lei net pe 200.000 capital pe ciclu mediu</strong> — modest în absolut, dar repetabil și decorelat de beta de piață, exact valoarea unei strategii market-neutral.</li>
+</ul>
+
+<p>Concluzia onestă: această tehnică NU este o mașină de bani, ci o sursă de randament decorelat, cu Sharpe moderat, a cărei profitabilitate depinde brutal de execuție, costuri și disciplina greci-lor. Edge-ul brut există; supraviețuirea lui după fricțiuni este meritul tău operațional.</p>
+
+<h2>Checklist operațional — execuție pas cu pas</h2>
+
+<ul>
+<li><strong>1. Semnal:</strong> calculează z-score-ul de exces factorial pe titlurile din sleeve-ul momentum; armează doar la z ≥ +2,0, RSI(14) > 72, volum în scădere.</li>
+<li><strong>2. Vega-gate:</strong> verifică IV Rank > 60 pe instrumentul de execuție; altfel renunță la poziție.</li>
+<li><strong>3. Intrare:</strong> vinde call ATM cu 28-35 DTE pe instrumentul lichid (index/ETF/proxy corelat).</li>
+<li><strong>4. Hedge:</strong> cumpără Δ × 100 acțiuni per contract pentru delta-neutralitate.</li>
+<li><strong>5. Sizing:</strong> risc 0,75% capital/poziție, max 5 contracte/emitent, max 3 emitenți, ajustat pentru corelație.</li>
+<li><strong>6. Management:</strong> rehedge la |Δ net| > 0,15/contract; monitorizare zilnică sub 14 DTE.</li>
+<li><strong>7. Exit profit:</strong> răscumpără la 55-65% din primă SAU la 10 DTE.</li>
+<li><strong>8. Exit pierdere:</strong> stop la 1,8× primă, sau convertește preventiv în vertical spread pe semn de gamma-squeeze.</li>
+<li><strong>9. Fiscal:</strong> evidențiază fiecare tranzacție pentru Declarația Unică, impozit 16% pe câștigul net (broker nerezident, fără reținere la sursă în RO), verifică pragul CASS 10% la nivel anual agregat.</li>
+<li><strong>10. Jurnal:</strong> loghează z-score-ul de intrare, IV Rank, captura realizată și regimul de piață — fără acest registru nu poți distinge edge-ul real de noroc.</li>
+</ul>

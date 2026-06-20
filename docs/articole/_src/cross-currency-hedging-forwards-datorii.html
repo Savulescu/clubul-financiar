@@ -1,0 +1,127 @@
+<p>Această lecție tratează <strong>hedging datorii valută străină forward swap</strong> la nivel de specialist: nu „de ce” să te acoperi, ci cum construiești efectiv structura de acoperire la rata favorabilă, cu calcul exact al forward points pe baza ratelor BNR și ale băncilor centrale, cu un <strong>EUR USD forward contract</strong> negociat pentru o datorie personală și cu un <strong>cross-currency swap individual</strong> custom încheiat OTC direct cu banca. Presupun că stăpânești deja expunerea netă, natural hedging și mecanica de bază a forward-ului — aici mergem direct în formule, spread și timing.</p>
+
+<p>Vei vedea de ce o <strong>refinanțare cu lock-in rate</strong> nu înseamnă să prinzi spot-ul de azi, ci să blochezi cursul forward corect pentru data refinanțării, cum descompui <strong>forward points și spread calculation</strong> în componenta de diferențial de dobândă plus marja bid/ask a băncii, și cum citești curba randamentelor EUR vs CHF pentru a decide între un forward sec, un swap valutar și un risk reversal pe opțiuni. Întreaga logică este orientată spre <strong>protecția împotriva aprecierii monedei în datorii</strong> — situația în care valuta creditului tău se scumpește față de leu între momentul deciziei și momentul plății sau refinanțării.</p>
+
+<p>Premisa cantitativă pe care o folosim pe tot parcursul, ancorată în iunie 2026: dobânda-cheie BNR este <strong>6,50%</strong> (facilitate de depozit 5,50%, Lombard 7,50%), facilitatea de depozit ECB este <strong>2,25%</strong>, iar rata SNB pentru CHF este aproape de <strong>0,00%</strong>. Aceste diferențiale determină semnul și mărimea forward points, deci costul real al oricărui hedge.</p>
+
+<h2>Forward points: formula de paritate și ce vezi pe cotația băncii</h2>
+
+<p>Forward-ul nu este o prognoză de curs. Este spot-ul ajustat cu diferențialul de dobândă dintre cele două valute, prin <strong>covered interest rate parity</strong>. Pentru o pereche cotată ca RON per unitate de valută străină (EUR/RON, CHF/RON), formula pe orizont este:</p>
+
+<ul>
+<li><strong>F = S × (1 + r_RON × t) / (1 + r_FX × t)</strong>, unde S este spot-ul, r_RON dobânda în lei pe orizont, r_FX dobânda în valuta străină, iar t = zile/360 (convenția money-market uzuală).</li>
+<li><strong>Forward points = F − S</strong>, exprimate de bancă în „pips” (a patra zecimală).</li>
+</ul>
+
+<p>Pentru că r_RON (≈6,5%) este net peste r_EUR (≈2,25%), forward-ul EUR/RON este <strong>peste spot</strong>: leul se vinde la termen la discount, EUR la premium. Concret, cu S = 5,0800 EUR/RON și un diferențial de 4,25 puncte procentuale pe 12 luni (t = 365/360 ≈ 1,0139):</p>
+
+<ul>
+<li>F ≈ 5,0800 × (1 + 0,0650 × 1,0139) / (1 + 0,0225 × 1,0139) = 5,0800 × 1,06590 / 1,02282 ≈ <strong>5,2940</strong>.</li>
+<li>Forward points ≈ +0,2140, adică <strong>~2.140 pips</strong> pe an, ≈ 178 pips/lună.</li>
+</ul>
+
+<p><strong>Implicația contraintuitivă pe care mulți o ratează:</strong> dacă ai o datorie în EUR și te acoperi cumpărând EUR forward, blochezi 5,2940, nu 5,0800. Plătești diferențialul de dobândă (acel +4,2% încorporat) ca preț al certitudinii. Forward-ul nu îți dă „cursul de azi pe mâine” — îți dă cursul fără surpriză. Dacă EUR/RON ajunge spot la 5,40 peste un an, hedge-ul te-a protejat; dacă rămâne la 5,08, ai „pierdut” cei ~2.140 pips. De aceea forward-ul se evaluează probabilistic, nu binar.</p>
+
+<h3>CHF: forward points mult mai mari din cauza diferențialului extrem</h3>
+
+<p>Pentru CHF/RON diferențialul de dobândă este uriaș: ~6,5% (RON) − ~0,0% (CHF) = <strong>~6,5 puncte procentuale</strong>. Cu S = 5,45 CHF/RON:</p>
+
+<ul>
+<li>F_12m ≈ 5,45 × 1,06590 / 1,00000 ≈ <strong>5,809</strong> → forward points ≈ +0,359, adică <strong>~3.590 pips/an</strong>.</li>
+</ul>
+
+<p>Asta înseamnă că acoperirea forward a unei datorii în CHF te costă, ca diferențial implicit, aproape de două ori mai mult decât pentru EUR. Aici apare decizia strategică reală: pentru CHF, forward-ul „scump” reflectă exact prima de risc pe care piața o cere pentru valuta-refugiu — iar dacă te aștepți la o apreciere a CHF mai mare decât aceste 6,5%, hedge-ul devine ieftin în termeni așteptați. Tabelul mental: <strong>compari forward points (cost cert) cu aprecierea probabilă (pierdere incertă)</strong>, nu forward points cu spot-ul de azi.</p>
+
+<h2>Descompunerea spread-ului: ce parte e dobândă și ce parte e marja băncii</h2>
+
+<p>Cotația pe care o primești de la dealerul de trezorerie nu e curba pură. Are trei straturi, pe care trebuie să le separi pentru a negocia:</p>
+
+<ul>
+<li><strong>Stratul 1 — forward points teoretici</strong>: din paritatea de mai sus, derivați din curbele de swap (nu din dobânda de politică directă, ci din ratele money-market 3M/6M/12M).</li>
+<li><strong>Stratul 2 — spread-ul bid/ask de piață</strong>: pe EUR/RON la termen, tipic câteva zeci de pips în plus față de mid; pe CHF/RON, mai larg din cauza lichidității reduse.</li>
+<li><strong>Stratul 3 — marja comercială a băncii pentru un client retail/IMM</strong>: aici se ascunde costul real. Pe forward-uri „pachetizate” pentru persoane fizice, banca poate adăuga 100–300 pips peste mid, mascați în „cursul garantat”.</li>
+</ul>
+
+<p><strong>Tehnica de specialist:</strong> cere cotația defalcat — spot folosit + forward points separat — nu „cursul forward all-in”. Dacă banca îți dă doar un număr unic (de ex. „îți garantez 5,33 la 12 luni”), calculează singur F teoretic (5,294 în exemplul nostru) și vezi diferența: 5,33 − 5,294 = 0,036 = <strong>360 pips marjă</strong> peste teoretic. Asta e ce negociezi. Pe sume sub ~50.000 EUR, marja e greu de comprimat; peste 100.000–250.000 EUR, ai pârghie reală să o aduci sub 80–120 pips.</p>
+
+<h3>Costul anualizat al hedge-ului ca rată echivalentă</h3>
+
+<p>Transformă forward points în cost procentual anual pentru a-l compara direct cu dobânda creditului: <strong>cost% = forward points / spot × (360/zile)</strong>. Pentru EUR: 0,2140 / 5,0800 × 1 ≈ <strong>4,21%/an</strong>. Pentru CHF: 0,359 / 5,45 ≈ <strong>6,59%/an</strong>. Aceasta este „prima de hedging” explicită. Dacă te acoperi pe doar 6 luni, o înjumătățești aproximativ (forward points scalează cu t, dar nu perfect liniar din cauza compunerii).</p>
+
+<h2>Curba randamentelor EUR vs CHF: cum decide forma curbei structura</h2>
+
+<p>Forward points pe diferite scadențe sunt determinați de <strong>panta relativă</strong> a celor două curbe. Citirea ei îți spune dacă să fixezi pe termen scurt și să rostogolești sau să blochezi lung dintr-o dată.</p>
+
+<ul>
+<li><strong>Curba EUR (iunie 2026)</strong>: după vârful de dobândă din 2023 (facilitatea de depozit ECB urcase atunci până la 4,00%), ciclul de relaxare a coborât rata la 2,25% în 2026, iar piața prețuiește o curbă aproape plată spre ușor ascendentă pe partea lungă. Diferențialul RON−EUR pe partea scurtă se îngustează dacă BNR taie înaintea ECB — ceea ce ar comprima forward points pe 3–6M față de 12M.</li>
+<li><strong>Curba CHF</strong>: ancorată aproape de zero, foarte plată. Diferențialul RON−CHF este aproape integral „purtat” de partea RON. Dacă piața prețuiește tăieri BNR în 12–24 luni, forward points CHF lungi sunt proporțional mai mici decât scurtul anualizat.</li>
+</ul>
+
+<p><strong>Regula de decizie:</strong> dacă diferențialul de dobândă (deci forward points/an) este așteptat să <em>scadă</em> — pentru că BNR va tăia înaintea ECB/SNB — atunci a bloca un forward lung azi „îngheață” un cost ridicat; mai bine fixezi scurt (3–6M) și rostogolești, sperând la forward points mai mici la roll. Invers, dacă te aștepți la lărgirea diferențialului (BNR sus, ECB/SNB jos pe termen lung), <strong>blochezi lung acum</strong> ca să eviți un roll mai scump. Pentru CHF, unde SNB e la zero și greu poate scădea, riscul de lărgire vine doar din RON — deci forward-ul lung CHF tinde să fie alegerea defensivă.</p>
+
+<h2>Cross-currency swap individual negociat OTC cu banca</h2>
+
+<p>Forward-ul sec acoperă o singură plată (sau o sumă bullet la refinanțare). Pentru o datorie cu <strong>flux de rate recurente</strong> în valută, instrumentul corect este <strong>cross-currency swap</strong>: schimbi un șir de plăți într-o valută contra un șir în alta, la cursuri fixate azi, plus diferențialul de dobândă pe fiecare leg.</p>
+
+<p>Structura unui CCS custom pentru o persoană cu datorie în EUR, venituri în RON:</p>
+
+<ul>
+<li><strong>Leg 1 (primești EUR / plătești în swap):</strong> banca îți livrează exact ratele EUR la scadențele creditului (de ex. 1.200 EUR/lună × 60 luni).</li>
+<li><strong>Leg 2 (plătești RON):</strong> tu plătești sumele în lei calculate la cursurile forward ale fiecărei scadențe, încorporând forward points crescători în timp.</li>
+<li><strong>Notional exchange:</strong> de regulă fără schimb de principal la final pentru un hedge de serviciu al datoriei (doar legurile de dobândă/rată), ceea ce reduce riscul de contrapartidă și colateralul cerut.</li>
+</ul>
+
+<p><strong>Diferența vs. o serie de forward-uri:</strong> CCS este un singur contract, cu un singur set de termeni, deci o singură marjă negociată — adesea mai ieftin decât 60 de forward-uri separate, fiecare cu spread propriu. În plus, fixează un <em>curs mediu efectiv</em> pe toată durata, nu cursuri punctuale, ceea ce te protejează de un singur vârf nefavorabil de curs care ar lovi exact o scadență.</p>
+
+<h3>Realitatea de acces în România 2026</h3>
+
+<p>CCS-urile sunt instrumente OTC sub ISDA/CSA, gândite pentru corporate. Ca persoană fizică sau PFA cu o datorie de zeci de mii de EUR, accesul direct este limitat: băncile cer fie sumă semnificativă (uzual peste echivalentul a câteva sute de mii EUR notional), fie te direcționează spre produse standardizate (forward-uri rostogolite, „multi-forward”). Practic, <strong>pentru retail, un program de forward-uri eșalonate replică economic un CCS</strong> fără infrastructura ISDA. Negociază un acord-cadru de forward (master agreement simplificat) care îți permite să fixezi tranșe la cerere, cu marjă pre-agreată pe pips — asta îți dă flexibilitatea unui swap cu birocrația unui forward.</p>
+
+<h2>Risk reversal pe opțiuni: hedge cu cost redus și protecție asimetrică</h2>
+
+<p>Dacă vrei protecție la apreciere dar nu vrei să plătești integral prima de hedging a forward-ului, structura de specialist este <strong>risk reversal</strong>: cumperi o opțiune call pe valuta datoriei (te protejează dacă se apreciază) și finanțezi prima vânzând o opțiune put (renunți la o parte din câștig dacă valuta se depreciază).</p>
+
+<ul>
+<li><strong>Cumperi call EUR/RON</strong> la strike, de ex., 5,30 — plafonezi cursul maxim la care vei cumpăra EUR.</li>
+<li><strong>Vinzi put EUR/RON</strong> la strike, de ex., 5,05 — te obligi să cumperi EUR la 5,05 dacă pică sub, dar încasezi primă.</li>
+<li><strong>Net:</strong> dacă strike-urile sunt alese ca primele să se anuleze, obții un „<strong>zero-cost collar</strong>” — protecție gratuită în schimbul plafonării câștigului între 5,05 și 5,30.</li>
+</ul>
+
+<p><strong>Skew-ul contează:</strong> pe perechi emergente RON, volatilitatea implicită a call-urilor pe valută străină (apreciere străină = depreciere RON) este de regulă mai scumpă decât a put-urilor — piața prețuiește mai mult riscul de slăbire a leului. Acest <em>risk-reversal skew</em> pozitiv înseamnă că pentru un collar zero-cost va trebui să accepți un strike de put mai apropiat de spot (renunți la mai mult upside) decât într-o pereche simetrică. Cuantifică: dacă RR 25-delta cotează la +2,5 vol, call-ul e cu ~2,5 puncte de volatilitate mai scump — exact prețul protecției pe care o cumperi.</p>
+
+<h2>Timing-ul lock-in-ului pentru refinanțare</h2>
+
+<p>Greșeala clasică: aștepți „un curs bun” pe spot. Corect este să raționezi pe <strong>forward-ul aferent datei de refinanțare</strong>, nu pe spot-ul de azi.</p>
+
+<ul>
+<li><strong>Determină data exactă a refinanțării</strong> (când expiră creditul vechi / când tragi noul credit în valută). Acela e orizontul t al forward-ului.</li>
+<li><strong>Calculează F la acel t</strong> și compară-l cu nivelul la care refinanțarea rămâne sustenabilă (cursul la care DTI/rata în lei e încă acceptabilă).</li>
+<li><strong>Blochează când F ≤ pragul tău de sustenabilitate</strong>, indiferent unde e spot-ul. Dacă forward-ul calculat e deja sub prag, fixează — nu specula că diferențialul de dobândă va lucra în favoarea ta.</li>
+</ul>
+
+<p><strong>Exemplu integrat.</strong> Refinanțezi peste 9 luni un credit, mutând 120.000 EUR notional. Spot 5,0800, diferențial 4,25%. F_9m ≈ 5,0800 × (1 + 0,065 × 0,75) / (1 + 0,0225 × 0,75) ≈ 5,0800 × 1,04875 / 1,016875 ≈ <strong>5,2393</strong>. Banca îți cotează all-in 5,275 → marjă 360 pips. Negociezi la 5,255 (≈ 160 pips peste teoretic) pe notional-ul mare. Costul cert al certitudinii: (5,255 − 5,080) × 120.000 = <strong>21.000 RON</strong> față de spot-ul de azi — dar zero risc dacă EUR/RON urcă la 5,45 (unde ai fi plătit 44.400 RON în plus neacoperit). Decizia: dacă probabilitatea de apreciere peste 5,255 e semnificativă și nu-ți permiți coada de scenariu, fixezi.</p>
+
+<h3>Erori de specialist de evitat</h3>
+
+<ul>
+<li><strong>Confunzi spot cu forward la negociere</strong> — accepți „cursul garantat” fără să-l descompui în spot + points + marjă.</li>
+<li><strong>Hedge-uiești valuta greșită</strong> — acoperi datoria brută în EUR când ai venituri nete în EUR, transformând un hedge natural într-o poziție speculativă (vezi lecția anterioară pe expunere netă).</li>
+<li><strong>Ignori riscul de bază</strong> — un CCS sau forward fixează cursul, dar dacă datoria are dobândă variabilă (Euribor/Saron), rămâi expus la leg-ul de dobândă; pentru protecție completă, swap-ul trebuie să acopere și rata, nu doar cursul.</li>
+<li><strong>Roll prea des pe forward-uri scurte</strong> — fiecare roll plătește din nou spread bid/ask + marjă; pe un orizont lung cunoscut, un forward lung unic e adesea mai ieftin decât 4 rostogoliri trimestriale.</li>
+<li><strong>Subestimezi colateralul</strong> — la mișcări adverse de curs, banca poate cere variation margin pe forward-uri mari; menține lichiditate-tampon ca să nu fii forțat să închizi hedge-ul în pierdere de mark-to-market.</li>
+</ul>
+
+<h2>Checklist de execuție</h2>
+
+<ul>
+<li><strong>1.</strong> Stabilește notional-ul exact și data plății/refinanțării → orizontul t.</li>
+<li><strong>2.</strong> Calculează F teoretic cu paritatea (S, r_RON ≈ 6,5%, r_FX: EUR 2,25% / CHF ~0%).</li>
+<li><strong>3.</strong> Convertește forward points în cost%/an și compară cu aprecierea probabilă, nu cu spot.</li>
+<li><strong>4.</strong> Cere cotația băncii defalcat (spot + points) și calculează marja peste teoretic în pips.</li>
+<li><strong>5.</strong> Decide instrumentul: forward sec (plată unică), program multi-forward / CCS (flux de rate), risk reversal / collar (cost redus, upside plafonat).</li>
+<li><strong>6.</strong> Citește panta curbelor EUR/CHF: fixează lung dacă diferențialul se lărgește, scurt+roll dacă se îngustează.</li>
+<li><strong>7.</strong> Negociază marja pe notional mare; țintește sub 120 pips peste teoretic pentru sume > 100.000 EUR.</li>
+<li><strong>8.</strong> Verifică acoperirea legului de dobândă dacă creditul e cu rată variabilă (Euribor/Saron).</li>
+<li><strong>9.</strong> Rezervă lichiditate-tampon pentru variation margin pe durata hedge-ului.</li>
+<li><strong>10.</strong> Blochează la pragul de sustenabilitate, nu la „cursul perfect” — certitudinea are un preț pe care l-ai cuantificat deja.</li>
+</ul>

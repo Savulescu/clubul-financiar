@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monte Carlo FIRE pe volatilitatea reala a pietei romanesti: BET-TR, EUR-RON si failure rate — Clubul Financiar</title><meta name="description" content="Model Monte Carlo FIRE calibrat pe Romania: volatilitate BET-TR, cuplaj EUR-RON, block bootstrap si failure rate la 10.000 iteratii. Ghid avansat de simulare…"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/monte-carlo-fire-volatilitate-romana-eur-bet.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Monte Carlo FIRE pe volatilitatea reala a pietei romanesti: BET-TR, EUR-RON si failure rate"><meta property="og:description" content="Model Monte Carlo FIRE calibrat pe Romania: volatilitate BET-TR, cuplaj EUR-RON, block bootstrap si failure rate la 10.000 iteratii. Ghid avansat de simulare…"><meta property="og:url" content="https://clubulfinanciar.ro/articole/monte-carlo-fire-volatilitate-romana-eur-bet.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Monte Carlo FIRE pe volatilitatea reala a pietei romanesti: BET-TR, EUR-RON si failure rate"><meta name="twitter:description" content="Model Monte Carlo FIRE calibrat pe Romania: volatilitate BET-TR, cuplaj EUR-RON, block bootstrap si failure rate la 10.000 iteratii. Ghid avansat de simulare…"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Monte Carlo FIRE pe volatilitatea reala a pietei romanesti: BET-TR, EUR-RON si failure rate", "description": "Model Monte Carlo FIRE calibrat pe Romania: volatilitate BET-TR, cuplaj EUR-RON, block bootstrap si failure rate la 10.000 iteratii. Ghid avansat de simulare…", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/monte-carlo-fire-volatilitate-romana-eur-bet.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#fire">🔥 Independență financiară (FIRE)</a> · 12 min citire · Actualizat 19 iun. 2026</p><h1>Monte Carlo FIRE pe volatilitatea reala a pietei romanesti: BET-TR, EUR-RON si failure rate</h1><p>O simulare <strong>monte carlo fire volatilitate Romania BET</strong> corectă pleacă de la o observație pe care majoritatea calculatoarelor FIRE o ignoră: parametrii stochastici impliciți (μ ≈ 7%, σ ≈ 15%, drawdown de tip 2008) sunt calibrați pe S&P 500 în USD, nu pe un portofoliu denominat în lei și expus la BET-TR, titluri de stat RON și cuplajul EUR-RON. Dacă rulezi un plan de retragere de 35-45 de ani cu σ greșit, eroarea de <em>failure rate</em> nu e cosmetică: la 4% retragere, o subestimare de 3-4 puncte de volatilitate poate muta rata de eșec de la 6% la 18%.</p>
+
+<p>Acest material îți dă scheletul complet al unui model de tip <strong>simulare stochastica fire RON EUR</strong>: cum extragi <strong>parametri reali piata romana fire</strong> dintr-o serie BET de ~28 de ani și o serie BET-TR (total return) începută în septembrie 2014, cum modelezi <strong>volatilitate BET-TR fire correlation</strong> cu cursul EUR-RON administrat de BNR, și cum calculezi <strong>failure rate fire 10000 iteratii</strong> printr-un block bootstrap care păstrează autocorelația și fat tails. Vom face și <strong>backtesting monte carlo fire</strong> împotriva istoricului real, ca să nu confunzi un model frumos cu unul corect. Presupun că stăpânești deja regula 4%, sequence of returns risk și logica unui SWR variabil — aici mergem direct în calibrare și cod conceptual.</p>
+
+<p>Atenție la o capcană de date pe care o vei întâlni imediat: BET-TR (indicele cu randament total, care reinvestește dividendele) există abia din 22 septembrie 2014. Orice istoric „BET-TR pe 20 de ani” este reconstruit sintetic, nu observat. Tratăm asta corect mai jos.</p>
+
+<h2>De ce parametrii S&P 500 produc un failure rate fals pe un portofoliu în lei</h2>
+
+<p>Un calculator FIRE generic simulează un proces lognormal cu drift și difuzie constante: <code>R_t = μ·dt + σ·√dt·Z</code>, cu Z ~ N(0,1). Problema nu e modelul, ci cei doi parametri și o ipoteză ascunsă — gaussianitatea. Pentru un rentier român, trei lucruri sparg transferul direct al parametrilor americani:</p>
+
+<ul>
+<li><strong>Volatilitatea de bază e mai mare.</strong> BET, ca piață frontieră/emergentă mică și concentrată (top 5 emitenți depășesc constant 50-60% din capitalizarea indicelui), are σ anualizat istoric net peste S&P 500. Pe seria lungă, abaterea standard a randamentelor lunare BET implică σ_anual frecvent în zona 22-30%, față de ~15-18% pentru S&P 500.</li>
+<li><strong>Distribuția e mai grasă la cozi.</strong> Kurtoza randamentelor lunare BET e semnificativ peste 3 (excess kurtosis pozitiv), iar asimetria e negativă: crash-urile sunt mai abrupte decât revenirile. Un model gaussian subestimează exact evenimentul care te omoară în anul 1 de FIRE.</li>
+<li><strong>Există un al doilea factor de risc: cursul.</strong> Dacă o parte din portofoliu e în active globale (VWCE, IWDA, CSPX) denominate în EUR/USD dar cheltuielile tale sunt în lei, randamentul tău real în RON e <code>R_RON ≈ R_activ + ΔFX</code>. Trebuie modelat explicit cuplajul EUR-RON.</li>
+</ul>
+
+<p>Concluzia operațională: nu poți importa σ = 15%. Trebuie să-l reconstruiești din date românești, pe componente, și apoi să-l agregi la nivel de portofoliu cu matricea de covarianță corectă.</p>
+
+<h2>Pasul 1 — Calibrarea μ și σ pe seria BET / BET-TR reală</h2>
+
+<p>Lucrezi pe randamente <em>logaritmice lunare</em> (<code>r = ln(P_t/P_{t-1})</code>), nu aritmetice, fiindcă se compun aditiv și se anualizează curat. Sursa de date: cotațiile oficiale BVB pentru BET (din 1997, deci ~28 ani de istoric de preț) și BET-TR (din 2014, pentru componenta de dividende reinvestite).</p>
+
+<h3>Reconstrucția unei serii total-return lungi</h3>
+
+<p>Fiindcă BET-TR e scurt, construiești o serie sintetică BET-TR pe toată istoria astfel: pentru perioada ≥ sept. 2014 folosești BET-TR observat; pentru perioada < 2014 aproximezi randamentul total adăugând la randamentul de preț BET un dividend yield istoric mediu al pieței (în România, randamentul dividendelor a fost ridicat datorită SIF-urilor și energiei — frecvent 4-7% anual, cu vârfuri peste 8% în anii cu dividende speciale Romgaz/OMV Petrom/bănci). Marchezi clar această componentă ca <em>estimată</em>, nu observată, fiindcă introduce incertitudine de parametru.</p>
+
+<h3>Estimatorii pe care îi extragi</h3>
+
+<ul>
+<li><strong>Drift μ:</strong> media randamentelor log lunare × 12. Pe seria lungă BET-TR sintetică, μ_log real (peste inflație) este modest și foarte sensibil la fereastra aleasă — exact de aceea nu te bazezi pe o singură valoare punctuală, ci pe bootstrap.</li>
+<li><strong>Volatilitate σ:</strong> abaterea standard a randamentelor log lunare × √12.</li>
+<li><strong>Asimetrie și kurtoză:</strong> momentele 3 și 4, ca să decizi dacă ai nevoie de un model fat-tailed (t-Student) sau de bootstrap nonparametric.</li>
+</ul>
+
+<p>Regula de igienă cantitativă: raportează întotdeauna estimatorii cu interval de încredere (de ex. prin bootstrap pe medie/σ), fiindcă pe 28 de ani ai doar ~28 de observații anuale efective — eroarea standard a lui μ_anual este de ordinul <code>σ/√n ≈ 25%/√28 ≈ 4,7%</code>. Cu alte cuvinte, μ-ul tău „adevărat” are o bandă de ±4-5 puncte. Asta e <em>parameter uncertainty</em> și trebuie injectată în simulare, altfel raportezi un failure rate fals de precis.</p>
+
+<h2>Pasul 2 — Modelarea cuplajului EUR-RON (BNR managed float)</h2>
+
+<p>Leul nu flotează liber. BNR practică un <em>managed float</em> cu intervenții pe piața valutară, ceea ce face ca EUR-RON să aibă o dinamică foarte particulară pentru un simulator: <strong>volatilitate zilnică mică, dar deprecieri în trepte și un drift structural ascendent</strong>. În 2026, EUR-RON se tranzacționează în zona ~5,24, după ce a stat administrat ani de zile, cu deprecieri controlate care urmează diferențialul de inflație și dobândă.</p>
+
+<p>Pentru modelare, NU folosi un random walk gaussian simetric — ar genera și aprecieri puternice ale leului, care empiric nu apar. În iunie 2026, EUR-RON se tranzacționează în zona ~5,24 (cursul de referință BNR a oscilat în ultimele luni între ~5,09 și ~5,27), după ani de depreciere controlată în trepte care urmează diferențialul de inflație și dobândă. Două abordări corecte:</p>
+
+<ul>
+<li><strong>Drift + jump:</strong> <code>ΔFX_t = δ·dt + σ_fx·√dt·Z + J_t</code>, unde δ este un drift mic pozitiv (depreciere structurală anuală a leului, calibrabil pe diferențialul de inflație RO vs zona euro, istoric ~2-4%/an), σ_fx este foarte mic (volatilitatea zilnică EUR-RON e o fracțiune din cea a unei perechi liber flotante), iar J_t este un proces Poisson rar de salt care modelează deprecierile abrupte (ex. martie 2020, momentele de stres pe leu).</li>
+<li><strong>Regime-switching:</strong> un model cu două regimuri — „calm administrat” (σ_fx aproape zero, drift mic) și „repricing” (salt + volatilitate ridicată) — cu o probabilitate mică de tranziție lunară.</li>
+</ul>
+
+<p>Esența pentru FIRE: <strong>EUR-RON nu te ajută aproape niciodată și te lovește ocazional în trepte.</strong> Dacă cheltuiești în lei și investești global, deprecierea leului îți crește valoarea în RON a activelor externe — un hedge natural parțial împotriva crizelor locale. Acesta e exact cuplajul pe care un calculator S&P-only îl ratează complet.</p>
+
+<h2>Pasul 3 — Matricea de covarianță și agregarea portofoliului</h2>
+
+<p>Un portofoliu FIRE realist al unui român nu e 100% BET. Modelezi cel puțin patru active corelate:</p>
+
+<ul>
+<li><strong>BET-TR (acțiuni RO)</strong> — μ_RO, σ_RO ridicat;</li>
+<li><strong>Acțiuni globale în EUR/USD</strong> (VWCE/IWDA) — μ_glob, σ_glob ~15%, plus expunere FX;</li>
+<li><strong>Titluri de stat / Fidelis / Tezaur RON</strong> — μ_bond apropiat de dobânda nominală, σ mic;</li>
+<li><strong>Componenta FX EUR-RON</strong> ca factor separat aplicat pe activele externe.</li>
+</ul>
+
+<p>Cheia e <strong>matricea de corelație</strong>, estimată pe randamentele istorice aliniate temporal. Empiric, în crize, corelația BET cu piețele globale crește (corelația „se duce spre 1” exact când ai nevoie de diversificare) — deci nu folosi corelația din vremuri calme. Trebuie să simulezi <em>corelație condiționată de regim</em>: una în calm (ex. 0,3-0,5 între BET și MSCI World), alta în criză (0,7-0,9). Altfel supraestimezi grosolan beneficiul diversificării și raportezi un failure rate prea optimist.</p>
+
+<p>Tehnic, generezi șocurile corelate prin <strong>descompunere Cholesky</strong> a matricei de covarianță Σ: <code>r = μ + L·Z</code>, unde <code>L·Lᵀ = Σ</code> și Z e vector de normale independente. Pentru fat tails, înlocuiești Z cu un vector t-Student multivariat (copulă t), care păstrează corelația cozilor — esențial pentru sequence risk.</p>
+
+<h2>Pasul 4 — Block bootstrap: alternativa care nu inventează distribuția</h2>
+
+<p>Modelul parametric (Cholesky + copulă t) e elegant dar presupune că ai ghicit corect forma distribuției. Pentru un dataset românesc scurt, abordarea mai robustă pentru <strong>backtesting monte carlo fire</strong> este <strong>stationary block bootstrap</strong> (Politis-Romano):</p>
+
+<ul>
+<li>Iei seria istorică reală de randamente lunare ale portofoliului (deja agregate în RON, cu FX inclus).</li>
+<li>În loc să tragi o lună aleatoare independentă, tragi <strong>blocuri contigue</strong> de lungime aleatoare (medie ~6-12 luni), pe care le concatenezi până umpli orizontul de 35-45 ani.</li>
+<li>Repeți de <strong>10.000 de ori</strong>.</li>
+</ul>
+
+<p>De ce blocuri: păstrează automat autocorelația (momentum și mean-reversion), clusterele de volatilitate și — crucial — secvențele reale de criză (un bloc poate conține exact 2008 sau 2020 cu coada lor de revenire). Nu presupui normalitate, nu presupui σ constant. Costul: nu poți simula crize mai mari decât cele din istoric. De aceea rulezi <em>ambele</em> metode și compari: dacă parametric (cu fat tails) și bootstrap dau failure rate apropiat, ai încredere; dacă diverg mult, ai un risc de model pe care trebuie să-l raportezi onest.</p>
+
+<h2>Pasul 5 — Bucla de simulare și definiția failure rate</h2>
+
+<p>Structura algoritmului pe care îl rulezi pentru <strong>failure rate fire 10000 iteratii</strong>:</p>
+
+<ul>
+<li><strong>Input:</strong> capital inițial W₀ (lei), retragere reală anuală C (în lei de azi), orizont T (luni), vector de alocare, matrice Σ sau seria pentru bootstrap, regim de retragere (fix 4% vs variabil/guardrails), inflație IPC modelată ca proces propriu (corelată negativ cu randamentele reale).</li>
+<li><strong>Per iterație:</strong> pentru fiecare lună t — generezi randamentul de portofoliu, aplici <code>W_t = W_{t-1}·(1+R_t) − C_t</code>, unde C_t e indexat la inflația simulată. Dacă W_t ≤ 0 înainte de T → iterația e marcată „eșec”.</li>
+<li><strong>Output:</strong> <code>failure_rate = (nr. iterații eșuate) / 10.000</code>, plus distribuția capitalului final, plus percentilele drawdown-ului maxim și anul median de ruină în scenariile eșuate.</li>
+</ul>
+
+<p>Rafinări de specialist care schimbă rezultatul:</p>
+
+<ul>
+<li><strong>Retrageri lunare, nu anuale.</strong> Retragerea la început de an în luna unui crash supraestimează eșecul; retragerea lunară e mai realistă și mai blândă.</li>
+<li><strong>Parameter uncertainty per iterație.</strong> La fiecare din cele 10.000 de rulări, trage întâi μ și σ din distribuția lor de incertitudine (ex. μ ~ N(μ̂, σ/√n)), apoi simulează. Asta îți dă un failure rate mai onest, de obicei mai mare cu câteva puncte.</li>
+<li><strong>Guardrails Guyton-Klinger.</strong> Modelează regula reală: dacă rata curentă de retragere depășește un prag, tai cheltuiala cu 10%; dacă scade mult, o crești. Un SWR rigid și unul cu guardrails pot da failure rate diferit cu 5-10 puncte la aceeași alocare.</li>
+</ul>
+
+<h2>Exemplu numeric concret: două planuri în lei</h2>
+
+<p>Capital W₀ = <strong>2.000.000 lei</strong>, retragere reală C = <strong>80.000 lei/an</strong> (deci SWR nominal 4%), orizont 40 de ani, inflație modelată cu medie ~4% (ținta BNR e 2,5% ±1pp, dar IPC RO a depășit-o sistematic). Alocare A: 60% BET-TR / 40% titluri de stat RON. Alocare B: 40% BET-TR / 35% acțiuni globale (cu hedge FX natural) / 25% titluri de stat.</p>
+
+<p>Logica rezultatelor (calibrată pe σ_RO ridicat și fat tails — rulează tu cifrele exacte pe datele tale):</p>
+
+<ul>
+<li><strong>Alocarea A</strong> are σ de portofoliu mai mare și e expusă 100% riscului local. Failure rate-ul tinde să fie mai mare exact din cauza concentrării pe BET și a corelației interne dintre emitenții grei (bănci + energie). Sequence risk-ul lovește brutal dacă crash-ul local vine în primii 3 ani.</li>
+<li><strong>Alocarea B</strong>, prin componenta globală denominată în valută, beneficiază de cuplajul EUR-RON: într-o criză locală cu depreciere a leului, valoarea în RON a activelor externe urcă, atenuând drawdown-ul total. Failure rate-ul tinde să fie mai mic <em>chiar dacă μ brut e similar</em>, fiindcă diversificarea pe factorul FX reduce varianța în RON.</li>
+</ul>
+
+<p>Lecția cantitativă: pe piața românească, <strong>componenta valutară a unui portofoliu global nu e un risc, ci un stabilizator</strong> pentru un rentier care cheltuiește în lei — invers față de intuiția standard. Iar un calculator FIRE care nu modelează FX nu poate vedea acest efect deloc.</p>
+
+<h2>Pasul 6 — Validarea: backtesting împotriva istoriei reale</h2>
+
+<p>Un model nevalidat e ficțiune frumoasă. Fă trei teste:</p>
+
+<ul>
+<li><strong>Historical SWR (rolling cohorts).</strong> Rulează planul pe ferestre istorice reale suprapuse (cohorta care iese la FIRE în 2000, 2007, 2008, 2020 etc.) și vezi câte ar fi supraviețuit efectiv. Aici descoperi că cohorta de FIRE din vârful 2007 a luat un −70% pe BET în 2008 — testul suprem de sequence risk pe date românești adevărate.</li>
+<li><strong>Coerența metodelor.</strong> Compară failure rate parametric (Cholesky + t) vs block bootstrap. Diferența = riscul tău de model.</li>
+<li><strong>Sensibilitate (tornado).</strong> Variază pe rând σ_RO, corelația de criză, driftul FX, inflația, rata de retragere — și vezi care parametru mișcă cel mai mult failure rate-ul. Aproape întotdeauna câștigătorii sunt: rata de retragere și corelația condiționată de criză. Acolo îți concentrezi marja de siguranță.</li>
+</ul>
+
+<h2>Edge-cases pe care un model naiv le ratează</h2>
+
+<ul>
+<li><strong>Impozitarea retragerilor.</strong> În RO 2026, câștigurile de capital realizate prin <em>broker rezident</em> (reținute la sursă) se impozitează cu <strong>3%</strong> pentru deținere &gt; 1 an și <strong>6%</strong> pentru deținere &lt; 1 an; prin <em>broker străin</em> (fără reținere la sursă) cota este <strong>16% pe câștigul net anual, autodeclarat în Declarația Unică</strong>; dividendele au impozit propriu de <strong>16%</strong> (2026). La acestea se adaugă <strong>CASS 10%</strong> calculat pe trepte (6/12/24 salarii minime — la salariu minim 4.050 lei, plafoanele sunt 24.300 / 48.600 / 97.200 lei/an). Retragerea ta <em>brută</em> necesară e mai mare decât cea netă cheltuită — injectează cota fiscală efectivă (impozit + CASS marginal) în C_t, altfel subestimezi presiunea pe portofoliu.</li>
+<li><strong>Lichiditatea BET.</strong> În stres, spread-urile pe emitenții mici BVB se lărgesc; vânzarea forțată într-un crash are slippage real, neglijat de orice model de preț de închidere.</li>
+<li><strong>Riscul de concentrare al indicelui.</strong> BET nu e „piața” într-un sens larg — e câțiva emitenți grei. Un șoc idiosincratic pe o bancă majoră sau pe energie mută indicele mai mult decât ar sugera σ agregat.</li>
+<li><strong>Inflația corelată negativ cu randamentele reale.</strong> Dacă modelezi inflația independent de piață, ratezi cel mai toxic scenariu: inflație mare + piață în scădere simultan (stagflație), care mănâncă portofoliul din ambele capete.</li>
+</ul>
+
+<h2>Checklist de implementare — de la zero la failure rate raportabil</h2>
+
+<ul>
+<li><strong>1.</strong> Adună seria BET (1997+) și BET-TR (2014+) din datele BVB; calculează randamente log lunare.</li>
+<li><strong>2.</strong> Reconstruiește total-return pre-2014 adăugând dividend yield istoric, marcat ca estimat.</li>
+<li><strong>3.</strong> Estimează μ, σ, asimetria, kurtoza — cu interval de încredere prin bootstrap.</li>
+<li><strong>4.</strong> Modelează EUR-RON ca drift + jump (sau regime-switching), NU random walk simetric.</li>
+<li><strong>5.</strong> Construiește matricea de covarianță multi-activ cu <em>corelație condiționată de regim</em> (calm vs criză).</li>
+<li><strong>6.</strong> Implementează DOUĂ motoare: parametric (Cholesky + copulă t) și stationary block bootstrap.</li>
+<li><strong>7.</strong> Rulează 10.000 de iterații cu retrageri lunare, inflație simulată corelată și parameter uncertainty per rulare.</li>
+<li><strong>8.</strong> Adaugă regula de retragere reală (guardrails), nu doar 4% rigid.</li>
+<li><strong>9.</strong> Validează prin rolling historical cohorts (inclusiv ieșirea din 2007) și prin coerența celor două motoare.</li>
+<li><strong>10.</strong> Raportează failure rate cu bandă de incertitudine + tornado de sensibilitate, nu un singur procent „precis”.</li>
+</ul>
+
+<p>Dacă faci toți cei zece pași, ai trecut de la un calculator FIRE de import — care îți minte cu volatilitatea altei piețe — la un model calibrat pe realitatea ta în lei: BET concentrat și volatil, leu administrat care se depreciază în trepte, și o componentă globală care, prin cursul EUR-RON, devine paradoxal cel mai bun stabilizator al planului tău de independență financiară.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

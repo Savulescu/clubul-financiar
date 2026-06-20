@@ -1,0 +1,128 @@
+<p>Pentru investitorul de venit fix care a depășit deja arbitrajul clasic pe curba randamentelor, problema reală nu mai este „ce cumpăr", ci cum sincronizezi <strong>obligații stat dobândă impozit timing BNR</strong> într-un model unic de alocare dinamică. Diferența dintre un randament brut de 7% și unul net realizat de 5,1% nu vine din selecția emisiunii, ci din interacțiunea dintre <em>duration</em>, momentul vânzării și regimul de impozitare aplicat fiecărui flux. Pe piața românească a anului 2026, cu un ciclu BNR aflat în pauză prelungită (dobânda de politică monetară menținută la 6,5% pe an, cu inflația încă peste ținta de 2,5%), interacțiunea dintre durată, timing și fiscalitate devine sursa principală de alfa pentru portofoliile de titluri.</p>
+
+<p>Lecția construiește un cadru cantitativ care leagă <strong>duration obligație stat impozit efectiv</strong> de structura cuponului, integrează <strong>yield curve ANAF timing obligații</strong> pentru a poziționa vânzările în jurul pragurilor fiscale, și exploatează <strong>tax-loss harvesting obligații amortizare</strong> atunci când marcarea la piață produce pierderi deductibile. Vom modela <strong>reinvestire cupon impozit minim</strong> pentru a evita eroziunea compusă a celor 10% pe dobândă, și vom compara <strong>laddering obligații Tezaur Fidelis impozit</strong> cu structurile listate la BVB, acolo unde tratamentul câștigului de capital diferă radical.</p>
+
+<p>Ipoteza de lucru: investitor persoană fizică rezidentă fiscal în România, cu portofoliu de venit fix între 200.000 și 2.000.000 lei, care optimizează nu randamentul brut, ci randamentul net efectiv ajustat la durata de deținere și la praguri CASS. Toate cifrele reflectă cadrul fiscal și monetar valabil în 2026.</p>
+
+<h2>Arhitectura fiscală a fluxurilor de venit fix în 2026</h2>
+
+<p>Punctul de plecare pentru orice optimizare este descompunerea randamentului total în componente cu tratament fiscal distinct. O obligațiune de stat generează trei fluxuri impozabile diferit, iar eroarea tipică a investitorului avansat este să le trateze omogen.</p>
+
+<ul>
+<li><strong>Cuponul (dobânda):</strong> impozit pe venit din dobânzi de <strong>10%</strong>, reținut la sursă pentru titlurile de stat distribuite prin canale precum Tezaur și Fidelis, sau declarat prin Declarația Unică pentru cele tranzacționate prin intermediari. Cota se aplică pe valoarea brută a cuponului.</li>
+<li><strong>Câștigul de capital la vânzare înainte de scadență:</strong> impozit pe câștigul din transferul titlurilor, cu cotele majorate de la 1 ianuarie 2026 — <strong>3%</strong> pentru titlurile deținute peste 365 de zile și <strong>6%</strong> pentru cele deținute sub 365 de zile, atunci când tranzacția se face printr-un intermediar rezident care reține și virează impozitul la sursă (impozit final). Aceste cote le-au înlocuit pe cele de 1% și 3% valabile în perioada 2023-2025. Atenție: dacă tranzacționezi printr-un broker nerezident, nu există reținere la sursă, iar cota este de <strong>10%</strong> pe câștig, autodeclarată prin Declarația Unică.</li>
+<li><strong>Diferența la scadență (par minus preț de achiziție sub par):</strong> tratată ca venit din dobânzi sau câștig, în funcție de structura instrumentului — punct critic pentru obligațiunile cumpărate cu discount pe piața secundară.</li>
+</ul>
+
+<p>Asimetria cotelor — 10% pe cupon, dar doar 3% pe câștigul de capital la deținere peste 365 de zile — este motorul întregului model. Un investitor care reușește să transforme o parte din randamentul așteptat din formă de <em>cupon</em> în formă de <em>câștig de capital</em> (cumpărând sub par instrumente cu cupon mic) își reduce cota efectivă de la 10% la 3%, o reducere de 7 puncte procentuale pe componenta respectivă. Spread-ul fiscal s-a îngustat față de regimul 2023-2025 (când era 10% versus 1%, o asimetrie de 9 puncte), dar rămâne suficient de mare pentru a justifica codificarea lui în politica de selecție.</p>
+
+<h3>CASS și pragul de 6 salarii minime</h3>
+
+<p>Peste impozitul pe venit se suprapune contribuția de asigurări sociale de sănătate. Veniturile din investiții (dobânzi, dividende, câștiguri de capital) intră în baza CASS dacă totalul veniturilor extrasalariale depășește pragurile de <strong>6, 12 și 24 de salarii minime brute</strong> pe an. Cu salariul minim brut de 4.050 lei în 2026, pragul de 6 salarii este 24.300 lei, cel de 12 salarii este 48.600 lei, iar cel de 24 salarii este 97.200 lei.</p>
+
+<p>CASS de 10% se aplică la nivelul pragului atins, nu la venitul total. Aceasta creează <em>efecte de prag</em> exploatabile: dacă venitul tău din investiții este de 47.000 lei, plătești CASS la baza de 24.300 lei (2.430 lei). Dacă urci la 49.000 lei, sari la baza de 48.600 lei (4.860 lei) — un venit suplimentar de 2.000 lei brut declanșează o CASS adițională de 2.430 lei, o cotă marginală efectivă de peste 121% pe acel tranșă. Timing-ul realizării câștigurilor între ani fiscali pentru a evita saltul de prag este una dintre cele mai subapreciate tehnici de optimizare.</p>
+
+<h2>Modelul de durată ajustată fiscal (after-tax duration)</h2>
+
+<p>Duration Macaulay clasic măsoară sensibilitatea prețului la rată ponderând fluxurile la valoarea lor brută. Pentru investitorul român, fluxurile brute supraestimează expunerea reală, pentru că fiecare cupon ajunge net doar la 90% din valoare. Definim <em>duration ajustată fiscal</em> ponderând fiecare flux la valoarea sa <strong>netă</strong>.</p>
+
+<p>Formula durației Macaulay standard:</p>
+
+<p><strong>D = Σ [ t × CF_t / (1+y)^t ] / P</strong></p>
+
+<p>unde CF_t este fluxul la momentul t, y randamentul la maturitate, P prețul. Versiunea ajustată fiscal înlocuiește fluxurile de cupon brute cu cele nete (cupon × 0,9) și fluxul terminal cu (principal + ultim cupon net):</p>
+
+<p><strong>D_fiscal = Σ [ t × CF_net,t / (1+y_net)^t ] / P</strong></p>
+
+<p>Consecința practică: instrumentele cu cupon mare au o <em>duration fiscală mai mică</em> decât duration nominală, pentru că greutatea relativă a cupoanelor (impozitate) scade față de principalul terminal (impozitat mai blând la deținere lungă). Aceasta răstoarnă o intuiție clasică — în context fiscal românesc, un titlu zero-cupon sau cu cupon mic, cumpărat sub par, oferă nu doar avantaj fiscal pe randament, ci și un profil de durată mai predictibil pentru imunizare.</p>
+
+<h3>Exemplu numeric: două obligațiuni cu același YTM brut</h3>
+
+<p>Comparăm două titluri de stat, ambele cu maturitate 5 ani și YTM brut 6,8%, dar cu structuri de cupon diferite. Investiție nominală: 500.000 lei.</p>
+
+<ul>
+<li><strong>Titlul A — cupon 7,5%, preț 102,9 (peste par):</strong> cupon anual brut 37.500 lei pe nominal de 500.000. Pe 5 ani, dobândă brută cumulată ≈ 187.500 lei, impozit 10% = 18.750 lei. Randamentul provine aproape integral din cupon, impozitat la 10%.</li>
+<li><strong>Titlul B — cupon 4,0%, preț 86,9 (sub par):</strong> investitorul plătește ≈ 434.500 lei pentru nominal de 500.000. Cupon brut anual 20.000 lei, dobândă cumulată ≈ 100.000 lei, impozit 10% = 10.000 lei. La scadență încasează 500.000 lei, realizând un câștig de capital de ≈ 65.500 lei. Dacă acest câștig se califică drept câștig din transfer la deținere peste 365 zile, impozitul este 3% = ≈ 1.965 lei.</li>
+</ul>
+
+<p>Impozit total Titlul A: ≈ 18.750 lei. Impozit total Titlul B: ≈ 11.965 lei. La randament brut echivalent, structura cu cupon mic și discount reduce sarcina fiscală cu aproximativ 36%. Aceasta este esența arbitrajului <strong>impozit pe dobândă versus câștig de capital</strong> pe care politica de selecție trebuie să o codifice algoritmic, nu intuitiv. Observă că majorarea cotei la 3% (de la 1%) a redus avantajul față de regimul anterior — sub vechile cote, impozitul Titlului B ar fi fost ≈ 10.655 lei, deci o economie de peste 43% — dar arbitrajul rămâne net favorabil structurii cu discount.</p>
+
+<h2>Timing-ul vânzării în jurul ciclului BNR</h2>
+
+<p>Ciclul de politică monetară BNR controlează direcția randamentelor, deci a prețurilor obligațiunilor deja deținute. În 2026, cu dobânda de politică monetară menținută la 6,5% pe an și o eventuală relaxare condiționată strict de coborârea inflației spre ținta de 2,5%, fereastra optimă de vânzare se deschide doar atunci când reducerea efectivă a ratelor (sau anticiparea ei de către piață) împinge prețurile titlurilor existente peste par. Cât timp banca centrală rămâne în pauză, scenariul de bază este un carry stabil, iar oportunitatea de marcare a câștigului de capital apare la prima inflexiune credibilă spre relaxare.</p>
+
+<p>Regula de decizie integrează trei variabile: (1) câștigul de capital nerealizat din scăderea randamentelor, (2) pragul de 365 de zile care comută cota de la 6% la 3%, și (3) pragul CASS anual. Modelul de timing rezolvă o optimizare care maximizează valoarea netă post-vânzare:</p>
+
+<p><strong>V_net = P_vânzare − impozit_câștig(holding_period) − ΔCASS(venit_anual)</strong></p>
+
+<h3>Matricea de decizie pe orizont de deținere</h3>
+
+<ul>
+<li><strong>Sub 365 zile, câștig mare din rally BNR:</strong> tentația de a marca profitul devreme este penalizată de cota de 6%. Dacă deținerea este la 11 luni și BNR semnalează încă o reducere, amânarea vânzării după pragul de 365 zile reduce cota la 3% — economie de 3 puncte procentuale pe întreg câștigul. Pe un câștig de 40.000 lei, economia este 1.200 lei plus protecția câștigului adițional din continuarea rally-ului.</li>
+<li><strong>Peste 365 zile, aproape de pragul CASS:</strong> dacă realizarea câștigului ar împinge venitul anual peste un prag de salarii minime, fragmentează vânzarea pe doi ani fiscali. Vinde tranșa care menține venitul sub 24.300 lei în anul curent, restul în ianuarie anul următor.</li>
+<li><strong>Curba se inversează / BNR pivotează spre înăsprire:</strong> prioritizează imunizarea prin scurtarea durației fiscale, nu marcarea profitului. Pierderea de carry din rotația spre maturități scurte este compensată de protejarea principalului.</li>
+</ul>
+
+<p>Sincronizarea <strong>yield curve ANAF timing obligații</strong> înseamnă concret: citești semnalul BNR pentru direcția prețului, dar lași calendarul ANAF (pragul 365 zile, anul fiscal, pragurile CASS) să decidă momentul exact al execuției. Cele două calendare rareori coincid, iar diferența de câteva săptămâni dintre optimul de piață și optimul fiscal este unde se câștigă sau se pierde randamentul net.</p>
+
+<h2>Tax-loss harvesting pe poziții de venit fix</h2>
+
+<p>Când BNR întârzie relaxarea sau inflația surprinde în sus, randamentele cresc și prețurile titlurilor deja deținute scad sub costul de achiziție. Pierderea nerealizată devine un activ fiscal dacă este marcată corect. <strong>Tax-loss harvesting obligații amortizare</strong> presupune vânzarea poziției pe pierdere pentru a genera o pierdere de capital deductibilă, compensabilă cu câștiguri de capital din alte transferuri în același an fiscal.</p>
+
+<p>Pierderile din transferul titlurilor se reportează pe următorii 7 ani fiscali, conform regulilor de reportare a pierderii nete anuale din investiții. Aceasta transformă o poziție temporar pe pierdere într-un scut fiscal pentru câștiguri viitoare.</p>
+
+<h3>Procedura corectă, evitând capcana de substituție</h3>
+
+<p>Spre deosebire de unele jurisdicții, legislația română nu impune o regulă explicită de tip „wash sale" pe titluri, dar prudența cere să eviți recumpărarea imediată a aceleiași emisiuni (același ISIN) dacă scopul economic al tranzacției ar putea fi recalificat. Soluția elegantă: vinde emisiunea pe pierdere și cumpără o emisiune <em>diferită</em> cu duration și risc de credit echivalente (alt ISIN, altă scadență apropiată), menținând expunerea pe curbă fără a reproduce identic poziția.</p>
+
+<p>Exemplu: deții titlu ISIN-X cumpărat la 100,0, acum la 94,2, pierdere nerealizată 5,8% pe 300.000 lei nominal = 17.400 lei. În același an ai realizat un câștig de 25.000 lei dintr-o altă vânzare (deținere peste 365 zile), impozitat la 3% = 750 lei. Marcând pierderea de 17.400 lei, baza impozabilă netă scade la 7.600 lei, impozit 228 lei. Economie imediată 522 lei, plus reportarea diferenței dacă pierderea depășește câștigurile. Reinvestești în ISIN-Y cu duration similară, păstrând poziția pe curbă.</p>
+
+<h2>Reinvestirea cupoanelor cu eroziune fiscală minimă</h2>
+
+<p>Eroarea compusă cea mai costisitoare pe orizonturi lungi este reinvestirea cupoanelor brute fără a contabiliza scurgerea fiscală anuală. Fiecare cupon pierde 10% la încasare, deci capitalul reinvestit crește pe o bază deja erodată. Pe 10 ani, diferența dintre reinvestirea brută teoretică și cea netă reală pe un portofoliu cu cupon 6% poate depăși 8-9% din valoarea terminală.</p>
+
+<p><strong>Reinvestire cupon impozit minim</strong> are două pârghii. Prima: alege instrumente cu cupon mic și discount (vezi modelul A vs B de mai sus), reducând frecvența și mărimea fluxurilor impozabile la 10% în favoarea câștigului terminal la 3% (deținere peste 365 zile). A doua: pentru cupoanele care totuși se încasează, direcționează reinvestirea spre instrumente fără reținere imediată la sursă, amânând momentul impozabil — efectul de amânare (tax deferral) crește valoarea prezentă a capitalului de lucru.</p>
+
+<ul>
+<li>Cupon încasat net (după 10%) reinvestit într-un nou titlu sub par: componenta de creștere viitoare se mută în zona 3% (la deținere peste un an).</li>
+<li>Evită fragmentarea în multe emisiuni cu cupon, fiecare generând rețineri mici frecvente; consolidează în poziții cu randament la maturitate dominat de discount.</li>
+</ul>
+
+<h2>Laddering: Tezaur/Fidelis versus piața secundară BVB</h2>
+
+<p>Structura de tip ladder (scară de scadențe) reduce riscul de reinvestire și netezește expunerea la duration. Dar alegerea canalului — Tezaur/Fidelis primare versus secundar BVB — schimbă materialmente tratamentul fiscal și flexibilitatea de timing.</p>
+
+<ul>
+<li><strong>Tezaur și Fidelis:</strong> dobânda este impozitată la 10% reținut la sursă, simplu și fără declarație. Avantaj: simplitate, scutire de declarare. Dezavantaj fiscal: tot randamentul vine ca dobândă (10%), fără posibilitatea de a converti în câștig de capital la 3%, și lichiditate redusă pentru tax-loss harvesting. Fidelis listate la BVB oferă lichiditate secundară, deci posibilitatea de timing al vânzării.</li>
+<li><strong>Titluri pe secundar BVB (prin intermediar):</strong> permit cumpărarea sub par, conversia randamentului în câștig de capital la 3% pentru deținere peste 365 zile (6% sub un an), și tax-loss harvesting activ. Costul: necesită declarare sau reținere prin intermediar și management activ.</li>
+</ul>
+
+<h3>Structura ladder optimizată fiscal</h3>
+
+<p>O scară pe 5 trepte (1-5 ani) optimizată fiscal nu pune sume egale pe fiecare treaptă. Treptele scurte (1-2 ani) se populează cu Tezaur/Fidelis pentru certitudine și simplitate, acceptând cota de 10% pe cupon pe sume reținute mici. Treptele lungi (3-5 ani) se populează cu titluri secundare cumpărate sub par, unde avantajul conversiei la câștig de capital 3% (deținere peste un an) și fereastra de tax-loss harvesting compensează complexitatea. Astfel, <strong>laddering obligații Tezaur Fidelis impozit</strong> devine o structură hibridă care optimizează simultan lichiditatea pe termen scurt și eficiența fiscală pe termen lung.</p>
+
+<h2>Sinteză: funcția obiectiv a alocării dinamice</h2>
+
+<p>Modelul complet maximizează randamentul net efectiv pe orizont, supus constrângerilor de durată-țintă și praguri fiscale. Funcția obiectiv, exprimată conceptual:</p>
+
+<p><strong>max Σ [ cupon_net,t + Δcâștig_capital,t × (1 − cota_holding) ] − ΔCASS(prag) </strong></p>
+
+<p>supus la: <em>D_fiscal_portofoliu = D_țintă ± toleranță</em>, și <em>venit_anual_realizat ≤ prag CASS optim</em>.</p>
+
+<p>Variabilele de control sunt: ponderea cupon-mare versus cupon-mic-discount (controlează mixul 10%/3%), momentul vânzării relativ la pragul de 365 zile și la ciclul BNR, și fragmentarea realizărilor pe ani fiscali pentru gestiunea pragurilor CASS.</p>
+
+<h2>Pași de implementare</h2>
+
+<ul>
+<li><strong>1.</strong> Inventariază portofoliul curent pe ISIN, calculând pentru fiecare poziție duration fiscală (cu fluxuri nete), data de achiziție și pragul de 365 zile aferent.</li>
+<li><strong>2.</strong> Pentru fiecare poziție, clasifică randamentul așteptat în componentă cupon (10%) versus câștig de capital (3% peste 365 zile sau 6% sub 365 zile). Marchează pozițiile dominate de cupon ca țintă de rotație spre structuri sub par.</li>
+<li><strong>3.</strong> Mapează calendarul: notează pentru fiecare poziție data la care deținerea depășește 365 zile; nu vinde câștiguri mari înainte de această dată decât dacă semnalul BNR impune protejarea principalului.</li>
+<li><strong>4.</strong> Proiectează venitul anual din investiții și verifică distanța față de pragurile CASS de 24.300, 48.600 și 97.200 lei. Dacă o realizare planificată sare un prag, fragmentează pe doi ani fiscali.</li>
+<li><strong>5.</strong> La fiecare ședință BNR, reevaluează direcția curbei: relaxare confirmată → menține duration și caută ferestre de marcare a câștigului post-365-zile; pivot spre înăsprire → scurtează duration fiscală, protejează principal.</li>
+<li><strong>6.</strong> Identifică pozițiile pe pierdere nerealizată; dacă ai câștiguri realizate în an, execută tax-loss harvesting cu substituție pe ISIN diferit, duration echivalentă, păstrând expunerea pe curbă.</li>
+<li><strong>7.</strong> Structurează ladder-ul hibrid: trepte scurte pe Tezaur/Fidelis (simplitate, 10% reținut), trepte lungi pe secundar sub par (conversie la 3% la deținere peste un an, flexibilitate de timing).</li>
+<li><strong>8.</strong> Reinvestește cupoanele nete în instrumente sub par pentru a deplasa creșterea viitoare din zona 10% în zona 3% (deținere peste un an), minimizând eroziunea compusă.</li>
+<li><strong>9.</strong> Documentează fiecare tranzacție pentru Declarația Unică sau verifică reținerea corectă prin intermediar; păstrază evidența pierderilor reportabile pe 7 ani.</li>
+</ul>
+
+<p><strong>Checklist de control trimestrial:</strong> duration fiscală a portofoliului în banda țintă; nicio poziție pe câștig mare sub 365 zile vândută inutil la 6%; venit anual proiectat sub pragul CASS optim; pierderile nerealizate evaluate pentru harvesting; mixul cupon/discount aliniat la faza ciclului BNR; cupoanele încasate reinvestite în structuri eficiente fiscal.</p>

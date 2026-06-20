@@ -1,0 +1,160 @@
+<p>Diferenţa dintre o afacere care scalează profitabil şi una care arde capital în tăcere se reduce, aproape întotdeauna, la calitatea modelului de <strong>unit economics CAC LTV antreprenor</strong> pe care îl operezi efectiv, nu la versiunea din pitch deck. La acest nivel nu mai discutăm ce înseamnă customer acquisition cost sau lifetime value, ci cum descompui aceste mărimi pe cohorte, cum izolezi <strong>customer acquisition cost channel</strong> de efectul de mix şi cum transformi un <strong>lifetime value retention metric</strong> static într-un model predictiv care îţi spune, la nivel de client individual, cine valorează 100x mai mult decât media.</p>
+
+<p>Vei lucra cu <strong>payback period calcul</strong> pe bază de marjă de contribuţie, nu pe venit brut, cu <strong>magic number SaaS growth</strong> ca verdict asupra eficienţei creşterii, cu <strong>churn rate impactul</strong> exponenţial asupra cozii LTV şi cu <strong>customer profitability cohort analysis</strong> care separă canalele profitabile de cash traps. Adăugăm <strong>engagement metrics predictive value</strong> ca leading indicator al retenţiei, înainte ca downgrade-ul de venit să apară în P&L. Toate calculele sunt ancorate în realitatea fiscală RO 2026 — TVA 21% (cota standard de la 1 august 2025), impozit micro 1% sub 100.000 EUR cifră de afaceri (plafon coborât şi cotă unică prin OUG 89/2025), impozit pe profit 16%, CASS şi contribuţii care îţi modifică marja de contribuţie reală pe care se sprijină întregul model.</p>
+
+<p>Ipoteza de lucru: ai depăşit nivelul în care CAC e „cheltuiala de marketing împărţită la clienţi noi". Aici, fiecare mărime e o variabilă aleatoare cu distribuţie, nu un punct.</p>
+
+<h2>CAC corect: fully-loaded, pe canal, cu atribuire şi blended trap</h2>
+
+<p>CAC-ul pe care îl raportezi e aproape sigur subestimat. CAC fully-loaded include nu doar spend-ul media, ci salariile echipei de growth (cu contribuţii), comisioanele de vânzări, costul tool-urilor de marketing, creative production şi onboarding-ul care precede prima plată. Formula operaţională:</p>
+
+<ul>
+<li><strong>CAC<sub>canal</sub></strong> = (Media spend + Salarii growth alocate + Comisioane + Tooling + Creative) / Clienţi noi atribuiţi canalului, în aceeaşi fereastră.</li>
+</ul>
+
+<p>Capcana numărul unu este <strong>blended CAC</strong>. Dacă 40% din clienţi vin organic (CAC ≈ 0) şi diluează media plătită, blended CAC arată sănătos chiar dacă fiecare canal plătit e o pierdere. Regula de specialist: optimizezi pe <strong>paid CAC pe canal</strong>, raportezi blended doar pentru board. Separă întotdeauna organic/brand de paid/non-brand — altfel plăteşti pentru clienţi care oricum cumpărau.</p>
+
+<p>A doua capcană e fereastra de atribuire. Cu un ciclu de vânzare de 45 de zile, clienţii care plătesc în luna curentă au fost achiziţionaţi cu spend din lunile anterioare. CAC instantaneu (spend lună / clienţi lună) e biased în creştere agresivă: numărătorul e „azi", numitorul e „acum 6 săptămâni". Corecţia minimă — lag-ul numitorului cu durata medie a ciclului:</p>
+
+<ul>
+<li><strong>CAC<sub>ajustat</sub></strong> = Spend(t − ciclu) / Clienţi_noi(t), nu Spend(t) / Clienţi(t).</li>
+</ul>
+
+<h3>Exemplu numeric — descompunerea canalelor</h3>
+
+<p>SaaS B2B, 3 canale, o lună. Google Ads: spend 30.000 lei, 20 clienţi → CAC 1.500 lei. LinkedIn: spend 40.000 lei, 10 clienţi → CAC 4.000 lei. Organic/referral: 0 spend efectiv, 30 clienţi. Blended CAC = 70.000 / 60 = 1.167 lei. Aparent excelent. Dar dacă ARPA-ul net e identic pe canale, LinkedIn la 4.000 lei CAC poate avea payback dublu şi LTV/CAC sub prag — un cash trap mascat de organic. Decizia se ia pe CAC pe canal, nu pe cei 1.167 lei blended.</p>
+
+<h2>LTV ca model, nu ca multiplicare: gross margin şi churn variabil</h2>
+
+<p>LTV-ul calculat ca ARPA × durată e o aproximare grosolană. Modelul corect porneşte de la marja de contribuţie, nu de la venit, şi tratează retenţia ca pe o curbă, nu ca pe o constantă.</p>
+
+<p>Forma de bază pe marjă, cu churn constant lunar şi discount:</p>
+
+<ul>
+<li><strong>LTV</strong> = (ARPA × Gross Margin %) × [ (1 + d) / (1 + d − r) ], unde r = retention rate lunară, d = discount rate lunar.</li>
+<li>Aproximarea fără discount, des folosită: <strong>LTV</strong> = (ARPA × GM%) / churn lunar.</li>
+</ul>
+
+<p>Gross margin contează enorm şi diferenţiază radical SaaS de e-commerce. La SaaS, GM% e 70–85% (infrastructură + support). La e-commerce fizic, GM% după COGS, fulfillment, retururi şi procesare plăţi e adesea 25–40%. Acelaşi ARPA produce LTV-uri necomparabile. Un LTV raportat pe venit brut într-un e-commerce cu GM 30% supraestimează valoarea reală de 3x.</p>
+
+<h3>Churn variabil pe durată — de ce churn constant minte</h3>
+
+<p>Churn-ul nu e constant. E ridicat în primele luni (early churn) şi se stabilizează la o cohortă fidelă. A folosi churn-ul mediu actual ca rată perpetuă supraestimează LTV-ul, fiindcă aplici rata blândă a supravieţuitorilor şi celor care oricum ar pleca devreme. Modelul de specialist foloseşte retenţie pe straturi de vârstă (survival/retention curve), nu o singură rată.</p>
+
+<ul>
+<li>Construieşte retenţia logodă: r<sub>1</sub> (lună 1→2), r<sub>2</sub>, … şi calculează LTV ca sumă de produse cumulative ale ratelor de supravieţuire × marjă lunară, actualizate.</li>
+<li><strong>LTV</strong> = Σ<sub>t</sub> [ (Π<sub>i≤t</sub> r<sub>i</sub>) × ARPA × GM% / (1 + d)<sup>t</sup> ].</li>
+</ul>
+
+<p>Pentru e-commerce non-subscription, înlocuieşte „retention rate" cu probabilitatea de re-cumpărare şi frecvenţa: LTV = AOV × marjă × frecvenţă anuală × ani de viaţă × probabilitate de retenţie. Modelele BG/NBD şi Gamma-Gamma estimează exact P(activ) şi valoarea aşteptată per client pe baza recenţei şi frecvenţei istorice — standardul pentru non-contractual.</p>
+
+<h2>Payback period: testul de lichiditate care decide ritmul de scalare</h2>
+
+<p>LTV/CAC îţi spune dacă afacerea e teoretic profitabilă. Payback period îţi spune dacă supravieţuieşti până acolo. Cu un LTV/CAC excelent de 5:1 dar payback de 18 luni, fiecare client nou e o gaură de cash 18 luni — la creştere rapidă, te omoară lichiditatea înainte să vezi profitul.</p>
+
+<ul>
+<li><strong>Payback (luni)</strong> = CAC / (ARPA × Gross Margin % lunar). Atenţie: pe marjă, nu pe venit.</li>
+</ul>
+
+<p>Exemplu: CAC 1.500 lei, ARPA 300 lei/lună, GM 80% → contribuţie 240 lei/lună → payback = 1.500 / 240 = 6,25 luni. Dacă ai calculat pe venit (300 lei), ai fi obţinut 5 luni şi ai fi subestimat presiunea de cash cu 25%.</p>
+
+<p>Praguri operaţionale, RO 2026, ţinând cont de costul real al capitalului — dobânda la creditele de capital de lucru pentru IMM se situează frecvent în zona 8–11% pe an, iar dobânda de politică monetară BNR este 6,50% (menţinută în 2025–2026):</p>
+
+<ul>
+<li><strong>SaaS B2C / e-commerce</strong>: payback ţintă &lt; 12 luni; sub 6 luni e excelent.</li>
+<li><strong>SaaS B2B</strong>: &lt; 12–18 luni acceptabil dacă retenţia netă e &gt; 100%.</li>
+<li>Peste 24 de luni: nu scala pe cash propriu fără finanţare care să acopere gaura — altfel insolvenţă tehnică prin epuizare de trezorerie deşi „eşti profitabil pe hârtie".</li>
+</ul>
+
+<h3>Payback şi viteza de reinvestire (CAC efficiency loop)</h3>
+
+<p>Payback-ul guvernează rata maximă de creştere autofinanţată. Cu payback de 6 luni, cash-ul recuperat de la o cohortă re-finanţează achiziţia abia după 6 luni; cu payback de 3 luni, reinvesteşti de două ori mai des din acelaşi capital. La capital limitat, halving payback-ul dublează practic rata de creştere organică — un lever mai puternic decât scăderea CAC în absolut.</p>
+
+<h2>Magic Number şi NRR: verdictul asupra eficienţei creşterii</h2>
+
+<p>Magic Number traduce eficienţa S&amp;M în limbaj de cash: cât ARR nou produce fiecare leu de spend de vânzări şi marketing.</p>
+
+<ul>
+<li><strong>Magic Number</strong> = (ARR<sub>Q</sub> − ARR<sub>Q−1</sub>) × 4 / S&amp;M spend<sub>Q−1</sub>. Adică creşterea anualizată de venit recurent raportată la spend-ul din trimestrul precedent.</li>
+</ul>
+
+<p>Interpretare: &lt; 0,5 → ineficient, opreşte acceleraţia şi repară unit economics; 0,5–0,75 → acceptabil; 0,75–1,0 → eficient, apasă pedala dacă ai cash; &gt; 1,0 → eficienţă rară, subinvesteşti în growth. Magic Number e oglinda agregată a payback-ului: un Magic Number de 1,0 corespunde aproximativ unui payback de ~12 luni pe gross margin tipic SaaS.</p>
+
+<p>Complementul indispensabil este <strong>NRR (Net Revenue Retention)</strong> — venitul de la cohorta existentă după expansion minus churn şi downgrade, fără clienţi noi. NRR &gt; 100% înseamnă că afacerea creşte chiar şi cu zero achiziţie nouă; e singura mărime care îţi permite să tolerezi payback lung, pentru că LTV-ul se umflă în timp prin expansion.</p>
+
+<ul>
+<li><strong>NRR</strong> = (MRR început + Expansion − Contraction − Churn) / MRR început, pe aceeaşi cohortă.</li>
+<li>NRR 120% = top decile B2B; 100–110% = sănătos; &lt; 90% = leaky bucket, creşterea e doar achiziţie peste o găleată spartă.</li>
+</ul>
+
+<h2>Churn rate: impactul exponenţial pe coada LTV</h2>
+
+<p>Relaţia LTV ≈ (ARPA × GM%) / churn este o hiperbolă: la churn mic, mişcări minuscule mută LTV-ul dramatic. Asta inversează intuiţia despre unde să investeşti.</p>
+
+<h3>Exemplu — sensibilitatea LTV la churn</h3>
+
+<p>ARPA 300 lei, GM 80% → contribuţie 240 lei/lună.</p>
+
+<ul>
+<li>Churn 5%/lună → LTV = 240 / 0,05 = 4.800 lei.</li>
+<li>Churn 3%/lună → LTV = 240 / 0,03 = 8.000 lei (+67% din 2 puncte de churn).</li>
+<li>Churn 2%/lună → LTV = 240 / 0,02 = 12.000 lei (+150% faţă de start).</li>
+</ul>
+
+<p>Verdictul de specialist: la o bază existentă mare, un punct de churn redus produce adesea mai mult LTV agregat decât scăderea CAC cu acelaşi efort. Retenţia e levierul cu cel mai mare multiplicator pe cozile lungi. La churn de 5% lunar (~46% anual) jumătate din bază dispare în mai puţin de 14 luni — niciun CAC nu compensează asta.</p>
+
+<h2>Cohort analysis: unde se ascunde adevărul despre profitabilitate</h2>
+
+<p>Mediile mint prin agregare. <strong>Customer profitability cohort analysis</strong> grupează clienţii pe luna de achiziţie şi urmăreşte fiecare cohortă în timp — retenţie, venit cumulat, contribuţie cumulată — şi suprapune CAC-ul cohortei pentru a vedea momentul exact de break-even.</p>
+
+<ul>
+<li>Construieşte matricea: rânduri = luna de achiziţie, coloane = vârsta cohortei (M0, M1, M2…), celule = contribuţie cumulată per client.</li>
+<li>Trasează linia CAC pe canal. Intersecţia contribuţiei cumulate cu CAC = payback real al cohortei.</li>
+<li>Citeşte panta retenţiei: cohortele recente cu retenţie M3 mai slabă decât cele vechi semnalează degradarea calităţii achiziţiei — adesea efectul scalării unui canal dincolo de audienţa lui de mare intenţie.</li>
+</ul>
+
+<p>Aici descoperi diferenţa de 100x: segmentarea LTV pe canal × plan × segment de comportament arată că un canal cu CAC mai mare poate aduce clienţi cu retenţie dublă şi expansion mare → LTV/CAC superior unui canal „ieftin" cu churn brutal. Decizia de alocare de buget se mută de pe CAC absolut pe <strong>LTV/CAC pe cohortă segmentată</strong>.</p>
+
+<h3>Diagnosticul cash trap</h3>
+
+<p>Un canal e cash trap dacă: payback &gt; 18–24 luni ŞI retenţia M6 sub mediană ŞI fără expansion. Semnătura: CAC mic, conversie aparent bună, dar contribuţia cumulată nu atinge niciodată CAC-ul fiindcă clienţii pleacă înainte. În cohort matrix se vede ca o linie de contribuţie cumulată care se plafonează sub linia CAC.</p>
+
+<h2>Engagement metrics ca predictor al retenţiei</h2>
+
+<p>Retenţia e un lagging indicator — afli că ai pierdut clientul când nu mai plăteşte. <strong>Engagement metrics predictive value</strong> înseamnă să identifici leading indicators care prezic churn-ul cu 1–3 luni înainte de revenue impact.</p>
+
+<ul>
+<li>Defineşte „activarea": acţiunea care corelează cel mai puternic cu retenţia la M3 (de ex. clientul care invită ≥ 3 useri sau atinge un prag de utilizare în primele 14 zile retine de 2–3x mai bine).</li>
+<li>Construieşte un <strong>health score</strong>: frecvenţă login, breadth de feature-uri folosite, trend de utilizare (în creştere/scădere), recenţa ultimei acţiuni-cheie.</li>
+<li>Modelează P(churn) prin regresie logistică sau gradient boosting pe aceste semnale; folos-o pentru intervenţii proactive de retenţie pe segmentul cu risc mare şi LTV mare.</li>
+</ul>
+
+<p>Pentru e-commerce, leading indicators echivalente: recenţa ultimei comenzi raportată la frecvenţa istorică (un client cu frecvenţă lunară care n-a comandat de 60 de zile semnalează atriţie), declinul AOV, dezabonarea de la e-mail. RFM (Recency-Frequency-Monetary) e baza minimă; modelele probabiliste (BG/NBD) o depăşesc estimând direct P(client încă activ).</p>
+
+<h2>Integrarea fiscală RO 2026: marja de contribuţie reală</h2>
+
+<p>Toate calculele de mai sus se sprijină pe marja de contribuţie. În RO 2026, fiscalitatea îţi schimbă marja reală:</p>
+
+<ul>
+<li><strong>TVA 21%</strong> (cota standard de la 1 august 2025): LTV şi ARPA se calculează net de TVA pentru B2B; la B2C, preţul afişat e cu TVA, deci venitul tău net e preţ / 1,21.</li>
+<li><strong>Impozit micro 1%</strong> pe veniturile sub 100.000 EUR (plafon coborât de la 250.000 EUR prin OUG 89/2025, cu cotă unică de 1% — cota de 3% şi condiţia salariatului au fost eliminate din 2026) — peste prag treci la impozit pe profit 16%. Pragul afectează direct contribuţia netă pe leu de venit.</li>
+<li><strong>Comisioane procesare plăţi</strong> (Stripe/Netopia ~1,4–2,9% + fix), <strong>chargeback</strong> şi retururi (la e-commerce 5–20% în fashion) intră toate în COGS pentru gross margin corect.</li>
+<li>Costul salarial fully-loaded al echipei de growth (cu CAS 25%, CASS 10%, CAM 2,25%) intră în CAC, nu doar salariul net.</li>
+</ul>
+
+<p>Concluzia operaţională: LTV-ul şi payback-ul calculate pe venit brut, ignorând TVA, comisioane şi fiscalitate, supraestimează sistematic profitabilitatea. Modelul corect rulează pe contribuţie netă, post-taxe variabile.</p>
+
+<h2>Checklist de implementare — sistemul de unit economics</h2>
+
+<ul>
+<li><strong>Pas 1.</strong> Calculează CAC fully-loaded pe fiecare canal separat (media + salarii cu contribuţii + comisioane + tooling); raportează blended doar la board.</li>
+<li><strong>Pas 2.</strong> Lag-uiește numitorul CAC cu durata medie a ciclului de vânzare; nu compara spend „azi" cu clienţi „azi" în creştere.</li>
+<li><strong>Pas 3.</strong> Calculează LTV pe marjă de contribuţie (ARPA × GM%), nu pe venit; foloseşte retenţie pe straturi de vârstă, nu churn constant.</li>
+<li><strong>Pas 4.</strong> Calculează payback pe contribuţie lunară; impune praguri: &lt; 12 luni B2C, &lt; 18 luni B2B cu NRR &gt; 100%.</li>
+<li><strong>Pas 5.</strong> Monitorizează LTV/CAC pe cohortă segmentată (canal × plan × segment), nu pe medie; ţintă ≥ 3:1 dar deciziile de buget pe segment.</li>
+<li><strong>Pas 6.</strong> Rulează cohort matrix lunar; identifică cash traps (payback &gt; 18–24 luni + retenţie M6 sub mediană + zero expansion) şi opreşte spend-ul acolo.</li>
+<li><strong>Pas 7.</strong> Calculează Magic Number trimestrial şi NRR pe cohortă; sub 0,5 Magic Number sau sub 90% NRR → opreşte acceleraţia, repară retenţia.</li>
+<li><strong>Pas 8.</strong> Construieşte un health score din engagement metrics şi un model P(churn); intervino proactiv pe segmentul risc-mare × LTV-mare.</li>
+<li><strong>Pas 9.</strong> Ajustează totul la fiscalitatea RO 2026 (TVA 21%, micro 1%/profit 16%, comisioane, contribuţii) — rulează pe contribuţie netă post-taxe.</li>
+<li><strong>Pas 10.</strong> Refă întregul model trimestrial: CAC, LTV, retenţia şi mixul de canale se mişcă; un model îngheţat e un model fals.</li>
+</ul>

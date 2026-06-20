@@ -1,0 +1,120 @@
+<p>La acest nivel nu mai discutăm <em>ce</em> verifică banca, ci <em>cum gândește modelul</em>. Un <strong>rating credit personal algoritm ai banca scoring 2026</strong> nu mai este o sumă liniară de ponderi fixe, ci un ansamblu de modele — un nucleu logistic reglementar (PD-ul transparent, cerut de IFRS 9 și de BNR) suprapus peste un strat de <strong>ai machine learning credit decision</strong> (gradient boosting tip XGBoost/LightGBM) care captează neliniarități și interacțiuni între variabile. Aici facem reverse-engineering pe acest strat: descompunem scorul în contribuții marginale per variabilă (logica de tip SHAP), cuantificăm impactul fiecărei mișcări și construim un plan de optimizare cu efect măsurabil în 30–90 de zile.</p>
+
+<p>Presupun că stăpânești deja arhitectura clasică — <strong>credit score componente pondere banca</strong> (payment history ~35%, utilizare ~30%, vechime ~15%, interogări ~10%, mix ~10%), cascada capacity-to-pay și stress test-ul IRCC. Aici trecem dincolo: cum se traduce un <strong>debt-to-income ratio impact score</strong> într-o pantă neliniară, cum funcționează <strong>payment history weighting credit</strong> cu decădere exponențială a recenței, care e curba reală a <strong>credit utilization effect score</strong> (pragurile-prag de 9%/30%/50%/90%), ce înseamnă <strong>behavioral credit scoring variables</strong> derivate din fluxul tranzacțional al contului curent și ce <strong>credit building strategie rapid</strong> mută acul cel mai mult per unitate de efort. Totul ancorat în România 2026: scală internă pe 300–850 maparea pe PD, praguri BNR, IRCC publicat trimestrial, raportare la Biroul de Credit și constrângerile GDPR/Art. 22 pe decizia automată.</p>
+
+<p>Regula de aur a întregului articol: nu optimizezi „scorul", optimizezi <strong>vectorul de features pe care îl vede modelul la data interogării</strong>. Diferența dintre amator și specialist este că specialistul știe exact ce snapshot vede algoritmul și își aranjează balanța, data de extras și istoricul de interogări înainte ca poza să fie făcută.</p>
+
+<h2>Anatomia modelului: PD reglementar + boost ML peste el</h2>
+<p>Modelul intern al unei bănci din România nu este monolitic. În practică sunt două straturi care se compun:</p>
+<ul>
+<li><strong>Stratul reglementar (scorecard logistic).</strong> Un model de regresie logistică pe „weights of evidence" (WoE), calibrat la o PD pe 12 luni. Este transparent intern, auditabil, cerut de IFRS 9 (provizioane) și de validarea de model BNR. Aici fiecare variabilă intră prin binning monoton și contribuie aditiv în spațiul log-odds.</li>
+<li><strong>Stratul ML (challenger / champion).</strong> Un model de tip gradient boosting care prinde interacțiuni (ex.: utilizare mare <em>combinată</em> cu vechime mică e mult mai toxică decât suma celor două efecte separate). Băncile îl rulează tot mai des în decizia retail, dar îl țin „explicabil" prin reason codes — exact pentru că <strong>Art. 22 GDPR</strong> îți dă dreptul la o explicație și la intervenție umană în decizia automată.</li>
+</ul>
+<p>Consecința pentru tine, ca specialist: scorul nu se mișcă liniar. Există <strong>praguri</strong> (cliffs) unde o variație mică produce un salt mare, și <strong>platouri</strong> unde efort suplimentar nu schimbă nimic. Tot jocul de optimizare e să identifici pe ce pantă te afli.</p>
+
+<h3>De la scor la PD la decizie</h3>
+<p>Scala 300–850 este o transformare monotonă a log-odds. O aproximare standard din industrie folosește o relație de tip „points-to-double-the-odds" (PDO): tipic, fiecare <strong>+20 de puncte înjumătățește odds-ul de default</strong>. Practic:</p>
+<ul>
+<li>score = Offset − Factor × ln(odds), cu Factor = PDO/ln(2) ≈ 28,85 la PDO=20;</li>
+<li>un scor 720 poate mapa la PD ≈ 1,5–2%, iar 660 la PD ≈ 5–7% — diferența de 60 de puncte triplează-cvadruplează probabilitatea de default percepută;</li>
+<li>banca nu decide pe scor, ci pe <strong>cutoff de PD</strong> ales astfel încât profitul ajustat la risc (după pierderea așteptată EL = PD × LGD × EAD) să fie pozitiv. De aceea același scor e „aprobat" la un produs și „respins" la altul: cutoff-ul diferă pe produs și pe apetitul de risc curent.</li>
+</ul>
+
+<h2>Descompunerea pe variabile: contribuția marginală (logica SHAP)</h2>
+<p>Cheia reverse-engineering-ului e să gândești ca modelul: fiecare feature are o <strong>contribuție în puncte față de scorul de bază (baseline)</strong>, condiționată de restul profilului. Mai jos, ordinele de mărime tipice pentru un aplicant retail „mediu", exprimate ca mișcare în puncte pe scala 300–850. Nu sunt valori publicate de bănci — sunt magnitudini calibrate pe comportamentul observat al motoarelor de scoring.</p>
+
+<h3>Payment history: decăderea exponențială a recenței</h3>
+<p>Greutatea nu e doar mare (~35%), e <strong>neliniară în timp</strong>. O întârziere de 30+ zile nu contează „o dată", ci cu un factor de recență care decade aproximativ exponențial. Modelul condensat:</p>
+<ul>
+<li>impact ≈ severitate × e^(−t/τ), unde t = vechimea incidentului în luni, iar τ ≈ 10–14 luni;</li>
+<li>o restanță 30 zile acum 2 luni: −60…−110 puncte; aceeași la 18 luni vechime: −15…−30 puncte; la 36 luni: aproape neglijabilă pentru ML, deși rămâne vizibilă la Biroul de Credit (date păstrate, regula uzuală, 4 ani de la raportare/stingere);</li>
+<li>severitatea scalează: 30 zile ≪ 60 zile ≪ 90 zile ≪ default/executare. Saltul de la „un incident" la „doua incidente în 12 luni" e supraliniar — modelul interpretează frecvența ca semnal de comportament, nu de accident.</li>
+</ul>
+<p><strong>Implicație tactică:</strong> dacă ai un incident vechi, timpul îl vindecă singur; nu plăti pentru „ștergere". Dar dacă ai un incident recent, prioritatea absolută e să nu adaugi al doilea — al doilea costă mai mult decât primul.</p>
+
+<h3>Credit utilization: curba cu praguri</h3>
+<p><strong>Credit utilization effect score</strong> este cea mai rapidă pârghie pentru că se resetează lunar și nu are memorie (modelul vede utilizarea raportată la data extrasului, nu media). Curba nu e liniară, are praguri:</p>
+<ul>
+<li>0% utilizare: ușor suboptim (paradoxal — modelul vrea să vadă că folosești creditul responsabil);</li>
+<li><strong>1–9%: zona optimă</strong> (+20…+40 puncte față de zona 50%+);</li>
+<li>10–29%: foarte bun;</li>
+<li>30–49%: neutru spre ușor negativ;</li>
+<li>50–74%: −20…−40 puncte;</li>
+<li>75–89%: −40…−70 puncte;</li>
+<li>≥90%: prag roșu, −70…−110, și flag de stres de lichiditate.</li>
+</ul>
+<p>Contează <strong>două</strong> metrici: utilizarea agregată (sold total / limită totală) ȘI utilizarea pe cardul individual cu cea mai mare expunere. Un card la 95% strică tabloul chiar dacă agregatul e 25%.</p>
+
+<h3>Mix, vechime și interogări</h3>
+<ul>
+<li><strong>Vechimea medie a conturilor (AAoA):</strong> fiecare cont nou diluează media și taie temporar câteva puncte; efectul e mai dur dacă cel mai vechi cont e deja tânăr (sub 2–3 ani).</li>
+<li><strong>Interogări (hard inquiries):</strong> tipic −3…−8 puncte fiecare, cu decădere în 12 luni și ștergere a impactului la ~24 luni. Aici intervine <strong>rate shopping</strong>: interogările de același tip (ipotecar/auto) într-o fereastră scurtă (14–45 zile) sunt deseori tratate de model ca <em>una singură</em> — exact ca să poți compara oferte fără penalizare cumulativă.</li>
+<li><strong>Credit mix:</strong> efect mic (~10%), dar real la cei „thin file". Un revolving + un installment plătite la timp bat un singur tip de produs.</li>
+</ul>
+
+<h2>Debt-to-income: panta neliniară dincolo de pragurile BNR</h2>
+<p><strong>Debt-to-income ratio impact score</strong> are două fețe. Prima e binară și reglementară — plafoanele BNR pe care le treci sau nu:</p>
+<ul>
+<li><strong>40%</strong> din venitul net — plafon general credite în lei;</li>
+<li>+5 puncte procentuale (până la ~45%) pentru ipotecarul la prima locuință în care vei locui;</li>
+<li><strong>20%</strong> pentru creditele în valută.</li>
+</ul>
+<p>A doua față e continuă: chiar sub plafon, modelul tratează DTI ca variabilă de risc cu pantă crescătoare. Diferența dintre 22% și 38% nu e „ambele aprobate", ci o pierdere graduală de puncte și o probabilitate mai mare să cazi la stress test. Forma practică:</p>
+<ul>
+<li>DTI &lt; 20%: zonă confortabilă, puține puncte pierdute;</li>
+<li>20–30%: pantă blândă;</li>
+<li>30–40%: pantă abruptă — fiecare punct procentual de DTI contează vizibil;</li>
+<li>peste prag: respingere binară, indiferent de scorul de risc.</li>
+</ul>
+<p><strong>Capcana limitelor neutilizate.</strong> Modelul de capacitate adaugă o rată echivalentă pe limitele de card/overdraft neutilizate, tipic <strong>3–5% din limită ca rată lunară teoretică</strong>. O limită totală de 30.000 lei poate „mânca" 900–1.500 lei/lună din plafonul tău de îndatorare, deși soldul e zero. De aici o pârghie subtilă: <strong>închiderea unei limite de card mari și nefolosite poate crește capacitatea de plată mai mult decât o creștere de salariu</strong> — dar atenție, închiderea taie și din vechimea medie și din utilizarea agregată. E un trade-off de optimizat, nu o regulă oarbă.</p>
+
+<h2>Behavioral scoring: ce citește modelul din contul tău curent</h2>
+<p><strong>Behavioral credit scoring variables</strong> sunt stratul în care băncile au cel mai mare avantaj informațional față de tine, pentru că derivă din fluxul tranzacțional pe care îl văd direct (la clientul propriu) sau pe care îl pot infera (open banking, cu consimțământ). Ce contează, cu impact estimat:</p>
+<ul>
+<li><strong>Volatilitatea soldului și „buffer-ul" de lichiditate.</strong> Cât stă contul aproape de zero înainte de salariu. Un client care ajunge recurent sub 200 lei în zilele 25–30 e flag de stres, chiar cu venit bun.</li>
+<li><strong>Recurența și stabilitatea venitului.</strong> Salariu pe contract permanent, aceeași sumă, aceeași dată — captat aproape integral. Venit variabil/freelance: ponderat la 50–80% și mediat pe 6–24 luni din declarațiile ANAF.</li>
+<li><strong>Raportul cheltuieli fixe / venit</strong> și prezența de „gambling merchants", retrageri cash mari recurente, plăți către IFN-uri de tip payday — toate sunt features negative puternice.</li>
+<li><strong>Returnări de direct debit / plăți respinse pe cont</strong> — semnal de lichiditate fragilă, deseori mai predictiv decât un incident vechi la Biroul de Credit.</li>
+</ul>
+<p>Pentru un nou client (fără istoric comportamental la banca respectivă) modelul se sprijină mai greu pe scorecard-ul de aplicație și pe Biroul de Credit; pentru un client vechi, behavioral score-ul poate <em>domina</em> decizia. Implicație: la banca unde îți ții salariul, comportamentul pe cont în ultimele 3–6 luni e munca ta de optimizat înainte să aplici.</p>
+<p><strong>De ce două persoane cu același salariu primesc răspunsuri diferite.</strong> Pentru că vectorul comportamental e diferit. Doi aplicanți cu venit net identic de 9.000 lei și fără incidente la Biroul de Credit pot avea PD-uri foarte diferite dacă unul ține un buffer mediu de 8.000 lei pe cont și celălalt ajunge recurent la sold zero înainte de salariu. Modelul ML prinde acest semnal ca interacțiune (venit OK × lichiditate fragilă = risc ascuns) pe care un scorecard pur liniar l-ar rata. De aceea, la nivel de specialist, „venitul" e doar o variabilă din zeci — și rareori cea care basculează decizia la marginea cutoff-ului.</p>
+
+<h2>Studiu de caz multi-variabil: +0 față de +74 de puncte în 60 de zile</h2>
+<p>Profil de plecare: scor intern 668, venit net 9.000 lei, două carduri (limite 15.000 + 10.000 lei), sold curent 11.500 lei pe primul (77% pe card / 46% agregat), o interogare acum 2 luni, fără incidente, AAoA 4,2 ani, salariu pe contract permanent virat la altă bancă decât cea țintă.</p>
+<p>Descompunere estimată față de un baseline „curat" (~740):</p>
+<ul>
+<li>utilizare 77% pe cardul principal: −45 puncte;</li>
+<li>utilizare agregată 46%: −15 puncte;</li>
+<li>1 interogare recentă: −5 puncte;</li>
+<li>thin behavioral file la banca țintă (salariu în altă parte): −7 puncte.</li>
+</ul>
+<p><strong>Plan pe 60 de zile, ordonat după puncte/efort:</strong></p>
+<ul>
+<li><strong>Ziua 1–5:</strong> plătește soldul cardului principal sub <strong>9%</strong> (sub 1.350 lei sold pe limita de 15.000) ÎNAINTE de data extrasului. Recâștig estimat: +40…+45 puncte. Aceasta e singura mișcare care contează cel mai mult.</li>
+<li><strong>Ziua 1–30:</strong> redirecționează virarea salariului către banca țintă, ca să construiești buffer și recurență vizibilă. Recâștig: +5…+10 puncte la 60–90 zile (efect care crește în timp).</li>
+<li><strong>Nu deschide niciun cont nou și nu genera interogări</strong> în fereastra de optimizare. Lasă interogarea existentă să decadă: +3…+5 puncte la 12 luni.</li>
+<li><strong>Nu închide cardul de 10.000 lei</strong> (l-ai folosi ca să scazi utilizarea agregată și să păstrezi AAoA), dar verifică dacă limita totală nu îți blochează DTI la capacitate; dacă da, recalculează trade-off-ul închiderii.</li>
+</ul>
+<p>Rezultat la ~60 de zile: <strong>668 → ~740</strong> (+72), trecere peste cutoff-ul probabil al produsului, fără nicio schimbare de venit. Întreg câștigul vine din <em>cum arată snapshot-ul</em> la următoarea interogare, nu din ceva fundamental nou.</p>
+
+<h2>Edge-cases pe care le exploatează specialistul</h2>
+<ul>
+<li><strong>Timing-ul interogării vs. data extrasului.</strong> Modelul vede utilizarea raportată la ultimul extras. Plătește înainte de extras, aplică după ce s-a raportat soldul mic. O zi diferență poate valora 40 de puncte.</li>
+<li><strong>Authorized user / co-debitor.</strong> Adăugarea pe un cont vechi, curat, cu utilizare mică poate ridica AAoA și utilizarea agregată simultan — pârghie pentru thin files.</li>
+<li><strong>Rate shopping cu deduplicare.</strong> Concentrează toate cererile de ofertă pentru același tip de credit în 14–30 de zile, ca modelul să le numere ca una.</li>
+<li><strong>Dreptul la explicație (Art. 22 GDPR + reason codes).</strong> La respingere, cere în scris motivele principale (reason codes). Îți spun exact ce feature a tras scorul în jos — e harta ta de optimizare, gratuită.</li>
+<li><strong>Stress test IRCC ascuns.</strong> Banca încadrează rata la un IRCC stresat (IRCC curent + șoc de câteva puncte + marjă), nu la cel de azi. De aceea plafonul tău <em>real</em> de DTI e adesea 30–35%, nu 40%. Calculează-ți capacitatea la rata stresată, nu la cea din pliant.</li>
+<li><strong>Disputarea erorilor la Biroul de Credit.</strong> O singură raportare eronată (rată închisă marcată ca activă, incident inexistent) poate costa 50–100 de puncte. Corectarea e gratuită și are cel mai bun raport puncte/efort dacă există eroare reală.</li>
+</ul>
+
+<h2>Checklist de specialist înainte de aplicare</h2>
+<ul>
+<li><strong>1. Trage-ți raportul Biroul de Credit</strong> și verifică fiecare linie pentru erori; disputează ce e greșit (efect: până la +50…+100 puncte dacă există eroare).</li>
+<li><strong>2. Adu utilizarea sub 9%</strong> pe cardul principal ȘI sub 30% agregat, plătit ÎNAINTE de data extrasului (efect: cea mai mare pârghie rapidă, +40…+60 puncte).</li>
+<li><strong>3. Îngheață interogările</strong> cu 90 de zile înainte; concentrează rate shopping-ul în 14–30 zile.</li>
+<li><strong>4. Construiește 3–6 luni de comportament curat pe cont</strong> la banca țintă: salariu virat acolo, buffer de lichiditate, zero plăți respinse, zero merchants toxici.</li>
+<li><strong>5. Calculează-ți DTI la rata stresată IRCC</strong> (curent + șoc + marjă), țintind 30–35%, și scade din capacitate rata teoretică pe limitele neutilizate (3–5% din limită).</li>
+<li><strong>6. Nu închide conturi vechi</strong> decât dacă limita lor îți blochează DTI; păstrează AAoA și utilizarea agregată.</li>
+<li><strong>7. La respingere, cere reason codes în scris</strong> (Art. 22 GDPR) și recalibrează exact pe variabila semnalată, apoi reaplică după ce ai mutat-o.</li>
+</ul>
+<p>Concluzia de specialist: într-un <strong>rating credit personal algoritm ai banca scoring 2026</strong> nu există „noroc". Există un vector de features, un snapshot la data interogării și un cutoff de PD. Stăpânește cele trei și treci de la „respins fără explicație" la „aprobat la dobânda cea mai bună" — printr-o secvență de mișcări măsurabile, nu prin speranță.</p>

@@ -1,0 +1,142 @@
+<p><strong>Arbitrajul obligațiunilor perpetue în context FIRE pleacă de la cupon</strong>: cumperi un flux teoretic infinit la 4–5% și pariezi că acel cupon, raportat la duratie și convexitate, bate matematic o scară de obligațiuni finite pe orizontul tău de retragere. Această lecție duce mai departe arbitrajul de yield curve, steepener, butterfly și spread compression din lecția anterioară și mută focusul de la <em>forma curbei</em> la <em>capătul ei infinit</em>: emisiunile perpetue hibride de capital bancar (AT1/Tier 2 cu trăsături perpetue), unde duratia tinde la o limită finită deși scadența nu există, iar callable-ul redefinește complet randamentul efectiv.</p>
+
+<p>Vom trata cantitativ <strong>obligațiuni perpetue fire arbitraj cupon</strong> ca instrument de portofoliu pentru independență financiară perpetuă: cum se calculează valoarea actuală a unei rente infinite, de ce <strong>duratia obligațiunilor perpetue vs finite</strong> diverge contraintuitiv, cum modelezi <strong>convexitatea obligațiunilor FIRE</strong> și de ce yield-to-call domină yield-to-perpetuity la <strong>callable bonds în strategia FIRE</strong>. Adaug structura reală a <strong>obligațiunilor hibride perpetue cu cupon</strong> emise de bănci europene, modul în care <strong>emisiunile perpetue BVB și cele indexate la EURIBOR</strong> se comportă față de cele cu cupon fix și ce poate atinge realist un investitor român prin BVB, Fidelis sau brokeri externi. Presupun stăpânite duratia Macaulay, duratia modificată, DV01 și relația preț-randament inversă — nu le reluăm.</p>
+
+<p>Context România 2026: investitorul retail român nu cumpără direct un AT1 Coco de la o bancă elvețiană pe ghișeu, dar îl poate accesa prin brokeri externi sau ETF-uri UCITS specializate, iar fiscalitatea pe cupon și pe câștig de capital se aplică exact ca la orice obligațiune străină. De aceea fiecare model de mai jos e adaptat la ce poate executa realist un FIRE-er român, nu la un desk de credit instituțional.</p>
+
+<h2>De ce „perpetuu” nu înseamnă „duratie infinită”</h2>
+
+<p>Eroarea clasică a investitorului avansat care trece la perpetue: presupune că, fără scadență, duratia explodează. Falsul intuitiv vine din confuzia dintre maturitate (infinită) și sensibilitatea la rate (finită). O rentă perpetuă plătind un cupon constant <em>C</em> are valoarea actuală <strong>VA = C / y</strong>, unde <em>y</em> e randamentul cerut. Derivând prețul în raport cu randamentul și împărțind la preț, duratia Macaulay a unei perpetue pure converge la o limită simplă și finită:</p>
+
+<ul>
+<li><strong>Duratie Macaulay perpetuă = (1 + y) / y.</strong> La un randament de 5%, asta înseamnă 1,05 / 0,05 = <strong>21 de ani</strong>, nu infinit.</li>
+<li><strong>Duratie modificată perpetuă = 1 / y.</strong> La 5%, exact <strong>20 de ani</strong>. Adică o perpetuă la 5% se mișcă, ca preț, aproximativ ca o obligațiune cu duratie modificată 20.</li>
+</ul>
+
+<p>Consecința brutală pentru FIRE: la randamente mici, duratia perpetuei devine enormă. La <em>y</em> = 4%, duratia modificată = 25; la <em>y</em> = 3%, urcă la 33,3. Cu cât intri la cupon mai mic într-un mediu de rate joase, cu atât instrumentul tău devine mai exploziv la orice creștere de randament. Asta e prima asimetrie de arbitraj: o perpetuă la 4% nu e „doar cu 1% mai prost” decât una la 5% — e și cu 25% mai volatilă în duratie (25 vs 20).</p>
+
+<h3>Comparația directă cu o obligațiune finită</h3>
+
+<p>Ia o obligațiune finită la 30 de ani, cupon 5%, randament 5% (deci la par). Duratia ei modificată e aproximativ 15,4. Compară cu perpetua la 5%, duratie modificată 20. Surpriza: <strong>perpetua are duratie mai mare decât finita la 30 de ani</strong>, dar diferența e mult mai mică decât sugerează „30 de ani vs infinit”. Motivul matematic: cupoanele îndepărtate (anul 40, 60, 100) sunt actualizate atât de agresiv încât contribuie aproape nimic. La 5%, un euro încasat în anul 50 valorează azi 8,7 cenți; în anul 100, 0,76 cenți. Coada infinită e financiar irelevantă.</p>
+
+<p>De aici regula de specialist: pentru orice randament <em>y</em>, duratia modificată a perpetuei (1/y) e plafonul superior pe care îl atinge orice obligațiune finită cu cupon la par pe măsură ce maturitatea crește. O finită la 50 de ani cu cupon la par are deja duratie modificată ~18,3, apropiindu-se de plafonul perpetuu de 20. Practic, <strong>peste ~40 de ani de maturitate, perpetua și finita devin gemene de duratie</strong> — diferența de risc de rată dispare, dar rămâne diferența de structură (call, subordonare, indexare).</p>
+
+<h2>Convexitatea: avantajul ascuns al perpetuei</h2>
+
+<p>Duratia e doar derivata de ordinul întâi. La mișcări mari de randament — exact scenariile care contează într-un ciclu BNR/BCE de 200–300 bps — convexitatea decide câștigătorul. Pentru o perpetuă pură, convexitatea are formă închisă elegantă:</p>
+
+<ul>
+<li><strong>Convexitate perpetuă = 2 / y².</strong> La 5%: 2 / 0,0025 = <strong>800</strong>. La 4%: 2 / 0,0016 = <strong>1250</strong>.</li>
+</ul>
+
+<p>O obligațiune finită la 30 de ani la par are convexitate ~350. Perpetua la 5% are 800 — de peste 2,2 ori mai multă convexitate la o duratie comparabilă. Convexitatea fiind <em>prietena deținătorului</em> (amplifică câștigurile la scăderea ratelor, atenuează pierderile la creșterea lor), perpetua oferă un profil asimetric favorabil <strong>cu condiția să nu fie callable</strong>. Aici e capcana, pe care o tratăm imediat.</p>
+
+<h3>Estimarea variației de preț pe două ordine</h3>
+
+<p>Variația procentuală de preț la o modificare Δy a randamentului se aproximează pas-cu-pas:</p>
+
+<ul>
+<li><strong>ΔP/P ≈ −D_mod × Δy + ½ × Convexitate × (Δy)².</strong></li>
+</ul>
+
+<p>Exemplu numeric, perpetuă la 5% (D_mod = 20, C = 800), șoc de +200 bps (Δy = +0,02):</p>
+
+<ul>
+<li>Termen duratie: −20 × 0,02 = −0,40 (adică −40%).</li>
+<li>Termen convexitate: ½ × 800 × 0,0004 = +0,16 (adică +16%).</li>
+<li>Estimare totală: −40% + 16% = <strong>−24%</strong>. Calculul exact prin VA = C/y dă: prețul trece de la 100 la C/0,07 = 71,4, deci −28,6%.</li>
+</ul>
+
+<p>Discrepanța (−24% estimat vs −28,6% real) arată că la șocuri mari de 200 bps aproximarea pe două ordine devine insuficientă pentru perpetue — terenul exact e formula directă VA = C/y, care e oricum trivială. Pentru FIRE, retine: <strong>o perpetuă la 5% pierde aproape 29% din valoare la +200 bps</strong> de rată. Asta nu e un instrument de „liniște”, e un instrument de duratie maximă deghizat în venit pasiv.</p>
+
+<h2>Yield-to-call domină: de ce perpetuele bancare nu sunt cu adevărat perpetue</h2>
+
+<p>Aproape toate emisiunile perpetue reale pe care le-ar cumpăra un FIRE-er sunt <strong>callable</strong>: AT1 (Additional Tier 1, instrumentele Coco) și Tier 2 hibride bancare au o primă dată de call, tipic la 5, 7 sau 10 ani de la emisiune, cu cupon fix până la call și apoi resetare la o referință (mid-swap sau EURIBOR/€STR + spread). Structura tipică a unei perpetue hibride de bancă europeană în 2026:</p>
+
+<ul>
+<li><strong>Cupon fix</strong> (ex. 4,75%) plătit până la prima dată de call.</li>
+<li><strong>First call</strong> la 5 ani, apoi call la fiecare dată de plată a cuponului.</li>
+<li><strong>Reset</strong> dacă nu e apelată: 5-year mid-swap rate + spread inițial (ex. +380 bps), sau referință variabilă indexată.</li>
+<li><strong>Trigger de conversie/write-down</strong> la AT1 dacă rata CET1 a băncii scade sub prag (tipic 5,125% sau 7%).</li>
+</ul>
+
+<p>Consecința pentru evaluare: <strong>yield-ul relevant nu e yield-to-perpetuity, ci yield-to-call (YTC)</strong>, sub ipoteza că emitentul apelează la prima dată — convenția de piață numită „priced to call”. Dacă o perpetuă AT1 cu cupon 4,75% se tranzacționează la 96 cu 5 ani până la call, YTC nu e 4,75% / 0,96 = 4,95% (yield curent), ci randamentul intern care egalează cele 5 cupoane plus restituirea la 100 cu prețul de 96 azi — adică aproximativ <strong>5,7%</strong>. Diferența de 75 bps față de yield-ul curent vine din pull-to-par pe 5 ani.</p>
+
+<h3>Extension risk: arbitrajul real</h3>
+
+<p>Adevăratul edge de arbitraj pe perpetue bancare e <strong>extension risk</strong>: riscul ca banca să NU apeleze la prima dată dacă refinanțarea ar fi mai scumpă decât cuponul de reset. Atunci instrumentul „se extinde”, prețul cade brusc spre o evaluare de perpetuă reală, iar duratia ta sare de la ~4,5 (priced-to-call) la ~18–20 (priced-to-perpetuity) peste noapte. Modelul corect de evaluare e o medie probabilistică:</p>
+
+<ul>
+<li><strong>Preț = p × VA(call la prima dată) + (1 − p) × VA(perpetuă cu reset)</strong>, unde <em>p</em> = probabilitatea de call.</li>
+</ul>
+
+<p>Aici se naște arbitrajul: piața tinde să prețuiască binar (fie 100% call, fie 100% extension), iar tu, cu un model de probabilitate calibrat pe spread-ul de reset vs nivelul curent al cuponului, poți cumpăra când <em>p</em> implicit de piață e prea pesimist. Regula practică: dacă cuponul de reset (mid-swap + spread) ar fi <strong>peste</strong> costul curent de finanțare al băncii, call-ul e economic rațional și <em>p</em> ar trebui să fie ridicat — dacă piața prețuiește un YTM de perpetuă, ai un mispricing exploatabil.</p>
+
+<h2>Modelul de valoare actuală pentru un FIRE perpetual</h2>
+
+<p>Logica FIRE clasică se bazează pe regula celor 4% (Trinity Study): retragi 4% din portofoliu anual, ajustat la inflație, și ai ~95% șanse să nu rămâi fără bani pe 30 de ani. Perpetuele răstoarnă acest cadru: dacă deții un flux perpetuu la cupon 4–5%, nu mai consumi principalul deloc — trăiești pur din cupon, iar capitalul rămâne intact la infinit. Diferența de model:</p>
+
+<ul>
+<li><strong>FIRE pe regula 4% (finit):</strong> ai nevoie de 25× cheltuielile anuale, dar accepți depletarea probabilistică a capitalului și risc de secvență a randamentelor.</li>
+<li><strong>FIRE perpetual pe cupon 4%:</strong> ai nevoie de 25× cheltuielile (1/0,04), dar capitalul e teoretic nemuritor — nu există risc de secvență pe principal, doar risc de credit și de reinvestire.</li>
+</ul>
+
+<p>Capcana matematică: rata de retragere sigură (4%) și cuponul (4%) coincid numeric, dar nu sunt același lucru. Regula 4% e <em>reală</em> (ajustată la inflație); cuponul de 4% e <em>nominal</em>. O perpetuă cu cupon fix de 4% pierde putere de cumpărare cu inflația în fiecare an — la 3% inflație, în 24 de ani cuponul valorează jumătate în termeni reali. <strong>Perpetua cu cupon fix nu e un instrument FIRE complet</strong>; e jumătatea nominală a unei strategii care are nevoie de un picior de creștere (acțiuni, dividende crescătoare) pentru protecția reală.</p>
+
+<h3>Calculul valorii actuale pas-cu-pas pentru o țintă FIRE</h3>
+
+<p>Ținta: 60.000 lei/an cheltuieli, acoperite din cupon perpetuu fără atingerea capitalului.</p>
+
+<ol>
+<li><strong>Capital necesar la cupon 4,5% net:</strong> 60.000 / 0,045 = <strong>1.333.333 lei</strong> investit în perpetue.</li>
+<li><strong>Ajustare fiscală:</strong> cuponul de obligațiuni străine e venit din investiții impozitat în România cu 10%. Peste anumite praguri de venit anual din investiții se adaugă și contribuția de sănătate CASS (10%), datorată pe tranșe în funcție de salariul minim brut (în 2026, 4.050 lei): baza de calcul e 6, 12 sau 24 de salarii minime — adică praguri de 24.300, 48.600 și 97.200 lei venit anual, cu CASS maximă plafonată la 10% × 24 de salarii minime (9.720 lei). Pentru cupon net 4,5%, ai nevoie de un cupon brut de ~5,0% înainte de impozit (mai mult dacă intri și în zona CASS).</li>
+<li><strong>Capital ajustat la cupon brut 5,0%:</strong> ținta brută devine 66.667 lei brut / 0,05 = <strong>1.333.333 lei</strong> — același capital, dar cu cupon brut mai mare care absoarbe impozitul.</li>
+<li><strong>Eroziune reală:</strong> la 3% inflație, peste 10 ani cei 60.000 lei reali cer 80.635 lei nominal — deci capitalul perpetuu fix acoperă tot mai puțin. Concluzie: dimensionezi cu o marjă de 20–30% peste necesar nominal, sau combini cu un picior crescător.</li>
+</ol>
+
+<h2>Perpetue fix vs indexate la EURIBOR: arbitrajul de regim de rate</h2>
+
+<p>O emisiune perpetuă cu cupon fix și una cu cupon variabil indexat (EURIBOR 3M sau €STR + spread) au profiluri de duratie radical diferite, iar alegerea între ele e un pariu pe regimul de rate — al doilea mare arbitraj al lecției.</p>
+
+<ul>
+<li><strong>Perpetua fixă</strong> are duratie modificată ~20 (la 5%). E un instrument de duratie maximă: câștigă masiv dacă ratele scad, pierde masiv dacă urcă.</li>
+<li><strong>Perpetua variabilă (EURIBOR + spread)</strong> are duratie de rată aproape de zero pe componenta de bază — cuponul se resetează la fiecare 3 luni, deci prețul e insensibil la nivelul ratelor. Duratia ei reziduală vine doar din spread-ul de credit, nu din rata fără risc.</li>
+</ul>
+
+<p>Arbitrajul de regim: în 2024–2025 BCE a intrat în ciclu de reducere a dobânzii, iar EURIBOR 3M a coborât semnificativ de la vârfurile de ~4%. Un FIRE-er care a deținut perpetue variabile a văzut cuponul scăzând odată cu EURIBOR (rău pentru venit), dar prețul stabil. Cine a deținut perpetue fixe a văzut cuponul intact și prețul apreciindu-se (bine pe ambele). <strong>Regula de poziționare:</strong> când anticipezi scăderi de rate, treci spre fix (capturezi cupon mare + apreciere de preț); când anticipezi creșteri, treci spre variabil EURIBOR (cuponul urcă, prețul nu cade). E un steepener aplicat la capătul infinit al curbei.</p>
+
+<h3>Pe BVB și instrumente accesibile din România</h3>
+
+<p>Realitatea pieței românești: <strong>nu există emisiuni perpetue de capital bancar listate la BVB</strong> pe care un retail să le cumpere ușor — segmentul de obligațiuni corporative BVB (inclusiv emisiuni indexate la EURIBOR ale unor emitenți români) e dominat de titluri cu scadență finită, iar Fidelis oferă exclusiv titluri de stat finite (în lei și valută). Perpetuele hibride bancare se accesează realist prin:</p>
+
+<ul>
+<li><strong>Brokeri externi</strong> (cont la un broker cu acces la piețe de obligațiuni europene) — cumpărare directă de AT1/Tier 2, dar cu nominal minim adesea de 100.000–200.000 EUR per emisiune, prohibitiv pentru majoritatea.</li>
+<li><strong>ETF-uri UCITS pe CoCo/AT1</strong> — vehiculul realist pentru un FIRE-er retail: expunere diversificată la coșul de perpetue bancare europene, cupon distribuit, cu nominal de cumpărare de zeci de euro. Fiscalitate 2026: distribuțiile de cupon/dobândă sunt venit din investiții impozitat cu 10%; câștigul de capital la vânzarea titlurilor depinde de canal — printr-un broker rezident cu reținere la sursă se aplică <strong>3% pentru deținerile peste un an și 6% pentru cele sub un an</strong>, iar printr-un broker străin (fără reținere) câștigul se autodeclară și se impozitează cu <strong>16%</strong> (cota standard pe câștigul de capital autodeclarat), la care se poate adăuga CASS dacă venitul total din investiții depășește pragurile.</li>
+</ul>
+
+<h2>Riscurile specifice pe care un model de duratie le ratează</h2>
+
+<p>Modelele de mai sus tratează rata și convexitatea. Dar perpetua bancară are riscuri care nu apar în nicio formulă de duratie și care, pentru un FIRE-er ce mizează pe „venit perpetuu sigur”, sunt existențiale:</p>
+
+<ul>
+<li><strong>Discreția cuponului (AT1):</strong> banca poate opri plata cuponului fără să declanșeze default — cuponul AT1 e discreționar și non-cumulativ. Nu primești cuponul ratat înapoi. Un model VA = C/y presupune <em>C</em> garantat; la AT1, <em>C</em> e condiționat de profituri distribuibile și de restricțiile MDA (Maximum Distributable Amount) impuse de BCE/EBA.</li>
+<li><strong>Write-down / conversie:</strong> dacă CET1 scade sub trigger, principalul poate fi redus sau convertit în acțiuni. Cazul Credit Suisse din 2023 a șters ~16 mld. CHF de AT1 la zero, deși acționarii au primit ceva — inversând ierarhia normală. Pentru un FIRE-er, asta înseamnă că „perpetuu” poate deveni „zero” instant.</li>
+<li><strong>Subordonarea:</strong> în cascada de absorbție a pierderilor, AT1 e imediat deasupra acțiunilor — primul instrument de datorie lovit. Cuponul de 4–5% nu compensează acest risc decât dacă banca e solidă; altfel e o iluzie de venit.</li>
+</ul>
+
+<p>De aceea perpetuele bancare nu sunt un „bond sigur cu cupon mai mare”, ci un <strong>instrument cvasi-acțiune cu plafon de upside</strong>. În alocarea FIRE, ele aparțin bucketului de risc de credit, nu celui de obligațiuni defensive.</p>
+
+<h2>Pași și checklist pentru construcția unei poziții perpetue în FIRE</h2>
+
+<ol>
+<li><strong>Calculează duratia reală</strong>: nu folosi „infinit”. Aplică D_mod = 1/y pentru priced-to-perpetuity și D_mod la prima dată de call pentru priced-to-call. Modelează ambele scenarii și ponderează cu probabilitatea de call.</li>
+<li><strong>Stres-testează la ±200 bps</strong>: folosește VA = C/y direct (nu aproximarea pe două ordine, insuficientă la șocuri mari). Acceptă mental că o perpetuă la 5% pierde ~29% la +200 bps.</li>
+<li><strong>Verifică YTC, nu yield curent</strong>: prețuiește la prima dată de call. Compară cuponul de reset cu costul curent de finanțare al băncii pentru a estima probabilitatea de extension.</li>
+<li><strong>Decide fix vs EURIBOR pe regim de rate</strong>: fix dacă anticipezi scăderi BCE, variabil dacă anticipezi creșteri. Nu deține ambele orb — alege poziționarea.</li>
+<li><strong>Limitează expunerea</strong>: tratează perpetuele AT1/Tier 2 ca risc de credit, nu defensivă. Plafonează la o fracțiune mică din portofoliul FIRE și diversifică pe emitenți (de preferat prin ETF UCITS, nu o singură emisiune de 100k EUR).</li>
+<li><strong>Adaugă piciorul real</strong>: cuponul fix e nominal și se erodează cu inflația. Cuplează perpetuele cu un activ crescător (acțiuni cu dividend crescător) pentru protecția puterii de cumpărare pe orizont infinit.</li>
+<li><strong>Calculează impactul fiscal RO</strong>: cuponul/distribuția se impozitează cu 10% (venit din investiții), iar câștigul de capital la vânzare cu 3%/6% prin broker rezident sau 16% autodeclarat prin broker străin; la ambele se poate adăuga CASS (10%) peste pragurile de 6/12/24 salarii minime. Dimensionează capitalul pe cuponul net, nu brut.</li>
+<li><strong>Marjă de siguranță</strong>: supra-dimensionează capitalul cu 20–30% peste necesarul nominal pentru a absorbi eroziunea reală și riscul de suspendare a cuponului.</li>
+</ol>
+
+<p>Esența arbitrajului perpetuu pentru FIRE: nu cumperi un cupon, cumperi o structură de duratie, convexitate și opționalitate de call, pe care piața o prețuiește adesea binar. Edge-ul tău e modelul de probabilitate calibrat — în rest, „perpetuu” e doar un cuvânt frumos pentru „duratie 20 cu risc de acțiune deghizat”.</p>

@@ -1,0 +1,139 @@
+<p>Lecția anterioară a stabilit arbitrul deciziei — ROIC marginal vs cost după impozit al datoriei — pe un model de trei scenarii cu o singură rundă. Aici tratăm <strong>capital structure debt equity dilution WACC</strong> ca sistem dinamic multi-rundă, unde fiecare decizie de astăzi reprețuiește toate rundele viitoare. La nivelul ăsta nu mai întrebi „datorie sau equity?”, ci „ce traiectorie de structură a capitalului maximizează post-money valuation net pentru fondator pe șapte runde, condiționat de un drum de WACC descrescător și de o stivă de liquidation preference care nu sufocă common-ul la exit?”.</p>
+
+<p>Construim trei lucruri de specialist: un calcul WACC pe componente (cost of equity vs cost of debt ca două funcții de leverage) cu re-levering Hamada la fiecare schimbare de structură; o simulare de diluție multi-rundă pe cap table fully diluted, cu option pool shuffle, anti-dilution, impactul fully diluted shares și conversia SAFE notes vs convertible; și un model de negociere a preferred stock unde liquidation preference ranks, participation și seniority rank decid cine ce ia în fiecare scenariu de exit. Toate cu cifre RO 2026 — cotă impozit profit 16%, scut fiscal modest, micro 1% fără scut, deductibilitate dobândă plafonată ATAD.</p>
+
+<p>Presupun stăpânite: WACC ca atare, mecanica cap table, ce e un SAFE, ce e o liquidation preference 1×. Mergem direct în calculul componentelor, în stivuirea preferințelor și în optimizarea drumului de cost al capitalului. Cost of equity vs cost of debt nu mai sunt două numere, ci două funcții de leverage care se intersectează — și exact unde se intersectează decizi.</p>
+
+<h2>WACC pe componente: re-levering la fiecare schimbare de structură</h2>
+
+<p>Eroarea de începător avansat e să folosești un WACC fix pe toată traiectoria de scalare. Greșit: WACC e o funcție de leverage, iar leverage-ul se schimbă la fiecare rundă. Trebuie re-calculat de fiecare dată, cu beta re-levered.</p>
+
+<p>Formula de bază, fără surprize:</p>
+
+<ul>
+<li><strong>WACC = (E/V) × Re + (D/V) × Rd × (1 − Tc)</strong>, unde Tc = 16% în RO 2026 pentru profit standard, dar <strong>0% efectiv pentru micro-întreprindere</strong> (impozit 1% pe venit, dobânda nu deduce nimic — scutul fiscal dispare, deci Rd intră brut în formulă).</li>
+<li><strong>Re prin CAPM = Rf + βL × ERP + size premium + specific risk premium.</strong> Pentru RO 2026: Rf ancorat pe randamentul titlurilor de stat RON pe 10 ani, orientativ ~7% (verifică curba MF/BNR la data deciziei); ERP pentru România ~6–7% (base ERP matur ~4,5–5% + country risk premium RO ~2–2,5% derivat din spread-ul CDS/rating). Pentru o firmă privată de scaling, adaugi size premium 3–5% și specific/illiquidity premium 4–8%. Re aterizează frecvent la 18–28%.</li>
+</ul>
+
+<p>Partea de specialist e <strong>re-levering beta cu Hamada</strong>, fiindcă fiecare rundă schimbă raportul D/E:</p>
+
+<ul>
+<li>Unlevered: <strong>βU = βL / [1 + (1 − Tc) × D/E]</strong>.</li>
+<li>Re-levered la noul leverage: <strong>βL' = βU × [1 + (1 − Tc) × (D/E)']</strong>.</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> Comparable listate (BVB + proxy regional) dau βL mediu 1,3 la un D/E de 0,5. Unlever: βU = 1,3 / [1 + 0,84 × 0,5] = 1,3 / 1,42 = 0,915. Firma ta țintește D/E = 1,0 după runda de datorie. Re-lever: βL' = 0,915 × [1 + 0,84 × 1,0] = 0,915 × 1,84 = 1,684. Cu Rf 7%, ERP 6,5%: Re = 7% + 1,684 × 6,5% + 4% size + 5% specific = 7 + 10,9 + 9 = ~26,9%. Crește leverage-ul → crește beta → crește Re. Asta e tensiunea WACC: datoria ieftină ridică costul equity-ului rămas.</p>
+
+<h3>Curba WACC și leverage-ul optim</h3>
+
+<p>WACC are formă de U. Inițial, înlocuirea equity (Re ~27%) cu datorie după impozit (11% × 0,84 = 9,24%) coboară WACC. Dar pe măsură ce D/V crește, două forțe împing înapoi: Re urcă prin Hamada, iar Rd urcă prin primă de faliment (banca taxează DSCR-ul în scădere). Punctul de minim — leverage-ul optim — e acolo unde derivata WACC pe leverage = 0.</p>
+
+<ul>
+<li>D/V = 0%: WACC = Re = 27,0%.</li>
+<li>D/V = 30%: WACC ≈ 0,7×24% + 0,3×9,24% = 16,8 + 2,77 = ~19,6% (Re scade că beta nu e încă extrem).</li>
+<li>D/V = 50%: WACC ≈ 0,5×26,9% + 0,5×10,1% (Rd urcat la 12% pre-tax) = 13,45 + 5,05 = ~18,5%.</li>
+<li>D/V = 65%: Rd sare la 14% (DSCR sub 1,3, primă de risc), Re la 31% → WACC ≈ 0,35×31% + 0,65×11,76% = 10,85 + 7,64 = ~18,5% și apoi urcă.</li>
+</ul>
+
+<p>Minimul practic e în banda D/V 45–55% pentru o firmă de scaling solidă în RO 2026 — dar e o bandă, nu un punct, și depinde brutal de stabilitatea EBIT. Cu cât varianța EBIT e mai mare, cu atât minimul se deplasează spre stânga (mai puțină datorie).</p>
+
+<h2>Deductibilitatea dobânzii: plafonul ATAD care îți mută WACC-ul</h2>
+
+<p>Scutul fiscal Rd × (1 − Tc) presupune că dobânda e integral deductibilă. În RO 2026 nu e garantat. Regulile de limitare a deductibilității costurilor excedentare ale îndatorării (transpunerea ATAD) plafonează deducerea la <strong>30% din EBITDA fiscal</strong>, cu un prag de siguranță deductibil integral de <strong>1.000.000 EUR/an cost excedentar al îndatorării</strong> (echivalent lei la cursul de referință).</p>
+
+<ul>
+<li>Sub pragul de 1M EUR cost excedentar: deduci tot, scutul e plin la 16%.</li>
+<li>Peste prag și peste 30% EBITDA: partea care depășește se reportează, dar în anul curent nu generează scut → costul efectiv al acelei tranșe de datorie e <strong>brut</strong>, nu net. Pentru o firmă care s-a îndatorat agresiv în timpul scalării, asta poate transforma Rd efectiv din 9,24% în 11% pe tranșa marginală — exact când ai cea mai mare nevoie de scut.</li>
+<li>Atenție la tranzacțiile cu afiliați (acționar care creditează firma): prețurile de transfer și regula de subcapitalizare/ATAD se aplică cumulat.</li>
+</ul>
+
+<p>Implicație de modelare: WACC-ul corect nu folosește un Tc uniform, ci un <strong>Tc marginal pe tranșă</strong> — plin sub prag, zero pe tranșa nedeductibilă.</p>
+
+<h2>Simularea diluției multi-rundă pe cap table fully diluted</h2>
+
+<p>Aici se câștigă sau se pierde averea fondatorului. Regula de aur: <strong>diluția se compune multiplicativ pe fully diluted shares, niciodată aditiv pe procente</strong>. Fiecare rundă diluează tot ce e dedesubt, inclusiv rundele anterioare.</p>
+
+<p>Construim un cap table pe șapte runde. Notăm cota fondatorului după runda <em>n</em>: <strong>Sₙ = Sₙ₋₁ × (1 − dₙ)</strong>, unde dₙ = nou capital emis / post-money al rundei <em>n</em>, calculat pe baza fully diluted (inclusiv option pool și instrumente convertibile diluate).</p>
+
+<h3>Componentele care umflă fully diluted înainte de tine</h3>
+
+<ul>
+<li><strong>Option pool shuffle:</strong> investitorul cere un pool de 12% creat <em>pre-money</em>. Acel pool iese exclusiv din partea common-ului existent. Diluția ta reală nu e cea nominală a rundei, ci nominală + pool.</li>
+<li><strong>Conversia SAFE/convertible din runde anterioare:</strong> la prima rundă cu preț (priced round), toate SAFE-urile și convertible-urile se convertesc simultan și diluează fondatorul. Surpriza clasică: fondatorul crede că a vândut 18% într-o rundă, dar SAFE-urile de seed convertesc încă 15% în aceeași clipă.</li>
+</ul>
+
+<p><strong>Exemplu numeric — patru runde.</strong> Pornim: fondator 100%, 1.000.000 acțiuni.</p>
+
+<ul>
+<li><strong>Seed (SAFE):</strong> 1.500.000 lei pe SAFE cu post-money cap 9.000.000 lei → 16,67% la conversie (amânat). Nu diluează încă nominal, dar e o creanță pe cap table.</li>
+<li><strong>Runda A (priced):</strong> pre-money 18.000.000 lei, investiție 6.000.000 lei → post-money 24M. Investitor nou cere pool 12% pre-money. SAFE-ul de seed se convertește acum. Stivuirea: poolul (12%) și SAFE-ul (procentul implicat de cap-ul de 9M raportat la prețul rundei) ies înainte de investitorul A. Fondatorul, nominal 75% după A „simplă”, ajunge efectiv la ~58–60% după pool + conversie SAFE.</li>
+<li><strong>Runda B:</strong> pre-money 50M, investiție 12M → post-money 62M, diluție rundă 19,35%. Fondator: 0,59 × (1 − 0,1935) = ~47,6%.</li>
+<li><strong>Runda C:</strong> pre-money 110M, investiție 20M → post 130M, diluție 15,4%. Fondator: 0,476 × 0,846 = ~40,3%.</li>
+</ul>
+
+<p>Lecția: cu trei runde priced + un SAFE de seed și două option pool refresh-uri, fondatorul scade sub 40% înainte de Seria C. Modelul aditiv naiv (16,67 + 25 + 19,35 + 15,4 = 76,4% „rămas 23,6%”) e fals în ambele direcții — corect e produsul cotelor reziduale, ajustat pentru pool și conversie.</p>
+
+<h3>Anti-dilution: full ratchet vs weighted average</h3>
+
+<p>Dacă o rundă viitoare se face la preț mai mic (down round), clauza anti-dilution a preferred-ului ajustează prețul de conversie în favoarea investitorului vechi — pe spinarea fondatorului. Două forme:</p>
+
+<ul>
+<li><strong>Full ratchet:</strong> prețul de conversie al investitorului vechi coboară la prețul down round-ului, indiferent de câte acțiuni se emit. Brutal pentru fondator. Evită-l în term sheet.</li>
+<li><strong>Broad-based weighted average</strong> (standardul de negociat): noul preț de conversie = OldPrice × (A + B) / (A + C), unde A = fully diluted înainte, B = bani noi / preț vechi, C = acțiuni noi emise. Diluează fondatorul mult mai blând. <strong>Exemplu:</strong> A = 10M acțiuni, preț vechi 5 lei, down round la 3 lei pentru 2M acțiuni (6M lei). B = 6.000.000/5 = 1.200.000; C = 2.000.000. NCP = 5 × (10M + 1,2M)/(10M + 2M) = 5 × 11,2/12 = 4,67 lei. Conversia se ajustează de la 5 la 4,67, nu la 3 — diferența uriașă față de full ratchet.</li>
+</ul>
+
+<h2>Preferred stock și stiva de liquidation preference: cine ce ia la exit</h2>
+
+<p>Cota procentuală pe fully diluted minte la exit, fiindcă preferred-ul se servește înaintea common-ului. Modelul de exit corect calculează <strong>waterfall</strong>-ul: ordinea de plată după seniority rank, apoi participation, apoi conversie.</p>
+
+<h3>Parametrii care se negociază</h3>
+
+<ul>
+<li><strong>Multiplul preferinței:</strong> 1× e standardul sănătos (investitorul ia înapoi suma investită înainte de orice). 2×–3× apare în runde de criză — toxic pentru common.</li>
+<li><strong>Participating vs non-participating:</strong> non-participating = investitorul ia <em>maximul</em> dintre (preferința 1×) și (cota pe fully diluted dacă convertește). Participating („double dip”) = ia preferința <em>plus</em> cota pe rest. Participating cu cap (ex. 3×) limitează lăcomia.</li>
+<li><strong>Seniority rank:</strong> stacked (last money in, first money out — fiecare rundă e senior celei anterioare) vs pari passu (toate preferred-urile la egalitate, pro-rata). Stacked favorizează investitorii târzii; pari passu e mai echitabil — negociază pari passu.</li>
+</ul>
+
+<h3>Waterfall numeric — de ce procentul tău minte la exit mic</h3>
+
+<p><strong>Setup.</strong> Cap table la exit: fondator 45% common; Seria A non-participating 1×, a pus 6M lei, deține 20% as-converted; Seria B participating 1× cu cap 3×, a pus 12M lei, deține 22% as-converted; option pool 13%. Seniority stacked: B senior lui A.</p>
+
+<ul>
+<li><strong>Exit la 30M lei (sub așteptări):</strong> B (senior) ia preferința 12M + participă pe rest. Rămas după B-preferință: 18M. A: max(6M preferință, 20% × 18M = 3,6M) → ia 6M preferință. Rămas: 12M. Acum participarea lui B și common-ul împart restul. Fondatorul, deși are 45% „pe hârtie”, ia ~45% dintr-un rest mic, după ce 18M au plecat sus. Rezultat: fondatorul ia ~5–6M, nu 0,45 × 30M = 13,5M. <strong>Liquidation preference a mâncat jumătate.</strong></li>
+<li><strong>Exit la 200M lei (succes):</strong> aici toate preferred-urile convertesc la common (cota as-converted bate preferința). B nu mai e participating relevant fiindcă cap-ul de 3× = 36M e depășit de cota convertită. Fondatorul ia aproape 45% × 200M = 90M. Preferințele devin irelevante.</li>
+</ul>
+
+<p>Concluzia de specialist: <strong>liquidation preference contează exact în zona de exit mic-mediu</strong> — acolo unde majoritatea exiturilor se întâmplă de fapt. La exit mare, structura preferinței se evaporă. De aceea negociezi 1× non-participating și pari passu: îți protejezi exact scenariile cele mai probabile statistic.</p>
+
+<h2>SAFE vs convertible note: ce alegi și de ce contează cap-ul</h2>
+
+<ul>
+<li><strong>Convertible note:</strong> instrument de datorie cu dobândă (5–8%) și maturitate. Dobânda se acumulează și convertește în acțiuni. Are scadență — dacă nu se face rundă priced, devine exigibil (risc de default tehnic). Util când vrei un instrument cu disciplină de termen.</li>
+<li><strong>SAFE (post-money):</strong> nu e datorie, nu are dobândă, nu are maturitate, nu apare în calculul ATAD și nu generează serviciu de datorie. Convertește la runda priced pe baza valuation cap și/sau discount. Post-money SAFE-ul fixează clar procentul investitorului — dar atenție, post-money cap înseamnă că <strong>diluția stacking-ului de SAFE-uri cade integral pe fondator</strong>, nu se împarte cu investitorii anteriori.</li>
+</ul>
+
+<p><strong>Capcana cap-ului.</strong> Patru SAFE-uri post-money cu cap 8M, fiecare 500k lei: fiecare e 6,25% post-money. Patru × 6,25% = 25% care toate ies din common la conversie. Plus discount-ul (tipic 20%) care, la o rundă peste cap, dă încă acțiuni. Modelează fiecare SAFE individual, pe cap-ul propriu, și însumează diluția pe common — nu trata SAFE-urile ca un bloc.</p>
+
+<h2>Optimizarea drumului: minimizezi diluția cumulată maximizând post-money pe fiecare rundă</h2>
+
+<p>Obiectivul nu e o singură rundă perfectă, ci o traiectorie. Două principii cantitative:</p>
+
+<ul>
+<li><strong>Substituie equity cu datorie exact când ROIC marginal &gt; WACC al rundei.</strong> Fiecare leu de datorie luat în loc de equity, când ești în zona acretivă, evită o cotă perpetuă. Pe șapte runde, mutarea a 30% din finanțare de la equity la venture debt poate adăuga 8–12 puncte la cota finală a fondatorului.</li>
+<li><strong>Întârzie rundele de equity până ridici post-money valuation</strong> — fiecare lună de creștere a EBIT/ARR ridică pre-money, deci scade dₙ pentru aceeași sumă strânsă. Venture debt-ul (deductibil sub prag ATAD, fără diluție) e exact puntea care cumpără timpul ăsta.</li>
+</ul>
+
+<p><strong>Test numeric de optimizare.</strong> Ai nevoie de 6M lei. Opțiunea pură-equity la pre-money 18M → diluție 25%. Alternativa: 3M venture debt (Rd 12%, deductibil) + amânare 6 luni a celor 3M equity, timp în care pre-money urcă la 26M → diluție pe partea de equity = 3/29 = 10,3%. Diluție totală pe rundă 10,3% în loc de 25% — economie de ~15 puncte de cotă, plătită cu un serviciu de datorie modest și deductibil. Asta e arbitrajul structurii de capital la nivel expert.</p>
+
+<h2>Pași și checklist pentru modelul tău</h2>
+
+<ul>
+<li><strong>1.</strong> Construiește WACC-ul ca funcție de leverage, nu ca scalar: re-levered beta (Hamada) la fiecare nivel D/E, Re prin CAPM cu CRP România + size + illiquidity, Rd cu primă de faliment crescătoare. Identifică banda D/V de minim (tipic 45–55% pentru EBIT stabil, mai jos pentru EBIT volatil).</li>
+<li><strong>2.</strong> Aplică Tc marginal pe tranșă, nu uniform: 16% sub plafonul ATAD de 1M EUR cost excedentar / 30% EBITDA, 0% pe tranșa nedeductibilă și 0% complet dacă ești micro (impozit 1% pe venit).</li>
+<li><strong>3.</strong> Modelează cap table-ul fully diluted multiplicativ: Sₙ = Sₙ₋₁ × (1 − dₙ), cu pool shuffle (pre-money pool iese din common) și conversia SAFE/convertible la prima priced round.</li>
+<li><strong>4.</strong> Negociază în term sheet: broad-based weighted average (nu full ratchet), 1× non-participating (sau participating cu cap mic), pari passu (nu stacked seniority).</li>
+<li><strong>5.</strong> Rulează waterfall-ul de exit pe minimum trei scenarii (mic / median / mare): vezi cât ia common-ul real după preferințe, nu cota nominală. Liquidation preference contează la exit mic-median — protejează exact acolo.</li>
+<li><strong>6.</strong> Pentru fiecare rundă, testează substituția equity→venture debt când ROIC marginal &gt; WACC; cuantifică punctele de cotă salvate pe orizontul complet de runde.</li>
+<li><strong>7.</strong> Întârzie equity-ul cu venture debt deductibil când fiecare lună ridică pre-money — modelează economia de diluție ca dₙ(amânat) vs dₙ(acum).</li>
+<li><strong>8.</strong> Verifică la zi, înainte de orice term sheet: randamentul titlurilor de stat RON 10 ani (Rf), ofertele reale de dobândă indexate IRCC/ROBOR + marjă, plafonul ATAD în lei la cursul de referință, eligibilitatea micro (plafon redus). Cifrele se mișcă — modelul rămâne.</li>
+</ul>

@@ -1,0 +1,132 @@
+<p>La nivel de specialist, <strong>arbitraj valutar pierderi fiscale EUR CHF</strong> nu înseamnă pariuri direcționale pe BNR, ci ingineria precisă a momentului de recunoaștere a diferenței de curs valutar pe un orizont multianual. Cititorul care a stăpânit deja <em>tax loss harvesting monedă străină</em> și mecanica unei <em>datorii valuate EUR cu depreciere RON deductibilă</em> știe că adevărata pârghie stă în lag-ul dintre cursul spot publicat de BNR și cursul forward implicit dintr-un contract de hedging, acolo unde se naște pierderea fiscală care anulează alte categorii de venit.</p>
+
+<p>Această lecție tratează stresarea ratei de schimb EUR/USD/CHF/RON pe o fereastră de 5 ani, modelarea cantitativă a diferențelor de curs realizate vs. nerealizate și structurile prin care un <em>hedging forward cu cost deductibil la ANAF</em> transformă volatilitatea în scut fiscal. Vom diseca arbitrajul de timing dintre maturitatea forward-ului și data de recunoaștere contabilă, optimizarea unui <em>multi-currency portfolio din perspectivă fiscală</em> și capcanele în care <em>swing trading-ul de valute pentru pierderi</em> se prăbușește în fața testului substanței economice.</p>
+
+<p>Atenție: granița dintre planificare fiscală legitimă și abuz de drept (art. 11 Cod fiscal) este cantitativă, nu retorică. Vom marca exact unde se află pragul.</p>
+
+<h2>Cadrul tehnic: cine recunoaște diferența de curs și când</h2>
+
+<p>Înainte de orice model, fixăm regimul de recunoaștere, pentru că aici se joacă tot arbitrajul. Tratamentul diferă radical în funcție de plătitor.</p>
+
+<ul>
+<li><strong>Persoană fizică, conversii pure de valută:</strong> câștigul din diferența de curs la schimbul valutar NU este, ca regulă, venit impozabil distinct pentru persoana fizică obișnuită care nu acționează ca trader profesionist. Reciproc, pierderea nu este deductibilă. Acesta este motivul pentru care arbitrajul de pierderi pe PF se construiește aproape exclusiv prin <strong>instrumente financiare derivate</strong> (forward, futures, CFD pe valute), nu prin schimb fizic.</li>
+<li><strong>Persoană fizică, venituri din instrumente financiare derivate (forward/futures valutar):</strong> intră la „venituri din investiții". Câștigul net anual se impune cu 10% impozit pe venit. Pierderea se reportează pe 7 ani fiscali consecutivi, dar — crucial — se compensează DOAR cu câștiguri de aceeași natură (tot din transferul titlurilor/instrumentelor financiare), nu cu salariu, chirie sau dividende.</li>
+<li><strong>PFA / întreprindere individuală în sistem real:</strong> diferențele de curs valutar realizate sunt venit, respectiv cheltuială deductibilă integral, și pot reduce baza globală de venit net. Aici scutul fiscal este cel mai larg.</li>
+<li><strong>Persoană juridică (micro vs. profit):</strong> la impozit pe profit 16%, diferențele de curs (realizate și, prin reevaluare, cele nerealizate la sold de creanțe/datorii în valută) afectează direct baza impozabilă. La microîntreprindere (1% cu condițiile 2026), diferențele de curs NU intră în baza de 1% pe venit, deci scutul nu funcționează — distincție capitală.</li>
+</ul>
+
+<p>Concluzia structurală: <strong>arbitrajul de pierderi deductibile care „anulează alte venituri" este realist doar pe PFA sistem real sau pe SRL la impozit pe profit.</strong> Pe PF cu derivate, pierderea este izolată (ring-fenced) în categoria investiții. Orice articol care promite anularea salariului cu pierderi din forward valutar pe PF este, tehnic, fals.</p>
+
+<h2>Modelul de bază: lag-ul spot–forward ca generator de pierdere</h2>
+
+<p>Forward-ul valutar se prețuiește prin paritatea ratelor dobânzii (covered interest parity). Pentru o pereche cu valuta de bază RON:</p>
+
+<p><strong>F = S × (1 + r_RON × t/360) / (1 + r_VAL × t/360)</strong></p>
+
+<p>unde S = curs spot, r_RON = rata dobânzii lei pe tenor, r_VAL = rata dobânzii valutei străine, t = zile până la maturitate. Diferența F − S este <strong>punctul forward</strong> (swap points). Pentru EUR/RON și mai ales CHF/RON, unde r_RON (ROBOR/IRCC ~ 5,5–6% în 2026) depășește net dobânda în EUR (~2,5%) și CHF (~1%), forward-ul cotează la <strong>premium</strong>: F > S. Cumpărătorul de EUR la termen plătește mai mult decât spot.</p>
+
+<p>Aici se naște arbitrajul de timing. Carry-ul negativ al unei poziții long EUR/RON forward (plătești diferențialul de dobândă încorporat în punctele forward) se materializează contabil ca o componentă de <strong>cost de hedging deductibil</strong>. Pe CHF/RON, diferențialul de dobândă este și mai mare, deci punctele forward sunt și mai abrupte — CHF devine instrumentul preferat pentru a „fabrica" cost forward deductibil cu expunere direcțională minimă.</p>
+
+<h3>Exemplu numeric calibrat (2026)</h3>
+
+<p>Presupunem un SRL la impozit pe profit cu o datorie comercială reală de 1.000.000 EUR scadentă la 12 luni. Cursul spot la contractare: 4,97 RON/EUR (nivel orientativ BNR 2026). Hedging prin forward de cumpărare EUR la 12 luni.</p>
+
+<ul>
+<li>r_RON 12M ≈ 5,8%; r_EUR 12M ≈ 2,5%. Diferențial ≈ 3,3%.</li>
+<li>F ≈ 4,97 × (1,058)/(1,025) ≈ 4,97 × 1,0322 ≈ <strong>5,130 RON/EUR</strong>.</li>
+<li>Puncte forward ≈ 0,160 RON/EUR × 1.000.000 = <strong>160.000 RON cost de carry</strong> încorporat.</li>
+</ul>
+
+<p>Dacă la maturitate cursul spot ajunge la 5,05 (RON s-a depreciat mai puțin decât prețuia forward-ul), poziția forward generează un câștig de hedging de (5,130 − 5,05) × 1.000.000 = −80.000 RON la decontare pe leg-ul forward, dar datoria comercială generează o cheltuială din diferența de curs de (5,05 − 4,97) × 1.000.000 = 80.000 RON. Net economic: hedge perfect, dar costul de carry de 160.000 RON rămâne <strong>cheltuială deductibilă</strong>. Acesta este scutul: ai cheltuit 160.000 RON deductibili la profit (economie de impozit 16% × 160.000 = <strong>25.600 RON</strong>) pentru un risc valutar neutralizat economic.</p>
+
+<h2>Stresarea ratei de schimb pe 5 ani: construcția matricei</h2>
+
+<p>Optimizarea pe orizont multianual cere o matrice de scenarii, nu un punct. Construim o grilă de stres pe trei axe: drift anual RON, volatilitate (sigma) și corelația EUR–CHF față de RON.</p>
+
+<h3>Parametrizarea driftului</h3>
+
+<p>Pe baza diferențialului de inflație RO vs. zona euro (RO ~ 4–5% vs. ZE ~ 2% în 2026), driftul de depreciere RON implicit (PPP-consistent) este ~2–3%/an față de EUR. Față de CHF, unde inflația elvețiană e ~1%, driftul de depreciere RON este structural mai mare, ~3,5–4,5%/an. Pe 5 ani compus, un drift de 3% înseamnă EUR/RON de la 4,97 la 4,97 × 1,03^5 ≈ <strong>5,76</strong>; CHF/RON, plecând de la ~5,30, la un drift de 4% ajunge la ~6,45.</p>
+
+<h3>Scenariile de stres (5 ani)</h3>
+
+<ul>
+<li><strong>Scenariu central (drift 3% EUR, 4% CHF):</strong> deprecierea graduală generează diferențe de curs nerealizate pe datorii — la SRL profit, reevaluarea anuală a soldurilor în valută produce cheltuieli deductibile recurente.</li>
+<li><strong>Scenariu șoc (depreciere 12% într-un an, gen 2022):</strong> o datorie de 1 mil. EUR generează ~600.000 RON cheltuială din diferență de curs într-un singur exercițiu — scut masiv, dar cu cash-flow real negativ la rambursare.</li>
+<li><strong>Scenariu apreciere RON (improbabil, dar de testat):</strong> diferențele devin venit impozabil, iar pierderea „fabricată" pe forward devine câștig impozabil — arbitrajul se inversează.</li>
+</ul>
+
+<p>Regula cantitativă de specialist: <strong>nu structura niciodată scutul pe ipoteza unui singur scenariu de drift.</strong> Calculează valoarea așteptată a economiei de impozit ponderată cu probabilitățile, scăzând costul real de carry. Dacă E[economie fiscală] − cost carry × (1 − rata impozit) < 0, structura distruge valoare chiar dacă „generează pierderi pe hârtie".</p>
+
+<h2>Arbitrajul de timing: maturitate forward vs. recunoaștere fiscală</h2>
+
+<p>Esența tehnică a unghiului acestei lecții. Diferența de curs pe forward se recunoaște la <strong>decontare/maturitate</strong> (sau la reevaluare la închiderea exercițiului pentru pozițiile deschise, la persoana juridică). Cheltuiala/venitul pe elementul hedge-uit (datoria) se recunoaște tot la reevaluare. Lag-ul exploatabil apare când:</p>
+
+<ul>
+<li><strong>Maturitatea forward-ului cade ÎNAINTE de 31 decembrie, iar reevaluarea datoriei se face DUPĂ.</strong> Realizezi pierderea pe forward în exercițiul N (deductibilă imediat), dar câștigul corespunzător pe datorie se „rostogolește" prin reevaluare în exercițiul N, neutralizându-l — deci timing-ul net pe SRL profit este în general simetric și NU produce un arbitraj real de an. Eroarea clasică e să crezi că poți decupla cele două legături.</li>
+<li><strong>Pe PFA sistem real (contabilitate de casă!):</strong> aici e diferența decisivă. La contabilitatea în partidă simplă, diferența de curs se recunoaște la <strong>încasare/plată efectivă</strong>, NU la reevaluare. Asta înseamnă că poți alege momentul plății și deci momentul recunoașterii pierderii. Decontând forward-ul pierzător în decembrie N (an cu venit ridicat) și amânând încasarea care produce câștig în ianuarie N+1, deplasezi pierderea în anul cu cota marginală cea mai utilă.</li>
+</ul>
+
+<h3>Model pas-cu-pas al arbitrajului de timing (PFA real)</h3>
+
+<ol>
+<li>Anul N: venit net din activitatea principală 400.000 RON. Cotă efectivă agregată ridicată pe marginal: 10% impozit pe venit, plus CASS de 10% aplicat pe baza plafonată. Pentru veniturile din activități independente, baza CASS pornește de la 6 salarii minime și urcă pe praguri (6/12/24), iar din 2026 plafonul maxim al bazei crește la 72 de salarii minime (≈ 291.600 RON la salariul minim de referință de 4.050 RON, adică un CASS maxim de ≈ 29.160 RON/an).</li>
+<li>Deschizi în trimestrul 3 o poziție forward CHF/RON cu puncte forward de carry semnificative (CHF = carry maxim).</li>
+<li>Decontezi în decembrie N leg-ul cu pierdere de 120.000 RON (carry + mișcare adversă controlată prin sizing). Pierderea, fiind cheltuială a activității dacă forward-ul e încadrat ca instrument de management al riscului valutar al activității, reduce venitul net la 280.000 RON.</li>
+<li>Economie de impozit pe venit: 10% × 120.000 = <strong>12.000 RON</strong>, plus impactul asupra plafonării CASS dacă venitul net coboară peste un prag inferior. În 2026 salariul minim brut de referință este ~4.050 RON, deci pragurile CASS la activități independente sunt: 6 × (24.300 RON), 12 × (48.600 RON) și 24 × (97.200 RON), cu plafon maxim al bazei de 72 × (≈ 291.600 RON).</li>
+</ol>
+
+<p><strong>Capcana fatală:</strong> pentru ca pierderea pe forward să fie deductibilă la PFA, instrumentul trebuie să aibă <strong>legătură reală cu activitatea economică</strong> (acoperirea unui risc valutar al încasărilor/plăților PFA). Un forward CHF speculativ pur, fără expunere subiacentă, este reîncadrat de ANAF ca activitate de investiții personale — pierdere nedeductibilă din venitul PFA. Aici cade 90% din schemele agresive.</p>
+
+<h2>Tax loss harvesting valutar prin instrumente derivate (PF investiții)</h2>
+
+<p>Pe categoria „venituri din investiții" a persoanei fizice, harvesting-ul funcționează diferit. Ai un portofoliu multi-valutar de futures/forward la un broker care raportează. Pierderea netă anuală se reportează 7 ani și compensează DOAR câștiguri viitoare din investiții.</p>
+
+<h3>Optimizarea recunoașterii înainte de 31 decembrie</h3>
+
+<ul>
+<li>Identifici pozițiile cu pierdere nerealizată (mark-to-market negativ): le închizi în decembrie pentru a cristaliza pierderea în anul curent.</li>
+<li>Reașezi expunerea printr-o poziție echivalentă economic dar nu identică (alt tenor, altă pereche corelată — EUR/RON în loc de o poziție CHF/RON corelată) pentru a evita o eventuală reîncadrare de tip „wash" și pentru a păstra direcția de piață.</li>
+<li>ATENȚIE 2026: brokerii fără sediu în RO NU rețin impozitul la sursă. Pentru aceștia, declararea se face prin Declarația Unică, iar pe titluri cota este de 16% pe câștigul net anual autodeclarat; compensarea pierderilor o operezi TU în calcul. Brokerii cu sediu în RO rețin la sursă, pe titluri, 3% pentru deținerile de peste 365 de zile și 6% pentru cele sub 365 de zile (cotele majorate aplicabile din 2026) — pe derivate (forward/futures valutar) regimul rămâne al câștigului net anual impozitat cu 10% via Declarația Unică.</li>
+</ul>
+
+<p><strong>Cuantificare:</strong> dacă ai 200.000 RON câștig din acțiuni printr-un broker cu reținere și 80.000 RON pierdere din forward valutar printr-un broker fără reținere, NU poți compensa automat — câștigul a fost deja impozitat la sursă. Recuperezi prin Declarația Unică doar dacă regularizarea anuală o permite pentru aceeași categorie. Pierderea de 80.000 rămâne reportabilă 7 ani contra câștigurilor viitoare de investiții.</p>
+
+<h2>Structura CHF: de ce este instrumentul de elecție</h2>
+
+<p>CHF concentrează trei proprietăți utile arbitrajului de cost:</p>
+
+<ul>
+<li><strong>Diferențial de dobândă maxim față de RON</strong> → puncte forward abrupte → cost de carry deductibil mare per unitate de risc.</li>
+<li><strong>Volatilitate joasă și statut de safe-haven</strong> → în scenarii de stres global, CHF se apreciază, amplificând cheltuiala din diferența de curs pe o datorie CHF (memento istoric: șocul ianuarie 2015 SNB).</li>
+<li><strong>Corelație imperfectă cu EUR</strong> → permite construcția unei perechi EUR-long / CHF-short care izolează diferențialul de carry cu expunere direcțională RON aproape nulă, lăsând costul de carry ca pierdere „curată".</li>
+</ul>
+
+<p>Structura de specialist: <strong>long EUR/RON forward + short CHF/RON forward, dimensionate la beta neutru</strong>. Expunerea netă la RON ≈ 0, dar plătești carry pe ambele legături. Costul agregat de carry este cheltuiala deductibilă, iar riscul de piață este redus la spread-ul EUR/CHF — o fracțiune din volatilitatea fiecărei perechi izolate. Pe SRL profit, acesta este cel mai „curat" generator de cheltuială deductibilă din toată gama, dar — repetăm — trebuie să servească un risc economic real ca să treacă testul art. 11.</p>
+
+<h2>Limita roșie: testul substanței economice și art. 11</h2>
+
+<p>ANAF aplică <strong>regula generală anti-abuz (GAAR)</strong>: o tranzacție al cărei scop esențial este obținerea unui avantaj fiscal, lipsită de substanță economică, este reîncadrată. Criteriile cantitative pe care le verifică, în practică:</p>
+
+<ul>
+<li><strong>Raportul cost-carry / beneficiu economic real:</strong> dacă plătești 160.000 RON carry pentru a acoperi un risc pe o datorie care nu există sau e nesemnificativă, structura e abuz.</li>
+<li><strong>Circularitatea:</strong> deschiderea și închiderea unor poziții valutare care se anulează reciproc în câteva zile, cu unic efect generarea pierderii la 31.12, = aranjament artificial.</li>
+<li><strong>Lipsa expunerii subiacente la PFA:</strong> forward fără flux comercial corespondent → nedeductibil.</li>
+</ul>
+
+<p>Pragul cantitativ de siguranță pe care îl recomand: <strong>orice structură de hedging trebuie să aibă o expunere subiacentă reală de minim 80% din noțional și un orizont de deținere coerent cu scadența fluxului acoperit.</strong> Sub acest prag, treci în zona reîncadrabilă.</p>
+
+<h2>Checklist de implementare — specialist</h2>
+
+<ol>
+<li><strong>Determină plătitorul corect:</strong> SRL profit (scut larg) sau PFA real (timing flexibil) pentru anularea altor venituri; PF derivate = pierdere ring-fenced, NU anulează salariu/chirie.</li>
+<li><strong>Verifică microîntreprinderea:</strong> dacă ești pe 1% venit, diferențele de curs NU reduc baza — treci pe profit înainte de a structura.</li>
+<li><strong>Calculează punctele forward</strong> cu CIP pentru fiecare tenor (EUR, CHF) și izolează componenta de carry deductibilă.</li>
+<li><strong>Documentează expunerea subiacentă reală</strong> ≥ 80% din noțional (factură, contract comercial, datorie) — dosarul anti-art.11.</li>
+<li><strong>Modelează matricea de stres pe 5 ani</strong> (drift 2–4,5%, șoc 12%, apreciere) și calculează E[economie fiscală] − cost carry net. Implementează doar dacă > 0.</li>
+<li><strong>Sincronizează timing-ul</strong>: la PFA real, decontează leg-ul pierzător în anul cu cota marginală cea mai mare, ținând cont de pragurile CASS la activități independente (6/12/24 salarii minime, cu plafon maxim al bazei de 72 de salarii minime din 2026).</li>
+<li><strong>Pe PF investiții</strong>: cristalizează pierderile nerealizate în decembrie, reportează 7 ani, declară în Declarația Unică, atenție la brokerii fără reținere la sursă.</li>
+<li><strong>Evită circularitatea</strong>: orizont de deținere coerent cu fluxul acoperit; fără deschideri/închideri în oglindă la 31.12.</li>
+<li><strong>Consultă un consultant fiscal autorizat (CCF)</strong> înainte de orice structură peste ~100.000 RON noțional — penalitățile de reîncadrare plus dobânzi anulează întreg avantajul.</li>
+</ol>
+
+<p>Arbitrajul valutar de pierderi fiscale este real și cuantificabil, dar marja lui de legitimitate este îngustă și definită numeric. Construiește-l pe substanță economică, modelează-l pe matrice de stres multianuală și recunoaște că instrumentul (CHF carry, structuri beta-neutre) contează mai puțin decât plătitorul corect și documentarea expunerii reale.</p>

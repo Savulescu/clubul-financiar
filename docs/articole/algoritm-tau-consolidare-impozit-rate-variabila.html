@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algoritmul tău de consolidare a datoriilor cu impozit și rată variabilă — Clubul Financiar</title><meta name="description" content="Construiește algoritmul optim de consolidare a datoriilor în România 2026: optimizare sub constrângeri fiscale (10%, CASS), rată IRCC variabilă, Solver și…"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/algoritm-tau-consolidare-impozit-rate-variabila.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Algoritmul tău de consolidare a datoriilor cu impozit și rată variabilă"><meta property="og:description" content="Construiește algoritmul optim de consolidare a datoriilor în România 2026: optimizare sub constrângeri fiscale (10%, CASS), rată IRCC variabilă, Solver și…"><meta property="og:url" content="https://clubulfinanciar.ro/articole/algoritm-tau-consolidare-impozit-rate-variabila.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Algoritmul tău de consolidare a datoriilor cu impozit și rată variabilă"><meta name="twitter:description" content="Construiește algoritmul optim de consolidare a datoriilor în România 2026: optimizare sub constrângeri fiscale (10%, CASS), rată IRCC variabilă, Solver și…"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Algoritmul tău de consolidare a datoriilor cu impozit și rată variabilă", "description": "Construiește algoritmul optim de consolidare a datoriilor în România 2026: optimizare sub constrângeri fiscale (10%, CASS), rată IRCC variabilă, Solver și…", "inLanguage": "ro-RO", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/articole/algoritm-tau-consolidare-impozit-rate-variabila.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#datorii">💳 Datorii</a> · 13 min citire · Actualizat 19 iun. 2026</p><h1>Algoritmul tău de consolidare a datoriilor cu impozit și rată variabilă</h1><p>La nivel de specialist, problema de <strong>consolidare datorii optimizare impozit rata variabilă</strong> nu este o alegere binară între Snowball și Avalanche, ci un program de optimizare sub constrângeri multiple. Cele două euristici populare presupun implicit că singurul cost relevant este dobânda nominală și că ratele sunt fixe — ipoteze false în România 2026, unde IRCC se mișcă trimestrial cu BNR, fiecare consolidare are comision și taxe de evaluare, partea de datorie condonată poate genera venit impozabil la 10%, iar buffer-ul de urgență trebuie menținut neclintit. Tratată corect, decizia este o instanță de <strong>linear programming debt optimization</strong> cu un <strong>multi-debt consolidation tax constraint</strong> explicit și termeni de cost total: dobândă, impozit, comisioane, cost de oportunitate și <strong>dynamic debt maturity matching</strong> al scadențelor.</p>
+
+<p>În această lecție construim algoritmul tău optim de consolidare multi-debt cu limită de impozit și rată de refinanțare variabilă. Pornim de la funcția-obiectiv de cost total prezent, formalizăm constrângerile (lichiditate, plafon fiscal pe dobânda condonată, capacitate DTI), apoi rezolvăm modelul cu Solver în Excel și îl stres-testăm cu o <strong>Monte Carlo simulation datorii rate</strong>. Acoperim și un <strong>variable rate refinancing algorithm</strong> care decide trimestrial dacă refinanțezi în funcție de traiectoria BNR, și aplicăm <strong>dynamic debt maturity matching</strong> pentru a alinia scadențele la fluxul tău de numerar. Pe scurt: înlocuim intuiția cu un <strong>multi-debt consolidation tax constraint</strong> formal și un model reproductibil.</p>
+
+<p>Presupun că stăpânești deja matematica anuității, diferența dintre DAE și dobânda nominală, mecanica IRCC trimestrial și logica fiscală a datoriei condonate ca venit din alte surse. Aici mergem direct în formularea optimizării și în interpretarea soluției, inclusiv edge-cases unde algoritmul contrazice ambele euristici clasice.</p>
+
+<h2>Funcția-obiectiv: costul total prezent, nu dobânda nominală</h2>
+
+<p>Greșeala de altitudine a euristicilor clasice este că optimizează o singură componentă. Avalanche minimizează dobânda plătită; Snowball minimizează timpul până la primul „kill” psihologic. Niciuna nu vede costul total. Definim funcția-obiectiv corectă ca <strong>valoarea actualizată a tuturor ieșirilor de numerar</strong> generate de portofoliul de datorii, pe orizontul de planificare T (în luni):</p>
+
+<p><strong>min Z = Σ<sub>t=1..T</sub> [ D<sub>t</sub> + Tx<sub>t</sub> + C<sub>t</sub> ] / (1+r)<sup>t</sup> − VAN(buffer)</strong></p>
+
+<ul>
+<li><strong>D<sub>t</sub></strong> — dobânda plătită în luna t pe soldurile rămase, cu rata efectivă variabilă pe creditele indexate IRCC.</li>
+<li><strong>Tx<sub>t</sub></strong> — impozitul generat de eventuala condonare în luna t: 10% pe partea iertată încadrată la venituri din alte surse (art. 114 Cod fiscal), plus eventual CASS dacă totalul veniturilor neasigurate depășește plafonul anual.</li>
+<li><strong>C<sub>t</sub></strong> — comisioanele de consolidare/refinanțare angajate în t (analiză dosar, evaluare, comision de rambursare anticipată, taxe notariale la garantare).</li>
+<li><strong>r</strong> — rata de actualizare lunară, egală cu costul tău de oportunitate (randamentul marginal pe care l-ai obține plasând lichiditatea în altă parte; pentru un titlu de stat Fidelis sau un cont de economii bun, ordin de mărime r ≈ 6%/an, deci ~0,49%/lună).</li>
+</ul>
+
+<p>Termenul final, VAN(buffer), capturează costul de a imobiliza lichiditate într-un fond de urgență în loc să o arunci în datorie. Acesta este exact arbitrajul pe care Avalanche îl ignoră: a plăti agresiv un credit cu 12% când rămâi fără buffer și ești forțat luna următoare să tragi un card cu DAE 24% este o pierdere netă, nu o economie.</p>
+
+<h3>De ce actualizarea schimbă ordinea de prioritizare</h3>
+
+<p>Un leu de dobândă plătit în luna 36 costă mai puțin în valoare prezentă decât un leu plătit azi. Asta înseamnă că, sub actualizare, o datorie cu rată mare dar scadență scurtă poate fi <em>mai puțin urgentă</em> decât una cu rată moderată dar scadență lungă, fiindcă a doua acumulează dobândă pe un orizont mult mai amplu. Avalanche, care sortează strict descrescător după rată, nu vede asta. Algoritmul optim sortează după <strong>contribuția marginală la Z a fiecărui leu alocat</strong>, care depinde de rată ȘI de durata reziduală ponderată — adică de duration-ul datoriei.</p>
+
+<h2>Variabilele de decizie și constrângerile</h2>
+
+<p>Variabilele pe care Solver le mută sunt alocările lunare de numerar disponibil peste plata minimă, plus deciziile binare de consolidare. Formalizat:</p>
+
+<ul>
+<li><strong>x<sub>i,t</sub></strong> — leii alocați suplimentar datoriei i în luna t (continuă, ≥ 0).</li>
+<li><strong>y<sub>j</sub> ∈ {0,1}</strong> — variabilă binară: consolidezi grupul j de datorii (1) sau nu (0). Activarea declanșează comisionul C<sub>j</sub> și, dacă include o condonare negociată, impozitul Tx<sub>j</sub>.</li>
+<li><strong>z<sub>i,t</sub> ∈ {0,1}</strong> — refinanțezi datoria i la momentul t (declanșator pentru variable rate refinancing).</li>
+</ul>
+
+<p>Constrângerile care fac problema realistă — și care lipsesc complet din Snowball/Avalanche:</p>
+
+<ul>
+<li><strong>Constrângere de buget (cash-flow):</strong> Σ<sub>i</sub> (min<sub>i,t</sub> + x<sub>i,t</sub>) ≤ CF<sub>t</sub> pentru fiecare lună. Nu poți aloca mai mult decât numerarul disponibil după cheltuieli fixe.</li>
+<li><strong>Constrângere de lichiditate (buffer):</strong> Buffer<sub>t</sub> ≥ B<sub>min</sub>, unde B<sub>min</sub> = 3-6 luni de cheltuieli obligatorii. Aceasta este o constrângere dură: algoritmul nu are voie să o încalce nici măcar temporar.</li>
+<li><strong>Constrângere de plafon fiscal (tax constraint):</strong> Σ<sub>j</sub> condonare<sub>j</sub> · y<sub>j</sub> ≤ K<sub>tax</sub>, unde K<sub>tax</sub> este pragul de condonare peste care impozitul pe venit + eventuala CASS îți erodează relieful net sub un nivel acceptabil. Acesta este punctul în care multi-debt consolidation devine, esențial, o problemă fiscală.</li>
+<li><strong>Constrângere de capacitate (DTI):</strong> rata lunară totală post-consolidare / venit net ≤ 40% (plafon de îndatorare în logica reglementării BNR pentru credite noi), altfel refinanțarea pur și simplu nu se aprobă.</li>
+<li><strong>Conservarea soldurilor:</strong> Sold<sub>i,t+1</sub> = Sold<sub>i,t</sub> · (1 + r<sub>i,t</sub>/12) − (min<sub>i,t</sub> + x<sub>i,t</sub>), cu r<sub>i,t</sub> variabil pe creditele IRCC.</li>
+</ul>
+
+<h3>Modelarea ratei variabile: IRCC ca proces, nu ca o constantă</h3>
+
+<p>Pe creditele de consum în lei cu dobândă variabilă, rata efectivă este IRCC + marjă fixă. IRCC se recalculează trimestrial pe baza tranzacțiilor interbancare dintr-un trimestru de referință, deci ai un decalaj: rata aplicată în trimestrul curent reflectă condițiile de acum două trimestre. Pentru model, tratează r<sub>i,t</sub> = IRCC<sub>t</sub> + marjă<sub>i</sub>, unde IRCC<sub>t</sub> este o funcție în trepte (pas trimestrial), nu o curbă netedă.</p>
+
+<p>Calibrare prudentă România 2026: cu dobânda de politică monetară BNR în zona 6,5% și IRCC reflectând cu lag piața interbancară, un IRCC de referință în ordinul de mărime 5-6% este o ipoteză rezonabilă, dar verific-o la sursă (BNR/ARB) pentru trimestrul exact — nu o îngheța în model. Marja băncii pe consum se adaugă peste, tipic 3-6 puncte procentuale, deci o rată efectivă de 9-12% pe creditul de consum variabil este un punct de plecare realist.</p>
+
+<h2>Exemplu numeric complet: patru datorii, un singur buget</h2>
+
+<p>Construim cazul de bază. Ai 1.800 lei/lună disponibili peste plățile minime și un buffer-țintă de 12.000 lei (3 luni × 4.000 lei cheltuieli). Portofoliul:</p>
+
+<ul>
+<li><strong>D1 — Card credit:</strong> sold 18.000 lei, DAE 24% (fix), min 540 lei/lună.</li>
+<li><strong>D2 — Credit consum variabil:</strong> sold 40.000 lei, rată IRCC+4 ≈ 10%, scadență reziduală 48 luni, rată 1.015 lei.</li>
+<li><strong>D3 — IFN nevoi personale:</strong> sold 9.000 lei, DAE 32% (fix), scadență 18 luni, rată 640 lei.</li>
+<li><strong>D4 — Refinanțare imobiliar parțial:</strong> sold 220.000 lei, IRCC+1,8 ≈ 7,8%, rată 1.760 lei.</li>
+</ul>
+
+<p><strong>Pasul 1 — sortare după rată reală actualizată.</strong> Avalanche pur ar zice: atacă D3 (32%), apoi D1 (24%), apoi D2 (10%), apoi D4. Dar D3 are sold mic și scadență scurtă (18 luni): contribuția lui la Z este deja plafonată de durata reziduală. D1, cardul, e revolving — fără scadență forțată, dobânda compusă rulează nelimitat la 24%. Sub actualizare, costul prezent al unui leu nealocat la D1 pe 36 de luni depășește costul lui D3, fiindcă D3 se autolichidează oricum în 18 luni.</p>
+
+<p><strong>Pasul 2 — alocarea optimă (rezultat Solver).</strong> Algoritmul alocă întâi cei 1.800 lei pentru a stinge cardul D1 (cea mai toxică structură revolving), apoi redirecționează către IFN-ul D3 (deși are rată mai mare, soldul mic se închide rapid și eliberează 640 lei/lună), apoi atacă D2. D4 (imobiliarul, 7,8%) rămâne pe plata minimă: nu merită accelerat câtă vreme costul lui de oportunitate (7,8%) este sub randamentul pe care l-ai obține investind sau menținând buffer. Aceasta este granița decizională cheie: <strong>nu accelerezi nicio datorie cu rată sub costul tău de oportunitate ajustat la risc.</strong></p>
+
+<h3>Unde intră limita de impozit</h3>
+
+<p>Să presupunem că IFN-ul D3 acceptă un settlement: plătești 6.000 lei și îți iartă 3.000 lei. Cei 3.000 lei condonați sunt venit din alte surse, impozitați la 10% = 300 lei. Atâta timp cât veniturile tale neasigurate nu ating plafonul CASS, costul fiscal e doar acel impozit pe venit. Net, condonarea îți aduce 3.000 − 300 = 2.700 lei relief real — clar favorabilă. Constrângerea K<sub>tax</sub> devine activă doar când acumulezi condonări mari într-un singur an fiscal: dacă negociezi simultan ștergeri la D1 și D3 care însumează, să zicem, peste primul prag CASS de 6 salarii minime brute (cu salariul minim de 4.050 lei în 2026, adică 24.300 lei venituri neasigurate pe an; pragurile superioare sunt 12 și 24 de salarii minime, deci 48.600 și 97.200 lei), declanșezi CASS de 10% pe baza de calcul aferentă treptei, iar relieful marginal pe ultimul leu condonat scade. Algoritmul, prin constrângerea de plafon, îți spune să <strong>eșalonezi condonările pe ani fiscali diferiți</strong> pentru a sta sub prag — un rezultat pe care nicio euristică nu-l produce.</p>
+
+<h2>Implementarea cu Solver în Excel</h2>
+
+<p>Modelul se construiește pe trei blocuri de foaie de calcul:</p>
+
+<ul>
+<li><strong>Blocul de stare:</strong> o matrice T×N (luni × datorii) cu soldurile, actualizată prin formula de conservare. Fiecare celulă de sold leagă luna anterioară, rata r<sub>i,t</sub> (cu IRCC în trepte pe coloană separată) și alocarea.</li>
+<li><strong>Blocul de decizie:</strong> matricea x<sub>i,t</sub> (alocările) plus vectorii binari y<sub>j</sub> și z<sub>i,t</sub>. Acestea sunt celulele variabile pe care Solver le modifică.</li>
+<li><strong>Blocul-obiectiv:</strong> o singură celulă cu Z = suma actualizată a dobânzilor + impozit + comisioane − VAN buffer.</li>
+</ul>
+
+<p>Configurare Solver (Data → Solver):</p>
+
+<ul>
+<li><strong>Set Objective:</strong> celula Z, <strong>To: Min</strong>.</li>
+<li><strong>By Changing Variable Cells:</strong> blocul x<sub>i,t</sub> + binarele y<sub>j</sub>, z<sub>i,t</sub>.</li>
+<li><strong>Subject to constraints:</strong> Σ alocări ≤ CF<sub>t</sub> (per lună); Buffer<sub>t</sub> ≥ B<sub>min</sub>; Σ condonări ≤ K<sub>tax</sub>; rata totală ≤ 40% venit; binarele declarate <em>bin</em>.</li>
+<li><strong>Solving Method:</strong> fiindcă ai variabile binare, folosește <strong>Simplex LP</strong> doar dacă liniarizezi; altfel <strong>Evolutionary</strong> (GRG Nonlinear nu gestionează bine binarele). Pentru robustețe, rulează Evolutionary cu Mutation Rate ~0,1 și Max Time 100s, apoi rafinează soluția cu Simplex pe varianta cu binarele fixate.</li>
+</ul>
+
+<p>Capcana de liniaritate: termenul de dobândă D<sub>t</sub> este produsul sold × rată, iar soldul depinde de alocările anterioare — deci modelul este nonliniar în x. Trucul de specialist este să liniarizezi pe orizonturi scurte (rezolvi luna cu luna, fixând soldul de început) sau să accepți Evolutionary pe modelul nonliniar complet. Pentru portofolii de 4-6 datorii și T = 60 luni, Evolutionary converge în secunde.</p>
+
+<h2>Variable rate refinancing algorithm: când apeși pe trigger</h2>
+
+<p>Refinanțarea unei datorii variabile nu se decide pe „rata a crescut”, ci pe valoarea prezentă a economiei nete vs costul de switch. Regula de decizie z<sub>i,t</sub> = 1 dacă și numai dacă:</p>
+
+<p><strong>VAN(economie dobândă) − Comision refinanțare − Impozit eventual > Prag de siguranță</strong></p>
+
+<p>unde VAN(economie) = Σ (sold<sub>i,t</sub> · Δrată / 12) / (1+r)<sup>k</sup> pe scadența reziduală. Pe creditele IRCC, Δrată anticipat depinde de traiectoria BNR. Aici introduci stochasticitatea: nu cunoști IRCC viitor, deci nu poți evalua determinist VAN(economie). Soluția este să nu refinanțezi pe punctul mediu, ci pe <strong>distribuția</strong> traiectoriilor de rată — adică Monte Carlo.</p>
+
+<h3>Monte Carlo pe traiectoria IRCC</h3>
+
+<p>Modelezi IRCC ca un proces mean-reverting (tip Vasicek discretizat): IRCC<sub>t+1</sub> = IRCC<sub>t</sub> + κ(θ − IRCC<sub>t</sub>) + σ·ε<sub>t</sub>, unde θ este nivelul de echilibru pe termen lung (ancorat la ținta BNR), κ viteza de revenire și ε zgomot normal. Simulezi 10.000 de traiectorii trimestriale pe orizontul T, recalculezi Z pe fiecare și obții o <strong>distribuție a costului total</strong>, nu un singur număr.</p>
+
+<p>Output-ul care contează: nu media lui Z, ci <strong>percentila 95 (Z la cel mai prost 5% scenariu de rată)</strong> și probabilitatea de încălcare a buffer-ului. Un plan de consolidare care minimizează Z mediu dar are 15% probabilitate să-ți spargă buffer-ul în scenariile de rată ridicată este inferior unuia cu Z mediu ușor mai mare dar 0% probabilitate de spargere. Aceasta este logica de optimizare robustă: optimizezi pe coadă, nu pe medie — exact cum un trezorier de corporație fixează ratele cu hedging, nu pe speranța că BNR taie.</p>
+
+<h2>Dynamic debt maturity matching</h2>
+
+<p>Ultima rafinare de specialist: alinierea scadențelor consolidate la profilul tău de venit. Dacă ai venit cu sezonalitate (bonus anual, venit de PFA neuniform), nu vrei o singură rată plată mare în lunile slabe. Maturity matching înseamnă să structurezi consolidarea astfel încât scadențele agregate să urmărească fluxul de numerar așteptat — scadențe mai scurte/agresive în lunile cu surplus, plata minimă în lunile slabe. În model, asta se traduce în CF<sub>t</sub> variabil pe lună și o constrângere care interzice ca rata totală să depășească venitul net al lunii respective minus minimul de trai. Rezultatul este un plan care nu doar minimizează costul, ci și nu te forțează niciodată în default tehnic într-o lună proastă.</p>
+
+<h2>Edge-cases unde algoritmul contrazice ambele euristici</h2>
+
+<ul>
+<li><strong>Datorie cu rată mare dar self-liquidating scurtă:</strong> Avalanche o atacă prima; algoritmul o lasă pe minim dacă se închide oricum în câteva luni și acel cash blochează închiderea unui revolving toxic.</li>
+<li><strong>Datorie mică psihologic „de eliberat”:</strong> Snowball o ucide prima; algoritmul o păstrează dacă rata ei e sub costul de oportunitate și banii fac mai mult la buffer sau la o datorie cu duration mai lungă.</li>
+<li><strong>Condonare disponibilă dar peste pragul fiscal:</strong> intuiția zice „acceptă tot ce-ți iartă banca”; algoritmul refuză o parte din condonare în anul curent fiindcă declanșează CASS și împinge relieful marginal sub zero — și o reprogramează pe anul fiscal următor.</li>
+<li><strong>Refinanțare ofertată la rată mai mică:</strong> intuiția zice „refinanțează imediat”; algoritmul calculează că, cu comisionul de rambursare anticipată + costul refinanțării + VAN economiei pe scadența scurtă reziduală, switch-ul este net negativ.</li>
+</ul>
+
+<h2>Checklist de implementare pas-cu-pas</h2>
+
+<ul>
+<li><strong>1. Inventariază</strong> fiecare datorie cu: sold exact, tip rată (fix/IRCC+marjă), DAE, scadență reziduală, comision de rambursare anticipată, plata minimă.</li>
+<li><strong>2. Stabilește r</strong> (costul de oportunitate) — randamentul realist al alternativei tale (titlu de stat, cont economii), ca rată de actualizare lunară.</li>
+<li><strong>3. Fixează B<sub>min</sub></strong> — buffer-ul de urgență ca 3-6 luni de cheltuieli obligatorii; intră ca constrângere dură, nu negociabilă.</li>
+<li><strong>4. Construiește matricea de stare T×N</strong> în Excel cu formula de conservare a soldului și coloana IRCC în trepte trimestriale (valori verificate la BNR/ARB pentru trimestrul curent).</li>
+<li><strong>5. Definește celula-obiectiv Z</strong> = VAN(dobândă + impozit 10% pe condonări + comisioane) − VAN(buffer).</li>
+<li><strong>6. Adaugă constrângerile</strong> de buget lunar, buffer ≥ B<sub>min</sub>, condonări ≤ K<sub>tax</sub>, rată totală ≤ 40% venit, binare declarate <em>bin</em>.</li>
+<li><strong>7. Rulează Solver</strong> (Evolutionary pentru binare, rafinare Simplex), citește alocările optime și deciziile de consolidare/refinanțare.</li>
+<li><strong>8. Stres-testează cu Monte Carlo</strong> pe IRCC: 10.000 traiectorii, raportează Z la percentila 95 și probabilitatea de spargere buffer.</li>
+<li><strong>9. Verifică plafonul fiscal:</strong> dacă condonările anuale se apropie de pragul CASS, eșalonează-le pe ani fiscali diferiți.</li>
+<li><strong>10. Reoptimizează trimestrial,</strong> la fiecare recalculare IRCC și la fiecare schimbare de venit — modelul este viu, nu un plan înghețat.</li>
+</ul>
+
+<p>Concluzia de specialist: prioritizarea optimă a datoriilor nu este o regulă, ci o soluție de optimizare care depinde de structura ta exactă de rate, scadențe, lichiditate și expunere fiscală. Snowball și Avalanche sunt cazuri particulare degenerate ale acestui model — Avalanche când ignori actualizarea, impozitul și lichiditatea; Snowball când supraponderezi un termen comportamental. Când construiești funcția-obiectiv completă și o rezolvi sub constrângeri reale, obții un plan care, în general, le bate pe ambele — și, mai important, nu te lasă niciodată fără buffer într-o lună în care BNR a mișcat rata împotriva ta.</p><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>

@@ -1,0 +1,155 @@
+<p>Un <strong>dynamic pricing algoritm chirii ocupare</strong> nu este o foaie de calcul cu trei niveluri sezoniere, ci un sistem de <strong>revenue management imobiliare</strong> care tratează fiecare unitate ca pe un perisabil cu inventar zero recuperabil: o lună goală nu se mai vinde niciodată. La nivel de portofoliu, proprietarii care rulează un <strong>seasonal pricing model</strong> cu 7-15 trepte și o <strong>tenant segmentation strategie</strong> pe 12-15 segmente obțin un <em>spread</em> de 8-12% pe yield-ul net față de cei care țin chirie fixă cu indexare anuală. Diferența nu vine din a cere mai mult, ci din a calibra fiecare ajustare (+/- 20% în jurul prețului de referință) astfel încât elasticitatea cererii, costul de vacanță și riscul de credit al chiriașului să fie ponderate într-o singură funcție obiectiv.</p>
+
+<p>Această lecție tratează construcția algoritmului la nivel de specialist: funcția de <strong>yield optimization imobiliar</strong>, treptele sezoniere calibrate pe date locale, scoringul chiriașului ca variabilă de preț (nu doar de selecție), și logica de <strong>occupancy rate maximizare ROI</strong> care decide când accepți un discount și când lași unitatea goală. Lucrăm cu cifre RO 2026, contextul fiscal ANAF pe venituri din chirii (cota 10% impozit pe venit, plus CASS la pragurile de 6/12/24 salarii minime), regimul TVA și implicațiile contabile ale optimizării prețului.</p>
+
+<p>Presupunem că stăpânești deja conceptele de bază (yield brut/net, indexare, vacancy rate) și nivelul avansat (CAP rate, NOI, sezonalitate calitativă). Mergem direct în motorul de calcul.</p>
+
+<h2>1. Funcția obiectiv: maximizezi yield net, nu chiria nominală</h2>
+
+<p>Eroarea de bază a proprietarului avansat-dar-nu-expert este să optimizeze chiria lunară. Chiria nominală maximă produce frecvent yield net mai mic, pentru că ignoră costul de vacanță și rotația. Funcția corectă pe care o maximizezi pe un orizont anual T este:</p>
+
+<p><strong>Yield_net = Σ [ P_t · O_t − C_vacanță · (1 − O_t) − C_rotație · f_t ] / Valoare_activ</strong></p>
+
+<ul>
+<li><strong>P_t</strong> = chiria efectivă în treapta t (după ajustarea sezonieră și de segment);</li>
+<li><strong>O_t</strong> = rata de ocupare așteptată la prețul P_t (funcție descrescătoare de preț — curba de elasticitate);</li>
+<li><strong>C_vacanță</strong> = costul lunar al unității goale (utilități minime, întreținere, cost de oportunitate al capitalului);</li>
+<li><strong>C_rotație</strong> = costul unei schimbări de chiriaș (curățenie, reparații, comision, ~0,5-1,5 chirii lunare);</li>
+<li><strong>f_t</strong> = frecvența de rotație indusă de strategia de preț în treapta t.</li>
+</ul>
+
+<p>Punctul critic: dacă crești P_t cu 20% și O_t scade de la 100% la 88%, dar curba reală de rotație împinge f_t în sus (chiriași mai puțin captivi), câștigul brut de 20% se poate transforma într-un yield net negativ. Algoritmul trebuie să rezolve trade-off-ul preț × ocupare × rotație simultan, nu secvențial.</p>
+
+<h3>Derivarea pragului de discount acceptabil</h3>
+
+<p>Întrebarea operațională zilnică: accept o ofertă sub prețul de referință sau las unitatea pe piață? Pragul de indiferență se calculează din costul de vacanță marginal. Dacă o lună goală te costă C_vacanță = chiria de referință R plus utilități (~150 lei) plus cost de oportunitate, iar timpul mediu suplimentar de expunere pentru a obține prețul plin este d zile, atunci discount-ul maxim rațional este:</p>
+
+<p><strong>Discount_max = (d / 365) + (C_vacanță_lunar / R) · (d / 30)</strong></p>
+
+<p>Exemplu numeric: unitate cu R = 3.000 lei/lună, costuri de vacanță reale ~3.250 lei/lună (chirie pierdută + utilități minime + management). Dacă menținerea prețului plin implică în medie 18 zile suplimentare de gol, pierderea = 3.250 × (18/30) ≈ 1.950 lei. Pe un contract de 12 luni, un discount de 1,5% (45 lei/lună × 12 = 540 lei) este net superior gol-ului de 1.950 lei. Concluzia de specialist: pe piețele cu time-on-market > 14 zile, discount-urile de 3-6% pe semnare rapidă bat aproape întotdeauna prețul plin cu vacanță.</p>
+
+<h2>2. Treptele sezoniere: 7-15 niveluri calibrate pe date locale</h2>
+
+<p>Sezonalitatea chiriilor în România este puternic asimetrică și NU coincide cu sezonalitatea turistică. Pentru rezidențial pe termen lung în orașe universitare (București, Cluj-Napoca, Iași, Timișoara), vârful absolut de cerere este <strong>septembrie-octombrie</strong> (an universitar) cu un al doilea vârf în <strong>februarie</strong> (semestrul II + relocări corporate post-bonus). Valea profundă este <strong>decembrie-ianuarie</strong> (nimeni nu se mută de sărbători) și un platou jos iunie-iulie.</p>
+
+<p>Construcția treptelor pornește de la indicele sezonier lunar I_m, calculat ca raport între cererea lunii și cererea medie anuală. Un model robust de 12 trepte (una pe lună) pentru un apartament cu 2 camere în zonă universitară Cluj arată tipic așa:</p>
+
+<ul>
+<li><strong>Septembrie:</strong> I = 1,18 → +18% peste referință</li>
+<li><strong>Octombrie:</strong> I = 1,12 → +12%</li>
+<li><strong>Februarie:</strong> I = 1,08 → +8%</li>
+<li><strong>Martie-Mai:</strong> I = 1,00-1,03 → preț de referință</li>
+<li><strong>Iunie-Iulie:</strong> I = 0,92 → −8%</li>
+<li><strong>August:</strong> I = 0,97 → −3% (anticipare septembrie)</li>
+<li><strong>Noiembrie:</strong> I = 0,96 → −4%</li>
+<li><strong>Decembrie-Ianuarie:</strong> I = 0,85-0,88 → −12% la −15%</li>
+</ul>
+
+<h3>Regula de plafonare a amplitudinii</h3>
+
+<p>Amplitudinea totală (vârf-vale) trebuie plafonată la <strong>maximum 30-35%</strong> pentru rezidențial pe termen lung. Peste acest prag, semnalizezi instabilitate și pierzi chiriași de calitate care caută predictibilitate. Banda practică de lucru: ±15% în jurul referinței, cu excepții punctuale la +18% în vârful absolut.</p>
+
+<p>Treapta pe care o aplici nu este luna calendaristică în care semnezi, ci <strong>luna de start a contractului ponderată cu durata</strong>. Un contract semnat în decembrie pe 12 luni nu trebuie penalizat cu −15%: media sezonieră a celor 12 luni acoperite este ≈ 1,00, deci aplici referința, nu valea. Calibrarea corectă pe contracte lungi folosește indicele mediu ponderat al perioadei acoperite, nu indicele lunii de semnare. Aceasta este greșeala cea mai frecventă a algoritmilor naivi.</p>
+
+<h2>3. Segmentarea chiriașului ca variabilă de preț</h2>
+
+<p>O <strong>tenant segmentation strategie</strong> de specialist nu folosește scoringul doar pentru a accepta/respinge, ci pentru a <strong>diferenția prețul și termenii</strong>. Construiești un scor compozit S pe 0-100 din variabile observabile, apoi mapezi scorul pe o ajustare de preț ȘI pe o ajustare de garanție/durată.</p>
+
+<p>În România 2026, variabilele utilizabile legal (cu acordul GDPR al candidatului) includ: raportul chirie/venit net documentat, stabilitatea ocupării (vechime contract muncă), istoric de plată (referințe), tip contract (nedeterminat vs. determinat), structura gospodăriei. Nu există un birou de credit care să livreze un FICO pentru chiriași rezidențiali ca în SUA; folosești un proxy intern.</p>
+
+<h3>Matricea de 15 segmente</h3>
+
+<p>Combini două axe: <strong>solvabilitate</strong> (3 niveluri: A/B/C după raportul chirie/venit — sub 30%, 30-40%, peste 40%) și <strong>profil de retenție</strong> (5 tipuri: corporate-relocat, familie stabilă, cuplu tânăr, student/co-living, freelancer/venit variabil). Rezultă 3×5 = 15 segmente. Fiecărui segment îi atașezi:</p>
+
+<ul>
+<li><strong>Ajustare de preț:</strong> de la −4% (familie stabilă A, retenție mare, risc mic — meriți să o reții cu discount) până la +8% (freelancer C, risc mare — prima de risc plus garanție mărită);</li>
+<li><strong>Garanție:</strong> 1 chirie (segmente A) până la 2-3 chirii (segmente C);</li>
+<li><strong>Durată minimă:</strong> contractele lungi cu segmente A primesc cel mai bun preț (reduci f_t rotație).</li>
+</ul>
+
+<p>Logica economică: un chiriaș familie-stabilă-A care semnează pe 24 luni îți reduce f_t și C_rotație pe doi ani. Un discount de 3-4% este o investiție cu randament superior, nu o pierdere. Invers, un segment C cu venit variabil justifică +6-8% nu din lăcomie, ci pentru a acoperi probabilitatea statistic mai mare de neîncasare și rotație. Acesta este <strong>risk-based pricing</strong> aplicat corect.</p>
+
+<h2>4. Algoritmul integrat: compunerea factorilor</h2>
+
+<p>Prețul final efectiv se compune multiplicativ, nu aditiv, pentru a evita acumularea liniară de ajustări care iese din bandă:</p>
+
+<p><strong>P_efectiv = R_referință × (1 + a_sezon) × (1 + a_segment) × (1 + a_cerere_RT) × (1 + a_inventar)</strong></p>
+
+<ul>
+<li><strong>R_referință:</strong> chiria de echilibru a zonei pentru tipul de unitate, recalibrată trimestrial din date de piață;</li>
+<li><strong>a_sezon:</strong> ajustarea din treapta sezonieră (−15% la +18%);</li>
+<li><strong>a_segment:</strong> ajustarea de risc/retenție (−4% la +8%);</li>
+<li><strong>a_cerere_RT:</strong> semnal real-time din numărul de vizionări/lead-uri pe anunț în ultimele 7 zile (peste prag → +2-5%, sub prag → −2-5%);</li>
+<li><strong>a_inventar:</strong> dacă ai mai multe unități goale simultan în aceeași zonă, aplici un discount de portofoliu pentru a accelera absorbția (−3-6%), pentru că nu vrei să concurezi cu tine însuți.</li>
+</ul>
+
+<p>Aplici un <strong>clamp final</strong>: P_efectiv se limitează la [0,82 × R ; 1,20 × R]. Orice combinație de factori care iese din bandă este truncată. Acest guard-rail previne situațiile în care vârf sezonier + segment de risc + cerere mare produc +35% și sperii piața.</p>
+
+<h3>Exemplu de calcul complet pas-cu-pas</h3>
+
+<p>Apartament 2 camere, Cluj-Napoca, zonă universitară. R_referință = 3.200 lei. Contract care începe în septembrie (a_sezon = +0,18). Candidat segment „cuplu tânăr B" (a_segment = +0,02). Anunțul a generat 14 lead-uri în 5 zile, peste pragul de 8 (a_cerere_RT = +0,04). Nicio altă unitate goală în zonă (a_inventar = 0).</p>
+
+<p>P_efectiv = 3.200 × 1,18 × 1,02 × 1,04 × 1,00 = <strong>4.005 lei</strong>. Verificare clamp: 1,20 × 3.200 = 3.840 lei. Rezultatul 4.005 > 3.840 → <strong>truncat la 3.840 lei</strong>. Aici clamp-ul a salvat proprietarul de la o cerere agresivă care, deși justificată de factori, ar fi redus drastic conversia. Prețul publicat: 3.840 lei (+20%).</p>
+
+<p>Același apartament, contract care începe în ianuarie, candidat segment „familie stabilă A" (a_segment = −0,04), 3 lead-uri în 7 zile (a_cerere_RT = −0,04), o altă unitate goală în clădire (a_inventar = −0,04): P = 3.200 × 0,87 × 0,96 × 0,96 × 0,96 ≈ <strong>2.461 lei</strong>. Clamp inferior: 0,82 × 3.200 = 2.624 lei → <strong>truncat la 2.624 lei</strong> (−18%). Diferența între cele două scenarii pe același activ: 1.216 lei/lună, adică 46% — exact spread-ul pe care chiria fixă îl lasă pe masă.</p>
+
+<h2>5. Impactul fiscal RO 2026 al optimizării de preț</h2>
+
+<p>Optimizarea prețului mărește venitul brut, deci trebuie modelat impactul fiscal net, altfel yield-ul „optimizat" este iluzoriu. Pentru persoană fizică, venitul din cedarea folosinței bunurilor se impozitează cu <strong>cota de 10%</strong> aplicată pe venitul net (venit brut minus cota forfetară de cheltuieli, dacă alegi sistemul forfetar, sau cheltuieli reale documentate).</p>
+
+<ul>
+<li><strong>CASS:</strong> dacă venitul net anual din chirii (cumulat cu alte venituri extrasalariale) depășește pragurile de <strong>6, 12 sau 24 de salarii minime brute</strong>, datorezi CASS 10% pe plafonul atins. Pentru 2026, la un salariu minim brut de 4.050 lei, pragurile devin <strong>24.300 lei (6 salarii), 48.600 lei (12 salarii) și 97.200 lei (24 salarii)</strong>; baza de calcul a CASS este plafonul atins, nu venitul efectiv, deci datorezi 2.430 / 4.860 / 9.720 lei pe an la fiecare treaptă. O creștere de chirie care te trece de un prag adaugă instantaneu o tranșă de CASS pe care trebuie să o scazi din câștigul de yield — efectul de prag este discret, nu liniar.</li>
+<li><strong>Reținere la sursă vs. declarare:</strong> dacă chiriașul este persoană juridică, acesta reține și virează impozitul; dacă este persoană fizică, declari în Declarația Unică.</li>
+<li><strong>TVA:</strong> închirierea rezidențială este, în regulă generală, scutită de TVA fără drept de deducere. Dacă optimizarea de preț împinge cifra de afaceri totală peste pragul de înregistrare în scopuri de TVA pe alte activități, atenție la efectele indirecte.</li>
+</ul>
+
+<p>Concluzia de specialist: calculezi yield-ul net <strong>după</strong> impozit și CASS, nu pe brut. O optimizare de preț de +10% brut care te împinge într-o nouă tranșă CASS poate produce un câștig net real de doar +6-7%. Algoritmul tău de <strong>occupancy rate maximizare ROI</strong> trebuie să încorporeze funcția fiscală ca o componentă a C_vacanță și a yield-ului net, altfel optimizezi greșit.</p>
+
+<h2>6. Edge-cases și capcane ale modelului</h2>
+
+<h3>Anti-selecția prin preț scăzut</h3>
+
+<p>Un discount agresiv în vale (−18%) poate atrage exact segmentul de risc pe care nu îl vrei. Soluția: discount-ul de vale se aplică selectiv — îl oferi pe canale care filtrează (referințe corporate) și îl combini cu o garanție mărită, nu cu relaxarea criteriilor de scoring. Niciodată nu scazi simultan prețul ȘI standardul chiriașului.</p>
+
+<h3>Rigurozitatea recalibrării R_referință</h3>
+
+<p>R_referință derivă din date de piață, dar piața se mișcă. Recalibrezi trimestrial folosind o medie ponderată: 70% chirii efectiv semnate în ultimele 90 zile în micro-zona ta (nu prețuri cerute, care sunt umflate cu 8-12%), 30% trend macro (IPC chirii din datele INS, dobânda de politică monetară BNR ca proxy pentru costul capitalului). Folosirea prețurilor cerute din anunțuri ca referință este eroarea care umflă întreg modelul.</p>
+
+<h3>Conflictul indexare contractuală vs. dynamic pricing</h3>
+
+<p>Pentru contractele în derulare, nu poți reseta prețul — ești legat de clauza de indexare (frecvent legată de IPC). Dynamic pricing se aplică <strong>doar la momentul re-listării</strong> (contract nou sau reînnoire). De aceea durata contractului este o variabilă strategică: pe piață ascendentă vrei contracte scurte (re-pricing frecvent); pe piață descendentă sau cu un chiriaș A excelent, vrei contracte lungi (blochezi un venit bun și reduci rotația). Algoritmul tău trebuie să propună durata optimă în funcție de poziția ciclului, nu doar prețul.</p>
+
+<h3>Saturația de portofoliu</h3>
+
+<p>Dacă deții 6 unități în aceeași clădire, ele nu sunt active independente: sunt un singur inventar care concurează. Optimizarea individuală produce un eșec de compoziție (toate cer +12% în septembrie, dar piața locală nu absoarbe 6 unități premium simultan). Soluția expertă: optimizare la nivel de portofoliu cu <strong>staggered pricing</strong> — scalonezi prețurile (una la +12%, una la referință, una la −4%) pentru a captura toată curba de cerere a zonei și a evita vacanța simultană.</p>
+
+<h2>7. Măsurarea performanței: KPI și backtesting</h2>
+
+<p>Nu poți optimiza ce nu măsori. KPI-urile de revenue management pe care le urmărești lunar:</p>
+
+<ul>
+<li><strong>RevPAU</strong> (Revenue per Available Unit) = venit total / unități-luni disponibile. Echivalentul RevPAR din hotelărie. Acesta este metrica supremă — combină preț și ocupare;</li>
+<li><strong>Occupancy rate efectiv</strong> = luni ocupate / luni disponibile, pe 12 luni rulante;</li>
+<li><strong>Yield net post-fiscal</strong> = NOI după impozit și CASS / valoare activ;</li>
+<li><strong>Capture rate de segment</strong> = % chiriași A/B din total (proxy pentru calitatea încasărilor);</li>
+<li><strong>Time-on-market median</strong> per treaptă sezonieră (validează calibrarea).</li>
+</ul>
+
+<p>Backtesting onest: compari RevPAU-ul realizat cu un <strong>contrafactual de chirie fixă</strong> (ce ai fi încasat la preț fix cu indexare). Dacă spread-ul net este sub 5%, modelul tău nu justifică efortul operațional — fie treptele sunt prost calibrate, fie zona are elasticitate prea mică (cerere rigidă). Pe piețe lichide (orașe universitare mari), un model corect livrează 8-12% spread net; pe piețe subțiri, beneficiul poate fi marginal și e mai rațional să optimizezi doar durata și segmentul, nu sezonalitatea.</p>
+
+<h2>Checklist de implementare pas-cu-pas</h2>
+
+<ul>
+<li><strong>Pasul 1:</strong> Calculează R_referință din chirii efectiv semnate (nu cerute) în micro-zonă, ponderat 70/30 cu macro;</li>
+<li><strong>Pasul 2:</strong> Construiește indicele sezonier I_m pe minim 24 luni de date locale; mapează-l pe 7-12 trepte cu amplitudine plafonată la 30-35%;</li>
+<li><strong>Pasul 3:</strong> Aplică indicele mediu ponderat al perioadei contractului, nu indicele lunii de semnare;</li>
+<li><strong>Pasul 4:</strong> Definește matricea de 15 segmente (3 solvabilitate × 5 retenție) cu ajustări de preț −4% la +8% și termeni de garanție diferențiați;</li>
+<li><strong>Pasul 5:</strong> Compune multiplicativ P_efectiv cu factorii sezon × segment × cerere RT × inventar și aplică clamp [0,82R ; 1,20R];</li>
+<li><strong>Pasul 6:</strong> Validează pragul de discount cu formula de cost de vacanță înainte de a accepta orice ofertă sub referință;</li>
+<li><strong>Pasul 7:</strong> Modelează yield-ul net <strong>post-impozit 10% și post-CASS</strong> la pragurile de 6/12/24 salarii minime;</li>
+<li><strong>Pasul 8:</strong> Pentru portofolii în aceeași clădire, aplică staggered pricing pentru a evita auto-concurența;</li>
+<li><strong>Pasul 9:</strong> Măsoară RevPAU, occupancy, yield post-fiscal și time-on-market lunar; recalibrează R trimestrial;</li>
+<li><strong>Pasul 10:</strong> Backtestează contra chiriei fixe; dacă spread-ul net &lt; 5%, simplifică modelul la doar durată + segment.</li>
+</ul>
+
+<p>Optimizarea de yield prin dynamic pricing nu este o tehnică de a stoarce chiriașul, ci de a aloca corect prețul pe curba reală de cerere, de a converti vacanța evitată în venit și de a recompensa retenția care îți reduce costurile. Disciplina cantitativă — funcția obiectiv corectă, clamp-urile, modelarea fiscală — separă proprietarul de portofoliu profesionist de cel care „simte" piața și lasă 8-12% pe masă în fiecare an.</p>

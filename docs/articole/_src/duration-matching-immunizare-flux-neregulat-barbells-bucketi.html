@@ -1,0 +1,155 @@
+<p>Scara de obligațiuni clasică rezolvă un flux <em>uniform</em>: aceeași sumă, la intervale egale. Realitatea unui pensionar român cu capital de 1,2 milioane lei nu arată așa. Are o plată balon pentru o intervenție medicală în anul 4, un transfer matrimonial în anul 7, o renovare în anul 11 și un consum de bază lunar care crește cu inflația. Aici <strong>duration matching flux neregulat immunizare barbell bucketing</strong> înlocuiește scara naivă cu un model de optimizare care potrivește simultan durata, convexitatea și dispersia activelor pe vectorul de pasive.</p>
+
+<p>Lecția aceasta presupune că deja stăpânești cash flow matching liabilities, construcția scării pe durație exactă și logica de sequence risk immunization din lecția anterioară. Mergem direct în mecanica de <strong>liability driven investing</strong> (LDI strategy) aplicată unui flux neregulat: cum partiționezi pasivul în bucket-uri (multiple liabilities bucketing approach), când un duration barbell bond portfolio domină un bullet, cum exploatezi convexity barbell strategy optimization pentru a câștiga la șocuri non-paralele, unde intervin floating rate notes duration matching pentru a anula riscul de reinvestire pe felia scurtă și cum impui o liability immunization multi-period robustă pe întreg vectorul de pasive.</p>
+
+<p>Toate cifrele sunt calibrate la piața românească 2026: dobânda-cheie BNR 6,50%, randamente titluri de stat și instrumentele de retail (Tezaur, Fidelis pe BVB), impozit 10% pe dobânzi, CASS 10% plafonat la 24 de salarii minime. Construim modelul de la vectorul de pasive până la rebalansarea anuală, cu formule explicite și un exemplu numeric complet.</p>
+
+<h2>1. De la cash flow matching la liability immunization multi-period</h2>
+
+<p>Distincția fundamentală pe care un specialist o operează: <em>cash flow matching</em> (dedicare) construiește un portofoliu care livrează exact cuponul + principalul la fiecare dată de pasiv, fără reinvestire necesară. Este robust dar scump și rigid. <em>Immunizarea</em> (liability immunization multi-period) relaxează cerința: nu mai potrivim fiecare flux, ci potrivim <strong>momentele</strong> distribuției — durata (momentul 1), convexitatea/dispersia (momentul 2) — astfel încât valoarea netă a portofoliului (active minus pasive) să fie insensibilă la mișcări de yield la ordinul întâi și protejată la ordinul doi.</p>
+
+<p>Condiția clasică Redington pentru immunizare cu un singur factor (shift paralel) cere trei lucruri simultan:</p>
+
+<ul>
+<li><strong>PV(active) = PV(pasive)</strong> — valoarea prezentă a activelor egalează pasivul, la curba spot curentă;</li>
+<li><strong>D(active) = D(pasive)</strong> — durata Macaulay (sau dollar duration) a activelor egalează durata pasivelor;</li>
+<li><strong>C(active) ≥ C(pasive)</strong> — convexitatea activelor o depășește pe cea a pasivelor (dispersia activelor în jurul datelor de pasiv este mai mare).</li>
+</ul>
+
+<p>A treia condiție este exact ce face un barbell relevant. Un bullet (toate activele concentrate la durata-țintă) are convexitate minimă. Un duration barbell bond portfolio — combinație de instrumente foarte scurte și foarte lungi cu aceeași durată medie — are convexitate mult mai mare. Pentru un flux de pasive el însuși dispersat în timp (neregulat), dispersia activelor trebuie să fie ≥ dispersia pasivelor, altfel imunizarea se rupe la shock-uri non-paralele.</p>
+
+<h3>Măsura de dispersie M² (Fong-Vasicek)</h3>
+
+<p>Redington protejează doar la shift paralel. În realitate curba se înclină (steepening/flattening) și se curbează (butterfly). Marginea împotriva riscului non-paralel se cuantifică prin M² — momentul doi al timpilor de flux ponderat cu PV, în jurul orizontului de imunizare H:</p>
+
+<p><strong>M² = Σ wᵢ · (tᵢ − H)²</strong>, unde wᵢ = PV(fluxᵢ) / PV(total).</p>
+
+<p>Limita Fong-Vasicek pe pierderea relativă a portofoliului imunizat este aproximativ: Δ(surplus)/PV ≥ −½ · M² · Δ(panta curbei). Cu cât M² este mai mic, cu atât portofoliul e mai robust la twist. Aici apare tensiunea de specialist: barbell-ul maximizează convexitatea (bun pentru Redington) dar și M² (rău pentru riscul de twist). Optimul nu e barbell-ul extrem, ci unul controlat.</p>
+
+<h2>2. Bucketing: partiționarea pasivului neregulat</h2>
+
+<p>Multiple liabilities bucketing approach descompune fluxul neregulat în K bucket-uri temporale, fiecare imunizat semi-independent. Pentru pensionarul nostru, vectorul de pasive (în lei, valori nominale, an de plată) este:</p>
+
+<ul>
+<li><strong>Bucket A (anii 1–3, consum de bază):</strong> 84.000 lei/an indexat cu inflația ≈ 252.000 lei nominal;</li>
+<li><strong>Bucket B (anul 4, intervenție medicală):</strong> 180.000 lei plată-balon;</li>
+<li><strong>Bucket C (anii 5–6, consum):</strong> ~92.000 lei/an ≈ 184.000 lei;</li>
+<li><strong>Bucket D (anul 7, transfer/eveniment):</strong> 150.000 lei;</li>
+<li><strong>Bucket E (anii 8–10, consum):</strong> ~100.000 lei/an ≈ 300.000 lei;</li>
+<li><strong>Bucket F (anul 11, renovare):</strong> 220.000 lei plată-balon;</li>
+<li><strong>Bucket G (anii 12–15, consum rezidual):</strong> ~108.000 lei/an ≈ 432.000 lei.</li>
+</ul>
+
+<p>Plățile-balon (B, D, F) sunt candidate naturale pentru <em>cash flow matching</em> exact (dedicare cu un titlu zero-cupon sintetic sau un Tezaur cu maturitate fix pe anul respectiv). Bucket-urile de consum recurent (A, C, E, G) sunt candidate pentru immunizare prin durată + convexitate, fiindcă tolerează reinvestire mică și beneficiază de eficiența barbell-ului.</p>
+
+<h3>Calculul duratei și PV per bucket</h3>
+
+<p>Folosim o curbă spot plată ilustrativă de 6,8% (titluri de stat RON, maturități medii, 2026). PV-ul Bucket G (anii 12–15, 108.000 lei/an):</p>
+
+<p>PV = 108.000 · [1,068⁻¹² + 1,068⁻¹³ + 1,068⁻¹⁴ + 1,068⁻¹⁵] = 108.000 · [0,4555 + 0,4265 + 0,3994 + 0,3739] = 108.000 · 1,6553 ≈ <strong>178.770 lei</strong>.</p>
+
+<p>Durata Macaulay a Bucket G (media ponderată PV a timpilor 12–15):</p>
+
+<p>D_G = (12·0,4555 + 13·0,4265 + 14·0,3994 + 15·0,3739) / 1,6553 = (5,466 + 5,545 + 5,592 + 5,609) / 1,6553 = 22,212 / 1,6553 ≈ <strong>13,42 ani</strong>.</p>
+
+<p>Repetând pentru toate bucket-urile și agregând, obținem PV total al pasivului ≈ 1.180.000 lei și durata Macaulay agregată D_L ≈ 6,9 ani. Acesta este targetul global de durată al portofoliului.</p>
+
+<h2>3. Construcția barbell-ului per bucket</h2>
+
+<p>Pentru un bucket de consum cu durată-țintă D* și PV-țintă P, barbell-ul folosește două instrumente: unul scurt (durată D_s) și unul lung (durată D_l), cu ponderi w_s și w_l. Condițiile de imunizare la nivel de bucket:</p>
+
+<ul>
+<li><strong>w_s + w_l = 1</strong> (alocare completă);</li>
+<li><strong>w_s · D_s + w_l · D_l = D*</strong> (potrivire durată).</li>
+</ul>
+
+<p>Rezolvând: <strong>w_l = (D* − D_s) / (D_l − D_s)</strong> și w_s = 1 − w_l.</p>
+
+<p>Pentru Bucket G (D* = 13,42): folosim un Tezaur scurt cu durată 2,5 ani și un titlu de stat lung cu durată 9,5 ani — dar 13,42 depășește 9,5, deci aici barbell-ul pur nu acoperă. Soluția de specialist: pentru bucket-urile cu durată mare folosim un <em>laddered bullet</em> (titluri pe anii 12–15 direct), iar barbell-ul rămâne pentru bucket-urile cu durată intermediară unde dispersia plătește.</p>
+
+<h3>Exemplu barbell pe Bucket E (D* ≈ 8,9 ani)</h3>
+
+<p>Instrumente: scurt D_s = 2,5 ani (Tezaur), lung D_l = 11 ani (titlu de stat benchmark). PV-țintă = 196.000 lei.</p>
+
+<p>w_l = (8,9 − 2,5) / (11 − 2,5) = 6,4 / 8,5 = <strong>0,753</strong>; w_s = <strong>0,247</strong>.</p>
+
+<p>Alocare: 0,247 · 196.000 = 48.412 lei în instrumentul scurt; 0,753 · 196.000 = 147.588 lei în cel lung. Convexitatea acestui barbell:</p>
+
+<p>C_barbell ≈ w_s · C_s + w_l · C_l. Cu C_s ≈ 7,5 și C_l ≈ 135: C_barbell = 0,247·7,5 + 0,753·135 = 1,85 + 101,7 = <strong>103,5</strong>. Un bullet cu aceeași durată 8,9 are C ≈ 82. Câștigul de convexitate (~21 unități) este protecția la ordinul doi pe care o cumperi — la cost de un dispersie M² mai mare, deci sensibilitate la twist.</p>
+
+<h2>4. Convexity barbell strategy optimization</h2>
+
+<p>Întrebarea de optimizare reală nu e „barbell sau bullet" ci „cât de extrem barbell". Formulăm o problemă cu trei constrângeri și o funcție-obiectiv:</p>
+
+<ul>
+<li><strong>Obiectiv:</strong> maximizează convexitatea agregată C_A (câștig la volatilitate de yield);</li>
+<li><strong>Constrângere 1:</strong> D_A = D_L (durata activelor = pasivelor), egalitate strictă;</li>
+<li><strong>Constrângere 2:</strong> M²_A ≤ M²_max (plafon de dispersie pentru riscul de twist);</li>
+<li><strong>Constrângere 3:</strong> ponderi ≥ 0, sumă = PV_L (fără leverage, fără short pe retail RO).</li>
+</ul>
+
+<p>Soluția: un barbell „cu acoperiș" — împingi convexitatea până la limita M²_max, nu mai departe. Practic, dacă te aștepți la un mediu de volatilitate ridicată a curbei dar shift dominant paralel, ridici M²_max (barbell mai agresiv). Dacă te aștepți la steepening structural (probabil în RO 2026, cu BNR care ar putea reduce dobânda-cheie de la 6,50% în timp ce partea lungă rămâne ancorată de primă de risc fiscal), cobori M²_max — twist-ul te-ar lovi pe un barbell agresiv.</p>
+
+<h3>Cuantificarea câștigului de convexitate</h3>
+
+<p>Câștigul așteptat din convexitate la un șoc de yield σ_y este aproximativ <strong>½ · C · σ_y²</strong> aplicat pe PV. La un PV de 196.000 lei, surplus de convexitate ΔC = 21 față de bullet și σ_y = 1,2% (120 bps volatilitate anuală a randamentelor RON):</p>
+
+<p>Câștig ≈ 0,5 · 21 · (0,012)² · 196.000 = 0,5 · 21 · 0,000144 · 196.000 ≈ <strong>296 lei/an</strong> pe acest bucket. Modest în absolut, dar e o asimetrie pură (câștigi indiferent de direcția mișcării) și se cumulează pe toate bucket-urile și pe orizontul de 15 ani.</p>
+
+<h2>5. Floating rate notes pentru felia scurtă</h2>
+
+<p>Bucket A (anii 1–3) și componenta scurtă a barbell-urilor suferă de <em>risc de reinvestire</em>: titlurile scurte se maturizează și banii trebuie replasați la randamente necunoscute. Floating rate notes duration matching rezolvă elegant — un FRN are durată de dobândă efectiv ≈ 0 (cuponul se resetează la fiecare perioadă la ROBOR/IRCC + spread), deci valoarea lui e insensibilă la nivelul ratelor.</p>
+
+<p>În RO 2026, instrumentele cu cupon variabil legat de <strong>IRCC</strong> (Indicele de Referință pentru Creditele Consumatorilor, ~5,8% în 2026) sau de inflație (titlurile Fidelis indexate, când sunt emise) funcționează ca FRN-uri. Folosirea lor pe felia scurtă:</p>
+
+<ul>
+<li>anulează riscul de reinvestire pe bucket-ul A (durata efectivă mică);</li>
+<li>permite ca felia lungă a barbell-ului să fie mai lungă fără a depăși D_L agregat, fiindcă FRN-ul aproape nu contribuie la durată;</li>
+<li>oferă o protecție naturală la inflație pe consumul de bază, dacă fluxul de pasive e el însuși indexat.</li>
+</ul>
+
+<p>Capcana de specialist: un FRN are durată de dobândă ≈ 0 dar durată de <em>spread</em> ≠ 0. Dacă spread-ul de credit se lărgește, FRN-ul pierde. Pentru titluri de stat RON spread-ul de credit e neglijabil; pentru obligațiuni corporative din Fidelis, nu — acolo FRN-ul nu e „durată zero" în sens economic.</p>
+
+<p>O nuanță suplimentară: durata efectivă a unui FRN nu este chiar zero, ci egală cu timpul până la următoarea resetare de cupon (durata până la reset). Pentru un instrument cu reset trimestrial, durata reziduală maximă este ~0,25 ani. Acumulată pe felia scurtă a portofoliului, această durată reziduală trebuie inclusă în D_A agregat — la scara unui portofoliu de 1,18 mil lei cu 200.000 lei în FRN-uri, contribuția la durată este 200.000/1.180.000 · 0,25 ≈ 0,042 ani, neglijabilă dar nu nulă. Specialistul o contabilizează explicit ca să nu introducă un bias sistematic de sub-imunizare.</p>
+
+<h2>6. Tratamentul fiscal — efectul pe randamentul net 2026</h2>
+
+<p>Imunizarea se face pe randamente NETE, altfel potrivirea PV este greșită. Regimul fiscal RON 2026 pe instrumente de venit fix:</p>
+
+<ul>
+<li><strong>Impozit 10%</strong> pe dobânzi/cupoane (titluri de stat, Tezaur, Fidelis, depozite). Reținut la sursă pentru Tezaur/Fidelis prin intermediar.</li>
+<li><strong>Câștig de capital</strong> pe vânzarea obligațiunilor printr-un intermediar fiscal rezident (broker autorizat în RO/BVB): impozit reținut la sursă în funcție de perioada de deținere — <strong>6% sub 1 an</strong> și <strong>3% peste 1 an</strong> (2026). Pentru un broker străin care nu reține la sursă, câștigul se autodeclară și se impozitează la cota standard de <strong>16%</strong>.</li>
+<li><strong>CASS 10%</strong> pe veniturile din investiții, calculat pe trepte plafonate la 6, 12 sau 24 de salarii minime. Salariul minim brut 2026 = 4.050 lei → praguri-bază de 24.300 lei (6 salarii), 48.600 lei (12 salarii) și 97.200 lei (24 de salarii). CASS se aplică pe baza-treaptă atinsă, nu pe venitul integral: CASS maxim ≈ 9.720 lei/an (10% × 97.200). Pentru un portofoliu de 1,18 mil lei cu randament ~6,8%, venitul brut ~80.000 lei depășește 48.600 dar nu 97.200 → se încadrează în treapta de 12 salarii, bază 48.600 lei, deci CASS ≈ 4.860 lei/an — relevant și de scăzut din PV-ul efectiv al activelor.</li>
+</ul>
+
+<p>Randamentul net pe titlul lung de 6,8% brut devine 6,12% după impozit 10%. Recalculezi întreaga curbă spot pe net înainte de a rula potrivirea de durată — altfel D_A calculat pe brut nu corespunde fluxului net care plătește efectiv pasivele.</p>
+
+<h2>7. Rebalansarea: când și cum</h2>
+
+<p>Imunizarea nu e „set and forget". Durata activelor și pasivelor derivează diferit în timp (duration drift: durata pasivelor scade aproape liniar cu trecerea timpului, durata activelor scade mai lent din cauza convexității). Reguli operaționale:</p>
+
+<ul>
+<li><strong>Trigger de durată:</strong> rebalansează când |D_A − D_L| &gt; 0,25 ani. Sub acest prag, costul de tranzacționare depășește beneficiul.</li>
+<li><strong>Trigger de PV:</strong> dacă surplusul (PV_A − PV_L) scade sub 0 (deficit de imunizare), reinjectează capital sau scurtează pasivele discreționare.</li>
+<li><strong>Roll al bucket-urilor:</strong> când un bucket-balon (B, D, F) intră în fereastra de 12 luni, convertește-l din immunizat în dedicat exact (cash flow matching), eliminând orice risc rezidual de reinvestire înainte de plată.</li>
+<li><strong>Recalibrare M²:</strong> reevaluează M²_max anual în funcție de regimul de pantă al curbei BNR.</li>
+</ul>
+
+<h3>Edge-case: pasive indexate la inflație</h3>
+
+<p>Dacă bucket-urile de consum sunt indexate (consumul real e fix, nominalul crește cu inflația), imunizarea cu titluri nominale lasă un <em>basis risk</em> de inflație. Soluția pură ar fi titluri indexate la inflație (linkers), dar piața RON 2026 are ofertă limitată. Aproximare practică: suprapotrivește durata (D_A puțin peste D_L) astfel încât o creștere a randamentelor nominale, corelată pozitiv cu inflația, să crească mai mult valoarea reinvestirii activelor — un hedge imperfect dar implementabil cu instrumentele disponibile.</p>
+
+<h2>Pași de implementare (checklist de specialist)</h2>
+
+<ul>
+<li><strong>1.</strong> Inventariază fluxul de pasive pe ani, separând consum recurent (indexat) de plăți-balon discreționare.</li>
+<li><strong>2.</strong> Construiește curba spot RON 2026 pe randamente NETE (după impozit 10% + estimare CASS), nu brute.</li>
+<li><strong>3.</strong> Calculează PV, durata Macaulay și M² pentru fiecare bucket; agregă D_L și M²_L.</li>
+<li><strong>4.</strong> Dedică plățile-balon cu titluri de maturitate exactă (cash flow matching pur).</li>
+<li><strong>5.</strong> Imunizează bucket-urile de consum cu barbell controlat: rezolvă w_l = (D*−D_s)/(D_l−D_s), verifică C_A ≥ C_L și M²_A ≤ M²_max.</li>
+<li><strong>6.</strong> Plasează felia scurtă în FRN/IRCC pentru a anula riscul de reinvestire și a elibera durată pentru felia lungă.</li>
+<li><strong>7.</strong> Verifică cele trei condiții Redington global: PV_A = PV_L, D_A = D_L, C_A ≥ C_L.</li>
+<li><strong>8.</strong> Setează trigger-e de rebalansare: |ΔD| &gt; 0,25 ani, surplus &lt; 0, roll bucket-balon la T−12 luni.</li>
+<li><strong>9.</strong> Monitorizează regimul de pantă BNR; ajustează M²_max (barbell mai/mai puțin agresiv) la așteptări de steepening vs. shift paralel.</li>
+<li><strong>10.</strong> Recalculează anual totul pe curba și pe regimul fiscal actualizat; documentează surplusul de imunizare ca margine de siguranță.</li>
+</ul>

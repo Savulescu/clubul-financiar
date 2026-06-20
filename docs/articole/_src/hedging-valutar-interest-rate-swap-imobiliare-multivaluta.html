@@ -1,0 +1,148 @@
+<p>Un portofoliu imobiliar paneuropean cu chirii încasate în EUR, finanțare în CHF și cheltuieli operaționale în RON nu are o singură expunere de risc, ci o matrice de riscuri corelate: <strong>hedging valutar interest rate swap imobiliare</strong> devine, la acest nivel, un exercițiu de optimizare a unei poziții nete pe trei curbe de discount simultan, nu o simplă acoperire tranzacție-cu-tranzacție. Investitorul instituțional nu „cumpără protecție”, ci practică <strong>currency risk management proprietate</strong> la nivel de overlay derivativ care transformă cash-flow-ul stocastic într-unul cvasi-determinist, lăsând expunerea reziduală exact acolo unde are convingere direcțională.</p>
+
+<p>Pe partea de dobândă, logica este identică: un credit imobiliar indexat la IRCC variabil generează un duration gap între activul de chirie (cvasi-fix, indexat la inflație cu lag) și pasivul flotant. Un <strong>interest rate swap România</strong> încheiat cu o bancă mare (receive-floating IRCC / pay-fixed) sintetizează un pasiv fix la, să zicem, 2,5%-3,5% peste swap-curve, neutralizând convexitatea negativă a creditului. Combinat cu <strong>currency forwards proprietate</strong> pe EUR/RON la 1 an și cu <strong>interest rate derivatives imobiliar</strong> denominate în CHF, obținem un <strong>multi-currency portfolio hedging</strong> coerent.</p>
+
+<p>Această lecție tratează construcția cantitativă a overlay-ului: pricing-ul forward din diferențialul de dobândă, structura unui IRS pe IRCC, basis-ul cross-currency EUR/CHF, optimizarea hedge ratio prin minimizarea varianței, contabilitatea de hedge IFRS 9 și tratamentul fiscal ANAF 2026 al instrumentelor derivate. Disciplina de <strong>currency risk management proprietate</strong> la scară instituțională înseamnă să cuantifici fiecare bază reziduală, nu să o ignori.</p>
+
+<h2>1. Arhitectura expunerii: descompunerea în factori de risc</h2>
+
+<p>Înainte de orice instrument, expunerea trebuie descompusă. Pentru un portofoliu de valoare brută a activelor (GAV) de 50 mil. EUR, cu LTV 55% (datorie 27,5 mil. EUR, din care 18 mil. EUR în CHF la cursul de finanțare și 9,5 mil. EUR pur EUR), NOI anual de 2,8 mil. EUR și OPEX denominat parțial RON, vectorul de expunere valutară netă pe orizont de 12 luni se construiește pe cash-flow, nu pe valoarea contabilă.</p>
+
+<ul>
+<li><strong>Expunere de flux (flow):</strong> NOI EUR minus serviciul datoriei CHF minus OPEX RON. Aceasta este expunerea care se acoperă cu forward-uri rulante, fiindcă este recurentă și previzibilă.</li>
+<li><strong>Expunere de stoc (stock / translation):</strong> echity-ul net în CHF și valoarea de piață a activelor în EUR raportat la moneda funcțională a fondului. Aceasta se acoperă cu un proxy hedge pe nominal, frecvent doar parțial (50-75%), pentru că re-hedging-ul la fiecare reevaluare consumă carry.</li>
+<li><strong>Expunere de dobândă:</strong> DV01 al pasivului flotant. Pentru 18 mil. CHF la SARON + marjă și 9,5 mil. EUR la EURIBOR/IRCC, DV01 agregat se calculează ponderat pe scadențe.</li>
+</ul>
+
+<p>Greșeala clasică a generaliștilor este să acopere GAV-ul (stocul) cu instrumente de flux. Specialistul separă cele două registre: forward-uri rulante de 3-12 luni pe flux, plus un proxy de translație pe equity, plus un layer de IRS pe duration.</p>
+
+<h2>2. Pricing-ul forward EUR/RON: paritatea acoperită a dobânzii</h2>
+
+<p>Forward-ul EUR/RON nu reflectă o „prognoză” a BNR, ci diferențialul de dobândă prin covered interest rate parity (CIP). Formula exactă pe convenția ACT/360 pentru RON și ACT/360 pentru EUR:</p>
+
+<p><strong>F = S × (1 + i_RON × t/360) / (1 + i_EUR × t/360)</strong></p>
+
+<p>Unde S este spotul EUR/RON, i_RON rata de piață monetară RON (ROBOR/depo interbancar pe scadența respectivă), i_EUR rata EUR (ESTER/EURIBOR), t numărul de zile. Cu un spot ipotetic S = 4,97, i_RON ≈ 6,0% și i_EUR ≈ 2,4% pe 12 luni (t = 365 zile, convenție ACT/360 → factor 365/360):</p>
+
+<ul>
+<li>Numărător RON: 1 + 0,060 × 365/360 = 1,06083</li>
+<li>Numitor EUR: 1 + 0,024 × 365/360 = 1,02433</li>
+<li>F = 4,97 × 1,06083 / 1,02433 = 4,97 × 1,03563 = <strong>5,1471</strong></li>
+</ul>
+
+<p>Punctele forward sunt deci aproximativ +1.770 pips (0,177 RON). Pentru cel care încasează EUR și trebuie să-l convertească în RON pentru OPEX, vânzarea EUR la termen <strong>aduce carry pozitiv</strong>: se vinde la 5,1471 ceva ce spot valorează 4,97. Diferențialul de dobândă RON-EUR lucrează în favoarea celui care vinde EUR forward. Acesta este motivul pentru care hedge-ul EUR/RON pe partea de OPEX nu costă carry, ci îl generează — fapt frecvent ignorat.</p>
+
+<p>Invers, cel care trebuie să cumpere EUR forward (de exemplu pentru a acoperi o tranșă de capital ce iese în EUR dintr-un fond cu funcțională RON) plătește acest carry. Aici intervine decizia de hedge ratio: dacă carry-ul anual de plătit (~3,6% din nominal) depășește volatilitatea așteptată favorabilă, hedge-ul total devine scump și se preferă un overlay parțial plus opțiuni.</p>
+
+<h3>2.1. Basis-ul cross-currency: de ce CIP nu se ține perfect</h3>
+
+<p>În practică, forward-ul cotat de bancă include un cross-currency basis spread (xccy basis). Pentru perechile cu RON, basis-ul poate fi semnificativ și volatil în episoade de stres, fiindcă lichiditatea la termen pe RON este limitată dincolo de 1 an. La 12 luni basis-ul este de regulă gestionabil; la 3-5 ani se lărgește și face hedge-ul de stoc costisitor. Concluzia operațională: pe EUR/RON se hedge-uiește rulant pe scadențe scurte (≤12 luni), nu pe termen lung.</p>
+
+<h2>3. EUR/CHF: hedging-ul finanțării și capcana negative-yield istorice</h2>
+
+<p>Finanțarea în CHF a fost atractivă datorită dobânzilor reduse, dar expune la aprecierea structurală a francului. Pentru 18 mil. CHF datorie, cu spot EUR/CHF ipotetic 0,93 și diferențial de dobândă EUR-CHF de aproximativ 1,2-1,5% în favoarea EUR (SARON sub ESTER), forward-ul EUR/CHF cotează <strong>sub</strong> spot (CHF la premium forward):</p>
+
+<p><strong>F = S × (1 + i_CHF × t/360) / (1 + i_EUR × t/360)</strong></p>
+
+<p>Cu i_CHF ≈ 1,0% și i_EUR ≈ 2,4%, t = 365: F = 0,93 × (1+0,01×365/360)/(1+0,024×365/360) = 0,93 × 1,01014/1,02433 = 0,93 × 0,98615 = <strong>0,9171</strong>. CHF se apreciază pe curba forward — exact riscul de care debitorul în CHF se teme, deja prețuit în forward. Cel care vinde EUR/cumpără CHF forward pentru a acoperi serviciul datoriei <strong>plătește</strong> acest premium (carry negativ ~1,4%/an).</p>
+
+<p>Implicația de specialist: hedge-ul integral al datoriei CHF costă carry, deci se calibrează la expunerea de flux (rate semestriale de serviciu), nu la întregul principal, iar acoperirea principalului se realizează doar la momente de refinanțare prin currency option collars (zero-cost collar: cumperi un cap pe EUR/CHF, vinzi un floor), nu prin forward seci.</p>
+
+<h2>4. Interest rate swap pe IRCC: structura și mecanica</h2>
+
+<p>IRCC (Indicele de Referință pentru Creditele Consumatorilor) se calculează de BNR ca medie trimestrială a tranzacțiilor interbancare, cu un lag de un trimestru în aplicare. Această întârziere creează un risc de bază specific: nu poți hedge-ui IRCC perfect cu un swap pe ROBOR sau pe ESTER, fiindcă fixing-ul diferă. Totuși, instituțional, pe partea de finanțare corporate imobiliară, expunerea reală este la <strong>ROBOR / EURIBOR</strong>, iar IRCC apare doar pe creditele cu persoane fizice.</p>
+
+<p>Structura unui IRS clasic pe leg-ul de finanțare ROBOR, nominal 40 mil. RON, scadență 5 ani:</p>
+
+<ul>
+<li><strong>Leg variabil (pe care îl primești):</strong> ROBOR 3M + reset trimestrial, ACT/360.</li>
+<li><strong>Leg fix (pe care îl plătești):</strong> rata swap negociată, de ex. 6,8% ACT/360 anual.</li>
+<li><strong>Net:</strong> dacă ROBOR 3M curent este 5,9%, plătești net 0,9% × nominal pe perioadă; dacă ROBOR urcă la 8%, primești net 1,2%. Swap-ul fixează costul total al creditului = marja băncii pe credit + 6,8% fix.</li>
+</ul>
+
+<p>Pricing-ul ratei fixe se face din curba zero-coupon RON. Rata swap par este rata fixă care egalează valoarea prezentă a celor două leg-uri la zero:</p>
+
+<p><strong>R_swap = (1 − DF_n) / Σ(τ_i × DF_i)</strong></p>
+
+<p>Unde DF_i sunt factorii de discount bootstrap-ați din curba ROBOR/OIS RON, τ_i fracțiunile de an, DF_n factorul la scadența finală. Numărătorul reprezintă PV-ul leg-ului flotant (telescopare), numitorul este anuitatea (PV01 × nominal).</p>
+
+<h3>4.1. DV01 și hedge ratio pe dobândă</h3>
+
+<p>DV01 (dollar value of 1 bp) al swap-ului = PV01 = Σ(τ_i × DF_i) × nominal × 0,0001. Pentru nominal 40 mil. RON, scadență 5 ani, DF mediu ~0,87, PV01 ≈ 4,1 × 0,0001 × 40.000.000 ≈ <strong>16.400 RON/bp</strong>. Aceasta înseamnă că la o mișcare de 100 bp a curbei, valoarea de piață a swap-ului se modifică cu ~1,64 mil. RON.</p>
+
+<p>Hedge ratio pe dobândă = DV01_pasiv_flotant / DV01_swap. Dacă expunerea flotantă pe care vrei s-o fixezi are DV01 de 18.000 RON/bp, ai nevoie de un nominal de swap mai mare: N_swap = N_target × (DV01_target / DV01_swap_unit) = ajustare proporțională până la egalizarea sensibilităților. Specialistul nu fixează „toată” datoria, ci fixează duration-ul-țintă astfel încât duration gap-ul activ-pasiv să fie zero (immunization).</p>
+
+<h2>5. Optimizarea hedge ratio prin minimizarea varianței</h2>
+
+<p>Hedge ratio optim pentru componenta valutară nu este automat 100%. Minimizând varianța portofoliului hedge-uit, hedge ratio-ul optim h* este:</p>
+
+<p><strong>h* = ρ × (σ_S / σ_F)</strong></p>
+
+<p>Unde ρ este corelația dintre randamentul spot și cel al instrumentului de hedge, σ_S și σ_F volatilitățile respective. Pentru un forward perfect pe aceeași pereche, ρ ≈ 1 și σ_S/σ_F ≈ 1, deci h* ≈ 1 (hedge complet optim). Dar pentru un <strong>proxy hedge</strong> — de exemplu acoperirea RON printr-un coș EUR/USD din lipsă de lichiditate — ρ scade la 0,6-0,8, iar h* devine sub-unitar: a hedge-ui 100% cu un proxy slab corelat <strong>adaugă</strong> varianță de bază, nu o reduce.</p>
+
+<p>Reducerea de varianță obținută = ρ². Un proxy cu ρ = 0,75 reduce varianța valutară cu doar 56% (0,75²), lăsând 44% rezidual. Acest calcul justifică, cantitativ, de ce pe RON se preferă instrumente directe (forward EUR/RON), chiar dacă bid-ask-ul e mai larg: basis-ul reziduual al unui proxy depășește costul de tranzacționare al instrumentului direct.</p>
+
+<h2>6. Contabilitatea de hedge IFRS 9 și efectul P&L</h2>
+
+<p>Fără hedge accounting, derivatele se evaluează la fair value prin contul de profit și pierdere (FVTPL), introducând volatilitate în rezultat care nu reflectă economia operațiunii. IFRS 9 permite trei tipuri de relații de acoperire relevante aici:</p>
+
+<ul>
+<li><strong>Cash-flow hedge:</strong> pentru fluxurile recurente de chirie EUR și serviciul datoriei. Partea efectivă a variației fair value a forward-ului merge în OCI (rezerva de cash-flow hedge), reciclată în P&L când fluxul acoperit afectează rezultatul. Ineficacitatea merge direct în P&L.</li>
+<li><strong>Fair value hedge:</strong> pentru un activ/pasiv recunoscut (de ex. datoria CHF la cost amortizat devine, prin swap, ca și cum ar fi la rată fixă; ajustarea de bază a datoriei și fair value-ul swap-ului se compensează în P&L).</li>
+<li><strong>Net investment hedge:</strong> pentru equity-ul net într-o operațiune străină (translația), cu partea efectivă în rezerva de conversie valutară (CTA).</li>
+</ul>
+
+<p>Testul de eficacitate sub IFRS 9 nu mai este pragul mecanic 80-125% din IAS 39, ci cerința unei relații economice și a unui hedge ratio aliniat cu cel folosit efectiv în managementul riscului. Re-balansarea (rebalancing) este permisă fără întreruperea relației — esențial pentru overlay-uri rulante.</p>
+
+<h2>7. Tratamentul fiscal ANAF 2026 al instrumentelor derivate</h2>
+
+<p>Pentru o societate plătitoare de impozit pe profit (cota standard 16%), câștigurile și pierderile din instrumente financiare derivate sunt, ca regulă, venituri/cheltuieli care concură la rezultatul fiscal pe baza tratamentului contabil, cu ajustările din Codul fiscal. Aspecte de specialist pentru 2026:</p>
+
+<ul>
+<li><strong>Hedging vs. speculativ:</strong> demonstrarea scopului de acoperire (documentația de hedge, corelația cu elementul acoperit) este relevantă pentru deductibilitatea integrală a pierderilor și pentru evitarea recalificării. Documentația IFRS 9 de hedge servește și ca probă fiscală.</li>
+<li><strong>Limitarea deductibilității dobânzilor (ATAD / art. 402 Cod fiscal):</strong> costurile excedentare ale îndatorării sunt deductibile în limita a 30% din EBITDA fiscal, peste un plafon de deducere garantat de 1.000.000 EUR (echivalent în lei la cursul de schimb comunicat de BNR valabil pentru ultima lună a perioadei fiscale). Pentru entitățile parte a unui grup există și plafoane suplimentare specifice tranzacțiilor cu afiliații. Partea fixă plătită pe IRS care reprezintă cost de finanțare intră în calculul costurilor îndatorării — deci swap-ul nu doar transformă riscul, ci poate afecta capacitatea de deducere.</li>
+<li><strong>Impozit pe veniturile nerezidenților:</strong> plățile către o bancă-contraparte nerezidentă pe leg-ul de swap pot intra sub incidența reținerii la sursă, cu aplicarea convențiilor de evitare a dublei impuneri și a certificatului de rezidență fiscală. Plățile de natura dobânzii către instituții financiare beneficiază adesea de scutiri convenționale, dar tratamentul trebuie verificat pe fiecare contraparte.</li>
+<li><strong>Persoana fizică:</strong> dacă vehiculul este o persoană fizică, câștigul net anual din derivate este venit din investiții impozitat cu 10% (autodeterminat prin declarația unică, întrucât instrumentele OTC nu au intermediar rezident care să rețină la sursă), plus eventual CASS de 10% pe tranșe raportate la salariul minim brut (4.050 lei în 2026): baza este de 6, 12 sau 24 de salarii minime, respectiv praguri de 24.300, 48.600 și 97.200 lei venit anual cumulat din investiții și alte surse. Este o structură rar folosită la această scară, dar relevantă pentru investitorul individual sofisticat.</li>
+</ul>
+
+<h2>8. Riscul de contraparte, CSA și margining</h2>
+
+<p>La nominal de zeci de milioane, riscul de contraparte pe derivatele OTC devine material. Un Credit Support Annex (CSA) la contractul-cadru ISDA impune colateralizare zilnică (variation margin) și, pentru noile tranzacții non-cleared peste praguri, initial margin. Implicații cantitative:</p>
+
+<ul>
+<li><strong>Funding cost al colateralului:</strong> variation margin în cash generează un cost de finanțare (collateral funding cost) care intră în pricing-ul efectiv al hedge-ului. Discount-ul cash-flow-urilor swap se face pe curba OIS aferentă monedei colateralului (OIS discounting).</li>
+<li><strong>CVA/DVA:</strong> ajustarea de valoare pentru riscul de credit al contrapărții (CVA) reduce fair value-ul; pentru raportare și pentru negocierea spread-ului, CVA-ul se cuantifică din probabilitatea de default implicită în CDS-ul băncii.</li>
+<li><strong>Wrong-way risk:</strong> dacă RON se depreciază exact când contrapartea românească e sub stres, expunerea pozitivă pe hedge crește simultan cu probabilitatea de default — se mitighează diversificând contrapărțile (bănci de rating diferit pe leg-uri diferite).</li>
+</ul>
+
+<h2>9. Punerea în practică: overlay-ul integrat pas-cu-pas</h2>
+
+<p>Sinteza operațională pentru portofoliul exemplu (GAV 50 mil. EUR, datorie 18 mil. CHF + 9,5 mil. EUR, NOI 2,8 mil. EUR, OPEX parțial RON):</p>
+
+<ol>
+<li><strong>Mapează vectorul de cash-flow net pe valută și scadență</strong> pentru următoarele 12 luni: separă flux (recurent) de stoc (translație) și de dobândă (DV01).</li>
+<li><strong>Calculează forward-urile teoretice CIP</strong> EUR/RON și EUR/CHF din diferențialele de dobândă curente; compară cu cotațiile băncii pentru a izola xccy basis-ul. Acceptă basis ≤12 luni, refuză termen lung pe RON.</li>
+<li><strong>Acoperă fluxul valutar rulant</strong> cu forward-uri de 3-6 luni reînnoite (roll), nu cu un singur forward la 12 luni — granularitatea reduce gap-ul de fixing și costul de roll.</li>
+<li><strong>Determină hedge ratio optim h* = ρ·σ_S/σ_F</strong> pe fiecare componentă; pe instrumente directe vizează ~100%, pe proxy reduce la sub-unitar și documentează varianța reziduală (1−ρ²).</li>
+<li><strong>Fixează duration-ul cu IRS</strong>: dimensionează nominalul swap-ului prin egalizarea DV01 (nu a principalului), țintind duration gap activ-pasiv ≈ 0; pentru România verifică dacă expunerea reală e ROBOR/EURIBOR (corporate) sau IRCC (retail) și acceptă basis-ul de fixing IRCC dacă există.</li>
+<li><strong>Structurează acoperirea principalului CHF cu zero-cost collar</strong> (cap cumpărat / floor vândut), nu cu forward sec, pentru a evita carry-ul negativ integral.</li>
+<li><strong>Desemnează relațiile de hedge IFRS 9</strong> (cash-flow / fair value / net investment) și pregătește documentația de eficacitate ÎNAINTE de prima tranzacție — aceeași documentație servește ca probă fiscală ANAF.</li>
+<li><strong>Verifică impactul ATAD</strong>: include leg-ul fix al IRS în costurile excedentare ale îndatorării și testează plafonul de 30% EBITDA; verifică reținerea la sursă și certificatul de rezidență pe contrapărțile nerezidente.</li>
+<li><strong>Negociază CSA-ul ISDA</strong> cu thresholds și minimum transfer amount adecvate; modelează collateral funding cost pe OIS discounting și diversifică contrapărțile pentru wrong-way risk.</li>
+<li><strong>Recalibrează lunar</strong>: re-marchează fair value, re-testează eficacitatea, rebalansează hedge ratio-ul fără a întrerupe relația, și raportează carry-ul net realizat vs. cel teoretic CIP ca metrică de control.</li>
+</ol>
+
+<p><strong>Checklist final de control:</strong></p>
+<ul>
+<li>☐ Vector de expunere flux/stoc/dobândă separat și documentat.</li>
+<li>☐ Forward-uri CIP verificate vs. cotație bancă, basis izolat și acceptat doar ≤12 luni pe RON.</li>
+<li>☐ Hedge ratio optim calculat per componentă, varianță reziduală cuantificată.</li>
+<li>☐ IRS dimensionat pe DV01, duration gap ≈ 0, basis IRCC verificat.</li>
+<li>☐ Collar zero-cost pe principalul CHF în loc de forward sec.</li>
+<li>☐ Relații IFRS 9 desemnate + documentație de eficacitate pre-tranzacție.</li>
+<li>☐ Test ATAD 30% EBITDA + reținere la sursă verificate.</li>
+<li>☐ CSA ISDA negociat, collateral funding cost modelat, contrapărți diversificate.</li>
+<li>☐ Recalibrare lunară și raport carry net realizat vs. teoretic.</li>
+</ul>
+
+<p>Diferența dintre un hedge amator și unul instituțional nu stă în alegerea instrumentului, ci în rigoarea cu care fiecare bază reziduală — de fixing, de proxy, de basis cross-currency, de colateral — este măsurată, prețuită și asumată conștient. Un overlay bine construit nu elimină riscul, ci îl mută exact acolo unde investitorul are convingere și capital să-l susțină.</p>

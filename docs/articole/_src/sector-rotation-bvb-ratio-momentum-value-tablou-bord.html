@@ -1,0 +1,177 @@
+<p>Lecția de față transformă intuiția macro într-un motor cantitativ: un sistem de <strong>sector rotation BVB momentum value ratio tablou bord</strong> care îți spune lunar, cu cifre, exact când să muți alocare între bănci, energy și utilități, fără să mai depinzi de „simțul pieței". Ai stăpânit deja citirea ciclurilor BNR și logica rotației tactice între sectoarele Bursei de Valori București. Acum construim deasupra un <strong>momentum-value score sector BVB</strong> reproductibil, cu praguri numerice, ponderi explicite și reguli de tranzacționare — exact ce ar rula un fond cu mandat de <em>sector relative strength BVB</em>.</p>
+
+<p>Vom calcula pas cu pas un scor compozit per sector, vom defini un proces de <strong>rebalansare lunară automată bursă</strong> ancorat în prima ședință a lunii, vom măsura <strong>ROI pe sector ratio</strong> versus benchmark și vom folosi un <strong>rotatie ciclu economic indicator</strong> ca filtru de regim. Totul închis într-un proces de <strong>signal generating sector momentum</strong> auditabil, plus un <strong>backtesting sector rotation strategie</strong> pe ultimii ~8 ani de date BVB, ca să știi ce te poți aștepta realist din punct de vedere al randamentului și al drawdown-ului.</p>
+
+<p>Premisa dură rămâne aceeași: BVB este o piață mică, concentrată (TLV, BRD, SNP, SNG, EL, TGN, TEL, DIGI, TTS, M, FP), cu lichiditate inegală și fluxuri de Pilon II care domină marginal prețul. Orice model american de rotație (Stovall, dual-momentum Antonacci) trebuie recalibrat agresiv pentru cele ~3-5 „sectoare" investibile reale de aici. Nu vinzi semnale fine pe 11 sectoare GICS; lucrezi cu 4-5 coșuri groase și accepți granularitatea limitată.</p>
+
+<h2>Arhitectura tabloului de bord: trei straturi de semnal</h2>
+
+<p>Tabloul de bord nu este un singur număr, ci o stivă de trei straturi care se înmulțesc, nu se adună la întâmplare. Fiecare strat răspunde la o întrebare distinctă și are dreptul de veto într-o anumită zonă.</p>
+
+<ul>
+<li><strong>Stratul 1 — Regim macro (filtru on/off).</strong> Faza ciclului BNR (dobândă-cheie, IPC vs țintă 2,5% ±1pp, curba 10Y-2Y, credit neguvernamental). Rol: stabilește <em>ce coșuri au voie</em> să primească alocare maximă și ce coșuri sunt plafonate. Nu generează ordine, ci limite.</li>
+<li><strong>Stratul 2 — Momentum-Value score (rangul).</strong> Inima sistemului. Combină <em>relative strength</em> (cât de tare bate sectorul indicele) cu un ecart de <em>value</em> (cât de ieftin e față de propria mediană istorică). Rol: ordonează sectoarele și produce ponderile.</li>
+<li><strong>Stratul 3 — Confirmare microstructură (gate de execuție).</strong> Lichiditate (ADTV — average daily traded value), breadth intra-sector (câte nume confirmă mișcarea), și trend de bază (preț peste MA200). Rol: blochează tranzacții pe semnale ilichide sau pe un singur nume care trage tot coșul.</li>
+</ul>
+
+<p>Logica de compoziție: <strong>scor final = (Momentum-Value score) × multiplicator_regim × gate_execuție</strong>, unde multiplicatorul de regim ∈ {0,5; 0,8; 1,0; 1,2} iar gate-ul ∈ {0; 1}. Astfel un sector cu scor brut excelent dar ilichid sau aflat sub MA200 într-un regim ostil primește alocare zero, indiferent de cât de „frumos" arată momentum-ul. Aceasta este diferența dintre un model de specialist și un screener naiv.</p>
+
+<h2>Definirea coșurilor sectoriale BVB și a proxy-urilor</h2>
+
+<p>Pentru că BVB nu are ETF-uri sectoriale lichide locale, construiești coșuri sintetice echi-ponderate sau ponderate pe lichiditate. Recomand ponderare pe rădăcina pătrată a ADTV (un compromis între equal-weight, care supra-expune nume mici, și cap-weight, care te lasă cu un singur nume dominant).</p>
+
+<ul>
+<li><strong>BANK</strong>: TLV, BRD (eventual BVB ca proxy de „financials"). Nucleu lichid, beta la dobândă și credit.</li>
+<li><strong>ENERGY</strong>: SNP, SNG, plus OIL/gaz adiacent. Sensibil la prețuri commodity și la regimul fiscal (suprataxă pe energie).</li>
+<li><strong>UTIL</strong>: EL, TGN, TEL. Cash-flow reglementat (ANRE), defensiv, dividend-payer.</li>
+<li><strong>GROWTH/TECH-CONSUM</strong>: DIGI, TTS, M (MedLife). Durată lungă, sensibil la dobânda de actualizare.</li>
+<li><strong>HOLDING/PROXY-PIAȚĂ</strong>: FP, SIF-uri — folosit ca filtru de breadth, nu ca țintă de rotație principală.</li>
+</ul>
+
+<p>Benchmark-ul de relativizare: <strong>BET-TR</strong> (varianta total return, cu dividende reinvestite). Critic — dacă relativizezi față de BET „price", subestimezi sistematic băncile și utilitățile care plătesc dividende mari (randamente de 7-9% nu sunt rare la EL/TGN/bănci), distorsionând momentumul relativ. Întotdeauna total return contra total return.</p>
+
+<h2>Stratul 2: formula Momentum-Value score, pas cu pas</h2>
+
+<p>Aceasta este componenta vandabilă a sistemului. O construim din două sub-scoruri standardizate (z-score în cross-section, adică între sectoare la aceeași dată), apoi le combinăm cu o pondere care depinde de regim.</p>
+
+<h3>Sub-scorul de Momentum (relative strength)</h3>
+
+<p>Folosim momentum multi-orizont, „skip-month" (excludem ultima lună pentru a evita reversal-ul pe termen scurt), o tehnică standard de specialist:</p>
+
+<ul>
+<li><strong>RS_3M</strong> = (P_sector / P_BETTR la t) / (P_sector / P_BETTR la t-3M) − 1</li>
+<li><strong>RS_6M</strong> = idem pe 6 luni, cu skip de ultima lună (de la t-1M la t-7M)</li>
+<li><strong>RS_12M</strong> = idem pe 12 luni, skip ultima lună (t-1M la t-13M)</li>
+</ul>
+
+<p><strong>Momentum_raw = 0,5 × RS_6M + 0,3 × RS_12M + 0,2 × RS_3M.</strong> Ponderea cea mai mare pe 6M pentru că pe BVB orizontul de 6 luni a fost istoric cel mai stabil semnal (12M e prea lent pe o piață care întoarce brusc; 3M e prea zgomotos). Apoi standardizezi: <strong>z_mom_i = (Momentum_raw_i − media pe sectoare) / abaterea standard pe sectoare</strong>.</p>
+
+<h3>Sub-scorul de Value (ieftinătate relativă proprie)</h3>
+
+<p>Aici e finețea pentru BVB: nu compari P/E-ul băncilor cu P/E-ul utilităților (sunt structural diferite), ci fiecare sector cu <em>propria sa istorie</em>. Calculezi un percentil de evaluare:</p>
+
+<ul>
+<li>Iei multiplul reprezentativ per sector: <strong>P/E forward pentru BANK/GROWTH, EV/EBITDA pentru ENERGY/UTIL</strong> (energy are volatilitate mare de profit, EV/EBITDA e mai stabil), plus <strong>dividend yield</strong> ca al doilea ancoraj pentru UTIL/BANK.</li>
+<li>Calculezi percentilul curent al multiplului față de propria distribuție pe 5 ani. Un sector la percentilul 20 (mai ieftin decât 80% din ultimii 5 ani) primește un value ridicat.</li>
+<li><strong>Value_raw_i = 1 − percentil_evaluare_i</strong> (deci ieftin = scor mare), apoi z-score în cross-section: <strong>z_val_i</strong>.</li>
+</ul>
+
+<h3>Combinarea: scorul compozit cu pondere dependentă de regim</h3>
+
+<p>Aici intervine inteligența: ponderea momentum vs value <em>nu e fixă</em>, ci se mută cu faza ciclului. În expansiune timpurie/relansare momentum-ul conduce; în supraîncălzire/încetinire value-ul (ieftinătatea defensivelor) capătă greutate, pentru că momentum-ul devine o capcană (cumperi vârful ciclicelor).</p>
+
+<ul>
+<li><strong>MV_score_i = w_mom × z_mom_i + w_val × z_val_i</strong></li>
+<li>Faza 1 (relansare): w_mom = 0,70; w_val = 0,30</li>
+<li>Faza 2 (supraîncălzire): w_mom = 0,55; w_val = 0,45</li>
+<li>Faza 3 (încetinire): w_mom = 0,40; w_val = 0,60</li>
+<li>Faza 4 (fund de ciclu): w_mom = 0,35; w_val = 0,65 (cumperi ieftin înainte de întoarcere)</li>
+</ul>
+
+<p>Acesta este <strong>rotatie ciclu economic indicator</strong> încorporat în chiar formula scorului, nu lipit pe deasupra. Faza o derivi din Stratul 1 (vezi mai jos cum o codifici numeric).</p>
+
+<h2>Exemplu numeric complet — tabloul de bord pentru o lună concretă</h2>
+
+<p>Să presupunem un moment de Faza 2 (supraîncălzire: IPC peste țintă și în creștere, BNR pe pauză la dobândă ridicată). Date ipotetice dar realiste pentru patru coșuri:</p>
+
+<ul>
+<li><strong>ENERGY</strong>: Momentum_raw = +14% → z_mom = +1,30; EV/EBITDA la percentil 35 → Value_raw = 0,65 → z_val = +0,40</li>
+<li><strong>BANK</strong>: Momentum_raw = +8% → z_mom = +0,50; P/E fwd la percentil 30 → z_val = +0,70</li>
+<li><strong>UTIL</strong>: Momentum_raw = +2% → z_mom = −0,40; EV/EBITDA la percentil 60 → z_val = −0,30</li>
+<li><strong>GROWTH</strong>: Momentum_raw = −6% → z_mom = −1,40; P/E fwd la percentil 75 → z_val = −0,80</li>
+</ul>
+
+<p>Cu ponderile Fazei 2 (w_mom = 0,55; w_val = 0,45):</p>
+
+<ul>
+<li><strong>ENERGY</strong>: 0,55 × 1,30 + 0,45 × 0,40 = 0,715 + 0,180 = <strong>+0,895</strong></li>
+<li><strong>BANK</strong>: 0,55 × 0,50 + 0,45 × 0,70 = 0,275 + 0,315 = <strong>+0,590</strong></li>
+<li><strong>UTIL</strong>: 0,55 × (−0,40) + 0,45 × (−0,30) = −0,220 − 0,135 = <strong>−0,355</strong></li>
+<li><strong>GROWTH</strong>: 0,55 × (−1,40) + 0,45 × (−0,80) = −0,770 − 0,360 = <strong>−1,130</strong></li>
+</ul>
+
+<p>Ranguri: ENERGY > BANK > UTIL > GROWTH. Acum traduci scorul în <strong>ponderi de portofoliu</strong>. Regulă recomandată: alocă doar sectoarelor cu MV_score > 0, proporțional cu scorul, cu un plafon dur de 45% per sector (anti-concentrare) și un minim de 15% pentru orice sector deținut (altfel costurile de tranzacționare mănâncă poziția pe o piață cu spread-uri largi).</p>
+
+<p>Alocare brută proporțională (doar scorurile pozitive: 0,895 + 0,590 = 1,485): ENERGY = 0,895/1,485 = 60,3% → plafonat la <strong>45%</strong>; BANK = 39,7% → <strong>40%</strong>; surplusul de 15% de la plafonarea ENERGY îl redistribui către BANK până la limita lichidității, sau îl ții în cash/BET-TR ca tampon. UTIL și GROWTH = 0% (scoruri negative). Soluție finală curată: <strong>ENERGY 45% / BANK 40% / cash sau BET-TR 15%</strong>.</p>
+
+<h2>Stratul 1 codificat numeric: scorul de fază</h2>
+
+<p>Ca să automatizezi, faza nu poate rămâne calitativă. Codific-o cu un mic indice pe patru semnale, fiecare scorat −1 / 0 / +1, unde +1 = pro-ciclic (favorabil energy/bănci/risc), −1 = defensiv:</p>
+
+<ul>
+<li><strong>Direcția dobânzii BNR</strong> (medie mobilă pe ultimele 2 decizii): taie = +1, pauză = 0, urcă = −1. (În 2026 dobânda-cheie a fost menținută la 6,50% — pauză prelungită; verifică pe bnr.ro înainte de fiecare rebalansare, deciziile fiind de regulă 8/an.)</li>
+<li><strong>IPC vs țintă și pantă</strong>: sub țintă și în scădere = +1 (lasă loc de relaxare); peste țintă și în creștere = −1.</li>
+<li><strong>Curba 10Y-2Y titluri de stat</strong>: steepening = +1, inversată = −1, plată = 0.</li>
+<li><strong>Creditul neguvernamental</strong> (variație anuală, statistici BNR lunare): accelerare = +1, decelerare = −1.</li>
+</ul>
+
+<p>Suma ∈ [−4; +4]. Mapping pe faze: <strong>+3..+4 = Faza 1</strong> (relansare, w_mom mare), <strong>+1..+2 = Faza 2</strong> (supraîncălzire), <strong>−2..0 = Faza 3</strong> (încetinire), <strong>−4..−3 = Faza 4</strong> (fund). Faza determină automat (w_mom, w_val) și multiplicatorul de regim din Stratul 1, care plafonează sectoarele „greșite" pentru fază (ex.: într-un regim −4, GROWTH primește multiplicator 0,5 chiar dacă momentum-ul lui ar fi pozitiv).</p>
+
+<h2>Stratul 3: gate-ul de execuție și capcanele de microstructură</h2>
+
+<p>Pe BVB, un semnal frumos pe hârtie poate fi imposibil de executat. Gate-ul de execuție (∈ {0,1}) cere trei condiții simultane pentru a permite o alocare crescută:</p>
+
+<ul>
+<li><strong>Lichiditate</strong>: ADTV pe coșul respectiv (mediat pe 20 ședințe) ≥ pragul care îți permite să intri/ieși în ≤3 ședințe cu impact &lt;0,5% din volum. Sub prag, plafonezi poziția la cât poți lichida realist.</li>
+<li><strong>Breadth intra-sector</strong>: cel puțin 50% din numele coșului peste propria MA200 (sau, la coșuri de 2 nume ca BANK, ambele să confirme). Evită cazul în care SNP trage tot ENERGY iar SNG e în declin — un coș fals-puternic.</li>
+<li><strong>Trend de bază</strong>: prețul coșului &gt; MA200 a coșului. Cumperi momentum doar într-un uptrend confirmat; altfel momentum-ul pozitiv e doar un rebound într-un downtrend (bull trap).</li>
+</ul>
+
+<p>Dacă gate = 0 pentru un sector altfel bine clasat, nu îl excluzi total, dar îi tai alocarea la jumătate și parchezi diferența în BET-TR/cash. Acesta e un detaliu care, în <strong>backtesting sector rotation strategie</strong> pe BVB, a separat sistematic strategiile care „arătau bine în Excel" de cele care chiar erau executabile cu €50k-€500k capital.</p>
+
+<h2>Rebalansarea lunară automată: cadența și regulile anti-churn</h2>
+
+<p>Procesul de <strong>rebalansare lunară automată bursă</strong> rulează în prima ședință completă a lunii (evită prima zi dacă e zi de decontare/expirare). Pași ficși:</p>
+
+<ul>
+<li>Trage datele de închidere ale lunii precedente (BVB are date EOD gratuite; pentru fundamentale folosești rapoartele trimestriale ASF/raportările companiilor).</li>
+<li>Recalculează cele trei straturi → MV_score per sector → ponderi-țintă.</li>
+<li><strong>Bandă de no-trade</strong>: rebalansezi un sector doar dacă ponderea-țintă diferă de cea curentă cu &gt; 5 puncte procentuale. Sub 5pp, nu atingi poziția. Aceasta taie 60-70% din tranzacții inutile pe o piață cu costuri reale (comision broker + spread + impozit pe câștig reținut la sursă, conform regimului 2026 pentru intermediarii rezidenți: 3% pe câștigul aferent deținerilor &gt;365 zile, respectiv 6% sub 365 zile, fără posibilitatea de a compensa pierderile — verifică încadrarea cu intermediarul tău; prin broker străin fără reținere la sursă, regimul este 16% autodeclarat prin Declarația Unică).</li>
+<li><strong>Histerezis pe semnal</strong>: un sector iese din portofoliu doar dacă MV_score scade sub −0,25 (nu sub 0). Pragul de intrare (0) și cel de ieșire (−0,25) diferite previn flip-flop-ul lună-de-lună când scorul oscilează în jurul lui zero.</li>
+</ul>
+
+<p>Frecvența lunară e calibrată intenționat: săptămânal generează prea mult zgomot și costuri pe BVB; trimestrial ratează rotațiile rapide (2020, 2022). Lunar e punctul dulce confirmat empiric pentru lichiditatea de aici.</p>
+
+<h2>Backtesting și ROI pe sector ratio: ce te poți aștepta realist</h2>
+
+<p>Un <strong>backtesting sector rotation strategie</strong> onest pe BVB ~2018-2026 trebuie să respecte câteva reguli de igienă, altfel rezultatul e ficțiune:</p>
+
+<ul>
+<li><strong>Point-in-time</strong>: folosește multiplii și fundamentalele <em>așa cum erau cunoscute la data deciziei</em>, nu cele restated ulterior. Altfel introduci lookahead masiv pe value.</li>
+<li><strong>Costuri reale</strong>: scade comision (~0,1-0,3% per tranzacție la brokerii RO), spread (poate fi 0,3-1% pe nume mai puțin lichide) și slippage. Pe lunar, cu banda de no-trade, ajungi rezonabil la 4-8 rebalansări „active" pe an.</li>
+<li><strong>Benchmark corect</strong>: compari cu BET-TR (buy-and-hold cu dividende reinvestite), nu cu BET price. Și raportezi <strong>ROI pe sector ratio</strong> ca randament al strategiei rotative împărțit la randamentul BET-TR pe aceeași fereastră.</li>
+<li><strong>Metrici cheie</strong>: nu privi doar randamentul total. Urmărește Sharpe, max drawdown, hit-rate al rotațiilor (% de mutări care au bătut alternativa de a sta) și turnover anual. O strategie cu randament egal cu BET-TR dar cu drawdown mai mic e o victorie reală pe acest mandat.</li>
+</ul>
+
+<p><strong>Avertisment de specialist asupra rezultatelor</strong>: pe un univers de doar 4-5 sectoare și ~8 ani (≈96 puncte lunare, dintre care doar câteva zeci de rotații efective), numărul de tranzacții independente e mic. Orice „outperformance" trebuie testat la robustețe — variază ponderile (RS_6M de la 0,4 la 0,6), pragul de no-trade (3-7pp), pragul de histerezis — și verifică dacă rezultatul supraviețuiește. Dacă Sharpe-ul colapsează când muți un parametru cu 10%, ai overfit, nu edge. Pe BVB, cu eșantion mic, e capcana #1.</p>
+
+<h2>Edge-cases și ajustări de specialist</h2>
+
+<h3>Evenimente de dividend masiv (energy/bănci)</h3>
+<p>SNG, SNP și băncile pot plăti dividende de 8-12% din preț într-o singură zi de ex-date. Asta creează un „gap" artificial în RS dacă lucrezi pe preț nereajustat. Soluție obligatorie: calculează momentum-ul pe serii <strong>total return</strong> (ajustate la dividend), altfel un coș apare brusc „prăbușit" în ziua de ex-div și sistemul vinde exact la momentul greșit.</p>
+
+<h3>Suprataxa pe energie și riscul de reglementare</h3>
+<p>Energy pe BVB are un risc politic/fiscal recurent (suprataxe pe profiturile excepționale, plafonări de preț). Un value-score care arată ENERGY foarte ieftin poate reflecta corect un risc de reglementare, nu o oportunitate. Adaugă un overlay calitativ: dacă există un proiect legislativ activ de suprataxă, plafonează ENERGY la 30% indiferent de scor.</p>
+
+<h3>Concentrarea într-un singur nume</h3>
+<p>Coșul BANK e dominat de TLV. Dacă TLV are un eveniment idiosincratic (achiziție, schimbare de management), coșul nu mai reflectă „băncile" ci TLV. Gate-ul de breadth (ambele nume să confirme) e plasa de siguranță, dar într-o piață atât de mică acceptă că diversificarea sectorială reală e limitată — nu te amăgi că ai 5 sectoare necorelate.</p>
+
+<h3>Fluxurile de Pilon II</h3>
+<p>Cumpărările recurente ale fondurilor de pensii distorsionează momentum-ul pe numele mari lichide (TLV, SNP, H2O). E un vânt din spate persistent pentru BANK/ENERGY care poate menține momentum artificial de ridicat. Nu e un bug de corectat, ci un factor de luat în calcul: pe BVB momentum-ul „funcționează" parțial pentru că fluxurile structurale îl auto-confirmă.</p>
+
+<h2>Checklist de execuție lunară (sistemul complet)</h2>
+
+<ul>
+<li><strong>1.</strong> Prima ședință completă a lunii: trage datele EOD ale lunii precedente + ultimele fundamentale point-in-time (rapoarte ASF/companii).</li>
+<li><strong>2.</strong> Calculează scorul de fază (4 semnale BNR/INS, sumă ∈ [−4;+4]) → derivă faza și ponderile (w_mom, w_val).</li>
+<li><strong>3.</strong> Calculează Momentum_raw (0,5·RS_6M + 0,3·RS_12M + 0,2·RS_3M, skip-month, pe serii total return) → z_mom per sector.</li>
+<li><strong>4.</strong> Calculează percentilul de evaluare pe 5 ani per sector → Value_raw → z_val.</li>
+<li><strong>5.</strong> MV_score = w_mom·z_mom + w_val·z_val per sector.</li>
+<li><strong>6.</strong> Aplică multiplicatorul de regim (Stratul 1) și gate-ul de execuție (Stratul 3: lichiditate, breadth, MA200).</li>
+<li><strong>7.</strong> Derivă ponderile-țintă: doar scoruri pozitive, proporțional, plafon 45%/sector, minim 15%/poziție, restul în BET-TR/cash.</li>
+<li><strong>8.</strong> Aplică banda de no-trade (Δ &gt; 5pp) și histerezisul de ieșire (MV &lt; −0,25). Tranzacționează doar diferențele care trec.</li>
+<li><strong>9.</strong> Verifică overlay-urile calitative (suprataxă energy, evenimente idiosincratice TLV) și plafonează manual dacă e cazul.</li>
+<li><strong>10.</strong> Loghează deciziile și scorurile (audit trail) — vei avea nevoie de istoric pentru a re-valida robustețea anuală și a evita overfitting-ul prin tweaking-ul parametrilor pe ultima lună slabă.</li>
+</ul>
+
+<p>Disciplina e tot. Un sistem mediocru executat identic 36 de luni la rând bate un sistem genial executat după inspirație. Tabloul de bord momentum-value nu îți garantează că bați BET-TR în fiecare an — îți garantează că deciziile tale de rotație sunt reproductibile, măsurabile și auditabile, exact cum trebuie să fie procesul unui specialist pe o piață mică și concentrată ca BVB.</p>

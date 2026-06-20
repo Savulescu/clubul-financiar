@@ -1,0 +1,147 @@
+<p>La nivel de specialist, <strong>predictive cash flow și volatilitatea venitului</strong> nu se tratează cu o singură prognoză „medie”, ci cu o întreagă distribuție de scenarii generate stocastic. Diferența dintre antreprenorul avansat și cel expert este metodologică: avansatul lucrează cu trei coloane bas-mid-top; expertul rulează <strong>Monte Carlo simulation income</strong> pe 1000+ traiectorii, citește percentilele și transformă incertitudinea într-un parametru optimizabil. În această lecție construim cadrul complet de <strong>stochastic scenario modeling venit</strong>: calibrarea procesului generator, simularea fluxului de numerar, calculul de <strong>Value at Risk cash flow</strong> la 95% și al Expected Shortfall, apoi traducerea acestor mărimi în reguli de <strong>contingency planning volatil venit</strong>, de <strong>income smoothing și remunerare</strong> și de <strong>downside protection venit variabil</strong>.</p>
+
+<p>Presupun că stăpânești deja burn rate-ul pe scenarii, prognoza rolling pe 18 luni și logica salariu vs dividend dintr-un SRL românesc — nu le reluăm. Aici mergem la <strong>probabilistic forecasting freelancer</strong> și firmă mică: cum modelezi venitul ca proces aleator cu drift, sezonalitate și salturi, cum propagi această distribuție prin contul de cash, și cum derivi pragul minim de buffer dintr-o constrângere explicită de probabilitate de ruină, nu din intuiție.</p>
+
+<p>Toate cifrele sunt calibrate pe România 2026: cote de impozitare PFA/SRL, plafoane CASS/CAS, dobânzi de referință BNR și praguri reale în lei. Unde un parametru depinde de istoricul tău concret (volatilitatea încasărilor, autocorelația lunară), îl marchez ca ipoteză de calibrat, nu îl inventez.</p>
+
+<h2>De ce media venitului este o capcană și ce înlocuiește prognoza punctuală</h2>
+
+<p>Eroarea fundamentală a planificării non-stocastice este reducerea venitului la un singur număr așteptat. Dacă încasezi în medie 45.000 lei/lună dar cu o deviație standard de 18.000 lei și o asimetrie negativă (cozi de luni proaste mai lungi decât cele bune), atunci un plan construit pe medie eșuează exact în lunile care contează. Tu nu trăiești din E[V], ci din <strong>distribuția completă</strong> a cash flow-ului cumulat.</p>
+
+<p>Mărimea corectă nu e media, ci funcția de repartiție a soldului de cash la fiecare orizont. Notăm:</p>
+
+<ul>
+<li><strong>V<sub>t</sub></strong> — încasarea (cash-in) din luna t, variabilă aleatoare.</li>
+<li><strong>F<sub>t</sub></strong> — cheltuielile fixe + variabile angajate în luna t (în mare parte deterministe pe orizont scurt).</li>
+<li><strong>C<sub>t</sub> = C<sub>t−1</sub> + V<sub>t</sub> − F<sub>t</sub></strong> — soldul de cash la finalul lunii t, un proces cumulat (random walk cu drift și sezonalitate).</li>
+<li><strong>τ = min{t : C<sub>t</sub> &lt; 0}</strong> — momentul de ruină de lichiditate (primul moment în care rămâi fără bani).</li>
+</ul>
+
+<p>Obiectivul nu mai este „să prognozez venitul lunii viitoare”, ci „să mențin <strong>P(τ ≤ 12) sub un prag de toleranță</strong>” — de exemplu sub 2%. Aceasta este o constrângere de probabilitate de ruină, și ea dictează cât buffer ții, cât scoți acasă și când reinvestești.</p>
+
+<h2>Calibrarea procesului generator al venitului</h2>
+
+<p>Înainte de orice simulare, trebuie să descompui seria ta istorică de încasări lunare în componente. Modelul minimal recomandat pentru un venit antreprenorial volatil are patru blocuri.</p>
+
+<h3>1. Drift, sezonalitate, autocorelație</h3>
+
+<p>Pe logaritmul încasărilor (log pentru a captura multiplicativitatea și a evita valori negative), estimează:</p>
+
+<ul>
+<li><strong>Drift μ</strong> — creșterea medie lunară. Dacă afacerea ta crește ~10%/an, μ ≈ ln(1,10)/12 ≈ 0,0079/lună.</li>
+<li><strong>Sezonalitate s<sub>m</sub></strong> — 12 coeficienți lunari (ex. august −25%, decembrie −15%, mai +20%) estimați ca medii lunare deviate de la trend.</li>
+<li><strong>Autocorelație φ</strong> — un client bun azi tinde să producă o lună bună și mâine. Estimează un AR(1): ln V<sub>t</sub> = c + φ·ln V<sub>t−1</sub> + ε<sub>t</sub>. Tipic φ ∈ [0,3; 0,6] pentru servicii cu clienți recurenți; φ ≈ 0 pentru proiecte one-off.</li>
+<li><strong>Volatilitate σ</strong> — deviația standard a reziduurilor ε<sub>t</sub>. Aceasta este inima volatilității venitului; o subestimezi sistematic dacă ai doar 12-18 luni de istoric.</li>
+</ul>
+
+<h3>2. Salturi (jump component) — clientul mare care pleacă</h3>
+
+<p>Volatilitatea normală nu surprinde evenimentele rare: pierderea unui client de 40% din cifră, o factură mare neîncasată, un sezon ratat complet. Acestea sunt <strong>salturi</strong> (regime jumps) și se modelează cu un proces Poisson: cu probabilitate λ pe lună, venitul scade cu un factor de șoc J (ex. −35%). Pentru un freelancer cu top-3 clienți = 70% din cifră, λ ≈ 0,05-0,10/lună (un șoc serios la fiecare 10-20 luni) este o calibrare prudentă. Ignorarea jump-ului este cauza #1 pentru care simulările naive subestimează grosolan riscul de coadă.</p>
+
+<h3>3. Întârzieri de încasare (DSO stocastic)</h3>
+
+<p>Venitul facturat ≠ cash încasat. Modelează separat lag-ul de plată: fiecare factură se încasează după d zile, unde d e și el aleator (ex. lognormal cu mediană 30 și coadă până la 90+). Pe venit B2B în România, un DSO mediu de 45-60 zile cu cozi la 90 zile este realist. Acest lag transformă o lună bună pe hârtie într-o criză de lichiditate reală două luni mai târziu — și doar simularea cash-ului (nu a venitului) o prinde.</p>
+
+<h3>4. Componenta deterministă a cheltuielilor</h3>
+
+<p>F<sub>t</sub> are o parte fixă (chirie, salarii nete + contribuții, leasing, contabilitate) și una variabilă-proporțională (comisioane, costuri direct legate de proiect). Modelează F<sub>t</sub> = F<sub>fix</sub> + β·V<sub>t</sub>, unde β e fracția variabilă (ex. 0,15). Atenție: impozitarea e o cheltuială stocastică derivată — la SRL micro plătești 1% sau 3% pe venit, la SRL pe profit 16% pe profit, la PFA real 10% impozit + CAS/CASS pe baze plafonate. Tratamentul fiscal corect intră în F<sub>t</sub>, altfel umfli cash-ul net.</p>
+
+<h2>Motorul Monte Carlo: de la proces la 1000+ traiectorii</h2>
+
+<p>Cu procesul calibrat, simularea este mecanică. Algoritmul, pas cu pas, pentru N = 5.000 traiectorii pe orizont H = 18 luni:</p>
+
+<ul>
+<li><strong>Pas 1.</strong> Pentru fiecare traiectorie n și fiecare lună t, trage ε<sub>t</sub> ~ N(0, σ²) și aplică recursiv ln V<sub>t</sub> = c + φ·ln V<sub>t−1</sub> + s<sub>m</sub> + μ·t + ε<sub>t</sub>.</li>
+<li><strong>Pas 2.</strong> Trage indicatorul de salt B<sub>t</sub> ~ Bernoulli(λ); dacă B<sub>t</sub> = 1, multiplică V<sub>t</sub> cu (1 + J), J negativ.</li>
+<li><strong>Pas 3.</strong> Aplică lag-ul de încasare: distribuie V<sub>t</sub> (facturat) pe lunile t, t+1, t+2 conform distribuției DSO.</li>
+<li><strong>Pas 4.</strong> Calculează F<sub>t</sub> și impozitul aferent regimului tău, apoi C<sub>t</sub> = C<sub>t−1</sub> + cash-in<sub>t</sub> − F<sub>t</sub>.</li>
+<li><strong>Pas 5.</strong> Înregistrează întreaga traiectorie {C<sub>t</sub>} și marchează dacă a atins ruina (min C<sub>t</sub> &lt; 0).</li>
+</ul>
+
+<p>După N rulări ai o matrice H × N de solduri. Din ea citești totul: percentilele soldului la fiecare lună, probabilitatea de ruină, distribuția surplusului anual distribuibil. Un laptop rulează 5.000 × 18 în sub o secundă într-o foaie de calcul vectorizată sau câteva linii de Python; nu e nevoie de infrastructură.</p>
+
+<h3>Cât de multe traiectorii? Eroarea Monte Carlo</h3>
+
+<p>Pentru a estima o probabilitate de coadă p (ex. P(ruină) ≈ 2%), eroarea standard a estimatorului este √(p(1−p)/N). La N = 1.000 și p = 0,02, SE ≈ 0,44% — adică estimezi 2% ± ~0,9% cu 95% încredere, prea imprecis pentru o decizie de buffer. La N = 5.000, SE ≈ 0,20%; la N = 10.000, SE ≈ 0,14%. Regula practică: pentru cuantile la 95% folosește minim 5.000 traiectorii, pentru cozi la 99% urcă la 20.000+. Aceasta este justificarea cantitativă a lui „1000+ scenarii”: pentru VaR 95% e pragul de jos, nu confortul.</p>
+
+<h2>VaR și Expected Shortfall pe cash flow</h2>
+
+<p>Adaptăm cele două mărimi clasice de risc la fluxul tău de numerar. Definește pierderea de lichiditate la orizont H ca deficitul față de soldul inițial: L = C<sub>0</sub> − min<sub>t≤H</sub> C<sub>t</sub> (cea mai adâncă scădere atinsă, un drawdown de cash).</p>
+
+<ul>
+<li><strong>VaR 95% (Value at Risk cash flow)</strong> = percentila 95 a lui L. Citită din simulare: sortezi cele 5.000 de valori L crescător și iei valoarea de la poziția 4.750. Interpretare: „în 95% din lunile-scenariu nu pierd mai mult de VaR<sub>95</sub> lei din cash; în 5% pierd cel puțin atât”.</li>
+<li><strong>Expected Shortfall (ES / CVaR 95%)</strong> = media celor mai proaste 5% scenarii, adică media valorilor L de la poziția 4.751 la 5.000. ES răspunde la întrebarea pe care VaR o ocolește: „<em>când</em> lucrurile merg prost (coada de 5%), cât de prost în medie?”.</li>
+</ul>
+
+<p><strong>Exemplu numeric.</strong> SRL de servicii, C<sub>0</sub> = 120.000 lei buffer, burn fix 40.000 lei/lună, încasare medie 45.000 lei cu σ ≈ 18.000 și λ = 0,07. Dintr-o rulare tipic calibrată poți obține: VaR<sub>95</sub> al drawdown-ului de cash ≈ 88.000 lei, ES<sub>95</sub> ≈ 121.000 lei. Citirea critică: ES depășește buffer-ul. Înseamnă că în coada de 5% a anului următor rămâi fără cash. VaR singur (88.000 &lt; 120.000) te-ar fi liniștit fals — exact de aceea expertul raportează la ES, nu la VaR.</p>
+
+<h3>Pragul de buffer derivat din constrângere, nu din tradiție</h3>
+
+<p>Regula amatorului — „ține 3-6 luni de cheltuieli” — este o aproximare grosieră a unei mărimi pe care acum o poți calcula exact. Buffer-ul minim B* este cel mai mic C<sub>0</sub> pentru care P(ruină pe H) ≤ toleranța ta. Procedural: rulezi simularea pentru valori crescătoare ale lui C<sub>0</sub> și cauți pragul. Dacă la 120.000 lei P(ruină) = 6%, iar ținta ta e 2%, crești C<sub>0</sub> până găsești, de pildă, B* ≈ 165.000 lei. Diferența de 45.000 lei nu e „prudență” vagă, e prețul cuantificat al unei reduceri de 4 puncte procentuale în probabilitatea de a rămâne fără bani. Echivalentul în luni de burn (165.000/40.000 ≈ 4,1 luni) iese ca rezultat, nu ca regulă impusă.</p>
+
+<h2>Income smoothing și remunerare risk-adjusted</h2>
+
+<p><strong>Income smoothing și remunerare</strong> înseamnă să-ți plătești ție un venit personal stabil dintr-un cash flow instabil, fără să golești buffer-ul în lunile proaste. Modelul stocastic îți dă regula de extracție optimă.</p>
+
+<h3>Salariul personal-țintă ca rentă din buffer</h3>
+
+<p>Stabilește un <strong>salariu personal fix lunar W</strong> pe care îl scoți indiferent de lună (acesta e smoothing-ul). W se calibrează astfel încât, în simulare, P(C<sub>t</sub> rămâne peste pragul de siguranță S pe tot orizontul | extragi W lunar) ≥ 98%. Cu cât W e mai mare, cu atât probabilitatea scade — există un W maxim sustenabil, exact ca o rată de retragere sigură la pensie. Tipic, W sustenabil ≈ percentila 25 a încasării nete lunare, nu media: te plătești din lunile proaste, nu din cele bune.</p>
+
+<h3>Surplusul condiționat: bonus doar din coada bună</h3>
+
+<p>Diferența pozitivă față de W o tratezi în două straturi:</p>
+
+<ul>
+<li><strong>Stratul de reumplere buffer:</strong> orice surplus se duce prioritar în buffer până când C<sub>t</sub> ≥ B*. Sub B* nu există dividend personal, oricât de bună e luna.</li>
+<li><strong>Stratul de distribuție:</strong> peste B*, distribui un procent p al surplusului (ex. 50%) ca dividend/bonus personal, și reții restul. Regula „distribui doar din ce depășește percentila 60 a anului” evită extracția pro-ciclică (eroarea de a scoate bani exact înainte de sezonul slab).</li>
+</ul>
+
+<p><strong>Atenție fiscală RO 2026.</strong> Dividendul din SRL e impozitat cu <strong>16% impozit pe dividend</strong> (cotă majorată de la 10% începând cu 2026), plus CASS de 10% dacă venitul anual din dividende depășește pragul raportat la salariul minim. Plafoanele CASS sunt structurate pe trepte — 6, 12 și 24 de salarii minime brute — iar la un salariu minim de 4.050 lei în 2026 înseamnă praguri de 24.300 lei, 48.600 lei și 97.200 lei venit anual, la care CASS datorat este 10% din baza-prag (2.430 / 4.860 / 9.720 lei). Mixul optim salariu/dividend nu se decide static, ci se re-optimizează la fiecare prag CASS: aproape de un prag, încasarea unui leu suplimentar de dividend poate declanșa saltul la o bază CASS superioară, adică sute de lei de contribuție pentru câțiva lei de venit brut. Modelează acest cost ca o funcție în trepte în F<sub>t</sub>, altfel optimul tău de remunerare e fals.</p>
+
+<h2>Timing optim pentru reinvestiții și retrageri</h2>
+
+<p>Întrebarea „când reinvestesc și când scot bani” devine, în limbaj stocastic, o problemă de <strong>opțiune reală</strong>: cash-ul ținut în buffer are o valoare de asigurare (evită ruina), iar reinvestirea îl consumă. Decizia optimă nu e calendaristică, ci condiționată de stare.</p>
+
+<ul>
+<li><strong>Regulă de reinvestire condiționată:</strong> reinvestești o cheltuială discreționară (angajare, echipament, marketing) doar dacă, <em>după</em> reinvestire, simularea arată P(ruină pe 12 luni) ≤ toleranță. Testezi angajamentul în scenariul de coadă (percentila 20 a venitului), nu în median. Dacă angajarea de 8.000 lei/lună mută P(ruină) de la 2% la 9%, e interzisă, oricât de profitabilă pare în mid.</li>
+<li><strong>Timing de retragere personală:</strong> retragerile mari (dividend extraordinar) se programează în fereastra post-sezon-bun, când C<sub>t</sub> e la percentila superioară <em>și</em> orizontul rămas până la următorul sezon slab e acoperit de buffer. Concret: retragi doar dacă C<sub>t</sub> − (W × luni până la următorul vârf sezonier) ≥ B*.</li>
+<li><strong>Asimetria opțiunii:</strong> costul de a reinvesti prea devreme (ruină) e mult mai mare decât costul de a aștepta o lună (oportunitate ratată). Această asimetrie justifică o regulă conservatoare: în dubiu, întârzie reinvestirea, nu retragerea de buffer.</li>
+</ul>
+
+<h2>Downside protection: instrumente concrete RO 2026</h2>
+
+<p><strong>Downside protection venit variabil</strong> nu e doar buffer pasiv. Straturile de apărare, în ordinea costului:</p>
+
+<ul>
+<li><strong>Linie de credit de lucru (overdraft / capital de lucru)</strong> — pre-aprobată, ne-trasă. E un buffer „virtual” care reduce B* necesar în cash propriu. Cost: dobândă doar pe sumele trase, indexată tipic la IRCC/ROBOR + marjă. Modeleaz-o ca buffer suplimentar disponibil în simulare, dar penalizat cu costul dobânzii în lunile de tragere.</li>
+<li><strong>Diversificarea clienților</strong> — reducerea concentrării top-3 scade direct λ și mărimea șocului J. E cea mai ieftină reducere de volatilitate: nu costă dobândă, ci efort comercial. Cuantific-o: trecerea de la 70% la 50% concentrare top-3 poate halvea λ în calibrare.</li>
+<li><strong>Contracte de retainer / abonament</strong> — transformă venit episodic în venit recurent, crescând φ (autocorelația) și scăzând σ. Fiecare retainer mută o parte din venit din coada stocastică în baza deterministă a lui F-acoperit.</li>
+<li><strong>Buffer fiscal segregat</strong> — la PFA real și SRL pe profit, provizionează lunar impozitul estimat într-un cont separat. Eroarea clasică e să cheltui cash-ul brut și să te trezești cu obligația fiscală în coada anului. Tratează impozitul ca pe o cheltuială deja angajată în C<sub>t</sub>.</li>
+</ul>
+
+<h2>Backtest și validare: nu te încrede în simulare oarbă</h2>
+
+<p>O simulare necalibrată e doar o părere îmbrăcată în cifre. Validează modelul înainte să-i asculți VaR-ul:</p>
+
+<ul>
+<li><strong>Out-of-sample.</strong> Calibrează pe primele 70% din istoric, simulează, și verifică dacă realitatea ultimelor 30% cade în benzile prezise. Dacă 30% din lunile reale ies din banda de 95%, modelul subestimează σ — probabil ignori jump-ul.</li>
+<li><strong>Backtest de acoperire VaR.</strong> Numără de câte ori pierderea reală a depășit VaR<sub>95</sub> prezis. Ar trebui să fie ~5% din observații. Semnificativ peste = model prea optimist; semnificativ sub = prea conservator (ții buffer scump degeaba).</li>
+<li><strong>Stress test determinist.</strong> Pe lângă Monte Carlo, rulează scenarii numite: „pierd clientul #1 + DSO se dublează + sezon slab simultan”. Dacă supraviețuiești corelației maxime, ești robust la cozile pe care simularea cu corelații moderate le subestimează.</li>
+</ul>
+
+<h2>Pași de implementare</h2>
+
+<ul>
+<li><strong>1.</strong> Exportă seria de încasări lunare pe minim 24-36 luni; separă facturat de încasat (pentru DSO).</li>
+<li><strong>2.</strong> Estimează μ, sezonalitatea s<sub>m</sub>, autocorelația φ și σ pe log-venit; calibrează λ și J din evenimentele rare istorice.</li>
+<li><strong>3.</strong> Construiește F<sub>t</sub> cu partea fixă, variabilă (β) și impozitul exact al regimului tău RO 2026 (micro 1%/3%, profit 16%, sau PFA 10% + CAS/CASS pe plafoane).</li>
+<li><strong>4.</strong> Rulează minim 5.000 traiectorii pe 18 luni; salvează matricea de solduri C<sub>t</sub>.</li>
+<li><strong>5.</strong> Citește VaR<sub>95</sub> și ES<sub>95</sub> ale drawdown-ului de cash; verifică dacă ES &lt; buffer.</li>
+<li><strong>6.</strong> Derivă B* din constrângerea P(ruină ≤ 12 luni) ≤ 2%; ajustează-l cu linia de credit pre-aprobată.</li>
+<li><strong>7.</strong> Fixează salariul personal W la nivelul sustenabil (≈ percentila 25 a venitului net), nu la medie.</li>
+<li><strong>8.</strong> Definește regula de surplus în două straturi: reumplere buffer până la B*, apoi distribuție condiționată de pragurile CASS.</li>
+<li><strong>9.</strong> Programează reinvestițiile și retragerile prin testul de coadă, nu prin calendar.</li>
+<li><strong>10.</strong> Re-calibrează lunar (rolling) și fă backtest de acoperire VaR trimestrial; dacă încălcările &gt; 5%, urcă σ și λ.</li>
+</ul>
+
+<p><strong>Checklist de control lunar:</strong> seria actualizată ▸ parametri re-estimați ▸ 5.000+ traiectorii rulate ▸ VaR<sub>95</sub> și ES<sub>95</sub> citite ▸ C<sub>t</sub> curent vs B* ▸ W confirmat sustenabil ▸ surplus alocat pe straturi ▸ orice angajament nou testat în coada de 20% ▸ buffer fiscal segregat la zi ▸ linia de credit rămasă ne-trasă.</p>

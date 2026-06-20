@@ -1,0 +1,134 @@
+<p>Un <strong>SWR personalizat Monte Carlo risk of ruin</strong> înlocuiește regula 4% cu un model stohastic în care rata de retragere nu mai e o constantă moștenită din studiul Trinity, ci o variabilă optimizată pe distribuția ta reală de randamente, cheltuieli și longevitate. Dacă ai parcurs deja regula 4% și calculele FIRE de bază, știi că procentul fix maschează exact riscul care contează: secvența randamentelor. Această lecție duce calculul de la euristică la <em>simulare randamente 100k scenarii</em>, unde fiecare traiectorie testează dacă portofoliul tău supraviețuiește unei serii proaste de ani la început, cu inflație medicală șocuri și taxe ANAF aplicate corect pe lei reali.</p>
+
+<p>Vom construi un model complet de <em>ruin probability calculator</em> pentru investitorul român 2026: bootstrap pe randamente istorice, glidepath retrageri FIRE care urcă alocarea în acțiuni pe măsură ce înaintezi în pensionare, șocuri corelate de inflație medicală, și taxa retragere optimă fiscal calibrată pe impozitul de 16% pe dividende, pe cota de câștig de capital prin intermediar fiscal rezident (3% la dețineri peste un an, 6% sub un an) și CASS plafonat. Scopul nu e un număr magic, ci o frontieră: ce rată de retragere îți dă o probabilitate de ruină sub pragul tău de toleranță, pe orizontul tău, cu cheltuielile tale.</p>
+
+<p>Presupun stăpânite valoarea actuală, deviația standard a randamentelor, corelația activelor și conceptul de sequence-of-returns risk. Nu le reluăm. Mergem direct în motorul de simulare, în calibrarea inputurilor pe date românești și în transformarea ieșirii într-o regulă de retragere dinamică pe care o poți executa real.</p>
+
+<h2>De ce regula 4% e o euristică greșit aplicată în România</h2>
+
+<p>Studiul original (Bengen 1994, apoi Trinity 1998) a derivat 4% pe un portofoliu 50/50 acțiuni-obligațiuni american, pe orizont de 30 de ani, cu inflație CPI SUA. Trei dintre aceste ipoteze se rup pentru un FIRE-er român:</p>
+
+<ul>
+<li><strong>Orizontul.</strong> FIRE la 40 de ani înseamnă 50+ ani de retrageri, nu 30. Rata de eșec a regulii 4% crește neliniar cu orizontul: la 30 de ani ~5% eșec istoric, la 50 de ani sare la 15–20% chiar și pe date SUA. Pe fiecare deceniu suplimentar, SWR sustenabil scade cu aproximativ 0,3–0,4 puncte procentuale.</li>
+<li><strong>Inflația.</strong> CPI SUA istoric ~3%. România a trăit 2022–2023 cu inflație de 13–16%, iar BNR țintește 2,5% ±1pp, dar cu varianță mult mai mare decât piețele dezvoltate. Un model care folosește un singur σ de inflație subestimează grav coada.</li>
+<li><strong>Fiscalitatea.</strong> Regula 4% presupune retragere brută = cheltuială. În realitate, fiecare leu retras dintr-un portofoliu de acțiuni trece prin impozit pe câștig de capital (prin intermediar fiscal rezident, care reține la sursă: 3% pentru titluri deținute peste un an, 6% sub un an; prin broker străin, 16% autodeclarat anual prin Declarația Unică), prin impozit pe dividende (16% din 2026) și prin CASS dacă venitul anual din investiții depășește pragurile de 6/12/24 salarii minime brute.</li>
+</ul>
+
+<p>Consecința: SWR-ul tău real, net de taxe și ajustat la orizont și la varianța inflației locale, e aproape sigur sub 4%. Întrebarea nu e „cât scad sub 4%”, ci „care e distribuția probabilității de ruină la fiecare rată candidat”. Asta cere simulare.</p>
+
+<h2>Arhitectura motorului Monte Carlo</h2>
+
+<p>Un motor corect de risk of ruin are cinci straturi. Le tratez pe rând cu specificațiile cantitative.</p>
+
+<h3>1. Generatorul de randamente: bootstrap în loc de normal i.i.d.</h3>
+
+<p>Eroarea de începător avansat: a simula randamente dintr-o distribuție normală cu medie μ și deviație σ. Piețele nu sunt normale — au cozi groase (kurtosis > 3) și autocorelație negativă pe orizonturi lungi (mean reversion). Două abordări superioare:</p>
+
+<ul>
+<li><strong>Block bootstrap.</strong> În loc să tragi un an la întâmplare, tragi <em>blocuri</em> contigue de 3–5 ani din istoricul real. Asta păstrează autocorelația și clusterele de volatilitate (crizele vin în serii). Pentru 100.000 de scenarii pe 50 de ani, asamblezi traiectorii din blocuri suprapuse ale seriei istorice 1900–2025 (date globale developed markets, pentru că istoricul BVB e prea scurt și nereprezentativ).</li>
+<li><strong>Bootstrap staționar (Politis-Romano).</strong> Lungimea blocului devine ea însăși aleatoare (distribuție geometrică cu lungime medie L), eliminând artefactul de tăiere fixă a blocului. Recomandat ca standard.</li>
+</ul>
+
+<p>De ce <em>simulare randamente 100k scenarii</em> și nu 1.000: eroarea standard a estimării unei probabilități de ruină p este √(p(1−p)/N). La p ≈ 5% și N = 1.000, eroarea standard e ~0,7pp — adică un interval de încredere care acoperă 3,6%–6,4%, inutil pentru decizie. La N = 100.000, eroarea standard scade la ~0,07pp. Pentru cozile pe care le testezi (probabilitate de ruină 2–10%), ai nevoie de cel puțin 50.000–100.000 de traiectorii ca intervalul să fie strâns.</p>
+
+<h3>2. Modelul de cheltuieli: nu o constantă reală</h3>
+
+<p>Cheltuielile în pensionare nu sunt o linie orizontală indexată la inflație. Empiric, urmează un „smile”: scad în mijlocul pensionării (faza activă se calmează) și explodează la final din cauza costurilor medicale. Modelarea de specialist:</p>
+
+<ul>
+<li><strong>Cheltuieli de bază</strong> indexate la inflația generală (IPC).</li>
+<li><strong>Componentă medicală</strong> indexată la o <em>inflație medicală</em> separată, sistematic mai mare decât IPC general (în România, costul serviciilor medicale private și al medicamentelor inovative crește cu 2–4pp peste IPC). Aceasta e o variabilă-cheie ignorată în 99% din calculatoarele FIRE.</li>
+<li><strong>Șocuri medicale</strong> ca evenimente Poisson: probabilitate anuală crescătoare cu vârsta (de la ~1% la 50 de ani la ~8–10% la 80+) de un eveniment care adaugă o cheltuială lump-sum (intervenție, îngrijire pe termen lung). Un an de îngrijire la domiciliu sau în centru privat în România 2026 costă realist 60.000–120.000 lei.</li>
+</ul>
+
+<h3>3. Stratul fiscal: retragerea brută necesară</h3>
+
+<p>Aici se rupe fiecare model naiv. Pentru a acoperi o cheltuială netă C, trebuie să retragi o sumă brută R > C astfel încât R minus impozitul pe partea de câștig din R să egaleze C. Dacă portofoliul are un cost-bază mediu și o cotă de apreciere a, fracțiunea impozabilă a fiecărei retrageri e a, iar impozitul efectiv pe retragere e a × cota de câștig de capital aplicabilă (3% prin intermediar fiscal rezident pentru dețineri peste un an, 6% sub un an, 16% autodeclarat prin broker străin).</p>
+
+<ul>
+<li>Exemplu: portofoliu cu apreciere medie a = 60% (deci 60% din fiecare leu retras e câștig impozabil), deținut peste un an prin intermediar fiscal rezident (cotă 3%). Impozit efectiv pe retragere = 0,60 × 3% = 1,8%. Pentru o cheltuială netă de 100.000 lei, retragerea brută necesară = 100.000 / (1 − 0,018) ≈ <strong>101.833 lei</strong>. Atenție: dacă investești prin broker străin (cotă 16% autodeclarată), impozitul efectiv sare la 0,60 × 16% = 9,6%, iar retragerea brută urcă la ≈ 110.620 lei — alegerea intermediarului devine ea însăși o variabilă de optimizare fiscală.</li>
+<li>Adaugă CASS: dacă venitul total din investiții (câștig de capital + dividende) depășește 6 salarii minime brute (în 2026, salariul minim brut e 4.050 lei → prag de 24.300 lei), datorezi CASS 10% pe baza plafonată la 6, 12 sau 24 de salarii minime, în funcție de tranșă. La venituri din investiții peste 24 de salarii minime (97.200 lei), CASS = 10% × 97.200 = <strong>9.720 lei</strong> fix, indiferent cât depășești.</li>
+</ul>
+
+<p>Modelul corect tratează CASS ca o funcție-treaptă pe venitul anual realizat, nu ca un procent liniar. Asta favorizează retragerile concentrate (realizezi mult într-un an, plătești CASS plafonat o dată) versus retrageri uniforme an de an care lovesc plafonul în fiecare an — canalul real prin care găsești taxa retragere optimă a portofoliului tău.</p>
+
+<h3>4. Glidepath-ul: alocare variabilă în timp</h3>
+
+<p>Contraintuitiv, cercetarea (Kitces-Pfau, „rising equity glidepath”) arată că în pensionare ar trebui să <em>crești</em> alocarea în acțiuni, nu să o scazi. Logica: riscul de secvență e concentrat în primii 10–15 ani. Dacă intri în pensionare cu alocare mai conservatoare (de ex. 60% acțiuni / 40% obligațiuni-cash) și urci treptat spre 80–90% acțiuni pe parcurs, reduci expunerea la exact perioada când un crash te-ar ruina, păstrând în același timp randamentul așteptat pe coada lungă. Modelul tău Monte Carlo trebuie să accepte un vector de alocare w(t) ca input, nu o singură pondere.</p>
+
+<h3>5. Definiția ruinei și metrica de ieșire</h3>
+
+<p>„Ruină” = portofoliul atinge zero înainte de finalul orizontului în cel puțin un an. Dar metrica binară (ruină da/nu) ascunde informație. Ieșiri mai bogate:</p>
+
+<ul>
+<li><strong>Probabilitate de ruină</strong> = fracțiunea traiectoriilor care ating zero.</li>
+<li><strong>Ruin-aware: anul median de epuizare</strong> în scenariile care eșuează (cât de devreme te lovește).</li>
+<li><strong>Magnitudinea shortfall-ului</strong> (cu cât rămâi dator în scenariile rele) — analog cu Conditional Value at Risk.</li>
+<li><strong>Distribuția averii terminale</strong> — moștenirea în percentila 10, 50, 90.</li>
+</ul>
+
+<h2>Exemplu numeric complet pas cu pas</h2>
+
+<p>Construim cazul de bază al unui FIRE-er român, 2026.</p>
+
+<ul>
+<li>Vârstă pensionare: 45 de ani. Orizont: 50 de ani (până la 95).</li>
+<li>Portofoliu: 2.500.000 lei într-un ETF global de acțiuni (UCITS, acumulare) + obligațiuni.</li>
+<li>Cheltuieli nete dorite: 100.000 lei/an (≈ 8.300 lei/lună).</li>
+<li>Alocare inițială: 70% acțiuni / 30% obligațiuni-cash, glidepath spre 85/15 până la vârsta 65.</li>
+</ul>
+
+<p><strong>Pasul 1 — rata de retragere brută inițială.</strong> Cheltuială netă 100.000 lei → retragere brută ~101.800 lei (impozit efectiv 1,8% pe partea de câștig, prin intermediar fiscal rezident, cotă 3% la deținere peste un an). Raportat la portofoliul de 2.500.000 lei, rata de retragere brută = 101.800 / 2.500.000 = <strong>4,07%</strong>. Deja peste pragul „sigur” intuitiv de 4%, înainte de a adăuga CASS, inflația medicală și — dacă ai folosi un broker străin la 16% — un strat fiscal de încă circa 0,35pp pe rata de retragere.</p>
+
+<p><strong>Pasul 2 — parametrii distribuției.</strong> Pentru blocul de acțiuni globale: randament real mediu istoric ~5% (developed markets, net de inflație), σ ~17%. Obligațiuni: real ~1,5%, σ ~7%. Inflația generală: medie 3%, σ 4% (calibrat pe varianța mai mare a României). Inflație medicală: IPC + 3pp, deci medie 6%.</p>
+
+<p><strong>Pasul 3 — rulează 100.000 de traiectorii block-bootstrap.</strong> În fiecare an t: trage randamentul portofoliului din blocul curent, aplică alocarea w(t), scade retragerea brută indexată la inflația realizată în acel scenariu, adaugă șoc medical Poisson dacă apare, recalculează soldul. Marchează ruina dacă soldul ≤ 0.</p>
+
+<p><strong>Pasul 4 — citește ieșirea.</strong> Pentru acest caz, un motor calibrat astfel produce tipic o probabilitate de ruină în zona 12–18% la rata de 4,07% brută pe 50 de ani — mult peste pragul de toleranță rezonabil de 5–10%. Concluzia: rata e prea agresivă. Cobori iterativ.</p>
+
+<p><strong>Pasul 5 — găsește SWR-ul la pragul tău.</strong> Rulezi modelul pe o grilă de rate (3,0%, 3,25%, 3,5%, ...) și cauți rata maximă la care probabilitatea de ruină ≤ 5%. Pentru profilul de mai sus, acea rată cade tipic în jur de <strong>3,2–3,5% brut</strong> pe orizont de 50 de ani — adică un portofoliu țintă mai aproape de 3.000.000–3.300.000 lei pentru aceeași cheltuială, nu 2.500.000. Diferența între 4% naiv și SWR-ul simulat e capitalul suplimentar de care ai nevoie ca să nu fii ruinat de secvență.</p>
+
+<h2>Reguli de retragere dinamice: superioare procentului fix</h2>
+
+<p>Un SWR fix e suboptimal pentru că ignoră informația care apare în timp. Trei reguli dinamice care reduc dramatic riscul de ruină la aceeași rată inițială:</p>
+
+<h3>Guardrails (Guyton-Klinger)</h3>
+
+<p>Definești o bandă în jurul ratei de retragere curente (rata = retragere / portofoliu curent). Dacă rata curentă urcă peste banda superioară (portofoliul a scăzut, deci retragerea ca % a crescut) — tai cheltuiala cu 10%. Dacă scade sub banda inferioară (portofoliul a crescut) — mărești cheltuiala cu 10%. Aceste „prosperity/capital preservation rules” transformă o ruină de 15% într-una de 2–4% la aceeași rată inițială, cu prețul unei variabilități de venit. Modelul Monte Carlo trebuie să implementeze regula <em>endogen</em>: retragerea în anul t depinde de soldul în t, nu de un plan static.</p>
+
+<h3>Floor-and-ceiling</h3>
+
+<p>Indexezi retragerea la inflație, dar impui un plafon (nu crești cu mai mult de X% chiar dacă portofoliul explodează) și un prag-podea (nu scazi sub un minim absolut de subzistență). Podeaua poate fi acoperită separat de pensia de stat CNPP și de Pilonul II/III, care în acest model devin o <em>anuitate de bază</em> ce reduce suma pe care portofoliul de risc trebuie să o producă.</p>
+
+<h3>Integrarea pensiei de stat și a Pilonului II</h3>
+
+<p>Un model serios scade din cheltuielile finanțate de portofoliu fluxurile garantate care încep mai târziu. Pensia CNPP și Pilonul II (plată la 65 de ani) acoperă o parte din podea după acea vârstă. Asta înseamnă că portofoliul trebuie să ducă greul doar pentru fereastra 45–65 (faza de „pre-pensie” cea mai vulnerabilă la secvență) plus suplimentul peste pensie după 65. Modelarea acestui flux întârziat reduce semnificativ rata de retragere necesară din portofoliul lichid în primii ani.</p>
+
+<h2>Edge-cases și capcane de modelare</h2>
+
+<ul>
+<li><strong>Corelația inflație-randamente.</strong> Inflația mare lovește simultan puterea de cumpărare (cheltuieli sus) și valoarea reală a obligațiunilor (jos). Dacă modelezi inflația și randamentele ca independente, subestimezi coada. Block bootstrap pe perioade reale captează corelația automat — alt motiv să-l preferi față de generarea i.i.d.</li>
+<li><strong>Inflația medicală necorelată cu IPC.</strong> În anii de IPC mic, costurile medicale pot crește în continuare. Tratează-le ca procese separate cu o corelație parțială (~0,5), nu perfect legate.</li>
+<li><strong>Riscul valutar.</strong> Portofoliul e în EUR/USD (ETF UCITS), cheltuielile în lei. O depreciere a leului îți crește puterea de cumpărare a portofoliului în lei, dar și prețul importurilor (inclusiv medical). Modelul trebuie să includă cursul ca variabilă stohastică, nu să presupună paritate fixă.</li>
+<li><strong>Modificări fiscale.</strong> Cotele (3%/6% câștig de capital prin intermediar rezident, 16% prin broker străin sau autodeclarat, 16% pe dividende din 2026) și pragurile CASS sunt politice. Un model robust testează sensibilitatea: ce se întâmplă cu SWR dacă impozitul efectiv pe câștig urcă la 16% permanent (eliminarea cotelor reduse de 3%/6%)? Tipic, fiecare +5pp de impozit efectiv pe câștig ridică rata de retragere brută necesară cu ~0,2–0,3pp și cere capital suplimentar.</li>
+<li><strong>Reziduul de overfitting pe istoric.</strong> Block bootstrap pe 1900–2025 presupune că viitorul seamănă cu trecutul. Stress-testează cu un „regime shift” pessimist: scade media randamentului real cu 1–1,5pp față de istoric (ipoteza randamentelor viitoare mai mici din evaluări actuale ridicate) și re-rulează. SWR-ul scade tipic cu încă 0,3–0,5pp.</li>
+</ul>
+
+<h2>De la probabilitate de ruină la decizie</h2>
+
+<p>Probabilitatea de ruină nu e o țintă de minimizat la zero — costul de a o duce sub 1% e un portofoliu atât de mare încât amâni FIRE cu ani. E un parametru de optimizat împotriva utilității tale: cât suplimentar de muncă valorează reducerea ruinei de la 8% la 4%? Cadrul corect e o frontieră ruină–capital–flexibilitate, unde regulile dinamice (guardrails) cumpără reducere de ruină nu cu capital, ci cu acceptarea variabilității de venit. Pentru majoritatea, combinația optimă e: SWR inițial simulat la prag 5–8%, plus guardrails, plus integrarea pensiei după 65 — nu un procent fix mai mic.</p>
+
+<h2>Checklist de implementare</h2>
+
+<ul>
+<li><strong>1.</strong> Calibrează inputurile pe date reale, nu pe presupuneri: randament real și σ pe activ (block bootstrap, nu normal i.i.d.), inflație generală medie 3% σ 4%, inflație medicală IPC+3pp.</li>
+<li><strong>2.</strong> Modelează cheltuielile ca „smile”: bază indexată IPC + componentă medicală indexată separat + șocuri Poisson crescătoare cu vârsta (60.000–120.000 lei/eveniment).</li>
+<li><strong>3.</strong> Adaugă stratul fiscal: retragere brută = netă / (1 − a×c), unde c = cota de câștig de capital (3% intermediar rezident >1an, 6% <1an, 16% broker străin/autodeclarat) și a = fracțiunea apreciată; impozit pe dividende 16%; CASS ca funcție-treaptă pe venitul anual (praguri 6/12/24 salarii minime, 4.050 lei brut în 2026).</li>
+<li><strong>4.</strong> Definește glidepath-ul w(t): pleacă conservator (60–70% acțiuni), urcă spre 80–90% până la 65, ca să aperi primii 10–15 ani de risc de secvență.</li>
+<li><strong>5.</strong> Rulează minimum 50.000–100.000 de traiectorii (eroare standard sub 0,1pp pe probabilitatea de ruină).</li>
+<li><strong>6.</strong> Caută pe grilă rata maximă cu probabilitate de ruină ≤ pragul tău (5–8%); raportează și anul median de epuizare și distribuția averii terminale.</li>
+<li><strong>7.</strong> Implementează guardrails endogen în motor (tai 10% peste banda superioară, mărești 10% sub cea inferioară) și re-evaluează ruina — așteaptă-te la o reducere de 8–10pp.</li>
+<li><strong>8.</strong> Scade fluxurile garantate (CNPP + Pilon II de la 65) din cheltuielile finanțate de portofoliu.</li>
+<li><strong>9.</strong> Stress-test: regime shift pesimist (−1,5pp randament real), impozit pe câștig la 16%, depreciere leu de 20%; verifică dacă SWR-ul rămâne în pragul de toleranță.</li>
+<li><strong>10.</strong> Reia simularea anual cu soldul real și inputurile actualizate — SWR-ul personalizat e un proces viu, nu un număr fixat la pensionare.</li>
+</ul>

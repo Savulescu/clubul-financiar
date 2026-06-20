@@ -1,0 +1,98 @@
+<p>O strategie de <strong>tail risk hedging vix calls roll strategy portofoliu</strong> nu cumpără pur și simplu opțiuni call pe VIX și le ține până la scadență — asta ar însemna să plătești sângerarea integrală a contango-ului și să arzi 8–12% din NAV anual. Construcția corectă a unui <strong>vix call hedge permanent portfolio</strong> este o problemă de inginerie a roll-ului: cum rulezi strike-urile și scadențele astfel încât <strong>roll strategy vix options cost</strong> să rămână sub 1–2% pe an, dar convexitatea la un șoc de −20%+ să rămână intactă. Aici disecăm exact mecanismul.</p>
+<p>Lecția presupune că deja stăpânești termen-structura VIX, skew-ul și logica de buget din lecția de Black Swan insurance. Mergem direct în profunzimea cantitativă: financiarea hedge-ului din <strong>vix contango financing strategy</strong>, decompoziția costului anual al <strong>tail risk premium</strong>, mecanismul exact de <strong>portfolio insurance vix mechanism</strong> via vega și gamma, plus un <strong>volatility hedge effectiveness backtest</strong> pe crahurile 2018, 2020 și 2022. Tratăm <strong>Black Swan insurance vix</strong> nu ca pariu pe timing, ci ca linie bugetară optimizată per leu de convexitate.</p>
+<p>Diferența dintre amatorul care „cumpără VIX calls când e frică" și specialistul care rulează un program permanent este că al doilea știe exact care componentă a P&L-ului este cost structural inevitabil și care este risipă evitabilă din roll prost executat.</p>
+
+<h2>De ce un VIX call buy-and-hold pierde 90% din timp: decompoziția P&L</h2>
+<p>Înainte de orice optimizare, trebuie să separi cele patru surse de P&L ale unei poziții long VIX call. Pe un orizont de deținere, randamentul opțiunii se descompune aproximativ astfel:</p>
+<p><strong>ΔC ≈ Δ·dF + ½·Γ·(dF)² + Vega·dσ + Θ·dt + Roll_carry</strong></p>
+<p>unde F este prețul futures VIX (nu spot-ul VIX, pe care nu îl poți tranzacționa direct), σ este volatilitatea implicită a opțiunii pe futures, iar Roll_carry este pierderea/câștigul din convergența futures-ului către spot pe măsură ce se apropie scadența. Cele patru capcane:</p>
+<ul>
+<li><strong>Theta (Θ) — sângerarea zilnică.</strong> O opțiune VIX call de o lună, ATM, pierde valoare extrinsecă accelerat în ultimele 2–3 săptămâni. Pe un VIX la 14–16 (regimul calm tipic), un call ATM pe futures pierde tipic 5–8% din valoare per săptămână în absența mișcării.</li>
+<li><strong>Roll-down pe contango — capcana ascunsă.</strong> În ~80% din zile, curba futures VIX este în contango: futures-ul de luna 2 cotează peste futures-ul de luna 1, care cotează peste spot. Spread-ul mediu M1–M2 istoric este ~5–7%/lună. Pe măsură ce ții poziția, futures-ul „coboară panta" spre spot — adversar direct pentru un long.</li>
+<li><strong>Mean-reversion al vega-ului.</strong> Chiar dacă VIX urcă temporar, revine la medie rapid. Un long care nu monetizează la vârf pierde tot câștigul de vega.</li>
+<li><strong>Convexitate negativă la roll.</strong> Dacă rulezi mecanic la scadență, cumperi sistematic „scump" (vol implied ridicat după spike) și vinzi „ieftin" — exact invers față de ce vrei.</li>
+</ul>
+<p>Concluzia cantitativă: un program naiv „cumpără 1-month ATM call lunar și ține la scadență" a costat istoric <strong>~10–14% din NAV pe an</strong> (calibrat pe S&P 500 alocând ~1% noțional VIX pe lună) — inacceptabil. Optimizarea roll-ului este exact ce transformă acești 10–14% în 1–2%.</p>
+
+<h3>Spot VIX vs futures VIX: de ce nu poți cumpăra panica direct</h3>
+<p>Punct critic pe care mulți avansați îl ratează: <strong>VIX spot nu este tranzacționabil.</strong> Cumperi expunere doar prin futures VIX (CFE) sau prin opțiuni pe acele futures. La un spike, spot-ul VIX poate sări de la 16 la 50 (+212%), dar futures-ul de luna 2 poate urca doar de la 17 la 28 (+65%) — pentru că piața prețuiește deja mean-reversion-ul. Acest „basis decay" este motivul pentru care payoff-ul real al hedge-ului tău e mult sub ce sugerează headline-ul VIX. Modelarea corectă a effectiveness-ului trebuie făcută pe <strong>front-month futures move, nu pe spot move</strong>.</p>
+
+<h2>Roll strategy optimizată: structura cu trei reguli</h2>
+<p>Hedge-ul permanent de cost minim nu cumpără ATM. Construcția care minimizează theta+roll-down menținând convexitatea folosește trei reguli simultane:</p>
+
+<h3>Regula 1 — Strike OTM departe (delta 0,10–0,15), nu ATM</h3>
+<p>Cumperi VIX calls cu strike la <strong>VIX +10 la +15 puncte</strong> (ex. dacă VIX e 15, cumperi strike 25–30), cu deltă în jur de 0,10. Logica: aceste opțiuni au theta absolut mic (costă bănuți), dar gamma explodează exact în zona de spike. Plătești puțin pe zi în piață calmă, iar într-un șoc convexitatea per leu investit este maximă. Un call strike 30 cumpărat cu VIX la 15 poate face 15–25x într-un eveniment de tip 2020.</p>
+
+<h3>Regula 2 — Scadență 3–5 luni, roll la 60–75 zile rămase</h3>
+<p>Nu cumperi front-month (theta brutal), ci scadențe de 3–5 luni unde theta zilnică e domoală, și <strong>rulezi poziția când mai rămân ~60–75 de zile</strong>, înainte ca decay-ul să accelereze. Astfel eviți zona de accelerare a theta-ului din ultima lună. Rulezi vânzând opțiunea de 60–75 zile (mai are valoare extrinsecă) și cumperi una nouă de 4 luni. Acest „ladder" netezește costul.</p>
+
+<h3>Regula 3 — Financiarea din contango: vinzi vega scumpă pe care n-o vrei</h3>
+<p>Aici intră <strong>vix contango financing strategy</strong>. Pentru a reduce costul net, finanțezi calls-urile de tail prin vânzarea structurată a unei părți din curba pe care nu o vrei oricum:</p>
+<ul>
+<li><strong>VIX call spread (vinzi strike-ul foarte sus).</strong> Cumperi call 25, vinzi call 50. Plafonezi payoff-ul peste VIX 50, dar reduci prima netă cu 35–45%. Întrebarea de optimizare: cât din coada extremă (VIX 50→80) ești dispus să cedezi pentru a reduce carry-ul? Pe S&P, doar 1987 și 2020 au depășit VIX 50 intraday — deci plafonul la 50 sacrifică <2% din scenarii istorice dar taie costul semnificativ.</li>
+<li><strong>Calendar financing.</strong> Vinzi vega de front-month (cea mai scumpă pe unitate de timp, care decade cel mai repede în contango) și cumperi vega de back-month. Capturezi roll-down-ul în favoarea ta, nu împotriva ta.</li>
+</ul>
+<p>Combinația „long OTM back-month call spread, finanțat parțial din short front-month vega" este structura care duce costul net spre <strong>1–2%/an</strong> menținând >70% din convexitatea de tail.</p>
+
+<h2>Modelul de buget pas-cu-pas: portofoliu 200.000 lei</h2>
+<p>Aplicăm pe un investitor român 2026 cu portofoliu de <strong>200.000 lei (~40.000 EUR)</strong> în ETF-uri pe S&P 500. Reține: VIX hedging direct cere broker cu acces CFE (Interactive Brokers, Tastytrade) — instrumentele se denominează în USD, deci adaugi și un risc valutar EUR/USD/RON pe componenta de hedge.</p>
+<p><strong>Pasul 1 — Dimensionarea noționalului de protejat.</strong> Vrei să acoperi un drawdown de −20% pe partea de echity. Pe 200.000 lei expuse, asta e o pierdere brută de ~40.000 lei. Ținta: hedge care recuperează 50–70% din această felie la un șoc.</p>
+<p><strong>Pasul 2 — Bugetul anual.</strong> Aloci 1,5% = <strong>3.000 lei/an</strong> (~600 EUR / ~650 USD) pentru componenta VIX. Împărțit pe ~5–6 roll-uri/an, ~110 USD per roll.</p>
+<p><strong>Pasul 3 — Structura per roll.</strong> Cu VIX la 15:</p>
+<ul>
+<li>Cumperi 1 contract VIX call strike 25, scadență 4 luni (~0,55 USD = 55 USD la multiplicatorul 100).</li>
+<li>Vinzi 1 call strike 50, aceeași scadență (~0,15 USD = 15 USD). Cost net spread: ~40 USD.</li>
+<li>Repeți astfel încât noționalul de vega să acopere ținta. La 200k lei, ai nevoie tipic de 2–3 spread-uri rulate.</li>
+</ul>
+<p><strong>Pasul 4 — Payoff modelat la șoc.</strong> Dacă VIX sare la 45 (scenariu 2018/„Volmageddon" sau corecție bruscă), call-ul 25 ajunge in-the-money cu ~20 de puncte intrinsec; pe 2–3 contracte, payoff brut ~4.000–6.000 lei pe componenta VIX. Plus, deoarece ai poziție multi-lună, vega-ul adaugă valoare extrinsecă suplimentară — payoff real ușor peste intrinsec. Recuperezi astfel ~10–15% din pierderea echity, iar la un șoc de tip 2020 (VIX 82), multiplul urcă la 15–25x pe partea long, recuperând 40–60%.</p>
+<p><strong>Pasul 5 — Regula de monetizare.</strong> Critic: <strong>nu aștepta scadența la un spike.</strong> Definește o regulă mecanică — ex. „închide 50% din poziție când VIX >35, restul când VIX >50 SAU profit >5x" — și rebalansează încasarea în echity ieftină. Fără regulă de monetizare, mean-reversion-ul îți evaporă câștigul în 2–3 săptămâni.</p>
+
+<h2>Decompoziția costului anual: unde se duc cei 1,5%</h2>
+<p>Pentru a controla <strong>tail risk premium cost anual</strong>, trebuie să atribui fiecare bps. Pe structura de mai sus, costul de ~1,5%/an se descompune aproximativ:</p>
+<ul>
+<li><strong>Roll-down pe contango: ~0,6–0,8%/an.</strong> Componenta structurală inevitabilă (parțial compensată de short-ul front-month). Aceasta este „prima de asigurare" pură.</li>
+<li><strong>Theta net: ~0,4–0,6%/an.</strong> Sângerarea de timp pe back-month, mult redusă vs front-month ATM.</li>
+<li><strong>Slippage + bid-ask + comisioane: ~0,2–0,3%/an.</strong> VIX options au spread-uri largi pe strike-uri departe OTM; execută cu limit orders, niciodată market. Acesta e bps-ul cel mai des subestimat.</li>
+<li><strong>Cost valutar (RON-hedger): ~0,1%/an</strong> implicit din conversie și fluctuație pe sold.</li>
+</ul>
+<p>Edge-case de optimizare: în regimuri de <strong>backwardation</strong> (curba inversată, M1 > M2 — apare DOAR în criză), roll-down-ul devine POZITIV pentru long. Un program sofisticat oprește financiarea prin short-vega și trece la long pur în backwardation, pentru că atunci carry-ul lucrează în favoarea ta. Detectarea regimului: monitorizezi spread-ul M1/M2; dacă scade sub 1,0 (backwardation), comuți modul.</p>
+
+<h3>Greșeala de timing: nu mări hedge-ul după ce VIX a explodat</h3>
+<p>Eroarea clasică, cuantificată: dacă VIX e deja la 40, vol-of-vol-ul (volatilitatea implicită a opțiunilor VIX, „VVIX") este 130–180, ceea ce face calls-urile de 3–4x mai scumpe ca primă. Cumpărând atunci, plătești tail premium-ul la vârf și ești expus colapsului de vol când piața se calmează. Regula de specialist: <strong>acumulezi hedge când VVIX < 90 și VIX < 18</strong>; în criză doar MONETIZEZI, nu cumperi.</p>
+
+<h2>Volatility hedge effectiveness backtest: trei regimuri de criză</h2>
+<p>Eficacitatea reală a unei <strong>vix call hedge permanent portfolio</strong> diferă radical după tipul de crah. Un <strong>volatility hedge effectiveness backtest</strong> onest trebuie segmentat pe viteză:</p>
+<ul>
+<li><strong>Feb 2018 („Volmageddon"):</strong> VIX 13→37 în câteva zile. Șoc de viteză pură. VIX call hedge OTM a performat excelent — multiplu 8–12x pe long calls, recuperare rapidă a pierderii echity de ~10%. Acesta e scenariul „ideal" pentru VIX hedge.</li>
+<li><strong>Mar 2020 (COVID):</strong> VIX 14→82 în 5 săptămâni — cel mai rapid bear din istorie. Convexitatea maximă: hedge-ul a făcut 15–25x, recuperând 40–60% din drawdown-ul de −34%. Aici VIX calls au strălucit ca nicăieri.</li>
+<li><strong>2022 (inflație/rate):</strong> VIX a oscilat 20–36 pe tot anul, fără spike masiv, în timp ce S&P pierdea lent −25%. <strong>VIX calls au DEZAMĂGIT</strong> — pentru că drawdown-ul a fost lent și volatilitatea n-a explodat, theta+roll au mâncat o parte din payoff. Acesta e edge-case-ul critic: <strong>VIX hedge protejează șocuri de viteză, NU bear markets lente.</strong></li>
+</ul>
+<p>Implicația de design: VIX calls roll strategy este <strong>UN picior</strong>, nu întreaga asigurare. Pentru crahurile lente (2000, 2022) ai nevoie de al doilea picior necorelat — aur, trend-following/CTA, cash în valută forte — așa cum am detaliat în lecția de Black Swan insurance. Un hedge mono-VIX e fragil exact la regimul 2022.</p>
+
+<h3>Metrica de eficiență per leu: cost-per-convexity</h3>
+<p>Pentru a compara structuri, folosește raportul <strong>(payoff la șoc −20%) / (cost anual)</strong>. Pe structura de back-month call spread optimizat: payoff modelat la −20%/VIX→40 e ~4.500 lei la un cost de 3.000 lei/an → ratio ~1,5x în anul de criză, dar peste un ciclu de 7 ani (1 criză la ~5–7 ani), costul cumulat e ~21.000 lei vs payoff ~4.500–6.000 într-un eveniment moderat sau 15.000–20.000 într-unul sever. <strong>Break-even-ul depinde de severitate</strong> — programul „plătește" pe șocuri mari și rapide, nu pe corecții obișnuite. De aceea calibrezi strike-ul departe OTM: vrei să fii plătit pe tail, nu pe zgomot.</p>
+
+<h2>Edge-cases și capcane de specialist</h2>
+<ul>
+<li><strong>Lichiditatea strike-urilor departe OTM.</strong> Call-urile VIX strike 50+ au open interest subțire; la roll poți prinde spread-uri de 30–50%. Soluție: rulează în zile calme, cu limit orders pas mărunt, niciodată în panică.</li>
+<li><strong>Settlement-ul VIX (procesul SOQ).</strong> VIX options se decontează cash pe „Special Opening Quotation" în dimineața de miercuri a scadenței — un proces care poate devia de la VIX-ul afișat. Nu ține poziții până la SOQ; monetizează înainte.</li>
+<li><strong>Pin risk și asimetria short-leg-ului.</strong> Dacă vinzi strike 50 pentru financiare și VIX explodează exact spre 50, gestiunea poziției devine delicată. Preferă să închizi întreg spread-ul la spike, nu doar long-leg-ul.</li>
+<li><strong>Riscul valutar pentru hedger-ul RON.</strong> Hedge-ul plătește în USD exact când USD se apreciază (fuga spre dolar la criză) — deci ai un tailwind valutar natural la șoc, dar headwind pe carry în perioade calme. Nu hedga valutar componenta de tail; lasă corelația naturală să lucreze.</li>
+<li><strong>Fiscalitate ANAF 2026.</strong> Câștigul din opțiuni pe instrumente străine via broker fără reținere la sursă în România (Interactive Brokers, Tastytrade) se declară în Declarația Unică, iar cota pe câștigul net autodeclarat este <strong>16%</strong> — cotele preferențiale de 3% (deținere &gt;1 an) și 6% (&lt;1 an) se aplică EXCLUSIV prin intermediari rezidenți care rețin la sursă, deci nu acoperă brokerii străini. Peste asta, dacă venitul total din investiții și alte surse non-salariale depășește treptele de venit, datorezi CASS 10% pe baze plafonate la <strong>6 / 12 / 24 de salarii minime</strong> (la salariul minim 2026 de 4.050 lei: praguri 24.300 / 48.600 / 97.200 lei, deci CASS maxim ~9.720 lei la baza de 24 salarii). Pierderile din anii de carry se pot reporta 7 ani și compensa cu câștigurile din anul de monetizare — exact profilul unei strategii de tail. Confirmă tratamentul exact al instrumentelor derivate cu un consultant fiscal, întrucât clasificarea opțiunilor cash-settled poate diferi.</li>
+</ul>
+
+<h2>Checklist de implementare — programul permanent</h2>
+<ul>
+<li><strong>1. Buget fix:</strong> alocă 1–2% din NAV/an exclusiv componentei VIX; pe 200k lei = 2.000–4.000 lei.</li>
+<li><strong>2. Strike OTM:</strong> cumpără calls la VIX +10/+15 puncte (deltă ~0,10–0,15), niciodată ATM.</li>
+<li><strong>3. Scadență 3–5 luni:</strong> rulează la 60–75 zile rămase, înainte de accelerarea theta.</li>
+<li><strong>4. Financiare:</strong> transformă în call spread (vinde strike 50) și/sau vinde front-month vega ca să tai carry-ul cu 35–45%.</li>
+<li><strong>5. Regim-switch:</strong> monitorizează M1/M2; sub 1,0 (backwardation) treci pe long pur, oprește short-vega.</li>
+<li><strong>6. Acumulează doar în liniște:</strong> adaugă hedge când VVIX<90 și VIX<18; niciodată după spike.</li>
+<li><strong>7. Regulă de monetizare mecanică:</strong> închide 50% la VIX>35, restul la VIX>50 sau profit >5x; rebalansează în echity ieftină.</li>
+<li><strong>8. Al doilea picior:</strong> cuplează VIX calls cu un hedge necorelat (aur/CTA/cash USD) pentru crahurile lente de tip 2022.</li>
+<li><strong>9. Execuție:</strong> limit orders pas mărunt pe strike-uri OTM; evită SOQ; cont multi-valutar pentru a gestiona USD.</li>
+<li><strong>10. Backtest propriu:</strong> validează effectiveness-ul pe front-month futures move (nu pe spot VIX), segmentat pe viteză de crah.</li>
+<li><strong>11. Fiscal:</strong> declară în Declarația Unică la cota de 16% (broker străin, autodeclarare), raportează carry-ul ca pierdere reportabilă pe 7 ani și compenseaz-o cu câștigul din anul de monetizare; verifică expunerea la CASS pe treptele de 6/12/24 salarii minime.</li>
+</ul>
+<p>Programul corect nu este „ai dreptate despre criză", ci „plătești disciplinat 1–2% pe an pentru o convexitate de tail pe care o monetizezi cu reguli, nu cu emoții" — exact diferența dintre o asigurare inginerească și un pariu pe timing.</p>

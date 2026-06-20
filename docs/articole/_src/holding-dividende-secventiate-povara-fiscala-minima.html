@@ -1,0 +1,137 @@
+<p>Pentru specialistul care construiește o arhitectură multi-entitate, problema centrală a anului 2026 nu mai este „PFA sau SRL", ci optimizarea poverii fiscale efective consolidate pe un orizont de 10 ani, cu <strong>holding-uri dividende timing fiscal</strong> tratate ca un singur sistem dinamic. Majorarea impozitului pe dividende la 16% de la 1 ianuarie 2026, comprimarea plafonului de microîntreprindere la 100.000 EUR și eliminarea cotei de 3% schimbă radical calculul: o veritabilă holding structure România tax planning bine proiectată nu mai vizează evitarea unei taxe, ci secvențierea fluxurilor între niveluri pentru a maximiza intervalele de imunitate parțială și totală.</p>
+
+<p>Lecția construiește un model cuantitativ de holding-uri suprapuse, cu dividend secvențiat, transformări juridice programate și optimizare profit distribuire multi-an. Vom trata explicit scutirea de participații (deținere ≥10% pe ≥1 an, care anulează integral cei 16% între persoane juridice române), regimul de holding microîntreprindere tax sub presiunea regulii întreprinderilor legate și logica structuri corporative minimizare taxă efectivă pe lanțul operațional → holding → persoană fizică. Toate cifrele sunt RO 2026; unde legislația lasă marjă de interpretare, formulăm prudent.</p>
+
+<p>Avertisment metodologic: niciuna dintre tehnicile de mai jos nu funcționează ca „trucuri" izolate. Ele produc valoare doar cumulativ, pe ani fiscali consecutivi, și doar dacă respectă testul de substanță economică (art. 11 Cod fiscal — antiabuz). Modelăm impactul, nu garantăm rezultatul.</p>
+
+<h2>Arhitectura de bază: cele trei niveluri de imunitate</h2>
+
+<p>Sistemul cuantitativ pe care îl optimizăm are trei paliere fiscale distincte, fiecare cu propriul „strat de imunitate":</p>
+
+<ul>
+<li><strong>Nivelul 0 — entitatea operațională (OpCo):</strong> generează profit. Aici se decide impozit pe profit 16% vs. microîntreprindere 1% pe venit. Pragul micro 2026 = 100.000 EUR, evaluat la cursul BNR din 31.12.2025 (~509.850 lei la 5,0985 lei/EUR — confirmați cursul publicat).</li>
+<li><strong>Nivelul 1 — holding-ul (HoldCo):</strong> persoană juridică română care deține ≥10% din OpCo. Dividendul OpCo→HoldCo este <strong>integral neimpozabil</strong> dacă deținerea ≥10% a fost menținută neîntrerupt ≥1 an la data plății (art. 23 lit. o / art. 43 Cod fiscal). Acesta este stratul de imunitate totală — nu 75%, ci 100% pe acest segment.</li>
+<li><strong>Nivelul 2 — persoana fizică (asociatul final):</strong> aici se aplică cei 16% impozit pe dividende + CASS plafonat. Acesta este singurul punct de fricțiune fiscală reală, iar întreaga artă a sequencing-ului constă în a-l atinge cât mai rar și cât mai eficient.</li>
+</ul>
+
+<p>Conceptul de „imunitate parțială de 75%" din practica de planificare se referă la efectul net combinat: dividendul urcă necontaminat prin HoldCo (0% taxă pe segmentul intermediar), iar fricțiunea apare exclusiv la extracția finală. Dacă profitul rămâne capitalizat la nivel de holding și este reinvestit, povara efectivă pe acel flux este zero pe termen lung — de unde și ratele efective sub 16% pe care le vom calcula.</p>
+
+<h2>Modelul cuantitativ: rata efectivă de taxare pe lanț (RET)</h2>
+
+<p>Definim Rata Efectivă de Taxare ca raport între totalul prelevărilor (impozit OpCo + impozit dividend + CASS) și profitul brut operațional, înainte de orice distribuire. Notăm:</p>
+
+<ul>
+<li><strong>P</strong> = profit brut OpCo;</li>
+<li><strong>t₀</strong> = cota la nivel OpCo (0,01 pentru micro pe venit, aproximat; 0,16 pe profit);</li>
+<li><strong>t_d</strong> = 0,16 impozit dividend la extracția finală (2026);</li>
+<li><strong>c</strong> = CASS, plafonat (vezi mai jos);</li>
+<li><strong>α</strong> = fracțiunea distribuită efectiv către persoana fizică într-un an dat (lever-ul de timing).</li>
+</ul>
+
+<p>Pentru un SRL pe profit care distribuie integral (α=1), fără holding intermediar:</p>
+
+<p><strong>Net persoană fizică = P × (1 − 0,16) × (1 − 0,16) = P × 0,7056.</strong> RET ≈ 29,4% (ignorând CASS). Acesta este scenariul-etalon „naiv".</p>
+
+<h3>Efectul holding-ului asupra timing-ului</h3>
+
+<p>Introducem HoldCo. Dividendul OpCo→HoldCo este 0%. La nivel HoldCo, profitul (deja net de impozitul OpCo) se acumulează. Cheia: <strong>doar fracțiunea α extrasă către persoana fizică suportă cei 16% + CASS într-un an dat.</strong> Restul rămâne în holding, disponibil pentru reinvestire fără fricțiune.</p>
+
+<p>RET multi-anuală devine o funcție de profilul de extracție {α₁, α₂, ..., α₁₀}. Dacă antreprenorul are nevoie de lichiditate personală de doar X lei/an, holding-ul permite calibrarea distribuirii exact la acel X, lăsând surplusul să compună fără cei 16% — exact opusul SRL-ului care distribuie reactiv, integral, an de an.</p>
+
+<h2>Lever-ul CASS: pragurile plafonate 2026 și optimizarea cuantelor de distribuire</h2>
+
+<p>CASS pe dividende rămâne în 2026 plafonat pe sistemul 6/12/24 salarii minime (spre deosebire de veniturile din activități independente, al căror plafon CASS urcă în 2026 la 72 salarii minime). Baza de calcul a plafoanelor se raportează la salariul minim brut în vigoare la 1 ianuarie 2026, respectiv 4.050 lei (majorarea la 4.325 lei de la 1 iulie 2026 nu modifică plafoanele CASS pentru anul fiscal 2026, care rămân ancorate la valoarea de la începutul anului). Pragurile anuale 2026 sunt:</p>
+
+<ul>
+<li><strong>6 salarii = 24.300 lei:</strong> sub acest prag, CASS = 0;</li>
+<li><strong>12 salarii = 48.600 lei:</strong> CASS = 10% × 24.300 = 2.430 lei;</li>
+<li><strong>24 salarii = 97.200 lei:</strong> CASS = 10% × 48.600 = 4.860 lei;</li>
+<li><strong>peste 24 salarii:</strong> CASS = 10% × 97.200 = 9.720 lei (plafon maxim).</li>
+</ul>
+
+<p>Atenție la mecanica de calcul: baza CASS pentru dividende se determină pe venitul net de impozit reținut, iar pragurile se raportează la salariul minim de la începutul anului. CASS se declară prin Declarația Unică (D212), aferent anului de realizare a venitului.</p>
+
+<p>Implicația strategică este contraintuitivă: <strong>plafonarea CASS face ca distribuirile MARI să fie marginal mai eficiente decât cele mici-dar-frecvente.</strong> Pentru o distribuire de 1.000.000 lei, CASS-ul de 9.720 lei reprezintă 0,97% — neglijabil. Pentru o distribuire de 60.000 lei, plafonul de 24 salarii nu este atins, dar CASS-ul fix de 4.860 lei (treapta 12 salarii) reprezintă un procent mult mai mare din suma extrasă. Concluzie: dacă oricum extrageți, extrageți în „pulsuri" mari și rare, nu în picături anuale.</p>
+
+<h3>Tehnica „pulse distribution" pe 10 ani</h3>
+
+<p>Comparăm două profiluri de extracție a aceluiași profit cumulat de 1.200.000 lei pe 10 ani:</p>
+
+<ul>
+<li><strong>Profil A (liniar):</strong> 120.000 lei/an × 10 ani. CASS plafonat la 24 salarii = 9.720 lei/an → 97.200 lei CASS pe 10 ani.</li>
+<li><strong>Profil B (puls):</strong> acumulare în holding 9 ani, extracție unică 1.200.000 lei în anul 10. CASS = 9.720 lei (un singur an plafonat) → economie CASS ≈ 87.480 lei.</li>
+</ul>
+
+<p>Plus, în Profilul B, cei 1.080.000 lei reținuți în holding pe parcurs au putut fi reinvestiți (instrumente financiare, imobiliare, alte participații), generând randament compus pe sume care în Profilul A părăseau perimetrul corporativ taxat anual. Pe 9 ani la 6% randament, diferența de compunere depășește frecvent economia CASS directă. Lever-ul de timing valorează mai mult prin amânare-compunere decât prin economia nominală de CASS.</p>
+
+<h2>Capcana întreprinderilor legate: de ce „stacking-ul micro" naiv eșuează în 2026</h2>
+
+<p>Aici desființăm o tehnică populară, dar nefuncțională în 2026. Tentația este să fragmentați activitatea în mai multe microîntreprinderi, fiecare sub 100.000 EUR, pentru a păstra cota de 1%. Regula întreprinderilor legate o anulează:</p>
+
+<ul>
+<li>Plafonul de 100.000 EUR se verifică <strong>cumulat</strong> pe entitatea română PLUS toate întreprinderile legate cu ea;</li>
+<li>O persoană care deține <strong>peste 25%</strong> în mai multe societăți le face „legate" — veniturile se însumează;</li>
+<li>În plus, un asociat cu >25% poate beneficia de regimul micro pentru <strong>o singură</strong> microîntreprindere.</li>
+</ul>
+
+<p>Consecința cuantitativă: trei OpCo cu 80.000 EUR fiecare, deținute 100% de aceeași persoană, NU rămân micro. Cumulat = 240.000 EUR > 100.000 EUR → toate trec la impozit pe profit 16%. Stacking-ul orizontal naiv este mort.</p>
+
+<h3>Structura corectă: dilution sub 25% + holding ca asociat</h3>
+
+<p>Singura cale legitimă de a menține pragul micro pe entități multiple este ca participațiile directe ale persoanei fizice să rămână sub 25% în entitățile suplimentare, cu HoldCo (persoană juridică) ca asociat majoritar. Atenție: regula de cumul se aplică și prin persoana juridică deținătoare — testul de „întreprinderi legate" privește lanțul de control, nu doar persoana fizică. Prin urmare, holding-ul nu „spală" automat legătura; el doar repoziționează unde se face testul. Concluzia operativă: în 2026, păstrarea micro pe volume mari este structural dificilă, iar designul trebuie să accepte că la scară OpCo migrează inevitabil pe 16% profit — moment în care holding-ul își schimbă rolul din „protector de cotă micro" în „colector de dividende imune".</p>
+
+<h2>Transformările juridice secvențiate: calendarul de 10 ani</h2>
+
+<p>Modelul matur tratează forma juridică drept variabilă de timp, nu constantă. Secvența-tip optimizată:</p>
+
+<ol>
+<li><strong>Anii 1–2 (faza micro):</strong> OpCo unic, micro 1% pe venit cât timp cifra de afaceri &lt; 100.000 EUR. Profitul net urcă spre HoldCo doar parțial; HoldCo se constituie devreme și acumulează ≥10% participație pentru a porni ceasul de 1 an al scutirii.</li>
+<li><strong>Anul 3 (tranziția de prag):</strong> când CA depășește 100.000 EUR sau ponderea consultanță/management atinge 20%, OpCo trece obligatoriu la profit 16% din trimestrul depășirii. Aici se reevaluează dacă merită fragmentarea activităților necontaminate într-o a doua entitate (cu grijă la regula 80/20 și la legate).</li>
+<li><strong>Anii 4–9 (faza de acumulare):</strong> dividende OpCo→HoldCo 100% imune (condiția de 1 an deja împlinită). Distribuire α minimă către persoana fizică, doar cât acoperă nevoile de lichiditate. Surplusul se reinvestește din HoldCo.</li>
+<li><strong>Anul 10 (extracție-puls sau exit):</strong> dacă obiectivul e lichidarea, vânzarea participației se poate face fie la nivel de HoldCo (câștig integrat în baza de impozit pe profit 16%, dar cu posibila scutire de participații pe titlurile deținute ≥10% timp de ≥1 an), fie de către persoana fizică direct. Reținem că, pentru persoana fizică, câștigul din transferul de titluri prin broker rezident este impozitat în 2026 cu 3% (deținere peste 1 an) sau 6% (sub 1 an), față de 16% prin broker nerezident (autodeclarat în D212). Dacă e extracție de cash, puls unic plafonat CASS.</li>
+</ol>
+
+<h3>Condiția critică a celor 12 luni</h3>
+
+<p>Scutirea de participații cere deținere ≥10% timp de ≥1 an împlinit până la data plății dividendului, inclusiv. Eroarea clasică: se constituie HoldCo și se distribuie dividend în aceeași lună → cei 16% se aplică integral, pentru că ceasul de 12 luni nu a fost pornit. <strong>Regula de aur: HoldCo trebuie să dețină participația ≥10% cu cel puțin 12 luni înainte de prima distribuire imună.</strong> Acesta este singurul „cost de setup" temporal al întregii structuri și trebuie planificat din anul 1.</p>
+
+<h2>Studiu de caz integrat: 1.000.000 lei profit, comparație pe 10 ani</h2>
+
+<p>Antreprenor cu OpCo pe profit (16%), profit brut 1.000.000 lei/an, nevoie de lichiditate personală 100.000 lei/an. Comparăm două arhitecturi pe orizont decenal.</p>
+
+<ul>
+<li><strong>Arhitectura naivă (fără holding, distribuire integrală):</strong> profit net post-impozit 840.000 lei/an; distribuit integral cu 16% dividend = 705.600 lei net, minus CASS plafon 9.720 lei → ~695.880 lei/an net persoană fizică. Pe 10 ani: ~6.958.800 lei net, dar zero capital reinvestit corporativ.</li>
+<li><strong>Arhitectura cu holding + α calibrat:</strong> OpCo→HoldCo 840.000 lei/an imun. Persoana fizică extrage doar ~119.000 lei brut/an (pentru a acoperi 100.000 lei net după 16% + CASS). Restul ~720.000 lei/an rămâne în HoldCo, reinvestit la 6% compus. Pe 10 ani, capitalul acumulat în holding (necontaminat de cei 16% până la o eventuală extracție viitoare) depășește 9,5 mil. lei valoare brută reinvestită, vs. distribuit-și-consumat în varianta naivă.</li>
+</ul>
+
+<p>Diferența reală nu este în net-ul anual de cash (similar), ci în <strong>capitalul de lucru fiscal-amânat</strong> care rămâne să compună. Cei 16% pe partea reinvestită sunt amânați, nu plătiți; iar amânarea pe 10 ani la 6% echivalează cu o reducere efectivă a poverii prezente de ~25–30% pe acel segment (valoare-prezentă a taxei amânate).</p>
+
+<p>Pentru a cuantifica riguros, definim factorul de avantaj al amânării: dacă cota nominală amânată este t_d = 0,16, perioada de amânare n ani și costul de oportunitate r, atunci valoarea-prezentă a taxei amânate este t_d / (1+r)ⁿ. La n=9 și r=6%, factorul (1+0,06)⁹ ≈ 1,689, deci sarcina prezentă a celor 16% scade la ~9,5% în termeni de valoare actuală. Cu cât holding-ul reține mai mult și mai mult timp, cu atât rata efectivă pe segmentul reinvestit converge spre acest minim. Acesta este motorul matematic care transformă o cotă nominală de 16% într-o povară efectivă sub 10% pe capitalul care nu este consumat — esența optimizării profit distribuire multi-an.</p>
+
+<p>Observați totodată asimetria: avantajul este maxim pentru antreprenorii cu nevoi de consum personal mici relativ la profit (α mic). Pentru cineva care consumă tot profitul anual (α≈1), holding-ul nu adaugă aproape nimic peste structura naivă — fricțiunea de 16% se plătește oricum integral, anual. Tehnica este, deci, un instrument de acumulare de avere, nu de venit curent; designul trebuie să pornească de la profilul real de lichiditate al persoanei, nu de la o ambiție abstractă de „minimizare a taxei".</p>
+
+<h2>Edge-cases și riscuri de specialist</h2>
+
+<ul>
+<li><strong>Antiabuz (art. 11):</strong> o structură fără substanță economică (HoldCo gol, fără activitate, fără personal, creat exclusiv fiscal) poate fi recalificată. HoldCo trebuie să aibă funcție reală: management de participații, trezorerie, reinvestire.</li>
+<li><strong>CASS la extracția-puls:</strong> verificați dacă pulsul mare nu se suprapune cu alte venituri (chirii, dobânzi, alte dividende) care, cumulate, modifică încadrarea în pragurile 6/12/24 — baza CASS este pe total venituri din categoriile vizate, nu pe fiecare sursă izolat.</li>
+<li><strong>Data distribuirii vs. data plății:</strong> cota de 16% se aplică dividendelor distribuite (hotărâre AGA) începând cu 1.01.2026 — contează data hotărârii de distribuire, nu data plății efective. Distribuirile hotărâte în 2025 (chiar plătite în 2026) au regim 2025.</li>
+<li><strong>Holding străin:</strong> directiva mamă-fiică UE poate oferi rute alternative, dar adaugă complexitate de rezidență fiscală, substanță și obligații de raportare (DAC6) care depășesc scopul acestei lecții și rareori justifică costul pentru capital sub câteva milioane EUR.</li>
+</ul>
+
+<h2>Checklist operațional — implementare pe 10 ani</h2>
+
+<ol>
+<li>Anul 1: constituie HoldCo și transferă/subscrie ≥10% în OpCo; pornește ceasul de 12 luni al scutirii.</li>
+<li>Documentează substanța HoldCo (obiect de activitate management participații, decizii AGA reale, evidență trezorerie).</li>
+<li>Monitorizează trimestrial pragul micro 100.000 EUR și ponderea consultanță/management ≤20%; planifică tranziția la profit înainte de a fi forțat.</li>
+<li>Verifică regula întreprinderilor legate (>25%) ÎNAINTE de a deschide entități paralele — nu fragmenta naiv.</li>
+<li>Calibrează α (fracțiunea extrasă) la nevoia reală de lichiditate personală; lasă surplusul în HoldCo.</li>
+<li>Programează extracțiile în pulsuri mari și rare pentru a dilua CASS-ul plafonat și a maximiza amânarea celor 16%.</li>
+<li>Confirmă data hotărârii AGA de distribuire pentru încadrarea corectă a cotei (16% post-2026).</li>
+<li>Reverifică anual cursul BNR din 31.12 pentru pragul micro și salariul minim de la 1 ianuarie pentru pragurile CASS (6/12/24 × 4.050 lei = 24.300 / 48.600 / 97.200 lei în 2026).</li>
+<li>Revizuiește cu consultant fiscal substanța economică pentru a rezista testului antiabuz art. 11.</li>
+<li>În anul-țintă de exit, evaluează vânzarea participației din HoldCo (câștig de capital) vs. extracție-puls de dividend — alege ruta cu valoare-prezentă netă maximă.</li>
+</ol>
+
+<p>Structura nu este un truc, ci un sistem disciplinat de amânare și consolidare. Valoarea ei reală se măsoară în capitalul fiscal-amânat care compune în interiorul holding-ului, nu în economia nominală de pe o singură distribuire. Verificați fiecare cifră la momentul aplicării cu un consultant autorizat — legislația 2026 este în mișcare, iar marja de eroare la scară multi-entitate se amplifică pe 10 ani.</p>
