@@ -55,26 +55,45 @@ METODOLOGIE DE CALCUL (respect-o exact):
 
 Închei mereu calculele cu: "Estimare educativă — verifică pe anaf.ro sau cu unealta de pe site pentru cifra exactă."`;
 
+// Un singur apel către un provider+cheie. Aruncă la eșec.
+async function callOne(c: { name: string; base: string; model: string; key: string },
+                       messages: any[], maxTokens: number, temperature: number) {
+  const resp = await fetch(c.base + "/chat/completions", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + c.key, "Content-Type": "application/json" },
+    body: JSON.stringify({ model: c.model, messages, max_tokens: maxTokens, temperature }),
+    signal: AbortSignal.timeout(45000),
+  });
+  if (!resp.ok) throw new Error(`${c.name} HTTP ${resp.status}`);
+  const j = await resp.json();
+  const content = j?.choices?.[0]?.message?.content;
+  if (!content) throw new Error(`${c.name} fără conținut`);
+  return { content, provider: c.name };
+}
+
+// Strânge TOATE cheile (de bază + numerotate _1.._9 per provider) și le încearcă
+// în PARALEL, în loturi, returnând primul răspuns reușit (rezistent la rate-limit).
 async function chat(messages: any[], maxTokens = 900, temperature = 0.4) {
-  let last = "n/a";
+  const SUFFIXES = ["", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_9"];
+  const cands: { name: string; base: string; model: string; key: string }[] = [];
   for (const [name, base, model, envb] of PROVIDERS) {
-    const key = Deno.env.get(envb);
-    if (!key) continue;
-    try {
-      const resp = await fetch(base + "/chat/completions", {
-        method: "POST",
-        headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
-        body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature }),
-        signal: AbortSignal.timeout(45000),
-      });
-      if (!resp.ok) { last = `${name} HTTP ${resp.status}`; continue; }
-      const j = await resp.json();
-      const content = j?.choices?.[0]?.message?.content;
-      if (content) return { content, provider: name };
-      last = `${name} fără conținut`;
-    } catch (e) { last = `${name} ${e}`; }
+    for (const s of SUFFIXES) {
+      const key = Deno.env.get(envb + s);
+      if (key) cands.push({ name, base, model, key });
+    }
   }
-  throw new Error("toți providerii au eșuat: " + last);
+  if (!cands.length) throw new Error("nicio cheie setată");
+  const BATCH = 6; // câte chei se încearcă SIMULTAN
+  let last = "n/a";
+  for (let i = 0; i < cands.length; i += BATCH) {
+    const batch = cands.slice(i, i + BATCH);
+    try {
+      return await Promise.any(batch.map((c) => callOne(c, messages, maxTokens, temperature)));
+    } catch (e) {
+      last = `lot ${i / BATCH + 1} (${batch.length} chei) au eșuat`;
+    }
+  }
+  throw new Error("toate cheile au eșuat: " + last);
 }
 
 const CORS = {
