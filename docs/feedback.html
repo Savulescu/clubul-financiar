@@ -117,19 +117,42 @@
     });
   });
   // admin: listeaza toate feedback-urile
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]);}); }
   function loadAdmin(){
     if(!window.cfAdmin) return;
     $("fbAdmin").style.display="block";
     var client=sb(); if(!client) return;
-    client.from("feedback").select("*").order("created_at",{ascending:false}).limit(500).then(function(res){
+    client.from("feedback").select("*").order("pinned",{ascending:false}).order("created_at",{ascending:false}).limit(500).then(function(res){
       if(!res || res.error || !res.data){ $("fbList").innerHTML='<p style="color:var(--muted)">Nu pot citi feedback-urile (verifică RLS / login admin).</p>'; return; }
       var d=res.data; $("fbCount").textContent=d.length+" feedback-uri";
       $("fbList").innerHTML = d.map(function(f){
         var dt=new Date(f.created_at).toLocaleString("ro-RO");
-        return '<div class="fb-item"><div class="meta"><span class="fb-tag">'+(f.category||"-")+'</span>'+dt+(f.email?(' · '+f.email):'')+'</div><div>'+(f.message||"").replace(/</g,"&lt;")+'</div></div>';
+        var pin=!!f.pinned;
+        return '<div class="fb-item"'+(pin?' style="border-color:var(--emerald);border-width:2px"':'')+'>'+
+          '<div class="meta">'+(pin?'<span class="fb-tag" style="background:var(--emerald);color:#fff">📌 Evidențiat</span>':'')+
+          '<span class="fb-tag">'+esc(f.category||"-")+'</span>'+dt+(f.email?(' · '+esc(f.email)):'')+'</div>'+
+          '<div style="margin-bottom:8px">'+esc(f.message)+'</div>'+
+          '<div style="display:flex;gap:8px">'+
+            '<button class="btn btn-ghost fb-pin" data-id="'+f.id+'" data-pin="'+(pin?1:0)+'" style="padding:5px 12px;font-size:.82rem">'+(pin?'Scoate din evidență':'📌 Evidențiază')+'</button>'+
+            '<button class="btn btn-ghost fb-del" data-id="'+f.id+'" style="padding:5px 12px;font-size:.82rem;color:#e25555">🗑 Șterge</button>'+
+          '</div></div>';
       }).join("");
     });
   }
+  // acțiuni admin: șterge / evidențiază (delegare)
+  document.addEventListener("click",function(e){
+    var del=e.target.closest(".fb-del"), pin=e.target.closest(".fb-pin");
+    var client=sb(); if(!client) return;
+    if(del){ if(!confirm("Ștergi acest feedback definitiv?")) return;
+      del.disabled=true;
+      client.from("feedback").delete().eq("id",del.getAttribute("data-id")).then(function(r){
+        if(r&&r.error){ alert("Nu am putut șterge: "+r.error.message); del.disabled=false; } else loadAdmin();
+      }); }
+    if(pin){ var np = pin.getAttribute("data-pin")==="1" ? false : true; pin.disabled=true;
+      client.from("feedback").update({pinned:np}).eq("id",pin.getAttribute("data-id")).then(function(r){
+        if(r&&r.error){ alert("Nu am putut actualiza: "+r.error.message); pin.disabled=false; } else loadAdmin();
+      }); }
+  });
   window.addEventListener("cf-auth",loadAdmin);
   setTimeout(loadAdmin,1200);
 })();
