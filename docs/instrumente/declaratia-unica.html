@@ -22,6 +22,38 @@
     </div>
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Asistent Declarația Unică 2026</h1><p class="lead" style="margin-inline:auto">Pune-ți veniturile pe categorii și vezi exact ce impozit și ce CASS ai de declarat, pe ce secțiune din Declarația Unică trec, cât e totalul de plată și cât economisești cu bonificația de 3%.</p></div></section>
+
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Dacă ai avut și alte venituri pe lângă salariu — chirii, dividende, dobânzi, câștiguri din acțiuni sau crypto, ori bani din PFA — trebuie să le declari singur la stat printr-un formular numit <b>Declarația Unică</b>. Unealta asta îți spune pe limba ta cât ai de plată la fiecare categorie și pe ce rând din declarație treci fiecare sumă, ca să nu plătești în plus și să nu ratezi termenul. În plus, dacă plătești tot din timp, primești o reducere de 3% — la o sumă de 5.000 lei înseamnă 150 lei economisiți direct.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul>
+        <li><b>Chirii încasate</b> — toți banii primiți pe chirie într-un an, înainte de orice scădere.</li>
+        <li><b>Dividende</b> — banii primiți de la firme la care ai acțiuni (parte din profit).</li>
+        <li><b>Dobânzi</b> — câștigul de la depozite, obligațiuni sau împrumuturi P2P.</li>
+        <li><b>Câștig din investiții</b> — profitul (vânzări minus cumpărări) la acțiuni/ETF, separat după broker.</li>
+        <li><b>Câștig crypto</b> — profitul net din vânzarea de criptomonede.</li>
+        <li><b>PFA</b> — cât ai facturat și ce cheltuieli ai avut, dacă lucrezi pe cont propriu.</li>
+        <p class="cf-note" style="margin-top:6px">Toate sumele sunt în lei, pe tot anul. Completează doar ce te privește.</p>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul>
+        <li><b>Cât ai de plată în total</b> — suma finală pe care o virezi la stat.</li>
+        <li><b>Impozitul pe venit</b> — partea de taxă pe câștigurile tale.</li>
+        <li><b>CASS</b> (contribuția la sănătate) — banii pentru asigurarea medicală, calculați pe trepte.</li>
+        <li><b>CAS</b> (contribuția la pensie) — apare doar dacă ai PFA.</li>
+        <li><b>Pe ce rând din declarație</b> treci fiecare sumă, ca să copiezi exact când completezi în SPV.</li>
+        <li><b>Termenele</b> și cât economisești dacă plătești la timp (bonificația de 3%).</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru oricine a avut venituri în afara salariului și trebuie să le declare singur. De exemplu: ai un apartament dat cu chirie, ai primit dividende de la o firmă, ai investit la bursă printr-un broker străin (care nu reține taxa pentru tine), ai vândut crypto pe profit sau ești freelancer/PFA și nu știi cât ai de plată la stat. Dacă ești în vreuna din situațiile astea, unealta te ajută să pui ordine în cifre înainte să completezi în SPV.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Pentru fiecare categorie de venit aplică regula fiscală potrivită: scade ce e de scăzut (de exemplu, 20% deducere la chirii) și aplică cota de impozit corectă (10%, 16%, 3% sau 6%, în funcție de tipul venitului). Apoi adună la un loc veniturile „pasive" (chirii, dividende, dobânzi, investiții, crypto) și calculează CASS-ul pe trepte de salarii minime — adică plătești o sumă fixă în funcție de cât de mult ai câștigat, nu un procent direct. La final însumează tot și îți arată și reducerea de 3% dacă plătești din timp. Toate cifrele sunt pe regulile fiscale din 2026 și reprezintă o estimare educativă — declarația oficială o depui tu în SPV pe anaf.ro.</p></details>
+  </div>
+</section>
+
 <section class="section"><div class="container" id="tool">
 
   <div class="cf-alert warn" style="margin-bottom:18px">ℹ️ Aceasta este o <b>foaie de lucru educativă</b> care te ajută să înțelegi și să pregătești cifrele. <b>Nu depune nimic în SPV</b> și nu transmite date la ANAF. Declarația o depui tu în Spațiul Privat Virtual (anaf.ro) sau prin contabil.</div>
@@ -45,8 +77,8 @@
 
       <div class="field"><label>Câștig crypto (lei)<span class="cf-note">câștigul net din criptomonede; cotă 10%</span></label><input type="number" id="crypto" value="0" min="0" step="500"></div>
 
-      <div class="field"><label>PFA / activitate independentă — încasări (lei)</label><input type="number" id="pfaInc" value="0" min="0" step="500"></div>
-      <div class="field"><label>PFA — cheltuieli deductibile (lei)</label><input type="number" id="pfaChelt" value="0" min="0" step="500"></div>
+      <div class="field"><label>PFA / activitate independentă — încasări (lei)<span class="cf-note">cât ai facturat în tot anul, înainte de cheltuieli</span></label><input type="number" id="pfaInc" value="0" min="0" step="500"></div>
+      <div class="field"><label>PFA — cheltuieli deductibile (lei)<span class="cf-note">cheltuielile cu activitatea pe care le scazi din venit</span></label><input type="number" id="pfaChelt" value="0" min="0" step="500"></div>
 
       <button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează foaia de lucru</button>
       <div class="cf-actions" style="margin-top:10px">

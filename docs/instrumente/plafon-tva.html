@@ -22,6 +22,29 @@
     </div>
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Radar plafon TVA &amp; micro</h1><p class="lead" style="margin-inline:auto">Loghează încasările lună de lună și vezi în timp real cât mai ai până la plafonul de TVA și cel de microîntreprindere. Îți estimăm și data la care le atingi, pe ritmul tău.</p></div></section>
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Dacă ai un PFA sau un SRL, există două praguri de bani peste care regulile fiscale se schimbă brusc: <b>395.000 lei</b> (te obligă să te înregistrezi la TVA) și <b>100.000 €</b> (ieși din regimul de microîntreprindere). Tu îți treci aici cât ai încasat lună de lună, iar unealta îți arată exact cât mai ai până la fiecare prag și pe ce dată îl vei atinge dacă mergi în ritmul de acum — ca să nu te trezești peste limită fără să fi pregătit hârtiile.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul>
+        <li><b>Încasările pe fiecare lună</b> — cât ai facturat/încasat în acea lună, în lei, <b>fără TVA</b> (suma netă, fără taxa adăugată pe factură).</li>
+        <li><b>Luna curentă, rapid</b> — poți completa doar luna de acum în câmpul de sus și apeși „Loghează luna curentă".</li>
+        <li>Nu trebuie să le ai pe toate; merge și cu o singură lună completată.</li>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul>
+        <li><b>Cifra de afaceri cumulată</b> — totalul încasat de la începutul anului până acum.</li>
+        <li><b>Cât la sută din fiecare plafon ai atins</b>, cu un termometru colorat (verde / galben / roșu).</li>
+        <li><b>Data estimată</b> la care vei depăși pragul, calculată pe ritmul tău mediu lunar — ca să acționezi din timp.</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru orice PFA, întreprindere individuală sau SRL micro care vinde produse sau servicii. Exemplu: ești freelancer, facturezi lunar și nu știi dacă mai poți rămâne fără TVA până la final de an — completezi lunile încasate și vezi pe loc dacă te apropii periculos de cele 395.000 lei.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Adună toate lunile pe care le-ai completat și obține cifra de afaceri cumulată pe an. Apoi calculează ritmul tău mediu lunar (media lunilor cu încasări) și estimează în câte luni, mergând tot așa, ajungi la fiecare plafon — de unde rezultă data afișată. Plafonul de microîntreprindere e în euro, așa că îl transformă în lei la cursul oficial. Toate cifrele sunt pe regulile fiscale din 2026; rezultatul este o estimare educativă, nu o declarație oficială.</p></details>
+  </div>
+</section>
 <section class="section"><div class="container" id="tool">
 
   <div class="panel">
@@ -30,6 +53,7 @@
 
     <div class="field">
       <label>Adaugă rapid luna curentă (<span id="lunaCurentaLbl">—</span>)</label>
+      <span class="cf-mini">în lei, fără TVA, pe luna asta</span>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <input type="number" id="quickAmount" placeholder="ex. 32000" min="0" step="100" style="flex:1;min-width:160px">
         <button class="btn btn-primary" id="quickAddBtn" style="white-space:nowrap">Loghează luna curentă</button>

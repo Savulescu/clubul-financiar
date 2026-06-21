@@ -23,12 +23,35 @@
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Salariu vs Dividend SRL</h1><p class="lead" style="margin-inline:auto">Pentru asociatul-administrator de micro-SRL: află cum să scoți banii din firmă cu cele mai mici taxe — tot pe salariu, tot pe dividend sau mixul optim.</p></div></section>
 
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Dacă ai un SRL și vrei să scoți banii din firmă, există mai multe căi: ca salariu, ca dividend sau un amestec din cele două — fiecare cu taxe diferite. Tu îi spui cât profit vrei să scoți, iar unealta îți arată ce variantă îți lasă cei mai mulți bani în mână. La un profit de 120.000 lei, alegerea bună poate însemna câteva mii de lei în plus pe an, fără niciun efort suplimentar.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul>
+        <li><b>Profit disponibil</b> = câți lei vrei să scoți din firmă într-un an, înainte de taxe (suma rămasă după ce firma și-a plătit cheltuielile). De exemplu: 120.000 lei pe an.</li>
+        <li><b>Persoane în întreținere</b> = câți copii sau membri de familie ai în grijă. Contează doar pentru salariu, unde îți reduce puțin impozitul.</li>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul>
+        <li>Cât îți rămâne <b>net în mână</b> pentru fiecare variantă: tot pe salariu, tot pe dividend sau mixul optim.</li>
+        <li>Care variantă câștigă și <b>cu câți lei</b> e mai bună decât celelalte.</li>
+        <li>Cât plătești la taxe la fiecare opțiune (CAS = pensie, CASS = sănătate, impozit), ca să vezi clar unde se duc banii.</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru tine, asociatul-administrator al unui micro-SRL, care la final de an te întrebi: „Îmi iau salariu, dividend sau un mix?". Ești patron de firmă mică și vrei să scoți profitul cât mai eficient, fără să dai mai multe taxe decât e nevoie.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Unealta calculează net-ul pentru fiecare cale: salariul plătește contribuții pe tot brutul (CAS = pensie, CASS = sănătate, plus impozit), iar dividendul plătește 16% impozit la care se adaugă CASS doar peste anumite praguri, pe trepte fixe (6, 12 sau 24 de salarii minime), nu pe toată suma. Apoi încearcă sute de combinații salariu+dividend și o alege pe cea care îți lasă cel mai mult în mână. Cifrele sunt pe regulile fiscale din 2026 și reprezintă o estimare educativă — confirmă cu contabilul tău înainte de a decide.</p></details>
+  </div>
+</section>
+
 <section class="section"><div class="container" id="tool">
 
   <div class="panel">
     <div class="grid grid-2">
-      <div class="field"><label>Profit disponibil de scos din firmă (lei/an)</label><input type="number" id="profit" value="120000" min="0" step="1000"></div>
-      <div class="field"><label>Persoane în întreținere (pt. deducerea salariului)</label><input type="number" id="dep" value="0" min="0" max="4" step="1"></div>
+      <div class="field"><label>Profit disponibil de scos din firmă (lei/an)</label><span class="cf-mini">în lei, pe tot anul</span><input type="number" id="profit" value="120000" min="0" step="1000"></div>
+      <div class="field"><label>Persoane în întreținere (pt. deducerea salariului)</label><span class="cf-mini">câți copii/membri ai în grijă</span><input type="number" id="dep" value="0" min="0" max="4" step="1"></div>
     </div>
     <p class="cf-note">„Profit disponibil" = suma brută pe care vrei s-o transferi din firmă în buzunarul tău, fie ca salariu de administrator, fie ca dividend. Comparăm cele 3 strategii și căutăm mixul care îți lasă cei mai mulți bani net în mână.</p>
     <button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button>

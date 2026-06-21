@@ -22,11 +22,34 @@
     </div>
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">PFA vs micro-SRL vs SRL</h1><p class="lead" style="margin-inline:auto">Pune încasările și cheltuielile tale și vezi unde rămâi cu mai mulți bani în mână: PFA sistem real, SRL micro 1% sau SRL pe profit 16%.</p></div></section>
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Te ajută să răspunzi la o întrebare de bani: „mi-ar rămâne mai mult în buzunar ca PFA sau ca firmă (SRL)?". Pui cât încasezi și cât cheltuiești pe an, iar unealta îți arată, în lei, cât rămâne net la fiecare variantă. La marje mari diferența poate fi de zeci de mii de lei pe an — exact banii pe care vrei să-i păstrezi tu, nu să-i dai degeaba pe taxe.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul>
+        <li><b>Încasări anuale</b> = cât ai facturat în total într-un an (toți banii intrați din muncă/clienți, înainte de orice taxă).</li>
+        <li><b>Cheltuieli deductibile</b> = cheltuielile de business pe care le poți scădea (chirie birou, abonamente, echipamente, contabil etc.).</li>
+        <li><b>Procent dividende (la SRL)</b> = cât din profitul firmei îți scoți pentru tine în buzunar. 100% = scoți tot; mai puțin = lași bani în firmă.</li>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul>
+        <li><b>Net în mână</b> la fiecare variantă: PFA, SRL micro (1%) și SRL pe profit (16%) — cât îți rămâne efectiv ție.</li>
+        <li><b>Cât plătești la stat</b> (impozite + contribuții) și ce procent din încasări înseamnă asta.</li>
+        <li><b>Pragul de basculare</b>: de la ce nivel de încasări SRL începe să fie mai bun ca PFA, în situația ta.</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru oricine câștigă bani pe cont propriu și se întreabă ce formă să aleagă. Ești freelancer (programator, designer, consultant) și nu știi dacă să rămâi PFA sau să faci un SRL? Pune cifrele tale și vezi negru pe alb unde rămâi cu mai mulți bani, înainte să mergi la contabil.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Pentru fiecare variantă unealta calculează taxele după regulile din 2026: la <b>PFA</b> — CAS (contribuția la pensie, 25%), CASS (contribuția la sănătate, 10%) și impozit pe venit 10%; la <b>SRL</b> — impozitul firmei (1% pe încasări la micro, sau 16% pe profit), apoi 16% pe dividende plus CASS când îți scoți banii. Scade taxele din ce ai câștigat și compară ce rămâne. Cifrele sunt pe regulile fiscale 2026 și reprezintă o estimare educativă — pentru decizii reale verifică cu un contabil și pe anaf.ro.</p></details>
+  </div>
+</section>
 <section class="section"><div class="container" id="tool">
   <div class="grid grid-2">
     <div class="panel">
-      <div class="field"><label>Încasări anuale (lei)</label><input type="number" id="inc" value="300000" min="0" step="1000"></div>
-      <div class="field"><label>Cheltuieli deductibile anuale (lei)</label><input type="number" id="chelt" value="60000" min="0" step="1000"></div>
+      <div class="field"><label>Încasări anuale (lei)<span class="cf-note">cât facturezi în total pe an</span></label><input type="number" id="inc" value="300000" min="0" step="1000"></div>
+      <div class="field"><label>Cheltuieli deductibile anuale (lei)<span class="cf-note">cheltuieli de business pe an</span></label><input type="number" id="chelt" value="60000" min="0" step="1000"></div>
       <div class="field"><label>Procent dividende distribuite la SRL (%)<span class="cf-note">cât din profitul net îți scoți ca dividend</span></label><input type="number" id="div" value="100" min="0" max="100" step="5"></div>
       <button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button>
       <div class="cf-actions" style="margin-top:10px"><button class="btn btn-ghost" id="pdfBtn">🖨️ Salvează PDF</button></div>

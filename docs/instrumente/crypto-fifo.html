@@ -22,6 +22,34 @@
     </div>
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Crypto FIFO pentru ANAF</h1><p class="lead" style="margin-inline:auto">Adaugă tranzacțiile tale (sau lipește un CSV de la Binance, Revolut sau XTB) și calculăm câștigul realizat cu metoda FIFO, impozitul de 10% pe Declarația Unică și pragul CASS.</p></div></section>
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Ai cumpărat și vândut crypto și nu știi cât datorezi statului? Unealta îți spune exact ce câștig ai realizat și ce impozit ai de plată — ca să nu te trezești cu surprize la ANAF. De exemplu, dacă ai vândut cu un câștig de 10.000 lei, vei vedea negru pe alb că datorezi 1.000 lei impozit (10%) și dacă te apropii sau nu de pragul de la care plătești și sănătate (CASS).</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul>
+        <li><b>Data</b> tranzacției — când ai cumpărat sau ai vândut.</li>
+        <li><b>Tip</b> — cumpărare sau vânzare.</li>
+        <li><b>Activ</b> — ce monedă (ex. BTC, ETH).</li>
+        <li><b>Cantitate</b> — câte unități (ex. 0,1 BTC).</li>
+        <li><b>Preț unitar</b> — cât a costat o unitate, în lei.</li>
+        <li><b>Comision</b> — taxa luată de exchange, în lei.</li>
+        <li>Sau pur și simplu lipești fișierul CSV exportat de la Binance, Revolut sau XTB.</li>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul>
+        <li><b>Câștigul sau pierderea</b> ta reală pe tot anul.</li>
+        <li><b>Impozitul de 10%</b> pe care îl ai de plată (doar dacă ești pe plus).</li>
+        <li><b>CASS</b> (contribuția la sănătate) — dacă ai sărit peste prag.</li>
+        <li><b>Totalul de plată la ANAF</b>, gata de trecut în Declarația Unică.</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru oricine a tranzacționat crypto și trebuie să declare câștigul la ANAF. Exemplu: ești la primul tău an cu Binance, ai făcut câteva vânzări și nu știi dacă datorezi ceva sau cum se calculează — aici afli în câteva minute, fără contabil.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Folosim metoda FIFO („prima cumpărată, prima vândută"): la fiecare vânzare, considerăm că ai vândut întâi monedele cumpărate cel mai demult. Așa aflăm cât te-a costat efectiv ce ai vândut (cost-bază) și scădem din banii încasați ca să obținem câștigul. Apoi aplicăm impozitul de 10% pe câștigul pozitiv și verificăm pragul CASS. Toate cifrele sunt pe regulile fiscale 2026 — e o estimare educativă, nu consultanță fiscală.</p></details>
+  </div>
+</section>
 <section class="section"><div class="container" id="tool">
 
   <div class="cf-tabs" role="tablist">
@@ -33,6 +61,7 @@
   <div class="cf-pane active" id="paneManual">
     <div class="panel">
       <p class="cf-note">Introdu fiecare cumpărare și vânzare. Prețul unitar și comisionul sunt <b>în RON</b> (folosește cursul BNR din ziua tranzacției pentru conversie).</p>
+      <p class="cf-note" style="margin-top:4px">Pe fiecare rând: <b>Cantitate</b> = câte unități; <b>Preț unitar</b> = cât a costat o unitate, în lei; <b>Comision</b> = taxa exchange-ului, în lei (lasă 0 dacă n-a fost).</p>
       <div style="overflow-x:auto">
         <table class="cf-tbl" id="txTable" style="width:100%;border-collapse:collapse;min-width:680px">
           <thead><tr>

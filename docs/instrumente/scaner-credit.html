@@ -22,6 +22,31 @@
     </div>
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Scaner credit & refinanțare</h1><p class="lead" style="margin-inline:auto">Rata lunară reală (PMT), DAE cu comisioane incluse, cost total — plus simulator de refinanțare și rambursare anticipată.</p></div></section>
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Îți arată cât te costă cu adevărat un credit — nu doar dobânda din reclamă, ci suma totală pe care o dai înapoi băncii, cu tot cu comisioane. Vezi rata ta lunară reală și afli, de exemplu, că un împrumut de 200.000 lei pe 20 de ani te poate costa peste 180.000 lei doar în dobândă și comisioane. În plus, calculezi cât economisești dacă muți creditul la altă bancă (refinanțare) sau dacă plătești o parte mai devreme.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul>
+        <li><b>Suma creditului</b> = câți lei împrumuți de la bancă.</li>
+        <li><b>Dobânda</b> = fixă (rămâne aceeași) sau variabilă (IRCC + marja băncii, se poate schimba). O găsești în oferta sau contractul de credit.</li>
+        <li><b>Perioada</b> = pe câți ani iei creditul.</li>
+        <li><b>Comisioanele</b> = costuri în plus față de dobândă (analiză dosar, administrare lunară, asigurare). Le scrie în oferta băncii.</li>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul>
+        <li><b>Rata lunară</b> — cât plătești efectiv în fiecare lună.</li>
+        <li><b>DAE</b> (Dobânda Anuală Efectivă) = costul real al creditului, cu comisioanele incluse. E cifra corectă de comparat între bănci, nu dobânda simplă.</li>
+        <li><b>Dobânda totală</b> și <b>costul total</b> — cât dai peste suma împrumutată.</li>
+        <li>Cât economisești dacă <b>refinanțezi</b> sau plătești <b>anticipat</b>.</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru oricine are sau își ia un credit — de nevoi personale, de casă (ipotecar) sau auto. Exemplu: vrei un credit de casă și două bănci îți dau „aceeași" dobândă, dar una are comisioane mai mari. Cu DAE vezi instant care e de fapt mai ieftină. Sau: ai primit un bonus și vrei să afli dacă merită să plătești anticipat.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Unealta calculează rata lunară cu formula standard de amortizare (aceeași folosită de bănci), apoi adună toate comisioanele ca să afle DAE — cât te costă creditul cu adevărat, în procente pe an. Pentru refinanțare și plată anticipată compară situația actuală cu cea nouă și îți spune economia în lei. Cifrele sunt pe regulile 2026 (inclusiv IRCC-ul actualizat trimestrial de BNR) și reprezintă o estimare educativă — pentru cifra exactă cere oferta scrisă de la bancă.</p></details>
+  </div>
+</section>
 <section class="section"><div class="container" id="tool">
 
   <div class="cf-tabs" role="tablist">
@@ -34,7 +59,7 @@
   <div class="cf-pane" id="p-credit">
     <div class="grid grid-2">
       <div class="panel">
-        <div class="field"><label>Sumă credit (lei)</label><input type="number" id="P" value="200000" min="1" step="1000"></div>
+        <div class="field"><label>Sumă credit (lei)</label><span class="cf-mini" style="display:block;margin-bottom:4px">cât împrumuți, în lei</span><input type="number" id="P" value="200000" min="1" step="1000"></div>
 
         <div class="field"><label>Tip dobândă</label>
           <div class="cf-tabs" id="dobTip" style="margin:6px 0 0">
@@ -44,7 +69,7 @@
         </div>
 
         <div id="boxFixa">
-          <div class="field"><label>Dobândă anuală fixă (%)</label><input type="number" id="rFixa" value="7.5" min="0" max="100" step="0.01"></div>
+          <div class="field"><label>Dobândă anuală fixă (%)</label><span class="cf-mini" style="display:block;margin-bottom:4px">din oferta băncii, pe an</span><input type="number" id="rFixa" value="7.5" min="0" max="100" step="0.01"></div>
         </div>
         <div id="boxVar" style="display:none">
           <div class="grid grid-2">
@@ -54,11 +79,11 @@
           <p class="cf-note">Dobândă variabilă = IRCC + marjă fixă. IRCC se actualizează trimestrial de BNR; rata ta urcă/coboară odată cu el.</p>
         </div>
 
-        <div class="field"><label>Perioadă (ani)</label><input type="number" id="yr" value="20" min="1" max="40" step="1"></div>
+        <div class="field"><label>Perioadă (ani)</label><span class="cf-mini" style="display:block;margin-bottom:4px">pe câți ani iei creditul</span><input type="number" id="yr" value="20" min="1" max="40" step="1"></div>
 
         <p class="cf-note" style="margin-top:14px"><b>Comisioane</b> (pentru DAE real)</p>
         <div class="grid grid-2">
-          <div class="field"><label>Comision analiză dosar (lei, o dată)</label><input type="number" id="cAnaliza" value="1000" min="0" step="50"></div>
+          <div class="field"><label>Comision analiză dosar (lei, o dată)</label><span class="cf-mini" style="display:block;margin-bottom:4px">se plătește o singură dată, la început</span><input type="number" id="cAnaliza" value="1000" min="0" step="50"></div>
           <div class="field"><label>Administrare lunară (lei/lună)</label><input type="number" id="cAdminLunar" value="0" min="0" step="5"></div>
         </div>
         <div class="grid grid-2">

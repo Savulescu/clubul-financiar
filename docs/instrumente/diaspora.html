@@ -22,6 +22,32 @@
     </div>
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Pachet diaspora</h1><p class="lead" style="margin-inline:auto">Trei module pentru românii din străinătate: verifică-ți rezidența fiscală, înțelege cum se totalizează pensia în UE și cum te apără convențiile de evitare a dublei impuneri.</p></div></section>
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Ai plecat din România și nu mai știi unde „aparții" la taxe? Acest instrument îți spune, în câteva clicuri, dacă mai ești considerat de stat plătitor de taxe în România (rezident fiscal), cum se adună anii de muncă din mai multe țări pentru pensie și cum eviți să plătești impozit de două ori pe aceiași bani. Pe scurt: îți arată unde și ce datorezi, ca să nu te trezești cu o amendă sau cu impozit dublu de mii de lei.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul>
+        <li><b>Zile petrecute în România</b> — câte zile pe an ai stat fizic în țară (numără-le aproximativ, din vacanțe + vizite).</li>
+        <li><b>Centrul intereselor vitale</b> — unde îți e „viața": familia, casa principală și venitul de bază (în RO, afară, sau împărțit).</li>
+        <li><b>Locuință permanentă</b> — dacă ai o casă/apartament la dispoziția ta oricând în România.</li>
+        <li><b>Anii lucrați în fiecare țară</b> — pentru pensie, câți ani ai cotizat (ai plătit contribuții) în RO, Germania, Italia etc.</li>
+        <li><b>Țara și tipul de venit</b> — de unde ai bani (salariu, chirii, dividende, pensie) ca să vezi cum te apără convenția.</li>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul>
+        <li><b>Verdictul de rezidență</b> — dacă România te impozitează pe tot venitul mondial sau doar pe banii din surse românești.</li>
+        <li><b>Cum se împarte pensia</b> — fiecare țară îți plătește separat, proporțional cu anii lucrați acolo; vezi procentul din fiecare.</li>
+        <li><b>Cum eviți impozitul dublu</b> — dacă RO are convenție cu țara ta și prin ce metodă (credit sau scutire) nu plătești de două ori.</li>
+        <li>Un <b>checklist descărcabil</b> cu pașii administrativi de bifat.</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru orice român plecat la muncă sau stabilit în străinătate. Ești muncitor în Germania de 3 ani și nu știi dacă mai datorezi taxe în România? Ai lucrat în Italia și Spania și te întrebi de unde îți vine pensia? Închiriezi un apartament în RO dar locuiești în Anglia? Aici afli, pe limba ta, ce ai de făcut.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Instrumentul aplică regulile fiscale valabile în 2026. Pentru rezidență, verifică criteriile folosite de ANAF (regula celor 183 de zile de prezență în țară, plus unde îți sunt familia, casa și veniturile) și îți dă un verdict orientativ. Pentru pensie, adună anii din toate țările doar ca să vadă dacă ai dreptul la pensie, apoi calculează ce parte îți revine din fiecare. Pentru impozitare, verifică dacă România are semnată o convenție cu țara ta și îți explică metoda prin care nu plătești taxa de două ori. Totul e o estimare educativă — pentru cazuri concrete, întreabă un consultant fiscal sau Casa de Pensii.</p></details>
+  </div>
+</section>
 <section class="section"><div class="container" id="tool">
 
   <div class="cf-tabs" role="tablist">
@@ -106,10 +132,10 @@
       <div class="panel">
         <h3 class="title" style="font-size:1.2rem;margin-bottom:6px">Ai convenție cu România?</h3>
         <p class="cf-note">Alege țara unde ai obținut venitul și vezi cum te apără convenția de evitare a dublei impuneri.</p>
-        <div class="field"><label>Țara unde ai realizat venitul</label>
+        <div class="field"><label>Țara unde ai realizat venitul<span class="cf-note">unde ai câștigat banii</span></label>
           <select id="dublaTara" class="input"></select>
         </div>
-        <div class="field"><label>Tip de venit</label>
+        <div class="field"><label>Tip de venit<span class="cf-note">de unde provin banii</span></label>
           <select id="dublaVenit" class="input">
             <option value="salariu" selected>Salariu / venit din muncă</option>
             <option value="chirii">Chirii (imobil în străinătate)</option>
@@ -271,8 +297,8 @@
     wrap.style.gap = "8px";
     wrap.style.alignItems = "flex-end";
     wrap.innerHTML =
-      '<div class="field" style="flex:2;margin:0"><label>Țară</label><select class="input pensieTara">' + opts + '</select></div>' +
-      '<div class="field" style="flex:1;margin:0"><label>Ani cotizați</label><input type="number" class="input pensieAni" value="' + (ani || 0) + '" min="0" max="60" step="1"></div>' +
+      '<div class="field" style="flex:2;margin:0"><label>Țară<span class="cf-note">unde ai plătit contribuții</span></label><select class="input pensieTara">' + opts + '</select></div>' +
+      '<div class="field" style="flex:1;margin:0"><label>Ani cotizați<span class="cf-note">ani de muncă acolo</span></label><input type="number" class="input pensieAni" value="' + (ani || 0) + '" min="0" max="60" step="1"></div>' +
       '<button class="btn btn-ghost pensieDel" style="padding:9px 12px;margin-bottom:2px">✕</button>';
     wrap.querySelector(".pensieDel").addEventListener("click", function(){
       wrap.remove(); pensieCalc();
@@ -481,11 +507,11 @@
   })();
 
   $("checklistDl").addEventListener("click", function(){
-    var txt = "CHECKLIST DIASPORA — Clubul Financiar\\n" +
-      "(educativ, 2026 — verifica pe anaf.ro)\\n" +
-      "=======================================\\n\\n" +
-      CHECKLIST.map(function(item, i){ return "[ ] " + (i+1) + ". " + item; }).join("\\n") +
-      "\\n\\nNu este consultanta fiscala. Pentru cazuri concrete, consulta un specialist.";
+    var txt = "CHECKLIST DIASPORA — Clubul Financiar\n" +
+      "(educativ, 2026 — verifica pe anaf.ro)\n" +
+      "=======================================\n\n" +
+      CHECKLIST.map(function(item, i){ return "[ ] " + (i+1) + ". " + item; }).join("\n") +
+      "\n\nNu este consultanta fiscala. Pentru cazuri concrete, consulta un specialist.";
     var blob = new Blob([txt], { type: "text/plain;charset=utf-8" });
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");

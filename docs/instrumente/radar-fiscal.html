@@ -39,6 +39,38 @@
   </div></header>
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Radar fiscal ANAF</h1><p class="lead" style="margin-inline:auto">Bifează-ți sursele de venit, scrie sumele anuale și vezi într-o secundă cât datorezi la ANAF — impozit, CASS și CAS, prag cu prag.</p></div></section>
 
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Dacă ai bani din mai multe locuri — salariu, PFA, chirii, dividende, investiții sau crypto — e ușor să te pierzi și să nu știi cât datorezi de fapt statului. Aici aduni totul într-un singur loc și afli pe loc cât ai de plată la ANAF într-un an și până când. Așa eviți surprize, penalități și plăți uitate — și vezi că plătind integral mai devreme poți economisi 3% din total (la o factură de 10.000 lei înseamnă 300 lei în buzunarul tău).</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3>
+        <ul style="color:var(--muted);padding-left:1.1em;line-height:1.6">
+          <li><b>Bifezi sursele tale de venit</b> — adică de unde îți vin banii (salariu, PFA, chirii etc.).</li>
+          <li><b>Salariul brut lunar</b> = suma de pe contract, înainte de taxe (nu banii pe care îi primești „în mână").</li>
+          <li><b>Încasări PFA pe an</b> = tot ce ai facturat și încasat într-un an; <b>cheltuielile deductibile</b> = costuri pentru afacere (chirie birou, abonamente, echipamente).</li>
+          <li><b>Chiria pe tot anul</b>, <b>dividendele</b> primite și <b>câștigul</b> din investiții sau crypto — toate sumele pe un an întreg, în lei.</li>
+        </ul>
+      </div>
+      <div class="card"><h3>📊 Ce afli</h3>
+        <ul style="color:var(--muted);padding-left:1.1em;line-height:1.6">
+          <li><b>Cât datorezi în total</b> la ANAF anul ăsta, dintr-o privire.</li>
+          <li>Defalcat pe cele 3 taxe: <b>impozit pe venit</b>, <b>CASS</b> (contribuția la sănătate) și <b>CAS</b> (contribuția la pensie).</li>
+          <li>Cât „costă" fiecare sursă în parte, ca să vezi unde se duc banii.</li>
+          <li><b>Până când</b> trebuie depusă și plătită Declarația Unică — cu un calendar de descărcat ca să nu uiți.</li>
+        </ul>
+      </div>
+      <div class="card"><h3>👤 Pentru cine e</h3>
+        <p style="color:var(--muted);line-height:1.6">Pentru oricine are venituri din mai multe surse și vrea claritate. Ești freelancer pe PFA și nu știi dacă mai datorezi CASS și pe dividendele din acțiuni? Ai un apartament dat în chirie pe lângă salariu? Ai investit în bursă sau crypto și te întrebi „acum ce fac cu taxele"? Acest radar îți pune cap la cap totul și îți spune suma exactă.</p>
+      </div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Pentru fiecare sursă bifată, calculatorul aplică regulile fiscale din 2026: impozitul pe venit, plus contribuțiile la sănătate (CASS) și la pensie (CAS), acolo unde se datorează. Pentru veniturile „pasive" (chirii, dividende, investiții, crypto) le adună pe toate și verifică dacă treci de pragurile de 6, 12 sau 24 de salarii minime — pragurile de la care apare CASS. La final îți arată suma totală și termenul Declarației Unice. Cifrele sunt pe regulile anului 2026 și reprezintă o estimare educativă, nu consultanță fiscală — pentru sume mari, verifică pe anaf.ro sau cu un contabil.</p></details>
+  </div>
+</section>
+
 <section class="section"><div class="container" id="tool">
 
   <div class="grid grid-2" style="align-items:start">
@@ -50,38 +82,38 @@
       <div class="cf-src" data-key="salariu">
         <label class="cf-chk"><input type="checkbox" id="c_salariu"> <b>Salariu</b></label>
         <div class="cf-fields" id="f_salariu" hidden>
-          <div class="field"><label>Salariu brut LUNAR (lei)</label><input type="number" id="i_salariu_brut" min="0" step="100" placeholder="6000"></div>
-          <div class="field"><label>Persoane în întreținere</label><input type="number" id="i_salariu_dep" min="0" max="4" step="1" value="0"></div>
+          <div class="field"><label>Salariu brut LUNAR (lei)</label><span class="cf-mini">suma de pe contract, înainte de taxe</span><input type="number" id="i_salariu_brut" min="0" step="100" placeholder="6000"></div>
+          <div class="field"><label>Persoane în întreținere</label><span class="cf-mini">copii sau alte persoane fără venit (max. 4)</span><input type="number" id="i_salariu_dep" min="0" max="4" step="1" value="0"></div>
         </div>
       </div>
 
       <div class="cf-src" data-key="pfa">
         <label class="cf-chk"><input type="checkbox" id="c_pfa"> <b>PFA (sistem real)</b></label>
         <div class="cf-fields" id="f_pfa" hidden>
-          <div class="field"><label>Încasări anuale (lei)</label><input type="number" id="i_pfa_inc" min="0" step="500" placeholder="120000"></div>
-          <div class="field"><label>Cheltuieli deductibile anuale (lei)</label><input type="number" id="i_pfa_chelt" min="0" step="500" placeholder="20000"></div>
+          <div class="field"><label>Încasări anuale (lei)</label><span class="cf-mini">cât ai facturat în total pe tot anul</span><input type="number" id="i_pfa_inc" min="0" step="500" placeholder="120000"></div>
+          <div class="field"><label>Cheltuieli deductibile anuale (lei)</label><span class="cf-mini">costuri pentru afacere (chirie, abonamente, echipamente)</span><input type="number" id="i_pfa_chelt" min="0" step="500" placeholder="20000"></div>
         </div>
       </div>
 
       <div class="cf-src" data-key="chirii">
         <label class="cf-chk"><input type="checkbox" id="c_chirii"> <b>Chirii</b></label>
         <div class="cf-fields" id="f_chirii" hidden>
-          <div class="field"><label>Chirie brută ANUALĂ (lei)</label><input type="number" id="i_chirii" min="0" step="500" placeholder="24000"></div>
+          <div class="field"><label>Chirie brută ANUALĂ (lei)</label><span class="cf-mini">chiria lunară × 12 luni, în lei</span><input type="number" id="i_chirii" min="0" step="500" placeholder="24000"></div>
         </div>
       </div>
 
       <div class="cf-src" data-key="dividende">
         <label class="cf-chk"><input type="checkbox" id="c_dividende"> <b>Dividende</b></label>
         <div class="cf-fields" id="f_dividende" hidden>
-          <div class="field"><label>Dividende brute anuale (lei)</label><input type="number" id="i_dividende" min="0" step="500" placeholder="30000"></div>
+          <div class="field"><label>Dividende brute anuale (lei)</label><span class="cf-mini">dividendele primite pe tot anul, înainte de impozit</span><input type="number" id="i_dividende" min="0" step="500" placeholder="30000"></div>
         </div>
       </div>
 
       <div class="cf-src" data-key="invRo">
         <label class="cf-chk"><input type="checkbox" id="c_invRo"> <b>Investiții — broker RO</b></label>
         <div class="cf-fields" id="f_invRo" hidden>
-          <div class="field"><label>Câștig net anual (lei)</label><input type="number" id="i_invRo" min="0" step="500" placeholder="10000"></div>
-          <div class="field"><label>Deținere</label>
+          <div class="field"><label>Câștig net anual (lei)</label><span class="cf-mini">profitul din vânzări, după ce scazi pierderile</span><input type="number" id="i_invRo" min="0" step="500" placeholder="10000"></div>
+          <div class="field"><label>Deținere</label><span class="cf-mini">cât timp ai ținut acțiunile înainte să le vinzi</span>
             <select id="i_invRo_det"><option value="long">Peste 1 an (3%)</option><option value="short">Sub 1 an (6%)</option></select>
           </div>
         </div>
@@ -90,14 +122,14 @@
       <div class="cf-src" data-key="invStrain">
         <label class="cf-chk"><input type="checkbox" id="c_invStrain"> <b>Investiții — broker străin</b></label>
         <div class="cf-fields" id="f_invStrain" hidden>
-          <div class="field"><label>Câștig net anual (lei)</label><input type="number" id="i_invStrain" min="0" step="500" placeholder="10000"></div>
+          <div class="field"><label>Câștig net anual (lei)</label><span class="cf-mini">profitul de la broker străin (ex. eToro, IBKR)</span><input type="number" id="i_invStrain" min="0" step="500" placeholder="10000"></div>
         </div>
       </div>
 
       <div class="cf-src" data-key="crypto">
         <label class="cf-chk"><input type="checkbox" id="c_crypto"> <b>Crypto</b></label>
         <div class="cf-fields" id="f_crypto" hidden>
-          <div class="field"><label>Câștig net anual (lei)</label><input type="number" id="i_crypto" min="0" step="500" placeholder="8000"></div>
+          <div class="field"><label>Câștig net anual (lei)</label><span class="cf-mini">profitul din crypto pe tot anul, în lei</span><input type="number" id="i_crypto" min="0" step="500" placeholder="8000"></div>
         </div>
       </div>
 
