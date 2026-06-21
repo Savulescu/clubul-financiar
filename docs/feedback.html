@@ -122,9 +122,11 @@
     if(!window.cfAdmin) return;
     $("fbAdmin").style.display="block";
     var client=sb(); if(!client) return;
-    client.from("feedback").select("*").order("pinned",{ascending:false}).order("created_at",{ascending:false}).limit(500).then(function(res){
+    client.from("feedback").select("*").order("created_at",{ascending:false}).limit(500).then(function(res){
       if(!res || res.error || !res.data){ $("fbList").innerHTML='<p style="color:var(--muted)">Nu pot citi feedback-urile (verifică RLS / login admin).</p>'; return; }
-      var d=res.data; $("fbCount").textContent=d.length+" feedback-uri";
+      var d=res.data;
+      d.sort(function(a,b){ return (b.pinned?1:0)-(a.pinned?1:0); }); // evidențiate primele (sortare în browser, robust)
+      $("fbCount").textContent=d.length+" feedback-uri";
       $("fbList").innerHTML = d.map(function(f){
         var dt=new Date(f.created_at).toLocaleString("ro-RO");
         var pin=!!f.pinned;
