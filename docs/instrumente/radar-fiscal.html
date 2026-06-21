@@ -478,7 +478,7 @@
 
   function mdEsc(s){ var d=document.createElement("div"); d.textContent=String(s==null?"":s); return d.innerHTML; }
   function mdToHtml(src){
-    function inline(t){ return mdEsc(t).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"<code>$1</code>"); }
+    function inline(t){ return mdEsc(t).replace(/&lt;br\s*\/?&gt;/gi,"<br>").replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"<code>$1</code>"); }
     function cells(line){ var c=line.split("|"); if(c.length&&c[0].trim()==="")c.shift(); if(c.length&&c[c.length-1].trim()==="")c.pop(); return c.map(function(x){return x.trim();}); }
     var L=String(src==null?"":src).split("\n"),out=[],i=0;
     while(i<L.length){ var ln=L[i];

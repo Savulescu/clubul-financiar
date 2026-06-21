@@ -131,8 +131,10 @@
   // Mini-renderer Markdown → HTML (tabele GFM, titluri, liste, bold, cod).
   function mdToHtml(src){
     function inline(t){
-      return esc(t).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
-                   .replace(/`([^`]+)`/g, "<code>$1</code>");
+      return esc(t)
+        .replace(/&lt;br\s*\/?&gt;/gi, "<br>")   // permite DOAR <br> (restul rămâne escapat)
+        .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+        .replace(/`([^`]+)`/g, "<code>$1</code>");
     }
     function cells(line){
       var c = line.split("|");
