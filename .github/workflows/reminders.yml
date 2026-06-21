@@ -1,0 +1,24 @@
+name: Remindere Hub Fiscal
+
+on:
+  schedule:
+    # 06:00 UTC zilnic = 09:00 RO. Lunar (ziua 1) trimite reminderele de logare;
+    # zilnic verifică termenele fiscale (deadline) apropiate.
+    - cron: '0 6 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python reminder_cron.py
+        env:
+          SUPABASE_URL:          ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY:  ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TELEGRAM_TOKEN:        ${{ secrets.TELEGRAM_TOKEN }}
+          RESEND_API_KEY:        ${{ secrets.RESEND_API_KEY }}
+          REMINDER_FROM:         ${{ secrets.REMINDER_FROM }}

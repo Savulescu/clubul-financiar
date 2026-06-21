@@ -158,16 +158,38 @@
   document.body.appendChild(foot);
   }
 
-  // ---- roluri (admin / premium) ----
+  // ---- roluri (admin / premium / pro / ultra) ----
   const ADMIN_EMAILS = ["clubulfinanciar@gmail.com"];
+  const RANK = { free:0, premium:1, pro:2, ultra:3 };
+  // expune clientul + userul pentru cf-tool.js (logare Supabase cross-device)
+  window.cfSupabase = sb; window.__cfSB = sb;
+  function setTier(tier, email, isAdmin){
+    const isPremium = RANK[tier] >= RANK.premium;
+    document.body.toggleAttribute("data-cf-premium", isPremium);
+    document.body.setAttribute("data-cf-tier", tier);
+    document.body.toggleAttribute("data-cf-role-admin", !!isAdmin);
+    window.cfTier = tier; window.cfPremium = isPremium; window.cfAdmin = !!isAdmin; window.cfEmail = email || null;
+    try { window.dispatchEvent(new CustomEvent("cf-auth", { detail:{ email:email||null, tier, isPremium, isAdmin:!!isAdmin } })); } catch(e){}
+  }
   function applyRole(session){
     const email = session && session.user && (session.user.email || "").toLowerCase();
     const isAdmin = !!email && ADMIN_EMAILS.includes(email);
-    const isPremium = isAdmin; // momentan: admin = acces premium complet
-    if(isPremium){ document.body.setAttribute("data-cf-premium",""); } else { document.body.removeAttribute("data-cf-premium"); }
-    if(isAdmin){ document.body.setAttribute("data-cf-role-admin",""); } else { document.body.removeAttribute("data-cf-role-admin"); }
-    window.cfPremium = isPremium; window.cfAdmin = isAdmin; window.cfEmail = email || null;
-    try { window.dispatchEvent(new CustomEvent("cf-auth", { detail: { email: email || null, isPremium, isAdmin } })); } catch(e){}
+    window.cfUserId = session && session.user ? session.user.id : null;
+    // baseline sincron: admin = ultra (acces complet), altfel free până vine DB-ul
+    setTier(isAdmin ? "ultra" : "free", email, isAdmin);
+    // tier real din tabelul subscriptions (abonament activ, neexpirat)
+    if(sb && !isAdmin && session && session.user){
+      try {
+        sb.from("subscriptions").select("tier,status,current_period_end")
+          .eq("user_id", session.user.id).maybeSingle().then(({data})=>{
+            if(data && data.status==="active" && (!data.current_period_end || new Date(data.current_period_end) > new Date())
+               && RANK[data.tier] != null){
+              setTier(data.tier, email, false);
+            }
+          }, ()=>{});
+      } catch(e){}
+    }
+    const isPremium = isAdmin;
     return { isAdmin, isPremium };
   }
 
