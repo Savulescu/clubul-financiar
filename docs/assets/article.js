@@ -153,7 +153,9 @@
       // test după lecție
       var box = document.createElement("section"); box.className = "lesson-quiz";
       box.innerHTML = '<div id="lqStart"><p class="eyebrow">Testează-te</p><h2 style="font-size:1.3rem;margin:4px 0 10px">Ai înțeles lecția? Verifică în 10 întrebări.</h2><button class="btn btn-primary" id="lqBtn">Începe testul</button></div><div id="lqRun"></div>';
-      art.appendChild(box);
+      // testul + navigarea trebuie să apară DEASUPRA disclaimerului „⚠️ Conținut educativ"
+      var _disc = art.querySelector(".disc");
+      if (_disc) art.insertBefore(box, _disc); else art.appendChild(box);
       // prev / next (cu nume)
       var nav = document.createElement("nav"); nav.className = "lesson-nav";
       nav.innerHTML =
@@ -161,7 +163,7 @@
              : '<a class="lnav prev" href="/manual/' + e.d + '.html"><span>← Înapoi la</span><b>Capitol</b></a>') +
         (e.n ? '<a class="lnav next" href="/articole/' + encodeURIComponent(e.n[0]) + '.html"><span>Lecția următoare →</span><b>' + esc(e.n[1]) + '</b></a>'
              : '<a class="lnav next" href="/teste.html?d=' + e.d + '"><span>Testul capitolului →</span><b>Recapitulare</b></a>');
-      art.appendChild(nav);
+      if (_disc) art.insertBefore(nav, _disc); else art.appendChild(nav);
 
       fetch("/assets/quiz/d/" + e.d + ".json").then(r => r.json()).then(qd => {
         var qs = (qd[slug] && qd[slug].q) || [];
