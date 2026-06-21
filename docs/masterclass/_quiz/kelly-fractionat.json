@@ -1,27 +1,304 @@
-{"questions":[
-{"q": "Ce reprezinta, in esenta, metoda Kelly fractionat (Fractional Kelly)?", "options": ["Inmultirea fractiunii recomandate de Criteriul lui Kelly cu un numar intre 0 si 1 pentru a reduce riscul", "Dublarea mizei recomandate de Kelly pentru a accelera cresterea", "O regula care elimina complet riscul de ruina", "O metoda de a transforma un avantaj negativ intr-unul pozitiv"], "correct": 0, "explain": "Kelly fractionat ia fractiunea Kelly si o scaleaza cu un factor intre 0 si 1 (de ex. ½ sau ¼), reducand riscul cu pretul unei cresteri mai lente.", "kind": "concept"},
-{"q": "Cine si in ce an a formulat Criteriul lui Kelly?", "options": ["Harry Markowitz, in 1952", "John L. Kelly, in 1956, la Bell Labs", "William Sharpe, in 1964", "Benjamin Graham, in 1949"], "correct": 1, "explain": "Criteriul lui Kelly a fost inventat in 1956 de John L. Kelly, cercetator la Bell Labs.", "kind": "text"},
-{"q": "Care este principalul compromis (trade-off) al folosirii unei fractiuni mai mici din Kelly?", "options": ["Crestere mai rapida fara niciun cost", "Risc mai mare in schimbul unor randamente garantate", "Crestere mai lenta in schimbul unui risc mai mic de pierderi mari", "Eliminarea completa a volatilitatii fara a afecta cresterea"], "correct": 2, "explain": "Nu exista pranz gratis: o fractiune mai mica aduce mai multa siguranta (scaderi mai mici), dar reduce si rata medie de crestere.", "kind": "concept"},
-{"q": "De ce folosim in practica o fractiune din Kelly in loc de Kelly complet?", "options": ["Pentru ca full Kelly este interzis de reglementari", "Pentru ca fractiunea creste intotdeauna randamentul mediu", "Pentru ca full Kelly nu poate fi calculat matematic", "Pentru ca estimarea avantajului este incerta, iar o fractiune ofera o marja de protectie la erorile de estimare"], "correct": 3, "explain": "In lumea reala estimam avantajul cu incertitudine; daca il supraestimam, full Kelly devine prea agresiv. Fractiunea ofera o perna impotriva erorilor de estimare.", "kind": "concept"},
-{"q": "In definitia data, ce reprezinta termenul 'bankroll' (capital de joc)?", "options": ["Suma de bani pusa deoparte pentru pariuri/investitii, pe care iti permiti sa o pierzi", "Toti banii pe care ii detii, inclusiv cei pentru chirie si mancare", "Doar profitul obtinut din investitii", "Suma imprumutata de la broker"], "correct": 0, "explain": "Bankroll-ul este capitalul dedicat pariurilor/investitiilor — banii pe care iti permiti sa ii pierzi, nu cei necesari pentru cheltuieli esentiale.", "kind": "text"},
-{"q": "Daca o aruncare corecta de moneda da 50% sanse, dar tu castigi de fapt 55% din timp, care este avantajul (edge)?", "options": ["55%", "5%", "50%", "10%"], "correct": 1, "explain": "Avantajul este masura in care sansa ta depaseste sansa corecta: 55% − 50% = 5%.", "kind": "text"},
-{"q": "Ce poate face Kelly fractionat in cazul unui avantaj real NEGATIV?", "options": ["Il transforma intr-un avantaj pozitiv prin scalare", "Garanteaza pastrarea capitalului", "Nimic bun — orice fractiune pozitiva tot duce la declin in timp", "Maximizeaza cresterea pe termen lung"], "correct": 2, "explain": "Daca avantajul real este negativ, scalarea cu o fractiune doar incetineste declinul; nu transforma un pariu pierzator intr-unul castigator.", "kind": "concept"},
-{"q": "Matematic, ce maximizeaza fractiunea Kelly optima?", "options": ["Randamentul mediu aritmetic intr-un singur pas", "Probabilitatea de a castiga fiecare pariu", "Reducerea costurilor de tranzactionare", "Valoarea asteptata a logaritmului averii (cresterea compusa cea mai rapida)"], "correct": 3, "explain": "Kelly maximizeaza valoarea asteptata a logaritmului averii, ceea ce corespunde celei mai rapide cresteri compuse pe termen lung.", "kind": "concept"},
-{"q": "In exemplul cu feliile de mar, p = 0,833 si q = 0,167, cu b = +1 si l = −1. Cat este fractiunea Kelly f* = (b·p − q)/b?", "options": ["0,666", "0,833", "0,167", "1,000"], "correct": 0, "explain": "f* = (1·0,833 − 0,167)/1 = 0,666. O valoare pozitiva arata ca jocul este favorabil.", "kind": "text"},
-{"q": "In exemplul rezolvat, cu un factor de scalare de 0,25 aplicat la 48 de bucati, cate bucati sunt oferite?", "options": ["48 de bucati", "12 bucati", "36 de bucati", "24 de bucati"], "correct": 1, "explain": "0,25 × 48 = 12 bucati oferite; restul de 36 raman in cos si nu pot fi nici mancate, nici pierdute.", "kind": "text"},
-{"q": "In exemplul cu merele, care este incertitudinea cheie care poate face ca pana si Kelly fractionat sa piarda bani?", "options": ["Numarul exact de copii din clasa", "Culoarea merelor cumparate", "Stabilitatea probabilitatii de castig p; daca scade sub 0,5, jocul se inverseaza", "Ora la care are loc gustarea"], "correct": 2, "explain": "Daca p scade sub 0,5, intregul joc devine pierzator. De aceea trebuie reestimat p inainte de fiecare runda.", "kind": "concept"},
-{"q": "In scenariul cresei 'Green Thumb' (buget 10.000$), cat se aloca investitiei cu risc ridicat folosind 30% Kelly fractionat?", "options": ["10.000$ in intregime in investitia riscanta", "600$, restul in numerar", "5.000$ impartiti egal", "3.000$, restul de 7.000$ mergand intr-o investitie mai conservatoare"], "correct": 3, "explain": "30% din 10.000$ = 3.000$ in investitia riscanta; restul de 7.000$ merge intr-o investitie mai conservatoare, limitand pierderea maxima la 3.000$.", "kind": "text"},
-{"q": "De ce este gresit sa alegi fractiunea Kelly 'din instinct', precum 'jumatate pare mai sigur'?", "options": ["Fractiunea trebuie derivata din rata estimata de castig si pierdere; raportata la avantaj si varianta, half-Kelly poate fi fie prea agresiv, fie prea prudent", "Pentru ca instinctul este intotdeauna mai bun decat calculul", "Pentru ca half-Kelly este interzis", "Pentru ca fractiunea nu afecteaza deloc riscul"], "correct": 0, "explain": "Fractiunea potrivita depinde de avantajul si varianta reale ale pariului; aleasa emotional, ea poate fi inadecvata in oricare directie.", "kind": "concept"},
-{"q": "Care este diferenta dintre 'f = 0,5' in Kelly fractionat si 'jumatate din dimensiunea pariului'?", "options": ["Sunt exact acelasi lucru", "In Kelly fractionat pariul este proportional cu capitalul curent, deci se ajusteaza cand capitalul creste/scade; 'jumatate fixa' ramane constanta", "Jumatatea fixa creste odata cu capitalul, iar Kelly fractionat ramane constant", "Ambele ignora capitalul curent"], "correct": 1, "explain": "Kelly fractionat scaleaza miza cu capitalul curent. O 'jumatate fixa' duce la subpariere cand capitalul creste si suprapariere cand scade.", "kind": "concept"},
-{"q": "Ce este 'frana de volatilitate' (volatility drag) in contextul Kelly fractionat?", "options": ["Un cost de tranzactionare fix perceput de broker", "Cresterea garantata a randamentului la fractiuni mici", "Reducerea ratei de crestere geometrice a capitalului; volatilitatea scade mai repede decat cresterea cand reduci f", "O taxa pe profitul realizat"], "correct": 2, "explain": "Reducerea fractiunii scade rata de crestere aproximativ proportional cu f, dar reduce volatilitatea mai rapid — de aceea fractiunile mici aduc multa stabilitate la un cost modest de crestere.", "kind": "concept"},
-{"q": "Cum recomanda capitolul sa testezi la stres estimarea avantajului?", "options": ["Maresti avantajul cu 50% pentru a fi optimist", "Ignori avantajul si folosesti o fractiune fixa", "Pariezi intreg capitalul pentru a testa", "Reduci avantajul estimat cu 20-30% si vezi cum se schimba fractiunea; daca se prabuseste, estimarea e fragila"], "correct": 3, "explain": "Reducand avantajul cu 20-30% si observand cum reactioneaza fractiunea afli cat de robusta este estimarea; o prabusire indica fragilitate.", "kind": "concept"},
-{"q": "De ce nu trebuie aplicata aceeasi fractiune Kelly fiecarui pariu?", "options": ["Pentru ca fiecare oportunitate are propriul avantaj si propriile cote; fractiunea trebuie recalculata individual", "Pentru ca toate pariurile au acelasi risc", "Pentru ca brokerul cere o fractiune unica", "Pentru ca recalcularea este interzisa"], "correct": 0, "explain": "Kelly fractionat nu este un multiplicator universal; o fractiune fixa risca prea mult pe pariuri cu avantaj mic si prea putin pe cele cu avantaj mare.", "kind": "concept"},
-{"q": "Pe biroul de tranzactionare, ce reprezinta numarul 0,7 din formula k_i = 0,7 × (f_i / b_i)?", "options": ["Avantajul brut al instrumentului", "Un buton de politica (fractiunea globala), setat de CRO dupa back-testuri, nu un parametru matematic", "Probabilitatea de castig a tranzactiei", "Costul de tranzactionare fix"], "correct": 1, "explain": "Cifra 0,7 este 'fractiunea' de politica setata de CRO pe baza de back-testuri si scenarii de stres; nu deriva din matematica formulei Kelly.", "kind": "concept"},
-{"q": "Conform back-testurilor interne ale biroului (2018-2023), ce a obtinut folosirea unei fractiuni intre 0,5 si 0,8?", "options": ["A pierdut tot avantajul teoretic", "A dublat scaderile fara beneficii", "A pastrat ~85% din avantajul teoretic, reducand scaderile cu ~40%", "A garantat un profit constant zilnic"], "correct": 2, "explain": "O fractiune de 0,5-0,8 a pastrat circa 85% din avantajul teoretic, taind totodata scaderile cu aproximativ 40%.", "kind": "text"},
-{"q": "De ce trateaza biroul fractiunea Kelly ca pe o 'tinta in miscare', nu ca pe o constanta fixa?", "options": ["Pentru ca matematica Kelly se schimba zilnic", "Pentru ca CRO prefera numerele aleatoare", "Pentru ca volatilitatea pietei este intotdeauna constanta", "Pentru ca avantajul brut f_i se erodeaza ~5% pe an pe masura ce mai multi participanti aglomereaza aceleasi semnale"], "correct": 3, "explain": "Avantajul nu este stationar: se erodeaza cu aprox. 5% pe an din cauza aglomerarii semnalelor, deci fractiunea trebuie ajustata in timp.", "kind": "concept"},
-{"q": "Ce se intampla cu fractiunea Kelly optima reala daca distributia pierderilor are cozi groase (fat-tails) mai grele decat se presupune?", "options": ["Fractiunea optima reala este mai MICA decat sugereaza formula din manual", "Fractiunea optima creste, fiind necesara mai multa expunere", "Cozile groase nu afecteaza fractiunea", "Fractiunea devine negativa automat"], "correct": 0, "explain": "Cozile groase cresc probabilitatea pierderilor extreme, deci fractiunea optima reala este mai mica decat indica formula simpla — un f fix poate fi prea agresiv.", "kind": "concept"},
-{"q": "De ce poate fi problematica aplicarea regulii Kelly fractionat independent pe fiecare pozitie dintr-un portofoliu?", "options": ["Portofoliile nu au niciodata pozitii corelate", "Ignorarea corelatiilor poate duce la supra-alocare si risc agregat mai mare decat se intentiona", "Regula functioneaza la fel pentru o pozitie sau pentru o mie", "Corelatiile reduc intotdeauna riscul total"], "correct": 1, "explain": "Formula clasica e derivata pentru un singur pariu; aplicata independent, ea ignora corelatiile si poate genera supra-alocare si scaderi simultane.", "kind": "concept"},
-{"q": "Ce sugereaza cercetarile de optimizare robusta cand incertitudinea parametrilor este mare?", "options": ["Fractiunea optima creste pentru a compensa incertitudinea", "Incertitudinea parametrilor nu conteaza pentru Kelly", "Fractiunea optima se micsoreaza dramatic, uneori aproape de zero", "Trebuie folosit intotdeauna full Kelly"], "correct": 2, "explain": "Cand probabilitatea reala de castig este ea insasi incerta, optimizarea robusta arata ca fractiunea ideala scade puternic, uneori spre zero.", "kind": "concept"},
-{"q": "Cum afecteaza costurile de tranzactionare si alunecarea (slippage) un pariu Kelly teoretic?", "options": ["Costurile nu afecteaza niciodata avantajul net", "Slippage-ul creste intotdeauna avantajul", "Kelly ajusteaza automat pentru toate costurile", "Cand costurile sunt o fractiune importanta din avantaj, avantajul net poate deveni negativ, transformand pariul intr-unul pierzator"], "correct": 3, "explain": "Derivarea Kelly presupune piete fara frecare. Costurile reale pot eroda avantajul pana il fac negativ, anuland beneficiul teoretic.", "kind": "concept"},
-{"q": "Care este pozitia 'onesta' a biroului privind rolul Kelly fractionat in supravietuirea contului?", "options": ["Este o conditie necesara, dar NU suficienta; executia, constientizarea regimului si controlul costurilor conteaza la fel de mult", "Este suficient de unul singur pentru a garanta succesul", "Este complet inutil in practica", "Inlocuieste nevoia de management al riscului"], "correct": 0, "explain": "Biroul considera Kelly fractionat necesar dar nu suficient: priceperea de executie, constientizarea regimului de piata si controlul costurilor sunt la fel de importante.", "kind": "concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce reprezinta, in esenta, metoda Kelly fractionat (Fractional Kelly)?",
+   "options": [
+    "Dublarea mizei recomandate de Kelly pentru a accelera cresterea",
+    "Inmultirea fractiunii recomandate de Criteriul lui Kelly cu un numar intre 0 si 1 pentru a reduce riscul",
+    "O regula care elimina complet riscul de ruina",
+    "O metoda de a transforma un avantaj negativ intr-unul pozitiv"
+   ],
+   "correct": 1,
+   "explain": "Kelly fractionat ia fractiunea Kelly si o scaleaza cu un factor intre 0 si 1 (de ex. ½ sau ¼), reducand riscul cu pretul unei cresteri mai lente.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cine si in ce an a formulat Criteriul lui Kelly?",
+   "options": [
+    "Harry Markowitz, in 1952",
+    "William Sharpe, in 1964",
+    "John L. Kelly, in 1956, la Bell Labs",
+    "Benjamin Graham, in 1949"
+   ],
+   "correct": 2,
+   "explain": "Criteriul lui Kelly a fost inventat in 1956 de John L. Kelly, cercetator la Bell Labs.",
+   "kind": "text"
+  },
+  {
+   "q": "Care este principalul compromis (trade-off) al folosirii unei fractiuni mai mici din Kelly?",
+   "options": [
+    "Crestere mai rapida fara niciun cost",
+    "Risc mai mare in schimbul unor randamente garantate",
+    "Eliminarea completa a volatilitatii fara a afecta cresterea",
+    "Crestere mai lenta in schimbul unui risc mai mic de pierderi mari"
+   ],
+   "correct": 3,
+   "explain": "Nu exista pranz gratis: o fractiune mai mica aduce mai multa siguranta (scaderi mai mici), dar reduce si rata medie de crestere.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce folosim in practica o fractiune din Kelly in loc de Kelly complet?",
+   "options": [
+    "Pentru ca estimarea avantajului este incerta, iar o fractiune ofera o marja de protectie la erorile de estimare",
+    "Pentru ca fractiunea creste intotdeauna randamentul mediu",
+    "Pentru ca full Kelly nu poate fi calculat matematic",
+    "Pentru ca full Kelly este interzis de reglementari"
+   ],
+   "correct": 0,
+   "explain": "In lumea reala estimam avantajul cu incertitudine; daca il supraestimam, full Kelly devine prea agresiv. Fractiunea ofera o perna impotriva erorilor de estimare.",
+   "kind": "concept"
+  },
+  {
+   "q": "In definitia data, ce reprezinta termenul 'bankroll' (capital de joc)?",
+   "options": [
+    "Toti banii pe care ii detii, inclusiv cei pentru chirie si mancare",
+    "Suma de bani pusa deoparte pentru pariuri/investitii, pe care iti permiti sa o pierzi",
+    "Doar profitul obtinut din investitii",
+    "Suma imprumutata de la broker"
+   ],
+   "correct": 1,
+   "explain": "Bankroll-ul este capitalul dedicat pariurilor/investitiilor — banii pe care iti permiti sa ii pierzi, nu cei necesari pentru cheltuieli esentiale.",
+   "kind": "text"
+  },
+  {
+   "q": "Daca o aruncare corecta de moneda da 50% sanse, dar tu castigi de fapt 55% din timp, care este avantajul (edge)?",
+   "options": [
+    "55%",
+    "50%",
+    "5%",
+    "10%"
+   ],
+   "correct": 2,
+   "explain": "Avantajul este masura in care sansa ta depaseste sansa corecta: 55% − 50% = 5%.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce poate face Kelly fractionat in cazul unui avantaj real NEGATIV?",
+   "options": [
+    "Il transforma intr-un avantaj pozitiv prin scalare",
+    "Garanteaza pastrarea capitalului",
+    "Maximizeaza cresterea pe termen lung",
+    "Nimic bun — orice fractiune pozitiva tot duce la declin in timp"
+   ],
+   "correct": 3,
+   "explain": "Daca avantajul real este negativ, scalarea cu o fractiune doar incetineste declinul; nu transforma un pariu pierzator intr-unul castigator.",
+   "kind": "concept"
+  },
+  {
+   "q": "Matematic, ce maximizeaza fractiunea Kelly optima?",
+   "options": [
+    "Valoarea asteptata a logaritmului averii (cresterea compusa cea mai rapida)",
+    "Probabilitatea de a castiga fiecare pariu",
+    "Reducerea costurilor de tranzactionare",
+    "Randamentul mediu aritmetic intr-un singur pas"
+   ],
+   "correct": 0,
+   "explain": "Kelly maximizeaza valoarea asteptata a logaritmului averii, ceea ce corespunde celei mai rapide cresteri compuse pe termen lung.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul cu feliile de mar, p = 0,833 si q = 0,167, cu b = +1 si l = −1. Cat este fractiunea Kelly f* = (b·p − q)/b?",
+   "options": [
+    "0,833",
+    "0,666",
+    "0,167",
+    "1,000"
+   ],
+   "correct": 1,
+   "explain": "f* = (1·0,833 − 0,167)/1 = 0,666. O valoare pozitiva arata ca jocul este favorabil.",
+   "kind": "text"
+  },
+  {
+   "q": "In exemplul rezolvat, cu un factor de scalare de 0,25 aplicat la 48 de bucati, cate bucati sunt oferite?",
+   "options": [
+    "48 de bucati",
+    "36 de bucati",
+    "12 bucati",
+    "24 de bucati"
+   ],
+   "correct": 2,
+   "explain": "0,25 × 48 = 12 bucati oferite; restul de 36 raman in cos si nu pot fi nici mancate, nici pierdute.",
+   "kind": "text"
+  },
+  {
+   "q": "In exemplul cu merele, care este incertitudinea cheie care poate face ca pana si Kelly fractionat sa piarda bani?",
+   "options": [
+    "Numarul exact de copii din clasa",
+    "Culoarea merelor cumparate",
+    "Ora la care are loc gustarea",
+    "Stabilitatea probabilitatii de castig p; daca scade sub 0,5, jocul se inverseaza"
+   ],
+   "correct": 3,
+   "explain": "Daca p scade sub 0,5, intregul joc devine pierzator. De aceea trebuie reestimat p inainte de fiecare runda.",
+   "kind": "concept"
+  },
+  {
+   "q": "In scenariul cresei 'Green Thumb' (buget 10.000$), cat se aloca investitiei cu risc ridicat folosind 30% Kelly fractionat?",
+   "options": [
+    "3.000$, restul de 7.000$ mergand intr-o investitie mai conservatoare",
+    "600$, restul in numerar",
+    "5.000$ impartiti egal",
+    "10.000$ in intregime in investitia riscanta"
+   ],
+   "correct": 0,
+   "explain": "30% din 10.000$ = 3.000$ in investitia riscanta; restul de 7.000$ merge intr-o investitie mai conservatoare, limitand pierderea maxima la 3.000$.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este gresit sa alegi fractiunea Kelly 'din instinct', precum 'jumatate pare mai sigur'?",
+   "options": [
+    "Pentru ca instinctul este intotdeauna mai bun decat calculul",
+    "Fractiunea trebuie derivata din rata estimata de castig si pierdere; raportata la avantaj si varianta, half-Kelly poate fi fie prea agresiv, fie prea prudent",
+    "Pentru ca half-Kelly este interzis",
+    "Pentru ca fractiunea nu afecteaza deloc riscul"
+   ],
+   "correct": 1,
+   "explain": "Fractiunea potrivita depinde de avantajul si varianta reale ale pariului; aleasa emotional, ea poate fi inadecvata in oricare directie.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este diferenta dintre 'f = 0,5' in Kelly fractionat si 'jumatate din dimensiunea pariului'?",
+   "options": [
+    "Sunt exact acelasi lucru",
+    "Jumatatea fixa creste odata cu capitalul, iar Kelly fractionat ramane constant",
+    "In Kelly fractionat pariul este proportional cu capitalul curent, deci se ajusteaza cand capitalul creste/scade; 'jumatate fixa' ramane constanta",
+    "Ambele ignora capitalul curent"
+   ],
+   "correct": 2,
+   "explain": "Kelly fractionat scaleaza miza cu capitalul curent. O 'jumatate fixa' duce la subpariere cand capitalul creste si suprapariere cand scade.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este 'frana de volatilitate' (volatility drag) in contextul Kelly fractionat?",
+   "options": [
+    "Un cost de tranzactionare fix perceput de broker",
+    "Cresterea garantata a randamentului la fractiuni mici",
+    "O taxa pe profitul realizat",
+    "Reducerea ratei de crestere geometrice a capitalului; volatilitatea scade mai repede decat cresterea cand reduci f"
+   ],
+   "correct": 3,
+   "explain": "Reducerea fractiunii scade rata de crestere aproximativ proportional cu f, dar reduce volatilitatea mai rapid — de aceea fractiunile mici aduc multa stabilitate la un cost modest de crestere.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum recomanda capitolul sa testezi la stres estimarea avantajului?",
+   "options": [
+    "Reduci avantajul estimat cu 20-30% si vezi cum se schimba fractiunea; daca se prabuseste, estimarea e fragila",
+    "Ignori avantajul si folosesti o fractiune fixa",
+    "Pariezi intreg capitalul pentru a testa",
+    "Maresti avantajul cu 50% pentru a fi optimist"
+   ],
+   "correct": 0,
+   "explain": "Reducand avantajul cu 20-30% si observand cum reactioneaza fractiunea afli cat de robusta este estimarea; o prabusire indica fragilitate.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu trebuie aplicata aceeasi fractiune Kelly fiecarui pariu?",
+   "options": [
+    "Pentru ca toate pariurile au acelasi risc",
+    "Pentru ca fiecare oportunitate are propriul avantaj si propriile cote; fractiunea trebuie recalculata individual",
+    "Pentru ca brokerul cere o fractiune unica",
+    "Pentru ca recalcularea este interzisa"
+   ],
+   "correct": 1,
+   "explain": "Kelly fractionat nu este un multiplicator universal; o fractiune fixa risca prea mult pe pariuri cu avantaj mic si prea putin pe cele cu avantaj mare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Pe biroul de tranzactionare, ce reprezinta numarul 0,7 din formula k_i = 0,7 × (f_i / b_i)?",
+   "options": [
+    "Avantajul brut al instrumentului",
+    "Probabilitatea de castig a tranzactiei",
+    "Un buton de politica (fractiunea globala), setat de CRO dupa back-testuri, nu un parametru matematic",
+    "Costul de tranzactionare fix"
+   ],
+   "correct": 2,
+   "explain": "Cifra 0,7 este 'fractiunea' de politica setata de CRO pe baza de back-testuri si scenarii de stres; nu deriva din matematica formulei Kelly.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform back-testurilor interne ale biroului (2018-2023), ce a obtinut folosirea unei fractiuni intre 0,5 si 0,8?",
+   "options": [
+    "A pierdut tot avantajul teoretic",
+    "A dublat scaderile fara beneficii",
+    "A garantat un profit constant zilnic",
+    "A pastrat ~85% din avantajul teoretic, reducand scaderile cu ~40%"
+   ],
+   "correct": 3,
+   "explain": "O fractiune de 0,5-0,8 a pastrat circa 85% din avantajul teoretic, taind totodata scaderile cu aproximativ 40%.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce trateaza biroul fractiunea Kelly ca pe o 'tinta in miscare', nu ca pe o constanta fixa?",
+   "options": [
+    "Pentru ca avantajul brut f_i se erodeaza ~5% pe an pe masura ce mai multi participanti aglomereaza aceleasi semnale",
+    "Pentru ca CRO prefera numerele aleatoare",
+    "Pentru ca volatilitatea pietei este intotdeauna constanta",
+    "Pentru ca matematica Kelly se schimba zilnic"
+   ],
+   "correct": 0,
+   "explain": "Avantajul nu este stationar: se erodeaza cu aprox. 5% pe an din cauza aglomerarii semnalelor, deci fractiunea trebuie ajustata in timp.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se intampla cu fractiunea Kelly optima reala daca distributia pierderilor are cozi groase (fat-tails) mai grele decat se presupune?",
+   "options": [
+    "Fractiunea optima creste, fiind necesara mai multa expunere",
+    "Fractiunea optima reala este mai MICA decat sugereaza formula din manual",
+    "Cozile groase nu afecteaza fractiunea",
+    "Fractiunea devine negativa automat"
+   ],
+   "correct": 1,
+   "explain": "Cozile groase cresc probabilitatea pierderilor extreme, deci fractiunea optima reala este mai mica decat indica formula simpla — un f fix poate fi prea agresiv.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce poate fi problematica aplicarea regulii Kelly fractionat independent pe fiecare pozitie dintr-un portofoliu?",
+   "options": [
+    "Portofoliile nu au niciodata pozitii corelate",
+    "Regula functioneaza la fel pentru o pozitie sau pentru o mie",
+    "Ignorarea corelatiilor poate duce la supra-alocare si risc agregat mai mare decat se intentiona",
+    "Corelatiile reduc intotdeauna riscul total"
+   ],
+   "correct": 2,
+   "explain": "Formula clasica e derivata pentru un singur pariu; aplicata independent, ea ignora corelatiile si poate genera supra-alocare si scaderi simultane.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce sugereaza cercetarile de optimizare robusta cand incertitudinea parametrilor este mare?",
+   "options": [
+    "Fractiunea optima creste pentru a compensa incertitudinea",
+    "Incertitudinea parametrilor nu conteaza pentru Kelly",
+    "Trebuie folosit intotdeauna full Kelly",
+    "Fractiunea optima se micsoreaza dramatic, uneori aproape de zero"
+   ],
+   "correct": 3,
+   "explain": "Cand probabilitatea reala de castig este ea insasi incerta, optimizarea robusta arata ca fractiunea ideala scade puternic, uneori spre zero.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum afecteaza costurile de tranzactionare si alunecarea (slippage) un pariu Kelly teoretic?",
+   "options": [
+    "Cand costurile sunt o fractiune importanta din avantaj, avantajul net poate deveni negativ, transformand pariul intr-unul pierzator",
+    "Slippage-ul creste intotdeauna avantajul",
+    "Kelly ajusteaza automat pentru toate costurile",
+    "Costurile nu afecteaza niciodata avantajul net"
+   ],
+   "correct": 0,
+   "explain": "Derivarea Kelly presupune piete fara frecare. Costurile reale pot eroda avantajul pana il fac negativ, anuland beneficiul teoretic.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este pozitia 'onesta' a biroului privind rolul Kelly fractionat in supravietuirea contului?",
+   "options": [
+    "Este suficient de unul singur pentru a garanta succesul",
+    "Este o conditie necesara, dar NU suficienta; executia, constientizarea regimului si controlul costurilor conteaza la fel de mult",
+    "Este complet inutil in practica",
+    "Inlocuieste nevoia de management al riscului"
+   ],
+   "correct": 1,
+   "explain": "Biroul considera Kelly fractionat necesar dar nu suficient: priceperea de executie, constientizarea regimului de piata si controlul costurilor sunt la fel de importante.",
+   "kind": "concept"
+  }
+ ]
+}

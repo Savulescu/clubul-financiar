@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este obiectivul principal al Regulamentului SHO (Reg SHO)?","options":["Să interzică complet orice formă de vânzare în lipsă pe piețele din SUA","Să oprească vânzarea în lipsă fără acoperire (naked short) și să asigure livrarea acțiunilor la decontare","Să garanteze că fiecare vânzare în lipsă va fi profitabilă","Să stabilească prețul minim al acțiunilor listate la NYSE și Nasdaq"],"correct":1,"explain":"Reg SHO vizează interzicerea short-ului fără acoperire și asigurarea că acțiunile vândute în lipsă pot fi livrate la decontare; nu interzice short-ul legitim și nu garantează profitul.","kind":"concept"},
-{"q":"Ce înseamnă o „vânzare în lipsă fără acoperire” (naked short sale)?","options":["O vânzare în lipsă efectuată fără a fi împrumutat acțiunile și fără o convingere rezonabilă că pot fi împrumutate","O vânzare a unor acțiuni deținute deja în portofoliu","Orice vânzare în lipsă a unei acțiuni small-cap","O vânzare în lipsă acoperită printr-un pre-împrumut documentat"],"correct":0,"explain":"Naked short = short fără împrumut și fără convingere rezonabilă că acțiunile pot fi împrumutate. Aceasta este partea ilegală pe care o vizează Reg SHO.","kind":"text"},
-{"q":"Un trader vrea să vândă în lipsă, dar prime brokerul răspunde „nicio localizare disponibilă”. Ce trebuie să se întâmple cu ordinul?","options":["Ordinul poate fi executat oricum, urmând ca localizarea să fie obținută ulterior","Ordinul trebuie anulat sau convertit într-o poziție long","Ordinul se execută automat ca formare de piață de bună-credință","Ordinul se execută, dar la jumătate din cantitate"],"correct":1,"explain":"Fără o localizare validă, vânzarea în lipsă nu poate fi acceptată; ordinul trebuie anulat sau convertit într-o poziție long. A te baza pe „acoperiri vagi” (soft-covers) este o greșeală frecventă.","kind":"concept"},
-{"q":"Ce este un „eșec de livrare” (fail to deliver, FTD)?","options":["O tranzacție anulată înainte de execuție","Situația în care vânzătorul nu are acțiunile pe care să le predea cumpărătorului în ziua decontării","O comandă de cumpărare respinsă de bursă","Un ordin de vânzare în lipsă marcat greșit"],"correct":1,"explain":"Un FTD apare când vânzătorul nu poate livra acțiunile cumpărătorului la data decontării. FTD-urile persistente sunt tratate ca semnal de alarmă de către Reg SHO.","kind":"text"},
-{"q":"Care este data tipică de decontare (settlement date) pentru acțiunile din SUA, conform capitolului?","options":["T+0 (în aceeași zi)","T+1 (o zi lucrătoare)","T+2 (data tranzacției plus două zile lucrătoare)","T+5 (cinci zile lucrătoare)"],"correct":2,"explain":"Pentru acțiunile din SUA, decontarea este T+2 — data tranzacției plus două zile lucrătoare. Dacă vânzătorul nu livrează la T+2, tranzacția eșuează la livrare.","kind":"text"},
-{"q":"Conform exemplului rezolvat cu XYZ Inc. (10.000.000 acțiuni în circulație), câte acțiuni reprezintă pragul de 0,5% relevant pentru lista valorilor-prag?","options":["5.000 de acțiuni","10.000 de acțiuni","50.000 de acțiuni","500.000 de acțiuni"],"correct":2,"explain":"0,5% din 10.000.000 = 50.000 de acțiuni. Un eșec persistent de cel puțin 50.000 de acțiuni (și minimum 10.000) timp de cinci zile de decontare ar califica XYZ pentru lista valorilor-prag.","kind":"concept"},
-{"q":"Pentru ca o acțiune să ajungă pe lista valorilor-prag (threshold security list), eșecurile de livrare trebuie să fie:","options":["De cel puțin 10.000 de acțiuni ȘI cel puțin 0,5% din acțiunile în circulație, timp de cinci zile de decontare consecutive","Doar mai mari de 1.000.000 de acțiuni într-o singură zi","De exact 1% din float, indiferent de durată","De orice mărime, dacă acțiunea este small-cap"],"correct":0,"explain":"Pragul cumulează două condiții simultane (≥10.000 acțiuni ȘI ≥0,5% din acțiunile în circulație) menținute cinci zile de decontare consecutive.","kind":"text"},
-{"q":"De ce oferă Reg SHO formatorilor de piață (market makers) o flexibilitate suplimentară?","options":["Pentru că ei nu trebuie niciodată să respecte cerințele de localizare","Pentru a le permite să continue să asigure lichiditate chiar și când o acțiune este greu de împrumutat","Pentru că plătesc taxe mai mari către SEC","Pentru că dețin întotdeauna acțiunile pe care le vând"],"correct":1,"explain":"Formatorii de piață mențin piețele ordonate; exceptarea le permite să asigure lichiditate continuă chiar și pentru acțiuni greu de împrumutat, dar este îngustă și condiționată de cotare bilaterală.","kind":"concept"},
-{"q":"De ce este pre-împrumutul (pre-borrow) considerat cea mai sigură modalitate de a respecta Reg SHO?","options":["Pentru că elimină nevoia de a păstra orice evidență","Pentru că acțiunile sunt deja în posesia brokerului, oferind dovadă incontestabilă a localizării","Pentru că scutește acțiunea de regula de decontare T+2","Pentru că permite shortul nelimitat fără raportare"],"correct":1,"explain":"Pre-împrumutul asigură acțiunile înainte de vânzare, oferind dovadă clară a localizării și reducând riscul de eșec. Este deosebit de util pentru acțiuni cu float redus.","kind":"concept"},
-{"q":"O greșeală frecventă este să presupui că pre-împrumutul elimină TOT riscul Reg SHO. De ce nu este adevărat?","options":["Pentru că pre-împrumutul este interzis de SEC","Pentru că dacă brokerul anulează împrumutul înainte de data tranzacției, localizarea nu mai este validă","Pentru că pre-împrumutul se aplică doar obligațiunilor","Pentru că pre-împrumutul dublează costurile de decontare"],"correct":1,"explain":"Pre-împrumutul este o punte temporară, nu un remediu permanent. Dacă acțiunile sunt eliberate înainte de tranzacție, se poate crea o vânzare în lipsă neacoperită; localizarea trebuie reconfirmată la data tranzacției.","kind":"concept"},
-{"q":"Conform celor doi piloni ai Reg SHO, ce reprezintă cerința de „închidere” (close-out, Regula 204)?","options":["Obligația de a publica zilnic poziția short către public","Obligația de a închide (buy-in) o poziție când apare un eșec de livrare neresolvat","Obligația de a vinde acțiunile imediat după cumpărare","Obligația de a obține aprobarea SEC înainte de fiecare short"],"correct":1,"explain":"Cerința de închidere impune răscumpărarea (buy-in) poziției până la începutul programului normal de tranzacționare în ziua de decontare care urmează, dacă există un FTD neresolvat.","kind":"text"},
-{"q":"De ce este greșit să confunzi o „vânzare din portofoliu” (sale against the box) cu o vânzare în lipsă?","options":["Pentru că vânzarea din portofoliu este o vânzare long și nu creează o poziție short, deci nu cade sub cerințele de localizare/închidere","Pentru că vânzarea din portofoliu este întotdeauna ilegală","Pentru că ambele sunt identice și tratate la fel de Reg SHO","Pentru că vânzarea din portofoliu se aplică doar opțiunilor"],"correct":0,"explain":"O vânzare din portofoliu vinde acțiuni deja deținute long; nu creează poziție short și nu face obiectul localizării sau închiderii. Eticheta corectă este „vânzare long”.","kind":"concept"},
-{"q":"Care este diferența-cheie dintre o „valoare-prag” (threshold security) și o „valoare restricționată” (restricted security)?","options":["O valoare-prag are FTD-uri persistente și cerințe suplimentare, dar nu e interzisă; o valoare restricționată e supusă unei suspendări/restricții SEC","Sunt termeni identici cu sensuri interschimbabile","O valoare-prag interzice complet shortul, iar cea restricționată îl permite","O valoare restricționată are FTD-uri, iar cea-prag nu are"],"correct":0,"explain":"Valoarea-prag declanșează reguli mai stricte de închidere/pre-împrumut, dar shortul nu e interzis. Valoarea restricționată e supusă unei suspendări sau restricții reglementare directe.","kind":"concept"},
-{"q":"În al doilea scenariu (ACME / Todd), pe ce excepție se baza Todd când lovea oferta fără a localiza mai întâi fiecare acțiune?","options":["Excepția de tranzacționare pe cont propriu","Excepția de formare de piață de bună-credință (bona-fide market making)","Excepția de arbitraj statistic","Excepția pentru fonduri speculative"],"correct":1,"explain":"Todd se baza pe excepția de formare de piață de bună-credință din Regula 204, satisfăcută doar fiindcă confirma că face o piață bilaterală continuă, nu o acoperire pe cont propriu.","kind":"concept"},
-{"q":"De ce NU este suficient ca o acțiune să fie pe lista „ușor de împrumutat” (easy-to-borrow) pentru a justifica complet un short, conform concluziilor?","options":["Pentru că listele ușor de împrumutat sunt doar orientative și nu satisfac singure cerința de „motive rezonabile”","Pentru că lista ușor de împrumutat interzice shortul","Pentru că lista se actualizează doar lunar","Pentru că lista se aplică doar obligațiunilor"],"correct":0,"explain":"Listele ușor de împrumutat sunt instrumente interne orientative; ele nu satisfac singure standardul de „motive rezonabile” al Reg SHO. Trebuie totuși obținută/documentată localizarea.","kind":"concept"},
-{"q":"Ce permite regula de agregare „netă” a eșecurilor (Regula 204(b))?","options":["Compensarea pozițiilor long și short ale aceleiași valori la același broker-dealer în aceeași zi de decontare","Anularea oricărui FTD prin plata unei taxe","Transferul eșecurilor către un alt broker fără evidență","Ignorarea totală a eșecurilor sub 100.000 de acțiuni"],"correct":0,"explain":"Regula 204(b) permite ca o poziție long dintr-un cont să vindece un eșec short din alt cont la același broker-dealer, în aceeași zi de decontare, dacă firma are control operațional asupra ambelor.","kind":"text"},
-{"q":"Cui îi revine în cele din urmă obligația de închidere atunci când un client inițiază o vânzare în lipsă care eșuează la livrare?","options":["Exclusiv clientului, firma nu are nicio responsabilitate","Broker-dealerului, care e ultimul responsabil chiar dacă clientul nu a livrat","Bursei pe care s-a tranzacționat","SEC, care cumpără acțiunile lipsă"],"correct":1,"explain":"Conform Regulii 204, broker-dealerul e în cele din urmă responsabil pentru închidere; trebuie fie să cumpere/împrumute acțiunile, fie să facă buy-in poziției clientului.","kind":"concept"},
-{"q":"De ce este riscant să cumperi în panică la T+1 când apare un eșec „cosmetic” (de exemplu o întârziere a curierului)?","options":["Pentru că este interzis prin lege să cumperi la T+1","Pentru că poate crea un impact inutil asupra pieței și costuri mai mari, deși regula acordă timp până la T+2","Pentru că anulează automat poziția short","Pentru că SEC amendează orice cumpărare la T+1"],"correct":1,"explain":"Cerința de închidere acordă timp până la începutul programului la T+2. Eșecurile cosmetice se pot vindeca prin decontarea normală; panica generează costuri și impact de piață inutile.","kind":"concept"},
-{"q":"Conform secțiunii despre limite, în care dintre următoarele regimuri eficacitatea Reg SHO poate fi compromisă?","options":["Acțiunile listate la NYSE","Acțiunile blue-chip din indicele S&P 500","Piețele OTC și valorile de tip Pink Sheet","ADR-urile listate pe burse din SUA"],"correct":2,"explain":"Capitolul subliniază că piețele OTC, valorile Pink Sheet și golurile de reglementare pot crea portițe; ADR-urile listate în SUA, în schimb, intră sub Reg SHO.","kind":"concept"},
-{"q":"Ce reprezintă „decontarea netă continuă” (continuous net settlement, CNS) și de ce contează?","options":["Sistemul DTCC care compensează tranzacțiile la nivelul firmei; eșecuri pot apărea totuși la nivel de client dacă firma nu are destule acțiuni în contul CNS","Un sistem care elimină definitiv orice eșec de livrare","O listă zilnică de acțiuni greu de împrumutat","Un raport trimis direct cumpărătorilor individuali"],"correct":0,"explain":"CNS (operat de DTCC) compensează tranzacțiile la nivelul firmei de compensare, dar eșecurile pot apărea în continuare la nivel de client; de aceea trebuie monitorizate zilnic rapoartele CNS.","kind":"text"},
-{"q":"Cât timp trebuie firmele să păstreze rapoartele zilnice de eșec și evidențele de răscumpărare (Regula 204), conform concluziilor?","options":["Timp de un an","Timp de cel puțin șase ani","Doar până la sfârșitul zilei de tranzacționare","Timp de 30 de zile"],"correct":1,"explain":"Evidențele de eșec și buy-in (Regula 204) trebuie păstrate cel puțin șase ani. Nereușita de a produce evidențele în 24 de ore poate declanșa acțiuni de aplicare a legii din partea SEC.","kind":"text"},
-{"q":"Conform fluxului de lucru al pupitrului, ce regulă practică se recomandă pentru dimensionarea unui nou short în raport cu capacitatea de împrumut?","options":["Să folosești 100% din împrumutul disponibil","Să menții noua expunere short sub 30% din împrumutul disponibil, pentru a lăsa marjă","Să shortezi exact cât interesul short total","Să nu ții cont de capacitatea de împrumut"],"correct":1,"explain":"O regulă practică este menținerea expunerii noi sub 30% din împrumutul disponibil, lăsând marjă pentru cererea neașteptată; depășirea capacității poate forța un buy-in costisitor.","kind":"concept"},
-{"q":"De ce este o greșeală ca un pupitru să marcheze fiecare short drept „formare de piață” fără obligații de cotare?","options":["Pentru că exceptarea se aplică doar shortului care e conceput rezonabil să asigure lichiditate, dovedit prin cotare bilaterală continuă","Pentru că orice short de formare de piață este oricum interzis","Pentru că marcarea ca formare de piață crește automat costurile de tranzacție","Pentru că SEC nu auditează niciodată aceste tranzacții"],"correct":0,"explain":"Exceptarea (Regula 203(b)(2)(iii)) cere ca shortul să fie conceput rezonabil pentru lichiditate, demonstrat prin cotare bilaterală continuă. Acoperirile pe cont propriu sau arbitrajul nu se califică.","kind":"concept"},
-{"q":"În al doilea scenariu, ce caz-limită trebuie urmărit chiar și după o localizare validă și o execuție corectă?","options":["Ca prețul acțiunii să crească peste 3,20","Ca brokerul cumpărătorului să întârzie livrarea, declanșând o cerință de închidere și posibil un buy-in automat","Ca FINRA să retragă acțiunea de pe lista ușor de împrumutat","Ca volumul să scadă sub media zilnică"],"correct":1,"explain":"Chiar cu localizare validă, un cumpărător întârziat poate crea un FTD; Regula 204 cere închiderea, iar firmele de compensare fac adesea buy-in automat la 9:30 la T+2.","kind":"concept"},
-{"q":"Care este mesajul-rezumat final al capitolului pentru un trader care operează sub Reg SHO?","options":["Shortează nelimitat, decontarea nu contează","Localizează înainte de a face short, livrează la timp, păstrează evidențele și tratează valorile-prag ca alertă maximă","Evită complet orice vânzare în lipsă","Bazează-te exclusiv pe lista ușor de împrumutat"],"correct":1,"explain":"Concluzia esențială: localizează înainte de short, livrează la timp, păstrează evidențele și tratează valorile-prag ca elemente de alertă maximă.","kind":"text"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este obiectivul principal al Regulamentului SHO (Reg SHO)?",
+   "options": [
+    "Să oprească vânzarea în lipsă fără acoperire (naked short) și să asigure livrarea acțiunilor la decontare",
+    "Să interzică complet orice formă de vânzare în lipsă pe piețele din SUA",
+    "Să garanteze că fiecare vânzare în lipsă va fi profitabilă",
+    "Să stabilească prețul minim al acțiunilor listate la NYSE și Nasdaq"
+   ],
+   "correct": 0,
+   "explain": "Reg SHO vizează interzicerea short-ului fără acoperire și asigurarea că acțiunile vândute în lipsă pot fi livrate la decontare; nu interzice short-ul legitim și nu garantează profitul.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă o „vânzare în lipsă fără acoperire” (naked short sale)?",
+   "options": [
+    "O vânzare a unor acțiuni deținute deja în portofoliu",
+    "O vânzare în lipsă efectuată fără a fi împrumutat acțiunile și fără o convingere rezonabilă că pot fi împrumutate",
+    "Orice vânzare în lipsă a unei acțiuni small-cap",
+    "O vânzare în lipsă acoperită printr-un pre-împrumut documentat"
+   ],
+   "correct": 1,
+   "explain": "Naked short = short fără împrumut și fără convingere rezonabilă că acțiunile pot fi împrumutate. Aceasta este partea ilegală pe care o vizează Reg SHO.",
+   "kind": "text"
+  },
+  {
+   "q": "Un trader vrea să vândă în lipsă, dar prime brokerul răspunde „nicio localizare disponibilă”. Ce trebuie să se întâmple cu ordinul?",
+   "options": [
+    "Ordinul poate fi executat oricum, urmând ca localizarea să fie obținută ulterior",
+    "Ordinul se execută automat ca formare de piață de bună-credință",
+    "Ordinul trebuie anulat sau convertit într-o poziție long",
+    "Ordinul se execută, dar la jumătate din cantitate"
+   ],
+   "correct": 2,
+   "explain": "Fără o localizare validă, vânzarea în lipsă nu poate fi acceptată; ordinul trebuie anulat sau convertit într-o poziție long. A te baza pe „acoperiri vagi” (soft-covers) este o greșeală frecventă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este un „eșec de livrare” (fail to deliver, FTD)?",
+   "options": [
+    "O tranzacție anulată înainte de execuție",
+    "Un ordin de vânzare în lipsă marcat greșit",
+    "O comandă de cumpărare respinsă de bursă",
+    "Situația în care vânzătorul nu are acțiunile pe care să le predea cumpărătorului în ziua decontării"
+   ],
+   "correct": 3,
+   "explain": "Un FTD apare când vânzătorul nu poate livra acțiunile cumpărătorului la data decontării. FTD-urile persistente sunt tratate ca semnal de alarmă de către Reg SHO.",
+   "kind": "text"
+  },
+  {
+   "q": "Care este data tipică de decontare (settlement date) pentru acțiunile din SUA, conform capitolului?",
+   "options": [
+    "T+2 (data tranzacției plus două zile lucrătoare)",
+    "T+1 (o zi lucrătoare)",
+    "T+0 (în aceeași zi)",
+    "T+5 (cinci zile lucrătoare)"
+   ],
+   "correct": 0,
+   "explain": "Pentru acțiunile din SUA, decontarea este T+2 — data tranzacției plus două zile lucrătoare. Dacă vânzătorul nu livrează la T+2, tranzacția eșuează la livrare.",
+   "kind": "text"
+  },
+  {
+   "q": "Conform exemplului rezolvat cu XYZ Inc. (10.000.000 acțiuni în circulație), câte acțiuni reprezintă pragul de 0,5% relevant pentru lista valorilor-prag?",
+   "options": [
+    "5.000 de acțiuni",
+    "50.000 de acțiuni",
+    "10.000 de acțiuni",
+    "500.000 de acțiuni"
+   ],
+   "correct": 1,
+   "explain": "0,5% din 10.000.000 = 50.000 de acțiuni. Un eșec persistent de cel puțin 50.000 de acțiuni (și minimum 10.000) timp de cinci zile de decontare ar califica XYZ pentru lista valorilor-prag.",
+   "kind": "concept"
+  },
+  {
+   "q": "Pentru ca o acțiune să ajungă pe lista valorilor-prag (threshold security list), eșecurile de livrare trebuie să fie:",
+   "options": [
+    "De exact 1% din float, indiferent de durată",
+    "Doar mai mari de 1.000.000 de acțiuni într-o singură zi",
+    "De cel puțin 10.000 de acțiuni ȘI cel puțin 0,5% din acțiunile în circulație, timp de cinci zile de decontare consecutive",
+    "De orice mărime, dacă acțiunea este small-cap"
+   ],
+   "correct": 2,
+   "explain": "Pragul cumulează două condiții simultane (≥10.000 acțiuni ȘI ≥0,5% din acțiunile în circulație) menținute cinci zile de decontare consecutive.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce oferă Reg SHO formatorilor de piață (market makers) o flexibilitate suplimentară?",
+   "options": [
+    "Pentru că ei nu trebuie niciodată să respecte cerințele de localizare",
+    "Pentru că dețin întotdeauna acțiunile pe care le vând",
+    "Pentru că plătesc taxe mai mari către SEC",
+    "Pentru a le permite să continue să asigure lichiditate chiar și când o acțiune este greu de împrumutat"
+   ],
+   "correct": 3,
+   "explain": "Formatorii de piață mențin piețele ordonate; exceptarea le permite să asigure lichiditate continuă chiar și pentru acțiuni greu de împrumutat, dar este îngustă și condiționată de cotare bilaterală.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este pre-împrumutul (pre-borrow) considerat cea mai sigură modalitate de a respecta Reg SHO?",
+   "options": [
+    "Pentru că acțiunile sunt deja în posesia brokerului, oferind dovadă incontestabilă a localizării",
+    "Pentru că elimină nevoia de a păstra orice evidență",
+    "Pentru că scutește acțiunea de regula de decontare T+2",
+    "Pentru că permite shortul nelimitat fără raportare"
+   ],
+   "correct": 0,
+   "explain": "Pre-împrumutul asigură acțiunile înainte de vânzare, oferind dovadă clară a localizării și reducând riscul de eșec. Este deosebit de util pentru acțiuni cu float redus.",
+   "kind": "concept"
+  },
+  {
+   "q": "O greșeală frecventă este să presupui că pre-împrumutul elimină TOT riscul Reg SHO. De ce nu este adevărat?",
+   "options": [
+    "Pentru că pre-împrumutul este interzis de SEC",
+    "Pentru că dacă brokerul anulează împrumutul înainte de data tranzacției, localizarea nu mai este validă",
+    "Pentru că pre-împrumutul se aplică doar obligațiunilor",
+    "Pentru că pre-împrumutul dublează costurile de decontare"
+   ],
+   "correct": 1,
+   "explain": "Pre-împrumutul este o punte temporară, nu un remediu permanent. Dacă acțiunile sunt eliberate înainte de tranzacție, se poate crea o vânzare în lipsă neacoperită; localizarea trebuie reconfirmată la data tranzacției.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform celor doi piloni ai Reg SHO, ce reprezintă cerința de „închidere” (close-out, Regula 204)?",
+   "options": [
+    "Obligația de a publica zilnic poziția short către public",
+    "Obligația de a vinde acțiunile imediat după cumpărare",
+    "Obligația de a închide (buy-in) o poziție când apare un eșec de livrare neresolvat",
+    "Obligația de a obține aprobarea SEC înainte de fiecare short"
+   ],
+   "correct": 2,
+   "explain": "Cerința de închidere impune răscumpărarea (buy-in) poziției până la începutul programului normal de tranzacționare în ziua de decontare care urmează, dacă există un FTD neresolvat.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este greșit să confunzi o „vânzare din portofoliu” (sale against the box) cu o vânzare în lipsă?",
+   "options": [
+    "Pentru că vânzarea din portofoliu se aplică doar opțiunilor",
+    "Pentru că vânzarea din portofoliu este întotdeauna ilegală",
+    "Pentru că ambele sunt identice și tratate la fel de Reg SHO",
+    "Pentru că vânzarea din portofoliu este o vânzare long și nu creează o poziție short, deci nu cade sub cerințele de localizare/închidere"
+   ],
+   "correct": 3,
+   "explain": "O vânzare din portofoliu vinde acțiuni deja deținute long; nu creează poziție short și nu face obiectul localizării sau închiderii. Eticheta corectă este „vânzare long”.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este diferența-cheie dintre o „valoare-prag” (threshold security) și o „valoare restricționată” (restricted security)?",
+   "options": [
+    "O valoare-prag are FTD-uri persistente și cerințe suplimentare, dar nu e interzisă; o valoare restricționată e supusă unei suspendări/restricții SEC",
+    "Sunt termeni identici cu sensuri interschimbabile",
+    "O valoare-prag interzice complet shortul, iar cea restricționată îl permite",
+    "O valoare restricționată are FTD-uri, iar cea-prag nu are"
+   ],
+   "correct": 0,
+   "explain": "Valoarea-prag declanșează reguli mai stricte de închidere/pre-împrumut, dar shortul nu e interzis. Valoarea restricționată e supusă unei suspendări sau restricții reglementare directe.",
+   "kind": "concept"
+  },
+  {
+   "q": "În al doilea scenariu (ACME / Todd), pe ce excepție se baza Todd când lovea oferta fără a localiza mai întâi fiecare acțiune?",
+   "options": [
+    "Excepția de tranzacționare pe cont propriu",
+    "Excepția de formare de piață de bună-credință (bona-fide market making)",
+    "Excepția de arbitraj statistic",
+    "Excepția pentru fonduri speculative"
+   ],
+   "correct": 1,
+   "explain": "Todd se baza pe excepția de formare de piață de bună-credință din Regula 204, satisfăcută doar fiindcă confirma că face o piață bilaterală continuă, nu o acoperire pe cont propriu.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce NU este suficient ca o acțiune să fie pe lista „ușor de împrumutat” (easy-to-borrow) pentru a justifica complet un short, conform concluziilor?",
+   "options": [
+    "Pentru că lista se actualizează doar lunar",
+    "Pentru că lista ușor de împrumutat interzice shortul",
+    "Pentru că listele ușor de împrumutat sunt doar orientative și nu satisfac singure cerința de „motive rezonabile”",
+    "Pentru că lista se aplică doar obligațiunilor"
+   ],
+   "correct": 2,
+   "explain": "Listele ușor de împrumutat sunt instrumente interne orientative; ele nu satisfac singure standardul de „motive rezonabile” al Reg SHO. Trebuie totuși obținută/documentată localizarea.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce permite regula de agregare „netă” a eșecurilor (Regula 204(b))?",
+   "options": [
+    "Ignorarea totală a eșecurilor sub 100.000 de acțiuni",
+    "Anularea oricărui FTD prin plata unei taxe",
+    "Transferul eșecurilor către un alt broker fără evidență",
+    "Compensarea pozițiilor long și short ale aceleiași valori la același broker-dealer în aceeași zi de decontare"
+   ],
+   "correct": 3,
+   "explain": "Regula 204(b) permite ca o poziție long dintr-un cont să vindece un eșec short din alt cont la același broker-dealer, în aceeași zi de decontare, dacă firma are control operațional asupra ambelor.",
+   "kind": "text"
+  },
+  {
+   "q": "Cui îi revine în cele din urmă obligația de închidere atunci când un client inițiază o vânzare în lipsă care eșuează la livrare?",
+   "options": [
+    "Broker-dealerului, care e ultimul responsabil chiar dacă clientul nu a livrat",
+    "Exclusiv clientului, firma nu are nicio responsabilitate",
+    "Bursei pe care s-a tranzacționat",
+    "SEC, care cumpără acțiunile lipsă"
+   ],
+   "correct": 0,
+   "explain": "Conform Regulii 204, broker-dealerul e în cele din urmă responsabil pentru închidere; trebuie fie să cumpere/împrumute acțiunile, fie să facă buy-in poziției clientului.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este riscant să cumperi în panică la T+1 când apare un eșec „cosmetic” (de exemplu o întârziere a curierului)?",
+   "options": [
+    "Pentru că este interzis prin lege să cumperi la T+1",
+    "Pentru că poate crea un impact inutil asupra pieței și costuri mai mari, deși regula acordă timp până la T+2",
+    "Pentru că anulează automat poziția short",
+    "Pentru că SEC amendează orice cumpărare la T+1"
+   ],
+   "correct": 1,
+   "explain": "Cerința de închidere acordă timp până la începutul programului la T+2. Eșecurile cosmetice se pot vindeca prin decontarea normală; panica generează costuri și impact de piață inutile.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform secțiunii despre limite, în care dintre următoarele regimuri eficacitatea Reg SHO poate fi compromisă?",
+   "options": [
+    "Acțiunile listate la NYSE",
+    "Acțiunile blue-chip din indicele S&P 500",
+    "Piețele OTC și valorile de tip Pink Sheet",
+    "ADR-urile listate pe burse din SUA"
+   ],
+   "correct": 2,
+   "explain": "Capitolul subliniază că piețele OTC, valorile Pink Sheet și golurile de reglementare pot crea portițe; ADR-urile listate în SUA, în schimb, intră sub Reg SHO.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce reprezintă „decontarea netă continuă” (continuous net settlement, CNS) și de ce contează?",
+   "options": [
+    "Un raport trimis direct cumpărătorilor individuali",
+    "Un sistem care elimină definitiv orice eșec de livrare",
+    "O listă zilnică de acțiuni greu de împrumutat",
+    "Sistemul DTCC care compensează tranzacțiile la nivelul firmei; eșecuri pot apărea totuși la nivel de client dacă firma nu are destule acțiuni în contul CNS"
+   ],
+   "correct": 3,
+   "explain": "CNS (operat de DTCC) compensează tranzacțiile la nivelul firmei de compensare, dar eșecurile pot apărea în continuare la nivel de client; de aceea trebuie monitorizate zilnic rapoartele CNS.",
+   "kind": "text"
+  },
+  {
+   "q": "Cât timp trebuie firmele să păstreze rapoartele zilnice de eșec și evidențele de răscumpărare (Regula 204), conform concluziilor?",
+   "options": [
+    "Timp de cel puțin șase ani",
+    "Timp de un an",
+    "Doar până la sfârșitul zilei de tranzacționare",
+    "Timp de 30 de zile"
+   ],
+   "correct": 0,
+   "explain": "Evidențele de eșec și buy-in (Regula 204) trebuie păstrate cel puțin șase ani. Nereușita de a produce evidențele în 24 de ore poate declanșa acțiuni de aplicare a legii din partea SEC.",
+   "kind": "text"
+  },
+  {
+   "q": "Conform fluxului de lucru al pupitrului, ce regulă practică se recomandă pentru dimensionarea unui nou short în raport cu capacitatea de împrumut?",
+   "options": [
+    "Să folosești 100% din împrumutul disponibil",
+    "Să menții noua expunere short sub 30% din împrumutul disponibil, pentru a lăsa marjă",
+    "Să shortezi exact cât interesul short total",
+    "Să nu ții cont de capacitatea de împrumut"
+   ],
+   "correct": 1,
+   "explain": "O regulă practică este menținerea expunerii noi sub 30% din împrumutul disponibil, lăsând marjă pentru cererea neașteptată; depășirea capacității poate forța un buy-in costisitor.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este o greșeală ca un pupitru să marcheze fiecare short drept „formare de piață” fără obligații de cotare?",
+   "options": [
+    "Pentru că marcarea ca formare de piață crește automat costurile de tranzacție",
+    "Pentru că orice short de formare de piață este oricum interzis",
+    "Pentru că exceptarea se aplică doar shortului care e conceput rezonabil să asigure lichiditate, dovedit prin cotare bilaterală continuă",
+    "Pentru că SEC nu auditează niciodată aceste tranzacții"
+   ],
+   "correct": 2,
+   "explain": "Exceptarea (Regula 203(b)(2)(iii)) cere ca shortul să fie conceput rezonabil pentru lichiditate, demonstrat prin cotare bilaterală continuă. Acoperirile pe cont propriu sau arbitrajul nu se califică.",
+   "kind": "concept"
+  },
+  {
+   "q": "În al doilea scenariu, ce caz-limită trebuie urmărit chiar și după o localizare validă și o execuție corectă?",
+   "options": [
+    "Ca prețul acțiunii să crească peste 3,20",
+    "Ca volumul să scadă sub media zilnică",
+    "Ca FINRA să retragă acțiunea de pe lista ușor de împrumutat",
+    "Ca brokerul cumpărătorului să întârzie livrarea, declanșând o cerință de închidere și posibil un buy-in automat"
+   ],
+   "correct": 3,
+   "explain": "Chiar cu localizare validă, un cumpărător întârziat poate crea un FTD; Regula 204 cere închiderea, iar firmele de compensare fac adesea buy-in automat la 9:30 la T+2.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este mesajul-rezumat final al capitolului pentru un trader care operează sub Reg SHO?",
+   "options": [
+    "Localizează înainte de a face short, livrează la timp, păstrează evidențele și tratează valorile-prag ca alertă maximă",
+    "Shortează nelimitat, decontarea nu contează",
+    "Evită complet orice vânzare în lipsă",
+    "Bazează-te exclusiv pe lista ușor de împrumutat"
+   ],
+   "correct": 0,
+   "explain": "Concluzia esențială: localizează înainte de short, livrează la timp, păstrează evidențele și tratează valorile-prag ca elemente de alertă maximă.",
+   "kind": "text"
+  }
+ ]
+}

@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este definiția corectă a unei încălcări grave (hard breach)?","options":["O abatere care nu creează pericol imediat, dar încetinește buna funcționare","O abatere care pune ceva sau pe cineva într-un pericol real sau aproape sigur, sau depășește o limită absolută","Orice greșeală făcută din intenție rea, indiferent de consecințe","O abatere care apare doar în mediile reglementate, niciodată pe un birou de tranzacționare"],"correct":1,"explain":"O încălcare gravă creează un risc care nu poate fi ignorat — pericol real/aproape sigur sau depășirea unei limite absolute reglementate.","kind":"text"},
-{"q":"Ce caracterizează o încălcare ușoară (soft breach)?","options":["Crește expunerea peste limita absolută reglementată","Nu creează pericol imediat, dar îngreunează buna funcționare a sistemului","Declanșează întotdeauna comutatorul de oprire automat","Necesită notificarea imediată a autorității de reglementare"],"correct":1,"explain":"Încălcarea ușoară nu este o urgență de siguranță, dar contează fiindcă poate duce la dezordine, întârzieri sau probleme acumulate.","kind":"text"},
-{"q":"Pe biroul de tranzacționare, ce declanșează un semnal de încălcare gravă?","options":["Atingerea pragului-tampon intern, de exemplu 95% din cerință","Atingerea limitei absolute reglementate, de exemplu 105% din cerința de capital","O scădere de preț sub media mobilă de 50 de zile","Orice ordin respins de bursă"],"correct":1,"explain":"Semnalul grav se activează la limita absolută reglementată (ex. 105% din cerința de capital), nu la pragul-tampon intern.","kind":"concept"},
-{"q":"Care este răspunsul standard la o încălcare gravă pe biroul de tranzacționare?","options":["Escaladare discreționară cu două minute de decizie","Comutator de oprire automat (kill-switch), fără suprascriere umană","Lărgirea automată a pragului-tampon","Ignorarea până la finalul sesiunii de tranzacționare"],"correct":1,"explain":"Încălcarea gravă declanșează kill-switch-ul automat: îngheață ordinele, anulează ordinele-copil și notifică; nicio suprascriere umană nu e permisă.","kind":"concept"},
-{"q":"Ce primește ofițerul de risc la o încălcare ușoară?","options":["O înghețare automată a tuturor ordinelor","O escaladare discreționară cu aproximativ două minute pentru a decide","O notificare obligatorie către autoritatea de reglementare","O reducere automată a poziției cu 30%"],"correct":1,"explain":"Încălcarea ușoară duce la escaladare discreționară: ofițerul are circa două minute să aleagă între a nu face nimic, a reduce expunerea sau a lărgi stop-loss-ul.","kind":"concept"},
-{"q":"De ce sunt alese cuvintele „gravă” și „ușoară”?","options":["Pentru a indica mărimea exactă a pierderii financiare","Pentru a face diferența evidentă: gravă = oprește imediat, ușoară = memento blând","Pentru a respecta o lege internațională de reglementare","Pentru că sunt termeni impuși de toate bursele"],"correct":1,"explain":"Cuvintele clarifică reacția: „gravă” cere oprire imediată, „ușoară” permite un avertisment blând, nu acțiune urgentă.","kind":"text"},
-{"q":"Un trader introduce ordine fantomă chiar sub limita absolută ca să declanșeze o înghețare timpurie, apoi le anulează. Ce problemă ilustrează acest comportament?","options":["O încălcare ușoară corect gestionată","Dependența excesivă (gaming) de kill-switch-ul automat","O corelație între instrumente neglijată","O ieșire optimă sub presiune gravă"],"correct":1,"explain":"Este un exemplu de „păcălire” a kill-switch-ului automat; de aceea compliance-ul revizuiește fiecare înghețare în 24 de ore.","kind":"concept"},
-{"q":"De ce este riscant ca ofițerul de risc să vadă doar un singur tichet la o încălcare ușoară?","options":["Pentru că tichetele individuale sunt mereu greșite","Pentru că o depășire la o acțiune poate coincide cu o depășire la un ETF corelat, ratând tăierea ambelor picioare","Pentru că un tichet conține întotdeauna date false","Pentru că reglementarea interzice vizualizarea unui singur tichet"],"correct":1,"explain":"Subestimarea corelației între instrumente: o breșă de 5% la o acțiune poate coincide cu 7% la un ETF corelat; de aceea biroul rulează un scan zilnic de corelație.","kind":"concept"},
-{"q":"În exemplul rezolvat, 20 de participanți au nevoie de 1,5 unități fiecare. Cât este minimul total necesar?","options":["25 de unități","30 de unități","35 de unități","20 de unități"],"correct":1,"explain":"20 × 1,5 = 30 de unități este minimul reglementat necesar.","kind":"text"},
-{"q":"Cu 25 de unități disponibile și 30 necesare, cum se clasifică situația?","options":["Conformitate completă","Încălcare ușoară, fiindcă diferența e nesemnificativă","Încălcare gravă, fiindcă disponibilul e semnificativ sub minim","Nu poate fi clasificată fără mai multe date"],"correct":2,"explain":"25 este semnificativ sub 30, deci este o încălcare gravă clară.","kind":"concept"},
-{"q":"Dacă disponibilul ar fi 29,5 unități din 30 necesare, cum s-ar clasifica?","options":["Încălcare gravă, fiindcă orice lipsă e gravă","Încălcare ușoară, fiindcă este aproape de minim, dar tot insuficient","Conformitate, fiindcă diferența e mică","Imposibil de stabilit"],"correct":1,"explain":"29,5 este foarte aproape de 30, dar tot insuficient — o încălcare ușoară, ilustrând gradul de neconformitate.","kind":"concept"},
-{"q":"În scenariul „pauzei de calmare”, de ce aceeași tehnică produce două rezultate opuse?","options":["Pentru că tehnica s-a schimbat între cele două zile","Pentru că starea internă (toleranța la presiune) a înclinat balanța, deși tehnica a rămas aceeași","Pentru că regulile s-au modificat peste noapte","Pentru că prima dată a fost o coincidență fără cauză"],"correct":1,"explain":"Tehnica nu s-a schimbat, dar capacitatea de a o tolera (starea internă de moment) s-a schimbat — aici stă nepotrivirea.","kind":"concept"},
-{"q":"Ce înseamnă principiul „cea mai puțin restrictivă, cea mai puțin intruzivă” practică?","options":["Răspunsul trebuie să fie cât mai dur posibil pentru siguranță maximă","Răspunsul nu trebuie să fie mai constrângător decât este absolut necesar pentru a menține siguranța","Răspunsul trebuie ales aleatoriu","Răspunsul trebuie să fie întotdeauna o pauză de 30 de secunde"],"correct":1,"explain":"Principiul cere ca răspunsul să fie cât mai puțin constrângător posibil, doar atât cât e necesar pentru siguranță.","kind":"text"},
-{"q":"Ce susține dovada despre eficacitatea pauzelor scurte?","options":["Funcționează întotdeauna în 100% din cazuri","Succesul depinde de starea internă de moment, nu de tehnică în sine","Eșuează mereu după un conflict","Nu există nicio dovadă privind eficacitatea lor"],"correct":1,"explain":"Pauzele reduc escaladarea în ~60% din cazuri dacă starea e calmă, dar o pot crește în ~40% dacă subiectul e deja agitat — eficacitatea este condiționată.","kind":"concept"},
-{"q":"Care este concepția greșită despre încălcările grave și ușoare ca „opuse binare”?","options":["Că ambele necesită aceeași reacție","Că una este mereu opusul celeilalte, ignorând că există pe un spectru dependent de context","Că niciuna nu există în practică","Că ambele sunt întotdeauna intenționate"],"correct":1,"explain":"În realitate, cele două există pe un spectru; o încălcare poate fi simultan gravă și ușoară în funcție de circumstanțe.","kind":"concept"},
-{"q":"De ce este o greșeală să te concentrezi exclusiv pe intenție la clasificarea unei încălcări?","options":["Pentru că intenția nu contează niciodată","Pentru că impactul și consecințele reale pot conta la fel de mult — o breșă gravă poate avea consecințe minime, iar una ușoară consecințe severe","Pentru că intenția e mereu imposibil de stabilit","Pentru că reglementarea interzice analiza intenției"],"correct":1,"explain":"Intenția e doar un factor; o încălcare gravă poate avea consecințe minime, iar una ușoară consecințe severe.","kind":"concept"},
-{"q":"De ce nu este corect să presupui că toate încălcările grave sunt severe ca impact?","options":["Pentru că încălcările grave nu există","Pentru că o încălcare gravă poate fi gravă ca tip, dar nu neapărat severă ca intenție sau consecințe","Pentru că severitatea nu poate fi măsurată niciodată","Pentru că toate încălcările grave sunt de fapt ușoare"],"correct":1,"explain":"O încălcare gravă poate fi clară și non-negociabilă, dar nu neapărat severă ca rezultat final.","kind":"concept"},
-{"q":"În faza de ieșire sub o încălcare gravă, ce se lichidează prima?","options":["Restul poziției către un dark pool","Acoperirea pe contracte futures listate (cel mai adânc registru, cea mai mică latență)","Cele mai mari 20% din poziție pe registrul vizibil","Nimic, se așteaptă revenirea prețului"],"correct":1,"explain":"Faza 1 (0–30 s) lichidează mai întâi hedge-ul pe futures listate, fiind cel mai adânc registru și cu cea mai mică latență.","kind":"concept"},
-{"q":"De ce este restul poziției direcționat către un dark pool în faza finală a ieșirii grave?","options":["Pentru a obține un preț mai mare garantat","Pentru a evita semnalarea pieței (tipping)","Pentru că dark pool-urile sunt obligatorii prin lege","Pentru a întârzia tranzacția cât mai mult"],"correct":1,"explain":"Restul este rutat către un dark pool sau motor de crossing intern tocmai pentru a evita semnalarea pieței despre vânzarea mare.","kind":"concept"},
-{"q":"Ce reprezintă VaR (Value at Risk) menționat în dimensionarea poziției?","options":["Volumul total al ordinelor anulate","Valoarea la risc — o estimare a pierderii potențiale a poziției","Viteza medie de execuție a ordinelor","Numărul de acțiuni disponibile în registru"],"correct":1,"explain":"VaR (Value at Risk / valoare la risc) estimează pierderea potențială; în exemplu, lotul de 100.000 contribuie cu 28.000$ la VaR.","kind":"text"},
-{"q":"De ce păstrează biroul lărgimea tamponului ușor la minimul reglementat, în loc să o mărească la 7%?","options":["Pentru că reglementarea interzice orice tampon","Pentru că nu există suficiente date pentru a dovedi că lărgirea ar reduce încălcările grave — corelația poate fi întâmplătoare","Pentru că un tampon mai mare ar declanșa kill-switch-ul","Pentru că traderii preferă tampoane mici"],"correct":1,"explain":"Cu doar 47 de evenimente grave, datele nu susțin cauzal că un tampon mai larg reduce frecvența; corelația poate fi coincidentală.","kind":"concept"},
-{"q":"Ce este un slippage (alunecare) în contextul ieșirilor din poziții?","options":["Comisionul fix perceput de bursă","Diferența dintre prețul așteptat și prețul efectiv de execuție","Numărul de ordine anulate într-o oră","Marja de profit garantată"],"correct":1,"explain":"Alunecarea (slippage) este diferența dintre prețul așteptat și cel obținut; ex. 1,4 bps la ieșiri ușoare vs. 3,7 bps la cele grave.","kind":"text"},
-{"q":"De ce se poate prăbuși cadrul grav vs. ușor în medii complexe?","options":["Pentru că regulile devin mereu mai stricte","Pentru că eșecurile sistemice sau breșele mici cumulative estompează liniile dintre grav și ușor","Pentru că nimeni nu mai folosește conformitatea","Pentru că toate breșele devin automat grave"],"correct":1,"explain":"În eșecuri sistemice sau serii de breșe mici cumulative, distincția clară grav/ușor devine greu de aplicat.","kind":"concept"},
-{"q":"De ce nu este cadrul grav vs. ușor o garanție a conformității?","options":["Pentru că este o lege științifică absolută","Pentru că este o unealtă, nu un substitut pentru un management robust al riscului","Pentru că funcționează doar pe biroul de tranzacționare","Pentru că ignoră complet riscul"],"correct":1,"explain":"Cadrul e un punct de plecare util, dar trebuie folosit împreună cu alte unelte; nu înlocuiește managementul robust al riscului.","kind":"concept"},
-{"q":"Care este regula mnemonică finală pentru cele două tipuri de încălcare?","options":["Gravă = ignoră; ușoară = escaladează","Gravă = oprește și escaladează; ușoară = pauză, amintește și corectează","Ambele = oprește totul imediat","Ambele = doar înregistrează în jurnal"],"correct":1,"explain":"Concluzia-cheie: încălcare gravă înseamnă oprește și escaladează; încălcare ușoară înseamnă pauză, amintește și corectează.","kind":"text"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este definiția corectă a unei încălcări grave (hard breach)?",
+   "options": [
+    "O abatere care nu creează pericol imediat, dar încetinește buna funcționare",
+    "O abatere care pune ceva sau pe cineva într-un pericol real sau aproape sigur, sau depășește o limită absolută",
+    "Orice greșeală făcută din intenție rea, indiferent de consecințe",
+    "O abatere care apare doar în mediile reglementate, niciodată pe un birou de tranzacționare"
+   ],
+   "correct": 1,
+   "explain": "O încălcare gravă creează un risc care nu poate fi ignorat — pericol real/aproape sigur sau depășirea unei limite absolute reglementate.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce caracterizează o încălcare ușoară (soft breach)?",
+   "options": [
+    "Crește expunerea peste limita absolută reglementată",
+    "Declanșează întotdeauna comutatorul de oprire automat",
+    "Nu creează pericol imediat, dar îngreunează buna funcționare a sistemului",
+    "Necesită notificarea imediată a autorității de reglementare"
+   ],
+   "correct": 2,
+   "explain": "Încălcarea ușoară nu este o urgență de siguranță, dar contează fiindcă poate duce la dezordine, întârzieri sau probleme acumulate.",
+   "kind": "text"
+  },
+  {
+   "q": "Pe biroul de tranzacționare, ce declanșează un semnal de încălcare gravă?",
+   "options": [
+    "Atingerea pragului-tampon intern, de exemplu 95% din cerință",
+    "Orice ordin respins de bursă",
+    "O scădere de preț sub media mobilă de 50 de zile",
+    "Atingerea limitei absolute reglementate, de exemplu 105% din cerința de capital"
+   ],
+   "correct": 3,
+   "explain": "Semnalul grav se activează la limita absolută reglementată (ex. 105% din cerința de capital), nu la pragul-tampon intern.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este răspunsul standard la o încălcare gravă pe biroul de tranzacționare?",
+   "options": [
+    "Comutator de oprire automat (kill-switch), fără suprascriere umană",
+    "Escaladare discreționară cu două minute de decizie",
+    "Lărgirea automată a pragului-tampon",
+    "Ignorarea până la finalul sesiunii de tranzacționare"
+   ],
+   "correct": 0,
+   "explain": "Încălcarea gravă declanșează kill-switch-ul automat: îngheață ordinele, anulează ordinele-copil și notifică; nicio suprascriere umană nu e permisă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce primește ofițerul de risc la o încălcare ușoară?",
+   "options": [
+    "O înghețare automată a tuturor ordinelor",
+    "O escaladare discreționară cu aproximativ două minute pentru a decide",
+    "O notificare obligatorie către autoritatea de reglementare",
+    "O reducere automată a poziției cu 30%"
+   ],
+   "correct": 1,
+   "explain": "Încălcarea ușoară duce la escaladare discreționară: ofițerul are circa două minute să aleagă între a nu face nimic, a reduce expunerea sau a lărgi stop-loss-ul.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce sunt alese cuvintele „gravă” și „ușoară”?",
+   "options": [
+    "Pentru a indica mărimea exactă a pierderii financiare",
+    "Pentru a respecta o lege internațională de reglementare",
+    "Pentru a face diferența evidentă: gravă = oprește imediat, ușoară = memento blând",
+    "Pentru că sunt termeni impuși de toate bursele"
+   ],
+   "correct": 2,
+   "explain": "Cuvintele clarifică reacția: „gravă” cere oprire imediată, „ușoară” permite un avertisment blând, nu acțiune urgentă.",
+   "kind": "text"
+  },
+  {
+   "q": "Un trader introduce ordine fantomă chiar sub limita absolută ca să declanșeze o înghețare timpurie, apoi le anulează. Ce problemă ilustrează acest comportament?",
+   "options": [
+    "O încălcare ușoară corect gestionată",
+    "O ieșire optimă sub presiune gravă",
+    "O corelație între instrumente neglijată",
+    "Dependența excesivă (gaming) de kill-switch-ul automat"
+   ],
+   "correct": 3,
+   "explain": "Este un exemplu de „păcălire” a kill-switch-ului automat; de aceea compliance-ul revizuiește fiecare înghețare în 24 de ore.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este riscant ca ofițerul de risc să vadă doar un singur tichet la o încălcare ușoară?",
+   "options": [
+    "Pentru că o depășire la o acțiune poate coincide cu o depășire la un ETF corelat, ratând tăierea ambelor picioare",
+    "Pentru că tichetele individuale sunt mereu greșite",
+    "Pentru că un tichet conține întotdeauna date false",
+    "Pentru că reglementarea interzice vizualizarea unui singur tichet"
+   ],
+   "correct": 0,
+   "explain": "Subestimarea corelației între instrumente: o breșă de 5% la o acțiune poate coincide cu 7% la un ETF corelat; de aceea biroul rulează un scan zilnic de corelație.",
+   "kind": "concept"
+  },
+  {
+   "q": "În exemplul rezolvat, 20 de participanți au nevoie de 1,5 unități fiecare. Cât este minimul total necesar?",
+   "options": [
+    "25 de unități",
+    "30 de unități",
+    "35 de unități",
+    "20 de unități"
+   ],
+   "correct": 1,
+   "explain": "20 × 1,5 = 30 de unități este minimul reglementat necesar.",
+   "kind": "text"
+  },
+  {
+   "q": "Cu 25 de unități disponibile și 30 necesare, cum se clasifică situația?",
+   "options": [
+    "Conformitate completă",
+    "Încălcare ușoară, fiindcă diferența e nesemnificativă",
+    "Încălcare gravă, fiindcă disponibilul e semnificativ sub minim",
+    "Nu poate fi clasificată fără mai multe date"
+   ],
+   "correct": 2,
+   "explain": "25 este semnificativ sub 30, deci este o încălcare gravă clară.",
+   "kind": "concept"
+  },
+  {
+   "q": "Dacă disponibilul ar fi 29,5 unități din 30 necesare, cum s-ar clasifica?",
+   "options": [
+    "Încălcare gravă, fiindcă orice lipsă e gravă",
+    "Imposibil de stabilit",
+    "Conformitate, fiindcă diferența e mică",
+    "Încălcare ușoară, fiindcă este aproape de minim, dar tot insuficient"
+   ],
+   "correct": 3,
+   "explain": "29,5 este foarte aproape de 30, dar tot insuficient — o încălcare ușoară, ilustrând gradul de neconformitate.",
+   "kind": "concept"
+  },
+  {
+   "q": "În scenariul „pauzei de calmare”, de ce aceeași tehnică produce două rezultate opuse?",
+   "options": [
+    "Pentru că starea internă (toleranța la presiune) a înclinat balanța, deși tehnica a rămas aceeași",
+    "Pentru că tehnica s-a schimbat între cele două zile",
+    "Pentru că regulile s-au modificat peste noapte",
+    "Pentru că prima dată a fost o coincidență fără cauză"
+   ],
+   "correct": 0,
+   "explain": "Tehnica nu s-a schimbat, dar capacitatea de a o tolera (starea internă de moment) s-a schimbat — aici stă nepotrivirea.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă principiul „cea mai puțin restrictivă, cea mai puțin intruzivă” practică?",
+   "options": [
+    "Răspunsul trebuie să fie cât mai dur posibil pentru siguranță maximă",
+    "Răspunsul nu trebuie să fie mai constrângător decât este absolut necesar pentru a menține siguranța",
+    "Răspunsul trebuie ales aleatoriu",
+    "Răspunsul trebuie să fie întotdeauna o pauză de 30 de secunde"
+   ],
+   "correct": 1,
+   "explain": "Principiul cere ca răspunsul să fie cât mai puțin constrângător posibil, doar atât cât e necesar pentru siguranță.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce susține dovada despre eficacitatea pauzelor scurte?",
+   "options": [
+    "Funcționează întotdeauna în 100% din cazuri",
+    "Eșuează mereu după un conflict",
+    "Succesul depinde de starea internă de moment, nu de tehnică în sine",
+    "Nu există nicio dovadă privind eficacitatea lor"
+   ],
+   "correct": 2,
+   "explain": "Pauzele reduc escaladarea în ~60% din cazuri dacă starea e calmă, dar o pot crește în ~40% dacă subiectul e deja agitat — eficacitatea este condiționată.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este concepția greșită despre încălcările grave și ușoare ca „opuse binare”?",
+   "options": [
+    "Că ambele necesită aceeași reacție",
+    "Că ambele sunt întotdeauna intenționate",
+    "Că niciuna nu există în practică",
+    "Că una este mereu opusul celeilalte, ignorând că există pe un spectru dependent de context"
+   ],
+   "correct": 3,
+   "explain": "În realitate, cele două există pe un spectru; o încălcare poate fi simultan gravă și ușoară în funcție de circumstanțe.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este o greșeală să te concentrezi exclusiv pe intenție la clasificarea unei încălcări?",
+   "options": [
+    "Pentru că impactul și consecințele reale pot conta la fel de mult — o breșă gravă poate avea consecințe minime, iar una ușoară consecințe severe",
+    "Pentru că intenția nu contează niciodată",
+    "Pentru că intenția e mereu imposibil de stabilit",
+    "Pentru că reglementarea interzice analiza intenției"
+   ],
+   "correct": 0,
+   "explain": "Intenția e doar un factor; o încălcare gravă poate avea consecințe minime, iar una ușoară consecințe severe.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu este corect să presupui că toate încălcările grave sunt severe ca impact?",
+   "options": [
+    "Pentru că încălcările grave nu există",
+    "Pentru că o încălcare gravă poate fi gravă ca tip, dar nu neapărat severă ca intenție sau consecințe",
+    "Pentru că severitatea nu poate fi măsurată niciodată",
+    "Pentru că toate încălcările grave sunt de fapt ușoare"
+   ],
+   "correct": 1,
+   "explain": "O încălcare gravă poate fi clară și non-negociabilă, dar nu neapărat severă ca rezultat final.",
+   "kind": "concept"
+  },
+  {
+   "q": "În faza de ieșire sub o încălcare gravă, ce se lichidează prima?",
+   "options": [
+    "Restul poziției către un dark pool",
+    "Cele mai mari 20% din poziție pe registrul vizibil",
+    "Acoperirea pe contracte futures listate (cel mai adânc registru, cea mai mică latență)",
+    "Nimic, se așteaptă revenirea prețului"
+   ],
+   "correct": 2,
+   "explain": "Faza 1 (0–30 s) lichidează mai întâi hedge-ul pe futures listate, fiind cel mai adânc registru și cu cea mai mică latență.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este restul poziției direcționat către un dark pool în faza finală a ieșirii grave?",
+   "options": [
+    "Pentru a obține un preț mai mare garantat",
+    "Pentru a întârzia tranzacția cât mai mult",
+    "Pentru că dark pool-urile sunt obligatorii prin lege",
+    "Pentru a evita semnalarea pieței (tipping)"
+   ],
+   "correct": 3,
+   "explain": "Restul este rutat către un dark pool sau motor de crossing intern tocmai pentru a evita semnalarea pieței despre vânzarea mare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce reprezintă VaR (Value at Risk) menționat în dimensionarea poziției?",
+   "options": [
+    "Valoarea la risc — o estimare a pierderii potențiale a poziției",
+    "Volumul total al ordinelor anulate",
+    "Viteza medie de execuție a ordinelor",
+    "Numărul de acțiuni disponibile în registru"
+   ],
+   "correct": 0,
+   "explain": "VaR (Value at Risk / valoare la risc) estimează pierderea potențială; în exemplu, lotul de 100.000 contribuie cu 28.000$ la VaR.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce păstrează biroul lărgimea tamponului ușor la minimul reglementat, în loc să o mărească la 7%?",
+   "options": [
+    "Pentru că reglementarea interzice orice tampon",
+    "Pentru că nu există suficiente date pentru a dovedi că lărgirea ar reduce încălcările grave — corelația poate fi întâmplătoare",
+    "Pentru că un tampon mai mare ar declanșa kill-switch-ul",
+    "Pentru că traderii preferă tampoane mici"
+   ],
+   "correct": 1,
+   "explain": "Cu doar 47 de evenimente grave, datele nu susțin cauzal că un tampon mai larg reduce frecvența; corelația poate fi coincidentală.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este un slippage (alunecare) în contextul ieșirilor din poziții?",
+   "options": [
+    "Comisionul fix perceput de bursă",
+    "Numărul de ordine anulate într-o oră",
+    "Diferența dintre prețul așteptat și prețul efectiv de execuție",
+    "Marja de profit garantată"
+   ],
+   "correct": 2,
+   "explain": "Alunecarea (slippage) este diferența dintre prețul așteptat și cel obținut; ex. 1,4 bps la ieșiri ușoare vs. 3,7 bps la cele grave.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce se poate prăbuși cadrul grav vs. ușor în medii complexe?",
+   "options": [
+    "Pentru că regulile devin mereu mai stricte",
+    "Pentru că toate breșele devin automat grave",
+    "Pentru că nimeni nu mai folosește conformitatea",
+    "Pentru că eșecurile sistemice sau breșele mici cumulative estompează liniile dintre grav și ușor"
+   ],
+   "correct": 3,
+   "explain": "În eșecuri sistemice sau serii de breșe mici cumulative, distincția clară grav/ușor devine greu de aplicat.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu este cadrul grav vs. ușor o garanție a conformității?",
+   "options": [
+    "Pentru că este o unealtă, nu un substitut pentru un management robust al riscului",
+    "Pentru că este o lege științifică absolută",
+    "Pentru că funcționează doar pe biroul de tranzacționare",
+    "Pentru că ignoră complet riscul"
+   ],
+   "correct": 0,
+   "explain": "Cadrul e un punct de plecare util, dar trebuie folosit împreună cu alte unelte; nu înlocuiește managementul robust al riscului.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este regula mnemonică finală pentru cele două tipuri de încălcare?",
+   "options": [
+    "Gravă = ignoră; ușoară = escaladează",
+    "Gravă = oprește și escaladează; ușoară = pauză, amintește și corectează",
+    "Ambele = oprește totul imediat",
+    "Ambele = doar înregistrează în jurnal"
+   ],
+   "correct": 1,
+   "explain": "Concluzia-cheie: încălcare gravă înseamnă oprește și escaladează; încălcare ușoară înseamnă pauză, amintește și corectează.",
+   "kind": "text"
+  }
+ ]
+}

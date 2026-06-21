@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Ce problema fundamentala rezolva criteriul Kelly?","options":["Cum sa prezici sigur care pariu va castiga","Ce fractiune din capitalul total sa risti pe un pariu cand ai un avantaj","Cum sa elimini complet riscul de pierdere","Cum sa alegi cea mai mica casa de pariuri"],"correct":1,"explain":"Kelly este o regula de dimensionare optima: iti spune CE FRACTIUNE din capital sa risti cand ai un avantaj, nu care pariu va castiga.","kind":"concept"},
-{"q":"Care este obiectivul principal pe care il maximizeaza criteriul Kelly?","options":["Rata de crestere pe termen lung a capitalului","Minimizarea oricarei pierderi pe termen scurt","Garantarea unui profit la fiecare pariu","Reducerea numarului de tranzactii"],"correct":0,"explain":"Kelly tinteste cea mai mare rata de crestere posibila pe termen lung; NU minimizeaza pierderile pe termen scurt si nu garanteaza siguranta.","kind":"concept"},
-{"q":"In formula f* = p − (1 − p) / b, ce reprezinta b?","options":["Probabilitatea de pierdere","Capitalul total","Cota neta primita (profitul pe unitatea riscata)","Marimea fixa a pariului"],"correct":2,"explain":"b este cota neta primita, adica profitul obtinut pentru fiecare unitate riscata.","kind":"text"},
-{"q":"Cum se calculeaza valoarea asteptata a unui pariu?","options":["Inmultind fiecare rezultat posibil cu probabilitatea sa si adunand rezultatele","Inmultind miza cu probabilitatea de castig","Impartind profitul la capital","Scazand pierderea din castig"],"correct":0,"explain":"Valoarea asteptata = suma fiecarui rezultat posibil inmultit cu probabilitatea sa.","kind":"text"},
-{"q":"Pentru p = 0,6 si cota 3:1 (b = 3), ce fractiune indica Kelly aproximativ?","options":["20%","33%","46,7%","60%"],"correct":2,"explain":"f* = 0,6 − 0,4/3 = 0,6 − 0,133 ≈ 0,467, deci aproximativ 46,7% din capital.","kind":"text"},
-{"q":"Ce inseamna o fractiune Kelly negativa?","options":["Trebuie sa pariezi mai mult","Cotele sunt foarte generoase","Pariul are valoare asteptata negativa, deci actiunea optima e sa nu pariezi nimic","Trebuie sa pariezi exact zero, dar tot sa intri in joc"],"correct":2,"explain":"O valoare negativa arata ca pariul are valoare asteptata negativa fata de convingerea ta; optim este sa nu pariezi.","kind":"concept"},
-{"q":"De ce multi practicieni folosesc 'Kelly fractionat' (de exemplu jumatate de Kelly)?","options":["Pentru a creste mai repede capitalul","Pentru a reduce volatilitatea si riscul de pierdere de cont, cu pretul unei cresteri mai lente","Pentru ca formula completa este interzisa","Pentru a garanta profit pe termen scurt"],"correct":1,"explain":"Kelly fractionat reduce abaterea standard a randamentelor (volatilitatea) si riscul, dar incetineste cresterea pe termen lung.","kind":"concept"},
-{"q":"In exemplul cu echipa de baschet (p = 0,58, b = 1), ce fractiune da Kelly?","options":["8%","42%","58%","16%"],"correct":3,"explain":"f* = (1×0,58 − 0,42)/1 = 0,16, adica 16% din capital.","kind":"text"},
-{"q":"De ce fractiunea Kelly este modesta in cazul cotei 'bani egali' chiar daca p = 58%?","options":["Pentru ca probabilitatea e sub 50%","Pentru ca plata e mica in raport cu riscul de a pierde miza","Pentru ca formula are o eroare","Pentru ca echipa joaca in deplasare"],"correct":1,"explain":"Avantajul de 8% se traduce intr-o fractiune modesta fiindca plata (even-money) e mica fata de riscul mizei.","kind":"concept"},
-{"q":"Ce se intampla cu marimea pozitiei Kelly atunci cand avantajul (edge) se micsoreaza?","options":["Ramane constanta","Creste pentru a recupera","Se micsoreaza — prima disciplina impusa de Kelly","Devine automat zero"],"correct":2,"explain":"Prima disciplina Kelly: marimea se micsoreaza cand avantajul se micsoreaza.","kind":"concept"},
-{"q":"La biroul de tranzactionare, ce formula Kelly se foloseste pentru a converti avantajul si riscul intr-o marime?","options":["f* = p − q","f* = (avantaj) / (risc²)","f* = bankroll × p","f* = b / p"],"correct":1,"explain":"Pentru pozitii de tranzactionare se foloseste f* = avantaj / risc², unde riscul e abaterea standard a profitului.","kind":"text"},
-{"q":"De ce inmulteste biroul fractiunea Kelly cu un 'factor de incredere' de 0,5–0,7?","options":["Pentru a creste rata de crestere","Pentru ca este cerut de lege","Pentru ca estimarile de avantaj si risc sunt zgomotoase, reducand astfel pierderile de cont","Pentru a creste numarul de actiuni cumparate"],"correct":2,"explain":"Estimarile reale sunt zgomotoase; marja de siguranta reduce drawdown-ul fara a distruge cresterea pe termen lung.","kind":"concept"},
-{"q":"Ce arata back-testele pe birouri reale despre portofoliile dimensionate Kelly?","options":["Cresc mai incet decat cele cu fractiune fixa","Cresc mai repede, dar au pierderi de cont mai mari cand estimarile sunt gresite","Nu au niciodata pierderi","Sunt identice cu fractiune fixa"],"correct":1,"explain":"Kelly creste mai repede dar sufera drawdown-uri mai mari cand avantajul e prost estimat — de aceea marja de siguranta nu e optionala.","kind":"text"},
-{"q":"De ce este Kelly atat de sensibil la o supraestimare a probabilitatii p?","options":["Pentru ca ignora complet p","Pentru ca reduce automat miza","Pentru ca p nu apare in formula","Pentru ca amplifica orice eroare din estimari — chiar 1% supraestimare poate dubla marimea recomandata"],"correct":3,"explain":"Kelly amplifica erorile din intrari; o supraestimare de 1% a unei probabilitati de 55% poate dubla pariul recomandat.","kind":"concept"},
-{"q":"Ce ipoteza face derivarea clasica Kelly despre pariurile succesive?","options":["Ca sunt corelate puternic","Ca sunt independente si distributia (p, b) este stationara","Ca probabilitatea creste in timp","Ca exista mereu credit nelimitat"],"correct":1,"explain":"Kelly clasic presupune pariuri independente si o distributie stationara (p si b nu se schimba in timp).","kind":"text"},
-{"q":"Cum afecteaza corelatia pozitiva intre pariuri aplicarea lui Kelly?","options":["Nu are niciun efect","Reduce automat riscul","Varianta portofoliului creste mai repede decat prezice Kelly, facand fractiunea prea agresiva","Garanteaza profit"],"correct":2,"explain":"Cand rezultatele sunt corelate pozitiv, varianta creste peste asteptari, iar fractiunea 'optima' devine prea agresiva.","kind":"concept"},
-{"q":"De ce trebuie scazute costurile de tranzactionare din b inainte de a aplica Kelly?","options":["Pentru ca nu conteaza in practica","Pentru ca altfel fractiunea calculata va fi prea mare; costurile pot transforma un avantaj pozitiv in negativ","Pentru ca maresc cota efectiva","Pentru ca Kelly le ignora intentionat"],"correct":1,"explain":"Comisioane, spread-uri, slippage si taxe reduc cota efectiva; ignorate, fac fractiunea prea mare si pot inversa semnul avantajului.","kind":"concept"},
-{"q":"Ce se intampla daca avantajul ajustat la costuri devine negativ?","options":["Kelly recomanda dublarea mizei","Kelly recomanda jumatate de pozitie","Kelly recomanda o marime a pariului egala cu zero","Kelly nu poate fi aplicat deloc"],"correct":2,"explain":"Daca avantajul ajustat e negativ, valoarea asteptata e negativa, iar Kelly indica miza zero.","kind":"concept"},
-{"q":"Pentru ce orizont a fost derivat matematic criteriul Kelly?","options":["Un singur pariu","Un orizont infinit, cu capital ce sustine oricate pariuri","Exact 100 de pariuri","O singura zi de tranzactionare"],"correct":1,"explain":"Kelly este derivat pentru un orizont infinit; cu capital finit, riscul de ruina creste daca fractiunea e mare.","kind":"text"},
-{"q":"Ce ar trebui sa faca un trader la o ruptura structurala (criza, schimbare de regim)?","options":["Sa mareasca fractiunea Kelly","Sa suspende sau sa reduca drastic dimensionarea Kelly si sa recalibreze modelul","Sa ignore situatia","Sa treaca la Kelly dublu"],"correct":1,"explain":"La rupturi structurale rata istorica de castig nu mai reflecta viitorul; Kelly trebuie suspendat/redus si modelul recalibrat.","kind":"concept"},
-{"q":"Maximizand 'cresterea logaritmica asteptata', ce NU garanteaza Kelly?","options":["Crestere pe termen lung","Independenta pariurilor","Profit pe orice set finit de tranzactii (poate exista volatilitate si pierderi temporare mari)","Sensibilitate la p"],"correct":2,"explain":"Kelly maximizeaza cresterea logaritmica pe secventa infinita, dar nu garanteaza profit pe un set finit; varianta poate fi mare.","kind":"concept"},
-{"q":"De ce este Kelly integral adesea prea agresiv pentru traderii individuali?","options":["Pentru ca subevalueaza avantajul","Pentru ca, cu capital finit, riscul de ruina si volatilitatea sunt mari; o fractiune (0,5 sau 0,25) e mai realista","Pentru ca produce mereu fractiuni negative","Pentru ca ignora cotele"],"correct":1,"explain":"Cu bankroll finit, Kelly integral expune la ruina si volatilitate mare; fractiuni precum 0,5 sau 0,25 sunt mai realiste.","kind":"concept"},
-{"q":"Care este o constrangere operationala care poate impiedica pariul Kelly exact?","options":["Lipsa unei formule","Cote prea mici","Plafoane de marime a pozitiei, cerinte de marja sau politici de risc","Probabilitate necunoscuta"],"correct":2,"explain":"Limite operationale precum plafoane de pozitie, cerinte de marja sau politici de risc pot bloca executarea marimii Kelly exacte.","kind":"text"},
-{"q":"Conform conceptiilor gresite frecvente, criteriul Kelly se aplica doar pariurilor binare?","options":["Da, exclusiv binare","Nu — poate fi aplicat oricarui pariu cu probabilitate si cote cunoscute, inclusiv rezultate multiple","Da, doar la monede","Nu se aplica niciodata pariurilor"],"correct":1,"explain":"Desi e folosit des pentru pariuri binare, Kelly se aplica oricarui pariu cu probabilitate si cote cunoscute, inclusiv over/under.","kind":"concept"},
-{"q":"De ce este Kelly un concept dinamic, nu un calcul de o singura data?","options":["Pentru ca formula se schimba lunar","Pentru ca depinde de ora zilei","Pentru ca b este mereu constant","Pentru ca fractiunea se modifica pe masura ce capitalul si evaluarea probabilitatii se schimba, deci trebuie recalculata regulat"],"correct":3,"explain":"Fractiunea Kelly se schimba cu capitalul si cu evaluarea probabilitatii; trebuie recalculata regulat pentru decizii optime.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce problema fundamentala rezolva criteriul Kelly?",
+   "options": [
+    "Ce fractiune din capitalul total sa risti pe un pariu cand ai un avantaj",
+    "Cum sa prezici sigur care pariu va castiga",
+    "Cum sa elimini complet riscul de pierdere",
+    "Cum sa alegi cea mai mica casa de pariuri"
+   ],
+   "correct": 0,
+   "explain": "Kelly este o regula de dimensionare optima: iti spune CE FRACTIUNE din capital sa risti cand ai un avantaj, nu care pariu va castiga.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este obiectivul principal pe care il maximizeaza criteriul Kelly?",
+   "options": [
+    "Minimizarea oricarei pierderi pe termen scurt",
+    "Rata de crestere pe termen lung a capitalului",
+    "Garantarea unui profit la fiecare pariu",
+    "Reducerea numarului de tranzactii"
+   ],
+   "correct": 1,
+   "explain": "Kelly tinteste cea mai mare rata de crestere posibila pe termen lung; NU minimizeaza pierderile pe termen scurt si nu garanteaza siguranta.",
+   "kind": "concept"
+  },
+  {
+   "q": "In formula f* = p − (1 − p) / b, ce reprezinta b?",
+   "options": [
+    "Probabilitatea de pierdere",
+    "Capitalul total",
+    "Cota neta primita (profitul pe unitatea riscata)",
+    "Marimea fixa a pariului"
+   ],
+   "correct": 2,
+   "explain": "b este cota neta primita, adica profitul obtinut pentru fiecare unitate riscata.",
+   "kind": "text"
+  },
+  {
+   "q": "Cum se calculeaza valoarea asteptata a unui pariu?",
+   "options": [
+    "Scazand pierderea din castig",
+    "Inmultind miza cu probabilitatea de castig",
+    "Impartind profitul la capital",
+    "Inmultind fiecare rezultat posibil cu probabilitatea sa si adunand rezultatele"
+   ],
+   "correct": 3,
+   "explain": "Valoarea asteptata = suma fiecarui rezultat posibil inmultit cu probabilitatea sa.",
+   "kind": "text"
+  },
+  {
+   "q": "Pentru p = 0,6 si cota 3:1 (b = 3), ce fractiune indica Kelly aproximativ?",
+   "options": [
+    "46,7%",
+    "33%",
+    "20%",
+    "60%"
+   ],
+   "correct": 0,
+   "explain": "f* = 0,6 − 0,4/3 = 0,6 − 0,133 ≈ 0,467, deci aproximativ 46,7% din capital.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce inseamna o fractiune Kelly negativa?",
+   "options": [
+    "Trebuie sa pariezi mai mult",
+    "Pariul are valoare asteptata negativa, deci actiunea optima e sa nu pariezi nimic",
+    "Cotele sunt foarte generoase",
+    "Trebuie sa pariezi exact zero, dar tot sa intri in joc"
+   ],
+   "correct": 1,
+   "explain": "O valoare negativa arata ca pariul are valoare asteptata negativa fata de convingerea ta; optim este sa nu pariezi.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce multi practicieni folosesc 'Kelly fractionat' (de exemplu jumatate de Kelly)?",
+   "options": [
+    "Pentru a creste mai repede capitalul",
+    "Pentru ca formula completa este interzisa",
+    "Pentru a reduce volatilitatea si riscul de pierdere de cont, cu pretul unei cresteri mai lente",
+    "Pentru a garanta profit pe termen scurt"
+   ],
+   "correct": 2,
+   "explain": "Kelly fractionat reduce abaterea standard a randamentelor (volatilitatea) si riscul, dar incetineste cresterea pe termen lung.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul cu echipa de baschet (p = 0,58, b = 1), ce fractiune da Kelly?",
+   "options": [
+    "8%",
+    "42%",
+    "58%",
+    "16%"
+   ],
+   "correct": 3,
+   "explain": "f* = (1×0,58 − 0,42)/1 = 0,16, adica 16% din capital.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce fractiunea Kelly este modesta in cazul cotei 'bani egali' chiar daca p = 58%?",
+   "options": [
+    "Pentru ca plata e mica in raport cu riscul de a pierde miza",
+    "Pentru ca probabilitatea e sub 50%",
+    "Pentru ca formula are o eroare",
+    "Pentru ca echipa joaca in deplasare"
+   ],
+   "correct": 0,
+   "explain": "Avantajul de 8% se traduce intr-o fractiune modesta fiindca plata (even-money) e mica fata de riscul mizei.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se intampla cu marimea pozitiei Kelly atunci cand avantajul (edge) se micsoreaza?",
+   "options": [
+    "Ramane constanta",
+    "Se micsoreaza — prima disciplina impusa de Kelly",
+    "Creste pentru a recupera",
+    "Devine automat zero"
+   ],
+   "correct": 1,
+   "explain": "Prima disciplina Kelly: marimea se micsoreaza cand avantajul se micsoreaza.",
+   "kind": "concept"
+  },
+  {
+   "q": "La biroul de tranzactionare, ce formula Kelly se foloseste pentru a converti avantajul si riscul intr-o marime?",
+   "options": [
+    "f* = p − q",
+    "f* = bankroll × p",
+    "f* = (avantaj) / (risc²)",
+    "f* = b / p"
+   ],
+   "correct": 2,
+   "explain": "Pentru pozitii de tranzactionare se foloseste f* = avantaj / risc², unde riscul e abaterea standard a profitului.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce inmulteste biroul fractiunea Kelly cu un 'factor de incredere' de 0,5–0,7?",
+   "options": [
+    "Pentru a creste rata de crestere",
+    "Pentru ca este cerut de lege",
+    "Pentru a creste numarul de actiuni cumparate",
+    "Pentru ca estimarile de avantaj si risc sunt zgomotoase, reducand astfel pierderile de cont"
+   ],
+   "correct": 3,
+   "explain": "Estimarile reale sunt zgomotoase; marja de siguranta reduce drawdown-ul fara a distruge cresterea pe termen lung.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce arata back-testele pe birouri reale despre portofoliile dimensionate Kelly?",
+   "options": [
+    "Cresc mai repede, dar au pierderi de cont mai mari cand estimarile sunt gresite",
+    "Cresc mai incet decat cele cu fractiune fixa",
+    "Nu au niciodata pierderi",
+    "Sunt identice cu fractiune fixa"
+   ],
+   "correct": 0,
+   "explain": "Kelly creste mai repede dar sufera drawdown-uri mai mari cand avantajul e prost estimat — de aceea marja de siguranta nu e optionala.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este Kelly atat de sensibil la o supraestimare a probabilitatii p?",
+   "options": [
+    "Pentru ca ignora complet p",
+    "Pentru ca amplifica orice eroare din estimari — chiar 1% supraestimare poate dubla marimea recomandata",
+    "Pentru ca p nu apare in formula",
+    "Pentru ca reduce automat miza"
+   ],
+   "correct": 1,
+   "explain": "Kelly amplifica erorile din intrari; o supraestimare de 1% a unei probabilitati de 55% poate dubla pariul recomandat.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce ipoteza face derivarea clasica Kelly despre pariurile succesive?",
+   "options": [
+    "Ca sunt corelate puternic",
+    "Ca probabilitatea creste in timp",
+    "Ca sunt independente si distributia (p, b) este stationara",
+    "Ca exista mereu credit nelimitat"
+   ],
+   "correct": 2,
+   "explain": "Kelly clasic presupune pariuri independente si o distributie stationara (p si b nu se schimba in timp).",
+   "kind": "text"
+  },
+  {
+   "q": "Cum afecteaza corelatia pozitiva intre pariuri aplicarea lui Kelly?",
+   "options": [
+    "Nu are niciun efect",
+    "Reduce automat riscul",
+    "Garanteaza profit",
+    "Varianta portofoliului creste mai repede decat prezice Kelly, facand fractiunea prea agresiva"
+   ],
+   "correct": 3,
+   "explain": "Cand rezultatele sunt corelate pozitiv, varianta creste peste asteptari, iar fractiunea 'optima' devine prea agresiva.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce trebuie scazute costurile de tranzactionare din b inainte de a aplica Kelly?",
+   "options": [
+    "Pentru ca altfel fractiunea calculata va fi prea mare; costurile pot transforma un avantaj pozitiv in negativ",
+    "Pentru ca nu conteaza in practica",
+    "Pentru ca maresc cota efectiva",
+    "Pentru ca Kelly le ignora intentionat"
+   ],
+   "correct": 0,
+   "explain": "Comisioane, spread-uri, slippage si taxe reduc cota efectiva; ignorate, fac fractiunea prea mare si pot inversa semnul avantajului.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se intampla daca avantajul ajustat la costuri devine negativ?",
+   "options": [
+    "Kelly recomanda dublarea mizei",
+    "Kelly recomanda o marime a pariului egala cu zero",
+    "Kelly recomanda jumatate de pozitie",
+    "Kelly nu poate fi aplicat deloc"
+   ],
+   "correct": 1,
+   "explain": "Daca avantajul ajustat e negativ, valoarea asteptata e negativa, iar Kelly indica miza zero.",
+   "kind": "concept"
+  },
+  {
+   "q": "Pentru ce orizont a fost derivat matematic criteriul Kelly?",
+   "options": [
+    "Un singur pariu",
+    "Exact 100 de pariuri",
+    "Un orizont infinit, cu capital ce sustine oricate pariuri",
+    "O singura zi de tranzactionare"
+   ],
+   "correct": 2,
+   "explain": "Kelly este derivat pentru un orizont infinit; cu capital finit, riscul de ruina creste daca fractiunea e mare.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce ar trebui sa faca un trader la o ruptura structurala (criza, schimbare de regim)?",
+   "options": [
+    "Sa mareasca fractiunea Kelly",
+    "Sa treaca la Kelly dublu",
+    "Sa ignore situatia",
+    "Sa suspende sau sa reduca drastic dimensionarea Kelly si sa recalibreze modelul"
+   ],
+   "correct": 3,
+   "explain": "La rupturi structurale rata istorica de castig nu mai reflecta viitorul; Kelly trebuie suspendat/redus si modelul recalibrat.",
+   "kind": "concept"
+  },
+  {
+   "q": "Maximizand 'cresterea logaritmica asteptata', ce NU garanteaza Kelly?",
+   "options": [
+    "Profit pe orice set finit de tranzactii (poate exista volatilitate si pierderi temporare mari)",
+    "Independenta pariurilor",
+    "Crestere pe termen lung",
+    "Sensibilitate la p"
+   ],
+   "correct": 0,
+   "explain": "Kelly maximizeaza cresterea logaritmica pe secventa infinita, dar nu garanteaza profit pe un set finit; varianta poate fi mare.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este Kelly integral adesea prea agresiv pentru traderii individuali?",
+   "options": [
+    "Pentru ca subevalueaza avantajul",
+    "Pentru ca, cu capital finit, riscul de ruina si volatilitatea sunt mari; o fractiune (0,5 sau 0,25) e mai realista",
+    "Pentru ca produce mereu fractiuni negative",
+    "Pentru ca ignora cotele"
+   ],
+   "correct": 1,
+   "explain": "Cu bankroll finit, Kelly integral expune la ruina si volatilitate mare; fractiuni precum 0,5 sau 0,25 sunt mai realiste.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este o constrangere operationala care poate impiedica pariul Kelly exact?",
+   "options": [
+    "Lipsa unei formule",
+    "Cote prea mici",
+    "Plafoane de marime a pozitiei, cerinte de marja sau politici de risc",
+    "Probabilitate necunoscuta"
+   ],
+   "correct": 2,
+   "explain": "Limite operationale precum plafoane de pozitie, cerinte de marja sau politici de risc pot bloca executarea marimii Kelly exacte.",
+   "kind": "text"
+  },
+  {
+   "q": "Conform conceptiilor gresite frecvente, criteriul Kelly se aplica doar pariurilor binare?",
+   "options": [
+    "Da, exclusiv binare",
+    "Nu se aplica niciodata pariurilor",
+    "Da, doar la monede",
+    "Nu — poate fi aplicat oricarui pariu cu probabilitate si cote cunoscute, inclusiv rezultate multiple"
+   ],
+   "correct": 3,
+   "explain": "Desi e folosit des pentru pariuri binare, Kelly se aplica oricarui pariu cu probabilitate si cote cunoscute, inclusiv over/under.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este Kelly un concept dinamic, nu un calcul de o singura data?",
+   "options": [
+    "Pentru ca fractiunea se modifica pe masura ce capitalul si evaluarea probabilitatii se schimba, deci trebuie recalculata regulat",
+    "Pentru ca depinde de ora zilei",
+    "Pentru ca b este mereu constant",
+    "Pentru ca formula se schimba lunar"
+   ],
+   "correct": 0,
+   "explain": "Fractiunea Kelly se schimba cu capitalul si cu evaluarea probabilitatii; trebuie recalculata regulat pentru decizii optime.",
+   "kind": "concept"
+  }
+ ]
+}

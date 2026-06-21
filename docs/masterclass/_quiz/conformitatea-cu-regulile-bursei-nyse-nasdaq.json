@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"De ce sunt comparate regulile bursei cu 'regulile casei' dintr-un cazinou?","options":["Pentru că permit casei să câștige mereu","Pentru că păstrează jocul corect, transparent și sigur pentru toți participanții","Pentru că sunt secrete și cunoscute doar de bursa","Pentru că se schimbă în funcție de cât câștigă un trader"],"correct":1,"explain":"Analogia subliniază că regulile creează un cadru comun care menține piața corectă, transparentă și sigură pentru toată lumea.","kind":"concept"},
-{"q":"Un trade care este legal pe NASDAQ ar putea fi ilegal pe NYSE. De ce?","options":["Pentru că NASDAQ nu este reglementată","Pentru că fiecare bursă își scrie propriul regulament (rulebook)","Pentru că NYSE interzice toate tranzacțiile electronice","Pentru că NASDAQ tranzacționează doar acțiuni străine"],"correct":1,"explain":"Fiecare bursă publică propriul rulebook, deci aceeași acțiune poate fi tratată diferit pe burse diferite.","kind":"concept"},
-{"q":"Ce rol are sistemul de supraveghere (surveillance) al bursei?","options":["Decide vinovăția traderilor și aplică amenzi automat","Urmărește tranzacțiile în timp real și semnalează activitatea neobișnuită pentru investigare","Execută ordinele clienților mai rapid","Stabilește prețurile de deschidere ale acțiunilor"],"correct":1,"explain":"Supravegherea nu decide vinovăția; doar semnalează activitatea neobișnuită și trimite alerte personalului de conformitate, care investighează.","kind":"concept"},
-{"q":"Un trader plasează un ordin mare de cumpărare fără intenția de a-l executa, doar pentru a păcăli ceilalți că cererea e ridicată. Cum se numește această practică ilegală?","options":["Spoofing","Best execution","Front-running","Settlement"],"correct":0,"explain":"Spoofing înseamnă plasarea unui ordin mare fără intenția de a-l executa, pentru a induce în eroare ceilalți participanți.","kind":"text"},
-{"q":"Ce este front-running-ul?","options":["Executarea celui mai rapid ordin de pe piață","Cumpărarea pentru contul firmei înaintea unui ordin mare cunoscut al unui client, pentru a profita din mișcarea de preț","Vânzarea în lipsă a unei acțiuni de prag","Anularea unui ordin învechit"],"correct":1,"explain":"Front-running-ul folosește informații nepublice despre ordinul unui client pentru a tranzacționa înaintea lui - este ilegal.","kind":"text"},
-{"q":"Ce înseamnă corect 'best execution'?","options":["Obținerea celui mai mic preț absolut, chiar dacă apare peste câteva zile","Obținerea celui mai bun preț și viteza disponibile în secundă exactă în care ordinul este trimis","Executarea doar pe bursa unde este listată acțiunea","Garantarea unui profit pentru client"],"correct":1,"explain":"Best execution se referă la cel mai bun preț și cea mai bună viteză disponibile în momentul executării, nu la un preț ipotetic mai târziu.","kind":"concept"},
-{"q":"Ce este o 'wash trade'?","options":["O tranzacție executată la cel mai bun preț protejat","Cumpărarea și vânzarea aceluiași titlu de către același proprietar beneficiar, fără schimbare reală de proprietate","O tranzacție care depășește plafonul de risc","Un ordin de tip iceberg"],"correct":1,"explain":"Wash trade-ul implică același proprietar beneficiar care cumpără și vinde fără schimbare de proprietate, creând volum artificial - este interzis.","kind":"text"},
-{"q":"Sistemul Self-Trade Prevention (STP) este conceput pentru a preveni ce situație?","options":["Tranzacționarea în afara orelor de piață","Ca același pupitru să cumpere și să vândă accidental aceeași acțiune către el însuși (wash trade)","Plasarea de ordine sub prețul minim","Depășirea limitei zilnice de P&L"],"correct":1,"explain":"STP blochează tranzacțiile în care același pupitru ar tranzacționa cu sine însuși, evitând wash trades accidentale.","kind":"concept"},
-{"q":"Un trader tastează accidental un zero în plus și cumpără 1.000.000 de acțiuni în loc de 1.000. Cum poate trata bursa acest caz?","options":["Îl consideră best execution","Îl poate declara 'clearly erroneous execution' (executare vădit eronată) și anula retroactiv","Îl raportează ca front-running","Îl acceptă fără excepție, deoarece ordinul a fost trimis"],"correct":1,"explain":"O tranzacție de tip fat-finger poate fi declarată clearly erroneous și anulată (nulă și neavenită) de echipa de operațiuni a bursei.","kind":"concept"},
-{"q":"Care dintre următoarele NU este o componentă a Regulation NMS descrisă în capitol?","options":["Order protection rule (regula de protecție a ordinului)","Access rule (regula de acces)","Sub-penny rule (regula sub-cent)","Opening Auction Collar (gulerul de licitație la deschidere)"],"correct":3,"explain":"Reg NMS include order protection, access și sub-penny rule. Opening Auction Collar este o regulă separată a NYSE pentru deschidere.","kind":"text"},
-{"q":"Conform regulii sub-cent (sub-penny rule), acțiunile cu preț peste 1,00 $...","options":["Nu pot fi cotate sau tranzacționate în increment mai mici de 0,01 $, cu excepții speciale","Trebuie tranzacționate doar în increment de 0,05 $","Nu pot fi vândute în lipsă","Trebuie raportate la SEC în fiecare secundă"],"correct":0,"explain":"Sub-penny rule interzice cotarea/tranzacționarea acțiunilor peste 1 $ în increment mai mici de un cent, cu excepția cazurilor speciale.","kind":"text"},
-{"q":"În exemplul cu AAPL, NBBO era 189,05 (bid) x 189,10 (offer). De ce nu este executabil ordinul de cumpărare la 189,00 $?","options":["Pentru că încalcă Order Protection Rule","Pentru că nimeni nu oferă să vândă la sau sub 189,00 $, deci nu se poate executa acum","Pentru că depășește oferta protejată de 189,10 $","Pentru că este un ordin de tip 'day'"],"correct":1,"explain":"Limita de cumpărare de 189,00 $ este sub bid-ul de 189,05 $; nimeni nu vinde la acel preț, deci ordinul rămâne în registru, nemarketabil.","kind":"concept"},
-{"q":"În același exemplu, politica SmallProp spune că, dacă un ordin nu poate fi executat fără a încălca Reg NMS și nu există loc cu preț mai bun, trebuie să...","options":["Reevaluezi ordinul automat la oferta protejată","Anulezi ordinul în loc să-l reevaluezi","Aștepți până la închiderea pieței","Îl direcționezi către NASDAQ"],"correct":1,"explain":"Politica conservatoare a SmallProp cere anularea ordinului în loc de repricing - 'anulează întâi, întreabă mai târziu'.","kind":"concept"},
-{"q":"De ce este politica SmallProp atât de conservatoare cu privire la trade-through-uri?","options":["Pentru că bursa închide la prânz","Pentru că amenzile pentru trade-through-uri încep de la 1 $ pe acțiune și pot escalada rapid","Pentru că AAPL este o acțiune ilichidă","Pentru că ordinele 'day' expiră imediat"],"correct":1,"explain":"Amenzile pentru încălcarea regulii trade-through (Reg NMS) pornesc de la 1 $ pe acțiune și cresc rapid, justificând prudența.","kind":"text"},
-{"q":"În al doilea scenariu, când este 'în vigoare' regula alternativă de uptick (NYSE Rule 802) pentru o threshold security?","options":["Mereu, indiferent de preț","Când acțiunea a înregistrat o scădere de 10% sau mai mult față de închiderea zilei anterioare","Doar în prima ora de tranzacționare","Când volumul depășește media zilnică"],"correct":1,"explain":"Regula se activează după o scădere de preț de 10% sau mai mult față de închiderea zilei precedente, permițând short doar peste bid plus un uptick.","kind":"text"},
-{"q":"Când regula de uptick este activă și bid-ul NBBO este 45,10 $, la ce preț este permisă vânzarea în lipsă?","options":["La 45,10 $ exact","Strict peste 45,10 $, de exemplu 45,11 $","La orice preț sub 45,10 $","Doar la prețul de închidere al zilei anterioare"],"correct":1,"explain":"Vânzarea în lipsă este permisă doar la un preț strict mai mare decât bid-ul (45,10 $), deci minim 45,11 $; un ordin la 45,10 $ sau mai mic ar fi respins.","kind":"concept"},
-{"q":"De ce se recomandă un ordin 'limită' în loc de unul 'de piață' la o vânzare în lipsă supusă testului de preț?","options":["Pentru că este mai ieftin de executat","Pentru că un ordin limită garantează că nu vei tranzacționa sub prețul specificat, protejând de încălcări neintenționate","Pentru că ordinele de piață sunt interzise pe NASDAQ","Pentru că se execută mai rapid"],"correct":1,"explain":"Ordinul limită fixează un preț minim, evitând ca short-ul să se execute sub pragul cerut de regula uptick - protejează de breach accidental.","kind":"concept"},
-{"q":"Care este diferența corectă dintre regulile de listare și regulile de tranzacționare?","options":["Ambele guvernează doar comportamentul traderilor","Regulile de listare stabilesc cerințele ca un titlu să fie listat (ex. capitalizare minimă), iar cele de tranzacționare guvernează comportamentul în timpul tranzacționării","Regulile de tranzacționare se aplică doar companiilor străine","Regulile de listare interzic manipularea pieței"],"correct":1,"explain":"Listarea privește eligibilitatea titlului (ex. capitalizare minimă), iar tranzacționarea privește comportamentul participanților (ex. manipulare, informații privilegiate).","kind":"concept"},
-{"q":"Ce înseamnă MNPI?","options":["Market Network Price Index","Informație materială nepublică ce ar putea influența prețul unui titlu","Minimum National Position Increment","Multi-National Pricing Instrument"],"correct":1,"explain":"MNPI = material non-public information, informație nepublică și materială care poate influența prețul; folosirea ei pentru tranzacționare este problematică.","kind":"text"},
-{"q":"În sectiunea 'Cum o folosește pupitrul', ce reprezintă benzile de 7%, 13% și 20% de pe tabloul Market-Wide Circuit Breaker?","options":["Comisioanele de tranzacționare","Pragurile de declanșare ale întrerupătoarelor de circuit pe S&P 500","Procentele de free float ale acțiunilor","Limitele zilnice de P&L per trader"],"correct":1,"explain":"Cele trei benzi sunt pragurile market-wide circuit breaker (7/13/20%); apropierea de un nivel declanșează alerta de oprire a ordinelor noi.","kind":"text"},
-{"q":"Plafonul dur (hard cap) al unui trader este definit ca...","options":["Exact 5% din free float","Cel mai mic dintre 5% din volumul mediu zilnic sau 2% din free float-ul public","Cel mai mare dintre 5% din volum sau 2% din float","Întotdeauna 2% din capitalul firmei"],"correct":1,"explain":"Hard cap-ul este cel mai MIC dintre cele două limite (5% ADV sau 2% float), aplicat automat de RiskMon, fără override.","kind":"text"},
-{"q":"Dacă un tichet depășește plafonul dur în RiskMon, ce se întâmplă?","options":["Se execută cu un avertisment","Blotter-ul îl face roșu și refuză să-l direcționeze; traderul trebuie să-l împartă sau să-l anuleze","Se trimite automat la Chief Compliance Officer pentru aprobare","Se reduce automat la dimensiunea plafonului"],"correct":1,"explain":"Tichetul devine roșu și este refuzat fără override; traderul îl împarte în ordine-copil sau îl anulează, iar refuzul este înregistrat.","kind":"concept"},
-{"q":"De ce traderii învață să introducă ordinele mari de deschidere înainte de 9:28 sau după 9:30?","options":["Pentru că bursa nu acceptă ordine între aceste ore","Pentru că între 9:28 și 9:30 acționează Opening Auction Collar, care respinge automat ordinele ce ar mișca prețul cu peste 0,25%","Pentru a evita comisioanele de deschidere","Pentru că P&L-ul se resetează la 9:30"],"correct":1,"explain":"Opening Auction Collar respinge ordinele care ar mișca prețul de deschidere cu peste 0,25%; de aceea ordinele mari se plasează în afara ferestrei sau prin iceberg/algoritmic.","kind":"concept"},
-{"q":"Capitolul descrie latența datelor ca o sursă de eșec. Care este o soluție practică recomandată?","options":["Ignorarea NBBO și folosirea prețurilor de închidere","Adăugarea unui buffer 'hard-stop' (ex. o pernă de 1 cent) la regulile de limită de preț și monitorizarea latenței","Trimiterea cât mai multor ordine agresive când latența crește","Dezactivarea verificărilor de conformitate în piețele rapide"],"correct":1,"explain":"Pentru a contracara latența, se adaugă o pernă suplimentară la limitele de preț și se trece la un mod mai conservator când latența crește.","kind":"concept"},
-{"q":"De ce nu este suficient un software de conformitate care verifică DOAR regulile bursei?","options":["Pentru că regulile bursei sunt mereu mai stricte decât SEC","Pentru că un ordin conform cu regula bursei poate totuși încălca o regulă SEC (ex. wash-sale sau matched-order)","Pentru că bursele nu au reguli scrise","Pentru că SEC nu reglementează tranzacțiile electronice"],"correct":1,"explain":"Un ordin care satisface o regula a bursei (ex. NYSE Rule 403) poate încălca o regulă SEC mai largă; e nevoie de o listă de verificare paralelă la nivel SEC.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "De ce sunt comparate regulile bursei cu 'regulile casei' dintr-un cazinou?",
+   "options": [
+    "Pentru că permit casei să câștige mereu",
+    "Pentru că se schimbă în funcție de cât câștigă un trader",
+    "Pentru că sunt secrete și cunoscute doar de bursa",
+    "Pentru că păstrează jocul corect, transparent și sigur pentru toți participanții"
+   ],
+   "correct": 3,
+   "explain": "Analogia subliniază că regulile creează un cadru comun care menține piața corectă, transparentă și sigură pentru toată lumea.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un trade care este legal pe NASDAQ ar putea fi ilegal pe NYSE. De ce?",
+   "options": [
+    "Pentru că fiecare bursă își scrie propriul regulament (rulebook)",
+    "Pentru că NASDAQ nu este reglementată",
+    "Pentru că NYSE interzice toate tranzacțiile electronice",
+    "Pentru că NASDAQ tranzacționează doar acțiuni străine"
+   ],
+   "correct": 0,
+   "explain": "Fiecare bursă publică propriul rulebook, deci aceeași acțiune poate fi tratată diferit pe burse diferite.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce rol are sistemul de supraveghere (surveillance) al bursei?",
+   "options": [
+    "Decide vinovăția traderilor și aplică amenzi automat",
+    "Urmărește tranzacțiile în timp real și semnalează activitatea neobișnuită pentru investigare",
+    "Execută ordinele clienților mai rapid",
+    "Stabilește prețurile de deschidere ale acțiunilor"
+   ],
+   "correct": 1,
+   "explain": "Supravegherea nu decide vinovăția; doar semnalează activitatea neobișnuită și trimite alerte personalului de conformitate, care investighează.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un trader plasează un ordin mare de cumpărare fără intenția de a-l executa, doar pentru a păcăli ceilalți că cererea e ridicată. Cum se numește această practică ilegală?",
+   "options": [
+    "Front-running",
+    "Best execution",
+    "Spoofing",
+    "Settlement"
+   ],
+   "correct": 2,
+   "explain": "Spoofing înseamnă plasarea unui ordin mare fără intenția de a-l executa, pentru a induce în eroare ceilalți participanți.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este front-running-ul?",
+   "options": [
+    "Executarea celui mai rapid ordin de pe piață",
+    "Anularea unui ordin învechit",
+    "Vânzarea în lipsă a unei acțiuni de prag",
+    "Cumpărarea pentru contul firmei înaintea unui ordin mare cunoscut al unui client, pentru a profita din mișcarea de preț"
+   ],
+   "correct": 3,
+   "explain": "Front-running-ul folosește informații nepublice despre ordinul unui client pentru a tranzacționa înaintea lui - este ilegal.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce înseamnă corect 'best execution'?",
+   "options": [
+    "Obținerea celui mai bun preț și viteza disponibile în secundă exactă în care ordinul este trimis",
+    "Obținerea celui mai mic preț absolut, chiar dacă apare peste câteva zile",
+    "Executarea doar pe bursa unde este listată acțiunea",
+    "Garantarea unui profit pentru client"
+   ],
+   "correct": 0,
+   "explain": "Best execution se referă la cel mai bun preț și cea mai bună viteză disponibile în momentul executării, nu la un preț ipotetic mai târziu.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este o 'wash trade'?",
+   "options": [
+    "O tranzacție executată la cel mai bun preț protejat",
+    "Cumpărarea și vânzarea aceluiași titlu de către același proprietar beneficiar, fără schimbare reală de proprietate",
+    "O tranzacție care depășește plafonul de risc",
+    "Un ordin de tip iceberg"
+   ],
+   "correct": 1,
+   "explain": "Wash trade-ul implică același proprietar beneficiar care cumpără și vinde fără schimbare de proprietate, creând volum artificial - este interzis.",
+   "kind": "text"
+  },
+  {
+   "q": "Sistemul Self-Trade Prevention (STP) este conceput pentru a preveni ce situație?",
+   "options": [
+    "Tranzacționarea în afara orelor de piață",
+    "Plasarea de ordine sub prețul minim",
+    "Ca același pupitru să cumpere și să vândă accidental aceeași acțiune către el însuși (wash trade)",
+    "Depășirea limitei zilnice de P&L"
+   ],
+   "correct": 2,
+   "explain": "STP blochează tranzacțiile în care același pupitru ar tranzacționa cu sine însuși, evitând wash trades accidentale.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un trader tastează accidental un zero în plus și cumpără 1.000.000 de acțiuni în loc de 1.000. Cum poate trata bursa acest caz?",
+   "options": [
+    "Îl consideră best execution",
+    "Îl acceptă fără excepție, deoarece ordinul a fost trimis",
+    "Îl raportează ca front-running",
+    "Îl poate declara 'clearly erroneous execution' (executare vădit eronată) și anula retroactiv"
+   ],
+   "correct": 3,
+   "explain": "O tranzacție de tip fat-finger poate fi declarată clearly erroneous și anulată (nulă și neavenită) de echipa de operațiuni a bursei.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care dintre următoarele NU este o componentă a Regulation NMS descrisă în capitol?",
+   "options": [
+    "Opening Auction Collar (gulerul de licitație la deschidere)",
+    "Access rule (regula de acces)",
+    "Sub-penny rule (regula sub-cent)",
+    "Order protection rule (regula de protecție a ordinului)"
+   ],
+   "correct": 0,
+   "explain": "Reg NMS include order protection, access și sub-penny rule. Opening Auction Collar este o regulă separată a NYSE pentru deschidere.",
+   "kind": "text"
+  },
+  {
+   "q": "Conform regulii sub-cent (sub-penny rule), acțiunile cu preț peste 1,00 $...",
+   "options": [
+    "Trebuie tranzacționate doar în increment de 0,05 $",
+    "Nu pot fi cotate sau tranzacționate în increment mai mici de 0,01 $, cu excepții speciale",
+    "Nu pot fi vândute în lipsă",
+    "Trebuie raportate la SEC în fiecare secundă"
+   ],
+   "correct": 1,
+   "explain": "Sub-penny rule interzice cotarea/tranzacționarea acțiunilor peste 1 $ în increment mai mici de un cent, cu excepția cazurilor speciale.",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul cu AAPL, NBBO era 189,05 (bid) x 189,10 (offer). De ce nu este executabil ordinul de cumpărare la 189,00 $?",
+   "options": [
+    "Pentru că încalcă Order Protection Rule",
+    "Pentru că depășește oferta protejată de 189,10 $",
+    "Pentru că nimeni nu oferă să vândă la sau sub 189,00 $, deci nu se poate executa acum",
+    "Pentru că este un ordin de tip 'day'"
+   ],
+   "correct": 2,
+   "explain": "Limita de cumpărare de 189,00 $ este sub bid-ul de 189,05 $; nimeni nu vinde la acel preț, deci ordinul rămâne în registru, nemarketabil.",
+   "kind": "concept"
+  },
+  {
+   "q": "În același exemplu, politica SmallProp spune că, dacă un ordin nu poate fi executat fără a încălca Reg NMS și nu există loc cu preț mai bun, trebuie să...",
+   "options": [
+    "Reevaluezi ordinul automat la oferta protejată",
+    "Îl direcționezi către NASDAQ",
+    "Aștepți până la închiderea pieței",
+    "Anulezi ordinul în loc să-l reevaluezi"
+   ],
+   "correct": 3,
+   "explain": "Politica conservatoare a SmallProp cere anularea ordinului în loc de repricing - 'anulează întâi, întreabă mai târziu'.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este politica SmallProp atât de conservatoare cu privire la trade-through-uri?",
+   "options": [
+    "Pentru că amenzile pentru trade-through-uri încep de la 1 $ pe acțiune și pot escalada rapid",
+    "Pentru că bursa închide la prânz",
+    "Pentru că AAPL este o acțiune ilichidă",
+    "Pentru că ordinele 'day' expiră imediat"
+   ],
+   "correct": 0,
+   "explain": "Amenzile pentru încălcarea regulii trade-through (Reg NMS) pornesc de la 1 $ pe acțiune și cresc rapid, justificând prudența.",
+   "kind": "text"
+  },
+  {
+   "q": "În al doilea scenariu, când este 'în vigoare' regula alternativă de uptick (NYSE Rule 802) pentru o threshold security?",
+   "options": [
+    "Mereu, indiferent de preț",
+    "Când acțiunea a înregistrat o scădere de 10% sau mai mult față de închiderea zilei anterioare",
+    "Doar în prima ora de tranzacționare",
+    "Când volumul depășește media zilnică"
+   ],
+   "correct": 1,
+   "explain": "Regula se activează după o scădere de preț de 10% sau mai mult față de închiderea zilei precedente, permițând short doar peste bid plus un uptick.",
+   "kind": "text"
+  },
+  {
+   "q": "Când regula de uptick este activă și bid-ul NBBO este 45,10 $, la ce preț este permisă vânzarea în lipsă?",
+   "options": [
+    "La 45,10 $ exact",
+    "La orice preț sub 45,10 $",
+    "Strict peste 45,10 $, de exemplu 45,11 $",
+    "Doar la prețul de închidere al zilei anterioare"
+   ],
+   "correct": 2,
+   "explain": "Vânzarea în lipsă este permisă doar la un preț strict mai mare decât bid-ul (45,10 $), deci minim 45,11 $; un ordin la 45,10 $ sau mai mic ar fi respins.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce se recomandă un ordin 'limită' în loc de unul 'de piață' la o vânzare în lipsă supusă testului de preț?",
+   "options": [
+    "Pentru că este mai ieftin de executat",
+    "Pentru că se execută mai rapid",
+    "Pentru că ordinele de piață sunt interzise pe NASDAQ",
+    "Pentru că un ordin limită garantează că nu vei tranzacționa sub prețul specificat, protejând de încălcări neintenționate"
+   ],
+   "correct": 3,
+   "explain": "Ordinul limită fixează un preț minim, evitând ca short-ul să se execute sub pragul cerut de regula uptick - protejează de breach accidental.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este diferența corectă dintre regulile de listare și regulile de tranzacționare?",
+   "options": [
+    "Regulile de listare stabilesc cerințele ca un titlu să fie listat (ex. capitalizare minimă), iar cele de tranzacționare guvernează comportamentul în timpul tranzacționării",
+    "Ambele guvernează doar comportamentul traderilor",
+    "Regulile de tranzacționare se aplică doar companiilor străine",
+    "Regulile de listare interzic manipularea pieței"
+   ],
+   "correct": 0,
+   "explain": "Listarea privește eligibilitatea titlului (ex. capitalizare minimă), iar tranzacționarea privește comportamentul participanților (ex. manipulare, informații privilegiate).",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă MNPI?",
+   "options": [
+    "Market Network Price Index",
+    "Informație materială nepublică ce ar putea influența prețul unui titlu",
+    "Minimum National Position Increment",
+    "Multi-National Pricing Instrument"
+   ],
+   "correct": 1,
+   "explain": "MNPI = material non-public information, informație nepublică și materială care poate influența prețul; folosirea ei pentru tranzacționare este problematică.",
+   "kind": "text"
+  },
+  {
+   "q": "În sectiunea 'Cum o folosește pupitrul', ce reprezintă benzile de 7%, 13% și 20% de pe tabloul Market-Wide Circuit Breaker?",
+   "options": [
+    "Comisioanele de tranzacționare",
+    "Procentele de free float ale acțiunilor",
+    "Pragurile de declanșare ale întrerupătoarelor de circuit pe S&P 500",
+    "Limitele zilnice de P&L per trader"
+   ],
+   "correct": 2,
+   "explain": "Cele trei benzi sunt pragurile market-wide circuit breaker (7/13/20%); apropierea de un nivel declanșează alerta de oprire a ordinelor noi.",
+   "kind": "text"
+  },
+  {
+   "q": "Plafonul dur (hard cap) al unui trader este definit ca...",
+   "options": [
+    "Exact 5% din free float",
+    "Întotdeauna 2% din capitalul firmei",
+    "Cel mai mare dintre 5% din volum sau 2% din float",
+    "Cel mai mic dintre 5% din volumul mediu zilnic sau 2% din free float-ul public"
+   ],
+   "correct": 3,
+   "explain": "Hard cap-ul este cel mai MIC dintre cele două limite (5% ADV sau 2% float), aplicat automat de RiskMon, fără override.",
+   "kind": "text"
+  },
+  {
+   "q": "Dacă un tichet depășește plafonul dur în RiskMon, ce se întâmplă?",
+   "options": [
+    "Blotter-ul îl face roșu și refuză să-l direcționeze; traderul trebuie să-l împartă sau să-l anuleze",
+    "Se execută cu un avertisment",
+    "Se trimite automat la Chief Compliance Officer pentru aprobare",
+    "Se reduce automat la dimensiunea plafonului"
+   ],
+   "correct": 0,
+   "explain": "Tichetul devine roșu și este refuzat fără override; traderul îl împarte în ordine-copil sau îl anulează, iar refuzul este înregistrat.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce traderii învață să introducă ordinele mari de deschidere înainte de 9:28 sau după 9:30?",
+   "options": [
+    "Pentru că bursa nu acceptă ordine între aceste ore",
+    "Pentru că între 9:28 și 9:30 acționează Opening Auction Collar, care respinge automat ordinele ce ar mișca prețul cu peste 0,25%",
+    "Pentru a evita comisioanele de deschidere",
+    "Pentru că P&L-ul se resetează la 9:30"
+   ],
+   "correct": 1,
+   "explain": "Opening Auction Collar respinge ordinele care ar mișca prețul de deschidere cu peste 0,25%; de aceea ordinele mari se plasează în afara ferestrei sau prin iceberg/algoritmic.",
+   "kind": "concept"
+  },
+  {
+   "q": "Capitolul descrie latența datelor ca o sursă de eșec. Care este o soluție practică recomandată?",
+   "options": [
+    "Ignorarea NBBO și folosirea prețurilor de închidere",
+    "Trimiterea cât mai multor ordine agresive când latența crește",
+    "Adăugarea unui buffer 'hard-stop' (ex. o pernă de 1 cent) la regulile de limită de preț și monitorizarea latenței",
+    "Dezactivarea verificărilor de conformitate în piețele rapide"
+   ],
+   "correct": 2,
+   "explain": "Pentru a contracara latența, se adaugă o pernă suplimentară la limitele de preț și se trece la un mod mai conservator când latența crește.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu este suficient un software de conformitate care verifică DOAR regulile bursei?",
+   "options": [
+    "Pentru că regulile bursei sunt mereu mai stricte decât SEC",
+    "Pentru că SEC nu reglementează tranzacțiile electronice",
+    "Pentru că bursele nu au reguli scrise",
+    "Pentru că un ordin conform cu regula bursei poate totuși încălca o regulă SEC (ex. wash-sale sau matched-order)"
+   ],
+   "correct": 3,
+   "explain": "Un ordin care satisface o regula a bursei (ex. NYSE Rule 403) poate încălca o regulă SEC mai largă; e nevoie de o listă de verificare paralelă la nivel SEC.",
+   "kind": "concept"
+  }
+ ]
+}

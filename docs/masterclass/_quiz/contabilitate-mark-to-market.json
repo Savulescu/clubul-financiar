@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este ideea centrală a contabilității mark-to-market (MTM)?","options":["Evaluarea instrumentelor la costul istoric de achiziție","Reevaluarea instrumentelor financiare la prețul lor curent de piață","Înregistrarea valorii doar atunci când instrumentul este vândut","Folosirea valorii contabile fixe pe toată perioada de deținere"],"correct":1,"explain":"MTM reevaluează instrumentele la valoarea justă curentă de piață, nu la costul istoric.","kind":"concept"},
-{"q":"De ce a fost creată metoda MTM, conform analogiei cu taraba de limonadă?","options":["Pentru a reduce taxele plătite de afaceri","Pentru a împiedica o companie să pară profitabilă în vremuri bune și să ascundă pierderile în vremuri rele","Pentru a elimina nevoia de a vinde stocul","Pentru a fixa prețurile pe termen lung"],"correct":1,"explain":"Fără MTM, o firmă ar putea ascunde pierderi refuzând să actualizeze valoarea activelor; MTM forțează onestitatea.","kind":"concept"},
-{"q":"Cărui tip de poziții li se aplică în mod obligatoriu marcarea zilnică la piață?","options":["Tuturor pozițiilor, fără excepție","Doar pozițiilor din registrul de tranzacționare (trading book)","Doar investițiilor pe termen lung","Doar pozițiilor în numerar"],"correct":1,"explain":"Doar pozițiile din trading book (deținute pentru revânzare pe termen scurt) trebuie reevaluate zilnic; cele din banking book se evidențiază la cost amortizat.","kind":"concept"},
-{"q":"Care este formula de bază a MTM pentru un contract futures?","options":["(Cantitate × Preț de tranzacționare) / Multiplicator","(Preț curent de piață − Preț de tranzacționare) × Cantitate × Multiplicatorul contractului","Preț curent de piață × Rata fără risc","Valoare nominală × Rata cuponului"],"correct":1,"explain":"MTM = (Preț curent − Preț de tranzacționare) × Cantitate × Multiplicatorul contractului.","kind":"text"},
-{"q":"Ce se întâmplă cu semnul rezultatului MTM dacă ești short (ai vândut) instrumentul?","options":["Nu se schimbă nimic față de o poziție long","Semnul se inversează: o creștere de preț devine pierdere, o scădere devine câștig","Rezultatul devine întotdeauna zero","Se înmulțește cu rata fără risc"],"correct":1,"explain":"Pentru o poziție short, o creștere de preț este o pierdere și o scădere este un câștig, deci semnul se inversează.","kind":"concept"},
-{"q":"Ce sursă de preț trebuie folosită corect la marcarea la piață?","options":["Prețul de intrare (entry price)","Prețul de ieșire (exit price) — cel la care ai putea vinde azi","Prețul median (mid-market) de pe Reuters","Costul istoric de achiziție"],"correct":1,"explain":"Regula este folosirea prețului de ieșire, adică prețul la care poziția ar putea fi efectiv vândută azi.","kind":"concept"},
-{"q":"La marcarea unei obligațiuni, ce preț trebuie folosit?","options":["Doar prețul curat (clean price)","Prețul murdar (dirty price) = preț curat + dobânda acumulată","Prețul nominal","Prețul de exercitare"],"correct":1,"explain":"MTM pentru o obligațiune trebuie să includă dobânda acumulată; deci se folosește prețul murdar (dirty price).","kind":"text"},
-{"q":"În exemplul lucrat (petrol la 60$ vs strike 50$, 6 luni, rata fără risc 5%), care este valoarea justă a contractului futures?","options":["10.000 $","9.753 $","11.200 $","50.000 $"],"correct":1,"explain":"Valoare justă = (60−50) × 1.000 × factor de actualizare 0,9753 = 9.753 $.","kind":"text"},
-{"q":"Cum se calculează factorul de actualizare în exemplul lucrat?","options":["1 + r × t","e^(−r × t)","r / t","1 − r × t"],"correct":1,"explain":"Factor de actualizare = e^(−r × t) = e^(−0,05 × 0,5) = 0,9753.","kind":"text"},
-{"q":"De ce poate produce o pierdere mare de MTM probleme de capital pentru o bancă?","options":["Pentru că MTM nu are nicio legătură cu capitalul","Pentru că P&L-ul MTM intră în CET1 prin profiturile reportate și poate împinge rata CET1 sub minim","Pentru că MTM este doar fiscal","Pentru că reduce automat dividendele"],"correct":1,"explain":"P&L-ul MTM se reflectă în Common Equity Tier 1 (CET1); o pierdere mare, chiar nerealizată, poate scădea rata CET1 sub minimul de reglementare.","kind":"concept"},
-{"q":"De ce este o eroare să marchezi din nou un contract futures care are marjă de variație (VM) zilnică?","options":["Pentru că VM nu are legătură cu MTM","Pentru că numerarul VM este deja rezultatul MTM al zilei, iar remarcarea dublează P&L-ul","Pentru că futures nu se marchează niciodată","Pentru că VM înlocuiește prețul de piață"],"correct":1,"explain":"VM zilnică decontează deja rezultatul MTM în numerar; remarcarea contractului dublează (double-count) P&L-ul.","kind":"concept"},
-{"q":"Ce reprezintă „Nivelul 3” în IFRS/US GAAP în contextul MTM?","options":["Prețuri observabile direct pe o piață lichidă","Prețuri derivate din modele, când piața este nelichidă sau închisă","Prețuri garantate de stat","Prețuri istorice de achiziție"],"correct":1,"explain":"Nivelul 3 se referă la prețuri derivate din modele, folosite când nu există prețuri observabile de piață.","kind":"text"},
-{"q":"Ce înseamnă afirmația „MTM netezește, nu prognozează” în contextul evaporării lichidității?","options":["MTM prezice corect prețurile viitoare","Sistemul tot scoate un MTM neted, dar prețul real de ieșire poate fi mult mai mic în stres","MTM oprește tranzacționarea","MTM elimină volatilitatea reală"],"correct":1,"explain":"În stres, sistemul de risc produce un MTM aparent neted folosind aproximări, dar nu reflectă prețul real de ieșire la vânzare forțată.","kind":"concept"},
-{"q":"Ce overlay-uri trebuie adăugate pentru a reflecta riscul de credit al contrapărții, pe care MTM îl ignoră?","options":["VaR și gross notional","CVA (Credit Valuation Adjustment) și PFE (Potential Future Exposure)","Doar dobânda acumulată","Doar cursul spot FX"],"correct":1,"explain":"MTM marchează doar instrumentul, nu riscul de neplată al contrapărții; se adaugă CVA și PFE.","kind":"text"},
-{"q":"Ce reprezintă MVA (Margin Valuation Adjustment)?","options":["O ajustare pentru riscul valutar","Costul de finanțare a marjei suplimentare pe care trebuie să o postezi","O taxă plătită bursei","Dobânda acumulată a unei obligațiuni"],"correct":1,"explain":"MVA reflectă costul economic de finanțare a colateralului/marjei, pe care contabilitatea MTM îl ignoră dacă nu e calculat explicit.","kind":"text"},
-{"q":"De ce un profit MTM poate să nu fie un câștig impozabil la sfârșitul anului?","options":["Pentru că autoritățile fiscale folosesc adesea costul istoric sau baza de realizare, iar poziția e încă deschisă","Pentru că MTM e mereu scutit de taxe","Pentru că profitul MTM e fictiv prin definiție","Pentru că taxele se plătesc doar pe dividende"],"correct":0,"explain":"Fiscul folosește adesea baza de realizare; un profit MTM nerealizat (poziție deschisă) poate să nu fie impozabil încă.","kind":"concept"},
-{"q":"Care este avertismentul „suprem” privind MTM?","options":["MTM prezice perfect viitorul","MTM este retrospectiv — îți spune valoarea de ieri, nu cea de mâine; nu înlocuiește testarea de stres","MTM elimină nevoia de risc management","MTM garantează profituri"],"correct":1,"explain":"MTM este o fotografie retrospectivă; un birou MTM-pozitiv poate exploda mâine, deci e nevoie de stress testing și analiză de scenarii.","kind":"concept"},
-{"q":"Cum gestionează MTM atribuirea P&L pentru un birou de tranzacționare?","options":["Atribuie tot profitul firmei, fără defalcare","Permite atribuirea exactă a profiturilor și pierderilor pe traderi, strategii și clase de active","Atribuie pierderile doar conducerii","Nu are legătură cu performanța"],"correct":1,"explain":"Evaluând pozițiile la prețul curent, MTM permite atribuirea corectă a P&L pe traderi, strategii și clase de active.","kind":"concept"},
-{"q":"Ce este registrul bancar (banking book) și cum se evidențiază pozițiile din el?","options":["Poziții de scurtă durată, marcate zilnic la piață","Poziții pentru investiție pe termen lung, evidențiate de regulă la cost amortizat, nu la MTM","Doar poziții valutare, marcate la cursul spot","Poziții speculative, evaluate prin modele de Nivel 3"],"correct":1,"explain":"Banking book conține poziții pe termen lung (de ex. obligațiuni ținute la scadență), evidențiate la cost amortizat, nu la MTM.","kind":"text"},
-{"q":"Ce diferență cheie există între contabilitatea MTM și contabilitatea de angajamente clasică privind valoarea instrumentelor?","options":["MTM ignoră complet piața","MTM recunoaște valoarea curentă de piață a instrumentelor, reflectând schimbările de preț în timp real","Cele două sunt identice","MTM recunoaște veniturile doar la încasarea numerarului"],"correct":1,"explain":"MTM este un tip de contabilitate de angajamente care recunoaște valoarea curentă de piață a instrumentelor, nu doar costul istoric.","kind":"concept"},
-{"q":"De ce trebuie biroul din Londra să evalueze pozițiile la ora 17:00 chiar dacă piața cash din SUA s-a închis la 16:00 New York?","options":["Pentru că ora New York e singura validă","Pentru a respecta cerința „la închiderea zilei de lucru” și a evita un preț stătut care distorsionează P&L-ul zilei următoare","Pentru că piața cash din SUA nu contează","Pentru a evita plata marjei"],"correct":1,"explain":"MTM trebuie făcut la închiderea zilei de lucru; folosirea ultimului print US din 16:00 creează un preț stale de 20 de minute care distorsionează P&L-ul.","kind":"concept"},
-{"q":"Care dintre acești factori NU este folosit în calculul de bază al MTM, dar adaugă complexitate în practica reală?","options":["Prețul curent de piață","Volatilitatea activului-suport și bonitatea contrapărții","Cantitatea poziției","Multiplicatorul contractului"],"correct":1,"explain":"Formula de bază folosește preț, cantitate și multiplicator; în practică, volatilitatea și bonitatea contrapărții cresc complexitatea evaluării.","kind":"concept"},
-{"q":"Ce trebuie să facă biroul cu o tranzacție OTC nelichidă care nu poate fi evaluată fiabil?","options":["Să o ignore complet din registre","Să o semnaleze, să obțină un preț de la broker sau o estimare prudentă, documentată într-un jurnal de excepții de evaluare","Să o marcheze automat la zero","Să o mute în registrul bancar fără documentare"],"correct":1,"explain":"Tranzacțiile care nu pot fi evaluate sunt semnalate; managerul obține un preț de broker sau o estimare prudentă, documentată în jurnalul de excepții, revizuit de compliance.","kind":"text"},
-{"q":"De ce nu trebuie suprascrise fișierele MTM ale zilelor anterioare?","options":["Pentru a economisi spațiu de stocare","Pentru a păstra o serie istorică ce permite back-testing, investigarea salturilor de P&L și satisfacerea cerințelor de inspecție ale autorităților","Pentru că fișierele vechi sunt inutile","Pentru a accelera calculul zilnic"],"correct":1,"explain":"Seria istorică (pistă de audit) permite back-testing, investigarea anomaliilor de P&L și răspunsul la inspecțiile de reglementare, care pot cere istoricul ultimelor 12 luni.","kind":"concept"},
-{"q":"Cum poate o întărire bruscă a EUR să șteargă un câștig MTM raportat în EUR?","options":["Nu poate, MTM e independent de monedă","La conversia înapoi în moneda de finanțare (de ex. USD), câștigul aparent în EUR poate dispărea din cauza nepotrivirii valutare","Pentru că EUR nu se poate converti","Pentru că MTM ignoră complet cursul de schimb"],"correct":1,"explain":"Dacă finanțarea e în USD dar MTM e în EUR, o mișcare valutară poate șterge câștigul la conversie; de aceea MTM se reconciliază cu moneda funcțională a entității.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este ideea centrală a contabilității mark-to-market (MTM)?",
+   "options": [
+    "Reevaluarea instrumentelor financiare la prețul lor curent de piață",
+    "Evaluarea instrumentelor la costul istoric de achiziție",
+    "Înregistrarea valorii doar atunci când instrumentul este vândut",
+    "Folosirea valorii contabile fixe pe toată perioada de deținere"
+   ],
+   "correct": 0,
+   "explain": "MTM reevaluează instrumentele la valoarea justă curentă de piață, nu la costul istoric.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce a fost creată metoda MTM, conform analogiei cu taraba de limonadă?",
+   "options": [
+    "Pentru a reduce taxele plătite de afaceri",
+    "Pentru a împiedica o companie să pară profitabilă în vremuri bune și să ascundă pierderile în vremuri rele",
+    "Pentru a elimina nevoia de a vinde stocul",
+    "Pentru a fixa prețurile pe termen lung"
+   ],
+   "correct": 1,
+   "explain": "Fără MTM, o firmă ar putea ascunde pierderi refuzând să actualizeze valoarea activelor; MTM forțează onestitatea.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cărui tip de poziții li se aplică în mod obligatoriu marcarea zilnică la piață?",
+   "options": [
+    "Tuturor pozițiilor, fără excepție",
+    "Doar investițiilor pe termen lung",
+    "Doar pozițiilor din registrul de tranzacționare (trading book)",
+    "Doar pozițiilor în numerar"
+   ],
+   "correct": 2,
+   "explain": "Doar pozițiile din trading book (deținute pentru revânzare pe termen scurt) trebuie reevaluate zilnic; cele din banking book se evidențiază la cost amortizat.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este formula de bază a MTM pentru un contract futures?",
+   "options": [
+    "(Cantitate × Preț de tranzacționare) / Multiplicator",
+    "Valoare nominală × Rata cuponului",
+    "Preț curent de piață × Rata fără risc",
+    "(Preț curent de piață − Preț de tranzacționare) × Cantitate × Multiplicatorul contractului"
+   ],
+   "correct": 3,
+   "explain": "MTM = (Preț curent − Preț de tranzacționare) × Cantitate × Multiplicatorul contractului.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce se întâmplă cu semnul rezultatului MTM dacă ești short (ai vândut) instrumentul?",
+   "options": [
+    "Semnul se inversează: o creștere de preț devine pierdere, o scădere devine câștig",
+    "Nu se schimbă nimic față de o poziție long",
+    "Rezultatul devine întotdeauna zero",
+    "Se înmulțește cu rata fără risc"
+   ],
+   "correct": 0,
+   "explain": "Pentru o poziție short, o creștere de preț este o pierdere și o scădere este un câștig, deci semnul se inversează.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce sursă de preț trebuie folosită corect la marcarea la piață?",
+   "options": [
+    "Prețul de intrare (entry price)",
+    "Prețul de ieșire (exit price) — cel la care ai putea vinde azi",
+    "Prețul median (mid-market) de pe Reuters",
+    "Costul istoric de achiziție"
+   ],
+   "correct": 1,
+   "explain": "Regula este folosirea prețului de ieșire, adică prețul la care poziția ar putea fi efectiv vândută azi.",
+   "kind": "concept"
+  },
+  {
+   "q": "La marcarea unei obligațiuni, ce preț trebuie folosit?",
+   "options": [
+    "Doar prețul curat (clean price)",
+    "Prețul nominal",
+    "Prețul murdar (dirty price) = preț curat + dobânda acumulată",
+    "Prețul de exercitare"
+   ],
+   "correct": 2,
+   "explain": "MTM pentru o obligațiune trebuie să includă dobânda acumulată; deci se folosește prețul murdar (dirty price).",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul lucrat (petrol la 60$ vs strike 50$, 6 luni, rata fără risc 5%), care este valoarea justă a contractului futures?",
+   "options": [
+    "10.000 $",
+    "50.000 $",
+    "11.200 $",
+    "9.753 $"
+   ],
+   "correct": 3,
+   "explain": "Valoare justă = (60−50) × 1.000 × factor de actualizare 0,9753 = 9.753 $.",
+   "kind": "text"
+  },
+  {
+   "q": "Cum se calculează factorul de actualizare în exemplul lucrat?",
+   "options": [
+    "e^(−r × t)",
+    "1 + r × t",
+    "r / t",
+    "1 − r × t"
+   ],
+   "correct": 0,
+   "explain": "Factor de actualizare = e^(−r × t) = e^(−0,05 × 0,5) = 0,9753.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce poate produce o pierdere mare de MTM probleme de capital pentru o bancă?",
+   "options": [
+    "Pentru că MTM nu are nicio legătură cu capitalul",
+    "Pentru că P&L-ul MTM intră în CET1 prin profiturile reportate și poate împinge rata CET1 sub minim",
+    "Pentru că MTM este doar fiscal",
+    "Pentru că reduce automat dividendele"
+   ],
+   "correct": 1,
+   "explain": "P&L-ul MTM se reflectă în Common Equity Tier 1 (CET1); o pierdere mare, chiar nerealizată, poate scădea rata CET1 sub minimul de reglementare.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este o eroare să marchezi din nou un contract futures care are marjă de variație (VM) zilnică?",
+   "options": [
+    "Pentru că VM nu are legătură cu MTM",
+    "Pentru că futures nu se marchează niciodată",
+    "Pentru că numerarul VM este deja rezultatul MTM al zilei, iar remarcarea dublează P&L-ul",
+    "Pentru că VM înlocuiește prețul de piață"
+   ],
+   "correct": 2,
+   "explain": "VM zilnică decontează deja rezultatul MTM în numerar; remarcarea contractului dublează (double-count) P&L-ul.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce reprezintă „Nivelul 3” în IFRS/US GAAP în contextul MTM?",
+   "options": [
+    "Prețuri observabile direct pe o piață lichidă",
+    "Prețuri istorice de achiziție",
+    "Prețuri garantate de stat",
+    "Prețuri derivate din modele, când piața este nelichidă sau închisă"
+   ],
+   "correct": 3,
+   "explain": "Nivelul 3 se referă la prețuri derivate din modele, folosite când nu există prețuri observabile de piață.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce înseamnă afirmația „MTM netezește, nu prognozează” în contextul evaporării lichidității?",
+   "options": [
+    "Sistemul tot scoate un MTM neted, dar prețul real de ieșire poate fi mult mai mic în stres",
+    "MTM prezice corect prețurile viitoare",
+    "MTM oprește tranzacționarea",
+    "MTM elimină volatilitatea reală"
+   ],
+   "correct": 0,
+   "explain": "În stres, sistemul de risc produce un MTM aparent neted folosind aproximări, dar nu reflectă prețul real de ieșire la vânzare forțată.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce overlay-uri trebuie adăugate pentru a reflecta riscul de credit al contrapărții, pe care MTM îl ignoră?",
+   "options": [
+    "VaR și gross notional",
+    "CVA (Credit Valuation Adjustment) și PFE (Potential Future Exposure)",
+    "Doar dobânda acumulată",
+    "Doar cursul spot FX"
+   ],
+   "correct": 1,
+   "explain": "MTM marchează doar instrumentul, nu riscul de neplată al contrapărții; se adaugă CVA și PFE.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce reprezintă MVA (Margin Valuation Adjustment)?",
+   "options": [
+    "O ajustare pentru riscul valutar",
+    "O taxă plătită bursei",
+    "Costul de finanțare a marjei suplimentare pe care trebuie să o postezi",
+    "Dobânda acumulată a unei obligațiuni"
+   ],
+   "correct": 2,
+   "explain": "MVA reflectă costul economic de finanțare a colateralului/marjei, pe care contabilitatea MTM îl ignoră dacă nu e calculat explicit.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce un profit MTM poate să nu fie un câștig impozabil la sfârșitul anului?",
+   "options": [
+    "Pentru că taxele se plătesc doar pe dividende",
+    "Pentru că MTM e mereu scutit de taxe",
+    "Pentru că profitul MTM e fictiv prin definiție",
+    "Pentru că autoritățile fiscale folosesc adesea costul istoric sau baza de realizare, iar poziția e încă deschisă"
+   ],
+   "correct": 3,
+   "explain": "Fiscul folosește adesea baza de realizare; un profit MTM nerealizat (poziție deschisă) poate să nu fie impozabil încă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este avertismentul „suprem” privind MTM?",
+   "options": [
+    "MTM este retrospectiv — îți spune valoarea de ieri, nu cea de mâine; nu înlocuiește testarea de stres",
+    "MTM prezice perfect viitorul",
+    "MTM elimină nevoia de risc management",
+    "MTM garantează profituri"
+   ],
+   "correct": 0,
+   "explain": "MTM este o fotografie retrospectivă; un birou MTM-pozitiv poate exploda mâine, deci e nevoie de stress testing și analiză de scenarii.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum gestionează MTM atribuirea P&L pentru un birou de tranzacționare?",
+   "options": [
+    "Atribuie tot profitul firmei, fără defalcare",
+    "Permite atribuirea exactă a profiturilor și pierderilor pe traderi, strategii și clase de active",
+    "Atribuie pierderile doar conducerii",
+    "Nu are legătură cu performanța"
+   ],
+   "correct": 1,
+   "explain": "Evaluând pozițiile la prețul curent, MTM permite atribuirea corectă a P&L pe traderi, strategii și clase de active.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este registrul bancar (banking book) și cum se evidențiază pozițiile din el?",
+   "options": [
+    "Poziții de scurtă durată, marcate zilnic la piață",
+    "Doar poziții valutare, marcate la cursul spot",
+    "Poziții pentru investiție pe termen lung, evidențiate de regulă la cost amortizat, nu la MTM",
+    "Poziții speculative, evaluate prin modele de Nivel 3"
+   ],
+   "correct": 2,
+   "explain": "Banking book conține poziții pe termen lung (de ex. obligațiuni ținute la scadență), evidențiate la cost amortizat, nu la MTM.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce diferență cheie există între contabilitatea MTM și contabilitatea de angajamente clasică privind valoarea instrumentelor?",
+   "options": [
+    "MTM ignoră complet piața",
+    "MTM recunoaște veniturile doar la încasarea numerarului",
+    "Cele două sunt identice",
+    "MTM recunoaște valoarea curentă de piață a instrumentelor, reflectând schimbările de preț în timp real"
+   ],
+   "correct": 3,
+   "explain": "MTM este un tip de contabilitate de angajamente care recunoaște valoarea curentă de piață a instrumentelor, nu doar costul istoric.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce trebuie biroul din Londra să evalueze pozițiile la ora 17:00 chiar dacă piața cash din SUA s-a închis la 16:00 New York?",
+   "options": [
+    "Pentru a respecta cerința „la închiderea zilei de lucru” și a evita un preț stătut care distorsionează P&L-ul zilei următoare",
+    "Pentru că ora New York e singura validă",
+    "Pentru că piața cash din SUA nu contează",
+    "Pentru a evita plata marjei"
+   ],
+   "correct": 0,
+   "explain": "MTM trebuie făcut la închiderea zilei de lucru; folosirea ultimului print US din 16:00 creează un preț stale de 20 de minute care distorsionează P&L-ul.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care dintre acești factori NU este folosit în calculul de bază al MTM, dar adaugă complexitate în practica reală?",
+   "options": [
+    "Prețul curent de piață",
+    "Volatilitatea activului-suport și bonitatea contrapărții",
+    "Cantitatea poziției",
+    "Multiplicatorul contractului"
+   ],
+   "correct": 1,
+   "explain": "Formula de bază folosește preț, cantitate și multiplicator; în practică, volatilitatea și bonitatea contrapărții cresc complexitatea evaluării.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce trebuie să facă biroul cu o tranzacție OTC nelichidă care nu poate fi evaluată fiabil?",
+   "options": [
+    "Să o ignore complet din registre",
+    "Să o marcheze automat la zero",
+    "Să o semnaleze, să obțină un preț de la broker sau o estimare prudentă, documentată într-un jurnal de excepții de evaluare",
+    "Să o mute în registrul bancar fără documentare"
+   ],
+   "correct": 2,
+   "explain": "Tranzacțiile care nu pot fi evaluate sunt semnalate; managerul obține un preț de broker sau o estimare prudentă, documentată în jurnalul de excepții, revizuit de compliance.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce nu trebuie suprascrise fișierele MTM ale zilelor anterioare?",
+   "options": [
+    "Pentru a economisi spațiu de stocare",
+    "Pentru a accelera calculul zilnic",
+    "Pentru că fișierele vechi sunt inutile",
+    "Pentru a păstra o serie istorică ce permite back-testing, investigarea salturilor de P&L și satisfacerea cerințelor de inspecție ale autorităților"
+   ],
+   "correct": 3,
+   "explain": "Seria istorică (pistă de audit) permite back-testing, investigarea anomaliilor de P&L și răspunsul la inspecțiile de reglementare, care pot cere istoricul ultimelor 12 luni.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum poate o întărire bruscă a EUR să șteargă un câștig MTM raportat în EUR?",
+   "options": [
+    "La conversia înapoi în moneda de finanțare (de ex. USD), câștigul aparent în EUR poate dispărea din cauza nepotrivirii valutare",
+    "Nu poate, MTM e independent de monedă",
+    "Pentru că EUR nu se poate converti",
+    "Pentru că MTM ignoră complet cursul de schimb"
+   ],
+   "correct": 0,
+   "explain": "Dacă finanțarea e în USD dar MTM e în EUR, o mișcare valutară poate șterge câștigul la conversie; de aceea MTM se reconciliază cu moneda funcțională a entității.",
+   "kind": "concept"
+  }
+ ]
+}

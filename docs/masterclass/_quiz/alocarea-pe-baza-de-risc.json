@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este diferența fundamentală dintre alocarea pe bază de risc și alocarea noțională?","options":["Alocarea pe bază de risc împarte capitalul după riscul fiecărei poziții, iar cea noțională strict după mărimea sau valoarea ei","Alocarea pe bază de risc folosește doar acțiuni, iar cea noțională doar obligațiuni","Alocarea noțională este mereu mai profitabilă","Alocarea pe bază de risc elimină complet orice risc"],"correct":0,"explain":"Alocarea noțională împarte capitalul după valoarea nominală, în timp ce alocarea pe bază de risc ține cont de cât de riscantă este fiecare poziție.","kind":"concept"},
-{"q":"În analogia cu bagajele, ce reprezintă o geantă veche și fragilă, cu fermoarul stricat?","options":["O poziție cu risc ridicat, în care pui mai puțin capital","O poziție garantat profitabilă","Un activ fără risc","O poziție pe care o ignori complet"],"correct":0,"explain":"Geanta fragilă reprezintă o poziție riscantă: chiar dacă are aceeași mărime ca alta, pui mai puțin în ea fiindcă „se poate rupe”.","kind":"concept"},
-{"q":"Conform capitolului, care este principiul esențial al alocării pe bază de risc?","options":["Mai mult capital unde riscul e mai mic și mai puțin unde riscul e mai mare","Capital egal pentru fiecare poziție, indiferent de risc","Tot capitalul în poziția cu cel mai mare randament","Mai mult capital unde volatilitatea e cea mai ridicată"],"correct":0,"explain":"Ideea de bază este să pui mai mult capital acolo unde riscul e scăzut (ca să-l poți menține) și mai puțin unde riscul e ridicat (ca să nu fii spulberat).","kind":"concept"},
-{"q":"Ce măsoară Valoarea la risc (VaR)?","options":["Pierderea potențială a unei investiții pe un orizont de timp, la un nivel de încredere specificat","Randamentul garantat al unei investiții","Numărul de tranzacții executate într-o zi","Valoarea de piață totală a portofoliului"],"correct":0,"explain":"VaR este o măsură statistică a pierderii potențiale pe un orizont de timp dat, la un nivel de încredere specificat.","kind":"text"},
-{"q":"În exemplul cu futures FESX, cum se calculează VaR-ul zilnic la 95% încredere pentru noțional de 5 000 €, cu volatilitate zilnică 1,20%?","options":["1,65 × 1,20% × 5 000 € = 99 €","0,95 × 1,20% × 5 000 € = 57 €","1,20% × 5 000 € = 60 €","2,33 × 1,20% × 5 000 € = 140 €"],"correct":0,"explain":"1,65 este scorul z pentru 95%, deci VaR = 1,65 × 1,20% × 5 000 € = 99 €.","kind":"text"},
-{"q":"De ce este 1,65 folosit în calculul VaR la 95%?","options":["Este scorul z corespunzător nivelului de încredere de 95%","Este o constantă aleatoare aleasă de birou","Reprezintă volatilitatea medie a pieței","Este rata dobânzii fără risc"],"correct":0,"explain":"1,65 este scorul z pentru 95%, adică spunem că pierderea pe care o vom depăși în 5% dintre zile este de 99 €.","kind":"text"},
-{"q":"Ce ne spune VaR-ul incremental (iVaR) într-o alocare cu paritate de risc?","options":["Cât adaugă o nouă poziție la riscul total al fiecărui portofoliu","Randamentul total așteptat al portofoliului","Valoarea noțională a fiecărei poziții","Numărul de loturi deja deținute"],"correct":0,"explain":"iVaR măsoară cât de mult adaugă noua poziție la riscul de ansamblu al fiecărui portofoliu; paritatea de risc urmărește egalizarea acestor contribuții.","kind":"concept"},
-{"q":"În al doilea scenariu, deși acțiunea cu risc ridicat are cel mai mic noțional (100 000 $), de ce domină riscul portofoliului?","options":["Pentru că are cea mai mare volatilitate (30%), deci cea mai mare contribuție la risc","Pentru că are cel mai mare randament garantat","Pentru că este corelată negativ cu celelalte active","Pentru că are cel mai mare noțional"],"correct":0,"explain":"Cu volatilitate de 30%, contribuția ei la risc (15%) o depășește pe cea a celorlalte active, în ciuda noționalului mai mic.","kind":"concept"},
-{"q":"De ce este greșit să confunzi volatilitatea cu riscul?","options":["Volatilitatea e doar o componentă; nu surprinde riscul de coadă, de lichiditate, de levier sau de finanțare","Volatilitatea și riscul sunt termeni identici","Volatilitatea măsoară doar randamentul, nu pierderea","Riscul este întotdeauna mai mic decât volatilitatea"],"correct":0,"explain":"O strategie cu volatilitate redusă poate exploda dacă e puternic îndatorată sau nelichidă; volatilitatea nu acoperă riscul de coadă, lichiditate, levier sau finanțare.","kind":"concept"},
-{"q":"De ce nu este suficient să calculezi riscul individual al fiecărei poziții și să-l plafonezi la o sumă fixă?","options":["Două poziții „cu risc scăzut” pot pierde împreună dacă sunt puternic corelate, ridicând riscul de portofoliu peste intenție","Plafonarea elimină automat orice corelație","Riscul individual e mereu mai mare decât cel de portofoliu","Suma fixă garantează diversificarea"],"correct":0,"explain":"Trebuie verificate corelațiile pe perechi și testat la stres P&L-ul combinat; altfel poziții aparent sigure pot pierde simultan în aceeași criză.","kind":"concept"},
-{"q":"Ce truc rapid de birou („beta a portofoliului”) semnalează lipsa de diversificare?","options":["Dacă 80% dintre poziții se mișcă în aceeași direcție într-o zi proastă, bugetul de risc nu e diversificat","Dacă portofoliul are exact 10 poziții","Dacă VaR-ul total depășește noționalul","Dacă toate pozițiile au același randament"],"correct":0,"explain":"O concentrare direcțională mare (ex. 80% în aceeași direcție într-o zi proastă) arată că riscul nu este, de fapt, diversificat.","kind":"text"},
-{"q":"Care sunt cele două rapoarte de lichiditate recomandate pentru monitorizare zilnică?","options":["Mărimea poziției raportată la volumul mediu zilnic, și diferența dintre VaR și cerința de marjă a brokerului","Randamentul vs. volatilitate, și Sharpe vs. beta","Noționalul vs. capitalul, și corelația vs. volatilitatea","Profitul vs. pierderea, și scadența vs. dobânda"],"correct":0,"explain":"Cele două rapoarte vizează lichiditatea: poziție / volum mediu zilnic și gap-ul VaR / cerință de marjă; deteriorarea oricăruia impune reducerea poziției.","kind":"text"},
-{"q":"De ce poate fi periculoasă supraalocarea către riscul „cel mai ieftin” (cel mai bun raport Sharpe)?","options":["Rapoartele sunt retrospective și presupun că viitorul seamănă cu trecutul; riscul ieftin devine scump când levierul se deznoadă sau lichiditatea seacă","Riscul ieftin nu produce niciodată pierderi","Sharpe garantează randamente viitoare","Riscul ieftin este lipsit complet de volatilitate"],"correct":0,"explain":"Raportul Sharpe e backward-looking; e mai sigur să amesteci riscul ieftin cu o alocare mică de active „de asigurare” pentru a supraviețui schimbărilor de regim.","kind":"concept"},
-{"q":"De ce contează potrivirea orizontului de risc cu orizontul de tranzacționare?","options":["Un orizont prea scurt subestimează expunerea pe termen lung, iar unul prea lung supraestimează riscul intraday","Orizontul nu influențează niciodată estimarea de risc","Un orizont lung reduce întotdeauna riscul","Orizontul scurt este corect în toate situațiile"],"correct":0,"explain":"Dacă orizontul real e de luni/ani, cifrele pe 1 zi subestimează expunerea; pentru un trader de înaltă frecvență, o lună supraestimează riscul intraday.","kind":"concept"},
-{"q":"Ce înseamnă că „limitele de risc sunt documente vii”?","options":["O poziție în interiorul benzii de VaR dimineața o poate depăși până la prânz; e nevoie de monitorizare intraday și escaladare","Limitele de risc nu se schimbă niciodată odată stabilite","Limitele trebuie ignorate dacă piața urcă","Limitele se aplică doar la sfârșitul anului"],"correct":0,"explain":"Piețele pot face salturi (gap) intraday; e nevoie de raport de risc la prânz, comparat cu alocarea de dimineață, și o scară clară de escaladare la depășiri.","kind":"concept"},
-{"q":"De ce nu poți copia direct alocarea altui birou?","options":["Fiecare birou are curbă de finanțare, mandat de client și profil de lichiditate diferite; trebuie reconstituite ipotezele","Alocările sunt secrete și interzise legal","Toate birourile au exact aceeași matrice de corelație","Copierea funcționează doar pentru obligațiuni"],"correct":0,"explain":"Trebuie reconstituite matricea de corelație, programul de lichiditate și ajustările de marjă; dacă input-urile diferă semnificativ, alocarea nu este transferabilă.","kind":"text"},
-{"q":"Conform capitolului, ce rol trebuie să aibă judecata umană față de modelele de risc?","options":["Modelele sunt un prim filtru, peste care se suprapun verificări calitative; ele nu anticipează evenimente de tip lebădă neagră","Modelele înlocuiesc complet judecata umană","Judecata umană trebuie ignorată dacă modelul dă un rezultat","Modelele anticipează perfect orice șoc de reglementare"],"correct":0,"explain":"Modelele sunt unelte, nu oracole; nu anticipează lebede negre, șocuri de reglementare sau schimbări de comportament, deci se completează cu judecată calitativă.","kind":"concept"},
-{"q":"Ce ilustrează principiul „garbage in, garbage out” în alocarea pe bază de risc?","options":["Dacă input-urile de risc (volatilitate, corelație) sunt învechite, împărțirea „cu risc egal” e egală doar cu numele","Modelul corectează automat datele greșite","Datele proaste produc întotdeauna alocări sigure","Numai datele de preț contează, nu și volatilitatea"],"correct":0,"explain":"Întregul exercițiu pornește de la estimarea de risc; input-uri stale sau o matrice de corelație calibrată pe piețe calme fac alocarea egală doar cu numele.","kind":"concept"},
-{"q":"De ce devin invalide matricile de covarianță în timpul unei schimbări de regim (de ex. o majorare bruscă de 100 bp)?","options":["Alocarea presupune relații statistice stabile; un șoc le invalidează, iar modelul poate concentra portofoliul pe nume greșite","Matricile de covarianță sunt mereu valabile","Schimbările de regim nu afectează corelațiile","Majorările de dobândă reduc întotdeauna riscul"],"correct":0,"explain":"Metoda presupune stabilitate statistică; după un șoc, vechea covarianță e depășită, iar modelul încă crede „sigure” active devenite riscante.","kind":"concept"},
-{"q":"Ce este o „prăpastie de lichiditate” (liquidity cliff) și de ce contează?","options":["O poziție nelichidă poate fi lichidată doar cu discount mare, iar costul anulează beneficiul; metoda nu vede orizonturile de lichiditate","Un randament garantat al activelor lichide","O scădere bruscă a dobânzii fără risc","O regulă care interzice tranzacțiile mari"],"correct":0,"explain":"Alocarea cu risc egal nu știe că un activ nelichid se vinde doar cu discount (ex. 15%); trebuie suprapusă o politică separată de lichiditate.","kind":"text"},
-{"q":"De ce poate alocarea pe bază de risc să subestimeze riscul de concentrare?","options":["O matrice de covarianță privește doar mișcările de preț și nu surprinde concentrarea pe o contraparte, sector sau geografie","Concentrarea reduce întotdeauna riscul total","Modelul include automat toate riscurile de concentrare","Concentrarea este vizibilă mereu în volatilitate"],"correct":0,"explain":"Riscuri precum concentrarea pe o singură contraparte/sector/geografie nu sunt captate de o matrice ce privește doar prețurile, deci fragilitatea reală e subestimată.","kind":"concept"},
-{"q":"Ce se poate întâmpla cu „diversificatorii” în timpul unui eveniment de coadă (tail event)?","options":["Pot deveni corelați în coadă, iar alocarea poate concentra brusc portofoliul exact în ei, fără avertisment","Rămân mereu necorelați și protejează portofoliul","Sunt automat eliminați de model","Devin activele cu cel mai mic risc"],"correct":0,"explain":"Modelele calibrate pe piețe normale nu anticipează șocuri rare; diversificatorii pot fi corelați în coadă, concentrând portofoliul exact unde trebuiau să-l protejeze.","kind":"concept"},
-{"q":"Ce risc ignoră alocarea pe bază de risc în privința reglementărilor?","options":["Cerințele de capital, ratele de levier și limitele de expunere mare (ex. regula de 25%)","Doar costul de tranzacționare","Randamentul așteptat al pieței","Volatilitatea istorică a activelor"],"correct":0,"explain":"O poziție mică în termeni de risc poate încălca o limită de expunere mare de 25%; e nevoie de un strat suplimentar care compară noționalul cu pragurile de reglementare.","kind":"text"},
-{"q":"Conform secțiunii despre biroul de tranzacționare, ce presupune bugetarea riscului (risk budgeting)?","options":["Alocarea unei porțiuni din bugetul total de risc fiecărei tranzacții, prin atribuirea unei ponderi de risc","Eliminarea oricărei tranzacții riscante","Alocarea capitalului strict după valoarea noțională","Maximizarea levierului pe fiecare poziție"],"correct":0,"explain":"Bugetarea riscului atribuie o pondere de risc fiecărei tranzacții; ex.: la buget de 100 000 $ și pondere 10%, riscul maxim al tranzacției e 10 000 $.","kind":"text"},
-{"q":"Care este concluzia finală a capitolului despre natura alocării pe bază de risc?","options":["Este o busolă utilă, nu o plasă de siguranță; trebuie asociată cu stres-test, monitorizare a lichidității și conformitate","Garantează supraviețuirea în orice condiții de piață","Înlocuiește nevoia de testare la stres","Elimină complet pierderile în condiții anormale"],"correct":0,"explain":"Metoda indică drumul către un portofoliu echilibrat în condiții normale, dar nu garantează supraviețuirea în cele anormale; rezultatul e o sugestie, nu o garanție.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este diferența fundamentală dintre alocarea pe bază de risc și alocarea noțională?",
+   "options": [
+    "Alocarea pe bază de risc folosește doar acțiuni, iar cea noțională doar obligațiuni",
+    "Alocarea pe bază de risc împarte capitalul după riscul fiecărei poziții, iar cea noțională strict după mărimea sau valoarea ei",
+    "Alocarea noțională este mereu mai profitabilă",
+    "Alocarea pe bază de risc elimină complet orice risc"
+   ],
+   "correct": 1,
+   "explain": "Alocarea noțională împarte capitalul după valoarea nominală, în timp ce alocarea pe bază de risc ține cont de cât de riscantă este fiecare poziție.",
+   "kind": "concept"
+  },
+  {
+   "q": "În analogia cu bagajele, ce reprezintă o geantă veche și fragilă, cu fermoarul stricat?",
+   "options": [
+    "Un activ fără risc",
+    "O poziție garantat profitabilă",
+    "O poziție cu risc ridicat, în care pui mai puțin capital",
+    "O poziție pe care o ignori complet"
+   ],
+   "correct": 2,
+   "explain": "Geanta fragilă reprezintă o poziție riscantă: chiar dacă are aceeași mărime ca alta, pui mai puțin în ea fiindcă „se poate rupe”.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform capitolului, care este principiul esențial al alocării pe bază de risc?",
+   "options": [
+    "Mai mult capital unde volatilitatea e cea mai ridicată",
+    "Capital egal pentru fiecare poziție, indiferent de risc",
+    "Tot capitalul în poziția cu cel mai mare randament",
+    "Mai mult capital unde riscul e mai mic și mai puțin unde riscul e mai mare"
+   ],
+   "correct": 3,
+   "explain": "Ideea de bază este să pui mai mult capital acolo unde riscul e scăzut (ca să-l poți menține) și mai puțin unde riscul e ridicat (ca să nu fii spulberat).",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce măsoară Valoarea la risc (VaR)?",
+   "options": [
+    "Pierderea potențială a unei investiții pe un orizont de timp, la un nivel de încredere specificat",
+    "Randamentul garantat al unei investiții",
+    "Numărul de tranzacții executate într-o zi",
+    "Valoarea de piață totală a portofoliului"
+   ],
+   "correct": 0,
+   "explain": "VaR este o măsură statistică a pierderii potențiale pe un orizont de timp dat, la un nivel de încredere specificat.",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul cu futures FESX, cum se calculează VaR-ul zilnic la 95% încredere pentru noțional de 5 000 €, cu volatilitate zilnică 1,20%?",
+   "options": [
+    "0,95 × 1,20% × 5 000 € = 57 €",
+    "1,65 × 1,20% × 5 000 € = 99 €",
+    "1,20% × 5 000 € = 60 €",
+    "2,33 × 1,20% × 5 000 € = 140 €"
+   ],
+   "correct": 1,
+   "explain": "1,65 este scorul z pentru 95%, deci VaR = 1,65 × 1,20% × 5 000 € = 99 €.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este 1,65 folosit în calculul VaR la 95%?",
+   "options": [
+    "Reprezintă volatilitatea medie a pieței",
+    "Este o constantă aleatoare aleasă de birou",
+    "Este scorul z corespunzător nivelului de încredere de 95%",
+    "Este rata dobânzii fără risc"
+   ],
+   "correct": 2,
+   "explain": "1,65 este scorul z pentru 95%, adică spunem că pierderea pe care o vom depăși în 5% dintre zile este de 99 €.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce ne spune VaR-ul incremental (iVaR) într-o alocare cu paritate de risc?",
+   "options": [
+    "Numărul de loturi deja deținute",
+    "Randamentul total așteptat al portofoliului",
+    "Valoarea noțională a fiecărei poziții",
+    "Cât adaugă o nouă poziție la riscul total al fiecărui portofoliu"
+   ],
+   "correct": 3,
+   "explain": "iVaR măsoară cât de mult adaugă noua poziție la riscul de ansamblu al fiecărui portofoliu; paritatea de risc urmărește egalizarea acestor contribuții.",
+   "kind": "concept"
+  },
+  {
+   "q": "În al doilea scenariu, deși acțiunea cu risc ridicat are cel mai mic noțional (100 000 $), de ce domină riscul portofoliului?",
+   "options": [
+    "Pentru că are cea mai mare volatilitate (30%), deci cea mai mare contribuție la risc",
+    "Pentru că are cel mai mare randament garantat",
+    "Pentru că este corelată negativ cu celelalte active",
+    "Pentru că are cel mai mare noțional"
+   ],
+   "correct": 0,
+   "explain": "Cu volatilitate de 30%, contribuția ei la risc (15%) o depășește pe cea a celorlalte active, în ciuda noționalului mai mic.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este greșit să confunzi volatilitatea cu riscul?",
+   "options": [
+    "Volatilitatea și riscul sunt termeni identici",
+    "Volatilitatea e doar o componentă; nu surprinde riscul de coadă, de lichiditate, de levier sau de finanțare",
+    "Volatilitatea măsoară doar randamentul, nu pierderea",
+    "Riscul este întotdeauna mai mic decât volatilitatea"
+   ],
+   "correct": 1,
+   "explain": "O strategie cu volatilitate redusă poate exploda dacă e puternic îndatorată sau nelichidă; volatilitatea nu acoperă riscul de coadă, lichiditate, levier sau finanțare.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu este suficient să calculezi riscul individual al fiecărei poziții și să-l plafonezi la o sumă fixă?",
+   "options": [
+    "Riscul individual e mereu mai mare decât cel de portofoliu",
+    "Plafonarea elimină automat orice corelație",
+    "Două poziții „cu risc scăzut” pot pierde împreună dacă sunt puternic corelate, ridicând riscul de portofoliu peste intenție",
+    "Suma fixă garantează diversificarea"
+   ],
+   "correct": 2,
+   "explain": "Trebuie verificate corelațiile pe perechi și testat la stres P&L-ul combinat; altfel poziții aparent sigure pot pierde simultan în aceeași criză.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce truc rapid de birou („beta a portofoliului”) semnalează lipsa de diversificare?",
+   "options": [
+    "Dacă toate pozițiile au același randament",
+    "Dacă portofoliul are exact 10 poziții",
+    "Dacă VaR-ul total depășește noționalul",
+    "Dacă 80% dintre poziții se mișcă în aceeași direcție într-o zi proastă, bugetul de risc nu e diversificat"
+   ],
+   "correct": 3,
+   "explain": "O concentrare direcțională mare (ex. 80% în aceeași direcție într-o zi proastă) arată că riscul nu este, de fapt, diversificat.",
+   "kind": "text"
+  },
+  {
+   "q": "Care sunt cele două rapoarte de lichiditate recomandate pentru monitorizare zilnică?",
+   "options": [
+    "Mărimea poziției raportată la volumul mediu zilnic, și diferența dintre VaR și cerința de marjă a brokerului",
+    "Randamentul vs. volatilitate, și Sharpe vs. beta",
+    "Noționalul vs. capitalul, și corelația vs. volatilitatea",
+    "Profitul vs. pierderea, și scadența vs. dobânda"
+   ],
+   "correct": 0,
+   "explain": "Cele două rapoarte vizează lichiditatea: poziție / volum mediu zilnic și gap-ul VaR / cerință de marjă; deteriorarea oricăruia impune reducerea poziției.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce poate fi periculoasă supraalocarea către riscul „cel mai ieftin” (cel mai bun raport Sharpe)?",
+   "options": [
+    "Riscul ieftin nu produce niciodată pierderi",
+    "Rapoartele sunt retrospective și presupun că viitorul seamănă cu trecutul; riscul ieftin devine scump când levierul se deznoadă sau lichiditatea seacă",
+    "Sharpe garantează randamente viitoare",
+    "Riscul ieftin este lipsit complet de volatilitate"
+   ],
+   "correct": 1,
+   "explain": "Raportul Sharpe e backward-looking; e mai sigur să amesteci riscul ieftin cu o alocare mică de active „de asigurare” pentru a supraviețui schimbărilor de regim.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce contează potrivirea orizontului de risc cu orizontul de tranzacționare?",
+   "options": [
+    "Un orizont lung reduce întotdeauna riscul",
+    "Orizontul nu influențează niciodată estimarea de risc",
+    "Un orizont prea scurt subestimează expunerea pe termen lung, iar unul prea lung supraestimează riscul intraday",
+    "Orizontul scurt este corect în toate situațiile"
+   ],
+   "correct": 2,
+   "explain": "Dacă orizontul real e de luni/ani, cifrele pe 1 zi subestimează expunerea; pentru un trader de înaltă frecvență, o lună supraestimează riscul intraday.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă că „limitele de risc sunt documente vii”?",
+   "options": [
+    "Limitele se aplică doar la sfârșitul anului",
+    "Limitele de risc nu se schimbă niciodată odată stabilite",
+    "Limitele trebuie ignorate dacă piața urcă",
+    "O poziție în interiorul benzii de VaR dimineața o poate depăși până la prânz; e nevoie de monitorizare intraday și escaladare"
+   ],
+   "correct": 3,
+   "explain": "Piețele pot face salturi (gap) intraday; e nevoie de raport de risc la prânz, comparat cu alocarea de dimineață, și o scară clară de escaladare la depășiri.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu poți copia direct alocarea altui birou?",
+   "options": [
+    "Fiecare birou are curbă de finanțare, mandat de client și profil de lichiditate diferite; trebuie reconstituite ipotezele",
+    "Alocările sunt secrete și interzise legal",
+    "Toate birourile au exact aceeași matrice de corelație",
+    "Copierea funcționează doar pentru obligațiuni"
+   ],
+   "correct": 0,
+   "explain": "Trebuie reconstituite matricea de corelație, programul de lichiditate și ajustările de marjă; dacă input-urile diferă semnificativ, alocarea nu este transferabilă.",
+   "kind": "text"
+  },
+  {
+   "q": "Conform capitolului, ce rol trebuie să aibă judecata umană față de modelele de risc?",
+   "options": [
+    "Modelele înlocuiesc complet judecata umană",
+    "Modelele sunt un prim filtru, peste care se suprapun verificări calitative; ele nu anticipează evenimente de tip lebădă neagră",
+    "Judecata umană trebuie ignorată dacă modelul dă un rezultat",
+    "Modelele anticipează perfect orice șoc de reglementare"
+   ],
+   "correct": 1,
+   "explain": "Modelele sunt unelte, nu oracole; nu anticipează lebede negre, șocuri de reglementare sau schimbări de comportament, deci se completează cu judecată calitativă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce ilustrează principiul „garbage in, garbage out” în alocarea pe bază de risc?",
+   "options": [
+    "Datele proaste produc întotdeauna alocări sigure",
+    "Modelul corectează automat datele greșite",
+    "Dacă input-urile de risc (volatilitate, corelație) sunt învechite, împărțirea „cu risc egal” e egală doar cu numele",
+    "Numai datele de preț contează, nu și volatilitatea"
+   ],
+   "correct": 2,
+   "explain": "Întregul exercițiu pornește de la estimarea de risc; input-uri stale sau o matrice de corelație calibrată pe piețe calme fac alocarea egală doar cu numele.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce devin invalide matricile de covarianță în timpul unei schimbări de regim (de ex. o majorare bruscă de 100 bp)?",
+   "options": [
+    "Majorările de dobândă reduc întotdeauna riscul",
+    "Matricile de covarianță sunt mereu valabile",
+    "Schimbările de regim nu afectează corelațiile",
+    "Alocarea presupune relații statistice stabile; un șoc le invalidează, iar modelul poate concentra portofoliul pe nume greșite"
+   ],
+   "correct": 3,
+   "explain": "Metoda presupune stabilitate statistică; după un șoc, vechea covarianță e depășită, iar modelul încă crede „sigure” active devenite riscante.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este o „prăpastie de lichiditate” (liquidity cliff) și de ce contează?",
+   "options": [
+    "O poziție nelichidă poate fi lichidată doar cu discount mare, iar costul anulează beneficiul; metoda nu vede orizonturile de lichiditate",
+    "Un randament garantat al activelor lichide",
+    "O scădere bruscă a dobânzii fără risc",
+    "O regulă care interzice tranzacțiile mari"
+   ],
+   "correct": 0,
+   "explain": "Alocarea cu risc egal nu știe că un activ nelichid se vinde doar cu discount (ex. 15%); trebuie suprapusă o politică separată de lichiditate.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce poate alocarea pe bază de risc să subestimeze riscul de concentrare?",
+   "options": [
+    "Concentrarea reduce întotdeauna riscul total",
+    "O matrice de covarianță privește doar mișcările de preț și nu surprinde concentrarea pe o contraparte, sector sau geografie",
+    "Modelul include automat toate riscurile de concentrare",
+    "Concentrarea este vizibilă mereu în volatilitate"
+   ],
+   "correct": 1,
+   "explain": "Riscuri precum concentrarea pe o singură contraparte/sector/geografie nu sunt captate de o matrice ce privește doar prețurile, deci fragilitatea reală e subestimată.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se poate întâmpla cu „diversificatorii” în timpul unui eveniment de coadă (tail event)?",
+   "options": [
+    "Sunt automat eliminați de model",
+    "Rămân mereu necorelați și protejează portofoliul",
+    "Pot deveni corelați în coadă, iar alocarea poate concentra brusc portofoliul exact în ei, fără avertisment",
+    "Devin activele cu cel mai mic risc"
+   ],
+   "correct": 2,
+   "explain": "Modelele calibrate pe piețe normale nu anticipează șocuri rare; diversificatorii pot fi corelați în coadă, concentrând portofoliul exact unde trebuiau să-l protejeze.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce risc ignoră alocarea pe bază de risc în privința reglementărilor?",
+   "options": [
+    "Volatilitatea istorică a activelor",
+    "Doar costul de tranzacționare",
+    "Randamentul așteptat al pieței",
+    "Cerințele de capital, ratele de levier și limitele de expunere mare (ex. regula de 25%)"
+   ],
+   "correct": 3,
+   "explain": "O poziție mică în termeni de risc poate încălca o limită de expunere mare de 25%; e nevoie de un strat suplimentar care compară noționalul cu pragurile de reglementare.",
+   "kind": "text"
+  },
+  {
+   "q": "Conform secțiunii despre biroul de tranzacționare, ce presupune bugetarea riscului (risk budgeting)?",
+   "options": [
+    "Alocarea unei porțiuni din bugetul total de risc fiecărei tranzacții, prin atribuirea unei ponderi de risc",
+    "Eliminarea oricărei tranzacții riscante",
+    "Alocarea capitalului strict după valoarea noțională",
+    "Maximizarea levierului pe fiecare poziție"
+   ],
+   "correct": 0,
+   "explain": "Bugetarea riscului atribuie o pondere de risc fiecărei tranzacții; ex.: la buget de 100 000 $ și pondere 10%, riscul maxim al tranzacției e 10 000 $.",
+   "kind": "text"
+  },
+  {
+   "q": "Care este concluzia finală a capitolului despre natura alocării pe bază de risc?",
+   "options": [
+    "Garantează supraviețuirea în orice condiții de piață",
+    "Este o busolă utilă, nu o plasă de siguranță; trebuie asociată cu stres-test, monitorizare a lichidității și conformitate",
+    "Înlocuiește nevoia de testare la stres",
+    "Elimină complet pierderile în condiții anormale"
+   ],
+   "correct": 1,
+   "explain": "Metoda indică drumul către un portofoliu echilibrat în condiții normale, dar nu garantează supraviețuirea în cele anormale; rezultatul e o sugestie, nu o garanție.",
+   "kind": "concept"
+  }
+ ]
+}

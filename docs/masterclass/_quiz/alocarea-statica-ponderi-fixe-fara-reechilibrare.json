@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Ce definește cel mai exact alocarea statică (static allocation) cu ponderi fixe?","options":["Distribuirea resurselor cu proporții care rămân constante în timp, fără reechilibrare","Ajustarea zilnică a ponderilor în funcție de prețul activelor","Vânzarea câștigătorilor pentru a cumpăra pierzătorii lunar","Alegerea activelor pe baza randamentului recent"],"correct":0,"explain":"Alocarea statică înseamnă ponderi fixate o singură dată care rămân constante, fără reechilibrare.","kind":"concept"},
-{"q":"Ce înseamnă 'fără reechilibrare' (no rebalancing) în alocarea statică?","options":["Nu vinzi câștigătorii și nu cumperi pierzătorii pentru a restabili ponderile originale","Nu mai ții niciodată evidența portofoliului","Nu calculezi niciodată randamentele","Reechilibrezi doar o dată pe an"],"correct":0,"explain":"'Fără reechilibrare' este o regulă pentru tranzacții: nu faci trade-uri pentru a restabili ponderile. Evidența și calculele continuă.","kind":"concept"},
-{"q":"În analogia limonadei, ce reprezintă raportul fix 60:40 portocale-zmeură?","options":["Ponderile fixe ale unei alocări statice","Reechilibrarea zilnică a stocului","Randamentul garantat al investiției","Comisionul de tranzacționare"],"correct":0,"explain":"Amestecul 60:40 blocat de la început, care nu se mai schimbă, este analogia ponderilor fixe.","kind":"concept"},
-{"q":"De ce este atrăgătoare alocarea statică pentru începători?","options":["Elimină părțile mobile, monitorizarea constantă și stresul deciziilor zilnice","Garantează cele mai mari randamente în fiecare zi","Protejează complet de orice risc de piață","Permite anticiparea perfectă a pieței"],"correct":0,"explain":"Este o regulă 'setează și uită' care reduce complexitatea și erorile pentru începători.","kind":"concept"},
-{"q":"Dacă aloci 60% în Acțiunea A și 40% în B, iar prețul lui B crește mult, ce faci în alocarea statică?","options":["Nimic; lași raportul să devieze (drift) singur în funcție de prețuri","Vinzi din A pentru a cumpăra mai mult B","Vinzi din B pentru a reveni la 60:40","Schimbi ponderea la 50:50"],"correct":0,"explain":"În alocarea statică nu forțezi revenirea ponderilor; raportul deviază liber pe măsură ce prețurile se mișcă.","kind":"concept"},
-{"q":"Un activ câștigă 20% și altul pierde 10%, fiecare cu pondere 50%. Care este randamentul portofoliului?","options":["+5% (0,5 x 1,20 + 0,5 x 0,90 = 1,05)","+10% (media simplă 20 și 0)","+30% (suma celor două)","0% (se anulează reciproc)"],"correct":0,"explain":"Ponderezi fiecare randament cu banii de start: 0,60 + 0,45 = 1,05, deci +5%.","kind":"concept"},
-{"q":"Deții 60 acțiuni A la 10 lei și 40 acțiuni B la 5 lei. Care sunt ponderile reale de start?","options":["75% A și 25% B (pe valoare: 600 vs 200)","60% A și 40% B (pe numărul de acțiuni)","50% A și 50% B","40% A și 60% B"],"correct":0,"explain":"Ponderile se calculează pe valoare, nu pe numărul de acțiuni: 600/(600+200)=0,75.","kind":"concept"},
-{"q":"De ce ponderile fixe NU elimină tot riscul portofoliului?","options":["Volatilitatea depinde de volatilitățile individuale și de corelația dintre active","Randamentul este întotdeauna media simplă a activelor","Ponderile se ajustează automat la risc","Activele necorelate au mereu risc zero"],"correct":0,"explain":"O împărțire 60/40 nu 'mediază' riscul; volatilitatea reală depinde de volatilitățile individuale și de corelație.","kind":"concept"},
-{"q":"Ce se întâmplă cu corelația dintre active exact atunci când diversificarea e cel mai necesară (în criză)?","options":["Poate crește spre 1, anulând beneficiul de diversificare","Scade automat spre zero","Rămâne întotdeauna constantă","Devine negativă, reducând riscul"],"correct":0,"explain":"În criză, corelația poate crește spre 1, iar portofoliul se comportă aproape ca 100% pe activul riscant.","kind":"concept"},
-{"q":"Care este diferența dintre alocare și strategie, conform capitolului?","options":["Alocarea decide CÂT din fiecare deții; strategia/selecția decide CARE active alegi","Sunt termeni identici, fără nicio distincție","Alocarea alege activele; strategia stabilește ponderile","Strategia înseamnă doar reechilibrare zilnică"],"correct":0,"explain":"Alocarea cu ponderi fixe este o regulă mecanică de 'cât'; selecția activelor ('care') este un strat separat.","kind":"concept"},
-{"q":"De ce este riscant să judeci un portofoliu cu ponderi fixe pe baza unui back-test de câteva luni?","options":["Eșantioanele mici pot ascunde scăderi mari (drawdowns) și risc de secvență","Back-test-urile scurte sunt întotdeauna pesimiste","Un singur set de date este dovadă suficientă","Lunile recente prezic perfect viitorul"],"correct":0,"explain":"Datele puține pot ascunde crash-uri sau risc de secvență; e nevoie de istorii lungi sau teste de stres.","kind":"concept"},
-{"q":"Un portofoliu 60% acțiuni / 40% obligațiuni: acțiunile cresc 20%, obligațiunile scad 5%. Ce ponderi rezultă?","options":["Aproximativ 64% acțiuni și 36% obligațiuni, prin drift","Rămân exact 60/40 datorită reechilibrării","50/50, deoarece se mediază","36% acțiuni și 64% obligațiuni"],"correct":0,"explain":"Fără reechilibrare, ponderea acțiunilor crește la ~64% și 'perna' de obligațiuni scade la 36%.","kind":"concept"},
-{"q":"Ce este riscul de secvență (sequence risk) și de ce alocarea statică nu îl surprinde?","options":["Ordinea în care apar randamentele; doi investitori cu aceleași ponderi pot avea solduri finale diferite","Riscul ca activele să fie alese în ordine greșită la cumpărare","Riscul de a uita să reechilibrezi","Comisionul perceput la fiecare tranzacție"],"correct":0,"explain":"Pierderile devreme vs târziu duc la solduri finale diferite; regula statică e oarbă la acest efect.","kind":"concept"},
-{"q":"Cum folosește în principal un birou de tranzacționare (trading desk) alocarea statică?","options":["Pentru dimensionarea poziției (position sizing) și gestionarea riscului, alocând un procent fix din capital","Pentru a anticipa exact vârfurile pieței","Pentru a evita complet orice pierdere","Pentru a reechilibra automat fiecare tranzacție"],"correct":0,"explain":"Alocă un procent fix din capital pe tranzacție pentru a menține un profil de risc consecvent.","kind":"concept"},
-{"q":"Care este un avantaj fiscal real al alocării statice în conturile impozabile?","options":["Nu vinde, deci amână realizarea câștigurilor de capital și a taxelor","Recoltează automat pierderile fiscale (tax-loss harvesting)","Elimină toate comisioanele de administrare","Garantează scutire totală de impozit"],"correct":0,"explain":"Pentru că nu vinde, amână taxele; dezavantajul este că ratează oportunitățile de recoltare a pierderilor.","kind":"concept"},
-{"q":"Ce este o 'pondere' (weight) în contextul alocării?","options":["Proporția sau procentul din totalul resurselor alocat unui anumit beneficiar","Numărul total de active disponibile","Diferența dintre prețul de cumpărare și cel de vânzare","Comisionul plătit la fiecare tranzacție"],"correct":0,"explain":"Ponderea este proporția/procentul din total alocat unui beneficiar (de ex. 60% și 40%).","kind":"text"},
-{"q":"Ce este reechilibrarea (rebalancing)?","options":["Procesul de ajustare a distribuției resurselor ca răspuns la schimbări","Calcularea valorii totale a portofoliului","Alegerea activelor în care investești","Plata comisioanelor anuale"],"correct":0,"explain":"Reechilibrarea ajustează distribuția ca răspuns la schimbări; în alocarea statică nu are loc.","kind":"text"},
-{"q":"În exemplul lucrat cu 1.000 lire, care sunt ponderile celor trei fonduri?","options":["50% creștere, 33,33% stabil, 16,67% sigur","60% creștere, 30% stabil, 10% sigur","33% fiecare fond","50% stabil, 25% creștere, 25% sigur"],"correct":0,"explain":"Jumătate în creștere (0,50), o treime în stabil (~0,3333), restul în sigur (~0,1667).","kind":"text"},
-{"q":"În același exemplu, ce randament general a dat amestecul static după primul an?","options":["Aproximativ 3,83% (~38,33 lire pe 1.000)","Exact 2%","Exact 6%","Aproximativ 7,86%"],"correct":0,"explain":"530 + 339,99 + 168,34 = ~1.038,33 lire, adică un randament de ~3,83% pe an.","kind":"text"},
-{"q":"De ce a depășit amestecul static (3,83%) randamentul fondului stabil de 2% în primul an?","options":["Randamentul mai mare de 6% al fondului de creștere a tras media în sus","Fondul sigur a avut cel mai mare randament","Reechilibrarea a adăugat valoare","Comisioanele au fost negative"],"correct":0,"explain":"Ponderea de 50% în fondul de creștere (6%) a ridicat media peste cei 2% ai fondului stabil.","kind":"text"},
-{"q":"Ce este 'proporția' conform definițiilor cheie?","options":["Raportul dintre resursele alocate unui beneficiar și totalul resurselor disponibile","Un număr mereu cuprins între 0 și 100","Suma tuturor ponderilor","Numărul de beneficiari"],"correct":0,"explain":"Proporția este raportul resurse_alocate / total (de ex. 6/10 = 60%).","kind":"text"},
-{"q":"În al doilea scenariu (5 copii, 10 jucării, ponderi egale de 2), câte jucării primește fiecare copil?","options":["2 jucării fiecare","1 jucărie fiecare","5 jucării fiecare","10 jucării pentru unul singur"],"correct":0,"explain":"Cu ponderi egale și total egal cu suma ponderilor, fiecare copil primește 2 jucării.","kind":"text"},
-{"q":"Pentru a verifica ponderea reală a unui activ la final, ce trebuie să faci?","options":["Să calculezi noile valori în bani și să împarți fiecare la valoarea totală","Să aduni cele două randamente procentuale","Să păstrezi ponderile inițiale neschimbate în calcul","Să folosești numărul de acțiuni, nu valoarea"],"correct":0,"explain":"Reevaluezi (re-price) portofoliul: valoare_i / valoare_totală îți dă ponderea reală după drift.","kind":"concept"},
-{"q":"Ce tip de investitor folosește cel mai des alocarea statică, conform concluziilor?","options":["Investitorii averși la risc sau noi, care preferă un portofoliu stabil și simplu","Traderii intraday agresivi","Cei care anticipează piața zilnic","Doar fondurile speculative mari"],"correct":0,"explain":"Este preferată de investitorii averși la risc sau începători care vor o abordare cu întreținere redusă.","kind":"text"},
-{"q":"Care este 'cheia succesului' alocării statice, conform concluziilor?","options":["Să stabilești corect ponderile și să rămâi fidel planului, nu să anticipezi piața","Să schimbi ponderile cât mai des posibil","Să alegi mereu activul cu cel mai mare randament recent","Să eviți complet orice activ riscant"],"correct":0,"explain":"Succesul vine din ponderi bine stabilite și disciplina de a rămâne pe plan, nu din timing-ul pieței.","kind":"text"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce definește cel mai exact alocarea statică (static allocation) cu ponderi fixe?",
+   "options": [
+    "Vânzarea câștigătorilor pentru a cumpăra pierzătorii lunar",
+    "Ajustarea zilnică a ponderilor în funcție de prețul activelor",
+    "Distribuirea resurselor cu proporții care rămân constante în timp, fără reechilibrare",
+    "Alegerea activelor pe baza randamentului recent"
+   ],
+   "correct": 2,
+   "explain": "Alocarea statică înseamnă ponderi fixate o singură dată care rămân constante, fără reechilibrare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă 'fără reechilibrare' (no rebalancing) în alocarea statică?",
+   "options": [
+    "Reechilibrezi doar o dată pe an",
+    "Nu mai ții niciodată evidența portofoliului",
+    "Nu calculezi niciodată randamentele",
+    "Nu vinzi câștigătorii și nu cumperi pierzătorii pentru a restabili ponderile originale"
+   ],
+   "correct": 3,
+   "explain": "'Fără reechilibrare' este o regulă pentru tranzacții: nu faci trade-uri pentru a restabili ponderile. Evidența și calculele continuă.",
+   "kind": "concept"
+  },
+  {
+   "q": "În analogia limonadei, ce reprezintă raportul fix 60:40 portocale-zmeură?",
+   "options": [
+    "Ponderile fixe ale unei alocări statice",
+    "Reechilibrarea zilnică a stocului",
+    "Randamentul garantat al investiției",
+    "Comisionul de tranzacționare"
+   ],
+   "correct": 0,
+   "explain": "Amestecul 60:40 blocat de la început, care nu se mai schimbă, este analogia ponderilor fixe.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este atrăgătoare alocarea statică pentru începători?",
+   "options": [
+    "Garantează cele mai mari randamente în fiecare zi",
+    "Elimină părțile mobile, monitorizarea constantă și stresul deciziilor zilnice",
+    "Protejează complet de orice risc de piață",
+    "Permite anticiparea perfectă a pieței"
+   ],
+   "correct": 1,
+   "explain": "Este o regulă 'setează și uită' care reduce complexitatea și erorile pentru începători.",
+   "kind": "concept"
+  },
+  {
+   "q": "Dacă aloci 60% în Acțiunea A și 40% în B, iar prețul lui B crește mult, ce faci în alocarea statică?",
+   "options": [
+    "Vinzi din B pentru a reveni la 60:40",
+    "Vinzi din A pentru a cumpăra mai mult B",
+    "Nimic; lași raportul să devieze (drift) singur în funcție de prețuri",
+    "Schimbi ponderea la 50:50"
+   ],
+   "correct": 2,
+   "explain": "În alocarea statică nu forțezi revenirea ponderilor; raportul deviază liber pe măsură ce prețurile se mișcă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un activ câștigă 20% și altul pierde 10%, fiecare cu pondere 50%. Care este randamentul portofoliului?",
+   "options": [
+    "0% (se anulează reciproc)",
+    "+10% (media simplă 20 și 0)",
+    "+30% (suma celor două)",
+    "+5% (0,5 x 1,20 + 0,5 x 0,90 = 1,05)"
+   ],
+   "correct": 3,
+   "explain": "Ponderezi fiecare randament cu banii de start: 0,60 + 0,45 = 1,05, deci +5%.",
+   "kind": "concept"
+  },
+  {
+   "q": "Deții 60 acțiuni A la 10 lei și 40 acțiuni B la 5 lei. Care sunt ponderile reale de start?",
+   "options": [
+    "75% A și 25% B (pe valoare: 600 vs 200)",
+    "60% A și 40% B (pe numărul de acțiuni)",
+    "50% A și 50% B",
+    "40% A și 60% B"
+   ],
+   "correct": 0,
+   "explain": "Ponderile se calculează pe valoare, nu pe numărul de acțiuni: 600/(600+200)=0,75.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce ponderile fixe NU elimină tot riscul portofoliului?",
+   "options": [
+    "Randamentul este întotdeauna media simplă a activelor",
+    "Volatilitatea depinde de volatilitățile individuale și de corelația dintre active",
+    "Ponderile se ajustează automat la risc",
+    "Activele necorelate au mereu risc zero"
+   ],
+   "correct": 1,
+   "explain": "O împărțire 60/40 nu 'mediază' riscul; volatilitatea reală depinde de volatilitățile individuale și de corelație.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se întâmplă cu corelația dintre active exact atunci când diversificarea e cel mai necesară (în criză)?",
+   "options": [
+    "Rămâne întotdeauna constantă",
+    "Scade automat spre zero",
+    "Poate crește spre 1, anulând beneficiul de diversificare",
+    "Devine negativă, reducând riscul"
+   ],
+   "correct": 2,
+   "explain": "În criză, corelația poate crește spre 1, iar portofoliul se comportă aproape ca 100% pe activul riscant.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este diferența dintre alocare și strategie, conform capitolului?",
+   "options": [
+    "Strategia înseamnă doar reechilibrare zilnică",
+    "Sunt termeni identici, fără nicio distincție",
+    "Alocarea alege activele; strategia stabilește ponderile",
+    "Alocarea decide CÂT din fiecare deții; strategia/selecția decide CARE active alegi"
+   ],
+   "correct": 3,
+   "explain": "Alocarea cu ponderi fixe este o regulă mecanică de 'cât'; selecția activelor ('care') este un strat separat.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este riscant să judeci un portofoliu cu ponderi fixe pe baza unui back-test de câteva luni?",
+   "options": [
+    "Eșantioanele mici pot ascunde scăderi mari (drawdowns) și risc de secvență",
+    "Back-test-urile scurte sunt întotdeauna pesimiste",
+    "Un singur set de date este dovadă suficientă",
+    "Lunile recente prezic perfect viitorul"
+   ],
+   "correct": 0,
+   "explain": "Datele puține pot ascunde crash-uri sau risc de secvență; e nevoie de istorii lungi sau teste de stres.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un portofoliu 60% acțiuni / 40% obligațiuni: acțiunile cresc 20%, obligațiunile scad 5%. Ce ponderi rezultă?",
+   "options": [
+    "Rămân exact 60/40 datorită reechilibrării",
+    "Aproximativ 64% acțiuni și 36% obligațiuni, prin drift",
+    "50/50, deoarece se mediază",
+    "36% acțiuni și 64% obligațiuni"
+   ],
+   "correct": 1,
+   "explain": "Fără reechilibrare, ponderea acțiunilor crește la ~64% și 'perna' de obligațiuni scade la 36%.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este riscul de secvență (sequence risk) și de ce alocarea statică nu îl surprinde?",
+   "options": [
+    "Riscul de a uita să reechilibrezi",
+    "Riscul ca activele să fie alese în ordine greșită la cumpărare",
+    "Ordinea în care apar randamentele; doi investitori cu aceleași ponderi pot avea solduri finale diferite",
+    "Comisionul perceput la fiecare tranzacție"
+   ],
+   "correct": 2,
+   "explain": "Pierderile devreme vs târziu duc la solduri finale diferite; regula statică e oarbă la acest efect.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum folosește în principal un birou de tranzacționare (trading desk) alocarea statică?",
+   "options": [
+    "Pentru a reechilibra automat fiecare tranzacție",
+    "Pentru a anticipa exact vârfurile pieței",
+    "Pentru a evita complet orice pierdere",
+    "Pentru dimensionarea poziției (position sizing) și gestionarea riscului, alocând un procent fix din capital"
+   ],
+   "correct": 3,
+   "explain": "Alocă un procent fix din capital pe tranzacție pentru a menține un profil de risc consecvent.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este un avantaj fiscal real al alocării statice în conturile impozabile?",
+   "options": [
+    "Nu vinde, deci amână realizarea câștigurilor de capital și a taxelor",
+    "Recoltează automat pierderile fiscale (tax-loss harvesting)",
+    "Elimină toate comisioanele de administrare",
+    "Garantează scutire totală de impozit"
+   ],
+   "correct": 0,
+   "explain": "Pentru că nu vinde, amână taxele; dezavantajul este că ratează oportunitățile de recoltare a pierderilor.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este o 'pondere' (weight) în contextul alocării?",
+   "options": [
+    "Numărul total de active disponibile",
+    "Proporția sau procentul din totalul resurselor alocat unui anumit beneficiar",
+    "Diferența dintre prețul de cumpărare și cel de vânzare",
+    "Comisionul plătit la fiecare tranzacție"
+   ],
+   "correct": 1,
+   "explain": "Ponderea este proporția/procentul din total alocat unui beneficiar (de ex. 60% și 40%).",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este reechilibrarea (rebalancing)?",
+   "options": [
+    "Alegerea activelor în care investești",
+    "Calcularea valorii totale a portofoliului",
+    "Procesul de ajustare a distribuției resurselor ca răspuns la schimbări",
+    "Plata comisioanelor anuale"
+   ],
+   "correct": 2,
+   "explain": "Reechilibrarea ajustează distribuția ca răspuns la schimbări; în alocarea statică nu are loc.",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul lucrat cu 1.000 lire, care sunt ponderile celor trei fonduri?",
+   "options": [
+    "50% stabil, 25% creștere, 25% sigur",
+    "60% creștere, 30% stabil, 10% sigur",
+    "33% fiecare fond",
+    "50% creștere, 33,33% stabil, 16,67% sigur"
+   ],
+   "correct": 3,
+   "explain": "Jumătate în creștere (0,50), o treime în stabil (~0,3333), restul în sigur (~0,1667).",
+   "kind": "text"
+  },
+  {
+   "q": "În același exemplu, ce randament general a dat amestecul static după primul an?",
+   "options": [
+    "Aproximativ 3,83% (~38,33 lire pe 1.000)",
+    "Exact 2%",
+    "Exact 6%",
+    "Aproximativ 7,86%"
+   ],
+   "correct": 0,
+   "explain": "530 + 339,99 + 168,34 = ~1.038,33 lire, adică un randament de ~3,83% pe an.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce a depășit amestecul static (3,83%) randamentul fondului stabil de 2% în primul an?",
+   "options": [
+    "Fondul sigur a avut cel mai mare randament",
+    "Randamentul mai mare de 6% al fondului de creștere a tras media în sus",
+    "Reechilibrarea a adăugat valoare",
+    "Comisioanele au fost negative"
+   ],
+   "correct": 1,
+   "explain": "Ponderea de 50% în fondul de creștere (6%) a ridicat media peste cei 2% ai fondului stabil.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este 'proporția' conform definițiilor cheie?",
+   "options": [
+    "Suma tuturor ponderilor",
+    "Un număr mereu cuprins între 0 și 100",
+    "Raportul dintre resursele alocate unui beneficiar și totalul resurselor disponibile",
+    "Numărul de beneficiari"
+   ],
+   "correct": 2,
+   "explain": "Proporția este raportul resurse_alocate / total (de ex. 6/10 = 60%).",
+   "kind": "text"
+  },
+  {
+   "q": "În al doilea scenariu (5 copii, 10 jucării, ponderi egale de 2), câte jucării primește fiecare copil?",
+   "options": [
+    "10 jucării pentru unul singur",
+    "1 jucărie fiecare",
+    "5 jucării fiecare",
+    "2 jucării fiecare"
+   ],
+   "correct": 3,
+   "explain": "Cu ponderi egale și total egal cu suma ponderilor, fiecare copil primește 2 jucării.",
+   "kind": "text"
+  },
+  {
+   "q": "Pentru a verifica ponderea reală a unui activ la final, ce trebuie să faci?",
+   "options": [
+    "Să calculezi noile valori în bani și să împarți fiecare la valoarea totală",
+    "Să aduni cele două randamente procentuale",
+    "Să păstrezi ponderile inițiale neschimbate în calcul",
+    "Să folosești numărul de acțiuni, nu valoarea"
+   ],
+   "correct": 0,
+   "explain": "Reevaluezi (re-price) portofoliul: valoare_i / valoare_totală îți dă ponderea reală după drift.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce tip de investitor folosește cel mai des alocarea statică, conform concluziilor?",
+   "options": [
+    "Traderii intraday agresivi",
+    "Investitorii averși la risc sau noi, care preferă un portofoliu stabil și simplu",
+    "Cei care anticipează piața zilnic",
+    "Doar fondurile speculative mari"
+   ],
+   "correct": 1,
+   "explain": "Este preferată de investitorii averși la risc sau începători care vor o abordare cu întreținere redusă.",
+   "kind": "text"
+  },
+  {
+   "q": "Care este 'cheia succesului' alocării statice, conform concluziilor?",
+   "options": [
+    "Să alegi mereu activul cu cel mai mare randament recent",
+    "Să schimbi ponderile cât mai des posibil",
+    "Să stabilești corect ponderile și să rămâi fidel planului, nu să anticipezi piața",
+    "Să eviți complet orice activ riscant"
+   ],
+   "correct": 2,
+   "explain": "Succesul vine din ponderi bine stabilite și disciplina de a rămâne pe plan, nu din timing-ul pieței.",
+   "kind": "text"
+  }
+ ]
+}

@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Ce este, in esenta, un eveniment de credit (credit event)?","options":["Orice scadere a pretului actiunii unei companii","O situatie definita in contract care da creditorului dreptul de a cere rambursarea imediata, executa garantia sau declansa un proces juridic","O simpla retrogradare a ratingului de credit","O crestere a dobanzii de referinta a bancii centrale"],"correct":1,"explain":"Evenimentul de credit este o situatie definita contractual (in credit agreement sau indenture) care confera creditorului drepturi precum rambursarea imediata sau executarea garantiei.","kind":"concept"},
-{"q":"Care organizatie publica lista standard de evenimente de credit folosita in derivatele de credit?","options":["Federal Reserve","ISDA (International Swaps and Derivatives Association)","Banca Centrala Europeana","Agentia de rating Moody's"],"correct":1,"explain":"ISDA publica lista standard de evenimente de credit (failure to pay, bankruptcy, restructuring etc.).","kind":"text"},
-{"q":"Un debitor datoreaza dobanda pe 15 martie si nu o plateste pana pe 16 martie. Cum se numeste acest eveniment?","options":["Restructurare","Failure to pay (neefectuarea platii)","Moratoriu","Obligation acceleration"],"correct":1,"explain":"Ratarea unei plati programate la scadenta este failure to pay si se considera default.","kind":"concept"},
-{"q":"Care este rolul tipic al perioadei de gratie (grace period) la failure to pay?","options":["Anuleaza automat datoria","Ofera un termen scurt (adesea 30 de zile) pentru a remedia neplata inainte ca aceasta sa devina default complet","Obliga creditorul sa ierte dobanda","Permite emitentului sa emita noi actiuni"],"correct":1,"explain":"Perioada de gratie da debitorului timp sa remedieze neplata; daca banii tot nu sosesc, evenimentul devine default complet.","kind":"concept"},
-{"q":"Conform capitolului, de ce trateaza piata adesea o restructurare ca pe o veste proasta, chiar daca nicio plata nu este ratata?","options":["Pentru ca actiunile cresc mereu dupa restructurare","Pentru ca li se cere creditorilor sa accepte mai putin decat li s-a promis","Pentru ca dobanda creste automat","Pentru ca restructurarea este ilegala"],"correct":1,"explain":"Restructurarea cere creditorilor sa accepte conditii mai slabe (haircut, prelungire), deci este vazuta negativ chiar fara o plata ratata.","kind":"concept"},
-{"q":"Cand devine o restructurare un eveniment de credit conform ISDA?","options":["Intotdeauna, automat","Niciodata","Doar daca indeplineste definitiile ISDA si este inclusa in contract; altfel este doar un workout privat","Doar daca este anuntata in presa"],"correct":2,"explain":"Restructurarea este eveniment de credit doar daca indeplineste definitiile ISDA si este inclusa explicit in contract.","kind":"concept"},
-{"q":"Ce declanseaza un eveniment de credit de tip obligation acceleration?","options":["Plata anticipata a unei obligatiuni","Cererea creditorului de rambursare imediata a intregului imprumut dupa incalcarea unui covenant","Cresterea ratingului","Emiterea de noi obligatiuni"],"correct":1,"explain":"Cand debitorul incalca un covenant si creditorul cere rambursarea imediata a intregului imprumut, apare obligation acceleration.","kind":"text"},
-{"q":"Ce inseamna repudierea (repudiation) ca eveniment de credit?","options":["Suspendarea temporara a platilor dispusa de guvern","Debitorul declara public ca nu isi va onora datoria","Plata cu intarziere de o zi","Conversia datoriei in actiuni"],"correct":1,"explain":"Repudierea inseamna declararea publica a refuzului de a onora datoria; moratoriul este suspendarea temporara dispusa de guvern.","kind":"text"},
-{"q":"In contractele CDS, ce sunt obligatiile livrabile (deliverable obligations)?","options":["Actiunile emitentului care pot fi vandute","Datoriile specificate in contract care pot fi livrate daca apare un eveniment de credit","Garantiile guvernamentale","Dividendele platite investitorilor"],"correct":1,"explain":"Obligatiile livrabile sunt datoriile (de regula senior unsecured) pe care cumparatorul de protectie le poate livra vanzatorului dupa un eveniment de credit.","kind":"text"},
-{"q":"Ce este rata de recuperare (recovery rate)?","options":["Procentul pe care investitorii il primesc in cele din urma inapoi din datorie","Rata dobanzii la noul imprumut","Numarul de zile din perioada de gratie","Spread-ul CDS exprimat in puncte de baza"],"correct":0,"explain":"Rata de recuperare este procentul din valoarea nominala pe care investitorii il recupereaza efectiv dupa default.","kind":"text"},
-{"q":"In exemplul Regional Plastics, recuperarea este 35%. Care este pierderea in caz de default (LGD)?","options":["35%","100%","65%","6%"],"correct":2,"explain":"LGD = 100% - recuperarea = 100% - 35% = 65%, adica £65 la fiecare £100 nominal.","kind":"concept"},
-{"q":"In exemplul Regional Plastics, daca am cumparat la £98,50 si vindem la mid-ul de £35,00, care este P&L per £100 nominal?","options":["-£63,50","+£35,00","-£35,00","-£98,50"],"correct":0,"explain":"P&L = 35,00 - 98,50 = -£63,50 per £100 nominal.","kind":"concept"},
-{"q":"In exemplul de restructurare al Regional Plastics (noua obligatiune £50 + actiuni £20), de ce ar prefera totusi desk-ul sa vanda in licitatie la £35?","options":["Pentru ca £35 este mai mult decat £70","Pentru ca restructurarea ar putea esua sau fi respinsa, lasandu-i cu doar £35 sau mai putin; vanzarea blocheaza o valoare cunoscuta","Pentru ca actiunile sunt interzise","Pentru ca licitatia ISDA garanteaza £70"],"correct":1,"explain":"Desk-ul prefera certitudinea: fara convingere mare ca restructurarea reuseste, blocheaza cei £35 cunoscuti in loc sa parieze pe £70 incerti.","kind":"concept"},
-{"q":"In al doilea scenariu (Smith Fabrication), incalcarea covenantului de acoperire a dobanzii constituie deja un eveniment de credit conform ISDA?","options":["Da, automat","Nu — este eveniment de default conform contractului de facilitate, dar nu eveniment de credit ISDA (fara plata ratata sau acceleration)","Da, dar doar dupa 30 de zile","Nu este niciun fel de eveniment"],"correct":1,"explain":"Incalcarea, supusa perioadei de remediere si fara acceleration ori plata ratata, e eveniment de default contractual, dar nu eveniment de credit sub ISDA.","kind":"concept"},
-{"q":"In scenariul Smith Fabrication, ratele indicative de broker erau 88-92 (performant), 65-70 (covenant incalcat neremediat), 45-50 (accelerat). Ce pret a fost ales si de ce?","options":["88-92, pentru ca incalcarea era publica","45-50, pentru ca imprumutul fusese accelerat","65-70 (cota 67), pentru ca a fost incalcare publica dar fara acceleration","Niciun pret, pentru ca imprumutul nu era tranzactionat"],"correct":2,"explain":"Acceleration nu avusese loc (deci nu 45-50) si incalcarea era publica (deci nu 88-92), ramanand intervalul 65-70.","kind":"concept"},
-{"q":"De ce este descoperirea pretului mai dificila pentru imprumutul Smith Fabrication decat pentru o obligatiune cotata?","options":["Pentru ca imprumutul nu este tranzactionat public si nu exista pret live, fiind nevoie de cotatii de broker si consens intern","Pentru ca imprumutul nu are dobanda","Pentru ca este garantat de guvern","Pentru ca este denominat in mai multe valute"],"correct":0,"explain":"Datoria privata nu are pret live pe ecran, asa ca pretul se bazeaza pe cotatii indicative de broker si pe consensul intern al desk-ului.","kind":"concept"},
-{"q":"Conform sectiunii de greseli frecvente, ce diferenta esentiala confunda adesea incepatorii?","options":["Intre dobanda si principal","Intre un eveniment de credit si o simpla largire a spread-ului de credit","Intre actiuni si obligatiuni","Intre USD si GBP"],"correct":1,"explain":"O largire a spread-ului poate semnala risc crescut fara a fi un eveniment de credit; cele doua nu trebuie confundate.","kind":"concept"},
-{"q":"De ce nu sunt toate defaulturile la fel din punct de vedere al impactului pe piata?","options":["Pentru ca toate au exact acelasi efect","Defaultul unui high-yield poate avea impact limitat, in timp ce defaultul unui mare emitent investment-grade poate trimite unde de soc in tot peisajul creditului","Pentru ca high-yield-ul nu intra niciodata in default","Pentru ca investment-grade nu poate intra in default"],"correct":1,"explain":"Tipul si severitatea conteaza: un default investment-grade major are impact sistemic mult mai mare decat un default high-yield izolat.","kind":"concept"},
-{"q":"O retrogradare a ratingului de credit (downgrade) implica automat un eveniment de credit?","options":["Da, intotdeauna","Nu — o retrogradare semnaleaza risc crescut, dar nu inseamna neaparat ca a avut loc un eveniment de credit","Da, dar doar pentru obligatiuni guvernamentale","Nu, retrogradarile nu exista"],"correct":1,"explain":"Retrogradarea poate fi cauzata de multi factori si nu implica automat un eveniment de credit definit contractual.","kind":"concept"},
-{"q":"Conform regulii empirice a desk-ului, o miscare de 1 bp in CDS-ul pe 5 ani echivaleaza cu aproximativ cat la fiecare 10 milioane USD notional?","options":["2 000 USD","200 USD","20 000 USD","500 USD"],"correct":0,"explain":"Regula empirica: ~2 000 USD per 1 bp la fiecare 10 milioane USD notional pentru un contract standard pe 5 ani.","kind":"text"},
-{"q":"Daca desk-ul vede CDS deja largit cu 500 bps si obligatiuni la 30 de centi, cum trateaza miscarea?","options":["Ca neincorporata (un-priced)","Ca incorporata in pret (priced in), cautand apoi valoare relativa (curba sau structura de capital)","Ca o eroare de date","Ca pe o oportunitate de cumparare a actiunilor"],"correct":1,"explain":"Cand miscarea e deja mare, desk-ul o considera priced in si cauta valoare relativa intre scadente sau ranguri.","kind":"concept"},
-{"q":"De ce seteaza desk-ul un declansator 'after-hours' pentru evenimentele de credit?","options":["Pentru ca pietele europene sunt deschise","Pentru ca evenimentele apar adesea dupa inchiderea SUA, iar riscul de gap intre 16:00 si 7:00 ET poate fi de 200-300 bps","Pentru ca tranzactionarea de noapte este gratuita","Pentru ca dobanda se calculeaza noaptea"],"correct":1,"explain":"Evenimentele apar des dupa inchidere; gap-ul mare de peste noapte (200-300 bps) cere reactie imediata la printuri largite.","kind":"concept"},
-{"q":"Care este, conform capitolului, adevaratul scop al desk-ului cand gestioneaza un eveniment de credit binar?","options":["Sa ghiceasca exact rezultatul final","Sa aiba dreptate asupra valorii relative si sa supravietuiasca rezultatului binar","Sa cumpere maxim de actiuni","Sa evite orice tranzactie"],"correct":1,"explain":"Scopul nu este sa ai dreptate asupra rezultatului, ci asupra valorii relative, mentinand riscul in limite pentru a supravietui.","kind":"concept"},
-{"q":"Care sunt cele doua tipuri de decontare a unui CDS dupa un eveniment de credit?","options":["Fizica si in numerar (cash)","Anuala si trimestriala","Publica si privata","Garantata si negarantata"],"correct":0,"explain":"Decontarea poate fi fizica (livrarea obligatiunilor in schimbul paritatii) sau in numerar (auctiunea stabileste pretul si se plateste diferenta).","kind":"text"},
-{"q":"Ce avertizeaza capitolul despre evenimentele de credit 'goale' (empty)?","options":["Ca toate platesc dublu","Ca unele actiuni numite 'restructurare' de presa nu indeplinesc definitia ISDA, deci nu urmeaza nicio plata daca contractul exclude restructurarea","Ca sunt mereu cele mai profitabile","Ca afecteaza doar actiunile"],"correct":1,"explain":"Un eveniment etichetat 'restructurare' poate sa nu calce definitia ISDA; daca clauza de restructurare lipseste din contract, nu se face nicio plata.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce este, in esenta, un eveniment de credit (credit event)?",
+   "options": [
+    "Orice scadere a pretului actiunii unei companii",
+    "O crestere a dobanzii de referinta a bancii centrale",
+    "O simpla retrogradare a ratingului de credit",
+    "O situatie definita in contract care da creditorului dreptul de a cere rambursarea imediata, executa garantia sau declansa un proces juridic"
+   ],
+   "correct": 3,
+   "explain": "Evenimentul de credit este o situatie definita contractual (in credit agreement sau indenture) care confera creditorului drepturi precum rambursarea imediata sau executarea garantiei.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care organizatie publica lista standard de evenimente de credit folosita in derivatele de credit?",
+   "options": [
+    "ISDA (International Swaps and Derivatives Association)",
+    "Federal Reserve",
+    "Banca Centrala Europeana",
+    "Agentia de rating Moody's"
+   ],
+   "correct": 0,
+   "explain": "ISDA publica lista standard de evenimente de credit (failure to pay, bankruptcy, restructuring etc.).",
+   "kind": "text"
+  },
+  {
+   "q": "Un debitor datoreaza dobanda pe 15 martie si nu o plateste pana pe 16 martie. Cum se numeste acest eveniment?",
+   "options": [
+    "Restructurare",
+    "Failure to pay (neefectuarea platii)",
+    "Moratoriu",
+    "Obligation acceleration"
+   ],
+   "correct": 1,
+   "explain": "Ratarea unei plati programate la scadenta este failure to pay si se considera default.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este rolul tipic al perioadei de gratie (grace period) la failure to pay?",
+   "options": [
+    "Anuleaza automat datoria",
+    "Obliga creditorul sa ierte dobanda",
+    "Ofera un termen scurt (adesea 30 de zile) pentru a remedia neplata inainte ca aceasta sa devina default complet",
+    "Permite emitentului sa emita noi actiuni"
+   ],
+   "correct": 2,
+   "explain": "Perioada de gratie da debitorului timp sa remedieze neplata; daca banii tot nu sosesc, evenimentul devine default complet.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform capitolului, de ce trateaza piata adesea o restructurare ca pe o veste proasta, chiar daca nicio plata nu este ratata?",
+   "options": [
+    "Pentru ca actiunile cresc mereu dupa restructurare",
+    "Pentru ca restructurarea este ilegala",
+    "Pentru ca dobanda creste automat",
+    "Pentru ca li se cere creditorilor sa accepte mai putin decat li s-a promis"
+   ],
+   "correct": 3,
+   "explain": "Restructurarea cere creditorilor sa accepte conditii mai slabe (haircut, prelungire), deci este vazuta negativ chiar fara o plata ratata.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cand devine o restructurare un eveniment de credit conform ISDA?",
+   "options": [
+    "Doar daca indeplineste definitiile ISDA si este inclusa in contract; altfel este doar un workout privat",
+    "Niciodata",
+    "Intotdeauna, automat",
+    "Doar daca este anuntata in presa"
+   ],
+   "correct": 0,
+   "explain": "Restructurarea este eveniment de credit doar daca indeplineste definitiile ISDA si este inclusa explicit in contract.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce declanseaza un eveniment de credit de tip obligation acceleration?",
+   "options": [
+    "Plata anticipata a unei obligatiuni",
+    "Cererea creditorului de rambursare imediata a intregului imprumut dupa incalcarea unui covenant",
+    "Cresterea ratingului",
+    "Emiterea de noi obligatiuni"
+   ],
+   "correct": 1,
+   "explain": "Cand debitorul incalca un covenant si creditorul cere rambursarea imediata a intregului imprumut, apare obligation acceleration.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce inseamna repudierea (repudiation) ca eveniment de credit?",
+   "options": [
+    "Suspendarea temporara a platilor dispusa de guvern",
+    "Plata cu intarziere de o zi",
+    "Debitorul declara public ca nu isi va onora datoria",
+    "Conversia datoriei in actiuni"
+   ],
+   "correct": 2,
+   "explain": "Repudierea inseamna declararea publica a refuzului de a onora datoria; moratoriul este suspendarea temporara dispusa de guvern.",
+   "kind": "text"
+  },
+  {
+   "q": "In contractele CDS, ce sunt obligatiile livrabile (deliverable obligations)?",
+   "options": [
+    "Actiunile emitentului care pot fi vandute",
+    "Dividendele platite investitorilor",
+    "Garantiile guvernamentale",
+    "Datoriile specificate in contract care pot fi livrate daca apare un eveniment de credit"
+   ],
+   "correct": 3,
+   "explain": "Obligatiile livrabile sunt datoriile (de regula senior unsecured) pe care cumparatorul de protectie le poate livra vanzatorului dupa un eveniment de credit.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este rata de recuperare (recovery rate)?",
+   "options": [
+    "Procentul pe care investitorii il primesc in cele din urma inapoi din datorie",
+    "Rata dobanzii la noul imprumut",
+    "Numarul de zile din perioada de gratie",
+    "Spread-ul CDS exprimat in puncte de baza"
+   ],
+   "correct": 0,
+   "explain": "Rata de recuperare este procentul din valoarea nominala pe care investitorii il recupereaza efectiv dupa default.",
+   "kind": "text"
+  },
+  {
+   "q": "In exemplul Regional Plastics, recuperarea este 35%. Care este pierderea in caz de default (LGD)?",
+   "options": [
+    "35%",
+    "65%",
+    "100%",
+    "6%"
+   ],
+   "correct": 1,
+   "explain": "LGD = 100% - recuperarea = 100% - 35% = 65%, adica £65 la fiecare £100 nominal.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul Regional Plastics, daca am cumparat la £98,50 si vindem la mid-ul de £35,00, care este P&L per £100 nominal?",
+   "options": [
+    "-£35,00",
+    "+£35,00",
+    "-£63,50",
+    "-£98,50"
+   ],
+   "correct": 2,
+   "explain": "P&L = 35,00 - 98,50 = -£63,50 per £100 nominal.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul de restructurare al Regional Plastics (noua obligatiune £50 + actiuni £20), de ce ar prefera totusi desk-ul sa vanda in licitatie la £35?",
+   "options": [
+    "Pentru ca £35 este mai mult decat £70",
+    "Pentru ca licitatia ISDA garanteaza £70",
+    "Pentru ca actiunile sunt interzise",
+    "Pentru ca restructurarea ar putea esua sau fi respinsa, lasandu-i cu doar £35 sau mai putin; vanzarea blocheaza o valoare cunoscuta"
+   ],
+   "correct": 3,
+   "explain": "Desk-ul prefera certitudinea: fara convingere mare ca restructurarea reuseste, blocheaza cei £35 cunoscuti in loc sa parieze pe £70 incerti.",
+   "kind": "concept"
+  },
+  {
+   "q": "In al doilea scenariu (Smith Fabrication), incalcarea covenantului de acoperire a dobanzii constituie deja un eveniment de credit conform ISDA?",
+   "options": [
+    "Nu — este eveniment de default conform contractului de facilitate, dar nu eveniment de credit ISDA (fara plata ratata sau acceleration)",
+    "Da, automat",
+    "Da, dar doar dupa 30 de zile",
+    "Nu este niciun fel de eveniment"
+   ],
+   "correct": 0,
+   "explain": "Incalcarea, supusa perioadei de remediere si fara acceleration ori plata ratata, e eveniment de default contractual, dar nu eveniment de credit sub ISDA.",
+   "kind": "concept"
+  },
+  {
+   "q": "In scenariul Smith Fabrication, ratele indicative de broker erau 88-92 (performant), 65-70 (covenant incalcat neremediat), 45-50 (accelerat). Ce pret a fost ales si de ce?",
+   "options": [
+    "88-92, pentru ca incalcarea era publica",
+    "65-70 (cota 67), pentru ca a fost incalcare publica dar fara acceleration",
+    "45-50, pentru ca imprumutul fusese accelerat",
+    "Niciun pret, pentru ca imprumutul nu era tranzactionat"
+   ],
+   "correct": 1,
+   "explain": "Acceleration nu avusese loc (deci nu 45-50) si incalcarea era publica (deci nu 88-92), ramanand intervalul 65-70.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este descoperirea pretului mai dificila pentru imprumutul Smith Fabrication decat pentru o obligatiune cotata?",
+   "options": [
+    "Pentru ca este garantat de guvern",
+    "Pentru ca imprumutul nu are dobanda",
+    "Pentru ca imprumutul nu este tranzactionat public si nu exista pret live, fiind nevoie de cotatii de broker si consens intern",
+    "Pentru ca este denominat in mai multe valute"
+   ],
+   "correct": 2,
+   "explain": "Datoria privata nu are pret live pe ecran, asa ca pretul se bazeaza pe cotatii indicative de broker si pe consensul intern al desk-ului.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform sectiunii de greseli frecvente, ce diferenta esentiala confunda adesea incepatorii?",
+   "options": [
+    "Intre dobanda si principal",
+    "Intre USD si GBP",
+    "Intre actiuni si obligatiuni",
+    "Intre un eveniment de credit si o simpla largire a spread-ului de credit"
+   ],
+   "correct": 3,
+   "explain": "O largire a spread-ului poate semnala risc crescut fara a fi un eveniment de credit; cele doua nu trebuie confundate.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu sunt toate defaulturile la fel din punct de vedere al impactului pe piata?",
+   "options": [
+    "Defaultul unui high-yield poate avea impact limitat, in timp ce defaultul unui mare emitent investment-grade poate trimite unde de soc in tot peisajul creditului",
+    "Pentru ca toate au exact acelasi efect",
+    "Pentru ca high-yield-ul nu intra niciodata in default",
+    "Pentru ca investment-grade nu poate intra in default"
+   ],
+   "correct": 0,
+   "explain": "Tipul si severitatea conteaza: un default investment-grade major are impact sistemic mult mai mare decat un default high-yield izolat.",
+   "kind": "concept"
+  },
+  {
+   "q": "O retrogradare a ratingului de credit (downgrade) implica automat un eveniment de credit?",
+   "options": [
+    "Da, intotdeauna",
+    "Nu — o retrogradare semnaleaza risc crescut, dar nu inseamna neaparat ca a avut loc un eveniment de credit",
+    "Da, dar doar pentru obligatiuni guvernamentale",
+    "Nu, retrogradarile nu exista"
+   ],
+   "correct": 1,
+   "explain": "Retrogradarea poate fi cauzata de multi factori si nu implica automat un eveniment de credit definit contractual.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform regulii empirice a desk-ului, o miscare de 1 bp in CDS-ul pe 5 ani echivaleaza cu aproximativ cat la fiecare 10 milioane USD notional?",
+   "options": [
+    "20 000 USD",
+    "200 USD",
+    "2 000 USD",
+    "500 USD"
+   ],
+   "correct": 2,
+   "explain": "Regula empirica: ~2 000 USD per 1 bp la fiecare 10 milioane USD notional pentru un contract standard pe 5 ani.",
+   "kind": "text"
+  },
+  {
+   "q": "Daca desk-ul vede CDS deja largit cu 500 bps si obligatiuni la 30 de centi, cum trateaza miscarea?",
+   "options": [
+    "Ca neincorporata (un-priced)",
+    "Ca pe o oportunitate de cumparare a actiunilor",
+    "Ca o eroare de date",
+    "Ca incorporata in pret (priced in), cautand apoi valoare relativa (curba sau structura de capital)"
+   ],
+   "correct": 3,
+   "explain": "Cand miscarea e deja mare, desk-ul o considera priced in si cauta valoare relativa intre scadente sau ranguri.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce seteaza desk-ul un declansator 'after-hours' pentru evenimentele de credit?",
+   "options": [
+    "Pentru ca evenimentele apar adesea dupa inchiderea SUA, iar riscul de gap intre 16:00 si 7:00 ET poate fi de 200-300 bps",
+    "Pentru ca pietele europene sunt deschise",
+    "Pentru ca tranzactionarea de noapte este gratuita",
+    "Pentru ca dobanda se calculeaza noaptea"
+   ],
+   "correct": 0,
+   "explain": "Evenimentele apar des dupa inchidere; gap-ul mare de peste noapte (200-300 bps) cere reactie imediata la printuri largite.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este, conform capitolului, adevaratul scop al desk-ului cand gestioneaza un eveniment de credit binar?",
+   "options": [
+    "Sa ghiceasca exact rezultatul final",
+    "Sa aiba dreptate asupra valorii relative si sa supravietuiasca rezultatului binar",
+    "Sa cumpere maxim de actiuni",
+    "Sa evite orice tranzactie"
+   ],
+   "correct": 1,
+   "explain": "Scopul nu este sa ai dreptate asupra rezultatului, ci asupra valorii relative, mentinand riscul in limite pentru a supravietui.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care sunt cele doua tipuri de decontare a unui CDS dupa un eveniment de credit?",
+   "options": [
+    "Publica si privata",
+    "Anuala si trimestriala",
+    "Fizica si in numerar (cash)",
+    "Garantata si negarantata"
+   ],
+   "correct": 2,
+   "explain": "Decontarea poate fi fizica (livrarea obligatiunilor in schimbul paritatii) sau in numerar (auctiunea stabileste pretul si se plateste diferenta).",
+   "kind": "text"
+  },
+  {
+   "q": "Ce avertizeaza capitolul despre evenimentele de credit 'goale' (empty)?",
+   "options": [
+    "Ca toate platesc dublu",
+    "Ca afecteaza doar actiunile",
+    "Ca sunt mereu cele mai profitabile",
+    "Ca unele actiuni numite 'restructurare' de presa nu indeplinesc definitia ISDA, deci nu urmeaza nicio plata daca contractul exclude restructurarea"
+   ],
+   "correct": 3,
+   "explain": "Un eveniment etichetat 'restructurare' poate sa nu calce definitia ISDA; daca clauza de restructurare lipseste din contract, nu se face nicio plata.",
+   "kind": "concept"
+  }
+ ]
+}

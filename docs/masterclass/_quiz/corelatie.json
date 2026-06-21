@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Ce măsoară fundamental coeficientul de corelație (r)?","options":["Cât de mult două liste de numere se mișcă în pas una cu cealaltă","Cât de mult câștigă o acțiune într-un an","Cât de volatil este un singur activ","Care variabilă o cauzează pe cealaltă"],"correct":0,"explain":"Corelația măsoară gradul în care mișcările a două variabile se aliniază; nu spune nimic despre randament, cauzalitate sau volatilitatea unui singur activ.","kind":"concept"},
-{"q":"Între ce valori se află întotdeauna coeficientul de corelație?","options":["Între –1 și +1","Între 0 și 100","Între –100 și +100","Între 0 și 1"],"correct":0,"explain":"r se află mereu între –1 (mișcare perfect opusă) și +1 (mișcare perfect împreună), trecând prin 0 (fără legătură liniară).","kind":"text"},
-{"q":"Două active au r aproape de –1. Cum se comportă, de obicei?","options":["Când unul crește, celălalt tinde să scadă","Cresc și scad aproape întotdeauna împreună","Se mișcă total independent","Au mereu același preț"],"correct":0,"explain":"O corelație negativă puternică (aproape de –1) înseamnă că activele se mișcă în direcții opuse: când unul urcă, celălalt tinde să coboare.","kind":"concept"},
-{"q":"De ce o corelație de 0 între temperatură și buburuze NU dovedește că variabilele sunt complet fără legătură?","options":["Pentru că r reflectă doar lipsa unui tipar liniar în datele colectate, nu absența oricărei legături posibile","Pentru că 0 înseamnă mereu o relație ascunsă","Pentru că eșantionul a fost prea mare","Pentru că temperatura cauzează mereu apariția buburuzelor"],"correct":0,"explain":"r aproape de zero arată doar absența unui tipar liniar în date; o legătură neliniară sau în alte condiții ar putea totuși exista.","kind":"concept"},
-{"q":"De ce vânzările de înghețată și numărul de oameni în pantaloni scurți par corelate?","options":["Un al treilea factor comun — vremea caldă — le determină pe amândouă","Înghețata îi face pe oameni să poarte pantaloni scurți","Pantalonii scurți cresc pofta de înghețată","Este o corelație negativă"],"correct":0,"explain":"Este exemplul clasic de variabilă terță: vremea caldă cauzează atât vânzările de înghețată, cât și purtatul de pantaloni scurți, fără ca una să o cauzeze pe cealaltă.","kind":"concept"},
-{"q":"Ce limitare importantă are coeficientul de corelație Pearson (r)?","options":["Surprinde doar relații liniare (în linie dreaptă), ratând tiparele curbe","Funcționează doar pentru acțiuni","Nu poate fi negativ","Necesită exact 1000 de observații"],"correct":0,"explain":"Pearson măsoară doar mișcarea comună liniară; o relație curbată sau în „U” puternică poate da un r aproape de zero.","kind":"concept"},
-{"q":"În exemplul cu cei doi copii și pătrățelele de covor, ce r a rezultat?","options":["Aproape –1,00, alegeri perfect opuse în fiecare zi","Aproape +1,00, alegeri identice","Exact 0, fără legătură","+0,5, legătură moderată"],"correct":0,"explain":"Copilul A alegea mereu opus față de Copilul B, dând o covarianță negativă și un r ≈ –1,00.","kind":"text"},
-{"q":"De ce trebuie să fim prudenți cu rezultatul r = –1 din exemplul celor doi copii?","options":["Se bazează pe doar 5 zile și 2 copii; eșantionul mic poate să nu fie reprezentativ","Pentru că –1 este matematic imposibil","Pentru că ar trebui să fie +1","Pentru că pătrățelele nu pot fi transformate în numere"],"correct":0,"explain":"Eșantioanele mici pot da corelații înșelătoare; cu mai multe zile, r ar putea scădea spre zero sau chiar își schimba semnul.","kind":"concept"},
-{"q":"Ce înseamnă că o corelație este „lipsită de scară” (independentă de unități)?","options":["Nu se schimbă dacă rescalezi datele, ex. preț în dolari versus euro","Se schimbă mereu cu unitatea de măsură","Poate depăși valoarea 1","Funcționează doar pe scară logaritmică"],"correct":0,"explain":"r al lui Pearson nu este afectat de o schimbare de unități; măsurarea în dolari sau euro lasă corelația neschimbată.","kind":"concept"},
-{"q":"Cum afectează valorile extreme (outliers) coeficientul Pearson?","options":["Au efect disproporționat, pentru că abaterile de la medie sunt ridicate la pătrat","Nu au niciun efect","Reduc mereu corelația la zero","Schimbă unitatea de măsură"],"correct":0,"explain":"Ridicarea la pătrat a abaterilor face ca un singur șoc extrem să poată împinge r dramatic în sus sau în jos.","kind":"concept"},
-{"q":"Ce este „dependența de coadă” (tail dependence) și de ce e periculoasă?","options":["Tendința unor active să se prăbușească împreună în stres, deși par necorelate normal — corelația standard nu o semnalează","Corelația dintre cozile a două animale","Un tip de corelație pozitivă garantată","O eroare de calcul a mediei"],"correct":0,"explain":"Active aparent diversificate (necorelate normal) pot cădea simultan în criză; Pearson nu surprinde acest risc, dând o falsă senzație de siguranță.","kind":"text"},
-{"q":"Pe biroul de tranzacționare, ce face o pereche long/short cu ρ aproape de +0,85?","options":["Se comportă aproape ca un singur pariu direcțional, cu risc de piață rezidual mic","Anulează tot riscul, devenind fără risc","Garantează profit","Devine o tranzacție necorelată"],"correct":0,"explain":"Cu corelație mare, ambele picioare urcă/coboară împreună, deci spread-ul se comportă ca un pariu direcțional cu risc rezidual redus.","kind":"concept"},
-{"q":"De ce verifică biroul corelația pe o fereastră mobilă de 30 de zile și un test de stres?","options":["Corelația care contează e cea care va persista cât e tranzacția deschisă, nu cea de anul trecut","Pentru că legea cere 30 de zile","Pentru a crește artificial valoarea ρ","Pentru că Pearson funcționează doar pe 30 de zile"],"correct":0,"explain":"Corelația variază în timp; biroul verifică dacă împerecherea supraviețuiește regimului așteptat, nu doar mediei istorice.","kind":"concept"},
-{"q":"În formula varianței portofoliului σ² = w₁²σ₁² + w₂²σ₂² + 2w₁w₂ρ₁₂σ₁σ₂, ce rol joacă ρ₁₂?","options":["Intră în termenul de risc rezidual; un ρ mare reduce varianța reziduală, permițând notional brut mai mare","Determină singur randamentul portofoliului","Nu apare niciodată în calcul","Fixează prețul activelor"],"correct":0,"explain":"Corelația intră în termenul încrucișat; cu ρ mare, varianța reziduală e mai mică, deci biroul poate rula expunere brută mai mare în limita bugetului de risc.","kind":"concept"},
-{"q":"Cum se comportă, de regulă, corelațiile în timpul crizelor de piață?","options":["Tind să crească spre +1, activele prăbușindu-se împreună","Tind să scadă spre zero","Rămân perfect constante","Devin mereu negative"],"correct":0,"explain":"În crize, corelațiile cresc (ρ → +1): chiar și active normal diversificate cad împreună, reducând beneficiul diversificării exact când e mai necesar.","kind":"text"},
-{"q":"Ce este o tranzacție de „estompare a corelației” (correlation fade)?","options":["Pariezi că două nume istoric corelate, care s-au decuplat recent fără motiv fundamental, vor reveni la corelația lor obișnuită","Vinzi toate activele când ρ scade","Cumperi doar active necorelate","Eviți orice tranzacționare în pereche"],"correct":0,"explain":"Când ρ scade temporar (ex. de la 0,85 la 0,50) fără schimbare fundamentală, biroul pariază (cu sumă mică) pe revenirea ρ la media sa.","kind":"text"},
-{"q":"Pe lângă ρ, ce alți factori verifică biroul înainte de a deschide o tranzacție în pereche?","options":["Lichiditatea, riscul de eveniment și costul de finanțare","Doar culoarea graficului","Numărul de angajați al firmei","Vechimea coeficientului în ani"],"correct":0,"explain":"Spread-uri largi, rezultate financiare/șocuri sau taxe mari de împrumut pot anula avantajul teoretic, oricât de proaspăt ar fi ρ.","kind":"text"},
-{"q":"Ce indică o valoare-p (p-value) mică (< 0,05) pentru o corelație?","options":["Corelația este probabil semnificativă statistic, nu din pură întâmplare","Corelația este sigur cauzală","Eșantionul este prea mic","Corelația este negativă"],"correct":0,"explain":"O valoare-p mică sugerează că e improbabil ca acea corelație să fi apărut din întâmplare; nu dovedește însă cauzalitate.","kind":"text"},
-{"q":"Ce este o corelație „falsă” (spurious)?","options":["O corelație aparent puternică apărută din întâmplare, mai ales când se examinează multe perechi simultan","O corelație care depășește 1","O corelație negativă perfectă","O corelație calculată corect pe date mari"],"correct":0,"explain":"Examinarea multor perechi de active crește șansa de a găsi corelații puternice pur întâmplătoare; testarea statistică ajută la filtrarea lor.","kind":"text"},
-{"q":"De ce o corelație puternică NU înseamnă predictibilitate?","options":["Corelația indică doar o relație istorică, nu una garantată în viitor","Pentru că r puternic e mereu o eroare","Pentru că predicția cere ρ = 0","Pentru că prețurile nu se schimbă niciodată"],"correct":0,"explain":"Corelația este retrospectivă; structurile pieței evoluează și relațiile se pot rupe, deci nu poți prezice sigur o poziție din cealaltă.","kind":"concept"},
-{"q":"Ce este covarianța (covariance) în procesul de calcul al corelației?","options":["O măsură a cât de mult se mișcă două variabile împreună, înainte de a fi scalată în r","Media celor două seturi de date","Prețul unei acțiuni","Eroarea standard a eșantionului"],"correct":0,"explain":"Covarianța măsoară mișcarea comună brută; împărțită la produsul abaterilor standard, devine coeficientul de corelație r.","kind":"text"},
-{"q":"De ce non-staționaritatea (schimbările de regim) face o corelație unică înșelătoare?","options":["Când varianța sau media de bază se schimbă, presupunerea că ρ e constant pe eșantion se prăbușește","Pentru că face ρ să depășească 1","Pentru că elimină valorile extreme","Pentru că transformă datele în unități noi"],"correct":0,"explain":"În regimuri diferite (volatilitate scăzută vs. ridicată), relația reală poate schimba semn sau magnitudine, deci o cifră unică poate induce în eroare.","kind":"concept"},
-{"q":"De ce volatilitățile diferite pot distorsiona interpretarea unei corelații?","options":["r e lipsit de scară și ignoră cât de volatil e fiecare activ; cel volatil poate domina riscul deși ρ pare modest","Pentru că r crește mereu cu volatilitatea","Pentru că volatilitatea nu există în portofolii","Pentru că ρ măsoară chiar volatilitatea"],"correct":0,"explain":"Corelația nu ține cont de mărimea mișcărilor; un activ foarte volatil poate domina riscul portofoliului chiar și la o corelație modestă.","kind":"concept"},
-{"q":"Care este recomandarea practică privind interpretarea unui singur număr de corelație?","options":["Tratează-l ca pe un instantaneu, nu ca pe o lege permanentă; folosește mai multe ferestre și instrumente complementare","Bazează-te exclusiv pe el pentru toate deciziile","Ignoră-l complet în trading","Consideră-l valabil pe veci dacă e peste 0,9"],"correct":0,"explain":"Capitolul recomandă tratarea ρ ca instantaneu, folosirea mai multor ferestre temporale și completarea cu Spearman, copule sau analiză de scenarii.","kind":"concept"},
-{"q":"Un administrator de grădiniță observă corelație negativă între copiii din Zona A și Zona B. Ce decizie de alocare e justificată?","options":["Poate cumpăra mai puține jucării în total, fiindcă cererea nu va atinge vârful în ambele zone simultan","Trebuie să dubleze jucăriile în ambele zone","Trebuie să închidă o zonă","Nu poate lua nicio decizie"],"correct":0,"explain":"Cu corelație negativă, vârfurile de cerere nu coincid, deci jucăriile pot fi partajate, reducând nevoia totală — exact ideea de diversificare aplicată la alocare.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce măsoară fundamental coeficientul de corelație (r)?",
+   "options": [
+    "Cât de mult două liste de numere se mișcă în pas una cu cealaltă",
+    "Cât de mult câștigă o acțiune într-un an",
+    "Cât de volatil este un singur activ",
+    "Care variabilă o cauzează pe cealaltă"
+   ],
+   "correct": 0,
+   "explain": "Corelația măsoară gradul în care mișcările a două variabile se aliniază; nu spune nimic despre randament, cauzalitate sau volatilitatea unui singur activ.",
+   "kind": "concept"
+  },
+  {
+   "q": "Între ce valori se află întotdeauna coeficientul de corelație?",
+   "options": [
+    "Între 0 și 100",
+    "Între –1 și +1",
+    "Între –100 și +100",
+    "Între 0 și 1"
+   ],
+   "correct": 1,
+   "explain": "r se află mereu între –1 (mișcare perfect opusă) și +1 (mișcare perfect împreună), trecând prin 0 (fără legătură liniară).",
+   "kind": "text"
+  },
+  {
+   "q": "Două active au r aproape de –1. Cum se comportă, de obicei?",
+   "options": [
+    "Se mișcă total independent",
+    "Cresc și scad aproape întotdeauna împreună",
+    "Când unul crește, celălalt tinde să scadă",
+    "Au mereu același preț"
+   ],
+   "correct": 2,
+   "explain": "O corelație negativă puternică (aproape de –1) înseamnă că activele se mișcă în direcții opuse: când unul urcă, celălalt tinde să coboare.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce o corelație de 0 între temperatură și buburuze NU dovedește că variabilele sunt complet fără legătură?",
+   "options": [
+    "Pentru că temperatura cauzează mereu apariția buburuzelor",
+    "Pentru că 0 înseamnă mereu o relație ascunsă",
+    "Pentru că eșantionul a fost prea mare",
+    "Pentru că r reflectă doar lipsa unui tipar liniar în datele colectate, nu absența oricărei legături posibile"
+   ],
+   "correct": 3,
+   "explain": "r aproape de zero arată doar absența unui tipar liniar în date; o legătură neliniară sau în alte condiții ar putea totuși exista.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce vânzările de înghețată și numărul de oameni în pantaloni scurți par corelate?",
+   "options": [
+    "Un al treilea factor comun — vremea caldă — le determină pe amândouă",
+    "Înghețata îi face pe oameni să poarte pantaloni scurți",
+    "Pantalonii scurți cresc pofta de înghețată",
+    "Este o corelație negativă"
+   ],
+   "correct": 0,
+   "explain": "Este exemplul clasic de variabilă terță: vremea caldă cauzează atât vânzările de înghețată, cât și purtatul de pantaloni scurți, fără ca una să o cauzeze pe cealaltă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce limitare importantă are coeficientul de corelație Pearson (r)?",
+   "options": [
+    "Funcționează doar pentru acțiuni",
+    "Surprinde doar relații liniare (în linie dreaptă), ratând tiparele curbe",
+    "Nu poate fi negativ",
+    "Necesită exact 1000 de observații"
+   ],
+   "correct": 1,
+   "explain": "Pearson măsoară doar mișcarea comună liniară; o relație curbată sau în „U” puternică poate da un r aproape de zero.",
+   "kind": "concept"
+  },
+  {
+   "q": "În exemplul cu cei doi copii și pătrățelele de covor, ce r a rezultat?",
+   "options": [
+    "Exact 0, fără legătură",
+    "Aproape +1,00, alegeri identice",
+    "Aproape –1,00, alegeri perfect opuse în fiecare zi",
+    "+0,5, legătură moderată"
+   ],
+   "correct": 2,
+   "explain": "Copilul A alegea mereu opus față de Copilul B, dând o covarianță negativă și un r ≈ –1,00.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce trebuie să fim prudenți cu rezultatul r = –1 din exemplul celor doi copii?",
+   "options": [
+    "Pentru că pătrățelele nu pot fi transformate în numere",
+    "Pentru că –1 este matematic imposibil",
+    "Pentru că ar trebui să fie +1",
+    "Se bazează pe doar 5 zile și 2 copii; eșantionul mic poate să nu fie reprezentativ"
+   ],
+   "correct": 3,
+   "explain": "Eșantioanele mici pot da corelații înșelătoare; cu mai multe zile, r ar putea scădea spre zero sau chiar își schimba semnul.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă că o corelație este „lipsită de scară” (independentă de unități)?",
+   "options": [
+    "Nu se schimbă dacă rescalezi datele, ex. preț în dolari versus euro",
+    "Se schimbă mereu cu unitatea de măsură",
+    "Poate depăși valoarea 1",
+    "Funcționează doar pe scară logaritmică"
+   ],
+   "correct": 0,
+   "explain": "r al lui Pearson nu este afectat de o schimbare de unități; măsurarea în dolari sau euro lasă corelația neschimbată.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum afectează valorile extreme (outliers) coeficientul Pearson?",
+   "options": [
+    "Nu au niciun efect",
+    "Au efect disproporționat, pentru că abaterile de la medie sunt ridicate la pătrat",
+    "Reduc mereu corelația la zero",
+    "Schimbă unitatea de măsură"
+   ],
+   "correct": 1,
+   "explain": "Ridicarea la pătrat a abaterilor face ca un singur șoc extrem să poată împinge r dramatic în sus sau în jos.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este „dependența de coadă” (tail dependence) și de ce e periculoasă?",
+   "options": [
+    "Un tip de corelație pozitivă garantată",
+    "Corelația dintre cozile a două animale",
+    "Tendința unor active să se prăbușească împreună în stres, deși par necorelate normal — corelația standard nu o semnalează",
+    "O eroare de calcul a mediei"
+   ],
+   "correct": 2,
+   "explain": "Active aparent diversificate (necorelate normal) pot cădea simultan în criză; Pearson nu surprinde acest risc, dând o falsă senzație de siguranță.",
+   "kind": "text"
+  },
+  {
+   "q": "Pe biroul de tranzacționare, ce face o pereche long/short cu ρ aproape de +0,85?",
+   "options": [
+    "Devine o tranzacție necorelată",
+    "Anulează tot riscul, devenind fără risc",
+    "Garantează profit",
+    "Se comportă aproape ca un singur pariu direcțional, cu risc de piață rezidual mic"
+   ],
+   "correct": 3,
+   "explain": "Cu corelație mare, ambele picioare urcă/coboară împreună, deci spread-ul se comportă ca un pariu direcțional cu risc rezidual redus.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce verifică biroul corelația pe o fereastră mobilă de 30 de zile și un test de stres?",
+   "options": [
+    "Corelația care contează e cea care va persista cât e tranzacția deschisă, nu cea de anul trecut",
+    "Pentru că legea cere 30 de zile",
+    "Pentru a crește artificial valoarea ρ",
+    "Pentru că Pearson funcționează doar pe 30 de zile"
+   ],
+   "correct": 0,
+   "explain": "Corelația variază în timp; biroul verifică dacă împerecherea supraviețuiește regimului așteptat, nu doar mediei istorice.",
+   "kind": "concept"
+  },
+  {
+   "q": "În formula varianței portofoliului σ² = w₁²σ₁² + w₂²σ₂² + 2w₁w₂ρ₁₂σ₁σ₂, ce rol joacă ρ₁₂?",
+   "options": [
+    "Determină singur randamentul portofoliului",
+    "Intră în termenul de risc rezidual; un ρ mare reduce varianța reziduală, permițând notional brut mai mare",
+    "Nu apare niciodată în calcul",
+    "Fixează prețul activelor"
+   ],
+   "correct": 1,
+   "explain": "Corelația intră în termenul încrucișat; cu ρ mare, varianța reziduală e mai mică, deci biroul poate rula expunere brută mai mare în limita bugetului de risc.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum se comportă, de regulă, corelațiile în timpul crizelor de piață?",
+   "options": [
+    "Rămân perfect constante",
+    "Tind să scadă spre zero",
+    "Tind să crească spre +1, activele prăbușindu-se împreună",
+    "Devin mereu negative"
+   ],
+   "correct": 2,
+   "explain": "În crize, corelațiile cresc (ρ → +1): chiar și active normal diversificate cad împreună, reducând beneficiul diversificării exact când e mai necesar.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este o tranzacție de „estompare a corelației” (correlation fade)?",
+   "options": [
+    "Eviți orice tranzacționare în pereche",
+    "Vinzi toate activele când ρ scade",
+    "Cumperi doar active necorelate",
+    "Pariezi că două nume istoric corelate, care s-au decuplat recent fără motiv fundamental, vor reveni la corelația lor obișnuită"
+   ],
+   "correct": 3,
+   "explain": "Când ρ scade temporar (ex. de la 0,85 la 0,50) fără schimbare fundamentală, biroul pariază (cu sumă mică) pe revenirea ρ la media sa.",
+   "kind": "text"
+  },
+  {
+   "q": "Pe lângă ρ, ce alți factori verifică biroul înainte de a deschide o tranzacție în pereche?",
+   "options": [
+    "Lichiditatea, riscul de eveniment și costul de finanțare",
+    "Doar culoarea graficului",
+    "Numărul de angajați al firmei",
+    "Vechimea coeficientului în ani"
+   ],
+   "correct": 0,
+   "explain": "Spread-uri largi, rezultate financiare/șocuri sau taxe mari de împrumut pot anula avantajul teoretic, oricât de proaspăt ar fi ρ.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce indică o valoare-p (p-value) mică (< 0,05) pentru o corelație?",
+   "options": [
+    "Corelația este sigur cauzală",
+    "Corelația este probabil semnificativă statistic, nu din pură întâmplare",
+    "Eșantionul este prea mic",
+    "Corelația este negativă"
+   ],
+   "correct": 1,
+   "explain": "O valoare-p mică sugerează că e improbabil ca acea corelație să fi apărut din întâmplare; nu dovedește însă cauzalitate.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este o corelație „falsă” (spurious)?",
+   "options": [
+    "O corelație negativă perfectă",
+    "O corelație care depășește 1",
+    "O corelație aparent puternică apărută din întâmplare, mai ales când se examinează multe perechi simultan",
+    "O corelație calculată corect pe date mari"
+   ],
+   "correct": 2,
+   "explain": "Examinarea multor perechi de active crește șansa de a găsi corelații puternice pur întâmplătoare; testarea statistică ajută la filtrarea lor.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce o corelație puternică NU înseamnă predictibilitate?",
+   "options": [
+    "Pentru că prețurile nu se schimbă niciodată",
+    "Pentru că r puternic e mereu o eroare",
+    "Pentru că predicția cere ρ = 0",
+    "Corelația indică doar o relație istorică, nu una garantată în viitor"
+   ],
+   "correct": 3,
+   "explain": "Corelația este retrospectivă; structurile pieței evoluează și relațiile se pot rupe, deci nu poți prezice sigur o poziție din cealaltă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este covarianța (covariance) în procesul de calcul al corelației?",
+   "options": [
+    "O măsură a cât de mult se mișcă două variabile împreună, înainte de a fi scalată în r",
+    "Media celor două seturi de date",
+    "Prețul unei acțiuni",
+    "Eroarea standard a eșantionului"
+   ],
+   "correct": 0,
+   "explain": "Covarianța măsoară mișcarea comună brută; împărțită la produsul abaterilor standard, devine coeficientul de corelație r.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce non-staționaritatea (schimbările de regim) face o corelație unică înșelătoare?",
+   "options": [
+    "Pentru că face ρ să depășească 1",
+    "Când varianța sau media de bază se schimbă, presupunerea că ρ e constant pe eșantion se prăbușește",
+    "Pentru că elimină valorile extreme",
+    "Pentru că transformă datele în unități noi"
+   ],
+   "correct": 1,
+   "explain": "În regimuri diferite (volatilitate scăzută vs. ridicată), relația reală poate schimba semn sau magnitudine, deci o cifră unică poate induce în eroare.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce volatilitățile diferite pot distorsiona interpretarea unei corelații?",
+   "options": [
+    "Pentru că volatilitatea nu există în portofolii",
+    "Pentru că r crește mereu cu volatilitatea",
+    "r e lipsit de scară și ignoră cât de volatil e fiecare activ; cel volatil poate domina riscul deși ρ pare modest",
+    "Pentru că ρ măsoară chiar volatilitatea"
+   ],
+   "correct": 2,
+   "explain": "Corelația nu ține cont de mărimea mișcărilor; un activ foarte volatil poate domina riscul portofoliului chiar și la o corelație modestă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este recomandarea practică privind interpretarea unui singur număr de corelație?",
+   "options": [
+    "Consideră-l valabil pe veci dacă e peste 0,9",
+    "Bazează-te exclusiv pe el pentru toate deciziile",
+    "Ignoră-l complet în trading",
+    "Tratează-l ca pe un instantaneu, nu ca pe o lege permanentă; folosește mai multe ferestre și instrumente complementare"
+   ],
+   "correct": 3,
+   "explain": "Capitolul recomandă tratarea ρ ca instantaneu, folosirea mai multor ferestre temporale și completarea cu Spearman, copule sau analiză de scenarii.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un administrator de grădiniță observă corelație negativă între copiii din Zona A și Zona B. Ce decizie de alocare e justificată?",
+   "options": [
+    "Poate cumpăra mai puține jucării în total, fiindcă cererea nu va atinge vârful în ambele zone simultan",
+    "Trebuie să dubleze jucăriile în ambele zone",
+    "Trebuie să închidă o zonă",
+    "Nu poate lua nicio decizie"
+   ],
+   "correct": 0,
+   "explain": "Cu corelație negativă, vârfurile de cerere nu coincid, deci jucăriile pot fi partajate, reducând nevoia totală — exact ideea de diversificare aplicată la alocare.",
+   "kind": "concept"
+  }
+ ]
+}

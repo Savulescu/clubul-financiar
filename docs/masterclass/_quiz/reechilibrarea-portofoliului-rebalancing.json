@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este scopul principal al reechilibrării (rebalancing) unui portofoliu?","options":["A prezice care activ va performa cel mai bine în viitor","A menține profilul de risc aliniat cu alocarea-țintă stabilită","A genera profit suplimentar prin tranzacționare frecventă","A elimina complet costurile de tranzacționare"],"correct":1,"explain":"Reechilibrarea readuce ponderile la alocarea-țintă pentru a menține riscul stabil și predictibil, nu pentru a prezice piața sau a genera profit.","kind":"concept"},
-{"q":"De ce derivă (drift) ponderile unui portofoliu chiar dacă nu cumperi și nu vinzi nicio acțiune?","options":["Pentru că brokerul ajustează automat pozițiile","Pentru că activele se mișcă în sus și în jos în proporții diferite","Pentru că inflația modifică valoarea numerarului","Pentru că dividendele se reinvestesc automat"],"correct":1,"explain":"Fiecare activ se mișcă după propriul ritm; pentru că mișcările diferă, felia pe care o reprezintă fiecare în avuția totală se schimbă fără nicio tranzacție.","kind":"concept"},
-{"q":"Analogia cu regulatorul de turație (governor) al unui motor ilustrează faptul că reechilibrarea:","options":["Accelerează portofoliul când piața urcă","Prezice direcția pieței înainte de a tranzacționa","Menține portofoliul într-o bandă sigură, fără a prezice câștigătorii","Maximizează randamentul în orice condiții"],"correct":2,"explain":"Ca regulatorul care ține turația într-o bandă sigură indiferent de pantă, reechilibrarea ține ponderile în limite, fără a prezice ce activ va performa.","kind":"concept"},
-{"q":"Un portofoliu țintă 60% acțiuni / 40% obligațiuni devine 70/30 după o piață puternică. Reechilibrarea corectă înseamnă:","options":["A cumpăra mai multe acțiuni pentru a urmări trendul","A vinde acțiuni și a cumpăra obligațiuni până la 60/40","A nu face nimic, pentru că acțiunile cresc","A vinde tot și a trece în numerar"],"correct":1,"explain":"Reechilibrarea vinde activul supraponderat (acțiunile) și cumpără pe cel subponderat (obligațiunile) pentru a reveni la raportul-țintă 60/40.","kind":"concept"},
-{"q":"De ce este greșit să crezi că reechilibrarea „blochează profitul”?","options":["Pentru că reechilibrarea nu implică niciodată vânzări","Pentru că este doar un instrument de control al riscului, nu o strategie de profit","Pentru că prețurile nu se schimbă niciodată","Pentru că profitul este garantat prin diversificare"],"correct":1,"explain":"Reechilibrarea menține profilul de risc stabil; nu garantează și nu „blochează” profit într-un sens magic. Este disciplină, nu pariu pe randament.","kind":"concept"},
-{"q":"Ce este o bandă de toleranță (tolerance band) în reechilibrare?","options":["Procentul maxim de comision permis de broker","Intervalul în jurul țintei în care abaterea este acceptată fără a tranzacționa","Numărul maxim de tranzacții pe zi","Pierderea maximă tolerată într-un an"],"correct":1,"explain":"Banda de toleranță definește cât poate devia o pondere de la țintă înainte de a declanșa o tranzacție de reechilibrare.","kind":"text"},
-{"q":"În exemplul TinyGrowth, politica era „reechilibrează dacă vreo pondere derivă cu mai mult de 0,50%”. Când A ajunge la 59,68% (țintă 60%), biroul:","options":["Vinde imediat acțiuni A","Nu tranzacționează, fiindcă 0,32% < 0,50%","Lichidează poziția B","Schimbă ponderea-țintă la 59,68%"],"correct":1,"explain":"Derivă de 0,32% este sub pragul de 0,50%, deci portofoliul rămâne în toleranță și nu sunt necesare tranzacții.","kind":"text"},
-{"q":"Care sunt cele trei tipuri principale de reechilibrare descrise în mecanism?","options":["Manuală, automată și hibridă","Discretă (la intervale fixe), continuă și pe prag (threshold)","Zilnică, săptămânală și anuală","Pe acțiuni, pe obligațiuni și pe mărfuri"],"correct":1,"explain":"Capitolul descrie reechilibrarea discretă (la intervale fixe), continuă (pe măsură ce prețurile se schimbă) și pe prag (când abaterea depășește un nivel).","kind":"text"},
-{"q":"Ce înseamnă marcarea la piață (mark-to-market), primul pas de pe birou în exemplul rezolvat?","options":["Stabilirea unei noi ponderi-țintă","Reevaluarea fiecărei dețineri la prețul live pentru a afla expunerea reală în dolari","Vânzarea tuturor pozițiilor la închidere","Calculul comisioanelor de tranzacționare"],"correct":1,"explain":"Mark-to-market reprice fiecare deținere la prețul mid live, astfel încât biroul să cunoască expunerea reală în dolari în momentul deciziei.","kind":"text"},
-{"q":"De ce poate părea contraintuitiv să vinzi un activ care tocmai a crescut, în cadrul reechilibrării?","options":["Pentru că pare că renunți la câștiguri, deși scopul e controlul riscului","Pentru că vânzarea este interzisă de reglementări","Pentru că crește mereu costul de tranzacționare","Pentru că obligațiunile sunt mai riscante decât acțiunile"],"correct":0,"explain":"Vânzarea câștigătorului pare a renunța la profit, dar analogia cu cârma bărcii arată că scopul e să rămâi pe curs (riscul-țintă), nu să urmărești câștiguri.","kind":"concept"},
-{"q":"De ce sunt benzile de toleranță preferabile pragurilor fixe rigide (ex. „5% pe orice poziție”)?","options":["Pentru că sunt impuse legal","Pentru că mișcările mici se compun rapid, iar pragul fix declanșează rulaj inutil în piețe în trend","Pentru că elimină complet riscul","Pentru că nu necesită monitorizare"],"correct":1,"explain":"Un prag fix per activ poate declanșa repetat tranzacții în aceeași direcție într-un trend, generând rulaj și comisioane; banda agregată reduce zgomotul.","kind":"concept"},
-{"q":"Un spread de 0,1% pe un ordin de 100 de milioane $ poate costa aproximativ:","options":["100 $","1.000 $","100.000 $","10 milioane $"],"correct":2,"explain":"0,1% × 100.000.000 $ = 100.000 $ — capitolul folosește acest exemplu pentru a sublinia impactul costurilor de tranzacționare la volume mari.","kind":"text"},
-{"q":"Care este diferența între reechilibrare și atribuirea performanței (performance attribution)?","options":["Sunt termeni identici","Reechilibrarea restabilește mecanic ponderile; atribuirea explică de ce s-au schimbat","Atribuirea cumpără active, reechilibrarea le vinde","Reechilibrarea se face doar anual"],"correct":1,"explain":"Reechilibrarea este un proces mecanic care restabilește ponderile; atribuirea performanței explică de ce s-au schimbat. Confundarea lor duce la decizii greșite.","kind":"concept"},
-{"q":"Dacă biroul vrea cu adevărat să reducă riscul pe tech, abordarea corectă este:","options":["Să folosească reechilibrarea ca portiță pentru a ieși din tech","Să schimbe ponderile-țintă din IPS (politica de investiții)","Să ignore complet poziția pe tech","Să tranzacționeze intraday pe zgomot"],"correct":1,"explain":"O reducere reală de risc înseamnă schimbarea țintei în IPS, nu folosirea reechilibrării vechilor ținte ca portiță — altfel portofoliul derivă din nou imediat.","kind":"concept"},
-{"q":"De ce este riscant să reechilibrezi intraday pe prețuri zgomotoase (Level-2)?","options":["Pentru că prețurile pot reveni imediat, generând rulaj și regret","Pentru că reglementările interzic tranzacțiile intraday","Pentru că închiderea pieței anulează ordinele","Pentru că obligațiunile nu se tranzacționează intraday"],"correct":0,"explain":"Prețurile de pe ecran pâlpâie; o abatere văzută la 11:03 poate dispărea la 11:05. Folosirea prețurilor de referință stabile (închidere/dimineață) evită churn-ul.","kind":"concept"},
-{"q":"Cum afectează ponderile o acțiune corporativă precum un dividend, fără nicio tranzacție?","options":["Nu afectează ponderile deloc","Schimbă ponderile prin numerar/preț, putând arunca portofoliul în afara țintei","Garantează revenirea la țintă automat","Dublează valoarea poziției"],"correct":1,"explain":"Dividendele, divizările și cupoanele schimbă ponderile fără tranzacții; biroul trebuie să recalculeze ponderile după fiecare acțiune corporativă.","kind":"concept"},
-{"q":"Ce înseamnă amestecarea reechilibrării cu înclinațiile tactice (tactical tilts) și de ce e o greșeală?","options":["Combinarea controlului riscului cu căutarea randamentului într-un singur pas confuz","Folosirea a două brokeri diferiți","Reechilibrarea de două ori pe zi","Tranzacționarea doar a obligațiunilor"],"correct":0,"explain":"Reechilibrarea (control de risc) și înclinația (căutare de randament) sunt decizii separate; biroul restabilește mai întâi mecanic ponderile IPS, apoi aplică separat suprapuneri tactice.","kind":"concept"},
-{"q":"De ce este importantă arhivarea jurnalului de tranzacții (blotter) după reechilibrare?","options":["Pentru a impresiona clienții","Pentru a dovedi la conformitate că abaterea a fost în toleranță și execuția corectă","Pentru a calcula dividendele","Pentru a evita plata comisioanelor"],"correct":1,"explain":"Fără o înregistrare datată (marcaj temporal, prețuri, dimensiuni de ordine), biroul nu poate dovedi că reechilibrarea a fost corectă atunci când conformitatea întreabă.","kind":"concept"},
-{"q":"Ce capcană apare când prețurile se mișcă prea rapid pentru ca reechilibrarea să le prindă (gap risk)?","options":["Raportul de la închidere arată corect ponderile, dar breșa apare în P&L-ul zilei următoare","Reechilibrarea devine gratuită","Volatilitatea dispare automat","Banda de toleranță se lărgește singură"],"correct":0,"explain":"Toleranța măsurată la închidere poate ascunde o breșă intraday; raportul arată „în toleranță”, dar pierderea apare a doua zi când explodează P&L-ul.","kind":"concept"},
-{"q":"În schimbarea de regim (regime change), de ce eșuează reechilibrarea mecanică?","options":["Pentru că prețurile nu mai există","Pentru că corelațiile stabile se inversează, iar scriptul alocă pe baza vechii matrici de covarianță","Pentru că brokerul închide contul","Pentru că dividendele cresc"],"correct":1,"explain":"În criză, corelațiile pot flipa; un 60/40 poate ajunge la 100% acțiuni, dar regula mecanică impune disciplina greșită folosind vechea covarianță.","kind":"concept"},
-{"q":"Care este protecția practică recomandată împotriva nepotrivirilor de monedă/finanțare (FX mismatch)?","options":["Ignorarea diferențelor de monedă","Calculul mișcării FX celei mai nefavorabile și rezervarea unei marje egale cu 1,5× derivă","Tranzacționarea doar în USD","Eliminarea obligațiunilor din portofoliu"],"correct":1,"explain":"Capitolul recomandă o suprapunere de finanțare: pentru fiecare nepotrivire de monedă, rezervă o marjă de 1,5× derivă în funcție de cea mai nefavorabilă mișcare FX.","kind":"text"},
-{"q":"Care este „regula de aur” pentru birourile de nivel începător privind reechilibrarea?","options":["Reechilibrează cât mai des posibil","Reechilibrarea nu înseamnă să prezici prețurile, ci să impui disciplină","Folosește mereu praguri fixe de 5%","Reechilibrează doar manual"],"correct":1,"explain":"Regula de aur: reechilibrarea impune disciplină, nu prezicere; orice abatere din emoție, optimizare sau neglijență adaugă zgomot fără avantaj.","kind":"concept"},
-{"q":"Reechilibrarea este descrisă mai degrabă ca:","options":["O strategie de generare de profit","Un instrument de management al riscului","O metodă de a evita impozitele","O tehnică de predicție a pieței"],"correct":1,"explain":"Concluziile-cheie subliniază explicit că reechilibrarea este un instrument de management al riscului menit să mențină ponderile-țintă, nu să genereze profit.","kind":"text"},
-{"q":"Conform constrângerilor din al doilea scenariu (3 clase de active), care era limita de reechilibrare zilnică pe un portofoliu de 100.000 $?","options":["1.000 $ (1%)","5.000 $ (5%)","10.000 $ (10%)","20.000 $ (20%)"],"correct":2,"explain":"Constrângerea era „putem reechilibra doar 10% din portofoliu într-o singură zi”, adică 10.000 $ pe un portofoliu de 100.000 $.","kind":"text"},
-{"q":"Ce trebuie să întrebi mereu, conform capitolului, înainte de a decide o tranzacție de reechilibrare?","options":["Cât profit voi face?","Mai este ponderea în interiorul benzii de toleranță?","Ce face concurența?","Care broker are comisionul cel mai mic?"],"correct":1,"explain":"Disciplina corectă este să întrebi dacă ponderea mai e în bandă: dacă da, nu faci nimic; dacă nu, ajustezi la țintă indiferent de direcția prețului.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este scopul principal al reechilibrării (rebalancing) unui portofoliu?",
+   "options": [
+    "A prezice care activ va performa cel mai bine în viitor",
+    "A elimina complet costurile de tranzacționare",
+    "A genera profit suplimentar prin tranzacționare frecventă",
+    "A menține profilul de risc aliniat cu alocarea-țintă stabilită"
+   ],
+   "correct": 3,
+   "explain": "Reechilibrarea readuce ponderile la alocarea-țintă pentru a menține riscul stabil și predictibil, nu pentru a prezice piața sau a genera profit.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce derivă (drift) ponderile unui portofoliu chiar dacă nu cumperi și nu vinzi nicio acțiune?",
+   "options": [
+    "Pentru că activele se mișcă în sus și în jos în proporții diferite",
+    "Pentru că brokerul ajustează automat pozițiile",
+    "Pentru că inflația modifică valoarea numerarului",
+    "Pentru că dividendele se reinvestesc automat"
+   ],
+   "correct": 0,
+   "explain": "Fiecare activ se mișcă după propriul ritm; pentru că mișcările diferă, felia pe care o reprezintă fiecare în avuția totală se schimbă fără nicio tranzacție.",
+   "kind": "concept"
+  },
+  {
+   "q": "Analogia cu regulatorul de turație (governor) al unui motor ilustrează faptul că reechilibrarea:",
+   "options": [
+    "Accelerează portofoliul când piața urcă",
+    "Menține portofoliul într-o bandă sigură, fără a prezice câștigătorii",
+    "Prezice direcția pieței înainte de a tranzacționa",
+    "Maximizează randamentul în orice condiții"
+   ],
+   "correct": 1,
+   "explain": "Ca regulatorul care ține turația într-o bandă sigură indiferent de pantă, reechilibrarea ține ponderile în limite, fără a prezice ce activ va performa.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un portofoliu țintă 60% acțiuni / 40% obligațiuni devine 70/30 după o piață puternică. Reechilibrarea corectă înseamnă:",
+   "options": [
+    "A cumpăra mai multe acțiuni pentru a urmări trendul",
+    "A nu face nimic, pentru că acțiunile cresc",
+    "A vinde acțiuni și a cumpăra obligațiuni până la 60/40",
+    "A vinde tot și a trece în numerar"
+   ],
+   "correct": 2,
+   "explain": "Reechilibrarea vinde activul supraponderat (acțiunile) și cumpără pe cel subponderat (obligațiunile) pentru a reveni la raportul-țintă 60/40.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este greșit să crezi că reechilibrarea „blochează profitul”?",
+   "options": [
+    "Pentru că reechilibrarea nu implică niciodată vânzări",
+    "Pentru că profitul este garantat prin diversificare",
+    "Pentru că prețurile nu se schimbă niciodată",
+    "Pentru că este doar un instrument de control al riscului, nu o strategie de profit"
+   ],
+   "correct": 3,
+   "explain": "Reechilibrarea menține profilul de risc stabil; nu garantează și nu „blochează” profit într-un sens magic. Este disciplină, nu pariu pe randament.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este o bandă de toleranță (tolerance band) în reechilibrare?",
+   "options": [
+    "Intervalul în jurul țintei în care abaterea este acceptată fără a tranzacționa",
+    "Procentul maxim de comision permis de broker",
+    "Numărul maxim de tranzacții pe zi",
+    "Pierderea maximă tolerată într-un an"
+   ],
+   "correct": 0,
+   "explain": "Banda de toleranță definește cât poate devia o pondere de la țintă înainte de a declanșa o tranzacție de reechilibrare.",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul TinyGrowth, politica era „reechilibrează dacă vreo pondere derivă cu mai mult de 0,50%”. Când A ajunge la 59,68% (țintă 60%), biroul:",
+   "options": [
+    "Vinde imediat acțiuni A",
+    "Nu tranzacționează, fiindcă 0,32% < 0,50%",
+    "Lichidează poziția B",
+    "Schimbă ponderea-țintă la 59,68%"
+   ],
+   "correct": 1,
+   "explain": "Derivă de 0,32% este sub pragul de 0,50%, deci portofoliul rămâne în toleranță și nu sunt necesare tranzacții.",
+   "kind": "text"
+  },
+  {
+   "q": "Care sunt cele trei tipuri principale de reechilibrare descrise în mecanism?",
+   "options": [
+    "Manuală, automată și hibridă",
+    "Zilnică, săptămânală și anuală",
+    "Discretă (la intervale fixe), continuă și pe prag (threshold)",
+    "Pe acțiuni, pe obligațiuni și pe mărfuri"
+   ],
+   "correct": 2,
+   "explain": "Capitolul descrie reechilibrarea discretă (la intervale fixe), continuă (pe măsură ce prețurile se schimbă) și pe prag (când abaterea depășește un nivel).",
+   "kind": "text"
+  },
+  {
+   "q": "Ce înseamnă marcarea la piață (mark-to-market), primul pas de pe birou în exemplul rezolvat?",
+   "options": [
+    "Stabilirea unei noi ponderi-țintă",
+    "Calculul comisioanelor de tranzacționare",
+    "Vânzarea tuturor pozițiilor la închidere",
+    "Reevaluarea fiecărei dețineri la prețul live pentru a afla expunerea reală în dolari"
+   ],
+   "correct": 3,
+   "explain": "Mark-to-market reprice fiecare deținere la prețul mid live, astfel încât biroul să cunoască expunerea reală în dolari în momentul deciziei.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce poate părea contraintuitiv să vinzi un activ care tocmai a crescut, în cadrul reechilibrării?",
+   "options": [
+    "Pentru că pare că renunți la câștiguri, deși scopul e controlul riscului",
+    "Pentru că vânzarea este interzisă de reglementări",
+    "Pentru că crește mereu costul de tranzacționare",
+    "Pentru că obligațiunile sunt mai riscante decât acțiunile"
+   ],
+   "correct": 0,
+   "explain": "Vânzarea câștigătorului pare a renunța la profit, dar analogia cu cârma bărcii arată că scopul e să rămâi pe curs (riscul-țintă), nu să urmărești câștiguri.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce sunt benzile de toleranță preferabile pragurilor fixe rigide (ex. „5% pe orice poziție”)?",
+   "options": [
+    "Pentru că sunt impuse legal",
+    "Pentru că mișcările mici se compun rapid, iar pragul fix declanșează rulaj inutil în piețe în trend",
+    "Pentru că elimină complet riscul",
+    "Pentru că nu necesită monitorizare"
+   ],
+   "correct": 1,
+   "explain": "Un prag fix per activ poate declanșa repetat tranzacții în aceeași direcție într-un trend, generând rulaj și comisioane; banda agregată reduce zgomotul.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un spread de 0,1% pe un ordin de 100 de milioane $ poate costa aproximativ:",
+   "options": [
+    "100 $",
+    "1.000 $",
+    "100.000 $",
+    "10 milioane $"
+   ],
+   "correct": 2,
+   "explain": "0,1% × 100.000.000 $ = 100.000 $ — capitolul folosește acest exemplu pentru a sublinia impactul costurilor de tranzacționare la volume mari.",
+   "kind": "text"
+  },
+  {
+   "q": "Care este diferența între reechilibrare și atribuirea performanței (performance attribution)?",
+   "options": [
+    "Sunt termeni identici",
+    "Reechilibrarea se face doar anual",
+    "Atribuirea cumpără active, reechilibrarea le vinde",
+    "Reechilibrarea restabilește mecanic ponderile; atribuirea explică de ce s-au schimbat"
+   ],
+   "correct": 3,
+   "explain": "Reechilibrarea este un proces mecanic care restabilește ponderile; atribuirea performanței explică de ce s-au schimbat. Confundarea lor duce la decizii greșite.",
+   "kind": "concept"
+  },
+  {
+   "q": "Dacă biroul vrea cu adevărat să reducă riscul pe tech, abordarea corectă este:",
+   "options": [
+    "Să schimbe ponderile-țintă din IPS (politica de investiții)",
+    "Să folosească reechilibrarea ca portiță pentru a ieși din tech",
+    "Să ignore complet poziția pe tech",
+    "Să tranzacționeze intraday pe zgomot"
+   ],
+   "correct": 0,
+   "explain": "O reducere reală de risc înseamnă schimbarea țintei în IPS, nu folosirea reechilibrării vechilor ținte ca portiță — altfel portofoliul derivă din nou imediat.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este riscant să reechilibrezi intraday pe prețuri zgomotoase (Level-2)?",
+   "options": [
+    "Pentru că reglementările interzic tranzacțiile intraday",
+    "Pentru că prețurile pot reveni imediat, generând rulaj și regret",
+    "Pentru că închiderea pieței anulează ordinele",
+    "Pentru că obligațiunile nu se tranzacționează intraday"
+   ],
+   "correct": 1,
+   "explain": "Prețurile de pe ecran pâlpâie; o abatere văzută la 11:03 poate dispărea la 11:05. Folosirea prețurilor de referință stabile (închidere/dimineață) evită churn-ul.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum afectează ponderile o acțiune corporativă precum un dividend, fără nicio tranzacție?",
+   "options": [
+    "Nu afectează ponderile deloc",
+    "Garantează revenirea la țintă automat",
+    "Schimbă ponderile prin numerar/preț, putând arunca portofoliul în afara țintei",
+    "Dublează valoarea poziției"
+   ],
+   "correct": 2,
+   "explain": "Dividendele, divizările și cupoanele schimbă ponderile fără tranzacții; biroul trebuie să recalculeze ponderile după fiecare acțiune corporativă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă amestecarea reechilibrării cu înclinațiile tactice (tactical tilts) și de ce e o greșeală?",
+   "options": [
+    "Tranzacționarea doar a obligațiunilor",
+    "Folosirea a două brokeri diferiți",
+    "Reechilibrarea de două ori pe zi",
+    "Combinarea controlului riscului cu căutarea randamentului într-un singur pas confuz"
+   ],
+   "correct": 3,
+   "explain": "Reechilibrarea (control de risc) și înclinația (căutare de randament) sunt decizii separate; biroul restabilește mai întâi mecanic ponderile IPS, apoi aplică separat suprapuneri tactice.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este importantă arhivarea jurnalului de tranzacții (blotter) după reechilibrare?",
+   "options": [
+    "Pentru a dovedi la conformitate că abaterea a fost în toleranță și execuția corectă",
+    "Pentru a impresiona clienții",
+    "Pentru a calcula dividendele",
+    "Pentru a evita plata comisioanelor"
+   ],
+   "correct": 0,
+   "explain": "Fără o înregistrare datată (marcaj temporal, prețuri, dimensiuni de ordine), biroul nu poate dovedi că reechilibrarea a fost corectă atunci când conformitatea întreabă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce capcană apare când prețurile se mișcă prea rapid pentru ca reechilibrarea să le prindă (gap risk)?",
+   "options": [
+    "Reechilibrarea devine gratuită",
+    "Raportul de la închidere arată corect ponderile, dar breșa apare în P&L-ul zilei următoare",
+    "Volatilitatea dispare automat",
+    "Banda de toleranță se lărgește singură"
+   ],
+   "correct": 1,
+   "explain": "Toleranța măsurată la închidere poate ascunde o breșă intraday; raportul arată „în toleranță”, dar pierderea apare a doua zi când explodează P&L-ul.",
+   "kind": "concept"
+  },
+  {
+   "q": "În schimbarea de regim (regime change), de ce eșuează reechilibrarea mecanică?",
+   "options": [
+    "Pentru că prețurile nu mai există",
+    "Pentru că brokerul închide contul",
+    "Pentru că corelațiile stabile se inversează, iar scriptul alocă pe baza vechii matrici de covarianță",
+    "Pentru că dividendele cresc"
+   ],
+   "correct": 2,
+   "explain": "În criză, corelațiile pot flipa; un 60/40 poate ajunge la 100% acțiuni, dar regula mecanică impune disciplina greșită folosind vechea covarianță.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este protecția practică recomandată împotriva nepotrivirilor de monedă/finanțare (FX mismatch)?",
+   "options": [
+    "Ignorarea diferențelor de monedă",
+    "Eliminarea obligațiunilor din portofoliu",
+    "Tranzacționarea doar în USD",
+    "Calculul mișcării FX celei mai nefavorabile și rezervarea unei marje egale cu 1,5× derivă"
+   ],
+   "correct": 3,
+   "explain": "Capitolul recomandă o suprapunere de finanțare: pentru fiecare nepotrivire de monedă, rezervă o marjă de 1,5× derivă în funcție de cea mai nefavorabilă mișcare FX.",
+   "kind": "text"
+  },
+  {
+   "q": "Care este „regula de aur” pentru birourile de nivel începător privind reechilibrarea?",
+   "options": [
+    "Reechilibrarea nu înseamnă să prezici prețurile, ci să impui disciplină",
+    "Reechilibrează cât mai des posibil",
+    "Folosește mereu praguri fixe de 5%",
+    "Reechilibrează doar manual"
+   ],
+   "correct": 0,
+   "explain": "Regula de aur: reechilibrarea impune disciplină, nu prezicere; orice abatere din emoție, optimizare sau neglijență adaugă zgomot fără avantaj.",
+   "kind": "concept"
+  },
+  {
+   "q": "Reechilibrarea este descrisă mai degrabă ca:",
+   "options": [
+    "O strategie de generare de profit",
+    "Un instrument de management al riscului",
+    "O metodă de a evita impozitele",
+    "O tehnică de predicție a pieței"
+   ],
+   "correct": 1,
+   "explain": "Concluziile-cheie subliniază explicit că reechilibrarea este un instrument de management al riscului menit să mențină ponderile-țintă, nu să genereze profit.",
+   "kind": "text"
+  },
+  {
+   "q": "Conform constrângerilor din al doilea scenariu (3 clase de active), care era limita de reechilibrare zilnică pe un portofoliu de 100.000 $?",
+   "options": [
+    "1.000 $ (1%)",
+    "5.000 $ (5%)",
+    "10.000 $ (10%)",
+    "20.000 $ (20%)"
+   ],
+   "correct": 2,
+   "explain": "Constrângerea era „putem reechilibra doar 10% din portofoliu într-o singură zi”, adică 10.000 $ pe un portofoliu de 100.000 $.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce trebuie să întrebi mereu, conform capitolului, înainte de a decide o tranzacție de reechilibrare?",
+   "options": [
+    "Cât profit voi face?",
+    "Care broker are comisionul cel mai mic?",
+    "Ce face concurența?",
+    "Mai este ponderea în interiorul benzii de toleranță?"
+   ],
+   "correct": 3,
+   "explain": "Disciplina corectă este să întrebi dacă ponderea mai e în bandă: dacă da, nu faci nimic; dacă nu, ajustezi la țintă indiferent de direcția prețului.",
+   "kind": "concept"
+  }
+ ]
+}

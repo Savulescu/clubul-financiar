@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Ce este, în esență, o limită de poziție (position limit)?","options":["Un plafon asupra dimensiunii maxime pe care un cont sau grup de conturi conexe o poate deține într-un instrument","Numărul maxim de tranzacții permise într-o zi","Pierderea maximă acceptată într-un scenariu de stres","Comisionul perceput pentru deschiderea unei poziții mari"],"correct":0,"explain":"O limită de poziție plafonează dimensiunea maximă a deținerii într-un instrument, la orice moment.","kind":"concept"},
-{"q":"De ce există limitele de poziție pe piețele financiare?","options":["Pentru a împiedica un participant să acumuleze o poziție atât de mare încât să distorsioneze prețurile sau să creeze risc sistemic","Pentru a garanta profituri investitorilor mici","Pentru a crește lichiditatea prin tranzacții mai dese","Pentru a elimina complet riscul de pierdere"],"correct":0,"explain":"Scopul principal este prevenirea concentrării excesive care ar putea distorsiona prețul sau bloca piața.","kind":"concept"},
-{"q":"Cum se exprimă de regulă un plafon de poziție?","options":["Ca procent din free-float, din valoarea noțională sau din volumul de tranzacționare","Întotdeauna ca un număr fix de acțiuni, identic pentru toate instrumentele","Ca procent din capitalul propriu al brokerului","Ca durata maximă în zile a deținerii"],"correct":0,"explain":"Plafonul se exprimă în mod uzual ca procent din free-float, noțional sau volum, în funcție de piață.","kind":"text"},
-{"q":"Limitele de poziție se aplică doar pozițiilor long (de cumpărare)?","options":["Nu — se aplică simetric și pozițiilor short, fiindcă riscul de manipulare sau lichidare dezordonată este simetric","Da, doar pozițiilor long","Doar pozițiilor short, fiindcă vânzarea în lipsă e mai riscantă","Doar pozițiilor deținute peste noapte"],"correct":0,"explain":"Cineva short pe 10.000 de acțiuni e la fel de constrâns ca cineva long; regula numără ambele picioare.","kind":"concept"},
-{"q":"Ce înseamnă calculul pe bază de „look-through” (transparență a controlului)?","options":["Pozițiile fondurilor cu același administrator sau beneficiar real se agregă și se tratează ca o singură deținere","Fiecare fond este verificat complet separat, fără agregare","Se ia în calcul doar poziția cea mai mare a grupului","Se ignoră pozițiile sub un anumit prag"],"correct":0,"explain":"Look-through împiedică ocolirea regulii prin împărțirea unei mize pe mai multe entități controlate de același decident.","kind":"text"},
-{"q":"Cât de des este verificată o limită de poziție într-un sistem modern?","options":["Continuu, de regulă după fiecare tranzacție, respingând automat ordinele care ar depăși limita","O singură dată, la deschiderea contului","Doar la finalul fiecărei zile de tranzacționare","Doar lunar, în raportul de conformitate"],"correct":0,"explain":"Verificarea în timp real este ceea ce face regula eficientă; controalele doar zilnice ar permite acumulări ilegale peste noapte.","kind":"concept"},
-{"q":"Prin ce diferă limitele de poziție de limitele de risc?","options":["Limitele de poziție plafonează dimensiunea deținerii indiferent de preț; limitele de risc plafonează pierderea potențială în scenarii de stres","Sunt termeni identici","Limitele de poziție se aplică doar derivativelor, cele de risc doar acțiunilor","Limitele de risc se verifică în timp real, cele de poziție niciodată"],"correct":0,"explain":"Limita de poziție vizează pura dimensiune; limita de risc vizează pierderea potențială sub stres.","kind":"concept"},
-{"q":"Un trader a acumulat deja 4,2% din volumul zilei, iar limita este 5%. Cât mai poate cumpăra?","options":["Cel mult 0,8% din volumul zilei","Încă 5% din volum","Nimic, fiindcă orice cumpărare e interzisă peste 4%","Până la 4,2% suplimentar"],"correct":0,"explain":"Spațiul rămas (headroom) este 5% − 4,2% = 0,8%; sistemul respinge sau reduce orice ordin mai mare.","kind":"concept"},
-{"q":"Ce face sistemul de risc cu un ordin care ar depăși limita de poziție?","options":["Îl respinge sau îi reduce dimensiunea („clip”) la spațiul rămas disponibil","Îl execută și trimite o avertizare ulterioară","Îl pune automat pe partea short","Îl execută la jumătate din preț"],"correct":0,"explain":"Ordinul este respins sau redus la reziduul disponibil, prevenind mecanic încălcarea.","kind":"text"},
-{"q":"De ce confundarea limitelor de poziție cu limitele de tranzacționare este o greșeală frecventă?","options":["Limitele de tranzacționare restricționează numărul de tranzacții, iar cele de poziție previn acumularea excesivă a unui activ","Ambele restricționează același lucru, deci nu contează","Limitele de tranzacționare se aplică doar fondurilor","Limitele de poziție se aplică doar tranzacționării intraday"],"correct":0,"explain":"Sunt concepte distincte: număr de tranzacții vs. mărimea deținerii; nu sunt interschimbabile.","kind":"concept"},
-{"q":"De ce derivativele complică respectarea limitelor de poziție?","options":["Pot crește semnificativ expunerea la un activ și pot fi folosite pentru a ocoli limitele","Sunt mereu scutite de limite","Reduc automat expunerea sub limită","Nu au nicio legătură cu pozițiile pe activul-suport"],"correct":0,"explain":"Futures și opțiunile pot amplifica expunerea și pot fi folosite pentru a circumventa limitele.","kind":"concept"},
-{"q":"Este hedging-ul scutit de limitele de poziție?","options":["Nu — hedging-ul poate fi în continuare supus limitelor de poziție","Da, întotdeauna scutit","Doar dacă folosește opțiuni","Doar pentru investitori individuali"],"correct":0,"explain":"Unii cred greșit că hedging-ul e exceptat; în realitate poate fi supus limitelor.","kind":"text"},
-{"q":"Când se aplică limita unei serii de contracte (mai multe scadențe), cum se calculează?","options":["Pe expunerea totală agregată a seriei (noțional ajustat cu delta), nu pe fiecare picior separat","Separat pentru fiecare scadență, fără agregare","Doar pentru scadența cea mai apropiată","Pe media aritmetică a picioarelor"],"correct":0,"explain":"Agregarea pe serie împiedică „felierea” limitei pe picioare pentru a o ocoli.","kind":"concept"},
-{"q":"De ce biroul de tranzacționare își sincronizează ordinele mari cu zilele de volum ridicat?","options":["Pentru că limita e bazată pe volum, deci volumul mare oferă mai mult headroom sub același procent","Pentru că în zilele cu volum mare comisioanele sunt mai mici","Pentru că reglementatorul cere asta explicit","Pentru a ascunde tranzacțiile de concurenți"],"correct":0,"explain":"Un plafon procentual din volum oferă mai mult spațiu absolut când volumul e mai mare.","kind":"concept"},
-{"q":"Ce este disciplina de „end-of-day flattening” (aplatizare la final de zi)?","options":["Reducerea pozițiilor în ultima oră astfel încât biroul să fie sub limita pentru ziua următoare","Închiderea completă a tuturor pozițiilor în fiecare seară, obligatoriu","Mutarea pozițiilor pe contul unui alt birou","Raportarea câștigurilor zilnice către clienți"],"correct":0,"explain":"Biroul reduce expunerea ca să nu încalce limita zilei următoare; sistemul poate aplatiza automat reziduul.","kind":"text"},
-{"q":"Ce sunt „crowded trades” (tranzacțiile aglomerate) și de ce slăbesc limitele de poziție?","options":["Mulți participanți fac tranzacții similare, iar efectul cumulat poate depăși niveluri sigure deși fiecare limită individuală e respectată","Tranzacții executate într-o piață cu prea mulți brokeri","Ordine plasate simultan de un singur trader","Tranzacții pe instrumente nelistate"],"correct":0,"explain":"Limitele individuale pot fi respectate, dar expunerea agregată a pieței devine periculoasă.","kind":"concept"},
-{"q":"De ce limitele de poziție pot crea un „fals sentiment de siguranță”?","options":["Pentru că nu elimină riscul de pierdere și pot duce la complacere și scăderea vigilenței","Pentru că garantează profit","Pentru că sunt verificate doar manual","Pentru că se aplică doar pozițiilor mici"],"correct":0,"explain":"Limitele reduc expunerea excesivă, dar nu garantează împotriva pierderilor; complacerea crește riscul.","kind":"concept"},
-{"q":"De ce depind limitele de poziție de date de referință corecte (ex. free-float)?","options":["Un free-float învechit sau o acțiune corporativă poate face calculul greșit, creând o încălcare falsă sau o alertă ratată","Pentru că datele de referință stabilesc comisioanele","Pentru că reglementatorul cere doar date lunare","Datele de referință nu influențează calculul"],"correct":0,"explain":"Calculul ca procent din free-float devine inexact dacă cifra de referință e greșită.","kind":"text"},
-{"q":"De ce sunt limitele de poziție mai puțin fiabile în piețe nelichide sau OTC?","options":["Este greu de măsurat noționalul în circulație și de lichidat rapid o poziție mare","Pentru că nu există reglementator în acele piețe","Pentru că prețurile sunt mereu fixe","Pentru că nu se pot deschide poziții short"],"correct":0,"explain":"În piețe nelichide/personalizate, măsurarea și lichidarea sunt dificile; sunt necesare garanții suplimentare.","kind":"concept"},
-{"q":"De ce sunt limitele de poziție considerate un control „static”?","options":["Nu se adaptează automat la condițiile în schimbare; o poziție sigură ieri poate deveni periculoasă azi în volatilitate extremă","Pentru că valoarea lor nu poate fi schimbată niciodată","Pentru că se calculează o singură dată pe an","Pentru că se aplică doar pieței statice de obligațiuni"],"correct":0,"explain":"Fiind statice, se combină cu limite de risc dinamice și circuit breakers pentru protecție proporțională.","kind":"concept"},
-{"q":"Cum poate procedura de excepție permite depășirea temporară a unei limite?","options":["Traderul cere formal o excepție, motivată și cu orizont de ieșire, aprobată de ofițerii seniori de risc","Traderul depășește limita și raportează ulterior, fără aprobare","Sistemul ridică automat limita la cerere","Excepțiile sunt interzise în orice situație"],"correct":0,"explain":"Procesul este formal și non-automat: cerere motivată plus aprobare senior, ca limita să nu fie tratată ca opțională.","kind":"text"},
-{"q":"O încălcare a limitei de poziție poate declanșa și alte consecințe de reglementare?","options":["Da — poate declanșa o raportare obligatorie a expunerii mari și o reducere forțată a mizei într-un interval scurt","Nu, încălcarea rămâne strict internă","Da, dar doar amendă, fără raportare","Nu, doar dacă poziția e short"],"correct":0,"explain":"Limitele interacționează cu raportarea expunerilor mari și limitele de concentrare; încălcarea are consecințe în aval.","kind":"concept"},
-{"q":"Cum afectează statutul entității limitele de poziție?","options":["Un trader individual poate avea limite diferite față de o corporație sau un fond","Statutul entității nu are niciun efect","Doar fondurile au limite, indivizii nu","Corporațiile sunt mereu scutite de limite"],"correct":0,"explain":"Statutul entității influențează limitele aplicabile; e o sursă frecventă de greșeli pentru începători.","kind":"text"},
-{"q":"De ce nu este eficacitatea limitelor de poziție în prevenirea manipulării un fapt unanim acceptat?","options":["Limitele prea jos pot bloca activitatea legitimă, iar cele prea înalte pot fi ineficiente — un compromis dezbătut de reglementatori","Pentru că nimeni nu le respectă","Pentru că nu există date despre piețe","Pentru că manipularea nu există în piețele reglementate"],"correct":0,"explain":"Designul optim echilibrează prevenirea manipulării cu permiterea activității legitime; rămâne o dezbatere.","kind":"concept"},
-{"q":"Conform dovezilor, ce rol au în principal limitele de poziție?","options":["Instrument de control al riscului, nu un generator de profit (alpha)","Principala sursă de randament a unui fond","Un substitut pentru ordinele stop-loss","O metodă de a crește efectul de levier"],"correct":0,"explain":"Studiile asociază limitele cu mai puține încălcări de marjă și volatilitate intra-day mai mică, dar nu cu profitabilitate sporită; sunt control al riscului.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce este, în esență, o limită de poziție (position limit)?",
+   "options": [
+    "Comisionul perceput pentru deschiderea unei poziții mari",
+    "Numărul maxim de tranzacții permise într-o zi",
+    "Pierderea maximă acceptată într-un scenariu de stres",
+    "Un plafon asupra dimensiunii maxime pe care un cont sau grup de conturi conexe o poate deține într-un instrument"
+   ],
+   "correct": 3,
+   "explain": "O limită de poziție plafonează dimensiunea maximă a deținerii într-un instrument, la orice moment.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce există limitele de poziție pe piețele financiare?",
+   "options": [
+    "Pentru a împiedica un participant să acumuleze o poziție atât de mare încât să distorsioneze prețurile sau să creeze risc sistemic",
+    "Pentru a garanta profituri investitorilor mici",
+    "Pentru a crește lichiditatea prin tranzacții mai dese",
+    "Pentru a elimina complet riscul de pierdere"
+   ],
+   "correct": 0,
+   "explain": "Scopul principal este prevenirea concentrării excesive care ar putea distorsiona prețul sau bloca piața.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum se exprimă de regulă un plafon de poziție?",
+   "options": [
+    "Întotdeauna ca un număr fix de acțiuni, identic pentru toate instrumentele",
+    "Ca procent din free-float, din valoarea noțională sau din volumul de tranzacționare",
+    "Ca procent din capitalul propriu al brokerului",
+    "Ca durata maximă în zile a deținerii"
+   ],
+   "correct": 1,
+   "explain": "Plafonul se exprimă în mod uzual ca procent din free-float, noțional sau volum, în funcție de piață.",
+   "kind": "text"
+  },
+  {
+   "q": "Limitele de poziție se aplică doar pozițiilor long (de cumpărare)?",
+   "options": [
+    "Doar pozițiilor short, fiindcă vânzarea în lipsă e mai riscantă",
+    "Da, doar pozițiilor long",
+    "Nu — se aplică simetric și pozițiilor short, fiindcă riscul de manipulare sau lichidare dezordonată este simetric",
+    "Doar pozițiilor deținute peste noapte"
+   ],
+   "correct": 2,
+   "explain": "Cineva short pe 10.000 de acțiuni e la fel de constrâns ca cineva long; regula numără ambele picioare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă calculul pe bază de „look-through” (transparență a controlului)?",
+   "options": [
+    "Se ignoră pozițiile sub un anumit prag",
+    "Fiecare fond este verificat complet separat, fără agregare",
+    "Se ia în calcul doar poziția cea mai mare a grupului",
+    "Pozițiile fondurilor cu același administrator sau beneficiar real se agregă și se tratează ca o singură deținere"
+   ],
+   "correct": 3,
+   "explain": "Look-through împiedică ocolirea regulii prin împărțirea unei mize pe mai multe entități controlate de același decident.",
+   "kind": "text"
+  },
+  {
+   "q": "Cât de des este verificată o limită de poziție într-un sistem modern?",
+   "options": [
+    "Continuu, de regulă după fiecare tranzacție, respingând automat ordinele care ar depăși limita",
+    "O singură dată, la deschiderea contului",
+    "Doar la finalul fiecărei zile de tranzacționare",
+    "Doar lunar, în raportul de conformitate"
+   ],
+   "correct": 0,
+   "explain": "Verificarea în timp real este ceea ce face regula eficientă; controalele doar zilnice ar permite acumulări ilegale peste noapte.",
+   "kind": "concept"
+  },
+  {
+   "q": "Prin ce diferă limitele de poziție de limitele de risc?",
+   "options": [
+    "Sunt termeni identici",
+    "Limitele de poziție plafonează dimensiunea deținerii indiferent de preț; limitele de risc plafonează pierderea potențială în scenarii de stres",
+    "Limitele de poziție se aplică doar derivativelor, cele de risc doar acțiunilor",
+    "Limitele de risc se verifică în timp real, cele de poziție niciodată"
+   ],
+   "correct": 1,
+   "explain": "Limita de poziție vizează pura dimensiune; limita de risc vizează pierderea potențială sub stres.",
+   "kind": "concept"
+  },
+  {
+   "q": "Un trader a acumulat deja 4,2% din volumul zilei, iar limita este 5%. Cât mai poate cumpăra?",
+   "options": [
+    "Nimic, fiindcă orice cumpărare e interzisă peste 4%",
+    "Încă 5% din volum",
+    "Cel mult 0,8% din volumul zilei",
+    "Până la 4,2% suplimentar"
+   ],
+   "correct": 2,
+   "explain": "Spațiul rămas (headroom) este 5% − 4,2% = 0,8%; sistemul respinge sau reduce orice ordin mai mare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce face sistemul de risc cu un ordin care ar depăși limita de poziție?",
+   "options": [
+    "Îl execută la jumătate din preț",
+    "Îl execută și trimite o avertizare ulterioară",
+    "Îl pune automat pe partea short",
+    "Îl respinge sau îi reduce dimensiunea („clip”) la spațiul rămas disponibil"
+   ],
+   "correct": 3,
+   "explain": "Ordinul este respins sau redus la reziduul disponibil, prevenind mecanic încălcarea.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce confundarea limitelor de poziție cu limitele de tranzacționare este o greșeală frecventă?",
+   "options": [
+    "Limitele de tranzacționare restricționează numărul de tranzacții, iar cele de poziție previn acumularea excesivă a unui activ",
+    "Ambele restricționează același lucru, deci nu contează",
+    "Limitele de tranzacționare se aplică doar fondurilor",
+    "Limitele de poziție se aplică doar tranzacționării intraday"
+   ],
+   "correct": 0,
+   "explain": "Sunt concepte distincte: număr de tranzacții vs. mărimea deținerii; nu sunt interschimbabile.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce derivativele complică respectarea limitelor de poziție?",
+   "options": [
+    "Sunt mereu scutite de limite",
+    "Pot crește semnificativ expunerea la un activ și pot fi folosite pentru a ocoli limitele",
+    "Reduc automat expunerea sub limită",
+    "Nu au nicio legătură cu pozițiile pe activul-suport"
+   ],
+   "correct": 1,
+   "explain": "Futures și opțiunile pot amplifica expunerea și pot fi folosite pentru a circumventa limitele.",
+   "kind": "concept"
+  },
+  {
+   "q": "Este hedging-ul scutit de limitele de poziție?",
+   "options": [
+    "Doar dacă folosește opțiuni",
+    "Da, întotdeauna scutit",
+    "Nu — hedging-ul poate fi în continuare supus limitelor de poziție",
+    "Doar pentru investitori individuali"
+   ],
+   "correct": 2,
+   "explain": "Unii cred greșit că hedging-ul e exceptat; în realitate poate fi supus limitelor.",
+   "kind": "text"
+  },
+  {
+   "q": "Când se aplică limita unei serii de contracte (mai multe scadențe), cum se calculează?",
+   "options": [
+    "Pe media aritmetică a picioarelor",
+    "Separat pentru fiecare scadență, fără agregare",
+    "Doar pentru scadența cea mai apropiată",
+    "Pe expunerea totală agregată a seriei (noțional ajustat cu delta), nu pe fiecare picior separat"
+   ],
+   "correct": 3,
+   "explain": "Agregarea pe serie împiedică „felierea” limitei pe picioare pentru a o ocoli.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce biroul de tranzacționare își sincronizează ordinele mari cu zilele de volum ridicat?",
+   "options": [
+    "Pentru că limita e bazată pe volum, deci volumul mare oferă mai mult headroom sub același procent",
+    "Pentru că în zilele cu volum mare comisioanele sunt mai mici",
+    "Pentru că reglementatorul cere asta explicit",
+    "Pentru a ascunde tranzacțiile de concurenți"
+   ],
+   "correct": 0,
+   "explain": "Un plafon procentual din volum oferă mai mult spațiu absolut când volumul e mai mare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este disciplina de „end-of-day flattening” (aplatizare la final de zi)?",
+   "options": [
+    "Închiderea completă a tuturor pozițiilor în fiecare seară, obligatoriu",
+    "Reducerea pozițiilor în ultima oră astfel încât biroul să fie sub limita pentru ziua următoare",
+    "Mutarea pozițiilor pe contul unui alt birou",
+    "Raportarea câștigurilor zilnice către clienți"
+   ],
+   "correct": 1,
+   "explain": "Biroul reduce expunerea ca să nu încalce limita zilei următoare; sistemul poate aplatiza automat reziduul.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce sunt „crowded trades” (tranzacțiile aglomerate) și de ce slăbesc limitele de poziție?",
+   "options": [
+    "Ordine plasate simultan de un singur trader",
+    "Tranzacții executate într-o piață cu prea mulți brokeri",
+    "Mulți participanți fac tranzacții similare, iar efectul cumulat poate depăși niveluri sigure deși fiecare limită individuală e respectată",
+    "Tranzacții pe instrumente nelistate"
+   ],
+   "correct": 2,
+   "explain": "Limitele individuale pot fi respectate, dar expunerea agregată a pieței devine periculoasă.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce limitele de poziție pot crea un „fals sentiment de siguranță”?",
+   "options": [
+    "Pentru că se aplică doar pozițiilor mici",
+    "Pentru că garantează profit",
+    "Pentru că sunt verificate doar manual",
+    "Pentru că nu elimină riscul de pierdere și pot duce la complacere și scăderea vigilenței"
+   ],
+   "correct": 3,
+   "explain": "Limitele reduc expunerea excesivă, dar nu garantează împotriva pierderilor; complacerea crește riscul.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce depind limitele de poziție de date de referință corecte (ex. free-float)?",
+   "options": [
+    "Un free-float învechit sau o acțiune corporativă poate face calculul greșit, creând o încălcare falsă sau o alertă ratată",
+    "Pentru că datele de referință stabilesc comisioanele",
+    "Pentru că reglementatorul cere doar date lunare",
+    "Datele de referință nu influențează calculul"
+   ],
+   "correct": 0,
+   "explain": "Calculul ca procent din free-float devine inexact dacă cifra de referință e greșită.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce sunt limitele de poziție mai puțin fiabile în piețe nelichide sau OTC?",
+   "options": [
+    "Pentru că nu există reglementator în acele piețe",
+    "Este greu de măsurat noționalul în circulație și de lichidat rapid o poziție mare",
+    "Pentru că prețurile sunt mereu fixe",
+    "Pentru că nu se pot deschide poziții short"
+   ],
+   "correct": 1,
+   "explain": "În piețe nelichide/personalizate, măsurarea și lichidarea sunt dificile; sunt necesare garanții suplimentare.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce sunt limitele de poziție considerate un control „static”?",
+   "options": [
+    "Pentru că se calculează o singură dată pe an",
+    "Pentru că valoarea lor nu poate fi schimbată niciodată",
+    "Nu se adaptează automat la condițiile în schimbare; o poziție sigură ieri poate deveni periculoasă azi în volatilitate extremă",
+    "Pentru că se aplică doar pieței statice de obligațiuni"
+   ],
+   "correct": 2,
+   "explain": "Fiind statice, se combină cu limite de risc dinamice și circuit breakers pentru protecție proporțională.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum poate procedura de excepție permite depășirea temporară a unei limite?",
+   "options": [
+    "Excepțiile sunt interzise în orice situație",
+    "Traderul depășește limita și raportează ulterior, fără aprobare",
+    "Sistemul ridică automat limita la cerere",
+    "Traderul cere formal o excepție, motivată și cu orizont de ieșire, aprobată de ofițerii seniori de risc"
+   ],
+   "correct": 3,
+   "explain": "Procesul este formal și non-automat: cerere motivată plus aprobare senior, ca limita să nu fie tratată ca opțională.",
+   "kind": "text"
+  },
+  {
+   "q": "O încălcare a limitei de poziție poate declanșa și alte consecințe de reglementare?",
+   "options": [
+    "Da — poate declanșa o raportare obligatorie a expunerii mari și o reducere forțată a mizei într-un interval scurt",
+    "Nu, încălcarea rămâne strict internă",
+    "Da, dar doar amendă, fără raportare",
+    "Nu, doar dacă poziția e short"
+   ],
+   "correct": 0,
+   "explain": "Limitele interacționează cu raportarea expunerilor mari și limitele de concentrare; încălcarea are consecințe în aval.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum afectează statutul entității limitele de poziție?",
+   "options": [
+    "Statutul entității nu are niciun efect",
+    "Un trader individual poate avea limite diferite față de o corporație sau un fond",
+    "Doar fondurile au limite, indivizii nu",
+    "Corporațiile sunt mereu scutite de limite"
+   ],
+   "correct": 1,
+   "explain": "Statutul entității influențează limitele aplicabile; e o sursă frecventă de greșeli pentru începători.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce nu este eficacitatea limitelor de poziție în prevenirea manipulării un fapt unanim acceptat?",
+   "options": [
+    "Pentru că nu există date despre piețe",
+    "Pentru că nimeni nu le respectă",
+    "Limitele prea jos pot bloca activitatea legitimă, iar cele prea înalte pot fi ineficiente — un compromis dezbătut de reglementatori",
+    "Pentru că manipularea nu există în piețele reglementate"
+   ],
+   "correct": 2,
+   "explain": "Designul optim echilibrează prevenirea manipulării cu permiterea activității legitime; rămâne o dezbatere.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform dovezilor, ce rol au în principal limitele de poziție?",
+   "options": [
+    "O metodă de a crește efectul de levier",
+    "Principala sursă de randament a unui fond",
+    "Un substitut pentru ordinele stop-loss",
+    "Instrument de control al riscului, nu un generator de profit (alpha)"
+   ],
+   "correct": 3,
+   "explain": "Studiile asociază limitele cu mai puține încălcări de marjă și volatilitate intra-day mai mică, dar nu cu profitabilitate sporită; sunt control al riscului.",
+   "kind": "concept"
+  }
+ ]
+}

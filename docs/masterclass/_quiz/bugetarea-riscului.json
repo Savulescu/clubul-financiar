@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este ideea centrală a bugetării riscului (risk budgeting)?","options":["Decizi câți bani pui pe fiecare tranzacție și apoi calculezi riscul","Decizi cât risc are voie să adauge fiecare tranzacție la grămada totală, iar capitalul urmează după aceea","Maximizezi randamentul fără să te uiți la pierderi","Aloci capital egal fiecărei poziții"],"correct":1,"explain":"Bugetarea riscului pune riscul pe primul loc: hotărăști cât risc lași fiecare tranzacție să adauge, iar numerarul vine după.","kind":"concept"},
-{"q":"Prin ce diferă bugetarea riscului de alocarea capitalului (capital allocation)?","options":["Sunt exact același lucru cu nume diferite","Alocarea capitalului decide câți bani intră, iar bugetarea riscului decide cât risc poartă acei bani","Bugetarea riscului se ocupă doar de acțiuni, alocarea capitalului doar de obligațiuni","Bugetarea riscului ignoră corelațiile, alocarea capitalului nu"],"correct":1,"explain":"O tranzacție poate folosi puțini bani dar purta un risc uriaș (ex. o opțiune deep out-of-the-money), deci cele două nu sunt echivalente.","kind":"concept"},
-{"q":"Cum este definit riscul în acest capitol?","options":["Probabilitatea de a pierde bani","Mărimea pierderii dacă aceasta se întâmplă, măsurată în aceleași unități ca randamentele","Numărul de tranzacții pierzătoare dintr-un an","Diferența dintre preț și valoarea reală"],"correct":1,"explain":"Riscul nu este șansa de a pierde, ci mărimea pierderii în cazul cel mai rău sau probabil — exprimată în procente sau dolari.","kind":"text"},
-{"q":"De ce traderii transformă totul într-o „unitate de risc” comună (risk unit)?","options":["Pentru a plăti comisioane mai mici","Pentru că fiecare instrument se mișcă diferit, iar un etalon comun permite comparații corecte","Pentru a evita plata impozitelor","Pentru că reglementatorii interzic dolarii bruți"],"correct":1,"explain":"Riscul e prea mare ca să fie discutat în dolari bruți fiindcă instrumentele se mișcă diferit; o unitate comună (ex. 1% din preț) le aduce pe toate la același etalon.","kind":"concept"},
-{"q":"Ce este riscul marginal (incremental) al unei tranzacții noi?","options":["Riscul total al întregului portofoliu","Riscul suplimentar pe care îl adaugă acea tranzacție la grămada existentă","Profitul minim pe care trebuie să-l aducă tranzacția","Costul comisionului de tranzacționare"],"correct":1,"explain":"Riscul marginal este creșterea de risc adăugată de o poziție nouă; deskul trebuie să aibă cel puțin atâta risc liber în buget înainte de a o executa.","kind":"text"},
-{"q":"O poziție produce 2 din cele 8 unități de risc folosite de un desk. Care este contribuția ei la risc (risk contribution)?","options":["8%","16%","25%","50%"],"correct":2,"explain":"Contribuția la risc = 2 / 8 = 25%. Ea arată ce fracțiune din bugetul total este responsabilă acea poziție.","kind":"concept"},
-{"q":"Ce este beneficiul diversificării (diversification benefit)?","options":["Randamentul suplimentar din deținerea mai multor active","Reducerea riscului combinat sub suma riscurilor individuale când pozițiile se mișcă în direcții opuse","Comisionul mai mic pentru portofolii mari","Garantarea că nu pierzi niciodată bani"],"correct":1,"explain":"Două poziții de câte 1 unitate care se mișcă în direcții opuse pot adăuga doar 1,2 unități în loc de 2; cele 0,8 economisite sunt beneficiul diversificării.","kind":"text"},
-{"q":"Dacă bugetarea riscului ignoră complet corelațiile dintre poziții, ce se întâmplă cu estimarea riscului total?","options":["Devine mai precisă","Riscul real este supraestimat, deoarece nu se ține cont de beneficiul diversificării","Riscul devine zero","Nu se schimbă nimic"],"correct":1,"explain":"Fără corelații, aduni naiv riscurile individuale și supraestimezi riscul când există beneficiu de diversificare (sau îl subestimezi când activele sunt corelate pozitiv).","kind":"concept"},
-{"q":"Ce este o limită de risc (risk limit) pe un desk?","options":["O sugestie care poate fi ignorată dacă profitul e bun","Plafonul rigid maxim de risc pe care un desk, trader sau strategie are voie să-l folosească la un moment dat","Randamentul minim cerut de investitori","Numărul maxim de tranzacții pe zi"],"correct":1,"explain":"Limita de risc este un plafon rigid, ca o limită de card de credit; dacă e atinsă, nu se mai adaugă tranzacții până nu se eliberează risc.","kind":"text"},
-{"q":"De ce este recomandat ca un începător să trateze monitorul de risc ca pe un indicator de combustibil?","options":["Pentru că arată cât profit a făcut deskul","Pentru că arată în timp real cât risc se folosește și cât de aproape ești de limite — nu lăsa acul în roșu","Pentru că prezice prețul de mâine","Pentru că înlocuiește nevoia de a tranzacționa"],"correct":1,"explain":"Monitorul/panoul de risc arată live consumul de risc față de limite; analogia cu indicatorul de combustibil amintește să nu intri în zona roșie.","kind":"concept"},
-{"q":"În bucla de mecanică, ce perioadă de referință standard se folosește pentru matricea de covarianță a randamentelor zilnice?","options":["30 de zile","100 de zile","252 de zile de tranzacționare","500 de zile"],"correct":2,"explain":"Capitolul folosește 252 de zile de tranzacționare (aproximativ un an bursier) ca perioadă-standard pentru volatilitățile zilnice.","kind":"text"},
-{"q":"De ce trebuie evitat biasul de privire în viitor (look-ahead bias) în bucla de bugetare a riscului?","options":["Pentru a economisi putere de calcul","Pentru că folosirea covarianței de mâine în decizia de azi falsifică rezultatul; se folosește matricea de la închiderea zilei","Pentru a reduce comisioanele","Pentru că reglementatorii cer date de mâine"],"correct":1,"explain":"Nu poți folosi informația viitoare în decizia prezentă; trebuie folosită matricea de covarianță de la închiderea zilei curente.","kind":"concept"},
-{"q":"Conform filtrului de lichiditate din capitol, când ar trebui exclus un instrument din bugetul de risc?","options":["Când prețul lui scade","Când volumul mediu zilnic este mai mic de 1,5× mărimea pe care plănuiești să o tranzacționezi","Când are corelație pozitivă cu piața","Când are randament așteptat scăzut"],"correct":1,"explain":"Dacă lichiditatea (volumul mediu zilnic) e sub 1,5× mărimea tranzacției, instrumentul se exclude sau se lărgește banda permisă, ca să eviți probleme de execuție.","kind":"text"},
-{"q":"De ce este bucla de bugetare a riscului ținută intenționat simplă (fără Black-Litterman, fără shrinkage bayesian)?","options":["Pentru că metodele complexe sunt ilegale","Pentru că pe un desk real trebuie să poți explica fiecare cifră unui PM stresat în sub trei minute","Pentru că simplitatea garantează profit","Pentru că Excel nu suportă metode complexe"],"correct":1,"explain":"Transparența și viteza de explicare contează pe un desk live; complexitatea inutilă face cifrele greu de apărat sub presiune.","kind":"concept"},
-{"q":"În al doilea scenariu, DV01-ul swap-ului EUR pe 5 ani e 4,2 bp/100M. Cu un buget de 18,2 bp, care e limita noțională aproximativă pe 5 ani?","options":["~256 M","~433 M","~180 M","~130 M"],"correct":1,"explain":"Limita noțională = 18,2 ÷ 4,2 × 100 M ≈ 433 M. Formula împarte bugetul de risc la DV01-ul per 100 M.","kind":"concept"},
-{"q":"De ce a ales traderul să aloce 70% din buget swap-ului pe 10 ani și doar 30% celui pe 5 ani?","options":["Pentru că cel pe 10 ani avea DV01 mai mic","Pentru că durata mai mare a celui pe 10 ani reducea sensibilitatea la majorări, exact ce ceruse CIO-ul","Pentru că era mai ieftin de tranzacționat","Pentru că reglementatorul impunea 70/30"],"correct":1,"explain":"CIO-ul a cerut mai puțină sensibilitate la majorări; durata 8,3 a celui pe 10 ani (față de 4,7) servea acest scop pe o curbă care se înclina.","kind":"concept"},
-{"q":"Ce rol are ceasul VaR (VaR clock) de pe registrul deskului?","options":["Arată ora locală a pieței","Arată în timp real procentul din VaR consumat; la 90% devine portocaliu și impune aprobare manuală, iar la 100% îngheață ordinele","Calculează comisioanele zilnice","Prezice randamentul de mâine"],"correct":1,"explain":"Ceasul VaR semnalează apropierea de limita rigidă: la 90% cere aprobare manuală, la 100% îngheață ordinele și alertează controlorul de risc.","kind":"text"},
-{"q":"Ce face „comutatorul de oprire VaR” (kill switch) dacă ceasul VaR atinge 100% într-un salt grav de piață?","options":["Dublează automat pozițiile pentru a recupera","Aplatizează toate pozițiile deskului în sub 30 de secunde","Trimite un e-mail investitorilor","Crește automat bugetul de risc"],"correct":1,"explain":"Kill switch-ul aplatizează (lichidează) toate pozițiile deskului foarte rapid, ca firma să nu depășească niciodată bugetul de risc absorbabil.","kind":"text"},
-{"q":"Ce NU face deskul disciplinat conform capitolului?","options":["Verifică ceasul VaR","Dimensionează pozițiile „din intuiție” sau „convingere”, ignorând limita VaR","Folosește motorul de risc în timp real","Reconciliază la sfârșitul zilei"],"correct":1,"explain":"Limita VaR este arbitrul final; deskul nu dimensionează după feeling și nu ignoră ceasul VaR chiar dacă profitul e pozitiv.","kind":"concept"},
-{"q":"De ce sunt datele istorice o limită a bugetării riscului?","options":["Sunt prea costisitoare de obținut","Performanța trecută poate să nu reflecte condițiile viitoare; crizele (ex. 2008) schimbă rapid piața","Sunt întotdeauna falsificate","Reglementatorii le interzic"],"correct":1,"explain":"Bugetele bazate pe trecut pot deveni irelevante când piața se schimbă brusc; criza din 2008 e exemplul clasic.","kind":"concept"},
-{"q":"De ce poate fi înșelător VaR-ul ca singură metrică de risc?","options":["Supraestimează mereu riscul","Măsoară pierderea pe un orizont dat, dar nu ține cont de probabilitatea evenimentelor extreme (de coadă)","Este interzis de reglementatori","Funcționează doar pentru obligațiuni"],"correct":1,"explain":"VaR nu surprinde bine cozile distribuției; de aceea capitolul recomandă combinarea cu expected shortfall (ES) și teste de stres.","kind":"text"},
-{"q":"Cum afectează comportamentul uman eficacitatea bugetării riscului?","options":["Nu are niciun efect, modelele sunt automate","Traderii pot depăși riscul alocat din supraîncredere sau dorința de a impresiona, ceea ce modelele matematice nu prind","Garantează respectarea limitelor","Reduce automat levierul"],"correct":1,"explain":"Modelele presupun comportament rațional; emoțiile, prejudecățile și presiunile sociale pot face un trader să-și asume mai mult risc decât alocat.","kind":"concept"},
-{"q":"Care este nivelul tipic de limită maximă de concentrare recomandat pentru o singură strategie sau trader?","options":["1-2% din buget","5-10% din buget","20-30% din buget","50-60% din buget"],"correct":2,"explain":"O limită de concentrare de 20-30% din bugetul total împiedică o singură explozie să consume întreaga alocație de risc.","kind":"text"},
-{"q":"De ce se recomandă păstrarea unei rezerve de contingență de 5-10% din bugetul de risc?","options":["Pentru a plăti comisioanele","Ca fond de ultimă instanță pentru oportunități neașteptate sau acoperire în criză, neprealocat și aprobat de controlorul de risc","Pentru a crește levierul","Pentru a evita reechilibrarea"],"correct":1,"explain":"Rezerva de contingență nu se prealocă; rămâne un fond de criză/oportunitate care necesită aprobarea controlorului de risc.","kind":"concept"},
-{"q":"De ce se spune că bugetarea riscului este un „control, nu o prognoză”?","options":["Pentru că prezice exact pierderile viitoare","Pentru că îți spune maximul pe care îl poți pierde în condiții normale, nu maximul pe care îl vei pierde; trebuie completată cu teste de stres","Pentru că garantează profit","Pentru că elimină complet riscul"],"correct":1,"explain":"Bugetarea riscului mărginește pierderea în condiții normale, dar nu prezice viitorul; de aceea se asociază cu teste de stres independente și verificări de lichiditate.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este ideea centrală a bugetării riscului (risk budgeting)?",
+   "options": [
+    "Decizi câți bani pui pe fiecare tranzacție și apoi calculezi riscul",
+    "Decizi cât risc are voie să adauge fiecare tranzacție la grămada totală, iar capitalul urmează după aceea",
+    "Maximizezi randamentul fără să te uiți la pierderi",
+    "Aloci capital egal fiecărei poziții"
+   ],
+   "correct": 1,
+   "explain": "Bugetarea riscului pune riscul pe primul loc: hotărăști cât risc lași fiecare tranzacție să adauge, iar numerarul vine după.",
+   "kind": "concept"
+  },
+  {
+   "q": "Prin ce diferă bugetarea riscului de alocarea capitalului (capital allocation)?",
+   "options": [
+    "Sunt exact același lucru cu nume diferite",
+    "Bugetarea riscului se ocupă doar de acțiuni, alocarea capitalului doar de obligațiuni",
+    "Alocarea capitalului decide câți bani intră, iar bugetarea riscului decide cât risc poartă acei bani",
+    "Bugetarea riscului ignoră corelațiile, alocarea capitalului nu"
+   ],
+   "correct": 2,
+   "explain": "O tranzacție poate folosi puțini bani dar purta un risc uriaș (ex. o opțiune deep out-of-the-money), deci cele două nu sunt echivalente.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum este definit riscul în acest capitol?",
+   "options": [
+    "Probabilitatea de a pierde bani",
+    "Diferența dintre preț și valoarea reală",
+    "Numărul de tranzacții pierzătoare dintr-un an",
+    "Mărimea pierderii dacă aceasta se întâmplă, măsurată în aceleași unități ca randamentele"
+   ],
+   "correct": 3,
+   "explain": "Riscul nu este șansa de a pierde, ci mărimea pierderii în cazul cel mai rău sau probabil — exprimată în procente sau dolari.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce traderii transformă totul într-o „unitate de risc” comună (risk unit)?",
+   "options": [
+    "Pentru că fiecare instrument se mișcă diferit, iar un etalon comun permite comparații corecte",
+    "Pentru a plăti comisioane mai mici",
+    "Pentru a evita plata impozitelor",
+    "Pentru că reglementatorii interzic dolarii bruți"
+   ],
+   "correct": 0,
+   "explain": "Riscul e prea mare ca să fie discutat în dolari bruți fiindcă instrumentele se mișcă diferit; o unitate comună (ex. 1% din preț) le aduce pe toate la același etalon.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este riscul marginal (incremental) al unei tranzacții noi?",
+   "options": [
+    "Riscul total al întregului portofoliu",
+    "Riscul suplimentar pe care îl adaugă acea tranzacție la grămada existentă",
+    "Profitul minim pe care trebuie să-l aducă tranzacția",
+    "Costul comisionului de tranzacționare"
+   ],
+   "correct": 1,
+   "explain": "Riscul marginal este creșterea de risc adăugată de o poziție nouă; deskul trebuie să aibă cel puțin atâta risc liber în buget înainte de a o executa.",
+   "kind": "text"
+  },
+  {
+   "q": "O poziție produce 2 din cele 8 unități de risc folosite de un desk. Care este contribuția ei la risc (risk contribution)?",
+   "options": [
+    "8%",
+    "16%",
+    "25%",
+    "50%"
+   ],
+   "correct": 2,
+   "explain": "Contribuția la risc = 2 / 8 = 25%. Ea arată ce fracțiune din bugetul total este responsabilă acea poziție.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este beneficiul diversificării (diversification benefit)?",
+   "options": [
+    "Randamentul suplimentar din deținerea mai multor active",
+    "Garantarea că nu pierzi niciodată bani",
+    "Comisionul mai mic pentru portofolii mari",
+    "Reducerea riscului combinat sub suma riscurilor individuale când pozițiile se mișcă în direcții opuse"
+   ],
+   "correct": 3,
+   "explain": "Două poziții de câte 1 unitate care se mișcă în direcții opuse pot adăuga doar 1,2 unități în loc de 2; cele 0,8 economisite sunt beneficiul diversificării.",
+   "kind": "text"
+  },
+  {
+   "q": "Dacă bugetarea riscului ignoră complet corelațiile dintre poziții, ce se întâmplă cu estimarea riscului total?",
+   "options": [
+    "Riscul real este supraestimat, deoarece nu se ține cont de beneficiul diversificării",
+    "Devine mai precisă",
+    "Riscul devine zero",
+    "Nu se schimbă nimic"
+   ],
+   "correct": 0,
+   "explain": "Fără corelații, aduni naiv riscurile individuale și supraestimezi riscul când există beneficiu de diversificare (sau îl subestimezi când activele sunt corelate pozitiv).",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este o limită de risc (risk limit) pe un desk?",
+   "options": [
+    "O sugestie care poate fi ignorată dacă profitul e bun",
+    "Plafonul rigid maxim de risc pe care un desk, trader sau strategie are voie să-l folosească la un moment dat",
+    "Randamentul minim cerut de investitori",
+    "Numărul maxim de tranzacții pe zi"
+   ],
+   "correct": 1,
+   "explain": "Limita de risc este un plafon rigid, ca o limită de card de credit; dacă e atinsă, nu se mai adaugă tranzacții până nu se eliberează risc.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este recomandat ca un începător să trateze monitorul de risc ca pe un indicator de combustibil?",
+   "options": [
+    "Pentru că arată cât profit a făcut deskul",
+    "Pentru că prezice prețul de mâine",
+    "Pentru că arată în timp real cât risc se folosește și cât de aproape ești de limite — nu lăsa acul în roșu",
+    "Pentru că înlocuiește nevoia de a tranzacționa"
+   ],
+   "correct": 2,
+   "explain": "Monitorul/panoul de risc arată live consumul de risc față de limite; analogia cu indicatorul de combustibil amintește să nu intri în zona roșie.",
+   "kind": "concept"
+  },
+  {
+   "q": "În bucla de mecanică, ce perioadă de referință standard se folosește pentru matricea de covarianță a randamentelor zilnice?",
+   "options": [
+    "30 de zile",
+    "100 de zile",
+    "500 de zile",
+    "252 de zile de tranzacționare"
+   ],
+   "correct": 3,
+   "explain": "Capitolul folosește 252 de zile de tranzacționare (aproximativ un an bursier) ca perioadă-standard pentru volatilitățile zilnice.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce trebuie evitat biasul de privire în viitor (look-ahead bias) în bucla de bugetare a riscului?",
+   "options": [
+    "Pentru că folosirea covarianței de mâine în decizia de azi falsifică rezultatul; se folosește matricea de la închiderea zilei",
+    "Pentru a economisi putere de calcul",
+    "Pentru a reduce comisioanele",
+    "Pentru că reglementatorii cer date de mâine"
+   ],
+   "correct": 0,
+   "explain": "Nu poți folosi informația viitoare în decizia prezentă; trebuie folosită matricea de covarianță de la închiderea zilei curente.",
+   "kind": "concept"
+  },
+  {
+   "q": "Conform filtrului de lichiditate din capitol, când ar trebui exclus un instrument din bugetul de risc?",
+   "options": [
+    "Când prețul lui scade",
+    "Când volumul mediu zilnic este mai mic de 1,5× mărimea pe care plănuiești să o tranzacționezi",
+    "Când are corelație pozitivă cu piața",
+    "Când are randament așteptat scăzut"
+   ],
+   "correct": 1,
+   "explain": "Dacă lichiditatea (volumul mediu zilnic) e sub 1,5× mărimea tranzacției, instrumentul se exclude sau se lărgește banda permisă, ca să eviți probleme de execuție.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este bucla de bugetare a riscului ținută intenționat simplă (fără Black-Litterman, fără shrinkage bayesian)?",
+   "options": [
+    "Pentru că metodele complexe sunt ilegale",
+    "Pentru că simplitatea garantează profit",
+    "Pentru că pe un desk real trebuie să poți explica fiecare cifră unui PM stresat în sub trei minute",
+    "Pentru că Excel nu suportă metode complexe"
+   ],
+   "correct": 2,
+   "explain": "Transparența și viteza de explicare contează pe un desk live; complexitatea inutilă face cifrele greu de apărat sub presiune.",
+   "kind": "concept"
+  },
+  {
+   "q": "În al doilea scenariu, DV01-ul swap-ului EUR pe 5 ani e 4,2 bp/100M. Cu un buget de 18,2 bp, care e limita noțională aproximativă pe 5 ani?",
+   "options": [
+    "~256 M",
+    "~130 M",
+    "~180 M",
+    "~433 M"
+   ],
+   "correct": 3,
+   "explain": "Limita noțională = 18,2 ÷ 4,2 × 100 M ≈ 433 M. Formula împarte bugetul de risc la DV01-ul per 100 M.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce a ales traderul să aloce 70% din buget swap-ului pe 10 ani și doar 30% celui pe 5 ani?",
+   "options": [
+    "Pentru că durata mai mare a celui pe 10 ani reducea sensibilitatea la majorări, exact ce ceruse CIO-ul",
+    "Pentru că cel pe 10 ani avea DV01 mai mic",
+    "Pentru că era mai ieftin de tranzacționat",
+    "Pentru că reglementatorul impunea 70/30"
+   ],
+   "correct": 0,
+   "explain": "CIO-ul a cerut mai puțină sensibilitate la majorări; durata 8,3 a celui pe 10 ani (față de 4,7) servea acest scop pe o curbă care se înclina.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce rol are ceasul VaR (VaR clock) de pe registrul deskului?",
+   "options": [
+    "Arată ora locală a pieței",
+    "Arată în timp real procentul din VaR consumat; la 90% devine portocaliu și impune aprobare manuală, iar la 100% îngheață ordinele",
+    "Calculează comisioanele zilnice",
+    "Prezice randamentul de mâine"
+   ],
+   "correct": 1,
+   "explain": "Ceasul VaR semnalează apropierea de limita rigidă: la 90% cere aprobare manuală, la 100% îngheață ordinele și alertează controlorul de risc.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce face „comutatorul de oprire VaR” (kill switch) dacă ceasul VaR atinge 100% într-un salt grav de piață?",
+   "options": [
+    "Dublează automat pozițiile pentru a recupera",
+    "Trimite un e-mail investitorilor",
+    "Aplatizează toate pozițiile deskului în sub 30 de secunde",
+    "Crește automat bugetul de risc"
+   ],
+   "correct": 2,
+   "explain": "Kill switch-ul aplatizează (lichidează) toate pozițiile deskului foarte rapid, ca firma să nu depășească niciodată bugetul de risc absorbabil.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce NU face deskul disciplinat conform capitolului?",
+   "options": [
+    "Verifică ceasul VaR",
+    "Reconciliază la sfârșitul zilei",
+    "Folosește motorul de risc în timp real",
+    "Dimensionează pozițiile „din intuiție” sau „convingere”, ignorând limita VaR"
+   ],
+   "correct": 3,
+   "explain": "Limita VaR este arbitrul final; deskul nu dimensionează după feeling și nu ignoră ceasul VaR chiar dacă profitul e pozitiv.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce sunt datele istorice o limită a bugetării riscului?",
+   "options": [
+    "Performanța trecută poate să nu reflecte condițiile viitoare; crizele (ex. 2008) schimbă rapid piața",
+    "Sunt prea costisitoare de obținut",
+    "Sunt întotdeauna falsificate",
+    "Reglementatorii le interzic"
+   ],
+   "correct": 0,
+   "explain": "Bugetele bazate pe trecut pot deveni irelevante când piața se schimbă brusc; criza din 2008 e exemplul clasic.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce poate fi înșelător VaR-ul ca singură metrică de risc?",
+   "options": [
+    "Supraestimează mereu riscul",
+    "Măsoară pierderea pe un orizont dat, dar nu ține cont de probabilitatea evenimentelor extreme (de coadă)",
+    "Este interzis de reglementatori",
+    "Funcționează doar pentru obligațiuni"
+   ],
+   "correct": 1,
+   "explain": "VaR nu surprinde bine cozile distribuției; de aceea capitolul recomandă combinarea cu expected shortfall (ES) și teste de stres.",
+   "kind": "text"
+  },
+  {
+   "q": "Cum afectează comportamentul uman eficacitatea bugetării riscului?",
+   "options": [
+    "Nu are niciun efect, modelele sunt automate",
+    "Garantează respectarea limitelor",
+    "Traderii pot depăși riscul alocat din supraîncredere sau dorința de a impresiona, ceea ce modelele matematice nu prind",
+    "Reduce automat levierul"
+   ],
+   "correct": 2,
+   "explain": "Modelele presupun comportament rațional; emoțiile, prejudecățile și presiunile sociale pot face un trader să-și asume mai mult risc decât alocat.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este nivelul tipic de limită maximă de concentrare recomandat pentru o singură strategie sau trader?",
+   "options": [
+    "1-2% din buget",
+    "5-10% din buget",
+    "50-60% din buget",
+    "20-30% din buget"
+   ],
+   "correct": 3,
+   "explain": "O limită de concentrare de 20-30% din bugetul total împiedică o singură explozie să consume întreaga alocație de risc.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce se recomandă păstrarea unei rezerve de contingență de 5-10% din bugetul de risc?",
+   "options": [
+    "Ca fond de ultimă instanță pentru oportunități neașteptate sau acoperire în criză, neprealocat și aprobat de controlorul de risc",
+    "Pentru a plăti comisioanele",
+    "Pentru a crește levierul",
+    "Pentru a evita reechilibrarea"
+   ],
+   "correct": 0,
+   "explain": "Rezerva de contingență nu se prealocă; rămâne un fond de criză/oportunitate care necesită aprobarea controlorului de risc.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce se spune că bugetarea riscului este un „control, nu o prognoză”?",
+   "options": [
+    "Pentru că prezice exact pierderile viitoare",
+    "Pentru că îți spune maximul pe care îl poți pierde în condiții normale, nu maximul pe care îl vei pierde; trebuie completată cu teste de stres",
+    "Pentru că garantează profit",
+    "Pentru că elimină complet riscul"
+   ],
+   "correct": 1,
+   "explain": "Bugetarea riscului mărginește pierderea în condiții normale, dar nu prezice viitorul; de aceea se asociază cu teste de stres independente și verificări de lichiditate.",
+   "kind": "concept"
+  }
+ ]
+}

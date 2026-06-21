@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Ce impune, în esență, regula de localizare (Locate Rule) înainte de o vânzare în lipsă?","options":["Ca brokerul-dealer să aibă motive rezonabile să creadă că acțiunile pot fi împrumutate și livrate","Ca prețul acțiunii să fi scăzut deja în ziua respectivă","Ca acțiunile să fie deja deținute integral de client","Ca tranzacția să fie aprobată în scris de bursă"],"correct":0,"explain":"Locate Rule cere ca, înainte de execuție, brokerul-dealer să fi localizat acțiuni împrumutabile disponibile pentru livrare la decontare.","kind":"concept"},
-{"q":"Care reglementare stă la baza regulii de localizare?","options":["Regulamentul SHO al SEC, Regula 203(b)","Directiva MiFID II, articolul 17","Regula 144A privind titlurile restricționate","Sarbanes-Oxley, secțiunea 404"],"correct":0,"explain":"Locate Rule provine din Regulation SHO al SEC, în special Regula 203(b).","kind":"text"},
-{"q":"Ce practică urmărește în primul rând să prevină regula de localizare?","options":["Vânzarea în lipsă neacoperită (naked short selling) și eșecurile de livrare","Tranzacționarea pe baza informațiilor privilegiate","Manipularea prin spălare de tranzacții (wash trading)","Front-running-ul ordinelor clienților"],"correct":0,"explain":"Regula previne naked short selling și failures to deliver, cerând localizarea acțiunilor înainte de vânzare.","kind":"text"},
-{"q":"Ce înseamnă, pe piețe, a 'localiza' acțiuni?","options":["A confirma o sursă reală din care acțiunile pot fi împrumutate la momentul vânzării","A cumpăra fizic acțiunile pe contul propriu","A găsi prețul cel mai mic de pe piață","A înregistra acțiunile la depozitarul central"],"correct":0,"explain":"'Locate' = confirmarea că un anumit număr de acțiuni poate fi împrumutat pentru a fi livrat cumpărătorului.","kind":"text"},
-{"q":"De ce este greșit să confunzi existența unei localizări cu garanția livrării?","options":["Pentru că localizarea spune doar că acțiunile POT fi împrumutate, nu că vor fi sigur livrate","Pentru că localizarea este întotdeauna falsă","Pentru că livrarea nu are legătură cu împrumutul","Pentru că reglementatorul livrează el acțiunile"],"correct":0,"explain":"O localizare confirmă posibilitatea împrumutului; date învechite sau supra-alocarea o pot transforma într-un fantom.","kind":"concept"},
-{"q":"Ce este un titlu 'hard-to-borrow' (greu de împrumutat)?","options":["Un titlu cu acțiuni rare pentru împrumut: subțire tranzacționat, puternic vândut în lipsă sau restricționat","Un titlu care nu poate fi cumpărat deloc","Un titlu listat doar pe piețe străine","Un titlu cu preț foarte mare pe acțiune"],"correct":0,"explain":"Hard-to-borrow descrie titluri pentru care oferta de împrumut e limitată, ceea ce crește costul și riscul.","kind":"text"},
-{"q":"În exemplul biroului de tranzacționare, clientul cere 50.000 acțiuni ACW.L, dar foaia de locate arată net 8.000 disponibile. Care este reacția corectă?","options":["Comunică clientului că poate localiza imediat doar 8.000 și împarte ordinul","Execută toate cele 50.000 și caută acțiuni ulterior","Refuză complet orice tranzacție","Vinde în lipsă 50.000 fără localizare, ca să nu piardă clientul"],"correct":0,"explain":"Localizarea onestă acoperă doar 8.000; restul se execută doar dacă se găsesc acțiuni suplimentare.","kind":"concept"},
-{"q":"De ce poate o acțiune corporativă (dividend, spin-off, fuziune) să anuleze o localizare?","options":["Pentru că poate schimba peste noapte compoziția pool-ului de acțiuni disponibile pentru împrumut","Pentru că anulează automat toate ordinele de vânzare","Pentru că reduce mereu prețul la zero","Pentru că transferă acțiunile către reglementator"],"correct":0,"explain":"De pildă, înainte de data de înregistrare a dividendului creditorul poate reține acțiunile, reducând disponibilul.","kind":"concept"},
-{"q":"În motorul de localizare al GlobeTrade, cum sunt tratate regulile cu wildcard ('oricare')?","options":["Sunt luate în calcul doar când nicio regulă mai specifică nu se potrivește","Au întotdeauna prioritate maximă","Sunt ignorate complet în orice situație","Se aplică simultan cu regulile specifice"],"correct":0,"explain":"Wildcard-urile permit aplicare largă, dar cedează în fața regulilor specifice care se potrivesc.","kind":"concept"},
-{"q":"Dacă două reguli se potrivesc într-un motor de localizare, cum se rezolvă conflictul?","options":["Se alege regula cu numărul de prioritate cel mai mic","Se alege regula cu ID-ul cel mai mare","Se aplică ambele reguli","Se respinge tranzacția automat"],"correct":0,"explain":"Numărul de prioritate mai mic câștigă; la egalitate se folosește un criteriu determinist de departajare.","kind":"text"},
-{"q":"De ce returnează intenționat motorul 'Nicio regulă găsită' când nimic nu se potrivește?","options":["Pentru a împiedica aplicarea silențioasă a unei reguli greșite, care ar cauza o breșă","Pentru a închide sistemul în caz de eroare","Pentru a aplica automat regula cu prioritate 1","Pentru a alege o regulă la întâmplare"],"correct":0,"explain":"Lipsa unei potriviri forțează intervenția umană în loc să rateze tăcut conformitatea.","kind":"concept"},
-{"q":"Ce este un 'fail to deliver' (eșec de livrare)?","options":["Situația în care vânzătorul nu reușește să livreze acțiunile la decontare","O eroare de cotare a prețului","Anularea unui dividend","Refuzul clientului de a plăti comisionul"],"correct":0,"explain":"Eșecul de livrare apare când împrumutul nu se materializează și acțiunile nu ajung la cumpărător la T+2.","kind":"text"},
-{"q":"De ce o nepotrivire de timing crește riscul ca localizarea să devină invalidă?","options":["Pentru că localizarea e satisfăcută la obținere, dar împrumutul efectiv poate avea loc mult mai târziu","Pentru că prețul se schimbă în fiecare secundă","Pentru că reglementatorul re-verifică zilnic","Pentru că împrumutul se face mereu instant"],"correct":0,"explain":"Între momentul localizării și decontare, mai ales la titluri hard-to-borrow, disponibilitatea poate dispărea.","kind":"concept"},
-{"q":"Ce reprezintă 'borrow fee' (costul de împrumut)?","options":["Taxa plătită pentru a împrumuta acțiunile, mai mare pentru titlurile greu de împrumutat","Comisionul bursei pentru execuție","Impozitul pe câștigul de capital","Prima de risc plătită clientului"],"correct":0,"explain":"Borrow fee crește cu raritatea acțiunilor; o localizare validă nu plafonează acest cost.","kind":"text"},
-{"q":"De ce 'date învechite' la custode pot face o localizare nesigură?","options":["Pentru că mulți custozi își actualizează deținerile o singură dată pe zi, iar pool-ul se poate epuiza între timp","Pentru că datele vechi cresc prețul acțiunii","Pentru că reglementatorul interzice datele vechi","Pentru că împrumutul devine gratuit"],"correct":0,"explain":"O localizare la 09:30 se poate baza pe un instantaneu de la închiderea precedentă, care nu mai e valabil.","kind":"concept"},
-{"q":"Ce este 'supra-alocarea' (over-allocation) în contextul localizărilor?","options":["Brokerul acordă localizări pentru același bloc de acțiuni mai multor vânzători","Clientul cumpără mai multe acțiuni decât are nevoie","Bursa listează prea multe titluri","Reglementatorul impune limite de poziție"],"correct":0,"explain":"La decontare doar un vânzător primește acțiunile; ceilalți suferă eșec de livrare.","kind":"text"},
-{"q":"De ce reprezintă tranzacțiile transfrontaliere o complicație pentru localizare?","options":["Jurisdicții diferite au cicluri de decontare și reguli de creditare diferite, care pot bloca o localizare","Pentru că prețurile sunt afișate în valute diferite","Pentru că taxele vamale anulează vânzarea","Pentru că nu există custozi în străinătate"],"correct":0,"explain":"O localizare validă pe o platformă americană poate fi blocată de restricții ale unui reglementator străin.","kind":"concept"},
-{"q":"Ce este 'contagiunea riscului de decontare' descrisă în capitol?","options":["O localizare eșuată poate declanșa o cascadă: brokerul cumpără cu primă, apare buy-in, presiune colectivă","O boală care afectează traderii","Răspândirea unui zvon despre o acțiune","Creșterea simultană a tuturor prețurilor"],"correct":0,"explain":"Când mulți sunt short pe același titlu, infrastructura de localizare poate fi copleșită, generând risc sistemic.","kind":"concept"},
-{"q":"Ce este o situație de 'buy-in' (răscumpărare forțată)?","options":["Brokerul trebuie să procure acțiunile de pe piață cu primă pentru a acoperi o livrare neonorată","Clientul cumpără mai multe acțiuni la preț redus","Bursa suspendă tranzacționarea","Reglementatorul cumpără acțiunile firmei"],"correct":0,"explain":"Când livrarea eșuează, brokerul e nevoit să cumpere acțiunile la prețul pieței, adesea cu cost mai mare.","kind":"text"},
-{"q":"De ce o localizare poate fi considerată 'necredibilă' de către reglementator?","options":["Dacă a fost generată automat fără o verificare reală, în timp real, a inventarului","Dacă a fost confirmată telefonic","Dacă vizează mai puțin de 1.000 de acțiuni","Dacă prețul acțiunii a crescut"],"correct":0,"explain":"Localizările trebuie să fie defensabile sub definiția 'rezonabilă' a reglementatorului, nu doar formal prezente.","kind":"concept"},
-{"q":"În exemplul desk-ului, de ce a vândut traderul în lipsă 12.000 de acțiuni pe contul casei?","options":["Pentru a-și acoperi (hedge) riscul de piață cât caută mai mult stoc de localizat","Pentru a manipula prețul în jos","Pentru a evita plata comisionului","Pentru a anula ordinul clientului"],"correct":0,"explain":"Hedge-ul protejează biroul de mișcările pieței până găsește acțiunile suplimentare, dar adaugă risc dacă nu le localizează.","kind":"text"},
-{"q":"Cum a ales traderul între brokerii care ofereau împrumut de acțiuni?","options":["A comparat costul total de carry și a ales sursa cea mai ieftină pentru nevoia de o zi","A ales primul broker care a răspuns","A ales brokerul cu cele mai multe acțiuni, indiferent de cost","A ales brokerul cu cel mai mare comision"],"correct":0,"explain":"Brokerul A (1,5%, o zi) a fost mai ieftin decât B (2% plus rabat de impact) pentru nevoia de o singură zi.","kind":"concept"},
-{"q":"De ce subliniază capitolul că regula de localizare 'nu garantează stabilitatea prețului'?","options":["Pentru că nu plafonează costul de împrumut și nu protejează de mișcările adverse de preț până la decontare","Pentru că prețul este fixat de bancă","Pentru că reglementatorul stabilește prețul","Pentru că prețul nu se schimbă după localizare"],"correct":0,"explain":"O localizare validă nu spune nimic despre cât va costa împrumutul sau cum se va mișca prețul ulterior.","kind":"concept"},
-{"q":"Care este o bună practică recomandată echipei de conformitate pentru titluri greu de împrumutat?","options":["Monitorizarea inventarului de acțiuni în timp real","Ignorarea acțiunilor corporative","Acordarea aceleiași localizări mai multor clienți","Renunțarea la documentare pentru viteză"],"correct":0,"explain":"Monitorizarea în timp real reduce riscul ca o localizare să devină invalidă la titluri hard-to-borrow.","kind":"concept"},
-{"q":"Care este concluzia esențială despre rolul regulii de localizare pentru un trading desk?","options":["Este instalația zilnică ce permite biroului să decidă cât risc poate lua, transformând o promisiune de livrare într-o poziție tranzacționabilă","Este doar o formalitate administrativă fără impact practic","Este o cerință doar pentru clienții retail","Este o regulă opțională pe piețele moderne"],"correct":0,"explain":"Comparând foaia de locate cu cererea, costurile și riscul, desk-ul transformă o promisiune de livrare într-o poziție reală, controlată.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce impune, în esență, regula de localizare (Locate Rule) înainte de o vânzare în lipsă?",
+   "options": [
+    "Ca tranzacția să fie aprobată în scris de bursă",
+    "Ca prețul acțiunii să fi scăzut deja în ziua respectivă",
+    "Ca acțiunile să fie deja deținute integral de client",
+    "Ca brokerul-dealer să aibă motive rezonabile să creadă că acțiunile pot fi împrumutate și livrate"
+   ],
+   "correct": 3,
+   "explain": "Locate Rule cere ca, înainte de execuție, brokerul-dealer să fi localizat acțiuni împrumutabile disponibile pentru livrare la decontare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care reglementare stă la baza regulii de localizare?",
+   "options": [
+    "Regulamentul SHO al SEC, Regula 203(b)",
+    "Directiva MiFID II, articolul 17",
+    "Regula 144A privind titlurile restricționate",
+    "Sarbanes-Oxley, secțiunea 404"
+   ],
+   "correct": 0,
+   "explain": "Locate Rule provine din Regulation SHO al SEC, în special Regula 203(b).",
+   "kind": "text"
+  },
+  {
+   "q": "Ce practică urmărește în primul rând să prevină regula de localizare?",
+   "options": [
+    "Tranzacționarea pe baza informațiilor privilegiate",
+    "Vânzarea în lipsă neacoperită (naked short selling) și eșecurile de livrare",
+    "Manipularea prin spălare de tranzacții (wash trading)",
+    "Front-running-ul ordinelor clienților"
+   ],
+   "correct": 1,
+   "explain": "Regula previne naked short selling și failures to deliver, cerând localizarea acțiunilor înainte de vânzare.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce înseamnă, pe piețe, a 'localiza' acțiuni?",
+   "options": [
+    "A găsi prețul cel mai mic de pe piață",
+    "A cumpăra fizic acțiunile pe contul propriu",
+    "A confirma o sursă reală din care acțiunile pot fi împrumutate la momentul vânzării",
+    "A înregistra acțiunile la depozitarul central"
+   ],
+   "correct": 2,
+   "explain": "'Locate' = confirmarea că un anumit număr de acțiuni poate fi împrumutat pentru a fi livrat cumpărătorului.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este greșit să confunzi existența unei localizări cu garanția livrării?",
+   "options": [
+    "Pentru că reglementatorul livrează el acțiunile",
+    "Pentru că localizarea este întotdeauna falsă",
+    "Pentru că livrarea nu are legătură cu împrumutul",
+    "Pentru că localizarea spune doar că acțiunile POT fi împrumutate, nu că vor fi sigur livrate"
+   ],
+   "correct": 3,
+   "explain": "O localizare confirmă posibilitatea împrumutului; date învechite sau supra-alocarea o pot transforma într-un fantom.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este un titlu 'hard-to-borrow' (greu de împrumutat)?",
+   "options": [
+    "Un titlu cu acțiuni rare pentru împrumut: subțire tranzacționat, puternic vândut în lipsă sau restricționat",
+    "Un titlu care nu poate fi cumpărat deloc",
+    "Un titlu listat doar pe piețe străine",
+    "Un titlu cu preț foarte mare pe acțiune"
+   ],
+   "correct": 0,
+   "explain": "Hard-to-borrow descrie titluri pentru care oferta de împrumut e limitată, ceea ce crește costul și riscul.",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul biroului de tranzacționare, clientul cere 50.000 acțiuni ACW.L, dar foaia de locate arată net 8.000 disponibile. Care este reacția corectă?",
+   "options": [
+    "Execută toate cele 50.000 și caută acțiuni ulterior",
+    "Comunică clientului că poate localiza imediat doar 8.000 și împarte ordinul",
+    "Refuză complet orice tranzacție",
+    "Vinde în lipsă 50.000 fără localizare, ca să nu piardă clientul"
+   ],
+   "correct": 1,
+   "explain": "Localizarea onestă acoperă doar 8.000; restul se execută doar dacă se găsesc acțiuni suplimentare.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce poate o acțiune corporativă (dividend, spin-off, fuziune) să anuleze o localizare?",
+   "options": [
+    "Pentru că reduce mereu prețul la zero",
+    "Pentru că anulează automat toate ordinele de vânzare",
+    "Pentru că poate schimba peste noapte compoziția pool-ului de acțiuni disponibile pentru împrumut",
+    "Pentru că transferă acțiunile către reglementator"
+   ],
+   "correct": 2,
+   "explain": "De pildă, înainte de data de înregistrare a dividendului creditorul poate reține acțiunile, reducând disponibilul.",
+   "kind": "concept"
+  },
+  {
+   "q": "În motorul de localizare al GlobeTrade, cum sunt tratate regulile cu wildcard ('oricare')?",
+   "options": [
+    "Se aplică simultan cu regulile specifice",
+    "Au întotdeauna prioritate maximă",
+    "Sunt ignorate complet în orice situație",
+    "Sunt luate în calcul doar când nicio regulă mai specifică nu se potrivește"
+   ],
+   "correct": 3,
+   "explain": "Wildcard-urile permit aplicare largă, dar cedează în fața regulilor specifice care se potrivesc.",
+   "kind": "concept"
+  },
+  {
+   "q": "Dacă două reguli se potrivesc într-un motor de localizare, cum se rezolvă conflictul?",
+   "options": [
+    "Se alege regula cu numărul de prioritate cel mai mic",
+    "Se alege regula cu ID-ul cel mai mare",
+    "Se aplică ambele reguli",
+    "Se respinge tranzacția automat"
+   ],
+   "correct": 0,
+   "explain": "Numărul de prioritate mai mic câștigă; la egalitate se folosește un criteriu determinist de departajare.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce returnează intenționat motorul 'Nicio regulă găsită' când nimic nu se potrivește?",
+   "options": [
+    "Pentru a închide sistemul în caz de eroare",
+    "Pentru a împiedica aplicarea silențioasă a unei reguli greșite, care ar cauza o breșă",
+    "Pentru a aplica automat regula cu prioritate 1",
+    "Pentru a alege o regulă la întâmplare"
+   ],
+   "correct": 1,
+   "explain": "Lipsa unei potriviri forțează intervenția umană în loc să rateze tăcut conformitatea.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este un 'fail to deliver' (eșec de livrare)?",
+   "options": [
+    "Anularea unui dividend",
+    "O eroare de cotare a prețului",
+    "Situația în care vânzătorul nu reușește să livreze acțiunile la decontare",
+    "Refuzul clientului de a plăti comisionul"
+   ],
+   "correct": 2,
+   "explain": "Eșecul de livrare apare când împrumutul nu se materializează și acțiunile nu ajung la cumpărător la T+2.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce o nepotrivire de timing crește riscul ca localizarea să devină invalidă?",
+   "options": [
+    "Pentru că împrumutul se face mereu instant",
+    "Pentru că prețul se schimbă în fiecare secundă",
+    "Pentru că reglementatorul re-verifică zilnic",
+    "Pentru că localizarea e satisfăcută la obținere, dar împrumutul efectiv poate avea loc mult mai târziu"
+   ],
+   "correct": 3,
+   "explain": "Între momentul localizării și decontare, mai ales la titluri hard-to-borrow, disponibilitatea poate dispărea.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce reprezintă 'borrow fee' (costul de împrumut)?",
+   "options": [
+    "Taxa plătită pentru a împrumuta acțiunile, mai mare pentru titlurile greu de împrumutat",
+    "Comisionul bursei pentru execuție",
+    "Impozitul pe câștigul de capital",
+    "Prima de risc plătită clientului"
+   ],
+   "correct": 0,
+   "explain": "Borrow fee crește cu raritatea acțiunilor; o localizare validă nu plafonează acest cost.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce 'date învechite' la custode pot face o localizare nesigură?",
+   "options": [
+    "Pentru că datele vechi cresc prețul acțiunii",
+    "Pentru că mulți custozi își actualizează deținerile o singură dată pe zi, iar pool-ul se poate epuiza între timp",
+    "Pentru că reglementatorul interzice datele vechi",
+    "Pentru că împrumutul devine gratuit"
+   ],
+   "correct": 1,
+   "explain": "O localizare la 09:30 se poate baza pe un instantaneu de la închiderea precedentă, care nu mai e valabil.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este 'supra-alocarea' (over-allocation) în contextul localizărilor?",
+   "options": [
+    "Bursa listează prea multe titluri",
+    "Clientul cumpără mai multe acțiuni decât are nevoie",
+    "Brokerul acordă localizări pentru același bloc de acțiuni mai multor vânzători",
+    "Reglementatorul impune limite de poziție"
+   ],
+   "correct": 2,
+   "explain": "La decontare doar un vânzător primește acțiunile; ceilalți suferă eșec de livrare.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce reprezintă tranzacțiile transfrontaliere o complicație pentru localizare?",
+   "options": [
+    "Pentru că nu există custozi în străinătate",
+    "Pentru că prețurile sunt afișate în valute diferite",
+    "Pentru că taxele vamale anulează vânzarea",
+    "Jurisdicții diferite au cicluri de decontare și reguli de creditare diferite, care pot bloca o localizare"
+   ],
+   "correct": 3,
+   "explain": "O localizare validă pe o platformă americană poate fi blocată de restricții ale unui reglementator străin.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este 'contagiunea riscului de decontare' descrisă în capitol?",
+   "options": [
+    "O localizare eșuată poate declanșa o cascadă: brokerul cumpără cu primă, apare buy-in, presiune colectivă",
+    "O boală care afectează traderii",
+    "Răspândirea unui zvon despre o acțiune",
+    "Creșterea simultană a tuturor prețurilor"
+   ],
+   "correct": 0,
+   "explain": "Când mulți sunt short pe același titlu, infrastructura de localizare poate fi copleșită, generând risc sistemic.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este o situație de 'buy-in' (răscumpărare forțată)?",
+   "options": [
+    "Clientul cumpără mai multe acțiuni la preț redus",
+    "Brokerul trebuie să procure acțiunile de pe piață cu primă pentru a acoperi o livrare neonorată",
+    "Bursa suspendă tranzacționarea",
+    "Reglementatorul cumpără acțiunile firmei"
+   ],
+   "correct": 1,
+   "explain": "Când livrarea eșuează, brokerul e nevoit să cumpere acțiunile la prețul pieței, adesea cu cost mai mare.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce o localizare poate fi considerată 'necredibilă' de către reglementator?",
+   "options": [
+    "Dacă vizează mai puțin de 1.000 de acțiuni",
+    "Dacă a fost confirmată telefonic",
+    "Dacă a fost generată automat fără o verificare reală, în timp real, a inventarului",
+    "Dacă prețul acțiunii a crescut"
+   ],
+   "correct": 2,
+   "explain": "Localizările trebuie să fie defensabile sub definiția 'rezonabilă' a reglementatorului, nu doar formal prezente.",
+   "kind": "concept"
+  },
+  {
+   "q": "În exemplul desk-ului, de ce a vândut traderul în lipsă 12.000 de acțiuni pe contul casei?",
+   "options": [
+    "Pentru a anula ordinul clientului",
+    "Pentru a manipula prețul în jos",
+    "Pentru a evita plata comisionului",
+    "Pentru a-și acoperi (hedge) riscul de piață cât caută mai mult stoc de localizat"
+   ],
+   "correct": 3,
+   "explain": "Hedge-ul protejează biroul de mișcările pieței până găsește acțiunile suplimentare, dar adaugă risc dacă nu le localizează.",
+   "kind": "text"
+  },
+  {
+   "q": "Cum a ales traderul între brokerii care ofereau împrumut de acțiuni?",
+   "options": [
+    "A comparat costul total de carry și a ales sursa cea mai ieftină pentru nevoia de o zi",
+    "A ales primul broker care a răspuns",
+    "A ales brokerul cu cele mai multe acțiuni, indiferent de cost",
+    "A ales brokerul cu cel mai mare comision"
+   ],
+   "correct": 0,
+   "explain": "Brokerul A (1,5%, o zi) a fost mai ieftin decât B (2% plus rabat de impact) pentru nevoia de o singură zi.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce subliniază capitolul că regula de localizare 'nu garantează stabilitatea prețului'?",
+   "options": [
+    "Pentru că prețul este fixat de bancă",
+    "Pentru că nu plafonează costul de împrumut și nu protejează de mișcările adverse de preț până la decontare",
+    "Pentru că reglementatorul stabilește prețul",
+    "Pentru că prețul nu se schimbă după localizare"
+   ],
+   "correct": 1,
+   "explain": "O localizare validă nu spune nimic despre cât va costa împrumutul sau cum se va mișca prețul ulterior.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este o bună practică recomandată echipei de conformitate pentru titluri greu de împrumutat?",
+   "options": [
+    "Acordarea aceleiași localizări mai multor clienți",
+    "Ignorarea acțiunilor corporative",
+    "Monitorizarea inventarului de acțiuni în timp real",
+    "Renunțarea la documentare pentru viteză"
+   ],
+   "correct": 2,
+   "explain": "Monitorizarea în timp real reduce riscul ca o localizare să devină invalidă la titluri hard-to-borrow.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este concluzia esențială despre rolul regulii de localizare pentru un trading desk?",
+   "options": [
+    "Este o regulă opțională pe piețele moderne",
+    "Este doar o formalitate administrativă fără impact practic",
+    "Este o cerință doar pentru clienții retail",
+    "Este instalația zilnică ce permite biroului să decidă cât risc poate lua, transformând o promisiune de livrare într-o poziție tranzacționabilă"
+   ],
+   "correct": 3,
+   "explain": "Comparând foaia de locate cu cererea, costurile și riscul, desk-ul transformă o promisiune de livrare într-o poziție reală, controlată.",
+   "kind": "concept"
+  }
+ ]
+}

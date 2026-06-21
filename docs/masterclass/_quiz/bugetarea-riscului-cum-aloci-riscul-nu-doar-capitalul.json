@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este distincția centrală pe care o face bugetarea riscului față de alocarea simplă a capitalului?","options":["Garantează un randament fix pentru fiecare activ","Decide cât RISC își asumă fiecare poziție, nu doar câți bani primește","Decide doar în ce monedă se investește","Elimină complet riscul din portofoliu"],"correct":1,"explain":"Bugetarea riscului alocă riscul (volatilitate, contribuție la risc), nu doar capitalul; două portofolii cu aceeași alocare de capital pot avea bugete de risc complet diferite.","kind":"concept"},
-{"q":"De ce două portofolii cu aceeași alocare de capital (ex. 60% acțiuni / 40% obligațiuni) pot avea bugete de risc total diferite?","options":["Pentru că randamentul așteptat este întotdeauna identic","Pentru că obligațiunile nu au niciodată risc","Pentru că acțiunile pot fi mult mai volatile decât obligațiunile, deci absorb o pondere de risc mult mai mare","Pentru că alocarea de capital determină exact riscul"],"correct":2,"explain":"Ponderea de capital și ponderea de risc sunt lucruri diferite: un activ de 5 ori mai volatil absoarbe o felie disproporționat mai mare din riscul total.","kind":"concept"},
-{"q":"În context investițional, ce înseamnă tehnic „riscul\"?","options":["Șansa ca randamentul real să fie diferit de cel așteptat (în bine sau în rău)","Garanția unei pierderi","Doar posibilitatea de a pierde bani, niciodată de a câștiga mai mult","Lipsa totală de informații despre piață"],"correct":0,"explain":"Riscul = șansa ca randamentul real să difere de cel așteptat; diferența poate fi pozitivă sau negativă.","kind":"text"},
-{"q":"Ce măsoară corelația dintre două active?","options":["Randamentul mediu al celor două active","Cât capital ai alocat fiecăruia","Costul de tranzacționare al celor două","Cum se mișcă două investiții una față de cealaltă, pe o scală de la –1 la +1"],"correct":3,"explain":"Corelația este un număr între –1 și +1: +1 = se mișcă identic, –1 = opus, 0 = independent.","kind":"text"},
-{"q":"De ce este numită diversificarea „singurul prânz gratuit\" din investiții?","options":["Pentru că nu costă comisioane","Combinând active care nu se mișcă în pas, poți reduce riscul total fără a reduce randamentul așteptat","Pentru că garantează profit","Pentru că elimină nevoia de a măsura corelația"],"correct":1,"explain":"Diversificarea reduce riscul total fără a sacrifica randamentul așteptat, dacă activele nu sunt perfect corelate.","kind":"concept"},
-{"q":"Ce este deviația standard în raport cu volatilitatea?","options":["Este opusul volatilității","Măsoară corelația dintre active","Este termenul tehnic pentru volatilitate, exprimat în aceleași unități ca randamentul","Este o garanție de randament"],"correct":2,"explain":"Deviația standard este măsura tehnică a volatilității; dacă e 5%, randamentul real e în interval de ±5% cam în 2/3 din cazuri.","kind":"text"},
-{"q":"Ce avantaj are pierderea așteptată (expected shortfall / CVaR) față de deviația standard?","options":["Ignoră complet pierderile mari","Este mai simplu de calculat și mereu corect","Garantează că nu vor exista pierderi","Se concentrează pe cele mai rele ~5% rezultate, oferind o imagine mai clară a pericolului real"],"correct":3,"explain":"Expected shortfall întreabă „dacă apar cele mai rele 5% rezultate, cât putem pierde?\", surprinzând mai bine cozile distribuției.","kind":"text"},
-{"q":"În exemplul cu trei active (NB 30%, NS 58%, NC 12% capital), bugetul de risc rezultat a fost ~5% / 76% / 20%. Ce ilustrează acest contrast?","options":["Un activ poate avea o pondere mică de capital, dar o pondere mare de risc (și invers)","Capitalul și riscul sunt mereu egale","Obligațiunile sunt cel mai riscant activ","Cripto absoarbe cel mai mult risc"],"correct":0,"explain":"Acțiunile cu 58% capital absorbeau ~76% din risc, iar obligațiunile cu 30% capital doar ~5% — capitalul și riscul diferă net.","kind":"concept"},
-{"q":"Cum se calculează covarianța dintre două active?","options":["Volatilitate A + volatilitate B","Corelație × volatilitatea activului A × volatilitatea activului B","Randament A × randament B","Corelație ÷ volatilitate"],"correct":1,"explain":"Covarianța = corelație × vol(A) × vol(B); ex. 0,4 × 0,03 × 0,12 = 0,00144.","kind":"text"},
-{"q":"Ce reprezintă contribuția marginală la risc (MCR) a unui activ?","options":["Randamentul total al activului","Capitalul investit în activ","Cât adaugă activul la riscul total dacă îi crești ponderea cu un punct procentual","Comisionul de tranzacționare"],"correct":2,"explain":"MCR_i = w_i × (rândul i din matricea de covarianță) × vectorul de ponderi; suma MCR-urilor egalează varianța portofoliului.","kind":"text"},
-{"q":"De ce, în pasul de optimizare, se impun reguli ca „ponderi între 0% și 100%\" și „suma = 100%\"?","options":["Pentru a garanta un randament fix","Pentru a elimina corelația","Pentru a forța egalitatea capitalului","Pentru a interzice shorting-ul și a asigura un portofoliu complet investit, fără levier"],"correct":3,"explain":"0 ≤ wᵢ ≤ 1 interzice vânzarea în lipsă, iar suma = 100% asigură un portofoliu complet investit.","kind":"concept"},
-{"q":"În al doilea scenariu (acoperișul care scârțâie), ce s-a alocat de fapt?","options":["Bugetul de neliniște (punctele de risc), nu banii","Capitalul total al organizației","Salariile personalului","Numărul de copii"],"correct":0,"explain":"Scenariul ilustrează alocarea bugetului de risc (puncte de neliniște 0–100), nu a banilor — exact ca în finanțe.","kind":"concept"},
-{"q":"În scenariul acoperișului, suma surselor era 43 de puncte, peste limita de 40. Ce decizie logică au luat?","options":["Au ignorat problema","Au atacat cea mai mare felie (scârțâitul, ~47% din buget) pentru cea mai rapidă reducere","Au redus uniform fiecare sursă cu 10%","Au crescut limita la 50 de puncte"],"correct":1,"explain":"Acționând asupra celei mai mari felii (scârțâitul, 20/43 ≈ 47%) au obținut cea mai mare reducere cu cel mai mic efort.","kind":"concept"},
-{"q":"Ce lecție generală despre bugetele de risc ilustrează cazul-limită „dacă zilele cu vânt se dublează\"?","options":["Bugetele de risc sunt mereu exacte","Vremea nu afectează niciodată riscul","Bugetele de risc se bazează pe ipoteza că viitorul seamănă cu trecutul; când aceasta se rupe, trebuie recalculate","Un buget de risc nu trebuie niciodată actualizat"],"correct":2,"explain":"Dacă vântul s-ar dubla, riscul ar urca de la 20 la 40 de puncte, depășind bugetul — prognozele depind de stabilitatea ipotezelor.","kind":"concept"},
-{"q":"Pe desk-ul de tranzacționare, ce este „Plicul de risc\" (Risk Envelope)?","options":["Lista de prețuri-țintă ale traderilor","Raportul de salarizare","Lista comisioanelor de brokeraj","Pagina zilnică ce arată riscul total, bugetul alocat de CIO și bugetul rămas"],"correct":3,"explain":"Plicul de risc arată VaR-ul total, bugetul alocat de CIO și cât a mai rămas — transformă apetitul de risc al firmei într-un plafon dur zilnic.","kind":"text"},
-{"q":"PM are 0,4 mil. € buget rămas, iar VaR marginal ASML e 0,18% per 1 mil. €. Ce notional maxim poate adăuga?","options":["≈ 222 k € (0,4 mil. € ÷ 0,18%)","4,2 mil. €","58 k €","Nelimitat, cât permite capitalul"],"correct":0,"explain":"Mărimea poziției e limitată de bugetul de risc: 0,4 mil. € ÷ 0,18% ≈ 222 k € notional, nu de linia de capital.","kind":"text"},
-{"q":"De ce a decis PM să AȘTEPTE adăugarea poziției la 10:30, când VaR marginal a sărit la 0,22%?","options":["Pentru că prețul scădea","Pentru că un VaR marginal mai mare consumă mai repede bugetul; mai târziu, când VaR scade, e mai „ieftin\" (în risc) să adauge","Pentru că se închidea piața","Pentru că nu mai avea capital"],"correct":1,"explain":"Bugetarea riscului pe dimensiunea timpului: când VaR marginal scade (la 0,17%), „rambursarea\" de buget permite adăugarea notionalului dorit fără depășire.","kind":"concept"},
-{"q":"Pe desk, stop-loss-ul la –4% este declanșat de ce, conform optici bugetării riscului?","options":["Doar de ora din zi","Doar de decizia traderului junior","Nu doar de P&L, ci și de eliberarea/depășirea bugetului de risc, redistribuibil într-o idee nouă","De nivelul comisioanelor"],"correct":2,"explain":"Stop-loss-ul eliberează 0,10 mil. € de buget de risc, redistribuibil; e legat de registrul de risc, nu doar de P&L.","kind":"concept"},
-{"q":"Ce ilustrează episodul „Volmageddon\" (februarie 2018) despre limitele bugetării riscului?","options":["Metoda nu a eșuat — datele istorice de intrare au eșuat când volatilitatea a crescut de cinci ori","Bugetarea riscului este inutilă","Volatilitatea nu se schimbă niciodată","Strategiile short-vol sunt fără risc"],"correct":0,"explain":"Bugetele short-vol erau minuscule pe baza istoricului calm; la spike-ul de volatilitate au explodat — trecutul nu garantează viitorul.","kind":"text"},
-{"q":"De ce evenimentele de coadă (tail events) sunt „invizibile\" pentru un buget bazat pe varianță?","options":["Varianța supraestimează mereu cozile","Varianța se concentrează pe centrul distribuției și dă greutate aproape zero cozilor extreme unde pierderile sunt cele mai mari","Cozile nu există în piețele reale","Varianța măsoară doar randamentul mediu"],"correct":1,"explain":"Varianța ignoră aproape complet cozile; sunt necesare teste de stres și scenarii pentru a surprinde evenimentele extreme (ex. 5 sigma).","kind":"concept"},
-{"q":"Ce se întâmplă cu beneficiul diversificării când corelațiile se prăbușesc în criză?","options":["Diversificarea devine și mai eficientă","Riscul portofoliului scade automat","Nu se schimbă nimic","Corelațiile converg adesea spre +1, totul se mișcă împreună și beneficiul diversificării dispare peste noapte"],"correct":3,"explain":"În crize corelațiile tind spre +1; un portofoliu „doar\" 15% riscant poate deveni brusc 90% riscant, iar bugetul devine fără sens.","kind":"concept"},
-{"q":"De ce un buget de risc NU este o garanție de performanță?","options":["Alocă risc, nu profit; o poziție poate sta în buget și totuși pierde bani dacă piața merge împotriva ei","Pentru că garantează mereu profit","Pentru că ignoră complet volatilitatea","Pentru că elimină pierderile"],"correct":0,"explain":"Bugetul ține în frâu volatilitatea agregată, dar o poziție poate rămâne în buget și pierde, sau depăși bugetul și câștiga.","kind":"concept"},
-{"q":"Cum poate o constrângere de levier (ex. plafon 2×) să dilueze logica bugetării riscului?","options":["Crește mereu randamentul","Elimină nevoia de corelație","Poate forța micșorarea unor poziții cu risc redus doar pentru că regula de levier domină regula de volatilitate","Garantează respectarea bugetului"],"correct":2,"explain":"Când limita de finanțare/levier domină, bugetul devine subordonat ei, iar alocarea originală bazată pe volatilitate este diluată.","kind":"concept"},
-{"q":"De ce însumarea bugetelor de risc între mai multe desk-uri poate subestima riscul agregat?","options":["Pentru că suma este mereu prea mare","Se presupune implicit independența, dar desk-urile pot folosi factori similari și pot tăia pozițiile simultan","Pentru că desk-urile nu interacționează niciodată","Pentru că riscul agregat e mereu zero"],"correct":1,"explain":"Erori de agregare: factori de risc comuni (credit, FX, dobânzi) și vânzări simultane fac riscul agregat mai mare decât suma bugetelor individuale.","kind":"concept"},
-{"q":"Care este metafora finală a capitolului despre bugetarea riscului?","options":["Este o mașină perfectă de profit","Este un substitut complet pentru managementul activ","Este o garanție împotriva oricărei pierderi","Este o busolă, nu o garanție — orientează spre o alocare echilibrată în condiții normale, dar nu avertizează când harta e greșită"],"correct":3,"explain":"Bugetarea riscului e o busolă; trebuie completată mereu cu o a doua busolă — teste de stres, analiză de scenarii și planuri de lichiditate.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este distincția centrală pe care o face bugetarea riscului față de alocarea simplă a capitalului?",
+   "options": [
+    "Garantează un randament fix pentru fiecare activ",
+    "Decide doar în ce monedă se investește",
+    "Decide cât RISC își asumă fiecare poziție, nu doar câți bani primește",
+    "Elimină complet riscul din portofoliu"
+   ],
+   "correct": 2,
+   "explain": "Bugetarea riscului alocă riscul (volatilitate, contribuție la risc), nu doar capitalul; două portofolii cu aceeași alocare de capital pot avea bugete de risc complet diferite.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce două portofolii cu aceeași alocare de capital (ex. 60% acțiuni / 40% obligațiuni) pot avea bugete de risc total diferite?",
+   "options": [
+    "Pentru că randamentul așteptat este întotdeauna identic",
+    "Pentru că obligațiunile nu au niciodată risc",
+    "Pentru că alocarea de capital determină exact riscul",
+    "Pentru că acțiunile pot fi mult mai volatile decât obligațiunile, deci absorb o pondere de risc mult mai mare"
+   ],
+   "correct": 3,
+   "explain": "Ponderea de capital și ponderea de risc sunt lucruri diferite: un activ de 5 ori mai volatil absoarbe o felie disproporționat mai mare din riscul total.",
+   "kind": "concept"
+  },
+  {
+   "q": "În context investițional, ce înseamnă tehnic „riscul\"?",
+   "options": [
+    "Șansa ca randamentul real să fie diferit de cel așteptat (în bine sau în rău)",
+    "Garanția unei pierderi",
+    "Doar posibilitatea de a pierde bani, niciodată de a câștiga mai mult",
+    "Lipsa totală de informații despre piață"
+   ],
+   "correct": 0,
+   "explain": "Riscul = șansa ca randamentul real să difere de cel așteptat; diferența poate fi pozitivă sau negativă.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce măsoară corelația dintre două active?",
+   "options": [
+    "Randamentul mediu al celor două active",
+    "Cum se mișcă două investiții una față de cealaltă, pe o scală de la –1 la +1",
+    "Costul de tranzacționare al celor două",
+    "Cât capital ai alocat fiecăruia"
+   ],
+   "correct": 1,
+   "explain": "Corelația este un număr între –1 și +1: +1 = se mișcă identic, –1 = opus, 0 = independent.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este numită diversificarea „singurul prânz gratuit\" din investiții?",
+   "options": [
+    "Pentru că nu costă comisioane",
+    "Pentru că garantează profit",
+    "Combinând active care nu se mișcă în pas, poți reduce riscul total fără a reduce randamentul așteptat",
+    "Pentru că elimină nevoia de a măsura corelația"
+   ],
+   "correct": 2,
+   "explain": "Diversificarea reduce riscul total fără a sacrifica randamentul așteptat, dacă activele nu sunt perfect corelate.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este deviația standard în raport cu volatilitatea?",
+   "options": [
+    "Este opusul volatilității",
+    "Măsoară corelația dintre active",
+    "Este o garanție de randament",
+    "Este termenul tehnic pentru volatilitate, exprimat în aceleași unități ca randamentul"
+   ],
+   "correct": 3,
+   "explain": "Deviația standard este măsura tehnică a volatilității; dacă e 5%, randamentul real e în interval de ±5% cam în 2/3 din cazuri.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce avantaj are pierderea așteptată (expected shortfall / CVaR) față de deviația standard?",
+   "options": [
+    "Se concentrează pe cele mai rele ~5% rezultate, oferind o imagine mai clară a pericolului real",
+    "Este mai simplu de calculat și mereu corect",
+    "Garantează că nu vor exista pierderi",
+    "Ignoră complet pierderile mari"
+   ],
+   "correct": 0,
+   "explain": "Expected shortfall întreabă „dacă apar cele mai rele 5% rezultate, cât putem pierde?\", surprinzând mai bine cozile distribuției.",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul cu trei active (NB 30%, NS 58%, NC 12% capital), bugetul de risc rezultat a fost ~5% / 76% / 20%. Ce ilustrează acest contrast?",
+   "options": [
+    "Capitalul și riscul sunt mereu egale",
+    "Un activ poate avea o pondere mică de capital, dar o pondere mare de risc (și invers)",
+    "Obligațiunile sunt cel mai riscant activ",
+    "Cripto absoarbe cel mai mult risc"
+   ],
+   "correct": 1,
+   "explain": "Acțiunile cu 58% capital absorbeau ~76% din risc, iar obligațiunile cu 30% capital doar ~5% — capitalul și riscul diferă net.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum se calculează covarianța dintre două active?",
+   "options": [
+    "Volatilitate A + volatilitate B",
+    "Randament A × randament B",
+    "Corelație × volatilitatea activului A × volatilitatea activului B",
+    "Corelație ÷ volatilitate"
+   ],
+   "correct": 2,
+   "explain": "Covarianța = corelație × vol(A) × vol(B); ex. 0,4 × 0,03 × 0,12 = 0,00144.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce reprezintă contribuția marginală la risc (MCR) a unui activ?",
+   "options": [
+    "Randamentul total al activului",
+    "Capitalul investit în activ",
+    "Comisionul de tranzacționare",
+    "Cât adaugă activul la riscul total dacă îi crești ponderea cu un punct procentual"
+   ],
+   "correct": 3,
+   "explain": "MCR_i = w_i × (rândul i din matricea de covarianță) × vectorul de ponderi; suma MCR-urilor egalează varianța portofoliului.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce, în pasul de optimizare, se impun reguli ca „ponderi între 0% și 100%\" și „suma = 100%\"?",
+   "options": [
+    "Pentru a interzice shorting-ul și a asigura un portofoliu complet investit, fără levier",
+    "Pentru a elimina corelația",
+    "Pentru a forța egalitatea capitalului",
+    "Pentru a garanta un randament fix"
+   ],
+   "correct": 0,
+   "explain": "0 ≤ wᵢ ≤ 1 interzice vânzarea în lipsă, iar suma = 100% asigură un portofoliu complet investit.",
+   "kind": "concept"
+  },
+  {
+   "q": "În al doilea scenariu (acoperișul care scârțâie), ce s-a alocat de fapt?",
+   "options": [
+    "Capitalul total al organizației",
+    "Bugetul de neliniște (punctele de risc), nu banii",
+    "Salariile personalului",
+    "Numărul de copii"
+   ],
+   "correct": 1,
+   "explain": "Scenariul ilustrează alocarea bugetului de risc (puncte de neliniște 0–100), nu a banilor — exact ca în finanțe.",
+   "kind": "concept"
+  },
+  {
+   "q": "În scenariul acoperișului, suma surselor era 43 de puncte, peste limita de 40. Ce decizie logică au luat?",
+   "options": [
+    "Au ignorat problema",
+    "Au redus uniform fiecare sursă cu 10%",
+    "Au atacat cea mai mare felie (scârțâitul, ~47% din buget) pentru cea mai rapidă reducere",
+    "Au crescut limita la 50 de puncte"
+   ],
+   "correct": 2,
+   "explain": "Acționând asupra celei mai mari felii (scârțâitul, 20/43 ≈ 47%) au obținut cea mai mare reducere cu cel mai mic efort.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce lecție generală despre bugetele de risc ilustrează cazul-limită „dacă zilele cu vânt se dublează\"?",
+   "options": [
+    "Bugetele de risc sunt mereu exacte",
+    "Vremea nu afectează niciodată riscul",
+    "Un buget de risc nu trebuie niciodată actualizat",
+    "Bugetele de risc se bazează pe ipoteza că viitorul seamănă cu trecutul; când aceasta se rupe, trebuie recalculate"
+   ],
+   "correct": 3,
+   "explain": "Dacă vântul s-ar dubla, riscul ar urca de la 20 la 40 de puncte, depășind bugetul — prognozele depind de stabilitatea ipotezelor.",
+   "kind": "concept"
+  },
+  {
+   "q": "Pe desk-ul de tranzacționare, ce este „Plicul de risc\" (Risk Envelope)?",
+   "options": [
+    "Pagina zilnică ce arată riscul total, bugetul alocat de CIO și bugetul rămas",
+    "Raportul de salarizare",
+    "Lista comisioanelor de brokeraj",
+    "Lista de prețuri-țintă ale traderilor"
+   ],
+   "correct": 0,
+   "explain": "Plicul de risc arată VaR-ul total, bugetul alocat de CIO și cât a mai rămas — transformă apetitul de risc al firmei într-un plafon dur zilnic.",
+   "kind": "text"
+  },
+  {
+   "q": "PM are 0,4 mil. € buget rămas, iar VaR marginal ASML e 0,18% per 1 mil. €. Ce notional maxim poate adăuga?",
+   "options": [
+    "4,2 mil. €",
+    "≈ 222 k € (0,4 mil. € ÷ 0,18%)",
+    "58 k €",
+    "Nelimitat, cât permite capitalul"
+   ],
+   "correct": 1,
+   "explain": "Mărimea poziției e limitată de bugetul de risc: 0,4 mil. € ÷ 0,18% ≈ 222 k € notional, nu de linia de capital.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce a decis PM să AȘTEPTE adăugarea poziției la 10:30, când VaR marginal a sărit la 0,22%?",
+   "options": [
+    "Pentru că prețul scădea",
+    "Pentru că se închidea piața",
+    "Pentru că un VaR marginal mai mare consumă mai repede bugetul; mai târziu, când VaR scade, e mai „ieftin\" (în risc) să adauge",
+    "Pentru că nu mai avea capital"
+   ],
+   "correct": 2,
+   "explain": "Bugetarea riscului pe dimensiunea timpului: când VaR marginal scade (la 0,17%), „rambursarea\" de buget permite adăugarea notionalului dorit fără depășire.",
+   "kind": "concept"
+  },
+  {
+   "q": "Pe desk, stop-loss-ul la –4% este declanșat de ce, conform optici bugetării riscului?",
+   "options": [
+    "Doar de ora din zi",
+    "Doar de decizia traderului junior",
+    "De nivelul comisioanelor",
+    "Nu doar de P&L, ci și de eliberarea/depășirea bugetului de risc, redistribuibil într-o idee nouă"
+   ],
+   "correct": 3,
+   "explain": "Stop-loss-ul eliberează 0,10 mil. € de buget de risc, redistribuibil; e legat de registrul de risc, nu doar de P&L.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce ilustrează episodul „Volmageddon\" (februarie 2018) despre limitele bugetării riscului?",
+   "options": [
+    "Metoda nu a eșuat — datele istorice de intrare au eșuat când volatilitatea a crescut de cinci ori",
+    "Bugetarea riscului este inutilă",
+    "Volatilitatea nu se schimbă niciodată",
+    "Strategiile short-vol sunt fără risc"
+   ],
+   "correct": 0,
+   "explain": "Bugetele short-vol erau minuscule pe baza istoricului calm; la spike-ul de volatilitate au explodat — trecutul nu garantează viitorul.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce evenimentele de coadă (tail events) sunt „invizibile\" pentru un buget bazat pe varianță?",
+   "options": [
+    "Varianța supraestimează mereu cozile",
+    "Varianța se concentrează pe centrul distribuției și dă greutate aproape zero cozilor extreme unde pierderile sunt cele mai mari",
+    "Cozile nu există în piețele reale",
+    "Varianța măsoară doar randamentul mediu"
+   ],
+   "correct": 1,
+   "explain": "Varianța ignoră aproape complet cozile; sunt necesare teste de stres și scenarii pentru a surprinde evenimentele extreme (ex. 5 sigma).",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se întâmplă cu beneficiul diversificării când corelațiile se prăbușesc în criză?",
+   "options": [
+    "Diversificarea devine și mai eficientă",
+    "Riscul portofoliului scade automat",
+    "Corelațiile converg adesea spre +1, totul se mișcă împreună și beneficiul diversificării dispare peste noapte",
+    "Nu se schimbă nimic"
+   ],
+   "correct": 2,
+   "explain": "În crize corelațiile tind spre +1; un portofoliu „doar\" 15% riscant poate deveni brusc 90% riscant, iar bugetul devine fără sens.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce un buget de risc NU este o garanție de performanță?",
+   "options": [
+    "Pentru că elimină pierderile",
+    "Pentru că garantează mereu profit",
+    "Pentru că ignoră complet volatilitatea",
+    "Alocă risc, nu profit; o poziție poate sta în buget și totuși pierde bani dacă piața merge împotriva ei"
+   ],
+   "correct": 3,
+   "explain": "Bugetul ține în frâu volatilitatea agregată, dar o poziție poate rămâne în buget și pierde, sau depăși bugetul și câștiga.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum poate o constrângere de levier (ex. plafon 2×) să dilueze logica bugetării riscului?",
+   "options": [
+    "Poate forța micșorarea unor poziții cu risc redus doar pentru că regula de levier domină regula de volatilitate",
+    "Elimină nevoia de corelație",
+    "Crește mereu randamentul",
+    "Garantează respectarea bugetului"
+   ],
+   "correct": 0,
+   "explain": "Când limita de finanțare/levier domină, bugetul devine subordonat ei, iar alocarea originală bazată pe volatilitate este diluată.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce însumarea bugetelor de risc între mai multe desk-uri poate subestima riscul agregat?",
+   "options": [
+    "Pentru că suma este mereu prea mare",
+    "Se presupune implicit independența, dar desk-urile pot folosi factori similari și pot tăia pozițiile simultan",
+    "Pentru că desk-urile nu interacționează niciodată",
+    "Pentru că riscul agregat e mereu zero"
+   ],
+   "correct": 1,
+   "explain": "Erori de agregare: factori de risc comuni (credit, FX, dobânzi) și vânzări simultane fac riscul agregat mai mare decât suma bugetelor individuale.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este metafora finală a capitolului despre bugetarea riscului?",
+   "options": [
+    "Este o mașină perfectă de profit",
+    "Este un substitut complet pentru managementul activ",
+    "Este o busolă, nu o garanție — orientează spre o alocare echilibrată în condiții normale, dar nu avertizează când harta e greșită",
+    "Este o garanție împotriva oricărei pierderi"
+   ],
+   "correct": 2,
+   "explain": "Bugetarea riscului e o busolă; trebuie completată mereu cu o a doua busolă — teste de stres, analiză de scenarii și planuri de lichiditate.",
+   "kind": "concept"
+  }
+ ]
+}

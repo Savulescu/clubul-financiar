@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este scopul principal al cerintei de capital net (net capital requirement)?","options":["Sa garanteze ca firma obtine profit in fiecare zi","Sa asigure ca firma detine destule active lichide pentru a-si onora obligatiile chiar daca totul merge prost simultan","Sa stabileasca pretul actiunilor pe care firma le poate tranzactiona","Sa elimine complet riscul de piata dintr-un portofoliu"],"correct":1,"explain":"Capitalul net este o perna de active lichide care permite firmei sa isi plateasca datoriile chiar in scenariul cel mai negru, protejand clientii si piata.","kind":"concept"},
-{"q":"Ce se intampla, conform regulii, daca capitalul net al unei mese de tranzactionare scade sub pragul minim cerut?","options":["Are la dispozitie 30 de zile pentru a remedia situatia","Trebuie sa opreasca imediat tranzactiile si sa acopere fara intarziere deficitul","Poate continua sa tranzactioneze daca raporteaza la sfarsitul lunii","Plateste o taxa fixa si continua normal"],"correct":1,"explain":"Daca apare un deficit, masa trebuie sa opreasca tranzactiile noi si sa remedieze imediat lipsa, prin atragere de numerar sau vanzare de active.","kind":"concept"},
-{"q":"Care dintre urmatoarele NU se considera activ lichid pentru capitalul net?","options":["Numerarul din contul bancar al firmei","Bonurile de tezaur emise de guvernul SUA (T-bills)","Actiunile unei companii private, tranzactionate rar","Unitatile de fond de piata monetara rascumparabile in aceeasi zi"],"correct":2,"explain":"Activele nelichide, precum actiunile companiilor private sau cele tranzactionate rar, nu se iau in calcul pentru capitalul net.","kind":"text"},
-{"q":"Ce reprezinta un haircut in calculul capitalului net?","options":["O reducere a valorii raportate a unui activ, pentru a reflecta riscul de a nu obtine pretul integral la o vanzare rapida","Comisionul platit brokerului pentru fiecare tranzactie","Profitul net obtinut dintr-o pozitie short","Suma de numerar pe care firma trebuie sa o tina mereu in seif"],"correct":0,"explain":"Haircut-ul diminueaza valoarea unui activ pentru a tine cont de riscul ca vanzarea rapida sa nu aduca pretul integral.","kind":"text"},
-{"q":"O masa detine o obligatiune corporativa de 100.000 USD, cu un haircut de 15%. Cu ce valoare este socotita pentru capitalul net?","options":["100.000 USD","15.000 USD","85.000 USD","115.000 USD"],"correct":2,"explain":"Haircut-ul de 15% reduce valoarea: 100.000 USD x (1 - 0,15) = 85.000 USD.","kind":"concept"},
-{"q":"Care este formula de baza a capitalului net prezentata in capitol?","options":["Capital net = Active totale + Datorii totale","Capital net = (numerar + active cvasi-lichide) - datorii curente","Capital net = Venituri - Cheltuieli","Capital net = Profit net x procentul de marja"],"correct":1,"explain":"Capitalul net se obtine adunand numerarul si activele cvasi-lichide (dupa haircut-uri) si scazand datoriile curente.","kind":"text"},
-{"q":"In SUA, care este regula principala care stabileste ce active conteaza si ce haircut-uri se aplica pentru capitalul net?","options":["SEC Rule 15c3-1","Capital Requirements Regulation (CRR)","Basel III","Dodd-Frank Act, sectiunea 13"],"correct":0,"explain":"In SUA, regula principala este SEC Rule 15c3-1; in Europa echivalentul este CRR.","kind":"text"},
-{"q":"De ce este capitalul net descris in capitol ca un 'calcul viu', nu ca 'bani care stau intr-un seif'?","options":["Pentru ca firma il poate modifica manual cand doreste","Pentru ca fiecare tranzactie, reevaluare a unui titlu sau retragere a unui client ii schimba dimensiunea","Pentru ca se recalculeaza o data pe an","Pentru ca depinde doar de soldul bancar de la inceputul lunii"],"correct":1,"explain":"Capitalul net se modifica permanent: orice tranzactie, reevaluare de pret sau miscare de fonduri a clientului il afecteaza.","kind":"concept"},
-{"q":"In exemplul rezolvat cu Nursery MiniFutures, de ce sare cerinta minima de la 45.000 USD la 250.000 USD?","options":["Pentru ca firma tranzactioneaza optiuni listate","Pentru ca firma administreaza (detine) fonduri ale clientilor","Pentru ca firma are pierderi nete in trimestru","Pentru ca firma opereaza in afara SUA"],"correct":1,"explain":"CFTC Rule 1.17 cere un minim de 45.000 USD daca IB-ul nu administreaza fonduri ale clientilor, dar 250.000 USD daca le administreaza.","kind":"concept"},
-{"q":"In exemplul Nursery MiniFutures, capitalul net final calculat a fost 136.600 USD. Ce trebuie sa faca firma?","options":["Nimic, pentru ca depaseste minimul","Sa atraga numerar suplimentar, deoarece este sub minimul de 250.000 USD","Sa opreasca permanent activitatea","Sa reduca haircut-urile aplicate pozitiilor"],"correct":1,"explain":"136.600 USD este sub minimul de 250.000 USD, deci CFO-ul vireaza imediat fonduri (113.400 USD) pentru a acoperi deficitul.","kind":"concept"},
-{"q":"In exemplul Nursery MiniFutures, de ce se elimina intreaga datorie de 89.000 USD a fondurilor segregate, pastrand doar 22.000 USD pe latura de active?","options":["Pentru ca 22.000 USD reprezinta partea excedentara, disponibila ca capital de lucru, restul fiind profitul clientilor","Pentru ca 89.000 USD este o eroare de inregistrare","Pentru ca fondurile clientilor nu apar niciodata in bilant","Pentru ca haircut-ul pe segregare este de exact 75%"],"correct":0,"explain":"Din 89.000 USD, 67.000 USD reprezinta profitul nerealizat al clientilor; doar excedentul de 22.000 USD ramane disponibil IB-ului.","kind":"concept"},
-{"q":"In exemplul rezolvat, ce reducere suplimentara cere Rule 1.17 asupra capitalului net provizoriu?","options":["O reducere de 5%","O reducere de 15%, ca perna impotriva riscului de piata","O reducere de 50%","Nicio reducere"],"correct":1,"explain":"Rule 1.17 cere reducerea capitalului net provizoriu cu inca 15%: 160.750 x (1 - 0,15) = 136.637,50.","kind":"text"},
-{"q":"De ce primesc titlurile de stat americane cu scadenta mai mare de 1 an un haircut (de exemplu 8%), conceptie gresita fiind ca toate conteaza la 100%?","options":["Pentru ca guvernul SUA poate intra in incapacitate de plata pe termen scurt","Pentru ca doar titlurile cu scadenta de cel mult 1 an sunt tratate ca imediat lichide; cele mai lungi au mai mult risc de pret","Pentru ca dobanda lor este impozitata diferit","Pentru ca nu sunt acceptate de bursa"],"correct":1,"explain":"Doar titlurile cu scadenta initiala de cel mult 1 an sunt 'imediat lichide'; cele mai lungi primesc un haircut (de exemplu 8%) pentru riscul de pret.","kind":"concept"},
-{"q":"De ce este gresit sa tratezi o optiune short ca pe o deducere de capital egala cu prima incasata?","options":["Pentru ca prima nu se incaseaza niciodata in numerar","Pentru ca optiunile short sunt supuse regulilor de marja, care pot cere mult mai mult decat prima (de exemplu 20% din valoarea indicelui)","Pentru ca optiunile short nu afecteaza capitalul net","Pentru ca prima trebuie adaugata, nu scazuta"],"correct":1,"explain":"Optiunile short cad sub cerintele de marja ale bursei; ignorarea lor si scaderea doar a primei supraevalueaza capitalul net.","kind":"concept"},
-{"q":"Cum trateaza Rule 15c3-1 un titlu nelichid care nu trece testul 'pietei disponibile' (ready market)?","options":["Il exclude pur si simplu din calcul","Ii aplica un haircut de 100% (valoare zero), dar il include in calcul","Ii aplica un haircut fix de 30%","Il considera la valoarea contabila integrala"],"correct":1,"explain":"Titlul nelichid trebuie inclus, dar cu un haircut de 100% (valoare zero) daca nu trece testul pietei disponibile.","kind":"concept"},
-{"q":"De ce este gresit, in cazul futures, sa scazi depozitul de marja din capitalul net?","options":["Pentru ca marja este un activ care creste capitalul","Pentru ca marja este o garantie de buna executie, nu un activ care reduce capitalul; doar castigul/pierderea neta nerealizata intra in calcul","Pentru ca futures nu apar niciodata in bilant","Pentru ca marja se aduna mereu la prima incasata"],"correct":1,"explain":"Marja pe futures este o garantie (performance bond), nu o deducere de capital; doar P&L-ul net nerealizat intra in calcul.","kind":"concept"},
-{"q":"De ce nu este suficienta o verificare a capitalului net doar la sfarsitul zilei?","options":["Pentru ca bursa inchide mai devreme","Pentru ca Rule 15c3-1 cere monitorizare continua: o retragere mare, un apel in marja sau o pierdere brusca pot duce capitalul sub minim inainte de pranz","Pentru ca preturile nu se schimba in timpul zilei","Pentru ca auditul lunar acopera oricum toate riscurile"],"correct":1,"explain":"Capitalul net se monitorizeaza continuu; socuri intra-day (retrageri, apeluri in marja, pierderi) il pot duce sub minim oricand.","kind":"concept"},
-{"q":"Care este o limita-cheie a capitalului net legata de orizontul de timp?","options":["Acopera un orizont de 24 de ore, nu o saptamana sau o luna intreaga","Garanteaza supravietuirea firmei timp de un an","Se calculeaza doar la finalul fiecarui trimestru","Acopera exact 5 zile lucratoare"],"correct":0,"explain":"Regula foloseste un orizont de o zi; daca o criza dureaza mai mult, perna se poate evapora (ex. 15 martie 2020).","kind":"text"},
-{"q":"De ce sunt descrise haircut-urile drept 'fictiune statistica', nu garantie?","options":["Pentru ca sunt alese aleatoriu de fiecare firma","Pentru ca se bazeaza pe miscarile de pret din trecut si ignora schimbarile de regim (o actiune care cadea max 5% poate cadea 25% intr-o criza)","Pentru ca nu sunt publicate de reglementatori","Pentru ca se aplica doar numerarului"],"correct":1,"explain":"Haircut-urile privesc in trecut (ex. cel mai prost 99% din ultimul an) si nu anticipeaza schimbarile de regim.","kind":"concept"},
-{"q":"De ce este riscul de concentrare 'ucigasul tacut' pe care testul de capital net nu il vede?","options":["Pentru ca regula penalizeaza dublu pozitiile concentrate","Pentru ca regula trateaza fiecare pozitie izolat si nu multiplica haircut-ul cu ponderea mare a unei singure pozitii in capital","Pentru ca pozitiile concentrate primesc mereu haircut de 100%","Pentru ca riscul de concentrare nu exista in practica"],"correct":1,"explain":"Regula evalueaza pozitiile izolat; nu avertizeaza ca 40% din capital intr-un singur activ cu haircut mic poate disparea daca acel activ e retrogradat.","kind":"concept"},
-{"q":"Cum ar trebui tratat capitalul net, conform metaforei din capitol?","options":["Ca pe o fortareata care garanteaza supravietuirea","Ca pe un semafor (prima poarta de trecut), nu ultima, completat de o a doua perspectiva asupra lichiditatii pe minimum 5 zile","Ca pe un calcul anual irelevant zilnic","Ca pe un substitut pentru gestionarea riscului"],"correct":1,"explain":"Capitalul net este prima poarta, un semafor; firma are nevoie de o vedere independenta a lichiditatii pe cel putin 5 zile, cu elemente extra-bilantiere.","kind":"concept"},
-{"q":"Cand un trader dimensioneaza o pozitie, cum influenteaza capitalul net decizia, conform exemplului cu 10.000 de contracte?","options":["Il ignora si tranzactioneaza intregul volum dorit","Reduce dimensiunea (ex. la 5.000 contracte) ca pierderea potentiala sa ramana acoperita de capitalul net suficient","Creste mereu dimensiunea pentru a maximiza profitul","Aplica un haircut profitului asteptat"],"correct":1,"explain":"Daca pierderea potentiala ameninta minimul de capital net, traderul micsoreaza pozitia pentru a mentine perna ceruta.","kind":"concept"},
-{"q":"Care este recomandarea practica daca un trader observa o discrepanta intre intrarile software-ului de conformitate si tabelele de haircut ale bursei?","options":["Sa ignore discrepantele sub 5%","Sa escaladeze imediat la directorul de conformitate (CCO) daca discrepanta depaseste 0,5% din capitalul net","Sa modifice singur haircut-urile in software","Sa astepte auditul lunar"],"correct":1,"explain":"Software-ul nu e infailibil; intrarile gresite dau rezultate gresite, iar o discrepanta peste 0,5% din capitalul net trebuie escaladata la CCO.","kind":"concept"},
-{"q":"De ce nu sunt capitalul net si capitalurile proprii (equity) termeni interschimbabili?","options":["Pentru ca sunt complet fara legatura","Pentru ca, desi capitalurile proprii sunt o componenta a calculului, capitalul net rezulta dupa scaderea activelor nepermise si a haircut-urilor","Pentru ca echity-ul este mereu mai mic decat capitalul net","Pentru ca echity-ul se calculeaza zilnic, iar capitalul net anual"],"correct":1,"explain":"Equity este punctul de plecare, dar capitalul net se obtine scazand activele nelichide si haircut-urile, deci cele doua difera.","kind":"text"},
-{"q":"Ce cushion (perna) peste minimul cerut recomanda capitolul sa pastreze firmele?","options":["Exact valoarea minimului, fara perna","De regula 5-10% peste nivelul cerut, pentru a absorbi pierderi neasteptate","Minimum 100% peste cerinta","Doar 0,5% peste cerinta"],"correct":1,"explain":"Capitolul recomanda o perna de 5-10% peste minim; daca capitalul net scade la 110% din minim, firma ar trebui sa opreasca asumarea de noi riscuri.","kind":"text"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este scopul principal al cerintei de capital net (net capital requirement)?",
+   "options": [
+    "Sa garanteze ca firma obtine profit in fiecare zi",
+    "Sa elimine complet riscul de piata dintr-un portofoliu",
+    "Sa stabileasca pretul actiunilor pe care firma le poate tranzactiona",
+    "Sa asigure ca firma detine destule active lichide pentru a-si onora obligatiile chiar daca totul merge prost simultan"
+   ],
+   "correct": 3,
+   "explain": "Capitalul net este o perna de active lichide care permite firmei sa isi plateasca datoriile chiar in scenariul cel mai negru, protejand clientii si piata.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se intampla, conform regulii, daca capitalul net al unei mese de tranzactionare scade sub pragul minim cerut?",
+   "options": [
+    "Trebuie sa opreasca imediat tranzactiile si sa acopere fara intarziere deficitul",
+    "Are la dispozitie 30 de zile pentru a remedia situatia",
+    "Poate continua sa tranzactioneze daca raporteaza la sfarsitul lunii",
+    "Plateste o taxa fixa si continua normal"
+   ],
+   "correct": 0,
+   "explain": "Daca apare un deficit, masa trebuie sa opreasca tranzactiile noi si sa remedieze imediat lipsa, prin atragere de numerar sau vanzare de active.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care dintre urmatoarele NU se considera activ lichid pentru capitalul net?",
+   "options": [
+    "Numerarul din contul bancar al firmei",
+    "Actiunile unei companii private, tranzactionate rar",
+    "Bonurile de tezaur emise de guvernul SUA (T-bills)",
+    "Unitatile de fond de piata monetara rascumparabile in aceeasi zi"
+   ],
+   "correct": 1,
+   "explain": "Activele nelichide, precum actiunile companiilor private sau cele tranzactionate rar, nu se iau in calcul pentru capitalul net.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce reprezinta un haircut in calculul capitalului net?",
+   "options": [
+    "Profitul net obtinut dintr-o pozitie short",
+    "Comisionul platit brokerului pentru fiecare tranzactie",
+    "O reducere a valorii raportate a unui activ, pentru a reflecta riscul de a nu obtine pretul integral la o vanzare rapida",
+    "Suma de numerar pe care firma trebuie sa o tina mereu in seif"
+   ],
+   "correct": 2,
+   "explain": "Haircut-ul diminueaza valoarea unui activ pentru a tine cont de riscul ca vanzarea rapida sa nu aduca pretul integral.",
+   "kind": "text"
+  },
+  {
+   "q": "O masa detine o obligatiune corporativa de 100.000 USD, cu un haircut de 15%. Cu ce valoare este socotita pentru capitalul net?",
+   "options": [
+    "100.000 USD",
+    "15.000 USD",
+    "115.000 USD",
+    "85.000 USD"
+   ],
+   "correct": 3,
+   "explain": "Haircut-ul de 15% reduce valoarea: 100.000 USD x (1 - 0,15) = 85.000 USD.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este formula de baza a capitalului net prezentata in capitol?",
+   "options": [
+    "Capital net = (numerar + active cvasi-lichide) - datorii curente",
+    "Capital net = Active totale + Datorii totale",
+    "Capital net = Venituri - Cheltuieli",
+    "Capital net = Profit net x procentul de marja"
+   ],
+   "correct": 0,
+   "explain": "Capitalul net se obtine adunand numerarul si activele cvasi-lichide (dupa haircut-uri) si scazand datoriile curente.",
+   "kind": "text"
+  },
+  {
+   "q": "In SUA, care este regula principala care stabileste ce active conteaza si ce haircut-uri se aplica pentru capitalul net?",
+   "options": [
+    "Capital Requirements Regulation (CRR)",
+    "SEC Rule 15c3-1",
+    "Basel III",
+    "Dodd-Frank Act, sectiunea 13"
+   ],
+   "correct": 1,
+   "explain": "In SUA, regula principala este SEC Rule 15c3-1; in Europa echivalentul este CRR.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce este capitalul net descris in capitol ca un 'calcul viu', nu ca 'bani care stau intr-un seif'?",
+   "options": [
+    "Pentru ca firma il poate modifica manual cand doreste",
+    "Pentru ca se recalculeaza o data pe an",
+    "Pentru ca fiecare tranzactie, reevaluare a unui titlu sau retragere a unui client ii schimba dimensiunea",
+    "Pentru ca depinde doar de soldul bancar de la inceputul lunii"
+   ],
+   "correct": 2,
+   "explain": "Capitalul net se modifica permanent: orice tranzactie, reevaluare de pret sau miscare de fonduri a clientului il afecteaza.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul rezolvat cu Nursery MiniFutures, de ce sare cerinta minima de la 45.000 USD la 250.000 USD?",
+   "options": [
+    "Pentru ca firma tranzactioneaza optiuni listate",
+    "Pentru ca firma opereaza in afara SUA",
+    "Pentru ca firma are pierderi nete in trimestru",
+    "Pentru ca firma administreaza (detine) fonduri ale clientilor"
+   ],
+   "correct": 3,
+   "explain": "CFTC Rule 1.17 cere un minim de 45.000 USD daca IB-ul nu administreaza fonduri ale clientilor, dar 250.000 USD daca le administreaza.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul Nursery MiniFutures, capitalul net final calculat a fost 136.600 USD. Ce trebuie sa faca firma?",
+   "options": [
+    "Sa atraga numerar suplimentar, deoarece este sub minimul de 250.000 USD",
+    "Nimic, pentru ca depaseste minimul",
+    "Sa opreasca permanent activitatea",
+    "Sa reduca haircut-urile aplicate pozitiilor"
+   ],
+   "correct": 0,
+   "explain": "136.600 USD este sub minimul de 250.000 USD, deci CFO-ul vireaza imediat fonduri (113.400 USD) pentru a acoperi deficitul.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul Nursery MiniFutures, de ce se elimina intreaga datorie de 89.000 USD a fondurilor segregate, pastrand doar 22.000 USD pe latura de active?",
+   "options": [
+    "Pentru ca 89.000 USD este o eroare de inregistrare",
+    "Pentru ca 22.000 USD reprezinta partea excedentara, disponibila ca capital de lucru, restul fiind profitul clientilor",
+    "Pentru ca fondurile clientilor nu apar niciodata in bilant",
+    "Pentru ca haircut-ul pe segregare este de exact 75%"
+   ],
+   "correct": 1,
+   "explain": "Din 89.000 USD, 67.000 USD reprezinta profitul nerealizat al clientilor; doar excedentul de 22.000 USD ramane disponibil IB-ului.",
+   "kind": "concept"
+  },
+  {
+   "q": "In exemplul rezolvat, ce reducere suplimentara cere Rule 1.17 asupra capitalului net provizoriu?",
+   "options": [
+    "O reducere de 5%",
+    "O reducere de 50%",
+    "O reducere de 15%, ca perna impotriva riscului de piata",
+    "Nicio reducere"
+   ],
+   "correct": 2,
+   "explain": "Rule 1.17 cere reducerea capitalului net provizoriu cu inca 15%: 160.750 x (1 - 0,15) = 136.637,50.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce primesc titlurile de stat americane cu scadenta mai mare de 1 an un haircut (de exemplu 8%), conceptie gresita fiind ca toate conteaza la 100%?",
+   "options": [
+    "Pentru ca guvernul SUA poate intra in incapacitate de plata pe termen scurt",
+    "Pentru ca nu sunt acceptate de bursa",
+    "Pentru ca dobanda lor este impozitata diferit",
+    "Pentru ca doar titlurile cu scadenta de cel mult 1 an sunt tratate ca imediat lichide; cele mai lungi au mai mult risc de pret"
+   ],
+   "correct": 3,
+   "explain": "Doar titlurile cu scadenta initiala de cel mult 1 an sunt 'imediat lichide'; cele mai lungi primesc un haircut (de exemplu 8%) pentru riscul de pret.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este gresit sa tratezi o optiune short ca pe o deducere de capital egala cu prima incasata?",
+   "options": [
+    "Pentru ca optiunile short sunt supuse regulilor de marja, care pot cere mult mai mult decat prima (de exemplu 20% din valoarea indicelui)",
+    "Pentru ca prima nu se incaseaza niciodata in numerar",
+    "Pentru ca optiunile short nu afecteaza capitalul net",
+    "Pentru ca prima trebuie adaugata, nu scazuta"
+   ],
+   "correct": 0,
+   "explain": "Optiunile short cad sub cerintele de marja ale bursei; ignorarea lor si scaderea doar a primei supraevalueaza capitalul net.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum trateaza Rule 15c3-1 un titlu nelichid care nu trece testul 'pietei disponibile' (ready market)?",
+   "options": [
+    "Il exclude pur si simplu din calcul",
+    "Ii aplica un haircut de 100% (valoare zero), dar il include in calcul",
+    "Ii aplica un haircut fix de 30%",
+    "Il considera la valoarea contabila integrala"
+   ],
+   "correct": 1,
+   "explain": "Titlul nelichid trebuie inclus, dar cu un haircut de 100% (valoare zero) daca nu trece testul pietei disponibile.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este gresit, in cazul futures, sa scazi depozitul de marja din capitalul net?",
+   "options": [
+    "Pentru ca marja este un activ care creste capitalul",
+    "Pentru ca futures nu apar niciodata in bilant",
+    "Pentru ca marja este o garantie de buna executie, nu un activ care reduce capitalul; doar castigul/pierderea neta nerealizata intra in calcul",
+    "Pentru ca marja se aduna mereu la prima incasata"
+   ],
+   "correct": 2,
+   "explain": "Marja pe futures este o garantie (performance bond), nu o deducere de capital; doar P&L-ul net nerealizat intra in calcul.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu este suficienta o verificare a capitalului net doar la sfarsitul zilei?",
+   "options": [
+    "Pentru ca bursa inchide mai devreme",
+    "Pentru ca auditul lunar acopera oricum toate riscurile",
+    "Pentru ca preturile nu se schimba in timpul zilei",
+    "Pentru ca Rule 15c3-1 cere monitorizare continua: o retragere mare, un apel in marja sau o pierdere brusca pot duce capitalul sub minim inainte de pranz"
+   ],
+   "correct": 3,
+   "explain": "Capitalul net se monitorizeaza continuu; socuri intra-day (retrageri, apeluri in marja, pierderi) il pot duce sub minim oricand.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este o limita-cheie a capitalului net legata de orizontul de timp?",
+   "options": [
+    "Acopera un orizont de 24 de ore, nu o saptamana sau o luna intreaga",
+    "Garanteaza supravietuirea firmei timp de un an",
+    "Se calculeaza doar la finalul fiecarui trimestru",
+    "Acopera exact 5 zile lucratoare"
+   ],
+   "correct": 0,
+   "explain": "Regula foloseste un orizont de o zi; daca o criza dureaza mai mult, perna se poate evapora (ex. 15 martie 2020).",
+   "kind": "text"
+  },
+  {
+   "q": "De ce sunt descrise haircut-urile drept 'fictiune statistica', nu garantie?",
+   "options": [
+    "Pentru ca sunt alese aleatoriu de fiecare firma",
+    "Pentru ca se bazeaza pe miscarile de pret din trecut si ignora schimbarile de regim (o actiune care cadea max 5% poate cadea 25% intr-o criza)",
+    "Pentru ca nu sunt publicate de reglementatori",
+    "Pentru ca se aplica doar numerarului"
+   ],
+   "correct": 1,
+   "explain": "Haircut-urile privesc in trecut (ex. cel mai prost 99% din ultimul an) si nu anticipeaza schimbarile de regim.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este riscul de concentrare 'ucigasul tacut' pe care testul de capital net nu il vede?",
+   "options": [
+    "Pentru ca regula penalizeaza dublu pozitiile concentrate",
+    "Pentru ca pozitiile concentrate primesc mereu haircut de 100%",
+    "Pentru ca regula trateaza fiecare pozitie izolat si nu multiplica haircut-ul cu ponderea mare a unei singure pozitii in capital",
+    "Pentru ca riscul de concentrare nu exista in practica"
+   ],
+   "correct": 2,
+   "explain": "Regula evalueaza pozitiile izolat; nu avertizeaza ca 40% din capital intr-un singur activ cu haircut mic poate disparea daca acel activ e retrogradat.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum ar trebui tratat capitalul net, conform metaforei din capitol?",
+   "options": [
+    "Ca pe o fortareata care garanteaza supravietuirea",
+    "Ca pe un substitut pentru gestionarea riscului",
+    "Ca pe un calcul anual irelevant zilnic",
+    "Ca pe un semafor (prima poarta de trecut), nu ultima, completat de o a doua perspectiva asupra lichiditatii pe minimum 5 zile"
+   ],
+   "correct": 3,
+   "explain": "Capitalul net este prima poarta, un semafor; firma are nevoie de o vedere independenta a lichiditatii pe cel putin 5 zile, cu elemente extra-bilantiere.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cand un trader dimensioneaza o pozitie, cum influenteaza capitalul net decizia, conform exemplului cu 10.000 de contracte?",
+   "options": [
+    "Reduce dimensiunea (ex. la 5.000 contracte) ca pierderea potentiala sa ramana acoperita de capitalul net suficient",
+    "Il ignora si tranzactioneaza intregul volum dorit",
+    "Creste mereu dimensiunea pentru a maximiza profitul",
+    "Aplica un haircut profitului asteptat"
+   ],
+   "correct": 0,
+   "explain": "Daca pierderea potentiala ameninta minimul de capital net, traderul micsoreaza pozitia pentru a mentine perna ceruta.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este recomandarea practica daca un trader observa o discrepanta intre intrarile software-ului de conformitate si tabelele de haircut ale bursei?",
+   "options": [
+    "Sa ignore discrepantele sub 5%",
+    "Sa escaladeze imediat la directorul de conformitate (CCO) daca discrepanta depaseste 0,5% din capitalul net",
+    "Sa modifice singur haircut-urile in software",
+    "Sa astepte auditul lunar"
+   ],
+   "correct": 1,
+   "explain": "Software-ul nu e infailibil; intrarile gresite dau rezultate gresite, iar o discrepanta peste 0,5% din capitalul net trebuie escaladata la CCO.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu sunt capitalul net si capitalurile proprii (equity) termeni interschimbabili?",
+   "options": [
+    "Pentru ca sunt complet fara legatura",
+    "Pentru ca echity-ul este mereu mai mic decat capitalul net",
+    "Pentru ca, desi capitalurile proprii sunt o componenta a calculului, capitalul net rezulta dupa scaderea activelor nepermise si a haircut-urilor",
+    "Pentru ca echity-ul se calculeaza zilnic, iar capitalul net anual"
+   ],
+   "correct": 2,
+   "explain": "Equity este punctul de plecare, dar capitalul net se obtine scazand activele nelichide si haircut-urile, deci cele doua difera.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce cushion (perna) peste minimul cerut recomanda capitolul sa pastreze firmele?",
+   "options": [
+    "Exact valoarea minimului, fara perna",
+    "Doar 0,5% peste cerinta",
+    "Minimum 100% peste cerinta",
+    "De regula 5-10% peste nivelul cerut, pentru a absorbi pierderi neasteptate"
+   ],
+   "correct": 3,
+   "explain": "Capitolul recomanda o perna de 5-10% peste minim; daca capitalul net scade la 110% din minim, firma ar trebui sa opreasca asumarea de noi riscuri.",
+   "kind": "text"
+  }
+ ]
+}

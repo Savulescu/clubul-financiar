@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Ce măsoară durata de spread (spread duration)?","options":["Sensibilitatea prețului unei obligațiuni la modificările spread-ului său de credit","Probabilitatea ca emitentul să intre în default în următorul an","Timpul rămas până la maturitatea obligațiunii","Câștigul total obținut dacă obligațiunea este ținută până la maturitate"],"correct":0,"explain":"Durata de spread exprimă variația procentuală aproximativă a prețului la o modificare a spread-ului de credit.","kind":"concept"},
-{"q":"Care este relația corectă dintre LGD și rata de recuperare?","options":["LGD = 1 − rata de recuperare","LGD = rata de recuperare","LGD = 1 + rata de recuperare","LGD = rata de recuperare × probabilitatea de default"],"correct":0,"explain":"Dacă recuperezi 30%, pierzi 70%, deci LGD = 1 − 0,30 = 0,70.","kind":"concept"},
-{"q":"O obligațiune recuperează 40 de cenți pe dolar după default. Cât este LGD?","options":["60%","40%","100%","20%"],"correct":0,"explain":"Rata de recuperare este 40%, deci LGD = 1 − 0,40 = 60%.","kind":"text"},
-{"q":"Ce reprezintă spread-ul de credit (credit spread)?","options":["Diferența de randament dintre o obligațiune corporativă și o obligațiune guvernamentală comparabilă","Diferența dintre randamentul obligațiunii și cuponul ei","Diferența dintre prețul curat și prețul murdar","Diferența dintre rata de recuperare și LGD"],"correct":0,"explain":"Spread-ul de credit este excesul de randament peste obligațiunea guvernamentală comparabilă, reflectând riscul suplimentar.","kind":"text"},
-{"q":"O greșeală frecventă este confundarea spread-ului de credit cu spread-ul de randament. Care este definiția corectă a spread-ului de credit?","options":["Randamentul obligațiunii minus rata fără risc","Randamentul obligațiunii minus cuponul","Cuponul minus rata fără risc","Prețul de piață minus valoarea nominală"],"correct":0,"explain":"Spread-ul de credit este randamentul minus rata fără risc; folosirea cuponului în loc duce la o durată de spread greșită.","kind":"concept"},
-{"q":"De ce este greșit să tratezi LGD ca un număr fix preluat din prospect?","options":["LGD este o estimare condiționată care variază cu senioritatea, garanțiile și jurisdicția","LGD este întotdeauna egal cu probabilitatea de default","LGD nu se aplică obligațiunilor corporative","LGD este fixat prin lege la 50%"],"correct":0,"explain":"Același emitent poate avea LGD diferit pe tranșe diferite (ex. senior garantat 30% vs. subordonat 70%).","kind":"concept"},
-{"q":"În exemplul Acme Corp, durata modificată este 4,3 și spread-ul 325 bp. Care este durata de spread aproximativă rezultată?","options":["≈ 1,4","≈ 4,3","≈ 3,25","≈ 0,4"],"correct":0,"explain":"Durata de spread ≈ 4,3 × 0,00324 ≈ 0,0139 ≈ 1,4.","kind":"text"},
-{"q":"Pentru obligațiunea Acme (senior negarantată), ce rată de recuperare istorică Moody's pe 10 ani este folosită ca estimare?","options":["≈ 40%","≈ 88,6%","≈ 20%","≈ 60%"],"correct":0,"explain":"Media globală pe 10 ani Moody's pentru senior negarantate este ≈ 40%, ceea ce dă LGD de 60%.","kind":"text"},
-{"q":"În exemplul Acme, recuperarea implicită din piață a ieșit ≈ 88,6% față de 40% istoric. Ce semnalează acest lucru analistului?","options":["Obligațiunea pare scumpă (rich) față de viziunea de credit; spread-ul ar putea fi prea strâns","Obligațiunea este sigur subevaluată și trebuie cumpărată agresiv","Calculul LGD a fost greșit","Emitentul este aproape sigur în default"],"correct":0,"explain":"O recuperare implicită mult peste cea istorică sugerează că piața plătește prea puțin pentru risc, deci obligațiunea pare scumpă.","kind":"concept"},
-{"q":"De ce nu trebuie tratate durata de spread și LGD ca independente?","options":["În medii cu default-uri în creștere, spread-urile se lărgesc în timp ce recuperarea scade, creând un șoc de preț compus","Sunt mereu perfect corelate negativ","Una o anulează matematic pe cealaltă","LGD determină întotdeauna durata de spread"],"correct":0,"explain":"Ambele variabile se pot mișca împotriva ta simultan, amplificând pierderea; trebuie suprapuse în tabloul de risc.","kind":"concept"},
-{"q":"Care este formula corectă a pierderii așteptate (Expected Loss)?","options":["Probabilitatea de default × (1 − Rata de recuperare)","Probabilitatea de default × Rata de recuperare","Durata de spread × LGD","Spread-ul de credit × Maturitatea"],"correct":0,"explain":"EL = PD × (1 − Rata de recuperare) = PD × LGD; inversarea recuperării cu pierderea distorsionează rezultatul.","kind":"text"},
-{"q":"De ce durata de spread NU este același lucru cu durata modificată sau DV01?","options":["Durata de spread surprinde doar mișcarea componentei de spread, nu și mișcările ratei fără risc","Durata de spread include și riscul valutar","Durata modificată ignoră complet prețul","DV01 măsoară doar recuperarea"],"correct":0,"explain":"Durata de spread izolează sensibilitatea la spread cu rata fără risc constantă; aplicarea ei la randamentul total supraestimează acoperirile.","kind":"concept"},
-{"q":"Ce se întâmplă cu durata de spread în condiții de lipsă de lichiditate și prețuri învechite (stale)?","options":["Subestimează sensibilitatea reală a prețului, fiindcă spread-ul citit este al ultimei tranzacții, nu cel curent","Devine mai precisă pentru că prețurile sunt stabile","Crește automat pentru a compensa riscul","Nu este afectată de lichiditate"],"correct":0,"explain":"Un preț înghețat ascunde riscul real; când tranzacționarea se reia, decalajul poate fi violent fără avertizare.","kind":"concept"},
-{"q":"Cum afectează regimurile de rezoluție bancară de după 2008 (bail-in) ratele istorice de recuperare?","options":["Le fac prea optimiste, pentru că datoria senior negarantată suportă acum pierderi ce reveneau înainte celei subordonate","Le fac mai conservatoare","Nu au niciun efect asupra recuperării","Garantează recuperare 100%"],"correct":0,"explain":"Bail-in-ul mută pierderi pe datoria senior, deci mediile istorice supraestimează recuperarea.","kind":"text"},
-{"q":"În martie 2020, durata de spread a dat greș deoarece:","options":["Mișcarea spread-urilor a fost un salt non-liniar (regim de lichiditate), nu o variație incrementală","Default-urile au scăzut brusc","Ratele de recuperare au urcat la 100%","Curba fără risc a dispărut"],"correct":0,"explain":"Durata de spread măsoară doar sensibilitatea de ordinul întâi; un salt de 300–400 bp a produs căderi mult mai mari decât estimat.","kind":"text"},
-{"q":"De ce poate masca un emitent adevărata subordonare prin garanții ascendente sau leasinguri sintetice?","options":["Datoria pare senior pe hârtie, dar recuperarea în stres poate fi de fapt ca a datoriei subordonate","Crește automat ratingul la AAA","Elimină complet riscul de default","Reduce durata de spread la zero"],"correct":0,"explain":"Eticheta „senior” poate fi înșelătoare; trebuie verificată cascada legală de subordonare, nu doar denumirea.","kind":"concept"},
-{"q":"Ce avertisment dă capitolul privind datoria suverană în piețe emergente, în caz de restructurare?","options":["Ipoteza de recuperare ar trebui setată la zero, nu la o medie istorică","Recuperarea este garantată de FMI","Spread-ul de credit devine irelevant","LGD scade automat sub 10%"],"correct":0,"explain":"Restructurările suverane pot șterge clase întregi de creditori, deci media istorică nu se aplică.","kind":"text"},
-{"q":"O obligațiune suverană în valută forte se lărgește cu 500 bp. Care este capcana pentru durata de spread?","options":["Tratează întreaga mișcare drept risc de credit, deși poate fi parțial risc valutar (FX)","Ignoră complet mișcarea","Confundă spread-ul cu cuponul","Crește recuperarea local-currency"],"correct":0,"explain":"O parte din lărgire poate reflecta devalorizarea monedei locale, nu deteriorarea creditului; investitorul local poate pierde prin curs.","kind":"concept"},
-{"q":"De ce metricile bond-cu-bond ratează riscul sistemic în crize?","options":["Ignoră faptul că default-urile se grupează (cluster) și corelațiile cresc spre 1","Supraestimează mereu pierderea individuală","Calculează doar riscul valutar","Folosesc doar date forward-looking"],"correct":0,"explain":"Durata de spread, LGD și recuperarea dau risc idiosincratic; în 2008 pierderea de portofoliu a depășit suma LGD-urilor individuale.","kind":"concept"},
-{"q":"Când ratingul și piața nu sunt de acord, ce limită apare?","options":["O obligațiune poate fi încă IG dar tranzacționată la spread de dificultate (>1000 bp), iar durata din matricea de tranziție subestimează pierderea","Ratingul este întotdeauna mai exact decât piața","Spread-ul devine zero","Recuperarea urcă automat"],"correct":0,"explain":"Ratingurile privesc în trecut, piața în viitor; metrica e la fel de bună ca matricea de tranziție folosită.","kind":"concept"},
-{"q":"Cum influențează rata de recuperare dimensionarea unei poziții long pe o obligațiune high-yield?","options":["O rată de recuperare mică împinge traderul să reducă poziția pentru a limita pierderea la default","O rată de recuperare mică justifică mărirea poziției","Rata de recuperare nu are legătură cu dimensionarea","Rata de recuperare determină doar cuponul"],"correct":0,"explain":"Recuperare mică = LGD mare; traderul reduce expunerea pentru a se încadra în limita pe un singur emitent.","kind":"concept"},
-{"q":"Cât de des recomandă capitolul actualizarea ipotezelor privind rata de recuperare?","options":["Cel puțin trimestrial, cu testare la stres în scenarii de tip 2008","O singură dată la emitere","Niciodată, fiind constante","Doar când emitentul intră deja în default"],"correct":0,"explain":"Ratele de recuperare se comprimă în stres (sub 20% în 2008), deci trebuie revizuite regulat și stresate.","kind":"text"},
-{"q":"În scenariul GreenTech, durata de spread a ieșit 1,5. Ce înseamnă pentru o creștere de 50 bp a spread-ului?","options":["O pierdere potențială estimată de 7,5 milioane $ (1,5 × 50)","O pierdere de 50 milioane $","Un câștig de 7,5 milioane $","Niciun impact asupra prețului"],"correct":0,"explain":"Pierderea potențială = durata de spread × modificarea spread-ului = 1,5 × 50 = 7,5 milioane $.","kind":"text"},
-{"q":"Care este mesajul central al secțiunii „Concluzii-cheie” despre folosirea metricilor de risc de credit?","options":["Sunt utile împreună cu alte instrumente, dar nu sunt un glob de cristal și necesită monitorizare continuă","Sunt suficiente folosite singure pentru orice decizie","Garantează performanța viitoare dacă datele sunt corecte","Înlocuiesc complet testarea la stres"],"correct":0,"explain":"Metricile sunt interdependente, dependente de calitatea datelor și trebuie combinate cu scoring, stress testing și scenarii.","kind":"concept"},
-{"q":"Care este, conform capitolului, adevăratul avantaj al mesei de tranzacționare în raport cu aceste metrici?","options":["Să sesizeze momentul în care metrica se prăbușește și să acționeze înainte de restul pieței","Să se bazeze exclusiv pe matricea de tranziție a agențiilor de rating","Să ignore fluxul de știri și să urmeze doar prețul cotat","Să fixeze o singură rată de recuperare permanentă"],"correct":0,"explain":"Metricile sunt lumini de avertizare; edge-ul vine din suprapunerea verificărilor calitative și recunoașterea ruperii modelului.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Ce măsoară durata de spread (spread duration)?",
+   "options": [
+    "Câștigul total obținut dacă obligațiunea este ținută până la maturitate",
+    "Probabilitatea ca emitentul să intre în default în următorul an",
+    "Timpul rămas până la maturitatea obligațiunii",
+    "Sensibilitatea prețului unei obligațiuni la modificările spread-ului său de credit"
+   ],
+   "correct": 3,
+   "explain": "Durata de spread exprimă variația procentuală aproximativă a prețului la o modificare a spread-ului de credit.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este relația corectă dintre LGD și rata de recuperare?",
+   "options": [
+    "LGD = 1 − rata de recuperare",
+    "LGD = rata de recuperare",
+    "LGD = 1 + rata de recuperare",
+    "LGD = rata de recuperare × probabilitatea de default"
+   ],
+   "correct": 0,
+   "explain": "Dacă recuperezi 30%, pierzi 70%, deci LGD = 1 − 0,30 = 0,70.",
+   "kind": "concept"
+  },
+  {
+   "q": "O obligațiune recuperează 40 de cenți pe dolar după default. Cât este LGD?",
+   "options": [
+    "40%",
+    "60%",
+    "100%",
+    "20%"
+   ],
+   "correct": 1,
+   "explain": "Rata de recuperare este 40%, deci LGD = 1 − 0,40 = 60%.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce reprezintă spread-ul de credit (credit spread)?",
+   "options": [
+    "Diferența dintre prețul curat și prețul murdar",
+    "Diferența dintre randamentul obligațiunii și cuponul ei",
+    "Diferența de randament dintre o obligațiune corporativă și o obligațiune guvernamentală comparabilă",
+    "Diferența dintre rata de recuperare și LGD"
+   ],
+   "correct": 2,
+   "explain": "Spread-ul de credit este excesul de randament peste obligațiunea guvernamentală comparabilă, reflectând riscul suplimentar.",
+   "kind": "text"
+  },
+  {
+   "q": "O greșeală frecventă este confundarea spread-ului de credit cu spread-ul de randament. Care este definiția corectă a spread-ului de credit?",
+   "options": [
+    "Prețul de piață minus valoarea nominală",
+    "Randamentul obligațiunii minus cuponul",
+    "Cuponul minus rata fără risc",
+    "Randamentul obligațiunii minus rata fără risc"
+   ],
+   "correct": 3,
+   "explain": "Spread-ul de credit este randamentul minus rata fără risc; folosirea cuponului în loc duce la o durată de spread greșită.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce este greșit să tratezi LGD ca un număr fix preluat din prospect?",
+   "options": [
+    "LGD este o estimare condiționată care variază cu senioritatea, garanțiile și jurisdicția",
+    "LGD este întotdeauna egal cu probabilitatea de default",
+    "LGD nu se aplică obligațiunilor corporative",
+    "LGD este fixat prin lege la 50%"
+   ],
+   "correct": 0,
+   "explain": "Același emitent poate avea LGD diferit pe tranșe diferite (ex. senior garantat 30% vs. subordonat 70%).",
+   "kind": "concept"
+  },
+  {
+   "q": "În exemplul Acme Corp, durata modificată este 4,3 și spread-ul 325 bp. Care este durata de spread aproximativă rezultată?",
+   "options": [
+    "≈ 4,3",
+    "≈ 1,4",
+    "≈ 3,25",
+    "≈ 0,4"
+   ],
+   "correct": 1,
+   "explain": "Durata de spread ≈ 4,3 × 0,00324 ≈ 0,0139 ≈ 1,4.",
+   "kind": "text"
+  },
+  {
+   "q": "Pentru obligațiunea Acme (senior negarantată), ce rată de recuperare istorică Moody's pe 10 ani este folosită ca estimare?",
+   "options": [
+    "≈ 20%",
+    "≈ 88,6%",
+    "≈ 40%",
+    "≈ 60%"
+   ],
+   "correct": 2,
+   "explain": "Media globală pe 10 ani Moody's pentru senior negarantate este ≈ 40%, ceea ce dă LGD de 60%.",
+   "kind": "text"
+  },
+  {
+   "q": "În exemplul Acme, recuperarea implicită din piață a ieșit ≈ 88,6% față de 40% istoric. Ce semnalează acest lucru analistului?",
+   "options": [
+    "Emitentul este aproape sigur în default",
+    "Obligațiunea este sigur subevaluată și trebuie cumpărată agresiv",
+    "Calculul LGD a fost greșit",
+    "Obligațiunea pare scumpă (rich) față de viziunea de credit; spread-ul ar putea fi prea strâns"
+   ],
+   "correct": 3,
+   "explain": "O recuperare implicită mult peste cea istorică sugerează că piața plătește prea puțin pentru risc, deci obligațiunea pare scumpă.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce nu trebuie tratate durata de spread și LGD ca independente?",
+   "options": [
+    "În medii cu default-uri în creștere, spread-urile se lărgesc în timp ce recuperarea scade, creând un șoc de preț compus",
+    "Sunt mereu perfect corelate negativ",
+    "Una o anulează matematic pe cealaltă",
+    "LGD determină întotdeauna durata de spread"
+   ],
+   "correct": 0,
+   "explain": "Ambele variabile se pot mișca împotriva ta simultan, amplificând pierderea; trebuie suprapuse în tabloul de risc.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este formula corectă a pierderii așteptate (Expected Loss)?",
+   "options": [
+    "Probabilitatea de default × Rata de recuperare",
+    "Probabilitatea de default × (1 − Rata de recuperare)",
+    "Durata de spread × LGD",
+    "Spread-ul de credit × Maturitatea"
+   ],
+   "correct": 1,
+   "explain": "EL = PD × (1 − Rata de recuperare) = PD × LGD; inversarea recuperării cu pierderea distorsionează rezultatul.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce durata de spread NU este același lucru cu durata modificată sau DV01?",
+   "options": [
+    "Durata modificată ignoră complet prețul",
+    "Durata de spread include și riscul valutar",
+    "Durata de spread surprinde doar mișcarea componentei de spread, nu și mișcările ratei fără risc",
+    "DV01 măsoară doar recuperarea"
+   ],
+   "correct": 2,
+   "explain": "Durata de spread izolează sensibilitatea la spread cu rata fără risc constantă; aplicarea ei la randamentul total supraestimează acoperirile.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce se întâmplă cu durata de spread în condiții de lipsă de lichiditate și prețuri învechite (stale)?",
+   "options": [
+    "Nu este afectată de lichiditate",
+    "Devine mai precisă pentru că prețurile sunt stabile",
+    "Crește automat pentru a compensa riscul",
+    "Subestimează sensibilitatea reală a prețului, fiindcă spread-ul citit este al ultimei tranzacții, nu cel curent"
+   ],
+   "correct": 3,
+   "explain": "Un preț înghețat ascunde riscul real; când tranzacționarea se reia, decalajul poate fi violent fără avertizare.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum afectează regimurile de rezoluție bancară de după 2008 (bail-in) ratele istorice de recuperare?",
+   "options": [
+    "Le fac prea optimiste, pentru că datoria senior negarantată suportă acum pierderi ce reveneau înainte celei subordonate",
+    "Le fac mai conservatoare",
+    "Nu au niciun efect asupra recuperării",
+    "Garantează recuperare 100%"
+   ],
+   "correct": 0,
+   "explain": "Bail-in-ul mută pierderi pe datoria senior, deci mediile istorice supraestimează recuperarea.",
+   "kind": "text"
+  },
+  {
+   "q": "În martie 2020, durata de spread a dat greș deoarece:",
+   "options": [
+    "Default-urile au scăzut brusc",
+    "Mișcarea spread-urilor a fost un salt non-liniar (regim de lichiditate), nu o variație incrementală",
+    "Ratele de recuperare au urcat la 100%",
+    "Curba fără risc a dispărut"
+   ],
+   "correct": 1,
+   "explain": "Durata de spread măsoară doar sensibilitatea de ordinul întâi; un salt de 300–400 bp a produs căderi mult mai mari decât estimat.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce poate masca un emitent adevărata subordonare prin garanții ascendente sau leasinguri sintetice?",
+   "options": [
+    "Elimină complet riscul de default",
+    "Crește automat ratingul la AAA",
+    "Datoria pare senior pe hârtie, dar recuperarea în stres poate fi de fapt ca a datoriei subordonate",
+    "Reduce durata de spread la zero"
+   ],
+   "correct": 2,
+   "explain": "Eticheta „senior” poate fi înșelătoare; trebuie verificată cascada legală de subordonare, nu doar denumirea.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce avertisment dă capitolul privind datoria suverană în piețe emergente, în caz de restructurare?",
+   "options": [
+    "LGD scade automat sub 10%",
+    "Recuperarea este garantată de FMI",
+    "Spread-ul de credit devine irelevant",
+    "Ipoteza de recuperare ar trebui setată la zero, nu la o medie istorică"
+   ],
+   "correct": 3,
+   "explain": "Restructurările suverane pot șterge clase întregi de creditori, deci media istorică nu se aplică.",
+   "kind": "text"
+  },
+  {
+   "q": "O obligațiune suverană în valută forte se lărgește cu 500 bp. Care este capcana pentru durata de spread?",
+   "options": [
+    "Tratează întreaga mișcare drept risc de credit, deși poate fi parțial risc valutar (FX)",
+    "Ignoră complet mișcarea",
+    "Confundă spread-ul cu cuponul",
+    "Crește recuperarea local-currency"
+   ],
+   "correct": 0,
+   "explain": "O parte din lărgire poate reflecta devalorizarea monedei locale, nu deteriorarea creditului; investitorul local poate pierde prin curs.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce metricile bond-cu-bond ratează riscul sistemic în crize?",
+   "options": [
+    "Supraestimează mereu pierderea individuală",
+    "Ignoră faptul că default-urile se grupează (cluster) și corelațiile cresc spre 1",
+    "Calculează doar riscul valutar",
+    "Folosesc doar date forward-looking"
+   ],
+   "correct": 1,
+   "explain": "Durata de spread, LGD și recuperarea dau risc idiosincratic; în 2008 pierderea de portofoliu a depășit suma LGD-urilor individuale.",
+   "kind": "concept"
+  },
+  {
+   "q": "Când ratingul și piața nu sunt de acord, ce limită apare?",
+   "options": [
+    "Spread-ul devine zero",
+    "Ratingul este întotdeauna mai exact decât piața",
+    "O obligațiune poate fi încă IG dar tranzacționată la spread de dificultate (>1000 bp), iar durata din matricea de tranziție subestimează pierderea",
+    "Recuperarea urcă automat"
+   ],
+   "correct": 2,
+   "explain": "Ratingurile privesc în trecut, piața în viitor; metrica e la fel de bună ca matricea de tranziție folosită.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum influențează rata de recuperare dimensionarea unei poziții long pe o obligațiune high-yield?",
+   "options": [
+    "Rata de recuperare determină doar cuponul",
+    "O rată de recuperare mică justifică mărirea poziției",
+    "Rata de recuperare nu are legătură cu dimensionarea",
+    "O rată de recuperare mică împinge traderul să reducă poziția pentru a limita pierderea la default"
+   ],
+   "correct": 3,
+   "explain": "Recuperare mică = LGD mare; traderul reduce expunerea pentru a se încadra în limita pe un singur emitent.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cât de des recomandă capitolul actualizarea ipotezelor privind rata de recuperare?",
+   "options": [
+    "Cel puțin trimestrial, cu testare la stres în scenarii de tip 2008",
+    "O singură dată la emitere",
+    "Niciodată, fiind constante",
+    "Doar când emitentul intră deja în default"
+   ],
+   "correct": 0,
+   "explain": "Ratele de recuperare se comprimă în stres (sub 20% în 2008), deci trebuie revizuite regulat și stresate.",
+   "kind": "text"
+  },
+  {
+   "q": "În scenariul GreenTech, durata de spread a ieșit 1,5. Ce înseamnă pentru o creștere de 50 bp a spread-ului?",
+   "options": [
+    "O pierdere de 50 milioane $",
+    "O pierdere potențială estimată de 7,5 milioane $ (1,5 × 50)",
+    "Un câștig de 7,5 milioane $",
+    "Niciun impact asupra prețului"
+   ],
+   "correct": 1,
+   "explain": "Pierderea potențială = durata de spread × modificarea spread-ului = 1,5 × 50 = 7,5 milioane $.",
+   "kind": "text"
+  },
+  {
+   "q": "Care este mesajul central al secțiunii „Concluzii-cheie” despre folosirea metricilor de risc de credit?",
+   "options": [
+    "Garantează performanța viitoare dacă datele sunt corecte",
+    "Sunt suficiente folosite singure pentru orice decizie",
+    "Sunt utile împreună cu alte instrumente, dar nu sunt un glob de cristal și necesită monitorizare continuă",
+    "Înlocuiesc complet testarea la stres"
+   ],
+   "correct": 2,
+   "explain": "Metricile sunt interdependente, dependente de calitatea datelor și trebuie combinate cu scoring, stress testing și scenarii.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este, conform capitolului, adevăratul avantaj al mesei de tranzacționare în raport cu aceste metrici?",
+   "options": [
+    "Să fixeze o singură rată de recuperare permanentă",
+    "Să se bazeze exclusiv pe matricea de tranziție a agențiilor de rating",
+    "Să ignore fluxul de știri și să urmeze doar prețul cotat",
+    "Să sesizeze momentul în care metrica se prăbușește și să acționeze înainte de restul pieței"
+   ],
+   "correct": 3,
+   "explain": "Metricile sunt lumini de avertizare; edge-ul vine din suprapunerea verificărilor calitative și recunoașterea ruperii modelului.",
+   "kind": "concept"
+  }
+ ]
+}

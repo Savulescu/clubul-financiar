@@ -1,27 +1,304 @@
-{"questions":[
-{"q":"Care este scopul principal al unei limite de poziție (position limit)?","options":["Să garanteze profit traderilor","Să împiedice un participant să capete prea multă influență asupra prețului și să creeze instabilitate","Să crească volumul de tranzacționare al bursei","Să elimine complet riscul de pierdere"],"correct":1,"explain":"Limita de poziție plafonează cantitatea deținută pentru a preveni influența excesivă asupra prețului, riscul excesiv și instabilitatea pieței.","kind":"concept"},
-{"q":"Cine stabilește de regulă limitele de poziție?","options":["Doar traderii individuali","Reglementatorul pieței sau bursa pe care se tranzacționează instrumentul","Clienții firmei de investiții","Băncile centrale exclusiv"],"correct":1,"explain":"Limitele sunt stabilite de reglementatorul pieței (ex. o autoritate de valori mobiliare) sau de bursa unde se tranzacționează instrumentul.","kind":"text"},
-{"q":"Ce reprezintă poziția netă (net position)?","options":["Suma tuturor pozițiilor long și short fără compensare","Diferența dintre suma long și suma short pentru același instrument","Doar pozițiile short ale unui trader","Valoarea totală a portofoliului firmei"],"correct":1,"explain":"Poziția netă este diferența dintre long și short pentru același instrument (ex. long 1.200 minus short 300 = 900 net long).","kind":"text"},
-{"q":"Dacă ești long 1.200 de acțiuni și short 300 de acțiuni din aceeași acțiune, care este poziția brută (gross)?","options":["900 acțiuni","1.500 acțiuni","300 acțiuni","1.200 acțiuni"],"correct":1,"explain":"Poziția brută însumează long și short fără compensare: 1.200 + 300 = 1.500 acțiuni.","kind":"concept"},
-{"q":"De ce ar stabili unii reglementatori limite pe poziția brută, nu doar pe cea netă?","options":["Pentru a încuraja speculația","Pentru a controla participarea globală la piață, chiar dacă expunerea netă este mică","Pentru că poziția netă nu poate fi calculată","Pentru a reduce taxele traderilor"],"correct":1,"explain":"Limitele pe poziția brută controlează participarea totală la piață, chiar dacă expunerea netă (compensată) pare mică.","kind":"concept"},
-{"q":"Ce este un prag (threshold) în contextul limitelor de poziție?","options":["Limita maximă absolută impusă de bursă","Un nivel predefinit sub limita oficială care declanșează o avertizare timpurie","Procentul de profit garantat","Numărul minim de contracte tranzacționabile"],"correct":1,"explain":"Pragul este setat sub limita oficială (ex. 80%) pentru a declanșa o alertă timpurie și a oferi timp de acțiune.","kind":"text"},
-{"q":"Ce este o depășire (breach) și ce impune de regulă?","options":["Atingerea a 50% din limită; nicio acțiune","Depășirea limitei stabilite; acțiune corectivă imediată precum lichidarea unei părți din poziție","O tranzacție profitabilă; raportare opțională","Închiderea pieței; suspendarea tuturor traderilor"],"correct":1,"explain":"Depășirea apare când poziția trece de limită și impune acțiune corectivă imediată plus posibile obligații de raportare.","kind":"text"},
-{"q":"În analogia bufetului, ce reprezintă regula de a cere permisiunea managerului după 5 farfurii?","options":["Comisionul de tranzacționare","Limita de poziție","Marja de profit","Casa de compensare"],"correct":1,"explain":"Regula de a cere permisiunea după un anumit număr de farfurii este analogă unei limite de poziție impuse de reglementator.","kind":"concept"},
-{"q":"În exemplul rezolvat cu WTI: limita bursei era 400 contracte, limita firmei 300, iar tu ești deja long 120. Câte contracte poți adăuga maxim?","options":["500 contracte","280 contracte","180 contracte","400 contracte"],"correct":2,"explain":"Cea mai strictă limită este a firmei (300). 300 − 120 = 180 contracte permise. Respectând firma, ești automat sub limita bursei.","kind":"concept"},
-{"q":"De ce, în exemplul WTI, respectarea limitei firmei (300) te ține automat și sub limita bursei (400)?","options":["Pentru că bursa nu verifică pozițiile","Pentru că limita firmei este mai strictă (mai mică) decât a bursei","Pentru că cele două limite sunt identice","Pentru că limita bursei nu se aplică junior-ilor"],"correct":1,"explain":"Limita obligatorie este întotdeauna cea mai strictă; fiind 300 < 400, respectarea ei garantează încadrarea și în limita bursei.","kind":"concept"},
-{"q":"Dacă clientul insistă pentru cele 500 de contracte complete, ce trebuie să facă traderul?","options":["Să suprascrie manual avertizarea de limită","Să execute integral și să raporteze ulterior","Să NU suprascrie manual și să ridice o cerere de majorare a limitei către conformitate","Să refuze definitiv și să închidă contul clientului"],"correct":2,"explain":"Suprascrierea manuală a opririi ferme este o încălcare; calea corectă este o cerere oficială de majorare către conformitate.","kind":"concept"},
-{"q":"În mecanica zilnică, care document este considerat \"unica sursă de adevăr\"?","options":["Tabelul static StaticLimits.xlsx","Fișierul zilnic cu limite (LIMITS_YYYYMMDD.csv)","Raportul de audit lunar","Extrasul brokerului"],"correct":1,"explain":"Fișierul zilnic cu limite este unica sursă de adevăr; tabelul static servește doar ca referință.","kind":"text"},
-{"q":"La ce nivel de utilizare (PercUsed) terminalul blochează tichete noi pentru perechea instrument-registru?","options":["La 50%","La 80%","La 100% sau peste (≥100)","Niciodată automat"],"correct":2,"explain":"La PercUsed ≥ 100 bannerul devine roșu și terminalul blochează tichetele noi până când utilizarea scade sub 100.","kind":"text"},
-{"q":"De ce limitele de poziție NU acoperă pozițiile în afara bursei (off-exchange / OTC)?","options":["Pentru că OTC-ul este interzis","Pentru că limitele se aplică doar produselor tranzacționate la bursă sau compensate, lăsând swap-urile și opțiunile OTC neacoperite","Pentru că OTC-ul nu implică risc","Pentru că reglementatorii preferă OTC-ul"],"correct":1,"explain":"Limitele acoperă doar produsele de bursă/compensate; un birou poate acumula expunere mare prin swap-uri OTC, invizibilă limitei.","kind":"concept"},
-{"q":"Cum poate o \"derogare de hedging\" să ducă la ridicarea efectivă a limitei?","options":["Prin etichetarea unui registru speculativ drept \"hedging\" dacă reglementatorul nu contestă în timp real","Prin dublarea automată a limitei","Prin eliminarea raportării","Prin transferul poziției la bursă"],"correct":0,"explain":"Derogarea trebuie să fie demonstrabil un hedge; un registru speculativ etichetat \"hedging\" și necontestat în timp real ridică efectiv limita.","kind":"concept"},
-{"q":"Ce permite scurgerea (leakage) transfrontalieră / pe multiple piețe?","options":["Limitele globale care comunică instantaneu","Faptul că limitele sunt per bursă/jurisdicție și nu comunică între ele, permițând 90% pe ICE și 90% pe SGX simultan","Interzicerea tranzacționării în străinătate","Agregarea instantanee a tuturor pozițiilor mondiale"],"correct":1,"explain":"Limitele fiind per bursă/jurisdicție și agregarea nefiind instantanee, un trader poate exploata decalajul rulând poziții mari pe piețe diferite.","kind":"concept"},
-{"q":"Ce ilustrează replicarea sintetică (ex. 50 loturi WTI + 50 loturi Brent + spread calendaristic)?","options":["O metodă de a reduce riscul real la zero","Cum limita vede produse separate, nu expunerea economică combinată concentrată","O încălcare directă a limitei bursei","Un mod de a evita complet decontarea"],"correct":1,"explain":"Limita e definită pe produs/scadență; combinând produse corelate, expunerea economică se concentrează deși limita vede produse separate.","kind":"concept"},
-{"q":"Care este diferența între o limită de concentrare și o limită de poziție?","options":["Sunt identice","Limita de concentrare plafonează cota din oferta livrabilă; un trader poate fi în limita de poziție, dar să depășească concentrarea","Limita de concentrare se aplică doar acțiunilor","Limita de poziție este mereu mai strictă"],"correct":1,"explain":"Limitele de concentrare plafonează cota din oferta livrabilă; ele și limitele de poziție nu se mișcă împreună — una poate fi depășită fără cealaltă.","kind":"concept"},
-{"q":"Ce înseamnă \"grandfathering\"-ul în contextul schimbării regimului de limite?","options":["Pozițiile existente sunt păstrate sub regulile vechi, putând depăși noul plafon până la rulare/lichidare","Toate pozițiile sunt lichidate forțat imediat","Limita se dublează automat","Noile reguli se aplică retroactiv tuturor pozițiilor"],"correct":0,"explain":"Pozițiile construite înainte de înăsprire sunt \"grandfathered\" și pot depăși noul plafon, invizibile pentru el până sunt rulate sau lichidate.","kind":"text"},
-{"q":"De ce o \"limită statică\" poate fi depășită fără nicio tranzacție nouă, într-o piață cu mișcare rapidă?","options":["Pentru că traderii adaugă tichete ascunse","Pentru că un salt de preț (ex. 10% în 5 minute) poate dubla valoarea noțională a poziției existente","Pentru că bursa schimbă limita pe loc","Pentru că poziția se închide singură"],"correct":1,"explain":"Limita e un plafon static, nu un amortizor dinamic; un salt mare de preț poate umfla valoarea noțională existentă peste limită.","kind":"concept"},
-{"q":"Care este o concepție greșită frecventă despre scopul limitelor de poziție?","options":["Că previn manipularea pieței","Că sunt menite EXCLUSIV să restricționeze activitatea de tranzacționare, ignorând rolul de prevenire a manipulării","Că trebuie monitorizate în timp real","Că diferă pe instrumente"],"correct":1,"explain":"O concepție greșită este că limitele doar restricționează tranzacționarea; scopul lor principal este prevenirea manipulării și asigurarea unei piețe corecte.","kind":"text"},
-{"q":"Ce este o vânzare fictivă (wash sale) și de ce contează pentru limite?","options":["O vânzare la pierdere garantată; nu afectează limitele","Cumpărarea și vânzarea aceluiași titlu într-o perioadă scurtă (ex. pentru taxe/manipulare); poate declanșa limitele cu consecințe neintenționate","O tranzacție anulată de bursă; irelevantă","O derogare oficială de la reglementator"],"correct":1,"explain":"Vânzările fictive (cumpărare+vânzare rapidă a aceluiași titlu) pot declanșa limitele de poziție și produce consecințe neintenționate.","kind":"text"},
-{"q":"De ce sunt esențiale alertele în timp real (vs. descoperirea doar la sfârșitul zilei)?","options":["Pentru a crește comisioanele","Pentru că o depășire descoperită abia la sfârșitul zilei te poate forța să lichidezi tranzacții mari în condiții nefavorabile","Pentru că reglementatorii interzic raportarea zilnică","Pentru a evita orice raportare"],"correct":1,"explain":"Alertele în timp real (ex. prag 90%) permit acțiune preventivă; descoperirea târzie forțează lichidări mari în condiții de piață adverse.","kind":"concept"},
-{"q":"Ce sunt pozițiile \"fantomă\" (ghost) menționate în concluzii?","options":["Poziții fictive inventate de trader","Poziții deținute de brokerul de compensare, raportate de bursă în interesul deschis, dar nereflectate în registrele interne","Poziții închise care apar din greșeală","Poziții ale reglementatorului"],"correct":1,"explain":"Interesul deschis raportat de bursă poate include poziții ale brokerului de compensare absente din registrele interne; de aceea extrasele brokerului se reconciliază zilnic.","kind":"text"},
-{"q":"De ce limitele de poziție NU sunt o garanție a siguranței pieței?","options":["Pentru că sunt mereu prea mari","Pentru că sunt un instrument de conformitate (transparență), nu unul economic — nu măsoară riscul real, nu previn squeeze-urile și nu opresc prețuri iraționale","Pentru că nimeni nu le respectă","Pentru că se aplică doar acțiunilor"],"correct":1,"explain":"Limitele forțează transparența și reduc dominația unui participant, dar nu măsoară riscul real și nu împiedică piața să se comporte imprevizibil — sunt o poartă, nu un gard.","kind":"concept"}
-]}
+{
+ "questions": [
+  {
+   "q": "Care este scopul principal al unei limite de poziție (position limit)?",
+   "options": [
+    "Să garanteze profit traderilor",
+    "Să crească volumul de tranzacționare al bursei",
+    "Să împiedice un participant să capete prea multă influență asupra prețului și să creeze instabilitate",
+    "Să elimine complet riscul de pierdere"
+   ],
+   "correct": 2,
+   "explain": "Limita de poziție plafonează cantitatea deținută pentru a preveni influența excesivă asupra prețului, riscul excesiv și instabilitatea pieței.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cine stabilește de regulă limitele de poziție?",
+   "options": [
+    "Doar traderii individuali",
+    "Băncile centrale exclusiv",
+    "Clienții firmei de investiții",
+    "Reglementatorul pieței sau bursa pe care se tranzacționează instrumentul"
+   ],
+   "correct": 3,
+   "explain": "Limitele sunt stabilite de reglementatorul pieței (ex. o autoritate de valori mobiliare) sau de bursa unde se tranzacționează instrumentul.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce reprezintă poziția netă (net position)?",
+   "options": [
+    "Diferența dintre suma long și suma short pentru același instrument",
+    "Suma tuturor pozițiilor long și short fără compensare",
+    "Doar pozițiile short ale unui trader",
+    "Valoarea totală a portofoliului firmei"
+   ],
+   "correct": 0,
+   "explain": "Poziția netă este diferența dintre long și short pentru același instrument (ex. long 1.200 minus short 300 = 900 net long).",
+   "kind": "text"
+  },
+  {
+   "q": "Dacă ești long 1.200 de acțiuni și short 300 de acțiuni din aceeași acțiune, care este poziția brută (gross)?",
+   "options": [
+    "900 acțiuni",
+    "1.500 acțiuni",
+    "300 acțiuni",
+    "1.200 acțiuni"
+   ],
+   "correct": 1,
+   "explain": "Poziția brută însumează long și short fără compensare: 1.200 + 300 = 1.500 acțiuni.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce ar stabili unii reglementatori limite pe poziția brută, nu doar pe cea netă?",
+   "options": [
+    "Pentru a încuraja speculația",
+    "Pentru că poziția netă nu poate fi calculată",
+    "Pentru a controla participarea globală la piață, chiar dacă expunerea netă este mică",
+    "Pentru a reduce taxele traderilor"
+   ],
+   "correct": 2,
+   "explain": "Limitele pe poziția brută controlează participarea totală la piață, chiar dacă expunerea netă (compensată) pare mică.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce este un prag (threshold) în contextul limitelor de poziție?",
+   "options": [
+    "Limita maximă absolută impusă de bursă",
+    "Numărul minim de contracte tranzacționabile",
+    "Procentul de profit garantat",
+    "Un nivel predefinit sub limita oficială care declanșează o avertizare timpurie"
+   ],
+   "correct": 3,
+   "explain": "Pragul este setat sub limita oficială (ex. 80%) pentru a declanșa o alertă timpurie și a oferi timp de acțiune.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este o depășire (breach) și ce impune de regulă?",
+   "options": [
+    "Depășirea limitei stabilite; acțiune corectivă imediată precum lichidarea unei părți din poziție",
+    "Atingerea a 50% din limită; nicio acțiune",
+    "O tranzacție profitabilă; raportare opțională",
+    "Închiderea pieței; suspendarea tuturor traderilor"
+   ],
+   "correct": 0,
+   "explain": "Depășirea apare când poziția trece de limită și impune acțiune corectivă imediată plus posibile obligații de raportare.",
+   "kind": "text"
+  },
+  {
+   "q": "În analogia bufetului, ce reprezintă regula de a cere permisiunea managerului după 5 farfurii?",
+   "options": [
+    "Comisionul de tranzacționare",
+    "Limita de poziție",
+    "Marja de profit",
+    "Casa de compensare"
+   ],
+   "correct": 1,
+   "explain": "Regula de a cere permisiunea după un anumit număr de farfurii este analogă unei limite de poziție impuse de reglementator.",
+   "kind": "concept"
+  },
+  {
+   "q": "În exemplul rezolvat cu WTI: limita bursei era 400 contracte, limita firmei 300, iar tu ești deja long 120. Câte contracte poți adăuga maxim?",
+   "options": [
+    "500 contracte",
+    "280 contracte",
+    "180 contracte",
+    "400 contracte"
+   ],
+   "correct": 2,
+   "explain": "Cea mai strictă limită este a firmei (300). 300 − 120 = 180 contracte permise. Respectând firma, ești automat sub limita bursei.",
+   "kind": "concept"
+  },
+  {
+   "q": "De ce, în exemplul WTI, respectarea limitei firmei (300) te ține automat și sub limita bursei (400)?",
+   "options": [
+    "Pentru că bursa nu verifică pozițiile",
+    "Pentru că limita bursei nu se aplică junior-ilor",
+    "Pentru că cele două limite sunt identice",
+    "Pentru că limita firmei este mai strictă (mai mică) decât a bursei"
+   ],
+   "correct": 3,
+   "explain": "Limita obligatorie este întotdeauna cea mai strictă; fiind 300 < 400, respectarea ei garantează încadrarea și în limita bursei.",
+   "kind": "concept"
+  },
+  {
+   "q": "Dacă clientul insistă pentru cele 500 de contracte complete, ce trebuie să facă traderul?",
+   "options": [
+    "Să NU suprascrie manual și să ridice o cerere de majorare a limitei către conformitate",
+    "Să execute integral și să raporteze ulterior",
+    "Să suprascrie manual avertizarea de limită",
+    "Să refuze definitiv și să închidă contul clientului"
+   ],
+   "correct": 0,
+   "explain": "Suprascrierea manuală a opririi ferme este o încălcare; calea corectă este o cerere oficială de majorare către conformitate.",
+   "kind": "concept"
+  },
+  {
+   "q": "În mecanica zilnică, care document este considerat \"unica sursă de adevăr\"?",
+   "options": [
+    "Tabelul static StaticLimits.xlsx",
+    "Fișierul zilnic cu limite (LIMITS_YYYYMMDD.csv)",
+    "Raportul de audit lunar",
+    "Extrasul brokerului"
+   ],
+   "correct": 1,
+   "explain": "Fișierul zilnic cu limite este unica sursă de adevăr; tabelul static servește doar ca referință.",
+   "kind": "text"
+  },
+  {
+   "q": "La ce nivel de utilizare (PercUsed) terminalul blochează tichete noi pentru perechea instrument-registru?",
+   "options": [
+    "La 50%",
+    "La 80%",
+    "La 100% sau peste (≥100)",
+    "Niciodată automat"
+   ],
+   "correct": 2,
+   "explain": "La PercUsed ≥ 100 bannerul devine roșu și terminalul blochează tichetele noi până când utilizarea scade sub 100.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce limitele de poziție NU acoperă pozițiile în afara bursei (off-exchange / OTC)?",
+   "options": [
+    "Pentru că OTC-ul este interzis",
+    "Pentru că reglementatorii preferă OTC-ul",
+    "Pentru că OTC-ul nu implică risc",
+    "Pentru că limitele se aplică doar produselor tranzacționate la bursă sau compensate, lăsând swap-urile și opțiunile OTC neacoperite"
+   ],
+   "correct": 3,
+   "explain": "Limitele acoperă doar produsele de bursă/compensate; un birou poate acumula expunere mare prin swap-uri OTC, invizibilă limitei.",
+   "kind": "concept"
+  },
+  {
+   "q": "Cum poate o \"derogare de hedging\" să ducă la ridicarea efectivă a limitei?",
+   "options": [
+    "Prin etichetarea unui registru speculativ drept \"hedging\" dacă reglementatorul nu contestă în timp real",
+    "Prin dublarea automată a limitei",
+    "Prin eliminarea raportării",
+    "Prin transferul poziției la bursă"
+   ],
+   "correct": 0,
+   "explain": "Derogarea trebuie să fie demonstrabil un hedge; un registru speculativ etichetat \"hedging\" și necontestat în timp real ridică efectiv limita.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce permite scurgerea (leakage) transfrontalieră / pe multiple piețe?",
+   "options": [
+    "Limitele globale care comunică instantaneu",
+    "Faptul că limitele sunt per bursă/jurisdicție și nu comunică între ele, permițând 90% pe ICE și 90% pe SGX simultan",
+    "Interzicerea tranzacționării în străinătate",
+    "Agregarea instantanee a tuturor pozițiilor mondiale"
+   ],
+   "correct": 1,
+   "explain": "Limitele fiind per bursă/jurisdicție și agregarea nefiind instantanee, un trader poate exploata decalajul rulând poziții mari pe piețe diferite.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce ilustrează replicarea sintetică (ex. 50 loturi WTI + 50 loturi Brent + spread calendaristic)?",
+   "options": [
+    "O metodă de a reduce riscul real la zero",
+    "O încălcare directă a limitei bursei",
+    "Cum limita vede produse separate, nu expunerea economică combinată concentrată",
+    "Un mod de a evita complet decontarea"
+   ],
+   "correct": 2,
+   "explain": "Limita e definită pe produs/scadență; combinând produse corelate, expunerea economică se concentrează deși limita vede produse separate.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este diferența între o limită de concentrare și o limită de poziție?",
+   "options": [
+    "Sunt identice",
+    "Limita de poziție este mereu mai strictă",
+    "Limita de concentrare se aplică doar acțiunilor",
+    "Limita de concentrare plafonează cota din oferta livrabilă; un trader poate fi în limita de poziție, dar să depășească concentrarea"
+   ],
+   "correct": 3,
+   "explain": "Limitele de concentrare plafonează cota din oferta livrabilă; ele și limitele de poziție nu se mișcă împreună — una poate fi depășită fără cealaltă.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce înseamnă \"grandfathering\"-ul în contextul schimbării regimului de limite?",
+   "options": [
+    "Pozițiile existente sunt păstrate sub regulile vechi, putând depăși noul plafon până la rulare/lichidare",
+    "Toate pozițiile sunt lichidate forțat imediat",
+    "Limita se dublează automat",
+    "Noile reguli se aplică retroactiv tuturor pozițiilor"
+   ],
+   "correct": 0,
+   "explain": "Pozițiile construite înainte de înăsprire sunt \"grandfathered\" și pot depăși noul plafon, invizibile pentru el până sunt rulate sau lichidate.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce o \"limită statică\" poate fi depășită fără nicio tranzacție nouă, într-o piață cu mișcare rapidă?",
+   "options": [
+    "Pentru că traderii adaugă tichete ascunse",
+    "Pentru că un salt de preț (ex. 10% în 5 minute) poate dubla valoarea noțională a poziției existente",
+    "Pentru că bursa schimbă limita pe loc",
+    "Pentru că poziția se închide singură"
+   ],
+   "correct": 1,
+   "explain": "Limita e un plafon static, nu un amortizor dinamic; un salt mare de preț poate umfla valoarea noțională existentă peste limită.",
+   "kind": "concept"
+  },
+  {
+   "q": "Care este o concepție greșită frecventă despre scopul limitelor de poziție?",
+   "options": [
+    "Că previn manipularea pieței",
+    "Că trebuie monitorizate în timp real",
+    "Că sunt menite EXCLUSIV să restricționeze activitatea de tranzacționare, ignorând rolul de prevenire a manipulării",
+    "Că diferă pe instrumente"
+   ],
+   "correct": 2,
+   "explain": "O concepție greșită este că limitele doar restricționează tranzacționarea; scopul lor principal este prevenirea manipulării și asigurarea unei piețe corecte.",
+   "kind": "text"
+  },
+  {
+   "q": "Ce este o vânzare fictivă (wash sale) și de ce contează pentru limite?",
+   "options": [
+    "O vânzare la pierdere garantată; nu afectează limitele",
+    "O derogare oficială de la reglementator",
+    "O tranzacție anulată de bursă; irelevantă",
+    "Cumpărarea și vânzarea aceluiași titlu într-o perioadă scurtă (ex. pentru taxe/manipulare); poate declanșa limitele cu consecințe neintenționate"
+   ],
+   "correct": 3,
+   "explain": "Vânzările fictive (cumpărare+vânzare rapidă a aceluiași titlu) pot declanșa limitele de poziție și produce consecințe neintenționate.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce sunt esențiale alertele în timp real (vs. descoperirea doar la sfârșitul zilei)?",
+   "options": [
+    "Pentru că o depășire descoperită abia la sfârșitul zilei te poate forța să lichidezi tranzacții mari în condiții nefavorabile",
+    "Pentru a crește comisioanele",
+    "Pentru că reglementatorii interzic raportarea zilnică",
+    "Pentru a evita orice raportare"
+   ],
+   "correct": 0,
+   "explain": "Alertele în timp real (ex. prag 90%) permit acțiune preventivă; descoperirea târzie forțează lichidări mari în condiții de piață adverse.",
+   "kind": "concept"
+  },
+  {
+   "q": "Ce sunt pozițiile \"fantomă\" (ghost) menționate în concluzii?",
+   "options": [
+    "Poziții fictive inventate de trader",
+    "Poziții deținute de brokerul de compensare, raportate de bursă în interesul deschis, dar nereflectate în registrele interne",
+    "Poziții închise care apar din greșeală",
+    "Poziții ale reglementatorului"
+   ],
+   "correct": 1,
+   "explain": "Interesul deschis raportat de bursă poate include poziții ale brokerului de compensare absente din registrele interne; de aceea extrasele brokerului se reconciliază zilnic.",
+   "kind": "text"
+  },
+  {
+   "q": "De ce limitele de poziție NU sunt o garanție a siguranței pieței?",
+   "options": [
+    "Pentru că sunt mereu prea mari",
+    "Pentru că nimeni nu le respectă",
+    "Pentru că sunt un instrument de conformitate (transparență), nu unul economic — nu măsoară riscul real, nu previn squeeze-urile și nu opresc prețuri iraționale",
+    "Pentru că se aplică doar acțiunilor"
+   ],
+   "correct": 2,
+   "explain": "Limitele forțează transparența și reduc dominația unui participant, dar nu măsoară riscul real și nu împiedică piața să se comporte imprevizibil — sunt o poartă, nu un gard.",
+   "kind": "concept"
+  }
+ ]
+}
