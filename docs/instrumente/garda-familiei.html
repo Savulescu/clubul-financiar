@@ -1,0 +1,474 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garda Familiei (anti-fraudă) — Clubul Financiar</title>
+<meta name="description" content="Protejează-ți familia de escrocherii: verifică mesaje și oferte suspecte cu scor de risc, vezi top schemele de fraudă active în România și urmează trusa „am fost înșelat” în primele 72h."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/instrumente/garda-familiei.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Garda Familiei (anti-fraudă)"><meta property="og:description" content="Verifică mesaje și oferte suspecte cu scor de risc, vezi top schemele de fraudă active în România și urmează trusa „am fost înșelat” în primele 72h."><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/garda-familiei.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Garda Familiei (anti-fraudă)"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Garda Familiei (anti-fraudă)</h1><p class="lead" style="margin-inline:auto">Lipește un mesaj sau o ofertă suspectă și află scorul de risc, vezi schemele de fraudă active în România și urmează pas cu pas trusa „am fost înșelat” în primele 72 de ore. Făcut ca să-ți protejezi părinții și bunicii.</p></div></section>
+<section class="section"><div class="container" id="tool">
+
+  <div class="panel" style="max-width:920px;margin:0 auto">
+    <div class="cf-alert warn"><span>⚠️</span><span><b>Cum funcționează:</b> verificatorul folosește reguli deterministe pentru a semnala tiparele clasice de înșelătorie. Un scor mic <b>nu garantează</b> că mesajul e sigur, iar un scor mare nu e o dovadă legală. La orice dubiu, sună direct banca la numărul de pe spatele cardului și verifică pe <a href="https://www.sri.ro" target="_blank" rel="noopener">surse oficiale</a>.</span></div>
+
+    <div class="cf-tabs" id="tabs">
+      <button class="cf-tab active" data-pane="pane-verif" type="button">🔎 Verifică un mesaj</button>
+      <button class="cf-tab" data-pane="pane-brief" type="button">📰 Brief lunar fraude</button>
+      <button class="cf-tab" data-pane="pane-trusa" type="button">🆘 Am fost înșelat (0–72h)</button>
+    </div>
+
+    <!-- ============ PANE 1: VERIFICATOR ============ -->
+    <div class="cf-pane active" id="pane-verif">
+      <div class="field">
+        <label for="msgIn">Lipește mesajul, SMS-ul, e-mailul sau oferta suspectă</label>
+        <textarea id="msgIn" rows="6" placeholder="Ex: „Felicitări! Ai câștigat un premiu. Confirmă-ți datele cardului și codul primit prin SMS în următoarele 30 de minute la link-ul de mai jos…”"></textarea>
+      </div>
+      <div class="cf-actions" style="margin-top:4px">
+        <button class="btn btn-primary" id="btnVerif" type="button">Analizează riscul</button>
+        <button class="btn btn-ghost" id="btnSample" type="button">Încarcă un exemplu</button>
+        <button class="btn btn-ghost" id="btnClearMsg" type="button">🗑️ Golește</button>
+      </div>
+
+      <div id="verifOut" style="margin-top:18px"></div>
+    </div>
+
+    <!-- ============ PANE 2: BRIEF LUNAR ============ -->
+    <div class="cf-pane" id="pane-brief">
+      <p class="cf-note">Cele mai răspândite scheme de fraudă din România în acest moment. Trimite-le familiei — recunoașterea tiparului e cea mai bună apărare.</p>
+      <div class="grid grid-2" id="briefGrid" style="margin-top:14px"></div>
+      <div class="cf-actions" style="margin-top:18px">
+        <button class="btn btn-ghost" id="btnRemind" type="button">🔔 Trimite-mi briefingul lunar</button>
+        <button class="btn btn-ghost" id="btnPrintBrief" type="button">🖨️ Salvează PDF pentru părinți</button>
+      </div>
+      <div id="remindMsg"></div>
+    </div>
+
+    <!-- ============ PANE 3: TRUSA 0-72h ============ -->
+    <div class="cf-pane" id="pane-trusa">
+      <div class="cf-alert danger"><span>🚨</span><span><b>Acționează imediat.</b> Primele ore sunt cruciale pentru a opri transferurile și a recupera banii. Urmează pașii în ordine, de sus în jos. Fiecare pas îți spune ce să faci și unde să suni.</span></div>
+      <div id="trusaList" style="margin-top:16px"></div>
+      <div class="cf-actions" style="margin-top:8px">
+        <button class="btn btn-primary" id="btnPrintTrusa" type="button">🖨️ Salvează trusa ca PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:920px;margin:30px auto 0">
+    <p><a class="btn btn-ghost" href="/instrumente.html">← Toate instrumentele</a></p>
+    <div class="disc">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
+  </div>
+
+</div></section>
+
+<footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var TOOL = "garda-familiei";
+  var $ = CF.$;
+
+  function esc(s){ var d=document.createElement("div"); d.textContent=String(s==null?"":s); return d.innerHTML; }
+
+  /* =========================================================================
+     TABS
+     ========================================================================= */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll("#tabs .cf-tab"));
+  tabs.forEach(function(t){
+    t.addEventListener("click", function(){
+      tabs.forEach(function(x){ x.classList.remove("active"); });
+      t.classList.add("active");
+      document.querySelectorAll(".cf-pane").forEach(function(p){ p.classList.remove("active"); });
+      var pane = $(t.getAttribute("data-pane"));
+      if(pane) pane.classList.add("active");
+    });
+  });
+
+  /* =========================================================================
+     (1) VERIFICATOR — reguli deterministe
+     ========================================================================= */
+  var msgIn = $("msgIn"), verifOut = $("verifOut"),
+      btnVerif = $("btnVerif"), btnSample = $("btnSample"), btnClearMsg = $("btnClearMsg");
+
+  // Listă albă de domenii bancare/oficiale RO (pentru detectarea typosquatting-ului).
+  var OFFICIAL_DOMAINS = [
+    "anaf.ro","ghiseul.ro","posta-romana.ro","bcr.ro","brd.ro","raiffeisen.ro",
+    "ing.ro","bancatransilvania.ro","btrl.ro","cec.ro","unicredit.ro","revolut.com",
+    "emag.ro","fan.courier.ro","sameday.ro","dpd.ro","gls-group.com","netflix.com",
+    "olx.ro","paypal.com","microsoft.com","google.com","facebook.com"
+  ];
+
+  // Fiecare regulă: id, greutate (impact pe scor), test (text minuscul, original) -> bool, etichetă, explicație.
+  var RULES = [
+    { id:"randament", w:22, label:"Promisiune de randament garantat",
+      explica:"Investițiile reale NU garantează niciodată profituri. Orice „garanție” de câștig e semnal clasic de schemă Ponzi sau fraudă investițională.",
+      test:function(t){ return /(randament|profit|c[aâ]?[șs]tig|dob[aâ]nd[aă]|venit)\s*(de\s*)?\d{1,3}\s*%/.test(t) ||
+        /(garantat|sigur|f[aă]r[aă]\s+risc|100\s*%\s*sigur|zero\s+risc)/.test(t) && /(profit|c[aâ]?[șs]tig|investi)/.test(t); } },
+    { id:"dublezi", w:24, label:"„Îți dublezi/triplezi banii”",
+      explica:"Promisiunea de a dubla rapid banii (mai ales în crypto sau „oportunități unice”) este aproape întotdeauna fraudă. Banii nu se dublează garantat în câteva zile.",
+      test:function(t){ return /(dubl|tripl|x2|x3|x5|x10|de\s+\d+\s+ori)\w*\s*(banii|investi|suma|capital)/.test(t) ||
+        /(dubl|tripl)\w*\s*(banii|investi|suma|capitalul|profitul)/.test(t); } },
+    { id:"urgenta", w:18, label:"Urgență artificială / presiune de timp",
+      explica:"Escrocii te grăbesc ca să nu ai timp să gândești sau să verifici. „Doar azi”, „expiră în 30 de minute”, „ultimul loc” = tactică de manipulare.",
+      test:function(t){ return /(urgent|imediat|acum|chiar acum|doar (azi|ast[aă]zi)|expir[aă]|[iî]n urm[aă]toarele \d+|[uú]ltim\w* (loc|[șs]ans[aă]|zi)|se [iî]nchide|gr[aă]be[șs]te|nu rata|repede)/.test(t); } },
+    { id:"date_card", w:26, label:"Cere date card / OTP / parolă",
+      explica:"NICIO bancă, ANAF sau companie reală nu îți cere prin SMS/e-mail codul de pe card (CVV), codul primit prin SMS (OTP), PIN-ul sau parola. Cine îți cere asta = fraudă.",
+      test:function(t){ return /(cvv|cod\w*\s*(de\s*)?(securitate|sms|de\s*pe\s*card|de\s*verificare|otp|primit))|(\botp\b)|(\bpin\b)|(parol\w*)|(num[aă]r\w*\s*(de\s*)?card|datele\s*cardului|confirm\w*\s*card)/.test(t); } },
+    { id:"iban_pf", w:20, label:"Plată către IBAN de persoană fizică",
+      explica:"Plățile către un cont personal (nume de persoană, nu firmă) pentru „investiții”, „taxe” sau „premii” sunt un mare semnal de alarmă. Firmele reale au conturi pe numele companiei.",
+      test:function(t){ return /\bRO\d{2}\s*[A-Z]{4}/i.test(t.replace(/\s+/g,"")) || /\b(iban|cont\s*bancar|transfer\w*\s*(bani|suma)|vireaz[aă]|depune\w*\s*[iî]n\s*cont)/.test(t); } },
+    { id:"link", w:14, label:"Link scurt sau domeniu suspect",
+      explica:"Link-urile scurtate (bit.ly, tinyurl) sau domeniile ciudate ascund destinația reală. Nu da click — tastează tu adresa oficială în browser.",
+      test:function(t){ return /(bit\.ly|tinyurl|cutt\.ly|t\.co\/|is\.gd|shorturl|rb\.gy|\.xyz|\.top|\.click|\.online\b|\.info\b)/.test(t); } },
+    { id:"premiu", w:16, label:"Premiu / câștig neașteptat",
+      explica:"Nu poți câștiga la o loterie/tombolă la care nu te-ai înscris. „Ai câștigat un telefon/voucher/premiu” + „plătește o taxă mică” = înșelătorie clasică.",
+      test:function(t){ return /(felicit[aă]ri|ai\s*c[aâ]?[șs]tigat|premiu|tombol[aă]|loterie|voucher|cadou\s*gratuit|selectat\s*pentru)/.test(t); } },
+    { id:"colet", w:15, label:"„Colet blocat / taxă livrare” (smishing)",
+      explica:"SMS-uri despre colete blocate care cer o „mică taxă” cu cardul sunt smishing. Curierul real nu cere date de card prin link-uri din SMS.",
+      test:function(t){ return /(colet\w*|pachet\w*|livrar\w*|expedi\w*|trimiter\w*)\s*.{0,40}(blocat|re[țt]inut|taxa|tax[aă]|vam[aă]|redirec|reprogram|nu\s*a\s*putut)/.test(t) ||
+        /(taxa|tax[aă])\s*.{0,20}(colet|livrar|vamal)/.test(t); } },
+    { id:"banca_angajat", w:18, label:"Persoană care pretinde că e „de la bancă/poliție/ANAF”",
+      explica:"„Sunt de la departamentul antifraudă al băncii și contul tău e în pericol — mută banii în contul sigur” este una dintre cele mai frecvente fraude. Banca nu te sună să-ți mute banii.",
+      test:function(t){ return /(angajat\w*\s*(al\s*)?b[aă]ncii|de\s*la\s*banc[aă]|departament\w*\s*(de\s*)?(antifraud[aă]|securitate|fraud[aă])|cont\s*(sigur|securizat|de\s*siguran[țt][aă])|reprezentant\w*\s*(al\s*)?(b[aă]ncii|anaf|poli[țt]iei))/.test(t); } },
+    { id:"crypto_invest", w:18, label:"„Oportunitate” crypto / platformă de investiții",
+      explica:"Platformele false de crypto/forex îți arată „profituri” pe ecran, apoi nu te lasă să retragi banii și cer „taxe” suplimentare. Adesea promovate prin reclame cu vedete.",
+      test:function(t){ return /(crypto|bitcoin|forex|trading|platform[aă]\s*de\s*investi|robot\s*de\s*trading|consultant\s*financiar|broker\b)/.test(t) &&
+        /(profit|c[aâ]?[șs]tig|investe[șs]te|oportunitate|[iî]nscrie|[iî]nregistreaz)/.test(t); } },
+    { id:"date_pers", w:12, label:"Cere date personale (CNP, copie buletin)",
+      explica:"Trimiterea CNP-ului sau a unei poze cu buletinul unor necunoscuți permite furtul de identitate și deschiderea de credite pe numele tău.",
+      test:function(t){ return /(cnp|copie\s*(buletin|carte\s*de\s*identitate|ci\b)|poz[aă]\s*(cu\s*)?(buletin|ci\b)|datele\s*personale\s*complete)/.test(t); } },
+    { id:"gramatica", w:6, label:"Greșeli / diacritice lipsă / ton automat",
+      explica:"Multe mesaje frauduloase sunt traduse automat sau scrise neglijent. Nu e o dovadă singură, dar combinată cu alte semnale crește riscul.",
+      test:function(t,orig){ var noDia = !/[ăâîșțĂÂÎȘȚ]/.test(orig) && orig.length > 80;
+        var capLock = (orig.replace(/[^A-ZĂÂÎȘȚ]/g,"").length / Math.max(1,orig.replace(/\s/g,"").length)) > 0.55 && orig.length > 30;
+        return noDia || capLock; } }
+  ];
+
+  // Typosquatting: domeniu care SEAMĂNĂ cu unul oficial dar nu e identic.
+  function typosquatHits(orig){
+    var hits = [];
+    var domains = (orig.match(/\b([a-z0-9-]+\.)+[a-z]{2,}\b/gi) || []).map(function(d){ return d.toLowerCase(); });
+    domains.forEach(function(dom){
+      var bare = dom.replace(/^www\./,"");
+      if(OFFICIAL_DOMAINS.indexOf(bare) !== -1) return; // exact = ok
+      OFFICIAL_DOMAINS.forEach(function(off){
+        var coreOff = off.split(".")[0];
+        var coreDom = bare.split(".")[0];
+        if(coreOff.length < 3) return;
+        // Conține numele brandului dar pe alt TLD/subdomeniu, sau e foarte aproape (1 literă diferență).
+        if(bare !== off && (coreDom === coreOff && bare.indexOf(off) === -1)){
+          hits.push({ found: bare, looksLike: off });
+        } else if(bare !== off && coreDom !== coreOff && levClose(coreDom, coreOff)){
+          hits.push({ found: bare, looksLike: off });
+        }
+      });
+    });
+    // deduplicare
+    var seen = {}; return hits.filter(function(h){ var k=h.found+"|"+h.looksLike; if(seen[k]) return false; seen[k]=1; return true; });
+  }
+  // distanță Levenshtein <=2 și lungimi apropiate (typo de brand)
+  function levClose(a, b){
+    if(Math.abs(a.length-b.length) > 2) return false;
+    if(a.length < 4 || b.length < 4) return false;
+    var d = lev(a,b);
+    return d >= 1 && d <= 2;
+  }
+  function lev(a, b){
+    var m=a.length, n=b.length, dp=[];
+    for(var i=0;i<=m;i++){ dp[i]=[i]; }
+    for(var j=0;j<=n;j++){ dp[0][j]=j; }
+    for(i=1;i<=m;i++){ for(j=1;j<=n;j++){
+      dp[i][j] = Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+    } }
+    return dp[m][n];
+  }
+
+  function analyze(orig){
+    var t = orig.toLowerCase();
+    var fired = [];
+    RULES.forEach(function(r){
+      var ok=false; try{ ok = r.test(t, orig); }catch(e){ ok=false; }
+      if(ok) fired.push(r);
+    });
+    var typo = typosquatHits(orig);
+    typo.forEach(function(h){
+      fired.push({ id:"typo", w:24, label:"Domeniu fals (typosquatting): „"+h.found+"”",
+        explica:"Domeniul „"+h.found+"” imită „"+h.looksLike+"”, dar NU este oficial. Escrocii copiază site-uri reale schimbând o literă sau extensia. Verifică adresa caracter cu caracter." });
+    });
+    var raw = fired.reduce(function(s,r){ return s + r.w; }, 0);
+    var score = Math.min(100, raw);
+    return { score: score, fired: fired };
+  }
+
+  var lastResult = null, lastText = "";
+
+  function renderVerif(){
+    var orig = (msgIn.value || "").trim();
+    if(!orig){
+      verifOut.innerHTML = '<p class="cf-note">Lipește un mesaj mai sus și apasă „Analizează riscul”.</p>';
+      lastResult = null; return;
+    }
+    var res = analyze(orig);
+    lastResult = res; lastText = orig;
+
+    var level, klass, fillKlass, ic;
+    if(res.score >= 60){ level="Risc ridicat"; klass="danger"; fillKlass="danger"; ic="🚫"; }
+    else if(res.score >= 30){ level="Risc mediu — atenție"; klass="warn"; fillKlass="warn"; ic="⚠️"; }
+    else if(res.score > 0){ level="Risc scăzut — verifică totuși"; klass="warn"; fillKlass=""; ic="🔎"; }
+    else { level="Niciun tipar clasic detectat"; klass="ok"; fillKlass=""; ic="✅"; }
+
+    var h = '';
+    h += '<div class="cf-big" style="margin-bottom:2px">'+ic+' '+res.score+'<span style="font-size:1.1rem;color:var(--muted)"> / 100 risc</span></div>';
+    h += '<div class="cf-meter"><div class="cf-meter-fill '+fillKlass+'" style="width:'+Math.max(4,res.score)+'%"></div><div class="cf-meter-lbl">'+esc(level)+'</div></div>';
+    h += '<div class="cf-alert '+klass+'" style="margin-top:10px"><span>'+ic+'</span><span><b>'+esc(level)+'.</b> ';
+    if(res.score >= 60){ h += 'Acest mesaj are mai multe semne clare de înșelătorie. <b>Nu da click, nu trimite bani și nu oferi date.</b> Dacă te-a contactat „banca”, închide și sună tu la numărul de pe spatele cardului.'; }
+    else if(res.score >= 30){ h += 'Există semnale care cer prudență. Verifică sursa pe cont propriu înainte de a reacționa.'; }
+    else if(res.score > 0){ h += 'Am găsit un semnal minor. Tratează-l cu prudență, dar nu e neapărat o fraudă.'; }
+    else { h += 'Nu am găsit tiparele clasice de fraudă. Atenție: asta nu garantează că mesajul e 100% sigur — folosește mereu bunul-simț.'; }
+    h += '</span></div>';
+
+    if(res.fired.length){
+      h += '<p class="cf-note" style="margin-top:14px"><b>Semnale găsite ('+res.fired.length+'):</b></p>';
+      h += '<div class="cf-log" style="margin-top:6px">';
+      res.fired.forEach(function(r){
+        h += '<div class="cf-row"><span>⚑ '+esc(r.label)+'</span><b class="cf-neg">+'+r.w+'</b></div>';
+        h += '<div class="cf-note" style="margin:-2px 0 10px">'+esc(r.explica)+'</div>';
+      });
+      h += '</div>';
+    } else {
+      h += '<p class="cf-note" style="margin-top:14px">Niciun tipar deterministic semnalat.</p>';
+    }
+
+    h += '<div class="cf-actions" style="margin-top:12px">';
+    h += '<button class="btn btn-primary" id="btnExplica" type="button">🤖 Explică-mi de ce (AI)</button>';
+    h += '<button class="btn btn-ghost" id="btnPrintVerif" type="button">🖨️ Salvează analiza (PDF)</button>';
+    h += '</div>';
+    h += '<div class="cf-quota" id="aiQuotaLine" style="margin-top:6px"></div>';
+    h += '<div id="aiExplica" style="margin-top:8px"></div>';
+
+    verifOut.innerHTML = h;
+
+    $("btnExplica").addEventListener("click", explicaAI);
+    $("btnPrintVerif").addEventListener("click", printVerif);
+    renderAiQuota();
+  }
+
+  function printVerif(){
+    if(!lastResult) return;
+    var body = '<p class="big">Scor de risc: '+lastResult.score+' / 100</p>';
+    body += '<table>';
+    if(lastResult.fired.length){
+      lastResult.fired.forEach(function(r){ body += '<tr><td>'+esc(r.label)+'</td><td>+'+r.w+'</td></tr>'; });
+    } else {
+      body += '<tr><td>Niciun tipar clasic de fraudă detectat</td><td>0</td></tr>';
+    }
+    body += '</table>';
+    body += '<p class="muted">Mesaj analizat:</p><p style="white-space:pre-wrap;border-left:3px solid #10b981;padding-left:10px">'+esc(lastText.slice(0,1200))+'</p>';
+    body += '<p class="muted">Regulă de aur: nicio bancă, ANAF sau curier nu îți cere prin SMS/e-mail codul OTP, CVV-ul, PIN-ul sau parola. La orice dubiu, sună la numărul de pe spatele cardului.</p>';
+    CF.printResult("Analiză mesaj suspect — Garda Familiei", body);
+  }
+
+  /* ---------- AI „Explică-mi de ce” ---------- */
+  function renderAiQuota(){
+    var line = $("aiQuotaLine"); if(!line) return;
+    var q = CF.aiQuota(), used = CF.aiUsedThisMonth();
+    if(q === Infinity){ line.textContent = "Explicații AI nelimitate (plan Ultra)."; }
+    else if(q === 0){ line.textContent = "Explicația AI necesită un plan plătit."; }
+    else { line.textContent = "Explicații AI: " + used + " / " + q + " folosite luna asta."; }
+  }
+
+  function explicaAI(){
+    var btn = $("btnExplica"), box = $("aiExplica");
+    if(!btn || !box || !lastResult) return;
+    var q = CF.aiQuota(), used = CF.aiUsedThisMonth();
+    if(q !== Infinity && used >= q){
+      box.innerHTML = '<div class="cf-alert warn"><span>🔓</span><span>Ai folosit toate explicațiile AI din luna asta. <a href="/premium.html#alege">Vezi planurile</a> pentru mai multe.</span></div>';
+      return;
+    }
+    btn.disabled = true; btn.textContent = "Se analizează…";
+    box.innerHTML = '<div class="cf-msg ai"><span class="cf-typing"><i></i><i></i><i></i></span></div>';
+
+    var semnale = lastResult.fired.map(function(r){ return "- " + r.label; }).join("\n") || "(niciun tipar clasic detectat de reguli)";
+    var sys = "Ești un expert în prevenția fraudelor financiare din România, care explică pe înțelesul oamenilor în vârstă. Răspunde DOAR în limba română, calm și clar. NU recomanda produse de investiții. Explică de ce un mesaj este sau nu suspect și ce trebuie să facă persoana. Maxim 6 propoziții scurte. Termină cu o singură recomandare concretă de siguranță.";
+    var usr = "Scor de risc calculat de reguli: " + lastResult.score + "/100.\nSemnale automate detectate:\n" + semnale +
+      "\n\nMesajul suspect:\n\"\"\"\n" + lastText.slice(0,1500) + "\n\"\"\"\n\nExplică-mi simplu de ce acest mesaj este (sau nu) o posibilă escrocherie și ce ar trebui să fac.";
+
+    CF.aiConsume(); renderAiQuota();
+
+    CF.aiChat([{role:"system",content:sys},{role:"user",content:usr}], { context:{ tema:"prevenție fraude RO 2026" } })
+      .then(function(res){
+        var content = (res && res.content && res.content.trim()) ||
+          "Nu am putut genera o explicație acum. Pe scurt: dacă mesajul cere bani, date de card, coduri OTP sau te grăbește, tratează-l ca pe o posibilă fraudă și verifică direct la bancă.";
+        box.innerHTML = '<div class="cf-msg ai">'+esc(content)+'</div>';
+      })
+      .catch(function(){
+        box.innerHTML = '<div class="cf-alert warn"><span>⚠️</span><span>Asistentul AI nu este disponibil acum. Regulă sigură: dacă un mesaj cere bani, date de card sau coduri și te grăbește — e foarte probabil o fraudă. Sună banca la numărul oficial.</span></div>';
+      })
+      .then(function(){ btn.disabled = false; btn.textContent = "🤖 Explică-mi de ce (AI)"; });
+  }
+
+  var SAMPLE = "FELICITARI! Contul tau a fost selectat pentru un premiu de la banca. Departamentul antifrauda a detectat o problema. Pentru a-ti proteja banii, confirma urgent codul primit prin SMS si datele cardului la link-ul http://bit.ly/cont-sigur in urmatoarele 30 de minute, altfel contul va fi blocat. Vireaza suma in contul sigur RO49 AAAA 1B31 0075 9384 0000.";
+
+  btnVerif.addEventListener("click", renderVerif);
+  msgIn.addEventListener("input", function(){ if((msgIn.value||"").trim()) renderVerif(); else { verifOut.innerHTML=''; lastResult=null; } });
+  btnSample.addEventListener("click", function(){ msgIn.value = SAMPLE; renderVerif(); });
+  btnClearMsg.addEventListener("click", function(){ msgIn.value=""; verifOut.innerHTML=''; lastResult=null; });
+
+  /* =========================================================================
+     (2) BRIEF LUNAR FRAUDE — listă curată statică
+     ========================================================================= */
+  var SCHEME = [
+    { titlu:"Investiții false (crypto / forex)", ic:"📉", nivel:"Foarte răspândit",
+      desc:"Reclame cu „personalități” care promit profituri uriașe. Un „broker” te sună, te ajută să depui și îți arată „câștiguri” pe o platformă falsă. Când vrei să retragi, ți se cer noi „taxe” și banii dispar.",
+      semne:["Randament „garantat”","Te grăbește să depui mai mult","Nu poți retrage fără „taxe”","Platformă necunoscută"] },
+    { titlu:"Smishing — „colet blocat / taxă livrare”", ic:"📦", nivel:"În creștere",
+      desc:"SMS care pretinde că un colet e blocat și cere o „mică taxă” cu cardul printr-un link. Pagina copiază curierul real (FAN, Sameday, Poșta) și fură datele cardului.",
+      semne:["Link scurt în SMS","Sumă mică („1,99 lei”)","Cere date complete de card","Diacritice lipsă"] },
+    { titlu:"Fraudă „angajatul băncii / antifraudă”", ic:"🏦", nivel:"Periculos",
+      desc:"Te sună cineva care zice că e de la banca ta, că ai o „tranzacție suspectă” și că trebuie să muți banii într-un „cont sigur” sau să citești codul primit prin SMS. Banca reală nu face asta niciodată.",
+      semne:["Sună „de la bancă”","Cere codul din SMS / OTP","„Mută banii în cont sigur”","Creează panică"] },
+    { titlu:"Criptomonede-piramidă / „rețea” de profit", ic:"🔺", nivel:"Recurent",
+      desc:"Schemă în care câștigi „aducând prieteni”. Banii noilor membri îi plătesc pe cei vechi (Ponzi). Pare profitabil la început, apoi se prăbușește și majoritatea pierd tot.",
+      semne:["Câștig din recrutare","„Intră acum, mai târziu e prea târziu”","Token/monedă necunoscută","Fără produs real"] },
+    { titlu:"Romance scam / prietenie online", ic:"💔", nivel:"Costisitor",
+      desc:"O persoană „de încredere” cunoscută online cere bani pentru o urgență (medicală, vamă, bilet de avion) și amână constant întâlnirea. Țintește adesea persoanele singure.",
+      semne:["Nu se întâlnește niciodată","Cere bani pentru „urgențe”","Poveste emoțională","Insistă pe transfer rapid"] },
+    { titlu:"Vânzări false OLX / Marketplace", ic:"🛒", nivel:"Frecvent",
+      desc:"Cumpărător sau vânzător fals care insistă pe „livrare cu card” printr-un link de plată fals, sau cere plata în avans pentru un produs care nu există.",
+      semne:["Insistă pe link de „livrare”","Plată doar în avans","Preț prea bun","Refuză întâlnirea/ramburs"] }
+  ];
+
+  function renderBrief(){
+    var grid = $("briefGrid");
+    var h = "";
+    SCHEME.forEach(function(s){
+      h += '<div class="card cf-card-opt">';
+      h += '<h4 style="display:flex;align-items:center;gap:8px">'+s.ic+' '+esc(s.titlu)+'</h4>';
+      h += '<span class="cf-badge pro" style="margin:2px 0 8px;display:inline-block">'+esc(s.nivel)+'</span>';
+      h += '<p style="color:var(--muted);font-size:.92rem;margin:0 0 10px">'+esc(s.desc)+'</p>';
+      h += '<p class="cf-note" style="margin:0 0 4px"><b>Semne de alarmă:</b></p><ul style="margin:0;padding-left:18px;font-size:.88rem;color:var(--muted)">';
+      s.semne.forEach(function(x){ h += '<li>'+esc(x)+'</li>'; });
+      h += '</ul></div>';
+    });
+    grid.innerHTML = h;
+  }
+
+  $("btnRemind").addEventListener("click", function(){
+    CF.setReminder(TOOL, {
+      kind:"monthly",
+      note:"Briefingul lunar Garda Familiei: noile scheme de fraudă din România. Trimite-l părinților și bunicilor.",
+      channel:"telegram"
+    });
+    var b = $("btnRemind"); b.textContent = "🔔 Reminder lunar activat"; b.disabled = true;
+    $("remindMsg").innerHTML = '<div class="cf-alert ok" style="margin-top:12px"><span>✅</span><span>Îți vom trimite lunar un rezumat al schemelor de fraudă active. Îl poți dezactiva oricând din contul tău.</span></div>';
+  });
+
+  $("btnPrintBrief").addEventListener("click", function(){
+    var body = '<p class="muted">Trimite această listă părinților și bunicilor. Recunoașterea tiparului = cea mai bună apărare.</p><table>';
+    SCHEME.forEach(function(s){
+      body += '<tr><td><b>'+esc(s.titlu)+'</b> ('+esc(s.nivel)+')<br><span style="font-weight:400;color:#5b7088">'+esc(s.desc)+'</span><br><span style="font-weight:400;color:#5b7088">Semne: '+esc(s.semne.join(", "))+'</span></td><td></td></tr>';
+    });
+    body += '</table><p class="muted">Regulă de aur: nicio instituție reală nu cere prin SMS/telefon codul OTP, CVV, PIN sau parola. La dubiu, sună banca la numărul de pe card.</p>';
+    CF.printResult("Top scheme de fraudă în România — Garda Familiei", body);
+  });
+
+  /* =========================================================================
+     (3) TRUSA „AM FOST ÎNȘELAT” 0–72h
+     ========================================================================= */
+  var PASI = [
+    { t:"0–15 min", ic:"📞", titlu:"Sună BANCA și blochează cardul/contul",
+      txt:"Sună imediat la numărul de pe spatele cardului. Cere blocarea cardului și a operațiunilor și raportează frauda. Dacă ai dat un cod / ai aprobat o plată, spune exact ce s-a întâmplat — uneori plata poate fi oprită sau revocată.",
+      link:null },
+    { t:"15–30 min", ic:"🔐", titlu:"Schimbă parolele și activează 2FA",
+      txt:"Schimbă parola la online banking, e-mail și conturile importante de pe un dispozitiv sigur. Activează autentificarea în doi pași (2FA). Dacă ai dat acces la telefon/calculator, deconectează-l de la internet.",
+      link:null },
+    { t:"Prima oră", ic:"🧾", titlu:"Adună dovezile",
+      txt:"Salvează capturi de ecran cu mesajul, link-ul, contul/IBAN-ul, sumele și data/ora. Nu șterge nimic. Vei avea nevoie de ele pentru bancă și poliție.",
+      link:null },
+    { t:"Primele 24h", ic:"🚓", titlu:"Depune plângere la Poliție",
+      txt:"Sună 112 dacă e o urgență. Pentru fraudă online, depune plângere la secția de poliție sau online. Cere numărul de înregistrare al plângerii — îți trebuie pentru bancă.",
+      link:{ url:"https://www.politiaromana.ro", text:"politiaromana.ro" } },
+    { t:"Primele 24–48h", ic:"🛡️", titlu:"Raportează la DNSC (incidente cibernetice)",
+      txt:"Directoratul Național de Securitate Cibernetică preia raportările de phishing, site-uri false și fraude online. Raportarea ajută la blocarea rapidă a site-urilor frauduloase.",
+      link:{ url:"https://dnsc.ro", text:"dnsc.ro" } },
+    { t:"Primele 48h", ic:"⚖️", titlu:"Sesizează ANPC (dacă e un „comerciant”)",
+      txt:"Dacă frauda implică un magazin online, un „contract” sau un serviciu plătit, depune sesizare la Autoritatea Națională pentru Protecția Consumatorilor.",
+      link:{ url:"https://anpc.ro", text:"anpc.ro" } },
+    { t:"48–72h", ic:"🏦", titlu:"Raportează IBAN-ul și cere recuperarea (chargeback)",
+      txt:"Cere oficial băncii procedura de recuperare (chargeback/recall) a transferului. Raportează IBAN-ul fraudulos băncii tale și, dacă e cazul, băncii care l-a emis. Cu cât mai repede, cu atât șansele cresc.",
+      link:null },
+    { t:"După 72h", ic:"👀", titlu:"Monitorizează și protejează-ți identitatea",
+      txt:"Verifică extrasele de cont zilele următoare. Dacă ai dat CNP-ul sau buletinul, fii atent la credite deschise pe numele tău. Anunță familia ca să nu fie ținta unei a doua fraude („te ajut să-ți recuperezi banii”).",
+      link:null }
+  ];
+
+  function renderTrusa(){
+    var box = $("trusaList");
+    var h = '<div class="cf-log">';
+    PASI.forEach(function(p, i){
+      h += '<div class="cf-row total"><span>'+p.ic+' <b>Pas '+(i+1)+' — '+esc(p.titlu)+'</b></span><span class="cf-badge pro">'+esc(p.t)+'</span></div>';
+      h += '<div class="cf-note" style="margin:-2px 0 6px">'+esc(p.txt);
+      if(p.link){ h += ' <a href="'+p.link.url+'" target="_blank" rel="noopener">'+esc(p.link.text)+' ↗</a>'; }
+      h += '</div>';
+    });
+    h += '</div>';
+    h += '<div class="cf-alert warn" style="margin-top:14px"><span>📌</span><span><b>Numere utile:</b> Urgențe: <b>112</b> · Anti-fraudă bancară: numărul de pe spatele cardului tău · Phishing/site fals: <a href="https://dnsc.ro" target="_blank" rel="noopener">dnsc.ro</a>.</span></div>';
+    box.innerHTML = h;
+  }
+
+  $("btnPrintTrusa").addEventListener("click", function(){
+    var body = '<p class="muted">Pași de urmat în primele 72 de ore dacă ai fost victima unei fraude. Urmează-i în ordine.</p><table>';
+    PASI.forEach(function(p,i){
+      var linkTxt = p.link ? (" — " + p.link.text + " (" + p.link.url + ")") : "";
+      body += '<tr><td><b>Pas '+(i+1)+' · '+esc(p.t)+' — '+esc(p.titlu)+'</b><br><span style="font-weight:400;color:#5b7088">'+esc(p.txt)+esc(linkTxt)+'</span></td><td></td></tr>';
+    });
+    body += '</table><p class="muted">Urgențe: 112. Anti-fraudă bancară: numărul de pe spatele cardului. Phishing: dnsc.ro.</p>';
+    CF.printResult("Trusa „am fost înșelat” (0–72h) — Garda Familiei", body);
+  });
+
+  /* =========================================================================
+     INIT
+     ========================================================================= */
+  renderBrief();
+  renderTrusa();
+
+  // Gating: unealtă Pro.
+  CF.requireTier("tool", "pro", {
+    msg: "Garda Familiei — verificator de mesaje suspecte, brief lunar de fraude și trusa „am fost înșelat” — e disponibilă din planul Pro."
+  });
+})();
+</script>
+</body></html>

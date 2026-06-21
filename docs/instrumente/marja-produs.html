@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marja reală pe produs — Clubul Financiar</title>
+<meta name="description" content="Pentru comercianți online: află marja netă reală în lei și procent după ce scazi TVA-ul colectat, comisionul de marketplace, taxa fixă, transportul și pierderea din retururi. Vezi dacă vinzi în profit sau pierdere."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/instrumente/marja-produs.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Marja reală pe produs"><meta property="og:description" content="Marja netă reală pe un produs vândut online, după TVA, comisioane marketplace, taxă fixă, transport și retururi. Profit sau pierdere?"><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/marja-produs.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Marja reală pe produs"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Marja reală pe produs</h1><p class="lead" style="margin-inline:auto">Pentru comerciant online. Vezi cât îți rămâne cu adevărat dintr-un produs vândut prin marketplace, după ce scazi TVA-ul colectat, comisioanele, taxa fixă, transportul și pierderea din retururi.</p></div></section>
+<section class="section"><div class="container" id="tool">
+
+  <div class="panel">
+    <h2 class="title" style="font-size:1.4rem;margin-bottom:6px">Datele produsului <span class="cf-badge pro">PRO</span></h2>
+    <p class="cf-note" style="margin-top:0">Completează valorile pentru o comandă tipică. Calculul se actualizează automat la fiecare modificare.</p>
+
+    <div class="grid grid-2">
+      <div class="field">
+        <label>Preț de vânzare (cu TVA)</label>
+        <input type="number" id="pretVanzare" min="0" step="1" value="120" placeholder="ex. 120"><span class="cf-mini">lei / comandă</span>
+      </div>
+      <div class="field">
+        <label>Cost achiziție produs</label>
+        <input type="number" id="costAchizitie" min="0" step="1" value="55" placeholder="ex. 55"><span class="cf-mini">lei (fără TVA dedus aici)</span>
+      </div>
+      <div class="field">
+        <label>Cotă TVA aplicată</label>
+        <select id="cotaTva"></select>
+      </div>
+      <div class="field">
+        <label>Comision marketplace</label>
+        <input type="number" id="comisionPct" min="0" max="100" step="0.1" value="15" placeholder="ex. 15"><span class="cf-mini">% din prețul de vânzare</span>
+      </div>
+      <div class="field">
+        <label>Taxă fixă / comandă</label>
+        <input type="number" id="taxaFixa" min="0" step="0.1" value="2" placeholder="ex. 2"><span class="cf-mini">lei (procesare, ambalare)</span>
+      </div>
+      <div class="field">
+        <label>Cost transport / comandă</label>
+        <input type="number" id="costTransport" min="0" step="0.1" value="0" placeholder="ex. 0"><span class="cf-mini">lei suportat de tine</span>
+      </div>
+      <div class="field">
+        <label>Rată retur</label>
+        <input type="number" id="rataRetur" min="0" max="100" step="0.1" value="8" placeholder="ex. 8"><span class="cf-mini">% din comenzi returnate</span>
+      </div>
+      <div class="field">
+        <label>Comenzi pe lună (pentru proiecție)</label>
+        <input type="number" id="comenziLuna" min="0" step="1" value="100" placeholder="ex. 100"><span class="cf-mini">comenzi vândute</span>
+      </div>
+    </div>
+
+    <div class="cf-actions" style="margin-top:14px">
+      <button class="btn btn-primary" id="calcBtn">Calculează marja</button>
+      <button class="btn btn-ghost" id="logBtn">💾 Loghează luna curentă</button>
+      <button class="btn btn-ghost" id="remBtn">🔔 Reminder lunar</button>
+      <button class="btn btn-ghost" id="pdfBtn">🖨️ Salvează PDF</button>
+    </div>
+  </div>
+
+  <div class="panel" id="rezultat" style="margin-top:22px">
+    <p style="color:var(--muted)">Completează datele produsului pentru a vedea marja reală.</p>
+  </div>
+
+  <div class="panel" id="istoricPanel" style="margin-top:22px;display:none">
+    <h2 class="title" style="font-size:1.3rem">Istoric logări lunare</h2>
+    <p class="cf-note" style="margin-top:0">Fiecare lună salvată apare mai jos, pentru evidența marjelor tale în timp.</p>
+    <table class="cf-log" id="istoricTbl"><thead><tr><th>Lună</th><th>Marjă / produs</th><th>Marjă %</th><th>Profit lunar estimat</th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <div style="margin-top:26px">
+    <a class="btn btn-ghost" href="/instrumente.html">← Toate instrumentele</a>
+  </div>
+  <div class="disc" style="margin-top:18px">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
+
+</div></section>
+
+<footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=1"></script>
+<script>
+(function () {
+  "use strict";
+  var TOOL = "marja-produs";
+  var F = window.CF_FISCAL;
+  var LUNI = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
+              "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+
+  // Cotele de TVA vin EXCLUSIV din sursa unică de adevăr (CF_FISCAL).
+  var COTE_TVA = [
+    { val: F.cote.tvaStandard, eticheta: "Standard" },
+    { val: F.cote.tvaRedusa, eticheta: "Redusă" }
+  ];
+
+  // Populează selectul de TVA din CF_FISCAL
+  (function () {
+    var sel = CF.$("cotaTva");
+    sel.innerHTML = "";
+    COTE_TVA.forEach(function (c, i) {
+      var o = document.createElement("option");
+      o.value = String(c.val);
+      o.textContent = (c.val * 100).toLocaleString("ro-RO", { maximumFractionDigits: 2 }) + "% — " + c.eticheta;
+      if (i === 0) o.selected = true;
+      sel.appendChild(o);
+    });
+  })();
+
+  function num(id) {
+    var v = parseFloat(CF.$(id).value);
+    return isFinite(v) ? v : NaN;
+  }
+
+  // Citește și validează toate inputurile. Întoarce null dacă datele sunt invalide.
+  function citesteInput() {
+    var pret = num("pretVanzare");
+    var cost = num("costAchizitie");
+    var cotaTva = parseFloat(CF.$("cotaTva").value);
+    var comisionPct = num("comisionPct");
+    var taxaFixa = num("taxaFixa");
+    var transport = num("costTransport");
+    var rataRetur = num("rataRetur");
+    var comenzi = num("comenziLuna");
+
+    if (!isFinite(pret) || pret <= 0) return null;
+    if (!isFinite(cost) || cost < 0) return null;
+    if (!isFinite(cotaTva) || cotaTva < 0) return null;
+    if (!isFinite(comisionPct) || comisionPct < 0) comisionPct = 0;
+    if (comisionPct > 100) comisionPct = 100;
+    if (!isFinite(taxaFixa) || taxaFixa < 0) taxaFixa = 0;
+    if (!isFinite(transport) || transport < 0) transport = 0;
+    if (!isFinite(rataRetur) || rataRetur < 0) rataRetur = 0;
+    if (rataRetur > 100) rataRetur = 100;
+    if (!isFinite(comenzi) || comenzi < 0) comenzi = 0;
+
+    return {
+      pret: pret, cost: cost, cotaTva: cotaTva, comisionPct: comisionPct,
+      taxaFixa: taxaFixa, transport: transport, rataRetur: rataRetur, comenzi: comenzi
+    };
+  }
+
+  // Modelul de calcul al marjei reale pe o comandă.
+  function calculeaza(d) {
+    // 1. TVA colectat pe prețul de vânzare (preț e cu TVA) → rămâne prețul net de TVA.
+    //    pretFaraTVA = pret / (1 + cotaTva)
+    var pretFaraTVA = d.pret / (1 + d.cotaTva);
+    var tvaColectat = d.pret - pretFaraTVA;
+
+    // 2. Comisionul marketplace se aplică pe prețul de vânzare afișat (cu TVA).
+    var comision = d.pret * (d.comisionPct / 100);
+
+    // 3. Costuri directe pe comanda vândută: produs + taxă fixă + transport.
+    var costuriComanda = d.cost + d.taxaFixa + d.transport + comision;
+
+    // 4. Marja brută a unei comenzi LIVRATE (fără pierderea din retur):
+    //    venit net de TVA - costuri.
+    var marjaLivrare = pretFaraTVA - costuriComanda;
+
+    // 5. Pierderea din retururi: la o comandă returnată pierzi, în medie,
+    //    transportul tur-retur + taxa fixă + comisionul (de regulă nerambursat
+    //    integral) + manipulare. Modelăm conservator pierderea pe comandă returnată
+    //    ca: transport (dus) + transport (retur, egal) + taxă fixă + comision.
+    //    Produsul revine pe stoc, deci costul produsului NU e pierdut integral.
+    var pierderePerRetur = (d.transport * 2) + d.taxaFixa + comision;
+    var fractieRetur = d.rataRetur / 100;
+
+    // 6. Marja netă reală PER COMANDĂ EXPEDIATĂ, ponderată cu rata de retur:
+    //    cu probabilitate (1 - retur) câștigi marjaLivrare,
+    //    cu probabilitate retur pierzi pierderePerRetur.
+    var marjaReala = (1 - fractieRetur) * marjaLivrare - fractieRetur * pierderePerRetur;
+
+    // Marja % se raportează la prețul net de TVA (baza reală a vânzării).
+    var marjaPct = pretFaraTVA > 0 ? (marjaReala / pretFaraTVA) * 100 : 0;
+
+    // Proiecție lunară: comenzi lansate × marja reală pe comandă.
+    var profitLunar = marjaReala * d.comenzi;
+
+    return {
+      pretFaraTVA: pretFaraTVA,
+      tvaColectat: tvaColectat,
+      comision: comision,
+      pierderePerRetur: pierderePerRetur,
+      fractieRetur: fractieRetur,
+      marjaLivrare: marjaLivrare,
+      marjaReala: marjaReala,
+      marjaPct: marjaPct,
+      profitLunar: profitLunar
+    };
+  }
+
+  function rand(x) { return Math.round(x * 100) / 100; }
+
+  var ultim = null; // ultimul rezultat calculat, pentru log/PDF
+
+  function randeaza() {
+    var d = citesteInput();
+    var out = CF.$("rezultat");
+    if (!d) {
+      ultim = null;
+      out.innerHTML = '<p style="color:var(--muted)">Introdu cel puțin un preț de vânzare valid (&gt; 0) și un cost (&ge; 0).</p>';
+      return;
+    }
+    var r = calculeaza(d);
+    ultim = { input: d, rez: r };
+
+    var pozitiv = r.marjaReala >= 0;
+    var html = "";
+
+    // Cifra mare = marja reală pe comandă
+    html += '<p class="cf-note" style="margin-top:0">Marja netă reală pe o comandă (după TVA, comision, taxă, transport și retururi)</p>';
+    html += '<div class="cf-big" style="color:' + (pozitiv ? 'var(--emerald)' : '#e25555') + '">' +
+      (pozitiv ? '' : '−') + CF.lei(Math.abs(r.marjaReala)) + '</div>';
+    html += '<p class="cf-note" style="margin-top:2px">Marjă reală: <b' + (pozitiv ? ' class="cf-pos"' : ' class="cf-neg"') + '>' +
+      (pozitiv ? '' : '−') + Math.abs(r.marjaPct).toLocaleString("ro-RO", { maximumFractionDigits: 1 }) + '%</b> din prețul net de TVA</p>';
+
+    // Alertă profit / pierdere
+    if (r.marjaReala < 0) {
+      html += '<div class="cf-alert danger" style="margin-top:14px"><span>🚨</span><div><b>Vinzi în PIERDERE.</b> ' +
+        'La fiecare comandă pierzi în medie ' + CF.lei(Math.abs(r.marjaReala)) +
+        '. Crește prețul, scade costul de achiziție, negociază comisionul sau reduce rata de retur.</div></div>';
+    } else if (r.marjaPct < 10) {
+      html += '<div class="cf-alert warn" style="margin-top:14px"><span>🟡</span><div><b>Marjă subțire (' +
+        r.marjaPct.toLocaleString("ro-RO", { maximumFractionDigits: 1 }) + '%).</b> ' +
+        'O singură creștere de cost, comision sau retur te poate băga pe pierdere. Ai prea puțin tampon.</div></div>';
+    } else {
+      html += '<div class="cf-alert ok" style="margin-top:14px"><span>✅</span><div><b>Vinzi în profit.</b> ' +
+        'Îți rămân ' + CF.lei(r.marjaReala) + ' net pe comandă, după toate costurile și retururile.</div></div>';
+    }
+
+    // Defalcarea pas cu pas
+    html += '<h3 style="margin:22px 0 6px;font-size:1.05rem">De la preț la marjă</h3>';
+    html += '<div class="cf-row"><span>Preț de vânzare (cu TVA)</span><b>' + CF.lei(d.pret) + '</b></div>';
+    html += '<div class="cf-row cf-neg"><span>− TVA colectat (' + (d.cotaTva * 100).toLocaleString("ro-RO", { maximumFractionDigits: 2 }) + '%)</span><b>−' + CF.lei(r.tvaColectat) + '</b></div>';
+    html += '<div class="cf-row"><span>= Venit net de TVA</span><b>' + CF.lei(r.pretFaraTVA) + '</b></div>';
+    html += '<div class="cf-row cf-neg"><span>− Cost achiziție produs</span><b>−' + CF.lei(d.cost) + '</b></div>';
+    html += '<div class="cf-row cf-neg"><span>− Comision marketplace (' + d.comisionPct.toLocaleString("ro-RO", { maximumFractionDigits: 2 }) + '%)</span><b>−' + CF.lei(r.comision) + '</b></div>';
+    html += '<div class="cf-row cf-neg"><span>− Taxă fixă / comandă</span><b>−' + CF.lei(d.taxaFixa) + '</b></div>';
+    html += '<div class="cf-row cf-neg"><span>− Cost transport</span><b>−' + CF.lei(d.transport) + '</b></div>';
+    html += '<div class="cf-row total"><span>= Marjă pe comandă LIVRATĂ (fără retur)</span><b' + (r.marjaLivrare >= 0 ? ' class="cf-pos"' : ' class="cf-neg"') + '>' +
+      (r.marjaLivrare >= 0 ? '' : '−') + CF.lei(Math.abs(r.marjaLivrare)) + '</b></div>';
+
+    // Efectul retururilor
+    html += '<h3 style="margin:22px 0 6px;font-size:1.05rem">Efectul retururilor</h3>';
+    html += '<div class="cf-row"><span>Rată retur</span><b>' + d.rataRetur.toLocaleString("ro-RO", { maximumFractionDigits: 1 }) + '%</b></div>';
+    html += '<div class="cf-row cf-neg"><span>Pierdere medie / comandă returnată</span><b>−' + CF.lei(r.pierderePerRetur) + '</b></div>';
+    html += '<p class="cf-note">Modelăm pierderea la retur ca transport dus-întors + taxa fixă + comisionul nerambursat. Costul produsului nu e pierdut (revine pe stoc).</p>';
+    html += '<div class="cf-row total"><span>= Marjă reală / comandă (ponderată cu retur)</span><b' + (pozitiv ? ' class="cf-pos"' : ' class="cf-neg"') + '>' +
+      (pozitiv ? '' : '−') + CF.lei(Math.abs(r.marjaReala)) + '</b></div>';
+
+    // Proiecție lunară
+    if (d.comenzi > 0) {
+      html += '<h3 style="margin:22px 0 6px;font-size:1.05rem">Proiecție lunară</h3>';
+      html += '<div class="cf-row"><span>Comenzi lansate / lună</span><b>' + d.comenzi.toLocaleString("ro-RO") + '</b></div>';
+      html += '<div class="cf-row total"><span>Profit / pierdere lunară estimată</span><b' + (r.profitLunar >= 0 ? ' class="cf-pos"' : ' class="cf-neg"') + '>' +
+        (r.profitLunar >= 0 ? '' : '−') + CF.lei(Math.abs(r.profitLunar)) + '</b></div>';
+    }
+
+    out.innerHTML = html;
+  }
+
+  /* ---------- logare lunară + istoric ---------- */
+  function logheazaLuna() {
+    if (!ultim) { alert("Calculează mai întâi o marjă validă înainte de a o loga."); return; }
+    var period = CF.perioadaCurenta();
+    CF.logEntry(TOOL, period, {
+      marjaReala: rand(ultim.rez.marjaReala),
+      marjaPct: rand(ultim.rez.marjaPct),
+      profitLunar: rand(ultim.rez.profitLunar),
+      pret: ultim.input.pret,
+      comenzi: ultim.input.comenzi
+    });
+    randeazaIstoric();
+    var b = CF.$("logBtn");
+    var t = b.textContent;
+    b.textContent = "✅ Luna " + period + " logată";
+    setTimeout(function () { b.textContent = t; }, 2500);
+  }
+
+  function randeazaIstoric() {
+    var log = CF.getLog(TOOL);
+    var keys = Object.keys(log).sort();
+    var panel = CF.$("istoricPanel");
+    var tbody = CF.$("istoricTbl").querySelector("tbody");
+    if (!keys.length) { panel.style.display = "none"; return; }
+    panel.style.display = "";
+    tbody.innerHTML = "";
+    keys.forEach(function (k) {
+      var p = log[k];
+      var parts = k.split("-");
+      var label = (LUNI[parseInt(parts[1], 10) - 1] || k) + " " + parts[0];
+      var mp = (typeof p.marjaPct === "number") ? p.marjaPct : 0;
+      var pl = (typeof p.profitLunar === "number") ? p.profitLunar : 0;
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + label + "</td>" +
+        "<td>" + (p.marjaReala < 0 ? "−" : "") + CF.lei(Math.abs(p.marjaReala || 0)) + "</td>" +
+        "<td>" + (mp < 0 ? "−" : "") + Math.abs(mp).toLocaleString("ro-RO", { maximumFractionDigits: 1 }) + "%</td>" +
+        "<td>" + (pl < 0 ? "−" : "") + CF.lei(Math.abs(pl)) + "</td>";
+      tbody.appendChild(tr);
+    });
+  }
+
+  /* ---------- butoane ---------- */
+  CF.$("calcBtn").addEventListener("click", randeaza);
+  CF.$("logBtn").addEventListener("click", logheazaLuna);
+
+  CF.$("remBtn").addEventListener("click", function () {
+    CF.setReminder(TOOL, {
+      kind: "monthly",
+      note: "Recalculează marja reală pe produs și loghează rezultatul lunii în Clubul Financiar.",
+      channel: "telegram"
+    });
+    var b = CF.$("remBtn");
+    b.textContent = "✅ Reminder lunar activat";
+    b.disabled = true;
+  });
+
+  CF.$("pdfBtn").addEventListener("click", function () {
+    if (!ultim) { alert("Calculează mai întâi o marjă validă."); return; }
+    var d = ultim.input, r = ultim.rez;
+    var pozitiv = r.marjaReala >= 0;
+    var body =
+      '<div class="big">' + (pozitiv ? '' : '−') + CF.lei(Math.abs(r.marjaReala)) + '</div>' +
+      '<p class="muted">Marjă reală pe o comandă (' +
+        (pozitiv ? '' : '−') + Math.abs(r.marjaPct).toLocaleString("ro-RO", { maximumFractionDigits: 1 }) + '%) — ' +
+        (pozitiv ? 'PROFIT' : 'PIERDERE') + '</p>' +
+      '<table>' +
+      '<tr><td>Preț de vânzare (cu TVA)</td><td>' + CF.lei(d.pret) + '</td></tr>' +
+      '<tr><td>TVA colectat (' + (d.cotaTva * 100).toLocaleString("ro-RO", { maximumFractionDigits: 2 }) + '%)</td><td>−' + CF.lei(r.tvaColectat) + '</td></tr>' +
+      '<tr><td>Venit net de TVA</td><td>' + CF.lei(r.pretFaraTVA) + '</td></tr>' +
+      '<tr><td>Cost achiziție produs</td><td>−' + CF.lei(d.cost) + '</td></tr>' +
+      '<tr><td>Comision marketplace (' + d.comisionPct.toLocaleString("ro-RO", { maximumFractionDigits: 2 }) + '%)</td><td>−' + CF.lei(r.comision) + '</td></tr>' +
+      '<tr><td>Taxă fixă / comandă</td><td>−' + CF.lei(d.taxaFixa) + '</td></tr>' +
+      '<tr><td>Cost transport</td><td>−' + CF.lei(d.transport) + '</td></tr>' +
+      '<tr><td>Rată retur</td><td>' + d.rataRetur.toLocaleString("ro-RO", { maximumFractionDigits: 1 }) + '%</td></tr>' +
+      '<tr><td>Pierdere / comandă returnată</td><td>−' + CF.lei(r.pierderePerRetur) + '</td></tr>' +
+      '<tr><td><b>Marjă reală / comandă</b></td><td><b>' + (pozitiv ? '' : '−') + CF.lei(Math.abs(r.marjaReala)) + '</b></td></tr>' +
+      (d.comenzi > 0 ? '<tr><td><b>Profit lunar estimat (' + d.comenzi.toLocaleString("ro-RO") + ' comenzi)</b></td><td><b>' +
+        (r.profitLunar >= 0 ? '' : '−') + CF.lei(Math.abs(r.profitLunar)) + '</b></td></tr>' : '') +
+      '</table>';
+    CF.printResult("Marja reală pe produs", body);
+  });
+
+  /* ---------- recalcul LIVE la fiecare input ---------- */
+  ["pretVanzare", "costAchizitie", "comisionPct", "taxaFixa", "costTransport", "rataRetur", "comenziLuna"]
+    .forEach(function (id) { CF.$(id).addEventListener("input", randeaza); });
+  CF.$("cotaTva").addEventListener("change", randeaza);
+
+  /* ---------- init ---------- */
+  randeaza();
+  randeazaIstoric();
+  CF.syncLog(TOOL).then(function () { randeazaIstoric(); });
+
+  // gating PRO (după ce s-a randat conținutul)
+  CF.requireTier("tool", "pro", {
+    msg: "Calculatorul de marjă reală pe produs, cu defalcarea după TVA, comisioane, transport și retururi plus logarea lunară, face parte din planul Pro."
+  });
+})();
+</script>
+</body></html>

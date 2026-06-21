@@ -12,7 +12,9 @@
   const NAV = [
     ["Începe aici", "/incepe-aici.html"],
     ["Învață", "/educatie.html"],
+    ["Masterclass", "/masterclass.html"],
     ["Calculatoare", "/calculatoare.html"],
+    ["Instrumente", "/instrumente.html"],
     ["Știri", "/stiri.html"],
     ["Premium", "/premium.html"],
   ];
