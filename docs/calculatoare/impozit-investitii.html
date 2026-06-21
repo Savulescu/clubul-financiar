@@ -20,8 +20,33 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Cât impozit plătesc pe investiții?</h1></div></section>
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Când câștigi bani din acțiuni, ETF-uri sau dividende, statul îți ia o parte sub formă de impozit — dar cât anume depinde de tipul venitului, de brokerul prin care investești și de cât timp ai ținut titlurile. Acest calculator îți spune instant câți lei dai la stat și câți îți rămân ție. De exemplu, la un câștig de 10.000 lei printr-un broker român, ținut peste un an, plătești doar 300 lei (3%) și rămâi cu 9.700 lei — în timp ce la un broker străin ai plăti 1.600 lei (16%).</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6">
+        <li><strong>Tipul de venit</strong> — câștig din vânzarea de acțiuni/ETF sau dividende primite.</li>
+        <li><strong>Tipul de broker</strong> — român (îți reține impozitul automat) sau străin (îl declari singur la ANAF).</li>
+        <li><strong>Perioada de deținere</strong> — peste 1 an sau sub 1 an (contează doar la brokerul român).</li>
+        <li><strong>Suma</strong> — câștigul net sau dividendele brute, în lei.</li>
+      </ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6">
+        <li><strong>Impozitul estimat</strong> — câți lei dai la stat.</li>
+        <li><strong>Cota aplicată</strong> — procentul (3%, 6% sau 16%) în funcție de situația ta.</li>
+        <li><strong>Cât îți rămâne</strong> — banii pe care îi păstrezi după impozit.</li>
+        <li>O notă despre <strong>CASS</strong>, dacă depășești plafoanele anuale.</li>
+      </ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p style="color:var(--muted);line-height:1.6">Pentru oricine investește la bursă sau în ETF-uri și vrea să știe dinainte cât va plăti la stat. De exemplu: ai vândut acțiuni cu profit prin Tradeville și vrei să afli cât îți oprește brokerul, sau investești prin Trading 212 / Interactive Brokers și trebuie să-ți pregătești Declarația Unică.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Calculatorul aplică pe suma ta cota de impozit corectă: 3% (broker român, peste 1 an), 6% (broker român, sub 1 an), respectiv 16% (broker străin sau dividende). Apoi scade impozitul din sumă ca să vezi cât îți rămâne. Cifrele sunt pe regulile fiscale 2026 (cote majorate, Legea 239/2025) și reprezintă o estimare educativă — nu include pierderile reportate, CASS sau situații particulare. Pentru cazul tău exact, verifică legislația în vigoare sau întreabă un contabil.</p></details>
+  </div>
+</section>
 <section class="section"><div class="container"><div class="calc">
-<div class="panel"><div class="field"><label>Tip de venit</label><select id="tip"><option value="gain">Câștig din vânzare acțiuni/ETF</option><option value="div">Dividende</option></select></div><div class="field" id="brokerField"><label>Tip broker</label><select id="broker"><option value="ro">Broker român (reține impozitul la sursă)</option><option value="for">Broker străin (autodeclari în Declarația Unică)</option></select></div><div class="field" id="holdField"><label>Perioadă de deținere</label><select id="hold"><option value="long">Peste 1 an</option><option value="short">Sub 1 an</option></select></div><div class="field"><label id="sumLbl">Câștig net (lei)</label><input type="number" id="sum" value="10000" min="0" step="100"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel"><div class="field"><label>Tip de venit</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Profit din vânzare sau dividende</span><select id="tip"><option value="gain">Câștig din vânzare acțiuni/ETF</option><option value="div">Dividende</option></select></div><div class="field" id="brokerField"><label>Tip broker</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Român (reține) sau străin (declari)</span><select id="broker"><option value="ro">Broker român (reține impozitul la sursă)</option><option value="for">Broker străin (autodeclari în Declarația Unică)</option></select></div><div class="field" id="holdField"><label>Perioadă de deținere</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">De cât timp ai titlurile</span><select id="hold"><option value="long">Peste 1 an</option><option value="short">Sub 1 an</option></select></div><div class="field"><label id="sumLbl">Câștig net (lei)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Suma pe care ai câștigat-o</span><input type="number" id="sum" value="10000" min="0" step="100"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
 <div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum se impozitează investițiile în România (2026)</h2><p style="color:var(--muted)">Prin <strong>broker român</strong>, impozitul pe câștig se reține automat la sursă: <strong>3%</strong> dacă ai deținut titlurile peste un an și <strong>6%</strong> dacă sub un an (cote majorate din 2026). Prin <strong>broker străin</strong>, declari singur câștigul net anual în Declarația Unică și plătești <strong>16%</strong> (din 2026, Legea 239/2025; era 10% în 2025). <strong>Dividendele</strong> se impozitează cu <strong>16%</strong> (din 2026), reținut de obicei la sursă. În plus, dacă veniturile din investiții depășesc anumite plafoane (6/12/24 salarii minime), poate apărea <strong>CASS 10%</strong> calculat pe plafon, nu pe tot venitul.</p><div class="disc">⚠️ Estimare educativă simplificată. Nu include CASS, pierderile reportate sau situații particulare. Cotele se modifică — verifică legislația în vigoare sau consultă un contabil. Nu reprezintă consultanță fiscală.</div>

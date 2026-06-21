@@ -20,8 +20,23 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator inflație</h1></div></section>
+<section class="section" style="padding-bottom:8px">
+  <div class="container">
+    <div class="card" style="border-left:4px solid var(--emerald)">
+      <h2 style="margin-top:0">La ce te ajută</h2>
+      <p style="color:var(--muted);font-size:1.02rem">Banii stau pe loc, dar prețurile cresc — așa că aceeași sumă cumpără tot mai puțin în fiecare an. Acest calculator îți arată cât vor valora cu adevărat banii tăi peste câțiva ani: de exemplu, 10.000 lei ținuți „la saltea" cu o inflație de 5% pe an mai valorează doar aproximativ 6.140 lei în putere de cumpărare peste 10 ani — adică pierzi în jur de 3.860 lei fără să cheltuiești nimic.</p>
+    </div>
+    <div class="grid grid-3" style="margin-top:16px">
+      <div class="card"><h3>📝 Ce introduci</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6"><li><b>Sumă azi (lei)</b> — banii pe care îi ai sau îi ții deoparte acum.</li><li><b>Peste câți ani</b> — cât timp privești în viitor (de exemplu 5, 10 sau 20 de ani).</li><li><b>Inflație medie anuală (%)</b> — cât de repede cresc prețurile în medie pe an. În România, în mod normal e undeva între 3% și 7%.</li></ul></div>
+      <div class="card"><h3>📊 Ce afli</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6"><li><b>Puterea de cumpărare</b> — cât vor mai valora banii tăi de fapt peste acei ani.</li><li><b>Suma nominală</b> — cifra rămâne aceeași pe hârtie (banii nu dispar din cont).</li><li><b>Pierderea</b> — cât din valoarea reală „se topește" doar pentru că ai stat pe loc.</li></ul></div>
+      <div class="card"><h3>👤 Pentru cine e</h3><p style="color:var(--muted);line-height:1.6">Pentru oricine ține bani în cont curent sau acasă și se întreabă dacă „merită". De exemplu, dacă ai strâns 20.000 lei pentru o mașină peste 5 ani, vezi negru pe alb cât pierzi dacă nu îi pui la lucru într-un depozit, titluri de stat sau investiții.</p></div>
+    </div>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+      <p style="color:var(--muted);margin-top:8px">Calculatorul împarte suma de azi la creșterea cumulată a prețurilor: pentru fiecare an, prețurile cresc cu rata de inflație aleasă, iar efectul se adună an de an (compunere). Așa află câți lei de azi mai „valorează" banii tăi în viitor. Este o estimare educativă bazată pe o rată de inflație constantă — în realitate inflația variază de la an la an.</p></details>
+  </div>
+</section>
 <section class="section"><div class="container"><div class="calc">
-<div class="panel"><div class="field"><label>Sumă azi (lei)</label><input type="number" id="S" value="10000" min="0" step="100"></div><div class="field"><label>Peste câți ani</label><input type="number" id="yr" value="10" min="1" max="100" step="1"></div><div class="field"><label>Inflație medie anuală (%)</label><input type="number" id="r" value="5" min="0" max="100" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel"><div class="field"><label>Sumă azi (lei)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Banii pe care îi ai acum</span><input type="number" id="S" value="10000" min="0" step="100"></div><div class="field"><label>Peste câți ani</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Cât privești în viitor</span><input type="number" id="yr" value="10" min="1" max="100" step="1"></div><div class="field"><label>Inflație medie anuală (%)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">De obicei 3%–7% în România</span><input type="number" id="r" value="5" min="0" max="100" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
 <div style="max-width:760px;margin:34px auto 0"><h2 class="title">De ce contează inflația</h2><p style="color:var(--muted)">Inflația erodează valoarea banilor în timp: aceeași sumă cumpără tot mai puțin. Banii ținuți „la saltea" pierd putere de cumpărare an de an. De aceea contează să-i investești sau măcar să-i ții într-un instrument cu dobândă.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
