@@ -30,7 +30,7 @@ REGULI DE FIER:
 1. Răspunzi DOAR pe fiscalitate/finanțe personale din România (ANAF, Declarația Unică, PFA, SRL, micro, TVA, CASS, CAS, impozite, chirii, dividende, investiții, crypto, credite, pensii).
 2. Ești EDUCATIV, nu dai consultanță fiscală oficială și nu înlocuiești un contabil sau ANAF. Pentru sume mari/decizii ireversibile spui mereu să verifice pe anaf.ro sau cu un contabil.
 3. NICIODATĂ nu recomanzi instrumente de investiție concrete ("cumpără acțiunea X", "investește în Y") — e linie roșie ASF. Explici educativ, atât.
-4. Răspunzi în română, clar și concis, cu cifre concrete în lei când e cazul. Poți folosi liste sau un tabel SCURT (max ~6 rânduri). Evită tabelele uriașe „toate taxele" — dacă subiectul e vast, dă un rezumat și oferă să detaliezi la cerere. Termină mereu răspunsul complet, nu îl lăsa la jumătate.
+4. Răspunzi în română, clar și bine structurat, cu cifre concrete în lei. Poți da răspunsuri detaliate (pași, liste, tabele) când subiectul cere. FOARTE IMPORTANT: termină ÎNTOTDEAUNA răspunsul complet — nu-l lăsa la jumătate. Dacă subiectul e foarte vast, fă-l mai compact ca să încapă întreg, sau încheie secțiunea curentă curat și oferă să continui la cerere („Vrei să continui cu partea despre X?").
 5. Dacă întrebarea nu e despre fiscalitate/finanțe RO, refuzi politicos și redirecționezi.
 
 CONSTANTE 2026 (folosește EXACT aceste valori):
@@ -73,7 +73,7 @@ async function callOne(c: { name: string; base: string; model: string; key: stri
 
 // Strânge TOATE cheile (de bază + numerotate _1.._9 per provider) și le încearcă
 // în PARALEL, în loturi, returnând primul răspuns reușit (rezistent la rate-limit).
-async function chat(messages: any[], maxTokens = 1800, temperature = 0.4) {
+async function chat(messages: any[], maxTokens = 4000, temperature = 0.4) {
   const SUFFIXES = ["", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_9"];
   const cands: { name: string; base: string; model: string; key: string }[] = [];
   for (const [name, base, model, envb] of PROVIDERS) {
@@ -106,16 +106,18 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405, headers: CORS });
   try {
-    const { messages, context } = await req.json();
+    const { messages, context, maxTokens } = await req.json();
     if (!Array.isArray(messages) || !messages.length) {
       return new Response(JSON.stringify({ error: "messages required" }), { status: 400, headers: { ...CORS, "Content-Type": "application/json" } });
     }
+    // Limită de output reglabilă din frontend (default 4000, max 6000) — fără re-deploy la viitoare ajustări.
+    const mt = Math.min(Math.max(parseInt(maxTokens, 10) || 4000, 256), 6000);
     const sys = SYSTEM + (context ? `\n\nContextul utilizatorului (cifrele lui, folosește-le): ${JSON.stringify(context)}` : "");
     const trimmed = messages.slice(-12).map((m: any) => ({
       role: m.role === "assistant" ? "assistant" : "user",
       content: String(m.content || "").slice(0, 4000),
     }));
-    const out = await chat([{ role: "system", content: sys }, ...trimmed]);
+    const out = await chat([{ role: "system", content: sys }, ...trimmed], mt);
     return new Response(JSON.stringify(out), { headers: { ...CORS, "Content-Type": "application/json" } });
   } catch (e) {
     const fallback = `Momentan asistentul AI nu e disponibil. Încearcă din nou peste câteva momente sau verifică pe anaf.ro.`;
