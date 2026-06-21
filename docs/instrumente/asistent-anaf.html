@@ -145,7 +145,7 @@
     var L = String(src == null ? "" : src).split("\n"), out = [], i = 0;
     while (i < L.length){
       var ln = L[i];
-      if (/\|/.test(ln) && i+1 < L.length && /^\s*\|?[\s:|-]*-[\s:|-]*\|?\s*$/.test(L[i+1])){
+      if (!/^\s*#/.test(ln) && /\|/.test(ln) && i+1 < L.length && /^\s*\|?[\s:|-]*-[\s:|-]*\|?\s*$/.test(L[i+1])){
         var head = cells(ln); i += 2; var rows = [];
         while (i < L.length && /\|/.test(L[i])){ rows.push(cells(L[i])); i++; }
         out.push('<table><thead><tr>' + head.map(function(c){ return "<th>"+inline(c)+"</th>"; }).join("") +
@@ -155,7 +155,14 @@
         continue;
       }
       var h = ln.match(/^(#{1,4})\s+(.*)/);
-      if (h){ var lv = Math.min(6, h[1].length + 2); out.push("<h"+lv+">"+inline(h[2])+"</h"+lv+">"); i++; continue; }
+      if (h){
+        var htxt = h[2], rest2 = "", pi = htxt.indexOf("|");
+        if (pi > 0){ rest2 = htxt.slice(pi); htxt = htxt.slice(0, pi).trim(); }
+        var lv = Math.min(6, h[1].length + 2);
+        out.push("<h"+lv+">"+inline(htxt)+"</h"+lv+">");
+        if (rest2){ L.splice(i+1, 0, rest2); } // titlu lipit de tabel → desparte
+        i++; continue;
+      }
       if (/^\s*[-*]\s+/.test(ln)){ var u=[]; while(i<L.length && /^\s*[-*]\s+/.test(L[i])){ u.push("<li>"+inline(L[i].replace(/^\s*[-*]\s+/,""))+"</li>"); i++; } out.push("<ul>"+u.join("")+"</ul>"); continue; }
       if (/^\s*\d+\.\s+/.test(ln)){ var o=[]; while(i<L.length && /^\s*\d+\.\s+/.test(L[i])){ o.push("<li>"+inline(L[i].replace(/^\s*\d+\.\s+/,""))+"</li>"); i++; } out.push("<ol>"+o.join("")+"</ol>"); continue; }
       if (ln.trim() === ""){ i++; continue; }
