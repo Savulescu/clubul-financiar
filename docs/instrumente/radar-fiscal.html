@@ -13,6 +13,14 @@
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
 <style>
+  .cf-msg.ai.md{white-space:normal}
+  .cf-msg.ai.md p{margin:.5em 0}
+  .cf-msg.ai.md h3,.cf-msg.ai.md h4,.cf-msg.ai.md h5{margin:.7em 0 .3em;font-size:1rem;font-weight:800}
+  .cf-msg.ai.md ul,.cf-msg.ai.md ol{margin:.4em 0;padding-left:1.2em}
+  .cf-msg.ai.md code{background:rgba(0,0,0,.08);padding:1px 5px;border-radius:5px;font-size:.88em}
+  .cf-msg.ai.md table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.84rem;display:block;overflow-x:auto}
+  .cf-msg.ai.md th,.cf-msg.ai.md td{border:1px solid var(--border);padding:5px 8px;text-align:left;vertical-align:top}
+  .cf-msg.ai.md th{background:var(--bg-soft2);font-weight:700}
   .cf-src{border:1px solid var(--border,#e6edf5);border-radius:12px;padding:12px 14px;margin-bottom:10px}
   .cf-chk{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:1rem}
   .cf-chk input{width:18px;height:18px;accent-color:#10b981;cursor:pointer}
@@ -436,10 +444,28 @@
 
   var chatHistory = [];
 
+  function mdEsc(s){ var d=document.createElement("div"); d.textContent=String(s==null?"":s); return d.innerHTML; }
+  function mdToHtml(src){
+    function inline(t){ return mdEsc(t).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"<code>$1</code>"); }
+    function cells(line){ var c=line.split("|"); if(c.length&&c[0].trim()==="")c.shift(); if(c.length&&c[c.length-1].trim()==="")c.pop(); return c.map(function(x){return x.trim();}); }
+    var L=String(src==null?"":src).split("\n"),out=[],i=0;
+    while(i<L.length){ var ln=L[i];
+      if(/\|/.test(ln)&&i+1<L.length&&/^\s*\|?[\s:|-]*-[\s:|-]*\|?\s*$/.test(L[i+1])){
+        var head=cells(ln);i+=2;var rows=[];while(i<L.length&&/\|/.test(L[i])){rows.push(cells(L[i]));i++;}
+        out.push('<table><thead><tr>'+head.map(function(c){return"<th>"+inline(c)+"</th>";}).join("")+'</tr></thead><tbody>'+rows.map(function(r){return"<tr>"+r.map(function(c){return"<td>"+inline(c)+"</td>";}).join("")+"</tr>";}).join("")+'</tbody></table>');continue;}
+      var h=ln.match(/^(#{1,4})\s+(.*)/);
+      if(h){var lv=Math.min(6,h[1].length+2);out.push("<h"+lv+">"+inline(h[2])+"</h"+lv+">");i++;continue;}
+      if(/^\s*[-*]\s+/.test(ln)){var u=[];while(i<L.length&&/^\s*[-*]\s+/.test(L[i])){u.push("<li>"+inline(L[i].replace(/^\s*[-*]\s+/,""))+"</li>");i++;}out.push("<ul>"+u.join("")+"</ul>");continue;}
+      if(/^\s*\d+\.\s+/.test(ln)){var o=[];while(i<L.length&&/^\s*\d+\.\s+/.test(L[i])){o.push("<li>"+inline(L[i].replace(/^\s*\d+\.\s+/,""))+"</li>");i++;}out.push("<ol>"+o.join("")+"</ol>");continue;}
+      if(ln.trim()===""){i++;continue;}
+      out.push("<p>"+inline(ln)+"</p>");i++;
+    }
+    return out.join("");
+  }
   function addMsg(role, text){
     var div = document.createElement("div");
-    div.className = "cf-msg " + (role === "user" ? "user" : "ai");
-    div.textContent = text;
+    div.className = "cf-msg " + (role === "user" ? "user" : "ai md");
+    if(role === "user") div.textContent = text; else div.innerHTML = mdToHtml(text);
     $("chatLog").appendChild(div);
     $("chatLog").scrollTop = $("chatLog").scrollHeight;
     return div;
@@ -463,7 +489,8 @@
       .concat(chatHistory);
 
     CF.aiChat(msgs, { context: aiContext() }).then(function(res){
-      thinking.textContent = res.content || "Nu am putut genera un răspuns acum.";
+      thinking.classList.add("md");
+      thinking.innerHTML = mdToHtml(res.content || "Nu am putut genera un răspuns acum.");
       chatHistory.push({ role: "assistant", content: res.content || "" });
       CF.aiConsume();
       renderQuota();
