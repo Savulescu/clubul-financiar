@@ -17,6 +17,7 @@
     ["Instrumente", "/instrumente.html"],
     ["Știri", "/stiri.html"],
     ["Premium", "/premium.html"],
+    ["Feedback", "/feedback.html"],
   ];
   const SOC = [
     ["Instagram","https://www.instagram.com/clubulfinanciar"],["TikTok","https://www.tiktok.com/@clubulfinanciar"],
