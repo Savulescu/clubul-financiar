@@ -24,7 +24,24 @@ const PROVIDERS: [string, string, string, string][] = [
   ["siliconflow", "https://api.siliconflow.cn/v1",                           "deepseek-ai/DeepSeek-V3",                         "SILICONFLOW_API_KEY"],
 ];
 
-const SYSTEM = `Ești "Asistentul ANAF" al Clubul Financiar — un ghid fiscal prietenos pentru România, actualizat la legislația 2026.
+// Promptul AUTORITATIV trăiește în docs/assets/ai-anaf-prompt.txt (editezi acolo + push, FĂRĂ re-deploy).
+// Cel de mai jos e doar FALLBACK dacă fetch-ul fișierului eșuează.
+const PROMPT_URL = "https://clubulfinanciar.ro/assets/ai-anaf-prompt.txt";
+let _promptCache: { text: string; ts: number } = { text: "", ts: 0 };
+async function getSystem(): Promise<string> {
+  const now = Date.now();
+  if (_promptCache.text && now - _promptCache.ts < 300000) return _promptCache.text; // cache 5 min
+  try {
+    const r = await fetch(PROMPT_URL, { signal: AbortSignal.timeout(5000) });
+    if (r.ok) {
+      const t = (await r.text()).trim();
+      if (t.length > 300) { _promptCache = { text: t, ts: now }; return t; }
+    }
+  } catch (_e) { /* fallback */ }
+  return _promptCache.text || FALLBACK_SYSTEM;
+}
+
+const FALLBACK_SYSTEM = `Ești "Asistentul ANAF" al Clubul Financiar — un ghid fiscal prietenos pentru România, actualizat la legislația 2026.
 
 REGULI DE FIER:
 1. Răspunzi pe fiscalitate, finanțe personale ȘI contabilitate din România (ANAF, Declarația Unică, PFA, SRL, micro, TVA, CASS, CAS, impozite, chirii, dividende, investiții, crypto, credite, pensii, plus contabilitate: plan de conturi, balanță, bilanț, înregistrări de partidă dublă, debit/credit, amortizare). Ești expert și pe contabilitate românească.
@@ -124,7 +141,8 @@ Deno.serve(async (req) => {
     }
     // Limită de output reglabilă din frontend (default 4000, max 6000) — fără re-deploy la viitoare ajustări.
     const mt = Math.min(Math.max(parseInt(maxTokens, 10) || 4000, 256), 6000);
-    const sys = SYSTEM + (context ? `\n\nContextul utilizatorului (cifrele lui, folosește-le): ${JSON.stringify(context)}` : "");
+    const baseSystem = await getSystem();
+    const sys = baseSystem + (context ? `\n\nContextul utilizatorului (cifrele lui, folosește-le): ${JSON.stringify(context)}` : "");
     const trimmed = messages.slice(-12).map((m: any) => ({
       role: m.role === "assistant" ? "assistant" : "user",
       content: String(m.content || "").slice(0, 4000),
