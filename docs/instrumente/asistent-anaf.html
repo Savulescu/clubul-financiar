@@ -265,6 +265,8 @@
   /* ---------- Init ---------- */
   render();
   updateQuota();
+  // Re-evaluează quota DUPĂ ce site.js stabilește tier-ul real (login/admin vine async).
+  window.addEventListener("cf-auth", updateQuota);
 
   // Gating: necesită plan Premium (sau superior). Montează lock dacă userul n-are tier.
   CF.requireTier("tool", "premium", {

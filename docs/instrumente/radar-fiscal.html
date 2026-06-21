@@ -479,6 +479,7 @@
   renderDU();
   renderLog();
   renderQuota();
+  window.addEventListener("cf-auth", renderQuota);
   CF.syncLog(TOOL).then(renderLog).catch(function(){});
 
   // Gating PRO peste tot containerul #tool
