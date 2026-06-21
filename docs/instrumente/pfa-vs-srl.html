@@ -31,7 +31,9 @@
     <div class="grid grid-3" style="margin-top:16px">
       <div class="card"><h3>📝 Ce introduci</h3><ul>
         <li><b>Încasări anuale</b> = cât ai facturat în total într-un an (toți banii intrați din muncă/clienți, înainte de orice taxă).</li>
-        <li><b>Cheltuieli deductibile</b> = cheltuielile de business pe care le poți scădea (chirie birou, abonamente, echipamente, contabil etc.).</li>
+        <li><b>Cheltuieli deductibile</b> = alte cheltuieli de business (chirie birou, abonamente, echipamente) — fără salarii și contabilitate, pe acelea le pui separat.</li>
+        <li><b>Angajați</b> = câți oameni angajezi și salariul brut mediu. Costul lor real (brut + 2,25% CAM) se scade automat. SRL micro cere minimum 1 salariat — îl adăugăm noi dacă pui 0.</li>
+        <li><b>Contabilitate</b> = cât plătești lunar pe contabil. PFA poate fi ținut și singur (pune 0); SRL cere de regulă 300-600 lei/lună.</li>
         <li><b>Procent dividende (la SRL)</b> = cât din profitul firmei îți scoți pentru tine în buzunar. 100% = scoți tot; mai puțin = lași bani în firmă.</li>
       </ul></div>
       <div class="card"><h3>📊 Ce afli</h3><ul>
@@ -49,7 +51,11 @@
   <div class="grid grid-2">
     <div class="panel">
       <div class="field"><label>Încasări anuale (lei)<span class="cf-note">cât facturezi în total pe an</span></label><input type="number" id="inc" value="300000" min="0" step="1000"></div>
-      <div class="field"><label>Cheltuieli deductibile anuale (lei)<span class="cf-note">cheltuieli de business pe an</span></label><input type="number" id="chelt" value="60000" min="0" step="1000"></div>
+      <div class="field"><label>Cheltuieli deductibile anuale (lei)<span class="cf-note">alte cheltuieli de business (fără salarii și contabilitate)</span></label><input type="number" id="chelt" value="60000" min="0" step="1000"></div>
+      <div class="field"><label>Număr de angajați<span class="cf-note">în afară de tine. SRL micro cere minimum 1 — îl adăugăm automat</span></label><input type="number" id="nrAng" value="0" min="0" step="1"></div>
+      <div class="field"><label>Salariu brut mediu / angajat (lei/lună)<span class="cf-note">costul real = brut + 2,25% (CAM)</span></label><input type="number" id="salAng" value="4050" min="0" step="50"></div>
+      <div class="field"><label>Contabilitate PFA (lei/lună)<span class="cf-note">poți ține și singur — pune 0</span></label><input type="number" id="contaPfa" value="100" min="0" step="10"></div>
+      <div class="field"><label>Contabilitate SRL (lei/lună)<span class="cf-note">SRL cere contabil — de regulă 300-600 lei</span></label><input type="number" id="contaSrl" value="400" min="0" step="10"></div>
       <div class="field"><label>Procent dividende distribuite la SRL (%)<span class="cf-note">cât din profitul net îți scoți ca dividend</span></label><input type="number" id="div" value="100" min="0" max="100" step="5"></div>
       <button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button>
       <div class="cf-actions" style="margin-top:10px"><button class="btn btn-ghost" id="pdfBtn">🖨️ Salvează PDF</button></div>
@@ -118,25 +124,34 @@
              totalTaxe: impozitFirma + impozitDividend + cass.cass, netInMana: netInMana };
   }
 
-  // Net în mână pentru fiecare variantă, la o anumită încasare/cheltuială/div.
-  function nets(inc, chelt, divFrac){
-    var pfa = F.pfaReal(inc, chelt);
-    var micro = F.srlMicro(inc, chelt, divFrac);
-    var profit = srlProfit(inc, chelt, divFrac);
+  // Net în mână pentru fiecare variantă, INCLUZÂND costurile reale:
+  // salarii angajați (brut + 2,25% CAM) și contabilitate (diferită PFA vs SRL).
+  // cc = { costAng1, nrAng, contaPfaAn, contaSrlAn }
+  function nets(inc, cheltBase, divFrac, cc){
+    cc = cc || { costAng1:0, nrAng:0, contaPfaAn:0, contaSrlAn:0 };
+    var angBase  = cc.nrAng * cc.costAng1;                       // angajați aleși de tine
+    var angMicro = Math.max(cc.nrAng, 1) * cc.costAng1;          // micro cere minimum 1 salariat
+    var cheltPfa    = cheltBase + angBase  + cc.contaPfaAn;
+    var cheltMicro  = cheltBase + angMicro + cc.contaSrlAn;
+    var cheltProfit = cheltBase + angBase  + cc.contaSrlAn;
+    var pfa = F.pfaReal(inc, cheltPfa);
+    var micro = F.srlMicro(inc, cheltMicro, divFrac);
+    var profit = srlProfit(inc, cheltProfit, divFrac);
+    pfa.costAng = angBase;     pfa.conta = cc.contaPfaAn;
+    micro.costAng = angMicro;  micro.conta = cc.contaSrlAn;  micro.angFortat = (cc.nrAng < 1);
+    profit.costAng = angBase;  profit.conta = cc.contaSrlAn;
     return { pfa: pfa, micro: micro, profit: profit };
   }
 
   // Caută numeric pragul de încasări la care cea mai bună variantă de SRL
   // depășește PFA (păstrând cheltuielile proporționale cu rata curentă).
-  function pragBasculare(cheltRatio, divFrac){
-    var step = 5000, lim = 5000000, prev = null;
+  function pragBasculare(cheltRatio, divFrac, cc){
+    var step = 5000, lim = 5000000;
     for (var x = step; x <= lim; x += step){
-      var ch = x * cheltRatio;
-      var r = nets(x, ch, divFrac);
+      var ch = x * cheltRatio;              // cheltuielile variabile scalează cu venitul
+      var r = nets(x, ch, divFrac, cc);     // costurile fixe (salarii, contabilitate) NU scalează
       var bestSrl = Math.max(r.micro.netInMana, r.profit.netInMana);
-      var srlWins = bestSrl > r.pfa.netInMana;
-      if (srlWins) return x;
-      prev = x;
+      if (bestSrl > r.pfa.netInMana) return x;
     }
     return null;
   }
@@ -145,10 +160,19 @@
 
   function build(){
     var inc = +$("inc").value, chelt = +$("chelt").value, divP = +$("div").value;
+    var nrAng = +$("nrAng").value, salAng = +$("salAng").value;
+    var contaPfa = +$("contaPfa").value, contaSrl = +$("contaSrl").value;
     if (!isFinite(inc) || inc < 0){ inc = 0; }
     if (!isFinite(chelt) || chelt < 0){ chelt = 0; }
     if (!isFinite(divP) || divP < 0){ divP = 0; } if (divP > 100) divP = 100;
+    if (!isFinite(nrAng) || nrAng < 0){ nrAng = 0; } nrAng = Math.floor(nrAng);
+    if (!isFinite(salAng) || salAng < 0){ salAng = 0; }
+    if (!isFinite(contaPfa) || contaPfa < 0){ contaPfa = 0; }
+    if (!isFinite(contaSrl) || contaSrl < 0){ contaSrl = 0; }
     var divFrac = divP / 100;
+    // costul real al unui angajat pe an = brut × 12 × 1.0225 (CAM 2,25% în sarcina firmei)
+    var cc = { costAng1: salAng * 12 * 1.0225, nrAng: nrAng,
+               contaPfaAn: contaPfa * 12, contaSrlAn: contaSrl * 12 };
 
     if (inc <= 0){
       $("summary").innerHTML = '<p style="color:var(--muted)">Introdu încasări anuale mai mari ca 0.</p>';
@@ -156,7 +180,7 @@
       return;
     }
 
-    var r = nets(inc, chelt, divFrac);
+    var r = nets(inc, chelt, divFrac, cc);
     var opts = [
       { key:"pfa", name:"PFA — sistem real", o:r.pfa, sub:"CAS + CASS + impozit 10%" },
       { key:"micro", name:"SRL micro 1%", o:r.micro, sub:"1% cifră + dividende 16% + CASS" },
@@ -172,6 +196,8 @@
       '<div class="cf-row"><span>Încasări anuale</span><b>' + lei(inc) + '</b></div>' +
       '<div class="cf-row"><span>Cheltuieli deductibile</span><b>' + lei(chelt) + '</b></div>' +
       '<div class="cf-row"><span>Venit/profit înainte de taxe</span><b>' + lei(Math.max(0, inc - chelt)) + '</b></div>' +
+      (nrAng > 0 ? '<div class="cf-row"><span>Angajați</span><b>' + nrAng + ' × ' + lei(salAng) + '/lună</b></div>' : '') +
+      '<div class="cf-row"><span>Contabilitate</span><b>PFA ' + lei(contaPfa) + ' · SRL ' + lei(contaSrl) + ' /lună</b></div>' +
       '<div class="cf-row"><span>Dividende distribuite (SRL)</span><b>' + divP + '%</b></div>';
 
     // Carduri comparație
@@ -193,6 +219,10 @@
           '<div class="cf-row"><span>Impozit dividende 16%</span><b>' + lei(o.impozitDividend) + '</b></div>' +
           '<div class="cf-row"><span>CASS dividende</span><b>' + lei(o.cassDividend) + '</b></div>';
       }
+      var costRows = '';
+      if (o.costAng > 0) costRows += '<div class="cf-row"><span>Salarii angajați (cu CAM)' + (opt.key==="micro"&&o.angFortat ? ' — 1 obligatoriu' : '') + '</span><b>−' + lei(o.costAng) + '</b></div>';
+      if (o.conta > 0) costRows += '<div class="cf-row"><span>Contabilitate</span><b>−' + lei(o.conta) + '</b></div>';
+      rows = costRows + rows;
       html +=
         '<div class="cf-card-opt' + (best ? ' best' : '') + '">' +
         (best ? '<span class="cf-badge pro">Cel mai bun net</span>' : '') +
@@ -220,13 +250,15 @@
       w += '<div class="cf-alert ok">✓ Te încadrezi în plafonul micro de ' +
            F.micro.plafonEUR.toLocaleString("ro-RO") + ' € (≈ ' + lei(plafonLei2) + ').</div>';
     }
-    w += '<div class="cf-alert warn">ℹ️ SRL micro 1% cere minimum 1 salariat cu normă întreagă (sau echivalent). ' +
-         'Costul salariului nu e inclus în acest calcul — adaugă-l la cheltuieli pentru o estimare realistă.</div>';
+    w += '<div class="cf-alert warn">ℹ️ SRL micro 1% cere minimum 1 salariat cu normă întreagă. ' +
+         (nrAng < 1 ? 'L-am adăugat automat în calcul (1 × ' + lei(salAng) + '/lună). ' : 'E acoperit de angajații tăi. ') +
+         'Salariile (cu CAM 2,25%) și contabilitatea sunt deja scăzute din net — vezi rândurile din fiecare card. ' +
+         'Dacă <b>tu</b> ești acel salariat, o parte din cost îți revine ca salariu net — vezi <a href="/instrumente/salariu-vs-dividend.html" style="color:var(--emerald)">Salariu vs Dividend</a>.</div>';
     $("warns").innerHTML = w;
 
     // Prag de basculare
     var cheltRatio = inc > 0 ? Math.min(1, chelt / inc) : 0;
-    var prag = pragBasculare(cheltRatio, divFrac);
+    var prag = pragBasculare(cheltRatio, divFrac, cc);
     var pivotHtml = '<h3 class="title" style="font-size:1.2rem;margin-bottom:8px">Pragul de basculare</h3>';
     if (prag == null){
       pivotHtml += '<p style="color:var(--muted)">Cu rata ta de cheltuieli (' + fmtPct(cheltRatio) +
@@ -240,7 +272,8 @@
     $("pivotBox").innerHTML = pivotHtml;
 
     // Reține ultimul calcul pentru PDF
-    window.__cfLast = { inc:inc, chelt:chelt, divP:divP, maxNet:maxNet, r:r, prag:prag };
+    window.__cfLast = { inc:inc, chelt:chelt, divP:divP, nrAng:nrAng, salAng:salAng,
+                        contaPfa:contaPfa, contaSrl:contaSrl, maxNet:maxNet, r:r, prag:prag };
   }
 
   function doPdf(){
@@ -249,6 +282,7 @@
     var body =
       '<p><b>Încasări anuale:</b> ' + lei(d.inc) + '</p>' +
       '<p><b>Cheltuieli deductibile:</b> ' + lei(d.chelt) + '</p>' +
+      '<p><b>Angajați:</b> ' + d.nrAng + ' × ' + lei(d.salAng) + '/lună · <b>Contabilitate:</b> PFA ' + lei(d.contaPfa) + ' / SRL ' + lei(d.contaSrl) + ' pe lună</p>' +
       '<p><b>Dividende distribuite (SRL):</b> ' + d.divP + '%</p><hr>' +
       '<p><b>PFA sistem real</b> — net în mână: ' + lei(d.r.pfa.netInMana) + ' (taxe ' + lei(d.r.pfa.totalTaxe) + ')</p>' +
       '<p><b>SRL micro 1%</b> — net în mână: ' + lei(d.r.micro.netInMana) + ' (taxe ' + lei(d.r.micro.totalTaxe) + ')</p>' +
@@ -261,7 +295,7 @@
 
   $("calcBtn").addEventListener("click", build);
   $("pdfBtn").addEventListener("click", doPdf);
-  ["inc","chelt","div"].forEach(function(id){
+  ["inc","chelt","div","nrAng","salAng","contaPfa","contaSrl"].forEach(function(id){
     $(id).addEventListener("input", build);
     $(id).addEventListener("change", build);
   });
