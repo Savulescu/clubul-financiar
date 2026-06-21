@@ -125,4 +125,12 @@
     (dn ? '<a class="lnav next" href="/masterclass/' + enc(dn) + '.html"><span>Lecția următoare →</span><b>' + esc(dnt || "") + '</b></a>'
         : '<a class="lnav next" href="' + hub + '"><span>Toate lecțiile →</span><b>Masterclass Bursă</b></a>');
   if (disc) disc.parentNode.insertBefore(nav, disc); else art.appendChild(nav);
+
+  // ---------- intro captivantă (hook) ----------
+  fetch("/assets/masterclass-intros.json").then(function (r) { return r.json(); }).then(function (hk) {
+    var t = hk[slug]; if (!t || !h1) return;
+    var box = document.createElement("div"); box.className = "lesson-intro";
+    box.innerHTML = '<p class="li-hook" style="margin:0">✨ ' + esc(t) + '</p>';
+    art.insertBefore(box, h1.nextSibling);
+  }).catch(function () { });
 })();
