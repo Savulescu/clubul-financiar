@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Managementul riscului și conformitatea — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Învață managementul riscului și conformitatea: evaluarea riscului, ierarhia controalelor, politici, apetit pentru risc, VaR și cum un birou aplică limite și stop-loss."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/managementul-riscului-si-conformitatea-3.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Managementul riscului și conformitatea"><meta property="og:description" content="Învață managementul riscului și conformitatea: evaluarea riscului, ierarhia controalelor, politici, apetit pentru risc, VaR și cum un birou aplică limite și stop-loss."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/managementul-riscului-si-conformitatea-3.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Managementul riscului și conformitatea"><meta name="twitter:description" content="Învață managementul riscului și conformitatea: evaluarea riscului, ierarhia controalelor, politici, apetit pentru risc, VaR și cum un birou aplică limite și stop-loss."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Managementul riscului și conformitatea", "description": "Învață managementul riscului și conformitatea: evaluarea riscului, ierarhia controalelor, politici, apetit pentru risc, VaR și cum un birou aplică limite și stop-loss.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/managementul-riscului-si-conformitatea-3.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="managementul-riscului-si-conformitatea-2" data-prev-title="Managementul riscului și conformitatea pe biroul de tranzacționare" data-next="cerinte-de-raportare-a-tranzactiilor" data-next-title="Cerintele de raportare a tranzactiilor pe bursa" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#compliance">Reguli &amp; conformitate</a> · 31 min · Actualizat 21 iun. 2026</p><h1>Managementul riscului și conformitatea</h1><h2>Definiție și termeni-cheie</h2>
+
+<p>Managementul riscului și conformitatea (risk management and compliance) reprezintă modul sistematic prin care o organizație ține totul sub control: identifică ce poate merge prost, evaluează cât de grav ar fi și respectă fiecare lege și regulă aplicabilă. Managementul riscului și conformitatea nu sunt un singur lucru, ci două idei unite care lucrează împreună în fiecare zi. În acest capitol vei învăța cum funcționează evaluarea riscului (risk assessment), ierarhia controalelor (hierarchy of controls), rolul politicilor și procedurilor, precum și modul în care un birou de tranzacționare aplică limitele de poziție și regulile de stop-loss.</p>
+
+<p>Tema centrală a acestui ghid pentru începători este simplă: nu eliminăm orice risc, fiindcă asta ar opri orice activitate utilă, ci păstrăm riscul suficient de mic încât beneficiul să merite. Vei întâlni concepte precum probabilitatea (likelihood), severitatea (severity), riscul rezidual (residual risk), apetitul pentru risc (risk appetite) și Value-at-Risk (VaR), toate explicate clar și cu exemple concrete.</p>
+
+<p><strong>Managementul riscului</strong> este procesul pas cu pas de a observa ce poate merge prost, de a decide cât de serios este și de a alege cea mai sigură cale de a opri problema înainte să rănească pe cineva. Scopul este să ții oamenii departe de pericol, oferind totuși ocazii valoroase de a explora și de a crește. De exemplu, o platformă înălțată în grădină este distractivă pentru cățărat, dar are și un risc de cădere. Managementul riscului întreabă: „Cât de probabilă este o cădere?”, „Cât de grav ar putea fi rănit cineva?” și „Ce putem face ca să fie mai sigur?”. Răspunsurile posibile ar putea fi suprafețe de aterizare mai moi, platforme mai joase sau supraveghere constantă. Observă că managementul riscului nu încearcă să elimine fiecare risc — fiindcă asta ar opri învățarea — ci încearcă să mențină riscul suficient de mic încât beneficiul să merite.</p>
+
+<p><strong>Conformitatea (compliance)</strong> înseamnă respectarea fiecărei reguli legale, politici sau înțelegeri pe care organizația trebuie să le urmeze. Aceste reguli vin din multe locuri: guvernul național, autoritatea locală, propriile promisiuni făcute clienților și chiar actul constitutiv al organizației. Conformitatea este ca un contract între organizație și societate: promitem să ținem totul în siguranță și, în schimb, ni se permite să operăm. Dacă încălcăm promisiunea, putem fi amendați, închiși sau putem pierde încrederea oamenilor.</p>
+
+<h3>Termeni-cheie pe care îi vei întâlni mereu</h3>
+
+<p><strong>Risc (risk)</strong> – șansa ca ceva rău să se întâmple. Ne gândim la riscuri pentru siguranță, sănătate, învățare și bunăstare. Un risc nu este același lucru cu un pericol; un risc poate fi mic sau mare și deseori îl putem micșora fără să-l eliminăm complet.</p>
+
+<p><strong>Pericol (hazard)</strong> – orice lucru care ar putea provoca daune. Pardoseli ude, colțuri ascuțite, mobilier neasigurat sau chiar zgomote puternice pot fi toate pericole. Identificarea pericolelor este primul pas în managementul riscului.</p>
+
+<p><strong>Probabilitate (likelihood)</strong> – cât de probabil este ca pericolul să provoace daune. Folosim adesea cuvinte simple: „foarte improbabil”, „posibil”, „probabil”, „aproape sigur”. De exemplu, o băltoacă pe podea este un pericol; probabilitatea ca ea să provoace o alunecare este „posibilă” într-o dimineață aglomerată.</p>
+
+<p><strong>Severitate (severity)</strong> – cât de gravă ar fi dauna dacă s-ar întâmpla. O lovitură mică ar putea fi „minoră”, un os rupt este „grav”, iar o rană la cap care necesită spitalizare este „majoră”. Personalul combină probabilitatea și severitatea pentru a decide care riscuri au nevoie de cea mai mare atenție.</p>
+
+<p><strong>Măsură de control (control measure)</strong> – orice acțiune pe care o luăm pentru a reduce fie probabilitatea, fie severitatea daunei. Controalele pot fi fizice (ex.: covorașe antiderapante), organizaționale (ex.: instruirea personalului) sau procedurale (ex.: înregistrarea intrărilor și ieșirilor). Cele mai bune controale sunt puse în aplicare înainte să se întâmple un accident.</p>
+
+<p><strong>Risc rezidual (residual risk)</strong> – riscul care rămâne după ce am aplicat toate măsurile de control. Chiar și cu cea mai bună supraveghere, cineva determinat ar putea totuși să se cațăre prea sus. Riscul rezidual este șansa mică rămasă; o acceptăm pentru că beneficiile depășesc pericolul.</p>
+
+<p><strong>Politică (policy)</strong> – o regulă scrisă care le spune tuturor exact ce să facă într-o anumită situație. O „Politică de protecție” spune cum trebuie să raporteze personalul îngrijorările privind bunăstarea cuiva; o „Politică de sănătate și securitate” explică cum se menține clădirea în siguranță. Politicile transformă legile și ideile bune în acțiuni de zi cu zi.</p>
+
+<p><strong>Procedură (procedure)</strong> – instrucțiunile pas cu pas care arată cum se pune în practică o politică. De exemplu, politica ar putea spune „Personalul trebuie să raporteze accidentele”, în timp ce procedura enumeră exact formularul de completat și pe cine să anunțe.</p>
+
+<p><strong>Reglementare (regulation)</strong> – o regulă legală făcută de un organism guvernamental. Reglementările nu sunt sugestii; ele sunt legea.</p>
+
+<p><strong>Inspecție (inspection)</strong> – o vizită a unui oficial guvernamental sau local pentru a verifica dacă organizația respectă reglementările. Inspectorii se uită la politici, vorbesc cu personalul, observă activitatea și verifică înregistrările. Ei acordă o notă și pot impune schimbări dacă ceva este nesigur.</p>
+
+<p><strong>Audit</strong> – o verificare atentă și planificată în interiorul organizației pentru a vedea dacă propriile reguli și controale funcționează. Spre deosebire de o inspecție, un audit este realizat chiar de organizație sau de un expert extern plătit. Auditurile ne ajută să găsim problemele mici înainte să devină mari.</p>
+
+<p><strong>Incertitudine (uncertainty)</strong> – faptul simplu că nu putem fi niciodată 100% siguri ce se va întâmpla în continuare. Chiar și cu cele mai bune planuri, se poate întâmpla un incident neprevăzut. Managementul riscului nu pretinde că prezice viitorul; spune doar că am gândit cu atenție și suntem pregătiți să acționăm dacă ceva merge prost.</p>
+
+<h3>Dovezi și limite</h3>
+
+<p>Cercetările arată că organizațiile care urmează pași clari de management al riscului au mai puține accidente și rezultate mai bune. Totuși, dovezile sunt cele mai puternice pentru pericolele evidente, precum căderile și arsurile. Știm mai puțin despre evenimentele foarte rare. De asemenea, conformitatea cu reglementările s-a dovedit că reduce incidentele grave, dar hârtiile singure nu garantează succesul. Cele mai bune organizații folosesc atât planificarea atentă, cât și relațiile bune.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că mergi desculț pe o plajă însorită și observi o porțiune de nisip fierbinte lângă prosop. Fără să te gândești prea mult, calci automat în jurul ei. Nu ai măsurat temperatura, nu ai citit un semn de avertizare și nu ai consultat un regulament. Corpul tău pur și simplu <em>știe</em> — prin experiență și instinct — că un pas pe nisipul fierbinte te-ar putea răni. Acea înțelegere imediată, de la nivelul instinctului, este intuiția în acțiune.</p>
+
+<p>În lumea conformității, lucrurile funcționează la fel, dar în loc să evităm nisipul fierbinte, evităm riscuri care ar putea face rău oamenilor. Intuiția în conformitate nu înseamnă să ghicești sau să te bazezi pe presimțiri. Înseamnă să recunoști tipare, să observi când ceva „nu e în regulă” și să iei măsuri rapide și raționale pentru a preveni dauna — înainte ca o problemă mică să devină ceva grav.</p>
+
+<p>De ce contează acest tip de intuiție? Pentru că mediile de lucru sunt locuri aglomerate. Cineva ar putea muta un obiect greu fără să-și dea seama că poate cădea. Un membru al echipei ar putea uita să verifice un detaliu important. În aceste momente, judecata rapidă și instinctivă — bazată pe instruire și pe reguli clare — poate preveni accidentele înainte să se întâmple.</p>
+
+<p>Gândește-te la conformitate ca la o „plasă de siguranță interioară”. Nu este doar despre bifarea unei liste. Este despre dezvoltarea unui simț al ceea ce este sigur și ce nu, astfel încât, atunci când ceva nu pare în regulă, să te oprești și să întrebi: <em>Este în acord cu regulile noastre de siguranță? Ar putea răni pe cineva? Ce spune politica?</em> Cu timpul, acest obicei devine a doua natură. Nu mai trebuie să te gândești în profunzime la fiecare pas — pur și simplu <em>știi</em> să verifici că poarta e închisă sau că lista de alergii este la zi.</p>
+
+<p>Această intuiție se construiește din două lucruri: orientări clare și practică repetată. La fel cum cineva învață să nu atingă o plită fierbinte fiind avertizat și apoi trăind consecința, echipele își construiesc intuiția de conformitate învățând regulile, exersându-le în simulări și reflectând asupra a ceea ce a mers bine sau prost. De fiecare dată când se face o simulare de incendiu sau se urmează o rutină de verificare, echipa întărește obiceiurile sigure. Aceste obiceiuri devin automate — ca a ști să ocolești nisipul fierbinte.</p>
+
+<p>Dar intuiția în conformitate nu este perfectă. Uneori, ceea ce „pare corect” poate fi de fapt riscant. De exemplu, cineva ar putea crede că e în regulă să lase ceva nesupravegheat „doar un minut”. Acel sentiment de „mă întorc repede” poate suprascrie regula. De aceea, intuiția în conformitate trebuie întotdeauna ghidată de standarde clare, scrise. Intuiția îți spune că ceva <em>ar putea</em> fi greșit; politica îți spune <em>exact</em> ce să faci.</p>
+
+<p>Dovezile susțin această idee. Studiile arată că mediile în care personalul dezvoltă instincte puternice de siguranță — prin instruire, jocuri de rol și practică reflexivă — au mai puține accidente și o aderență mai bună la regulile de sănătate și securitate. Dar dovezile arată și că intuiția singură nu este suficientă. Fără politici consecvente și verificări regulate, chiar și personalul bine intenționat poate scăpa din vedere riscuri.</p>
+
+<p>Așadar, intuiția în conformitate este ca o alarmă discretă în mintea ta — una care sună când ceva nu pare sigur. Este rapidă, practică și construită din experiență. Dar trebuie întotdeauna însoțită de reguli clare, instruire regulată și disponibilitatea de a verifica de două ori. Astfel, organizația nu doar reacționează la riscuri — le previne înainte chiar să se formeze.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Managementul riscului și conformitatea presupun o abordare sistematică de identificare, evaluare și atenuare a riscurilor potențiale și de asigurare a respectării legilor, reglementărilor și standardelor relevante. Mecanica poate fi descompusă în câțiva pași-cheie, prezentați mai jos.</p>
+
+<h3>Pasul 1: Identificarea riscului</h3>
+
+<p>Procesul începe cu identificarea riscului, unde riscurile potențiale sunt identificate și documentate. Aceasta presupune o trecere în revistă temeinică a operațiunilor organizației, inclusiv a politicilor, procedurilor și practicilor sale. Procesul de identificare a riscului presupune de obicei:</p>
+
+<ul>
+<li>Revizuirea legilor, reglementărilor și standardelor relevante</li>
+<li>Efectuarea unui parcurs (walk-through) prin organizație pentru a identifica pericole și riscuri potențiale</li>
+<li>Consultarea personalului și a părților interesate pentru a aduna informații despre riscurile potențiale</li>
+<li>Revizuirea rapoartelor de incident, a accidentelor și a situațiilor „la limită” (near-misses) pentru a identifica tendințe și tipare</li>
+</ul>
+
+<h3>Pasul 2: Evaluarea riscului</h3>
+
+<p>După ce riscurile potențiale au fost identificate, următorul pas este evaluarea probabilității și a impactului lor potențial. Aceasta presupune folosirea unui instrument de evaluare a riscului, precum o matrice sau un sistem de punctare, pentru a evalua nivelul de risc asociat fiecărui risc identificat. Procesul de evaluare a riscului presupune de obicei:</p>
+
+<ul>
+<li>Evaluarea probabilității de apariție a fiecărui risc, folosind o scală precum scăzut, moderat sau ridicat</li>
+<li>Evaluarea impactului potențial al fiecărui risc, folosind o scală precum scăzut, moderat sau ridicat</li>
+<li>Calcularea unui scor de risc prin înmulțirea evaluărilor de probabilitate și impact</li>
+<li>Clasificarea fiecărui risc ca scăzut, moderat sau ridicat în funcție de scorul său de risc</li>
+</ul>
+
+<h3>Pasul 3: Atenuarea riscului</h3>
+
+<p>Următorul pas este dezvoltarea și implementarea de strategii pentru a atenua sau reduce riscurile identificate. Aceasta presupune dezvoltarea de politici, proceduri și practici care minimizează probabilitatea și impactul fiecărui risc. Procesul de atenuare a riscului presupune de obicei:</p>
+
+<ul>
+<li>Dezvoltarea și implementarea de politici și proceduri pentru a preveni sau minimiza riscul</li>
+<li>Oferirea de instruire și sprijin personalului pentru a se asigura că își înțelege rolurile și responsabilitățile în atenuarea riscului</li>
+<li>Revizuirea și actualizarea regulată a politicilor și procedurilor pentru a rămâne eficiente</li>
+<li>Monitorizarea și revizuirea eficacității strategiilor de atenuare a riscului</li>
+</ul>
+
+<h3>Pasul 4: Conformitatea</h3>
+
+<p>Pasul final este asigurarea faptului că organizația respectă legile, reglementările și standardele relevante. Aceasta presupune revizuirea și verificarea faptului că toate politicile, procedurile și practicile sunt actualizate și în acord cu cerințele curente. Procesul de conformitate presupune de obicei:</p>
+
+<ul>
+<li>Revizuirea și verificarea faptului că toate politicile și procedurile sunt în acord cu legile, reglementările și standardele curente</li>
+<li>Efectuarea de audituri și inspecții regulate pentru a asigura conformitatea</li>
+<li>Oferirea de instruire și sprijin personalului pentru a se asigura că își înțelege rolurile și responsabilitățile în menținerea conformității</li>
+<li>Revizuirea și actualizarea regulată a politicilor și procedurilor pentru a rămâne eficiente</li>
+</ul>
+
+<h3>Pasul 5: Monitorizare și revizuire</h3>
+
+<p>Pasul final este monitorizarea și revizuirea eficacității procesului de management al riscului și de conformitate. Aceasta presupune revizuirea și actualizarea regulată a politicilor și procedurilor, precum și monitorizarea și revizuirea eficacității strategiilor de atenuare a riscului. Procesul de monitorizare și revizuire presupune de obicei:</p>
+
+<ul>
+<li>Revizuirea și actualizarea regulată a politicilor și procedurilor pentru a rămâne eficiente</li>
+<li>Monitorizarea și revizuirea eficacității strategiilor de atenuare a riscului</li>
+<li>Efectuarea de audituri și inspecții regulate pentru a asigura conformitatea</li>
+<li>Oferirea de instruire și sprijin personalului pentru a-și înțelege rolurile în menținerea conformității</li>
+</ul>
+
+<p>În concluzie, mecanica managementului riscului și a conformității presupune o abordare sistematică de identificare, evaluare și atenuare a riscurilor potențiale, precum și de asigurare a respectării legilor, reglementărilor și standardelor relevante. Urmând acești pași-cheie, organizațiile pot minimiza probabilitatea și impactul riscurilor potențiale și pot asigura un mediu sigur și sănătos.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Imaginează-ți o mică organizație numită „Bright Little Stars” care se ocupă de zece situații în fiecare zi lucrătoare. Într-o dimineață obișnuită, lucrurile încep între orele 8:00 și 9:00. Organizația este condusă de un coordonator calificat și doi asistenți; coordonatorul este și responsabilul desemnat de protecție.</p>
+
+<p><strong>Pasul 1 – Identifică pericolele care ar putea provoca daune</strong><br>
+Un pericol este orice are potențialul de a provoca daune. La „Bright Little Stars” putem enumera cel puțin trei:</p>
+
+<ul>
+<li>Băuturi fierbinți lăsate pe mese joase – cineva ar putea răsturna cana și s-ar putea opări.</li>
+<li>O priză defectă în perete în spatele cuierului – cineva ar putea introduce un obiect metalic înăuntru.</li>
+<li>O balustradă slăbită la tobogan – cineva ar putea cădea și s-ar putea lovi la cap.</li>
+</ul>
+
+<p><strong>Pasul 2 – Decide cât de probabil este fiecare pericol și cât de gravă ar fi dauna</strong><br>
+Transformăm fiecare pericol într-o evaluare simplă a riscului. Riscul se scrie de obicei ca un număr:</p>
+
+<p><strong>Risc = Probabilitate × Severitate</strong></p>
+
+<p>Probabilitatea se punctează pe o scală de la 1 la 5, unde 1 = aproape niciodată și 5 = se întâmplă zilnic. Severitatea este tot de la 1 la 5, unde 1 = o zgârietură mică și 5 = deces sau rană care schimbă viața.</p>
+
+<p><strong>Băuturi fierbinți lăsate nesupravegheate</strong></p>
+<ul>
+<li>Probabilitate: 3 (o dată sau de două ori pe săptămână o cană este lăsată la îndemână)</li>
+<li>Severitate: 3 (o opărire ar putea necesita prim ajutor și o vizită la medic)</li>
+<li>Risc = 3 × 3 = 9</li>
+</ul>
+
+<p><strong>Priză defectă în spatele cuierului</strong></p>
+<ul>
+<li>Probabilitate: 2 (doar când lipsește capacul prizei, ceea ce se întâmplă o dată pe lună)</li>
+<li>Severitate: 4 (electrocutarea ar putea fi gravă)</li>
+<li>Risc = 2 × 4 = 8</li>
+</ul>
+
+<p><strong>Balustradă slăbită la tobogan</strong></p>
+<ul>
+<li>Probabilitate: 1 (jurnalul de mentenanță arată că a fost raportată acum trei luni, dar nu s-a făcut nimic)</li>
+<li>Severitate: 3 (o cădere ar putea rupe un braț)</li>
+<li>Risc = 1 × 3 = 3</li>
+</ul>
+
+<p><strong>Pasul 3 – Compară riscurile cu „apetitul pentru risc” al organizației</strong><br>
+„Bright Little Stars” a decis că nu va accepta niciun risc peste 10 pe această scală. Riscul balustradei (3) este sub această linie, deci este tolerabil pentru moment. Celelalte două riscuri (9 și 8) sunt aproape de limită și necesită acțiune.</p>
+
+<p><strong>Pasul 4 – Alege controale care reduc riscul la un nivel acceptabil</strong><br>
+Folosim ierarhia controalelor (hierarchy of controls):</p>
+
+<ul>
+<li><strong>1. Eliminare</strong> – îndepărtează complet pericolul. Băuturi fierbinți: am putea interzice complet băuturile fierbinți, dar nu este practic pentru micul dejun.</li>
+<li><strong>2. Substituire</strong> – schimbă cu ceva mai sigur. Băuturi fierbinți: trecem la căni termoizolante cu capac care se deschide doar la apăsare.</li>
+<li><strong>3. Izolare</strong> – ține oamenii departe de pericol. Priză defectă: punem un dulap cu cheie în fața ei, ca să nu poată fi atinsă.</li>
+<li><strong>4. Inginerie</strong> – schimbă mediul. Balustrada toboganului: programăm reparația pentru acest weekend; între timp punem un gard temporar în jurul toboganului.</li>
+<li><strong>5. Administrativ</strong> – instruiește personalul și supraveghează. Băuturi fierbinți: personalul semnează zilnic o listă de verificare că toate cănile sunt pe mese înalte. Priză defectă: adăugăm o verificare vizuală zilnică în jurnalul de mentenanță.</li>
+</ul>
+
+<p><strong>Pasul 5 – Recalculează riscul după aplicarea controalelor</strong></p>
+
+<p><strong>Băuturi fierbinți cu căni cu capac</strong></p>
+<ul>
+<li>Probabilitatea scade la 1 (personalul uită rar acum)</li>
+<li>Severitatea rămâne 3</li>
+<li>Risc nou = 1 × 3 = 3 (tolerabil)</li>
+</ul>
+
+<p><strong>Priză defectă cu barieră de dulap</strong></p>
+<ul>
+<li>Probabilitatea scade la 1 (dulapul e încuiat și verificat zilnic)</li>
+<li>Severitatea rămâne 4</li>
+<li>Risc nou = 1 × 4 = 4 (tolerabil)</li>
+</ul>
+
+<p><strong>Balustrada toboganului reparată</strong></p>
+<ul>
+<li>Probabilitatea devine 0 (niciun pericol)</li>
+<li>Severitatea irelevantă</li>
+<li>Risc nou = 0 (tolerabil)</li>
+</ul>
+
+<p><strong>Pasul 6 – Notează și revizuiește</strong><br>
+Coordonatorul înregistrează noile controale în registrul de riscuri (risk register) al organizației: data, pericolul, riscul inițial, controlul, riscul nou și data revizuirii. De exemplu: 12 mai, băuturi fierbinți, risc inițial 9, control: căni cu capac + listă zilnică, risc nou 3, revizuire 12 iunie.</p>
+
+<p>Registrul este revizuit lunar. Dacă apare o situație nouă cu o alergie cunoscută, coordonatorul adaugă acel pericol și repetă pașii.</p>
+
+<h3>Ce susțin și ce nu susțin dovezile</h3>
+
+<ul>
+<li>Metoda de evaluare a riscului este predată pe scară largă, dar este doar un instrument rapid; nu prezice exact accidentele.</li>
+<li>Ierarhia controalelor se bazează pe cercetarea privind siguranța industrială (ex.: Haddon, 1973) și este o practică bună acceptată, însă nu poate elimina orice pericol posibil.</li>
+<li>Cifrele din acest exemplu sunt ilustrative; fiecare organizație trebuie să-și colecteze propriile date.</li>
+</ul>
+
+<h2>Un al doilea scenariu</h2>
+
+<p><strong>Un al doilea scenariu: „pălăria de soare lipsă”</strong></p>
+
+<p><strong>Context</strong><br>
+Într-o dimineață caldă de primăvară apare nevoia de protecție solară, însoțită de o pălărie roșie aprinsă, etichetată cu numele și autocolantul „Sun Safe” al organizației. În timpul activității de dimineață, pălăria este lăsată pe un raft jos. Mai târziu, când grupul se mută în zona exterioară, pălăria nu mai este vizibilă. Personalul efectuează o căutare sistematică în cameră, pe coridor, în vestiar și în zona imediată din grădină. După zece minute, pălăria nu poate fi găsită. Personalul urmează procedura „Obiecte pierdute”: completează un formular scurt de incident, informează la momentul potrivit și izolează locul pălăriei de la utilizare ulterioară până când fie este recuperată, fie declarată definitiv pierdută.</p>
+
+<p><strong>Definiții și de ce contează acest lucru</strong></p>
+<ul>
+<li><strong>Risc:</strong> șansa expunerii la radiații ultraviolete (UV) fără protecție adecvată.</li>
+<li><strong>Conformitate:</strong> acțiunea conformă cu Politica de siguranță solară a organizației, care este aliniată ghidurilor naționale privind minimizarea expunerii la UV.</li>
+<li><strong>Obiect pierdut:</strong> orice articol care iese de sub control direct și nu poate fi localizat într-o zonă de căutare și o fereastră de timp definite.</li>
+</ul>
+
+<p><strong>Ce spune politica</strong><br>
+Politica de siguranță solară prevede că personalul trebuie:</p>
+<ul>
+<li>1. să se asigure că este purtată protecția solară etichetată la exterior;</li>
+<li>2. să efectueze o numărare și o verificare vizuală la fiecare tranziție de la interior la exterior;</li>
+<li>3. să înregistreze orice articol lipsă în jurnalul de incidente;</li>
+<li>4. să notifice partea responsabilă cât mai curând posibil;</li>
+<li>5. să pună în carantină articolul lipsă până când fie este returnat, fie declarat oficial pierdut.</li>
+</ul>
+
+<p><strong>Cum aprofundează acest scenariu înțelegerea</strong></p>
+
+<p><strong>Caz-limită 1 – absența temporară</strong><br>
+Unii practicieni ar putea argumenta că o pălărie lăsată pe un raft timp de zece minute „nu este încă un risc”. Totuși, politica tratează orice separare între persoană și articolul de protecție ca pe o expunere potențială. Fereastra de zece minute nu este arbitrară: este timpul maxim permis pentru căutare înainte de escaladarea incidentului. Această regulă există pentru că pielea se arde repede și pentru că personalul trebuie să demonstreze diligență (due diligence) în localizarea articolului. Scenariul ilustrează astfel cum conformitatea nu înseamnă să aștepți să se producă dauna; înseamnă să demonstrezi grijă sistematică în fiecare moment posibil de expunere.</p>
+
+<p><strong>Caz-limită 2 – perspectiva părții responsabile</strong><br>
+La preluare, membrul personalului explică faptul că pălăria lipsește și oferă o pălărie de rezervă pentru drumul spre casă. Partea responsabilă semnează formularul de incident, indicând că a fost informată. Acest simplu act de documentare arată conformitatea cu politica de comunicare. Evidențiază și un aspect subtil: conformitatea nu este doar despre protecție în interiorul organizației; se extinde la asigurarea faptului că partea responsabilă face parte din bucla de siguranță. Fără acea semnătură, organizația nu ar putea dovedi că și-a îndeplinit obligația de îngrijire (duty of care).</p>
+
+<p><strong>Ce susțin și ce nu susțin dovezile</strong></p>
+<ul>
+<li>Ghidurile naționale confirmă că anumite categorii sunt cele mai expuse riscului de arsuri solare pentru că pielea este mai subțire și răspunsul imunitar este imatur. Acest lucru susține decizia de a trata orice protecție lipsă ca pe o problemă de conformitate.</li>
+<li>Nu există date publicate despre cât de des se pierd astfel de articole, deci nu putem cuantifica reducerea riscului obținută prin politică. Această incertitudine înseamnă că trebuie să ne bazăm pe principiul precauției (precautionary principle): tratează fiecare articol lipsă ca și cum ar putea duce la daune, chiar dacă dauna nu se materializează niciodată.</li>
+</ul>
+
+<p><strong>Incertitudine și pașii următori</strong><br>
+După trei zile, pălăria tot nu a fost găsită. Managerul decide să înlocuiască articolul din fondul de mărunțiș (petty cash) și să reamintească întregului personal să efectueze o verificare vizuală finală a îmbrăcămintei și a bunurilor înainte de plecare. Această acțiune depășește politica scrisă, dar este consecventă cu obligația mai largă de îngrijire. Scenariul arată, prin urmare, că conformitatea nu este o listă de verificare rigidă; este un proces viu care se adaptează la informații noi, onorând totodată intenția inițială.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Când vine vorba de managementul riscului și conformitate, există mai multe capcane frecvente în care cad adesea începătorii. Înțelegerea acestor greșeli și concepții greșite este crucială pentru dezvoltarea de strategii eficiente de management al riscului și pentru menținerea conformității cu cerințele de reglementare.</p>
+
+<p>Una dintre cele mai semnificative concepții greșite este că managementul riscului este un proces unic, făcut o singură dată. Mulți cred că, odată ce o evaluare a riscului a fost finalizată, procesul s-a încheiat, iar atenția se mută spre implementare. Totuși, managementul riscului este un proces continuu care necesită monitorizare și revizuire constantă. Riscurile se pot schimba în timp și pot apărea riscuri noi, ceea ce face esențială reevaluarea și actualizarea regulată a strategiilor.</p>
+
+<p>O altă greșeală frecventă este concentrarea exclusivă pe aspectele tehnice ale managementului riscului, precum identificarea și evaluarea riscurilor. Deși aceste aspecte tehnice sunt cruciale, ele sunt doar o parte a ecuației. Managementul eficient al riscului necesită și o înțelegere profundă a factorilor organizaționali și umani care contribuie la risc. Aceasta include luarea în considerare a motivațiilor, comportamentelor și atitudinilor indivizilor din organizație, precum și a culturii și politicilor organizaționale.</p>
+
+<p>Unii cred în mod greșit că managementul riscului este exclusiv responsabilitatea unui manager de risc sau a unui ofițer de conformitate desemnat. Deși aceste persoane joacă un rol critic, este o responsabilitate colectivă care implică toți membrii organizației. Fiecare are un rol în identificarea, evaluarea și atenuarea riscurilor și este esențial să se cultive o cultură a conștientizării și responsabilității față de risc în întreaga organizație.</p>
+
+<p>O altă concepție greșită este că managementul riscului se concentrează exclusiv pe evitarea riscurilor. Deși evitarea riscurilor este un aspect esențial, nu este singura considerație. Managementul riscului presupune și asumarea de riscuri calculate pentru a atinge obiectivele organizaționale. Aceasta necesită o abordare echilibrată care cântărește beneficiile potențiale ale unui risc în raport cu costurile și consecințele potențiale.</p>
+
+<p>Unii cred în mod greșit și că conformitatea este doar o chestiune de urmare a regulilor și reglementărilor. Deși respectarea regulilor și reglementărilor este esențială, conformitatea înseamnă și înțelegerea principiilor și a intenției care stau la baza reglementărilor. Aceasta necesită o înțelegere profundă a cadrului de reglementare și capacitatea de a-l interpreta și aplica într-un context practic.</p>
+
+<p>O altă greșeală frecventă este bazarea exclusivă pe liste de verificare și șabloane pentru a gestiona riscul și a asigura conformitatea. Deși aceste instrumente pot fi utile, ele nu înlocuiesc o înțelegere profundă a principiilor și conceptelor de bază. Managementul eficient al riscului și conformitatea necesită o abordare nuanțată și specifică contextului, care ține cont de caracteristicile și circumstanțele unice ale organizației.</p>
+
+<p>În cele din urmă, unii cred în mod greșit că managementul riscului și conformitatea sunt concepte separate și distincte. Deși sunt înrudite, nu se exclud reciproc. De fapt, managementul eficient al riscului este strâns legat de conformitate, iar o strategie robustă de management al riscului este esențială pentru menținerea conformității cu cerințele de reglementare.</p>
+
+<p>Pentru a evita aceste greșeli și concepții greșite frecvente, este esențial să dezvolți o înțelegere profundă a principiilor și conceptelor de bază ale managementului riscului și conformității. Aceasta necesită angajament față de învățarea continuă și dezvoltarea profesională, precum și disponibilitatea de a pune sub semnul întrebării presupunerile și înțelepciunea convențională. Adoptând o abordare nuanțată și specifică contextului, organizațiile pot minimiza riscul de erori și neconformitate și își pot maximiza șansele de succes.</p>
+
+<h2>Cum folosește biroul de tranzacționare acest lucru</h2>
+
+<p>Pe un birou de tranzacționare (trading desk), expresia „management al riscului și conformitate” nu este un departament separat care stă în back office; este ritmul viu pe care biroul îl respiră la fiecare bătaie a ceasului. Biroul este de obicei mic — poate un trader senior, un trader junior și un ofițer de conformitate care este și controlorul de risc — așa că fiecare decizie trebuie luată cu două pălării simultan: „Este profitabil?” și „Este permis?”. Instrumentele folosite sunt simple, dar concrete: limite de poziție (position limits), reguli de stop-loss, verificări pre-tranzacționare (pre-trade checks) și limite în timp real pe registrul de tranzacții (blotter).</p>
+
+<p>În fiecare dimineață, biroul primește o listă de nume aprobate, sectoare și dimensiuni nominale maxime de la tabloul de bord al conformității. Aceste numere nu sunt sugestii; sunt plafoane stricte impuse de sistemul de management al ordinelor (OMS – order management system). Înainte de deschiderea pieței, ofițerul de conformitate încarcă limitele în OMS, astfel încât orice ordin care ar încălca o limită de sector sau o limită pe un singur nume să fie respins automat. Aceasta este prima poartă: biroul nu poate nici măcar să încerce să tranzacționeze peste ceea ce permite cadrul de risc.</p>
+
+<p>Când piața se deschide, biroul începe să construiască poziții. Traderul senior decide o regulă de dimensionare: pentru fiecare nume, dimensiunea poziției este plafonată la 2% din volumul zilnic sau la 50.000 £, oricare este mai mică. Traderul junior introduce ordinul în OMS; sistemul verifică instantaneu dimensiunea propusă în raport cu limitele preîncărcate. Dacă verificarea eșuează, ordinul este marcat cu roșu, iar ofițerul de conformitate trebuie să aprobe o derogare (override). Derogările sunt rare, fiindcă limitele sunt stabilite de comitetul de risc al fondului, nu de birou.</p>
+
+<p>Pe parcursul zilei, biroul monitorizează două numere live pe ecranul blotter-ului: expunerea brută (gross exposure) și expunerea netă (net exposure). Expunerea brută este suma tuturor pozițiilor long și short fără compensare; expunerea netă este diferența dintre long și short. Biroul are o politică prin care expunerea brută nu trebuie să depășească niciodată 250.000 £, iar expunerea netă trebuie să rămână în ±50.000 £. Dacă vreunul dintre numere iese din bandă, OMS trimite o alertă, iar ofițerul de conformitate cere o reducere imediată. Instinctul biroului este să taie riscul înainte de a suna alerta, dar alerta asigură că, chiar dacă traderul este distras, sistemul impune disciplina.</p>
+
+<p>Regulile de stop-loss sunt al doilea nivel de apărare. Pentru fiecare poziție long, biroul setează un stop mental la 5% sub prețul de intrare; pentru fiecare poziție short, stopul este la 5% peste prețul de intrare. Aceste stopuri nu sunt tranzacții automate — sunt reguli pe care traderii le urmează manual. Dacă piața se mișcă împotriva unei poziții cu distanța de stop, traderul trebuie să închidă tranzacția sau să-i explice ofițerului de conformitate de ce o mai ține. Explicația trebuie documentată în blotter în decurs de cinci minute. Această regulă împiedică pierderile mici să se transforme în pierderi mari și menține pierderea medie pe tranzacție în bugetul de risc al fondului.</p>
+
+<p>Deciziile de moment sunt și ele constrânse. Biroul are o regulă „fără știri”: nu pot fi deschise poziții noi în interval de 30 de minute de la orice comunicat economic programat. OMS este programat să blocheze introducerea ordinelor în această fereastră. Aceasta împiedică biroul să fie prins pe partea greșită a unui titlu de știre și îl forțează să aștepte ca datele să fie digerate. După comunicat, ofițerul de conformitate dă undă verde biroului să reia tranzacționarea, dar numai după ce verifică faptul că nu se mai prețuiește vreo știre depășită.</p>
+
+<p>La sfârșitul zilei, blotter-ul este blocat, iar ofițerul de conformitate efectuează o verificare finală. Sistemul calculează automat Value-at-Risk (VaR) pentru portofoliu folosind un model parametric simplu, pe 1 zi, la 95%. Dacă VaR depășește 15.000 £, biroul trebuie să reducă pozițiile înainte de închidere. Numărul VaR nu este o prognoză a pierderii; este un etalon de reglementare care îi spune biroului cât capital ar putea fi expus riscului în condiții normale de piață. Biroul acceptă că modelul este imperfect — presupune că randamentele sunt distribuite normal și ignoră cozile groase (fat tails) — dar este măsura agreată, așa că biroul se conformează.</p>
+
+<p>În practică, biroul folosește aceste reguli ca balustrade (guardrails), nu ca rețete pentru profit. Stopurile și limitele sunt alese astfel încât nicio tranzacție singură să nu poată șterge capitalul fondului, dar înseamnă și că biroul ratează uneori o mișcare mare pentru că dimensiunea poziției a fost prea mică. Rolul ofițerului de conformitate nu este să oprească fiecare tranzacție, ci să se asigure că biroul nu uită niciodată că riscul și recompensa sunt două fețe ale aceleiași monede. Dovezile din blotter-ul biroului arată că, pe parcursul a șase luni, pierderea medie per tranzacție pierzătoare a fost de 1.200 £, mult sub bugetul de risc de 2.500 £, în timp ce câștigul mediu per tranzacție câștigătoare a fost de 2.100 £. Biroul continuă deci să tranzacționeze, dar întotdeauna în interiorul șinelor pe care le-a construit conformitatea.</p>
+
+<h2>Limite, avertismente și când eșuează</h2>
+
+<p>Managementul riscului și conformitatea nu sunt sisteme infailibile. Deși pot reduce semnificativ probabilitatea de neconformitate și pot minimiza pierderile potențiale, nu sunt o garanție împotriva tuturor riscurilor. Există mai multe limitări și avertismente de luat în considerare când implementăm strategii de management al riscului și conformitate.</p>
+
+<p>Una dintre limitările principale este complexitatea cerințelor de reglementare. Conformitatea cu legile și reglementările poate fi nuanțată și dependentă de context, ceea ce face dificilă dezvoltarea unei abordări universale. De exemplu, cerințele specifice pentru depozitarea materialelor periculoase pot varia în funcție de tipul și cantitatea substanței, precum și de reglementările locale în vigoare. În astfel de cazuri, strategiile pot necesita adaptare la circumstanțele specifice, ceea ce poate consuma timp și resurse.</p>
+
+<p>O altă limitare este dependența de date și presupuneri. Strategiile de management al riscului se bazează adesea pe date istorice și pe presupuneri despre evenimente viitoare. Totuși, aceste presupuneri nu se confirmă întotdeauna, iar evenimente neașteptate pot apărea, fără să fi fost luate în calcul în evaluarea riscului. De exemplu, o organizație poate avea un sistem robust pentru gestionarea alergiilor, dar o reacție alergică severă neașteptată poate apărea totuși dacă alergia nu este documentată corect sau dacă personalul nu este instruit adecvat.</p>
+
+<p>În plus, strategiile de management al riscului și conformitate nu pot ține întotdeauna cont de eroarea umană. În ciuda celor mai bune eforturi, pot apărea greșeli, iar acestea pot avea consecințe grave. De exemplu, un membru al personalului poate uita să administreze un medicament sau poate citi greșit o fișă, ducând la un eveniment advers grav.</p>
+
+<p>Mai mult, strategiile pot să nu fie întotdeauna eficiente în situații de stres ridicat sau presiune mare. În astfel de cazuri, personalul poate fi mai predispus la greșeli sau la trecerea cu vederea a procedurilor critice, chiar dacă a fost instruit și cunoaște protocoalele. De exemplu, în timpul unei crize, personalul poate fi mai predispus la greșeli din cauza nivelului ridicat de stres și presiune.</p>
+
+<p>În ceea ce privește regimurile specifice în care managementul riscului și conformitatea se pot prăbuși, iată câteva exemple:</p>
+
+<ul>
+<li><strong>Activități cu risc ridicat:</strong> strategiile pot să nu fie întotdeauna eficiente în activitățile cu risc ridicat, unde probabilitatea de rănire este mai mare.</li>
+<li><strong>Cazuri complexe:</strong> strategiile pot să nu fie întotdeauna eficiente în cazuri complexe, unde nevoile nu sunt bine înțelese sau personalul nu este instruit adecvat.</li>
+<li><strong>Situații de urgență:</strong> strategiile pot să nu fie întotdeauna eficiente în situații de urgență, unde personalul poate fi mai predispus la greșeli din cauza stresului și presiunii.</li>
+</ul>
+
+<p>În ceea ce privește ce <em>nu</em> îți spun strategiile de management al riscului și conformitate, iată câteva exemple:</p>
+
+<ul>
+<li>Nu îți spun cum să gestionezi incertitudinea: se bazează pe presupuneri și date, dar nu țin cont de incertitudine sau de evenimente neașteptate.</li>
+<li>Nu îți spun cum să prioritizezi riscurile: pot identifica multiple riscuri, dar nu oferă o prioritizare clară a acestora.</li>
+<li>Nu îți spun cum să aloci resursele: pot identifica resursele necesare atenuării riscurilor, dar nu oferă un plan clar de alocare a acestora.</li>
+</ul>
+
+<p>În ceea ce privește motivele pentru care managementul riscului și conformitatea nu sunt o garanție, iată câteva:</p>
+
+<ul>
+<li><strong>Eroarea umană:</strong> în ciuda celor mai bune eforturi, pot apărea greșeli, cu consecințe grave.</li>
+<li><strong>Evenimente neprevăzute:</strong> strategiile pot să nu țină întotdeauna cont de evenimente neașteptate, care pot apărea în ciuda celor mai bune eforturi.</li>
+<li><strong>Complexitatea cerințelor de reglementare:</strong> conformitatea poate fi nuanțată și dependentă de context, ceea ce face dificilă o abordare universală.</li>
+</ul>
+
+<p>În concluzie, deși strategiile de management al riscului și conformitate pot reduce semnificativ probabilitatea de neconformitate și pot minimiza pierderile potențiale, ele nu sunt o garanție împotriva tuturor riscurilor. Există mai multe limitări și avertismente de luat în considerare, iar acestea trebuie cântărite cu atenție în raport cu beneficiile potențiale.</p>
+
+<h2>Concluzii esențiale</h2>
+
+<ul>
+<li>Conformitatea este practica de zi cu zi de a te asigura că toți respectă regulile, politicile și legile care țin lucrurile în siguranță. Nu este o sarcină unică; este un set continuu de verificări, înregistrări și acțiuni pe care toți trebuie să le facă.</li>
+
+<li>Riscul înseamnă orice ar putea afecta bunăstarea sau rezultatul. „Riscul” nu este un cuvânt rău; el denumește pur și simplu orice ar putea merge prost. Gestionarea acelui risc înseamnă identificarea timpurie a riscului, decizia privind gravitatea lui și alegerea celei mai sigure căi de a face activitatea.</li>
+
+<li>Cei patru pași de bază ai managementului riscului sunt: a identifica (observă ce poate merge prost), a evalua (decide cât de probabil este și cât de grav ar fi), a controla (alege cea mai sigură cale) și a înregistra (notează ce ai decis și de ce). Acești pași trebuie scriși, astfel încât inspectorii, personalul și părțile interesate să poată vedea că ai gândit cu atenție.</li>
+
+<li>O evaluare a riscului (risk assessment) este documentul scris (sau fișierul digital) care arată acești patru pași pentru o activitate sau o zonă. Enumeră pericolul (lucrul care ar putea răni), riscul (cât de probabil și cât de grav) și controalele puse în aplicare. Nu trebuie să fie lung; trebuie să fie suficient de clar încât un membru nou al personalului să-l înțeleagă.</li>
+
+<li>Controalele trebuie să se potrivească contextului. Pentru situații diferite, accentul cade pe pericole diferite. Controalele trebuie să respecte și politicile proprii ale organizației.</li>
+
+<li>„Probabilitatea” și „severitatea” sunt cele două numere pe care le folosești pentru a decide cât de serios este un risc. Probabilitatea este cât de des crezi că pericolul ar putea provoca daune (rar, improbabil, posibil, probabil, aproape sigur). Severitatea este cât de gravă ar fi dauna (minoră, moderată, majoră, severă). Înmulțind aceste două numere obții o evaluare a riscului. Nu este nevoie de matematică complicată; un tabel simplu (ex.: 1–5) este suficient.</li>
+
+<li>Controalele alese trebuie să fie „rezonabil de aplicabile” (reasonably practicable). Asta înseamnă că trebuie să fie raționale pentru mărimea, bugetul și contextul organizației. Nu trebuie să cheltui sume mari sau să schimbi totul, dar trebuie să arăți că ai gândit cu atenție și ai luat pașii evidenți.</li>
+
+<li>Toți din organizație sunt responsabili de conformitate, nu doar managerul. Personalul trebuie să urmeze politicile, să raporteze pericolele și să înregistreze orice incident.</li>
+
+<li>Înregistrările trebuie păstrate cel puțin trei ani (sau mai mult dacă legea cere). Aceasta include evaluările de risc, rapoartele de incident, registrele de accidente și jurnalele de instruire a personalului. Înregistrările digitale sunt acceptabile, dar trebuie să aibă copie de siguranță și să fie ușor de găsit în timpul unei inspecții.</li>
+
+<li>Incertitudinea este normală. Nu putem fi niciodată 100% siguri că un accident nu se va întâmpla. Conformitatea nu înseamnă zero risc; înseamnă că am făcut ceea ce ar face o organizație responsabilă pentru a reduce riscul cât de mult este rezonabil de aplicabil. Dacă învățăm continuu, înregistrăm continuu și ne îmbunătățim continuu, ne facem bine treaba.</li>
+
+<li>Dovezile nu ne dau întotdeauna răspunsul exact corect. Cercetarea poate arăta o tendință generală, dar nu ne poate spune care soluție exactă este cea mai sigură în cazul tău. Folosește cele mai bune dovezi disponibile, dar verifică-le mereu în raport cu situația ta concretă și cu regulile pe care trebuie să le respecți.</li>
+
+<li>Inspectorii și autoritatea locală vor căuta trei lucruri: (1) că ai evaluări de risc pentru activitățile principale, (2) că le respecți și (3) că le revizuiești când lucrurile se schimbă (situații noi, personal nou, echipamente noi). Dacă poți arăta aceste trei lucruri, ești pe drumul cel bun.</li>
+</ul><script type="application/json" id="cf-mc-quiz">[{"q": "Care este scopul principal al managementului riscului, conform capitolului?", "options": ["Să elimine complet orice risc posibil", "Să mențină riscul suficient de mic încât beneficiul să merite", "Să transfere toate riscurile către o terță parte", "Să ignore riscurile mici și să se concentreze doar pe cele mari"], "correct": 1, "explain": "Managementul riscului nu încearcă să elimine fiecare risc (asta ar opri orice activitate utilă), ci să-l mențină suficient de mic încât beneficiul să merite.", "kind": "concept"}, {"q": "Ce reprezintă conformitatea (compliance) în descrierea din capitol?", "options": ["Respectarea fiecărei reguli legale, politici sau înțelegeri aplicabile", "Un departament separat din back office", "Un raport anual trimis autorităților", "O strategie de a maximiza profitul"], "correct": 0, "explain": "Conformitatea înseamnă respectarea fiecărei reguli legale, politici sau înțelegeri pe care organizația trebuie să le urmeze; este ca un contract cu societatea.", "kind": "text"}, {"q": "Care este diferența dintre un 'pericol' (hazard) și un 'risc' (risk)?", "options": ["Sunt termeni identici", "Pericolul este lucrul care poate provoca daune, iar riscul este șansa ca acesta să provoace daune", "Riscul este fizic, iar pericolul este doar teoretic", "Pericolul apare doar după ce riscul s-a materializat"], "correct": 1, "explain": "Pericolul este orice lucru care ar putea provoca daune, iar riscul este șansa ca acel pericol să producă efectiv daune.", "kind": "concept"}, {"q": "Cum se calculează scorul de risc în exemplul rezolvat?", "options": ["Probabilitate + Severitate", "Severitate ÷ Probabilitate", "Probabilitate × Severitate", "Probabilitate × Frecvență × Cost"], "correct": 2, "explain": "Riscul se scrie ca Risc = Probabilitate × Severitate, fiecare punctată de obicei pe o scală de la 1 la 5.", "kind": "text"}, {"q": "În exemplul cu 'Bright Little Stars', care risc inițial era cel mai mare?", "options": ["Băuturile fierbinți (9)", "Priza defectă (8)", "Balustrada slăbită (3)", "Toate erau egale"], "correct": 0, "explain": "Băuturile fierbinți aveau probabilitate 3 × severitate 3 = 9, cel mai mare scor inițial dintre cele trei pericole.", "kind": "text"}, {"q": "Organizația din exemplu nu acceptă niciun risc peste 10. De ce balustrada (risc 3) era totuși tolerabilă, deși nu fusese reparată?", "options": ["Pentru că nimeni nu observase pericolul", "Pentru că scorul ei (3) era sub pragul de apetit pentru risc", "Pentru că reparațiile erau prea scumpe", "Pentru că severitatea era zero"], "correct": 1, "explain": "Apetitul pentru risc era pragul 10; riscul balustradei (3) era sub această linie, deci tolerabil pentru moment, chiar dacă rămânea de reparat.", "kind": "concept"}, {"q": "Care este ordinea corectă a primelor niveluri din ierarhia controalelor?", "options": ["Administrativ, Inginerie, Izolare, Substituire, Eliminare", "Eliminare, Substituire, Izolare, Inginerie, Administrativ", "Substituire, Eliminare, Administrativ, Izolare, Inginerie", "Inginerie, Eliminare, Substituire, Administrativ, Izolare"], "correct": 1, "explain": "Ierarhia controalelor merge de la cel mai eficient la cel mai puțin eficient: Eliminare, Substituire, Izolare, Inginerie, Administrativ.", "kind": "concept"}, {"q": "De ce controalele administrative (instruire, supraveghere) sunt considerate ultimul nivel din ierarhie?", "options": ["Pentru că sunt cele mai scumpe", "Pentru că se bazează pe comportamentul uman, mai predispus la eroare decât eliminarea fizică a pericolului", "Pentru că sunt ilegale în multe locuri", "Pentru că nu necesită documentare"], "correct": 1, "explain": "Controalele administrative depind de oameni care urmează corect regulile, deci sunt mai puțin sigure decât eliminarea sau substituirea fizică a pericolului.", "kind": "concept"}, {"q": "Ce este 'riscul rezidual' (residual risk)?", "options": ["Riscul de dinainte de aplicarea controalelor", "Riscul transferat unei alte organizații", "Un risc care nu a fost încă identificat", "Riscul care rămâne după aplicarea tuturor măsurilor de control"], "correct": 3, "explain": "Riscul rezidual este șansa mică ce rămâne după ce am aplicat toate controalele; îl acceptăm pentru că beneficiile depășesc pericolul.", "kind": "text"}, {"q": "Conform scenariului 'pălăriei lipsă', de ce fereastra de zece minute de căutare nu este arbitrară?", "options": ["Este timpul mediu de pauză al personalului", "Este timpul maxim permis pentru căutare înainte de escaladarea incidentului", "Este durata legală minimă a oricărei căutări", "Este timpul după care orice obiect devine proprietatea organizației"], "correct": 1, "explain": "Cele zece minute reprezintă timpul maxim de căutare permis înainte de escaladare, fiindcă expunerea poate provoca daune rapid, iar personalul trebuie să demonstreze diligență.", "kind": "text"}, {"q": "Ce ilustrează semnătura părții responsabile pe formularul de incident în scenariul pălăriei?", "options": ["Că incidentul a fost cauzat de organizație", "Că bucla de siguranță se extinde dincolo de organizație și obligația de îngrijire a fost îndeplinită", "Că organizația nu mai are nicio responsabilitate", "Că pălăria a fost găsită"], "correct": 1, "explain": "Semnătura dovedește comunicarea și că obligația de îngrijire (duty of care) a fost îndeplinită; fără ea, organizația nu ar putea demonstra acest lucru.", "kind": "concept"}, {"q": "Ce este 'principiul precauției' (precautionary principle) aplicat în scenariul pălăriei?", "options": ["Să aștepți date complete înainte de a acționa", "Să tratezi fiecare articol lipsă ca și cum ar putea duce la daune, chiar dacă dauna nu se materializează", "Să ignori riscurile fără dovezi cantitative", "Să transferi responsabilitatea către părinți"], "correct": 1, "explain": "În lipsa datelor care să cuantifice riscul, principiul precauției cere să tratezi fiecare articol lipsă ca un posibil risc de daune.", "kind": "concept"}, {"q": "Care este una dintre cele mai frecvente concepții greșite despre managementul riscului?", "options": ["Că este un proces continuu", "Că este un proces făcut o singură dată, încheiat după prima evaluare", "Că implică toți membrii organizației", "Că necesită revizuire regulată"], "correct": 1, "explain": "O concepție greșită majoră este că managementul riscului este un proces unic; în realitate este continuu, fiindcă riscurile se schimbă și apar altele noi.", "kind": "text"}, {"q": "De ce managementul riscului NU înseamnă doar evitarea riscurilor?", "options": ["Pentru că riscurile sunt mereu benefice", "Pentru că presupune și asumarea de riscuri calculate pentru a atinge obiectivele", "Pentru că evitarea este imposibilă", "Pentru că reglementările interzic evitarea"], "correct": 1, "explain": "Managementul riscului echilibrat presupune și asumarea de riscuri calculate, cântărind beneficiile potențiale în raport cu costurile și consecințele.", "kind": "concept"}, {"q": "De ce bazarea exclusivă pe liste de verificare și șabloane este o greșeală?", "options": ["Listele de verificare sunt interzise legal", "Ele nu înlocuiesc înțelegerea profundă a principiilor și a contextului specific", "Sunt prea scumpe de produs", "Nu pot fi păstrate digital"], "correct": 1, "explain": "Listele și șabloanele ajută, dar nu înlocuiesc o abordare nuanțată, adaptată circumstanțelor unice ale organizației.", "kind": "concept"}, {"q": "Pe biroul de tranzacționare, ce se întâmplă cu un ordin care încalcă o limită de sector preîncărcată în OMS?", "options": ["Este executat cu o avertizare", "Este respins automat de sistem", "Este aprobat automat de traderul senior", "Este trimis la finalul zilei pentru revizuire"], "correct": 1, "explain": "Limitele sunt plafoane stricte impuse de OMS; orice ordin care le-ar încălca este respins automat — prima poartă de control.", "kind": "text"}, {"q": "Care este diferența dintre expunerea brută (gross) și cea netă (net) pe blotter?", "options": ["Brută = doar long; netă = doar short", "Sunt identice", "Brută = suma tuturor long și short fără compensare; netă = diferența dintre long și short", "Brută include comisioanele; netă le exclude"], "correct": 2, "explain": "Expunerea brută însumează toate pozițiile long și short fără compensare, iar cea netă este diferența dintre long și short.", "kind": "text"}, {"q": "Care este rolul regulii 'fără știri' (no news) pe biroul de tranzacționare?", "options": ["Interzice cititul presei la birou", "Blochează deschiderea de poziții noi în 30 de minute de la un comunicat economic programat", "Oprește tranzacționarea pe toată ziua comunicatelor", "Permite doar tranzacții pe baza de zvonuri"], "correct": 1, "explain": "Regula blochează poziții noi 30 de minute în jurul comunicatelor economice, ca biroul să nu fie prins pe partea greșită a unui titlu de știre.", "kind": "text"}, {"q": "Ce reprezintă Value-at-Risk (VaR) în descrierea biroului?", "options": ["O prognoză exactă a pierderii zilnice", "Un etalon de reglementare care arată cât capital ar putea fi expus riscului în condiții normale de piață", "Profitul maxim posibil", "Valoarea totală a portofoliului"], "correct": 1, "explain": "VaR nu prezice pierderea; este un etalon care arată cât capital ar putea fi la risc în condiții normale de piață, la un anumit nivel de încredere.", "kind": "concept"}, {"q": "Care este o limitare recunoscută a modelului VaR parametric folosit de birou?", "options": ["Necesită prea mult capital de calcul", "Funcționează doar pe poziții short", "Este interzis de reglementatori", "Presupune randamente distribuite normal și ignoră cozile groase (fat tails)"], "correct": 3, "explain": "Modelul parametric presupune o distribuție normală a randamentelor și ignoră cozile groase (evenimentele extreme), deci este imperfect, dar este măsura agreată.", "kind": "concept"}, {"q": "De ce regulile de stop-loss împiedică pierderile mici să devină mari?", "options": ["Garantază profit pe fiecare tranzacție", "Forțează traderul să închidă poziția (sau să justifice) când piața se mișcă cu distanța de stop", "Elimină nevoia de supraveghere", "Cresc automat dimensiunea poziției"], "correct": 1, "explain": "Stop-loss-ul cere închiderea poziției sau o justificare documentată când piața se mișcă cu distanța de stop, menținând pierderea medie în bugetul de risc.", "kind": "concept"}, {"q": "Conform capitolului, de ce stopurile și limitele acționează ca 'balustrade' (guardrails) și nu ca rețete de profit?", "options": ["Garantează că fiecare tranzacție va fi profitabilă", "Asigură că nicio tranzacție singură nu poate șterge capitalul, deși uneori biroul ratează o mișcare mare", "Maximizează dimensiunea fiecărei poziții", "Elimină complet riscul de pierdere"], "correct": 1, "explain": "Sunt balustrade: previn ca o singură tranzacție să distrugă capitalul, dar pot face ca biroul să rateze uneori o mișcare mare din cauza dimensiunii prea mici.", "kind": "concept"}, {"q": "Ce înseamnă că un control trebuie să fie 'rezonabil de aplicabil' (reasonably practicable)?", "options": ["Trebuie să fie cea mai scumpă soluție disponibilă", "Trebuie aprobat de un avocat", "Trebuie să fie rațional pentru mărimea, bugetul și contextul organizației, fără cheltuieli excesive", "Trebuie să elimine 100% din risc"], "correct": 2, "explain": "„Rezonabil de aplicabil” înseamnă controale raționale pentru mărimea și bugetul organizației — nu sume uriașe, dar pașii evidenți, gândiți cu atenție.", "kind": "concept"}, {"q": "Cât timp trebuie păstrate, în general, înregistrările (evaluări de risc, rapoarte de incident etc.)?", "options": ["Cel mult o lună", "Cel puțin trei ani (sau mai mult dacă legea cere)", "Doar până la următoarea inspecție", "Nu există nicio cerință de păstrare"], "correct": 1, "explain": "Înregistrările trebuie păstrate cel puțin trei ani (sau mai mult dacă legea cere), iar cele digitale trebuie să aibă copie de siguranță și să fie ușor de găsit.", "kind": "text"}, {"q": "Care sunt cele trei lucruri pe care inspectorii și autoritatea locală le caută?", "options": ["Profit, creștere și marketing", "Că ai evaluări de risc pentru activitățile principale, că le respecți și că le revizuiești când lucrurile se schimbă", "Numărul de angajați, cifra de afaceri și locația", "Existența unei singure liste de verificare semnate o dată pe an"], "correct": 1, "explain": "Inspectorii caută: (1) evaluări de risc pentru activitățile principale, (2) că sunt respectate și (3) că sunt revizuite când apar schimbări.", "kind": "text"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>

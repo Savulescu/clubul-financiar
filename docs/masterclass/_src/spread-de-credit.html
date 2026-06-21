@@ -1,0 +1,344 @@
+<h2>Definiție și termeni-cheie</h2>
+
+<p><strong>Spread-ul de credit</strong> (credit spread) este, pe scurt, prețul neîncrederii pe piața obligațiunilor: diferența de randament (yield) dintre o obligațiune corporativă și o obligațiune de stat de aceeași maturitate. A înțelege cum se calculează spread-ul de credit, de ce contează spread-ul BBB față de Trezorerie (Treasury) și ce ne spune despre riscul de credit este esențial pentru orice investitor la bursă care vrea să citească corect starea de spirit a piețelor.</p>
+
+<p>În lumea piețelor de credit, spread-ul de credit măsoară diferența de randament dintre două tipuri de obligațiuni: o obligațiune corporativă și o obligațiune guvernamentală, de regulă o obligațiune de Trezorerie. El reprezintă randamentul suplimentar pe care un investitor îl cere pentru a fi compensat pentru riscul mai mare de a împrumuta o companie în loc de un guvern. Altfel spus, este prețul riscului de credit (credit risk).</p>
+
+<p>În paragrafele de mai jos vom defini termenii implicați — obligațiune corporativă, obligațiune de stat, randament, rată a cuponului, maturitate, rating de credit și risc de credit — vom vedea formula de calcul, exemple lucrate pas cu pas, greșelile frecvente ale începătorilor și modul în care un birou de tranzacționare (trading desk) folosește spread-urile în practică.</p>
+
+<p><strong>Spread de credit:</strong> diferența de randament dintre o obligațiune corporativă și o obligațiune guvernamentală, de obicei una de Trezorerie, de maturitate similară. Reprezintă randamentul suplimentar pe care îl cere un investitor pentru a compensa riscul mai mare de a împrumuta o entitate corporativă în loc de un guvern. Cu alte cuvinte, este prețul riscului de credit.</p>
+
+<p><strong>Obligațiune corporativă:</strong> un tip de titlu de datorie emis de o companie pentru a atrage capital de la investitori. Reprezintă un împrumut acordat de investitor companiei, compania angajându-se să ramburseze suma principală plus dobânda pe o perioadă determinată. Obligațiunile corporative sunt de regulă evaluate de agențiile de rating pentru a indica bonitatea (creditworthiness) emitentului.</p>
+
+<p><strong>Obligațiune guvernamentală (obligațiune de Trezorerie):</strong> un titlu de datorie emis de un guvern pentru a-și finanța activitățile. Reprezintă un împrumut acordat de investitor guvernului, acesta angajându-se să ramburseze principalul plus dobânda pe o perioadă determinată. Obligațiunile de Trezorerie sunt considerate practic fără risc, deoarece este puțin probabil ca guvernul să intre în incapacitate de plată asupra datoriei sale.</p>
+
+<p><strong>Randament (yield):</strong> câștigul pe care un investitor se așteaptă să îl obțină dintr-o obligațiune, exprimat ca procent din valoarea nominală a obligațiunii. Ține cont de rata cuponului, de maturitate și de prețul de piață.</p>
+
+<p><strong>Rata cuponului (coupon rate):</strong> rata dobânzii plătită de emitent deținătorului obligațiunii la intervale regulate, de obicei semestrial sau anual. Se exprimă ca procent din valoarea nominală a obligațiunii.</p>
+
+<p><strong>Maturitate (maturity):</strong> perioada de timp până la rambursarea valorii nominale către deținător. Se exprimă în ani și este un factor esențial în determinarea randamentului unei obligațiuni.</p>
+
+<p><strong>Rating de credit (credit rating):</strong> o evaluare a bonității unui debitor, care indică probabilitatea de neplată (default) a obligațiilor sale de datorie. Agențiile de rating, precum Moody's, Standard &amp; Poor's și Fitch, atribuie rating-uri pe baza sănătății financiare, a industriei și a altor factori.</p>
+
+<p><strong>Scala de rating:</strong> agențiile folosesc o scală pentru a încadra debitorii în categorii de risc. Cea mai comună este scala de grad investițional (investment-grade), care merge de la AAA (cea mai înaltă calitate de credit) la D (neplată). Ratingul BBB, des menționat în contextul spread-urilor de credit, este un rating de grad investițional mediu, indicând un risc de credit relativ scăzut.</p>
+
+<p><strong>Risc de credit (credit risk):</strong> posibilitatea ca un debitor să intre în incapacitate de plată, producând o pierdere pentru creditor. Spread-urile de credit reflectă evaluarea pe care piața o face riscului de credit: spread-uri mai mari indică un risc de neplată perceput mai ridicat.</p>
+
+<p>Pe scurt, spread-urile de credit sunt diferența de randament dintre obligațiunile corporative și cele guvernamentale, reflectând randamentul suplimentar pe care investitorii îl cer pentru riscul mai mare de a împrumuta o entitate corporativă. Înțelegerea termenilor implicați este esențială pentru a sesiza semnificația lor în piețele de credit.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că ești un fermier local care are nevoie de bani împrumut pentru a cumpăra semințe și îngrășăminte înainte de sezonul recoltei. Te duci la doi creditori diferiți.</p>
+
+<p>Primul creditor este cooperativa de credit din oraș. Te cunosc personal, au încredere că vei returna banii după recoltă și de aceea îți percep o dobândă de 4% pe an.</p>
+
+<p>Al doilea creditor este un negustor ambulant care nu te-a întâlnit niciodată. Habar nu are dacă recolta ta va fi bună sau slabă anul acesta. Ca să se protejeze, îți percepe 9% pe an.</p>
+
+<p>Cei 5% în plus pe care îi cere negustorul reprezintă, în termeni simpli, „spread-ul" dintre cât îi plătești lui și cât plătești cooperativei de credit. El există pentru că negustorul vede un risc mai mare în a te împrumuta decât vede cooperativa.</p>
+
+<p>Acum tradu povestea în limbajul pieței obligațiunilor. O companie cu rating BBB (gândește-te la ea ca la o fermă de dimensiuni medii) emite o obligațiune pe cinci ani. Pentru că are doar BBB, investitorii se tem că ar putea să nu returneze banii integral. Pentru a compensa această îngrijorare, ei cer un randament mai mare — să zicem 6% — în loc de randamentul de 4% al unei obligațiuni de Trezorerie pe cinci ani, fără risc (gândește-te la Trezorerie ca la cooperativa de credit). Diferența, 2%, este spread-ul de credit. Este „prima de asigurare" suplimentară pe care investitorii o cer pentru riscul în plus de a împrumuta o companie BBB în loc de guvernul SUA.</p>
+
+<p>De ce contează asta pe un birou de tranzacționare?</p>
+
+<ul>
+<li><strong>Este o măsurare în timp real a temperaturii.</strong> Arată cât de îngrijorați se simt investitorii. Dacă spread-ul BBB se lărgește brusc de la 2% la 3%, înseamnă că investitorii au devenit mai neliniștiți; ei cer acum un 1% suplimentar pentru a împrumuta companiile BBB. Asta ar putea semnala probleme pentru acele companii sau pentru economie.</li>
+<li><strong>Este un instrument de valoare relativă.</strong> Dacă spread-ul este 2% astăzi, dar media istorică e 3%, un trader ar putea cumpăra obligațiunea BBB și vinde Trezoreria, pariind că randamentul suplimentar se va contracta înapoi spre normal. Invers, dacă spread-ul este deja 5%, aceeași tranzacție ar putea părea neatractivă, pentru că riscul unei lărgiri suplimentare e mare.</li>
+<li><strong>Ajută la stabilirea prețului noii datorii.</strong> Când o companie vrea să emită o obligațiune nouă, se uită la spread-ul BBB curent. Dacă spread-ul este 3%, compania știe că va trebui să ofere investitorilor cel puțin atât randament suplimentar peste Trezorerie pentru a atrage cumpărători.</li>
+</ul>
+
+<p><strong>Punct esențial:</strong> spread-ul nu este o sferă de cristal. El reflectă ceea ce cred colectiv investitorii despre riscul viitor de neplată, dar convingerile se pot schimba rapid. O lărgire a spread-ului poate însemna „riscul crește" sau poate însemna pur și simplu „investitorii cer brusc mai multă compensație pentru același risc". Întreabă mereu: mișcarea este determinată de fundamente (calitatea reală a creditului) sau de sentiment (frică sau lăcomie)? Ambele sunt motive valide de lărgire sau strângere, dar implicațiile pentru tranzacționare diferă.</p>
+
+<p>Pe scurt, spread-ul de credit este modul în care piața pune o etichetă de preț pe încredere — sau pe lipsa ei. Când încrederea e mare, spread-urile sunt înguste; când încrederea e mică, spread-urile se lărgesc. Traderii urmăresc zilnic acea etichetă de preț pentru că le spune dacă lumea se simte mai încrezătoare sau mai neliniștită.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Pentru a înțelege mecanica spread-urilor de credit, să descompunem procesul în componentele sale de bază: datele de intrare, procesul de calcul și rezultatele.</p>
+
+<p><strong>Date de intrare (inputs):</strong></p>
+
+<ul>
+<li><strong>Prețurile obligațiunilor:</strong> prețurile obligațiunilor emise de corporație (ex.: Apple, Inc.) și de guvern (ex.: Trezoreria SUA).</li>
+<li><strong>Rating-urile de credit:</strong> rating-urile atribuite corporației și guvernului de agențiile de rating (ex.: Moody's, Standard &amp; Poor's).</li>
+<li><strong>Maturitatea:</strong> timpul până la scadența obligațiunilor.</li>
+<li><strong>Randamentul:</strong> randamentul la maturitate (yield to maturity) al obligațiunilor.</li>
+</ul>
+
+<p><strong>Procesul:</strong></p>
+
+<ul>
+<li><strong>Identifică obligațiunea de referință:</strong> alege o obligațiune guvernamentală (ex.: Trezoreria SUA) cu o maturitate similară cu cea a obligațiunii corporative.</li>
+<li><strong>Determină spread-ul de credit:</strong> calculează diferența de randament dintre obligațiunea corporativă și obligațiunea guvernamentală de referință.</li>
+<li><strong>Ține cont de riscul de credit:</strong> ajustează spread-ul pentru a reflecta riscul de credit asociat obligațiunii corporative.</li>
+<li><strong>Calculează spread-ul de credit:</strong> folosește spread-ul ajustat pentru a obține valoarea finală.</li>
+</ul>
+
+<p><strong>Calcul:</strong></p>
+
+<p>Spread-ul de credit se calculează cu formula:</p>
+
+<p><strong>Spread de credit = Randamentul obligațiunii corporative − Randamentul obligațiunii de referință</strong></p>
+
+<p>Unde:</p>
+
+<ul>
+<li>Randamentul obligațiunii corporative este randamentul la maturitate al obligațiunii corporative.</li>
+<li>Randamentul obligațiunii de referință este randamentul la maturitate al obligațiunii guvernamentale de referință.</li>
+<li>Ajustarea de risc de credit este un factor care ține cont de riscul de credit asociat obligațiunii corporative.</li>
+</ul>
+
+<p><strong>Rezultate (outputs):</strong></p>
+
+<p>Rezultatul calculului este o măsură a randamentului suplimentar cerut de investitori pentru a compensa riscul de credit asociat obligațiunii corporative. Acest rezultat poate fi exprimat în procente sau în puncte de bază (basis points, bp). Un punct de bază este a suta parte dintr-un procent (0,01%).</p>
+
+<p><strong>Exemplu:</strong></p>
+
+<p>Presupunem că avem o obligațiune corporativă pe 10 ani de la o companie numită BBB Corp, cu un randament la maturitate de 4,5%, și o obligațiune de Trezorerie SUA pe 10 ani, cu un randament la maturitate de 2,5%. Ratingul BBB Corp este BBB, iar al Trezoreriei SUA este AAA. Maturitatea ambelor obligațiuni este de 10 ani.</p>
+
+<p>Folosind formula de mai sus, calculăm spread-ul de credit:</p>
+
+<p><strong>Spread de credit = 4,5% − 2,5% = 2,0%</strong></p>
+
+<p>Asta înseamnă că investitorii cer un randament suplimentar de 2,0% pentru a compensa riscul de credit asociat obligațiunii BBB Corp față de obligațiunea de Trezorerie SUA.</p>
+
+<p>În concluzie, mecanica spread-urilor de credit presupune calcularea diferenței de randament dintre o obligațiune corporativă și o obligațiune guvernamentală de referință, ajustarea pentru riscul de credit și exprimarea rezultatului în procente sau puncte de bază.</p>
+
+<h2>Exemplu lucrat</h2>
+
+<p>Pentru a ilustra conceptul de spread de credit, să luăm un exemplu simplu. Presupunem că analizăm bonitatea a două obligațiuni: o obligațiune de Trezorerie cu rating AAA (cel mai înalt rating) și o obligațiune corporativă emisă de o companie cu rating BBB (un rating de nivel mediu). Vom folosi următoarele date:</p>
+
+<ul>
+<li><strong>Obligațiunea de Trezorerie:</strong>
+  <ul>
+    <li>Valoare nominală (par value): 100 $</li>
+    <li>Maturitate: 5 ani</li>
+    <li>Randament la maturitate (YTM): 2,5%</li>
+    <li>Preț curent de piață: 100 $ (la valoarea nominală)</li>
+  </ul>
+</li>
+<li><strong>Obligațiunea corporativă (rating BBB):</strong>
+  <ul>
+    <li>Valoare nominală (par value): 100 $</li>
+    <li>Maturitate: 5 ani</li>
+    <li>Randament la maturitate (YTM): 4,2%</li>
+    <li>Preț curent de piață: 95 $</li>
+  </ul>
+</li>
+</ul>
+
+<p>Obiectivul nostru este să calculăm spread-ul de credit dintre cele două obligațiuni. Pentru asta, trebuie să determinăm diferența de randament dintre ele, care ne va indica prima de risc suplimentară pe care investitorii o cer pentru a deține obligațiunea corporativă cu rating BBB.</p>
+
+<p><strong>Pasul 1: Calculează randamentul obligațiunii de Trezorerie</strong></p>
+
+<p>Randamentul obligațiunii de Trezorerie este deja dat: 2,5%. Acesta este câștigul pe care investitorii se așteaptă să îl obțină dacă o dețin până la maturitate.</p>
+
+<p><strong>Pasul 2: Calculează randamentul obligațiunii corporative</strong></p>
+
+<p>Pentru a calcula randamentul obligațiunii corporative folosim formula randamentului la maturitate (YTM). Randamentul la maturitate este rata unică de actualizare care face ca valoarea prezentă a cupoanelor și a principalului obligațiunii să fie egală cu prețul ei de piață. Rezolvând pentru obligațiunea corporativă, obținem:</p>
+
+<p>YTM ≈ 4,2%</p>
+
+<p><strong>Pasul 3: Ajustează randamentul obligațiunii corporative pentru discount</strong></p>
+
+<p>Obligațiunea corporativă se tranzacționează cu un discount de 5 $ (100 $ − 95 $) sub valoarea nominală. De fapt, randamentul la maturitate (YTM) ține deja cont de discount-ul față de valoarea nominală: pentru că este rata care egalizează prețul obligațiunii cu valoarea prezentă a fluxurilor sale viitoare de numerar, accreția prin „atragere spre valoarea nominală" (pull-to-par) de la 95 $ la 100 $ este deja inclusă în YTM-ul de 4,2%. Nu este nevoie de nicio ajustare separată.</p>
+
+<p>Randament ajustat = 4,2%</p>
+
+<p><strong>Pasul 4: Calculează spread-ul de credit</strong></p>
+
+<p>Spread-ul de credit este diferența de randament dintre cele două obligațiuni. Pentru a-l calcula, scădem randamentul obligațiunii de Trezorerie din randamentul ajustat al obligațiunii corporative:</p>
+
+<p>Spread de credit = Randamentul obligațiunii corporative − Randamentul obligațiunii de Trezorerie<br>
+Spread de credit ≈ 4,2% − 2,5%<br>
+Spread de credit ≈ 1,7%</p>
+
+<p>Asta înseamnă că investitorii cer un câștig suplimentar de 1,7% pe an pentru a deține obligațiunea corporativă cu rating BBB în loc de obligațiunea de Trezorerie. Acesta este spread-ul de credit, care reflectă riscul crescut asociat obligațiunii corporative.</p>
+
+<p>În acest exemplu, spread-ul de credit este relativ ridicat, indicând că investitorii percep obligațiunea corporativă BBB ca fiind mai riscantă decât obligațiunea de Trezorerie. Acest lucru e în concordanță cu faptul că obligațiunea corporativă are un rating mai mic (BBB) față de obligațiunea de Trezorerie (AAA).</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p><strong>Un al doilea scenariu — „Curbă inversată întâlnește un downgrade de rating"</strong></p>
+
+<p>Presupunem că biroul de tranzacționare este rugat să stabilească prețul unei obligațiuni nou emise pe 5 ani, cu rată fixă, de la Acme Widgets Inc., o companie al cărei rating de emitent pe termen lung tocmai a fost retrogradat de la BBB la BB+ de către cele trei agenții majore. În același timp, curba randamentelor obligațiunilor de Trezorerie SUA a devenit inversată: titlurile pe 2 ani randează 4,60%, cele pe 5 ani randează 4,30%, iar cele pe 10 ani randează 4,10%. Analistul nostru de credit trebuie să calculeze spread-ul de credit pe 5 ani pe care îl va cere piața înainte ca obligațiunea să poată fi vândută investitorilor instituționali.</p>
+
+<p><strong>Pasul 1 — Identifică reperul fără risc</strong></p>
+
+<p>Pentru că obligațiunea are exact cinci ani până la maturitate, reperul corect de Trezorerie este titlul pe 5 ani recent emis (on-the-run), care se tranzacționează la un randament de 4,30%. Aceasta este rata „fără risc" pe care o vom scădea ulterior.</p>
+
+<p><strong>Pasul 2 — Adună noile statistici de credit ale emitentului</strong></p>
+
+<p>Indicatorii de credit ai Acme după retrogradare sunt:</p>
+
+<ul>
+<li>Rating senior negarantat: BB+</li>
+<li>Probabilitate de neplată implicită pe 5 ani: 7,8% (derivată din modelul KMV al Moody's)</li>
+<li>Pierdere așteptată în caz de neplată (loss given default): 55% (norma de industrie pentru BB+)</li>
+<li>Tampon de lichiditate: 1,2× EBITDA anual (adecvat, dar nu generos)</li>
+</ul>
+
+<p><strong>Pasul 3 — Observă titluri comparabile de pe piața secundară</strong></p>
+
+<p>Biroul extrage cotații executabile pentru obligațiuni industriale pe 5 ani cu rating similar:</p>
+
+<ul>
+<li>Spread industrial BBB pe 5 ani: +200 bp</li>
+<li>Spread industrial BB+ pe 5 ani: +385 bp (mijlocul pieței)</li>
+</ul>
+
+<p>Categoria BB+ este cel mai apropiat reper, pentru că ratingul Acme se află acum acolo.</p>
+
+<p><strong>Pasul 4 — Ajustează pentru caracteristici idiosincratice</strong></p>
+
+<p>Obligațiunile Acme sunt negarantate, necallabile timp de cinci ani și se clasează pari passu (la egalitate) cu creditorii generali — fără elemente structurale suplimentare. Prin urmare, biroul folosește reperul BB+ de +385 bp fără ajustări suplimentare.</p>
+
+<p><strong>Pasul 5 — Calculează randamentul și spread-ul cerute</strong></p>
+
+<p>Randament cerut = Reper de Trezorerie + spread de credit<br>
+= 4,30% + 3,85%<br>
+= 8,15%</p>
+
+<p>Spread de credit = 385 bp (sau 3,85%)</p>
+
+<p><strong>Pasul 6 — Verifică distorsiunea de curbă</strong></p>
+
+<p>Curba inversată înseamnă că titlul de Trezorerie pe 2 ani randează mai mult decât cel pe 5 ani. Unii traderi ar putea argumenta că cel pe 2 ani este o „acoperire" (hedge) mai bună, fiind mai aproape de data de refinanțare a emitentului. Totuși, fluxurile de numerar ale obligațiunii sunt fixe pe cinci ani, deci curba corectă de actualizare este cea pe 5 ani. Folosirea celei pe 2 ani ar subestima spread-ul cu aproximativ 30 bp (mărimea inversării curbei) și ar lăsa biroul cu protecție insuficientă.</p>
+
+<p><strong>Pasul 7 — Testează la stres probabilitatea de neplată</strong></p>
+
+<p>Probabilitatea de neplată pe 5 ani a Acme, de 7,8%, este deja ridicată pentru BB+. Dacă economia alunecă în recesiune, ea ar putea crește la 12%. Biroul rulează, prin urmare, o analiză de sensibilitate: 12% PD × 55% LGD ≈ 6,6% pierdere așteptată, care în termeni de spread înseamnă aproximativ +450 bp. Asta îi spune echipei de vânzări că obligațiunea s-ar putea reevalua mai larg dacă sentimentul se deteriorează și că acoperirea cu CDS pe 5 ani la +420 bp este doar marginal suficientă.</p>
+
+<p><strong>Pasul 8 — Acțiunea practică a biroului</strong></p>
+
+<p>Traderul marchează noua obligațiune Acme pe 5 ani la +385 bp (randament 8,15%) față de Trezoreria pe 5 ani la 4,30%. Echipa de vânzări este instruită să o propună la 8,00%–8,25% pentru a ține cont de negocierea de preț. Poziția este imediat acoperită cu o poziție scurtă (short) pe futures de Trezorerie pe 5 ani (2 contracte la fiecare 10 milioane $ valoare nominală) și o poziție lungă (long) pe indicele CDS BB+ pe 5 ani (CDX HY 26) pentru a neutraliza riscul de rating. Poziția este dimensionată mic, pentru că inversarea curbei și retrogradarea recentă creează un risc de eveniment greu de acoperit perfect.</p>
+
+<p><strong>Concluzia esențială pentru începători</strong></p>
+
+<p>Chiar și un calcul simplu de spread de credit trebuie să treacă trei verificări: (1) reperul corect fără risc, (2) categoria corectă de rating după orice retrogradare și (3) forma curbei, care poate inversa logica obișnuită de acoperire. Ignorarea oricăruia dintre acești pași poate lăsa biroul supraexpus la mișcări pe care credea că le neutralizase.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<ul>
+<li><strong>Tratarea spread-ului ca „randament suplimentar" fără a verifica ce compensează.</strong> Începătorii văd „spread-ul de 200 bp (2%)" și se gândesc „bani gratis". Spread-ul nu este gratis; este randamentul suplimentar cerut de piață pentru a suporta riscul de credit, riscul de lichiditate și alți factori pe care obligațiunile de Trezorerie nu îi au. Dacă emitentul intră în neplată, pierzi întregul principal, nu doar spread-ul. Întreabă mereu: „Pentru ce sunt plătit să-mi asum acest risc de coadă (tail risk)?" Dacă nu poți răspunde, speculezi, nu investești.</li>
+
+<li><strong>Uitarea că spread-ul este o fotografie, nu o prognoză.</strong> Cei 200 bp pe care îi vezi astăzi sunt prețul pieței pentru riscul de credit de astăzi. Mâine spread-ul se poate lărgi la 300 bp sau strânge la 100 bp în funcție de informații noi, acțiuni de rating sau condiții de lichiditate. Începătorii tratează uneori spread-ul de azi ca pe un randament anual garantat. Nu este; este un cupon variabil care poate dispărea peste noapte.</li>
+
+<li><strong>Compararea merelor cu perele: folosirea reperului greșit.</strong> O greșeală frecventă este scăderea randamentului emitentului dintr-un „randament corporativ" generic sau din randamentul altui emitent fără a verifica potrivirea maturității. Spread-ul este definit ca diferența dintre YTM-ul emitentului și randamentul unei obligațiuni de stat fără risc de aceeași maturitate. Dacă obligațiunea corporativă este pe 5 ani și o compari cu Trezoreria pe 10 ani, introduci o nepotrivire de maturitate care distorsionează spread-ul cu 10–30 bp pe o curbă tipică. Pe birou folosim curba zero-cupon sau randamentul de Trezorerie interpolat pentru data exactă de maturitate.</li>
+
+<li><strong>Ignorarea efectului de pull-to-par la obligațiunile cu discount.</strong> Când o obligațiune se tranzacționează sub valoarea nominală (ex.: 95), investitorul câștigă nu doar cuponul, ci și accreția discount-ului spre valoarea nominală la maturitate. Începătorii tratează uneori întregul randament ca spread peste Trezorerie, uitând că o parte din randament este doar returnarea principalului. Calculul corect folosește randamentul la maturitate, care include deja pull-to-par; nu adăuga o linie suplimentară de „discount".</li>
+
+<li><strong>Bazarea excesivă doar pe rating-urile de credit.</strong> Rating-urile (AAA, BBB etc.) sunt retrospective și rămân în urma prețurilor de piață. Un emitent BBB poate fi retrogradat la high-yield (BB) peste noapte, făcând spread-ul să sară cu 200–400 bp. Invers, un emitent CCC poate fi promovat la B+, micșorând spread-ul. Piețele se mișcă înaintea agențiilor de rating. Verifică mereu ratingul implicit din piață (spread-ul însuși) față de ratingul agenției; dacă diferă cu mai mult de 2 trepte (notches), întreabă-te de ce.</li>
+
+<li><strong>Neglijarea primei de lichiditate din spread.</strong> Obligațiunile mai puțin lichide se tranzacționează cu o „primă de lichiditate" suplimentară de 20–50 bp, care nu este risc de credit pur. Un începător care cumpără o obligațiune industrială BBB mică și tranzacționată rar poate crede că întregul spread de 250 bp este compensație pentru riscul de neplată, când de fapt 50 bp sunt doar costul de a ieși din poziție. Pe birou eliminăm prima de lichiditate comparând spread-ul obligațiunii cu cel al unei obligațiuni recent emise (on-the-run) de la același emitent sau grup de companii similare.</li>
+
+<li><strong>Confundarea yield spread-ului cu Z-spread-ul sau I-spread-ul.</strong>
+  <ul>
+    <li>Yield spread = diferența simplă dintre două randamente de obligațiuni.</li>
+    <li>I-spread = yield spread față de curba swap interpolată (comun în Europa).</li>
+    <li>Z-spread = spread-ul cu volatilitate zero; spread-ul constant adăugat la fiecare rată spot de Trezorerie astfel încât fluxurile actualizate să fie egale cu prețul obligațiunii.</li>
+  </ul>
+  Începătorii folosesc adesea „yield spread" când biroul are nevoie de fapt de Z-spread pentru analiza de valoare relativă. Diferența poate fi 10–40 bp pe o obligațiune de 5 ani, suficient pentru a stabili greșit prețul unei tranzacții. Confirmă mereu ce spread afișează sistemul tău.</li>
+
+<li><strong>Presupunerea că spread-ul este constant pe durata de viață a obligațiunii.</strong> Spread-ul este un singur număr cotat astăzi, dar prețul obligațiunii se va mișca pe măsură ce curbele de credit se înclină sau se aplatizează, pe măsură ce se schimbă gradul de îndatorare al emitentului sau pe măsură ce se modifică randamentele de Trezorerie. Un începător care cumpără o obligațiune pe 5 ani crezând că o va ține până la maturitate poate descoperi că spread-ul s-a lărgit cu 100 bp, iar pierderea de marcare la piață (mark-to-market) șterge câțiva ani de venit din cupon. Testează mereu la stres poziția în scenarii de spread de ±100 bp.</li>
+
+<li><strong>Uitarea taxelor și a costurilor de finanțare.</strong> Venitul din credit este impozitat la cota venitului obișnuit (până la 37% în SUA plus taxe statale), în timp ce câștigurile de capital pe termen lung din Trezorerie sunt impozitate la rate mai mici. Finanțarea cumpărării prin repo la SOFR + 20 bp adaugă un cost explicit. Un începător care se concentrează doar pe spread-ul brut poate ajunge cu o poziție de carry negativ. Calculează spread-ul net = (spread brut − cost de finanțare) × (1 − cota de impozitare).</li>
+
+<li><strong>Goana după cel mai mare spread fără o opinie despre probabilitatea de neplată.</strong> Obligațiunile cu cel mai mare spread sunt de obicei cele mai riscante. Un începător care alocă disproporționat către titluri cu rating CCC pentru că „spread-ul e atractiv" poate suferi pierderi mari când neplățile cresc. Folosește un model simplu de credit (ex.: pierdere așteptată = probabilitate de neplată × pierdere în caz de neplată) pentru a verifica dacă spread-ul compensează riscul de coadă. Dacă modelul arată o pierdere așteptată mai mare decât spread-ul, tranzacția nu este ajustată la risc.</li>
+</ul>
+
+<p><strong>Listă rapidă de verificare pentru a evita aceste capcane:</strong></p>
+
+<ul>
+<li>Verifică reperul: folosește curba zero-cupon de Trezorerie potrivită cu maturitatea obligațiunii.</li>
+<li>Confirmă tipul de spread: yield, I-spread sau Z-spread.</li>
+<li>Elimină prima de lichiditate comparând cu o obligațiune similară recent emisă.</li>
+<li>Testează la stres poziția pentru mișcări de spread de ±100 bp și o scădere de preț de 20%.</li>
+<li>Calculează carry-ul net după taxe și finanțare.</li>
+<li>Verifică încrucișat rating-urile agențiilor cu rating-urile implicite din nivelurile de spread.</li>
+<li>Documentează teza de credit: de ce ar trebui spread-ul să se strângă sau să rămână larg și ce ți-ar schimba opinia.</li>
+</ul>
+
+<h2>Cum îl folosește biroul de tranzacționare</h2>
+
+<p>Pe un birou de tranzacționare, spread-urile de credit sunt o componentă esențială a domeniului de credit. Ele sunt folosite pentru a analiza și stabili prețul riscului de credit, un factor-cheie în deciziile de investiții. Iată cum folosește biroul spread-urile de credit în scenarii reale.</p>
+
+<p><strong>Dimensionarea poziției și gestionarea riscului</strong></p>
+
+<p>Când un trader analizează o poziție într-un instrument de credit, precum o obligațiune corporativă, folosește adesea spread-urile pentru a evalua riscul implicat. De exemplu, dacă ia în calcul cumpărarea unei obligațiuni BBB, va compara spread-ul ei cu cel al unei obligațiuni de Trezorerie similare. Dacă spread-ul obligațiunii BBB este semnificativ mai mare, asta poate indica un risc de neplată mai ridicat, iar traderul își poate ajusta dimensiunea poziției în consecință.</p>
+
+<p><strong>Alegerea câștigătorilor și a perdanților</strong></p>
+
+<p>Spread-urile pot fi folosite și pentru a identifica potențialii câștigători și perdanți de pe piața de credit. De pildă, dacă un trader observă că spread-ul unei anumite obligațiuni corporative s-a îngustat semnificativ într-o perioadă scurtă, asta poate indica faptul că piața devine mai optimistă în privința bonității companiei. Invers, dacă spread-ul s-a lărgit, poate indica un pesimism crescând. Traderul poate folosi această informație pentru a decide ce obligațiuni să cumpere sau să vândă.</p>
+
+<p><strong>Sincronizarea cu piața</strong></p>
+
+<p>Spread-urile pot fi folosite și pentru a evalua sentimentul pieței și pentru a decide când să intre sau să iasă dintr-o tranzacție. De exemplu, dacă un trader observă că spread-urile se lărgesc pe scară largă, asta poate indica o aversiune crescândă față de risc, iar el ar putea dori să reducă expunerea la instrumente de credit. Invers, dacă spread-urile se îngustează, asta poate indica o toleranță crescândă la risc, iar el ar putea dori să crească expunerea.</p>
+
+<p><strong>Compararea diferitelor credite</strong></p>
+
+<p>Spread-urile pot fi folosite pentru a compara bonitatea unor companii sau emitenți diferiți. De exemplu, dacă un trader analizează cumpărarea unei obligațiuni emise de o companie cu rating BBB, poate compara spread-ul ei cu cel al unei obligațiuni similare emise de o companie cu rating AA. Dacă spread-ul obligațiunii BBB este semnificativ mai mare, asta poate indica faptul că piața percepe compania BBB ca fiind mai riscantă decât compania AA.</p>
+
+<p><strong>Rata fără risc și spread-urile de credit</strong></p>
+
+<p>Rata fără risc, reprezentată de regulă de obligațiunile de Trezorerie, servește drept reper pentru spread-urile de credit. Comparând spread-ul unei obligațiuni corporative cu rata fără risc, un trader poate evalua prima de risc suplimentară pe care o percepe pentru împrumutarea emitentului corporativ. Dacă spread-ul este mare, poate indica faptul că piața percepe o primă de risc mai ridicată, iar traderul ar putea dori să-și reducă expunerea.</p>
+
+<p><strong>Interpretare și limitări</strong></p>
+
+<p>Este esențial de reținut că spread-urile de credit nu sunt o măsură perfectă a riscului de credit. Ele pot fi influențate de diverși factori de piață și economici, precum ratele dobânzii, lichiditatea și sentimentul pieței. Un trader trebuie să țină cont cu atenție de acești factori atunci când interpretează spread-urile și să ia decizii informate pe baza propriei analize și toleranțe la risc.</p>
+
+<p>În concluzie, spread-urile de credit sunt un instrument esențial pentru traderi în domeniul creditului. Înțelegând cum să le folosească, traderii pot lua decizii mai informate privind dimensionarea poziției, gestionarea riscului și sincronizarea cu piața. Totuși, este esențial de reținut că spread-urile nu sunt o măsură perfectă a riscului de credit și ar trebui folosite alături de alte tehnici de analiză și de gestionare a riscului.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Spread-urile de credit sunt un instrument util de filtrare la prima vedere, dar nu sunt o plasă de siguranță. Ele comprimă întregul risc al unei obligațiuni — neplată, recuperare, lichiditate și chiar riscul ca investitorii să înceteze să le mai pese de credit — într-un singur număr. Această comprimare ascunde tot atât cât dezvăluie. Mai jos sunt limitele concrete pe care le vei întâlni zilnic pe birou.</p>
+
+<p><strong>1. Lichiditatea nu este risc de credit, dar totuși determină spread-ul.</strong> Spread-ul pe care îl vezi pe ecran este diferența de randament dintre o obligațiune corporativă și o Trezorerie de maturitate similară. Acel spread se stabilește pe piața secundară, unde obligațiunile își schimbă proprietarul. Dacă obligațiunea este greu de vândut — pentru că emitentul e mic, emisiunea e minusculă sau toată lumea încearcă să strângă numerar în același timp — spread-ul se poate lărgi chiar dacă fundamentele de credit ale emitentului nu s-au schimbat. În martie 2020, obligațiuni industriale BBB care se tranzacționau la 150 bp peste Trezorerie au ajuns brusc la 300–400 bp. Modelele de credit erau neschimbate; piața pur și simplu a încetat să mai coteze prețuri în ambele sensuri. Biroul a învățat pe pielea lui că un spread „ieftin" poate deveni o capcană ilichidă.</p>
+
+<p><strong>2. Ipotezele de recuperare sunt incluse, dar niciodată exprimate.</strong> Când anualizezi un spread de 200 bp pe zece ani, presupui implicit că emitentul va plăti 100 de cenți la dolar dacă supraviețuiește, sau zero dacă intră în neplată. În realitate, ratele de recuperare variază în funcție de senioritate, industrie și regim macroeconomic. În criza din 2008, împrumuturile senioare garantate au recuperat 60–70 de cenți; în 2020, obligațiunile high-yield au recuperat 30–40 de cenți. Dacă ipoteza de recuperare inclusă în spread este greșită, spread-ul însuși este înșelător. Analiștii de credit ai biroului rulează scenarii de recuperare, dar acele scenarii nu sunt vizibile în tickerul zilnic de spread.</p>
+
+<p><strong>3. Riscul de coadă și „necunoscutele necunoscute".</strong> Spread-urile de credit nu îți spun nimic despre evenimente cu probabilitate mică, dar impact mare — pandemii, atacuri cibernetice asupra unui furnizor critic, o interdicție bruscă de reglementare sau o decizie privind un brevet-cheie. De exemplu, un furnizor de software ar putea suferi un atac de tip ransomware care îi îngheață temporar sistemele de facturare. Spread-ul CDS pe 5 ani ar putea sări de la 120 bp la 600 bp într-o săptămână, în timp ce spread-ul obligațiunii cash rămâne în urmă, pentru că obligațiunea nu se tranzacționează. Biroul care s-a bazat doar pe spread-ul cash a ratat mișcarea. Spread-urile sunt retrospective; ele nu anticipează lebedele negre.</p>
+
+<p><strong>4. Schimbările de regim: când „creditul" din spread-ul de credit dispare.</strong> Într-o criză de lichiditate, fiecare activ riscant este vândut indiferent de fundamente. Spread-ul dintre o obligațiune BBB și o Trezorerie devine un spread „risk-off" mai degrabă decât un spread „de credit". În martie 2020, întregul spread al indicelui BBB a explodat la 600 bp, în timp ce gradul de îndatorare al emitentului mediu abia s-a schimbat. Biroul trebuie să facă diferența între „lărgirea spread-ului pentru că s-a înrăutățit creditul" și „lărgirea spread-ului pentru că piața e disfuncțională". Nu există o formulă pentru asta; este recunoaștere de tipare, construită prin urmărirea registrelor de ordine și a stocurilor dealerilor.</p>
+
+<p><strong>5. Tranzacțiile de bază (basis trades) și efectele de finanțare.</strong> Dacă încerci să acoperi o obligațiune corporativă cu un futures de Trezorerie, introduci un spread de finanțare. Futures-urile de Trezorerie sunt evaluate pe baza ratelor repo, iar obligațiunile corporative sunt finanțate pe piața repo tri-party sau bilaterală. Când piețele de finanțare se strâng, spread-ul dintre obligațiunea corporativă și futures-ul de Trezorerie se poate lărgi chiar dacă creditul emitentului nu s-a deteriorat. Biroul trebuie să elimine componenta de finanțare înainte de a decide dacă spread-ul de credit în sine este atractiv.</p>
+
+<p><strong>6. Nu îți spune nimic despre clauze sau subordonare structurală.</strong> O obligațiune BBB emisă de o societate holding se poate clasa în urma datoriei garantate de la filialele operaționale. Spread-ul nu dezvăluie acea subordonare structurală decât dacă citești prospectul de emisiune (indenture). În 2019, un fond imobiliar (REIT) cu rating BBB a emis obligațiuni negarantate la 200 bp peste Trezorerie; șase luni mai târziu, filialele operaționale au intrat în faliment, iar recuperările pe obligațiunile negarantate au scăzut la 20 de cenți. Spread-ul nu a avertizat niciodată asupra structurii.</p>
+
+<p><strong>7. Nu este o garanție de valoare relativă.</strong> Două obligațiuni de la același emitent se pot tranzacționa la spread-uri diferite pur și simplu pentru că una este mai mare, mai nouă sau are un cupon diferit. Biroul vede adesea obligațiuni „ieftine" off-the-run care afișează spread-uri largi, dar care de fapt nu oferă un randament în exces odată ce ții cont de lichiditate și durată. Verifică mereu mărimea emisiunii, vechimea și creșterile de cupon (step-ups) înainte de a trata o diferență de spread ca pe un arbitraj.</p>
+
+<p><strong>Regulă practică de orientare:</strong> dacă spread-ul de credit este mai larg decât 2× mediana istorică pentru acel rating și sector, presupune mai întâi risc de lichiditate și abia apoi risc de credit. Dacă spread-ul este mai îngust decât 0,5× mediana, presupune fie o cerere tehnică, fie un eveniment iminent pe care piața nu l-a evaluat încă. În oricare caz, verifică printr-o privire în registrul de ordine și un apel rapid la echipa de vânzări înainte de a face tranzacția.</p>
+
+<h2>Concluzii esențiale</h2>
+
+<ul>
+<li><strong>Spread-urile de credit contează:</strong> diferența de randament dintre o obligațiune corporativă (ex.: cu rating BBB) și o obligațiune de Trezorerie de maturitate similară este un indicator esențial al riscului de credit și al așteptărilor pieței.</li>
+
+<li><strong>Definiție:</strong> spread-ul de credit este diferența de randament dintre o obligațiune corporativă și o obligațiune guvernamentală comparabilă (ex.: Trezorerie) de aceeași maturitate.</li>
+
+<li><strong>Factori-cheie:</strong> spread-urile de credit sunt influențate de factori precum:
+  <ul>
+    <li>Ratingul de credit: obligațiunile cu rating mai mic (ex.: BBB) au spread-uri mai mari decât cele cu rating mai mare (ex.: A).</li>
+    <li>Condițiile de piață: spread-urile se lărgesc în perioade de stres economic sau de incertitudine.</li>
+    <li>Lichiditatea: spread-urile pot fi influențate de disponibilitatea obligațiunilor pe piață.</li>
+  </ul>
+</li>
+
+<li><strong>De ce contează spread-urile de credit:</strong> ele îi ajută pe investitori și traderi să evalueze:
+  <ul>
+    <li>Riscul de credit: probabilitatea de neplată sau de retrogradare.</li>
+    <li>Așteptările pieței: nivelul primei de risc cerute de investitori pentru a deține o anumită obligațiune.</li>
+    <li>Valoarea relativă: atractivitatea unei obligațiuni corporative față de o obligațiune de Trezorerie.</li>
+  </ul>
+</li>
+
+<li><strong>Interpretare:</strong> un spread mai mare indică un risc de credit perceput mai ridicat sau o cerere mai mare de primă de risc, în timp ce un spread mai mic sugerează un risc perceput mai scăzut sau o cerere mai mică de primă de risc.</li>
+
+<li><strong>Precauție:</strong> spread-urile de credit nu sunt o măsură directă a riscului de credit și pot fi influențate de diverși factori de piață și economici.</li>
+
+<li><strong>Considerații-cheie:</strong> când analizezi spread-urile, ia în calcul ratingul și istoricul de credit, condițiile de piață și perspectiva economică, lichiditatea și activitatea de tranzacționare, precum și valoarea relativă și comparația de randament.</li>
+
+<li><strong>Bune practici:</strong> folosește obligațiuni comparabile (aceeași maturitate și rating), ia în calcul mai mulți factori care influențează spread-urile și revizuiește-ți regulat analiza pentru a reflecta schimbarea condițiilor de piață.</li>
+
+<li><strong>Limitări:</strong> spread-urile au limitări, printre care rating-urile subiective, volatilitatea și problemele de lichiditate ale pieței, precum și complexitatea spread-urilor în perioade de stres economic.</li>
+
+<li><strong>Învățare continuă:</strong> spread-urile de credit sunt un instrument esențial în analiza de credit, dar necesită educație și practică permanente pentru a fi stăpânite. Rămâi la curent cu evoluțiile pieței și rafinează-ți continuu înțelegerea.</li>
+</ul>

@@ -1,0 +1,276 @@
+<p>Riscul de neplată (default risk), cunoscut și ca risc de credit, este unul dintre conceptele fundamentale ale piețelor financiare. Acest ghid despre <strong>riscul de neplată și probabilitatea de default (PD)</strong> îți explică, pas cu pas, ce este, cum se măsoară și cum se folosește la o masă de tranzacționare. Pe scurt, riscul de neplată reprezintă posibilitatea ca un debitor sau un emitent — o companie sau un stat — să nu își poată onora obligațiile de plată, adică să nu își ramburseze la timp creditele sau obligațiunile.</p>
+
+<p>Vei învăța ce înseamnă <strong>probabilitatea de default (PD)</strong>, cum se leagă ea de pierderea în caz de neplată (LGD), de expunerea la neplată (EAD) și de pierderea așteptată (expected loss). Vom porni de la intuiție, vom parcurge mecanica modelelor de credit, două exemple practice, greșelile frecvente ale începătorilor, modul în care un birou de tranzacționare folosește PD-ul și, în final, limitele acestor modele.</p>
+
+<p>Ideea centrală pe care merită să o reții de la început: PD nu este o predicție certă pentru o anumită companie, ci o medie statistică pe termen lung. Este un instrument de clasificare a riscului de credit, nu un glob de cristal — iar utilizarea lui corectă presupune mereu să verifici orizontul de timp, calitatea datelor și să îl combini cu LGD și EAD.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Riscul de neplată, cunoscut și ca risc de credit, este un concept fundamental în finanțe care se referă la posibilitatea ca un debitor sau un emitent să nu își îndeplinească obligațiile de plată. Cu alte cuvinte, riscul de neplată este probabilitatea ca o companie sau un stat să nu fie capabil să își ramburseze la timp împrumuturile sau obligațiunile.</p>
+
+<p>Pentru a înțelege riscul de neplată, este esențial să definim câțiva termeni-cheie:</p>
+
+<ul>
+<li><strong>Debitor (borrower)</strong>: O persoană sau organizație care primește un împrumut sau care se împrumută de la un creditor. În contextul riscului de neplată, debitorul este entitatea care ar putea să nu își ramburseze obligațiile de plată.</li>
+<li><strong>Obligație de plată (debt obligation)</strong>: O promisiune de a rambursa un împrumut sau o obligațiune, cu dobândă. Obligațiile de plată pot lua diverse forme, precum credite, obligațiuni sau alte tipuri de acorduri de creditare.</li>
+<li><strong>Creditor (lender)</strong>: O persoană sau organizație care acordă un împrumut unui debitor. În contextul riscului de neplată, creditorul este entitatea care poate suferi pierderi dacă debitorul intră în incapacitate de plată.</li>
+<li><strong>Neplată / incapacitate de plată (default)</strong>: Eșecul unui debitor de a-și îndeplini obligațiile, precum nerambursarea la timp a unui împrumut sau a unei obligațiuni. Neplata poate apărea din diverse motive, inclusiv dificultăți financiare, faliment sau alte evenimente neprevăzute.</li>
+<li><strong>Probabilitate de default (PD)</strong>: O măsură a probabilității ca un debitor să intre în neplată într-un anumit interval de timp. PD este de obicei exprimată ca procent și este folosită pentru a estima potențialele pierderi asociate unui împrumut sau unei obligațiuni.</li>
+<li><strong>Pierdere în caz de neplată (LGD — loss given default)</strong>: Procentul din obligația totală pe care creditorul îl va pierde, probabil, dacă debitorul intră în neplată. LGD ține cont de valoarea garanției, dacă există, și de capacitatea creditorului de a recupera datoria.</li>
+<li><strong>Pierdere așteptată (EL — expected loss)</strong>: Pierderea medie pe care un creditor se poate aștepta să o suporte la un împrumut sau o obligațiune pe durata de viață a acestuia. EL se calculează înmulțind PD cu LGD și este folosită pentru a estima potențialele pierderi.</li>
+<li><strong>Rating de credit (credit rating)</strong>: O măsură a bonității unui debitor, care reflectă capacitatea acestuia de a-și rambursa obligațiile. Ratingurile de credit sunt de obicei atribuite de agenții de rating, precum Moody's sau Standard &amp; Poor's, și variază de la AAA (calitate ridicată a creditului) la D (default).</li>
+<li><strong>Spread de credit (credit spread)</strong>: Diferența dintre randamentul unei obligațiuni și randamentul unei obligațiuni fără risc, precum o obligațiune de trezorerie a SUA. Spreadul de credit reflectă riscul suplimentar asociat creditării unui debitor cu rating de credit mai scăzut.</li>
+<li><strong>Garanție / colateral (collateral)</strong>: Un activ sau o proprietate pe care debitorul o pune drept garanție pentru a asigura un împrumut sau o obligațiune. Garanția poate fi folosită pentru recuperarea datoriei dacă debitorul intră în neplată, dar valoarea ei poate fi insuficientă pentru a acoperi întreaga sumă datorată.</li>
+</ul>
+
+<p>Înțelegerea acestor termeni-cheie este esențială pentru a stăpâni conceptul de risc de neplată și măsurarea lui. Cunoscând aceste definiții, vei fi mai bine pregătit să analizezi și să gestionezi riscul de neplată în activitatea ta de trader sau profesionist în finanțe.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că ești proprietarul unei mici afaceri și împrumuți bani prietenilor și familiei. Nu ești o bancă, dar îi ajuți pe oameni cu numerar atunci când au nevoie. În calitate de creditor, îți asumi riscul ca debitorul să nu îți dea banii înapoi. Acesta este un aspect fundamental al creditării: riscul ca debitorul să intre în neplată.</p>
+
+<p>În acest scenariu simplu, ai putea evalua probabilitatea ca prietenul tău să nu plătească pe baza comportamentului său din trecut, a situației sale financiare actuale și a reputației sale. Ți-ai putea pune întrebări precum: „Mi-a returnat banii la timp și înainte?", „Are un loc de muncă stabil?", „Este de încredere?". Luând în considerare acești factori, poți face o estimare educată privind probabilitatea ca prietenul tău să nu ramburseze împrumutul.</p>
+
+<p>Acum, să extindem acest lucru la lumea piețelor de credit. Atunci când băncile și alte instituții financiare împrumută bani companiilor și persoanelor fizice, își asumă și ele riscul de neplată. Dar, în loc să se bazeze pe relații personale și pe intuiție, folosesc modele sofisticate pentru a evalua probabilitatea de neplată.</p>
+
+<p>Conceptul-cheie aici este probabilitatea de default (PD). PD este o măsură a probabilității ca un debitor să intre în neplată. De obicei este exprimată ca procent, variind de la 0% (nicio șansă de neplată) la 100% (neplată sigură).</p>
+
+<p>Pe piețele de credit, PD este o metrică esențială, deoarece îi ajută pe creditori și pe investitori să înțeleagă riscul asociat unui anumit împrumut sau unei anumite obligațiuni. Estimând PD, creditorii pot stabili rata dobânzii pe care o percep debitorilor, ceea ce, la rândul său, influențează prețul împrumutului sau al obligațiunii.</p>
+
+<p>Dar de ce este importantă PD? Imaginează-ți că ești creditor și ai doi debitori cu PD-uri diferite. Debitorul A are o PD de 5%, în timp ce Debitorul B are o PD de 20%. În acest scenariu, Debitorul A este considerat un debitor cu risc mai scăzut, iar Debitorul B un debitor cu risc mai ridicat.</p>
+
+<p>Dacă îi împrumuți 100 $ Debitorului A, te poți aștepta să primești înapoi 100 $, minus o dobândă. Dar dacă îi împrumuți 100 $ Debitorului B, te-ai putea aștepta să primești înapoi mai puțin de 100 $, sau chiar nimic.</p>
+
+<p>PD îi ajută pe creditori și pe investitori să ia decizii informate despre cui să împrumute și cât să perceapă pentru împrumut. Este o modalitate de a cuantifica riscul asociat creditării, un aspect esențial al piețelor de credit.</p>
+
+<p>În secțiunea următoare vom explora cum se măsoară și se calculează PD, inclusiv diversele modele și tehnici folosite pentru a estima riscul de neplată. Dar, deocamdată, să ne concentrăm pe intuiția din spatele PD: este o modalitate de a evalua probabilitatea de neplată, un aspect fundamental al creditării. Înțelegând PD, creditorii și investitorii pot lua decizii mai informate și pot gestiona riscul mai eficient.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>La o masă de tranzacționare rareori pornești de la zero atunci când vrei să afli șansa ca o companie să intre în neplată la datoria sa. În schimb, te bazezi pe un set restrâns de date pe care banca le cumpără deja de la un furnizor de date de credit (Bloomberg, ICE Data Services, S&amp;P Global, Moody's sau un model proprietar). Ofițerul de credit sau analistul de risc al biroului extrage cele mai recente cifre, verifică datele învechite și apoi rulează modelul o dată pe zi (sau pe tură) pentru a obține o singură „probabilitate de default" (PD) pentru următoarele 12 luni. Iată secvența exactă pe care o vei vedea pe terminal.</p>
+
+<h3>1. Datele pe care chiar le introduci sau le copiezi</h3>
+<ul>
+<li>Ticker-ul sau CUSIP-ul emitentului (de ex., „AAPL 5 3/8 05/15/2026 Corp").</li>
+<li>Data de referință (de obicei azi).</li>
+<li>Orizontul: 12 luni este standardul de reglementare pentru PD „pe termen apropiat".</li>
+<li>Indicatorul de senioritate: „Senior negarantat" (Senior Unsecured), cu excepția cazului în care obligațiunea este garantată sau subordonată.</li>
+<li>Moneda datoriei (importantă dacă modelul trebuie să convertească pasivele în monedă locală).</li>
+<li>Suprascrieri opționale: dacă biroul suspectează că modelul furnizorului este în urmă față de o recentă retrogradare de rating, analistul poate introduce manual o suprascriere a PD.</li>
+</ul>
+
+<h3>2. Rularea modelului pe care o declanșezi</h3>
+<p>Odată ce datele de intrare sunt fixate, apeși „Run" pe ecranul de analiză a creditului. Motorul face trei lucruri într-o secundă:</p>
+
+<p><strong>a. Extrage datele brute</strong></p>
+<ul>
+<li>Cel mai recent nivel de îndatorare al emitentului (Datorie/EBITDA), rata de acoperire a dobânzii (EBIT/Dobândă) și numerarul din bilanț.</li>
+<li>Prețul acțiunii emitentului și volatilitatea, din fluxul în timp real al biroului de acțiuni.</li>
+<li>Prețurile obligațiunilor în circulație ale emitentului și spreadurile credit-default-swap (CDS), din stratul de date de piață.</li>
+<li>Cel mai recent rating public al emitentului și perspectiva (outlook), din fluxul agenției de rating.</li>
+</ul>
+
+<p><strong>b. Transformă datele brute în parametri de model</strong></p>
+<ul>
+<li>Distanța-până-la-neplată (DtD — distance-to-default): calculată ca (Valoarea capitalului propriu − Punctul de neplată) / (Valoarea capitalului propriu × Volatilitatea capitalului propriu). „Punctul de neplată" este o estimare conservatoare a pasivelor care trebuie plătite anul următor.</li>
+<li>PD prin-ciclu (through-the-cycle): o transpunere statistică din DtD într-o PD medie pe termen lung, folosind o bază de date istorică a neplăților.</li>
+<li>Ajustarea punct-în-timp (point-in-time): modelul înmulțește PD prin-ciclu cu un factor care reflectă ciclul macroeconomic curent (derivat din rata șomajului, creșterea PIB și indicele spreadurilor de credit). Rezultatul este PD „punct-în-timp" pe 12 luni.</li>
+</ul>
+
+<p><strong>c. Calibrează la prețurile de piață</strong></p>
+<ul>
+<li>Modelul compară PD calculată cu PD implicată de spreadul CDS pe 5 ani al emitentului. Dacă cele două diferă cu mai mult de 20 de puncte de bază, modelul emite un „avertisment de calibrare", iar analistul trebuie să decidă dacă acceptă PD furnizorului sau o suprascrie.</li>
+</ul>
+
+<h3>3. Rezultatele pe care le analizezi</h3>
+<ul>
+<li>PD12m: probabilitatea principală (de ex., 0,45%).</li>
+<li>Banda de încredere de 95% pentru PD12m: îți spune intervalul în care se află probabil PD reală (de ex., 0,22% – 0,91%).</li>
+<li>Pierdere așteptată (EL): PD × Pierderea în caz de neplată (LGD). LGD este de obicei setată la 45% pentru datoria senior negarantată, cu excepția cazului în care obligațiunea este garantată.</li>
+<li>Indicator de watch-list: dacă PD12m > 2% și este în creștere trei zile consecutive, emitentul este marcat automat pentru analiza de dimineață a ofițerului de credit.</li>
+</ul>
+
+<h3>4. Ce faci în continuare</h3>
+<ul>
+<li>Compari noua PD cu valoarea de ieri; dacă a sărit cu mai mult de 0,3%, deschizi dosarul de credit al emitentului și parcurgi fluxurile de știri.</li>
+<li>Introduci PD în calculatorul de limite al biroului pentru a vedea dacă dimensiunea tranzacției propuse de trader încă se încadrează în limita aprobată.</li>
+<li>Dacă emitentul este pe lista de supraveghere, escaladezi la comitetul de credit înainte ca tranzacția să fie înregistrată.</li>
+</ul>
+
+<h3>5. Capcane frecvente de evitat</h3>
+<ul>
+<li>Nu te baza pe cifra brută a PD fără a verifica banda de încredere; o bandă largă înseamnă că modelul este incert.</li>
+<li>Nu ignora nepotrivirea de orizont: o PD pe 5 ani nu este același lucru cu o PD pe 1 an, chiar și pentru același emitent.</li>
+<li>Nu uita să reîmprospătezi datele zilnic; prețurile acțiunilor sau spreadurile CDS învechite pot mișca PD cu 20–30% peste noapte.</li>
+</ul>
+
+<p>Aceasta este bucla mecanică pe care o repeți în fiecare dimineață: extrage, rulează, verifică, acționează. Restul capitolului explică cum să interpretezi rezultatele și când să suprascrii modelul.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Imaginează-ți că ești analist de credit junior la o masă de tranzacționare și ți s-a cerut să prețuiești o obligațiune corporativă senior negarantată pe 5 ani, emisă de „Acme Widgets Ltd.". Biroul vrea să cunoască riscul de neplată al obligațiunii pentru a putea decide ce spread peste rata fără risc să ceară. Mai jos găsești o parcurgere pas cu pas a modului în care ai calcula o probabilitate de default (PD) simplă și cum ai transforma asta într-o cifră de pierdere așteptată pe care biroul o poate folosi în modelul său de prețuire.</p>
+
+<h3>1. Adună datele de bază ale obligațiunii</h3>
+<ul>
+<li>Emitent: Acme Widgets Ltd.</li>
+<li>Mărimea emisiunii: 200 milioane €</li>
+<li>Cupon (anual): 4,5%</li>
+<li>Scadență: 5 ani</li>
+<li>Senioritate: Senior negarantat (fără garanție)</li>
+<li>Preț de piață curent: 98,0 € la 100 € valoare nominală</li>
+<li>Referință fără risc: randamentul Bund-ului german pe 5 ani = 1,8%</li>
+</ul>
+<p>Prețul de piață reflectă deja un anumit risc de credit, dar biroul vrea o PD explicită pe care să o introducă în modelul său intern de risc.</p>
+
+<h3>2. Identifică ratingul de credit al emitentului</h3>
+<p>Primul și cel mai obișnuit truc este să cauți ratingul de credit extern al emitentului. Să presupunem că Moody's îi acordă companiei Acme Widgets ratingul „Baa2". Moody's publică rate istorice de neplată pentru fiecare clasă de rating. Pentru categoria „Baa", rata cumulativă de neplată pe 5 ani este de aproximativ 2,5% (adică, pe un orizont de cinci ani, 2,5% dintre emitenții cu rating Baa au intrat în neplată).</p>
+
+<h3>3. Convertește rata cumulativă de neplată într-o PD anuală</h3>
+<p>Rata cumulativă (CR) este probabilitatea de neplată pe întregul orizont. Pentru a obține o PD anuală, presupunem o rată de hazard (λ) constantă, astfel încât: CR = 1 − e^(−λ × T), unde <em>T</em> = 5 ani. Rezolvând pentru λ: λ = −(1/T) × ln(1−CR) = −(1/5) × ln(1−0,025) ≈ 0,00504. Așadar, PD anuală ≈ 0,504% (0,00504 × 100). În practică, poți pur și simplu împărți rata cumulativă la orizont, ca aproximare grosieră: 2,5% / 5 ≈ 0,5% pe an, ceea ce se potrivește cu calculul de mai sus.</p>
+
+<h3>4. Ajustează PD pentru senioritatea specifică a obligațiunii</h3>
+<p>Obligațiunile senior negarantate stau după datoria senior garantată, dar înaintea notelor subordonate. Ratele de neplată ale Moody's sunt deja stratificate pe senioritate, dar dacă ai doar un rating senior-negarantat ar putea fi nevoie să aplici un „factor de ajustare pentru senioritate". O regulă empirică obișnuită este să crești PD cu 20% pentru expunerea negarantată: PD anuală ajustată = 0,5% × (1 + 0,20) = 0,60%.</p>
+
+<h3>5. Estimează pierderea în caz de neplată (LGD)</h3>
+<p>LGD este proporția din expunere care se pierde dacă apare neplata. Pentru obligațiunile corporative senior negarantate, practica de piață presupune adesea LGD ≈ 60% (adică, în caz de neplată recuperezi aproximativ 40% din valoarea nominală). Această cifră provine din ratele istorice de recuperare publicate de agențiile de rating.</p>
+
+<h3>6. Calculează pierderea așteptată (EL)</h3>
+<p>Pierderea așteptată este produsul dintre PD, LGD și valoarea expunerii (EAD — exposure at default). Pentru o singură obligațiune, EAD este pur și simplu nominalul la care ai fi expus dacă ai deține obligațiunea până la scadență, adică valoarea nominală de 200 milioane €.</p>
+<p>EL anuală = PD anuală × LGD × EAD = 0,0060 × 0,60 × 200 mil. € = 720 mii € pe an.</p>
+<p>Dacă vrei EL pe cinci ani, poți fie să însumezi EL anuale (presupunând independență), fie să folosești direct PD cumulativă: EL pe 5 ani = PD cumulativă pe 5 ani × LGD × EAD = 0,025 × 0,60 × 200 mil. € = 3,0 mil. €.</p>
+
+<h3>7. Transformă EL într-un spread de credit</h3>
+<p>Modelul de prețuire al biroului adaugă de obicei un spread care compensează pierderea așteptată plus o primă de risc. O abordare simplă este: Spread = EL pe 5 ani / Valoarea prezentă a fluxurilor de numerar. Mai întâi calculezi valoarea prezentă (PV) a fluxurilor de numerar ale obligațiunii folosind rata fără risc (1,8%). Cuponul anual este de 9 milioane € (4,5% × 200 mil. €). PV a cupoanelor (anuitate) ≈ 9 mil. € × [(1−(1+0,018)⁻⁵)/0,018] ≈ 40,5 mil. €. PV a principalului = 200 mil. € / (1+0,018)⁵ ≈ 181,0 mil. €.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Pentru a ilustra mai departe conceptul de risc de neplată și măsurarea lui, să luăm în considerare un scenariu diferit. Să presupunem că suntem analiști de credit la o bancă și avem sarcina de a evalua bonitatea unui nou client, o companie de producție de dimensiuni medii numită GreenTech Inc. Am fost abordați de CEO-ul companiei pentru a acorda un împrumut de 10 milioane $ care să ajute la finanțarea extinderii operațiunilor.</p>
+
+<p>Pe măsură ce începem analiza, observăm că GreenTech Inc. are un istoric de operare relativ scurt, fiind fondată acum doar cinci ani. Compania are o echipă de management puternică și un plan de afaceri solid, dar se află încă în stadiile incipiente de creștere. De asemenea, observăm că industria de producție este foarte competitivă, iar GreenTech Inc. se confruntă cu provocări semnificative legate de presiunea asupra prețurilor și de perturbările lanțului de aprovizionare.</p>
+
+<p>Analiza noastră arată că GreenTech Inc. are un raport datorii/capitaluri proprii de 2:1, ceea ce indică faptul că firma este puternic îndatorată. De asemenea, observăm că fluxul de numerar al companiei depinde puternic de un singur client major, care reprezintă peste 50% din veniturile sale. Dacă acest client ar trece la un concurent, fluxul de numerar al GreenTech Inc. ar putea fi grav afectat.</p>
+
+<p>Având în vedere acești factori, estimăm probabilitatea de default (PD) pentru GreenTech Inc. la aproximativ 15%. Aceasta este o PD relativ ridicată în comparație cu alte companii din industrie și reflectă preocupările noastre legate de capacitatea companiei de a-și îndeplini obligațiile de plată.</p>
+
+<p>Pentru a ne rafina și mai mult analiza, folosim un model de scoring de credit care încorporează diverse metrici de credit, inclusiv istoricul de credit al companiei, performanța financiară și tendințele industriei. Modelul produce un scor de credit de 550, care se încadrează în categoria „risc ridicat". Pe baza acestei analize, recomandăm ca banca să limiteze suma împrumutului la 5 milioane $, cu o rată a dobânzii mai mare care să reflecte riscul crescut.</p>
+
+<p>În acest scenariu, am aplicat conceptele de risc de neplată și probabilitate de default la un exemplu din lumea reală. Luând în considerare diverse metrici de credit și tendințe ale industriei, am reușit să estimăm probabilitatea de default pentru GreenTech Inc. și să luăm o decizie mai informată privind împrumutul. Această analiză evidențiază importanța unei analize de credit atente și nevoia de a lua în considerare mai mulți factori atunci când evaluezi bonitatea unei companii.</p>
+
+<p>Concluziile-cheie din acest scenariu includ:</p>
+<ul>
+<li>Importanța luării în considerare a mai multor metrici de credit atunci când evaluezi bonitatea unei companii.</li>
+<li>Nevoia de a analiza tendințele industriei și presiunile concurențiale.</li>
+<li>Folosirea modelelor de scoring de credit pentru a rafina analiza de credit.</li>
+<li>Importanța ajustării termenilor împrumutului și a ratelor dobânzii pentru a reflecta riscul crescut.</li>
+</ul>
+
+<p>Aplicând aceste concepte și tehnici, analiștii de credit pot lua decizii mai informate privind creditarea și pot ajuta la atenuarea riscului de neplată pentru bancă.</p>
+
+<h2>Greșeli frecvente și concepții greșite</h2>
+
+<p>Începătorii în riscul de credit se împiedică adesea de aceleași neînțelegeri. Cunoașterea acestor capcane din timp te poate scuti de erori costisitoare și de obiceiuri proaste. Mai jos sunt cele mai frecvente greșeli și de ce contează, cu explicații simple și modalități practice de a le evita.</p>
+
+<p><strong>1. Tratarea „probabilității de default" ca și cum ar fi o predicție.</strong> Ce greșesc oamenii: citesc o PD de 1% și se gândesc „Această companie aproape sigur va supraviețui". Nu asta înseamnă PD. O PD este o medie pe termen lung, nu o prognoză pentru un anume an. O PD de 1% spune: „Dacă ne uităm la mii de companii similare, aproximativ 1% vor intra în neplată în fiecare an." Numele tău anume poate intra în neplată în anul unu sau în anul zece; PD nu îți spune când. Cum o eviți: întreabă-te mereu „Pe câte observații se bazează această PD?". Dacă eșantionul este mic sau dezechilibrat, PD este zgomotoasă. Tratează-o ca pe un instrument de clasificare relativă, nu ca pe un glob de cristal.</p>
+
+<p><strong>2. Ignorarea orizontului de timp.</strong> Ce greșesc oamenii: compară două PD-uri fără a verifica fereastra de timp. O PD pe un an și o PD pe cinci ani nu sunt comparabile. O firmă poate avea o PD pe un an de 0,5%, dar o PD pe cinci ani de 2,5%, pentru că riscul de neplată se cumulează în timp. Cum o eviți: potrivește orizontul PD cu durata expunerii. Dacă faci o tranzacție pe șase luni, folosește o PD pe șase luni; dacă împrumuți pe cinci ani, folosește o PD pe cinci ani.</p>
+
+<p><strong>3. Convingerea că „PD mai mică = credit mai sigur".</strong> Ce greșesc oamenii: presupun că orice scădere a PD reduce automat riscul. PD este doar o felie din riscul de credit. O PD mai mică poate fi compensată de o expunere la neplată (EAD) mai mare sau de o scadență (M) mai lungă. Un împrumut cu rating BBB, cu PD de 0,4% și EAD de 10 milioane $, poate fi mai riscant decât un împrumut cu rating BB, cu PD de 0,8% și EAD de 1 milion $. Cum o eviți: folosește formula completă a riscului de credit — Pierdere așteptată = PD × EAD × LGD — înainte de a numi un credit „sigur".</p>
+
+<p><strong>4. Dependența excesivă de ratingurile agențiilor.</strong> Ce greșesc oamenii: tratează notele literale ale Moody's sau S&amp;P ca pe litera de lege. Ratingurile rămân în urma prețurilor de piață și pot fi învechite, mai ales în sectoarele volatile. O companie poate avea rating BBB, dar să se tranzacționeze ca un CCC pe piața secundară. Cum o eviți: verifică încrucișat ratingurile cu PD-urile implicate de piață (spreadurile credit default swap) și cu propriile tale modele interne. Dacă prețul de piață nu este de acord cu ratingul, află de ce.</p>
+
+<p><strong>5. Uitarea că PD nu este LGD.</strong> Ce greșesc oamenii: confundă probabilitatea de default cu pierderea în caz de neplată. PD este șansa de neplată; LGD este fracțiunea pierdută dacă neplata se produce. Un credit cu PD ridicată și LGD scăzută poate fi mai sigur decât un credit cu PD scăzută și LGD ridicată. Cum o eviți: păstrează cele două concepte separate. Când dimensionezi o limită, înmulțește PD cu LGD, nu doar cu expunerea.</p>
+
+<p><strong>6. Goana după cea mai mică PD fără a înțelege factorii determinanți.</strong> Ce greșesc oamenii: aleg numele cu cea mai mică PD fără a verifica modelul de bază. O PD poate fi mică pentru că modelul este optimist, datele sunt învechite sau firma tocmai a emis datorie nouă (ceea ce reduce temporar spreadurile). Cum o eviți: sapă în datele de intrare ale modelului — rate financiare, ajustări macro, calitatea managementului. Dacă datele de intrare par învechite sau alese pe sprânceană, tratează PD cu suspiciune.</p>
+
+<p><strong>7. Ignorarea corelației și a concentrării.</strong> Ce greșesc oamenii: privesc fiecare credit izolat și ratează modul în care neplățile se grupează. Doi debitori pot avea fiecare o PD de 1%, dar dacă împart același furnizor sau același risc regional, probabilitatea lor comună de neplată este mai mare de 2%. Cum o eviți: testează la stres portofoliul pentru factori de risc comuni. Folosește limite de concentrare pe sector sau pe regiune pentru a ține sub control riscul de corelație.</p>
+
+<p><strong>8. Tratarea PD ca fiind statică.</strong> Ce greșesc oamenii: îngheață PD odată ce a fost înregistrată. Calitatea creditului se schimbă: o firmă poate migra de la grad de investiție la randament ridicat (high yield) în câteva luni. O PD statică ratează migrațiile de rating și impulsul de retrogradare al agențiilor. Cum o eviți: recalculează PD cel puțin trimestrial sau ori de câte ori apar știri importante. Automatizează alerte când PD depășește praguri prestabilite.</p>
+
+<p><strong>9. Convingerea că PD-urile istorice se repetă întotdeauna.</strong> Ce greșesc oamenii: presupun că trecutul este prolog. O PD construită pe 20 de ani de condiții de credit benigne poate subestima riscul într-un regim de dobânzi în creștere sau de recesiune. Cum o eviți: aplică ajustări de scenariu — recesiune ușoară, stres sever — și recalculează PD-urile sub fiecare scenariu. Păstrează o PD „ajustată la regim" alături de PD istorică brută.</p>
+
+<p><strong>10. Neglijarea riscului operațional în calculul PD.</strong> Ce greșesc oamenii: au încredere într-un model de tip „cutie neagră" fără a înțelege fluxul lui de date. Gunoi la intrare, gunoi la ieșire: dacă datele contabile sunt retratate sau ghidajul managementului este înșelător, PD este greșită. Cum o eviți: atribuie un „scor de calitate a datelor" fiecărei surse de PD. Dacă scorul scade sub un prag, retrogradează sau suprascrie PD.</p>
+
+<p>Listă rapidă de verificare înainte de a acționa pe baza unei PD:</p>
+<ul>
+<li>Este orizontul corect?</li>
+<li>Este modelul de PD transparent și recent?</li>
+<li>Am înmulțit cu EAD și LGD?</li>
+<li>Am testat la stres pentru corelație și schimbare de regim?</li>
+<li>Sunt datele curate?</li>
+</ul>
+<p>Respectă această listă de verificare și vei evita majoritatea capcanelor de începător.</p>
+
+<h2>Cum folosește biroul de tranzacționare acest indicator</h2>
+
+<p>La un birou de tranzacționare a creditului, „riscul de neplată" nu este un concept abstract; este singura cifră care decide dacă o tranzacție se deschide, cât de mare poate fi și când trebuie închisă. În fiecare dimineață, biroul se trezește știind că unele dintre obligațiunile și împrumuturile din portofoliu vor intra în neplată în acest an. Sarcina este să se asigure că aceste neplăți nu spulberă profitul (P&amp;L). Prin urmare, biroul tratează probabilitatea de default (PD) ca pe o intrare vie în patru decizii concrete: generarea de idei, dimensionarea pozițiilor, limitele de risc și momentul ieșirii.</p>
+
+<p>Generarea de idei începe cu un filtru (screen). Analistul de credit rulează un filtru care marchează emitenții a căror PD a urcat recent peste pragul intern de „watch-list" al biroului (de exemplu, o PD pe cinci ani > 3%). Filtrul returnează o listă de nume, dar traderul nu cumpără sau vinde imediat. În schimb, traderul întreabă: „De ce s-a mișcat PD?". Dacă urcarea este cauzată de un eveniment singular (de ex., un incendiu la o fabrică) care nu se va repeta, biroul o poate trata ca zgomot. Dacă urcarea reflectă o schimbare structurală (de ex., un retailer care pierde cotă de piață în fața comerțului electronic), biroul o tratează ca semnal și începe o analiză de credit mai profundă. PD este, așadar, primul portar: orice este sub prag este ignorat, cu excepția cazului în care se identifică un catalizator; orice este peste el este escaladat la comitetul de credit.</p>
+
+<p>Dimensionarea pozițiilor este locul în care PD devine o constrângere fermă. Biroul folosește un motor intern de risc care convertește PD într-o pierdere așteptată (EL) pentru fiecare linie de obligațiune. Formula este simplă: EL = PD × Pierderea în caz de neplată (LGD) × Expunerea la neplată (EAD). Pentru o obligațiune senior negarantată, LGD este de obicei 45%; pentru un împrumut de primă garanție (first-lien), ar putea fi 35%. Motorul de risc îi spune apoi traderului dimensiunea maximă a nominalului care poate fi deținut înainte ca pierderea așteptată să depășească limita de risc overnight a biroului (să zicem, 0,5% din capitalul biroului). Dacă PD este 2% și LGD este 45%, pierderea așteptată este 0,9% din valoarea nominală, deci biroul poate deține aproximativ 0,56 mil. € valoare nominală pentru fiecare 1 mil. € de capital înainte ca pierderea așteptată să atingă limita de 0,5%. Dacă PD sare la 4%, dimensiunea permisă se înjumătățește. Prin urmare, traderul ajustează poziția în timp real: dacă PD urcă în timpul zilei, motorul de risc marchează linia pentru reducere obligatorie, adesea printr-un „cut ticket" automat care vinde 20% din poziție fără aprobare umană.</p>
+
+<p>Limitele de risc sunt impuse nu doar prin dimensiune, ci și prin scadență. Biroul știe că PD crește cu orizontul de timp; o PD pe 1 an de 1% poate deveni o PD pe 5 ani de 3%. Când biroul cumpără o obligațiune pe 5 ani, încarcă deci PD pe 5 ani în motorul de risc și setează o „poartă de durată": dacă PD urcă peste 3%, poziția trebuie rulată într-un titlu cu scadență mai scurtă sau acoperită cu un credit default swap (CDS). Aceeași logică se aplică portofoliului de tranzacționare: dacă PD pe 5 ani a unui nume trece de 4%, biroul trebuie fie să vândă obligațiunea, fie să cumpere protecție, fie să obțină aprobare explicită de la comitetul de risc pentru a depăși poarta. Aceste porți nu sunt teoretice; sunt opriri ferme în sistemul de gestionare a ordinelor. Un trader care le ignoră va vedea ticketul respins de sistem.</p>
+
+<p>Momentul ieșirii este ultima utilizare. Biroul monitorizează PD pe o bază rulantă de 30 de zile. Dacă PD rulantă pe 30 de zile crește cu mai mult de 50 de puncte de bază într-o săptămână, biroul declanșează o alertă de „avertizare timpurie". Alerta nu forțează automat o vânzare; forțează o analiză. Analistul de credit rerulează modelul financiar, verifică marja față de clauzele contractuale (covenant headroom) și caută fluxul de știri. Dacă deteriorarea este confirmată, traderul are două opțiuni: să vândă poziția imediat sau să cumpere protecție CDS. Alegerea depinde de lichiditate. Dacă obligațiunea se tranzacționează la 30 de cenți pe dolar, cu un spread bid-ask de 2%, biroul va vinde probabil. Dacă obligațiunea este încă lichidă la 80 de cenți, biroul poate prefera să se acopere cu un CDS ieftin. În ambele cazuri, PD este declanșatorul, iar decizia de ieșire se ia în 24 de ore.</p>
+
+<p>Biroul folosește PD și pentru tranzacții de valoare relativă (relative value). Când două obligațiuni de la același emitent se tranzacționează la randamente diferite, traderul le compară PD-urile. Dacă obligațiunea mai ieftină are o PD mai mică, biroul o poate cumpăra și o poate vinde pe cea mai scumpă, pariind că piața a supraestimat riscul de neplată. Dimensiunea poziției este, din nou, determinată de motorul de risc: traderul dimensionează tranzacția astfel încât diferența de PD (nu diferența de randament) să justifice pierderea așteptată. Dacă PD-urile converg rapid, tranzacția se închide; dacă diverg, biroul reduce poziția pentru a rămâne în limitele de risc.</p>
+
+<p>Pe scurt, biroul de tranzacționare tratează PD ca pe un semnal viu, tranzacționabil. Nu este o prognoză de pus la dosar; este o cifră care controlează fiecare acțiune, de la idee la ieșire. Avantajul biroului vine din identificarea mișcărilor PD înaintea pieței, din dimensionarea pozițiilor astfel încât pierderile așteptate să nu depășească niciodată capitalul și din ieșirea înainte ca neplata să se materializeze. Biroul nu pretinde că prezice neplățile cu certitudine; pretinde doar că, tratând PD ca pe o constrângere fermă, poate supraviețui celor pe care nu le vede venind.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Chiar și cele mai sofisticate modele de probabilitate de default (PD) sunt, în esența lor, aproximări statistice. La o masă de tranzacționare sunt instrumente utile, dar nu sunt globuri de cristal. Mai jos sunt limitele practice pe care le vei întâlni zilnic, situațiile frecvente în care cifrele pot induce în eroare și semnalele de alarmă care ar trebui să te facă să te oprești înainte de a te baza pe o cifră de PD ca pe o metrică de decizie absolută.</p>
+
+<h3>1. Riscul de model — „necunoscutele necunoscute"</h3>
+<p>Un model de PD este construit pe date istorice, pe un set de variabile explicative (de ex., îndatorare, acoperirea fluxului de numerar, volatilitatea pieței) și pe o formă funcțională presupusă (logit, probit, analiză de supraviețuire etc.). Dacă oricare dintre aceste ingrediente se schimbă, rezultatul modelului poate deveni lipsit de sens.</p>
+<ul>
+<li><strong>Schimbări de regim:</strong> Criza financiară din 2008–2009, șocul COVID-19 sau o neplată suverană bruscă pot crea condiții de piață care nu au fost niciodată observate în fereastra de calibrare. În astfel de regimuri, relațiile dintre variabile și rezultatele de neplată se pot rupe, ducând la subestimarea sau supraestimarea sistematică a riscului. Un model calibrat pe ani „normali" va subevalua de obicei riscul când volatilitatea urcă, pentru că frecvența istorică a neplăților a fost mică.</li>
+<li><strong>Rupturi structurale:</strong> O firmă care trece printr-o fuziune, o vânzare majoră de active sau o schimbare a politicii contabile poate arăta brusc foarte diferit față de profilul istoric pe care l-a învățat modelul. PD se va baza încă pe datele de dinaintea evenimentului, ceea ce poate induce în eroare până când se acumulează suficiente neplăți post-eveniment (adesea ani).</li>
+<li><strong>Calitatea datelor:</strong> Situațiile financiare lipsă sau învechite, profiturile raportate greșit sau definițiile inconsistente între jurisdicții introduc zgomot. Modelul poate „netezi" aceste erori, dar PD rezultată poate fi distorsionată. La birou, verifică întotdeauna sursa datelor de intrare, mai ales pentru emitenții din piețe emergente, unde standardele de raportare variază.</li>
+</ul>
+
+<h3>2. Ce NU îți spune PD</h3>
+<ul>
+<li><strong>Severitatea pierderii:</strong> PD este doar probabilitatea de neplată, nu pierderea așteptată în caz de neplată (LGD). Doi emitenți cu PD-uri identice pot avea expuneri la neplată (EAD) și rate de recuperare foarte diferite. Tratarea PD ca substitut pentru riscul total de credit va subevalua pozițiile unde LGD este ridicată (de ex., datorie suverană negarantată).</li>
+<li><strong>Momentul neplății:</strong> O PD de 5% pe un orizont de un an nu spune nimic despre când în acel an ar putea avea loc neplata. Pentru tranzacțiile cu scadență scurtă, momentul contează, deoarece expunerea la flux de numerar poate fi foarte diferită la începutul versus la sfârșitul perioadei. Unele modele oferă „rate de hazard" care pot fi integrate pentru a deduce momentul, dar multe PD-uri la nivel de birou sunt pur și simplu cifre anualizate.</li>
+<li><strong>Corelație și contagiune:</strong> PD-urile sunt probabilități marginale. Ele ignoră faptul că neplățile pot fi corelate, mai ales în cadrul aceleiași industrii sau țări. Un portofoliu de nume cu PD ridicată poate părea riscant izolat, dar pericolul real este gruparea neplăților în perioadele de stres, care nu este surprinsă de o simplă sumă de PD-uri.</li>
+</ul>
+
+<h3>3. Semnale practice de alarmă la birou</h3>
+<ul>
+<li><strong>PD-uri plate sau „plafonate":</strong> Când un model produce aceeași PD pentru o gamă largă de calități de credit (de ex., fiecare corporativă cu rating BBB primește o PD de 2%), este un semn că puterea de discriminare a modelului s-a epuizat. În astfel de cazuri, suplimentează PD cu ajustări calitative (comentariile managementului, perspectiva sectorului).</li>
+<li><strong>Riscul de coadă extrem:</strong> Majoritatea modelelor de PD se bazează pe regresie logistică, care presupune o curbă în formă de S relativ netedă. Ele se chinuie să surprindă „cozile groase" (fat tails) ale evenimentelor de credit, unde probabilitatea unei neplăți rare, dar severe, este mai mare decât sugerează modelul. Testarea la stres a PD prin inflarea ei manuală (de ex., +200 bps) poate scoate la iveală expuneri ascunse.</li>
+<li><strong>Ferestre istorice inconsistente:</strong> Un model calibrat pe ultimii trei ani de date va fi puternic influențat de ciclurile de piață recente, în timp ce o fereastră de zece ani netezește vârfurile pe termen scurt. Dacă vezi PD-uri foarte diferite de la două modele, investighează perioada de calibrare subiacentă înainte de a avea încredere în vreuna dintre cifre.</li>
+</ul>
+
+<h3>4. Când să te retragi și să folosești judecata</h3>
+<ul>
+<li><strong>Emitenți noi sau credite „de la zero" (greenfield):</strong> Dacă o companie are mai puțin de doi ani de situații financiare auditate, PD este practic extrapolată din companii comparabile. În aceste cazuri, bazează-te pe evaluări calitative (calitatea managementului, reziliența modelului de afaceri) și atribuie un interval de încredere mai larg.</li>
+<li><strong>Expuneri suverane sau cvasi-suverane:</strong> Riscul politic, schimbările de politici și controalele valutare pot provoca neplăți care nu se reflectă în datele istorice de neplată corporativă. Modelele de PD care ignoră acești factori macro vor subestima sistematic riscul.</li>
+<li><strong>Mediu macroeconomic în schimbare rapidă:</strong> În perioadele de înăsprire a politicii monetare, de inflație în creștere sau de tensiuni geopolitice, frecvența de bază a neplăților se poate accelera. Un model de PD static va rămâne în urmă; actualizează modelul mai frecvent sau aplică un „multiplicator de stres" PD-urilor existente.</li>
+</ul>
+
+<h3>5. Concluzia pentru birou</h3>
+<p>Tratează PD ca pe un <em>semnal</em>, nu ca pe o <em>certitudine</em>. Folosește-o pentru a clasifica calitatea relativă a creditului, pentru a marca expunerile care merită o analiză mai profundă și ca intrare în cadre mai largi de prețuire ajustată la risc. Însoțește întotdeauna cifra cu:</p>
+<ul>
+<li>O bandă de încredere (de ex., ± 150 bps) care reflectă incertitudinea modelului.</li>
+<li>O ajustare calitativă care surprinde factorii pe care modelul nu îi poate vedea.</li>
+<li>Un scenariu de stres care testează portofoliul sub rate de neplată mai mari decât cele istorice.</li>
+</ul>
+<p>Când vezi PD divergând puternic de propria ta intuiție sau de spreadurile pieței, acela este un indiciu să sapi mai adânc — nu să ignori modelul. Ținând aceste limite în prim-plan, vei evita capcana frecventă de a trata o probabilitate de default ca pe o garanție și vei păstra flexibilitatea necesară pentru a naviga inevitabilele „necunoscute necunoscute" cu care se confruntă orice birou de credit.</p>
+
+<h2>Concluzii-cheie</h2>
+
+<ul>
+<li><strong>Riscul de neplată este un concept fundamental în analiza de credit</strong>: se referă la probabilitatea ca un debitor sau emitent să nu își îndeplinească obligațiile de plată, precum plățile de dobândă sau rambursarea principalului.</li>
+<li><strong>Probabilitatea de default (PD) este o metrică-cheie</strong>: măsoară probabilitatea de neplată pe un orizont de timp specific, de obicei un an. O PD mai mare indică un risc mai mare de neplată.</li>
+<li><strong>PD este estimată folosind date istorice și modele de scoring de credit</strong>: modelele de scoring folosesc o combinație de factori cantitativi și calitativi, precum istoricul de credit, situațiile financiare și tendințele industriei, pentru a estima probabilitatea de neplată.</li>
+<li><strong>PD nu este același lucru cu pierderea așteptată</strong>: pierderea așteptată este produsul dintre PD și pierderea în caz de neplată (LGD), care este procentul din împrumut sau obligațiune ce se va pierde probabil în caz de neplată.</li>
+<li><strong>Riscul de neplată este influențat de diverși factori</strong>: aceștia includ calitatea creditului, condițiile de piață, tendințele economice și riscurile specifice industriei.</li>
+<li><strong>Înțelegerea riscului de neplată este crucială pentru analiza de credit</strong>: ajută traderii și analiștii să evalueze bonitatea debitorilor sau emitenților și să ia decizii de investiție informate.</li>
+<li><strong>PD este o intrare critică pentru modelele de evaluare a creditului</strong>: aceste modele folosesc PD, LGD și alți factori pentru a estima valoarea instrumentelor sensibile la credit, precum obligațiuni și împrumuturi.</li>
+<li><strong>Riscul de neplată nu este static</strong>: se poate schimba în timp din cauza diverșilor factori, precum schimbări ale calității creditului, ale condițiilor de piață sau ale tendințelor economice.</li>
+<li><strong>Traderii și analiștii trebuie să ia în considerare mai multe scenarii</strong>: când analizează riscul de neplată, trebuie să ia în considerare scenarii diferite, precum o recesiune sau o încetinire economică, pentru a obține o înțelegere cuprinzătoare a riscurilor potențiale.</li>
+<li><strong>Riscul de neplată este doar un aspect al analizei de credit</strong>: este esențial să iei în considerare și alți factori, precum spreadul de credit, ratingul de credit și clauzele contractuale, pentru a obține o imagine completă a riscului de credit.</li>
+<li><strong>Modelele de risc de neplată nu sunt infailibile</strong>: pot fi supuse erorilor sau distorsiunilor, iar acuratețea lor poate fi afectată de diverși factori, precum calitatea datelor sau complexitatea modelului.</li>
+<li><strong>Traderii și analiștii trebuie să rămână la curent cu evoluțiile pieței</strong>: trebuie să monitorizeze continuu condițiile de piață, tendințele de credit și evoluțiile economice pentru a fi informați despre potențialele schimbări ale riscului de neplată.</li>
+</ul>

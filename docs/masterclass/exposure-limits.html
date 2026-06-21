@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limitele de expunere — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Ce sunt limitele de expunere pe un birou de tranzacționare: expunere, risc, VaR, hard/soft stop, conformitate și cum se aplică zilnic pentru a proteja firma."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/exposure-limits.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Limitele de expunere"><meta property="og:description" content="Ce sunt limitele de expunere pe un birou de tranzacționare: expunere, risc, VaR, hard/soft stop, conformitate și cum se aplică zilnic pentru a proteja firma."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/exposure-limits.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Limitele de expunere"><meta name="twitter:description" content="Ce sunt limitele de expunere pe un birou de tranzacționare: expunere, risc, VaR, hard/soft stop, conformitate și cum se aplică zilnic pentru a proteja firma."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Limitele de expunere", "description": "Ce sunt limitele de expunere pe un birou de tranzacționare: expunere, risc, VaR, hard/soft stop, conformitate și cum se aplică zilnic pentru a proteja firma.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/exposure-limits.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="limite-de-expunere" data-prev-title="Limite de expunere: ghid complet pentru risc și siguranță" data-next="limite-de-expunere-in-trading" data-next-title="Limite de expunere în trading: cum îți protejezi capitalul" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#compliance">Reguli &amp; conformitate</a> · 34 min · Actualizat 21 iun. 2026</p><h1>Limitele de expunere</h1><p>Limitele de expunere (exposure limits) sunt regulile cele mai stricte pe care un birou de tranzacționare (trading desk) este obligat să le respecte atunci când își asumă risc. Aceste limite de risc pe biroul de tranzacționare îți spun, pe scurt, câți bani este dispusă firma să piardă într-o singură zi, săptămână sau lună înainte de a fi obligată să oprească tranzacționarea. Gândește-te la ele ca la limitele de viteză de pe șosea: dacă mergi mai repede decât limita permisă, poți fi amendat sau oprit din circulație.</p>
+
+<p>La fel se întâmplă și în tranzacționare: dacă un trader încalcă o limită de expunere, firma poate să-și piardă licența sau să primească amenzi uriașe. Acesta este motivul pentru care controlul expunerii și gestionarea riscului (risk management) stau în centrul oricărei activități de conformitate (compliance). Înainte de a intra în detalii, hai să definim termenii-cheie pe care îi vei auzi zilnic la birou: expunere, risc, limită, VaR, conformitate și multe altele. Vei vedea cum aceste reguli de control al riscului protejează capitalul firmei, clienții și acționarii.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p><strong>Expunere (Exposure):</strong> Aceasta este suma totală de risc pe care un trader și-o asumă la un moment dat. Expunerea nu este același lucru cu profitul sau pierderea. Ea reprezintă „mărimea" pariurilor pe care le-a făcut traderul. De exemplu, dacă un trader cumpără acțiuni în valoare de 10 milioane de dolari într-o companie, expunerea sa este de 10 milioane de dolari. Dacă prețul acțiunilor scade, expunerea rămâne aceeași — tot 10 milioane de dolari — dar pierderea crește. Expunerea se măsoară în dolari (sau euro, yeni etc.) și poate fi pentru o singură tranzacție, un birou sau întreaga firmă.</p>
+
+<p><strong>Risc (Risk):</strong> Riscul este șansa ca traderul să piardă bani. Nu este vorba doar despre a pierde bani astăzi; include și șansa de a pierde mulți bani în viitor. De exemplu, un trader ar putea cumpăra acțiuni care ar putea scădea cu 20% mâine. Acea scădere reprezintă riscul. Pe un birou, riscul este adesea măsurat prin cât de mult s-ar putea schimba valoarea pariurilor traderului într-o singură zi.</p>
+
+<p><strong>Limită (Limit):</strong> O limită este un număr fix stabilit de firmă sau de reglementatori. Ea le spune traderilor câtă expunere sau risc au voie să își asume. Limitele pot fi pentru un singur trader, un birou sau întreaga firmă. De exemplu, o firmă ar putea stabili o limită zilnică de 50 de milioane de dolari pentru întregul birou de acțiuni. Dacă expunerea biroului depășește 50 de milioane de dolari, sistemul de tranzacționare va bloca noile tranzacții până când expunerea scade din nou sub limită.</p>
+
+<p><strong>Conformitate (Compliance):</strong> Conformitatea este echipa care se asigură că firma respectă toate regulile. Ei monitorizează expunerea și riscul traderilor în timp real. Dacă un trader încearcă să își asume prea mult risc, sistemul de conformitate va opri automat tranzacția. Conformitatea nu este același lucru cu traderii sau managerii — ei sunt „poliția" biroului de tranzacționare.</p>
+
+<p><strong>Birou (Desk):</strong> Un birou este un grup de traderi care se concentrează pe același tip de tranzacționare. De exemplu, ar putea exista un „Birou de Acțiuni" (Equity Desk) care tranzacționează acțiuni, un „Birou de Venit Fix" (Fixed Income Desk) care tranzacționează obligațiuni și un „Birou de Derivate" (Derivatives Desk) care tranzacționează opțiuni și contracte futures. Fiecare birou are propriile limite de expunere, stabilite de managerii de risc ai firmei.</p>
+
+<p><strong>Poziție (Position):</strong> O poziție este un singur pariu pe care l-a făcut traderul. De exemplu, dacă un trader cumpără 100 de acțiuni Apple, aceasta este o poziție. Dacă cumpără 100 de acțiuni Microsoft, aceasta este o altă poziție. Totalul tuturor pozițiilor de pe un birou reprezintă expunerea biroului.</p>
+
+<p><strong>Marcare la piață (Mark-to-Market):</strong> Acesta este procesul de calculare a valorii curente a unei poziții. Traderii fac acest lucru în fiecare zi pentru a vedea câți bani au câștigat sau au pierdut. De exemplu, dacă un trader cumpără o acțiune cu 100 de dolari și prețul crește la 110 dolari, valoarea de marcare la piață a poziției este 110 dolari. Dacă prețul scade la 90 de dolari, valoarea este 90 de dolari. Marcarea la piață se face în timp real pe majoritatea birourilor de tranzacționare.</p>
+
+<p><strong>VaR (Value at Risk — Valoarea la Risc):</strong> VaR este un număr care îi spune firmei câți bani ar putea pierde biroul într-o singură zi, cu un nivel de încredere de 95% sau 99%. De exemplu, dacă VaR-ul biroului este de 10 milioane de dolari, înseamnă că există doar o șansă de 1% sau 5% (în funcție de nivelul de încredere) ca biroul să piardă mai mult de 10 milioane de dolari într-o singură zi. VaR este una dintre cele mai comune modalități de a măsura riscul și de a stabili limitele de expunere.</p>
+
+<p><strong>Oprire dură (Hard Stop):</strong> O oprire dură este o limită strictă care nu poate fi încălcată. Dacă expunerea sau VaR-ul biroului atinge oprirea dură, sistemul de tranzacționare va bloca automat toate noile tranzacții. Traderii nu pot trece peste o oprire dură. Este ca și cum ai lovi un zid de cărămidă — nu poți trece prin el.</p>
+
+<p><strong>Oprire moale (Soft Stop):</strong> O oprire moale este un nivel de avertizare. Dacă expunerea sau VaR-ul biroului atinge oprirea moale, sistemul va avertiza traderul și managerul, dar nu va bloca noile tranzacții. Traderul poate încă tranzacționa, dar trebuie să fie atent. Gândește-te la ea ca la un limitator de viteză (speed bump) — poți trece peste el, dar nu este recomandat.</p>
+
+<p><strong>Reglementator (Regulator):</strong> Un reglementator este o agenție guvernamentală care creează și impune regulile pentru firmele de tranzacționare. Exemplele includ Comisia pentru Valori Mobiliare și Burse (Securities and Exchange Commission — SEC) din Statele Unite, Autoritatea de Conduită Financiară (Financial Conduct Authority — FCA) din Regatul Unit și Autoritatea Europeană pentru Valori Mobiliare și Piețe (European Securities and Markets Authority — ESMA) din Uniunea Europeană. Reglementatorii stabilesc multe dintre limitele de expunere pe care firmele trebuie să le respecte.</p>
+
+<p><strong>Politica firmei (Firm Policy):</strong> Acesta este setul de reguli pe care firma însăși le creează, în plus față de regulile stabilite de reglementatori. De exemplu, o firmă ar putea stabili o limită zilnică de VaR mai strictă decât cea cerută de reglementator. Politicile firmei sunt adesea mai conservatoare decât limitele de reglementare, pentru a proteja reputația și capitalul firmei.</p>
+
+<p>În rezumat, limitele de expunere sunt parapetele de protecție care împiedică biroul de tranzacționare să își asume prea mult risc. Ele sunt formate din numere (limite), măsurători (expunere, VaR) și sisteme (conformitate, opriri dure, opriri moi). Fiecare trader, manager și ofițer de conformitate trebuie să înțeleagă acești termeni și să respecte strict limitele. Încălcarea unei limite poate duce la amenzi, pierderea licenței sau chiar la închiderea firmei.</p>
+
+<h2>Intuiția din spate</h2>
+
+<p>Imaginează-ți că administrezi pentru prima dată un mic stand de limonadă. Împrumuți 100 de dolari de la părinții tăi pentru a cumpăra pahare, lămâi și zahăr. În prima sâmbătă caniculară vinzi limonadă în valoare de 150 de dolari. Te simți bogat — până când îți dai seama că ai cheltuit fiecare bănuț pe care îl aveai și acum le datorezi părinților 100 de dolari plus dobândă. Dacă vremea se strică weekendul viitor, s-ar putea să nu îi poți plăti înapoi. Ai putea pierde încrederea părinților și poate chiar bicicleta, pe care ai promis să o păstrezi în siguranță.</p>
+
+<p>Acea teamă de a datora mai mult decât poți plăti înapoi este aceeași teamă pe care băncile și birourile de tranzacționare o resimt în fiecare zi. Diferența este că, în loc de limonadă, ei lucrează cu milioane de dolari în acțiuni, obligațiuni sau valute, iar în loc de un weekend, ei se confruntă cu luni sau ani de mișcări viitoare de preț. Limitele de expunere sunt modul în care biroul spune: „Nu ne vom lăsa niciodată să ajungem într-o poziție în care să datorăm mai mult decât putem plăti în mod confortabil, oricât de rea ar deveni vremea."</p>
+
+<p>Hai să transformăm povestea limonadei într-o regulă simplă. Să presupunem că părinții tăi îți spun: „Poți împrumuta până la 100 de dolari, dar trebuie să păstrezi mereu cel puțin 50 de dolari în numerar în casă pentru urgențe." Acei 100 de dolari reprezintă expunerea ta maximă la riscul limonadei; cei 50 de dolari sunt rezerva ta de siguranță (safety buffer). Dacă vreodată ai mai mult de 100 de dolari blocați în pahare și lămâi, încalci regula și trebuie să vinzi din stoc înainte de a deschide luni. Exact așa funcționează limitele de expunere pe un birou de tranzacționare.</p>
+
+<h3>De ce există această regulă?</h3>
+<ul>
+<li>Previne pierderile care ar putea scufunda firma.</li>
+<li>Menține firma lichidă — capabilă să plătească facturi, salarii și taxe chiar dacă piețele se mișcă împotriva ei.</li>
+<li>Protejează clienții și acționarii de pierderile-surpriză cauzate de un singur trader care își asumă prea mult risc.</li>
+</ul>
+
+<h3>Ce problemă rezolvă?</h3>
+<p>Fără limite, un singur trader ar putea, în cel mai rău caz, să piardă suficienți bani încât să facă întreaga firmă insolvabilă. În 1995, Banca Barings s-a prăbușit pentru că un trader din Singapore, Nick Leeson, a luat în secret poziții cu mult peste ceea ce banca își putea permite să piardă. Limitele de expunere sunt sistemul de avertizare timpurie al biroului, astfel încât nimeni să nu poată ascunde un pariu atât de mare.</p>
+
+<h3>O analogie simplă pentru începători</h3>
+<p>Gândește-te la limitele de expunere ca la linia roșie de pe indicatorul de combustibil al unei mașini. Când acul este în zona roșie, te oprești și alimentezi înainte de a rămâne fără benzină. Pe biroul de tranzacționare, linia roșie este limita de expunere. De îndată ce o poziție se apropie de acea linie, biroul trebuie fie să reducă poziția, fie să strângă numerar suplimentar. Dacă acul trece de linia roșie, sistemul blochează automat noile tranzacții până când poziția este readusă sub control.</p>
+
+<h3>Ce trebuie urmărit zilnic</h3>
+<ul>
+<li><strong>Expunerea netă (net exposure):</strong> valoarea totală în dolari a tuturor pozițiilor deținute de birou, minus orice numerar sau active foarte sigure.</li>
+<li><strong>Expunerea brută (gross exposure):</strong> același total, dar fără a scădea numerarul, deoarece și numerarul poate fi pierdut într-o criză.</li>
+<li><strong>Limite pe sector sau instrument:</strong> linii roșii separate pentru diferite tipuri de pariuri (de exemplu, 50 de milioane de dolari în obligațiuni guvernamentale europene, 30 de milioane de dolari în acțiuni asiatice).</li>
+<li><strong>Limite de concentrare (concentration limits):</strong> reguli care împiedică biroul să pună prea mulți bani într-o singură acțiune sau țară.</li>
+</ul>
+
+<h3>Ce să faci și ce să nu faci</h3>
+<p><strong>De făcut:</strong></p>
+<ul>
+<li>Verifică-ți expunerea față de limită în fiecare dimineață, înainte de începerea tranzacționării.</li>
+<li>Dacă ești aproape de limită, sună-ți managerul și stabiliți împreună un plan de reducere a riscului.</li>
+<li>Folosește ordine stop-loss pentru a plafona automat pierderile dacă prețurile se mișcă împotriva ta.</li>
+</ul>
+<p><strong>De evitat:</strong></p>
+<ul>
+<li>Să presupui că „nu se va întâmpla niciodată". Piețele se pot mișca mai rapid decât te aștepți.</li>
+<li>Să ascunzi poziții de sistemul de risc; linia roșie funcționează doar dacă toată lumea raportează cinstit.</li>
+<li>Să ignori depășirile mici; chiar și o depășire de 1 milion de dolari poate degenera într-o pierdere mult mai mare pe parcursul săptămânilor.</li>
+</ul>
+
+<h3>Incertitudine și cazuri-limită</h3>
+<p>Nicio regulă nu este perfectă. Uneori o poziție poate fi temporar peste limită din cauza unei mișcări bruște de piață — imaginează-ți un crah fulger (flash crash) care dublează valoarea portofoliului tău de obligațiuni în câteva minute. În acele momente rare, biroul trebuie să decidă rapid dacă limita mai are sens sau dacă încălcarea ei temporară este mai sigură decât vânzarea în panică. Această decizie de judecată este motivul pentru care există manageri cu experiență: ei echilibrează regula cu haosul din lumea reală.</p>
+
+<p>Pe scurt, limitele de expunere sunt centura de siguranță a biroului. Speri să nu ai niciodată nevoie de ea, dar când drumul devine accidentat, îi ține pe toți în siguranță.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<h3>1. Colectarea datelor brute</h3>
+<p>În fiecare dimineață, la ora 07:15 (ora Londrei), Motorul de Risc (Risk Engine) primește un flux de date de la Sistemul de Tranzacționare care listează fiecare poziție deschisă în fiecare instrument deținut de birou. Fiecare linie din acest flux se numește „înregistrare de poziție" (position record) și conține patru câmpuri:</p>
+<ul>
+<li><strong>ID-ul instrumentului</strong> — codul unic (de exemplu, „BP.L" pentru acțiunile ordinare BP plc).</li>
+<li><strong>Direcția</strong> — fie „Long" (cumpărare), fie „Short" (vânzare).</li>
+<li><strong>Cantitatea</strong> — numărul de acțiuni, contracte sau unități (pozitiv pentru long, negativ pentru short).</li>
+<li><strong>Valoarea de piață</strong> — ultimul preț mediu (mid-price) înmulțit cu cantitatea cu semn, deja convertit în moneda de bază a biroului (GBP în acest exemplu).</li>
+</ul>
+<p>În același timp, Baza de Date de Conformitate publică trei tabele suplimentare:</p>
+<ul>
+<li><strong>Definițiile limitelor</strong> — un rând pentru fiecare tip de limită (de exemplu, „Acțiune Individuală", „Sector Acțiuni", „FX Brut", „Total Net") împreună cu plafonul său numeric (de exemplu, 5.000.000 £ pentru Acțiune Individuală).</li>
+<li><strong>Factorii de ponderare</strong> — un număr zecimal între 0 și 1 care îi spune motorului cât din valoarea de piață să numere atunci când limita este „netă" față de „brută". Pentru Acțiune Individuală factorul este 1,0, deoarece limita se aplică valorii de piață complete, indiferent de pozițiile care se compensează între ele.</li>
+<li><strong>Orizontul de retroanaliză (look-back horizon)</strong> — de obicei 20 de zile de tranzacționare, folosit doar pentru limita VaR mobilă.</li>
+</ul>
+
+<h3>2. Construirea cubului de expunere</h3>
+<p>Motorul de Risc creează un cub în memorie cu trei axe:</p>
+<ul>
+<li>Instrument (rânduri)</li>
+<li>Tip de limită (coloane)</li>
+<li>Direcție (două straturi: long și short)</li>
+</ul>
+<p>Pentru fiecare celulă, motorul calculează:</p>
+<ul>
+<li><strong>Expunere brută</strong> = suma valorilor absolute ale tuturor valorilor de piață din acea celulă.</li>
+<li><strong>Expunere netă</strong> = suma algebrică a tuturor valorilor de piață din acea celulă.</li>
+</ul>
+<p>Exemplu pentru BP.L sub limita Acțiune Individuală:</p>
+<ul>
+<li>Expunere brută = |3.200.000 £| + |–1.800.000 £| = 5.000.000 £</li>
+<li>Expunere netă = 3.200.000 £ – 1.800.000 £ = 1.400.000 £</li>
+</ul>
+
+<h3>3. Aplicarea regulilor de limită în ordine</h3>
+<p>Motorul parcurge ierarhia limitelor exact o dată pe ciclu:</p>
+<p><strong>a. Limite cu prag dur</strong> (Acțiune Individuală, Sector Acțiuni, FX Brut)</p>
+<ul>
+<li>Dacă Expunerea Brută &gt; Plafonul Limitei → marchează „Încălcare" (Breach) și blochează orice ordin nou care ar crește expunerea.</li>
+<li>Dacă Expunerea Brută ≤ Plafonul Limitei → permite ordinul, dar înregistrează totuși utilizarea pentru pasul următor.</li>
+</ul>
+<p><strong>b. Limite de expunere netă</strong> (Total Net)</p>
+<ul>
+<li>Expunere Netă = Σ (Valori de piață Long) – Σ (Valori de piață Short).</li>
+<li>Dacă Expunerea Netă &gt; Plafonul Limitei → marchează „Încălcare" și blochează orice ordin nou care ar crește expunerea netă.</li>
+</ul>
+<p><strong>c. Limita VaR mobilă</strong> (opțională)</p>
+<ul>
+<li>Motorul ia ultimele 20 de zile de profit și pierdere (P&amp;L) zilnic pentru fiecare instrument, convertește în GBP și calculează un VaR pe o zi la nivel de 99% folosind metoda istorică.</li>
+<li>Suma tuturor cifrelor VaR de pe întregul birou nu trebuie să depășească limita de X £.</li>
+<li>Deoarece VaR este o estimare statistică, o încălcare aici NU blochează automat tranzacțiile; ea declanșează un e-mail către Șeful de Risc (Head of Risk), care decide în 15 minute dacă permite ordinul sau cere desfacerea poziției.</li>
+</ul>
+
+<h3>4. Producerea rezultatelor</h3>
+<p>Până la ora 07:30, motorul scrie patru artefacte:</p>
+<ul>
+<li><strong>Raportul de expunere</strong> — un PDF trimis șefului de birou și ofițerului de conformitate, care arată fiecare limită, expunerea curentă, plafonul, procentul de utilizare și o culoare de semafor (verde ≤ 80%, galben 81–95%, roșu &gt; 95%).</li>
+<li><strong>API în timp real</strong> — un punct de acces REST pe care Sistemul de Tranzacționare îl interoghează de fiecare dată când un trader apasă „Trimite". Punctul de acces returnează un singur obiect JSON: { "canTrade": true/false, "reason": "Within limits" | "Single-Name breach" | "Total Net breach" | "VaR escalation" }.</li>
+<li><strong>Jurnalul de audit</strong> — un fișier CSV adăugat pe unitatea partajată cu marcaj de timp, ID-ul utilizatorului, instrument, cantitate, direcție și statusul limitei. Acest jurnal este imuabil și păstrat timp de șapte ani conform regulilor de păstrare a evidențelor din MiFID.</li>
+<li><strong>Coada de alerte</strong> — dacă o limită este încălcată, motorul trimite un mesaj pe canalul intern de Slack #risk-alerts și pe pagerul ofițerului de conformitate.</li>
+</ul>
+
+<h3>5. Tratarea cazurilor-limită</h3>
+<ul>
+<li><strong>Mișcări de preț peste noapte</strong> — Echipa de Date de Piață reevaluează fiecare poziție la ora 07:00 folosind prețul mediu de la licitația de deschidere. Dacă un salt brusc al unei acțiuni (gap-up) provoacă o încălcare, ordinul este blocat până când biroul fie reduce poziția, fie echipa de risc anulează manual limita cu o justificare documentată.</li>
+<li><strong>Acțiuni corporative</strong> — Când o acțiune devine ex-dividend, câmpul cantității este ajustat automat de fluxul de Acțiuni Corporative; nu este permisă nicio introducere manuală.</li>
+<li><strong>Poziții în valute diferite</strong> — Expunerile FX sunt convertite în GBP la cursul de fixing al BCE de la ora 16:00 din ziua precedentă; mișcările FX din timpul zilei sunt ignorate pentru limite, pentru a evita zgomotul.</li>
+</ul>
+
+<h3>6. Resetarea de la sfârșitul zilei</h3>
+<p>La ora 18:00, motorul arhivează cubul zilei, șterge toate înregistrările de poziție și pornește din nou la 00:00 cu o foaie goală. Orice poziții încă deschise după ora 18:00 sunt reportate automat și reevaluate la marcajul de la ora 07:00 al zilei următoare.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Imaginează-ți că ești un trader junior pe biroul de acțiuni al unei bănci de investiții de dimensiune medie. Managerul tău de birou a stabilit o <em>limită de expunere noțională netă (net notional exposure limit)</em> de <strong>10 milioane USD</strong> pentru sectorul „Tehnologie". Această limită este suma maximă de valoare de piață pe care o poți avea „long" (cumpărare) sau „short" (vânzare) în acel sector, după ce toate pozițiile sunt compensate (netate) între ele. Mai jos este o parcurgere pas cu pas a modului în care ai gestiona o nouă cerere de tranzacție rămânând în limită.</p>
+
+<h3>1. Cunoaște-ți expunerea curentă</h3>
+<p>La începutul zilei extragi raportul zilnic de expunere din sistemul de risc (de exemplu, Bloomberg EMSX sau „Tabloul de Bord de Risc" intern al firmei). Raportul arată:</p>
+<ul>
+<li>Apple (AAPL) — Long — 2.000 acțiuni × 150 USD = noțional 300.000 USD</li>
+<li>Microsoft (MSFT) — Short — 1.000 acțiuni × 300 USD = noțional 300.000 USD</li>
+<li>Nvidia (NVDA) — Long — 500 acțiuni × 400 USD = noțional 200.000 USD</li>
+<li><strong>Noțional Net = 200.000 USD</strong></li>
+</ul>
+<p>Noționalul net se calculează adunând noționalul tuturor pozițiilor long și scăzând noționalul tuturor pozițiilor short. În acest caz ești net <strong>long</strong> cu 200 de mii USD în Tehnologie, mult sub plafonul de 10 milioane USD.</p>
+
+<h3>2. Primește o cerere de tranzacție</h3>
+<p>Un coleg de la vânzări te sună: „Clientul vrea să cumpere 5.000 de acțiuni Tesla (TSLA) la 250 USD fiecare." Înainte de a executa, trebuie să verifici dacă această tranzacție te-ar împinge peste limită.</p>
+<p><strong>Termeni-cheie:</strong></p>
+<ul>
+<li><strong>Mărimea tranzacției</strong> — numărul de acțiuni (sau contracte) pe care le dorește clientul.</li>
+<li><strong>Prețul tranzacției</strong> — prețul la care intenționezi să execuți; pentru verificările ordinelor cu limită folosim prețul cotat de client.</li>
+<li><strong>Noțional</strong> — mărimea tranzacției × prețul tranzacției; valoarea în dolari a tranzacției.</li>
+</ul>
+<p>Pentru cererea TSLA: 5.000 acțiuni × 250 USD = <strong>1.250.000 USD</strong> noțional.</p>
+
+<h3>3. Proiectează expunerea post-tranzacție</h3>
+<p>Adaugă noul noțional la expunerea netă curentă:</p>
+<ul>
+<li>Noțional net curent (long) = 200.000 USD</li>
+<li>Noțional propus al tranzacției (long) = 1.250.000 USD</li>
+<li>Noțional net proiectat = 200.000 + 1.250.000 = <strong>1.450.000 USD</strong></li>
+</ul>
+<p>Deoarece tranzacția este o achiziție <em>long</em>, noționalul net crește. Compară cifra proiectată cu limita: limita = 10.000.000 USD, expunerea proiectată = 1.450.000 USD. Deoarece 1,45 M &lt; 10 M, tranzacția este <strong>în limită</strong>.</p>
+
+<h3>4. Confirmă celelalte plafoane relevante</h3>
+<p>Multe birouri au <em>sub-limite</em> care se află sub limita principală de expunere. În exemplul nostru:</p>
+<ul>
+<li><strong>Sub-limită pe sector:</strong> 5 M USD pentru „Semiconductoare" (un subset al Tehnologiei).</li>
+<li><strong>Plafon pe nume individual (single-name cap):</strong> nu mai mult de 2 M USD noțional net în orice acțiune individuală.</li>
+</ul>
+<p>Verifică-le: TSLA nu este un semiconductor, deci sub-limita pe semiconductoare rămâne neschimbată. Expunerea curentă la TSLA este zero; adăugând 1,25 M USD, rămâi sub plafonul de 2 M USD. Ambele verificări trec.</p>
+
+<h3>5. Obține aprobarea necesară</h3>
+<p>Chiar dacă tranzacția este sub limită, politica biroului tău poate cere o <em>aprobare pre-tranzacție</em> pentru orice tranzacție peste un <em>prag</em> (de exemplu, 500 de mii USD). Deoarece noționalul TSLA depășește acel prag, trebuie să:</p>
+<ul>
+<li>Trimiți un e-mail scurt managerului de birou (sau să folosești fluxul intern „Aprobare Tranzacție") cu detaliile tranzacției (ticker, mărime, preț, noțional), un instantaneu al expunerii curente și motivul cererii clientului.</li>
+<li>Aștepți un răspuns „Aprobat". Managerul poate cere o justificare rapidă („clientul vrea expunere la creșterea mașinilor electrice") înainte de a aproba.</li>
+</ul>
+
+<h3>6. Execută tranzacția</h3>
+<p>Odată aprobată, plasezi ordinul în sistemul de execuție (de exemplu, Bloomberg EMSX). După execuție, imediat: actualizezi raportul de expunere (majoritatea sistemelor fac asta automat), verifici că noționalul net post-tranzacție arată acum <strong>1.450.000 USD</strong> și înregistrezi tranzacția în jurnalul biroului, notând referința aprobării.</p>
+
+<h3>7. Monitorizează poziția pe parcursul zilei</h3>
+<p>Prețurile se mișcă, iar odată cu ele și valoarea de <em>marcare la piață</em> (MtM) a pozițiilor tale. Noționalul net este o măsură <em>statică</em> bazată pe prețul de tranzacționare, dar managerii de risc urmăresc adesea <em>expunerea curentă</em> (ajustată la preț) pentru a anticipa încălcările limitei. De exemplu, dacă TSLA urcă la 300 USD, valoarea MtM a poziției tale de 5.000 de acțiuni devine 5.000 × 300 = 1,5 M USD, ridicând expunerea netă la <strong>1,7 M USD</strong>. Ai fi în continuare confortabil sub limită.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să luăm în considerare un alt exemplu pentru a ilustra mai bine conceptul de limite de expunere și cum sunt aplicate în practică. Să presupunem că lucrăm pe un birou de tranzacționare specializat în tranzacționare valutară (forex). Echipa noastră are sarcina de a gestiona un portofoliu de tranzacții care implică cumpărarea și vânzarea de diverse valute. Avem o limită de 10% pentru expunerea noastră totală la euro, una dintre cele mai tranzacționate valute.</p>
+
+<p>Unul dintre traderii noștri, Alex, lucrează la o tranzacție care implică cumpărarea a 100 de milioane de euro, în anticiparea unei posibile creșteri a valorii valutei. În același timp, un alt trader, Ben, lucrează la o tranzacție care implică vânzarea a 50 de milioane de euro, o porțiune semnificativă din expunerea noastră totală la euro.</p>
+
+<p>Inițial, expunerea noastră la euro este la 5% din valoarea totală a portofoliului. Însă, odată cu tranzacția lui Alex, expunerea crește la 7,5% (5% + 2,5% de la cele 100 de milioane de euro). Între timp, tranzacția lui Ben reduce expunerea la 6,25% (7,5% – 1,25% de la cele 50 de milioane de euro). Dar apoi vine un alt trader, Chris, care cumpără 50 de milioane de euro, ceea ce crește expunerea înapoi la 7,5% (6,25% + 1,25%).</p>
+
+<p>În acest punct, expunerea noastră la euro este la 7,5%, apropiindu-se de limita noastră. Avem o limită de 10% pentru expunerea totală la euro. Trebuie să ne asigurăm că nu o depășim, deoarece depășirea ei ar putea pune firma în pericol.</p>
+
+<p>În acest scenariu putem vedea cum funcționează limitele de expunere în practică. Avem o limită de 10% și trebuie să ne gestionăm tranzacțiile astfel încât să nu o depășim. Putem face acest lucru monitorizându-ne expunerea în timp real și ajustându-ne tranzacțiile în consecință. De exemplu, dacă observăm că expunerea la euro crește prea repede, putem reduce expunerea închizând unele dintre tranzacțiile existente sau ajustând mărimea noilor tranzacții. Gestionând eficient limitele de expunere, putem ajuta la diminuarea riscului și ne asigurăm că firma rămâne în cadrul orientărilor de reglementare.</p>
+
+<p>În acest scenariu trebuie să luăm în considerare și conceptul de „compensare" (netting) a expunerii. Compensarea este procesul de echilibrare a câștigurilor și pierderilor din tranzacții pentru a determina expunerea totală. În acest caz, dacă avem o tranzacție de cumpărare a 100 de milioane de euro și alta de vânzare a 50 de milioane de euro, le putem compensa pentru a determina expunerea totală. Aceasta poate ajuta la reducerea expunerii și ne asigură că nu ne depășim limita.</p>
+
+<p>În concluzie, acest scenariu ilustrează importanța gestionării limitelor de expunere în practică. Monitorizând expunerea în timp real și ajustându-ne tranzacțiile în consecință, putem ajuta la diminuarea riscului și ne asigurăm că firma rămâne în cadrul orientărilor de reglementare.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p><strong>1. „Expunerea este același lucru cu mărimea poziției."</strong> Mărimea poziției este numărul brut de contracte sau acțiuni pe care le deții. Expunerea este aceeași mărime înmulțită cu prețul pe care îl vei pierde dacă piața se mișcă împotriva ta. O poziție de 100 de acțiuni într-o acțiune de 10 dolari înseamnă doar 1.000 de dolari de expunere, în timp ce 100 de acțiuni într-o acțiune de 100 de dolari înseamnă 10.000 de dolari. Începătorii uită adesea multiplicatorul de preț și stabilesc limite pe baza numărului brut de acțiuni în loc de dolari riscați. Convertește întotdeauna în monedă înainte de a compara cu limita.</p>
+
+<p><strong>2. „Expunerea ajustată cu delta este opțională."</strong> Când deții opțiuni sau contracte futures, delta îți spune cât se mișcă opțiunea pentru o mișcare de 1 dolar a activului-suport. Un începător ar putea trata o poziție de 100 de contracte futures la fel ca 100 de opțiuni call pe acele futures. În realitate, opțiunile call s-ar putea comporta ca doar 40 de contracte (delta 0,40), deci expunerea reală este mai mică. Omiterea pasului delta te poate face să crezi că ești în limită când de fapt ești peste. Rulează calculul delta de fiecare dată când deschizi sau ajustezi portofoliul.</p>
+
+<p><strong>3. „Limitele pe produse diferite se adună."</strong> Biroul tău poate avea limite separate pentru acțiuni, dobânzi și FX, dar limita la nivel de firmă este adesea o sumă a tuturor produselor convertite într-o monedă comună. Un începător ar putea menține fiecare produs sub felia lui din plăcintă și să presupună că este în siguranță, doar pentru a descoperi că, atunci când yenul se întărește și indicele S&amp;P crește, expunerea combinată în dolari încalcă plafonul general. Agregă întotdeauna pe toate produsele înainte de a concluziona că ești în siguranță.</p>
+
+<p><strong>4. „Salturile din timpul zilei nu contează."</strong> Limitele sunt de obicei măsurate la sfârșitul fiecărei zile de tranzacționare, dar oscilațiile mari din timpul zilei te pot forța să desfaci poziții înainte de închidere. Un începător ar putea ignora expunerea intraday și să urmărească doar valoarea de la sfârșitul zilei, apoi să primească un apel în marjă sau o lichidare forțată când piața se mișcă rapid. Urmărește atât cifra statică de la sfârșitul zilei, cât și P&amp;L-ul dinamic din timpul zilei; dacă oricare se apropie de limită, acționează imediat.</p>
+
+<p><strong>5. „Expunerea valutară înseamnă doar perechi FX."</strong> Un birou care tranzacționează acțiuni europene în euro ar putea crede că nu are risc FX deoarece tranzacțiile sunt denominate în euro. Totuși, finanțarea firmei este adesea în dolari, deci o pierdere denominată în euro tot trebuie convertită înapoi în dolari pentru linia de finanțare. Tratează fiecare poziție în altă monedă decât moneda de bază ca având expunere FX egală cu întreaga sa valoare de piață.</p>
+
+<p><strong>6. „Ordinele stop-loss te protejează de limite."</strong> Un ordin stop-loss elimină riscul de piață odată ce stopul este atins, dar nu elimină poziția din portofoliu până când stopul este executat. Dacă stopul este în interiorul benzii limitei tale, s-ar putea să fii încă peste limită în timp ce stopul lucrează. Poziția contează în continuare la expunerea ta până când este închisă. Folosește stop-loss-urile pentru controlul riscului, nu ca substitut pentru monitorizarea limitelor.</p>
+
+<p><strong>7. „Limitele de conformitate sunt la fel ca limitele de risc."</strong> Limitele de conformitate sunt stabilite de reglementatori și auditori; limitele de risc sunt stabilite de birou sau de Directorul de Risc (CRO). Un începător ar putea confunda cele două și crede că faptul de a fi în interiorul limitei de risc satisface automat conformitatea. Verifică întotdeauna limita de conformitate separat; ea este de obicei mai strictă și are puncte de măsurare diferite.</p>
+
+<p><strong>8. „Te poți baza pe ecranul din front-office."</strong> Ecranul de tranzacționare arată ce ai introdus, dar s-ar putea să nu reflecte tranzacțiile nedecontate, transferurile (give-ups) sau alocările care nu au fost încă postate. Un începător ar putea crede că o tranzacție este încă în blotter când ea a fost deja transferată altui birou sau înregistrată pe contul unui client. Reconciliază-ți blotterul cu sistemul de back-office cel puțin o dată pe tură pentru a prinde aceste neconcordanțe.</p>
+
+<p><strong>9. „Limitele sunt statice."</strong> Limitele de expunere se recalculează zilnic, dar mișcările de piață îți pot schimba limita efectivă în timpul zilei. Un începător ar putea stabili o limită bazată pe prețurile de ieri și uita că schimbarea de preț de azi a strâns sau a lărgit banda. Recalculează-ți expunerea de fiecare dată când evaluezi o nouă tranzacție sau vezi o mișcare mare de piață.</p>
+
+<p><strong>10. „Derivatele extrabursiere (OTC) sunt exceptate."</strong> Mulți începători presupun că, deoarece un swap sau o opțiune OTC nu este listată la o bursă, ea nu contează la limitele de poziție impuse de bursă. În practică, majoritatea birourilor aplică totuși limite interne de expunere produselor OTC, deoarece capitalul firmei este în joc. Tratează fiecare derivat, listat sau OTC, ca fiind supus acelorași verificări de expunere.</p>
+
+<h3>Listă rapidă de verificare pentru a evita aceste capcane</h3>
+<ul>
+<li>Convertește fiecare poziție în expunere în monedă înainte de a compara cu limita.</li>
+<li>Aplică delta pentru opțiuni și futures; nu le trata ca 1:1 cu activul-suport.</li>
+<li>Agregă pe toate produsele și monedele; nu izola pe birou.</li>
+<li>Monitorizează oscilațiile din timpul zilei, nu doar valorile de la sfârșitul zilei.</li>
+<li>Reconciliază-ți blotterul cu back-office-ul cel puțin o dată pe tură.</li>
+<li>Tratează derivatele OTC la fel ca produsele listate în privința limitelor.</li>
+</ul>
+
+<h2>Cum folosește biroul de tranzacționare limitele</h2>
+
+<p>Pe un birou de tranzacționare real, limitele de expunere nu sunt doar un număr pe o foaie de conformitate; ele sunt linia roșie vie pe care biroul nu o poate trece fără a încălca reguli, fără a pierde autoritate sau, în cel mai rău caz, fără a pune în pericol capitalul firmei. Biroul folosește limita în patru pași concreți în fiecare zi: (1) verificări pre-tranzacție înainte de executarea oricărui ordin, (2) dimensionarea pozițiilor în timp real, astfel încât biroul să nu depășească niciodată limita, (3) reconcilierea de la sfârșitul zilei pentru a dovedi conformitatea și (4) gestionarea excepțiilor atunci când limita este încălcată.</p>
+
+<h3>Pasul 1 — Verificarea pre-tranzacție („poarta ordinului")</h3>
+<p>Înainte de a trimite orice ordin, traderul deschide ecranul blotter (lista live a ordinelor în lucru). Blotterul arată deja poziția curentă în instrument (de exemplu, 1.200 de acțiuni ABC Corp). Traderul tastează noua mărime a ordinului (de exemplu, cumpărare 300 de acțiuni). În acel moment, blotterul rulează o verificare automată de expunere: adaugă noua mărime a ordinului la poziția curentă și compară rezultatul cu limita pe nume individual a biroului pentru ABC Corp (să zicem 1.500 de acțiuni). Dacă 1.200 + 300 = 1.500, blotterul devine verde și traderul poate apăsa „trimite". Dacă suma ar depăși 1.500, blotterul clipește roșu și ordinul este respins cu un mesaj pop-up: „Limită de expunere depășită — reduceți mărimea." Traderul trebuie atunci fie să reducă mărimea ordinului, fie să îl anuleze complet.</p>
+<p>Această verificare are loc în mai puțin de o secundă, condusă de motorul de risc care se află între terminalul traderului și bursă. Motorul folosește exact același fișier de limite pe care conformitatea l-a încărcat în noaptea precedentă; nu există nicio anulare manuală în această etapă.</p>
+
+<h3>Pasul 2 — Dimensionarea pozițiilor în timp real („supravegherea tabloului de bord")</h3>
+<p>Odată ce ordinele sunt active, biroul ține deschis un al doilea ecran: tabloul de bord al pozițiilor. Acest tablou de bord arată, într-o coloană, poziția curentă (1.200 de acțiuni), limita (1.500 de acțiuni) și marja rămasă (headroom — 300 de acțiuni). Pe măsură ce tranzacțiile se execută, tabloul de bord se actualizează automat. Dacă biroul cumpără încă 200 de acțiuni, tabloul recalculează instantaneu: 1.200 + 200 = 1.400, marja rămasă = 100. Traderul vede marja verde micșorându-se în timp real. Dacă marja devine galbenă (sub 50 de acțiuni) sau roșie (sub 10 acțiuni), tabloul declanșează o alertă sonoră și un banner care clipește. Traderul trebuie să oprească imediat tranzacționarea acelui nume sau să reducă pozițiile existente pentru a elibera marjă.</p>
+<p><strong>Detaliu important:</strong> tabloul de bord folosește „expunerea brută", adică numără fiecare acțiune deținută de birou, indiferent dacă este acoperită (hedged) sau nu. Dacă biroul deține 1.400 de acțiuni ABC Corp și simultan vinde short 1.000 de acțiuni ABC Corp, expunerea brută este 1.400 + 1.000 = 2.400 de acțiuni, ceea ce ar încălca limita chiar dacă netul este de doar 400 de acțiuni. Limita este pe brut, nu pe net, deoarece reglementatorii vor să vadă amprenta reală pe care o are biroul într-un singur nume.</p>
+
+<h3>Pasul 3 — Reconcilierea de la sfârșitul zilei („ștampila de conformitate")</h3>
+<p>La ora 17:30, ora locală, biroul rulează reconcilierea de la sfârșitul zilei. Echipa de risc trimite un fișier fiecărui trader care listează fiecare instrument atins de trader în ziua respectivă. Traderul trebuie să confirme că poziția finală corespunde cu ceea ce arată motorul de risc. Dacă există vreo neconcordanță, blotterul de tranzacții trebuie corectat înainte de ora 18:00. Odată ce traderul apasă „reconciliază", sistemul blochează poziția și trimite un raport PDF către conformitate. Acest raport este dovada legală că biroul a rămas în limite. Dacă raportul arată o încălcare, biroul trebuie să depună imediat un raport de incident și poate face față unor restricții de tranzacționare a doua zi.</p>
+
+<h3>Pasul 4 — Gestionarea excepțiilor (ce să faci când linia roșie este depășită)</h3>
+<p>Dacă, în ciuda tuturor verificărilor, biroul încalcă o limită, motorul de risc îngheață toate ordinele pentru acel instrument și trimite o alertă șefului de birou și ofițerului de conformitate. Șeful de birou are două opțiuni: (a) reduce poziția vânzând acțiuni imediat sau (b) cere o anulare din partea conformității dacă încălcarea este nesemnificativă (de exemplu, 5 acțiuni peste o limită de 1.500) și biroul poate dovedi că o va desface în decurs de o oră. Anulările sunt rare și necesită justificare scrisă. Biroul trebuie totuși să depună un raport de incident în decurs de 24 de ore.</p>
+
+<h3>Sfaturi practice de la veteranii biroului</h3>
+<ul>
+<li>Verifică întotdeauna marja rămasă înainte de a mări o poziție; nu te baza pe memorie.</li>
+<li>Dacă tranzacționezi nume nelichide, lasă marjă suplimentară, deoarece impactul de piață al desfacerii poate fi mare.</li>
+<li>Nu presupune niciodată că acoperirile (hedge-urile) te vor salva; limita este pe expunerea brută, nu pe net.</li>
+<li>Dacă tabloul de bord arată roșu, oprește imediat tranzacționarea acelui nume — fără excepții.</li>
+<li>Reconciliază devreme; așteptarea până în ultimul minut riscă un raport întârziat și o interogare din partea conformității.</li>
+</ul>
+
+<p>Pe scurt, biroul tratează limitele de expunere ca pe o limită de viteză pe autostradă: poți conduce până la ea, dar trecerea peste ea înseamnă o penalizare automată.</p>
+
+<h2>Limitări, avertismente și când eșuează</h2>
+
+<p>Când vezi prima dată un număr pe ecran care spune „Limită de expunere = 10 mil. $", e tentant să te gândești la el ca la un zid dur care nu va fi niciodată trecut. În practică, limita este un <em>control</em> — o regulă care îi spune biroului să nu mai adauge risc odată ce ești aproape de un prag prestabilit. Este utilă pentru că îi forțează pe oameni să întrebe „Chiar vrem să fim mai mari?", dar <strong>nu</strong> este o garanție că biroul nu va depăși niciodată limita și nici nu îți spune tot ce trebuie să știi despre riscul pe care ți-l asumi.</p>
+
+<h3>1. Limitele sunt la fel de bune ca datele care le alimentează</h3>
+<ul>
+<li><strong>Latența datelor de piață</strong> — Dacă fluxul de prețuri pe care îl folosești este vechi de cinci secunde, expunerea pe care o calculezi va fi învechită. Pe piețele care se mișcă rapid, o limită de 10 mil. $ poate fi încălcată în câteva secunde înainte ca sistemul să înregistreze măcar schimbarea.</li>
+<li><strong>Erori de calitate a datelor</strong> — Cotații greșite, cotații lipsă sau acțiuni corporative (splituri, plăți de dividende) care nu au fost încorporate pot face calculatorul de expunere să subestimeze mărimea reală a poziției. Fă întotdeauna o „verificare de sănătate a datelor" la începutul fiecărei ture: caută salturi evidente, goluri sau valori „NaN" în fluxul de prețuri.</li>
+</ul>
+
+<h3>2. Ipotezele modelelor sunt simplificări, nu realitate</h3>
+<ul>
+<li><strong>Riscul aproximării liniare</strong> — Multe cadre de limite folosesc o expunere liniară „delta" (sensibilitatea de ordinul întâi la mișcările de preț). Aceasta funcționează bine pentru mișcări mici, dar la un salt de 5% profitul și pierderea (P&amp;L) reală poate fi mult mai mare, deoarece curbura („gamma") este ignorată.</li>
+<li><strong>Ipoteza distribuției normale</strong> — Unele limite interne sunt stabilite pe baza Valorii la Risc (VaR) care presupune că randamentele sunt distribuite normal. Piețele reale au „cozi groase" (fat tails): mișcările extreme se întâmplă mai des decât prezice modelul. În consecință, o limită bazată pe VaR poate părea confortabilă în timp ce riscul real de coadă este mult mai mare.</li>
+</ul>
+
+<h3>3. Ruperea corelațiilor</h3>
+<p>Limitele se bazează adesea pe o matrice de corelație care îi spune sistemului cum se mișcă împreună diferitele instrumente. În piețe calme, o corelație de 0,8 între doi indici de acțiuni ar putea fi exactă. În timpul unei crize, acele corelații pot sări la 0,95 sau chiar 1,0, ceea ce înseamnă că expunerea combinată este mult mai mare decât a anticipat calculul limitei. Ține mereu un ochi pe <strong>diagnosticele de corelație în timp real</strong> (de exemplu, grafice de corelație mobilă pe 30 de zile) și fii gata să strângi limitele când cifrele încep să devieze.</p>
+
+<h3>4. Factori operaționali și umani</h3>
+<ul>
+<li><strong>Anulări manuale</strong> — Traderii cer uneori o „derogare de limită" (limit waiver) pentru o anumită tranzacție. Dacă derogarea nu este înregistrată corect, sistemul va crede în continuare că limita este în vigoare, ducând la o încălcare neașteptată mai târziu.</li>
+<li><strong>Clasificarea greșită a produselor</strong> — Un produs structurat ar putea fi introdus ca o opțiune simplă (vanilla), făcând motorul de expunere să aplice factorul de risc greșit. Verifică de două ori codul și descrierea produsului înainte de a apăsa „Trimite".</li>
+</ul>
+
+<h3>5. Lichiditatea și adâncimea pieței</h3>
+<p>O limită îți spune „cât risc poți deține", nu „cât de ușor poți desface acel risc". Într-o obligațiune tranzacționată rar sau o acțiune cu capitalizare mică, o poziție de 10 mil. $ poate reprezenta o fracțiune mare din volumul zilnic. Dacă trebuie să ieși rapid, ai putea mișca prețul împotriva ta și suporta o pierdere mult mai mare decât ar sugera limita. Biroul ar trebui, prin urmare, să asocieze limitele de expunere cu <strong>praguri de lichiditate</strong> (de exemplu, „nu mai mult de 20% din volumul mediu zilnic").</p>
+
+<h3>6. Limite de reglementare vs. limite interne</h3>
+<p>Reglementatorii pot impune o expunere <em>maximă</em> (de exemplu, „nu mai mult de 5% din capitalul de rang 1 / Tier-1") care este absolută. Limitele interne pot fi mai stricte sau mai laxe, în funcție de apetitul de risc al biroului. Încălcarea unei limite interne nu este o încălcare a reglementărilor, dar poate semnala totuși o problemă care necesită escaladare. Invers, faptul că rămâi sub o limită de reglementare <strong>nu</strong> garantează siguranța dacă limitele interne sunt ignorate.</p>
+
+<h3>Ce să faci când o limită este încălcată sau pare nesigură</h3>
+<ul>
+<li><strong>Semnalare imediată</strong> — Sistemul ar trebui să genereze un pop-up și un e-mail către trader, managerul de risc și șeful de birou. Nu o ignora ca pe „doar o eroare de rotunjire".</li>
+<li><strong>Analiza cauzei-rădăcină</strong> — Identifică dacă încălcarea a provenit din mișcarea pieței, o eroare de date, o ipoteză a modelului sau o greșeală operațională.</li>
+<li><strong>Escaladează</strong> — Dacă încălcarea este materială (de exemplu, &gt; 50% din limită), urmează protocolul de escaladare al biroului: informează managementul superior, suspendă tranzacționarea ulterioară a instrumentului și ia în considerare un „kill-switch" (buton de oprire) dacă riscul nu poate fi atenuat rapid.</li>
+<li><strong>Ajustează limita</strong> — Dacă încălcarea se datorează unei schimbări reale a condițiilor de piață (de exemplu, un salt de volatilitate), biroul ar putea fi nevoit să strângă limita temporar. Documentează raționamentul și obține aprobarea înainte de a schimba orice număr.</li>
+</ul>
+
+<h3>Ce să NU faci</h3>
+<ul>
+<li>Să ignori semnalul pentru că „știi că poziția este sigură". Scopul limitelor este de a oferi un punct de control obiectiv și auditabil; judecata personală ar trebui să completeze, nu să înlocuiască acest control.</li>
+<li>Să presupui că o încălcare a limitei se va corecta de la sine fără acțiune.</li>
+</ul>
+
+<h2>Concluzii-cheie</h2>
+
+<p>Când lucrezi cu limite de expunere pe un birou de tranzacționare, există câteva puncte esențiale de reținut pentru a asigura o gestionare eficientă a riscului și conformitatea:</p>
+
+<ul>
+<li><strong>Înțelege scopul limitelor de expunere:</strong> Limitele de expunere sunt stabilite pentru a preveni asumarea excesivă de risc de către traderi și pentru a asigura că expunerea generală la risc a firmei rămâne în niveluri acceptabile. Ele nu sunt un plafon dur, ci mai degrabă un ghid care ajută la gestionarea riscului.</li>
+<li><strong>Cunoaște diferitele tipuri de limite de expunere:</strong>
+<ul>
+<li><strong>Limite de poziție:</strong> limitează numărul de contracte sau poziții pe care un trader le poate deține într-o anumită piață sau instrument.</li>
+<li><strong>Valoarea la Risc (VaR):</strong> măsoară pierderea potențială a unui portofoliu pe un anumit orizont de timp, cu un nivel de încredere dat.</li>
+<li><strong>Deficitul Așteptat (Expected Shortfall — ES):</strong> măsoară pierderea medie așteptată a unui portofoliu pe un anumit orizont de timp, cu un nivel de încredere dat.</li>
+<li><strong>Limite stop-loss:</strong> limitează suma pierderii pe care un trader o poate suporta pe o anumită poziție sau portofoliu.</li>
+</ul>
+</li>
+<li><strong>Identifică părțile interesate cheie:</strong> limitele de expunere sunt stabilite și aplicate de echipele de management al riscului, echipele de conformitate, traderi și managementul superior, fiecare cu un rol distinct.</li>
+<li><strong>Înțelege importanța monitorizării și revizuirii regulate:</strong> limitele de expunere trebuie revizuite și actualizate periodic pentru a reflecta schimbările în condițiile de piață, strategiile de tranzacționare și apetitul de risc.</li>
+<li><strong>Recunoaște limitările limitelor de expunere:</strong> ele nu sunt o soluție infailibilă și pot fi ocolite de traderi prin diverse mijloace, precum acoperirea (hedging), poziționarea sau arbitrajul.</li>
+<li><strong>Fii conștient de cerințele de reglementare:</strong> limitele de expunere trebuie stabilite și aplicate în conformitate cu cerințele de reglementare, precum cele stabilite de SEC în Statele Unite.</li>
+<li><strong>Dezvoltă un cadru robust de management al riscului:</strong> care include evaluarea riscului, monitorizarea riscului și raportarea periodică a riscului către părțile interesate.</li>
+</ul>
+
+<p>Înțelegând aceste concluzii-cheie, vei fi mai bine pregătit să gestionezi eficient limitele de expunere și să te asiguri că biroul tău de tranzacționare operează în niveluri de risc acceptabile.</p><script type="application/json" id="cf-mc-quiz">[{"q": "Care este definiția corectă a „expunerii” (exposure) pe un birou de tranzacționare?", "options": ["Suma totală de risc pe care un trader și-o asumă la un moment dat, adică „mărimea” pariurilor", "Profitul net realizat la sfârșitul zilei", "Diferența dintre prețul de cumpărare și cel de vânzare", "Comisionul plătit reglementatorului"], "correct": 0, "explain": "Expunerea este mărimea totală a pozițiilor (cât risc îți asumi), nu profitul sau pierderea. Dacă pierzi, expunerea rămâne aceeași, dar pierderea crește.", "kind": "concept"}, {"q": "Un trader cumpără acțiuni de 10 milioane USD, iar prețul scade cu 20%. Ce se întâmplă cu expunerea sa?", "options": ["Scade la 8 milioane USD", "Rămâne 10 milioane USD, dar pierderea crește", "Crește la 12 milioane USD", "Devine zero pentru că poziția e pe pierdere"], "correct": 1, "explain": "Expunerea este mărimea pariului inițial și rămâne 10 milioane USD; ceea ce crește este pierderea, nu expunerea.", "kind": "concept"}, {"q": "Care este diferența esențială dintre o „oprire dură” (hard stop) și o „oprire moale” (soft stop)?", "options": ["Hard stop avertizează, soft stop blochează tranzacțiile", "Ambele blochează identic tranzacțiile", "Hard stop blochează automat noile tranzacții și nu poate fi depășită; soft stop doar avertizează, dar permite tranzacționarea", "Soft stop e stabilită de reglementator, hard stop de trader"], "correct": 2, "explain": "Hard stop = zid care nu poate fi trecut (blochează automat). Soft stop = nivel de avertizare (ca un limitator de viteză): poți trece, dar nu e recomandat.", "kind": "text"}, {"q": "Ce indică VaR (Value at Risk) de 10 milioane USD la un nivel de încredere de 99%?", "options": ["Biroul va pierde exact 10 milioane USD în fiecare zi", "Profitul garantat este de 10 milioane USD", "Limita maximă de cumpărare este 10 milioane USD", "Există o șansă de doar 1% ca biroul să piardă mai mult de 10 milioane USD într-o singură zi"], "correct": 3, "explain": "VaR la 99% înseamnă că există doar 1% șanse ca pierderea într-o zi să depășească acea sumă. Este o estimare statistică a riscului, nu o certitudine.", "kind": "concept"}, {"q": "De ce dezvăluie capitolul povestea Băncii Barings (Nick Leeson, 1995)?", "options": ["Pentru a arăta cum se calculează VaR", "Ca exemplu real în care un singur trader a luat poziții secrete peste ce putea firma să piardă, ducând la colaps — exact ce previn limitele de expunere", "Pentru a explica funcționarea ordinelor stop-loss", "Pentru a ilustra cum cresc dividendele"], "correct": 1, "explain": "Barings a fost dată ca exemplu de catastrofă: limitele de expunere sunt sistemul de avertizare timpurie care împiedică un trader să ascundă un pariu suficient de mare cât să prăbușească firma.", "kind": "text"}, {"q": "Pe tabloul de bord al biroului, de ce se folosește expunerea BRUTĂ (gross) și nu cea netă pentru limita pe nume individual?", "options": ["Pentru că netul e mai greu de calculat", "Pentru că reglementatorii vor să vadă amprenta reală a biroului într-un singur nume, indiferent de acoperiri", "Pentru a reduce numărul de tranzacții", "Pentru că brutul e întotdeauna mai mic decât netul"], "correct": 1, "explain": "Brutul numără fiecare acțiune deținută (long + short în absolut). 1.400 long + 1.000 short = 2.400 brut, chiar dacă netul e doar 400 — reglementatorul vrea amprenta reală totală.", "kind": "concept"}, {"q": "Un birou deține 1.400 acțiuni long și 1.000 acțiuni short în ABC Corp, cu o limită brută de 1.500. Care e situația?", "options": ["În limită, pentru că netul e 400", "Încălcare (breach), pentru că expunerea brută este 2.400 > 1.500", "În limită, pentru că short-urile nu contează", "Exact la limită, 1.500"], "correct": 1, "explain": "Expunerea brută = 1.400 + 1.000 = 2.400, ceea ce depășește 1.500, deci este o încălcare — chiar dacă netul (400) ar părea confortabil.", "kind": "concept"}, {"q": "Care este una dintre cele mai frecvente greșeli ale începătorilor privind relația dintre expunere și mărimea poziției?", "options": ["Confundă long cu short", "Calculează VaR-ul greșit", "Uită multiplicatorul de preț și stabilesc limite pe numărul brut de acțiuni în loc de dolari riscați", "Folosesc euro în loc de dolari"], "correct": 2, "explain": "100 acțiuni la 10$ = 1.000$ expunere, dar 100 acțiuni la 100$ = 10.000$. Trebuie convertit întotdeauna în monedă (dolari riscați) înainte de a compara cu limita.", "kind": "concept"}, {"q": "De ce nu este suficient să tratezi 100 de contracte futures la fel ca 100 de opțiuni call pe acele futures?", "options": ["Pentru că opțiunile sunt mai scumpe", "Pentru că delta opțiunilor (ex. 0,40) face ca expunerea reală să fie mai mică — call-urile s-ar comporta ca doar 40 de contracte", "Pentru că futures sunt OTC", "Pentru că opțiunile nu au expunere"], "correct": 1, "explain": "Delta arată cât se mișcă opțiunea pentru o mișcare de 1$ a activului-suport. Cu delta 0,40, 100 call-uri se comportă ca 40 de contracte; omiterea pasului delta te poate face să crezi că ești în limită când ești peste.", "kind": "concept"}, {"q": "Conform capitolului, de ce un birou care tranzacționează acțiuni europene în euro tot are risc FX?", "options": ["Pentru că euro nu e o valută reală", "Pentru că acțiunile europene se tranzacționează în dolari", "FX-ul nu contează niciodată", "Pentru că finanțarea firmei este adesea în dolari, deci o pierdere în euro tot trebuie convertită înapoi în dolari"], "correct": 3, "explain": "Concepție greșită: „expunerea valutară înseamnă doar perechi FX”. Dacă finanțarea e în dolari, orice poziție în altă monedă are expunere FX egală cu întreaga valoare de piață.", "kind": "concept"}, {"q": "De ce un ordin stop-loss NU te scutește de monitorizarea limitelor de expunere?", "options": ["Pentru că stop-loss-ul crește expunerea", "Pentru că poziția contează în continuare la expunere până când stopul este efectiv executat și poziția închisă", "Pentru că stop-loss-urile sunt interzise de reglementator", "Pentru că stop-loss-ul mărește VaR-ul"], "correct": 1, "explain": "Stop-loss-ul elimină riscul de piață doar după ce este atins și executat; până atunci poziția rămâne în portofoliu și contează la expunere. E un instrument de control al riscului, nu un substitut pentru monitorizarea limitelor.", "kind": "concept"}, {"q": "Care este diferența dintre limitele de conformitate și limitele de risc, conform capitolului?", "options": ["Sunt identice", "Limitele de conformitate sunt stabilite de reglementatori/auditori și sunt de obicei mai stricte; limitele de risc sunt stabilite de birou sau de CRO", "Limitele de risc sunt mereu mai stricte", "Doar limitele de risc sunt obligatorii"], "correct": 1, "explain": "A fi în interiorul limitei de risc nu satisface automat conformitatea. Limita de conformitate (de la reglementatori/auditori) e de obicei mai strictă și are puncte de măsurare diferite — trebuie verificată separat.", "kind": "text"}, {"q": "În exemplul rezolvat, expunerea netă curentă este 200.000 USD long, iar o nouă tranzacție TSLA adaugă 1.250.000 USD long. Limita e 10 M USD. Care e expunerea netă proiectată și verdictul?", "options": ["1.050.000 USD — peste limită", "1.450.000 USD — în limită", "1.250.000 USD — exact la limită", "9.800.000 USD — peste limită"], "correct": 1, "explain": "200.000 + 1.250.000 = 1.450.000 USD. Deoarece 1,45 M < 10 M, tranzacția este confortabil în limită.", "kind": "concept"}, {"q": "Cum se calculează noționalul net al unui portofoliu de sector?", "options": ["Adunând toate pozițiile, fără semn", "Înmulțind long cu short", "Adunând noționalul pozițiilor long și scăzând noționalul pozițiilor short", "Doar pozițiile long contează"], "correct": 2, "explain": "Noțional net = Σ(noțional long) − Σ(noțional short). Pozițiile short se compensează (netting) cu cele long pentru a obține expunerea netă a sectorului.", "kind": "text"}, {"q": "De ce, în cazul numelor nelichide (illiquid), veteranii recomandă lăsarea unei marje (headroom) suplimentare?", "options": ["Pentru că nelichidele au comisioane mai mari", "Pentru că impactul de piață al desfacerii poate fi mare — limita spune cât risc poți deține, nu cât de ușor îl poți desface", "Pentru că reglementatorul cere asta explicit", "Pentru că prețul lor e mereu mai mic"], "correct": 1, "explain": "O limită îți spune cât risc poți deține, nu cât de ușor îl poți desface. Într-un instrument nelichid, ieșirea rapidă poate mișca prețul împotriva ta, generând pierderi mai mari decât sugerează limita.", "kind": "concept"}, {"q": "Ce reprezintă „compensarea” (netting) a expunerii în contextul scenariului forex cu euro?", "options": ["Anularea completă a tuturor tranzacțiilor", "Procesul de echilibrare a câștigurilor și pierderilor (long contra short) pentru a determina expunerea totală reală", "Adunarea brută a tuturor pozițiilor", "Conversia euro în dolari"], "correct": 1, "explain": "Netting = compensarea pozițiilor opuse. O cumpărare de 100 mil. euro și o vânzare de 50 mil. euro se compensează parțial, reducând expunerea netă reală a portofoliului.", "kind": "text"}, {"q": "De ce o limită bazată pe VaR poate părea „confortabilă” deși riscul real este mai mare?", "options": ["Pentru că VaR ignoră complet pierderile", "Pentru că VaR presupune adesea distribuție normală, însă piețele reale au „cozi groase” (fat tails) cu mișcări extreme mai frecvente decât prezice modelul", "Pentru că VaR e calculat doar lunar", "Pentru că VaR include doar profiturile"], "correct": 1, "explain": "Multe limite VaR presupun normalitatea randamentelor, dar piețele reale au fat tails: evenimentele extreme apar mai des decât prezice modelul, deci riscul de coadă real poate depăși limita aparent confortabilă.", "kind": "concept"}, {"q": "Ce pericol prezintă o „rupere a corelațiilor” (correlation breakdown) într-o criză?", "options": ["Corelațiile dispar complet și nu mai contează", "Corelațiile scad la zero, reducând riscul", "Corelații care erau 0,8 în piețe calme pot sări la 0,95–1,0, făcând expunerea combinată mult mai mare decât a anticipat calculul limitei", "Doar prețurile contează, nu corelațiile"], "correct": 2, "explain": "Matricea de corelație presupune relații stabile. În criză, corelațiile cresc brusc spre 1,0, instrumentele se mișcă împreună, iar expunerea reală combinată depășește mult ce a presupus limita.", "kind": "concept"}, {"q": "Pentru limita VaR mobilă din mecanica zilnică, ce se întâmplă când este declanșată o încălcare?", "options": ["Toate tranzacțiile sunt blocate automat, ca la hard stop", "NU blochează automat tranzacțiile; declanșează un e-mail către Șeful de Risc, care decide în 15 minute dacă permite ordinul sau cere desfacerea", "Biroul este închis imediat", "Se șterge tot cubul de expunere"], "correct": 1, "explain": "Deoarece VaR este o estimare statistică, o încălcare aici nu blochează automat ordinele — escaladează către Head of Risk pentru o decizie umană în 15 minute.", "kind": "text"}, {"q": "În mecanica de la sfârșitul zilei, ce se întâmplă cu pozițiile rămase deschise după ora 18:00?", "options": ["Sunt închise forțat automat", "Sunt reportate automat și reevaluate la marcajul de la ora 07:00 al zilei următoare", "Sunt șterse din sistem", "Sunt transferate reglementatorului"], "correct": 1, "explain": "La 18:00 cubul se arhivează și se golesc înregistrările, dar pozițiile încă deschise se reportează automat și se reevaluează la marcarea de la 07:00 a doua zi.", "kind": "text"}, {"q": "Care este rolul „factorilor de ponderare” (weighting factors) în motorul de risc?", "options": ["Stabilesc comisionul tranzacției", "Determină ora de deschidere a pieței", "Un număr între 0 și 1 care spune motorului cât din valoarea de piață să numere (ex. 1,0 la Acțiune Individuală, unde se aplică valoarea completă)", "Convertesc acțiunile în obligațiuni"], "correct": 2, "explain": "Factorul de ponderare (0–1) indică cât din valoarea de piață contează la o limită netă vs. brută. Pentru Acțiune Individuală factorul e 1,0: se aplică valoarea de piață completă, indiferent de compensări.", "kind": "text"}, {"q": "De ce sunt politicile interne ale firmei (firm policy) adesea mai conservatoare decât limitele de reglementare?", "options": ["Pentru a plăti mai puține taxe", "Pentru a proteja reputația și capitalul firmei, mergând dincolo de minimul cerut de reglementator", "Pentru că reglementatorii nu au limite", "Pentru a evita complet tranzacționarea"], "correct": 1, "explain": "Firmele își impun limite (ex. un VaR zilnic mai strict) mai conservatoare decât minimul de reglementare pentru a-și proteja capitalul și reputația, nu doar pentru a fi conforme legal.", "kind": "concept"}, {"q": "Un trader vede pe blotter că 1.200 + 300 = 1.500, exact limita pe nume individual. Ce face sistemul?", "options": ["Respinge ordinul cu mesaj roșu", "Blotterul devine verde și traderul poate apăsa „trimite”, fiindcă suma este egală cu limita (nu o depășește)", "Blochează contul traderului", "Escaladează la Head of Risk"], "correct": 1, "explain": "Verificarea pre-tranzacție blochează doar dacă suma DEPĂȘEȘTE limita. La 1.500 = 1.500, ordinul este permis (verde); abia peste 1.500 ar fi respins (roșu).", "kind": "concept"}, {"q": "De ce este jurnalul de audit (audit log) păstrat imuabil timp de șapte ani?", "options": ["Pentru a economisi spațiu pe server", "Pentru ca traderii să-l poată edita", "Pentru a calcula dividendele", "Pentru a respecta regulile de păstrare a evidențelor din MiFID — este dovada legală a conformității"], "correct": 3, "explain": "Jurnalul CSV (timestamp, user, instrument, cantitate, direcție, status limită) este imuabil și păstrat 7 ani conform regulilor MiFID de record-keeping, servind drept dovadă legală.", "kind": "text"}, {"q": "Conform secțiunii „Concluzii-cheie”, limitele de expunere pot fi ocolite (circumvent) de traderi prin ce mijloace?", "options": ["Doar prin VaR", "Prin acoperire (hedging), poziționare și arbitraj — de aceea nu sunt o soluție infailibilă", "Prin oprirea complet a tranzacționării", "Prin schimbarea valutei de bază"], "correct": 1, "explain": "Capitolul subliniază că limitele nu sunt infailibile: pot fi ocolite prin hedging (derivate de compensare), poziționare indirectă și arbitraj — de aceea e nevoie de monitorizare și revizuire continuă.", "kind": "text"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>

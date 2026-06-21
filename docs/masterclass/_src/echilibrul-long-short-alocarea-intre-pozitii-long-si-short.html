@@ -1,0 +1,415 @@
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Echilibrul long/short (long/short balance) este modul în care un trader împarte banii între două tipuri de pariuri: pariuri care câștigă atunci când piața urcă (poziții „long", adică „pe creștere") și pariuri care câștigă atunci când piața scade (poziții „short", adică „pe scădere"). Gândește-te la acest echilibru ca la decizia, luată zilnic, despre cât din capitalul tău de tranzacționare îndrepți în fiecare direcție. Stăpânirea acestui echilibru long/short și a alocării dintre poziții long și short este fundamentul oricărui fond market-neutral.</p>
+
+<p>Ideea-cheie: echilibrul este rareori 50% long și 50% short. Poate fi 60% long și 40% short, 80% long și 20% short sau orice combinație. Împărțirea exactă este ceea ce numim „alocarea" (allocation). Alocarea nu este o decizie luată o singură dată, ci una pe care traderii o ajustează în fiecare zi în funcție de viziunea lor asupra pieței, de volatilitate și de limitele de risc.</p>
+
+<p>În acest capitol vei învăța cum să măsori expunerea brută (gross exposure) și expunerea netă (net exposure), cum să respecți bugetul de risc, cum să reechilibrezi cartea de poziții și cum gestionează un birou de tranzacționare real, pas cu pas, balanța dintre cumpărări și vânzări în lipsă. Termenii englezești importanți sunt păstrați în paranteză, ca să recunoști vocabularul folosit pe orice birou profesionist.</p>
+
+<h3>1. Poziția long</h3>
+
+<p>O poziție long înseamnă, pur și simplu, a deține ceva despre care speri că va crește în preț. Dacă cumperi 100 de acțiuni din Acțiunea A la 50 $ și le vinzi mai târziu la 60 $, ai obținut un profit de 1.000 $. Pe birou spunem că ești „long 100 de acțiuni din Acțiunea A". Fiecare poziție long are trei numere pe care le urmărim:</p>
+
+<ul>
+<li><strong>Valoarea noțională (notional)</strong> – valoarea în dolari a poziției (număr de acțiuni × preț).</li>
+<li><strong>Direcția</strong> – câștigă dacă prețul urcă.</li>
+<li><strong>Expunerea (exposure)</strong> – cu cât se mișcă profitul/pierderea (P&amp;L) când prețul se schimbă cu 1%. Un long de 100.000 $ într-o acțiune care se mișcă 1 $ la fiecare variație de 1% are o expunere de 1.000 $ la fiecare 1%.</li>
+</ul>
+
+<h3>2. Poziția short</h3>
+
+<p>O poziție short este un pariu că ceva va scădea. Pentru a deschide un short împrumuți activul (de obicei de la broker), îl vinzi imediat și, mai târziu, îl răscumperi mai ieftin pentru a-l înapoia. Dacă vinzi în lipsă 100 de acțiuni din Acțiunea B la 40 $ și acoperi poziția (cover) la 30 $, ai obținut un profit de 1.000 $. Puncte esențiale:</p>
+
+<ul>
+<li><strong>Valoarea noțională</strong> – la fel ca la long, valoarea în dolari la momentul vânzării.</li>
+<li><strong>Direcția</strong> – câștigă dacă prețul scade.</li>
+<li><strong>Expunerea</strong> – din nou, cu cât se mișcă P&amp;L la o variație de 1%. Un short de 100.000 $ în aceeași acțiune are o expunere de 1.000 $ la fiecare 1%, dar cu semn opus față de partea long.</li>
+</ul>
+
+<h3>3. Expunerea brută (gross exposure)</h3>
+
+<p>Aceasta este totalul tuturor pozițiilor long plus toate pozițiile short, ignorând direcția. Dacă ești long 500.000 $ și short 300.000 $, expunerea ta brută este 800.000 $. Îți spune câtă „putere de foc" ai angajat în piață, indiferent dacă pariezi pe creștere sau pe scădere.</p>
+
+<h3>4. Expunerea netă (net exposure)</h3>
+
+<p>Expunerea netă scade pozițiile short din cele long. În același exemplu, 500.000 $ − 300.000 $ = 200.000 $ net long. O valoare netă pozitivă înseamnă că ești înclinat spre piețe în creștere; o valoare netă negativă înseamnă că ești înclinat spre piețe în scădere. Expunerea netă este singurul număr care îți arată înclinația direcțională.</p>
+
+<h3>5. Alocarea (allocation)</h3>
+
+<p>Alocarea este procesul de a alege cum împarți capitalul total între partea long și partea short. Dacă ai 1.000.000 $ de capital și decizi să pui 700.000 $ pe long și 300.000 $ pe short, alocarea ta este 70% long / 30% short. Alocarea nu este o decizie luată o singură dată; traderii o ajustează în fiecare zi în funcție de viziunea lor asupra pieței, de volatilitate și de limitele de risc.</p>
+
+<h3>6. Bugetul de risc (risk budget)</h3>
+
+<p>Bugetul de risc este suma maximă de bani pe care ai voie să o pierzi într-o singură zi. De obicei se exprimă ca o sumă în dolari sau ca un procent din capital. Dacă bugetul tău de risc este 20.000 $ pe zi, iar pozițiile tale curente au un potențial de pierdere zilnică de 25.000 $, trebuie să reduci expunerea — fie micșorând pozițiile, fie schimbând echilibrul long/short — până când pierderea potențială intră în buget.</p>
+
+<h3>7. Riscul de corelație și de aglomerare (crowding risk)</h3>
+
+<p>Uneori, mulți traderi se află de aceeași parte a aceleiași tranzacții. Dacă majoritatea fondurilor sunt long pe aceleași acțiuni, iar acele acțiuni scad brusc, toți încearcă să vândă în același timp, agravând pierderile. Acesta se numește risc de aglomerare (crowding risk). Corelația ne spune cât de mult se mișcă împreună diferite active. O corelație ridicată între pozițiile tale long și short reduce beneficiul de diversificare al echilibrului long/short.</p>
+
+<h3>8. Reechilibrarea (rebalancing)</h3>
+
+<p>Reechilibrarea înseamnă ajustarea împărțirii long/short înapoi la alocarea-țintă. Dacă ținta ta este 60% long / 40% short, dar mișcările de piață de azi te lasă la 70% long / 30% short, vinzi din pozițiile long sau cumperi mai multe short pentru a readuce raportul la normal. Reechilibrarea se face de obicei la un moment fix în fiecare zi, adesea la închiderea pieței.</p>
+
+<h3>9. Levierul (leverage)</h3>
+
+<p>Levierul înseamnă folosirea banilor împrumutați pentru a mări dimensiunea pozițiilor dincolo de propriul capital. Dacă folosești 1.000.000 $ din banii tăi și împrumuți încă 1.000.000 $ pentru a cumpăra acțiuni, expunerea ta brută este 2.000.000 $, dar expunerea netă rămâne 1.000.000 $ (presupunând că nu ai vândut nimic în lipsă). Levierul amplifică atât câștigurile, cât și pierderile; cu cât levierul este mai mare, cu atât echilibrul long/short trebuie gestionat mai strâns pentru a evita încălcarea limitelor de risc.</p>
+
+<h3>10. Atribuirea P&amp;L (P&amp;L attribution)</h3>
+
+<p>La sfârșitul fiecărei zile descompunem profitul sau pierderea în contribuții din long, din short și din costurile de finanțare (dobânda la acțiunile sau numerarul împrumutat). Dacă long-urile au făcut 8.000 $, short-urile 5.000 $, iar finanțarea a costat 1.000 $, P&amp;L-ul tău net este 12.000 $. Această descompunere arată dacă echilibrul tău long/short funcționează așa cum a fost gândit.</p>
+
+<p>În practică, echilibrul long/short este volanul unui fond long/short. Sarcina traderului este să stabilească alocarea, să monitorizeze expunerile netă și brută, să respecte bugetul de risc și să reechilibreze atunci când piața scoate raporturile din linie. Restul capitolului îți va arăta exact cum să faci fiecare dintre acești pași pe un birou de tranzacționare real.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că ești un fermier care cultivă două tipuri de culturi: grâu și porumb. Ai o cantitate limitată de teren pentru ambele culturi și trebuie să decizi cât din fiecare cultură să plantezi. Scopul este să maximizezi recolta totală, adică randamentul combinat al grâului și al porumbului.</p>
+
+<p>În acest scenariu, a planta mai mult grâu seamănă cu a lua o poziție long într-o tranzacție. Pariezi că grâul se va descurca bine și va crește în valoare. Pe de altă parte, a planta mai mult porumb seamănă cu a lua o poziție short. Pariezi că porumbul se va descurca prost și va scădea în valoare.</p>
+
+<p>Totuși, există o capcană. Terenul de care dispui este limitat și nu poți planta ambele culturi în cantități egale. Acest lucru seamănă cu constrângerea unui birou de tranzacționare, unde capitalul disponibil pentru tranzacționare este limitat. Trebuie să îți aloci resursele (în acest caz, terenul) între două opțiuni diferite (grâu și porumb).</p>
+
+<p>Problema pe care încerci să o rezolvi este cum să aloci terenul între grâu și porumb pentru a maximiza recolta totală. Acest lucru este echivalent cu problema alocării capitalului între poziții long și short pentru a maximiza profitul din tranzacționare.</p>
+
+<p>Așa cum fermierul trebuie să țină cont de factori precum rata de creștere a fiecărei culturi, vremea și cererea de pe piață, un trader trebuie să țină cont de factori precum mișcarea de preț așteptată a activului-suport, volatilitatea și sentimentul pieței. Scopul este să iei o decizie informată despre cum să îți aloci resursele pentru a obține cel mai bun rezultat posibil.</p>
+
+<p>În ambele cazuri, cheia este să găsești echilibrul optim între cele două opțiuni. Dacă fermierul plantează prea mult grâu și prea puțin porumb, recolta totală poate avea de suferit. La fel, dacă un trader ia o poziție long prea mare și o poziție short prea mică, profitul din tranzacționare poate fi suboptim.</p>
+
+<p>Conceptul de echilibru long/short este o modalitate de a cuantifica acest echilibru optim. Este o măsură a cât din capitalul de tranzacționare este alocat pozițiilor long față de pozițiile short. Prin monitorizarea și ajustarea echilibrului long/short, un trader se poate asigura că își valorifică la maximum resursele și că reduce riscul de subperformanță.</p>
+
+<p>Deși această analogie nu este exactă, ea ajută la ilustrarea intuiției de bază din spatele conceptului de echilibru long/short. Așa cum fermierul trebuie să echilibreze creșterea grâului și a porumbului pentru a maximiza recolta, un trader trebuie să echilibreze pozițiile long și short pentru a maximiza profitul. Înțelegând acest concept fundamental, traderii pot lua decizii mai informate și își pot îmbunătăți performanța generală.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Pe un birou de tranzacționare, expresia „echilibru long/short" este o prescurtare pentru decizia despre cât capital să pui pe partea long a cărții de poziții față de cât pe partea short. Procesul este complet mecanic odată ce ai decis deja ce vrei să deții (long-urile) și ce vrei să datorezi (short-urile). Mai jos este secvența exactă pe care o urmează un alocator junior în fiecare dimineață, împărțită în date de intrare, procesul pas cu pas și rezultatele care ajung în registrul de tranzacții (blotter).</p>
+
+<h3>1. Datele de intrare pe care trebuie să le aduni înainte de a începe</h3>
+
+<ul>
+<li><strong>Valoarea brută de piață (gross market value, GMV)</strong>: valoarea totală în dolari a fiecărei poziții long plus fiecare poziție short, exprimată ca număr pozitiv.</li>
+<li><strong>Expunerea netă (net exposure, NE)</strong>: long-uri minus short-uri (poate fi pozitivă sau negativă).</li>
+<li><strong>Numerarul disponibil</strong>: numerarul pe care nu l-ai folosit încă; este singurul capital pe care îl poți utiliza pentru a ajusta echilibrul.</li>
+<li><strong>Lista de poziții</strong>: un rând de tabel pentru fiecare titlu, cu (a) partea (L sau S), (b) cantitatea, (c) prețul, (d) valoarea de piață, (e) sectorul, (f) marcajul de lichiditate.</li>
+<li><strong>Limitele de risc</strong>: GMV maximă și NE absolută maximă pe care biroul are voie să le ruleze astăzi.</li>
+<li><strong>Tabelul costurilor de execuție</strong>: comisionul estimat și costul de impact asupra pieței pentru a adăuga sau a elimina 1 $ din orice titlu.</li>
+</ul>
+
+<h3>2. Exercițiul de alocare pas cu pas</h3>
+
+<p><strong>Pasul 1 – Verifică punctul de plecare</strong><br>
+Deschide registrul și confirmă GMV, NE și numerarul. Dacă registrul arată GMV = 32,4 mil. $, NE = +2,1 mil. $, numerar = 4,7 mil. $, notează aceste cifre pe o foaie de hârtie.</p>
+
+<p><strong>Pasul 2 – Calculează „numerarul necesar" pentru a ajunge la echilibrul-țintă</strong><br>
+Să presupunem că politica biroului este să ruleze 70% din GMV pe partea long și 30% pe partea short. Aceasta se numește „împărțirea 70/30".<br>
+GMV long țintă = 0,70 × 32,4 mil. $ = 22,68 mil. $<br>
+GMV short țintă = 0,30 × 32,4 mil. $ = 9,72 mil. $<br>
+GMV long curentă = 25,3 mil. $ (din registru)<br>
+GMV short curentă = 7,1 mil. $<br>
+Prin urmare, long-urile sunt cu 2,62 mil. $ prea mari, iar short-urile cu 2,62 mil. $ prea mici.<br>
+Ca să micșorezi long-urile cu 2,62 mil. $ trebuie să vinzi 2,62 mil. $ de long-uri; ca să crești short-urile cu aceeași sumă trebuie să cumperi 2,62 mil. $ de short-uri. Cele două tranzacții se anulează întotdeauna reciproc în termeni de dolari, deci singurul numerar de care ai nevoie este pentru comisioane și impactul asupra pieței.</p>
+
+<p><strong>Pasul 3 – Transformă sumele în ordine</strong></p>
+<ul>
+<li>Enumeră fiecare poziție long în ordinea descrescătoare a lichidității (cele mai lichide primele).</li>
+<li>Vinde primele N rânduri până când vânzarea cumulată ajunge la 2,62 mil. $ (rotunjit la cei mai apropiați 10.000 $ pentru a evita tranzacțiile cu loturi neregulate).</li>
+<li>Fă la fel pentru short-uri: cumpără cei mai lichizi candidați short până ajungi la 2,62 mil. $.</li>
+<li>Înregistrează fiecare tichet în registru la rubrica „Ajustare de alocare".</li>
+</ul>
+
+<p><strong>Pasul 4 – Verifică limitele de risc după execuția ipotetică</strong><br>
+După ce tranzacțiile se execută, recalculează GMV și NE.<br>
+GMV nouă = (25,3 − 2,62) + (7,1 + 2,62) = 32,4 mil. $ (neschimbată).<br>
+NE nouă = (22,68 − 2,62) − (9,72 + 2,62) = −2,26 mil. $.<br>
+Dacă noua NE este în interiorul benzii permise (de exemplu ±3 mil. $), alocarea este acceptată. Dacă nu, trebuie să iterezi: vinzi mai multe long-uri sau cumperi mai multe short-uri până când NE intră în bandă.</p>
+
+<p><strong>Pasul 5 – Finanțează tranzacțiile</strong><br>
+Numerarul pentru comisioane și pentru orice slippage rezidual provine din cei 4,7 mil. $ disponibili. Dacă tabelul de costuri spune 0,02 $ la fiecare 100 $ de rulaj, rulajul de 2,62 mil. $ costă aproximativ 5,2 mii $. Scade asta din numerar; dacă numerarul scade sub zero, trebuie să reduci proporțional dimensiunile tranzacțiilor.</p>
+
+<h3>3. Rezultatele care contează pentru birou</h3>
+
+<ul>
+<li>Registru actualizat, cu noile cantități, prețuri și valori de piață.</li>
+<li>Numere de confirmare de la broker pentru fiecare tichet.</li>
+<li>Impactul în timp real asupra P&amp;L: diferența dintre NE veche și cea nouă, înmulțită cu mișcarea indicelui de la închiderea de ieri.</li>
+<li>Un „fișier delta" care alimentează sistemul de risc, astfel încât rapoartele de risc overnight să reflecte noul echilibru.</li>
+</ul>
+
+<h3>Capcane frecvente de evitat</h3>
+
+<ul>
+<li>Nu tranzacționa loturi neregulate; rotunjește la cele mai apropiate 100 de acțiuni sau 10 contracte.</li>
+<li>Nu lăsa niciodată short-urile să depășească long-urile cu mai mult decât limita de risc, chiar dacă o acțiune este foarte atractivă.</li>
+<li>Reactualizează întotdeauna prețul ordinelor imediat înainte de trimitere; prețurile învechite pot transforma un slippage de 0,1% într-unul de 0,5%.</li>
+<li>Dacă numerarul este puțin, prioritizează mai întâi numele cu lichiditate ridicată; numele nelichide pot fi lăsate pentru după-amiază, când volumul este mai mare.</li>
+</ul>
+
+<p>Aceasta este întreaga buclă mecanică: adună datele de intrare, calculează diferența, împarte diferența în ordine, verifică limitele, finanțează tranzacțiile și înregistrează rezultatele. Stăpânirea acestei bucle este prima abilitate pe care un alocator începător trebuie să o demonstreze înainte de a trece la subiecte mai subtile, precum înclinațiile sectoriale sau scalarea levierului.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să parcurgem o decizie de alocare completă și concretă pe un birou mic de început. Biroul rulează o strategie market-neutral (neutră față de piață): este long pe un coș de 20 de acțiuni lichide și short pe un coș, egal ca valoare în dolari, de alte 20 de acțiuni lichide. Mandatul este să mențină expunerea brută (long + short) la aproximativ 1 mil. USD, iar expunerea netă (long − short) cât mai aproape de zero. Toate prețurile sunt live la 10:15 ET, pe 12 mai 2023.</p>
+
+<h3>1. Pozițiile de pornire</h3>
+<ul>
+<li>Cartea long: 20 de acțiuni, valoare totală de piață 500.000 USD.</li>
+<li>Cartea short: 20 de acțiuni, valoare totală de piață 500.000 USD.</li>
+<li>Brut = 1 mil., Net = 0.</li>
+</ul>
+
+<h3>2. Catalizatorul la 10:16</h3>
+<p>Un broker semnalează o foaie de flux (axe sheet) care arată un flux bidirecțional intens în complexul energetic. Mai exact:</p>
+<ul>
+<li>Numele long din energie (de ex. XOM, CVX) sunt în creștere cu 0,8% la deschidere.</li>
+<li>Numele short din energie (de ex. RIG, FANG) sunt în scădere cu 1,1% la deschidere.</li>
+</ul>
+<p>Long-urile din energie ale biroului reprezintă 8% din cartea long; short-urile din energie reprezintă 7% din cartea short.</p>
+
+<h3>3. Verificare rapidă a P&amp;L</h3>
+<ul>
+<li>Evaluare la piață (mark-to-market) pe long-uri: +0,8% × 0,08 × 500 mii ≈ +3.200 USD.</li>
+<li>Evaluare la piață pe short-uri: −1,1% × 0,07 × 500 mii ≈ −3.850 USD.</li>
+<li>P&amp;L net de până acum: −650 USD.</li>
+</ul>
+
+<h3>4. Limitele de risc</h3>
+<ul>
+<li>Ponderea maximă long pe un singur nume: 6% din cartea long.</li>
+<li>Ponderea maximă short pe un singur nume: 5% din cartea short.</li>
+<li>Expunerea netă maximă pe sector: ±3% din brut.</li>
+</ul>
+<p>Energia este în prezent 8% long și 7% short, deci netul sectorial este +1% din brut, ceea ce se încadrează în limita de ±3%. Nu există încă o încălcare clară, dar biroul preferă să mențină neturile sectoriale mai strânse decât limita.</p>
+
+<h3>5. Alegerea de alocare</h3>
+<p>Biroul are trei opțiuni practice:</p>
+<ul>
+<li>A. Să nu facă nimic.</li>
+<li>B. Să reducă din long-uri și/sau să adauge la short-uri pentru a apropia netul sectorial al energiei de zero.</li>
+<li>C. Să supra-aloce pe partea short în energie pentru a exprima o viziune pesimistă (bearish).</li>
+</ul>
+<p>Deoarece biroul este market-neutral prin mandat, opțiunea C este în afara plicului de risc. Prin urmare, biroul ia în considerare opțiunea B.</p>
+
+<h3>6. Dimensionarea re-alocării</h3>
+<ul>
+<li>Netul sectorial dorit pentru energie: 0% din brut.</li>
+<li>Long-uri curente în energie: 40.000 USD (8% din 500 mii).</li>
+<li>Short-uri curente în energie: 35.000 USD (7% din 500 mii).</li>
+<li>Pentru a ajunge la net zero, biroul trebuie să adauge 37.500 USD de short-uri suplimentare în nume din energie.</li>
+</ul>
+<p>Totuși, biroul are și o pondere maximă short pe un singur nume de 5%. Dacă biroul ar adăuga pur și simplu 37.500 USD la short-urile existente din energie, cel mai mare nume individual s-ar deplasa de la 5% la 7,5%, încălcând limita.</p>
+
+<h3>7. Planul de execuție</h3>
+<ul>
+<li>Vinde 20.000 USD din long-urile existente în energie (reducând ponderea long de la 8% la 4%).</li>
+<li>Cumpără 17.500 USD de short-uri suplimentare în energie (adăugând la cele 35 mii existente pentru a ajunge la 52,5 mii).</li>
+<li>Expunerea netă în energie: long-uri 4%, short-uri 10,5% → net −6,5% din cartea long, sau −3,25% din brut. Acest lucru încalcă ușor limita de net sectorial de ±3%, așa că biroul ar reduce puțin mai mult short-urile din energie pentru a readuce netul în interiorul benzii.</li>
+</ul>
+
+<h3>8. Reechilibrarea restului cărții</h3>
+<ul>
+<li>După ajustarea în energie, cartea long se micșorează de la 500 mii la 480 mii, iar cartea short crește de la 500 mii la 517,5 mii.</li>
+<li>Pentru a menține expunerea brută la 1 mil., biroul trebuie să adauge 17,5 mii USD la long-urile din nume non-energetice și să scadă 17,5 mii USD din short-urile non-energetice. Acest lucru se face prin scalarea proporțională a pozițiilor non-energetice existente, pentru a menține diversificarea.</li>
+</ul>
+
+<h3>9. Starea finală după re-alocare</h3>
+<ul>
+<li>Cartea long: 500.000 USD (brut neschimbat).</li>
+<li>Cartea short: 500.000 USD (brut neschimbat).</li>
+<li>Netul sectorial al energiei: −3,25% din brut (ușor în afara limitei de ±3%, urmând a fi redus suplimentar).</li>
+<li>Limitele pe un singur nume: toate long-urile ≤ 6%, toate short-urile ≤ 5%.</li>
+</ul>
+
+<h3>10. Verificarea cu realitatea</h3>
+<ul>
+<li>Biroul nu știe dacă energia va continua să depășească piața sau se va inversa.</li>
+<li>Prin urmare, alocarea este un pas de control al riscului, nu un pariu direcțional.</li>
+<li>Biroul va monitoriza P&amp;L-ul intraday și poate micro-ajusta din nou dacă limitele se deplasează sau dacă sectorul se mai mișcă cu 0,5%.</li>
+</ul>
+
+<p>Acest exemplu rezolvat arată pașii concreți — evaluare la piață, verificarea limitelor, dimensionare și scalare proporțională — folosiți zilnic pe un birou de început pentru a menține echilibrul long/short în plicul de risc declarat.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să luăm în considerare un alt exemplu pentru a ilustra mai departe conceptul de echilibru long/short. Să presupunem că suntem administratori de portofoliu la o firmă de investiții și că suntem responsabili de alocarea activelor între poziții long și short. Scopul nostru este să menținem un portofoliu echilibrat care maximizează randamentele și minimizează riscul.</p>
+
+<p>Să presupunem că avem un total de 100 de milioane $ de alocat între poziții long și short. Cercetarea noastră sugerează că piața va fi volatilă pe termen scurt, cu prețuri care fluctuează din cauza schimbărilor în condiții și a dinamicii cererii și ofertei.</p>
+
+<p>Am identificat două acțiuni despre care credem că au potențial de creștere: Green Thumb (GTN) și Blooming Beauty (BBN). Analiza noastră sugerează că GTN are un potențial de creștere mai mare, dar prețul său este și mai volatil. Pe de altă parte, BBN are un preț mai stabil, dar un potențial de creștere mai mic.</p>
+
+<p>Strategia noastră de echilibru long/short presupune alocarea a 60% din portofoliu pozițiilor long și a 40% pozițiilor short. Vom folosi o combinație de analiză fundamentală și tehnică pentru a determina acțiunile specifice de alocat fiecărei poziții.</p>
+
+<p>Iată o posibilă alocare:</p>
+<ul>
+<li>Poziții long: 60% din 100 mil. $ = 60 mil. $</li>
+<li>Poziții short: 40% din 100 mil. $ = 40 mil. $</li>
+</ul>
+
+<p>În cadrul pozițiilor long, vom aloca 30 mil. $ pentru GTN și 30 mil. $ pentru BBN. Acest lucru ne va oferi un portofoliu diversificat, cu expunere atât la acțiuni de creștere ridicată, cât și la acțiuni stabile.</p>
+
+<p>Pentru pozițiile short, vom aloca 20 mil. $ pentru GTN și 20 mil. $ pentru BBN. Acest lucru ne va permite să profităm de o eventuală scădere a prețului acestor acțiuni, limitând în același timp pierderile potențiale.</p>
+
+<p>Pe măsură ce piața fluctuează, ne vom monitoriza continuu pozițiile și ne vom ajusta alocarea după nevoie. Dacă prețul GTN crește, am putea decide să ne mărim poziția long în BBN pentru a menține alocarea-țintă.</p>
+
+<p>În acest scenariu, ne-am alocat cu succes portofoliul între poziții long și short, ținând cont de cercetarea și analiza noastră de piață. Prin menținerea unui portofoliu echilibrat, putem gestiona riscul și maximiza randamentele într-o piață volatilă.</p>
+
+<p>Merită menționat că acesta este un exemplu simplificat, iar în realitate procesul de alocare între poziții long și short este mai complex și implică mult mai multe variabile. Totuși, acest scenariu ar trebui să îți ofere o idee despre cum poate fi aplicată în practică strategia de echilibru long/short.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<h3>1. A trata împărțirea long/short ca pe o singură „dimensiune de poziție" și nu ca pe două decizii separate.</h3>
+<p>Începătorii își imaginează adesea alocarea ca pe un singur buton: „Sunt 50% long și 50% short." În realitate, partea long și partea short sunt două pariuri independente, ale căror dimensiuni trebuie alese separat și ale căror riscuri se compun. A confunda împărțirea cu o singură decizie de dimensionare îi face pe traderi să ignore faptul că expunerea brută poate exploda chiar și atunci când netul este zero; o împărțire 50/50 pe 100 mil. $ de capital devine 150 mil. $ brut long și 150 mil. $ brut short, nu 100 mil. $ brut total. Scrie întotdeauna cele două numere — brut long și brut short — și întreabă-te dacă fiecare este justificat de propriul său avantaj (edge), nu de simetria împărțirii.</p>
+
+<h3>2. A lăsa poziția netă să se abată pentru că short-urile „protejează" (hedging) long-urile.</h3>
+<p>O capcană clasică este să dimensionezi short-urile abia după ce long-urile sunt executate, sau invers, crezând că short-urile doar compensează long-urile. Acest lucru transformă alocarea într-o țintă mobilă, care reacționează la mișcările pieței în loc să fie o distribuție pre-planificată a riscului. Rezultatul este că beta netă a portofoliului poate aluneca spre +1 sau −1 fără ca traderul să observe. Regulă: stabilește țintele brut long și brut short înainte de orice execuție și abia apoi lasă piața să determine ponderile reale. Dacă short-urile sunt cu adevărat menite să acopere riscul, exprimă acea intenție explicit în formula de dimensionare (de exemplu, short exact pe valoarea în dolari a long-urilor), dar fă-o prin design, nu din întâmplare.</p>
+
+<h3>3. A supra-aloca pe short-uri pentru că „par mai ieftine".</h3>
+<p>Mulți începători raționează că vânzarea în lipsă este mai ieftină (fără cost de împrumut, fără scurgere de dividende) și, prin urmare, ar trebui să primească o felie mai mare de capital. Acest lucru trece cu vederea două realități: în primul rând, short-ul introduce propriile fricțiuni — nume greu de împrumutat, risc de rechemare (recall) și profiluri de pierdere asimetrice atunci când short-ul urcă; în al doilea rând, costul de oportunitate al blocării capitalului în short-uri este avantajul pierdut pe partea long. Tratează short-urile ca pe long-uri: compară randamentul așteptat pe unitate de risc, nu pe unitate de cost. Dacă cele mai bune long-uri de pe lista ta au rapoarte Sharpe de 1,2, iar cele mai bune short-uri au rapoarte Sharpe de 0,8, alocă mai mult pe long-uri, chiar dacă short-urile „par" mai ieftine.</p>
+
+<h3>4. A ignora declinul alfa atunci când alocarea este prea echilibrată.</h3>
+<p>Un portofoliu perfect echilibrat între long-uri și short-uri poate totuși subperforma dacă long-urile și short-urile sunt selectate din același univers îngust (de ex. doar acțiuni cu capitalizare mare). În astfel de cazuri, riscul de piață rezidual pe care short-urile ar fi trebuit să-l acopere nu se anulează complet, iar portofoliul ajunge să aibă o beta ascunsă față de indicele de referință (benchmark). Greșeala este să presupui că sume egale în dolari oferă automat neutralitate față de piață; nu este așa. Calculează întotdeauna explicit beta portofoliului și reechilibrează alocarea dacă beta iese din banda ta de toleranță.</p>
+
+<h3>5. A reacționa la P&amp;L în loc de a reechilibra alocarea.</h3>
+<p>După o serie de câștiguri, partea brut long crește mai repede decât partea brut short (dacă long-urile se apreciază, iar short-urile sunt plate sau în scădere). Instinctul începătorului este să „lase câștigătorii să alerge", dar acest lucru crește pe tăcute expunerea brută și reintroduce riscul de piață. Invers, după pierderi, short-urile pot crește în pondere relativă, împingând portofoliul spre net short. Obiceiul corect este să reechilibrezi alocarea înapoi la țintele inițiale brut long / brut short, la o frecvență fixă (de ex. săptămânal) sau atunci când abaterea depășește un prag prestabilit (de ex. 5% din brutul-țintă). Folosește o listă simplă de verificare: „Am reechilibrat long-urile? Am reechilibrat short-urile? Este netul încă în limite?"</p>
+
+<h3>6. A uita că short-urile au o convenție de lichidare diferită.</h3>
+<p>Pozițiile long se decontează „T+1" pe majoritatea piețelor; pozițiile short pot avea o închidere în aceeași zi dacă acțiunea este rechemată de creditor. Începătorii alocă uneori capital presupunând că ambele părți sunt la fel de lichide, doar pentru a descoperi că un short trebuie acoperit într-un preaviz de câteva ore, în timp ce long-ul poate rămâne deschis. Marchează întotdeauna fiecare short cu orizontul de lichidare așteptat și păstrează o rezervă de numerar egală cu riscul maxim de rechemare pe care ești dispus să îl tolerezi.</p>
+
+<h3>7. A confunda alocarea cu convingerea.</h3>
+<p>O idee cu convingere ridicată ar trebui să primească o pondere mai mare, dar convingerea nu este același lucru cu direcția. Începătorii alocă uneori mai mult unui long doar pentru că „simt puternic" potențialul de creștere, dând în același timp părții short o pondere mai mică, deși teza short este la fel de solidă. Convingerea ar trebui să scaleze dimensiunea fiecărei poziții individuale, nu împărțirea long/short. Dacă ai trei long-uri cu scoruri de convingere de 8, 6 și 4 și două short-uri cu scoruri de 7 și 5, clasează-le pe toate cinci după randamentul așteptat pe unitate de risc și lasă clasamentul — nu semnul — să determine ponderile.</p>
+
+<h3>8. A folosi același stop-loss pentru ambele părți.</h3>
+<p>Pentru că pierderile pe partea long sunt plafonate de dimensiunea poziției, iar pierderile pe partea short sunt teoretic nelimitate, un singur stop-loss procentual (de ex. „închide dacă scade cu 5%") este periculos pentru short-uri. Fie setează stop-uri mai strânse pentru short-uri, fie, mai bine, folosește un stop bazat pe volatilitate (de ex. închide dacă poziția se mișcă două deviații standard istorice împotriva ta) și aplică-l simetric. Documentează regula în avans, ca să nu o anulezi în focul momentului.</p>
+
+<h3>9. A neglija corelația dintre long-uri și short-uri.</h3>
+<p>Dacă long-urile și short-urile tale sunt foarte corelate (de ex. două ETF-uri care urmăresc același sector), expunerea brută se anulează, dar riscul nu; un șoc sectorial va mișca ambele părți împotriva ta. Începătorii presupun adesea că orice pereche de long-uri și short-uri oferă diversificare. Înainte de a finaliza alocarea, calculează corelațiile pe perechi și elimină sau înlocuiește orice nume a cărui corelație depășește pragul tău (de obicei 0,7 în strategiile pe acțiuni).</p>
+
+<h3>10. A lăsa alocarea să se abată odată cu prețul în loc de a reechilibra.</h3>
+<p>O împărțire 50/50 în prima zi poate deveni 60/40 după un raliu pur și simplu pentru că long-urile s-au apreciat mai mult decât short-urile. Începătorul poate crede că aceasta este „alfa gratuită", dar de obicei este un pariu ascuns pe continuarea trendului. Reechilibrează mecanic: dacă alocarea se abate cu mai mult de X% de la țintă, vinde o felie din cele care depășesc performanța și cumpără o felie din cele care subperformează pentru a restabili ponderile inițiale.</p>
+
+<h2>Cum folosește biroul de tranzacționare acest instrument</h2>
+
+<p>Pe un birou de tranzacționare real, echilibrul long/short nu este un raport abstract — este mecanismul viu, de zi cu zi, care decide cât capital riscăm pe partea „de creștere" față de partea „de scădere". În fiecare dimineață, administratorul de portofoliu (PM) și controlorul de risc stau împreună și se uită la trei lucruri: (1) scorurile de convingere pe care tocmai le-am atribuit fiecărui nume, (2) pierderea maximă pe care suntem dispuși să o acceptăm într-o singură zi și (3) lichiditatea acțiunilor pe care le deținem sau pe care vrem să le deținem. Aceste trei date de intrare sunt introduse într-un proces simplu, în doi pași.</p>
+
+<h3>Pasul 1 – transformă convingerile în „dolari de risc" bruți</h3>
+<p>Pornim de la un univers de, să zicem, 200 de acțiuni. Pentru fiecare acțiune tocmai am rulat modelul nostru fundamental și am produs un scor de convingere de la −100 (short puternic) la +100 (long puternic). Biroul a decis de asemenea că suntem dispuși să pierdem cel mult 0,8% din portofoliu într-o singură zi, dacă fiecare long și fiecare short s-ar mișca împotriva noastră în același timp. Acel 0,8% este limita noastră zilnică de Valoare-la-Risc (Value-at-Risk, VaR). Acum transformăm fiecare scor de convingere într-o sumă noțională în dolari care, dacă fiecare poziție s-ar mișca cu maximul istoric zilnic, ar contribui cu o felie egală la acel VaR de 0,8%. Formula este:</p>
+
+<p><strong>dolari_de_risc = (scor_convingere / 100) × (limită_VaR / 2)</strong></p>
+
+<p>Împărțirea la 2 distribuie VaR-ul total în mod egal între long-uri și short-uri, ca să nu devenim accidental unilaterali. După ce facem calculul, ajungem la o listă de long-uri care însumează +0,4% VaR și o listă de short-uri care însumează −0,4% VaR. Acestea sunt bugetele de risc brute.</p>
+
+<h3>Pasul 2 – decupează bugetele brute în funcție de lichiditate și aglomerare</h3>
+<p>Bugetele de risc brute sunt periculoase, pentru că o acțiune cu capitalizare mică ar putea avea un scor de convingere de +80, dar să tranzacționeze doar 5 milioane $ pe zi. Dacă punem pe ea întreaga sumă noțională de 8 milioane $, am mișca prețul înainte să terminăm execuția. Așa că biroul aplică două „foarfece" de lichiditate. Mai întâi, nu riscăm niciodată mai mult de 10% din volumul mediu zilnic al acțiunii într-o singură zi. În al doilea rând, nu lăsăm niciodată un singur nume să contribuie cu mai mult de 0,15% VaR, indiferent de convingere. După decupare, long-ul cu capitalizare mică s-ar putea micșora de la 8 milioane $ la 2 milioane $. Procesul rulează automat în sistemul de gestionare a ordinelor (OMS) de fiecare dată când se generează un nou tichet de ordin.</p>
+
+<h3>La ce se uită biroul efectiv pe parcursul zilei</h3>
+<ul>
+<li>Ecranul registrului arată contribuția VaR live a fiecărei poziții în puncte de bază. Dacă short-urile se mută brusc la −0,5% VaR pentru că o acțiune sare în sus, controlorul de risc o semnalează imediat, iar PM-ul decide dacă reduce sau acoperă riscul.</li>
+<li>Scara de lichiditate ne spune câte acțiuni putem tranzacționa cu adevărat fără a mișca piața. Dacă mărimea ofertei (ask) este subțire, putem împărți ordinul pe două-trei ore sau putem decide chiar să nu intrăm deloc în poziție.</li>
+<li>Matricea de aglomerare (crowding matrix) — actualizată overnight din datele brokerului principal (prime broker) — arată ce fonduri speculative se înghesuie în aceleași nume. Dacă aglomerarea este ridicată pe un long pe care urmează să-l adăugăm, putem reduce dimensiunea sau aștepta un punct de intrare mai bun.</li>
+</ul>
+
+<h3>Sincronizare și reechilibrare</h3>
+<p>Nu așteptăm sfârșitul zilei pentru a reechilibra. Dacă piața deschide cu un gap de 2% pe partea long, VaR-ul portofoliului crește instantaneu. În câteva minute, sistemul de risc recalculează, iar traderul primește o alertă: „Limita VaR depășită cu +0,2%." Biroul are atunci trei opțiuni: (1) să taie cele mai mari long-uri pentru a recupera excesul, (2) să adauge la short-uri pentru a compensa mișcarea sau (3) să nu facă nimic, dacă mișcarea se încadrează în toleranța intraday pe care am setat-o (de obicei 1,2% din portofoliu). Decizia se ia în mai puțin de cinci minute, pentru că avem reguli pre-agreate și benzi discreționare pre-aprobate.</p>
+
+<h3>Disciplina de la sfârșitul zilei</h3>
+<p>La 16:15, sistemul generează automat un raport „pre-închidere". Acesta enumeră fiecare poziție care încalcă încă limita de 0,15% pe nume sau a cărei decupare de lichiditate este sub 50%. PM-ul și controlorul de risc petrec următoarele zece minute fie reducând aceste poziții, fie adăugând acoperiri compensatorii. Aceasta este ultima șansă de a corecta orice dezechilibru înainte de închiderea pieței.</p>
+
+<h3>Ce NU trebuie făcut</h3>
+<ul>
+<li>Nu lăsa scorurile de convingere brute să anuleze foarfecele de lichiditate — supra-încrederea duce la slippage.</li>
+<li>Nu reechilibra exclusiv pe baza mișcărilor de preț; recalculează întotdeauna VaR-ul după orice șoc de piață.</li>
+<li>Nu ignora matricea de aglomerare pe partea short; short-urile aglomerate pot sări împotriva ta la o veste proastă.</li>
+</ul>
+
+<p>În practică, echilibrul long/short este, prin urmare, o buclă de feedback vie: convingere → buget de risc → verificare a lichidității → execuție → monitorizare intraday → reducere la sfârșitul zilei. Avantajul biroului nu vine din prezicerea perfectă a pieței, ci din aplicarea consecventă a acestor pași mecanici, astfel încât mișcarea unei singure zile să nu poată șterge portofoliul atent echilibrat.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Deși echilibrul long/short este un instrument puternic pentru alocarea între poziții long și short, nu este lipsit de limite și avertismente. Înțelegerea acestor limite este esențială pentru o utilizare eficientă a acestui instrument într-un mediu de tranzacționare.</p>
+
+<p>Una dintre limitele principale ale echilibrului long/short este că reprezintă o măsură statică, adică oferă doar un instantaneu al condițiilor curente de piață într-un anumit moment. Nu ia în calcul mișcările viitoare ale pieței sau eventualele schimbări de sentiment. Drept urmare, s-ar putea să nu reflecte cu acuratețe riscurile și oportunitățile reale asociate unei tranzacții sau investiții.</p>
+
+<p>O altă limită este aceea că se bazează pe date istorice și pe tendințe de piață pentru a face predicții despre mișcările viitoare. Totuși, tendințele de piață se pot schimba rapid, iar datele istorice s-ar putea să nu fie reprezentative pentru condițiile curente. Aceasta înseamnă că echilibrul long/short poate fi ineficient în prezicerea mișcărilor în perioade de volatilitate ridicată sau atunci când tendințele se schimbă rapid.</p>
+
+<p>În plus, echilibrul long/short nu ține cont de alți factori importanți care pot influența mișcările pieței, cum ar fi indicatorii economici, politicile băncilor centrale și evenimentele geopolitice. Acești factori pot avea un impact semnificativ asupra sentimentului pieței și pot provoca mișcări care nu sunt reflectate în echilibrul long/short.</p>
+
+<p>De asemenea, echilibrul long/short este un model matematic și, ca atare, este la fel de bun ca datele pe care se bazează. Dacă datele sunt incomplete, inexacte sau distorsionate, echilibrul long/short nu va oferi o reprezentare corectă a condițiilor de piață. Aceasta înseamnă că traderii și investitorii trebuie să selecteze cu atenție datele folosite și să se asigure că sunt reprezentative pentru condițiile pe care încearcă să le analizeze.</p>
+
+<p>Atunci când echilibrul long/short dă greș, poate fi din diverse motive, printre care:</p>
+<ul>
+<li><strong>Volatilitatea pieței</strong>: în perioade de volatilitate ridicată, echilibrul long/short s-ar putea să nu reflecte cu acuratețe condițiile de piață.</li>
+<li><strong>Tendințele de piață</strong>: dacă tendințele se schimbă rapid, echilibrul long/short poate fi ineficient în prezicerea mișcărilor.</li>
+<li><strong>Indicatorii economici</strong>: schimbări în indicatorii economici, precum creșterea PIB sau ratele inflației, pot influența sentimentul pieței și pot provoca mișcări nereflectate în echilibrul long/short.</li>
+<li><strong>Politicile băncilor centrale</strong>: politicile băncilor centrale, precum modificările ratelor dobânzii sau relaxarea cantitativă (quantitative easing), pot avea un impact semnificativ asupra sentimentului pieței.</li>
+<li><strong>Evenimentele geopolitice</strong>: evenimente precum războaiele sau dezastrele naturale pot provoca mișcări nereflectate în echilibrul long/short.</li>
+</ul>
+
+<p>Pe lângă acești factori externi, echilibrul long/short poate da greș și din cauza unor factori interni, precum:</p>
+<ul>
+<li><strong>Abaterea modelului (model drift)</strong>: dacă modelul folosit pentru a calcula echilibrul long/short nu este actualizat regulat sau se bazează pe date învechite, se poate „abate" de la condițiile reale de piață.</li>
+<li><strong>Calitatea datelor</strong>: dacă datele folosite sunt incomplete, inexacte sau distorsionate, pot duce la concluzii greșite.</li>
+<li><strong>Dependența excesivă de model</strong>: dacă traderii și investitorii se bazează prea mult pe echilibrul long/short, pot deveni complăcuți și pot ignora alți factori importanți.</li>
+</ul>
+
+<p>În concluzie, deși echilibrul long/short este un instrument puternic pentru alocarea între poziții long și short, nu este lipsit de limite și avertismente. Traderii și investitorii trebuie să țină cont de aceste limite și să folosească echilibrul long/short împreună cu alte instrumente și analize pentru a lua decizii informate.</p>
+
+<h2>Idei de reținut</h2>
+
+<ul>
+<li><strong>Definiția într-o singură frază</strong><br>
+Echilibrul long/short este decizia despre cât capital să plasezi în poziții long (pariu pe creșterea prețurilor) față de poziții short (pariu pe scăderea prețurilor), astfel încât profilul combinat de risc și randament al portofoliului să corespundă mandatului fondului și viziunii curente asupra pieței.</li>
+</ul>
+
+<p><strong>Două reguli concrete de alocare pe care orice începător trebuie să le memoreze</strong></p>
+<ul>
+<li>Nu lăsa niciodată expunerea brută (suma valorilor noționale absolute long și short) să depășească limita de levier declarată a fondului; dacă limita este 2×, menține brutul ≤ 200% din NAV.</li>
+<li>Menține expunerea netă (long minus short) în interiorul mandatului direcțional; dacă mandatul este market-neutral, urmărește net ≈ 0% ± 5%.</li>
+</ul>
+
+<p><strong>La ce te uiți efectiv pe registru</strong></p>
+<ul>
+<li>Cifrele de expunere brută și netă, actualizate la fiecare reîmprospătare a registrului.</li>
+<li>Împărțirile brute pe sectoare/regiuni, pentru a verifica riscul de concentrare.</li>
+<li>Nivelurile de stop-loss pe ambele părți și distanța față de prețul curent; dacă short-urile sunt la 2% de stop-ul lor, dar long-urile mai au 5% spațiu, reechilibrează imediat.</li>
+</ul>
+
+<p><strong>Lista de verificare zilnică (bifeaz-o în fiecare dimineață)</strong></p>
+<ul>
+<li>□ Verifică brut ≤ plafonul mandatului (de ex. 2×).</li>
+<li>□ Verifică dacă netul este în interiorul benzii permise (±5% pentru market-neutral).</li>
+<li>□ Confirmă că niciun titlu individual nu are brut > 5% din NAV.</li>
+<li>□ Verifică ca distanța medie de stop pe partea short să nu fie mai strânsă decât pe partea long; dacă este, crește short-urile sau taie long-urile pentru a restabili echilibrul.</li>
+</ul>
+
+<p><strong>Un singur număr de urmărit în fiecare oră</strong><br>
+Raportul brut/net; dacă brutul urcă în timp ce netul rămâne plat, adaugi mai mult risc compensatoriu decât risc direcțional — decide dacă acest lucru este intenționat sau o abatere accidentală.</p>
+
+<p><strong>Ce să faci când piața face un gap</strong></p>
+<ul>
+<li>Dacă o poziție long face un gap în scădere cu 3% în pre-market, decide înainte de deschidere dacă o tai sau dacă strângi numerar din altă parte pentru a menține netul neschimbat.</li>
+<li>Dacă o poziție short face un gap în creștere cu 2% în pre-market, nu aștepta deschiderea — acoperă cel puțin o parte din poziție imediat pentru a proteja banda de expunere netă.</li>
+</ul>
+
+<p><strong>Semnale de alarmă (red-flag) care forțează o reechilibrare instantanee</strong></p>
+<ul>
+<li>Expunere brută > 110% din plafon.</li>
+<li>Expunere netă > +8% sau < −8% când mandatul este ±5%.</li>
+<li>Brutul oricărui titlu individual > 8% din NAV.</li>
+</ul>
+
+<p><strong>Capcane frecvente pentru începători de evitat</strong></p>
+<ul>
+<li>A lăsa long-urile câștigătoare să alerge în timp ce lași short-urile pierzătoare să alerge; acest lucru distorsionează raportul brut/net și adesea încalcă limitele.</li>
+<li>A ignora costurile de finanțare; short-urile costă bani (taxa de împrumut), long-urile aduc bani (spread-ul repo); diferența poate inversa P&amp;L-ul chiar și când prețurile sunt plate.</li>
+<li>A uita că dividendele pe partea long sunt primite, dar dividendele pe partea short sunt plătite; acest lucru creează o frână ascunsă asupra P&amp;L-ului net, care trebuie bugetată.</li>
+</ul>
+
+<p><strong>Regulă practică pentru dimensionarea pozițiilor noi</strong><br>
+Alocă noile long-uri și short-uri astfel încât brutul incremental adăugat de fiecare tichet nou să fie aproximativ egal; acest lucru previne explodarea unei părți în timp ce cealaltă rămâne plată.</p>
+
+<p><strong>Când să te oprești și să ceri ajutor</strong></p>
+<ul>
+<li>Dacă expunerea brută se abate cu mai mult de 5% peste plafon în timpul zilei.</li>
+<li>Dacă expunerea netă iese din banda mandatului mai mult de 30 de minute fără o aprobare (override) autorizată.</li>
+<li>Dacă expunerea brută a oricărui titlu individual depășește 10% din NAV.</li>
+</ul>
+
+<p><strong>O singură frază de reținut înainte să apeși „trimite"</strong><br>
+Reechilibrează mai întâi brutul pentru a rămâne în interiorul limitelor de levier, apoi reglează fin netul pentru a rămâne în interiorul mandatului direcțional — niciodată invers.</p>

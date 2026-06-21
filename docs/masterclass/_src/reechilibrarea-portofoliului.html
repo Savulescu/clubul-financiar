@@ -1,0 +1,260 @@
+<p>Reechilibrarea portofoliului (rebalancing) este procesul prin care ajustezi periodic compoziția investițiilor pentru a readuce fiecare poziție la ponderea-țintă (target weight) stabilită inițial. Pe scurt, reechilibrarea portofoliului înseamnă să vinzi puțin din activele care au crescut prea mult și să cumperi din cele care au rămas în urmă, astfel încât alocarea activelor (asset allocation) să rămână aliniată cu profilul tău de risc și cu obiectivele de investiție.</p>
+
+<p>De ce ai nevoie de reechilibrare? Pentru că prețurile de pe piață se mișcă mereu, iar ponderile reale ale acțiunilor și obligațiunilor se abat (drift) de la planul tău. Dacă nu corectezi această deviație prin reechilibrare periodică sau pe bază de toleranță, riscul portofoliului crește pe tăcute, iar diversificarea inițială dispare.</p>
+
+<p>În acest capitol vei învăța definițiile cheie, intuiția din spatele reechilibrării, mecanica pas cu pas, exemple lucrate, greșelile frecvente, modul în care folosește un birou de tranzacționare (trading desk) acest proces, precum și limitele și momentele în care reechilibrarea dă greș. Scopul: să poți menține ponderile-țintă cu cap, controlându-ți costurile și taxele.</p>
+
+<h2>Definiție și termeni cheie</h2>
+
+<p>Reechilibrarea (rebalancing) este un proces folosit pentru a ajusta compoziția unui portofoliu de investiții, astfel încât acesta să își mențină ponderea-țintă sau alocarea de active. Reechilibrarea este esențială pentru a te asigura că investițiile rămân aliniate cu profilul de risc dorit și cu obiectivele de investiție.</p>
+
+<p>Pentru a înțelege reechilibrarea, să definim mai întâi câțiva termeni cheie:</p>
+
+<ul>
+<li><strong>Portofoliu (portfolio)</strong>: o colecție de investiții deținute de o persoană sau o organizație. Un portofoliu poate include un amestec de active, precum acțiuni, obligațiuni și numerar.</li>
+<li><strong>Activ (asset)</strong>: un tip de investiție care reprezintă proprietatea într-o companie sau o creanță asupra activelor unei companii. Exemple de active includ acțiunile (cunoscute și ca titluri de capital, equities), obligațiunile și imobiliarele.</li>
+<li><strong>Pondere-țintă (target weight)</strong>: procentul dorit pentru fiecare activ din portofoliu. De exemplu, un investitor poate avea o pondere-țintă de 60% acțiuni și 40% obligațiuni.</li>
+<li><strong>Alocarea activelor (asset allocation)</strong>: procesul de împărțire a portofoliului între diferite active pentru a atinge o pondere-țintă. Alocarea activelor este o componentă esențială a reechilibrării.</li>
+<li><strong>Frecvența reechilibrării (rebalancing frequency)</strong>: regularitatea cu care un portofoliu este reechilibrat pentru a-și menține ponderea-țintă. Frecvențe uzuale sunt trimestrial, semestrial sau anual.</li>
+<li><strong>Orizontul de investiție (investment horizon)</strong>: perioada de timp în care este menținută o investiție. Orizontul poate fi pe termen scurt (de ex. 1-3 ani) sau pe termen lung (de ex. 5-10 ani).</li>
+<li><strong>Profilul de risc (risk profile)</strong>: o măsură a nivelului de risc pe care un investitor este dispus să și-l asume. Poate fi ridicat, mediu sau scăzut, în funcție de toleranța față de fluctuațiile pieței.</li>
+<li><strong>Obiectivele de investiție (investment goals)</strong>: scopurile specifice ale unei investiții, precum creșterea capitalului, venitul sau conservarea capitalului.</li>
+<li><strong>Indice de referință (benchmark)</strong>: un punct de reper față de care se măsoară performanța unui portofoliu. Reperele se pot baza pe indici bursieri, precum FTSE 100 sau S&amp;P 500.</li>
+</ul>
+
+<p><strong>Strategie de reechilibrare (rebalancing strategy)</strong>: abordarea folosită pentru a reechilibra un portofoliu. Strategii uzuale includ:</p>
+
+<ul>
+<li><strong>Cumpără-și-păstrează (buy-and-hold)</strong>: o abordare pasivă, în care portofoliul nu este gestionat activ, iar ponderea-țintă este menținută prin reechilibrare periodică.</li>
+<li><strong>Management activ (active management)</strong>: o abordare mai implicată, în care portofoliul este gestionat activ pentru a atinge ponderea-țintă.</li>
+</ul>
+
+<p><strong>Metode de reechilibrare (rebalancing methods)</strong>: tehnicile specifice folosite pentru a reechilibra un portofoliu. Metode uzuale includ:</p>
+
+<ul>
+<li><strong>Injecții de numerar (cash injections)</strong>: adăugarea de numerar în portofoliu pentru a menține ponderea-țintă.</li>
+<li><strong>Vânzări de active (asset sales)</strong>: vânzarea de active pentru a reduce ponderea unora dintre ele și a menține ponderea-țintă.</li>
+<li><strong>Reechilibrare eficientă fiscal (tax-efficient rebalancing)</strong>: reechilibrarea portofoliului într-un mod care minimizează obligațiile fiscale.</li>
+</ul>
+
+<p>Înțelegând termenii și conceptele de mai sus, vei fi mai bine pregătit să navighezi procesul de reechilibrare și să iei decizii de investiție informate.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că îngrijești o grădiniță cu trei straturi de flori. Fiecare strat trebuie să aibă mereu un anumit număr de plante: stratul A trebuie să aibă 40 de plante, stratul B 40 de plante, iar stratul C 20 de plante. Acea împărțire 40-40-20 este „amestecul tău țintă”.</p>
+
+<p>Uzi și hrănești straturile în fiecare dimineață. Până la prânz, soarele a pârjolit atât de tare stratul A încât jumătate din plantele lui se ofilesc. Acum stratul A are doar 20 de plante, B încă 40, iar C tot 20. Echilibrul inițial 40-40-20 a dispărut; numerele reale sunt acum 20-40-20.</p>
+
+<p>Ce s-a întâmplat? Soarele a schimbat dimensiunea reală a stratului A fără să îl întrebi. Dacă nu faci nimic, mâine stratul A va avea tot doar 20 de plante. În timp, stratul A va deveni prea mic pentru a-și face partea de muncă, iar celelalte straturi pot deveni supraaglomerate.</p>
+
+<p>Reechilibrarea este pur și simplu actul de a readuce grădina la forma planificată 40-40-20. Numeri plantele, observi că stratul A are 20 mai puține, iar B și C sunt exact pe țintă. Aduci 20 de plante noi și pui 10 în stratul A și 10 în stratul C. (De ce stratul C? Pentru că este cel mai mic și deci locul cel mai sigur pentru a adăuga câteva plante în plus fără risc de supraaglomerare.) După mutare, numerele sunt 30-40-30, mai aproape de 40-40-20. Repeți procesul până când fiecare strat are numărul pe care l-ai decis inițial.</p>
+
+<p>Observă cele două idei esențiale:</p>
+
+<ul>
+<li><strong>Deviația este inevitabilă.</strong> Ceva în afara controlului tău — soarele, ploaia, vântul sau, în finanțe, prețurile pieței — va împinge mereu dimensiunile reale departe de ținte. Nu poți opri deviația; o poți doar observa și corecta.</li>
+<li><strong>Reechilibrarea este o corecție deliberată.</strong> Te costă puțin efort (sau, în finanțe, un mic comision de tranzacționare), dar menține grădina (sau portofoliul) comportându-se așa cum ai planificat. Fără reechilibrare, scopul inițial al împărțirii 40-40-20 — frumusețe echilibrată, creștere echilibrată, risc echilibrat — va dispărea pe tăcute.</li>
+</ul>
+
+<p>Aceeași logică se aplică unui portofoliu de acțiuni sau obligațiuni. Să presupunem că decizi ca fondul pentru facultatea copilului tău să fie mereu împărțit 60% acțiuni și 40% obligațiuni. În câteva luni, piața de acțiuni urcă puternic, în timp ce obligațiunile stagnează. Fondul tău este acum 75% acțiuni și 25% obligațiuni. Deviația este aceeași ca soarele care micșorează stratul A: „stratul” de acțiuni este acum prea mare pentru planul tău inițial. Reechilibrarea înseamnă să vinzi niște acțiuni și să cumperi niște obligațiuni până când fondul revine la 60-40. Comisionul pe care îl plătești este „costul udatului”, prețul mic pentru a păstra grădina în forma aleasă.</p>
+
+<p>Pe scurt, reechilibrarea există pentru că viața (sau piețele) nu stă niciodată pe loc. Ea rezolvă problema „lucrurilor care se îndepărtează de unde le vrei tu”, oferindu-ți o metodă simplă și repetabilă de a le aduce înapoi din când în când.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Pentru a înțelege mecanica reechilibrării, să luăm un exemplu simplu. Imaginează-ți un portofoliu cu două clase de active: acțiuni și obligațiuni. Ponderea-țintă pentru acțiuni este 60%, iar pentru obligațiuni 40%. După câteva luni însă, ponderile reale au deviat la 55% pentru acțiuni și 45% pentru obligațiuni.</p>
+
+<p>Obiectivul nostru este să reechilibrăm portofoliul pentru a restabili ponderile-țintă. Iată o descriere pas cu pas a mecanicii:</p>
+
+<p><strong>Date de intrare:</strong></p>
+
+<ul>
+<li>Ponderile actuale ale portofoliului: 55% acțiuni, 45% obligațiuni</li>
+<li>Ponderile-țintă: 60% acțiuni, 40% obligațiuni</li>
+<li>Prețurile curente de piață pentru acțiuni și obligațiuni</li>
+<li>Numerarul disponibil pentru reechilibrare</li>
+</ul>
+
+<p><strong>Proces:</strong></p>
+
+<ul>
+<li><strong>Calculează suma de reechilibrare necesară</strong>: determini diferența dintre ponderile actuale și cele țintă. Pentru acțiuni: 60% (țintă) − 55% (actual) = 5%. Pentru obligațiuni: 40% (țintă) − 45% (actual) = −5%.</li>
+<li><strong>Stabilește direcția reechilibrării</strong>: deoarece diferența pentru acțiuni este pozitivă (5%), trebuie să cumperi mai multe acțiuni. Deoarece diferența pentru obligațiuni este negativă (−5%), trebuie să vinzi din obligațiuni.</li>
+<li><strong>Calculează cantitatea de reechilibrat</strong>: înmulțești diferența de pondere cu valoarea de piață curentă a portofoliului. Să presupunem că valoarea portofoliului este 100.000 £. Pentru acțiuni: 5% × 100.000 £ = 5.000 £. Pentru obligațiuni: −5% × 100.000 £ = −5.000 £ (trebuie să vinzi obligațiuni de 5.000 £).</li>
+<li><strong>Execută tranzacțiile de reechilibrare</strong>: cumperi acțiuni de 5.000 £ și vinzi obligațiuni de 5.000 £. Astfel restabilești ponderile-țintă de 60% acțiuni și 40% obligațiuni.</li>
+</ul>
+
+<p><strong>Rezultate:</strong></p>
+
+<ul>
+<li>Ponderile reechilibrate ale portofoliului: 60% acțiuni, 40% obligațiuni</li>
+<li>Valoarea de piață actualizată: 100.000 £ (presupunând că prețurile nu s-au schimbat)</li>
+<li>Ieșire de numerar: 5.000 £ (pentru a cumpăra acțiuni suplimentare)</li>
+<li>Intrare de numerar: 5.000 £ (din vânzarea de obligațiuni)</li>
+</ul>
+
+<p>În practică, mecanica reechilibrării poate fi mai complexă, mai ales când ai mai multe clase de active, instrumente derivate și alte produse de investiții. Totuși, pașii de bază de mai sus oferă o înțelegere clară a procesului.</p>
+
+<h2>Exemplu lucrat</h2>
+
+<p>Să construim o mică grădiniță reală cu trei ghivece, ca să vedem exact cum funcționează reechilibrarea.</p>
+
+<ul>
+<li>Ghiveciul A (roșii): 3 plante</li>
+<li>Ghiveciul B (mazăre): 5 plante</li>
+<li>Ghiveciul C (morcovi): 2 plante</li>
+</ul>
+
+<p>Total plante în grădină = 3 + 5 + 2 = 10 plante.</p>
+
+<p><strong>Ponderile-țintă (planul educatoarei):</strong> roșiile ar trebui să fie 30% din grădină, mazărea 50%, iar morcovii 20%.</p>
+
+<p><strong>Pasul 1 – Verifică ponderile actuale.</strong> Roșii: 3 din 10 plante → 30% (corespunde țintei). Mazăre: 5 din 10 → 50% (corespunde țintei). Morcovi: 2 din 10 → 20% (corespunde țintei). Deoarece fiecare ghiveci este exact pe țintă, grădina este deja echilibrată. Nicio acțiune azi.</p>
+
+<p>Să o facem mai interesantă. Să presupunem că după o săptămână de creștere numerele se schimbă, deoarece mazărea a crescut mai repede decât se aștepta.</p>
+
+<p><strong>Noile numere de plante:</strong> Ghiveciul A (roșii): tot 3 plante. Ghiveciul B (mazăre): acum 7 plante. Ghiveciul C (morcovi): tot 2 plante. Total = 3 + 7 + 2 = 12 plante.</p>
+
+<p><strong>Pasul 2 – Recalculează ponderile reale.</strong> Roșii: 3 / 12 = 25%. Mazăre: 7 / 12 ≈ 58,3%. Morcovi: 2 / 12 ≈ 16,7%.</p>
+
+<p><strong>Pasul 3 – Compară cu ponderile-țintă.</strong> Roșiile sunt cu 5% sub țintă (25% față de 30%). Mazărea este cu 8,3% peste țintă (58,3% față de 50%). Morcovii sunt cu 3,3% sub țintă (16,7% față de 20%). Mazărea „câștigă”, deci a sufocat roșiile și morcovii. Trebuie să mutăm niște mazăre pentru a restabili echilibrul inițial.</p>
+
+<p><strong>Pasul 4 – Decide câte plante muți.</strong> Fie x = numărul de plante de mazăre pe care le mutăm în ghiveciul cu roșii. După mutare: roșiile vor avea 3 + x plante, mazărea 7 − x plante, morcovii tot 2. Totalul rămâne 12 (nimic nu se adaugă sau elimină, doar se rearanjează). Vrem ca roșiile să fie 30% din 12 plante:</p>
+
+<ul>
+<li>3 + x = 0,30 × 12</li>
+<li>3 + x = 3,6</li>
+<li>x = 0,6 plante</li>
+</ul>
+
+<p>Nu putem muta 0,6 dintr-o plantă, așa că rotunjim la cea mai apropiată plantă întreagă. Mutarea unei plante este mai aproape decât mutarea a zero plante, deci mutăm 1 plantă de mazăre din Ghiveciul B în Ghiveciul A.</p>
+
+<p><strong>Pasul 5 – Execută mutarea și verifică.</strong> Roșii: 3 + 1 = 4 plante → 4 / 12 ≈ 33,3%. Mazăre: 7 − 1 = 6 plante → 6 / 12 = 50%. Morcovi: 2 plante → 2 / 12 ≈ 16,7%. Mazărea și roșiile sunt acum în limita a 3,3% față de ținte; morcovii sunt încă puțin sub. Ideea cheie este că am folosit reechilibrarea — mutând un număr mic de plante — pentru a aduce grădina înapoi spre ponderile planificate, fără a o lua de la zero.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să luăm un alt exemplu pentru a aprofunda înțelegerea. Imaginează-ți că gestionezi un portofoliu de investiții și ai stabilit o pondere-țintă de 30% pentru fondul „Creștere” (Growth) și 70% pentru fondul „Venit” (Income). Portofoliul actual arată astfel:</p>
+
+<ul>
+<li>Fond Creștere: 10.000 £ (pondere actuală: 50%)</li>
+<li>Fond Venit: 10.000 £ (pondere actuală: 50%)</li>
+</ul>
+
+<p>Am monitorizat performanța în ultimele luni și am observat că fondul Creștere a mers excelent, cu un randament de 20%. Fondul Venit a fost relativ stabil, cu un randament de 5%. Drept urmare, portofoliul arată acum astfel:</p>
+
+<ul>
+<li>Fond Creștere: 12.000 £ (pondere actuală: 54,55%)</li>
+<li>Fond Venit: 10.000 £ (pondere actuală: 45,45%)</li>
+</ul>
+
+<p>Ponderea-țintă pentru Creștere este 30%, iar pentru Venit 70%. Trebuie să reechilibrăm. Pentru asta, vom vinde unități din fondul Creștere și vom folosi banii pentru a cumpăra unități din fondul Venit.</p>
+
+<p>Să calculăm cât trebuie să vindem din fondul Creștere. Portofoliul total valorează 12.000 £ + 10.000 £ = 22.000 £. Vrem ca fondul Creștere să fie 30% din acest total. Folosim formula:</p>
+
+<p><strong>Suma de vândut = Valoarea actuală a fondului Creștere − (Ponderea-țintă × Valoarea totală a portofoliului)</strong></p>
+
+<ul>
+<li>Suma de vândut = 12.000 £ − (30% × 22.000 £)</li>
+<li>Suma de vândut = 12.000 £ − 6.600 £</li>
+<li>Suma de vândut = 5.400 £</li>
+</ul>
+
+<p>Deci trebuie să vindem unități de 5.400 £ din fondul Creștere. Vom folosi acești bani pentru a cumpăra unități din fondul Venit. Prețul unei unități din fondul Venit este 1 £, deci putem cumpăra:</p>
+
+<ul>
+<li>Număr de unități de cumpărat = Suma de vândut / Preț pe unitate</li>
+<li>Număr de unități = 5.400 £ / 1 £ = 5.400 unități</li>
+</ul>
+
+<p>Noul portofoliu va arăta astfel:</p>
+
+<ul>
+<li>Fond Creștere: 6.600 £ (pondere actuală: 30%)</li>
+<li>Fond Venit: 15.400 £ (pondere actuală: 70%)</li>
+</ul>
+
+<p>Am reechilibrat cu succes portofoliul pentru a atinge ponderile-țintă.</p>
+
+<h2>Greșeli frecvente și concepții greșite</h2>
+
+<ul>
+<li><strong>„Pot reechilibra o dată pe an și tot rămân pe țintă.”</strong> Realitate: piețele nu se mișcă în linie dreaptă; oscilează. O singură verificare anuală permite o deviație mare înainte să acționezi. Exemplu: o componentă de acțiuni pornită de la 60% poate ajunge la 72% după o piață în creștere puternică, apoi la 65% înainte să reechilibrezi. Ai ratat deja punctul ieftin de cumpărare și ai vândut în putere. Regulă practică: verificările trimestriale sau semestriale țin deviația sub 5% pentru majoritatea portofoliilor echilibrate.</li>
+<li><strong>„Reechilibrarea înseamnă să vinzi câștigătorii și să cumperi perdanții.”</strong> Concepție greșită: expresia „vinde scump, cumpără ieftin” este atractivă, dar incompletă. Reechilibrarea este mecanică: vinzi activul care a devenit supraponderat și cumperi pe cel subponderat. Dacă acțiunile au urcat și reprezintă acum 65% în loc de 60%, vinzi acțiuni și cumperi obligațiuni — chiar dacă acțiunile sunt „sus”. Scopul nu este să prezici viitorul, ci să readuci portofoliul la politica agreată. Nu lăsa biasul comportamental să te oprească din a vinde ceva care tocmai a crescut.</li>
+<li><strong>„Costurile de tranzacționare sunt prea mici ca să-mi pese.”</strong> Capcană ascunsă: costurile se cumulează în timp. Un comision de 0,15% pe fiecare tranzacție pare neînsemnat, dar dacă reechilibrezi de patru ori pe an pe zece fonduri, poți eroda 0,3%–0,5% din randamentul anual. Mai dăunătoare sunt spread-urile bid-ask (cumpărare-vânzare) la ETF-uri ilichide sau comisioanele de intrare la fonduri mutuale. Verifică fișa fondului pentru „rulajul portofoliului” (portfolio turnover) și „rata totală a cheltuielilor” (total expense ratio). Dacă costurile depășesc reducerea de deviație așteptată, ia în calcul o reechilibrare mai rară.</li>
+<li><strong>„O să reechilibrez doar în contul meu cu avantaje fiscale ca să evit taxele.”</strong> Începătorii atenți la taxe uneori evită reechilibrarea în conturile cu avantaje fiscale de teama impozitului pe câștiguri de capital. Este invers: avantajul fiscal este exact motivul pentru care ar trebui să reechilibrezi acolo. În afara învelișului fiscal ai povară fiscală; în interior nu. Folosește spațiul fiscal protejat agresiv pentru tranzacțiile de reechilibrare. Dacă ai și conturi taxabile, plasează clasele de active cu rulaj ridicat în contul cu avantaje fiscale.</li>
+<li><strong>„Reechilibrarea îmi garantează că voi bate piața.”</strong> Promisiune falsă: reechilibrarea este un instrument de control al riscului, nu un motor de alfa. În piețe puternic trending (de ex. acțiunile tech 2020-2023), un portofoliu buy-and-hold poate depăși unul reechilibrat. Invers, în piețe cu revenire la medie (mean-reverting), reechilibrarea adaugă valoare. Beneficiul este modest — studiile istorice arată o îmbunătățire de 0,2%–0,9% anualizat pentru un portofoliu 60/40 — deci nu te aștepta la miracole. Tratează-o ca igienă a portofoliului, nu ca o schemă de îmbogățire rapidă.</li>
+<li><strong>„Pot estima din ochi — știu unde e linia.”</strong> Capcana supraîncrederii: deviația se acumulează lent până când contează brusc. O deviație de 5% într-un portofoliu 60/40 înseamnă 3% din valoarea totală; o deviație de 10% înseamnă 6%. Dacă aștepți până „simți” că portofoliul e deviat, ai ratat deja tranzacția optimă. Folosește un tabel simplu sau instrumentul de reechilibrare al brokerului; durează două minute și elimină emoția.</li>
+<li><strong>„Deviația de alocare este același lucru cu deviația de risc.”</strong> Nu tocmai. Un portofoliu poate devia de la 60/40 la 65/35 fără să-și schimbe riscul așteptat, dacă volatilitățile activelor rămân la fel. Dar dacă acțiunile devin o felie mai mare și volatilitatea sare (gândește-te la 2008), profilul de risc al portofoliului se schimbă. Reechilibrarea restabilește atât ponderile-țintă, cât și nivelul de risc intenționat. Urmărește atât deviația procentuală, cât și deviația contribuției la risc.</li>
+<li><strong>„O să reechilibrez doar când o clasă de active se mișcă cu mai mult de X%.”</strong> Regulile pe bandă procentuală sună precis, dar introduc risc de sincronizare. Dacă setezi o bandă de 5% și piața face un salt peste noapte, poți fi nevoit să cumperi scump și să vinzi ieftin într-o singură tranzacție. Regulile fixe de calendar (lunar, trimestrial) sunt mai simple și evită această capcană. Dacă insiști pe benzi, folosește benzi mai largi (10%–15%) combinate cu verificări de calendar.</li>
+</ul>
+
+<p><strong>Listă rapidă pentru a evita capcanele:</strong></p>
+
+<ul>
+<li>Setează un declanșator de calendar (de ex. la fiecare 3 luni) și respectă-l.</li>
+<li>Calculează deviația în bani, nu doar în procente.</li>
+<li>Plasează activele cu rulaj ridicat în conturile cu avantaje fiscale.</li>
+<li>Compară costurile de tranzacționare cu reducerea de deviație așteptată.</li>
+<li>Documentează regula de reechilibrare în declarația ta de politică de investiții, ca să nu poți raționaliza renunțarea la ea.</li>
+</ul>
+
+<h2>Cum folosește biroul de tranzacționare reechilibrarea</h2>
+
+<p>Reechilibrarea este un proces esențial în managementul de active, iar birourile de tranzacționare (trading desks) îl folosesc pentru a menține ponderile-țintă în portofolii. Scopul este ca ponderile reale ale activelor să fie aliniate cu cele țintă, bazate de regulă pe strategia de investiție și pe obiectivele de management al riscului.</p>
+
+<p>Iată o descriere pas cu pas a modului în care un birou de tranzacționare folosește reechilibrarea:</p>
+
+<ul>
+<li><strong>Monitorizarea performanței portofoliului</strong>: biroul monitorizează continuu performanța, urmărind ponderile reale ale activelor și comparându-le cu cele țintă. Aceasta implică analiza datelor de piață, a fluxurilor de fonduri și a altor factori relevanți.</li>
+<li><strong>Identificarea abaterilor</strong>: biroul identifică activele care s-au abătut de la ponderile-țintă. Aceste abateri pot apărea din schimbări de prețuri, răscumpărări ale investitorilor sau investiții noi. Se folosesc software de analiză a portofoliului și revizuiri manuale.</li>
+<li><strong>Analiza cauzelor</strong>: odată identificate abaterile, biroul analizează cauzele de fond — tendințe de piață, indicatori economici și alți factori — pentru a înțelege rădăcina problemei și impactul potențial.</li>
+<li><strong>Elaborarea unui plan de reechilibrare</strong>: pe baza analizei, biroul elaborează un plan care descrie acțiunile necesare pentru a restabili ponderile-țintă: cumpărarea sau vânzarea de active specifice, ajustarea alocării sau alte strategii.</li>
+<li><strong>Execuția planului de reechilibrare</strong>: biroul execută planul, ceea ce poate implica tranzacții, ajustarea poziției de numerar sau alte strategii. Scopul este de a minimiza impactul reechilibrării asupra performanței, menținând în același timp ponderile-țintă.</li>
+<li><strong>Revizuirea și rafinarea procesului</strong>: după finalizare, biroul evaluează eficiența și rafinează procesul: ajustează ponderile-țintă, actualizează planul sau implementează strategii noi.</li>
+</ul>
+
+<p>În practică, reechilibrarea este un proces continuu care necesită monitorizare, analiză și ajustare permanentă. Biroul trebuie să echilibreze nevoia de a menține ponderile-țintă cu nevoia de a minimiza impactul reechilibrării asupra performanței. De exemplu, un birou care gestionează un portofoliu de acțiuni cu capitalizare mare poate folosi reechilibrarea pentru a menține o pondere-țintă de 30% în sectorul tehnologic. Dacă sectorul tech scade semnificativ, biroul poate fi nevoit să vândă acțiuni tech și să cumpere alte acțiuni cu capitalizare mare pentru a restabili ponderea-țintă.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Reechilibrarea nu este o baghetă magică. Poate menține portofoliul aproape de ponderile-țintă, dar nu poate garanta profituri, nu poate preveni pierderi și nu te poate proteja de orice surpriză a pieței. Mai jos sunt principalele limite pe care trebuie să le cunoști înainte de a te baza pe ea.</p>
+
+<ul>
+<li><strong>Reechilibrarea este o regulă mecanică, nu o regulă de investiție.</strong> Formula „vinde ce a urcat, cumpără ce a scăzut” pare disciplinată, dar este la fel de bună ca ponderile pe care le alegi. Dacă ponderile-țintă în sine sunt greșite, reechilibrarea va trage cu fidelitate portofoliul înapoi la acele ponderi greșite de fiecare dată.</li>
+<li><strong>Costurile de tranzacționare pot mânca beneficiul.</strong> De fiecare dată când tranzacționezi plătești spread-uri bid-ask, comisioane sau costuri de impact pe piață. Într-un portofoliu mic, o tranzacție de 100 £ poate pierde 3 £ în comisioane. Regula practică: deviația anuală pe care trebuie să o corectezi trebuie să fie mai mare decât costul dus-întors (round-trip); altfel plătești ca să rămâi pe loc.</li>
+<li><strong>Taxele pot inversa câștigul.</strong> Vânzarea unui activ care s-a apreciat declanșează o obligație de impozit pe câștiguri de capital. Dacă portofoliul este într-un cont taxabil, fiecare reechilibrare poate genera o factură fiscală. Dacă deviația este mică, taxa poate șterge profitul reechilibrării. Într-un înveliș fără taxe problema dispare, dar în afara lui este un risc real.</li>
+<li><strong>Regimuri de piață în care reechilibrarea dă greș:</strong>
+<ul>
+<li><strong>Piețe puternic trending</strong>: dacă piața urcă sau coboară în linie dreaptă luni întregi, regula mecanică vinde câștigătorii și cumpără perdanții în fiecare perioadă. Într-o piață în creștere puternică ajungi cu prea puțin din cel mai bun activ. Exemplul clasic este bula dot-com: portofoliile care reechilibrau lunar spre ponderi tech tot mai mici au avut randamente mai slabe decât buy-and-hold.</li>
+<li><strong>Volatilitate ridicată fără revenire la medie</strong>: reechilibrarea funcționează cel mai bine când prețurile oscilează în jurul unei medii pe termen lung. Dacă prețurile sar aleatoriu fără să revină, regula doar urmărește zgomotul.</li>
+<li><strong>Active ilichide sau cu spread larg</strong>: unele active — private equity, anumite obligațiuni corporative sau acțiuni mici din străinătate — au spread-uri largi și prețuri rare. O reechilibrare zilnică sau săptămânală este imposibilă; chiar și tranzacțiile lunare pot mișca prețul împotriva ta.</li>
+</ul>
+</li>
+<li><strong>Riscul valutar este adesea ignorat.</strong> Dacă portofoliul deține active globale, mișcările cursului de schimb pot depăși deviația activelor. Reechilibrarea în interiorul acțiunilor poate menține ponderile, dar dacă lira se întărește cu 10% față de dolar, felia ta de acțiuni americane se micșorează în termeni de liră fără nicio acțiune din partea ta.</li>
+<li><strong>Nu îți spune când să schimbi ținta.</strong> O țintă de 60% acțiuni / 40% obligațiuni poate fi perfectă la o vârstă, dar mai târziu poți dori să reduci riscul de acțiuni. Reechilibrarea te va menține la 60/40 chiar și când politica însăși este depășită. Procesul este mut la întrebarea „mai sunt potrivite aceste ponderi?” — trebuie să le revizuiești separat.</li>
+<li><strong>Nevoile de lichiditate pot anula reechilibrarea.</strong> Dacă ai nevoie brusc de numerar, poți fi nevoit să vinzi cel mai performant activ indiferent de ponderea-țintă. Vânzările forțate rup disciplina de reechilibrare.</li>
+<li><strong>Capcane comportamentale.</strong> <em>Reechilibrare excesivă</em>: unii verifică prețurile zilnic și tranzacționează la fiecare deviație de 1%, ceea ce duce la zeci de tranzacții mici, costuri mari și stres. <em>Reechilibrare insuficientă</em>: alții ignoră deviația până când portofoliul este complet în afara țintei; o poziție de 70% acțiuni poate deveni pe tăcute 90%, ridicând riscul peste ce s-a intenționat.</li>
+<li><strong>Nu este un instrument de management al riscului.</strong> Reechilibrarea limitează distanța față de țintă, dar nu garantează un randament pozitiv și nu protejează împotriva unei pierderi permanente de capital. În martie 2020, acțiunile globale au scăzut cu aproximativ 30% într-o lună. Un portofoliu 60/40 tot a scăzut, iar reechilibrarea a vândut acțiuni în plin crash, blocând pierderile. Procesul atenuează deviația, nu scăderile abrupte (drawdowns).</li>
+</ul>
+
+<p><strong>Concluzie:</strong> reechilibrarea este o modalitate disciplinată de a păstra un portofoliu aliniat cu un plan ales, dar nu este o garanție de succes. Funcționează cel mai bine în piețe laterale, cu revenire la medie, cu costuri mici și prețuri clare. Are dificultăți în trenduri puternice, volatilitate ridicată, active ilichide și când taxele, nevoile de lichiditate sau mișcările valutare domină. Tratează-o ca pe un administrator util, nu ca pe un salvator; revizuiește regulat atât regula, cât și ponderile-țintă.</p>
+
+<h2>Concluzii cheie</h2>
+
+<ul>
+<li>Reechilibrarea este procesul de cumpărare sau vânzare de mici felii din portofoliu, astfel încât fiecare poziție să corespundă din nou ponderii-țintă după ce prețurile s-au mișcat.</li>
+<li>Ponderile-țintă sunt procentele din portofoliul total pe care ai decis inițial să le deții în fiecare clasă de active. Ele nu sunt același lucru cu ponderile actuale după ce prețurile se schimbă.</li>
+<li>Cel mai simplu mod de a reechilibra este periodic — în fiecare lună sau trimestru calendaristic — tranzacționând doar cât să readuci fiecare poziție la ponderea-țintă. Aceasta se numește reechilibrare pe bază de calendar (calendar-based).</li>
+<li>Poți reechilibra și ori de câte ori o poziție deviază cu mai mult de o toleranță setată — de ex. 5% față de țintă. Aceasta se numește reechilibrare pe bază de toleranță (tolerance-based). De obicei declanșează tranzacții mai des, dar ține portofoliul mai aproape de nivelul de risc intenționat.</li>
+<li>Reechilibrarea costă bani. Fiecare cumpărare sau vânzare implică taxe de tranzacționare, comisioane sau spread-uri bid-ask. Dacă acest cost este mai mare decât beneficiul așteptat în controlul riscului, este mai bine să nu tranzacționezi deloc.</li>
+<li>Taxele de tranzacționare contează. În unele țări, vânzarea activelor apreciate declanșează un impozit pe câștiguri de capital. Dacă factura fiscală ar șterge cea mai mare parte din beneficiu, amânarea reechilibrării poate fi alegerea mai înțeleaptă.</li>
+<li>Reechilibrarea nu garantează randamente mai mari. Este un instrument de control al riscului, nu un motor de alfa. În piețe puternic trending, a rămâne complet investit deseori bate reechilibrarea.</li>
+<li>Mărimea deviației care declanșează o reechilibrare ar trebui aleasă în funcție de nevoile tale de flux de numerar. O toleranță de 2% este mai strânsă și costă mai mult; una de 10% este mai relaxată și costă mai puțin, dar riscul portofoliului se va abate mai mult de la țintă.</li>
+<li>Când reechilibrezi, ajustează fiecare poziție, nu doar pe cele care au crescut sau scăzut. Asta menține diversificarea și previne pariuri ascunse pe un singur activ.</li>
+<li>Folosește prețuri de indice sau prețuri de piață curate pentru etapa de evaluare. Prețurile vechi sau eronate pot crea dezechilibre artificiale care duc la tranzacții inutile.</li>
+<li>Înregistrează fiecare tranzacție de reechilibrare și prețul ei în jurnalul tău de investiții. În timp, acest jurnal devine o mică pistă de audit.</li>
+<li>Reechilibrarea funcționează cel mai bine în piețe lichide. Dacă un activ este puțin tranzacționat sau are spread-uri largi, costul ajustării ponderii poate depăși beneficiul.</li>
+<li>Pentru conturile taxabile, preferă reechilibrarea cu fluxuri de numerar — contribuții noi sau retrageri — ori de câte ori este posibil. Folosirea numerarului pentru a completa pozițiile subponderate evită declanșarea impozitelor pe câștiguri de capital.</li>
+<li>În conturile de pensie fără taxe, reechilibrarea pe bază de calendar este de obicei cea mai ușoară regulă, deoarece nu există fricțiuni fiscale, iar costurile de tranzacționare sunt mici.</li>
+<li>Reține că reechilibrarea este o disciplină mecanică, nu un instrument de predicție. Nu îți spune care active vor urca sau coborî; îți spune doar când să restabilești echilibrul pe care l-ai decis deja.</li>
+</ul>

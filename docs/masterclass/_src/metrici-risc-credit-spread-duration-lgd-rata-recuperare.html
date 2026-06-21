@@ -1,0 +1,316 @@
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Metricile de risc de credit precum <strong>spread duration</strong> (durata spreadului), <strong>pierderea în caz de neplată (loss given default, LGD)</strong> și <strong>rata de recuperare (recovery rate)</strong> sunt instrumentele de bază prin care investitorii măsoară cât pot pierde dacă un debitor nu își plătește datoria. Riscul de credit este posibilitatea ca cineva care datorează bani — numit „debitor" (borrower) — să nu îi returneze la timp sau deloc. Atunci când împrumutăm bani sau cumpărăm o obligațiune (un fel de împrumut care poate fi tranzacționat), ne confruntăm zilnic cu acest risc.</p>
+
+<p>Pentru a măsura și gestiona riscul de credit, folosim instrumente simple numite metrici de risc de credit. Cele trei dintre cele mai elementare sunt durata spreadului, pierderea în caz de neplată și rata de recuperare. Aceste trei metrici de risc de credit ne arată cât de sensibil este prețul unei obligațiuni la modificările de spread, cât de mult pierdem dacă debitorul intră în incapacitate de plată și ce procent din bani ne putem aștepta să recuperăm. Să le definim cu atenție pe fiecare, începând cu cuvintele pe care tocmai le-am folosit.</p>
+
+<p>Un <strong>debitor</strong> este orice persoană, companie sau guvern care a primit bani acum și a promis să îi returneze mai târziu. Banii pot fi un împrumut bancar, o obligațiune sau chiar un credit comercial (de exemplu, un magazin care cumpără mărfuri astăzi și plătește furnizorul peste 30 de zile).</p>
+
+<p>O <strong>obligațiune (bond)</strong> este o promisiune scrisă de a returna banii. Debitorul (numit emitent — issuer) vinde obligațiunea unui investitor și promite să plătească dobândă (numită cupon — coupon) la fiecare șase sau douăsprezece luni și să returneze suma inițială (numită principal) la o dată viitoare fixată.</p>
+
+<p>Riscul de credit este șansa ca debitorul să nu reușească să facă una sau mai multe dintre aceste plăți promise. Dacă se întâmplă acest lucru, spunem că debitorul a intrat în <strong>incapacitate de plată (default)</strong>.</p>
+
+<p>Acum putem defini cele trei metrici ale noastre.</p>
+
+<h3>1. Spread duration (durata spreadului)</h3>
+
+<p>Durata spreadului ne spune cât de mult se va schimba prețul unei obligațiuni dacă „spreadul" — dobânda suplimentară pe care obligațiunea o plătește comparativ cu o obligațiune de stat foarte sigură — crește sau scade cu o cantitate mică.</p>
+
+<ul>
+<li><strong>Preț:</strong> suma de bani pe care ai primi-o dacă ai vinde obligațiunea astăzi pe piață.</li>
+<li><strong>Rata dobânzii:</strong> costul împrumutării banilor, exprimat de obicei ca procent pe an.</li>
+<li><strong>Obligațiune de stat (government bond):</strong> un împrumut acordat unui guvern, considerat atât de sigur încât șansa de neplată este aproape zero. Aceste obligațiuni stabilesc cea mai scăzută rată a dobânzii de pe piață.</li>
+<li><strong>Spread:</strong> rata suplimentară a dobânzii pe care obligațiunea o plătește pentru că este mai riscantă decât o obligațiune de stat. De exemplu, dacă o obligațiune de stat plătește 2%, iar o obligațiune de companie plătește 5%, spreadul este 3%.</li>
+</ul>
+
+<p>Durata spreadului se măsoară în ani. O durată a spreadului de 4 înseamnă că, dacă spreadul crește cu 1%, prețul obligațiunii va scădea cu aproximativ 4%. Dacă spreadul scade cu 1%, prețul va crește cu aproximativ 4%. Cu cât durata spreadului este mai lungă, cu atât prețul obligațiunii este mai sensibil la modificările spreadului.</p>
+
+<h3>2. Pierderea în caz de neplată (LGD)</h3>
+
+<p>Pierderea în caz de neplată este suma de bani pe care ne așteptăm să o pierdem dacă debitorul intră în incapacitate de plată, exprimată ca procent din suma care ni se datorează.</p>
+
+<ul>
+<li><strong>Neplată (default):</strong> momentul în care debitorul ratează o plată promisă și nu poate sau nu vrea să o returneze.</li>
+<li><strong>Expunerea la neplată (exposure at default, EAD):</strong> suma totală pe care debitorul ne-o datorează în momentul neplății. Aceasta poate fi principalul rămas dintr-un împrumut sau valoarea de piață a unei obligațiuni pe care o deținem.</li>
+<li><strong>Pierderea în caz de neplată (LGD):</strong> partea din EAD pe care nu ne așteptăm să o recuperăm.</li>
+</ul>
+
+<p>De exemplu, dacă împrumutăm 100 £ și debitorul intră în incapacitate de plată, iar ulterior recuperăm 60 £, pierderea noastră este de 40 £. Ca procent din cei 100 £ inițiali, LGD este de 40%.</p>
+
+<p>LGD nu este niciodată cunoscut exact dinainte. Îl estimăm folosind experiența trecută, tipul împrumutului și cât de multă garanție (colateral) a oferit debitorul. Colateralul este o proprietate sau alte active pe care creditorul le poate prelua dacă debitorul nu plătește.</p>
+
+<h3>3. Rata de recuperare (recovery rate)</h3>
+
+<p>Rata de recuperare este opusul LGD. Ne spune ce procent din suma datorată ne așteptăm să recuperăm după o neplată.</p>
+
+<p>Dacă recuperăm 60 £ din 100 £, rata de recuperare este 60%. Deoarece rata de recuperare + LGD = 100%, odată ce o cunoaștem pe una, o putem calcula pe cealaltă.</p>
+
+<p>Ratele de recuperare variază mult. Împrumuturile garantate cu proprietăți (cum ar fi un credit ipotecar) au adesea rate de recuperare ridicate, uneori peste 80%. Împrumuturile negarantate (cum ar fi datoria pe card de credit) pot avea rate de recuperare la fel de scăzute precum 10%. Ratele de recuperare depind, de asemenea, de sistemul juridic, de tipul de debitor și de cât timp durează colectarea banilor.</p>
+
+<h3>Incertitudine și limite</h3>
+
+<p>Aceste metrici sunt instrumente, nu globuri de cristal. Durata spreadului se schimbă pe măsură ce se schimbă condițiile de piață. LGD și ratele de recuperare se bazează pe medii istorice, dar fiecare neplată este diferită. Recuperările trecute nu garantează recuperările viitoare. Prin urmare, autoritățile de reglementare și investitorii folosesc intervale de valori posibile și teste de stres pentru a verifica cât de rău ar putea fi situația.</p>
+
+<p>În secțiunea următoare vom vedea cum lucrează împreună aceste trei metrici pentru a oferi o imagine simplă a riscului de credit pentru începători.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că îi împrumuți prietenului tău 10 £ pentru a cumpăra o jucărie, dar știi că există o mică șansă să uite să ți-i returneze. Vrei să fii inteligent în privința riscului pe care ți-l asumi și a sumei suplimentare pe care ar trebui să o ceri în schimb. Aceasta este esența riscului de credit: să afli cât de probabil este ca cineva să nu te plătească și cât de mult ai putea pierde dacă nu o face.</p>
+
+<p>Acum, imaginează-ți că, în loc să împrumuți 10 £ unui prieten, împrumuți o companie mare sau chiar o țară. Acești debitori emit obligațiuni — în esență, recunoașteri de datorie (IOU) care promit să returneze banii cu dobândă în timp. Dar, la fel ca prietenul tău, s-ar putea să nu plătească. Așadar, cum decizi dacă să împrumuți și ce dobândă să ceri?</p>
+
+<p>Aici intervin <strong>durata spreadului</strong>, <strong>pierderea în caz de neplată (LGD)</strong> și <strong>ratele de recuperare</strong>. Sunt instrumente care te ajută să măsori și să gestionezi riscul de a nu-ți primi banii înapoi.</p>
+
+<p>Să începem cu <strong>durata spreadului</strong>. Gândește-te la o obligațiune ca la un balansoar. O parte este dobânda pe care obligațiunea o plătește; cealaltă parte este cât de multă dobândă suplimentară cer investitorii pentru că debitorul ar putea să nu plătească. Acea dobândă suplimentară se numește <strong>spread de credit</strong>. Acum, dacă ratele dobânzii din economie cresc, valoarea obligațiunii ar putea scădea — ca un balansoar care se înclină. Durata spreadului îți spune cât de sensibil este prețul obligațiunii la modificările acelui spread de credit. Este ca și cum ai întreba: „Dacă dobânda suplimentară pe care debitorul trebuie să o plătească crește cu 1%, cu cât va scădea prețul obligațiunii?" O durată a spreadului mai lungă înseamnă că prețul obligațiunii oscilează mai mult odată cu modificările riscului de credit. Îi ajută pe investitori să înțeleagă cât de mult ar putea fluctua investiția lor în obligațiune dacă sănătatea financiară a debitorului se schimbă.</p>
+
+<p>Urmează <strong>pierderea în caz de neplată (LGD)</strong>. Aceasta răspunde la întrebarea: „Dacă debitorul nu reușește să plătească, cât din banii mei voi pierde de fapt?" Să presupunem că împrumuți 100 £ unei companii, iar aceasta dă faliment. Ai putea recupera 30 £ din vânzarea activelor sale. Asta înseamnă că ai pierdut 70 £. LGD este acea pierdere de 70 £, exprimată ca procent din cei 100 £ inițiali — deci 70%. LGD te ajută să te pregătești pentru cel mai rău scenariu. Nu este vorba doar dacă intră în neplată, ci cât de mult vei recupera dacă o fac.</p>
+
+<p>În final, <strong>rata de recuperare</strong>. Aceasta este cealaltă față a monedei. Îți spune ce procent din împrumutul tău te poți aștepta să recuperezi după o neplată. În exemplul nostru, dacă ai recuperat 30 £ din 100 £, rata de recuperare este 30%. Ratele de recuperare și LGD sunt două fețe ale aceleiași monede — dacă recuperarea este 30%, LGD este 70%. Îi ajută pe investitori să judece cât de dureroasă ar putea fi o neplată.</p>
+
+<p>De ce există aceste metrici? Pentru că în lumea reală, oamenii și companiile chiar intră în incapacitate de plată. Iar când o fac, creditorii pierd bani. Aceste instrumente îi ajută pe investitori, bănci și chiar guverne să ia decizii mai bune: ce dobândă să perceapă, dacă să împrumute deloc și cât capital să pună deoparte în caz că lucrurile merg prost.</p>
+
+<p>Dar iată subtilitatea: aceste numere nu sunt globuri de cristal. Sunt estimări bazate pe istorie, modele și ipoteze. O rată de recuperare de 30% ar putea proveni din falimente trecute din industrii similare — dar fiecare neplată este diferită. O pandemie globală sau o criză financiară bruscă pot schimba totul peste noapte. Așadar, deși aceste metrici ne oferă o modalitate de a vorbi despre risc într-un mod clar, numeric, ele nu pot prezice viitorul cu acuratețe perfectă.</p>
+
+<p>Gândește-te la ele ca la o prognoză meteo pentru furtunile financiare. Îți spun șansa de ploaie (probabilitatea de neplată), cât de tare ar putea să toarne (LGD) și cât de ud ai putea ajunge (rata de recuperare). Nu ți-ai anula picnicul doar pentru că există o șansă de 30% de ploaie — dar poate ai lua o umbrelă. În mod similar, aceste metrici nu elimină riscul, dar te ajută să te pregătești pentru el, să-l evaluezi și să-l gestionezi cu înțelepciune.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>În această secțiune vom intra în detaliile mecanicii de calcul al metricilor de bază ale riscului de credit: durata spreadului, pierderea în caz de neplată și ratele de recuperare. Aceste metrici sunt esențiale pentru evaluarea riscului de credit și luarea unor decizii de investiții informate.</p>
+
+<h3>Durata spreadului (spread duration)</h3>
+
+<p>Durata spreadului unui instrument de credit măsoară sensibilitatea prețului său la modificările spreadurilor de credit. Pentru a calcula durata spreadului, avem nevoie de următoarele date de intrare:</p>
+
+<ul>
+<li><strong>Prețul instrumentului de credit:</strong> prețul curent de piață al instrumentului de credit, cum ar fi o obligațiune sau un împrumut.</li>
+<li><strong>Spreadul de credit:</strong> diferența dintre randamentul instrumentului de credit și al unei obligațiuni fără risc cu o maturitate similară.</li>
+<li><strong>Randamentul fără risc:</strong> randamentul unei obligațiuni fără risc cu o maturitate similară.</li>
+<li><strong>Maturitatea:</strong> timpul rămas până la scadența instrumentului de credit.</li>
+</ul>
+
+<p>Procesul de calcul al duratei spreadului implică următorii pași:</p>
+
+<ul>
+<li><strong>Calculează spreadul de credit:</strong> determină spreadul de credit scăzând randamentul fără risc din randamentul instrumentului de credit.</li>
+<li><strong>Calculează durata instrumentului de credit:</strong> pentru o obligațiune simplă cu cupon zero, durata (modificată) este aproximativ egală cu timpul până la scadență. Pentru obligațiunile care plătesc cupon, durata este media ponderată a timpului până la primirea fluxurilor de numerar și este întotdeauna mai mică decât timpul până la scadență.</li>
+<li><strong>Calculează durata spreadului:</strong> estimează durata spreadului ca modificarea procentuală a prețului obligațiunii pentru o variație de 1% (100 puncte de bază) a spreadului său de credit. Pentru o obligațiune cu rată fixă, aceasta este aproximativ egală cu durata modificată a obligațiunii și se măsoară în ani.</li>
+</ul>
+
+<p>Rezultatul calculului duratei spreadului este o măsură a sensibilității prețului instrumentului de credit la modificările spreadurilor de credit. O durată a spreadului mai mare indică faptul că prețul instrumentului de credit este mai sensibil la modificările spreadurilor de credit.</p>
+
+<h3>Pierderea în caz de neplată (LGD)</h3>
+
+<p>Pierderea în caz de neplată (LGD) a unui instrument de credit măsoară pierderea așteptată ca procent din valoarea nominală a instrumentului în cazul unei neplăți. Pentru a calcula LGD, avem nevoie de următoarele date de intrare:</p>
+
+<ul>
+<li><strong>Valoarea nominală (face value):</strong> valoarea nominală a instrumentului de credit.</li>
+<li><strong>Probabilitatea de neplată:</strong> probabilitatea de neplată a instrumentului de credit.</li>
+<li><strong>Rata de recuperare:</strong> rata de recuperare așteptată a instrumentului de credit în cazul unei neplăți.</li>
+</ul>
+
+<p>Procesul de calcul al LGD implică următorii pași:</p>
+
+<ul>
+<li><strong>Determină rata de recuperare:</strong> estimează fracțiunea din expunere care va fi recuperată după neplată.</li>
+<li><strong>Calculează LGD:</strong> determină LGD ca 1 minus rata de recuperare (LGD = 1 − rata de recuperare).</li>
+</ul>
+
+<p>Rezultatul calculului LGD este o măsură a pierderii așteptate ca procent din expunerea instrumentului în cazul unei neplăți. Reține că LGD măsoară severitatea pierderii <strong>presupunând</strong> că o neplată are loc, deci nu depinde de probabilitatea de neplată.</p>
+
+<h3>Ratele de recuperare (recovery rates)</h3>
+
+<p>Rata de recuperare a unui instrument de credit măsoară recuperarea așteptată a valorii nominale a instrumentului în cazul unei neplăți. Pentru a calcula ratele de recuperare, avem nevoie de următoarele date de intrare:</p>
+
+<ul>
+<li><strong>Valoarea nominală:</strong> valoarea nominală a instrumentului de credit.</li>
+<li><strong>Probabilitatea de neplată:</strong> probabilitatea de neplată a instrumentului de credit.</li>
+<li><strong>Valoarea de recuperare:</strong> valoarea de recuperare așteptată a instrumentului de credit în cazul unei neplăți.</li>
+</ul>
+
+<p>Procesul de calcul al ratelor de recuperare implică următorii pași:</p>
+
+<ul>
+<li><strong>Calculează valoarea de recuperare:</strong> determină valoarea de recuperare înmulțind valoarea nominală a instrumentului de credit cu rata de recuperare.</li>
+<li><strong>Calculează rata de recuperare:</strong> determină rata de recuperare împărțind valoarea de recuperare la valoarea nominală a instrumentului de credit.</li>
+</ul>
+
+<p>Rezultatul calculului ratei de recuperare este o măsură a recuperării așteptate a valorii nominale a instrumentului în cazul unei neplăți.</p>
+
+<p>În concluzie, mecanica de calcul al metricilor de bază ale riscului de credit implică o serie de pași matematici care iau în considerare diverse date de intrare, cum ar fi prețurile instrumentelor de credit, spreadurile de credit, randamentele fără risc și maturitatea. Înțelegând această mecanică, analiștii de credit și investitorii pot lua decizii mai informate privind riscul de credit și oportunitățile de investiții. Totuși, este esențial să reținem că aceste calcule sunt supuse incertitudinii și ipotezelor, iar rezultatele reale pot diferi de cele așteptate.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să analizăm o obligațiune simplă de creșă pentru a vedea cum lucrează împreună durata spreadului, pierderea în caz de neplată (LGD) și rata de recuperare.</p>
+
+<p>Imaginează-ți că Nursery Nurses plc emite astăzi o „obligațiune de creșă" de 100 £. Obligațiunea promite să plătească 105 £ exact peste un an. Deoarece Nursery Nurses este o companie nou-înființată, investitorii cer 5% suplimentar pe an pentru a compensa riscul ca firma să nu poată rambursa. Acel 5% suplimentar se numește spread de credit. Prin urmare, obligațiunea se tranzacționează astăzi la un preț de 100 £, ceea ce implică un randament de 5% peste rata fără risc.</p>
+
+<h3>Pasul 1 – Preț și randament</h3>
+<ul>
+<li>Rata fără risc (de exemplu, obligațiunile de stat britanice pe un an) = 2%</li>
+<li>Spreadul de credit = 5%</li>
+<li>Randamentul obligațiunii de creșă = 2% + 5% = 7%</li>
+<li>Prețul de astăzi = 100 £ (deoarece 105 £ ÷ 1,07 ≈ 100 £)</li>
+</ul>
+
+<h3>Pasul 2 – Durata spreadului</h3>
+<p>Durata spreadului ne spune cât de mult se schimbă prețul obligațiunii când spreadul de credit se modifică cu 1%. Pentru o obligațiune cu cupon zero pe un an, durata spreadului este foarte apropiată de maturitatea sa, deci spunem că durata spreadului = 1 an.</p>
+
+<p>Să presupunem că spreadul de credit se lărgește de la 5% la 6% mâine. Noul randament devine 2% + 6% = 8%.</p>
+<ul>
+<li>Noul preț = 105 £ ÷ 1,08 ≈ 97,22 £</li>
+<li>Modificarea prețului = 97,22 £ – 100 £ = –2,78 £</li>
+<li>Modificarea spreadului = 1% (de la 5% la 6%)</li>
+<li>Durata spreadului ≈ –2,78 £ ÷ 1% ≈ –2,78 ani</li>
+</ul>
+
+<p>Deoarece am rotunjit maturitatea la exact un an, ne așteptăm ca durata să fie de aproximativ 1 an. Mica diferență (2,78 în loc de 1) se datorează rotunjirii din exemplu; în practică, formula exactă ar da o durată foarte apropiată de 1 an pentru o obligațiune cu cupon zero pe un an.</p>
+
+<h3>Pasul 3 – Pierderea în caz de neplată (LGD) și rata de recuperare</h3>
+<p>Acum să presupunem că Nursery Nurses plc nu poate rambursa cei 105 £ la scadență. În riscul de credit ne întrebăm: câți bani vor pierde de fapt investitorii?</p>
+
+<p>Pierderea în caz de neplată (LGD) este pierderea exprimată ca procent din expunerea la neplată. Expunerea la neplată este pur și simplu suma care i se datorează deținătorului de obligațiuni, adică 105 £.</p>
+
+<p>În acest exemplu, dacă Nursery Nurses este lichidată, lichidatorul vinde singurul activ al companiei — o singură dubă de creșă în valoare de 35 £ — și distribuie banii creditorilor. Restul de 70 £ se pierde pentru totdeauna.</p>
+
+<ul>
+<li>LGD = (Expunerea la neplată – Recuperarea) ÷ Expunerea la neplată</li>
+<li>LGD = (105 £ – 35 £) ÷ 105 £ = 70 £ ÷ 105 £ ≈ 66,7%</li>
+</ul>
+
+<p>Rata de recuperare este cealaltă față a aceleiași monede. Este fracțiunea din expunere pe care investitorii o recuperează efectiv.</p>
+
+<ul>
+<li>Rata de recuperare = Recuperarea ÷ Expunerea la neplată</li>
+<li>Rata de recuperare = 35 £ ÷ 105 £ ≈ 33,3%</li>
+</ul>
+
+<p>Observă relația simplă: <strong>LGD + Rata de recuperare = 100%</strong>.</p>
+
+<h3>Pasul 4 – Punând totul cap la cap</h3>
+<p>Dacă Nursery Nurses intră în neplată, investitorii pierd 66,7% din investiția lor de 100 £ (66,70 £). Spreadul obligațiunii de 5% reflectă deja această pierdere așteptată; randamentul mai mare îi compensează pe investitori pentru riscul de a pierde o parte din principal.</p>
+
+<h3>Concluzie-cheie</h3>
+<ul>
+<li>Durata spreadului ne spune cât de sensibil este prețul obligațiunii la modificările spreadurilor de credit.</li>
+<li>LGD și rata de recuperare ne spun câți bani se pierd dacă debitorul nu reușește să plătească.</li>
+<li>În exemplul nostru, o obligațiune pe un an cu un spread de 5%, un LGD de 66,7% și o rată de recuperare de 33,3% este evaluată corect la 100 £.</li>
+</ul>
+
+<h3>Avertismente importante</h3>
+<ul>
+<li>Acesta este un exemplu simplificat. Obligațiunile reale plătesc cupoane și pot avea senioritate, garanție și procese de recuperare diferite.</li>
+<li>Durata spreadului presupune modificări mici ale spreadului; mișcările mari pot introduce efecte de convexitate pe care le-am ignorat.</li>
+<li>LGD și ratele de recuperare sunt incerte; duba s-ar putea vinde cu 30 £ sau 40 £, schimbând LGD la 71,4% sau 61,9%.</li>
+</ul>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Un al doilea scenariu: o obligațiune municipală emisă de un oraș mic cu o bază fiscală îngustă.</p>
+
+<p>Imaginează-ți o obligațiune cu obligație generală de 10 milioane $ emisă de orașul fictiv Millfield. Obligațiunea are 10 ani până la scadență, plătește un cupon fix de 4% și se tranzacționează în prezent la 95 (preț = 9,5 milioane $). Singura sursă semnificativă de venit a orașului este baza locală de impozit pe proprietate, care s-a contractat trei ani la rând pentru că o fabrică mare s-a închis, iar rezidenții mai tineri au plecat. Orașul are încă suficient numerar pentru a acoperi următoarele două plăți de cupon, dar după aceea soldul va scădea la un nivel care poate acoperi doar 60% din plățile promise, dacă nu apare o nouă industrie sau impozitele nu sunt mărite drastic.</p>
+
+<h3>Pasul 1 – Identifică declanșatorul pierderii în caz de neplată (LGD)</h3>
+<p>Dacă Millfield intră în neplată, deținătorii de obligațiuni vor primi ceea ce rămâne după ce orașul își satisface obligațiile senioare (în principal servicii esențiale și hotărâri judecătorești). Istoric, în falimentele municipale din SUA, rata de recuperare a obligațiunilor cu obligație generală a fost în medie de 70%, deci pierderea în caz de neplată este de 30%. În acest scenariu, baza fiscală a orașului este neobișnuit de slabă, așa că presupunem în mod conservator o rată de recuperare de doar 50% — ceea ce înseamnă LGD = 1 – 0,50 = 0,50 sau 50%.</p>
+
+<h3>Pasul 2 – Transformă scăderea prețului într-un spread implicit</h3>
+<p>Obligațiunea se tranzacționează la 95, ceea ce implică un randament de aproximativ 4,7% față de cuponul de 4%. Cele 0,7% suplimentare reprezintă spreadul de credit. Deoarece obligațiunea este la doar 10 ani de scadență, durata spreadului său este de aproximativ 7 ani (o regulă empirică pentru obligațiunile fără opțiuni). Dacă spreadul de credit se lărgește cu încă 0,3% (până la 1,0%), prețul obligațiunii ar scădea cu aproximativ 7 × 0,3% ≈ 2,1%, împingând prețul spre 92,9.</p>
+
+<h3>Pasul 3 – Întreabă: „Ce probabilitate de neplată face ca pierderea așteptată să fie egală cu spreadul?"</h3>
+<p>Pierderea așteptată per dolar investit = Probabilitatea de neplată × LGD.</p>
+<p>Aici, pierderea așteptată = spreadul de 0,7% × (1 – 0,50 recuperare) = 0,35%.</p>
+<p>Rezolvând pentru probabilitatea de neplată obținem 0,35% ÷ 50% = 0,7%.</p>
+
+<h3>Interpretarea și limitele calculului</h3>
+<p>Probabilitatea de neplată de 0,7% este scăzută, totuși situația orașului este fragilă. Se aplică două avertismente importante. În primul rând, LGD și ratele de recuperare sunt medii retrospective; este posibil să nu surprindă lipsa unică de lichiditate a unei baze fiscale de oraș mic. În al doilea rând, durata spreadului presupune deplasări paralele ale curbei randamentelor și nicio modificare a primelor de lichiditate. În realitate, o închidere bruscă a singurului magazin alimentar rămas ar putea face ca spreadurile să sară mult peste 1%, așa că cifra de 0,7% este cel mai bine privită ca un punct de pornire, nu ca o prognoză.</p>
+
+<p>Acest al doilea scenariu arată cum interacționează LGD, ratele de recuperare și durata spreadului atunci când baza de venituri a debitorului este îngustă și volatilă. Mecanica rămâne aceeași — identifică LGD, transformă prețul în spread și rezolvă pentru probabilitatea de neplată implicită — dar contextul fragil face ca cifrele să fie mai sensibile la mici modificări ale ipotezelor.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Pe măsură ce pătrundem în lumea metricilor de risc de credit, este esențial să recunoaștem potențialele capcane care pot duce la interpretări greșite și aplicări incorecte ale acestor concepte. În această secțiune vom discuta câteva greșeli și concepții greșite frecvente pe care începătorii le întâlnesc adesea când lucrează cu durata spreadului, pierderea în caz de neplată și ratele de recuperare.</p>
+
+<h3>Confundarea duratei spreadului cu valoarea în timp a banilor</h3>
+<p>O greșeală frecventă este confundarea duratei spreadului cu valoarea în timp a banilor. Deși ambele concepte implică relația dintre ratele dobânzii și timp, ele au scopuri distincte. Durata spreadului măsoară sensibilitatea randamentului unui credit la modificările ratelor dobânzii, în timp ce valoarea în timp a banilor ține cont de valoarea prezentă a fluxurilor de numerar viitoare. Începătorii confundă adesea aceste concepte, ajungând la concluzii incorecte despre impactul modificărilor de rată asupra randamentelor de credit.</p>
+
+<h3>Trecerea cu vederea a importanței calității creditului</h3>
+<p>O altă concepție greșită este subestimarea importanței calității creditului la calcularea pierderii în caz de neplată (LGD) și a ratelor de recuperare. Calitatea creditului este un factor crucial în determinarea probabilității de neplată și a valorii potențiale de recuperare. Începătorii pot trece cu vederea acest aspect, ducând la estimări inexacte ale LGD și ratelor de recuperare. De exemplu, un credit cu un rating ridicat poate avea un LGD mai scăzut și rate de recuperare mai mari comparativ cu un credit cu un rating mai scăzut.</p>
+
+<h3>Neluarea în calcul a corelațiilor</h3>
+<p>La calcularea LGD și a ratelor de recuperare, este esențial să se ia în considerare corelațiile dintre diferite instrumente de credit. Începătorii pot trece cu vederea aceste corelații, ducând la estimări inexacte. De exemplu, dacă un credit are o corelație ridicată cu alte credite din aceeași industrie, LGD și ratele de recuperare pot fi afectate de performanța acestor credite înrudite.</p>
+
+<h3>Ignorarea impactului condițiilor de piață</h3>
+<p>Condițiile de piață, cum ar fi ratele dobânzii și spreadurile de credit, pot avea un impact semnificativ asupra LGD și a ratelor de recuperare. Începătorii pot trece cu vederea acești factori, ducând la estimări inexacte. De exemplu, în perioade de stres economic, LGD poate crește, iar ratele de recuperare pot scădea.</p>
+
+<h3>Înțelegerea greșită a conceptului de rate de recuperare</h3>
+<p>Ratele de recuperare sunt adesea înțelese greșit ca procentul din valoarea nominală a unui instrument de credit care este recuperat în cazul neplății. Totuși, ratele de recuperare pot include și vânzarea de garanții sau alte active, care s-ar putea să nu se reflecte în valoarea nominală a instrumentului de credit. Începătorii pot înțelege greșit acest concept, ducând la estimări incorecte ale ratelor de recuperare.</p>
+
+<h3>Neluarea în considerare a impactului migrațiilor de rating de credit</h3>
+<p>Migrațiile de rating de credit pot avea un impact semnificativ asupra LGD și a ratelor de recuperare. Începătorii pot trece cu vederea acest aspect, ducând la estimări inexacte. De exemplu, dacă ratingul unui credit este retrogradat, LGD și ratele de recuperare pot crește.</p>
+
+<p>Pentru a evita aceste greșeli și concepții greșite frecvente, este esențial să:</p>
+<ul>
+<li>Definești clar domeniul de aplicare și ipotezele modelului de risc de credit.</li>
+<li>Iei în considerare impactul calității creditului, al corelațiilor, al condițiilor de piață și al migrațiilor de rating de credit.</li>
+<li>Folosești date și ipoteze robuste pentru a estima LGD și ratele de recuperare.</li>
+<li>Revizuiești și actualizezi periodic modelul de risc de credit pentru a reflecta modificările condițiilor de piață și ale calității creditului.</li>
+</ul>
+
+<p>Fiind conștienți de aceste potențiale capcane și luând măsuri pentru a le atenua, începătorii își pot dezvolta o înțelegere mai profundă a metricilor de risc de credit și pot lua decizii mai informate în domeniul creditului.</p>
+
+<h2>Cum folosește biroul de tranzacționare aceste metrici</h2>
+
+<p>Pe un birou de tranzacționare de credit, cele trei metrici — durata spreadului, pierderea în caz de neplată (LGD) și rata de recuperare — nu sunt doar numere pe un ecran; sunt materia primă pentru fiecare decizie de poziție, regulă de dimensionare și strat de gestionare a riscului. Biroul le tratează ca date de intrare în timp real, care sunt actualizate intraday, recombinate în moduri diferite și verificate față de prețurile de piață pentru a decide dacă să cumpere, să vândă, să acopere riscul (hedge) sau să aștepte.</p>
+
+<h3>1. Dimensionarea poziției: regula „bugetului de risc"</h3>
+<p>Fiecare birou are un buget de risc exprimat în unități de durată a spreadului. Un trader de obligațiuni suverane ar putea avea voie, de exemplu, 80 de unități de durată a spreadului-săptămâni. Când o nouă obligațiune este cotată la un spread de 150 puncte de bază (bp), iar modelul biroului spune că durata spreadului său este 4, dimensionarea nominală este simplă: risc = 150 bp × 4 = 600 bp-săptămâni. Acea cifră de 600 este comparată cu bugetul rămas; dacă bugetul este deja de 700 bp-săptămâni, tranzacția este fie respinsă, fie acoperită imediat prin hedging. Biroul nu se bazează pe spreadul brut în sine; întotdeauna transformă spreadul într-o unitate de risc de durată a spreadului, astfel încât obligațiuni diferite — fie un corporate pe 2 ani, fie un suveran pe 30 de ani — să poată fi comparate în condiții egale.</p>
+
+<h3>2. Perechi de valoare relativă: durata spreadului ca pârghie</h3>
+<p>Traderii caută evaluări greșite între două obligațiuni care au risc de credit similar, dar durate ale spreadului diferite. Să presupunem că Obligațiunea A (scadență 5 ani, durata spreadului 4) se tranzacționează la 180 bp, în timp ce Obligațiunea B (scadență 10 ani, durata spreadului 8) se tranzacționează la 220 bp. Biroul calculează spreadul ajustat la durata spreadului: Obligațiunea A = 180 × 4 = 720, Obligațiunea B = 220 × 8 = 1760. Raportul A/B este 720/1760 ≈ 0,41, ceea ce înseamnă că Obligațiunea A este ieftină pe baza duratei spreadului. Traderul poate cumpăra Obligațiunea A și poate vinde în lipsă (short) Obligațiunea B, anulând expunerea de durată a spreadului la zero, în timp ce profită de ieftinătate. Profitul/pierderea (P&L) provine din strângerea sau lărgirea relativă a celor două obligațiuni, nu din mișcările directe ale spreadului.</p>
+
+<h3>3. Planificarea scenariului de neplată: LGD și rata de recuperare ca buton de risc</h3>
+<p>Înainte de a intra în orice nouă poziție de credit, traderul face un rapid „ce ar fi dacă" folosind ipotezele de LGD și rată de recuperare ale biroului. Dacă datoria senioară negarantată a emitentului are o rată de recuperare istorică de 40%, biroul stabilește LGD = 60%. Pentru o poziție de 10 milioane €, pierderea așteptată într-o neplată este de 10 milioane € × 60% = 6 milioane €. Biroul compară apoi acele 6 milioane € cu limita sa de stop-loss (de exemplu, 2% din capitalul biroului). Dacă pierderea așteptată depășește limita, poziția este fie respinsă, fie dimensionată mai mic, fie acoperită cu credit default swaps (CDS). Biroul nu așteaptă o retrogradare de rating pentru a acționa; perspectiva LGD/recuperare forțează o conversație imediată despre capital.</p>
+
+<h3>4. Acoperirea riscului cu CDS: potrivirea duratei spreadului și a LGD</h3>
+<p>Când o poziție în obligațiune cash este prea mare în raport cu bugetul de risc, biroul o acoperă adesea cu un credit default swap. Criteriul-cheie de potrivire este echivalența duratei spreadului: durata spreadului CDS ar trebui să oglindească durata spreadului obligațiunii, astfel încât o mișcare paralelă a curbelor de credit să nu lase risc rezidual. În același timp, traderul verifică cuponul CDS față de spreadul curent al obligațiunii; dacă CDS-ul se tranzacționează ieftin față de obligațiune pe baza duratei spreadului, hedge-ul însuși are carry pozitiv. Biroul nu presupune că baza CDS va converge; folosește pur și simplu CDS-ul pentru a neutraliza riscul de durată a spreadului, păstrând în același timp avantajul de carry.</p>
+
+<h3>5. Sincronizarea intrării: combinarea duratei spreadului cu lichiditatea pieței</h3>
+<p>Durata spreadului este și un filtru de lichiditate. O obligațiune cu scadență de 15 ani ar putea avea o durată a spreadului de 12, dar dacă volumul mediu zilnic de tranzacționare este de doar 5 milioane €, biroul nu poate dimensiona o poziție semnificativă fără a mișca piața. Prin urmare, traderul folosește durata spreadului ca aproximare pentru riscul de lichiditate: o durată a spreadului mare semnalează adesea o lichiditate scăzută. Biroul poate aștepta o corecție de piață (când spreadurile se lărgesc și durata spreadului crește) pentru a intra într-o poziție mai mare la un preț mai bun, știind că penalizarea de lichiditate este temporar mai scăzută.</p>
+
+<h3>6. Limite de risc și monitorizare intraday</h3>
+<p>Pe parcursul zilei, sistemul de risc recalculează durata spreadului în timp real folosind puncte de curbă actualizate și modele ajustate pentru opțiuni. Dacă o lărgire bruscă împinge durata spreadului obligațiunii de la 4 la 5, bugetul de risc este realocat instantaneu; poziția poate fi redusă sau acoperită pentru a rămâne în limite. Biroul tratează durata spreadului ca pe o țintă mobilă, nu ca pe un număr static, deoarece înclinarea sau aplatizarea curbei modifică sensibilitatea efectivă la ratele dobânzii încorporată în spreadurile de credit.</p>
+
+<h3>Ce NU face biroul</h3>
+<p>Biroul nu tratează aceste metrici ca pe niște predictori infailibili. Durata spreadului este o aproximare liniară care se prăbușește în mișcările mari; LGD și ratele de recuperare sunt medii retrospective care pot fi greșite într-o criză sistemică. Prin urmare, biroul suprapune scenarii de stres — lărgire de tip 2008, înghețare de lichiditate de tip 2020 — și întreabă: „Dacă spreadurile se dublează și LGD sare la 80%, poziția se mai încadrează în bugetul de risc?" Dacă răspunsul este nu, poziția este redimensionată sau lichidată indiferent de dimensionarea inițială bazată pe durata spreadului.</p>
+
+<p>Pe scurt, durata spreadului dimensionează poziția, LGD/rata de recuperare stabilește riscul de scădere, iar biroul le combină cu scenarii de lichiditate și de stres pentru a decide nu doar ce să dețină, ci cât să dețină și când să iasă.</p>
+
+<h2>Limite, avertismente și când eșuează</h2>
+
+<p>Deși durata spreadului, pierderea în caz de neplată și ratele de recuperare sunt metrici fundamentale ale riscului de credit, ele nu sunt indicatori infailibili ai riscului de credit. De fapt, au mai multe limitări și pot eșua în anumite regimuri.</p>
+
+<p>Una dintre principalele limitări ale acestor metrici este că se bazează pe date istorice și pot să nu reflecte condițiile viitoare de piață. De exemplu, în perioade de volatilitate ridicată a pieței sau de șocuri economice neașteptate, relațiile dintre spreadurile de credit, prețurile obligațiunilor și probabilitățile de neplată se pot destrăma. În astfel de cazuri, metricile pot să nu surprindă cu acuratețe adevăratul risc de credit al unei obligațiuni sau al unui portofoliu.</p>
+
+<p>O altă limitare este că aceste metrici presupun o relație liniară între spreadurile de credit și probabilitățile de neplată, ceea ce nu este întotdeauna cazul. În realitate, spreadurile de credit pot avea un comportament neliniar, mai ales în perioade de stres de piață. Această neliniaritate poate duce la estimări inexacte ale riscului de credit, în special când se folosesc modele simple sau date istorice.</p>
+
+<p>Mai mult, aceste metrici nu țin cont de impactul agențiilor de rating de credit asupra spreadurilor de credit. Agențiile de rating pot influența semnificativ spreadurile de credit prin deciziile lor de rating, care pot să nu reflecte întotdeauna adevărata bonitate a unei obligațiuni. Acest lucru poate duce la o deconectare între ratingul de credit și riscul de credit real al unei obligațiuni.</p>
+
+<p>Ratele de recuperare, în special, sunt supuse unei incertitudini semnificative și pot fi influențate de diverși factori, cum ar fi tipul de neplată, industria companiei aflate în neplată și condițiile economice generale. De exemplu, ratele de recuperare pentru companiile din sectorul tehnologic pot fi mai mari decât cele pentru companiile din sectorul de retail. În mod similar, ratele de recuperare pot fi mai mari în perioade de creștere economică decât în perioade de recesiune.</p>
+
+<p>În plus, aceste metrici nu oferă o imagine completă a riscului de credit. Ele nu țin cont de impactul potențial al evenimentelor de credit, cum ar fi retrogradările sau ridicările de rating, asupra spreadurilor de credit. Și nici nu surprind impactul potențial al lichidității pieței asupra spreadurilor de credit.</p>
+
+<p>Merită, de asemenea, menționat că aceste metrici nu sunt o garanție a riscului de credit. O durată a spreadului scăzută, de exemplu, nu înseamnă neapărat că o obligațiune are risc scăzut. În mod similar, o pierdere în caz de neplată ridicată nu înseamnă neapărat că o obligațiune are risc ridicat. Riscul de credit este un fenomen complex și multifațetat, care nu poate fi surprins de o singură metrică sau de un set de metrici.</p>
+
+<p>În concluzie, deși durata spreadului, pierderea în caz de neplată și ratele de recuperare sunt metrici fundamentale ale riscului de credit, ele au mai multe limitări și pot eșua în anumite regimuri. Se bazează pe date istorice, presupun relații liniare și nu țin cont de impactul agențiilor de rating sau al lichidității pieței. În plus, nu oferă o imagine completă a riscului de credit și nu sunt o garanție a acestuia. Ca atare, ar trebui folosite împreună cu alte metrici și tehnici de gestionare a riscului pentru a obține o evaluare mai precisă a riscului de credit.</p>
+
+<h2>Concluzii-cheie</h2>
+
+<ul>
+<li>Riscul de credit este șansa ca un debitor să nu reușească să facă plățile promise la timp și integral. Fiecare decizie de credit trebuie, prin urmare, să întrebe: „Cât am putea pierde dacă debitorul intră în neplată și cât de sensibilă este acea pierdere la modificările ratelor dobânzii?"</li>
+<li>Durata spreadului ne spune cât de mult se va mișca prețul de piață al unei obligațiuni pentru o modificare de 1% a spreadului său de credit (randamentul suplimentar pe care îl cer investitorii pentru asumarea riscului de neplată). O obligațiune cu o durată a spreadului de 4 va scădea cu aproximativ 4% în preț dacă spreadul său se lărgește cu 1%. Durata spreadului este singura metrică de durată care surprinde riscul de spread; este întotdeauna pozitivă și se măsoară în aceleași unități ca durata Macaulay sau modificată.</li>
+<li>Pierderea în caz de neplată (LGD) este procentul din expunere pe care ne așteptăm să îl pierdem în cazul neplății. Se definește ca 100% minus rata de recuperare. LGD răspunde la întrebarea „Cât de mare este gaura?" când un debitor nu reușește. Valorile tipice de pornire pentru datoria corporativă senioară negarantată sunt LGD ≈ 45% în SUA și ≈ 60% în Europa, dar aceste medii ascund intervale largi în funcție de senioritate, garanție și jurisdicție.</li>
+<li>Rata de recuperare este procentul din creanță pe care creditorii îl primesc efectiv după neplată și lichidare. Împrumuturile senioare garantate recuperează adesea 65–70%, obligațiunile senioare negarantate 35–45%, datoria subordonată 10–25%, iar capitalul junior chiar mai puțin. Ratele de recuperare sunt medii retrospective; ele nu prezic viitorul, dar oferă o primă estimare a recuperărilor probabile.</li>
+<li>Cele trei metrici lucrează împreună: durata spreadului măsoară riscul de preț din modificările de spread, LGD măsoară mărimea pierderii dacă apare neplata, iar rata de recuperare este pur și simplu complementul LGD. Împreună, ne permit să estimăm pierderile potențiale mark-to-market și nevoile de capital economic pentru un portofoliu de credit.</li>
+<li>Incertitudinea este ridicată. Durata spreadului presupune că spreadurile se mișcă paralel și că condițiile de lichiditate rămân normale. LGD și ratele de recuperare se bazează pe date istorice care pot să nu se repete; ele ignoră șocurile macroeconomice, efectele de vânzare forțată sau întârzierile juridice. Pragurile de reglementare și ajustările (haircut) ale agențiilor de rating depășesc adesea mediile istorice brute, așa că verifică întotdeauna cel mai recent regulament.</li>
+<li>Nu folosi niciodată o singură metrică izolat. O obligațiune cu durată a spreadului scăzută, dar LGD ridicat poate cauza totuși pierderi mari dacă mulți emitenți intră în neplată simultan. Invers, o obligațiune cu durată a spreadului ridicată, dar LGD scăzut poate pierde rapid din valoare într-un episod de lărgire a spreadului, chiar dacă nu apare nicio neplată. Combină întotdeauna durata spreadului cu LGD (sau rata de recuperare) pentru a dimensiona limitele de poziție și a stabili reguli de stop-loss.</li>
+<li>Începe cu pași mici, rămâi conservator. Pentru portofolii de nivel de început, presupune LGD ≥ 50% dacă expunerea nu este complet garantată cu colateral de calitate înaltă și folosește o durată a spreadului de cel puțin 3 pentru orice obligațiune corporativă deținută mai mult de câteva săptămâni. Aceste praguri simple previn surprizele mari în timp ce câștigi experiență cu modele mai rafinate.</li>
+</ul>

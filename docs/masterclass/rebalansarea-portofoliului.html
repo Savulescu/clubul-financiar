@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rebalansarea portofoliului — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Ghid pentru incepatori despre rebalansarea portofoliului: ponderi-tinta, abatere (drift), regula calendaristica vs. prag, costuri si impozite, cu exemple."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/rebalansarea-portofoliului.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Rebalansarea portofoliului"><meta property="og:description" content="Ghid pentru incepatori despre rebalansarea portofoliului: ponderi-tinta, abatere (drift), regula calendaristica vs. prag, costuri si impozite, cu exemple."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/rebalansarea-portofoliului.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Rebalansarea portofoliului"><meta name="twitter:description" content="Ghid pentru incepatori despre rebalansarea portofoliului: ponderi-tinta, abatere (drift), regula calendaristica vs. prag, costuri si impozite, cu exemple."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Rebalansarea portofoliului", "description": "Ghid pentru incepatori despre rebalansarea portofoliului: ponderi-tinta, abatere (drift), regula calendaristica vs. prag, costuri si impozite, cu exemple.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/rebalansarea-portofoliului.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="dimensionarea-pozitiei-fundamente" data-prev-title="Dimensionarea poziției: fundamente" data-next="bugetarea-riscului-2" data-next-title="Bugetarea riscului: cum aloci riscul, nu doar capitalul" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#allocation">Alocarea activelor</a> · 32 min · Actualizat 21 iun. 2026</p><h1>Rebalansarea portofoliului</h1><p>Rebalansarea portofoliului (rebalancing) este procesul prin care readuci investițiile la proporțiile pe care le-ai stabilit la început, după ce unele au crescut sau au scăzut mai mult decât altele. Pe scurt, rebalansarea înseamnă să ajustezi pozițiile pentru a menține ponderile-țintă (target weights) alese în funcție de toleranța ta la risc. Dacă ți-ai propus, de exemplu, 60% acțiuni, 30% obligațiuni și 10% numerar, iar bursa crește și acțiunile ajung să cântărească 65% din portofoliu, ai luat fără să vrei mai mult risc decât ai planuit.</p>
+
+<p>În acest capitol din Masterclass Bursă explicăm clar, pentru începători, cum funcționează rebalansarea portofoliului: ce sunt ponderile-țintă, ce înseamnă abaterea (drift), când merită să rebalansezi (regula calendaristică vs. regula de prag), cum ții cont de costurile de tranzacționare și de impozite, plus exemple numerice complete pas cu pas.</p>
+
+<p>Ideea-cheie este simplă: rebalansarea nu îți mărește câștigul așteptat și nu garantează că vei cumpăra ieftin și vei vinde scump. Rolul ei principal este să controleze riscul și să te țină disciplinat, readucând portofoliul la planul inițial atunci când piețele îl dau peste cap.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Rebalansarea este acțiunea de a readuce un set de elemente la proporțiile lor dorite, după ce unele au crescut sau s-au micșorat față de acele proporții.</p>
+
+<p>Imaginează-ți că ai patru găleți cu bile colorate. La început ai decis că vrei ca 25% dintre bile să fie roșii, 25% albastre, 25% verzi și 25% galbene. După o vreme, unele găleți au mai multe bile pentru că s-au adăugat bile noi sau bilele s-au înmulțit, așa că proporțiile nu mai sunt egale. Rebalansarea înseamnă pur și simplu să muți bile din găletile care au prea multe în cele care au prea puține, până când fiecare găleată conține din nou exact un sfert din total.</p>
+
+<p>În finanțe, „elementele” sunt de obicei investiții precum acțiuni, obligațiuni sau numerar. „Proporțiile dorite” se numesc ponderi-țintă (target weights), iar procesul de mutare a banilor (sau a titlurilor) pentru a reface acele ponderi se numește rebalansare.</p>
+
+<h3>Termeni pe care trebuie să-i înțelegi</h3>
+
+<ul>
+<li><strong>Poziție (position)</strong> – suma de bani pe care o deții în prezent într-o anumită investiție. Dacă deții acțiuni de 1.000 £ la o companie, poziția ta în acea companie este de 1.000 £.</li>
+<li><strong>Pondere-țintă (target weight)</strong> – procentul din portofoliul total pe care vrei să-l ocupe fiecare investiție. Dacă portofoliul tău valorează 10.000 £ și vrei 10% în obligațiuni, ponderea-țintă pentru obligațiuni este de 1.000 £ (10% din 10.000 £).</li>
+<li><strong>Abatere (drift)</strong> – diferența dintre poziția ta reală și ponderea-țintă, cauzată de schimbările de preț. Dacă obligațiunile cresc și valorează acum 1.200 £ în loc de ținta de 1.000 £, abaterea este de +200 £.</li>
+<li><strong>Regulă de rebalansare (rebalancing rule)</strong> – instrucțiunea simplă pe care ți-o dai (ție sau calculatorului) cu privire la momentul acțiunii. Cele două reguli cele mai frecvente sunt:
+  <ul>
+    <li><strong>Pe bază de timp (time-based)</strong>: „Verifică în fiecare lună și rebalansează dacă vreo poziție s-a îndepărtat cu mai mult de 5% de ținta sa.”</li>
+    <li><strong>Pe bază de prag (threshold-based)</strong>: „Rebalansează ori de câte ori o poziție s-a îndepărtat cu mai mult de 10% de ținta sa, indiferent de timp.”</li>
+  </ul>
+</li>
+<li><strong>Flux de numerar (cash flow)</strong> – banii pe care îi adaugi sau îi retragi din portofoliu. Adăugarea a 500 £ în cont este un flux de intrare; retragerea a 500 £ este un flux de ieșire. Fluxurile de numerar pot fi folosite ca metodă ieftină de rebalansare, pentru că poți direcționa banii noi către investițiile subponderate în loc să le vinzi pe cele supraponderate.</li>
+<li><strong>Cost de tranzacționare (transaction cost)</strong> – orice comision sau taxă pe care trebuie să o plătești când cumperi sau vinzi. Comisioanele de brokeraj, impozitul pe tranzacții (stamp duty) și spread-ul dintre cerere și ofertă (bid-ask) contează toate. Aceste costuri îți reduc randamentul, așa că o rebalansare bună încearcă să păstreze tranzacționarea la minimum.</li>
+<li><strong>Lot fiscal (tax lot)</strong> – pachetul specific de acțiuni pe care l-ai cumpărat la o anumită dată, la un anumit preț. În multe țări plătești impozit pe câștigul de capital doar când vinzi un lot, iar impozitul depinde de cât timp l-ai deținut. Rebalansarea te poate forța să vinzi loturi care declanșează facturi fiscale mari, așa că investitorii atenți la impozite preferă adesea să rebalanseze prin fluxuri de numerar sau alegând ce loturi să vândă.</li>
+<li><strong>Volatilitate (volatility)</strong> – cât de mult sare în sus și în jos prețul unei investiții. Investițiile cu volatilitate ridicată se abat mai departe și mai rapid de la țintele lor, așa că au nevoie de obicei de rebalansare mai frecventă.</li>
+<li><strong>Corelație (correlation)</strong> – cât de strâns se mișcă împreună două investiții. Dacă două acțiuni urcă și coboară mereu în tandem, abaterea lor este similară, iar tranzacțiile de rebalansare sunt mai mici. Dacă se mișcă în direcții opuse, abaterea se anulează și rebalansarea este rar necesară.</li>
+<li><strong>Raport de rebalansare (rebalancing ratio)</strong> – fracțiunea din portofoliu care trebuie tranzacționată pentru a reface țintele. Un raport de 0,1 înseamnă că 10% din portofoliu trebuie mutat; un raport de 0,01 înseamnă că doar 1% trebuie mutat. Rapoartele mai mici sunt mai ieftine și creează mai puțină „frecare” din costuri și impozite.</li>
+</ul>
+
+<h3>Ce face și ce nu face rebalansarea</h3>
+
+<p>Rebalansarea menține nivelul de risc al portofoliului aproape de nivelul pe care l-ai ales inițial. Nu îți crește randamentul așteptat și nici nu garantează că vei cumpăra ieftin și vei vinde scump. Dovezile arată că rebalansarea reduce mai ales riscul (măsurat prin volatilitate sau prin pierderea maximă – maximum drawdown) și te ține disciplinat. Mărimea acestor beneficii depinde de costuri, de impozite și de cât de volatile sunt investițiile tale; cu cât dovezile sunt mai puternice pentru controlul riscului, cu atât sunt mai slabe pentru creșterea randamentului.</p>
+
+<h2>Intuiție</h2>
+
+<p>Imaginează-ți că ai un coș cu fructe pe care vrei să-l păstrezi la fel în fiecare zi: jumătate mere, un sfert banane și un sfert portocale. La început alegi cu grijă numărul potrivit din fiecare fruct, astfel încât coșul să respecte acea rețetă. În următoarele zile, merele încep să se coacă mai repede, bananele se lovesc și unele cad, iar portocalele rămân ferme. Dacă lași coșul așa cum este, proporția de mere va crește, în timp ce bananele se vor micșora, iar coșul nu va mai arăta ca amestecul inițial pe care l-ai dorit.</p>
+
+<p>Rebalansarea este acțiunea simplă de a face un pas înapoi, de a verifica compoziția curentă și apoi de a adăuga sau elimina fructe, astfel încât coșul să conțină din nou exact jumătate mere, un sfert banane și un sfert portocale. În lumea investițiilor, „fructele” sunt activele individuale – acțiuni, obligațiuni, numerar sau alte investiții – iar „rețeta” este ponderea-țintă pe care o stabilești pentru fiecare clasă de active când îți construiești prima dată portofoliul. Pentru că prețul fiecărui activ urcă sau coboară pe cont propriu, procentele de la care ai pornit se vor abate în timp. Rebalansarea este procesul care trage portofoliul înapoi către rețeta inițială.</p>
+
+<p>De ce contează asta? Gândește-te la rețeta coșului ca la o modalitate de a controla riscul. Dacă vrei o călătorie liniștită și stabilă, ai putea decide ca doar o felie mică din banii tăi să fie în fructele mai sălbatice – să zicem, merele care pot oscila puternic ca preț – în timp ce majoritatea să stea în bananele mai stabile. Când merele cresc brusc, ponderea lor în coș se umflă, ceea ce înseamnă că ți-ai asumat mai mult risc decât ai planuit. Invers, dacă merele se prăbușesc, rămâi cu o expunere foarte mică la potențialul lor de revenire. Prin rebalansare, reduci în mod deliberat excesul de mere când merg bine și adaugi puțin mai multe când rămân în urmă, păstrând nivelul general de risc aproape de cel pe care l-ai dorit.</p>
+
+<p>O analogie utilă din viața de zi cu zi este cada cu două robinete: unul cu apă caldă, unul cu apă rece. Reglezi butoanele astfel încât apa să iasă la o temperatură plăcută – să zicem, 50% cald și 50% rece. Dacă robinetul cu apă caldă picură mai repede, apa devine mai fierbinte; dacă cel rece încetinește, temperatura scade. Pentru a menține temperatura plăcută, ajustezi periodic butoanele, dând robinetul cald mai încet și pe cel rece mai tare, sau invers. Temperatura apei este profilul risc-randament al portofoliului, iar butoanele sunt ponderile pe care le atribui fiecărui activ. Rebalansarea este acțiunea de a învârti butoanele înapoi la setarea dorită.</p>
+
+<p>Prin urmare, problema pe care o rezolvă rebalansarea este dublă. În primul rând, te protejează împotriva creșterii neintenționate a riscului (risk creep). Fără ea, un portofoliu poate deveni puternic înclinat către activele care au performat bine, expunându-te la oscilații mai mari când acele active își schimbă direcția. În al doilea rând, impune un obicei disciplinat de „cumpără ieftin, vinde scump”. Când prețul unui activ a crescut, iar ponderea lui depășește ținta, vinzi o parte; când prețul a scăzut, iar ponderea coboară sub țintă, cumperi mai mult. În teorie, asta poate capta o parte din tendința naturală de „revenire la medie” (mean-reversion) a piețelor – prețurile care s-au îndepărtat mult de media lor pe termen lung tind adesea să revină către ea.</p>
+
+<p>Totuși, intuiția nu garantează un câștig gratuit. Vânzarea câștigătorilor și cumpărarea pierzătorilor pot fi anulate de costurile de tranzacționare (comisioane, spread-uri bid-ask) și, în conturile impozabile, de impactul fiscal al realizării câștigurilor. În plus, piețele nu revin mereu într-un mod ordonat și previzibil; uneori un activ câștigător continuă să urce mult timp, iar un activ pierzător nu își mai revine niciodată. Studiile empirice constată că rebalansarea poate îmbunătăți modest randamentele ajustate la risc – mai ales în portofoliile cu active slab corelate – dar beneficiul este de obicei mic în comparație cu costul tranzacționării frecvente. Pentru majoritatea investitorilor începători, un program simplu și periodic (de exemplu, o dată pe an) atinge un echilibru rezonabil între menținerea profilului de risc dorit și păstrarea costurilor reduse.</p>
+
+<p>Pe scurt, rebalansarea este verificarea de rutină care menține portofoliul aliniat cu planul pe care l-ai stabilit când l-ai construit prima dată. Rezolvă problema abaterii cauzate de mișcările inegale ale pieței, te ajută să rămâi în zona ta de confort față de risc și încurajează un obicei disciplinat de „cumpără ieftin, vinde scump”. Intuiția este clară: la fel cum ai ajusta fructele dintr-un coș sau robinetele dintr-o cadă pentru a păstra un amestec dorit, ajustezi periodic ponderile din coșul tău de investiții pentru a rămâne pe drumul cel bun. Dovezile sugerează că a face asta, în mod chibzuit și cu atenție la costuri, te poate ajuta să atingi rezultatele pe termen lung pe care le urmărești, chiar dacă nu elimină toată incertitudinea.</p>
+
+<h2>Cum funcționează – mecanica</h2>
+
+<p>Rebalansarea este un proces folosit pentru a ajusta ponderile diferitelor active dintr-un portofoliu de investiții, astfel încât să corespundă unei ponderi-țintă sau unei alocări de active dorite. Acest lucru se face de obicei pentru a asigura că portofoliul rămâne aliniat cu toleranța la risc și cu obiectivele de investiții ale investitorului. Mecanica rebalansării implică mai mulți pași, pe care îi prezentăm mai jos.</p>
+
+<h3>Pasul 1: Evaluarea portofoliului curent</h3>
+
+<p>Pentru a rebalansa un portofoliu, trebuie mai întâi să determinăm valoarea curentă a fiecărui activ deținut. Asta presupune calcularea valorii de piață curente a fiecărui titlu – acțiuni, obligațiuni sau fonduri mutuale – și apoi însumarea acestor valori pentru a obține valoarea totală a portofoliului.</p>
+
+<h3>Pasul 2: Alocarea-țintă de active</h3>
+
+<p>Apoi trebuie să determinăm alocarea-țintă de active pentru portofoliu. Acesta este amestecul dorit de clase de active – acțiuni, obligațiuni și numerar – pe care portofoliul ar trebui să le dețină. Alocarea-țintă se exprimă de obicei ca procent din valoarea totală a portofoliului.</p>
+
+<h3>Pasul 3: Calcularea ponderilor curente</h3>
+
+<p>Folosind evaluarea curentă a portofoliului și alocarea-țintă, putem calcula ponderile curente ale fiecărei clase de active. Asta presupune împărțirea valorii fiecărei clase de active la valoarea totală a portofoliului și apoi înmulțirea cu 100 pentru a exprima rezultatul ca procent.</p>
+
+<h3>Pasul 4: Identificarea activelor de cumpărat sau de vândut</h3>
+
+<p>Pentru a rebalansa portofoliul, trebuie să identificăm ce active trebuie cumpărate sau vândute pentru a atinge alocarea-țintă. Asta presupune compararea ponderilor curente ale fiecărei clase de active cu ponderile-țintă și stabilirea care active sunt supraponderate sau subponderate.</p>
+
+<h3>Pasul 5: Determinarea sumelor de rebalansare</h3>
+
+<p>După ce am identificat activele de cumpărat sau de vândut, trebuie să determinăm sumele de rebalansare. Asta presupune calcularea cantității din fiecare activ care trebuie cumpărată sau vândută pentru a atinge ponderile-țintă. Sumele de rebalansare se calculează de obicei ca diferența dintre ponderea-țintă și ponderea curentă a fiecărei clase de active.</p>
+
+<h3>Pasul 6: Executarea tranzacțiilor</h3>
+
+<p>În final, trebuie să executăm tranzacțiile pentru a cumpăra sau vinde activele identificate la pasul 4. Asta presupune folosirea unui cont de brokeraj sau a unei alte platforme de investiții pentru a achiziționa sau vinde activele necesare.</p>
+
+<h3>Pasul 7: Monitorizare și ajustare</h3>
+
+<p>După ce tranzacțiile de rebalansare au fost executate, trebuie să monitorizăm portofoliul pentru a ne asigura că rămâne aliniat cu alocarea-țintă. Asta presupune revizuirea regulată a ponderilor curente ale portofoliului și efectuarea ajustărilor necesare pentru a menține ponderile-țintă.</p>
+
+<p>Pe scurt, mecanica rebalansării implică o serie de pași: evaluarea portofoliului curent, alocarea-țintă de active, calcularea ponderilor curente, identificarea activelor de cumpărat sau de vândut, determinarea sumelor de rebalansare, executarea tranzacțiilor și monitorizarea și ajustarea portofoliului. Urmând acești pași, investitorii pot asigura că portofoliile lor rămân aliniate cu obiectivele de investiții și cu toleranța la risc.</p>
+
+<p>Merită menționat că există mai multe tipuri de rebalansare, precum:</p>
+
+<ul>
+<li><strong>Rebalansare calendaristică (calendar-based)</strong>: presupune rebalansarea portofoliului la intervale regulate, de exemplu trimestrial sau anual.</li>
+<li><strong>Rebalansare pe bază de prag (threshold-based)</strong>: presupune rebalansarea portofoliului când ponderile curente se abat de la ponderile-țintă cu un anumit procent, de exemplu 5%.</li>
+<li><strong>Recoltarea pierderilor fiscale (tax-loss harvesting)</strong>: presupune vânzarea activelor care și-au pierdut din valoare pentru a realiza pierderi și a le folosi la compensarea câștigurilor din alte active.</li>
+</ul>
+
+<p>Fiecare dintre aceste tipuri de rebalansare are propriile avantaje și dezavantaje, iar alegerea celei pe care o folosești va depinde de circumstanțele și obiectivele individuale ale investitorului.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Vom parcurge un ciclu complet de rebalansare pentru un portofoliu „de grădiniță”. Toate cifrele sunt rotunjite la două zecimale, ca un copil de patru ani să poată număra piesele, dar logica este aceeași pentru orice mărime de cont.</p>
+
+<h3>Scenariu</h3>
+
+<ul>
+<li>Amestec-țintă: 60% cărți de „Povești” (S), 30% piese de „Construcție” (B), 10% acuarele de „Artă” (A).</li>
+<li>Prețuri curente: fiecare carte de Povești = 1 £, fiecare piesă de Construcție = 2 £, fiecare borcănel de acuarelă = 5 £.</li>
+<li>Portofoliu de start (Ziua 0): 60 S, 15 B, 2 A.</li>
+<li>După o săptămână, prețurile se modifică la: S = 1,10 £, B = 1,90 £, A = 5,50 £.</li>
+<li>Avem instrucțiunea să rebalansăm înapoi la amestecul 60/30/10 o dată pe săptămână.</li>
+</ul>
+
+<p><strong>Pasul 1 – calculează valoarea curentă a fiecărei poziții</strong><br>
+Valoare_S = 60 × 1,10 £ = 66,00 £<br>
+Valoare_B = 15 × 1,90 £ = 28,50 £<br>
+Valoare_A = 2 × 5,50 £ = 11,00 £<br>
+Valoare totală portofoliu = 66,00 £ + 28,50 £ + 11,00 £ = 105,50 £</p>
+
+<p><strong>Pasul 2 – calculează suma-țintă pentru fiecare categorie</strong><br>
+Țintă_S = 60% × 105,50 £ = 63,30 £<br>
+Țintă_B = 30% × 105,50 £ = 31,65 £<br>
+Țintă_A = 10% × 105,50 £ = 10,55 £</p>
+
+<p><strong>Pasul 3 – compară ținta cu valoarea curentă și decide dacă cumperi sau vinzi</strong></p>
+<ul>
+<li>Cărți de Povești: avem nevoie de 63,30 £, dar valorează 66,00 £ → surplus 2,70 £ → vom vinde de 2,70 £.</li>
+<li>Piese de Construcție: avem nevoie de 31,65 £, dar valorează 28,50 £ → lipsă 3,15 £ → vom cumpăra de 3,15 £.</li>
+<li>Acuarele de Artă: avem nevoie de 10,55 £, dar valorează 11,00 £ → surplus 0,45 £ → vom vinde de 0,45 £.</li>
+</ul>
+
+<p><strong>Pasul 4 – transformă ajustările de numerar necesare în obiecte întregi</strong><br>
+Pentru că nu putem tranzacționa fracțiuni de obiecte la nivel de grădiniță, rotunjim la cea mai apropiată piesă, carte sau borcănel întreg.</p>
+
+<p>Vinde cărți de Povești: 2,70 £ ÷ 1,10 £ pe carte ≈ 2,45 cărți → vindem 2 cărți. Numerar obținut = 2 × 1,10 £ = 2,20 £ (lăsăm restul de 0,50 £ în pușculiță ca eroare de rotunjire).</p>
+
+<p>Cumpără piese de Construcție: 3,15 £ ÷ 1,90 £ pe piesă ≈ 1,66 piese → cumpărăm 2 piese. Numerar necesar = 2 × 1,90 £ = 3,80 £.</p>
+
+<p>Vinde acuarele de Artă: 0,45 £ ÷ 5,50 £ pe borcănel ≈ 0,08 borcănel → vindem 0 borcănele (rotunjit la zero). Schimbare de numerar = 0,00 £.</p>
+
+<p>Flux net de numerar: +2,20 £ (din S) – 3,80 £ (pentru B) – 0,00 £ (pentru A) = –1,60 £. Asta înseamnă că valoarea totală a portofoliului după tranzacționare este 105,50 £ – 1,60 £ = 103,90 £.</p>
+
+<p><strong>Pasul 5 – confirmă noile cantități și verifică amestecul</strong></p>
+<ul>
+<li>Cărți de Povești rămase = 60 – 2 = 58 cărți, valorând 58 × 1,10 £ = 63,80 £</li>
+<li>Piese de Construcție noi = 15 + 2 = 17 piese, valorând 17 × 1,90 £ = 32,30 £</li>
+<li>Acuarelele de Artă neschimbate la 2 borcănele, valorând 11,00 £</li>
+</ul>
+<p>Valoare totală = 63,80 £ + 32,30 £ + 11,00 £ = 107,10 £ (eroarea de rotunjire de 1,60 £ apare aici). Amestec procentual:<br>
+S = 63,80 / 107,10 ≈ 59,6%<br>
+B = 32,30 / 107,10 ≈ 30,2%<br>
+A = 11,00 / 107,10 ≈ 10,3%</p>
+
+<p>Procentele se încadrează în ±0,4% față de ținta 60/30/10, ceea ce este suficient de aproape pentru un portofoliu de grădiniță și arată că rotunjirea obiectelor întregi nu strică metoda.</p>
+
+<h3>Ce ne spun și ce nu ne spun cifrele</h3>
+<ul>
+<li>Exemplul rezolvat arată clar pașii mecanici.</li>
+<li>NU dovedește că rebalansarea îmbunătățește randamentele pe termen lung; asta depinde de traiectoriile viitoare ale prețurilor și de comisioane, pe care nu le-am examinat.</li>
+<li>De asemenea, NU arată ce se întâmplă dacă prețurile se mișcă din nou înainte de următoarea rebalansare; acela este subiectul secțiunii următoare despre momentul acțiunii.</li>
+</ul>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Imaginează-ți un mic fond de familie care are trei „găleți”: un fond de indice de acțiuni, un fond de obligațiuni guvernamentale și un fond de tip numerar (money-market). Obiectivul pe termen lung al familiei este să păstreze portofoliul împărțit 60% acțiuni, 30% obligațiuni și 10% numerar. Pornesc cu un total de 10.000 £, deci sumele-țintă sunt:</p>
+
+<ul>
+<li>Acțiuni = 6.000 £</li>
+<li>Obligațiuni = 3.000 £</li>
+<li>Numerar = 1.000 £</li>
+</ul>
+
+<p>Șase luni mai târziu, piața s-a mișcat. Indicele de acțiuni a crescut cu 15%, fondul de obligațiuni a fost plat, iar fondul de numerar a câștigat o modestă dobândă de 1%. Noile valori de piață sunt:</p>
+
+<ul>
+<li>Acțiuni = 6.900 £ (pentru că 6.000 £ × 1,15)</li>
+<li>Obligațiuni = 3.000 £ (neschimbat)</li>
+<li>Numerar = 1.010 £ (pentru că 1.000 £ × 1,01)</li>
+</ul>
+
+<p>Portofoliul valorează acum 10.910 £. <strong>Ponderile curente</strong> sunt:</p>
+
+<ul>
+<li>Acțiuni = 6.900 £ ÷ 10.910 £ ≈ 63,3%</li>
+<li>Obligațiuni = 3.000 £ ÷ 10.910 £ ≈ 27,5%</li>
+<li>Numerar = 1.010 £ ÷ 10.910 £ ≈ 9,3%</li>
+</ul>
+
+<p>Pentru că poziția de acțiuni a crescut mai repede decât celelalte, ponderea ei este peste ținta de 60%, în timp ce obligațiunile și numerarul sunt sub țintele lor. Familia decide să <strong>rebalanseze</strong> pentru a readuce ponderile la împărțirea inițială 60-30-10.</p>
+
+<h3>Pasul 1: Calculează sumele-țintă la noua mărime totală</h3>
+
+<p>Familia vrea să păstreze aceleași procente, dar acum portofoliul este mai mare. Sumele-țintă devin:</p>
+
+<ul>
+<li>Țintă acțiuni = 60% × 10.910 £ = 6.546 £</li>
+<li>Țintă obligațiuni = 30% × 10.910 £ = 3.273 £</li>
+<li>Țintă numerar = 10% × 10.910 £ = 1.091 £</li>
+</ul>
+
+<p>Acestea sunt cifrele pe care procesul de rebalansare le va viza.</p>
+
+<h3>Pasul 2: Stabilește cât să vinzi sau să cumperi</h3>
+
+<p>Compară valorile de piață curente cu țintele:</p>
+
+<ul>
+<li>Acțiuni: curent 6.900 £, țintă 6.546 £ → <strong>vinde</strong> 354 £</li>
+<li>Obligațiuni: curent 3.000 £, țintă 3.273 £ → <strong>cumpără</strong> 273 £</li>
+<li>Numerar: curent 1.010 £, țintă 1.091 £ → <strong>cumpără</strong> 81 £</li>
+</ul>
+
+<p>Familia trebuie să vândă acțiuni de 354 £ și să folosească încasările pentru a cumpăra obligațiuni și numerar. În practică, de obicei ar vinde întâi acțiunile, apoi ar aloca numerarul către celelalte două găleți.</p>
+
+<h3>Pasul 3: Ține cont de costurile de tranzacționare</h3>
+
+<p>Chiar și la un nivel de înțelegere „de grădiniță”, este important să recunoaștem că a cumpăra și a vinde nu este gratuit. Să presupunem că brokerul percepe un comision fix de 5 £ pe fiecare tranzacție. Familia va suporta două comisioane (unul pentru vânzarea acțiunilor, unul pentru cumpărarea obligațiunilor; achiziția de numerar se poate face fără o tranzacție dacă fondul de numerar este în același cont). Numerarul net disponibil după comisionul de vânzare este:</p>
+
+<ul>
+<li>Numerar din vânzarea acțiunilor = 354 £ − 5 £ = 349 £</li>
+</ul>
+
+<p>Acum familia poate aloca acești 349 £ către achizițiile de obligațiuni și numerar. Achiziția de obligațiuni are nevoie de 273 £, lăsând 76 £ pentru achiziția de numerar. Ținta de numerar de 1.091 £ va fi atinsă doar parțial (vor ajunge la 1.010 £ + 76 £ = 1.086 £). Diferența rămasă de 5 £ este o mică „eroare de rebalansare” care ar fi corectată la următoarea ocazie.</p>
+
+<h3>Pasul 4: Execută tranzacțiile</h3>
+
+<ul>
+<li><strong>Vinde</strong> acțiuni de 354 £ (plătești 5 £ comision).</li>
+<li><strong>Cumpără</strong> obligațiuni de 273 £ (plătești 5 £ comision).</li>
+<li><strong>Depune</strong> restul de 76 £ în fondul de numerar (fără comision).</li>
+</ul>
+
+<p>După tranzacții, compoziția portofoliului este:</p>
+
+<ul>
+<li>Acțiuni = 6.546 £</li>
+<li>Obligațiuni = 3.273 £</li>
+<li>Numerar = 1.086 £</li>
+</ul>
+
+<p>Valoarea totală este acum 10.905 £, cu câteva lire mai mică decât înainte din cauza comisioanelor. Ponderile au revenit la aproximativ 60%-30%-10% (de fapt 60,0%-30,0%-9,9%). Abaterea minusculă este acceptabilă pentru majoritatea investitorilor începători, mai ales atunci când costul unei tranzacții suplimentare pentru a perfecta echilibrul ar depăși beneficiul.</p>
+
+<h3>Ce ne învață acest scenariu</h3>
+
+<p>Rebalansarea reface procentele-țintă chiar și atunci când portofoliul a crescut. Sumele-țintă sunt întotdeauna recalculate la noua mărime totală a portofoliului, nu la cea veche. În plus, scenariul arată că, în lumea reală, comisioanele și rotunjirea lasă o mică abatere reziduală față de ținta perfectă – abatere pe care un investitor înțelept o tolerează în loc să plătească pentru încă o tranzacție.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Rebalansarea poate fi un proces complex, iar începătorii fac adesea greșeli sau au concepții greșite despre cum funcționează. Este esențial să înțelegi aceste capcane pentru a le evita și a lua decizii informate. Iată câteva greșeli și concepții greșite frecvente legate de rebalansare:</p>
+
+<ul>
+<li><strong>Ignorarea importanței rebalansării regulate</strong>: mulți începători cred că rebalansarea este necesară doar când ponderea portofoliului se abate semnificativ de la țintă. Însă această abordare poate duce la pierderi importante în timp. Rebalansarea regulată ajută la menținerea ponderii-țintă, reducând impactul fluctuațiilor de piață.</li>
+<li><strong>Neglijarea impactului comisioanelor</strong>: la rebalansare, este esențial să iei în calcul comisioanele asociate cumpărării și vânzării de titluri. Aceste comisioane pot eroda randamentele portofoliului, făcând mai dificilă menținerea ponderii-țintă. Începătorii trec adesea cu vederea impactul comisioanelor, ceea ce poate duce la rezultate suboptime.</li>
+<li><strong>Înțelegerea greșită a conceptului „cumpără ieftin, vinde scump”</strong>: expresia este adesea asociată cu rebalansarea, dar nu este complet exactă. În realitate, rebalansarea presupune cumpărarea și vânzarea de titluri pentru a menține ponderea-țintă, indiferent de prețurile lor curente. Această abordare poate fi contraintuitivă, pentru că poate implica cumpărarea unor titluri la prețuri mari sau vânzarea lor la prețuri mici.</li>
+<li><strong>Convingerea că rebalansarea este un eveniment unic</strong>: începătorii cred adesea că rebalansarea se face o singură dată, dar este un proces continuu. Pe măsură ce ponderea portofoliului se abate de la țintă, rebalansarea devine necesară. Asta cere monitorizare și ajustări regulate.</li>
+<li><strong>Concentrarea exclusivă pe câștigurile pe termen scurt</strong>: unii începători prioritizează câștigurile pe termen scurt în fața stabilității pe termen lung. Însă rebalansarea este o strategie pe termen lung care urmărește menținerea ponderii-țintă în timp. Concentrarea doar pe câștigurile pe termen scurt poate duce la rezultate suboptime și risc crescut.</li>
+<li><strong>Subestimarea impactului volatilității pieței</strong>: volatilitatea poate afecta semnificativ ponderea portofoliului, făcând dificilă menținerea țintei. Începătorii subestimează adesea impactul volatilității, ceea ce poate duce la pierderi importante dacă nu este abordat prin rebalansare regulată.</li>
+<li><strong>Neluarea în calcul a implicațiilor fiscale</strong>: la rebalansare, este esențial să iei în calcul implicațiile fiscale ale cumpărării și vânzării de titluri. Începătorii trec adesea cu vederea aceste implicații, ceea ce poate duce la obligații fiscale crescute și randamente reduse.</li>
+<li><strong>Convingerea că rebalansarea este o abordare „setează și uită”</strong>: unii începători cred că rebalansarea înseamnă să lași portofoliul să se gestioneze singur. Însă rebalansarea cere monitorizare și ajustări regulate pentru a menține ponderea-țintă. Asta presupune efort continuu și atenție la performanța portofoliului.</li>
+<li><strong>Neluarea în calcul a impactului inflației</strong>: inflația poate afecta semnificativ randamentele portofoliului, făcând dificilă menținerea țintei. Începătorii trec adesea cu vederea impactul inflației, ceea ce poate duce la randamente reduse și risc crescut.</li>
+<li><strong>Lipsa unei înțelegeri clare a ponderii-țintă</strong>: începătorii se chinuie adesea să definească ponderea-țintă, ceea ce poate duce la rezultate suboptime. Este esențial să ai o înțelegere clară a ponderii-țintă și a logicii din spatele ei pentru a lua decizii informate despre rebalansare.</li>
+</ul>
+
+<p>Înțelegând aceste greșeli și concepții greșite frecvente, începătorii pot evita capcanele și pot lua decizii informate despre rebalansare. Este esențial să abordezi rebalansarea cu o înțelegere clară a logicii de bază și a ponderii-țintă pentru a obține rezultate optime.</p>
+
+<h2>Cum o folosește biroul de tranzacționare</h2>
+
+<p>La un birou real de tranzacționare (trading desk), procesul de rebalansare nu este un exercițiu abstract de clasă; este un flux de lucru în timp real, așezat între „ideea” managerului de portofoliu și „cotația” pieței. Sarcina biroului este să transforme ponderile-țintă ale managerului în tranzacții executabile, respectând limitele de risc, cost și decontare, și să o facă destul de rapid încât ponderile-țintă să nu se abată prea mult înainte ca ordinele să fie executate.</p>
+
+<p>Punctul de plecare este <em>portofoliul-țintă</em>. Acesta este o listă cu fiecare titlu pe care biroul are voie să-l dețină, împreună cu procentul exact de capital pe care fiecare titlu ar trebui să-l reprezinte la următoarea rebalansare. De exemplu, un birou de nivel de început ar putea primi instrucțiunea: „Apple 25%, Microsoft 20%, Trezorerie pe 10 ani 15%, numerar 40%.” Procentele însumează 100% și sunt exprimate în termeni noționali, adică valoarea în dolari pe care biroul ar deține-o dacă fiecare poziție ar fi la prețul de mijloc (mid-market), fără reduceri. Biroul tratează aceste cifre ca sacre până la următorul ciclu de rebalansare, de obicei săptămânal sau bisăptămânal.</p>
+
+<p>În fiecare dimineață, echipa de risc publică <em>portofoliul curent</em>. Acesta este registrul viu (blotter): pentru fiecare linie arată câte acțiuni, obligațiuni sau contracte sunt în evidențe, ultimul preț tranzacționat, valoarea de piață curentă și procentul de capital pe care îl reprezintă acum acea linie. Diferența dintre procentul-țintă și procentul curent se numește <em>supra/subpondere</em> (over/under weight). Dacă Apple ar trebui să fie 25%, dar este doar 23%, biroul este <em>subponderat</em> pe Apple cu 2% din capital. Invers, dacă Microsoft este 22% în loc de 20%, biroul este <em>supraponderat</em> pe Microsoft cu 2%.</p>
+
+<p>Prima întrebare practică este: ce mărime de tranzacție este necesară pentru a închide diferența? Biroul înmulțește supra/subponderea cu capitalul total pentru a obține <em>ajustarea noțională</em>. Cu 10 milioane de dolari sub administrare, o subpondere de 2% pe Apple înseamnă că biroul trebuie să cumpere acțiuni Apple de 200.000 $. Biroul convertește apoi acel noțional în acțiuni folosind ultimul preț tranzacționat, adaugă un mic tampon pentru rotunjire și curs valutar dacă e necesar, și verifică dacă mărimea ordinului rezultat se încadrează în <em>limita de mărime</em> a biroului – o regulă strictă care împiedică orice ordin să miște piața sau să încalce mărimea minimă de tichet a brokerului.</p>
+
+<p>Urmează <em>costul de implementare</em> (implementation shortfall). Chiar dacă biroul ar putea tranzacționa la prețul de închidere de ieri, piața s-ar putea să se fi mișcat, așa că ajustarea <em>teoretică</em> este doar un punct de plecare. Echipa de execuție aplică de aceea o <em>estimare de alunecare</em> (slippage estimate): un număr empiric (adesea 5–15 puncte de bază pentru acțiunile cu capitalizare mare) care spune cât de mult se va mișca probabil prețul în defavoarea ta în timp ce ordinul este lucrat. Dacă estimarea de alunecare depășește profitul așteptat din semnalul de rebalansare, biroul poate <em>reduce</em> ordinul sau îl poate amâna până când condițiile se îmbunătățesc. Aici puritatea teoretică a lui „exact 25%” întâlnește realitatea aspră a costurilor de tranzacționare.</p>
+
+<p>Limitele de risc sunt verificate în timp real. Motorul de Valoare la Risc (VaR) al biroului recalculează profilul de risc al portofoliului după tranzacțiile propuse. Dacă noul VaR depășește limita biroului, mărimea ordinului este redusă proporțional până când limita este respectată. La fel, este consultată și găleata de lichiditate a biroului: dacă ordinul propus pe Apple ar consuma mai mult de 20% din volumul mediu zilnic al Apple, ordinul este împărțit în ordine-copil mai mici și eșalonat pe parcursul zilei pentru a evita impactul asupra pieței.</p>
+
+<p>Momentul este alt levier practic. Biroul poate alege să <em>încarce în față</em> (front-load) rebalansarea – tranzacționând primele cele mai mari diferențe – sau să <em>eșaloneze</em> rebalansarea pe parcursul mai multor ore pentru a reduce impactul asupra pieței. Birourile de nivel de început folosesc de obicei un algoritm simplu de <em>preț mediu ponderat cu volumul</em> (VWAP) pentru prima oră de tranzacționare și apoi trec la un program <em>ponderat cu timpul</em> pentru restul zilei. Alegerea depinde de cât de mult are biroul încredere în semnal față de cât de mult se teme de impactul asupra pieței.</p>
+
+<p>În final, biroul înregistrează fiecare abatere de la tranzacția ideală într-un <em>jurnal de rebalansare</em>. Acest jurnal captează noționalul intenționat, acțiunile efectiv tranzacționate, prețul mediu de execuție, costul de alunecare și poziția reziduală după închidere. De-a lungul săptămânilor și lunilor, jurnalul devine „verificarea la realitate” a biroului: îi spune echipei dacă regulile de rebalansare funcționează sau dacă trebuie ajustate estimările de alunecare, limitele de mărime sau chiar ponderile-țintă în sine.</p>
+
+<p>Dovezile pe care le avem sunt mixte. Testele pe date istorice (back-tests) arată că rebalansarea disciplinată adaugă valoare prin prevenirea abaterilor mari, dar mărimea acelei valori este mică – de obicei câteva puncte de bază pe ciclu de rebalansare – odată ce se includ costurile de tranzacționare. Ce nu ne pot spune datele este cum se comportă biroul în cele mai grele zile: când piața are goluri de preț, când lichiditatea dispare sau când managerul de portofoliu schimbă brusc ponderile-țintă. Acele cazuri-limită sunt cele în care experiența și judecata biroului contează cel mai mult și în care cadrul teoretic oferă doar îndrumare limitată.</p>
+
+<h2>Limite, rezerve și când eșuează</h2>
+
+<p>Rebalansarea – mutarea banilor dintr-o deținere în alta astfel încât fiecare activ să rămână la ponderea sa dorită – pare o regulă simplă și mecanică. În practică însă, regula se așază peste o realitate de piață complexă, iar există mai multe motive pentru care s-ar putea să nu ofere rezultatele pe care le așteaptă un utilizator naiv. Mai jos sunt cele mai frecvente surse de limitare, situațiile în care devin importante și consecințele pentru un portofoliu care se bazează doar pe rebalansare.</p>
+
+<ul>
+<li><strong>Costurile de tranzacționare nu sunt zero</strong>: fiecare tranzacție are un cost – un comision, un spread bid-ask, impact asupra pieței și uneori impozite. Ecuația teoretică a rebalansării presupune că poți cumpăra sau vinde orice cantitate instantaneu la prețul cotat, dar în realitate fiecare tranzacție reduce valoarea portofoliului. Când costul rebalansării este comparabil cu – sau mai mare decât – beneficiul așteptat al revenirii la ponderile-țintă, efectul net poate fi negativ. Rebalansarea mică și frecventă (de exemplu, zilnică) este deosebit de vulnerabilă, pentru că costul cumulat poate depăși orice câștig din corectarea abaterii.</li>
+<li><strong>Riscul de moment și volatilitatea pieței</strong>: rebalansarea te forțează să vinzi activele care au crescut și să le cumperi pe cele care au scăzut. Dacă piața are un trend puternic într-o direcție, acest tipar „vinde-scump, cumpără-ieftin” poate bloca pierderi. De exemplu, într-o piață în creștere prelungită (bull market), activul supraponderat (cel care a performat cel mai bine) va continua să urce, iar vânzarea lui pentru a rebalansa poate lăsa portofoliul în urma pieței. Invers, într-o scădere abruptă, activul subponderat poate continua să scadă după ce ai cumpărat mai mult din el, mărind pierderea. Rebalansarea nu protejează împotriva riscului direcțional; controlează doar compoziția <em>relativă</em>.</li>
+<li><strong>Presupunerea ponderilor-țintă statice</strong>: regula clasică de rebalansare presupune că procentele-țintă sunt fixe pentru totdeauna. În realitate, amestecul optim de active se schimbă cu orizontul investitorului, toleranța la risc și mediul macroeconomic. Dacă ținta este stabilită pe baza unor ipoteze depășite (de exemplu, o împărțire 60/40 acțiuni-obligațiuni derivată dintr-o eră cu dobânzi mici), rebalansarea la acele ținte învechite poate menține portofoliul nealiniat cu peisajul risc-randament actual.</li>
+<li><strong>Constrângerile de lichiditate</strong>: unele dețineri sunt greu de tranzacționat rapid sau în volume mari fără a mișca prețul. Fondurile imobiliare, participațiile în private equity sau acțiunile tranzacționate rar pot avea adâncime de piață limitată. Încercarea de a rebalansa aceste poziții poate fi fie imposibilă (nu există piață), fie poate provoca o mișcare substanțială de preț (impact mare asupra pieței). În astfel de cazuri, portofoliul poate rămâne dezechilibrat mult timp, sau rebalansarea poate fi forțată la un preț prost, erodând valoarea.</li>
+<li><strong>Riscul de model și eroarea de estimare</strong>: ponderile-țintă sunt adesea derivate dintr-o optimizare medie-varianță sau dintr-un model factorial. Acele modele se bazează pe estimări istorice de randament și volatilitate, care sunt zgomotoase și pot să nu prezică comportamentul viitor. Dacă datele de intrare sunt distorsionate, ținta rezultată poate fi suboptimă, iar rebalansarea la acea țintă nu va îmbunătăți performanța ajustată la risc. În plus, optimizarea poate genera ponderi extreme (de exemplu, 90% într-un singur activ) care sunt nepractice de menținut.</li>
+<li><strong>Frecarea comportamentală</strong>: rebalansarea este un proces disciplinat și mecanic, dar totuși cere investitorului să acționeze. În practică, oamenii amână, ignoră abateri mici sau încalcă regula când emoțiile sunt la cotă maximă. „Regula de rebalansare” devine astfel mai degrabă un ghid decât o garanție. Cu cât este mai mare întârzierea dintre semnal și execuție, cu atât mai mare este abaterea de la ponderea dorită, și cu atât mai slabe sunt beneficiile statistice.</li>
+<li><strong>Schimbările de regim și rupturile structurale</strong>: piețele trec ocazional prin schimbări structurale – noi reglementări, disrupții tehnologice sau schimbări de politică monetară – care alterează relațiile dintre active. O regulă de rebalansare calibrată pe date dinaintea schimbării s-ar putea să nu mai capteze dinamica reală, iar actul rebalansării poate chiar agrava expunerea la noul regim. De exemplu, după o creștere bruscă a inflației, obligațiunile își pot pierde corelația negativă istorică cu acțiunile; rebalansarea înapoi în obligațiuni ar putea crește riscul general al portofoliului.</li>
+<li><strong>Costul de oportunitate</strong>: prin angajarea de capital pentru a menține o anumită pondere, portofoliul poate rata noi oportunități de investiții care apar în afara universului inițial. Dacă apare o idee cu convingere mare, disciplina rebalansării poate descuraja alocarea de fonduri suplimentare către ea, dacă ponderile-țintă nu sunt ajustate deliberat. Astfel, rebalansarea poate acționa ca o constrângere de „rigiditate”, limitând flexibilitatea.</li>
+<li><strong>Considerentele fiscale</strong>: în conturile impozabile, vânzarea activelor apreciate pentru a rebalansa declanșează impozite pe câștigul de capital, care reduc randamentele după impozitare. Formula simplă de rebalansare nu ia în calcul frecarea fiscală, iar în jurisdicțiile cu impozite mari beneficiul net al rebalansării poate fi neglijabil sau chiar negativ. Strategiile conștiente de impozite (de exemplu, recoltarea pierderilor fiscale sau plasarea activelor pe tipuri de conturi) sunt necesare pentru a atenua acest efect, dar adaugă un strat suplimentar de complexitate.</li>
+<li><strong>Eșecul de a aborda riscul de coadă (tail risk)</strong>: rebalansarea se concentrează pe menținerea unei distribuții line a ponderilor pe termen lung. Nu protejează direct împotriva evenimentelor rare și extreme (de exemplu, un crash de piață). Într-un scenariu de risc de coadă, compoziția portofoliului se poate schimba dramatic într-o singură zi, iar orice program de rebalansare prestabilit va fi prea lent pentru a răspunde. Sunt necesare instrumente suplimentare de gestionare a riscului – precum ordinele stop-loss, opțiunile sau acoperirile dinamice (hedges) – pentru a aborda acea dimensiune.</li>
+</ul>
+
+<p><strong>Concluzie:</strong> rebalansarea este o disciplină utilă pentru a ține profilul de risc al portofoliului aliniat cu un plan pe termen lung, dar nu este un glonț de argint. Eficacitatea ei depinde de costuri de tranzacționare reduse, de lichiditate rezonabilă a pieței, de ipoteze-țintă stabile și de o execuție disciplinată. Când oricare dintre aceste condiții cedează – volatilitate ridicată, schimbări de regim, active nelichide sau frecare fiscală importantă – regula simplă poate subperforma, sau chiar dăuna portofoliului. Practicienii tratează de aceea rebalansarea ca o componentă a unei gestionări mai ample a riscului.</p>
+
+<h2>Concluzii-cheie</h2>
+
+<p>Rebalansarea este un concept esențial în domeniul alocării, iar înțelegerea aspectelor ei cheie este vitală pentru o gestionare eficientă a portofoliului. Iată punctele de reținut:</p>
+
+<ul>
+<li><strong>Rebalansarea nu este o strategie de tranzacționare</strong>: este un proces de ajustare a pozițiilor pentru a menține ponderile-țintă, nu o modalitate de a face profit sau de a genera randamente. Scopul este să asiguri că portofoliul rămâne aliniat cu toleranța la risc și cu obiectivele investitorului.</li>
+<li><strong>Ponderile-țintă sunt cruciale</strong>: ponderile-țintă reprezintă alocarea dorită către fiecare clasă de active sau titlu din portofoliu. Rebalansarea presupune ajustarea ponderilor reale pentru a corespunde acestor ținte.</li>
+<li><strong>Rebalansarea frecventă nu este întotdeauna mai bună</strong>: deși rebalansarea regulată poate ajuta la menținerea ponderilor-țintă, poate duce și la costuri de tranzacționare și obligații fiscale crescute. O abordare echilibrată este să rebalansezi periodic, luând în calcul costurile și beneficiile fiecărui ciclu.</li>
+<li><strong>Rebalansarea se poate face în mai multe moduri</strong>:
+  <ul>
+    <li><strong>Rebalansare prin numerar (cash rebalancing)</strong>: vânzarea de titluri pentru a strânge numerar și apoi cumpărarea activelor dorite.</li>
+    <li><strong>Rebalansare prin titluri (security rebalancing)</strong>: cumpărarea sau vânzarea de titluri specifice pentru a ajusta ponderile-țintă.</li>
+    <li><strong>Rebalansare prin coș (basket rebalancing)</strong>: ajustarea ponderilor unui grup de titluri pentru a menține alocarea-țintă.</li>
+  </ul>
+</li>
+<li><strong>Eficiența fiscală este esențială</strong>: rebalansarea poate declanșa impozite pe câștigul de capital, care pot eroda randamentele. Investitorii ar trebui să ia în calcul implicațiile fiscale la rebalansare și să urmărească minimizarea obligațiilor fiscale.</li>
+<li><strong>Rebalansarea nu este o soluție universală</strong>: frecvența și metoda de rebalansare depind de obiectivele, toleranța la risc și orizontul de timp ale investitorului. O abordare adaptată este necesară pentru a asigura că rebalansarea se aliniază cu obiectivele.</li>
+<li><strong>Rebalansarea poate fi automatizată</strong>: cu ajutorul tehnologiei, rebalansarea poate fi automatizată folosind diverse unelte și platforme. Asta poate ajuta la reducerea costurilor de tranzacționare și la creșterea eficienței.</li>
+<li><strong>Monitorizarea și revizuirea sunt esențiale</strong>: monitorizarea și revizuirea regulată a portofoliului sunt necesare pentru a asigura că rebalansarea este eficientă și aliniată cu obiectivele.</li>
+<li><strong>Rebalansarea nu înlocuiește o strategie de investiții bine gândită</strong>: o strategie solidă de investiții este fundația unui portofoliu de succes. Rebalansarea este o unealtă pentru a menține alinierea cu strategia, nu un înlocuitor al ei.</li>
+</ul>
+
+<p>Înțelegând aceste concluzii-cheie, investitorii și managerii de portofoliu pot implementa eficient rebalansarea pentru a menține ponderile-țintă și a-și atinge obiectivele de investiții.</p><script type="application/json" id="cf-mc-quiz">[{"q": "Care este scopul principal al rebalansării unui portofoliu?", "options": ["Să crească randamentul așteptat al portofoliului", "Să mențină nivelul de risc aproape de cel ales inițial, readucând ponderile la țintă", "Să garanteze că vei cumpăra mereu ieftin și vei vinde scump", "Să elimine complet pierderile în caz de criză"], "correct": 1, "explain": "Rebalansarea menține profilul de risc aproape de cel planificat și te ține disciplinat; nu crește randamentul așteptat și nu garantează market-timing.", "kind": "concept"}, {"q": "Ce înseamnă „abaterea” (drift) într-un portofoliu?", "options": ["Comisionul plătit la fiecare tranzacție", "Diferența dintre poziția reală și ponderea-țintă, cauzată de schimbările de preț", "Procentul total al portofoliului în numerar", "Numărul de tranzacții făcute într-un an"], "correct": 1, "explain": "Drift-ul este diferența dintre valoarea reală a unei poziții și ținta sa, apărută pentru că prețurile activelor se mișcă diferit.", "kind": "text"}, {"q": "Un investitor are ținta 60% acțiuni, dar după o creștere puternică acțiunile ajung la 65%. Ce s-a întâmplat cu riscul portofoliului?", "options": ["Riscul a scăzut sub nivelul planificat", "Riscul a rămas exact la fel", "Riscul a crescut peste nivelul planificat, fără ca investitorul să decidă asta", "Riscul a fost eliminat de creștere"], "correct": 2, "explain": "Când activul mai volatil crește în pondere peste țintă, investitorul are mai mult risc decât a planuit, fără o decizie conștientă (risk creep).", "kind": "concept"}, {"q": "Ce este ponderea-țintă (target weight)?", "options": ["Prețul curent al unui activ", "Procentul din portofoliul total pe care vrei să-l ocupe fiecare investiție", "Comisionul mediu pe tranzacție", "Volumul zilnic tranzacționat al unui activ"], "correct": 1, "explain": "Ponderea-țintă este procentul dorit din portofoliul total pentru fiecare investiție; de ex. 10% în obligațiuni dintr-un portofoliu de 10.000 înseamnă 1.000 țintă.", "kind": "text"}, {"q": "De ce sunt fluxurile de numerar (cash flows) o metodă „ieftină” de rebalansare?", "options": ["Pentru că elimină toate impozitele", "Pentru că poți direcționa banii noi către activele subponderate fără a le vinde pe cele supraponderate", "Pentru că brokerul plătește comisionul în locul tău", "Pentru că dublează randamentul activelor subponderate"], "correct": 1, "explain": "Direcționând depozitele noi către pozițiile subponderate, eviți vânzările (deci comisioane și impozite pe câștig), reducând costul rebalansării.", "kind": "concept"}, {"q": "Diferența principală dintre regula de rebalansare pe bază de timp și cea pe bază de prag este:", "options": ["Una se aplică doar la acțiuni, cealaltă doar la obligațiuni", "Cea pe bază de timp verifică/acționează la intervale fixe; cea pe bază de prag acționează când abaterea depășește un procent, indiferent de timp", "Cea pe bază de prag nu necesită niciodată tranzacții", "Cea pe bază de timp ignoră complet ponderile-țintă"], "correct": 1, "explain": "Regula time-based folosește un calendar (ex. lunar/anual); cea threshold-based declanșează rebalansarea când o poziție se abate cu un anumit procent, fără legătură cu un calendar.", "kind": "text"}, {"q": "Cum afectează volatilitatea ridicată a unui activ nevoia de rebalansare?", "options": ["O reduce, pentru că activul rămâne stabil", "Nu are niciun efect asupra rebalansării", "O crește, pentru că activul se abate mai departe și mai rapid de la țintă", "O elimină, pentru că volatilitatea anulează abaterea"], "correct": 2, "explain": "Activele cu volatilitate mare se îndepărtează mai repede și mai mult de ponderea-țintă, deci au nevoie de rebalansare mai frecventă.", "kind": "concept"}, {"q": "Două acțiuni care se mișcă mereu în tandem (corelație ridicată) au ca efect asupra rebalansării:", "options": ["Tranzacții de rebalansare mai mici, pentru că abaterea lor este similară", "Tranzacții de rebalansare mult mai mari", "Imposibilitatea de a calcula ponderile", "Eliminarea costurilor de tranzacționare"], "correct": 0, "explain": "Dacă două active urcă/coboară împreună, ponderile lor se abat similar, deci este nevoie de tranzacționare mai mică pentru a reface țintele.", "kind": "concept"}, {"q": "Ce arată dovezile empirice despre beneficiul rebalansării?", "options": ["Crește mereu mult randamentul, indiferent de costuri", "Reduce mai ales riscul (volatilitate/drawdown); beneficiul de randament e mic și depinde de costuri", "Garantează că portofoliul bate piața în fiecare an", "Nu are niciun efect măsurabil"], "correct": 1, "explain": "Evidența arată că rebalansarea controlează mai ales riscul; cu cât dovada pentru control de risc e mai puternică, cu atât e mai slabă pentru creșterea randamentului.", "kind": "concept"}, {"q": "În scenariul familiei (10.910 după creștere), de ce sunt sumele-țintă recalculate (6.546 / 3.273 / 1.091) și nu cele inițiale (6.000 / 3.000 / 1.000)?", "options": ["Din cauza unei erori de calcul", "Pentru că procentele-țintă se aplică mereu la noua valoare totală a portofoliului", "Pentru că obligațiunile au crescut cel mai mult", "Pentru că brokerul cere sume rotunde"], "correct": 1, "explain": "Țintele procentuale se aplică la mărimea totală curentă; când portofoliul crește la 10.910, 60/30/10 produce noile sume-țintă.", "kind": "concept"}, {"q": "De ce expresia „cumpără ieftin, vinde scump” nu descrie complet exact rebalansarea?", "options": ["Pentru că rebalansarea cumpără/vinde pentru a menține ponderea-țintă, nu în funcție de prețul curent", "Pentru că rebalansarea cumpără doar la maxime", "Pentru că rebalansarea nu implică niciodată vânzări", "Pentru că expresia se aplică doar obligațiunilor"], "correct": 0, "explain": "Rebalansarea tranzacționează pentru a reface ponderile-țintă, ceea ce uneori poate însemna cumpărare la preț mare sau vânzare la preț mic; nu urmărește direct „ieftin/scump”.", "kind": "concept"}, {"q": "Într-un bull market prelungit, ce risc apare dacă vinzi mereu activul supraponderat pentru a rebalansa?", "options": ["Riscul de a plăti mai puține impozite", "Riscul ca portofoliul să rămână în urma pieței, deoarece câștigătorul continuă să urce", "Riscul de a dubla expunerea la activul câștigător", "Riscul ca activul să nu se mai poată tranzacționa"], "correct": 1, "explain": "Dacă tendința continuă, vânzarea repetată a câștigătorului poate lăsa portofoliul în urma pieței; rebalansarea nu protejează împotriva riscului direcțional.", "kind": "concept"}, {"q": "Ce este un „lot fiscal” (tax lot)?", "options": ["Suma totală a impozitelor anuale", "Pachetul specific de acțiuni cumpărat la o anumită dată și preț, relevant pentru impozitul la vânzare", "Comisionul fix perceput de broker", "Pragul minim de rebalansare"], "correct": 1, "explain": "Un tax lot este pachetul de acțiuni cumpărat la o dată/preț specific; impozitul pe câștig depinde de cât l-ai deținut, așa că alegerea lotului vândut contează fiscal.", "kind": "text"}, {"q": "Care este pericolul principal al rebalansării mici și foarte frecvente (de ex. zilnice)?", "options": ["Devine imposibil de calculat", "Costurile cumulate de tranzacționare pot depăși orice câștig din corectarea abaterii", "Crește automat impozitele la zero", "Elimină nevoia de ponderi-țintă"], "correct": 1, "explain": "Rebalansarea foarte frecventă acumulează multe costuri (comisioane, spread, impozite) care pot depăși beneficiul mic al corectării abaterii.", "kind": "concept"}, {"q": "De ce poate fi problematică rebalansarea activelor nelichide (imobiliare, private equity, acțiuni rar tranzacționate)?", "options": ["Sunt scutite de impozite, deci nu merită", "Pot fi imposibil de tranzacționat rapid sau pot mișca semnificativ prețul (impact mare)", "Au mereu corelație zero", "Nu au niciodată o pondere-țintă"], "correct": 1, "explain": "Activele cu adâncime de piață redusă pot fi greu de vândut/cumpărat fără a mișca prețul, așa că rebalansarea lor poate fi imposibilă sau forțează prețuri proaste.", "kind": "concept"}, {"q": "Ce reprezintă „frecarea comportamentală” (behavioural drag) în contextul rebalansării?", "options": ["Costul fix perceput de platformă", "Faptul că oamenii amână, ignoră abateri mici sau încalcă regula când emoțiile sunt intense", "Diferența dintre VaR și volatilitate", "Impozitul pe câștigul de capital"], "correct": 1, "explain": "Chiar dacă regula e mecanică, execuția depinde de om; amânarea sau încălcarea ei mărește abaterea și slăbește beneficiile statistice.", "kind": "text"}, {"q": "De ce poate fi riscantă rebalansarea către ponderi-țintă „statice” (ex. 60/40 stabilit într-o eră cu dobânzi mici)?", "options": ["Pentru că procentele nu mai pot fi calculate", "Pentru că amestecul optim se schimbă cu orizontul, toleranța la risc și macroeconomia, iar ținta veche poate fi nealiniată", "Pentru că țintele statice elimină orice cost", "Pentru că obligațiunile nu mai există"], "correct": 1, "explain": "Țintele presupuse fixe pentru totdeauna pot deveni învechite; rebalansarea către ele poate menține portofoliul nealiniat cu peisajul risc-randament actual.", "kind": "concept"}, {"q": "La biroul de tranzacționare, ce este „supra/subponderea” (over/under weight)?", "options": ["Diferența dintre prețul de cumpărare și cel de vânzare", "Diferența dintre procentul-țintă și procentul curent al unei poziții", "Volumul mediu zilnic al unui activ", "Comisionul total plătit pe zi"], "correct": 1, "explain": "Dacă Apple ar trebui să fie 25% dar e 23%, biroul e subponderat cu 2%; e diferența dintre ponderea-țintă și cea curentă.", "kind": "text"}, {"q": "Cum calculează biroul „ajustarea noțională” necesară pentru o poziție?", "options": ["Înmulțind supra/subponderea cu capitalul total", "Împărțind prețul la volum", "Adunând toate comisioanele lunii", "Scăzând VaR din lichiditate"], "correct": 0, "explain": "Noționalul de ajustat = supra/subpondere × capital total. Ex.: 2% subpondere pe 10 mil. $ înseamnă cumpărare de 200.000 $.", "kind": "text"}, {"q": "Ce decide biroul dacă „estimarea de alunecare” (slippage) depășește profitul așteptat din semnalul de rebalansare?", "options": ["Dublează imediat mărimea ordinului", "Reduce ordinul sau îl amână până când condițiile se îmbunătățesc", "Ignoră limitele de risc", "Vinde tot portofoliul"], "correct": 1, "explain": "Dacă alunecarea estimată e mai mare decât câștigul așteptat, biroul scalează în jos ordinul sau îl amână, pentru că tranzacția ar costa mai mult decât aduce.", "kind": "concept"}, {"q": "De ce este un ordin mare împărțit în „ordine-copil” eșalonate pe parcursul zilei?", "options": ["Pentru a plăti mai multe comisioane", "Pentru a evita consumarea unei părți prea mari din volumul zilnic și impactul asupra pieței", "Pentru a crește VaR-ul portofoliului", "Pentru a anula complet alunecarea"], "correct": 1, "explain": "Dacă un ordin ar consuma prea mult din volumul mediu zilnic (ex. >20%), e împărțit și eșalonat ca să nu miște prețul împotriva ta.", "kind": "concept"}, {"q": "După o creștere bruscă a inflației, obligațiunile pot pierde corelația negativă istorică cu acțiunile. Ce implicație are asta pentru rebalansare?", "options": ["Rebalansarea către obligațiuni devine întotdeauna gratuită", "Rebalansarea înapoi în obligațiuni ar putea crește, nu reduce, riscul general", "Inflația anulează orice abatere", "Rebalansarea devine imposibilă"], "correct": 1, "explain": "Dacă regimul se schimbă și corelațiile se modifică, o regulă calibrată pe vechiul regim poate agrava expunerea; rebalansarea în obligațiuni poate crește riscul.", "kind": "concept"}, {"q": "Ce este rebalansarea prin numerar (cash rebalancing), așa cum e descrisă la concluzii?", "options": ["Vânzarea de titluri pentru a strânge numerar și apoi cumpărarea activelor dorite", "Păstrarea a 100% în numerar permanent", "Eliminarea oricărei tranzacționări", "Cumpărarea doar de obligațiuni guvernamentale"], "correct": 0, "explain": "Cash rebalancing înseamnă vinzi titluri pentru a obține numerar și apoi cumperi activele necesare pentru a reface ponderile-țintă.", "kind": "text"}, {"q": "De ce rebalansarea NU este considerată un înlocuitor al unei strategii de investiții bine gândite?", "options": ["Pentru că rebalansarea generează randamente garantate", "Pentru că este doar o unealtă de menținere a alinierii cu strategia, nu fundația portofoliului", "Pentru că elimină nevoia de a alege active", "Pentru că funcționează doar fără strategie"], "correct": 1, "explain": "O strategie solidă este fundația; rebalansarea doar menține portofoliul aliniat cu acea strategie, fără a o înlocui.", "kind": "concept"}, {"q": "De ce rebalansarea singură NU protejează împotriva riscului de coadă (tail risk), ca un crash de piață?", "options": ["Pentru că tail risk nu există în practică", "Pentru că un program prestabilit reacționează prea lent la schimbări dramatice într-o singură zi", "Pentru că rebalansarea vinde automat tot la primul semn de scădere", "Pentru că crash-urile cresc mereu valoarea portofoliului"], "correct": 1, "explain": "Rebalansarea menține o distribuție lină pe termen lung, dar un program planificat e prea lent pentru șocuri extreme; sunt necesare stop-loss, opțiuni sau hedge-uri dinamice.", "kind": "concept"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>

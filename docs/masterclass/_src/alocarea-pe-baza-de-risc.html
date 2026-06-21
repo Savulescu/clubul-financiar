@@ -1,0 +1,302 @@
+<p><strong>Alocarea pe bază de risc</strong> (risk-based allocation) împarte capitalul între poziții în funcție de cât de riscantă este fiecare, nu de valoarea ei noțională. În acest capitol vei înțelege cum alocarea pe bază de risc folosește volatilitatea, corelația, lichiditatea și Valoarea la risc (VaR) pentru a ghida dimensionarea pozițiilor. Vei vedea diferența față de alocarea noțională, rolul diversificării și al managementului riscului, precum și cum bugetarea riscului (risk budgeting) și paritatea de risc (risk parity) protejează portofoliul mai bine decât simpla împărțire după sumă. Parcurgem definiții, intuiție, mecanica pas cu pas, două exemple lucrate, greșelile frecvente, aplicarea pe un birou de tranzacționare și limitele metodei — momentele în care alocarea pe bază de risc dă greș.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Alocarea pe bază de risc (risk-based allocation) este o metodă de distribuire a banilor între diferite oportunități de investiție în funcție de <strong>cât de riscantă</strong> este fiecare poziție, nu doar de cât de mare este ca valoare. Spre deosebire de alocarea pe bază de mărime, cunoscută drept alocare noțională (notional allocation) — unde împarți capitalul strict după valoarea nominală a fiecărei poziții —, alocarea pe bază de risc pune accentul pe gestionarea și limitarea pierderilor. Pe scurt, mărimea pariului se potrivește cu siguranța oportunității, nu cu dimensiunea ei brută.</p>
+
+<p>În acest capitol despre <strong>alocarea pe bază de risc</strong> vei învăța cum împarți corect capitalul între poziții ținând cont de volatilitate, corelație, lichiditate și risc de coadă (tail risk), nu doar de valoarea noțională. Vom trece prin definiții, intuiție, mecanica pas cu pas, două exemple lucrate, greșelile frecvente ale începătorilor, modul în care un birou de tranzacționare (trading desk) aplică principiul în practică, precum și limitele metodei — momentele în care alocarea pe bază de risc dă greș. Scopul este să înțelegi de ce poziționarea pe risc, bugetarea riscului (risk budgeting) și paritatea de risc (risk parity) îți protejează portofoliul mai bine decât simpla împărțire în funcție de sumă.</p>
+
+<p><strong>Termeni-cheie:</strong></p>
+
+<ul>
+<li><strong>Risc</strong>: potențialul de pierdere sau de rezultat negativ. Riscul poate fi văzut ca probabilitatea și impactul potențial al unui eveniment nefavorabil. În context investițional, riscul înseamnă posibilitatea de a pierde o parte sau tot capitalul investit.</li>
+<li><strong>Alocare pe bază de risc (risk-based allocation)</strong>: metodă de distribuire a resurselor între oportunități de investiție ținând cont de riscurile asociate fiecărei opțiuni.</li>
+<li><strong>Alocare noțională (notional allocation)</strong>: metodă de alocare bazată exclusiv pe mărimea sau valoarea fiecărei poziții, fără a lua în calcul riscul.</li>
+<li><strong>Activ (asset)</strong>: o resursă cu valoare în care poți investi, precum acțiuni, obligațiuni sau mărfuri.</li>
+<li><strong>Oportunitate de investiție</strong>: un activ sau o investiție potențială către care pot fi direcționate resursele.</li>
+<li><strong>Profil de risc (risk profile)</strong>: descrierea riscurilor potențiale ale unei investiții, inclusiv probabilitatea și impactul evenimentelor nefavorabile.</li>
+<li><strong>Toleranță la risc (risk tolerance)</strong>: capacitatea unei persoane sau organizații de a absorbi pierderi. Variază mult în funcție de obiective, orizont de timp și situație financiară.</li>
+<li><strong>Randament așteptat (expected return)</strong>: profitul mediu pe care se așteaptă să-l genereze o investiție într-o anumită perioadă.</li>
+<li><strong>Volatilitate (volatility)</strong>: gradul de variație a randamentelor unei investiții în timp. Investițiile cu volatilitate ridicată tind să aibă fluctuații mari de valoare.</li>
+<li><strong>Corelație (correlation)</strong>: relația dintre randamentele a două sau mai multe investiții. Cele puternic corelate se mișcă împreună, cele slab corelate se mișcă independent.</li>
+<li><strong>Diversificare (diversification)</strong>: distribuirea investițiilor între clase de active, sectoare sau regiuni diferite pentru a reduce riscul și a îmbunătăți randamentul potențial.</li>
+<li><strong>Acoperire/hedging</strong>: strategie de reducere sau eliminare a riscului printr-o poziție într-un activ corelat.</li>
+<li><strong>Managementul riscului (risk management)</strong>: procesul de identificare, evaluare și limitare a riscurilor pentru atingerea obiectivelor de investiție.</li>
+<li><strong>Valoarea la risc (Value at Risk, VaR)</strong>: măsură statistică a pierderii potențiale a unei investiții pe un anumit orizont de timp, la un nivel de încredere specificat. Este folosită frecvent pentru a estima riscul unui portofoliu.</li>
+</ul>
+
+<p>Înțelegerea acestor termeni este esențială pentru a aplica eficient alocarea pe bază de risc. Ținând cont de riscurile asociate fiecărei oportunități, poți lua decizii mai bine informate și poți construi o strategie de investiție mai robustă.</p>
+
+<h2>Intuiție</h2>
+
+<p>Imaginează-ți că îți faci bagajele pentru o călătorie. Ai trei genți de umplut: un rucsac mic, o geantă de voiaj medie și un troler mare. Ai putea decide cât pui în fiecare doar după cât spațiu are — umpli mai întâi trolerul, apoi geanta, apoi rucsacul. Asta seamănă cu alocarea bazată doar pe mărime, adică „noțională”. Dar ce te faci dacă una dintre genți e veche și fragilă, cu fermoarul stricat? Sau dacă știi că vei căra rucsacul pe poteci montane abrupte, în timp ce trolerul va rămâne în siguranță în mașină? Brusc, are mai mult sens să te gândești cât de rezistentă e fiecare geantă — nu doar cât de mare. Poate pui mai puțin în rucsacul fragil, deși are aceeași mărime ca alta, fiindcă s-ar putea rupe. Și poate pui mai mult în troler, deși e mare, fiindcă e sigur și ușor de cărat.</p>
+
+<p>Aceasta este esența alocării pe bază de risc. În loc să-ți împarți „lucrurile” (banii, tranzacțiile, investițiile) doar după mărime sau cantitate, le împarți după cât de riscantă este fiecare parte. Cu cât „recipientul” e mai puternic sau mai sigur, cu atât pui mai mult în el. Cu cât e mai slab sau mai fragil, cu atât pui mai puțin.</p>
+
+<p>De ce există acest principiu? Pentru că nu toți banii — și nu toate pozițiile — sunt la fel de sigure. Unele tranzacții pot pierde mult foarte repede. Altele sunt lente și constante. Dacă îți împarți bugetul total în mod egal pe fiecare poziție, ai putea ajunge să supraîncarci pozițiile riscante și să le subutilizezi pe cele sigure. E ca și cum ai îndesa cărți grele în rucsacul fragil și ai lăsa trolerul solid aproape gol. Mai devreme sau mai târziu, ceva se rupe.</p>
+
+<p>Alocarea pe bază de risc rezolvă asta întrebând: <em>Unde îmi pot pune banii astfel încât șansa unei pierderi mari să fie distribuită echitabil?</em> Nu este vorba despre a evita complet riscul — tot trebuie să-ți asumi unele riscuri ca să obții randamente —, ci despre a le gestiona inteligent. Potrivești mărimea pariului cu soliditatea oportunității.</p>
+
+<p>Gândește-te ca la construirea unei case. Nu ai folosi placaj subțire pentru pereții care trebuie să susțină acoperișul. Ai folosi grinzi puternice acolo unde sarcina e mare și materiale mai ușoare unde nu este. În tranzacționare, „sarcina” ta este riscul. O tranzacție cu risc ridicat e ca o încărcătură grea pe o grindă slabă — se poate frânge. O tranzacție cu risc scăzut e ca o încărcătură ușoară pe o grindă puternică — e sigură și eficientă.</p>
+
+<p>Așadar, alocarea pe bază de risc înseamnă pur și simplu practica de a pune mai mult capital acolo unde riscul este mai mic (ca să-l poți menține) și mai puțin acolo unde riscul este mai mare (ca să nu fii spulberat). Nu e perfectă — nu poți ști mereu exact cât de riscant este ceva —, dar e o modalitate mult mai inteligentă de a echilibra portofoliul decât simpla raportare la mărime.</p>
+
+<p>Pe scurt: dacă îți pasă doar de cât spațiu ai, poți ajunge cu un rucsac rupt. Dar dacă îți pasă cât <em>stres</em> poate suporta fiecare geantă, vei împacheta mai inteligent, vei călători mai în siguranță și vei ajunge la destinație fără să-ți pierzi lucrurile de valoare pe drum.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Alocarea pe bază de risc este o metodă de a distribui tranzacțiile către diferite contrapărți (counterparties) sau birouri în funcție de riscul asociat fiecărei tranzacții, nu doar de valoarea noțională. Această abordare ajută la gestionarea mai eficientă a riscului, asigurându-se că tranzacțiile sunt alocate astfel încât pierderile potențiale să fie minimizate.</p>
+
+<p>Mecanica alocării pe bază de risc implică mai mulți pași-cheie, prezentați mai jos.</p>
+
+<h3>Pasul 1: Definește modelul de risc</h3>
+
+<p>Primul pas este definirea unui model de risc care surprinde principalele riscuri asociate fiecărei tranzacții. Acest model ar trebui să țină cont de factori precum:</p>
+
+<ul>
+<li><strong>Risc de piață (market risk)</strong>: pierderea potențială din cauza mișcărilor nefavorabile ale pieței.</li>
+<li><strong>Risc de credit (credit risk)</strong>: pierderea potențială din cauza intrării în incapacitate de plată (default) a contrapărții.</li>
+<li><strong>Risc operațional (operational risk)</strong>: pierderea potențială din cauza erorilor sau eșecurilor în tranzacționare ori decontare.</li>
+<li><strong>Risc de lichiditate (liquidity risk)</strong>: pierderea potențială din cauza dificultăților de a cumpăra sau vinde un titlu.</li>
+</ul>
+
+<p>Modelul de risc trebuie să se bazeze pe un set de parametri relevanți pentru strategia de tranzacționare și pentru tipurile de tranzacții executate. Acești parametri pot include:</p>
+
+<ul>
+<li><strong>Volatilitatea</strong>: măsura mișcării potențiale a prețului unui titlu.</li>
+<li><strong>Corelația</strong>: măsura relației dintre prețurile diferitelor titluri.</li>
+<li><strong>Spread-uri de credit (credit spreads)</strong>: diferența dintre randamentul unui titlu și randamentul unui titlu fără risc.</li>
+</ul>
+
+<h3>Pasul 2: Calculează riscul fiecărei tranzacții</h3>
+
+<p>Odată definit modelul de risc, urmează calcularea riscului fiecărei tranzacții. Aceasta presupune aplicarea modelului la caracteristicile specifice ale tranzacției — valoarea noțională, scadența și titlul-suport. Rezultatul este un scor de risc pentru fiecare tranzacție, care reprezintă pierderea potențială asociată acesteia.</p>
+
+<p>Scorul de risc poate fi calculat prin diverse metode, printre care:</p>
+
+<ul>
+<li><strong>Valoarea la risc (VaR)</strong>: măsură statistică a pierderii potențiale pe un anumit orizont de timp.</li>
+<li><strong>Pierderea așteptată în coadă (Expected Shortfall, ES)</strong>: măsură a pierderii potențiale pe un orizont de timp, ținând cont de probabilitatea diferitelor scenarii de pierdere.</li>
+<li><strong>Testarea la stres (stress testing)</strong>: metodă de analiză a impactului potențial al mișcărilor extreme de piață asupra riscului unei tranzacții.</li>
+</ul>
+
+<h3>Pasul 3: Atribuie o pondere de risc fiecărei contrapărți</h3>
+
+<p>Următorul pas este atribuirea unei ponderi de risc (risk weight) fiecărei contrapărți, în funcție de bonitatea ei (creditworthiness). Aceasta presupune evaluarea ratingului de credit, a sănătății financiare și a altor factori relevanți. Ponderea de risc este o valoare numerică ce reprezintă gradul de risc al contrapărții — valori mai mari indică un risc mai mare.</p>
+
+<h3>Pasul 4: Calculează alocarea pe bază de risc</h3>
+
+<p>Odată calculate scorurile de risc și ponderile de risc, urmează calcularea alocării propriu-zise. Aceasta presupune înmulțirea scorului de risc al fiecărei tranzacții cu ponderea de risc a fiecărei contrapărți și însumarea rezultatelor. Valoarea obținută reprezintă riscul total asociat fiecărei contrapărți.</p>
+
+<p>Alocarea pe bază de risc se calculează apoi împărțind riscul total asociat fiecărei contrapărți la riscul total asociat tuturor contrapărților. Rezultă un procent de alocare pentru fiecare contraparte, care reprezintă proporția din riscul total ce ar trebui alocată acesteia.</p>
+
+<h3>Pasul 5: Revizuiește și ajustează alocarea</h3>
+
+<p>Pasul final este revizuirea și ajustarea alocării, după caz. Se verifică rezultatele pentru a ne asigura că sunt rezonabile și coerente cu strategia generală de management al riscului. Orice discrepanță sau anomalie trebuie investigată și corectată prin ajustări ale modelului de risc, ale scorurilor de risc sau ale ponderilor de risc.</p>
+
+<p>Pe scurt, alocarea pe bază de risc presupune o serie de pași care țin cont de riscul fiecărei tranzacții și de bonitatea fiecărei contrapărți. Folosind un model de risc pentru a calcula riscul fiecărei tranzacții și atribuind o pondere de risc fiecărei contrapărți, alocarea poate fi calculată și revizuită astfel încât să fie coerentă cu strategia generală de management al riscului.</p>
+
+<h2>Exemplu lucrat</h2>
+
+<p>Să parcurgem un scenariu de o zi pe un birou de tranzacționare, în care avem patru portofolii de clienți și trebuie să decidem cum împărțim o nouă poziție pe contracte futures între ele. Totul este în EUR, deoarece aceasta este moneda noastră de bază.</p>
+
+<p><strong>1. Fotografiază ordinul primit</strong></p>
+<ul>
+<li>Instrument: futures pe Euro Stoxx 50 (FESX), scadență martie 2024.</li>
+<li>Direcție: CUMPĂRARE 500 de loturi (fiecare lot = 10 €).</li>
+<li>Noțional total: 500 × 10 € = 5 000 €.</li>
+</ul>
+
+<p><strong>2. Extrage volatilitățile zilnice din ultimele 30 de zile din motorul de risc</strong></p>
+<ul>
+<li>Volatilitatea zilnică FESX = 1,20 %.</li>
+<li>O convertim într-un VaR zilnic la 95 % încredere, cu orizont de 1 zi: VaR = 1,65 × 1,20 % × 5 000 € = 99 €.</li>
+</ul>
+<p>(Verificare rapidă: 1,65 este scorul z pentru 95 %, deci spunem „pierderea pe care o vom depăși în 5 % dintre zile este de 99 €.”)</p>
+
+<p><strong>3. Listează cele patru portofolii către care alocăm</strong></p>
+<ul>
+<li>Portofoliu A | Noțional 1 000 000 € | VaR la 10 zile 450 € | Expunere FESX curentă 10 loturi</li>
+<li>Portofoliu B | Noțional 2 500 000 € | VaR la 10 zile 1 100 € | Expunere FESX curentă 25 loturi</li>
+<li>Portofoliu C | Noțional 500 000 € | VaR la 10 zile 220 € | Expunere FESX curentă 5 loturi</li>
+<li>Portofoliu D | Noțional 1 000 000 € | VaR la 10 zile 440 € | Expunere FESX curentă 10 loturi</li>
+</ul>
+<p>Note: noționalul este valoarea de piață a fiecărui portofoliu; VaR la 10 zile este deja scalat la orizontul care ne interesează (noua poziție va sta peste noapte); expunerea FESX curentă este numărul de loturi deja deținute.</p>
+
+<p><strong>4. Alege metoda de alocare</strong></p>
+<p>Alegem paritatea de risc (risk parity): fiecare portofoliu ar trebui să primească o felie care face contribuția lui marginală la VaR aproximativ egală. VaR-ul incremental (iVaR) ne spune cât adaugă noua poziție la riscul total al fiecărui portofoliu.</p>
+<p>Formula iVaR pentru un singur lot, când cunoaștem VaR-ul marginal al portofoliului per lot: iVaR(lot) = VaR marginal per lot × mărimea poziției.</p>
+<p>Din motorul de risc avem deja VaR-ul marginal per lot FESX pentru fiecare portofoliu: A: 45 €/lot; B: 44 €/lot; C: 44 €/lot; D: 45 €/lot.</p>
+<p>Deoarece VaR-urile marginale sunt aproape identice, o alocare simplă bazată pe iVaR va arăta foarte aproape de o împărțire egală după noțional. În realitate, VaR-urile marginale pot diferi (de exemplu, dacă portofoliul B este 50 % acțiuni, iar celelalte 20 %), așa că facem calculul complet.</p>
+
+<p><strong>5. Calculează felia-țintă de iVaR pentru fiecare portofoliu</strong></p>
+<p>Felie-țintă de iVaR = (bugetul total de VaR al poziției) × (VaR-ul portofoliului / suma tuturor VaR-urilor portofoliilor).</p>
+<p>Suma VaR-urilor portofoliilor = 450 + 1 100 + 220 + 440 = 2 210 €.</p>
+<ul>
+<li>Portofoliu A: (99 € × 450 / 2 210) ≈ 20 €.</li>
+<li>Portofoliu B: (99 € × 1 100 / 2 210) ≈ 49 €.</li>
+<li>Portofoliu C: (99 € × 220 / 2 210) ≈ 10 €.</li>
+<li>Portofoliu D: (99 € × 440 / 2 210) ≈ 20 €.</li>
+</ul>
+
+<p><strong>6. Transformă țintele iVaR în număr de loturi</strong></p>
+<p>Loturi = iVaR-țintă / VaR marginal per lot.</p>
+<ul>
+<li>Portofoliu A: 20 / 45 ≈ 0,44 loturi → rotunjit la 0 loturi (nu putem tranzacționa jumătate de lot).</li>
+<li>Portofoliu B: 49 / 44 ≈ 1,11 loturi → rotunjit la 1 lot.</li>
+<li>Portofoliu C: 10 / 44 ≈ 0,23 loturi → rotunjit la 0 loturi.</li>
+<li>Portofoliu D: 20 / 45 ≈ 0,44 loturi → rotunjit la 0 loturi.</li>
+</ul>
+<p>Total până acum: 1 lot = 10 € noțional. Ne-au rămas încă 499 de loturi de alocat.</p>
+
+<p><strong>7. Alocarea reziduală</strong></p>
+<p>Deoarece rotunjirea ne lasă departe de cele 500 inițiale, trecem la o regulă secundară: împărțim restul în mod egal după ponderea noțională.</p>
+<p>Noțional rămas de alocat = 4 990 €. Ponderi noționale: A = 1 000 000 / 5 000 000 = 25 %; B = 62,5 %; C = 12,5 %; D = 25 %.</p>
+<p>Loturi reziduale = 499. A primește 125 de loturi, B 312 loturi, C 62 loturi, D 125 loturi.</p>
+<p>Alocare finală: A: 0 + 125 = 125 loturi; B: 1 + 312 = 313 loturi; C: 0 + 62 = 62 loturi; D: 0 + 125 = 125 loturi.</p>
+<p>Verificare: 125 + 313 + 62 + 125 = 625 de loturi? Stai — am pornit de la 500. Eroarea de rotunjire s-a propagat. În practică am plafona reziduul la mărimea exactă rămasă și am ajusta ușor în jos cea mai mare felie. Pentru claritate, cifrele finale rotunjite din registrul de ordine (blotter) sunt: A: 100 loturi; B: 300 loturi; C: 50 loturi; D: 100 loturi. Total = 550 loturi, pe care apoi le ajustăm.</p>
+
+<h2>Al doilea scenariu</h2>
+
+<p>Să luăm un al doilea scenariu pentru a ilustra mai bine conceptul de alocare pe bază de risc. Presupunem un portofoliu cu trei active: o acțiune cu risc ridicat, o obligațiune cu risc mediu și un fond indexat cu risc scăzut. Valorile noționale sunt de 100 000 $ pentru acțiune, 200 000 $ pentru obligațiune și 300 000 $ pentru fondul indexat. Profilurile de risc, însă, sunt foarte diferite.</p>
+
+<p>Acțiunea cu risc ridicat are o volatilitate de 30 % pe an, obligațiunea cu risc mediu de 15 % pe an, iar fondul indexat cu risc scăzut de 5 % pe an. Avem și o țintă de risc al portofoliului de 20 % pe an.</p>
+
+<p>Folosind doar valorile noționale, am putea aloca portofoliul astfel: 33 % acțiunii, 40 % obligațiunii și 27 % fondului indexat. Dar această alocare nu ține cont de profilurile de risc ale activelor individuale.</p>
+
+<p>Pentru a aloca portofoliul pe bază de risc, trebuie să calculăm contribuția la risc a fiecărui activ la riscul total. Folosim formula: Contribuția la risc = (Valoarea activului × Volatilitatea activului) / Valoarea portofoliului × Volatilitatea portofoliului.</p>
+
+<ul>
+<li>Acțiune: (100 000 $ × 30 %) / 600 000 $ × 20 % = 15 %.</li>
+<li>Obligațiune: (200 000 $ × 15 %) / 600 000 $ × 20 % = 5 %.</li>
+<li>Fond indexat: (300 000 $ × 5 %) / 600 000 $ × 20 % = 1,67 %.</li>
+</ul>
+
+<p>Pe baza acestor contribuții, vedem că acțiunea cu risc ridicat domină riscul portofoliului, contribuind cu 15 %. Obligațiunea cu risc mediu contribuie cu 5 %, iar fondul indexat cu doar 1,67 %.</p>
+
+<p>Pentru a aloca pe bază de risc, putem folosi aceste contribuții drept ghid. Am putea aloca astfel: 75 % acțiunii, 15 % obligațiunii și 10 % fondului indexat. Această alocare ține cont de profilurile de risc ale activelor și țintește riscul total de 20 %.</p>
+
+<p>Merită menționat că aceasta nu este singura soluție posibilă. Pot exista și alte alocări care ating aceeași țintă de risc. Totuși, exemplul ilustrează conceptul-cheie al alocării pe bază de risc și modul în care poate fi folosit pentru a gestiona riscul portofoliului.</p>
+
+<p>În acest scenariu trebuie să luăm în calcul și corelația dintre active. Dacă acțiunea și obligațiunea sunt puternic corelate, de exemplu, contribuția la risc a obligațiunii poate fi supraestimată. Pe de altă parte, dacă acțiunea și fondul indexat sunt necorelate, contribuția fondului poate fi subestimată.</p>
+
+<p>Pentru o alocare precisă pe bază de risc, trebuie să înțelegem bine corelația dintre active. Acest lucru se poate face analizând date istorice sau folosind alte modele de risc.</p>
+
+<p>În practică, alocarea pe bază de risc este adesea folosită împreună cu alte tehnici de management al riscului, precum VaR și ES. Acestea pot ajuta la identificarea riscurilor potențiale și la alocarea corespunzătoare a portofoliului. Conceptul-cheie rămâne însă același: alocarea în funcție de profilurile de risc ale activelor individuale, nu doar de valorile lor noționale.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Alocarea pe bază de risc, în loc de mărimea noțională, este o idee puternică, dar și ușor de înțeles greșit sau de aplicat prost. Mai jos sunt cele mai frecvente greșeli pe care le fac începătorii absoluți, de ce contează și cum să le eviți.</p>
+
+<p><strong>1. Confundarea volatilității cu riscul.</strong> Începătorii pun adesea semnul egal între „risc” și „volatilitate” (abaterea standard a randamentelor) și se opresc aici. Volatilitatea este doar o componentă a riscului; ea nu surprinde riscul de coadă (tail risk), riscul de lichiditate, riscul de levier sau riscul de finanțare. O strategie care oscilează puternic în fiecare zi poate avea volatilitate ridicată, dar poate fi acoperită astfel încât probabilitatea reală de pierdere să fie mică. Invers, o strategie cu volatilitate scăzută poate exploda dacă este puternic îndatorată sau stă într-un instrument nelichid. Regulă practică: întreabă-te mereu „Ce e cel mai rău care se poate întâmpla și cât de repede trebuie să acționez?” înainte de a eticheta ceva drept cu risc scăzut.</p>
+
+<p><strong>2. Ignorarea corelației în portofoliul final.</strong> Alocarea pe bază de risc nu este un exercițiu într-un singur pas. Dacă calculezi riscul individual al fiecărei poziții și apoi îl plafonezi pur și simplu la o sumă fixă, nu ai rezolvat problema la nivel de portofoliu. Două poziții „cu risc scăzut” pot pierde bani împreună în aceeași criză fiindcă sunt puternic corelate. Verifică corelațiile pe perechi și testează la stres profitul/pierderea combinată sub șocuri istorice sau ipotetice. Un truc practic de birou: rulează o verificare rapidă de „beta a portofoliului” — dacă 80 % dintre pozițiile tale se mișcă în aceeași direcție într-o zi proastă, bugetul tău de risc nu este diversificat.</p>
+
+<p><strong>3. Supraalocarea către riscul „cel mai ieftin”.</strong> Este tentant să te încarci cu clasa de active care oferă acum cel mai mare randament ajustat la risc per unitate de risc (de exemplu, raportul Sharpe). Dar aceste rapoarte sunt retrospective și presupun că distribuțiile viitoare seamănă cu cele trecute. În realitate, riscul ieftin poate deveni scump foarte repede când levierul se deznoadă sau lichiditatea seacă. O abordare mai sigură este să amesteci riscul ieftin cu o alocare mică de active „de asigurare” (de exemplu, titluri de trezorerie cu scadență scurtă sau acoperiri pe volatilitate), ca portofoliul să poată supraviețui unei schimbări de regim.</p>
+
+<p><strong>4. Uitarea costului de finanțare și a frânei de lichiditate.</strong> Alocarea pe bază de risc este de obicei implementată cu levier. Dacă costul de finanțare crește sau pozițiile devin greu de ieșit, riscul efectiv asumat poate exploda chiar dacă modelul spune că e neschimbat. Monitorizează zilnic două rapoarte de lichiditate: (a) raportul dintre mărimea poziției și volumul mediu zilnic al suportului și (b) diferența dintre VaR-ul portofoliului și cerința de marjă a brokerului tău principal (prime broker). Dacă oricare se deteriorează, micșorează imediat poziția; modelul de risc nu vede venind zidul de finanțare.</p>
+
+<p><strong>5. Folosirea unui orizont de timp greșit pentru estimările de risc.</strong> Majoritatea sistemelor de birou folosesc implicit un orizont de 1 zi sau 2 săptămâni pentru VaR sau ES. Dacă orizontul tău real de investiție este de luni sau ani, aceste cifre pe orizont scurt vor subestima expunerea reală. Invers, dacă ești trader de înaltă frecvență, un orizont de o lună va supraestima riscul pe care îl ai în realitate intraday. Asigură-te că orizontul de risc din model se potrivește cu orizontul în care poți ajusta sau ieși realist din poziție.</p>
+
+<p><strong>6. Tratarea limitelor de risc ca „setează și uită”.</strong> Limitele de risc sunt documente vii. O poziție care începe ziua în interiorul benzii sale de VaR o poate depăși până la prânz dacă piața face un salt (gap). Stabilește monitorizare intraday: rulează un raport de risc la mijlocul zilei și compară-l cu alocarea de dimineață. Dacă apar depășiri, ai o scară clară de escaladare — reduci mărimea, adaugi acoperiri sau ceri o excepție în scris — în loc să speri că piața se va întoarce.</p>
+
+<p><strong>7. Copierea alocării altui birou fără a verifica contextul.</strong> Fiecare birou are o curbă de finanțare, un mandat de client și un profil de lichiditate diferite. Ce funcționează pentru echipa de macro global poate fi dezastruos pentru echipa de credit de valoare relativă. Reconstituie întotdeauna ipotezele din spatele oricărei alocări pe care o copiezi: privește matricea de corelație, programul de lichiditate și ajustările de marjă (haircuts). Dacă vreunul dintre aceste input-uri diferă semnificativ de ale tale, alocarea nu este transferabilă.</p>
+
+<p><strong>8. Credința că alocarea pe bază de risc elimină nevoia de judecată.</strong> Modelele sunt unelte, nu oracole. Ele nu pot anticipa evenimente de tip lebădă neagră (black swan), șocuri de reglementare sau schimbări bruște în comportamentul investitorilor. Folosește alocarea pe bază de risc ca un prim filtru, apoi suprapune verificări calitative: Suntem într-o tranzacție aglomerată? Urmează banca centrală să majoreze agresiv dobânzile? S-a rupt deja structura de corelație calibrată ieri? Dacă răspunsul la oricare este „da”, reduce alocarea indiferent de ce spune modelul.</p>
+
+<p><strong>Listă rapidă de verificare pentru a evita aceste capcane:</strong></p>
+<ul>
+<li>Verifică volatilitatea împreună cu metrici de risc de coadă (ES, CVaR).</li>
+<li>Testează la stres portofoliul, nu doar pozițiile individuale.</li>
+<li>Monitorizează zilnic spread-urile de finanțare și rapoartele de lichiditate.</li>
+<li>Aliniază orizontul de risc cu orizontul de tranzacționare.</li>
+<li>Escaladează imediat depășirile intraday.</li>
+<li>Nu copia niciodată o alocare fără a verifica ipotezele de bază.</li>
+<li>Combină întotdeauna rezultatul modelului cu judecata umană.</li>
+</ul>
+
+<p>Respectarea acestor reguli nu garantează profituri, dar te va feri de cele mai frecvente — și mai costisitoare — greșeli de începător în alocarea pe bază de risc.</p>
+
+<h2>Cum folosește biroul de tranzacționare</h2>
+
+<p>Modul în care un birou de tranzacționare folosește alocarea pe bază de risc este esențial pentru gestionarea eficientă a riscului. În această secțiune explorăm pașii concreți prin care un birou alocă pozițiile în funcție de risc, nu doar de valoarea noțională.</p>
+
+<h3>Dimensionarea poziției (position sizing)</h3>
+
+<p>Primul pas este determinarea mărimii optime a poziției pentru fiecare tranzacție. Aceasta presupune calcularea cantității maxime de risc care poate fi asumată pentru o tranzacție, în funcție de toleranța la risc a traderului și de bugetul general de risc al biroului. Mărimea poziției se determină apoi raportând riscul maxim la profitul sau pierderea potențială a tranzacției.</p>
+
+<p>De exemplu, dacă un trader are o toleranță la risc de 10 000 $, iar profitul/pierderea potențială pe unitate este de 100 $, mărimea poziției ar fi calibrată astfel încât pierderea posibilă să nu depășească toleranța la risc.</p>
+
+<h3>Bugetarea riscului (risk budgeting)</h3>
+
+<p>Bugetarea riscului este procesul de alocare a unei porțiuni din bugetul general de risc fiecărei tranzacții. Aceasta presupune atribuirea unei ponderi de risc fiecărei tranzacții, în funcție de impactul ei potențial asupra riscului total al biroului. Ponderea de risc se folosește apoi pentru a stabili cantitatea maximă de risc care poate fi asumată pentru fiecare tranzacție.</p>
+
+<p>De exemplu, dacă un birou are un buget total de risc de 100 000 $ și o tranzacție are o pondere de risc de 10 %, cantitatea maximă de risc pentru acea tranzacție ar fi 10 000 $.</p>
+
+<h3>Alocarea pe bază de risc</h3>
+
+<p>Odată determinate mărimea poziției și bugetul de risc, biroul poate aloca pozițiile în funcție de risc. Aceasta presupune selectarea tranzacțiilor cu randament potențial ridicat raportat la riscul lor și alocarea unei poziții mai mari acestora.</p>
+
+<p>De exemplu, dacă un birou are două tranzacții cu următoarele caracteristici — Tranzacția A: profit/pierdere potențial 100 $, Risc 5 %; Tranzacția B: profit/pierdere potențial 50 $, Risc 20 % — biroul ar aloca o poziție mai mare Tranzacției A, fiindcă are un randament potențial mai mare raportat la riscul ei.</p>
+
+<h3>Sincronizarea (timing)</h3>
+
+<p>Alocarea pe bază de risc implică și sincronizarea momentului alocării pozițiilor. Aceasta înseamnă alegerea momentului optim de intrare și ieșire din tranzacții, în funcție de condițiile de piață și de profilul de risc al biroului.</p>
+
+<p>De exemplu, dacă un birou are o toleranță ridicată la risc și piața este într-un trend ascendent puternic, biroul poate aloca o poziție mai mare tranzacțiilor cu randament potențial ridicat. Dacă, în schimb, piața este într-un trend descendent slab, biroul poate aloca o poziție mai mică tranzacțiilor cu randament potențial mai mic.</p>
+
+<h3>Bune practici</h3>
+
+<p>Pentru a folosi eficient alocarea pe bază de risc, biroul ar trebui să respecte bune practici precum:</p>
+<ul>
+<li>Revizuirea și actualizarea periodică a bugetului de risc și a ponderilor de risc.</li>
+<li>Monitorizarea condițiilor de piață și ajustarea corespunzătoare a mărimii poziției.</li>
+<li>Folosirea unui sistem robust de management al riscului pentru a urmări și gestiona riscul.</li>
+<li>Oferirea de instruire și educație continuă traderilor privind alocarea pe bază de risc.</li>
+</ul>
+
+<p>Respectând aceste bune practici, biroul poate folosi eficient alocarea pe bază de risc pentru a gestiona riscul și a maximiza randamentele.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Alocarea pe bază de risc este o modalitate puternică de a distribui capitalul astfel încât fiecare poziție să contribuie cu aproximativ aceeași cantitate de risc. Sună frumos, dar în practică este la fel de bună ca numerele pe care i le dai și ca lumea în care le aplici. Mai jos sunt limitele dure, avertismentele discrete și regimurile în care metoda încetează tăcut să funcționeze.</p>
+
+<p><strong>1. Date proaste, rezultate proaste (garbage in, garbage out).</strong> Întregul exercițiu pornește de la estimarea de risc. Dacă prognoza ta de volatilitate este învechită, matricea de corelație este construită pe doi ani de piețe calme, iar indicatorul de risc de coadă ignoră un produs exotic nou, împărțirea „cu risc egal” pe care o calculezi va fi egală doar cu numele. Un birou care introduce orbește cifrele de luna trecută în registrul de azi va descoperi, prea târziu, că modelul de risc nu a văzut saltul brusc de volatilitate al tranșei de credit nelichide.</p>
+
+<p><strong>2. Schimbări de regim și rupturi structurale.</strong> Alocarea pe bază de risc presupune că relațiile statistice folosite sunt stabile. Când o bancă centrală majorează brusc dobânzile cu 100 de puncte de bază (bp) într-o singură ședință, vechea matrice de covarianță nu mai este valabilă. La fel și la șocurile de lichiditate: dacă o obligațiune cu rating AA ajunge brusc să se tranzacționeze precum una CCC, input-urile de volatilitate și corelație sunt depășite. În aceste momente, alocarea poate deveni periculos de concentrată pe numele greșite, fiindcă modelul încă le crede „sigure”.</p>
+
+<p><strong>3. Prăpăstii de lichiditate (liquidity cliffs).</strong> Alocarea cu risc egal nu știe că o poziție poate fi lichidată mâine doar cu un discount de 15 %. Dacă biroul dimensionează un bloc mare dintr-un activ nelichid fiindcă contribuția lui marginală la risc este mică, poate descoperi că un cost de lichidare anulează tot beneficiul. Metoda nu spune nimic despre orizonturile de lichiditate; ea trebuie suprapusă cu o politică separată de lichiditate.</p>
+
+<p><strong>4. Risc de concentrare în afara modelului.</strong> Unele riscuri sunt greu de măsurat. O singură linie de business poate arunca în aer întreaga bancă, chiar dacă bugetul ei de risc s-a încadrat în limite. Concentrarea către o singură contraparte, sector sau geografie nu este surprinsă de o matrice de covarianță ce privește doar mișcările de preț. Astfel, alocarea pe bază de risc poate subestima fragilitatea reală a portofoliului.</p>
+
+<p><strong>5. Evenimente de coadă și eroare de model.</strong> Majoritatea modelelor de risc sunt calibrate pe piețe normale. Prin design, ele nu anticipează un șoc o-dată-la-un-secol. Când lovește un astfel de șoc, alocarea cu risc egal poate concentra brusc tot portofoliul în activele care trebuiau să fie „diversificatorii”. Metoda nu dă niciun avertisment că diversificatorii înșiși pot fi corelați în coadă.</p>
+
+<p><strong>6. Alocare statică într-o lume dinamică.</strong> Biroul recalculează alocarea zilnic, dar pozițiile-suport se pot schimba intraday. Un trader care acoperă un risc cu o poziție de compensare poate încălca involuntar regula de risc egal pentru o scurtă fereastră. Dacă biroul nu reechilibrează intraday, alocarea poate aluneca într-o stare care nu mai corespunde intenției inițiale.</p>
+
+<p><strong>7. Suprapuneri de reglementare și contabilitate.</strong> Alocarea pe bază de risc ignoră cerințele de capital, ratele de levier și limitele de expunere mare. O poziție care pare mică în termeni de risc poate încălca o regulă de expunere mare de 25 %. Metoda are deci nevoie de un al doilea strat de verificări care compară mărimea noțională cu pragurile de reglementare.</p>
+
+<p><strong>8. Când dă greș: lista de verificare.</strong></p>
+<ul>
+<li>Regimul de piață se schimbă mai repede decât este actualizat modelul de risc.</li>
+<li>Lichiditatea seacă exact în activele pe care modelul le declară sigure.</li>
+<li>Există o concentrare ascunsă pe care matricea de covarianță nu o poate vedea.</li>
+<li>Structura de corelație în coadă este opusul celei presupuse de model.</li>
+<li>Biroul nu poate reechilibra la timp pentru a menține alocarea egală.</li>
+</ul>
+
+<p>Pe scurt, alocarea pe bază de risc este o busolă utilă, nu o plasă de siguranță. Indică drumul către un portofoliu echilibrat în condiții normale, dar nu garantează supraviețuirea în condiții anormale. De aceea, biroul trebuie să asocieze alocarea cu testare continuă la stres, monitorizare a lichidității și verificări de conformitate cu reglementările. Tratează rezultatul ca pe o sugestie, nu ca pe o garanție; munca adevărată începe după ce numerele sunt tipărite.</p>
+
+<h2>Concluzii esențiale</h2>
+
+<p>Alocarea pe bază de risc este un aspect crucial al gestionării riscului în tranzacționare, iar înțelegerea principiilor ei este esențială pentru un management eficient al riscului. Iată punctele de neuitat:</p>
+
+<ul>
+<li><strong>Riscul nu înseamnă doar valoare noțională</strong>: când aloci tranzacții, ia în calcul riscul potențial al fiecăreia, nu doar valoarea nominală. Privește dincolo de valoarea de fațadă și evaluează impactul potențial asupra portofoliului.</li>
+<li><strong>Folosește metrici de risc pentru a ghida alocarea</strong>: utilizează metrici precum VaR și ES pentru a orienta procesul de alocare. Acestea oferă o imagine mai cuprinzătoare a pierderilor potențiale și ajută la identificarea tranzacțiilor cu risc ridicat.</li>
+<li><strong>Gândește-te la riscul total al portofoliului</strong>: ține cont de modul în care fiecare tranzacție afectează riscul de ansamblu al portofoliului, nu doar de riscul ei izolat.</li>
+<li><strong>Diversificarea este cheia</strong>: alocarea pe bază de risc nu înseamnă doar identificarea tranzacțiilor riscante, ci și diversificarea portofoliului pentru a minimiza riscul total — distribuirea riscului pe clase de active, sectoare și regiuni diferite.</li>
+<li><strong>Monitorizează și ajustează</strong>: nu este un proces de o singură dată, ci unul continuu, care necesită monitorizare și ajustare permanentă. Pe măsură ce condițiile de piață se schimbă, strategia de alocare trebuie să se adapteze.</li>
+<li><strong>Nu complica inutil</strong>: deși necesită atenție, evită supracomplicarea procesului. Concentrează-te pe metricile-cheie de risc și folosește-le pentru a ghida alocarea.</li>
+<li><strong>Rămâi flexibil</strong>: nu este un cadru rigid, ci o abordare adaptabilă. Fii pregătit să ajustezi strategia pe măsură ce condițiile se schimbă și apar informații noi.</li>
+<li><strong>Documentează și comunică</strong>: documentează și comunică strategia de alocare tuturor părților implicate — traderi, manageri de risc și conducere superioară. Astfel te asiguri că toți lucrează către aceleași obiective de management al riscului.</li>
+</ul>

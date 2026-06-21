@@ -1,0 +1,247 @@
+<p><strong>Bugetarea riscului</strong> (risk budgeting) este procesul prin care decizi cât risc are voie să-și asume fiecare parte a portofoliului tău și te asiguri că totalul nu depășește niciodată limita primită. Cheia este aceasta: <strong>aloci risc, nu doar capital</strong>. Nu hotărăști în primul rând câți bani pui pe fiecare tranzacție, ci cât risc lași acea tranzacție să adauge la „grămada" totală de risc. Banii vin abia după aceea; riscul vine pe primul loc.</p>
+
+<p>Gândește-te la bugetarea riscului ca la un buget casnic, dar în loc de bani împarți „puncte de risc". Fiecare tranzacție, fiecare strategie, fiecare birou de tranzacționare (desk) — chiar și fiecare trader — primește o alocație de puncte de risc. Scopul este să păstrezi în siguranță întreaga operațiune de tranzacționare, obținând în același timp randamentele pe care le așteaptă afacerea. Înțelegerea diferenței dintre alocarea riscului și alocarea capitalului (capital allocation) este esențială pentru orice începător, fiindcă două poziții pot folosi exact aceeași sumă de bani, dar pot avea profiluri de risc complet diferite.</p>
+
+<p>În acest capitol vei învăța termenii-cheie ai bugetării riscului, intuiția din spatele ei, mecanica pas cu pas folosită pe un desk real, exemple lucrate cu cifre, greșelile frecvente și limitele acestei metode.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Bugetarea riscului este procesul de a decide cât „risc" are voie să-și asume biroul tău de tranzacționare în fiecare parte a portofoliului, asigurându-te apoi că totalul nu trece niciodată peste limita primită. Ideea esențială: nu decizi cât numerar pui pe fiecare tranzacție, ci cât risc ești dispus să lași acea tranzacție să adauge la grămada totală de risc. Numerarul urmează mai târziu, dar riscul vine primul.</p>
+
+<h3>Riscul (în acest context)</h3>
+<p>Riscul este orice posibilitate ca valoarea pozițiilor tale să se miște într-un mod care îți face rău. Nu este același lucru cu șansa de a pierde bani; este <strong>mărimea pierderii</strong> dacă aceasta se întâmplă. De exemplu, dacă deții o obligațiune care ar putea scădea cu 2% într-o zi, acel 2% este riscul pe care îl asumi pe acea obligațiune. Riscul se măsoară în aceleași unități ca randamentele (procente sau dolari), dar este întotdeauna o mărime „în cazul cel mai rău" sau „probabilă", nu o garanție.</p>
+
+<h3>Bugetul de risc</h3>
+<p>Bugetul de risc (risk budget) este grămada totală de puncte de risc pe care ai voie să le folosești în întreaga operațiune. Este stabilit de directorul de risc (chief risk officer) sau de consiliul de administrație și se exprimă de obicei ca pierdere maximă pe zi, săptămână sau an. Pentru un începător, gândește-te la el ca la un indicator de limită de viteză pentru întreg etajul de tranzacționare: niciun desk nu poate „conduce mai repede" (asuma mai mult risc) decât limita afișată.</p>
+
+<h3>Unitatea de risc</h3>
+<p>Riscul este prea mare ca să fie discutat în dolari bruți, fiindcă fiecare instrument se mișcă diferit. Așa că traderii transformă totul într-o unitate comună numită <strong>unitate de risc</strong> (risk unit). O unitate de risc este definită ca mișcarea zilnică tipică a unui instrument standard. Pentru acțiuni, o unitate de risc este adesea setată la 1% din preț; pentru o acțiune de 100 de dolari, asta înseamnă 1 dolar. Pentru un contract futures pe trezorerie la 10 ani, o unitate de risc ar putea fi 0,5% din valoarea noțională. Cifra exactă nu contează, atâta timp cât toți cei de pe desk folosesc același etalon.</p>
+
+<h3>Riscul marginal (sau riscul incremental)</h3>
+<p>Acesta este riscul suplimentar pe care îl adaugă o tranzacție nouă la grămada existentă. Dacă deskul are deja 5 unități de risc și vrei să adaugi o tranzacție care va aduce 0,3 unități de risc, riscul marginal (marginal risk) este 0,3. Deskul trebuie să aibă cel puțin 0,3 unități de risc libere în buget înainte ca tranzacția să poată fi executată.</p>
+
+<h3>Contribuția la risc</h3>
+<p>Odată ce ai multe tranzacții active, poți întreba: „Cât din bugetul total de risc este responsabilă această singură tranzacție?" Acesta este contribuția ei la risc (risk contribution). Dacă întreg deskul folosește 8 unități de risc și o singură poziție pe o acțiune produce 2 dintre ele, contribuția ei la risc este de 25%. Contribuția la risc te ajută să vezi care tranzacții „înghit" bugetul și care își fac partea în liniște.</p>
+
+<h3>Beneficiul diversificării</h3>
+<p>Când două tranzacții se mișcă în direcții opuse, riscul lor combinat este mai mic decât suma riscurilor individuale. Acea reducere se numește beneficiul diversificării (diversification benefit). De exemplu, dacă Tranzacția A are 1 unitate de risc și Tranzacția B are 1 unitate de risc, dar de obicei se mișcă în direcții opuse, perechea ar putea adăuga doar 1,2 unități de risc în loc de 2. Cele 0,8 unități în plus reprezintă beneficiul diversificării. Bugetarea riscului trebuie să țină cont de acest beneficiu; altfel ai supraestima riscul real.</p>
+
+<h3>Limita de risc</h3>
+<p>O limită de risc (risk limit) este cantitatea maximă de risc pe care un singur desk, trader sau strategie are voie să o folosească la un moment dat. Este un plafon rigid, ca o limită de card de credit. Dacă un desk își atinge limita de risc, nu mai pot fi adăugate tranzacții până când nu se elimină ceva risc sau nu se mărește bugetul.</p>
+
+<h3>Monitorul de risc (sau panoul de risc)</h3>
+<p>Acesta este ecranul live pe care îl privește fiecare trader. Arată, în timp real, cât risc folosește fiecare poziție, desk și trader, cât de aproape sunt de limitele lor și unde stau cele mai mari riscuri. Un începător ar trebui să trateze acest ecran ca pe un indicator de combustibil: nu lăsa niciodată acul să intre în zona roșie.</p>
+
+<h3>Ce NU este bugetarea riscului</h3>
+<p>Nu este același lucru cu alocarea capitalului. Alocarea capitalului decide câți bani intră în fiecare tranzacție; bugetarea riscului decide cât risc are voie să poarte acel numerar. O tranzacție poate folosi puțini bani, dar să poarte totuși un risc uriaș (de exemplu, o opțiune adânc în afara banilor — deep out-of-the-money), și invers. Bugetarea riscului păstrează atenția pe risc, nu pe numerar.</p>
+
+<p>În cuvinte simple: bugetarea riscului este sistemul de semafoare al operațiunii. Înainte ca orice tranzacție nouă să primească „verde", deskul trebuie să verifice că riscul marginal al tranzacției nu împinge deskul peste bugetul total de risc și că contribuția ei la risc este corectă în raport cu randamentele pe care le promite.</p>
+
+<h2>Intuiția</h2>
+
+<p>Bugetarea riscului este un concept care poate părea abstract la început, dar este de fapt înrădăcinat într-o idee simplă, ușor de prins printr-o analogie. Imaginează-ți că ești părinte și planifici o vacanță în familie la un parc de distracții. Ai decis să-ți duci cei trei copii, de 5, 8 și 11 ani, la un parc cu o varietate de atracții, unele blânde și altele destul de intense. Știi că cel de 5 ani este încă mic și ar putea să nu fie pregătit pentru atracțiile mari, așa că decizi să-i limitezi accesul doar la cele blânde.</p>
+
+<p>În acest scenariu, aloci „capacitatea de risc" a copilului — în acest caz, abilitatea lui emoțională și fizică de a face față emoției atracțiilor — diferitelor activități. Nu aloci doar timpul sau banii copilului, ci și capacitatea lui de risc, care este esențială pentru siguranța și plăcerea lui.</p>
+
+<p>Acum hai să aplicăm această idee la un desk de tranzacționare. Imaginează-ți că fiecare trader are o „capacitate de risc" unică — abilitatea lui de a absorbi pierderi potențiale fără să-și pună în pericol performanța sau expunerea generală la risc a firmei. La fel ca în cazul copilului, capacitatea de risc a unui trader este influențată de factori precum experiența, nivelul de competență și tipurile de tranzacții pe care le face.</p>
+
+<p>Când aloci riscul, nu distribui doar capital între diferite active sau strategii; aloci și capacitatea de risc a fiecărui trader către acele active sau strategii. Aici intervine bugetarea riscului. Alocând riscul într-un mod care potrivește capacitatea de risc a fiecărui trader cu riscurile potențiale ale tranzacțiilor pe care le face, poți minimiza probabilitatea pierderilor catastrofale și te poți asigura că fiecare trader lucrează în zona lui de confort.</p>
+
+<p>Intuiția din spatele bugetării riscului este că ea ajută la gestionarea riscului într-un mod proporțional cu capacitatea de risc a fiecărui trader. Așa cum nu ți-ai pune copilul de 5 ani într-un montagne russe, nu ai aloca o tranzacție cu risc ridicat unui trader care nu este pregătit să-i facă față. Potrivind capacitatea de risc cu riscurile potențiale, poți crea un mediu de tranzacționare mai echilibrat și mai sustenabil, care permite fiecărui trader să performeze la cel mai bun nivel.</p>
+
+<p>Această analogie evidențiază importanța luării în considerare a capacității de risc atunci când aloci riscul. Nu este vorba doar despre distribuirea capitalului sau a activelor; este vorba despre a te asigura că fiecare trader lucrează în limitele lui și că expunerea generală la risc a firmei este gestionată eficient.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Ca să vezi cum funcționează de fapt bugetarea riscului pe un desk live, gândește-te la proces ca la o buclă scurtă, repetabilă, care rulează de fiecare dată când se ia o decizie nouă de alocare. Bucla are patru pași concreți pe care trebuie să-i execuți, iar fiecare pas produce un rezultat care devine intrarea pentru următorul. Mai jos este secvența exactă, cu instrumentele pe care le vei atinge, cifrele la care te vei uita și verificările pe care trebuie să le faci.</p>
+
+<h3>1. Construiește „harta riscului"</h3>
+<ul>
+<li><strong>Intrări:</strong> lista instrumentelor deja aflate în portofoliu (sau candidații, dacă pornești de la zero), prețurile lor curente de piață și matricea de covarianță a randamentelor zilnice pentru ultimele 252 de zile de tranzacționare (perioada-standard de referință pentru volatilitățile zilnice).</li>
+<li><strong>Mecanica:</strong> Pentru fiecare instrument calculezi volatilitatea marginală σ_i, care depinde de ponderile curente (w_i, w_j), de volatilitățile anualizate ale instrumentelor (σ_i, σ_j) și de corelația ρ_ij dintre ele. Majoritatea deskurilor fac asta în Excel cu funcția MMULT sau în Python cu pandas.DataFrame.cov() urmată de o mică înmulțire de matrice.</li>
+<li><strong>Rezultat:</strong> o coloană numită „Volatilitate marginală" pentru fiecare poziție. Aceasta îți spune cât contribuie fiecare instrument la volatilitatea totală a portofoliului dacă adaugi încă un dolar de expunere.</li>
+</ul>
+
+<h3>2. Transformă volatilitatea marginală în contribuție la risc</h3>
+<ul>
+<li><strong>Intrare:</strong> volatilitățile marginale din Pasul 1 și ponderile curente ale portofoliului.</li>
+<li><strong>Mecanica:</strong> Contribuția la risc_i = w_i · σ_i. Aduni toate contribuțiile ca să obții volatilitatea totală a portofoliului, apoi împarți fiecare contribuție la total ca să obții un procent. Aceste procente sunt „cotele tale din bugetul de risc".</li>
+<li><strong>Rezultat:</strong> o a doua coloană numită „Contribuție la risc %". Dacă un instrument arată 25%, el este responsabil pentru un sfert din volatilitatea totală a portofoliului, indiferent cât capital folosește.</li>
+</ul>
+
+<h3>3. Compară cu bugetul de risc dorit</h3>
+<ul>
+<li><strong>Intrare:</strong> procentele de contribuție la risc din Pasul 2 și limitele bugetului de risc primite (de exemplu, „nicio contribuție la risc a unei acțiuni nu poate depăși 15%" sau „segmentul de obligațiuni trebuie să rămână între 30% și 50%").</li>
+<li><strong>Mecanica:</strong> Pentru fiecare instrument sau segment, verifică dacă contribuția lui la risc este în banda permisă. Dacă este peste, trebuie să reduci expunerea; dacă este sub, o poți crește, cu condiția să nu încalci o altă restricție.</li>
+<li><strong>Sfat practic:</strong> Folosește formatarea condiționată în Excel sau o hartă termică colorată, ca celulele roșii să sară în ochi. Cea mai frecventă greșeală a începătorilor este să se uite doar la ponderile de capital; aici ignori în mod explicit capitalul și te concentrezi pe cotele de volatilitate.</li>
+</ul>
+
+<h3>4. Reechilibrează și blochează</h3>
+<ul>
+<li><strong>Intrare:</strong> lista instrumentelor aflate peste sau sub bugetele lor de risc, costurile de tranzacționare (spread-urile bid-ask și comisioanele) și numerarul disponibil pentru reechilibrare.</li>
+<li><strong>Mecanica:</strong> Calculezi valoarea în dolari pe care trebuie să o adaugi sau să o scazi din fiecare instrument supra- sau sub-contribuitor, o transformi într-o schimbare de pondere, verifici că suma tuturor schimbărilor nu mișcă volatilitatea totală cu mai mult de ±1% față de țintă (o toleranță obișnuită pe desk), apoi execuți tranzacțiile — dar numai după ce ai confirmat că noua matrice de covarianță (actualizată cu ultimele prețuri de închidere) susține în continuare bugetul de risc dorit. Dacă nu, repeți Pașii 1-3 cu noua matrice.</li>
+<li><strong>Rezultat:</strong> o nouă „hartă a riscului" și un registru (blotter) care arată tranzacțiile executate, cu ora, prețul și procentul de contribuție la risc rezultat, astfel încât deskul din ziua următoare să poată verifica alocarea.</li>
+</ul>
+
+<h3>Verificările-cheie pe care trebuie să le faci în fiecare ciclu</h3>
+<ul>
+<li><strong>Bias de privire în viitor (look-ahead bias):</strong> nu folosi niciodată covarianța de mâine în decizia de azi; folosește întotdeauna matricea de la închiderea zilei.</li>
+<li><strong>Filtru de lichiditate:</strong> dacă volumul mediu zilnic al unui instrument este mai mic de 1,5× mărimea pe care plănuiești să o tranzacționezi, exclude-l din bugetul de risc sau lărgește banda permisă.</li>
+<li><strong>Verificarea levierului:</strong> dacă levierul brut al portofoliului depășește limita internă a bugetului de risc (adesea 2×), oprește-te și cere un mandat nou înainte de a continua.</li>
+<li><strong>Aprobare (sign-off):</strong> tipărește tabelul final de contribuție la risc și pune șeful de desk să-l semneze; acesta este traseul de audit pe care îl va cere CFO-ul după orice scădere de profit (drawdown).</li>
+</ul>
+
+<p>Bucla este intenționat simplă — fără Black-Litterman, fără shrinkage bayesian — fiindcă pe un desk real trebuie să poți explica fiecare cifră unui manager de portofoliu (PM) stresat în mai puțin de trei minute. Dacă matricea de covarianță este învechită sau volatilitățile marginale sunt zgomotoase, tot rezultatul este suspect; tratează acele zile ca „zile fără alocare" și rămâi la ponderile existente.</p>
+
+<h2>Exemplu lucrat</h2>
+
+<p>Să presupunem că suntem managerii de portofoliu la o firmă de investiții și avem un portofoliu format din trei active diferite: o obligațiune, un fond de acțiuni și un fond de investiții imobiliare (REIT). Scopul nostru este să alocăm riscul acestor active într-un mod aliniat cu bugetul nostru general de risc.</p>
+
+<p>Presupunem următoarele informații despre fiecare activ:</p>
+<ul>
+<li><strong>Obligațiune:</strong> randament așteptat 4%, deviație standard (volatilitate) 2%, corelație cu piața 0,5, cu fondul de acțiuni 0,2, cu REIT-ul 0,1.</li>
+<li><strong>Fond de acțiuni:</strong> randament așteptat 8%, deviație standard 12%, corelație cu piața 0,8, cu obligațiunea 0,2, cu REIT-ul 0,3.</li>
+<li><strong>REIT:</strong> randament așteptat 6%, deviație standard 10%, corelație cu piața 0,6, cu obligațiunea 0,1, cu fondul de acțiuni 0,3.</li>
+</ul>
+
+<p>Bugetul nostru general de risc este 15% (exprimat ca procent din valoarea portofoliului). Vrem să alocăm riscul fiecărui activ într-un mod aliniat cu bugetul de risc, folosind un cadru care ține cont de randamentul așteptat și deviația standard a fiecărui activ, precum și de corelațiile dintre ele.</p>
+
+<p>Mai întâi trebuie să calculăm contribuția la risc a fiecărui activ în portofoliu. Contribuția la risc măsoară cât contribuie fiecare activ la riscul general al portofoliului. O putem calcula astfel:</p>
+
+<p><strong>Contribuția la risc = (Deviația standard a activului × (Randamentul așteptat al activului − Randamentul așteptat al portofoliului)) / Deviația standard a portofoliului</strong></p>
+
+<p>Folosind această formulă (cu un randament al portofoliului de 5% și o deviație standard a portofoliului de 15%), obținem:</p>
+<ul>
+<li><strong>Obligațiune:</strong> (2% × (4% − 5%)) / 15% ≈ −0,27%</li>
+<li><strong>Fond de acțiuni:</strong> (12% × (8% − 5%)) / 15% ≈ 3,47%</li>
+<li><strong>REIT:</strong> (10% × (6% − 5%)) / 15% ≈ 0,27%</li>
+</ul>
+
+<p>Acum că avem contribuția la risc a fiecărui activ, putem aloca riscul fiecărui activ în funcție de contribuția lui. Raportând fiecare contribuție la cea mai mare (cea a fondului de acțiuni), obținem proporțiile de alocare: obligațiunea 0,27% / 3,47% = 7,7%, fondul de acțiuni 3,47% / 3,47% = 100%, REIT-ul 0,27% / 3,47% = 7,7%.</p>
+
+<p>Prin urmare, alocăm 7,7% din valoarea portofoliului obligațiunii, 100% fondului de acțiuni și 7,7% REIT-ului. Această alocare se aliniază cu bugetul nostru general de risc de 15% și ține cont de randamentul așteptat, deviația standard și corelațiile fiecărui activ. (Reține: acesta este un exemplu didactic simplificat; un desk real ar folosi matricea completă de covarianță, nu o formulă scurtată.)</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Imaginează-ți că este ora 11:15 și șeful biroului de tranzacționare a ratelor tocmai ți-a cerut să realoci cele 20 de puncte de bază (bp) de buget total de risc care stau acum în swap-uri EUR pe 5 ani. Deskul tocmai a pierdut 1,8 bp pe acea poziție în ultima oră, fiindcă BCE a majorat neașteptat rata dobânzii la depozite cu 25 bp. Directorul de investiții (CIO) vrea riscul mutat undeva „mai puțin sensibil la majorări", dar singurul alt instrument de pe lista aprobată este swap-ul EUR pe 10 ani. Ai două minute să decizi cât din cele 18,2 bp rămase lași în swap-urile pe 5 ani și cât muți în swap-urile pe 10 ani.</p>
+
+<h3>Pasul 1 — Reevaluează DV01-ul ambelor instrumente</h3>
+<p>Deschizi registrul de risc și notezi DV01-ul live per 100 M noțional:</p>
+<ul>
+<li>Swap EUR pe 5 ani: DV01 = 4,2 bp per 100 M</li>
+<li>Swap EUR pe 10 ani: DV01 = 7,1 bp per 100 M</li>
+</ul>
+
+<h3>Pasul 2 — Transformă bugetul de risc în limite noționale</h3>
+<p>Bugetul tău total de risc este 18,2 bp. Vrei să știi câte milioane de noțional poți rula în fiecare instrument fără să depășești bugetul:</p>
+<p><strong>Limita noțională = (buget de risc în bp) ÷ (DV01 per 100 M) × 100 M</strong></p>
+<ul>
+<li>Limita pe 5 ani = 18,2 ÷ 4,2 × 100 M ≈ 433 M</li>
+<li>Limita pe 10 ani = 18,2 ÷ 7,1 × 100 M ≈ 256 M</li>
+</ul>
+
+<h3>Pasul 3 — Decide împărțirea alocării</h3>
+<p>CIO-ul a cerut „mai puțină sensibilitate la majorări". O verificare rapidă pe ecrane arată că swap-ul pe 10 ani are o durată de 8,3 față de 4,7 pentru cel pe 5 ani. În rest egale, cel pe 10 ani se va mișca de aproximativ 1,8 ori mai mult la aceeași schimbare de rată. Acea durată mai mare este exact ce vrem ca să reducem sensibilitatea, fiindcă piața prețuiește acum o curbă mai abruptă. Prin urmare, alegi să aloci 70% din buget la cel pe 10 ani și doar 30% la cel pe 5 ani.</p>
+
+<h3>Pasul 4 — Calculează pozițiile noționale efective</h3>
+<ul>
+<li>Noțional pe 10 ani = 0,70 × 256 M ≈ 180 M</li>
+<li>Noțional pe 5 ani = 0,30 × 433 M ≈ 130 M</li>
+</ul>
+<p>Verifică matematica (DV01 e cotat per 100 M): (180/100) × 7,1 bp + (130/100) × 4,2 bp = 12,78 bp + 5,46 bp ≈ 18,2 bp, ceea ce se potrivește cu bugetul de 18,2 bp de la care am pornit.</p>
+
+<h3>Pasul 5 — Introdu ordinele și actualizează registrul</h3>
+<p>În sistemul de risc: reduci poziția existentă pe 5 ani de la 238 M la 130 M (o derulare de 108 M), deschizi un receiver nou de 180 M pe 10 ani și etichetezi ambele picioare cu același bilet de „realocare", astfel încât atribuirea ulterioară a profitului să arate schimbul, nu o poziție nouă.</p>
+
+<h3>Pasul 6 — Monitorizează riscul rezidual</h3>
+<p>După ce ordinele se execută, registrul ar trebui să arate riscul DV01 total ≈ 1,83 bp și riscul ponderat cu durata în jur de 2.250 M·an, în scădere față de cele 2.400 M·an inițiale, fiindcă ne-am mutat în instrumentul cu durată mai mare. Urmărește fluxul live de profit timp de 15 minute; dacă curba se înclină și mai mult, noua carte va pierde pe receiverul de 10 ani și va câștiga pe cel de 5 ani, dar netul ar trebui să rămână în plicul de 20 bp.</p>
+
+<h3>Avertismente importante</h3>
+<ul>
+<li>Cifrele DV01 fluctuează în piețele volatile; reîmprospătează-le în fiecare oră.</li>
+<li>Swap-ul pe 10 ani poate avea un spread bid-offer mai larg, așa că poate fi nevoie să-ți lărgești ușor limita de risc pentru a ține cont de alunecarea la execuție (slippage).</li>
+<li>Dacă BCE livrează încă o majorare, DV01-ul ambelor swap-uri se va schimba din nou; fii gata să reevaluezi și să realoci în câteva minute.</li>
+</ul>
+
+<h2>Greșeli frecvente și concepții greșite</h2>
+
+<p>Bugetarea riscului este un proces complex și nuanțat, iar până și traderii experimentați pot cădea pradă greșelilor și concepțiilor greșite frecvente. Ca începător, este esențial să fii conștient de aceste capcane ca să eviți erorile costisitoare.</p>
+
+<ul>
+<li><strong>Confundarea bugetării riscului cu alocarea capitalului.</strong> Bugetarea riscului nu înseamnă doar alocarea de capital către diferite active sau strategii. Înseamnă alocarea riscului, un concept mai abstract, care presupune evaluarea pierderilor potențiale asociate fiecărei investiții.</li>
+<li><strong>Neluarea în considerare a corelației dintre active.</strong> Mulți traderi presupun că activele sunt independente și necorelate. În realitate, multe active sunt puternic corelate, iar o pierdere într-unul poate avea un efect în lanț asupra celorlalte. Ignorarea corelației poate duce la supra-alocarea riscului.</li>
+<li><strong>Folosirea datelor istorice pentru a prezice riscurile viitoare.</strong> Datele istorice oferă informații valoroase, dar nu sunt un predictor sigur al riscurilor viitoare. Condițiile de piață se pot schimba rapid, iar ce a funcționat în trecut poate să nu mai funcționeze.</li>
+<li><strong>Ignorarea impactului levierului.</strong> Levierul poate amplifica atât câștigurile, cât și pierderile. Traderii se concentrează adesea pe câștigurile potențiale, dar ignoră pierderile potențiale.</li>
+<li><strong>Tratarea bugetării riscului ca pe un exercițiu unic.</strong> Bugetarea riscului este un proces continuu, care necesită monitorizare și ajustări regulate. O alocare bună ieri poate să nu mai fie bună azi.</li>
+<li><strong>Neluarea în considerare a impactului factorilor externi.</strong> Indicatorii economici, evenimentele geopolitice și schimbările de reglementare pot influența semnificativ bugetele de risc.</li>
+<li><strong>Folosirea unor metrici de risc simpliste.</strong> Metrici precum deviația standard sunt utile, dar nu întotdeauna exacte. Traderii ar trebui să combine mai multe metrici, precum value-at-risk (VaR) și expected shortfall (ES), pentru o imagine mai completă.</li>
+<li><strong>Tratarea bugetării riscului ca pe un joc de cifre.</strong> Nu este vorba doar despre cifre, ci despre decizii informate bazate pe o înțelegere profundă a piețelor și a activelor de bază.</li>
+<li><strong>Necomunicarea bugetelor de risc către părțile interesate.</strong> Bugetele de risc trebuie comunicate clar investitorilor, reglementatorilor și colegilor de echipă. Lipsa comunicării duce la neînțelegeri și așteptări nealiniate.</li>
+<li><strong>Tratarea bugetării riscului ca pe un proces static.</strong> Bugetele de risc trebuie să fie dinamice și adaptabile la condițiile de piață în schimbare.</li>
+</ul>
+
+<h2>Cum îl folosește deskul de tranzacționare</h2>
+
+<p>Pe un desk de tranzacționare live, „bugetul de risc" este singura cifră care decide dacă o poziție nouă este deschisă, cât de mare devine și când trebuie tăiată. În fiecare dimineață, echipa de risc publică o fișă zilnică de risc care listează, pentru fiecare desk, suma maximă de „capital de risc" pe care are voie să o pună în joc în acea zi. Sarcina deskului este să transforme acel buget de risc în tranzacții reale fără a-l depăși vreodată.</p>
+
+<h3>1. Strângerea de mână de dimineață</h3>
+<p>La 07:45, controlorul de risc trimite fișierul cu bugetul de risc (CSV sau Excel) pe canalul intern de chat. Fișierul conține trei coloane: Desk, Valută, Limita VaR zilnică (95%, 1 zi, USD). Traderul senior deschide fișierul, verifică cifra față de închiderea de ieri și o scrie pe tablă în caseta roșie „MAX VaR AZI". Dacă cifra e mai mică decât ieri, deskul trebuie să-și planifice micșorarea pozițiilor; dacă e mai mare, poate adăuga risc.</p>
+
+<h3>2. Transformarea bugetului de risc în limite noționale</h3>
+<p>Analistul de risc al deskului deschide același fișier în motorul intern de risc, care deține sensibilitatea fiecărei poziții live (delta, vega, DV01 etc.) și matricea de corelație dintre toate instrumentele. El apasă „Calculează limitele noționale", care rezolvă un mic program pătratic: minimizează VaR-ul total cu condiția ca suma sensibilităților la pătrat ≤ bugetul de risc. Rezultatul este un vector de „noțional permis" pentru fiecare grup de instrumente, pe care îl lipește în registrul de tranzacționare. Orice ordin nou va verifica acum flagul „Noțional ≤ Permis"; dacă pică, ordinul este respins automat.</p>
+
+<h3>3. Dimensionarea poziției în registru</h3>
+<p>Un trader junior vrea să cumpere 10 M swap-uri US pe 5 ani la 4,25%. Registrul arată mărimea introdusă (10 M), noționalul permis (250 M) și capacitatea VaR rămasă (234 M). Arată și impactul de profit în timp real al ordinului, dar și impactul lui asupra VaR. Dacă traderul încearcă să introducă 30 M, registrul îl respinge cu „Limită VaR depășită" și o casetă roșie în jurul ordinului.</p>
+
+<h3>4. Sincronizarea riscului: „ceasul VaR"</h3>
+<p>Fiecare poziție are o degradare ascunsă a VaR: dacă piața se mișcă în sens opus poziției, contribuția ei la VaR scade; dacă se mișcă spre poziție, VaR crește. Registrul are un ceas VaR live în colțul din dreapta sus care arată „VaR consumat: 62% / 100%". Când ceasul atinge 90%, registrul devine portocaliu și traderul senior trebuie să aprobe manual orice ordin nou. Dacă ceasul atinge 100%, registrul îngheață toate ordinele noi și trimite o alertă către controlorul de risc.</p>
+
+<h3>5. Reechilibrarea intra-zilnică a riscului</h3>
+<p>La 11:00, piața sare cu 15 bp pe swap-ul pe 5 ani. Registrul recalculează VaR în timp real: poziția lungă pe 5 ani are acum o contribuție mai mare la VaR. Ceasul VaR sare de la 75% la 95%. Traderul senior introduce imediat un ordin compensatoriu short de 5 M pe același instrument; registrul îl acceptă fiindcă impactul net asupra VaR este negativ. Dacă saltul ar fi fost mai grav și ceasul ar fi atins 100%, registrul ar fi declanșat automat un „comutator de oprire VaR" (kill switch) care aplatizează toate pozițiile deskului în sub 30 de secunde.</p>
+
+<h3>6. Reconcilierea de la sfârșitul zilei</h3>
+<p>La 17:30, controlorul de risc rulează raportul VaR final. Registrul exportă un CSV cu fiecare ordin introdus în acea zi și impactul lui exact asupra VaR. Traderul senior compară suma tuturor impacturilor VaR cu limita publicată. Orice depășire este marcată în roșu și trebuie explicată CRO-ului până la 18:00. Bugetul de risc pentru ziua următoare este ajustat în sus sau în jos în funcție de explicație.</p>
+
+<h3>Ce NU face deskul</h3>
+<ul>
+<li>Nu dimensionează pozițiile „din intuiție" sau „convingere"; limita VaR este arbitrul final.</li>
+<li>Nu ignoră ceasul VaR chiar dacă profitul este pozitiv; ceasul este singurul semnal care îi spune deskului când se apropie de granița rigidă.</li>
+<li>Nu se bazează pe backtest-uri în Excel; fiecare cifră VaR este generată de motorul în timp real care deține cartea live.</li>
+</ul>
+
+<p>Pe scurt, bugetul de risc nu este o sugestie — este sistemul de operare al deskului. Traderii își petrec ziua transformând acea singură cifră în ordine, urmărind ceasul VaR și reacționând instantaneu când piața forțează cifra să se miște. Întreg fluxul de lucru este conceput astfel încât deskul să nu poată niciodată, nici măcar din greșeală, să depășească bugetul de risc pe care baza de capital a firmei îl poate absorbi.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Bugetarea riscului este un instrument puternic pentru alocarea riscului, dar nu este un glonț de argint. Ca orice model sau abordare, are limitele și capcanele ei. Înțelegerea acestor limite este crucială pentru a folosi bugetarea riscului eficient.</p>
+
+<p>Una dintre limitele principale este dependența de datele istorice. Bugetele de risc se bazează de obicei pe performanța trecută, care poate să nu reflecte condițiile viitoare de piață. Piețele se pot schimba rapid, iar evenimentele neașteptate pot face datele istorice mai puțin relevante. Criza financiară globală din 2008 a fost un exemplu perfect de cât de rapid se pot schimba condițiile de piață.</p>
+
+<p>O altă limită este incapacitatea de a ține cont de efectele neliniare. Bugetele de risc se bazează de obicei pe modele liniare, care presupun că schimbările mici ale riscului au efecte mici asupra randamentelor. În realitate, schimbările mici de risc pot duce uneori la efecte mari, neliniare — de exemplu, o mică creștere a volatilității poate provoca o scădere mare a randamentelor, mai ales în piețele cu levier ridicat.</p>
+
+<p>Bugetarea riscului presupune adesea că riscul este independent și identic distribuit (i.i.d.), adică fiecare tranzacție are aceeași distribuție de probabilitate. În realitate, riscul poate fi puternic corelat și dependent de alți factori, precum condițiile de piață, indicatorii economici și chiar evenimentele meteo. Un val de căldură în Europa poate reduce producția de grâu, ceea ce afectează profilul de risc al contractelor futures pe grâu.</p>
+
+<p>În plus, bugetarea riscului se bazează adesea pe o singură metrică, precum Value-at-Risk (VaR), care poate fi înșelătoare. VaR măsoară pierderea potențială a unui portofoliu pe un orizont de timp specific, dar nu ține cont de probabilitatea evenimentelor extreme. Un portofoliu poate suferi totuși o pierdere mare dacă apare un eveniment extrem, chiar dacă VaR-ul este scăzut.</p>
+
+<p>O altă limită este incapacitatea de a ține cont de comportamentul uman. Bugetele de risc se bazează pe modele matematice, dar comportamentul uman poate fi imprevizibil și influențat de emoții, prejudecăți și presiuni sociale. Un trader poate să-și asume mai mult risc decât a fost alocat din cauza supraîncrederii sau a dorinței de a-și impresiona colegii.</p>
+
+<p>În cele din urmă, bugetarea riscului nu este o garanție a succesului. Chiar și cu un buget de risc bine conceput, pot apărea evenimente neașteptate și se pot înregistra pierderi. Bugetarea riscului este un instrument de gestionare a riscului, nu de eliminare a lui. Nu este un substitut pentru practicile bune de tranzacționare, precum dimensionarea corectă a poziției, ordinele stop-loss și gestionarea riscului.</p>
+
+<h2>Concluzii esențiale</h2>
+
+<ul>
+<li>Bugetarea riscului este procesul de a decide cât risc are voie să-și asume fiecare poziție, strategie sau trader, exprimat într-o unitate de risc comună precum volatilitatea, VaR sau expected shortfall. Nu este același lucru cu alocarea capitalului; două poziții pot avea același capital, dar profiluri de risc foarte diferite.</li>
+<li>Începe cu o singură „monedă de risc" valabilă pe întreg deskul. Majoritatea deskurilor folosesc VaR parametric 95%, ES 99% sau un VaR 95% pe 20 de zile scalat la un orizont de 1 zi. Alege una, documenteaz-o și păstreaz-o pe toată durata ciclului de buget.</li>
+<li>Transformă fiecare poziție în unitatea de risc aleasă înainte să aloci. Convertește delta opțiunilor în echivalente în dolari, agregă futures și swap-uri la DV01 și include orice risc idiosincratic rezidual. Abia atunci poți compara „mere cu mere".</li>
+<li>Decide dacă bugetul este rigid sau flexibil. Un buget rigid (hard) înseamnă că trebuie să închizi sau să acoperi orice poziție care își încalcă limita; un buget flexibil (soft) semnalează încălcările pentru discuție, dar permite excepții cu aprobare explicită.</li>
+<li>Aloci risc, nu capital. Dacă o strategie cu volatilitate ridicată folosește doar 10% din capitalul deskului, dar 40% din bugetul de risc, este totuși un mare consumator de risc. Invers, o strategie cu volatilitate scăzută poate folosi 30% din capital, dar doar 5% din risc.</li>
+<li>Folosește contribuțiile marginale la risc pentru a-ți ghida deciziile. Dacă riscul marginal al unei poziții noi depășește bugetul rămas, tranzacția este respinsă sau micșorată — chiar dacă raportul Sharpe pare atractiv.</li>
+<li>Reechilibrează bugetul cel puțin săptămânal sau ori de câte ori o mișcare materială de piață schimbă contribuția la risc a unei poziții cu mai mult de 10%. Automatizează calculul dacă poți; foile de calcul manuale derivă și introduc erori.</li>
+<li>Nu număra niciodată riscul de două ori. Dacă două strategii se suprapun pe aceeași piață de bază, VaR-ul lor combinat trebuie să reflecte corelația dintre ele.</li>
+<li>Setează o limită maximă de concentrare — de obicei 20-30% din bugetul total — pentru orice strategie sau trader. Asta împiedică o singură explozie să consume întreaga alocație de risc.</li>
+<li>Păstrează o rezervă de contingență. Rezervă 5-10% din bugetul total de risc pentru oportunități neașteptate sau acoperire în criză. Nu o prealoca; tratează-o ca pe un fond de ultimă instanță care trebuie aprobat de controlorul de risc.</li>
+<li>Comunică schimbările imediat. Dacă un trader încalcă bugetul sau cere o excepție, anunță deskul de risc, managerul de portofoliu și conformitatea în aceeași zi de tranzacționare.</li>
+<li>Revizuiește procesul de bugetare lunar. Verifică dacă metrica de risc aleasă încă surprinde comportamentul real de pierdere al cărții. Dacă pierderile de coadă depășesc VaR-ul 95% de mai mult de o dată pe an, ia în calcul trecerea la ES 99%.</li>
+<li>Documentează fiecare excepție. Înregistrează data, poziția, impactul de risc, aprobatorul și motivul. Acest traseu de audit este esențial în revizuirile interne și inspecțiile de reglementare.</li>
+<li>Reține că bugetarea riscului este un control, nu o prognoză. Îți spune maximul pe care îl poți pierde în condiții normale, nu maximul pe care îl vei pierde. Asociaz-o întotdeauna cu teste de stres independente și verificări de lichiditate.</li>
+</ul>

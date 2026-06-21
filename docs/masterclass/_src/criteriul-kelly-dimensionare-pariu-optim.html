@@ -1,0 +1,357 @@
+<p>Criteriul Kelly (Kelly criterion) este o regulă matematică de dimensionare optimă a poziției (optimal sizing) care îți spune ce fracțiune din capitalul total ar trebui să riști pe un singur pariu atunci când ai un avantaj real. Acest ghid despre criteriul Kelly pentru începători explică pe înțelesul tuturor formula Kelly, cum calculezi fracțiunea optimă de pariat, ce înseamnă mărimea pariului (bet size), probabilitatea de câștig, cota netă (net odds) și valoarea așteptată (expected value), plus de ce mulți practicieni folosesc varianta „Kelly fracționat" (fractional Kelly) pentru a reduce riscul.</p>
+
+<p>Criteriul Kelly poartă numele lui John L. Kelly Jr., care l-a publicat în 1956. Regula este folosită în finanțe, în pariuri și chiar în biologie, pentru a decide cât să investești sau să riști atunci când te aștepți, în timp, să câștigi mai mult decât pierzi. În esența sa, criteriul Kelly echilibrează două forțe: șansa de a-ți crește banii rapid dacă câștigi și riscul de a pierde atât de mult încât să nu-ți mai poți reveni dacă pierzi.</p>
+
+<p>El nu îți garantează că nu vei pierde niciodată bani; în schimb, încearcă să-ți crească banii cât mai repede posibil, păstrând în același timp riscul de ruină totală la un nivel scăzut. Vei vedea în continuare formula, exemple lucrate pas cu pas, capcanele frecvente și modul în care un birou de tranzacționare (trading desk) aplică Kelly în practică, ca o regulă zilnică de alocare a capitalului.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Pentru a înțelege criteriul Kelly, trebuie să cunoști câțiva termeni esențiali: <strong>mărimea fracționară a pariului</strong> (fractional bet size), <strong>probabilitatea de câștig</strong> (probability of winning), <strong>cota netă primită</strong> (net odds received) și <strong>valoarea așteptată</strong> (expected value). Să definim cu grijă fiecare dintre ei.</p>
+
+<p>O <strong>mărime fracționară a pariului</strong> este partea din banii tăi totali pe care decizi să o riști pe un singur pariu. De exemplu, dacă ai 100 £ și decizi să riști 10%, mărimea pariului tău este 10 £. Criteriul Kelly îți spune exact ce fracțiune să pariezi pentru a maximiza creșterea pe termen lung, ținând cont de avantajul tău.</p>
+
+<p><strong>Probabilitatea de câștig</strong> este șansa ca pariul tău să reușească. De obicei se scrie ca un număr între 0 și 1 sau ca un procent. De pildă, dacă o monedă este corectă, probabilitatea de a pica „cap" este 0,5 (sau 50%). În pariuri, aceasta este șansa ca rezultatul ales de tine să se întâmple. Trebuie să o estimezi corect; criteriul Kelly nu poate funcționa dacă estimarea ta este greșită.</p>
+
+<p><strong>Cota netă primită</strong> descrie cât câștigi în raport cu cât riști. Dacă pariezi 1 £ și câștigi 2 £ (inclusiv 1 £ inițial înapoi), cota netă este 1:1, adică îți dublezi banii. Dacă pe un pariu de 1 £ câștigi 3 £, cota netă este 2:1, fiindcă obții un profit de 2 £ pentru fiecare 1 £ riscat. Cotele nete se scriu adesea ca un raport, de forma „b la 1", unde b este profitul pe unitatea riscată.</p>
+
+<p><strong>Valoarea așteptată</strong> a unui pariu este suma medie pe care te aștepți să o câștigi sau să o pierzi per pariu dacă îl repeți de multe ori. Se calculează înmulțind fiecare rezultat posibil cu probabilitatea sa și adunând rezultatele. De exemplu, dacă pariezi 1 £ pe aruncarea unei monede corecte și câștigi 1 £ când pică „cap" (probabilitate 0,5) și pierzi 1 £ când pică „pajură" (probabilitate 0,5), valoarea așteptată este (0,5 × 1 £) + (0,5 × −1 £) = 0 £. Asta înseamnă că, în medie, nici nu câștigi, nici nu pierzi bani. Dacă moneda este părtinitoare și „cap" apare în 60% din cazuri, valoarea așteptată devine (0,6 × 1 £) + (0,4 × −1 £) = 0,20 £, deci te aștepți să câștigi în medie 20 de penny pentru fiecare 1 £ pariat.</p>
+
+<p>Acum, criteriul Kelly combină aceste idei într-o singură formulă. Fracțiunea f* pe care ar trebui să o pariezi este:</p>
+
+<p><strong>f* = p − (1 − p) / b</strong></p>
+
+<p>unde:</p>
+<ul>
+<li>p este probabilitatea de câștig,</li>
+<li>b este cota netă primită (profitul pe unitatea riscată),</li>
+<li>iar f* este fracțiunea din banii tăi totali de pariat.</li>
+</ul>
+
+<p>De exemplu, să presupunem că ești convins că un cal are 60% șanse să câștige (p = 0,6), iar casa de pariuri plătește cota 3:1 (deci, dacă pariezi 1 £ și câștigi, primești 3 £ profit plus 1 £ inițial; așadar b = 3). Atunci:</p>
+
+<ul>
+<li>f* = 0,6 − (1 − 0,6) / 3</li>
+<li>f* = 0,6 − 0,4 / 3</li>
+<li>f* = 0,6 − 0,133</li>
+<li>f* ≈ 0,467</li>
+</ul>
+
+<p>Așadar ar trebui să pariezi aproximativ 46,7% din banii tăi totali pe acest cal.</p>
+
+<p>Este important să înțelegi ce <em>nu</em> face criteriul Kelly. El <em>nu</em> prezice câștigătorii și nu garantează profituri. Presupune că estimarea ta a probabilității p este corectă. Dacă îți supraestimezi avantajul, criteriul Kelly îți va sugera să pariezi prea mult și ai putea pierde rapid bani. De asemenea, formula presupune că poți paria orice fracțiune din banii tăi, inclusiv fracțiuni de bănuț. În viața reală, pariurile vin în unități întregi, așa că s-ar putea să pariezi puțin mai puțin decât fracțiunea Kelly.</p>
+
+<p>În fine, criteriul Kelly țintește spre <em>cea mai mare rată de creștere posibilă pe termen lung</em> a banilor tăi. El nu minimizează șansa pierderilor pe termen scurt și nu garantează siguranța. Unii oameni folosesc o strategie de tip „jumătate de Kelly" (half-Kelly) sau „un sfert de Kelly" (quarter-Kelly) pentru a reduce riscul, chiar dacă astfel banii cresc mai încet.</p>
+
+<p>Pe scurt, criteriul Kelly este o regulă precisă pentru a decide cât să pariezi atunci când ai un avantaj. Folosește estimarea ta a șansei de câștig, plata pe care o primești și banii tăi totali pentru a calcula o mărime a pariului în același timp prudentă și agresivă. Este puternic, dar sensibil la date de intrare corecte și la constrângerile lumii reale.</p>
+
+<h2>Intuiție</h2>
+
+<p>Imaginează-ți că ai o grădină mică în care cultivi căpșuni. În fiecare săptămână poți decide câte fructe vei culege și vinde la piață. Dacă culegi prea puține, câștigi doar puțin; dacă culegi prea multe și o furtună bruscă spală restul, rămâi fără nimic. Grădina nu garantează o recoltă perfectă de fiecare dată – uneori vremea e însorită, alteori e ploioasă – iar tu nu știi dinainte care săptămână cum va fi. Totuși, vrei să-ți dezvolți grădina astfel încât, de-a lungul multor săptămâni, suma totală de bani câștigați să fie cât mai mare, fără să riști toată grădina într-o singură săptămână proastă.</p>
+
+<p>Criteriul Kelly este o regulă simplă care îți spune exact câte fructe să culegi în fiecare săptămână, pe baza a două informații pe care le ai: (1) șansa ca vremea să fie destul de bună pentru un preț bun și (2) cu cât mai mulți bani vei face dacă apare vremea bună, comparativ cu o săptămână proastă. În limbajul pariurilor, acestea se numesc probabilitatea de câștig și cota de plată. Regula spune: „Ia o fracțiune din fructele tale totale care este proporțională cu avantajul pe care îl ai față de piață și redu-o în funcție de cât de mare este plata." Cu alte cuvinte, pariezi mai mult atunci când ești mai sigur că șansele sunt de partea ta și pariezi mai puțin atunci când plata este uriașă, dar incertă.</p>
+
+<p>De ce există o asemenea regulă? Gândește-te la un copil care învață să se țină în echilibru pe bicicletă. Dacă se înclină prea tare într-o parte, cade; dacă stă perfect drept, poate continua să înainteze. Copilul învață, prin încercare și eroare, cât de mult să-și mute greutatea ca să rămână în echilibru și totuși să avanseze. Regula Kelly funcționează la fel pentru bani: găsește punctul de echilibru în care te „înclini" exact cât trebuie spre partea profitabilă pentru a-ți crește averea, dar nu atât de mult încât o singură pierdere să te dea jos de pe drum. Ea rezolvă problema „dimensionării optime": dată fiind o singură șansă de a câștiga sau pierde, cât din rezerva ta actuală ar trebui să riști pentru a maximiza creșterea pe termen lung?</p>
+
+<p>O imagine concretă ajută. Să presupunem că ai zece bile și ți se oferă un joc: dacă din sac se extrage o bilă roșie, câștigi cinci bile în plus; dacă se extrage o bilă albastră, pierzi bilele pe care le-ai pus în joc. Știi că sacul conține trei bile roșii și șapte albastre, deci șansa de câștig este 30%. Plata este de cinci la unu: pentru fiecare bilă riscată, ai putea câștiga cinci. Regula Kelly spune că ar trebui să riști o fracțiune egală cu (probabilitate × plată − probabilitate de pierdere) împărțit la plată. Punând cifrele, obținem (0,3 × 5 − 0,7) / 5 = (1,5 − 0,7) / 5 = 0,8 / 5 = 0,16. Așadar ar trebui să pui pe linie aproximativ 1,6 bile (rotunjit la 1 sau 2). Dacă riști mereu această sumă, numărul așteptat de bile pe care le deții va crește mai repede decât dacă ai fi riscat o felie mai mare sau mai mică.</p>
+
+<p>Intuiția din spatele formulei este că fiecare pariu schimbă mărimea „plăcintei" tale. Când câștigi, plăcinta crește; când pierzi, plăcinta se micșorează. Pentru că următorul pariu va fi o fracțiune din noua mărime a plăcintei, un câștig timpuriu are un impact mai mare decât un câștig târziu. Fracțiunea Kelly echilibrează creșterea așteptată de la un câștig cu micșorarea așteptată de la o pierdere, asigurând că, de-a lungul multor repetări, rata de creștere geometrică (multiplicativă) este maximizată. Cu alte cuvinte, privește înainte spre termenul lung și întreabă: „Dacă joc acest joc de multe ori, ce fracțiune din averea mea îmi va da cea mai mare creștere medie?"</p>
+
+<p>Este important să ții minte că regula Kelly nu garantează un profit la niciun pariu individual și nici nu te protejează de o serie de rezultate ghinioniste. Ea doar îți spune cum să-ți aloci miza astfel încât, dacă probabilitățile pe care le-ai folosit sunt corecte, creșterea <em>medie</em> de-a lungul multor repetări să fie cât mai mare. Dacă estimarea ta a șansei de câștig este greșită, fracțiunea recomandată ar putea fi prea mare (ducând la ruină mai rapidă) sau prea mică (lăsând creștere nevalorificată). Pentru că piețele reale sunt zgomotoase, iar probabilitățile se schimbă, mulți practicieni folosesc un „Kelly fracționat" – de exemplu, jumătate din suma calculată – pentru a adăuga o pernă de siguranță.</p>
+
+<p>Pe scurt, criteriul Kelly există pentru a răspunde la o întrebare foarte firească: când ai un avantaj, cât ar trebui să riști? Gândind pariurile ca pe adăugarea sau scoaterea repetată de felii dintr-o plăcintă în creștere, regula apare ca punctul optim în care plăcinta se extinde cel mai rapid fără să fie tăiată complet într-o singură tură ghinionistă. Această intuiție se transferă de la jocuri simple cu bile la decizii mai complexe despre investiții, pariuri sau orice situație în care mizezi în mod repetat o parte din ceea ce deții.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Criteriul Kelly este o formulă matematică pentru a determina mărimea optimă a unui pariu, dată fiind probabilitatea de câștig și cotele oferite de o casă de pariuri. Pentru a înțelege cum funcționează, să descompunem mecanica pas cu pas.</p>
+
+<h3>Pasul 1: Definește datele de intrare</h3>
+
+<p>Pentru a aplica criteriul Kelly, trebuie să cunoști următoarele:</p>
+
+<ul>
+<li><strong>p</strong>: probabilitatea de câștig (un număr între 0 și 1)</li>
+<li><strong>q</strong>: probabilitatea de pierdere (care este 1 − p)</li>
+<li><strong>f</strong>: cotele oferite de casa de pariuri (un număr care reprezintă suma pe care o vei primi dacă câștigi, raportată la suma pariată)</li>
+<li><strong>b</strong>: fracțiunea din capitalul tău (bankroll) pe care ești dispus să o riști pe acest pariu (un număr între 0 și 1)</li>
+</ul>
+
+<h3>Pasul 2: Calculează fracțiunea Kelly</h3>
+
+<p>Fracțiunea Kelly este fracțiunea optimă din capitalul tău de pariat, dată fiind probabilitatea de câștig și cotele oferite. Se calculează folosind formula:</p>
+
+<p><strong>k = (pf − 1) / (f − 1)</strong></p>
+
+<p>unde k este fracțiunea Kelly.</p>
+
+<h3>Pasul 3: Calculează mărimea optimă a pariului</h3>
+
+<p>Odată ce ai fracțiunea Kelly, poți calcula mărimea optimă a pariului înmulțind-o cu capitalul tău:</p>
+
+<p><strong>Mărimea optimă a pariului = Capital × k</strong></p>
+
+<h3>Pasul 4: Determină randamentul așteptat</h3>
+
+<p>Criteriul Kelly se bazează pe ideea de a maximiza randamentul așteptat al pariului tău, raportat la riscul asumat. Randamentul așteptat se calculează astfel:</p>
+
+<p><strong>Randament așteptat = (p × (f − 1)) − (q × k)</strong></p>
+
+<p>Acesta reprezintă randamentul așteptat al pariului tău, raportat la riscul asumat.</p>
+
+<h3>Pasul 5: Ia în considerare implicațiile</h3>
+
+<p>Criteriul Kelly este o formulă matematică, dar nu este o garanție a succesului. Mărimea optimă a pariului calculată cu ajutorul criteriului Kelly se bazează pe ipoteza că vei paria cu un capital suficient de mare pentru a absorbi pierderile potențiale. Dacă pariezi cu un capital mic, s-ar putea să fie nevoie să ajustezi fracțiunea Kelly pentru a ține cont de riscul de ruină.</p>
+
+<p>În practică, criteriul Kelly este folosit adesea împreună cu alte strategii de gestionare a riscului, precum dimensionarea poziției (position sizing) și ordinele de tip stop-loss. Folosind criteriul Kelly pentru a determina mărimea optimă a pariului, poți minimiza riscul de ruină și maximiza randamentul așteptat al pariurilor tale.</p>
+
+<p>Merită menționat că, fiind o formulă matematică, criteriul Kelly este la fel de bun ca datele de intrare folosite pentru a-l calcula. Dacă datele de intrare sunt incorecte sau incomplete, rezultatul poate fi înșelător sau inexact. De aceea, este esențial să analizezi cu atenție datele de intrare și ipotezele folosite în calculul Kelly, pentru a te asigura că rezultatele sunt fiabile și utilizabile în practică.</p>
+
+<h2>Exemplu lucrat</h2>
+
+<p>Să parcurgem un calcul Kelly complet și concret, folosind numere realiste pentru un începător, dar care arată totuși ideile esențiale.</p>
+
+<p>Imaginează-ți că ai un mic serviciu de udat plante pentru copiii din cartier. În fiecare zi cari un rucsac cu exact 10 stropitori mici. Fiecare stropitoare ține 1 litru și poate fi vândută (sau „mizată") pentru 2 £ dacă găsești un părinte dispus. În orice zi există o șansă de 60% ca un părinte să cumpere stropitoarea și o șansă de 40% ca aceasta să rămână nevândută. Pornești cu 100 £ din banii tăi.</p>
+
+<p><strong>Pasul 1 – Identifică cele trei date de intrare Kelly</strong></p>
+<ul>
+<li>Avantaj (probabilitatea de câștig minus probabilitatea de pierdere): p = 0,60, deci avantajul este 0,60 − 0,40 = 0,20.</li>
+<li>Mărimea câștigului: când câștigi, primești 2 £ pentru fiecare 1 £ mizat, deci plata brută este 2:1. În limbaj Kelly, „cota netă primită" este așadar 2 − 1 = 1 (obții 1 unitate de profit pentru fiecare 1 unitate mizată).</li>
+<li>Capital: pornești cu B = 100 £.</li>
+</ul>
+
+<p><strong>Pasul 2 – Introdu în formula Kelly</strong></p>
+
+<p>Fracțiunea Kelly pentru un singur pariu f* este:</p>
+<ul>
+<li>f* = (avantaj) / (cota netă primită)</li>
+<li>f* = 0,20 / 1</li>
+<li>f* = 0,20</li>
+</ul>
+
+<p>Așadar ar trebui să riști 20% din capitalul tău pe acest pariu unic.</p>
+
+<p><strong>Pasul 3 – Transformă fracțiunea într-o sumă reală</strong></p>
+
+<p>20% din 100 £ înseamnă 20 £. Prin urmare, ar trebui să mizezi exact 20 £ din cele 100 £ pe această oportunitate cu stropitoarea.</p>
+
+<p><strong>Pasul 4 – Verifică ce se întâmplă în cele două rezultate posibile</strong></p>
+
+<p><em>Rezultatul A – Părintele cumpără stropitoarea (probabilitate 60%)</em></p>
+<ul>
+<li>Mizezi 20 £.</li>
+<li>Primești 2 £ pentru fiecare 1 £ mizat, deci obții 2 × 20 £ = 40 £ câștig.</li>
+<li>Noul tău capital este 100 £ − 20 £ + 40 £ = 120 £.</li>
+</ul>
+
+<p><em>Rezultatul B – Părintele nu cumpără stropitoarea (probabilitate 40%)</em></p>
+<ul>
+<li>Mizezi 20 £.</li>
+<li>Pierzi miza de 20 £.</li>
+<li>Noul tău capital este 100 £ − 20 £ = 80 £.</li>
+</ul>
+
+<p>Observă că fracțiunea Kelly este aleasă astfel încât, în medie, capitalul tău să crească cel mai rapid, oferindu-ți totuși o șansă pozitivă de a supraviețui oricărei pierderi individuale. Nu este o garanție a profitului — doar rata de creștere optimă din punct de vedere matematic, dată fiind valorile pe care le-ai furnizat.</p>
+
+<p><strong>Pasul 5 – Ce NU promite Kelly</strong></p>
+<ul>
+<li>Nu garantează că nu vei rămâne niciodată fără bani; dacă nimerești o serie lungă de pierderi, tot poți pierde bani.</li>
+<li>Presupune că numerele pe care le-ai introdus (60%, 2 £, 100 £) sunt exact corecte; dacă estimarea ta a șansei de 60% este greșită chiar și cu câteva puncte procentuale, mărimea optimă reală ar putea fi diferită.</li>
+<li>Este conceput pentru un singur pariu independent; dacă faci multe pariuri la rând sau dacă probabilitatea se schimbă după fiecare pariu, formula simplă nu se mai aplică.</li>
+</ul>
+
+<p><strong>Pasul 6 – Verificare rapidă de bun-simț</strong></p>
+
+<p>Să presupunem că, în schimb, ai mizat 10 £ (jumătate din suma Kelly). Capitalul tău ar crește cu 5% la un câștig și s-ar micșora cu 10% la o pierdere — tot cu așteptare pozitivă, dar creștere mai lentă. Mizarea sumei întregi de 30 £ (1,5 × Kelly) ți-ar da oscilații mai rapide: +30% la câștig, −30% la pierdere. Deși miza mai mare face mișcarea de creștere mai mare, ea crește și riscul unei pierderi de cont (drawdown) atât de mari încât ai putea abandona strategia după o serie proastă. Kelly echilibrează aceste compromisuri pentru a maximiza creșterea pe termen lung, fără a garanta siguranța pe termen scurt.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Imaginează-ți că ești un pasionat de pariuri sportive care urmărește de câteva luni rezultatele unei anumite echipe de baschet. După o observație atentă, estimezi că, ori de câte ori echipa joacă acasă, câștigă în 58% din cazuri. Casa de pariuri îți oferă cotă „bani egali" (even-money) pe victoria pe teren propriu: mizezi 1 $ și, dacă echipa câștigă, primești 2 $ (1 $ inițial înapoi plus 1 $ profit). În limbaj Kelly, cota se exprimă ca <strong>b = 1</strong> (profitul pe care îl primești pentru fiecare 1 $ mizat).</p>
+
+<p>Înainte de a plasa vreun pariu, vrei să decizi ce fracțiune din capitalul tău total de pariere ar trebui să riști. Formula Kelly pentru un pariu binar (câștig/pierdere) este:</p>
+
+<p><strong>f* = (bp − q) / b</strong></p>
+
+<p>unde:</p>
+<ul>
+<li><strong>p</strong> este probabilitatea estimată de câștig (aici 0,58),</li>
+<li><strong>q = 1 − p</strong> este probabilitatea de pierdere (0,42), iar</li>
+<li><strong>b</strong> este cota netă primită la o victorie (profit pe unitate mizată, aici 1).</li>
+</ul>
+
+<p>Punând numerele:</p>
+
+<p><strong>f* = (1 × 0,58 − 0,42) / 1 = 0,16.</strong></p>
+
+<p>Prescripția Kelly este, prin urmare, să mizezi <strong>16% din capitalul tău</strong> pe acest pariu unic pe meciul de pe teren propriu. Dacă ai un capital de 500 $, miza optimă ar fi 80 $.</p>
+
+<h3>De ce fracțiunea este modestă</h3>
+
+<p>Deși probabilitatea de câștig a echipei (58%) depășește pragul de echilibru de 50%, cota este doar „bani egali". Avantajul suplimentar de 8% se traduce într-o fracțiune Kelly modestă, fiindcă plata este mică în raport cu riscul de a pierde miza. Formula surprinde compromisul: un avantaj mai mare (p mai ridicat) sau o cotă mai generoasă (b mai ridicat) ar crește fracțiunea optimă, în timp ce un avantaj mai mic sau cote mai slabe ar micșora-o.</p>
+
+<h3>Cazuri-limită și ajustări practice</h3>
+
+<h3>1. Kelly fracționat pentru aversiunea la risc</h3>
+
+<p>Fracțiunea Kelly pură maximizează creșterea logaritmică așteptată a capitalului tău, dar produce și o volatilitate considerabilă pe termen scurt. Mulți pariori prudenți reduc deliberat miza Kelly, o practică numită „Kelly fracționat" (fractional Kelly). De exemplu, pariind jumătate din suma Kelly (8% din capital), abaterea standard a randamentelor scade cu aproximativ rădăcina pătrată a factorului de scalare, păstrând totuși o rată de creștere așteptată pozitivă. În exemplul nostru, un pariu de tip jumătate-Kelly ar fi 40 $ la un capital de 500 $, oferind o traiectorie mai lină a averii, cu prețul unei creșteri mai lente pe termen lung.</p>
+
+<h3>2. Când formula dă mize zero sau negative</h3>
+
+<p>Să presupunem că aceeași casă de pariuri ți-ar oferi cota <strong>b = 2</strong> (câștigi 2 $ profit pentru fiecare 1 $ mizat) la un alt meci, dar crezi că probabilitatea de câștig a echipei este doar <strong>p = 0,30</strong>. Fracțiunea Kelly ar fi:</p>
+
+<p><strong>f* = (2 × 0,30 − 0,70) / 2 = (0,60 − 0,70) / 2 = −0,05.</strong></p>
+
+<p>O valoare negativă îți spune că, dată fiind estimarea ta a probabilității, pariul are o <strong>valoare așteptată negativă</strong>; acțiunea optimă este să <strong>nu pariezi nimic</strong>. Acest caz-limită demonstrează că Kelly nu recomandă niciodată un pariu atunci când cotele sunt nefavorabile în raport cu convingerea ta, chiar dacă plata este mare.</p>
+
+<h3>3. Când fracțiunea depășește 100%</h3>
+
+<p>În cazuri rare, cu un avantaj foarte mare și cote foarte generoase, formula poate produce o fracțiune mai mare de 100%. Aceasta ar însemna să riști mai mult decât capitalul pe care îl ai — ceea ce, fără credit (levier), este imposibil. În practică, fracțiunea se plafonează la nivelul a ceea ce poți efectiv miza, iar majoritatea practicienilor o reduc mult sub maximul teoretic.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Criteriul Kelly este un instrument puternic pentru pariere optimă, dar, ca orice concept complex, este predispus la interpretări greșite. Începătorii cad adesea în capcane frecvente, care pot duce la decizii de pariere suboptime. Să explorăm câteva dintre cele mai dese greșeli și concepții greșite legate de criteriul Kelly.</p>
+
+<h3>Concepția greșită 1: Fracțiunea Kelly este întotdeauna pozitivă</h3>
+
+<p>Una dintre cele mai frecvente concepții greșite este că fracțiunea Kelly este întotdeauna pozitivă. Însă nu este neapărat așa. Deși fracțiunea Kelly este de obicei pozitivă, ea poate fi și negativă sau chiar zero. O fracțiune Kelly negativă indică faptul că pariorul nu ar trebui să parieze deloc, deoarece randamentul așteptat este mai mic decât rata fără risc. O fracțiune Kelly zero înseamnă că pariorul ar trebui să riște minimul necesar pentru a participa la joc. Este esențial să înțelegi că fracțiunea Kelly poate fi negativă sau zero, nu doar pozitivă.</p>
+
+<h3>Concepția greșită 2: Criteriul Kelly este un câștigător garantat</h3>
+
+<p>O altă concepție greșită este că criteriul Kelly este un câștigător garantat. Acest lucru este departe de adevăr. Criteriul Kelly este o strategie de pariere optimă, dar nu este o metodă infailibilă de a câștiga. El presupune că pariorul are o evaluare corectă a probabilității și că cotele sunt corecte. În realitate însă, pariorul poate greși în evaluarea probabilității sau cotele pot fi părtinitoare. În plus, criteriul Kelly nu ia în calcul aspectele psihologice și emoționale ale parierii, care pot duce la decizii suboptime.</p>
+
+<h3>Concepția greșită 3: Criteriul Kelly este doar pentru pariuri binare</h3>
+
+<p>Unii începători presupun că criteriul Kelly se aplică doar pariurilor binare (de exemplu, câștig sau pierdere). Însă criteriul Kelly poate fi aplicat oricărui pariu cu probabilitate și cote cunoscute. Deși este folosit adesea pentru pariuri binare, poate fi utilizat și pentru pariuri cu rezultate multiple, precum pariuri „peste/sub" (over/under) sau pariuri de tip propoziție (proposition).</p>
+
+<h3>Concepția greșită 4: Criteriul Kelly este un calcul de o singură dată</h3>
+
+<p>Criteriul Kelly este adesea înțeles greșit ca un calcul de o singură dată, care poate fi aplicat unui singur pariu. În realitate, criteriul Kelly este un concept dinamic, care necesită monitorizare și actualizare continuă. Fracțiunea Kelly se schimbă pe măsură ce capitalul și evaluarea probabilității pariorului se modifică. Este esențial să recalculezi fracțiunea Kelly în mod regulat pentru a asigura decizii de pariere optime.</p>
+
+<h3>Concepția greșită 5: Criteriul Kelly este doar pentru pariorii profesioniști</h3>
+
+<p>Criteriul Kelly este adesea asociat cu pariorii profesioniști, dar este un instrument valoros pentru oricine dorește să ia decizii de pariere informate. El poate fi aplicat oricărui tip de pariu, de la pariuri sportive la piețele financiare. Deși pariorii profesioniști pot beneficia de criteriul Kelly, acesta nu este exclusiv pentru ei.</p>
+
+<h3>Evitarea greșelilor frecvente</h3>
+
+<p>Pentru a evita greșelile și concepțiile greșite frecvente, este esențial să:</p>
+
+<ul>
+<li>Înțelegi ipotezele de bază ale criteriului Kelly, inclusiv evaluarea corectă a probabilității și cotele corecte.</li>
+<li>Recalculezi regulat fracțiunea Kelly pentru a asigura decizii de pariere optime.</li>
+<li>Fii conștient de posibilitatea unor fracțiuni Kelly negative sau zero.</li>
+<li>Recunoști că criteriul Kelly nu este un câștigător garantat și că pot apărea decizii suboptime.</li>
+<li>Aplici criteriul Kelly oricărui tip de pariu, nu doar pariurilor binare.</li>
+</ul>
+
+<p>Înțelegând greșelile și concepțiile greșite frecvente legate de criteriul Kelly, începătorii pot lua decizii de pariere informate și pot evita greșeli costisitoare. Ține minte: criteriul Kelly este un instrument puternic, dar necesită aplicare atentă și monitorizare continuă pentru a obține rezultate optime.</p>
+
+<h2>Cum îl folosește biroul de tranzacționare</h2>
+
+<p>La un birou de tranzacționare (trading desk), criteriul Kelly nu este o „mărime a pariului" în sensul unui singur bilet; este o regulă zilnică de alocare a capitalului care transformă fiecare avantaj de preț într-o mărime a poziției. Biroul începe fiecare dimineață cu un fond fix de capital de risc (să zicem, 10 milioane $ de „buget de risc"). Înainte de a intra în orice tranzacție, managerul de portofoliu și echipa de risc rulează un mini-model care estimează două numere pentru fiecare titlu: <em>avantajul</em> (profitul așteptat per acțiune dacă tranzacția este ținută până la orizont) și <em>riscul</em> (abaterea standard a acelui profit). Aceste două numere sunt introduse în formula Kelly:</p>
+
+<p><strong>f* = (avantaj) / (risc²)</strong></p>
+
+<p>Rezultatul, f*, este o <em>fracțiune</em> din bugetul de risc pe care biroul este dispus să o riște pe această poziție unică. Dacă f* iese 0,03, biroul va risca 3% din fondul de 10 milioane $ — 300.000 $ — ca valoare noțională, nu ca număr de acțiuni — pe acea idee. Numărul efectiv de acțiuni este apoi calculat împărțind riscul în dolari la distanța stop-loss (în dolari pe acțiune). În felul acesta, fracțiunea Kelly devine puntea dintre „avantaj" și „mărime".</p>
+
+<p>În timpul zilei, biroul ține o evidență curentă a profitului/pierderii <em>realizate</em> (P&L) față de profitul/pierderea <em>din model</em>. Dacă modelul a avut dreptate, estimările de avantaj de a doua zi dimineață rămân neschimbate și se refolosește aceeași fracțiune. Dacă modelul a greșit — să zicem că acțiunea s-a mișcat împotriva tezei — estimarea avantajului este revizuită în jos, fracțiunea Kelly se micșorează, iar poziția este fie redusă, fie închisă. Aceasta este prima disciplină impusă de Kelly: <em>mărimea se micșorează când avantajul se micșorează.</em></p>
+
+<p>A doua disciplină este <em>cadența</em>. Kelly este o formulă pe o singură perioadă; presupune că tranzacția este ținută până la orizont. În practică, biroul desfășoară fracțiunea Kelly pe un calendar de descreștere în timp (time-decay). Pentru un orizont de o săptămână, fracțiunea ar putea fi 1/5 în ziua 1, 1/5 în ziua 2 și așa mai departe. Alocarea fiecărei zile este tratată ca un „pariu" separat, astfel încât fracțiunea zilnică să rămână Kelly-optimă pentru acea subperioadă. Acest lucru împiedică biroul să concentreze excesiv riscul într-o singură zi.</p>
+
+<p>A treia disciplină este <em>compensarea la nivel de portofoliu</em> (netting). Biroul însumează toate fracțiunile Kelly individuale din toate pozițiile. Dacă suma depășește 1,0 — maximul teoretic — fracțiunile sunt reduse proporțional, astfel încât riscul agregat să nu depășească niciodată bugetul. Nu aceasta a fost intenția originală a lui Kelly, dar este modalitatea practică de a evita ruina atunci când mai multe avantaje sunt corelate.</p>
+
+<p>În fine, biroul păstrează o <em>marjă de siguranță</em>. Kelly presupune că estimările de avantaj și risc sunt perfecte; în realitate, ele sunt zgomotoase. Prin urmare, biroul înmulțește fracțiunea Kelly cu un „factor de încredere" (de obicei 0,5–0,7) înainte de a trimite ordinul. Un Kelly de 0,03 devine o fracțiune de risc de 0,015. Acest lucru nu este Kelly din punct de vedere matematic, dar este Kelly din punct de vedere empiric: reduce pierderile de cont (drawdown) fără a distruge rata de creștere pe termen lung.</p>
+
+<p>Ce susține și ce nu susține evidența: testele retroactive (back-tests) pe birouri reale arată că portofoliile dimensionate Kelly cresc mai repede decât portofoliile cu fracțiune fixă, dar suferă și pierderi de cont mai mari atunci când estimările de avantaj sunt greșite. Ajustarea cu marjă de siguranță nu este, prin urmare, opțională; ea este diferența dintre un optim teoretic și unul practic.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Criteriul Kelly este adesea prezentat ca o regulă elegantă matematic pentru dimensionarea „optimă" a pariului, dar eleganța se sprijină pe un set de ipoteze foarte specifice. Când acele ipoteze sunt încălcate, formula poate da sfaturi înșelătoare sau chiar dezastruoase. Mai jos enumerăm principalele surse de incertitudine, limitele practice ale modelului și situațiile în care Kelly ar trebui abandonat sau modificat substanțial.</p>
+
+<h3>1. Estimările corecte ale probabilității și plății sunt o condiție prealabilă</h3>
+
+<p>Kelly necesită două date de intrare pentru fiecare tranzacție sau pariu:</p>
+<ul>
+<li><strong>p</strong> – probabilitatea ca rezultatul să fie un câștig („avantajul");</li>
+<li><strong>b</strong> – cota netă primită la o victorie, exprimată ca multiplu al mizei (de exemplu, o plată de 2 la 1 înseamnă b = 2).</li>
+</ul>
+
+<p>Dacă oricare dintre numere este greșit, fracțiunea Kelly rezultată este greșită. În majoritatea piețelor reale, adevărata probabilitate de câștig este ascunsă în spatele datelor zgomotoase, al erorilor de model și al dinamicii schimbătoare a pieței. Chiar și o mică supraestimare a lui p poate face fracțiunea Kelly prea mare, ducând la pierderi de cont rapide. De exemplu, o supraestimare de 1% a unei probabilități de câștig de 55% poate dubla mărimea recomandată a pariului.</p>
+
+<p><strong>Concluzie:</strong> Kelly nu este un substitut pentru o estimare riguroasă a probabilității; el amplifică orice eroare prezentă în acele estimări.</p>
+
+<h3>2. Independența și staționaritatea sunt rareori satisfăcute</h3>
+
+<p>Derivarea clasică presupune că fiecare pariu este <strong>independent</strong> de celelalte și că distribuția subiacentă (valorile p și b) este <strong>staționară</strong> — nu se schimbă în timp. Pe piețele financiare, tranzacțiile sunt adesea corelate (de exemplu, o serie de poziții long într-o piață cu trend), iar avantajul poate să se deplaseze pe măsură ce se încorporează informația. Când rezultatele sunt corelate pozitiv, varianța portofoliului crește mai repede decât prezice Kelly, făcând fracțiunea „optimă" prea agresivă. Invers, corelația negativă poate face Kelly prea conservator.</p>
+
+<p><strong>Concluzie:</strong> Dacă bănuiești dependență în serie sau un avantaj care se deplasează, tratează Kelly ca pe un ghid aproximativ și ia în calcul adăugarea unei perne de siguranță sau folosirea unei reguli de dimensionare dinamică, adaptată la performanța observată.</p>
+
+<h3>3. Ignorarea costurilor de tranzacționare, a alunecării prețului și a taxelor</h3>
+
+<p>Formula Kelly presupune că plata netă b se primește integral la fiecare câștig. În realitate, fiecare tranzacție implică <strong>costuri de tranzacționare</strong> (comisioane, spread-uri, alunecare a prețului / slippage) și, posibil, <strong>taxe</strong> care reduc cota efectivă. Dacă aceste costuri nu sunt incluse în b, fracțiunea calculată va fi prea mare. Chiar și costuri modeste pot transforma un avantaj pozitiv într-unul negativ, transformând un pariu de mărime Kelly într-o pierdere garantată de-a lungul multor repetări.</p>
+
+<p><strong>Concluzie:</strong> Scade întotdeauna costurile așteptate din b înainte de a aplica Kelly; dacă avantajul ajustat devine negativ, Kelly recomandă o mărime a pariului egală cu zero.</p>
+
+<h3>4. Capitalul finit și considerentele de „Kelly fracționat"</h3>
+
+<p>Kelly este derivat pentru un <strong>orizont infinit</strong>, cu un capital care poate susține un număr arbitrar de pariuri. Cu un capital finit, riscul de <strong>ruină</strong> (pierderea întregului capital) devine neglijabil doar dacă fracțiunea recomandată nu este mare. De aceea, practicienii folosesc adesea <strong>Kelly fracționat</strong> (de exemplu, jumătate de Kelly) pentru a face un compromis între rata de creștere și riscul de pierdere de cont. Reducerea nu este doar o ajustare „conservatoare"; ea modifică rata de creștere asimptotică și poate fi esențială pentru supraviețuire atunci când avantajul este modest.</p>
+
+<p><strong>Concluzie:</strong> Pentru majoritatea traderilor individuali, Kelly integral este prea agresiv; o fracțiune (de regulă 0,5 sau 0,25) este o țintă mai realistă.</p>
+
+<h3>5. Riscul de model și rupturile structurale</h3>
+
+<p>Kelly presupune că modelul de probabilitate subiacent este <strong>corect</strong> și <strong>stabil</strong>. Însă piețele pot trece prin <strong>rupturi structurale</strong> — schimbări bruște de regim, precum o criză financiară, o schimbare de reglementare sau un șoc macroeconomic — care fac estimările trecute caduce. În asemenea perioade, rata istorică de câștig s-ar putea să nu mai reflecte performanța viitoare, iar îndrumarea lui Kelly poate fi catastrofal de greșită.</p>
+
+<p><strong>Concluzie:</strong> Monitorizează schimbările de regim și fii pregătit să suspenzi sau să reduci drastic dimensionarea bazată pe Kelly atunci când mediul deviază puternic de la ipotezele modelului.</p>
+
+<h3>6. Nicio garanție de profit pe termen scurt</h3>
+
+<p>Chiar și cu date de intrare perfecte, Kelly maximizează <strong>creșterea logaritmică așteptată</strong> a averii de-a lungul unei secvențe infinite de pariuri. El <strong>nu</strong> garantează un profit pe niciun set finit de tranzacții. De fapt, varianța rezultatelor sub Kelly poate fi substanțială; o serie de rezultate ghinioniste poate produce pierderi temporare mari, chiar dacă traiectoria pe termen lung este ascendentă. De aceea, mulți traderi resimt pierderi de cont care par „nedrepte", deși urmează Kelly.</p>
+
+<p><strong>Concluzie:</strong> Kelly este o strategie de creștere pe termen lung, nu o garanție de profit pe termen scurt. Așteaptă-te la volatilitate și planifică pentru ea.</p>
+
+<h3>7. Constrângeri psihologice și operaționale</h3>
+
+<p>Traderii umani se luptă adesea cu disciplina necesară pentru a paria exact fracțiunea Kelly, mai ales când aceasta cere poziții mari după o serie de câștiguri. În plus, limitele operaționale — precum plafoane de mărime a poziției, cerințe de marjă sau politici de gestionare a riscului — pot împiedica executarea exactă a mărimii Kelly.</p>
+
+<p><strong>Concluzie:</strong> Optimul teoretic trebuie reconciliat cu constrângerile practice; în multe cazuri, mărimea fezabilă va fi mai mică decât sugerează Kelly.</p>
+
+<h3>8. Rezumatul modurilor de eșec</h3>
+
+<table>
+<tr><th>Mod de eșec</th><th>Simptom</th><th>Răspuns practic</th></tr>
+<tr><td>p sau b prost estimate</td><td>Pierderi de cont constant mai mari decât cele așteptate</td><td>Reestimează probabilitățile, aplică perne de siguranță</td></tr>
+<tr><td>Pariuri corelate</td><td>Eroziune a capitalului mai rapidă decât cea așteptată</td><td>Redu expunerea, adaugă diversificare, folosește Kelly fracționat</td></tr>
+<tr><td>Costuri ignorate</td><td>Avantajul pozitiv devine negativ</td><td>Include toate costurile în b înainte de dimensionare</td></tr>
+<tr><td>Capital finit</td><td>Ruină după câteva pierderi</td><td>Folosește Kelly fracționat, stabilește limite maxime de pierdere</td></tr>
+<tr><td>Ruptură structurală</td><td>Avantajul istoric dispare</td><td>Suspendă dimensionarea Kelly, recalibrează modelul</td></tr>
+<tr><td>Volatilitate pe termen scurt</td><td>Oscilații mari în ciuda dimensionării „optime"</td><td>Acceptă varianța, menține disciplina, păstrează rezerve</td></tr>
+<tr><td>Limite operaționale</td><td>Imposibilitatea de a plasa pariul Kelly exact</td><td>Plafonează mărimea la minimul dintre Kelly și limita de politică</td></tr>
+</table>
+
+<p>În esență, criteriul Kelly este un <strong>instrument</strong>, nu un panaceu. Folosit cu estimări atente și cu o marjă de siguranță, el oferă o disciplină valoroasă de dimensionare; folosit orbește, poate amplifica fix erorile care duc la ruină.</p>
+
+<h2>Idei-cheie de reținut</h2>
+
+<p>Criteriul Kelly este o formulă matematică pentru a determina mărimea optimă a unui singur pariu dintr-o serie de pariuri independente, identic distribuite, cu probabilități cunoscute de câștig și de pierdere. Iată ideile-cheie de reținut:</p>
+
+<ul>
+<li><strong>Criteriul Kelly nu este o garanție de câștig</strong>: Este o formulă matematică ce te ajută să valorifici la maximum pariurile, dar nu îți garantează o victorie. Rezultatul unui pariu rămâne incert, iar criteriul Kelly te ajută doar să-ți gestionezi riscul.</li>
+
+<li><strong>Fracțiunea Kelly (f) este cheia</strong>: Fracțiunea Kelly (f) este conceptul cel mai important. Este o valoare între 0 și 1 care reprezintă mărimea optimă a pariului tău ca fracțiune din capital. Un f mai mare înseamnă un pariu mai mare, iar un f mai mic înseamnă un pariu mai mic.</li>
+
+<li><strong>Fracțiunea Kelly depinde de cote și de probabilitate</strong>: Fracțiunea Kelly (f) este o funcție a cotelor și a probabilității de câștig. Se calculează cu formula f = (bp − q) / b, unde p este probabilitatea de câștig, q este probabilitatea de pierdere, iar b este cota netă primită.</li>
+
+<li><strong>Criteriul Kelly este sensibil la probabilitatea de câștig</strong>: Fracțiunea Kelly (f) este foarte sensibilă la probabilitatea de câștig. O mică schimbare a acesteia poate produce o schimbare mare a lui f.</li>
+
+<li><strong>Criteriul Kelly presupune independența</strong>: Presupune că fiecare pariu este independent de celelalte, adică rezultatul unui pariu nu afectează rezultatul altuia.</li>
+
+<li><strong>Criteriul Kelly presupune distribuții identice</strong>: Presupune că fiecare pariu are o distribuție identică, adică probabilitatea de câștig și de pierdere este aceeași pentru fiecare pariu.</li>
+
+<li><strong>Criteriul Kelly nu este potrivit pentru pariuri corelate</strong>: Nu este potrivit pentru pariuri corelate, în care rezultatul unui pariu afectează rezultatul altuia.</li>
+
+<li><strong>Criteriul Kelly nu înlocuiește o strategie de pariere solidă</strong>: Este un instrument matematic care te poate ajuta să iei decizii informate, dar nu înlocuiește o strategie solidă. Trebuie să iei în calcul și alți factori, precum capitalul, toleranța la risc și obiectivele tale de pariere.</li>
+
+<li><strong>Criteriul Kelly este un concept teoretic</strong>: Presupune cunoașterea perfectă a cotelor și a probabilității. În practică, s-ar putea să nu ai acces la aceste informații și va trebui să faci estimări sau să folosești date istorice pentru a lua decizii informate.</li>
+
+<li><strong>Criteriul Kelly este un instrument util de gestionare a riscului</strong>: Te poate ajuta să eviți supra-parierea și să-ți minimizezi pierderile.</li>
+
+<li><strong>Criteriul Kelly nu este o soluție universală</strong>: Va trebui să-l adaptezi la obiectivele tale specifice de pariere și la toleranța ta la risc.</li>
+</ul>

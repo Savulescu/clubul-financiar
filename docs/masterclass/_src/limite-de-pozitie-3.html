@@ -1,0 +1,172 @@
+<p>Pe piețele financiare, <strong>limitele de poziție</strong> (position limits) sunt reguli care stabilesc dimensiunea maximă pe care un participant o poate deține într-un anumit instrument sau clasă de active, fie pe partea de cumpărare, fie pe cea de vânzare. Aceste plafoane de tranzacționare există pentru a împiedica acumularea excesivă de poziții care ar putea distorsiona prețurile sau bloca piața pentru ceilalți. Înțelegerea modului în care funcționează limitele de poziție în conformitate cu reglementarea (compliance) te ajută să eviți încălcările (breach) costisitoare și să tranzacționezi în limite sigure.</p>
+
+<p>O limită de poziție este, în esență, un plafon impus de reglementator, de bursă sau de regulile interne ale firmei: „Nu mai mult de X unități deținute de un singur cont sau grup de conturi controlate de același decident." Numărul X nu este arbitrar — el este calibrat în funcție de lichiditatea instrumentului, de volatilitate și de numărul participanților din piață. Scopul este să prevină ca un singur jucător să devină atât de mare încât să poată manipula prețul, să corneze (corner) piața sau să creeze risc sistemic.</p>
+
+<p>În acest capitol vei vedea cum se calculează o limită de poziție, cum o aplică un birou de tranzacționare (trading desk) în timp real, ce greșeli fac începătorii și unde poate eșua acest instrument de gestionare a riscului. Vom porni de la o intuiție simplă și vom ajunge la mecanica precisă folosită de fondurile profesioniste.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>O limită de poziție este numărul maxim de poziții sau active pe care o persoană ori o organizație le poate deține într-o anumită piață sau clasă de active. Este o regulă simplă: „Nu mai mult de X unități sub controlul unui singur participant." Valoarea exactă a lui X se schimbă în funcție de tipul instrumentului și de condițiile pieței.</p>
+
+<h3>Termeni pe care îi vei reîntâlni</h3>
+
+<ul>
+<li><strong>Participant:</strong> persoana, contul sau entitatea responsabilă pentru deținerea unei poziții. Poate fi un investitor individual, un fond sau o corporație.</li>
+<li><strong>Poziție:</strong> expunerea deținută într-un instrument — long (cumpărat, pariezi pe creștere) sau short (vândut în lipsă, pariezi pe scădere).</li>
+<li><strong>Plafon (cap):</strong> nivelul maxim permis. Se exprimă de regulă ca procent din free-float-ul (acțiunile aflate liber în circulație), din valoarea noțională (notional) sau din volumul de tranzacționare.</li>
+<li><strong>Încălcare (breach):</strong> situația în care poziția depășește limita stabilită. Sistemele de risc resping automat ordinele care ar produce o încălcare.</li>
+<li><strong>Conformitate (compliance):</strong> respectarea cadrului de reguli interne și de reglementare care guvernează tranzacționarea.</li>
+<li><strong>Bandă/categorie:</strong> un grup de instrumente sau de poziții cu caracteristici de risc similare. Limita de poziție poate fi diferită pentru fiecare categorie.</li>
+</ul>
+
+<h3>Incertitudine și limite oneste</h3>
+
+<p>Nu există un număr „întotdeauna sigur" valabil universal. Cercetarea oferă intervale — valori asupra cărora majoritatea experților sunt de acord că sunt rezonabile — dar fiecare piață este diferită. Un instrument lichid permite o limită relativ mai înaltă decât unul nelichid, unde o poziție mare este greu de lichidat. De aceea, limitele de poziție sunt cel mai bine înțelese ca „cea mai sigură dimensiune pe care o putem gestiona acum", nu ca „un număr perfect care nu se schimbă niciodată".</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți o petrecere de copii cu o cutie mare de jucării. Copiii adoră jucăriile, dar părinții vor să se asigure că toți au un rând și că nimeni nu acaparează prea multe. Soluția: fiecare copil poate lua doar un anumit număr de jucării înainte să ceară permisiunea pentru mai multe. Regula împiedică un singur copil să monopolizeze cutia și asigură o șansă corectă pentru toți.</p>
+
+<p>Acest scenariu simplu ilustrează conceptul de limite de poziție. Limitele de poziție sunt reguli care stabilesc un număr maxim de poziții sau active pe care o persoană ori o organizație le poate deține. La fel cum părinții limitează numărul de jucării per copil, limitele de poziție împiedică pe oricine să domine o piață sau o clasă de active.</p>
+
+<p>În contextul conformității, limitele de poziție sunt folosite pentru a împiedica instituțiile mari sau traderii să manipuleze prețurile sau să corneze piețele. Stabilind un plafon pentru numărul de poziții care pot fi deținute, ele ajută la menținerea unor piețe corecte și ordonate, esențiale pentru buna funcționare a economiei.</p>
+
+<p>Intuiția din spate se bazează pe ideea că o concentrare excesivă de poziții poate duce la distorsiuni de piață și rezultate nedrepte. Când un singur participant deține prea multe poziții, poate influența prețurile și îngreuna participarea celorlalți. Limitele de poziție previn acest lucru prin plafonarea numărului de poziții deținute, promovând astfel competiția corectă și prevenind manipularea.</p>
+
+<p>Totuși, limitele de poziție pot avea și consecințe neintenționate. Dacă sunt stabilite prea jos, pot împiedica participanți legitimi să ia poziții necesare strategiei lor. Dacă sunt prea înalte, pot fi ineficiente în prevenirea manipulării. Eficacitatea lor rămâne un subiect de dezbatere între reglementatori și participanți: unii le consideră un instrument esențial, alții le văd ca excesiv de restrictive. Proiectarea și implementarea optimă a limitelor de poziție rămân o provocare continuă.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Pentru a vedea exact cum funcționează o limită de poziție, urmărim trei etape: (1) datele de intrare care ajung la „poartă" (gatekeeper), (2) procesul pas-cu-pas pe care îl rulează sistemul de control și (3) rezultatele care ies. Fiecare etapă este concretă; nimic nu este ascuns. Folosim o analogie cu o „poartă de acces" pentru a face mecanica intuitivă.</p>
+
+<h3>1. Datele de intrare — ce sosește efectiv</h3>
+<p>La fiecare ordin, sistemul de control primește mai multe informații: identificatorul contului, instrumentul vizat, tipul de operațiune (cumpărare/vânzare) și un marcaj temporal (timestamp). Aceste piese formează împreună o „cerere" care intră în sistem prin singurul canal permis: motorul de risc.</p>
+
+<h3>2. Procesul — ce face sistemul de control cu fiecare cerere</h3>
+<p><strong>Pasul 1 – verifică instrumentul.</strong> Sistemul identifică instrumentul vizat. Dacă instrumentul nu intră sub incidența limitei, cererea trece mai departe; dacă da, se aplică verificarea.</p>
+<p><strong>Pasul 2 – numără pozițiile deja deținute.</strong> Sistemul consultă totalul curent al expunerii contului în acel instrument, total actualizat la fiecare tranzacție care intră sau iese.</p>
+<p><strong>Pasul 3 – compară cu limita.</strong> Dacă totalul rămâne sub limita de poziție, ordinul este marcat „ADMIS" și executat. Dacă totalul ar atinge sau depăși limita, ordinul este respins (sau dimensiunea este redusă — „clipped" — la spațiul rămas disponibil).</p>
+<p><strong>Pasul 4 – actualizează totalul.</strong> De fiecare dată când o tranzacție este admisă, sistemul adaugă expunerea la total. Când o poziție este închisă, totalul este redus corespunzător.</p>
+
+<h3>3. Rezultatele — ce iese din poartă</h3>
+<ul>
+<li>Un ordin <strong>ADMIS</strong>, executat în piață deoarece se încadrează în limită.</li>
+<li>Un ordin în <strong>așteptare</strong>, ținut până se eliberează spațiu sub limită sau până la finalul sesiunii.</li>
+<li>Un ordin <strong>respins</strong>, returnat imediat cu o explicație scurtă (ar fi depășit limita).</li>
+</ul>
+
+<h3>Dovezi și incertitudine</h3>
+<p>Totalul calculat de sistemul de risc este singura evidență oficială. Dacă o poziție scapă neînregistrată (de exemplu printr-o eroare de date), totalul devine inexact. În practică, rata de eroare este de regulă foarte mică, așa că totalul este „suficient de bun" pentru uzul zilnic, dar nu perfect. Valoarea exactă a limitei este adesea o regulă practică, nu un standard derivat științific.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să folosim o analogie didactică cu o creșă, „Green Leaves", care trebuie să respecte un cadru de conformitate ce include limite de poziție (aici: câți „copii" — adică unități de expunere — poate avea în grijă un „membru" la un moment dat). Mecanica este aceeași cu cea a unei limite de poziție financiare.</p>
+
+<p>Cadrul de conformitate specifică următoarele limite:</p>
+<ul>
+<li>Maximum 5 unități pentru categoria A (cea mai sensibilă, ca instrumentele nelichide).</li>
+<li>Maximum 7 unități pentru categoria B (risc mediu).</li>
+<li>Maximum 10 unități pentru categoria C (cea mai lichidă).</li>
+</ul>
+
+<p>Avem doi participanți, John și Emma. John operează în categoria A (infanți), Emma în categoria B (toddler).</p>
+
+<p><strong>Pasul 1: Determină numărul curent de unități în fiecare grup.</strong> Categoria A (John): 4 unități. Categoria B (Emma): 6 unități.</p>
+<p><strong>Pasul 2: Identifică limita de poziție aplicabilă.</strong> Categoria A: 5. Categoria B: 7.</p>
+<p><strong>Pasul 3: Verifică încadrarea.</strong> John: 4 &lt; 5 (în limită). Emma: 6 &lt; 7 (în limită). Ambii respectă limitele, iar firma este în conformitate.</p>
+
+<p>Acum să presupunem că expunerile cresc: categoria A ajunge la 6 unități, iar categoria B la 8 unități.</p>
+<p><strong>Recalculare:</strong> John: 6 &gt; 5 (depășește limita de 5). Emma: 8 &gt; 7 (depășește limita de 7). În acest scenariu revizuit, ambii depășesc limitele, iar firma nu mai este în conformitate.</p>
+
+<p>Exemplul arată cum limitele de poziție asigură respectarea cerințelor: stabilind un plafon pentru fiecare categorie de risc, se evită supraîncărcarea unui participant și se menține un control adecvat al expunerii.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să folosim o a doua analogie: un copil, Liam, vrea „camionul roșu chiar acum". Patru copii se joacă deja cu cele trei camioane disponibile. Liam se îndreaptă spre raft, dar locul este ocupat. Cum aplicăm ideea de limită de poziție?</p>
+
+<ol>
+<li><strong>Identifică poziția disputată.</strong> „Poziția" este locul de pe raft pentru camionul roșu. O limită de poziție este numărul maxim de „participanți" care pot ocupa simultan un loc, un obiect sau un rol. Aici limita este un copil per camion.</li>
+<li><strong>Verifică ocuparea curentă.</strong> Trei locuri (camioane), patru copii care vor să se joace. Sistemul este deja plin: nimeni nou nu poate ocupa un loc fără să deplaseze pe altcineva. Exact ca într-o piață fără headroom (spațiu liber sub limită).</li>
+<li><strong>Comunică limita.</strong> Calm și clar: „Acum doar un singur prieten se poate juca cu camionul roșu. Raftul este plin. Vrei altă jucărie sau aștepți să se elibereze?"</li>
+<li><strong>Oferă o alternativă.</strong> Indici colțul cu blocuri libere și amintești că un camion va fi liber „în două minute".</li>
+<li><strong>Aplică limita dacă e necesar.</strong> Dacă presiunea continuă, intervii ferm. Nu negociezi numărul de locuri; limita este fixată de adult, nu de dorința copilului — la fel cum limita de poziție este fixată de regulator, nu de apetitul traderului.</li>
+</ol>
+
+<h3>De ce funcționează (logica de bază)</h3>
+<ul>
+<li><strong>Resursă finită:</strong> există doar trei locuri. Odată pline, niciun participant nou nu poate intra fără să iasă altcineva.</li>
+<li><strong>Rotație predictibilă:</strong> participanții învață că, dacă așteaptă, locul se va elibera într-un interval scurt și transparent.</li>
+<li><strong>Limită clară:</strong> repetarea calmă a regulii semnalează că limita este nenegociabilă, reducând nevoia de a escalada.</li>
+</ul>
+
+<h3>Ce susține și ce nu susține dovada</h3>
+<p>Cercetarea arată că regulile simple de tip „unul pe rând" sunt înțelese când sunt asociate constant cu o așteptare scurtă și o alternativă atractivă. Totuși, dovada nu garantează că oricine va accepta limita imediat; uneori e nevoie de practică repetată. Analogia este utilă, dar piețele reale au incertitudini suplimentare, pe care le tratăm mai jos.</p>
+
+<h2>Greșeli frecvente și concepții greșite</h2>
+
+<p>Când lucrezi cu limite de poziție, este esențial să fii conștient de capcanele care pot duce la presupuneri greșite. Începătorii se împiedică adesea de subtilități; o înțelegere clară a greșelilor frecvente ajută la evitarea erorilor costisitoare.</p>
+
+<ol>
+<li><strong>Confundarea limitelor de poziție cu limitele de tranzacționare.</strong> Limitele de tranzacționare (trading limits / day-trading limits) restricționează <em>numărul de tranzacții</em> într-un interval, de regulă o zi. Limitele de poziție previn <em>acumularea excesivă</em> a unui activ. Cele două nu sunt interschimbabile.</li>
+<li><strong>Ignorarea derivativelor.</strong> Derivativele (futures, opțiuni) pot crește semnificativ expunerea la un activ, depășind limita. Începătorii uită că derivativele pot fi folosite pentru a ocoli limitele de poziție, cu consecințe neintenționate.</li>
+<li><strong>Neînțelegerea rolului hedging-ului.</strong> Hedging-ul (acoperirea riscului printr-o poziție opusă) este o strategie legitimă, dar unii cred greșit că este scutit de limite. Nu este: și hedging-ul poate fi supus limitelor de poziție.</li>
+<li><strong>Trecerea cu vederea a statutului entității.</strong> Statutul entității contează: un trader individual poate avea limite diferite față de o corporație sau un fond. Începătorii subestimează importanța statutului entității.</li>
+<li><strong>Neurmărirea limitelor în timp real.</strong> Limitele se pot schimba frecvent din cauza condițiilor de piață sau a actualizărilor de reglementare. A presupune că rămân statice duce la încălcări neașteptate; ele trebuie monitorizate în timp real.</li>
+<li><strong>Concepții greșite despre pozițiile „scutite" sau „grandfathered".</strong> Unii cred că anumite poziții sunt scutite prin grandfathering. Aceste excepții sunt însă condiționate și nu se aplică în toate situațiile; reglementările aplicabile trebuie verificate atent.</li>
+<li><strong>Subestimarea complexității.</strong> Limitele de poziție pot fi complexe și nuanțate, mai ales cu derivative sau strategii de hedging. Începătorii le subestimează complexitatea și pot omite factori critici.</li>
+</ol>
+
+<p>Pentru a evita aceste greșeli este esențial să dezvolți o înțelegere profundă a limitelor de poziție, a mecanicii lor și a cadrelor de reglementare care le guvernează.</p>
+
+<h2>Cum le folosește biroul de tranzacționare</h2>
+
+<p>Pe un birou de tranzacționare real, limita de poziție nu este un slide de curs; este un plafon viu pe care biroul trebuie să-l respecte de fiecare dată când cumpără sau vinde. Gândește-te la limită ca la cea mai mare „găleată" pe care biroul are voie să o umple cu un instrument. Dacă găleata este deja trei sferturi plină, nu mai poți adăuga încă un sfert fără să golești ceva sau să ceri o creștere temporară a limitei.</p>
+
+<ol>
+<li><strong>Dimensionarea pre-tranzacție (pre-trade sizing).</strong> Înainte de orice ordin, traderul rulează o verificare rapidă de dimensiune folosind cea mai recentă valoare a limitei (de ex. „5% din volumul zilnic al contractului din față") și volumul curent. Un raport simplu indică maximul ce poate fi cumpărat fără încălcare. Dacă biroul a acumulat deja 4,2% din volumul zilei, următorul ordin de cumpărare poate fi de cel mult 0,8%. Sistemul de risc impune asta automat: dacă traderul încearcă să depășească reziduul, ordinul este respins sau redus (clipped) la spațiul rămas.</li>
+<li><strong>Monitorizarea intra-day și „supravegherea găleții".</strong> Sistemul de risc recalculează utilizarea limitei continuu — de regulă la câteva minute — pentru că volumul se acumulează pe parcursul zilei. Biroul ține pe ecran un mic tablou de bord cu trei numere: poziția curentă, limita și spațiul rămas (headroom). Dacă tabloul devine portocaliu (headroom sub 1%), biroul oprește acumularea agresivă și poate chiar reduce o parte din carte pentru a elibera spațiu. Nu e ghicit; e o poartă mecanică ce previne încălcarea accidentală.</li>
+<li><strong>Dimensionarea pe instrumente conexe.</strong> Când biroul tranzacționează o serie de contracte (de ex. trei scadențe consecutive), limita se aplică expunerii <em>totale</em> pe serie, nu fiecărui picior separat. Motorul de risc agregă valorile noționale ajustate cu delta și compară suma cu limita. Acest lucru împiedică „felierea" limitei pe picioare pentru a ocoli regula.</li>
+<li><strong>Decizii de timing sub limită.</strong> Fiindcă limita este un plafon bazat pe volum, strictețea ei variază cu activitatea pieței. Într-o zi cu volum mic, headroom-ul se micșorează rapid; într-o zi cu volum mare, se extinde. Biroul își sincronizează ordinele mari cu volume ridicate, ceea ce oferă mai mult spațiu sub același procent. În piețe subțiri, biroul împarte ordinele mari în „copii" mai mici sau așteaptă un vârf de volum. Limita acționează astfel ca un guvernator natural al vitezei de execuție.</li>
+<li><strong>Protocolul de excepție când limita este atinsă.</strong> Dacă biroul chiar trebuie să depășească limita (de ex. un flux de client care nu poate fi sincronizat perfect), procesul este formal. Traderul cere o excepție prin sistemul de management al riscului, specificând spațiul suplimentar necesar, motivul și orizontul de ieșire. Ofițerii seniori de risc analizează cererea; aprobarea nu este automată. Această poartă asigură că limita nu este tratată ca opțională.</li>
+<li><strong>Disciplina de aplatizare la final de zi (end-of-day flattening).</strong> La închidere, biroul trebuie să fie sub limita pentru ziua următoare. Dacă acumularea intra-day l-a apropiat de limită, traderul începe să reducă pozițiile în ultima oră. Sistemul de risc poate aplatiza automat orice reziduu care ar încălca limita zilei următoare, prevenind o încălcare peste noapte.</li>
+</ol>
+
+<h3>Ce susține și ce nu susține dovada</h3>
+<p>Studiile arată că birourile care impun strict limitele de poziție au mai puține încălcări de marjă și vârfuri de volatilitate intra-day mai mici, mai ales în contracte nelichide. Totuși, dovada nu demonstrează că limitele de poziție îmbunătățesc profitabilitatea pe termen lung; ele sunt în primul rând un instrument de control al riscului, nu un generator de alpha. Limitele prea strânse pot forța împărțirea ordinelor, crescând impactul în piață și reducând calitatea execuției. Limita optimă echilibrează siguranța cu eficiența execuției, iar procentul „corect" este specific fiecărui birou și instrument.</p>
+
+<h2>Limite, avertismente și când eșuează</h2>
+
+<p>Limitele de poziție sunt un instrument crucial de gestionare a riscului, dar, ca orice mecanism, au limitări și capcane. Înțelegerea acestor avertismente este esențială pentru a le folosi eficient.</p>
+
+<p>O limitare primară este incapacitatea de a surprinde dinamici complexe de piață. În condiții foarte volatile sau cu schimbări bruște și semnificative, limitele de poziție pot fi insuficiente pentru a preveni o expunere excesivă. Într-o piață care escaladează rapid, o limită poate fi depășită înainte ca echipa să intervină.</p>
+
+<p>O a doua considerație critică este conceptul de <strong>„tranzacții aglomerate" (crowded trades)</strong>. Când mulți traderi sau investitori execută tranzacții similare, limitele de poziție pot deveni ineficiente. Efectul cumulat al limitelor individuale poate duce la o situație în care expunerea totală a pieței depășește niveluri sigure, deși fiecare limită individuală este respectată.</p>
+
+<p>În plus, limitele de poziție nu adresează <strong>riscurile ascunse (hidden risks)</strong>. Acestea apar din instrumente sau strategii complexe care nu sunt evidente nici la o analiză atentă. O tranzacție pe opțiuni aparent inofensivă poate ascunde riscuri subiacente semnificative pe care limita nu le detectează.</p>
+
+<p>Limitele de poziție nu oferă nici garanție împotriva pierderilor. Pot reduce expunerea excesivă, dar nu elimină riscul de pierdere. Mai mult, pot crea un fals sentiment de siguranță, ducând la complacere și la scăderea vigilenței.</p>
+
+<p>Regimuri în care limitele de poziție tind să cedeze:</p>
+<ol>
+<li><strong>Tranzacționare de înaltă frecvență (high-frequency trading):</strong> în piețe foarte rapide, limitele pot deveni ineficiente din cauza ritmului tranzacțiilor.</li>
+<li><strong>Produse financiare complexe:</strong> limitele pot avea dificultăți cu instrumente exotice precum opțiuni, futures sau alte derivative.</li>
+<li><strong>Șocuri de piață:</strong> mișcările bruște și ample pot copleși limitele, cu consecințe neintenționate.</li>
+<li><strong>Efecte de rețea (network effects):</strong> când mulți participanți fac tranzacții similare, efectul cumulat anulează eficacitatea limitelor individuale.</li>
+</ol>
+
+<p>Limitele de poziție sunt un instrument, nu un panaceu. Ele trebuie folosite împreună cu alte strategii de gestionare a riscului — dimensionarea poziției (position sizing), ordinele stop-loss și reechilibrarea periodică a portofoliului. Recunoscând limitările lor, poți construi o abordare de risc mai cuprinzătoare și mai eficientă.</p>
+
+<h2>Concluzii esențiale</h2>
+
+<ul>
+<li>O limită de poziție este un plafon (de reglementare sau intern) asupra dimensiunii maxime pe care un cont sau un grup de conturi conexe o poate deține într-un instrument, în orice moment. Plafonul se exprimă ca procent din acțiunile aflate în circulație, din valoarea noțională sau din volumul de tranzacționare. Exemplu: „nu mai mult de 5% din free-float-ul unei acțiuni listate." Limitele previn ca un participant să acumuleze o poziție atât de mare încât să distorsioneze prețurile, să blocheze piața sau să creeze risc sistemic.</li>
+<li>Limitele de poziție se aplică <strong>atât pe partea long, cât și pe cea short</strong>. Cineva short pe 10.000 de acțiuni este la fel de constrâns ca cineva long pe 10.000, fiindcă riscul de manipulare sau de lichidare dezordonată este simetric. Regula numără ambele „picioare" ale fiecărei poziții.</li>
+<li>Limitele se calculează pe bază de <strong>„look-through" (transparență a controlului)</strong>. Dacă două fonduri sunt administrate de același consultant sau au același beneficiar real, pozițiile lor se agregă și se tratează ca o singură deținere. Asta împiedică ocolirea regulii prin împărțirea unei mize mari pe mai multe entități controlate de fapt de un singur decident.</li>
+<li>Limita este verificată <strong>continuu</strong>, nu doar la final de zi. Majoritatea sistemelor recalculează poziția agregată după fiecare tranzacție, iar un ordin care ar trece contul peste limită este respins automat. Această aplicare în timp real este ceea ce face regula eficientă.</li>
+<li>Limitele de poziție <strong>nu sunt totuna cu limitele de expunere sau de risc</strong>. Limitele de expunere plafonează valoarea noțională raportată la capital; limitele de risc plafonează pierderea potențială în scenarii de stres. Limitele de poziție plafonează pura dimensiune a deținerii, indiferent de preț.</li>
+<li>Valoarea numerică a unei limite nu este arbitrară: este stabilită de reglementator sau de bursă după studierea lichidității, volatilității și a numărului de participanți. O limită prea strânsă frustrează hedging-ul sau market-making-ul legitim; una prea largă poate eșua în controlul riscului sistemic.</li>
+<li>Limitele de poziție interacționează cu alte reguli, mai ales raportarea expunerilor mari și limitele de concentrare. O încălcare poate declanșa o raportare obligatorie către reglementator și o reducere forțată a mizei într-un interval scurt.</li>
+<li>Eficacitatea depinde de <strong>date de referință corecte</strong>. Dacă cifra de free-float este învechită sau o acțiune corporativă schimbă numărul de acțiuni, calculul limitei poate fi greșit, creând o încălcare falsă sau o alertă ratată. Echipele mențin un flux de date controlat, actualizat zilnic.</li>
+<li>Limitele sunt cele mai fiabile în instrumente lichide, tranzacționate la bursă. În piețe nelichide sau personalizate (anumite derivative OTC, plasamente private), este greu de măsurat noționalul sau de lichidat rapid o poziție mare; aici limitele trebuie completate cu garanții suplimentare (haircuts minime, praguri de marjă).</li>
+<li>În fine, limitele de poziție sunt un <strong>control static</strong>; nu se adaptează la condițiile în schimbare. În volatilitate extremă sau short squeeze, o poziție confortabilă ieri poate deveni periculos de mare azi. De aceea echipele combină limitele de poziție cu limite de risc dinamice și circuit breakers pentru ca protecțiile să rămână proporționale cu riscul în evoluție.</li>
+</ul>

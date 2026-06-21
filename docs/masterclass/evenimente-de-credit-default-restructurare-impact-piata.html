@@ -1,0 +1,429 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evenimente de credit: default, restructurare si impactul lor pe piata — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Ce sunt evenimentele de credit: default, restructurare, failure to pay si impactul lor pe piata de obligatiuni si CDS, cu exemple practice de pe un desk de credit."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/evenimente-de-credit-default-restructurare-impact-piata.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Evenimente de credit: default, restructurare si impactul lor pe piata"><meta property="og:description" content="Ce sunt evenimentele de credit: default, restructurare, failure to pay si impactul lor pe piata de obligatiuni si CDS, cu exemple practice de pe un desk de credit."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/evenimente-de-credit-default-restructurare-impact-piata.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Evenimente de credit: default, restructurare si impactul lor pe piata"><meta name="twitter:description" content="Ce sunt evenimentele de credit: default, restructurare, failure to pay si impactul lor pe piata de obligatiuni si CDS, cu exemple practice de pe un desk de credit."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Evenimente de credit: default, restructurare si impactul lor pe piata", "description": "Ce sunt evenimentele de credit: default, restructurare, failure to pay si impactul lor pe piata de obligatiuni si CDS, cu exemple practice de pe un desk de credit.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/evenimente-de-credit-default-restructurare-impact-piata.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="evenimente-de-credit-neplata-restructurari-impact-piata" data-prev-title="Evenimente de credit: neplata, restructurarea și impactul pe piață" data-next="evenimente-de-credit-defaulturi-restructurari-si-impactul-lo" data-next-title="Evenimente de credit: defaulturi, restructurări și impactul lor pe piață" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#credit">Risc de credit</a> · 32 min · Actualizat 21 iun. 2026</p><h1>Evenimente de credit: default, restructurare si impactul lor pe piata</h1><p>Evenimentele de credit (credit events) sunt momentele in care o companie sau un stat care a imprumutat bani nu mai respecta termenii agreati ai datoriei, intr-un mod pe care contractul il considera „eveniment de credit". A intelege defaultul, restructurarea si impactul lor pe piata este esential pentru orice investitor, deoarece aceste momente schimba cine ce detine, cati bani isi schimba proprietarul si ce preturi sunt dispuse sa plateasca investitorii pentru datorii similare in viitor.</p>
+
+<p>In acest capitol din Masterclass Bursa explicam pas cu pas ce inseamna <strong>default</strong> (neplata), <strong>restructurare</strong> (restructuring), <strong>eveniment de credit</strong> si <strong>failure to pay</strong> (neefectuarea platii), de ce conteaza fiecare si cum reactioneaza piata de obligatiuni (bonds) si de CDS-uri atunci cand apar. Vei vedea exemple practice de pe un desk de tranzactionare a creditului, cum se estimeaza rata de recuperare (recovery rate) si cum se calculeaza profitul sau pierderea (P&amp;L) dupa un default.</p>
+
+<p>Pentru un incepator, primul pas este sa stie exact ce inseamna acesti termeni si cum se transforma o simpla plata ratata intr-o pierdere reala de valoare pentru creditori. Pornim de la definitii clare si ajungem la modul in care un desk de credit pozitioneaza si gestioneaza riscul dupa un astfel de eveniment.</p>
+
+<h2>Definitie si termeni cheie</h2>
+
+<p>Evenimentele de credit sunt momentele in care o companie (sau un guvern) care a imprumutat bani nu reuseste sa respecte termenii agreati ai datoriei sale, intr-un mod care, conform contractului, se considera „eveniment de credit". Aceste evenimente conteaza pentru ca schimba cine ce detine, cati bani isi schimba proprietarul si ce preturi sunt dispusi sa plateasca investitorii pentru datorii similare in viitor. Pentru un incepator pe un desk de tranzactionare, primul pas este sa inteleaga exact ce inseamna cuvinte precum „default", „restructurare", „eveniment de credit" si „failure to pay", si de ce fiecare este important.</p>
+
+<h3>1. Datoria si creditorul</h3>
+<ul>
+<li><strong>Datoria (debt):</strong> banii pe care un debitor promite sa ii ramburseze cu dobanda.</li>
+<li><strong>Creditorul (creditor):</strong> persoana sau compania care a imprumutat banii si care are dreptul legal de a primi platile.</li>
+</ul>
+<p>Pe un desk de tranzactionare urmarim partea creditorului — de regula o banca, un fond sau un detinator de obligatiuni (bondholder) — care trebuie sa decida ce face atunci cand debitorul nu mai plateste la timp sau integral.</p>
+
+<h3>2. Evenimentul de credit</h3>
+<p>Un eveniment de credit este orice situatie definita in contract (numit „contract de credit" sau „indenture" al obligatiunii) care ii da creditorului dreptul de a cere rambursarea imediata, de a executa garantia (collateral) sau de a declansa un proces juridic. International Swaps and Derivatives Association (ISDA) publica o lista standard de evenimente care conteaza; cele mai frecvente sunt:</p>
+<ul>
+<li>Failure to pay (neefectuarea platii)</li>
+<li>Bankruptcy (faliment)</li>
+<li>Obligation acceleration (accelerarea obligatiei)</li>
+<li>Obligation default (neindeplinirea obligatiei)</li>
+<li>Repudiation / moratorium (repudiere / moratoriu)</li>
+<li>Restructuring (restructurare)</li>
+</ul>
+
+<h3>3. Defaultul</h3>
+<p>Defaultul este cel mai simplu eveniment de credit: debitorul rateaza o plata programata de dobanda sau de principal pana la data scadentei stabilite in contract. De exemplu, daca o companie datoreaza 10 milioane USD dobanda la obligatiuni pe 15 martie si nu o plateste pana pe 16 martie, aceasta este o neefectuare a platii (failure to pay) si se considera default. Odata ce apare un default, creditorul poate de obicei cere rambursarea integrala imediata, chiar daca imprumutul initial avea scadenta peste multi ani.</p>
+
+<h3>4. Failure to pay (neefectuarea platii)</h3>
+<p>Failure to pay este momentul exact in care debitorul nu trimite banii promisi la data promisa. Contractul ofera de obicei o scurta „perioada de gratie" (grace period, adesea 30 de zile calendaristice) pentru a remedia neplata; daca banii tot nu sosesc, evenimentul devine un default complet. Pe desk monitorizam calendarele si sistemele de decontare (settlement) pentru a depista neplatile din timp.</p>
+
+<h3>5. Falimentul (bankruptcy)</h3>
+<p>Falimentul este un proces juridic care incepe atunci cand debitorul (sau creditorii sai) depune o cerere in instanta solicitand protectie fata de datoriile sale. In Statele Unite acesta este de regula Chapter 11; in Regatul Unit se numeste administration sau lichidare (liquidation). Odata ce o cerere de faliment devine publica, ea se considera automat eveniment de credit. Instanta decide apoi care creditori sunt platiti primii si in ce ordine.</p>
+
+<h3>6. Restructurarea (restructuring)</h3>
+<p>Restructurarea apare atunci cand debitorul si creditorii sai sunt de acord sa modifice termenii initiali ai datoriei pentru a evita un default formal sau un faliment. Modificarile tipice sunt:</p>
+<ul>
+<li>Reducerea ratei dobanzii</li>
+<li>Prelungirea scadentei (maturity)</li>
+<li>Convertirea datoriei in actiuni (debt-for-equity swap)</li>
+<li>Iertarea unei parti din principal (haircut)</li>
+</ul>
+<p>Restructurarea este un eveniment de credit doar daca indeplineste definitiile ISDA; altfel este doar o renegociere privata (workout). Pentru ca li se cere creditorilor sa accepte mai putin decat li s-a promis, piata trateaza adesea o restructurare ca pe o veste proasta, chiar daca nicio plata nu este ratata efectiv.</p>
+
+<h3>7. Obligation acceleration si obligation default</h3>
+<ul>
+<li><strong>Obligation acceleration (accelerarea obligatiei):</strong> daca debitorul incalca o clauza restrictiva (covenant — o promisiune din contract, de ex. „datoria totala trebuie sa ramana sub 3× EBITDA"), creditorul poate cere rambursarea imediata a intregului imprumut. In momentul in care creditorul formuleaza acea cerere, apare un eveniment de credit de tip obligation acceleration.</li>
+<li><strong>Obligation default (neindeplinirea obligatiei):</strong> un termen mai larg, care inseamna orice incalcare a unui covenant care inca nu a declansat acceleration, dar care ar putea duce la asta. Ambii termeni sunt importanti pentru ca pot impinge o companie intr-un eveniment de credit inainte de orice plata efectiv ratata.</li>
+</ul>
+
+<h3>8. Repudierea / moratoriul (repudiation / moratorium)</h3>
+<p>Repudierea inseamna ca debitorul declara public ca nu isi va onora datoria (de exemplu, un nou guvern anunta ca va inceta sa plateasca obligatiuni in valuta straina). Moratoriul este o suspendare temporara a platilor dispusa de un guvern. Oricare dintre aceste actiuni este tratata ca eveniment de credit conform regulilor ISDA.</p>
+
+<h3>9. Obligatii livrabile (deliverable obligations)</h3>
+<p>In derivatele de credit, precum credit-default swaps (CDS), contractul specifica exact ce datorii pot fi livrate daca apare un eveniment de credit. Acestea se numesc obligatii livrabile (deliverable obligations). De regula includ obligatiuni senior negarantate (senior unsecured), imprumuturi sau bilete la ordin ale debitorului. Daca un eveniment de credit este confirmat, cumparatorul de protectie livreaza una dintre aceste obligatiuni vanzatorului de protectie si primeste plata agreata.</p>
+
+<h3>10. Impactul pe piata</h3>
+<p>Dupa ce un eveniment de credit este anuntat, preturile datoriei debitorului scad adesea brusc, deoarece investitorii se asteapta sa recupereze mai putin de 100 de centi la dolar. Primele CDS (spread-ul) sar de obicei in sus, reflectand un risc perceput mai mare. Pe desk urmarim:</p>
+<ul>
+<li>Pretul obligatiunii in numerar (cash bond), de ex. 40 de centi la dolar</li>
+<li>Spread-ul CDS (de ex. 5 000 de puncte de baza)</li>
+<li>Rata de recuperare (recovery rate) — procentul pe care investitorii il primesc in cele din urma inapoi</li>
+</ul>
+<p>Aceste cifre ne spun cata valoare s-a pierdut si daca evenimentul de credit este deja „incorporat in pret" (priced in) sau inca se desfasoara.</p>
+
+<h3>Lista de verificare pentru incepatori</h3>
+<ul>
+<li>Cunoaste termenii contractului (verifica indenture-ul sau definitiile ISDA).</li>
+<li>Urmareste data platii si perioada de gratie.</li>
+<li>Confirma daca o plata ratata, o cerere de faliment sau o restructurare indeplineste definitia de eveniment de credit.</li>
+<li>Inregistreaza data si ora evenimentului — acest lucru este esential din motive juridice si contabile.</li>
+<li>Estimeaza recuperarea si marcheaza pozitia la valoarea de piata (mark to market) imediat.</li>
+</ul>
+<p><strong>Nota de incertitudine:</strong> Nu orice plata ratata este un eveniment de credit, daca contractul permite o perioada de remediere (cure) sau o derogare (waiver). Verifica intotdeauna formularea exacta inainte de a declara un eveniment.</p>
+
+<h2>Intuitie</h2>
+
+<p>Imagineaza-ti ca administrezi un mic stand de limonada intr-un cartier. Ai investit timp si bani in afacere, iar pana acum a mers bine. Insa, intr-o zi, un mare magazin de lant se deschide peste drum si incepe sa vanda limonada la un pret mai mic. Drept urmare, vanzarile tale scad semnificativ si te lupti sa-ti acoperi cheltuielile.</p>
+
+<p>In acest scenariu, marele magazin de lant poate fi privit ca un eveniment de credit. La fel cum prezenta magazinului afecteaza afacerea standului tau de limonada, un eveniment de credit poate avea un impact semnificativ asupra sanatatii financiare a unei companii si asupra perceptiei pietei despre ea.</p>
+
+<p>Un eveniment de credit poate fi privit ca o perturbare a functionarii normale a unei companii. Aceasta perturbare poate fi cauzata de diversi factori, precum o schimbare a situatiei financiare a companiei, o scadere a valorii sale de piata sau chiar un dezastru natural.</p>
+
+<p>In cazul standului tau de limonada, evenimentul de credit (marele magazin de lant) a provocat o scadere a vanzarilor, ceea ce, la randul sau, iti afecteaza capacitatea de a rambursa banii imprumutati pentru a porni afacerea. Acest lucru este similar cu modul in care un eveniment de credit poate afecta capacitatea unei companii de a-si rambursa datoriile.</p>
+
+<p>Acum, sa introducem conceptul de ratinguri de credit (credit ratings). Imagineaza-ti ca standul tau de limonada are un rating de credit, la fel cum are o companie. Acest rating reflecta probabilitatea ca tu sa-ti rambursezi datoriile la timp. Cand se deschide marele magazin de lant, rating-ul tau de credit ar putea scadea, indicand ca esti la un risc mai mare de a intra in default la imprumuturi.</p>
+
+<p>Aici intervine impactul pe piata. Cand apare un eveniment de credit, acesta poate afecta perceptia pietei despre bonitatea (creditworthiness) unei companii. Acest lucru, la randul sau, poate afecta capacitatea companiei de a imprumuta bani la o rata a dobanzii rezonabila. Gandeste-te cum rating-ul tau de credit ti-ar putea afecta capacitatea de a obtine un imprumut de la o banca.</p>
+
+<p>In contextul evenimentelor de credit, impactul pe piata poate fi vazut ca un efect de unda. Cand apare un eveniment de credit, el poate avea un efect de domino asupra intregii piete, afectand preturile activelor conexe si ratingurile de credit ale altor companii.</p>
+
+<p>Pentru a construi intuitia de la principii fundamentale, sa descompunem componentele unui eveniment de credit:</p>
+<ul>
+<li><strong>Compania:</strong> entitatea care trece prin evenimentul de credit. In exemplul nostru, afacerea ta.</li>
+<li><strong>Ratingul de credit:</strong> reflecta probabilitatea ca firma sa-si ramburseze datoriile la timp.</li>
+<li><strong>Impactul pe piata:</strong> efectul evenimentului de credit asupra perceptiei pietei despre bonitatea companiei.</li>
+<li><strong>Defaultul:</strong> apare atunci cand o companie nu isi poate rambursa datoriile la timp.</li>
+<li><strong>Restructurarea:</strong> un proces prin care o companie isi renegociaza datoriile cu creditorii pentru a evita defaultul.</li>
+</ul>
+<p>Intelegand aceste componente si cum interactioneaza, poti dezvolta o intuitie mai profunda despre modul in care functioneaza evenimentele de credit si cum pot afecta piata.</p>
+
+<h2>Cum functioneaza — mecanica</h2>
+
+<p>Pentru a intelege mecanica evenimentelor de credit, trebuie sa descompunem procesul in componentele sale cheie: intrari (inputs), proces si iesiri (outputs). Aceasta sectiune ofera o explicatie pas cu pas a modului in care functioneaza evenimentele de credit, folosind ca exemple defaultul si restructurarea.</p>
+
+<h3>Intrari (inputs)</h3>
+<ul>
+<li><strong>Contractul de obligatiune sau de imprumut:</strong> contractul dintre emitent (debitor) si investitor (creditor) care stabileste termenii imprumutului sau ai obligatiunii.</li>
+<li><strong>Contractul de credit:</strong> contractul dintre emitent si furnizorul facilitatii de credit (de ex. o banca) care stabileste termenii facilitatii de credit.</li>
+<li><strong>Declansatorul evenimentului (event trigger):</strong> un eveniment specific care declanseaza evenimentul de credit, precum o plata ratata (default) sau un acord de restructurare.</li>
+<li><strong>Notificarea de eveniment de credit (credit event notice):</strong> o notificare formala trimisa de emitent furnizorului facilitatii de credit si celorlalte parti interesate, anuntand evenimentul de credit.</li>
+</ul>
+
+<h3>Procesul</h3>
+<p>Procesul unui eveniment de credit implica urmatorii pasi:</p>
+<ul>
+<li><strong>Declansatorul evenimentului:</strong> se activeaza declansatorul, precum o plata ratata sau un acord de restructurare.</li>
+<li><strong>Notificarea de eveniment de credit:</strong> emitentul trimite o notificare furnizorului facilitatii de credit si celorlalte parti, anuntand evenimentul.</li>
+<li><strong>Analiza furnizorului facilitatii de credit:</strong> furnizorul analizeaza notificarea si contractul pentru a stabili daca evenimentul de credit este valid.</li>
+<li><strong>Decizia furnizorului facilitatii de credit:</strong> furnizorul decide daca sa declare evenimentul de credit si sa activeze facilitatea.</li>
+<li><strong>Activarea facilitatii de credit:</strong> daca furnizorul declara evenimentul, facilitatea este activata, iar emitentul poate accesa fondurile pentru a acoperi datoria.</li>
+<li><strong>Restructurare sau default:</strong> in functie de tipul evenimentului, emitentul poate restructura datoria sau intra in default la imprumut.</li>
+</ul>
+
+<h3>Iesiri (outputs)</h3>
+<ul>
+<li><strong>Activarea facilitatii de credit:</strong> facilitatea este activata, iar emitentul poate accesa fondurile pentru a acoperi datoria.</li>
+<li><strong>Restructurare sau default:</strong> emitentul poate restructura datoria sau intra in default, in functie de tipul evenimentului.</li>
+<li><strong>Actualizarea agentiei de rating:</strong> agentia de rating actualizeaza rating-ul de credit al emitentului pentru a reflecta evenimentul.</li>
+<li><strong>Impactul pe piata:</strong> evenimentul de credit poate avea un impact pe piata, precum o modificare a spread-ului de credit al emitentului sau o scadere a valorii obligatiunii ori a imprumutului.</li>
+</ul>
+
+<h3>Exemplu: Default</h3>
+<p>Sa presupunem ca o companie (emitent) emite o obligatiune cu o valoare nominala de 100 de milioane USD si o scadenta de 5 ani. Obligatiunea are o facilitate de credit de 50 de milioane USD oferita de o banca (furnizorul facilitatii). Daca emitentul rateaza o plata, evenimentul de credit este declansat, iar emitentul trimite o notificare bancii.</p>
+<p>Banca analizeaza notificarea si stabileste ca evenimentul de credit este valid. Banca declara evenimentul si activeaza facilitatea de credit. Emitentul poate apoi accesa facilitatea pentru a acoperi datoria. In acest caz, rezultatul este un default la imprumut, iar impactul pe piata poate fi o scadere a valorii obligatiunii.</p>
+
+<h3>Exemplu: Restructurare</h3>
+<p>Sa presupunem ca o companie (emitent) contracteaza un imprumut cu o valoare nominala de 50 de milioane USD si o scadenta de 5 ani. Imprumutul are o facilitate de credit de 25 de milioane USD oferita de o banca. Daca emitentul si banca sunt de acord sa restructureze imprumutul, evenimentul de credit este declansat, iar emitentul trimite o notificare bancii.</p>
+<p>Banca analizeaza notificarea si stabileste ca evenimentul de credit este valid. Banca declara evenimentul si activeaza facilitatea de credit. Emitentul si banca convin sa restructureze imprumutul, ceea ce poate implica o modificare a ratei dobanzii, a calendarului de rambursare sau a altor termeni. In acest caz, rezultatul este o restructurare a imprumutului, iar impactul pe piata poate fi o modificare a spread-ului de credit al emitentului.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Sa parcurgem o tranzactie simpla, aproape reala, pe care un analist de credit de pe un desk ar putea fi pus sa o evalueze dupa ce apare un eveniment de credit. Vom folosi o singura obligatiune emisa de „Regional Plastics plc", un producator britanic de ambalaje din plastic. Obligatiunea este o nota senior negarantata (senior unsecured) pe 5 ani, cu un cupon de 6%, emisa in ianuarie 2022 la paritate (£100). Astazi este 15 mai 2025. Regional Plastics tocmai a anuntat o administrare prearanjata (pre-pack administration), pe care piata o interpreteaza ca un default conform definitiilor ISDA 2014. Comitetul de Determinari ISDA (Determinations Committee) a declarat un eveniment de credit (failure to pay) si a stabilit o data de licitatie (auction) pe 22 mai 2025. Trebuie sa decidem: (1) cat valoreaza obligatiunea astazi si (2) care va fi P&amp;L-ul nostru daca o vindem.</p>
+
+<h3>Pasul 1 — Confirma evenimentul de credit si ipotezele de recuperare</h3>
+<ul>
+<li>Eveniment de credit: Failure to pay a principalului (£100) scadent pe 15 mai 2025.</li>
+<li>Rata de recuperare: piata evalueaza obligatiunile senior negarantate la o recuperare de 35% intr-un scenariu de default. Aceasta se bazeaza pe tranzactionarea recenta a hartiilor in dificultate (distressed paper) din sectorul ambalajelor si pe curba interna de recuperare a desk-ului.</li>
+<li>Suma recuperata = £100 × 35% = £35 la fiecare £100 valoare nominala.</li>
+<li>Pierderea in caz de default (Loss Given Default, LGD) = £100 − £35 = £65 la fiecare £100, adica 65%.</li>
+</ul>
+
+<h3>Pasul 2 — Estimeaza pretul post-default inainte de licitatie</h3>
+<p>Procesul de licitatie ISDA va stabili un pret final pentru obligatiune pe 22 mai. Pana atunci, obligatiunea se tranzactioneaza cu un discount de „recuperare implicita". Cel mai simplu mod de a o evalua este sa actualizam fluxul de numerar de recuperare asteptat la o rata care reflecta incertitudinea de a fi platit.</p>
+<ul>
+<li>Flux de numerar de recuperare asteptat = £35 pe 22 mai 2025.</li>
+<li>Timpul pana la licitatie ≈ 7 zile calendaristice ≈ 7/365 = 0,019 ani.</li>
+<li>Rata de actualizare = rata fara risc + prima de lichiditate. Desk-ul foloseste rata Sonia pe 1 saptamana (in prezent 5,20%) plus un spread de lichiditate de 2% pentru hartii in dificultate. Rata totala de actualizare = 5,20% + 2,00% = 7,20%.</li>
+<li>Valoarea prezenta a recuperarii = £35 / (1 + 0,072)^0,019 ≈ £35 / 1,00137 ≈ £34,95.</li>
+</ul>
+<p>Prin urmare, obligatiunea ar trebui sa se tranzactioneze la aproximativ £34,95 la fiecare £100 valoare nominala pana la finalizarea licitatiei.</p>
+
+<h3>Pasul 3 — Compara cu pretul observabil de piata</h3>
+<p>La ora 11:00, ecranul brokerului arata Regional Plastics 6% 2027 la cumparare (bid) £33,50, la vanzare (offer) £36,50. Mijlocul (mid) este £35,00, ceea ce este la cativa penny de estimarea noastra de £34,95. Acest lucru ne da incredere ca ipotezele noastre de recuperare si de actualizare sunt corecte.</p>
+
+<h3>Pasul 4 — Calculeaza P&amp;L-ul daca vindem astazi</h3>
+<p>Sa presupunem ca am cumparat obligatiunea saptamana trecuta la £98,50 (pret curat — clean price) si acum o vindem la mid-ul brokerului de £35,00.</p>
+<ul>
+<li>Pretul brut (dirty price) primit = pret curat + dobanda acumulata. Dobanda acumulata de la 15 mai la 15 mai este zero, deoarece obligatiunea plateste anual pe 15 mai. Asadar pretul brut = £35,00.</li>
+<li>Pretul de achizitie (brut) = £98,50.</li>
+<li>P&amp;L per £100 = £35,00 − £98,50 = −£63,50.</li>
+</ul>
+<p>Am pierdut £63,50 la fiecare £100 valoare nominala in doar cateva zile.</p>
+
+<h3>Pasul 5 — Analizeaza alternativa de restructurare</h3>
+<p>Regional Plastics a anuntat si o propunere de restructurare: schimbul vechii obligatiuni cu o noua obligatiune pe 3 ani cu cupon 8%, plus 20% in actiuni noi. Noua obligatiune se tranzactioneaza astazi la £50 flat. Sa evaluam oferta de restructurare.</p>
+<ul>
+<li>Valoarea noii obligatiuni = £50.</li>
+<li>Valoarea actiunilor = 20% din valoarea nominala = £20 (presupunem ca actiunile valoreaza ceva, deoarece compania inca opereaza).</li>
+<li>Contraprestatia totala a restructurarii ≈ £50 + £20 = £70.</li>
+<li>Compara cu recuperarea in numerar de £35. Daca restructurarea reuseste, detinatorii de obligatiuni ar primi £70 in loc de £35. Prin urmare, oferta de restructurare este economic mai buna pentru noi.</li>
+</ul>
+
+<h3>Pasul 6 — Decide ce sa faci</h3>
+<p>Avem doua optiuni:</p>
+<ul>
+<li>Vinde vechea obligatiune acum la £35 si cristalizeaza pierderea de £63,50.</li>
+<li>Pastreaza si oferta-o (tender) in restructurare, sperand sa primesti £70 mai tarziu.</li>
+</ul>
+<p>Risc: Restructurarea ar putea esua sau ar putea fi respinsa de o majoritate a detinatorilor de obligatiuni. In acest caz, am putea ramane doar cu £35. Licitatia ISDA tot va avea loc, dar plata finala ar putea fi mai mica daca comitetul de licitatie stabileste o recuperare sub 35%.</p>
+<p>Regula desk-ului: Daca nu avem o convingere foarte mare ca restructurarea va reusi, preferam sa vindem in licitatie si sa blocam cei £35 cunoscuti, in loc sa pariem pe cei £70 incerti. Prin urmare, instruim desk-ul de vanzari sa loveasca bid-ul brokerului de £33,50 pentru a iesi rapid din pozitie.</p>
+
+<h3>Concluzie cheie pentru incepatori</h3>
+<ul>
+<li>Un eveniment de credit schimba instantaneu valoarea obligatiunii de la paritate la recuperarea asteptata, actualizata pentru riscul de timp.</li>
+<li>Pana la decontarea licitatiei, obligatiunea se tranzactioneaza la un pret care reflecta cea mai buna estimare a pietei despre acea recuperare.</li>
+<li>Compara intotdeauna pretul in numerar din licitatie cu orice alternativa de restructurare; uneori alternativa este mai buna, dar comporta risc de executie.</li>
+<li>Nu pastra niciodata o obligatiune intrata in default sperand la un rezultat mai bun, decat daca ai facut analiza de credit si ai aprobarea comitetului de credit.</li>
+</ul>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Un al doilea scenariu: un emitent industrial small-cap cu un singur imprumut bancar si fara obligatiuni.</p>
+
+<h3>Contextul de pe desk</h3>
+<p>Esti analistul junior de credit care sta langa flow trader-ul intr-o dimineata de luni. Flow trader-ul tocmai a afisat o alerta pe ecran: „Smith Fabrication PLC — incalcare de covenant raportata, se cauta bid 9% pe term loan." Smith Fabrication este un producator privat de garnituri industriale; are o singura facilitate de credit — un term loan B amortizabil de £35 milioane scadent peste sapte ani — si nicio obligatiune publica. Compania nu are rating. Desk-ul tau detine £2 milioane din imprumut la paritate (cost 150 bps peste SONIA). Trebuie sa decizi: (1) daca a avut loc un eveniment de credit, (2) ce pret ar trebui sa coteze trader-ul clientilor si (3) care va fi impactul asupra P&amp;L daca marchezi pozitia la valoarea de piata.</p>
+
+<h3>Pasul 1 — Identifica contractul si declansatorul</h3>
+<p>Extrage contractul de facilitate de pe drive-ul comun. Clauze cheie:</p>
+<ul>
+<li>Covenant financiar: rata de acoperire a dobanzii (EBIT / cheltuiala cu dobanda) trebuie sa ramana ≥ 1,5×.</li>
+<li>Perioada de remediere (cure period): 30 de zile lucratoare.</li>
+<li>Evenimente de default: incalcarea unui covenant este eveniment de default daca nu este remediata in perioada de remediere.</li>
+<li>Acceleration: daca un eveniment de default persista, creditorii pot accelera imprumutul si cere rambursarea imediata.</li>
+</ul>
+<p>Stirea de azi spune ca EBIT a scazut la £1,2 milioane, in timp ce dobanda anualizata este de £1,0 milioane, dand o rata de 1,2× — o incalcare. Prin urmare, a avut loc un eveniment de default, dar acesta este supus perioadei de remediere de 30 de zile. Aceasta nu este inca un default de plata, nici un acceleration, si prin urmare nu este un eveniment de credit conform definitiilor ISDA. Totusi, este un eveniment de credit conform contractului de facilitate.</p>
+
+<h3>Pasul 2 — Evalueaza probabilitatea si calendarul remedierii</h3>
+<p>Suni directorul financiar (CFO) al companiei. El recunoaste ca rata este scazuta din cauza unei opriri unice de uzina, dar comenzile isi revin. El se asteapta ca EBIT sa revina la £1,8 milioane in sase saptamani. Managerul de relatii al bancii confirma ca agentul de facilitate a renuntat (waiver) deja informal la incalcare. Prin urmare, probabilitatea de remediere este ridicata, dar perioada de remediere inca curge.</p>
+
+<h3>Pasul 3 — Impactul pe piata si pretul</h3>
+<p>Deoarece imprumutul nu este tranzactionat public, nu exista un pret live pe ecran. Totusi, peste noapte au venit trei cotatii indicative de la brokeri:</p>
+<ul>
+<li>88–92 (bid–offer) pentru un imprumut performant.</li>
+<li>65–70 pentru un imprumut cu covenant incalcat, dar neremediat.</li>
+<li>45–50 pentru un imprumut care a fost accelerat.</li>
+</ul>
+<p>Flow trader-ul iti cere sa decizi ce interval se aplica. Rationamentul tau:</p>
+<ul>
+<li>Acceleration nu a avut loc → nu 45–50.</li>
+<li>Incalcarea covenantului este publica → nu 88–92.</li>
+<li>Prin urmare, intervalul potrivit este 65–70.</li>
+</ul>
+<p>Il instruiesti pe trader sa coteze 67 mid-market clientilor, cu mentiunea ca, daca derogarea de remediere este documentata formal, pretul poate fi revizuit la 85.</p>
+
+<h3>Pasul 4 — Impactul asupra P&amp;L si limitele de risc</h3>
+<p>Limita ta de risc este £50 k VaR pe aceasta pozitie. Marcarea la piata la 67 implica o pierdere de £1,02 milioane pe valoarea nominala de £2 milioane (haircut de 33%). Escaladezi imediat catre controlorul de risc de credit: pozitia este acum de 20× peste limita. Controlorul iti cere sa pregatesti un plan de lichidare — vinde 50% din detinere pentru a aduce pozitia in limita.</p>
+
+<h3>Pasul 5 — Documentare si pasii urmatori</h3>
+<p>Redactezi o nota interna de credit:</p>
+<ul>
+<li>Eveniment: incalcare de covenant conform contractului de facilitate.</li>
+<li>Statusul remedierii: in asteptare (fereastra de 30 de zile).</li>
+<li>Cotatia de piata: 65–70.</li>
+<li>Actiune: vinde 50% din pozitie pentru a reduce riscul.</li>
+</ul>
+<p>Depui nota in jurnalul comun de credit si actualizezi blotter-ul, astfel incat desk-ul sa stie ca pozitia este acum „restructuring watch" (sub supraveghere de restructurare). Vei monitoriza scrisoarea formala de waiver asteptata in doua saptamani; daca este primita, intervalul de pret se va stramta la 85–88, iar problema limitei de risc va fi reanalizata.</p>
+
+<h3>Concluzie cheie pentru desk</h3>
+<p>Chiar si intr-o structura simpla cu un singur imprumut, diferenta dintre „incalcare", „eveniment de default" si „acceleration" conteaza atat pentru pret, cat si pentru risc. O incalcare fara acceleration declanseaza totusi un discount de piata, dar perioada de remediere ofera timp pentru negociere, nu pentru lichidare imediata. Coreleaza intotdeauna limbajul contractului cu cotatia efectiva de piata — descoperirea pretului este mai dificila pe datoria privata, asa ca trebuie sa te bazezi pe cotatiile brokerilor si pe consensul intern.</p>
+
+<h2>Greseli si conceptii gresite frecvente</h2>
+
+<p>Cand navighezi prin lumea complexa a evenimentelor de credit, este usor sa cazi in capcane frecvente care pot duce la decizii gresit informate si la oportunitati pierdute. Ca incepator in domeniul creditului, este esential sa fii constient de aceste capcane si sa iei masuri pentru a le evita.</p>
+
+<p>Una dintre cele mai semnificative conceptii gresite este presupunerea ca toate defaulturile sunt la fel. In realitate, tipul si severitatea defaultului pot avea un impact substantial asupra dinamicii pietei. De exemplu, defaultul unei obligatiuni cu randament ridicat (high-yield) poate avea un impact limitat asupra pietei in ansamblu, in timp ce defaultul unui emitent major investment-grade poate trimite unde de soc prin intregul peisaj al creditului.</p>
+
+<p>O alta greseala frecventa este nediferentierea dintre un eveniment de credit si o largire a spread-ului de credit (credit spread widening). Desi o largire a spread-ului poate semnala un risc de credit crescut, ea nu implica neaparat ca a avut loc un eveniment de credit. O largire a spread-ului poate fi cauzata de o varietate de factori, inclusiv schimbari de sentiment al pietei, conditii economice sau chiar actiuni ale bancii centrale. In schimb, un eveniment de credit este o intamplare specifica, precum un default sau o restructurare, care declanseaza un raspuns al pietei.</p>
+
+<p>Incepatorii cred adesea ca evenimentele de credit sunt determinate exclusiv de factori specifici emitentului. Desi factorii specifici emitentului sunt fara indoiala importanti, ei nu sunt singurii factori declansatori. Factori la nivel de piata, precum schimbari ale ratelor dobanzii, conditii economice sau medii de reglementare, pot afecta semnificativ evenimentele de credit. De exemplu, o schimbare a politicii monetare poate duce la un eveniment de credit chiar daca emitentul insusi nu se confrunta cu dificultati financiare.</p>
+
+<p>O alta capcana de evitat este presupunerea ca evenimentele de credit tin exclusiv de bonitatea emitentului. Desi bonitatea emitentului este cruciala, ea nu este singurul factor in joc. Lichiditatea pietei, sentimentul investitorilor si chiar factori externi precum geopolitica pot contribui toate la aparitia si la impactul evenimentelor de credit. De exemplu, un eveniment de credit declansat de o schimbare a sentimentului pietei poate sa nu fie direct legat de bonitatea emitentului.</p>
+
+<p>In plus, incepatorii se chinuie adesea sa diferentieze un eveniment de credit de o retrogradare a ratingului de credit (credit rating downgrade). Desi o retrogradare poate semnala un risc de credit crescut, ea nu implica neaparat ca a avut loc un eveniment de credit. O retrogradare poate fi determinata de o varietate de factori, inclusiv schimbari ale conditiilor de piata, factori specifici emitentului sau chiar metodologia agentiei de rating.</p>
+
+<p>In cele din urma, este esential sa eviti conceptia gresita ca evenimentele de credit tin exclusiv de performanta trecuta. Desi performanta trecuta este un factor important in evaluarea riscului de credit, ea nu este singura consideratie. Factori orientati spre viitor, precum sanatatea financiara a emitentului, conditiile de piata si mediile de reglementare, pot afecta de asemenea semnificativ evenimentele de credit. De exemplu, un eveniment de credit declansat de o schimbare a conditiilor de piata poate sa nu fie direct legat de performanta trecuta a emitentului.</p>
+
+<p>Pentru a evita aceste greseli si conceptii gresite frecvente, este esential sa ramai informat despre evolutiile pietei, factorii specifici emitentului si factorii externi declansatori ai evenimentelor de credit. Adoptand o abordare cuprinzatoare si nuantata a analizei de credit, incepatorii pot dobandi o intelegere mai profunda a interactiunii complexe a factorilor care determina evenimentele de credit si pot lua decizii mai bine informate.</p>
+
+<h2>Cum foloseste desk-ul de tranzactionare aceste cunostinte</h2>
+
+<p>Pe un desk de credit, in momentul in care un eveniment de credit este anuntat, fluxul se schimba de la „evaluarea riscului" la „pozitionarea pentru consecinte". Prima sarcina a desk-ului este sa decida daca evenimentul este deja reflectat in preturi sau daca mai exista o miscare de capturat. Cel mai rapid mod de a face asta este sa privesti trei ecrane simultan:</p>
+<ul>
+<li>Preturile CDS pentru entitatea de referinta (mid, bid, ask si ultimul print).</li>
+<li>Preturile obligatiunilor in numerar (cea mai ieftina de livrat — cheapest-to-deliver sau CTD, urmatoarea cea mai ieftina si orice hartie garantata).</li>
+<li>Ecranul de actiuni al emitentului (pret, volum si adancimea carnetului de ordine).</li>
+</ul>
+<p>Daca CDS-ul deja s-a largit cu 500 bps si obligatiunile in numerar sunt la 30 de centi la dolar, desk-ul trateaza miscarea ca „incorporata in pret" (priced in). Desk-ul cauta apoi valoare relativa: CDS-ul pe 5 ani se tranzactioneaza acum mai larg decat cel pe 1 an? Obligatiunea subordonata este mai ieftina decat cea senior? Daca raspunsul este da, desk-ul poate pune o tranzactie de curba sau de structura de capital (cumpara CDS 5 ani vs. vinde CDS 1 an, sau cumpara cash subordonat vs. vinde cash senior), pariind ca piata a vandut excesiv riscul cu scadenta mai lunga sau cu rang mai jos.</p>
+<p>Daca, in schimb, CDS-ul este inca la 200 bps, iar actiunea a scazut doar cu 5%, desk-ul trateaza evenimentul ca „neincorporat" (un-priced). Urmatorul pas este dimensionarea pozitiei. Regula empirica este: o miscare de 1 bp in CDS-ul pe 5 ani ≈ 2 000 USD la fiecare 10 milioane USD notional pentru un contract standard pe 5 ani. Deci, daca desk-ul crede ca CDS-ul va merge la 800 bps de la 200 bps, aceasta este o miscare de 600 bps. Pentru o pozitie de 50 de milioane USD notional, impactul P&amp;L este aproximativ 600 × 2 000 USD × 5 = 6 milioane USD. Desk-ul intreaba apoi: merita miscarea asteptata riscul unui eveniment de coada (tail) mai mare (de ex. un bail-out surpriza sau o restructurare care sterge valoarea actiunilor)? Daca raspunsul este da, desk-ul va intra in tranzactie, dar va seta si un stop-loss ferm: daca CDS-ul se stramta inapoi la 300 bps, pozitia este inchisa, deoarece teza initiala a esuat.</p>
+<p>Pentru obligatiunile in numerar, desk-ul foloseste „spread-to-maturity" (numit si randament pana la scadenta minus curba fara risc) ca metrica principala. Daca obligatiunea CTD se tranzactioneaza la 1 200 bps peste, iar desk-ul crede ca recuperarea finala va fi de 40 de centi, recuperarea implicita este deja 50 de centi. Desk-ul intreaba apoi: merita diferenta de 10 puncte dintre 40% si 50% recuperare riscul de lichiditate al detinerii unei obligatiuni ilichide? Daca da, desk-ul va cumpara CTD-ul si va acoperi (hedge) riscul de rata a dobanzii cu un receiver swap sau un Treasury future. Hedge-ul este dimensionat astfel incat DV01-ul obligatiunii si al swap-ului sa fie egale; in acest fel, singurul risc ramas este cel de credit.</p>
+<p>Sincronizarea (timing) este critica. Evenimentele de credit se intampla adesea dupa inchiderea pietei din SUA. Prin urmare, desk-ul:</p>
+<ul>
+<li>Pre-pozitioneaza ordine in piata electronica inainte de inchidere.</li>
+<li>Foloseste brokeri prin voce pentru a dimensiona tranzactii bloc daca carnetul electronic este prea subtire.</li>
+<li>Seteaza un declansator „after-hours": daca CDS-ul afiseaza mai larg de X bps dupa ora 16:00 ET, desk-ul va lovi bid-ul imediat, deoarece riscul de gap intre 16:00 si 7:00 ET poate fi de 200–300 bps.</li>
+</ul>
+<p>Limitele de risc sunt aplicate in timp real. Sistemul de risc al desk-ului va:</p>
+<ul>
+<li>Semnala orice expunere pe un singur nume care depaseste limita de „risc de eveniment" (de regula 10% din VaR-ul total de credit al desk-ului).</li>
+<li>Ingheta pozitia daca recuperarea implicita de CDS se misca cu mai mult de 10% intr-o zi.</li>
+<li>Cere o a doua aprobare de la seful de credit daca dimensiunea pozitiei depaseste 5% din capitalul desk-ului.</li>
+</ul>
+<p>In final, desk-ul nu uita niciodata ca evenimentele de credit sunt binare. O restructurare poate sterge valoarea actiunilor, dar poate lasa datoria neatinsa daca firma gaseste o „vacanta" de la covenantele sale. Prin urmare, desk-ul tine un „manual de restructurare" (restructuring playbook) pe blotter: o lista cu datele cheie (termene de plata a dobanzii, teste de covenant, scadenta obligatiunii), recuperarea probabila in diferite scenarii si lichiditatea fiecarei obligatiuni. Cand este anuntata o restructurare, desk-ul pune manualul in actiune: vinde obligatiunile cele mai expuse la restructurare si cumpara pe cele mai putin expuse, mentinand in acelasi timp DV01-ul net si durata de spread in limite. Scopul nu este sa ai dreptate asupra rezultatului — este sa ai dreptate asupra valorii relative si sa supravietuiesti rezultatului binar.</p>
+
+<h2>Limite, avertismente si cand da gres</h2>
+
+<p>Desi cadrul evenimentelor de credit ofera un instrument util pentru a intelege impactul defaulturilor si restructurarilor asupra pietei, este esential sa-i recunoastem limitele si potentialele capcane. Pe masura ce patrundem in detaliile evenimentelor de credit, devine clar ca acest cadru nu este un glob de cristal, iar predictiile sale sunt supuse unor avertismente si incertitudini variate.</p>
+
+<p>O limitare semnificativa a cadrului de evenimente de credit este dependenta sa de date istorice si de modele statistice. Aceste modele sunt la fel de bune ca datele care le alimenteaza si pot fi influentate de diverse distorsiuni (biases) si ipoteze. Mai mult, complexitatea pietelor financiare moderne si aparitia unor noi factori de risc pot face aceste modele depasite sau inexacte.</p>
+
+<p>Un alt avertisment critic este ipoteza unui mediu economic stabil. Evenimentele de credit sunt adesea declansate de recesiuni economice, care pot duce la o cascada de defaulturi si restructurari. Insa cadrul nu tine cont de potentialele interactiuni dintre socurile economice si evenimentele de credit. Cu alte cuvinte, nu surprinde potentialele bucle de feedback care pot aparea cand instabilitatea economica declanseaza evenimente de credit, care la randul lor agraveaza instabilitatea economica.</p>
+
+<p>In plus, cadrul evenimentelor de credit se bazeaza pe o distinctie binara intre default si restructurare. In realitate, insa, granitele dintre aceste doua stari pot fi neclare, iar rezultatul efectiv poate fi o combinatie a ambelor. De exemplu, o companie poate intra in default la o anumita emisiune de obligatiuni, dar isi poate restructura celelalte obligatii de datorie pentru a evita un default total. In astfel de cazuri, cadrul poate sa nu surprinda cu acuratete nuantele situatiei.</p>
+
+<p>O alta limitare semnificativa este ipoteza unei piete care functioneaza bine. Evenimentele de credit apar adesea in perioade de stres al pietei, cand lichiditatea este redusa, iar preturile sunt supuse unei volatilitati extreme. In astfel de medii, predictiile cadrului pot fi nesigure, iar impactul efectiv pe piata poate diferi semnificativ de rezultatele asteptate.</p>
+
+<p>In plus, cadrul evenimentelor de credit nu tine cont de potentialul impact al schimbarilor de reglementare si de politica. De exemplu, un guvern poate introduce noi reglementari sau politici care afecteaza bonitatea unei anumite companii sau industrii. Aceste schimbari pot avea un impact semnificativ asupra pietei, dar nu sunt surprinse de cadru.</p>
+
+<p>In cele din urma, este esential sa recunoastem ca acest cadru nu este o garantie a rezultatelor de piata. Chiar daca el prezice un anumit rezultat, nu exista nicio garantie ca acesta se va materializa. Participantii la piata — traderi, investitori si autoritati de reglementare — pot influenta rezultatul efectiv prin actiunile si deciziile lor.</p>
+
+<p>In concluzie, desi cadrul evenimentelor de credit ofera un instrument util pentru a intelege impactul defaulturilor si restructurarilor asupra pietei, este esential sa-i recunoastem limitele si potentialele capcane. Recunoscand aceste avertismente si incertitudini, participantii la piata pot lua decizii mai bine informate si pot dezvolta o intelegere mai nuantata a relatiilor complexe dintre evenimentele de credit si rezultatele de piata.</p>
+
+<h2>Concluzii cheie</h2>
+
+<ul>
+<li>Un eveniment de credit este orice declansator definit legal care permite cumparatorului de protectie sa ceara plata de la vanzatorul de protectie in cadrul unui contract de derivat de credit.
+<ul>
+<li>Definitiile ISDA 2014 enumera cele sase evenimente de credit standard: faliment, failure to pay, obligation acceleration, obligation default, repudiere/moratoriu si restructurare.</li>
+<li>Restructurarea este singurul eveniment care trebuie inclus explicit in contract; daca nu este, contractul acopera doar celelalte cinci evenimente.</li>
+</ul>
+</li>
+<li>Defaultul nu este acelasi lucru cu un eveniment de credit.
+<ul>
+<li>Defaultul inseamna ca un debitor a incalcat un covenant, a ratat o plata de dobanda sau nu a rambursat principalul la scadenta.</li>
+<li>Un default devine eveniment de credit doar atunci cand indeplineste formularea precisa a contractului si declanseaza mecanismul de plata al derivatului de credit.</li>
+</ul>
+</li>
+<li>Restructurarea este o modificare deliberata a termenilor unui instrument de datorie, dezavantajoasa economic pentru creditori.
+<ul>
+<li>Forme tipice: reducere (haircut) de cupon sau de principal, prelungirea scadentei, conversie de moneda sau schimbarea legii aplicabile.</li>
+<li>Restructurarea este eveniment de credit doar daca contractul o include; altfel este tratata ca un amendament normal si nu are loc nicio plata.</li>
+</ul>
+</li>
+<li>Impactul pe piata urmeaza evenimentul de credit, nu defaultul in sine.
+<ul>
+<li>In momentul in care un eveniment de credit este anuntat, obligatiunile in numerar ale entitatii de referinta se largesc de regula in randament (pretul scade), iar spread-ul CDS al entitatii sare in sus.</li>
+<li>Marimea gap-ului depinde de cat de sever este perceput evenimentul si de lichiditatea pietelor de obligatiuni si de CDS.</li>
+</ul>
+</li>
+<li>Decontarea poate fi fizica sau in numerar.
+<ul>
+<li>Decontare fizica: cumparatorul de protectie livreaza obligatiunile intrate in default vanzatorului de protectie in schimbul paritatii.</li>
+<li>Decontare in numerar: o licitatie stabileste pretul final al celei mai ieftine obligatiuni de livrat; vanzatorul de protectie plateste diferenta dintre paritate si acel pret de licitatie.</li>
+</ul>
+</li>
+<li>Asteptarile de recuperare determina pretul inainte si dupa eveniment.
+<ul>
+<li>Inainte de eveniment, spread-ul CDS reflecta viziunea pietei despre pierderea in caz de default (LGD).</li>
+<li>Dupa eveniment, odata ce recuperarea este cunoscuta (din licitatie sau tranzactionare), spread-ul CDS se prabuseste aproape de zero, in timp ce pretul obligatiunii in numerar converge spre valoarea sa post-recuperare.</li>
+</ul>
+</li>
+<li>Nu toate restructurarile sunt egale.
+<ul>
+<li>Restructurarile „in dificultate" (distressed — haircut-uri mari, tactici coercitive) au mai multe sanse sa declanseze un eveniment de credit.</li>
+<li>Restructurarile „consensuale" (amendamente minore agreate cu toti creditorii) evita de regula un eveniment de credit si, prin urmare, evita plata.</li>
+</ul>
+</li>
+<li>Riscul de documentare este material.
+<ul>
+<li>Diferentele de termeni contractuali (modified restructuring vs. old restructuring vs. fara clauza de restructurare) pot transforma o plata de la zero la paritate.</li>
+<li>Verifica intotdeauna formularea exacta a confirmarii si a anexei ISDA inainte de a presupune ca a avut loc un eveniment de credit.</li>
+</ul>
+</li>
+<li>Sincronizarea conteaza.
+<ul>
+<li>Evenimentul de credit trebuie determinat formal de Comitetul de Determinari ISDA; pana atunci, tranzactionarea continua pe incertitudine.</li>
+<li>Odata ce comitetul decide, procesul de licitatie incepe in cateva zile; in fereastra de licitatie, preturile se pot misca brusc pe zvonuri si pe inchideri de pozitii.</li>
+</ul>
+</li>
+<li>Lichiditatea seaca rapid.
+<ul>
+<li>Dupa un eveniment de credit, obligatiunile si CDS-urile entitatii de referinta devin greu de tranzactionat; spread-urile bid–ask se largesc, iar unii dealeri pot refuza sa coteze.</li>
+<li>Traderii care trebuie sa acopere sau sa lichideze pozitii ar trebui sa planifice pentru slippage si costuri de tranzactionare mai mari.</li>
+</ul>
+</li>
+<li>Atentie la evenimentele de credit „goale" (empty).
+<ul>
+<li>Unele actiuni corporative etichetate „restructurare" de presa nu indeplinesc definitia ISDA; daca contractul exclude restructurarea, nu urmeaza nicio plata.</li>
+<li>Invers, un eveniment care pare minor la suprafata (de ex. o mica reducere de cupon) poate totusi califica daca indeplineste testele mecanice ale contractului.</li>
+</ul>
+</li>
+<li>Obicei practic de desk: tine un jurnal continuu.
+<ul>
+<li>Inregistreaza formularea exacta a fiecarei clauze de eveniment de credit din fiecare contract pe care il tranzactionezi.</li>
+<li>Noteaza data deciziei Comitetului de Determinari si pretul final de licitatie; acest istoric este nepretuit cand apar dispute sau cand explici ulterior P&amp;L-ul conducerii.</li>
+</ul>
+</li>
+<li>Incertitudinea face parte din joc.
+<ul>
+<li>Definitiile ISDA evolueaza; noi decizii pot schimba rezultatul unor contracte vechi.</li>
+<li>Verifica intotdeauna cele mai recente suplimente ISDA si ajusteaza-ti corespunzator limitele interne de risc.</li>
+</ul>
+</li>
+</ul><script type="application/json" id="cf-mc-quiz">[{"q": "Ce este, in esenta, un eveniment de credit (credit event)?", "options": ["Orice scadere a pretului actiunii unei companii", "O situatie definita in contract care da creditorului dreptul de a cere rambursarea imediata, executa garantia sau declansa un proces juridic", "O simpla retrogradare a ratingului de credit", "O crestere a dobanzii de referinta a bancii centrale"], "correct": 1, "explain": "Evenimentul de credit este o situatie definita contractual (in credit agreement sau indenture) care confera creditorului drepturi precum rambursarea imediata sau executarea garantiei.", "kind": "concept"}, {"q": "Care organizatie publica lista standard de evenimente de credit folosita in derivatele de credit?", "options": ["Federal Reserve", "ISDA (International Swaps and Derivatives Association)", "Banca Centrala Europeana", "Agentia de rating Moody's"], "correct": 1, "explain": "ISDA publica lista standard de evenimente de credit (failure to pay, bankruptcy, restructuring etc.).", "kind": "text"}, {"q": "Un debitor datoreaza dobanda pe 15 martie si nu o plateste pana pe 16 martie. Cum se numeste acest eveniment?", "options": ["Restructurare", "Failure to pay (neefectuarea platii)", "Moratoriu", "Obligation acceleration"], "correct": 1, "explain": "Ratarea unei plati programate la scadenta este failure to pay si se considera default.", "kind": "concept"}, {"q": "Care este rolul tipic al perioadei de gratie (grace period) la failure to pay?", "options": ["Anuleaza automat datoria", "Ofera un termen scurt (adesea 30 de zile) pentru a remedia neplata inainte ca aceasta sa devina default complet", "Obliga creditorul sa ierte dobanda", "Permite emitentului sa emita noi actiuni"], "correct": 1, "explain": "Perioada de gratie da debitorului timp sa remedieze neplata; daca banii tot nu sosesc, evenimentul devine default complet.", "kind": "concept"}, {"q": "Conform capitolului, de ce trateaza piata adesea o restructurare ca pe o veste proasta, chiar daca nicio plata nu este ratata?", "options": ["Pentru ca actiunile cresc mereu dupa restructurare", "Pentru ca li se cere creditorilor sa accepte mai putin decat li s-a promis", "Pentru ca dobanda creste automat", "Pentru ca restructurarea este ilegala"], "correct": 1, "explain": "Restructurarea cere creditorilor sa accepte conditii mai slabe (haircut, prelungire), deci este vazuta negativ chiar fara o plata ratata.", "kind": "concept"}, {"q": "Cand devine o restructurare un eveniment de credit conform ISDA?", "options": ["Intotdeauna, automat", "Niciodata", "Doar daca indeplineste definitiile ISDA si este inclusa in contract; altfel este doar un workout privat", "Doar daca este anuntata in presa"], "correct": 2, "explain": "Restructurarea este eveniment de credit doar daca indeplineste definitiile ISDA si este inclusa explicit in contract.", "kind": "concept"}, {"q": "Ce declanseaza un eveniment de credit de tip obligation acceleration?", "options": ["Plata anticipata a unei obligatiuni", "Cererea creditorului de rambursare imediata a intregului imprumut dupa incalcarea unui covenant", "Cresterea ratingului", "Emiterea de noi obligatiuni"], "correct": 1, "explain": "Cand debitorul incalca un covenant si creditorul cere rambursarea imediata a intregului imprumut, apare obligation acceleration.", "kind": "text"}, {"q": "Ce inseamna repudierea (repudiation) ca eveniment de credit?", "options": ["Suspendarea temporara a platilor dispusa de guvern", "Debitorul declara public ca nu isi va onora datoria", "Plata cu intarziere de o zi", "Conversia datoriei in actiuni"], "correct": 1, "explain": "Repudierea inseamna declararea publica a refuzului de a onora datoria; moratoriul este suspendarea temporara dispusa de guvern.", "kind": "text"}, {"q": "In contractele CDS, ce sunt obligatiile livrabile (deliverable obligations)?", "options": ["Actiunile emitentului care pot fi vandute", "Datoriile specificate in contract care pot fi livrate daca apare un eveniment de credit", "Garantiile guvernamentale", "Dividendele platite investitorilor"], "correct": 1, "explain": "Obligatiile livrabile sunt datoriile (de regula senior unsecured) pe care cumparatorul de protectie le poate livra vanzatorului dupa un eveniment de credit.", "kind": "text"}, {"q": "Ce este rata de recuperare (recovery rate)?", "options": ["Procentul pe care investitorii il primesc in cele din urma inapoi din datorie", "Rata dobanzii la noul imprumut", "Numarul de zile din perioada de gratie", "Spread-ul CDS exprimat in puncte de baza"], "correct": 0, "explain": "Rata de recuperare este procentul din valoarea nominala pe care investitorii il recupereaza efectiv dupa default.", "kind": "text"}, {"q": "In exemplul Regional Plastics, recuperarea este 35%. Care este pierderea in caz de default (LGD)?", "options": ["35%", "100%", "65%", "6%"], "correct": 2, "explain": "LGD = 100% - recuperarea = 100% - 35% = 65%, adica £65 la fiecare £100 nominal.", "kind": "concept"}, {"q": "In exemplul Regional Plastics, daca am cumparat la £98,50 si vindem la mid-ul de £35,00, care este P&L per £100 nominal?", "options": ["-£63,50", "+£35,00", "-£35,00", "-£98,50"], "correct": 0, "explain": "P&L = 35,00 - 98,50 = -£63,50 per £100 nominal.", "kind": "concept"}, {"q": "In exemplul de restructurare al Regional Plastics (noua obligatiune £50 + actiuni £20), de ce ar prefera totusi desk-ul sa vanda in licitatie la £35?", "options": ["Pentru ca £35 este mai mult decat £70", "Pentru ca restructurarea ar putea esua sau fi respinsa, lasandu-i cu doar £35 sau mai putin; vanzarea blocheaza o valoare cunoscuta", "Pentru ca actiunile sunt interzise", "Pentru ca licitatia ISDA garanteaza £70"], "correct": 1, "explain": "Desk-ul prefera certitudinea: fara convingere mare ca restructurarea reuseste, blocheaza cei £35 cunoscuti in loc sa parieze pe £70 incerti.", "kind": "concept"}, {"q": "In al doilea scenariu (Smith Fabrication), incalcarea covenantului de acoperire a dobanzii constituie deja un eveniment de credit conform ISDA?", "options": ["Da, automat", "Nu — este eveniment de default conform contractului de facilitate, dar nu eveniment de credit ISDA (fara plata ratata sau acceleration)", "Da, dar doar dupa 30 de zile", "Nu este niciun fel de eveniment"], "correct": 1, "explain": "Incalcarea, supusa perioadei de remediere si fara acceleration ori plata ratata, e eveniment de default contractual, dar nu eveniment de credit sub ISDA.", "kind": "concept"}, {"q": "In scenariul Smith Fabrication, ratele indicative de broker erau 88-92 (performant), 65-70 (covenant incalcat neremediat), 45-50 (accelerat). Ce pret a fost ales si de ce?", "options": ["88-92, pentru ca incalcarea era publica", "45-50, pentru ca imprumutul fusese accelerat", "65-70 (cota 67), pentru ca a fost incalcare publica dar fara acceleration", "Niciun pret, pentru ca imprumutul nu era tranzactionat"], "correct": 2, "explain": "Acceleration nu avusese loc (deci nu 45-50) si incalcarea era publica (deci nu 88-92), ramanand intervalul 65-70.", "kind": "concept"}, {"q": "De ce este descoperirea pretului mai dificila pentru imprumutul Smith Fabrication decat pentru o obligatiune cotata?", "options": ["Pentru ca imprumutul nu este tranzactionat public si nu exista pret live, fiind nevoie de cotatii de broker si consens intern", "Pentru ca imprumutul nu are dobanda", "Pentru ca este garantat de guvern", "Pentru ca este denominat in mai multe valute"], "correct": 0, "explain": "Datoria privata nu are pret live pe ecran, asa ca pretul se bazeaza pe cotatii indicative de broker si pe consensul intern al desk-ului.", "kind": "concept"}, {"q": "Conform sectiunii de greseli frecvente, ce diferenta esentiala confunda adesea incepatorii?", "options": ["Intre dobanda si principal", "Intre un eveniment de credit si o simpla largire a spread-ului de credit", "Intre actiuni si obligatiuni", "Intre USD si GBP"], "correct": 1, "explain": "O largire a spread-ului poate semnala risc crescut fara a fi un eveniment de credit; cele doua nu trebuie confundate.", "kind": "concept"}, {"q": "De ce nu sunt toate defaulturile la fel din punct de vedere al impactului pe piata?", "options": ["Pentru ca toate au exact acelasi efect", "Defaultul unui high-yield poate avea impact limitat, in timp ce defaultul unui mare emitent investment-grade poate trimite unde de soc in tot peisajul creditului", "Pentru ca high-yield-ul nu intra niciodata in default", "Pentru ca investment-grade nu poate intra in default"], "correct": 1, "explain": "Tipul si severitatea conteaza: un default investment-grade major are impact sistemic mult mai mare decat un default high-yield izolat.", "kind": "concept"}, {"q": "O retrogradare a ratingului de credit (downgrade) implica automat un eveniment de credit?", "options": ["Da, intotdeauna", "Nu — o retrogradare semnaleaza risc crescut, dar nu inseamna neaparat ca a avut loc un eveniment de credit", "Da, dar doar pentru obligatiuni guvernamentale", "Nu, retrogradarile nu exista"], "correct": 1, "explain": "Retrogradarea poate fi cauzata de multi factori si nu implica automat un eveniment de credit definit contractual.", "kind": "concept"}, {"q": "Conform regulii empirice a desk-ului, o miscare de 1 bp in CDS-ul pe 5 ani echivaleaza cu aproximativ cat la fiecare 10 milioane USD notional?", "options": ["2 000 USD", "200 USD", "20 000 USD", "500 USD"], "correct": 0, "explain": "Regula empirica: ~2 000 USD per 1 bp la fiecare 10 milioane USD notional pentru un contract standard pe 5 ani.", "kind": "text"}, {"q": "Daca desk-ul vede CDS deja largit cu 500 bps si obligatiuni la 30 de centi, cum trateaza miscarea?", "options": ["Ca neincorporata (un-priced)", "Ca incorporata in pret (priced in), cautand apoi valoare relativa (curba sau structura de capital)", "Ca o eroare de date", "Ca pe o oportunitate de cumparare a actiunilor"], "correct": 1, "explain": "Cand miscarea e deja mare, desk-ul o considera priced in si cauta valoare relativa intre scadente sau ranguri.", "kind": "concept"}, {"q": "De ce seteaza desk-ul un declansator 'after-hours' pentru evenimentele de credit?", "options": ["Pentru ca pietele europene sunt deschise", "Pentru ca evenimentele apar adesea dupa inchiderea SUA, iar riscul de gap intre 16:00 si 7:00 ET poate fi de 200-300 bps", "Pentru ca tranzactionarea de noapte este gratuita", "Pentru ca dobanda se calculeaza noaptea"], "correct": 1, "explain": "Evenimentele apar des dupa inchidere; gap-ul mare de peste noapte (200-300 bps) cere reactie imediata la printuri largite.", "kind": "concept"}, {"q": "Care este, conform capitolului, adevaratul scop al desk-ului cand gestioneaza un eveniment de credit binar?", "options": ["Sa ghiceasca exact rezultatul final", "Sa aiba dreptate asupra valorii relative si sa supravietuiasca rezultatului binar", "Sa cumpere maxim de actiuni", "Sa evite orice tranzactie"], "correct": 1, "explain": "Scopul nu este sa ai dreptate asupra rezultatului, ci asupra valorii relative, mentinand riscul in limite pentru a supravietui.", "kind": "concept"}, {"q": "Care sunt cele doua tipuri de decontare a unui CDS dupa un eveniment de credit?", "options": ["Fizica si in numerar (cash)", "Anuala si trimestriala", "Publica si privata", "Garantata si negarantata"], "correct": 0, "explain": "Decontarea poate fi fizica (livrarea obligatiunilor in schimbul paritatii) sau in numerar (auctiunea stabileste pretul si se plateste diferenta).", "kind": "text"}, {"q": "Ce avertizeaza capitolul despre evenimentele de credit 'goale' (empty)?", "options": ["Ca toate platesc dublu", "Ca unele actiuni numite 'restructurare' de presa nu indeplinesc definitia ISDA, deci nu urmeaza nicio plata daca contractul exclude restructurarea", "Ca sunt mereu cele mai profitabile", "Ca afecteaza doar actiunile"], "correct": 1, "explain": "Un eveniment etichetat 'restructurare' poate sa nu calce definitia ISDA; daca clauza de restructurare lipseste din contract, nu se face nicio plata.", "kind": "concept"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>

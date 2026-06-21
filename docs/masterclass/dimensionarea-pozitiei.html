@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dimensionarea poziției: cât capital riști pe fiecare tranzacție — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Învață dimensionarea poziției pentru începători: formula de calcul, regula de 1% pe tranzacție, stop-loss, distanța de stop și cum influențează volatilitatea și levierul."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/dimensionarea-pozitiei.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Dimensionarea poziției: cât capital riști pe fiecare tranzacție"><meta property="og:description" content="Învață dimensionarea poziției pentru începători: formula de calcul, regula de 1% pe tranzacție, stop-loss, distanța de stop și cum influențează volatilitatea și levierul."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/dimensionarea-pozitiei.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Dimensionarea poziției: cât capital riști pe fiecare tranzacție"><meta name="twitter:description" content="Învață dimensionarea poziției pentru începători: formula de calcul, regula de 1% pe tranzacție, stop-loss, distanța de stop și cum influențează volatilitatea și levierul."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Dimensionarea poziției: cât capital riști pe fiecare tranzacție", "description": "Învață dimensionarea poziției pentru începători: formula de calcul, regula de 1% pe tranzacție, stop-loss, distanța de stop și cum influențează volatilitatea și levierul.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/dimensionarea-pozitiei.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="diversificarea-naiva-2" data-prev-title="Diversificarea naivă: ce este și care sunt limitele ei" data-next="reechilibrarea-portofoliului-rebalancing" data-next-title="Reechilibrarea portofoliului (rebalancing): ghid complet" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#allocation">Alocarea activelor</a> · 29 min · Actualizat 21 iun. 2026</p><h1>Dimensionarea poziției: cât capital riști pe fiecare tranzacție</h1><p>Dimensionarea poziției (position sizing) este procesul prin care decizi exact <strong>cât capital riști în fiecare tranzacție</strong> pe care o deschizi. Aceasta este puntea dintre părerea ta despre piață (avantajul tău sau „edge”-ul) și suma reală de bani pe care o pui pe tranzacție. O regulă bună de dimensionare a poziției îți protejează capitalul atunci când greșești și îți permite să crești expunerea atunci când ai dreptate, fără a risca vreodată mai mult decât îți poți permite să pierzi.</p>
+
+<p>În acest capitol despre dimensionarea poziției pentru începători înveți formula corectă de calcul al numărului de acțiuni sau contracte, regula de 1% pe tranzacție (risk per trade), rolul stop-loss-ului și al distanței de stop, precum și modul în care volatilitatea, levierul (leverage) și marja (margin) influențează mărimea poziției. Vei descoperi cum gestionezi riscul pe tranzacție, cum eviți pierderile mari și cum calculezi câte acțiuni să cumperi în funcție de toleranța ta la risc.</p>
+
+<p>Scopul este simplu: să transformi o idee de tranzacție într-o sumă concretă de bani pusă la risc, controlată și auditabilă, nu o ghicire bazată pe instinct. Stăpânirea acestor noțiuni de bază te ține în joc suficient de mult timp cât avantajul tău să dea roade de-a lungul multor tranzacții.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Dimensionarea poziției este procesul de a decide exact câți bani riști în fiecare tranzacție pe care o deschizi. Este legătura dintre viziunea ta asupra pieței (avantajul tău, „edge”) și suma reală pe care o plasezi pe tranzacție. O regulă bună de dimensionare îți protejează capitalul când greșești și îți permite să mărești expunerea când ai dreptate, fără a risca vreodată mai mult decât îți poți permite să pierzi.</p>
+
+<p>Termeni-cheie pe care îi vei întâlni mereu:</p>
+
+<ul>
+<li><strong>Soldul contului (account balance)</strong> – numerarul total pe care îl ai chiar acum în contul de tranzacționare, măsurat în dolari (sau în moneda ta de bază). Dacă ai depus 100.000 $ ieri, soldul contului tău este 100.000 $ astăzi, chiar dacă piața s-a mișcat între timp.</li>
+
+<li><strong>Numerar liber / disponibil (free cash)</strong> – partea din soldul contului care nu este deja blocată în poziții deschise. Dacă ai 100.000 $ în cont, dar 30.000 $ sunt deja folosiți drept marjă pentru două contracte futures, numerarul tău liber este 70.000 $. Doar numerarul liber poate fi riscat în tranzacții noi.</li>
+
+<li><strong>Poziția (position)</strong> – ansamblul de contracte sau acțiuni pe care le deții pe o singură piață. Dacă cumperi 100 de acțiuni Apple, aceasta este o poziție. Dacă mai cumperi și 50 de acțiuni Microsoft, aceea este o a doua poziție. Fiecare poziție este separată și trebuie dimensionată individual.</li>
+
+<li><strong>Mărimea poziției (position size)</strong> – numărul de contracte sau acțiuni pe care decizi să le cumperi sau să le vinzi într-o singură poziție. De exemplu, „voi cumpăra 150 de acțiuni Tesla” înseamnă că mărimea poziției este de 150 de acțiuni.</li>
+
+<li><strong>Riscul pe tranzacție (risk per trade)</strong> – suma maximă în bani pe care ești dispus să o pierzi dacă tranzacția merge împotriva ta. O regulă uzuală de început este să nu riști mai mult de 1% din soldul contului pe o singură tranzacție. Dacă soldul tău este 100.000 $, un risc de 1% înseamnă 1.000 $.</li>
+
+<li><strong>Stop-loss (sau stop)</strong> – un ordin presetat care îți închide automat poziția dacă prețul se mișcă împotriva ta cu o anumită valoare. Distanța de la prețul de intrare până la prețul de stop-loss se numește distanța de stop (stop distance). Dacă cumperi o acțiune la 50 $ și pui un stop la 47 $, distanța de stop este de 3 $.</li>
+
+<li><strong>Riscul în dolari pe acțiune/contract (dollar risk per share)</strong> – suma pe care o pierzi pentru fiecare acțiune sau contract dacă stop-ul este atins. Pentru o tranzacție pe acțiuni, este pur și simplu distanța de stop înmulțită cu numărul de acțiuni. Dacă distanța de stop este 3 $ și cumperi 150 de acțiuni, riscul tău în dolari este 3 $ × 150 = 450 $. Pentru futures se aplică aceeași idee, dar dimensiunea contractului este de obicei fixă (de exemplu, un contract E-mini S&P 500 valorează 50 $ × nivelul indicelui).</li>
+
+<li><strong>Dimensiunea contractului / prețul acțiunii (contract size)</strong> – valoarea monetară a unei unități a instrumentului pe care îl tranzacționezi. Pentru o acțiune, este prețul acțiunii. Pentru un contract futures, este multiplicatorul (de ex., 50 $ pe punct de indice pentru E-mini S&P). Pentru forex, este dimensiunea lotului (1 lot standard = 100.000 de unități din moneda de bază).</li>
+
+<li><strong>Procentul de risc (risk percentage)</strong> – procentul din soldul contului pe care decizi să-l riști pe o singură tranzacție. Majoritatea începătorilor folosesc 0,5% până la 2%. Dacă alegi 1%, riscul tău în dolari este 1% din soldul contului.</li>
+
+<li><strong>Formula de dimensionare a poziției (position sizing formula)</strong> – calculul simplu care transformă procentul de risc, distanța de stop și dimensiunea contractului în numărul exact de acțiuni sau contracte de cumpărat. Formula este:
+<br><strong>Mărimea poziției = (Riscul în dolari pe tranzacție) ÷ (Distanța de stop × Dimensiunea contractului)</strong>
+<br>Exemplu: sold cont = 100.000 $, procent de risc = 1%, distanța de stop = 2 $, dimensiunea contractului = 1 (o acțiune). Riscul în dolari = 1.000 $. Mărimea poziției = 1.000 $ ÷ (2 $ × 1) = 500 de acțiuni.</li>
+
+<li><strong>Marja (margin)</strong> – garanția pe care trebuie să o depui pentru a deschide o poziție cu levier. Marja nu este un comision; este un depozit de bună-credință pe care brokerul îl reține cât timp poziția este deschisă. Cerințele de marjă se schimbă zilnic odată cu mișcările de preț. Dacă brokerul îți cere 5.000 $ marjă pentru o poziție și ai 7.000 $ numerar liber, o poți deschide, dar trebuie să ții blocați cel puțin 5.000 $ până închizi tranzacția.</li>
+
+<li><strong>Levierul (leverage)</strong> – raportul dintre valoarea totală a poziției și marja pe care o depui. Dacă controlezi acțiuni de 100.000 $ cu o marjă de 10.000 $, levierul este 10:1. Levierul amplifică atât câștigurile, cât și pierderile; folosește-l cu prudență.</li>
+
+<li><strong>Pierderea maximă (max drawdown)</strong> – cea mai mare scădere procentuală a soldului contului tău, de la un vârf la un minim, înainte de atingerea unui nou vârf. Dacă contul scade de la 100.000 $ la 85.000 $ și apoi își revine, pierderea maximă este de 15%. Regulile de dimensionare a poziției sunt concepute pentru a menține pierderea maximă în zona ta de confort.</li>
+
+<li><strong>Criteriul Kelly (Kelly criterion)</strong> – o formulă avansată care sugerează fracțiunea optimă din capitalul tău (bankroll) pe care s-o riști la fiecare pariu, atunci când îți cunoști avantajul și probabilitatea de câștig. Majoritatea începătorilor folosesc reguli cu procent fix în schimb, deoarece Kelly necesită estimări precise, greu de făcut pe piețele reale.</li>
+
+<li><strong>Tranzacționarea fracționară (fractional trading)</strong> – posibilitatea de a cumpăra sau vinde mai puțin de o acțiune sau de un contract întreg. Unii brokeri permit acum acțiuni fracționare (de ex., 0,3 acțiuni Amazon) sau micro-contracte, ceea ce face dimensionarea poziției mai precisă pentru conturile mici.</li>
+</ul>
+
+<p>Folosește acești termeni drept vocabular de bază. Când vei citi secțiunea următoare despre „Cum îți dimensionezi prima poziție”, vei ști deja ce înseamnă fiecare cuvânt și cum se îmbină piesele.</p>
+
+<h2>Intuiția</h2>
+
+<p>Pe măsură ce pătrundem în lumea dimensionării poziției, este esențial să înțelegem rolul intuiției în luarea deciziilor informate. Intuiția este adesea descrisă ca o senzație instinctivă sau un presentiment care ne ghidează acțiunile. În contextul dimensionării poziției, intuiția poate fi gândită ca abilitatea de a face presupuneri educate despre rezultatele potențiale ale unei tranzacții.</p>
+
+<p>Pentru a construi intuiția, să începem cu o analogie simplă. Imaginează-ți că plănuiești o călătorie cu mașina din punctul A în punctul B. N-ai mai parcurs niciodată acest traseu, dar ai auzit că este un drum pitoresc și plăcut. Nu știi la ce să te aștepți, dar ești entuziasmat să explorezi necunoscutul.</p>
+
+<p>Pe măsură ce începi călătoria, dai de o bifurcație. Poți lua drumul din stânga, care arată neted și bine întreținut, sau pe cel din dreapta, care pare accidentat și nesigur. Nu ești sigur care drum e mai sigur sau mai eficient, dar trebuie să iei o decizie.</p>
+
+<p>În acest scenariu, intuiția ta este ca o busolă mentală care te ajută să navighezi prin necunoscut. Te-ai putea baza pe experiența ta, pe sfaturile altora sau chiar pe instinctele tale pentru a lua o decizie. Ai putea gândi: „Am mai condus pe drumuri accidentate și de obicei nu e mare lucru. Voi lua drumul din dreapta.”</p>
+
+<p>Acum, să aplicăm această analogie la dimensionarea poziției. Imaginează-ți că ești trader și iei în considerare deschiderea unei tranzacții pe o anumită acțiune sau activ. Nu ești sigur cum va reacționa piața, dar ai un presentiment că acțiunea ar putea evolua într-o anumită direcție.</p>
+
+<p>Intuiția ta este ca busola mentală care te ajută să navighezi prin necunoscut. Te-ai putea baza pe experiență, pe analiza pieței sau chiar pe instincte pentru a lua o decizie. Ai putea gândi: „Am mai văzut această acțiune evoluând în această direcție și de obicei e o oportunitate bună. Voi aloca 5% din portofoliu acestei tranzacții.”</p>
+
+<p>Problema pe care intuiția o rezolvă este incertitudinea care vine odată cu luarea deciziilor pe o piață imprevizibilă. Bazându-te pe intuiție, poți face presupuneri educate despre rezultatele potențiale ale unei tranzacții și îți poți aloca resursele în consecință.</p>
+
+<p>Totuși, este esențial de reținut că intuiția nu este un substitut pentru analiză. Deși intuiția îți poate ghida deciziile, este crucial să o susții cu cercetare și analiză solidă. Acest lucru te va ajuta să-ți rafinezi intuiția și să iei decizii mai informate.</p>
+
+<p>În contextul dimensionării poziției, intuiția poate fi un instrument puternic pentru luarea deciziilor. Combinând intuiția cu analiza și cercetarea, poți dezvolta o înțelegere mai nuanțată a piețelor și poți lua decizii mai informate despre cum să-ți aloci resursele.</p>
+
+<p>Pentru a-ți construi intuiția, încearcă următoarele exerciții:</p>
+
+<ul>
+<li>Reflectează asupra experiențelor și tranzacțiilor tale din trecut. Care au fost rezultatele? Ce ai învățat din ele?</li>
+<li>Analizează-ți emoțiile și prejudecățile. Cum îți influențează deciziile?</li>
+<li>Exersează luarea deciziilor pe baza intuiției și analizei. Ce a funcționat bine? Ce nu?</li>
+<li>Cere feedback de la alții. Ce părere au despre deciziile tale?</li>
+<li>Învață și rafinează-ți continuu abilitățile. Ce noi perspective ai dobândit?</li>
+</ul>
+
+<p>Urmând aceste exerciții și combinând intuiția cu analiza, poți dezvolta o abordare mai intuitivă a dimensionării poziției și poți lua decizii mai informate pe piețe.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Mecanica dimensionării poziției constă în calculele și verificările zilnice, pas cu pas, pe care le face un operator de birou (desk runner) atunci când apare o nouă idee de tranzacție. Scopul este simplu: să transformi ideea de tranzacție într-o mărime reală a ordinului, pe care traderul o poate trimite pe piață fără ezitări. Mai jos este secvența exactă pe care o rulăm la biroul de început (nursery desk), din momentul în care ideea ajunge pe registru până în momentul în care ordinul este activ.</p>
+
+<h3>1. Adună datele brute de intrare</h3>
+<ul>
+<li>Tichetul ideii de tranzacție (de ex., „Cumpără 500 de acțiuni ABC Corp când prețul ≤ 120,50”).</li>
+<li>Prețul curent de piață (ultima tranzacție sau mijlocul NBBO).</li>
+<li>Bugetul de risc la nivel de cont (suma totală în dolari pe care avem voie să o riscăm pe toate pozițiile astăzi).</li>
+<li>Limitele de risc la nivel de poziție (suma maximă în dolari pe care o putem risca pe un singur nume).</li>
+<li>Verificarea lichidității (volumul mediu zilnic și adâncimea registrului de ordine pentru ABC).</li>
+<li>Estimarea slippage-ului (cât impact asupra prețului ne așteptăm pentru un ordin de piață de 500 de acțiuni).</li>
+<li>Orice limitări interne „de început” (de ex., „maximum 2% din ADV pe un singur nume pentru stagiari”).</li>
+</ul>
+
+<h3>2. Transformă ideea într-un risc noțional</h3>
+<ul>
+<li>Stabilește mai întâi nivelul stop-loss-ului. Dacă ideea spune „≤ 120,50”, presupunem că stop-ul este chiar sub acel nivel, să zicem 120,30.</li>
+<li>Calculează distanța dintre intrare și stop: 120,50 − 120,30 = 0,20 puncte.</li>
+<li>Înmulțește distanța cu numărul propus de acțiuni: 0,20 × 500 = 100 $ risc noțional.</li>
+</ul>
+
+<h3>3. Verifică în raport cu limitele de risc</h3>
+<ul>
+<li>Compară 100 $ cu limita de poziție pentru ABC (de ex., 200 $). OK.</li>
+<li>Compară 100 $ cu bugetul de risc al contului (de ex., 1.000 $ astăzi). OK.</li>
+<li>Dacă oricare verificare eșuează, reduci numărul de acțiuni până când ambele limite sunt respectate.</li>
+</ul>
+
+<h3>4. Reașază prețul pentru slippage</h3>
+<ul>
+<li>Dacă am folosit un ordin de piață, presupunem că plătim cererea (ask) plus jumătate din spread.</li>
+<li>Noua intrare efectivă = 120,50 + 0,05 = 120,55.</li>
+<li>Recalculează distanța: 120,55 − 120,30 = 0,25.</li>
+<li>Noul risc noțional = 0,25 × 500 = 125 $.</li>
+<li>Dacă acum 125 $ depășește limitele, reducem numărul de acțiuni până când riscul revine în limite.</li>
+</ul>
+
+<h3>5. Bariera de lichiditate</h3>
+<ul>
+<li>Verifică ADV-ul lui ABC (să zicem 1 milion de acțiuni). 500 de acțiuni reprezintă 0,05% din ADV — în regulă.</li>
+<li>Verifică adâncimea registrului: dacă mărimea ofertei de cumpărare (bid) din interior este de doar 200 de acțiuni la 120,50, un ordin de piață de 500 de acțiuni va „mătura” registrul. Atunci fie: împărțim ordinul în două tranșe, fie trecem la un ordin limită evaluat la 1–2 cenți peste cea mai bună ofertă de vânzare (ask) și așteptăm.</li>
+</ul>
+
+<h3>6. Dimensionează ordinul și rutează-l</h3>
+<ul>
+<li>Numărul final de acțiuni după toate verificările (de ex., 400 de acțiuni).</li>
+<li>Trimite ordinul cu un TIF (time in force) de tip DAY și un preț-limită dacă folosim ordine iceberg sau tranșe.</li>
+<li>Etichetează tichetul cu riscul noțional (100 $), pentru ca registrul să poată calcula automat P&L-ul mai târziu.</li>
+</ul>
+
+<h3>7. Confirmarea post-tranzacție</h3>
+<ul>
+<li>Când execuția se realizează, registrul compară automat prețul de execuție cu prețul de intrare.</li>
+<li>Dacă execuția este mai proastă decât așteptat (de ex., 120,60 în loc de 120,55), registrul semnalează „slippage peste 5 bps”, ca traderul să decidă dacă lărgește stop-ul sau acceptă varianța.</li>
+<li>Registrul verifică, de asemenea, ca riscul noțional total pe toate pozițiile să nu depășească bugetul zilnic; dacă îl depășește, traderul trebuie fie să închidă, fie să reducă alte poziții.</li>
+</ul>
+
+<h3>8. Resetarea zilnică</h3>
+<ul>
+<li>La ora 16:15 ET rulăm un script care însumează riscul noțional pe fiecare poziție deschisă.</li>
+<li>Orice poziție al cărei risc noțional depășește 1% din bugetul contului este evidențiată cu roșu; traderul trebuie fie să adauge un stop-loss, fie să reducă mărimea la următoarea deschidere de sesiune.</li>
+</ul>
+
+<p><strong>Cifre-cheie de urmărit pe registru:</strong></p>
+<ul>
+<li>„Risc rămas” = Bugetul contului − suma tuturor riscurilor noționale deschise.</li>
+<li>„Poziție % din ADV” = Acțiuni / ADV pentru fiecare nume.</li>
+<li>„Slippage de la deschidere” = (Execuția medie − mijlocul prețului la momentul ordinului) × acțiuni.</li>
+</ul>
+
+<p>Nimic de aici nu garantează profit; garantează doar că mărimea pe care o punem este în limitele pe care le-am stabilit și că știm exact ce riscăm.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să parcurgem un exemplu concret de funcționare a dimensionării poziției. Vom folosi un scenariu ipotetic în care tranzacționăm o acțiune populară de început, „Apple Blossom” (AB). Scopul nostru este să determinăm mărimea optimă a poziției pentru o tranzacție.</p>
+
+<p><strong>Ipoteze:</strong></p>
+<ul>
+<li>Prețul acțiunii Apple Blossom este în prezent de 50 $ pe acțiune.</li>
+<li>Contul nostru de tranzacționare are un capital total de 10.000 $.</li>
+<li>Folosim o strategie de management al riscului pentru a ne limita pierderile potențiale la 2% din capitalul contului.</li>
+<li>Am plasat stop-loss-ul la 1,50 $ sub prețul de intrare, deci cel mult putem pierde 1,50 $ pe acțiune dacă tranzacția merge împotriva noastră.</li>
+</ul>
+
+<h3>Pasul 1: Determină toleranța la risc</h3>
+<p>Mai întâi, trebuie să calculăm suma maximă de bani pe care suntem dispuși să o pierdem pe această tranzacție. Am decis să ne limităm pierderile potențiale la 2% din capitalul contului. Pentru a afla această sumă, înmulțim capitalul contului cu procentul toleranței la risc:</p>
+<p><strong>10.000 $ × 0,02 = 200 $</strong></p>
+<p>Aceasta înseamnă că suntem dispuși să pierdem până la 200 $ pe această tranzacție.</p>
+
+<h3>Pasul 2: Determină mărimea poziției</h3>
+<p>Apoi, trebuie să calculăm numărul maxim de acțiuni pe care ni le putem permite să le cumpărăm pe baza toleranței noastre la risc. Vom folosi următoarea formulă:</p>
+<p><strong>Acțiuni maxime = Toleranța la risc ÷ (Riscul în dolari pe acțiune)</strong></p>
+<p>Aici, riscul în dolari pe acțiune este cei 1,50 $ pe care i-am putea pierde pe acțiune dacă tranzacția merge împotriva noastră (distanța de la intrare până la stop-loss). Înlocuind cifrele, obținem:</p>
+<p><strong>Acțiuni maxime = 200 $ ÷ 1,50 $ = 133,33 acțiuni</strong></p>
+<p>Deoarece nu putem cumpăra o fracțiune de acțiune, vom rotunji în jos la 133 de acțiuni. Aceasta înseamnă că vom limita mărimea poziției la 133 de acțiuni.</p>
+
+<h3>Pasul 3: Revizuiește mărimea poziției</h3>
+<p>Înainte de a executa tranzacția, ar trebui să ne revizuim mărimea poziției pentru a ne asigura că se aliniază cu strategia noastră de management al riscului. În acest caz, am determinat că o poziție de 133 de acțiuni de Apple Blossom se încadrează în toleranța noastră la risc. Vom lua în considerare și alți factori, precum condițiile de piață, costurile de tranzacționare și riscul general al portofoliului.</p>
+
+<p>În acest exemplu, am parcurs procesul de determinare a mărimii optime a poziției pentru o tranzacție. Urmând acești pași, ne putem asigura că tranzacțiile noastre se aliniază cu strategia de management al riscului și ne ajută să ne atingem obiectivele de investiții.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să trecem la un caz-limită diferit: o poziție despre care se așteaptă să piardă bani în medie, dar care merită totuși luată pentru că diversifică portofoliul, iar pierderea este plafonată la o sumă mică și acceptabilă. Aceasta este clasica idee de „bilet de loterie” sau „bilet de loterie plus acoperire (hedge)” și este ceva ce șefii de birou le permit adesea alocatorilor juniori să ruleze în mărime mică, pentru ca biroul să poată afla dacă avantajul este real.</p>
+
+<p><strong>Tichetul de tranzacție:</strong></p>
+<ul>
+<li>Instrument: contract futures pe obligațiuni guvernamentale grecești pe 10 ani (GGBLZ3).</li>
+<li>Direcție: short 50 de contracte.</li>
+<li>Valoare noțională la spot: 50 × 100.000 € = 5.000.000 €.</li>
+<li>Preț de intrare: 132,45.</li>
+<li>Stop-loss: 134,00 (la 155 bps distanță).</li>
+<li>Țintă: 128,00 (la 445 bps distanță).</li>
+<li>Distribuția estimată a P&L-ului zilnic (de la cuantul biroului): medie −0,02% din noțional, volatilitate 0,18%.</li>
+<li>Corelația cu restul portofoliului: −0,32.</li>
+</ul>
+
+<h3>Pasul 1 – Dimensionează tichetul astfel încât pierderea în cel mai rău caz să fie „mică”</h3>
+<p>Regula biroului este că orice tichet poate pierde cel mult 0,30% din capitalul total într-o singură zi. Capitalul total astăzi este de 200.000.000 €, deci limita absolută de pierdere este 0,003 × 200.000.000 = 600.000 €. Mișcarea în cel mai rău caz, de la intrare la stop: 155 bps × 100.000 € = 155.000 € pe contract. Numărul maxim de contracte permise = 600.000 € ÷ 155.000 € ≈ 3,8 contracte. Rotunjim în jos la 3 contracte, pentru a rămâne în limită chiar dacă stop-ul este ratat cu un tick.</p>
+
+<h3>Pasul 2 – Verifică matematica valorii așteptate</h3>
+<ul>
+<li>Noțional pe contract: 100.000 €.</li>
+<li>Noțional al poziției: 3 × 100.000 = 300.000 €.</li>
+<li>P&L zilnic așteptat: −0,02% × 300.000 = −60 €.</li>
+<li>Volatilitatea zilnică a P&L: 0,18% × 300.000 = 540 €.</li>
+<li>Raportul Sharpe (zilnic): −60 ÷ 540 ≈ −0,11.</li>
+</ul>
+<p>Tichetul este de așteptat să piardă bani în fiecare zi în medie, dar pierderea este mică, iar poziția este o acoperire (hedge) împotriva restului portofoliului.</p>
+
+<h3>Pasul 3 – Rulează verificarea de corelație</h3>
+<ul>
+<li>VaR zilnic al portofoliului (95%) înainte de acest tichet: 1.800.000 €.</li>
+<li>VaR marginal al tichetului: corelație × volatilitate × noțional poziție = −0,32 × 540.000 = −173.000 €.</li>
+<li>VaR al portofoliului după adăugarea tichetului: 1.800.000 − 173.000 = 1.627.000 €.</li>
+</ul>
+<p>VaR-ul chiar se îmbunătățește (scade), pentru că tichetul este negativ corelat. De aceea biroul îl permite, deși tichetul are valoare așteptată negativă.</p>
+
+<h3>Pasul 4 – Înregistrează tichetul și setează alarmele</h3>
+<ul>
+<li>Introdu ordinul: short 3 GGBLZ3 la 132,45.</li>
+<li>Setează un stop dur la 134,00; sistemul va lichida automat dacă oferta de cumpărare scade sub acel nivel.</li>
+<li>Etichetează tichetul „Diversificator – Avantaj Mic”, ca departamentul financiar să știe că nu este o poziție de bază.</li>
+<li>Alertă P&L zilnic: dacă pierderea mark-to-market depășește 200.000 € (o treime din limita celui mai rău caz), sună imediat șeful de birou.</li>
+</ul>
+
+<p><strong>Ce să urmărești și ce să nu faci:</strong></p>
+<ul>
+<li>Urmărește corelația: dacă derivă spre zero sau pozitiv, tichetul nu mai diversifică și ar trebui tăiat.</li>
+<li>Nu lăsa poziția să derive: pentru că valoarea așteptată este negativă, tichetul trebuie închis dacă dispare corelația sau este atins stop-ul.</li>
+<li>Nu mări poziția „pentru că e ieftină”: limita zilnică de pierdere de 600.000 € este absolută, nu relativă.</li>
+<li>Ține un jurnal: scrie motivul tichetului (avantajul de diversificare) și pierderea zilnică așteptată (−60 €) în fișa de alocare, ca tura următoare să vadă de ce este pe portofoliu.</li>
+</ul>
+
+<h3>Rezultatul după o săptămână</h3>
+<p>Contractul futures pe obligațiuni a crescut cu 80 bps. Stop-ul nu a fost atins. Pierdere mark-to-market: 80 bps × 300.000 = 2.400 €. Pierderea așteptată pentru săptămână (−0,02% zilnic × 5 zile): −300 €. Pierderea reală a fost de 2.400 €, mai mare decât așteptat, dar tot în limita zilnică de 600.000 €. Corelația a rămas −0,30.</p>
+<p><strong>Lecție:</strong> tichetul a diversificat portofoliul (VaR-ul portofoliului a scăzut cu încă 120.000 €), deși a pierdut bani. Biroul l-a păstrat deschis pentru că pierderea era plafonată, iar beneficiul de diversificare a persistat.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Întrucât am discutat importanța dimensionării poziției în gestionarea riscului și maximizarea randamentelor, este esențial să evidențiem greșelile și concepțiile greșite frecvente pe care le fac începătorii. Înțelegerea acestor capcane te va ajuta să le eviți și să dezvolți o strategie de dimensionare mai eficientă.</p>
+
+<ul>
+<li><strong>Supraîncredere în performanța trecută</strong>: Mulți traderi presupun greșit că tranzacțiile lor câștigătoare din trecut vor continua să performeze bine în viitor. Acest lucru duce la supraalocarea de capital către poziții care au performat istoric bine, fără a ține cont de condițiile de piață în schimbare sau de riscul crescut al unei serii de pierderi. Pentru a evita asta, concentrează-te pe condițiile actuale de piață și pe evaluarea riscului, nu doar pe performanța trecută.</li>
+
+<li><strong>Neluarea în considerare a mărimii poziției în portofoliul de ansamblu</strong>: Traderii se concentrează adesea pe dimensionarea individuală a poziției fără a ține cont de riscul portofoliului în ansamblu. Acest lucru poate duce la o concentrare excesivă a riscului într-o singură poziție, ceea ce poate avea consecințe devastatoare dacă tranzacția merge împotriva ta. Ia mereu în considerare riscul portofoliului de ansamblu și ajustează dimensionarea în consecință.</li>
+
+<li><strong>Folosirea unei mărimi fixe de poziție</strong>: Folosirea unei mărimi fixe poate fi o rețetă pentru dezastru, mai ales pe piețele volatile. Condițiile de piață se pot schimba rapid, iar o mărime fixă ar putea să nu fie adecvată pentru a absorbi riscul crescut. În schimb, folosește o abordare dinamică, care se ajustează la condițiile de piață în schimbare.</li>
+
+<li><strong>Neluarea în considerare a raportului risc-recompensă</strong>: Traderii se concentrează adesea pe profitul potențial al unei tranzacții fără a ține cont de riscul potențial. Acest lucru poate duce la supraalocarea de capital către poziții cu un raport risc-recompensă slab, ceea ce poate genera pierderi semnificative. Ia mereu în considerare raportul risc-recompensă când dimensionezi pozițiile.</li>
+
+<li><strong>Neajustarea la volatilitatea pieței</strong>: Volatilitatea pieței poate avea un impact semnificativ asupra dimensionării poziției. Traderii nu reușesc adesea să-și ajusteze dimensionarea pentru a ține cont de volatilitatea crescută, ceea ce poate duce la pierderi excesive. Folosește indicatori de volatilitate, precum Average True Range (ATR), pentru a-ți ajusta dimensionarea în consecință.</li>
+
+<li><strong>Neluarea în considerare a stării emoționale a traderului</strong>: Traderii iau adesea decizii impulsive pe baza stării lor emoționale, în loc de o evaluare rațională a riscului. Acest lucru poate duce la supraalocarea de capital către poziții conduse de emoții și nu de o strategie solidă de management al riscului. Fă mereu un pas înapoi și evaluează-ți starea emoțională înainte de a lua o decizie de tranzacționare.</li>
+
+<li><strong>Lipsa unui plan clar de management al riscului</strong>: Traderii nu reușesc adesea să aibă un plan clar de management al riscului, ceea ce poate duce la pierderi excesive. Dezvoltă un plan clar care să detalieze strategia de dimensionare a poziției, nivelurile de stop-loss și raportul risc-recompensă.</li>
+
+<li><strong>Nemonitorizarea și neajustarea dimensionării poziției</strong>: Traderii nu reușesc adesea să-și monitorizeze și să-și ajusteze strategia de dimensionare pe măsură ce condițiile de piață se schimbă. Acest lucru poate duce la o concentrare excesivă a riscului într-o singură poziție, cu consecințe devastatoare. Revizuiește și ajustează regulat strategia de dimensionare pentru a rămâne aliniată cu planul tău de management al riscului.</li>
+</ul>
+
+<p>Evitând aceste greșeli și concepții greșite frecvente, poți dezvolta o strategie de dimensionare a poziției mai eficientă, care te ajută să gestionezi riscul și să maximizezi randamentele. Ține minte, dimensionarea poziției este o componentă critică a unei strategii de tranzacționare de succes și necesită atenție și grijă la detalii.</p>
+
+<h2>Cum o folosește biroul de tranzacționare</h2>
+
+<p>Biroul de tranzacționare nu stă să dezbată teorie. Folosește dimensionarea poziției în fiecare zi pentru a transforma „îmi place această tranzacție” în „pun la risc exact atâția bani chiar acum”. Iată secvența exactă pe care o urmează biroul, pas cu pas, cu cifre concrete și ecranele la care se uită.</p>
+
+<h3>1. Ședința de risc de dimineață – 08:00</h3>
+<p>Șeful de risc afișează „bugetul de risc” pentru zi: VaR-ul total permis pe toate birourile (de ex., 25 de milioane $ VaR 1 zi, 95%). Felia biroului este decupată de CRO; astăzi este 5 milioane $. Acela este plafonul dur.</p>
+
+<h3>2. Generarea de idei – 08:05–08:30</h3>
+<p>Analistul de la birou semnalează un nume: „Vreau să cumpăr 100.000 de acțiuni XYZ Corp.” Traderul deschide imediat registrul și vede:</p>
+<ul>
+<li>Preț curent: 42,10 $</li>
+<li>Volatilitate realizată pe 20 de zile: 28%</li>
+<li>Volatilitate implicită de pe ecran: 30%</li>
+<li>ATR pe 5 zile: 1,80 $</li>
+</ul>
+
+<h3>3. Prima etapă: dimensionare bazată pe preț</h3>
+<p>Traderul aplică regula biroului: „Nu risca niciodată mai mult de 0,5% din VaR-ul zilnic pe un singur nume.” 0,5% din 5 milioane $ înseamnă 25.000 $. Stop-loss-ul este setat la 40,30 $, adică 1,80 $ sub prețul curent (un ATR). Numărul maxim de acțiuni admis la acel stop este deci 25.000 $ ÷ 1,80 $ ≈ 13.888 de acțiuni. Rotunjind în jos pentru lichiditate, traderul decide să înceapă cu 12.000 de acțiuni.</p>
+
+<h3>4. A doua etapă: suprapunerea de corelație</h3>
+<p>Sistemul de risc arată că XYZ are un beta de 0,45 față de S&P 500. Portofoliul are deja 3 milioane $ în futures pe indice. Contribuția marginală la VaR a celor 12.000 de acțiuni este 18.000 $, încă în interiorul limitei de 25.000 $. Dacă poziția crește la 25.000 de acțiuni, VaR-ul marginal sare la 38.000 $, iar sistemul semnalează „PESTE BUGET”. Traderul notează acea limită și nu dimensionează peste ea.</p>
+
+<h3>5. Momentul intrării – 09:45</h3>
+<p>Traderul așteaptă ca deschiderea de la 9:30 să se tipărească. Prima cotație este 42,08 $, încă peste stop. Ridică ordinul în valul de impuls de la 9:45. Execuția este 12.000 la o medie de 42,12 $.</p>
+
+<h3>6. Verificarea de risc în timp real – 10:00</h3>
+<p>Registrul arată acum:</p>
+<ul>
+<li>Poziție: 12.000 de acțiuni</li>
+<li>Valoare de piață: 505.440 $ (2% din AUM-ul biroului)</li>
+<li>VaR: 17.500 $ (3,5% din VaR-ul zilnic)</li>
+<li>Distanța de stop-loss: 1,80 $ (4,3% risc de preț)</li>
+</ul>
+<p>Traderul etichetează mental tranzacția „mică, dar curată” și merge mai departe.</p>
+
+<h3>7. Mărirea poziției – 11:15</h3>
+<p>XYZ se tipărește la 42,55 $ pe volum puternic. Analistul ridică prețul-țintă la 44,00 $, +3,4%. Traderul re-rulează matematica de dimensionare:</p>
+<ul>
+<li>Nou stop-loss: 42,00 $ (un ATR sub noul preț)</li>
+<li>Risc pe acțiune: 0,55 $</li>
+<li>Spațiu de VaR disponibil: 25.000 $ − 17.500 $ = 7.500 $</li>
+<li>Acțiuni suplimentare: 7.500 $ ÷ 0,55 $ ≈ 13.636 → rotunjit la 12.000</li>
+</ul>
+<p>Adaugă încă 12.000 la 42,57 $, dublând poziția la 24.000 de acțiuni. VaR-ul urcă acum la 24.700 $, încă sub limita de 25.000 $.</p>
+
+<h3>8. Eveniment de știri – 13:40</h3>
+<p>O retrogradare de la un broker apare pe fir; XYZ scade la 41,80 $. Registrul afișează „STOP ATINS” la 42,00 $. Sistemul lichidează automat cele 24.000 de acțiuni la piață. Execuția este la o medie de 41,78 $. Pierdere: 24.000 × 0,22 $ = 5.280 $, adică 0,1% din VaR-ul zilnic — acceptabil.</p>
+
+<h3>9. Reconcilierea de la finalul zilei – 16:30</h3>
+<p>Raportul de risc arată:</p>
+<ul>
+<li>VaR total folosit de birou: 4,8 milioane $ (96% din buget)</li>
+<li>Cel mai mare VaR pe un singur nume: 24.700 $ (regula de 0,5% respectată)</li>
+<li>Nicio încălcare, nicio derogare.</li>
+</ul>
+
+<p><strong>Ce NU face biroul:</strong></p>
+<ul>
+<li>Nu dimensionează după instinct sau pentru că „se simte bine” cu povestea.</li>
+<li>Nu ignoră distanța de stop-loss când volatilitatea explodează; dacă ATR-ul se lărgește, micșorează poziția pentru a menține constant riscul în dolari.</li>
+<li>Nu lasă o singură tranzacție să depășească regula de 0,5%, chiar dacă directorul de investiții (CIO) strigă „CUMPĂRĂ MAI MULT”. Sistemul de risc impune automat plafonul.</li>
+</ul>
+
+<p>Pe scurt, biroul transformă formula de dimensionare a poziției într-un proces viu, controlat de risc: buget de dimineață → idee → dimensionare pe preț → filtru de corelație → intrare → monitorizare în timp real → stop automat. Fiecare clic, fiecare linie de registru, fiecare variație de VaR este vizibilă pentru tot biroul și pentru CRO. Așa devine „cât” o sarcină repetabilă și auditabilă, nu un joc de ghicit.</p>
+
+<h2>Limite, avertismente și când eșuează</h2>
+
+<p>Deși noțiunile de bază ale dimensionării poziției oferă o abordare structurată pentru determinarea mărimii optime, există limitări inerente și capcane potențiale de care trebuie să fii conștient. Înțelegerea acestor limitări este crucială pentru un management eficient al riscului și pentru minimizarea pierderilor potențiale.</p>
+
+<h3>Defectarea regimului</h3>
+<p>Noțiunile de bază ale dimensionării poziției se bazează pe date istorice și pot să nu performeze bine în condiții de piață extreme. De exemplu, în perioade de volatilitate ridicată sau de stres al pieței, modelele se pot chinui să prezică cu acuratețe mărimea optimă a poziției. Aceasta pentru că datele istorice folosite la dezvoltarea modelelor s-ar putea să nu reflecte condițiile extreme care pot apărea în realitate.</p>
+<p>În astfel de regimuri, modelele pot:</p>
+<ul>
+<li>Să nu țină cont de riscul crescut asociat mișcărilor de piață extreme</li>
+<li>Să ofere mărimi de poziție prea conservatoare sau prea agresive</li>
+<li>Să se defecteze din cauza lipsei datelor istorice sau a prezenței valorilor extreme (outliers)</li>
+</ul>
+
+<h3>Ce nu îți spune</h3>
+<p>Noțiunile de bază ale dimensionării poziției nu sunt o garanție a succesului. Nu îți oferă informații despre:</p>
+<ul>
+<li>Dinamica sau tendințele de bază ale pieței</li>
+<li>Potențialul de probleme de lichiditate sau costuri de tranzacționare</li>
+<li>Impactul factorilor externi, precum știrile economice sau schimbările de reglementare</li>
+<li>Toleranța individuală la risc a traderului sau starea sa emoțională</li>
+</ul>
+<p>Deși dimensionarea poziției poate oferi un cadru pentru determinarea mărimilor optime, nu ține cont de complexitățile și incertitudinile piețelor.</p>
+
+<h3>De ce nu este o garanție</h3>
+<p>Noțiunile de bază ale dimensionării poziției se bazează pe modele statistice și date istorice. Totuși, piețele sunt inerent incerte și supuse diverselor riscuri și incertitudini. Drept urmare, chiar și cu o dimensionare optimă, nu există nicio garanție a succesului. De fapt, modelele pot să nu țină cont de evenimente neprevăzute sau surprize de piață, schimbări de sentiment sau de tendință, prezența valorilor extreme și impactul factorilor externi.</p>
+
+<h3>Când eșuează</h3>
+<p>Noțiunile de bază ale dimensionării poziției pot eșua în diverse scenarii, inclusiv:</p>
+<ul>
+<li>Condiții de piață extreme, precum volatilitatea ridicată sau stresul pieței</li>
+<li>Prezența valorilor extreme (outliers)</li>
+<li>Schimbări de sentiment sau de tendință a pieței</li>
+<li>Impactul factorilor externi, precum știrile economice sau schimbările de reglementare</li>
+<li>Toleranța individuală la risc a traderului sau starea sa emoțională</li>
+</ul>
+<p>În astfel de scenarii, modelele pot oferi mărimi de poziție inexacte sau înșelătoare, ducând la pierderi potențiale. Este esențial să fii conștient de aceste limitări și să folosești dimensionarea poziției ca ghid, nu ca o regulă bătută în cuie.</p>
+
+<h3>Bune practici</h3>
+<p>Pentru a minimiza riscurile asociate dimensionării poziției, traderii ar trebui:</p>
+<ul>
+<li>Să folosească mai multe modele și abordări pentru a determina mărimile optime</li>
+<li>Să-și monitorizeze și să-și ajusteze continuu strategiile de dimensionare</li>
+<li>Să fie conștienți de limitările și capcanele potențiale ale dimensionării poziției</li>
+<li>Să dezvolte un cadru robust de management al riscului care să țină cont de diverse riscuri și incertitudini</li>
+<li>Să învețe continuu și să se adapteze la condițiile de piață în schimbare</li>
+</ul>
+
+<h2>Concluzii-cheie</h2>
+
+<ul>
+<li>Mărimea poziției este suma în bani pe care decizi să o riști pe o singură tranzacție; nu este același lucru cu numărul de acțiuni sau contracte pe care le cumperi. Dacă cumperi 100 de acțiuni la 50 $ fiecare, mărimea poziției tale este suma pe care o riști, nu cei 5.000 $ valoare noțională.</li>
+
+<li>Definește mereu riscul în bani înainte de a intra în tranzacție. Întreabă-te: „Care este maximul pe care sunt dispus să-l pierd pe această idee?” Scrie acea cifră înainte de a apăsa cumpărare. Acest număr este limita ta de risc pe tranzacție.</li>
+
+<li>Folosește o regulă de fracțiune fixă pentru a transforma limita de risc pe tranzacție în mărime de poziție. Cea mai simplă regulă este regula de 1%: nu risca mai mult de 1% din contul total pe o singură tranzacție. Dacă contul tău este 100.000 $, pierderea maximă pe o tranzacție este 1.000 $.</li>
+
+<li>Transformă riscul în dolari în mărime de poziție împărțind limita de risc pe tranzacție la distanța de la prețul de intrare până la prețul de stop-loss. Exemplu: intrare 50 $, stop 48 $, risc 2 $. Cu o limită de risc de 1.000 $, mărimea poziției = 1.000 $ ÷ 2 $ = 500 de acțiuni.</li>
+
+<li>Nu lăsa niciodată mărimea poziției să derive cu emoțiile. Dacă mărimea calculată ți se pare prea mare sau prea mică, ajustează distanța de stop-loss, nu procentul de risc pe tranzacție. Mutarea stop-ului doar ca să se potrivească cu o mărime dorită încalcă regula fracțiunii fixe și crește varianța.</li>
+
+<li>Tratează limita de risc pe tranzacție ca absolută. Dacă ești pe minus 3% în această săptămână, tot riști doar 1% pe următoarea tranzacție. Urmărirea pierderilor prin mărirea poziției este cea mai rapidă cale de a arde un cont.</li>
+
+<li>Mărimea poziției interacționează cu volatilitatea. Pe piețe calme, un risc de 1% îți poate da o poziție mare; pe piețe volatile, același 1% îți poate da o poziție mică. Este normal — nu forța mărimea mai sus doar pentru că piața pare „sigură”.</li>
+
+<li>Reechilibrează-ți bugetul de risc săptămânal sau zilnic, dacă contul se mișcă rapid. Un cont de 100.000 $ care crește la 120.000 $ poate risca acum 1.200 $ pe tranzacție, nu cei 1.000 $ inițiali. Folosește noul capital total pentru a recalcula mărimile.</li>
+
+<li>Ține un jurnal simplu: preț de intrare, preț de stop, mărimea poziției și riscul în dolari. Revizuiește jurnalul săptămânal pentru a vedea cât de des atingi limita de 1% și dacă ești tentat să o încalci.</li>
+
+<li>Ține minte că dimensionarea poziției nu garantează profituri. Controlează doar cât pierzi când greșești. O regulă bună de dimensionare te ține în joc suficient de mult cât avantajul tău să dea roade de-a lungul multor tranzacții.</li>
+
+<li>Când tranzacția se mișcă în favoarea ta, mută rapid stop-ul la pragul de rentabilitate (breakeven). Asta reduce la zero riscul rămas și protejează mărimea inițială a poziției pe care ai planificat-o.</li>
+
+<li>Nu confunda mărimea poziției cu convingerea. O mărime mică poate exprima totuși o convingere puternică dacă avantajul tău este solid; o mărime mare poate exprima o convingere slabă dacă avantajul este firav. Mărimea ține de controlul riscului, nu de credință.</li>
+
+<li>Dacă tranzacționezi mai multe poziții pe același birou, agregă riscul pe toate pozițiile cel puțin o dată pe zi. O limită de 1% pe tranzacție poate deveni 5% în total dacă rulezi cinci poziții corelate. Decide dacă este acceptabil sau dacă trebuie să micșorezi fiecare mărime individuală.</li>
+
+<li>În final, acceptă că nu există o regulă perfectă de dimensionare pentru fiecare piață. Regula de 1% este un punct de plecare, nu o lege. Testeaz-o pe propriile tale date timp de cel puțin trei luni înainte de a lua în calcul ajustări.</li>
+</ul><script type="application/json" id="cf-mc-quiz">[{"q": "Ce este, de fapt, dimensionarea poziției (position sizing)?", "options": ["Procesul de a decide cât capital riști în fiecare tranzacție pe care o deschizi", "Alegerea momentului exact de intrare pe piață", "Selectarea acțiunilor cu cea mai bună performanță trecută", "Stabilirea prețului-țintă al unei tranzacții"], "correct": 0, "explain": "Dimensionarea poziției este legătura dintre avantajul tău și suma reală pusă la risc; decide cât riști pe fiecare tranzacție.", "kind": "concept"}, {"q": "Conform formulei din capitol, cum se calculează mărimea poziției?", "options": ["Riscul în dolari pe tranzacție ÷ (Distanța de stop × Dimensiunea contractului)", "Soldul contului × procentul de risc", "Distanța de stop × numărul de acțiuni", "Riscul în dolari × dimensiunea contractului"], "correct": 0, "explain": "Formula este: Mărimea poziției = (Riscul în dolari pe tranzacție) ÷ (Distanța de stop × Dimensiunea contractului).", "kind": "concept"}, {"q": "Cont de 100.000 $, risc 1%, distanță de stop 2 $, o acțiune = contract 1. Câte acțiuni cumperi?", "options": ["500 de acțiuni", "1.000 de acțiuni", "250 de acțiuni", "2.000 de acțiuni"], "correct": 0, "explain": "Riscul în dolari = 1.000 $. Mărimea poziției = 1.000 ÷ (2 × 1) = 500 de acțiuni.", "kind": "concept"}, {"q": "Care este diferența dintre soldul contului și numerarul liber (free cash)?", "options": ["Numerarul liber este partea din sold care nu e blocată în poziții deschise; doar el poate fi riscat în tranzacții noi", "Sunt termeni identici", "Numerarul liber include și marja blocată", "Soldul contului exclude numerarul depus recent"], "correct": 0, "explain": "Free cash = soldul minus capitalul deja blocat ca marjă în poziții deschise; numai acesta poate fi riscat în tranzacții noi.", "kind": "text"}, {"q": "Ce reprezintă distanța de stop (stop distance)?", "options": ["Distanța dintre prețul de intrare și prețul de stop-loss", "Distanța dintre prețul de intrare și prețul-țintă", "Procentul din cont riscat pe tranzacție", "Diferența dintre prețul ask și prețul bid"], "correct": 0, "explain": "Distanța de stop este diferența dintre prețul de intrare și prețul de stop-loss; ex. intrare 50 $, stop 47 $ → 3 $.", "kind": "text"}, {"q": "De ce majoritatea începătorilor folosesc reguli cu procent fix în loc de criteriul Kelly?", "options": ["Kelly necesită estimări precise ale avantajului și probabilității, greu de făcut pe piețele reale", "Kelly este interzis de brokeri", "Regulile cu procent fix garantează profituri mai mari", "Kelly se aplică doar pe forex"], "correct": 0, "explain": "Criteriul Kelly cere estimări precise ale avantajului și probabilității de câștig, dificil de obținut în practică, de aceea se preferă procentul fix.", "kind": "text"}, {"q": "Ce înseamnă marja (margin) la deschiderea unei poziții cu levier?", "options": ["O garanție de bună-credință reținută de broker cât timp poziția e deschisă, nu un comision", "Un comision plătit definitiv brokerului", "Profitul minim garantat al poziției", "Diferența dintre intrare și stop"], "correct": 0, "explain": "Marja nu este un comision, ci un depozit-garanție pe care brokerul îl reține; cerințele de marjă se schimbă zilnic cu prețul.", "kind": "text"}, {"q": "Controlezi acțiuni de 100.000 $ cu o marjă de 10.000 $. Care este levierul?", "options": ["10:1", "1:10", "100:1", "5:1"], "correct": 0, "explain": "Levierul = valoarea poziției ÷ marja = 100.000 ÷ 10.000 = 10:1.", "kind": "concept"}, {"q": "Ce este pierderea maximă (max drawdown)?", "options": ["Cea mai mare scădere procentuală a contului de la un vârf la un minim, înainte de un nou vârf", "Pierderea totală pe o singură tranzacție", "Procentul de risc pe tranzacție", "Suma marjei blocate"], "correct": 0, "explain": "Max drawdown măsoară cea mai mare cădere procentuală de la vârf la minim; regulile de dimensionare urmăresc să o țină în zona de confort.", "kind": "text"}, {"q": "În exemplul rezolvat (cont 10.000 $, risc 2%, stop la 1,50 $ sub intrare), câte acțiuni se cumpără?", "options": ["133 de acțiuni (200 $ ÷ 1,50 $, rotunjit în jos)", "200 de acțiuni", "100 de acțiuni", "150 de acțiuni"], "correct": 0, "explain": "Toleranța la risc = 200 $; 200 ÷ 1,50 = 133,33, rotunjit în jos la 133 de acțiuni.", "kind": "concept"}, {"q": "De ce permite biroul un tichet cu valoare așteptată NEGATIVĂ (scenariul cu obligațiunea grecească short)?", "options": ["Pentru că este negativ corelat cu portofoliul și reduce VaR-ul total, diversificând riscul", "Pentru că este sigur că va aduce profit", "Pentru că nu are stop-loss", "Pentru că marja este zero"], "correct": 0, "explain": "Tichetul pierde mic în medie, dar corelația −0,32 reduce VaR-ul portofoliului; beneficiul de diversificare justifică poziția.", "kind": "concept"}, {"q": "Ce trebuie să facă alocatorul dacă, la tichetul-diversificator, corelația derivă spre zero sau pozitiv?", "options": ["Să taie poziția, pentru că nu mai diversifică", "Să mărească poziția pentru a compensa", "Să mute stop-ul mai departe", "Să ignore, atâta timp cât stop-ul nu e atins"], "correct": 0, "explain": "Dacă negativ-corelarea dispare, tichetul nu mai diversifică și, având valoare așteptată negativă, trebuie închis.", "kind": "concept"}, {"q": "De ce ajustezi distanța de stop-loss, și NU procentul de risc, dacă mărimea calculată ți se pare nepotrivită?", "options": ["Mutarea stop-ului doar pentru a obține o mărime dorită încalcă regula fracțiunii fixe și crește varianța", "Procentul de risc nu poate fi modificat tehnic", "Stop-ul nu influențează mărimea poziției", "Brokerul interzice modificarea procentului"], "correct": 0, "explain": "Regula fracțiunii fixe ține riscul constant; modificarea procentului pentru a forța o mărime distruge disciplina și crește varianța rezultatelor.", "kind": "concept"}, {"q": "Ești pe minus 3% pe săptămână. Cât ar trebui să riști pe următoarea tranzacție, conform regulii fracțiunii fixe?", "options": ["Tot 1% (limita este absolută; nu mărești pentru a recupera)", "3%, pentru a recupera pierderea", "5%, dublu față de normal", "0%, oprești tranzacționarea pe săptămâna respectivă"], "correct": 0, "explain": "Limita de risc pe tranzacție este absolută; mărirea poziției pentru a recupera (chasing) e cea mai rapidă cale de a arde contul.", "kind": "concept"}, {"q": "Cont care crește de la 100.000 $ la 120.000 $, regula de 1%. Care este noul risc per tranzacție?", "options": ["1.200 $ (recalculezi pe noul capital total)", "1.000 $ (rămâne fix la valoarea inițială)", "2.000 $", "600 $"], "correct": 0, "explain": "Reechilibrezi bugetul de risc pe capitalul curent: 1% din 120.000 $ = 1.200 $.", "kind": "concept"}, {"q": "Cum interacționează mărimea poziției cu volatilitatea pieței?", "options": ["În piețe calme, 1% risc dă o poziție mare; în piețe volatile, același 1% dă o poziție mai mică", "Volatilitatea nu afectează mărimea poziției", "Mai multă volatilitate înseamnă mereu poziții mai mari", "Mărimea crește proporțional cu volatilitatea"], "correct": 0, "explain": "La risc fix, volatilitatea (distanța de stop mai mare) reduce numărul de acțiuni; e normal să ai poziții mai mici pe piețe volatile.", "kind": "concept"}, {"q": "De ce trebuie agregat riscul pe toate pozițiile cel puțin o dată pe zi?", "options": ["O limită de 1% per tranzacție poate deveni 5% total dacă rulezi cinci poziții corelate", "Pentru a calcula comisioanele zilnice", "Pentru că brokerul cere asta legal", "Pentru a maximiza levierul disponibil"], "correct": 0, "explain": "Pozițiile corelate își însumează riscul; cinci poziții la 1% pot expune efectiv 5% din cont, ceea ce trebuie evaluat conștient.", "kind": "concept"}, {"q": "Ce indicator de volatilitate recomandă capitolul pentru ajustarea dimensionării poziției?", "options": ["Average True Range (ATR)", "Indicele de încredere a consumatorilor", "Raportul preț/profit (P/E)", "Volumul mediu zilnic (ADV)"], "correct": 0, "explain": "ATR măsoară amplitudinea reală a mișcărilor de preț și ajută la ajustarea mărimii poziției la volatilitate.", "kind": "text"}, {"q": "În exemplul biroului, care este regula maximă de risc pe un singur nume?", "options": ["Maximum 0,5% din VaR-ul zilnic pe un singur nume", "Maximum 5% din AUM pe un singur nume", "Maximum 2% din ADV pe un singur nume", "Maximum 1% din capital pe un singur nume"], "correct": 0, "explain": "Regula biroului: nu se riscă niciodată mai mult de 0,5% din VaR-ul zilnic pe un singur nume (25.000 $ din 5 mil. $).", "kind": "text"}, {"q": "La biroul de tranzacționare, ce face sistemul când volatilitatea (ATR) se lărgește?", "options": ["Micșorează poziția pentru a menține constant riscul în dolari", "Mărește poziția pentru a profita de volatilitate", "Mută stop-ul mai departe și păstrează mărimea", "Ignoră, dacă CIO cere să cumpere mai mult"], "correct": 0, "explain": "Când ATR-ul crește, distanța de stop crește, deci numărul de acțiuni scade pentru a păstra riscul în dolari constant.", "kind": "concept"}, {"q": "De ce NU este dimensionarea poziției o garanție a profitului?", "options": ["Controlează doar cât pierzi când greșești, nu dacă ai dreptate; piețele rămân incerte", "Pentru că brokerii o interzic", "Pentru că funcționează doar pe acțiuni, nu pe futures", "Pentru că ignoră complet stop-loss-ul"], "correct": 0, "explain": "Dimensionarea controlează pierderea când greșești și te ține în joc; nu prezice direcția pieței și nu garantează câștiguri.", "kind": "text"}, {"q": "Ce reprezintă greșeala de a folosi o mărime fixă de poziție?", "options": ["Poate fi inadecvată în piețe volatile, unde riscul crește rapid; e mai bună o abordare dinamică", "Reduce întotdeauna riscul la zero", "Este recomandată pentru toate piețele", "Elimină nevoia de stop-loss"], "correct": 0, "explain": "O mărime fixă nu absoarbe riscul crescut pe piețe volatile; abordarea dinamică se ajustează la condiții.", "kind": "concept"}, {"q": "De ce este greșit să confunzi mărimea poziției cu convingerea?", "options": ["Mărimea ține de controlul riscului, nu de credință; o poziție mică poate exprima convingere puternică dacă avantajul e solid", "Convingerea determină mereu o poziție mai mare", "Mărimea trebuie să crească proporțional cu convingerea", "Convingerea înlocuiește calculul riscului"], "correct": 0, "explain": "Mărimea reflectă disciplina de risc, nu intensitatea credinței; o mărime mică poate avea convingere mare dacă edge-ul e puternic.", "kind": "concept"}, {"q": "De ce reașază biroul prețul de intrare pentru slippage înainte de a finaliza mărimea?", "options": ["Pentru că un ordin de piață plătește mai prost, mărind distanța de stop și riscul noțional, care pot depăși limitele", "Pentru a reduce comisionul brokerului", "Pentru a mări levierul disponibil", "Slippage-ul nu afectează niciodată riscul"], "correct": 0, "explain": "Slippage-ul mută intrarea efectivă, lărgind distanța de stop și crescând riscul noțional; dacă depășește limita, se reduce numărul de acțiuni.", "kind": "concept"}, {"q": "Câte luni recomandă capitolul să testezi regula de 1% pe propriile date înainte de a o ajusta?", "options": ["Cel puțin trei luni", "O săptămână", "Un an întreg", "O singură zi"], "correct": 0, "explain": "Regula de 1% este un punct de plecare; capitolul recomandă testarea pe date proprii cel puțin trei luni înainte de orice ajustare.", "kind": "text"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>

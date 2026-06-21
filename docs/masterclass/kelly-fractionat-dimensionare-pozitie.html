@@ -1,0 +1,505 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kelly fracționat: ghid complet de dimensionare a poziției și control al riscului — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Învață strategia Kelly fracționat: formula, factorul de reducere, exemple pas cu pas și cum dimensionezi corect poziția pentru a reduce riscul de drawdown."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/kelly-fractionat-dimensionare-pozitie.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Kelly fracționat: ghid complet de dimensionare a poziției și control al riscului"><meta property="og:description" content="Învață strategia Kelly fracționat: formula, factorul de reducere, exemple pas cu pas și cum dimensionezi corect poziția pentru a reduce riscul de drawdown."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/kelly-fractionat-dimensionare-pozitie.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Kelly fracționat: ghid complet de dimensionare a poziției și control al riscului"><meta name="twitter:description" content="Învață strategia Kelly fracționat: formula, factorul de reducere, exemple pas cu pas și cum dimensionezi corect poziția pentru a reduce riscul de drawdown."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Kelly fracționat: ghid complet de dimensionare a poziției și control al riscului", "description": "Învață strategia Kelly fracționat: formula, factorul de reducere, exemple pas cu pas și cum dimensionezi corect poziția pentru a reduce riscul de drawdown.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/kelly-fractionat-dimensionare-pozitie.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="alocarea-cu-ponderi-egale" data-prev-title="Alocarea cu ponderi egale (equal-weighted allocation)" data-next="criteriul-kelly-dimensionarea-optima-a-pozitiei-2" data-next-title="Criteriul Kelly: dimensionarea optima a pozitiei" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#allocation">Alocarea activelor</a> · 29 min · Actualizat 21 iun. 2026</p><h1>Kelly fracționat: ghid complet de dimensionare a poziției și control al riscului</h1><p>Strategia <strong>Kelly fracționat (Fractional Kelly)</strong> este o regulă de control al riscului care îți spune ce fracțiune din capital să riști atunci când mărimea poziției este stabilită cu ajutorul criteriului Kelly. Pe scurt, înmulțești fracțiunea optimă recomandată de formula Kelly cu un număr cuprins între 0 și 1, ca să reduci pericolul de pierderi mari (drawdown) și de margin call, păstrând în același timp o creștere pozitivă a contului.</p>
+
+<p>Pentru un începător, ideea-cheie a <strong>criteriului Kelly fracționat în trading</strong> este simplă: un avantaj real (edge) merită folosit, dar nu trebuie să pariezi tot ce sugerează matematica, fiindcă estimările tale despre probabilități și randamente nu sunt niciodată perfecte. Folosind un factor de reducere (shrinkage factor) precum 0,5 (jumătate de Kelly) sau 0,25 (un sfert de Kelly), accepți o creștere mai lentă a capitalului în schimbul unei șanse mult mai mari de a supraviețui pe termen lung.</p>
+
+<p>În acest capitol vei învăța formula criteriului Kelly, sensul fracțiunii Kelly și al factorului de reducere, cum se calculează dimensiunea poziției pas cu pas, cum folosește un birou de tranzacționare (trading desk) acest instrument zi de zi, precum și greșelile frecvente, limitele și momentele în care metoda dă greș.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Kelly fracționat este o regulă de control al riscului care îi spune unui trader cât de mare să fie poziția atunci când mărimea tranzacției este decisă de criteriul Kelly.</p>
+
+<h3>Criteriul Kelly</h3>
+
+<p>Criteriul Kelly (Kelly criterion) este o formulă care răspunde la întrebarea: „Dacă știu exact probabilitățile de câștig și de pierdere, precum și mărimea exactă a câștigului și a pierderii, ce fracțiune din capitalul meu total ar trebui să pariez astfel încât capitalul să crească cât mai repede posibil pe termen lung?”</p>
+
+<p>Formula este:</p>
+
+<p><strong>f* = (b·p – q) / b</strong></p>
+
+<p>unde:</p>
+
+<ul>
+<li><strong>f*</strong> este fracțiunea din capitalul total pe care o pariezi (fracțiunea Kelly);</li>
+<li><strong>p</strong> este probabilitatea de a câștiga un singur pariu;</li>
+<li><strong>q</strong> este probabilitatea de a pierde (q = 1 – p);</li>
+<li><strong>b</strong> este cota netă primită la pariu (de exemplu, dacă riști 1 ca să câștigi 2, atunci b = 2).</li>
+</ul>
+
+<h3>Kelly fracționat</h3>
+
+<p>Kelly fracționat înmulțește pur și simplu fracțiunea Kelly f* cu un număr fix cuprins între 0 și 1. Dacă multiplicatorul este 0,5, pariezi jumătate din ce sugerează Kelly; dacă este 0,25, pariezi un sfert. Acest multiplicator este numit adesea „fracțiunea” sau „factorul de reducere” (shrinkage factor).</p>
+
+<h3>De ce să folosești o fracțiune?</h3>
+
+<ul>
+<li><strong>Supra-pariatul</strong> (a paria mai mult decât Kelly) poate provoca pierderi foarte mari (drawdown) chiar și atunci când avantajul este real.</li>
+<li>O fracțiune păstrează rata de creștere pozitivă, reducând în același timp șansa de a ajunge la un margin call sau de a-ți distruge contul.</li>
+<li>Face strategia mai ușor de urmat în perioadele cu serii de pierderi.</li>
+</ul>
+
+<h3>Termeni-cheie pe care îi vei vedea la un birou de tranzacționare</h3>
+
+<p><strong>Bankroll (capital de tranzacționare)</strong> — suma totală de bani pe care ai pus-o deoparte pentru tranzacționare. Nu este același lucru cu banii din contul tău bancar; sunt banii pe care ești dispus să îi pierzi fără să-ți schimbi stilul de viață.</p>
+
+<p><strong>Edge (avantaj)</strong> — un avantaj există atunci când valoarea așteptată (expected value) a unei tranzacții este pozitivă. Valoarea așteptată este suma medie pe care te aștepți să o câștigi (sau să o pierzi) per tranzacție dacă ai repeta-o de multe ori. Se calculează ca: (câștig așteptat × probabilitatea de câștig) – (pierdere așteptată × probabilitatea de pierdere). Dacă valoarea așteptată este pozitivă, ai un avantaj.</p>
+
+<p><strong>Drawdown (pierdere maximă)</strong> — scăderea procentuală a capitalului tău de la cel mai înalt punct la cel mai jos punct în timpul unei serii de pierderi. De exemplu, dacă bankroll-ul scade de la 100.000 $ la 70.000 $, drawdown-ul este de 30%.</p>
+
+<p><strong>Margin call (apel în marjă)</strong> — o cerere din partea brokerului de a depune mai mulți bani sau de a închide poziții, deoarece valoarea contului tău a scăzut sub minimul cerut de broker. Supra-pariatul crește riscul unui margin call.</p>
+
+<p><strong>Fracțiunea Kelly (f*)</strong> — rezultatul formulei Kelly; fracțiunea din bankroll pe care ar trebui să o riști pe un singur pariu pentru a maximiza creșterea pe termen lung.</p>
+
+<p><strong>Factorul de reducere (f)</strong> — numărul cu care înmulțești f* pentru a reduce riscul. Alegerile uzuale sunt 0,5 (jumătate de Kelly), 0,25 (un sfert de Kelly) sau 0,1 (o zecime de Kelly). Alegerea este subiectivă și depinde de cât de mult drawdown poți tolera.</p>
+
+<p><strong>Volatilitatea avantajului</strong> — în tranzacționarea reală, avantajul nu este cunoscut cu exactitate; se schimbă de la o zi la alta. Prin urmare, fracțiunea Kelly f* este incertă. Kelly fracționat este o modalitate de a recunoaște această incertitudine.</p>
+
+<h3>La ce să te uiți când citești un raport Kelly</h3>
+
+<ul>
+<li><strong>Avantajul raportat:</strong> Este pozitiv? Cum a fost estimat?</li>
+<li><strong>Fracțiunea Kelly f*:</strong> Este mai mare decât 1? (Dacă da, strategia este supra-pariată chiar și la Kelly integral.)</li>
+<li><strong>Factorul de reducere:</strong> De ce a ales biroul 0,5 în loc de 0,25?</li>
+<li><strong>Mărimea bankroll-ului:</strong> A fost actualizată după tranzacțiile recente?</li>
+<li><strong>Drawdown-urile recente:</strong> S-au menținut în limitele de risc ale biroului?</li>
+</ul>
+
+<h3>Ce să NU faci</h3>
+
+<ul>
+<li>Nu folosi fracțiunea Kelly ca pe o regulă rigidă. Este un ghid, nu o garanție.</li>
+<li>Nu ignora costurile de tranzacționare. Ele reduc avantajul efectiv și pot transforma o strategie câștigătoare într-una pierzătoare.</li>
+<li>Nu uita să recalculezi fracțiunea Kelly după fiecare tranzacție dacă bankroll-ul sau avantajul tău s-a schimbat.</li>
+</ul>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că mergi printr-o ceață deasă pe o potecă îngustă de munte. Cunoști direcția generală spre vârf — „avantajul” tău — dar fiecare pas este incert. Ai putea aluneca, vântul te-ar putea împinge sau pur și simplu ai putea aprecia greșit terenul. Dacă ai cunoaște exact panta, frecarea și viteza vântului, ai putea calcula mărimea <em>perfectă</em> a pasului pentru a ajunge cel mai repede în vârf. Acea mărime perfectă a pasului este ceea ce îți oferă criteriul Kelly integral: fracțiunea optimă din punct de vedere matematic din capitalul tău pe care să o pariezi atunci când ai un avantaj.</p>
+
+<p>Dar iată problema: ceața nu este doar deasă — ea se <em>mișcă</em>. Vântul se schimbă. Solul se modifică. Modelul tău despre munte este doar o aproximare. Dacă faci acel pas Kelly perfect, ai putea cădea de pe stâncă. Așa că, în loc să mergi cu viteză maximă, încetinești. Faci jumătăți de pas sau sferturi de pas. Acesta este Kelly fracționat: încă țintești spre vârf, dar te miști cu prudență, ajustându-ți ritmul la incertitudinea din jur.</p>
+
+<p>La un birou de tranzacționare, „avantajul” este randamentul tău așteptat pe unitate de risc — de exemplu, să știi că, istoric, o anumită strategie face 1% pe zi cu o abatere standard zilnică de 0,5%. Kelly integral ți-ar spune să pariezi <em>tot</em> capitalul pe acea strategie, fiindcă reprezintă rata optimă de creștere. Dar lumea reală nu este o foaie de calcul curată. Alunecarea de preț la execuție (slippage), schimbările de regim de piață și evenimentele de tip lebădă neagră (black swan) pândesc în ceață. Dacă pariezi tot și o singură zi proastă îți șterge jumătate din capital, nu mai poți compune câștigurile. Ai ieșit de pe potecă.</p>
+
+<p>Kelly fracționat există pentru că nu avem încredere că ceața va sta pe loc. Este un mecanism de control al riscului. Folosind o fracțiune — să zicem jumătate de Kelly — accepți o creștere mai lentă, dar supraviețuiești rafalelor neașteptate. Nu maximizezi randamentul; maximizezi <em>capacitatea de supraviețuire</em>. Este diferența dintre a sprinta orbește spre un obiectiv și a merge cu grijă, cu o lanternă în mână.</p>
+
+<p>Gândește-te la asta ca la condusul unei mașini de curse. Kelly integral înseamnă să apeși accelerația la maximum pe o pistă uscată, cu vizibilitate perfectă. Kelly fracționat înseamnă să iei piciorul de pe accelerație când plouă sau când drumul face o curbă strânsă. S-ar putea să nu câștigi fiecare cursă, dar termini mai des. Iar în tranzacționare, a termina — a rămâne în joc — contează mai mult decât a câștiga fiecare pariu.</p>
+
+<p>Intuiția este simplă: <em>mai mult avantaj este mai bine, dar mai multă incertitudine este mai rău.</em> Kelly fracționat echilibrează cele două. Spune: „Cred în avantajul meu, dar nu cred în modelul meu despre incertitudine.” Așa că voi lua doar o parte din pariul optim. Nu zero — fiindcă asta înseamnă creștere nulă — dar nici tot — fiindcă asta este prea riscant.</p>
+
+<p>În practică, traderii încep adesea cu o fracțiune mică — precum 10% sau 20% din Kelly — atunci când sunt noi într-o strategie sau pe o piață. Încă învață terenul. Pe măsură ce încrederea crește și ceața se ridică, ar putea mări fracțiunea. Dar rareori folosesc Kelly integral, cu excepția unei simulări controlate sau a unui mediu foarte stabil.</p>
+
+<p>Așadar, ideea de bază este aceasta: Kelly fracționat nu înseamnă a fi perfect. Înseamnă a fi <em>robust</em>. Transformă un instrument de optimizare tăios ca un brici într-un ghid practic de supraviețuire. Recunoaște că piața nu este o problemă de matematică cu un singur răspuns corect — este o călătorie dinamică și incertă. Iar în acea călătorie, a înainta cu grijă bate căderea de pe stâncă.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Kelly fracționat este o tehnică populară de management al riscului folosită de traderi pentru a reduce riscul asociat criteriului Kelly, o formulă pentru determinarea mărimii optime a unui pariu. Criteriul Kelly se bazează pe ideea de a maximiza rata de creștere a unei serii de pariuri, dar necesită cunoașterea probabilității reale de câștig și a cotei pariului. Deoarece aceste valori sunt adesea necunoscute sau incerte, Kelly fracționat oferă o abordare mai conservatoare, micșorând mărimea pariului Kelly cu o fracțiune fixă.</p>
+
+<p>Pentru a înțelege mecanica Kelly fracționat, să descompunem procesul în componentele sale principale.</p>
+
+<h3>Intrări (inputs)</h3>
+
+<ul>
+<li><strong>Cotele reale:</strong> probabilitatea efectivă de a câștiga și de a pierde un pariu, care sunt adesea necunoscute sau incerte.</li>
+<li><strong>Formula criteriului Kelly:</strong> formula pentru calcularea mărimii optime a pariului Kelly, bazată pe cotele reale și pe probabilitatea de câștig.</li>
+<li><strong>Fracțiunea:</strong> o valoare fixă cuprinsă între 0 și 1 care determină proporția din mărimea pariului Kelly pe care o folosești.</li>
+<li><strong>Mărimea pariului:</strong> suma de bani de pariat pe o anumită tranzacție.</li>
+<li><strong>Toleranța la risc:</strong> disponibilitatea traderului de a-și asuma risc, care determină nivelul dorit de reducere a riscului.</li>
+</ul>
+
+<h3>Procesul</h3>
+
+<ul>
+<li><strong>Calculează mărimea pariului Kelly:</strong> folosește formula criteriului Kelly pentru a calcula mărimea optimă a pariului Kelly pe baza cotelor reale și a probabilității de câștig.</li>
+<li><strong>Stabilește fracțiunea:</strong> alege o fracțiune între 0 și 1 care reprezintă proporția din mărimea pariului Kelly pe care o folosești. De exemplu, o fracțiune de 0,5 ar însemna folosirea jumătății din mărimea pariului Kelly.</li>
+<li><strong>Micșorează mărimea pariului Kelly:</strong> înmulțește mărimea pariului Kelly cu fracțiunea aleasă pentru a determina mărimea pariului Kelly fracționat.</li>
+<li><strong>Ajustează mărimea pariului:</strong> ajustează mărimea pariului pentru a corespunde mărimii pariului Kelly fracționat.</li>
+</ul>
+
+<h3>Ieșiri (outputs)</h3>
+
+<ul>
+<li><strong>Mărimea pariului Kelly fracționat:</strong> mărimea micșorată a pariului care reprezintă proporția din mărimea pariului Kelly pe care o folosești.</li>
+<li><strong>Reducerea riscului:</strong> reducerea riscului asociată folosirii unei fracțiuni din mărimea pariului Kelly.</li>
+<li><strong>Randamentele potențiale:</strong> randamentele potențiale ale investiției pe baza mărimii pariului Kelly fracționat.</li>
+</ul>
+
+<h3>Exemplu</h3>
+
+<p>Să presupunem că un trader vrea să parieze pe o tranzacție cu cote reale de 1,5:1 (adică o șansă de 60% de a câștiga) și o formulă a criteriului Kelly care recomandă o mărime a pariului de 100 $. Traderul decide să folosească o fracțiune de 0,75 pentru a reduce riscul. Calculul ar fi:</p>
+
+<ul>
+<li>Calculează mărimea pariului Kelly: 100 $</li>
+<li>Stabilește fracțiunea: 0,75</li>
+<li>Micșorează mărimea pariului Kelly: 100 $ × 0,75 = 75 $</li>
+<li>Ajustează mărimea pariului: traderul ar paria 75 $ pe tranzacție.</li>
+</ul>
+
+<p>În acest exemplu, traderul a redus riscul asociat criteriului Kelly folosind o fracțiune de 0,75, ceea ce a dus la o mărime mai mică a pariului, de 75 $. Randamentele potențiale ale investiției ar fi mai mici decât în cazul pariului Kelly original, dar reducerea riscului ar fi mai mare.</p>
+
+<h2>Exemplu lucrat</h2>
+
+<p>Să parcurgem o singură tranzacție pe care un birou ar putea-o face într-o dimineață de luni și să vedem cum am decide cât să riscăm folosind o regulă Kelly fracționat.</p>
+
+<h3>Ideea de tranzacționare</h3>
+
+<ul>
+<li><strong>Instrument:</strong> EUR/USD spot</li>
+<li><strong>Direcție:</strong> Long (credem că perechea va urca)</li>
+<li><strong>Preț de intrare:</strong> 1,0800</li>
+<li><strong>Stop-loss:</strong> 1,0750 (50 de pipi sub intrare)</li>
+<li><strong>Țintă:</strong> 1,1000 (200 de pipi peste intrare)</li>
+<li><strong>Mărimea nominală (notional) la care ne gândim:</strong> 1.000.000 €</li>
+</ul>
+
+<h3>Pasul 1 – Calculează mișcarea de preț și avantajul</h3>
+
+<p>Avantajul este profitul așteptat pe unitate tranzacționată dacă tranzacția se repetă de multe ori. Nu cunoaștem viitorul, așa că trebuie să estimăm.</p>
+
+<ul>
+<li>Distanța până la stop: 1,0800 – 1,0750 = 0,0050 = 50 de pipi</li>
+<li>Distanța până la țintă: 1,1000 – 1,0800 = 0,0200 = 200 de pipi</li>
+<li>Probabilitatea de câștig (p): credem că 65% (adică 0,65)</li>
+<li>Probabilitatea de pierdere (q): 1 – p = 35% (0,35)</li>
+</ul>
+
+<h3>Pasul 2 – Calculează raportul de payoff (b)</h3>
+
+<p>Raportul de payoff arată cât câștigi raportat la cât riști pe o singură tranzacție.</p>
+
+<p><strong>b = (distanța până la țintă) / (distanța până la stop) = 200 / 50 = 4</strong></p>
+
+<h3>Pasul 3 – Calculează fracțiunea Kelly</h3>
+
+<p>Fracțiunea Kelly: f* = p – q / b</p>
+
+<p>Înlocuind valorile:</p>
+
+<ul>
+<li>f* = 0,65 – 0,35 / 4</li>
+<li>f* = 0,65 – 0,0875</li>
+<li>f* = 0,5625</li>
+</ul>
+
+<p>Așadar, fracțiunea Kelly integrală este de aproximativ 56%. Majoritatea birourilor nu folosesc Kelly 100%, fiindcă poate fi foarte agresiv. În schimb, aleg un Kelly fracționat, precum ½ Kelly (0,5) sau ⅓ Kelly (0,33).</p>
+
+<h3>Pasul 4 – Alege fracțiunea pe care o vom folosi efectiv</h3>
+
+<p>Să alegem ½ Kelly pentru această tranzacție. Asta ne dă o fracțiune de risc de:</p>
+
+<p><strong>f = ½ × 0,5625 = 0,28125</strong></p>
+
+<h3>Pasul 5 – Dimensionează poziția</h3>
+
+<p>Avem în minte un notional de 1.000.000 €, dar trebuie să-l scalăm cu fracțiunea de risc.</p>
+
+<ul>
+<li>Suma de risc = f × notional</li>
+<li>Suma de risc = 0,28125 × 1.000.000 € = 281.250 €</li>
+</ul>
+
+<h3>Pasul 6 – Transformă suma de risc în mărime efectivă a poziției</h3>
+
+<p>Riscăm 281.250 € dacă stop-ul de la 1,0750 este atins. Pierderea per pip este:</p>
+
+<p>Pierdere per pip pentru un lot standard (100.000 unități) = 100.000 × 0,0001 = 10 € per pip.</p>
+
+<p>Pentru a risca 281.250 € avem nevoie de:</p>
+
+<p><strong>Mărimea poziției = 281.250 € / (10 € per pip) = 28.125 pipi</strong></p>
+
+<p>Deoarece fiecare lot standard reprezintă 10.000 pipi, rotunjim la cea mai apropiată mărime rezonabilă:</p>
+
+<p>28.125 pipi ÷ 10.000 pipi per lot ≈ 2,8 loturi.</p>
+
+<h3>Pasul 7 – Verifică matematica</h3>
+
+<p>Dacă cumpărăm 2,8 loturi la 1,0800 și stop-ul de la 1,0750 este atins, pierdem:</p>
+
+<p>2,8 loturi × 50 de pipi × 10 € per pip = 1.400 €.</p>
+
+<p>Aceasta reprezintă 0,14% din 1.000.000 €, ceea ce este sub plafonul nostru de risc de 281.250 €, deci dimensionarea este consistentă intern.</p>
+
+<h3>Pasul 8 – Înregistrează tranzacția</h3>
+
+<p>Scriem în registrul de tranzacții (blotter):</p>
+
+<ul>
+<li>Tranzacție: Long EUR/USD 2,8 loturi @ 1,0800</li>
+<li>Stop: 1,0750 (50 de pipi)</li>
+<li>Țintă: 1,1000 (200 de pipi)</li>
+<li>Fracțiunea Kelly: ½ Kelly → 0,28125</li>
+<li>Risc pe tranzacție: 1.400 € (0,14%)</li>
+</ul>
+
+<h3>Avertismente importante</h3>
+
+<ul>
+<li>Probabilitatea de câștig de 65% este o opinie, nu un fapt. Dacă probabilitatea reală este mai mică, avantajul se micșorează și Kelly scade.</li>
+<li>Volatilitatea sau riscul de gap peste noapte nu sunt surprinse de modelul simplu bazat pe distanța până la stop; este posibil să fie nevoie să lărgim stop-ul sau să reducem mărimea în afara orelor de tranzacționare.</li>
+<li>Kelly fracționat este atât de bun pe cât sunt datele de intrare. Revizuiește ipotezele după ce tranzacția este executată și ajustează fracțiunea data viitoare dacă avantajul se schimbă.</li>
+</ul>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Imaginează-ți că acum conduci un mic birou „de creșă” (nursery desk) specializat în tranzacționarea mișcării din prima zi după raportarea rezultatelor (after-earnings) la acțiuni americane cu capitalizare mică (small-cap). Ai construit un model care prezice direcția acelui gap cu un avantaj de +2% per tranzacție (adică, dacă pariezi 1 $ pe fiecare nume despre care modelul tău spune că va urca, te aștepți să câștigi în medie 0,02 $ per tranzacție). Modelul nu este perfect — rata ta de reușită (hit-rate) este de 55% — dar câștigul mediu reprezintă 8% din mărimea poziției, în timp ce pierderea medie este de doar 6%. Cu alte cuvinte:</p>
+
+<ul>
+<li>probabilitatea de câștig p = 0,55</li>
+<li>mărimea câștigului (raportat la miză) = +8%</li>
+<li>mărimea pierderii (raportat la miză) = –6%</li>
+</ul>
+
+<p>Kelly îți spune să riști 0,02 / 0,08 ≈ 25% din capital pe fiecare tranzacție. Asta este mult prea agresiv pentru un birou de creșă care trebuie să supraviețuiască cozilor groase (fat-tails), alunecării de preț (slippage) și eventualelor prăbușiri. Așa că decizi să folosești jumătate de Kelly, adică o fracțiune f = 0,50. Formula pentru mărimea poziției devine:</p>
+
+<ul>
+<li>s = f · (p – q) / (b · q)</li>
+<li>= 0,50 · (0,55 – 0,45) / (0,08 · 0,45)</li>
+<li>≈ 0,50 · 0,10 / 0,036</li>
+<li>≈ 1,39</li>
+</ul>
+
+<p>Interpretare: vei risca 1,39% din capital pe fiecare tranzacție, nu 25%.</p>
+
+<h3>Ce faci efectiv la birou</h3>
+
+<ul>
+<li>Deschizi „Earnings Gap Scanner” la 07:00 ET.</li>
+<li>Pentru fiecare acțiune din listă, modelul afișează o direcție prezisă (long sau short) și o probabilitate p. Filtrezi lista pentru a păstra doar numele cu p ≥ 0,55.</li>
+<li>Pre-calculezi fracțiunea Kelly o singură dată, la începutul săptămânii: f = 0,50. (Poți ajusta f săptămânal în funcție de drawdown-urile sau volatilitatea recentă, dar azi este fixă.)</li>
+<li>Pentru fiecare nume care se califică, calculezi: mărimea poziției = f · (p – (1–p)) / (0,08 · (1–p)), rotunjit la cea mai apropiată valoare de 0,1% din capital.</li>
+<li>Execuți ordinul la licitația de deschidere, folosind o limită de cel mult 5 bps față de primul print.</li>
+<li>Etichetezi imediat tichetul cu valoarea p a modelului și cu fracțiunea f, ca să poți analiza performanța mai târziu.</li>
+<li>Plafonezi riscul zilnic total la 3% din capital, indiferent câte nume se califică. Dacă suma mărimilor individuale ar depăși 3%, micșorezi fiecare tichet proporțional (pro-rata) până când plafonul este respectat.</li>
+</ul>
+
+<h3>Cazul-limită care îi induce în eroare pe începători: numele cu „skew invers”</h3>
+
+<p>O acțiune, XYZZ, urcă cu 12% în afara orelor de tranzacționare (after-hours), dar modelul tău consideră în continuare că gap-ul este supraevaluat; îi dă p = 0,42 (adică modelul spune „short” cu doar 42% probabilitate). Nu o tranzacționezi, fiindcă fracțiunea Kelly pentru un short ar fi negativă:</p>
+
+<p>s = 0,50 · (0,42 – 0,58) / (0,08 · 0,58) ≈ –1,72%.</p>
+
+<p>O mărime negativă înseamnă „nu lua această tranzacție.” Începătorii ignoră uneori acest semnal și fac short oricum; rezultatul este că luptă mereu împotriva pieței (the tape), iar pierderile lor se compun. Regula biroului este explicită: dacă fracțiunea Kelly este negativă, sari peste acel nume.</p>
+
+<h3>Ce să urmărești în registru</h3>
+
+<ul>
+<li><strong>Expunerea brută zilnică.</strong> Cu f = 0,50 te aștepți la aproximativ 1,4% din capital per tranzacție; dacă rulezi 20 de nume pe zi, expunerea brută ar trebui să fie în jur de 28% din capital. Dacă urcă peste 40%, probabil ai uitat să aplici plafonul zilnic de 3%.</li>
+<li><strong>Rata de câștig vs. p-ul modelului.</strong> Dacă câștigi doar 50% din tranzacții când modelul a prezis 55%, avantajul s-ar putea micșora. Recalculează parametrii săptămânal; nu presupune că sunt stabili.</li>
+<li><strong>Drawdown-ul maxim într-o singură zi.</strong> Cu 1,4% per tranzacție și 20 de tranzacții, o zi proastă poate pierde totuși 6–7% dacă mai multe pierderi se grupează. Biroul de creșă păstrează un stop strict la –4% P&L zilnic; dacă îl atingi, oprești strategia până a doua zi dimineață.</li>
+</ul>
+
+<h3>Ce să NU faci</h3>
+
+<ul>
+<li>Nu „aproxima din ochi” fracțiunea. A tasta 0,50 în loc de 0,05 schimbă mărimea poziției cu un factor de zece; registrul o va arăta imediat, dar pierderea ar putea fi deja înregistrată.</li>
+<li>Nu suprascrie filtrul Kelly negativ. Modelul îți spune că tranzacția are valoare așteptată negativă; a lupta împotriva lui este cea mai rapidă cale de a transforma un avantaj mic într-o pierdere mare.</li>
+<li>Nu ignora alunecarea de preț (slippage). Câștigul mediu de 8% și pierderea medie de 6% se bazează pe execuții la prețul mediu (mid-price). În realitate, ai putea plăti 10–15 bps de impact de piață la acțiunile small-cap; dacă da, avantajul tău real este mai aproape de +1% și fracțiunea Kelly ar trebui recalculată.</li>
+</ul>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Când implementezi Kelly fracționat, este ușor să cazi în capcane frecvente care pot submina eficacitatea acestei strategii de reducere a riscului. Ca începător, este esențial să fii conștient de aceste posibile greșeli și concepții eronate pentru a le evita.</p>
+
+<ul>
+<li><strong>Neînțelegerea criteriului Kelly.</strong> Criteriul Kelly este o formulă care estimează fracțiunea optimă din avere de pariat pe o anumită oportunitate. Totuși, mulți traderi cred în mod greșit că este o regulă rigidă, care trebuie respectată la literă. În realitate, criteriul Kelly este un ghid, iar fracțiunea optimă poate varia în funcție de condițiile specifice ale pieței și de toleranța la risc a traderului.</li>
+<li><strong>Complicarea inutilă a calculului.</strong> Formula criteriului Kelly poate fi intimidantă, iar unii traderi simt nevoia să o complice adăugând factori suplimentari sau modele matematice sofisticate. În realitate, criteriul Kelly este o formulă simplă care poate fi implementată ușor cu o înțelegere de bază a probabilităților și statisticii. Complicarea calculului poate duce la erori și la scăderea performanței.</li>
+<li><strong>Ignorarea compromisului dintre risc și randament.</strong> Kelly fracționat este o strategie de reducere a riscului care presupune pariarea unei fracțiuni din suma optimă. Unii traderi cred în mod greșit că pot reduce riscul fără a sacrifica randamentele potențiale. În realitate, reducerea riscului necesită adesea sacrificarea unei părți din randamentele potențiale. Traderii trebuie să cântărească atent acest compromis.</li>
+<li><strong>Neluarea în calcul a volatilității pieței.</strong> Volatilitatea pieței poate afecta semnificativ eficacitatea Kelly fracționat. Unii traderi cred în mod greșit că volatilitatea este un factor constant, ușor de luat în calcul. În realitate, volatilitatea poate fi imprevizibilă și poate necesita ajustări ale calculului Kelly fracționat.</li>
+<li><strong>Neîmonitorizarea și neajustarea strategiei.</strong> Kelly fracționat este o strategie dinamică ce necesită monitorizare și ajustare permanentă. Unii traderi cred în mod greșit că pot configura o strategie Kelly fracționat și apoi o pot uita. Însă condițiile de piață și toleranța la risc se pot schimba în timp, necesitând ajustări.</li>
+<li><strong>Ignorarea impactului efectului de levier (leverage).</strong> Levierul poate afecta semnificativ eficacitatea Kelly fracționat. Unii traderi cred în mod greșit că levierul este un factor neutru, care poate fi ignorat. În realitate, levierul amplifică atât câștigurile, cât și pierderile, necesitând atenție deosebită.</li>
+<li><strong>Ignorarea impactului costurilor de tranzacționare.</strong> Costurile de tranzacționare pot afecta semnificativ eficacitatea Kelly fracționat. Unii traderi cred în mod greșit că sunt un factor minor, ce poate fi ignorat. În realitate, costurile de tranzacționare mănâncă din profituri și reduc eficacitatea strategiei.</li>
+</ul>
+
+<p>Pentru a evita aceste greșeli și concepții eronate frecvente, traderii ar trebui să:</p>
+
+<ul>
+<li>înțeleagă criteriul Kelly și limitele acestuia;</li>
+<li>păstreze calculul simplu și să evite complicarea inutilă;</li>
+<li>cântărească atent compromisul dintre risc și randament;</li>
+<li>ia în calcul volatilitatea pieței și să ajusteze strategia după nevoie;</li>
+<li>monitorizeze și să ajusteze strategia regulat;</li>
+<li>ia în considerare impactul levierului și al costurilor de tranzacționare;</li>
+<li>evalueze și să rafineze continuu strategia pentru o performanță optimă.</li>
+</ul>
+
+<p>Fiind conștienți de aceste greșeli și concepții eronate frecvente, traderii pot evita capcanele și pot implementa o strategie Kelly fracționat eficientă, care reduce riscul și maximizează randamentele potențiale.</p>
+
+<h2>Cum folosește biroul de tranzacționare metoda</h2>
+
+<p>La biroul de tranzacționare, Kelly fracționat nu este o formulă teoretică ascunsă într-o foaie de calcul; este limbajul zilnic al dimensionării pozițiilor și al controlului riscului. În fiecare dimineață, șeful de birou sau responsabilul de risc deschide registrul (blotter) și vede, pentru fiecare poziție deschisă, o coloană etichetată „FKelly %”. Acel număr este fracțiunea din pariul Kelly integral pe care biroul este dispus să o riște pe acea idee în ziua respectivă. Nu este fix pe toată durata tranzacției; poate fi mărit sau micșorat la ședința de risc de dimineață, în funcție de știrile de peste noapte, de lichiditate sau pur și simplu de convingerea analistului care a propus numele.</p>
+
+<p>Fluxul concret începe la 7:30 dimineața, când registrul de peste noapte este printat. Pentru fiecare poziție deținută de birou, registrul arată:</p>
+
+<ul>
+<li>Simbolul și valoarea nominală (notional)</li>
+<li>Fracțiunea Kelly integrală (FKelly %) agreată la inițierea poziției</li>
+<li>Mărimea curentă a poziției în dolari sau contracte</li>
+<li>Impactul asupra P&L-ului zilnic dacă poziția se mișcă 1% împotriva noastră</li>
+<li>O celulă tip semafor: verde dacă FKelly % este în apetitul de risc al biroului, galben dacă a deviat, roșu dacă a depășit stop-loss-ul.</li>
+</ul>
+
+<p>Regula biroului este simplă: dacă FKelly % este peste plafonul agreat — să zicem 0,3 Kelly — atunci poziția trebuie redusă la acel plafon înainte de deschiderea pieței la ora 8:00. Reducerea este mecanică: traderul vinde valoarea nominală în exces, iar registrul recalculează automat FKelly % pentru noua mărime, astfel încât semaforul devine verde. Nu există discreție în această etapă; FKelly % este prima linie de apărare împotriva prăbușirilor.</p>
+
+<p>Pe parcursul zilei, FKelly % este recalculat după fiecare print de preț, pentru fiecare poziție. Calculul folosește cele mai recente trei intrări: avantajul așteptat, probabilitatea de câștig și volatilitatea. Aceste intrări vin de la echipa de cercetare într-un fișier care se actualizează la 9:00, 12:00 și 16:00. Fișierul de cercetare conține, pentru fiecare simbol, o coloană „Edge” (randamentul zilnic așteptat dacă poziția este dimensionată la Kelly), „pWin” (probabilitatea ca poziția să fie profitabilă în următoarele 24 de ore) și „Vol” (abaterea standard zilnică a randamentelor). Motorul de risc al biroului calculează apoi:</p>
+
+<p><strong>FKelly % = (Edge / Vol²) × pWin × f,</strong></p>
+
+<p>unde f este fracțiunea aleasă de birou (0,3 în exemplul nostru). Rezultatul este împins în registru, iar semaforul se actualizează în timp real.</p>
+
+<p>Când sosește o idee nouă — să zicem o propunere de arbitraj de credit de la echipa de cercetare — analistul trebuie să completeze un formular de o pagină care se încheie cu un FKelly % propus. Formularul este analizat la ședința de alocare de la ora 15:00. Sunt examinate cu atenție trei numere: avantajul, probabilitatea de câștig și FKelly % în sine. Dacă analistul propune 0,5 Kelly pe o poziție cu volatilitate zilnică de 10% și probabilitate de câștig de 60%, biroul va obiecta dacă avantajul pare optimist sau dacă estimarea volatilității este învechită. FKelly % final este agreat prin consens și introdus în registru ca plafon al poziției.</p>
+
+<p>Biroul folosește FKelly % și pentru sincronizare (timing). Dacă FKelly % al unei poziții urcă peste plafon fiindcă avantajul a crescut — poate s-a anunțat o tranzacție de fuziune — atunci traderului i se permite să mărească poziția, dar doar până la noul plafon FKelly %. Invers, dacă FKelly % scade fiindcă avantajul s-a erodat — să zicem că un zvon este dezmințit — poziția este redusă sau închisă. Acest mecanism de timing împiedică biroul să adauge la poziții pierzătoare și să taie pozițiile câștigătoare, ceea ce este opusul unui management bun al riscului.</p>
+
+<p>La sfârșitul zilei, registrul este arhivat, iar istoricul FKelly % este stocat. În fiecare vineri, echipa de risc rulează un backtest: pentru fiecare poziție care a fost deschisă în cursul săptămânii, calculează care ar fi fost FKelly % folosind doar informațiile disponibile la momentul respectiv. Dacă FKelly % realizat este în mod constant mai mare decât plafonul, biroul înăsprește intrările de avantaj sau de probabilitate de câștig; dacă este în mod constant mai mic, ar putea relaxa fracțiunea. Această calibrare săptămânală împiedică FKelly % să devină irelevant.</p>
+
+<p>În practică, biroul folosește rareori fracțiunea Kelly integrală; 0,2 până la 0,4 este uzual. Fracțiunea nu este aleasă pentru eleganță matematică, ci pentru confort psihologic: păstrează volatilitatea P&L-ului în toleranța directorului financiar (CFO) și împiedică șeful de birou să își piardă somnul. FKelly % este, prin urmare, atât un buton de risc, cât și un instrument de comunicare — când CFO-ul întreabă de ce biroul a pierdut bani pe o poziție, răspunsul este întotdeauna formulat în termeni de FKelly % și de fracțiunea agreată.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Kelly fracționat este o strategie populară de management al riscului, dar, ca orice abordare, are limitele și capcanele sale. Deși poate fi un instrument eficient de reducere a riscului, este esențial să înțelegi când ar putea să nu funcționeze conform așteptărilor.</p>
+
+<p>Una dintre principalele limitări ale Kelly fracționat este că presupune un mediu de piață stabil. În perioade de volatilitate ridicată sau de schimbări semnificative ale condițiilor de piață, strategia ar putea să nu fie eficientă. Asta deoarece criteriul Kelly se bazează pe o viziune statică asupra pieței și nu ia în calcul evenimentele neașteptate sau schimbările de regim.</p>
+
+<p>Un alt avertisment este că Kelly fracționat se bazează pe estimări corecte ale probabilității de succes și ale randamentului potențial al investiției. Dacă aceste estimări sunt greșite, strategia ar putea să nu performeze conform intenției. Acest lucru poate fi deosebit de problematic dacă estimările se bazează pe date istorice care nu mai reflectă condițiile actuale de piață.</p>
+
+<p>Mai mult, Kelly fracționat nu oferă nicio informație despre potențialul de pierderi semnificative. Deși poate reduce riscul de pierderi mici, nu garantează că pierderile mai mari vor fi evitate. De fapt, strategia poate chiar crește riscul de pierderi mai mari dacă fracțiunea din Kelly este prea ridicată sau dacă piața este foarte volatilă.</p>
+
+<p>Merită menționat și că Kelly fracționat nu ia în calcul potențiala corelație între diferite investiții. Dacă investițiile sunt puternic corelate, strategia ar putea să nu fie eficientă în reducerea riscului, deoarece pierderile dintr-o investiție nu vor mai fi compensate de câștigurile din alta.</p>
+
+<p>În plus, Kelly fracționat nu oferă nicio informație despre potențialul de evenimente extreme de coadă (tail events), precum evenimentele de tip lebădă neagră sau mișcările extreme de piață. Aceste evenimente pot avea un impact semnificativ asupra performanței strategiei și ar putea să nu fie surprinse de criteriul Kelly.</p>
+
+<p>În final, este esențial să reții că Kelly fracționat nu este o garanție a succesului. Este o strategie de management al riscului care poate ajuta la reducerea riscului de pierderi, dar nu este o abordare infailibilă. De fapt, strategia ar putea să nu funcționeze deloc în anumite condiții de piață, așa că este esențial să îi înțelegi clar limitele și capcanele înainte de a o implementa.</p>
+
+<p>În practică, asta înseamnă că traderii și investitorii ar trebui să fie prudenți atunci când folosesc Kelly fracționat, mai ales în perioade de volatilitate ridicată sau de schimbări semnificative ale condițiilor de piață. De asemenea, ar trebui să își revizuiască și să își actualizeze regulat estimările privind probabilitatea de succes și randamentul potențial, pentru a se asigura că strategia rămâne eficientă.</p>
+
+<p>În cele din urmă, Kelly fracționat este un instrument util pentru reducerea riscului, dar nu înlocuiește deciziile de investiții sănătoase și o înțelegere temeinică a pieței. Este esențial să îl folosești împreună cu alte strategii de management al riscului și să revizuiești și să actualizezi regulat strategia pentru a te asigura că rămâne eficientă.</p>
+
+<h2>Concluzii-cheie</h2>
+
+<ul>
+<li>Kelly fracționat înseamnă pur și simplu „ia fracțiunea Kelly integrală f* și înmulțește-o cu un factor de siguranță f, unde f este între 0 și 1.”
+  <ul><li>Exemplu: dacă fracțiunea Kelly integrală este 0,40 și decizi f = 0,50, tranzacționezi jumătate de Kelly, adică 0,20 din capital pe pariu.</li></ul>
+</li>
+<li>Factorul de siguranță f este butonul tău personal de risc.
+  <ul>
+  <li>f = 1,00 → Kelly integral (creștere maximă, drawdown maxim).</li>
+  <li>f = 0,50 → jumătate de Kelly (creștere mai lentă, aproximativ jumătate din drawdown).</li>
+  <li>f = 0,25 → un sfert de Kelly (foarte conservator, drawdown mic).</li>
+  <li>Alege f înainte de a dimensiona poziția, nu după ce vezi P&L-ul.</li>
+  </ul>
+</li>
+<li>Trebuie să cunoști două numere ca să calculezi f* înainte de a alege f:
+  <ul>
+  <li>Avantajul per unitate pariată = (probabilitatea de câștig × profitul dacă câștigi) – (probabilitatea de pierdere × pierderea dacă pierzi).</li>
+  <li>Varianța rezultatelor sau, echivalent, raportul câștig-pierdere (câștig mediu / pierdere medie).</li>
+  </ul>
+  Fără acestea, formula Kelly nu are sens.
+</li>
+<li>Fracțiunea Kelly f* se calculează ca: f* = (p·b – (1–p)) / b.
+  <ul>
+  <li>p = probabilitatea de câștig (trebuie să fie &gt; 0,50 pentru un avantaj pozitiv).</li>
+  <li>b = raportul câștig/pierdere (profitul mediu când câștigi împărțit la pierderea medie când pierzi).</li>
+  </ul>
+  Păstrează b și p consistente cu instrumentul, intervalul de timp și costurile pe care le tranzacționezi efectiv.
+</li>
+<li>Kelly fracționat nu este o garanție împotriva pierderilor.
+  <ul>
+  <li>Chiar și cu f = 0,25 poți totuși pierde bani; metoda doar reduce șansa de ruină.</li>
+  <li>Piețele se schimbă; recalculează p, b și f cel puțin săptămânal sau ori de câte ori avantajul tău deviază.</li>
+  </ul>
+</li>
+<li>Nu folosi niciodată același f pentru fiecare strategie.
+  <ul>
+  <li>O strategie cu convingere mare și volatilitate redusă poate tolera f = 0,75.</li>
+  <li>O strategie aglomerată și volatilă ar putea necesita f ≤ 0,25.</li>
+  </ul>
+  Tratează f ca specific strategiei, nu uniform pe întreg biroul.
+</li>
+<li>Drawdown-urile se micșorează aproximativ proporțional cu f.
+  <ul>
+  <li>Regulă empirică: înjumătățirea lui f înjumătățește drawdown-ul tipic de la vârf la minim.</li>
+  <li>Dar înjumătățirea lui f înjumătățește și rata de creștere compusă așteptată.</li>
+  </ul>
+  Compromisul este inevitabil; documentează-l în politica ta de dimensionare.
+</li>
+<li>Nu confunda „Kelly fracționat” cu „jumătate din pariu”.
+  <ul>
+  <li>Kelly fracționat scalează fracțiunea, nu pariul în dolari.</li>
+  <li>Dacă mărimea ta Kelly integrală în dolari este 100.000 $ și folosești f = 0,50, pariezi 50.000 $, atât.</li>
+  </ul>
+  Nu mai scala suplimentar cu limitele de poziție sau de risc — acelea vin după.
+</li>
+<li>Păstrează un plafon strict pentru f la nivelul biroului.
+  <ul>
+  <li>Exemplu de plafon: nicio strategie nu poate folosi f &gt; 0,60 fără aprobarea directorului de risc (CRO).</li>
+  <li>Plafonul există deoarece corelația se rupe sub stres, iar prăbușirile individuale pot răni totuși creșa.</li>
+  </ul>
+</li>
+<li>Evidența este obligatorie.
+  <ul>
+  <li>Înregistrează valorile p, b, f* și f pentru fiecare decizie de alocare.</li>
+  <li>Stochează-le într-o foaie de calcul partajată sau într-un sistem de risc, astfel încât următorul trader să poată reproduce dimensionarea.</li>
+  </ul>
+</li>
+<li>Dacă nu poți estima p și b cu o încredere rezonabilă, nu folosi deloc Kelly.
+  <ul>
+  <li>Kelly este sensibil la mici erori în p și b; o supraestimare de 5% a lui p poate dubla f*-ul real.</li>
+  <li>În astfel de cazuri, treci la reguli mai simple de dimensionare (fracțiune fixă, țintirea volatilității) până când ai date mai bune.</li>
+  </ul>
+</li>
+<li>Revizuiește-ți f-ul trimestrial sau după fiecare 20 de tranzacții, care vine primul.
+  <ul>
+  <li>Întreabă-te: s-a schimbat avantajul? Au crescut costurile? Este strategia mai aglomerată?</li>
+  <li>Ajustează f înainte de următoarea tranzacție, nu după o pierdere.</li>
+  </ul>
+</li>
+<li>Reține: Kelly este o formulă pe orizont lung; nu te protejează de șocurile pe termen scurt.
+  <ul>
+  <li>În timpul unui drawdown, nu crește f pentru a „recupera” pierderile.</li>
+  <li>Dacă drawdown-ul depășește banda de scenariu cel mai rău a modelului tău, oprește strategia până când revalidezi p și b.</li>
+  </ul>
+</li>
+<li>Sistemul de risc al creșei va bloca orice mărime Kelly fracționat care încalcă limitele de risc ale biroului, indiferent de f-ul ales.
+  <ul>
+  <li>Treaba ta este să alegi f-ul potrivit; treaba sistemului este să impună plafonul.</li>
+  <li>Dacă sistemul îți respinge mărimea, redu f și retrimite — nu suprascrie blocajul.</li>
+  </ul>
+</li>
+<li>În final: Kelly fracționat este un instrument, nu o religie.
+  <ul>
+  <li>Dacă regimul de piață se schimbă și avantajul tău dispare, oprește complet folosirea Kelly.</li>
+  <li>Rămâi umil; piețele sunt mai inteligente decât orice formulă.</li>
+  </ul>
+</li>
+</ul><script type="application/json" id="cf-mc-quiz">[{"q": "Ce reprezintă, în esență, strategia Kelly fracționat (Fractional Kelly)?", "options": ["Înmulțirea fracțiunii Kelly optime (f*) cu un număr între 0 și 1 pentru a reduce riscul", "Renunțarea completă la formula Kelly în favoarea unei sume fixe", "Pariatul mereu pe jumătate din capitalul total disponibil", "O metodă de a maximiza randamentul ignorând drawdown-ul"], "correct": 0, "explain": "Kelly fracționat ia fracțiunea Kelly integrală f* și o înmulțește cu un factor de siguranță f (între 0 și 1), reducând astfel riscul și drawdown-ul.", "kind": "concept"}, {"q": "În formula Kelly f* = (b·p – q) / b, ce reprezintă litera 'b'?", "options": ["Cota netă primită la pariu (raportul câștig/risc)", "Probabilitatea de a pierde", "Mărimea bankroll-ului", "Factorul de reducere"], "correct": 0, "explain": "'b' este cota netă, adică raportul dintre cât câștigi și cât riști; de exemplu, dacă riști 1 pentru a câștiga 2, atunci b = 2.", "kind": "text"}, {"q": "De ce ar alege un trader să folosească o fracțiune din Kelly în loc de Kelly integral?", "options": ["Pentru a reduce drawdown-urile mari și a crește șansa de supraviețuire pe termen lung", "Pentru a câștiga garantat mai mult la fiecare tranzacție", "Fiindcă Kelly integral este interzis de brokeri", "Pentru a elimina complet costurile de tranzacționare"], "correct": 0, "explain": "Supra-pariatul provoacă drawdown-uri mari chiar și cu un avantaj real; fracțiunea păstrează creșterea pozitivă reducând riscul de margin call sau de ruină.", "kind": "concept"}, {"q": "Ce este, conform capitolului, 'bankroll-ul' (capitalul de tranzacționare)?", "options": ["Banii pe care ești dispus să-i pierzi fără să-ți schimbi stilul de viață", "Tot soldul din contul tău bancar personal", "Profitul total acumulat într-un an", "Suma împrumutată de la broker prin levier"], "correct": 0, "explain": "Bankroll-ul nu este același lucru cu cash-ul din bancă; este capitalul dedicat tranzacționării, pe care ești dispus să-l riști fără a-ți schimba viața.", "kind": "text"}, {"q": "Cum se calculează valoarea așteptată (expected value) a unei tranzacții?", "options": ["(câștig așteptat × probabilitatea de câștig) – (pierdere așteptată × probabilitatea de pierdere)", "câștig mediu împărțit la pierderea medie", "probabilitatea de câștig minus costurile de tranzacționare", "mărimea poziției înmulțită cu volatilitatea"], "correct": 0, "explain": "Un avantaj (edge) există când valoarea așteptată este pozitivă, calculată ca media câștigurilor minus media pierderilor ponderate cu probabilitățile lor.", "kind": "text"}, {"q": "În analogia cu mersul prin ceață pe munte, ce reprezintă faptul că 'ceața se mișcă'?", "options": ["Incertitudinea că modelul tău despre piață rămâne valabil în timp", "Faptul că randamentele cresc constant", "Garanția că vei ajunge în vârf", "Lipsa oricărui avantaj real"], "correct": 0, "explain": "Ceața în mișcare simbolizează incertitudinea: modelul tău este doar o aproximare, condițiile se schimbă, de aceea faci pași mai mici (Kelly fracționat).", "kind": "concept"}, {"q": "Conform capitolului, ce maximizează de fapt Kelly fracționat, spre deosebire de Kelly integral?", "options": ["Capacitatea de supraviețuire (robustețea), nu randamentul maxim", "Randamentul absolut, cu orice preț", "Numărul de tranzacții executate pe zi", "Levierul folosit"], "correct": 0, "explain": "Kelly fracționat acceptă creștere mai lentă în schimbul supraviețuirii rafalelor neașteptate; nu maximizează randamentul, ci robustețea.", "kind": "concept"}, {"q": "De ce încep adesea traderii cu o fracțiune mică (10–20% din Kelly) pe o strategie nouă?", "options": ["Pentru că încă învață terenul și nu au încredere deplină în model", "Pentru că brokerul impune acest minim", "Fiindcă fracțiunile mici garantează profit", "Pentru a evita complet drawdown-urile"], "correct": 0, "explain": "Când sunt noi într-o strategie sau pe o piață, traderii încă învață terenul; pe măsură ce 'ceața se ridică' și crește încrederea, pot mări fracțiunea.", "kind": "concept"}, {"q": "În exemplul EUR/USD, distanța până la țintă era 200 de pipi și până la stop 50 de pipi. Cât este raportul de payoff (b)?", "options": ["4", "2", "0,25", "8"], "correct": 0, "explain": "b = distanța până la țintă / distanța până la stop = 200 / 50 = 4.", "kind": "text"}, {"q": "În exemplul EUR/USD, cu p = 0,65 și b = 4, fracțiunea Kelly integrală f* calculată a fost de aproximativ:", "options": ["0,5625 (≈56%)", "0,28 (≈28%)", "0,10 (≈10%)", "1,00 (≈100%)"], "correct": 0, "explain": "f* ≈ 0,5625, adică aproximativ 56% — un nivel agresiv, motiv pentru care se aplică o fracțiune precum ½ Kelly.", "kind": "text"}, {"q": "După aplicarea ½ Kelly în exemplul EUR/USD, fracțiunea de risc efectivă a devenit:", "options": ["0,28125", "0,5625", "0,14", "1,125"], "correct": 0, "explain": "f = ½ × 0,5625 = 0,28125; aceasta este fracțiunea de risc folosită pentru a dimensiona poziția.", "kind": "text"}, {"q": "De ce este probabilitatea de câștig de 65% considerată un 'avertisment important' în exemplul EUR/USD?", "options": ["Este o opinie, nu un fapt; dacă probabilitatea reală e mai mică, avantajul și Kelly scad", "Este prea mică pentru a tranzacționa", "Garantează 65% câștig pe fiecare tranzacție", "Înlocuiește nevoia de stop-loss"], "correct": 0, "explain": "Probabilitatea de câștig este o estimare subiectivă; dacă realitatea e mai mică, avantajul se micșorează și fracțiunea Kelly recomandată scade.", "kind": "concept"}, {"q": "În scenariul biroului de creșă (small-cap), Kelly integral recomanda ~25% din capital pe tranzacție. De ce a ales biroul jumătate de Kelly (f = 0,50)?", "options": ["25% e prea agresiv pentru a supraviețui cozilor groase, slippage-ului și prăbușirilor", "Jumătate de Kelly dublează randamentul", "Brokerul interzicea pozițiile peste 25%", "Pentru a evita complet costurile de tranzacționare"], "correct": 0, "explain": "Un birou de creșă trebuie să supraviețuiască fat-tails, slippage și eventualelor blow-up-uri, așa că reduce de la 25% la ~1,39% per tranzacție folosind ½ Kelly.", "kind": "concept"}, {"q": "În scenariul small-cap, ce înseamnă o fracțiune Kelly negativă (de ex. –1,72% pentru numele XYZZ)?", "options": ["Nu lua această tranzacție — modelul indică valoare așteptată negativă", "Dublează poziția în direcția opusă", "Folosește levier maxim", "Tranzacția este garantat profitabilă"], "correct": 0, "explain": "O mărime negativă înseamnă 'nu intra'; modelul spune că tranzacția are valoare așteptată negativă, iar a o ignora compune pierderile.", "kind": "concept"}, {"q": "De ce este periculos să tastezi 0,50 în loc de 0,05 ca fracțiune, conform avertismentelor din scenariul small-cap?", "options": ["Schimbă mărimea poziției cu un factor de zece, iar pierderea poate fi deja înregistrată", "Nu are niciun efect, fiindcă sistemul corectează automat", "Reduce profitul cu exact 10%", "Anulează ordinul automat"], "correct": 0, "explain": "O eroare de tastare de la 0,05 la 0,50 multiplică expunerea de zece ori; deși registrul o arată imediat, pierderea poate fi deja produsă.", "kind": "concept"}, {"q": "De ce este important plafonul zilnic de 3% din capital în scenariul small-cap, chiar dacă fiecare poziție e mică?", "options": ["Pentru a limita expunerea brută totală când multe nume se califică simultan", "Pentru a forța folosirea levierului", "Pentru a garanta un profit zilnic de 3%", "Pentru a elimina nevoia de stop-loss individual"], "correct": 0, "explain": "Cu ~1,4% per tranzacție și multe nume, expunerea brută poate crește mult; plafonul de 3% (cu reducere pro-rata) ține riscul agregat sub control.", "kind": "concept"}, {"q": "Care este o concepție greșită frecventă despre criteriul Kelly, conform capitolului?", "options": ["Că este o regulă rigidă ce trebuie respectată la literă, nu un ghid", "Că este prea conservator în orice situație", "Că funcționează doar pe acțiuni small-cap", "Că nu necesită cunoașterea probabilităților"], "correct": 0, "explain": "Mulți traderi cred greșit că Kelly e o regulă fixă; în realitate este un ghid, iar fracțiunea optimă variază cu condițiile de piață și toleranța la risc.", "kind": "concept"}, {"q": "Conform secțiunii despre greșeli frecvente, este adevărat că poți reduce riscul fără a sacrifica deloc randamentul potențial?", "options": ["Nu — reducerea riscului necesită de obicei sacrificarea unei părți din randament", "Da — Kelly fracționat elimină acest compromis", "Da, dacă folosești levier", "Doar pe piețe stabile randamentul nu scade"], "correct": 0, "explain": "Capitolul subliniază că ignorarea compromisului risc-randament e o greșeală; reducerea riscului implică, de regulă, sacrificarea unei părți din randamentul potențial.", "kind": "concept"}, {"q": "Cum afectează efectul de levier (leverage) o strategie Kelly fracționat?", "options": ["Amplifică atât câștigurile, cât și pierderile, deci necesită atenție deosebită", "Este neutru și poate fi ignorat în siguranță", "Reduce automat drawdown-ul", "Crește doar câștigurile, nu și pierderile"], "correct": 0, "explain": "Levierul nu este neutru: amplifică atât câștigurile, cât și pierderile, deci impactul lui trebuie luat în calcul când dimensionezi cu Kelly.", "kind": "concept"}, {"q": "La biroul de tranzacționare, ce indică o celulă roșie tip semafor în coloana FKelly %?", "options": ["Poziția a depășit stop-loss-ul", "FKelly % este în apetitul de risc agreat", "Poziția tocmai a fost deschisă", "Avantajul a crescut peste plafon"], "correct": 0, "explain": "Semaforul e verde dacă FKelly % e în apetit, galben dacă a deviat și roșu dacă a depășit stop-loss-ul.", "kind": "text"}, {"q": "Care este formula folosită de motorul de risc al biroului pentru FKelly %?", "options": ["FKelly % = (Edge / Vol²) × pWin × f", "FKelly % = Edge × Vol × pWin", "FKelly % = (Vol² / Edge) × f", "FKelly % = pWin / (Edge × f)"], "correct": 0, "explain": "Biroul calculează FKelly % = (Edge / Vol²) × pWin × f, unde f este fracțiunea aleasă (de ex. 0,3).", "kind": "text"}, {"q": "Cum previne mecanismul de timing bazat pe FKelly % un management prost al riscului?", "options": ["Împiedică biroul să adauge la pozițiile pierzătoare și să taie pe cele câștigătoare", "Forțează închiderea tuturor pozițiilor la prânz", "Mărește automat levierul când scade avantajul", "Ignoră schimbările de avantaj pe parcursul zilei"], "correct": 0, "explain": "Dacă avantajul crește, poziția poate fi mărită doar până la noul plafon; dacă avantajul se erodează, poziția e redusă — exact opusul comportamentului greșit.", "kind": "concept"}, {"q": "Ce gamă de fracțiune Kelly este uzuală la birou, în practică?", "options": ["0,2 până la 0,4", "0,8 până la 1,0", "Exact 1,0 (Kelly integral)", "Sub 0,01"], "correct": 0, "explain": "În practică, biroul folosește rareori Kelly integral; o fracțiune de 0,2–0,4 este uzuală, aleasă pentru confort psihologic și volatilitate controlată a P&L-ului.", "kind": "text"}, {"q": "De ce NU ar trebui să folosești același f pentru fiecare strategie?", "options": ["Pentru că o strategie cu convingere mare și volatilitate mică tolerează f mai mare decât una aglomerată și volatilă", "Pentru că regulile impun un f unic pe birou", "Pentru că f trebuie schimbat la fiecare tranzacție indiferent de strategie", "Pentru că f nu influențează niciodată drawdown-ul"], "correct": 0, "explain": "f este specific strategiei: una cu convingere mare și volatilitate redusă poate folosi f = 0,75, iar una aglomerată și volatilă f ≤ 0,25.", "kind": "concept"}, {"q": "Conform concluziilor, ce ar trebui să faci în timpul unui drawdown, legat de fracțiunea f?", "options": ["Să NU crești f pentru a 'recupera' pierderile; eventual să oprești strategia dacă drawdown-ul depășește banda modelului", "Să dublezi f imediat pentru a compensa", "Să treci la Kelly integral", "Să ignori complet drawdown-ul, fiindcă Kelly te protejează pe termen scurt"], "correct": 0, "explain": "Kelly este o formulă pe orizont lung și nu protejează de șocurile pe termen scurt; în drawdown nu crești f pentru a recupera, iar dacă depășește banda de scenariu cel mai rău, oprești strategia până revalidezi p și b.", "kind": "concept"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>

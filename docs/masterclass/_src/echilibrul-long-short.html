@@ -1,0 +1,252 @@
+<p>Echilibrul long/short (long/short balance) este modul prin care un investitor decide cum se alocă banii între pozițiile long și pozițiile short, adică între pariurile pe creșterea prețurilor și cele pe scăderea lor. Acest echilibru între poziții long și short stă la baza unei alocări inteligente a capitalului și a unei bune gestiuni a riscului (risk management) într-un portofoliu de acțiuni. Înțelegerea raportului long/short te ajută să iei decizii de investiții informate, indiferent de direcția pieței.</p>
+
+<p>O <strong>poziție long</strong> înseamnă să cumperi sau să deții un activ (acțiune, marfă, valută), mizând că valoarea lui va crește în timp. O <strong>poziție short</strong> înseamnă să vinzi în lipsă un activ împrumutat, mizând că valoarea lui va scădea. Combinând cele două, transformi un pariu pe o singură direcție într-un scut pe două direcții.</p>
+
+<p>În acest capitol din Masterclass Bursă vei învăța ce este alocarea între poziții long și short, cum se calculează expunerea netă (net exposure), cum echilibrezi portofoliul pentru a controla riscul și costurile, precum și capcanele frecvente pe care le evită traderii profesioniști atunci când gestionează raportul long/short.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>În contextul investițiilor și al tradingului, un echilibru long/short se referă la alocarea activelor între două tipuri de poziții: long și short. Înțelegerea acestor concepte este esențială pentru a lua decizii de investiții informate și pentru a gestiona riscul.</p>
+
+<h3>Ce sunt pozițiile long și short?</h3>
+
+<p>O <strong>poziție long</strong> este o investiție în care cumperi sau deții un activ, precum o acțiune, o marfă sau o valută, cu așteptarea ca valoarea lui să crească în timp. Atunci când cumperi o acțiune, practic pariezi că firma se va descurca bine și prețul acțiunii va urca. În acest scenariu ești expus la pierderi potențiale dacă prețul scade, dar ai și potențialul de a obține profit dacă prețul crește.</p>
+
+<p>Pe de altă parte, o <strong>poziție short</strong> este o investiție în care vinzi sau împrumuți un activ cu așteptarea ca valoarea lui să scadă în timp. Atunci când vinzi în lipsă (sell short) o acțiune, practic pariezi că firma se va descurca slab și prețul acțiunii va scădea. În acest scenariu, va trebui să răscumperi acțiunea la un preț mai mic pentru a o returna celui de la care ai împrumutat-o, iar diferența dintre prețul de vânzare și prețul de răscumpărare este profitul tău.</p>
+
+<h3>Termeni-cheie</h3>
+
+<ul>
+<li><strong>Activ (asset):</strong> un instrument financiar, precum o acțiune, o obligațiune, o marfă sau o valută, care poate fi cumpărat, vândut sau tranzacționat.</li>
+<li><strong>Poziție (position):</strong> o investiție sau o tranzacție anume, long sau short, pe care o deține un investitor.</li>
+<li><strong>Long:</strong> o poziție în care un investitor deține sau cumpără un activ, așteptându-se ca valoarea lui să crească.</li>
+<li><strong>Short:</strong> o poziție în care un investitor vinde sau împrumută un activ, așteptându-se ca valoarea lui să scadă.</li>
+<li><strong>Levier (leverage):</strong> folosirea de bani împrumutați sau de alte instrumente financiare pentru a amplifica câștigurile sau pierderile potențiale.</li>
+<li><strong>Marjă (margin):</strong> suma de bani necesară pentru a deschide și a menține o poziție cu levier.</li>
+<li><strong>Risc (risk):</strong> posibilitatea de a pierde o parte sau tot capitalul investit.</li>
+<li><strong>Randament (return):</strong> profitul sau pierderea generată de o investiție sau o tranzacție.</li>
+</ul>
+
+<h3>Echilibrul long/short</h3>
+
+<p>Un echilibru long/short se referă la raportul dintre pozițiile long și pozițiile short din portofoliul unui investitor. Acest echilibru este esențial pentru gestionarea riscului și maximizarea randamentelor. O <strong>înclinare long (long bias)</strong> înseamnă că investitorul are mai multe poziții long decât short, în timp ce o <strong>înclinare short (short bias)</strong> înseamnă că are mai multe poziții short decât long.</p>
+
+<h3>De ce este important echilibrul long/short?</h3>
+
+<p>Un portofoliu long/short bine echilibrat îi poate ajuta pe investitori să:</p>
+
+<ul>
+<li>gestioneze riscul, limitând pierderile potențiale;</li>
+<li>maximizeze randamentele, profitând de oportunitățile pieței;</li>
+<li>mențină un portofoliu stabil, echilibrând pozițiile long și short.</li>
+</ul>
+
+<p>Totuși, este important de reținut că echilibrul long/short nu este o soluție universală. Obiectivele, toleranța la risc și condițiile de piață ale fiecărui investitor sunt unice, iar o abordare personalizată este necesară pentru rezultate optime. În secțiunea următoare vom explora cum se calculează și se gestionează un echilibru long/short într-un scenariu practic.</p>
+
+<h2>Intuiție</h2>
+
+<p>Imaginează-ți că ții o mică tarabă cu limonadă pentru o singură după-amiază caniculară. Ai două tipuri de limonadă: cea clasică, galbenă, și una nou-nouță, „super-acră", care are gust de strănut de lămâie. Ai doar 100 de lei de cheltuit și trebuie să decizi cât din acești bani pui în fiecare tip de limonadă.</p>
+
+<p>Dacă pui toți cei 100 de lei în limonada clasică și ziua iese înnorată, s-ar putea să nu vinzi aproape nimic și să pierzi mare parte din bani. Dacă pui toți cei 100 de lei în limonada super-acră și ziua iese blândă, se întâmplă același lucru. Dar dacă împarți cei 100 de lei — să zicem 60 în clasică și 40 în super-acră — atunci, orice ar face vremea, tot ai niște limonadă pe care clienții ar putea să o cumpere. Nu ai obținut cel mai mare profit posibil în niciun scenariu, dar nici nu ai pierdut totul în niciun scenariu. Aceasta este prima parte din intuiția din spatele „echilibrului long/short": deținând ambele variante, te protejezi împotriva situației în care te-ai înșelat complet.</p>
+
+<p>Acum să traducem povestea cu limonada în limbajul piețelor.</p>
+
+<p>Pe piețe poți câștiga bani când prețurile cresc (asta se numește poziție „long") și poți câștiga bani și când prețurile scad (asta se numește poziție „short"). O poziție long înseamnă pur și simplu să deții un activ — să cumperi o acțiune, de exemplu. O poziție short este un pariu împotriva unui activ — împrumuți acțiunea azi, o vinzi imediat și promiți să o răscumperi mai târziu la orice preț va avea atunci. Dacă prețul scade, o răscumperi mai ieftin și păstrezi diferența; dacă prețul crește, pierzi bani pe short.</p>
+
+<p>Problema este că nu știi niciodată sigur în ce direcție se vor mișca prețurile. Chiar și investitorii profesioniști, cu cea mai bună documentare, sunt deseori surprinși. Așa că, dacă pui toți banii în long și piața scade brusc, poți pierde mult. Dacă pui toți banii în short și piața crește brusc, poți de asemenea pierde mult. Soluția este să echilibrezi cele două: ține niște bani în long și niște bani în short. Acel echilibru este ceea ce numim echilibrul long/short.</p>
+
+<p>Gândește-te la el ca la o giruetă care poate indica două direcții în același timp. În loc să pariezi pe o singură direcție, construiești o mică acoperire (hedge) „în ambele direcții". Acoperirea nu este gratuită: pe vreme calmă nu vei face cel mai mare profit posibil, la fel cum la taraba cu limonadă nu ai făcut cel mai mare profit posibil într-o zi perfect însorită. Dar acoperirea împiedică și o singură furtună să te dea peste cap. Acesta este compromisul: mai puțin potențial de câștig în cel mai bun caz, dar mult mai puțină pierdere în cel mai rău caz.</p>
+
+<p>O a doua parte a intuiției vine din ideea de „muniție uscată" (dry powder). Să presupunem că observi că prețul unei acțiuni care îți place a crescut atât de rapid încât pare scumpă. Ai putea să vinzi toată poziția și să aștepți o corecție, dar atunci ai ieșit complet din piață. Alternativ, ai putea să vinzi o parte din poziție (un short) păstrând în același timp o parte din ea (un long). Acum participi în continuare dacă acțiunea continuă să crească, dar profiți și dacă scade. Echilibrul long/short îți permite să rămâi investit, scoțând în același timp niște fise de pe masă.</p>
+
+<p>În final, gândește-te la comisioane și la costurile de împrumut. Vânzarea în lipsă nu este niciodată gratuită; de obicei plătești dobândă pentru acțiunile împrumutate și s-ar putea să trebuiască să depui garanții suplimentare. Dacă faci prea mult short, aceste costuri îți pot eroda randamentele. Prin urmare, echilibrul long/short are și o latură practică: este o modalitate de a controla costurile, păstrând în același timp flexibilitatea de a beneficia din oricare direcție a pieței.</p>
+
+<p>Pe scurt, echilibrul long/short există pentru că piețele sunt incerte, iar previziunile umane sunt imperfecte. Împărțind banii între poziții care profită din creșterea prețurilor și poziții care profită din scăderea lor, transformi un pariu pe o singură direcție într-un scut pe două direcții. Renunți la o parte din câștigurile din cel mai bun caz, dar eviți și pierderile din cel mai rău caz. Aceasta este intuiția centrală: nu să prezici viitorul, ci să te pregătești pentru multe viitoruri posibile în același timp.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Pentru a înțelege mecanica alocării între pozițiile long și short, să luăm un scenariu simplu. Imaginează-ți că ești managerul unei grădinițe, responsabil cu alocarea unui buget de 10.000 de lei pentru a investi în două tipuri de jucării: cuburi de lemn și mașinuțe. Te aștepți ca cererea pentru cuburi de lemn să crească în lunile următoare, în timp ce cererea pentru mașinuțe să scadă.</p>
+
+<p>În acest scenariu, o poziție long ar reprezenta cumpărarea de cuburi de lemn, mizând că prețul lor va crește, în timp ce o poziție short ar reprezenta vânzarea de mașinuțe, mizând că prețul lor va scădea. Scopul tău este să aloci bugetul de 10.000 de lei între aceste două poziții pentru a maximiza randamentele.</p>
+
+<p>Iată datele de intrare cheie de luat în calcul:</p>
+
+<ol>
+<li><strong>Buget:</strong> suma totală de bani disponibilă pentru investiție, în acest caz 10.000 de lei.</li>
+<li><strong>Randamente așteptate:</strong> randamentele potențiale ale fiecărei poziții, pe baza analizei tendințelor pieței. De exemplu, ai putea estima un randament de 10% pentru cuburile de lemn și un randament de 5% pentru mașinuțe.</li>
+<li><strong>Toleranța la risc:</strong> disponibilitatea ta de a-ți asuma risc, care va influența cât din buget aloci fiecărei poziții.</li>
+<li><strong>Condițiile de piață:</strong> condițiile curente, precum cererea și oferta, care vor afecta prețurile fiecărei poziții.</li>
+</ol>
+
+<p>Acum, să parcurgem procesul de alocare a bugetului între pozițiile long și short:</p>
+
+<ol>
+<li><strong>Stabilește randamentul-țintă:</strong> decide ce randament vrei să obții cu investiția. Acesta va depinde de toleranța ta la risc și de așteptările legate de piață.</li>
+<li><strong>Calculează randamentele potențiale:</strong> calculează randamentele potențiale ale fiecărei poziții, pe baza analizei tendințelor pieței.</li>
+<li><strong>Evaluează riscul:</strong> evaluează riscul asociat fiecărei poziții, ținând cont de factori precum volatilitatea pieței și pierderile potențiale.</li>
+<li><strong>Alocă bugetul:</strong> alocă bugetul între cele două poziții, ținând cont de randamentul-țintă, randamentele potențiale și toleranța la risc.</li>
+<li><strong>Monitorizează și ajustează:</strong> monitorizează continuu condițiile de piață și ajustează alocarea după nevoie pentru a-ți atinge randamentul-țintă.</li>
+</ol>
+
+<p>Rezultatele acestui proces vor fi:</p>
+
+<ol>
+<li><strong>Buget alocat:</strong> suma de bani alocată fiecărei poziții, pe baza analizei și a toleranței la risc.</li>
+<li><strong>Randamente așteptate:</strong> randamentele estimate pentru fiecare poziție, pe baza analizei tendințelor pieței.</li>
+<li><strong>Profil de risc:</strong> un rezumat al riscului asociat fiecărei poziții, inclusiv pierderile potențiale și volatilitatea pieței.</li>
+<li><strong>Indicatori de performanță:</strong> metrici pentru a urmări performanța fiecărei poziții, precum randamentul investiției și randamentul ajustat la risc.</li>
+</ol>
+
+<p>De exemplu, să zicem că aloci 8.000 de lei pentru cuburile de lemn și 2.000 de lei pentru mașinuțe. Randamentele tale așteptate ar fi:</p>
+
+<ul>
+<li>Cuburi de lemn: randament de 10% (800 lei)</li>
+<li>Mașinuțe: randament de 5% (100 lei)</li>
+</ul>
+
+<p>Profilul tău de risc ar indica faptul că poziția pe cuburi de lemn este mai riscantă, din cauza potențialului de volatilitate și de fluctuație a prețurilor. Indicatorii de performanță ar urmări randamentul investiției și randamentul ajustat la risc pentru fiecare poziție, permițându-ți să ajustezi alocarea după nevoie pentru a-ți atinge randamentul-țintă.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să construim un mic portofoliu de grădiniță ca să vedem cum funcționează de fapt echilibrul long/short în practică. Vom:</p>
+
+<ul>
+<li>începe cu 100 de monede de grădiniță (MG) în numerar;</li>
+<li>alege două firme reale de grădiniță: PetalPlants (simbol PP) și SunShineToys (simbol ST);</li>
+<li>decide câte acțiuni din fiecare cumpărăm (partea „long") și, dacă decidem să facem short, câte acțiuni împrumutăm și vindem (partea „short");</li>
+<li>urmări numerarul, valorile de piață și echilibrul general dintre cele două părți.</li>
+</ul>
+
+<h3>Pasul 1 – stabilește punctul de pornire doar long</h3>
+<p>PetalPlants ne place cel mai mult, așa că cheltuim jumătate din numerar pe PP.</p>
+<ul>
+<li>Preț PP = 2 MG per acțiune</li>
+<li>Acțiuni pe care le putem cumpăra = 50 MG ÷ 2 MG/acțiune = 25 de acțiuni</li>
+<li>Numerar rămas = 100 MG – 50 MG = 50 MG</li>
+</ul>
+<p>Portofoliul până acum: Long PP: 25 acțiuni × 2 MG = 50 MG; Numerar: 50 MG; Total = 100 MG.</p>
+
+<h3>Pasul 2 – stabilește partea short</h3>
+<p>Credem că SunShineToys este supraevaluată. În loc să o cumpărăm, împrumutăm 10 acțiuni și le vindem în lipsă la prețul curent.</p>
+<ul>
+<li>Preț ST = 5 MG per acțiune</li>
+<li>Încasări din vânzarea short = 10 acțiuni × 5 MG = 50 MG</li>
+</ul>
+<p>Trebuie să păstrăm aceste 50 MG „în depozit" drept garanție (colateral) pentru acțiunile împrumutate; nu le putem cheltui.</p>
+<p>Portofoliul acum: Long PP: 25 acțiuni × 2 MG = 50 MG; Short ST: –10 acțiuni × 5 MG = –50 MG; Numerar: 0 MG (toate cele 50 MG sunt blocate drept garanție); Total = 0 MG (cele două părți se anulează). Observă că cele două părți sunt egale ca dimensiune (50 MG long față de 50 MG short). Acesta este un portofoliu echilibrat 100%.</p>
+
+<h3>Pasul 3 – verifică profitul/pierderea zilnică (P&amp;L)</h3>
+<p>A doua zi prețurile se mișcă: PP urcă la 2,2 MG, ST scade la 4,8 MG.</p>
+<ul>
+<li>Câștig pe partea long: 25 acțiuni × (2,2 – 2,0) MG = +5 MG</li>
+<li>Câștig pe partea short: 10 acțiuni × (5,0 – 4,8) MG = +2 MG</li>
+<li>P&amp;L total = +5 MG + 2 MG = +7 MG</li>
+</ul>
+<p>Numerarul rămâne la 50 MG (nu îl putem atinge până nu închidem poziția short).</p>
+
+<h3>Pasul 4 – reechilibrează pentru a menține echilibrul</h3>
+<p>După mișcarea de preț, portofoliul nu mai este echilibrat: Valoare long = 25 × 2,2 = 55 MG; Valoare short = 10 × 4,8 = 48 MG; Expunere netă = +7 MG.</p>
+<p>Dacă vrem să menținem echilibrul long/short exact la 1:1, trebuie să micșorăm partea mai mare. Putem fie (A) să vindem niște PP, fie (B) să răscumpărăm niște ST. Alegem opțiunea B, pentru că partea short este mai mică. Răscumpărăm 1 acțiune ST la 4,8 MG, folosind 4,8 MG din garanție. Noua poziție short = 9 acțiuni × 4,8 MG = 43,2 MG; partea long rămâne la 55 MG.</p>
+<p>Suntem încă ușor dezechilibrați (+11,8 MG net long), așa că repetăm: răscumpărăm încă o acțiune ST. Noua poziție short = 8 acțiuni × 4,8 MG = 38,4 MG; partea long = 55 MG; expunere netă = 16,6 MG long.</p>
+<p>Pentru că prețurile de grădiniță se mișcă rapid și avem poziții mici, un echilibru exact de 1:1 este greu de menținut în timp real. În practică, stabilim o bandă-țintă (de exemplu, „menține expunerea netă între –5 MG și +5 MG") și reechilibrăm doar când ieșim din acea bandă.</p>
+
+<h3>Pasul 5 – închide pozițiile</h3>
+<p>În a treia zi decidem să ieșim. Preț PP = 2,1 MG; Preț ST = 4,9 MG.</p>
+<ul>
+<li>Închidere long PP: vindem 25 acțiuni × 2,1 MG = 52,5 MG.</li>
+<li>Închidere short ST: răscumpărăm 8 acțiuni × 4,9 MG = 39,2 MG. Returnăm acțiunile și păstrăm diferența: 40 MG (garanție) – 39,2 MG = 0,8 MG profit pe short.</li>
+</ul>
+<p>Cont de numerar: numerar inițial 100 MG + câștig long PP 2,5 MG (52,5 – 50) + câștig short ST 0,8 MG = numerar final 103,3 MG. Am făcut 3,3 MG pe un portofoliu de 100 MG în trei zile. Echilibrul long/short ne-a ajutat să prindem câștiguri atât din creșterea PetalPlants, cât și din scăderea SunShineToys, ținând în același timp expunerea brută sub control.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să luăm în considerare un alt scenariu pentru a aprofunda înțelegerea echilibrului long/short. Imaginează-ți că suntem managerul unei grădinițe, responsabil cu alocarea resurselor între două tipuri de investiții: un set nou de echipamente de joacă (poziție long) și un set de mobilier de exterior la mâna a doua (poziție short). Scopul nostru este să echilibrăm pozițiile long și short pentru a obține o alocare stabilă și optimă.</p>
+
+<p>Să presupunem că avem un buget de 10.000 de lei de alocat între cele două investiții. Setul nou de echipamente de joacă costă 5.000 de lei, iar setul de mobilier de exterior la mâna a doua poate fi cumpărat cu 3.000 de lei. Ne așteptăm ca setul nou de echipamente de joacă să crească în valoare cu 20% în următorul an, în timp ce setul de mobilier de exterior la mâna a doua se va deprecia cu 10% în aceeași perioadă.</p>
+
+<p>Alocarea noastră curentă este 60% long (echipamente noi de joacă) și 40% short (mobilier de exterior la mâna a doua). Totuși, vrem să ajustăm alocarea pentru a profita de mișcările de preț așteptate. Decidem să creștem poziția long la 70% și să scădem poziția short la 30%.</p>
+
+<p>Pentru a calcula noua alocare, trebuie să determinăm suma investită în fiecare poziție. Avem un buget de 10.000 de lei și vrem să alocăm 70% pentru poziția long și 30% pentru poziția short.</p>
+
+<p>Pentru poziția long: 10.000 lei × 0,70 = 7.000 lei (alocați setului nou de echipamente de joacă).</p>
+
+<p>Pentru poziția short: 10.000 lei × 0,30 = 3.000 lei (alocați setului de mobilier de exterior la mâna a doua).</p>
+
+<p>Acum că am determinat suma investită în fiecare poziție, putem calcula profitul sau pierderea așteptată. Pentru poziția long, ne așteptăm ca setul nou de echipamente de joacă să crească în valoare cu 20%, ceea ce înseamnă un profit estimat de: 7.000 lei × 0,20 = 1.400 lei.</p>
+
+<p>Pentru poziția short, ne așteptăm ca setul de mobilier de exterior la mâna a doua să se deprecieze cu 10%, ceea ce înseamnă un profit estimat de: 3.000 lei × 0,10 = 300 lei.</p>
+
+<p>Totuși, trebuie să luăm în calcul și pierderea potențială dacă mișcările de preț așteptate nu au loc. Dacă setul nou de echipamente de joacă se depreciază cu 20%, vom pierde: 7.000 lei × 0,20 = 1.400 lei. În mod similar, dacă setul de mobilier de exterior la mâna a doua crește în valoare cu 10%, vom pierde: 3.000 lei × 0,10 = 300 lei.</p>
+
+<p>Pentru a determina profitul sau pierderea așteptată în ansamblu, trebuie să luăm în calcul atât câștigurile, cât și pierderile potențiale. În acest scenariu, ne așteptăm la un profit de 1.700 lei (1.400 lei + 300 lei) dacă mișcările de preț așteptate au loc. Totuși, trebuie să luăm în calcul și pierderile potențiale de 1.400 lei + 300 lei = 1.700 lei dacă mișcările de preț nu au loc.</p>
+
+<p>Ajustând pozițiile long și short, am crescut profitul potențial, dar am crescut și pierderea potențială. Acest lucru subliniază importanța de a cântări atent riscurile și recompensele atunci când iei decizii de investiții. În secțiunea următoare vom explora cum să folosim echilibrul long/short pentru a gestiona riscul și a obține o alocare stabilă.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Atunci când lucrează cu echilibre long/short, începătorii fac deseori greșeli care pot duce la alocări incorecte sau chiar la pierderi semnificative. Înțelegerea acestor capcane frecvente este esențială pentru a-ți forma o stăpânire solidă a conceptului.</p>
+
+<p>Una dintre cele mai importante concepții greșite este presupunerea că un echilibru long/short este un raport fix. Mulți traderi noi cred că trebuie să aloce un anumit procent din portofoliu pozițiilor long și un alt procent pozițiilor short. Totuși, nu este neapărat așa. Un echilibru long/short este o alocare dinamică, care se poate schimba în funcție de condițiile de piață, toleranța la risc și alți factori.</p>
+
+<p>O altă greșeală frecventă este ignorarea conceptului de „expunere netă" (net exposure). Acesta se referă la suma totală investită în piață, ținând cont atât de pozițiile long, cât și de cele short. Începătorii se concentrează adesea doar pe pozițiile individuale, fără a lua în calcul impactul lor asupra portofoliului. De exemplu, un trader poate avea o poziție long într-o acțiune de 10.000 USD și o poziție short în aceeași acțiune de 5.000 USD. Deși pozițiile individuale par echilibrate, expunerea netă este de fapt 5.000 USD, pentru că traderul a investit cu 5.000 USD mai mult în piață decât a „shortat".</p>
+
+<p>Traderii se confruntă adesea și cu conceptul de „raport de acoperire" (hedge ratio). Acesta se referă la raportul dintre valoarea nominală a unei poziții short și valoarea nominală a unei poziții long. O greșeală frecventă este presupunerea că un raport de acoperire de 1:1 este întotdeauna suficient. Totuși, nu este așa, deoarece raportul optim de acoperire va depinde de condițiile specifice de piață și de toleranța la risc a traderului. De exemplu, un trader ar putea avea nevoie de un raport de acoperire de 2:1 pe o piață foarte volatilă, în timp ce un raport de 1:1 poate fi suficient pe o piață mai stabilă.</p>
+
+<p>O altă concepție greșită este că un echilibru long/short este o modalitate de a „paria împotriva" pieței. Deși este adevărat că pozițiile short implică vânzarea unui titlu pe care traderul nu îl deține, asta nu înseamnă neapărat că traderul „pariază împotriva" pieței. De fapt, un echilibru long/short bine conceput poate fi o modalitate de a gestiona riscul și de a crește randamentele potențiale, indiferent de direcția pieței.</p>
+
+<p>În final, începătorii nu iau adesea în calcul impactul levierului asupra echilibrului long/short. Levierul poate amplifica atât câștigurile, cât și pierderile, iar traderii trebuie să fie atenți să nu folosească un levier excesiv. De exemplu, un trader poate folosi un levier de 2:1 pe o poziție long, ceea ce înseamnă că o investiție de 10.000 USD poate deveni o poziție de 20.000 USD. Totuși, dacă piața se mișcă împotriva traderului, și pierderile pot fi amplificate, ducând la pierderi semnificative.</p>
+
+<p>Pentru a evita aceste greșeli și concepții greșite, traderii trebuie să-și formeze o înțelegere profundă a conceptelor și a mecanicii echilibrelor long/short. Aceasta include înțelegerea expunerii nete, a raportului de acoperire și a levierului, precum și a importanței alocării dinamice și a gestiunii riscului. Evitând aceste capcane frecvente, traderii pot construi echilibre long/short eficiente, care îi ajută să-și atingă obiectivele de investiții.</p>
+
+<h2>Cum folosește masa de tranzacționare acest concept</h2>
+
+<p>Pe o masă de tranzacționare (trading desk) reală, „echilibrul long/short" nu este un exercițiu de clasă — este pulsul viu al fiecărei decizii de risc și de P&amp;L. Când șefa de masă parcurge portofoliul la 7:15 dimineața, nu se întreabă „Care este raportul teoretic optim?". Se întreabă „Care poziții long sunt prea mari, care short sunt prea mici și cum le redimensionăm astfel încât o mișcare adversă de 2% în oricare direcție să nu șteargă marja de azi-dimineață?". Această întrebare este echilibrul long/short în acțiune.</p>
+
+<p>Să urmărim masa de instrumente derivate pe acțiuni a unei bănci europene de dimensiune medie, într-o miercuri obișnuită. Portofoliul este neutru peste noapte, dar sesiunea de futures de peste noapte tocmai a marcat un gap în jos de 0,8% pe Euro Stoxx 50. Ecranul controlorului de risc semnalează o depășire de 1,2% a valorii la risc (Value-at-Risk, VaR) pe partea long a portofoliului. Limita internă de risc a mesei pentru VaR pe o singură sesiune este 1,5%, deci depășirea este tolerabilă, dar la limită. Traderul responsabil, Anna, are acum cinci minute să decidă dacă (a) reduce long-urile, (b) adaugă short-uri sau (c) face ambele până când echilibrul „pare corect". Nu scoate un număr dintr-un tabel; folosește echilibrul long/short ca pe un buton practic de reglaj.</p>
+
+<p>Anna pornește de la indicatorii agregați de risc (Greeks) ai portofoliului. Delta este +1.200, adică portofoliul este efectiv long pe 1.200 de puncte de indice. Vega este –320, deci portofoliul pierde bani dacă volatilitatea implicită crește. Știe din calibrarea de ieri că o mișcare de 10 puncte a indicelui (≈0,6%) costă de obicei 48.000 € pe partea de delta și 12.000 € pe partea de vega. O mișcare adversă de 2% ar fi, prin urmare, de aproximativ 3,3 ori mai mare: 158.000 € pierdere pe delta și 40.000 € pierdere pe vega, în total 198.000 €. Stop-loss-ul zilnic al mesei este 250.000 €, deci poziția este încă în limite — dar doar la limită. Anna decide să apropie echilibrul long/short de neutru, adăugând o acoperire short moderată.</p>
+
+<p>Consultă ecranul de selecție a acțiunilor. Primele cinci poziții long sunt ASML (+58.000 € delta), LVMH (+42.000 €), SAP (+36.000 €), L'Oréal (+30.000 €) și Siemens (+28.000 €). Scorurile interne de convingere ale mesei (0–100) pentru aceste nume sunt 78, 65, 72, 68 și, respectiv, 60. Anna vrea să păstreze long-urile cu cea mai mare convingere, dar să reducă riscul de coadă. Îi cere traderului de flux să vândă 200 de contracte futures pe indice (≈28.000 € delta) și să cumpere simultan 20.000 € valoare nominală de spread-uri de put pe ASML (strike –3%, scadență o lună). Spread-ul de put costă 1.200 € în primă, dar oferă o acoperire convexă. Efect net: delta scade de la +1.200 la +920, vega devine –300, iar pierderea maximă pe două zile se reduce la 140.000 €. Echilibrul long/short este acum mai aproape de 60/40 în loc de fostul 75/25.</p>
+
+<p>Mai târziu în acea dimineață, BCE publică minute cu ton agresiv (hawkish). Indicele crește cu 1,1% în douăzeci de minute. Fără acoperire, portofoliul ar fi câștigat 132.000 € doar pe delta. Cu acoperire, câștigul net este 96.000 €, pentru că futures-urile short și spread-ul de put compensează parțial mișcarea. P&amp;L-ul mesei este în continuare pozitiv, dar echilibrul long/short a împiedicat o cedare completă a câștigului. Șeful de masă aprobă reechilibrarea, pentru că a ținut portofoliul în plicul de risc, păstrând în același timp 70% din potențialul de creștere.</p>
+
+<p>Masa repetă acest exercițiu de fiecare dată când sosește un semnal nou. La 14:30, masa de credit semnalează că un furnizor-cheie al Siemens ar putea intra în insolvență peste noapte. Convingerea Annei în Siemens scade de la 60 la 35. Decide să reducă poziția long pe Siemens de la 28.000 € delta la 12.000 € delta și să crească simultan acoperirea short cu încă 150 de contracte futures pe indice (≈21.000 € delta). Noul echilibru este 45/55 long/short. VaR scade la 0,9%, confortabil sub limită, iar riscul de gap peste noapte este redus.</p>
+
+<p>La sfârșitul sesiunii, masa rulează blotter-ul de post-tranzacționare. Echilibrul long/short este acum 48/52. P&amp;L-ul zilei este +84.000 € brut, –11.000 € costuri de acoperire, rezultând net +73.000 €. Randamentul ajustat la risc al mesei (P&amp;L împărțit la VaR-ul zilnic) este 8,1, mult peste pragul de 5,0. Șeful de masă aprobă, pentru că dimensionarea pozițiilor, acoperirea și momentul au fost toate guvernate de o singură întrebare transparentă: „Ce raport long/short ne ține sub pragul de durere, lăsând în același timp cele mai bune idei să respire?". Acel raport — actualizat în timp real — este echilibrul long/short în uz.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Toate instrumentele au limite, iar echilibrul long/short nu face excepție. Este o busolă, nu o garanție. Mai jos sunt locurile în care metoda te poate induce în eroare, presupunerile pe care le face în tăcere și regimurile în care pur și simplu se prăbușește.</p>
+
+<p><strong>1. Presupunerea tăcută: revenirea la medie încă funcționează.</strong> Întregul calcul se bazează pe ideea că prețurile vor reveni în cele din urmă la media lor istorică (sau la prețul relativ pe care l-ai ales drept „corect"). Dacă această ancoră dispare — pentru că piața a intrat într-un trend ascendent structural, un trend descendent structural sau un nou regim de preț (de exemplu, o schimbare a politicii băncii centrale) — profitul așteptat din exemplu se evaporă. În 2022, randamentele obligațiunilor guvernamentale globale au crescut nouă luni la rând; o pereche long/short care fusese profitabilă ani de zile a produs brusc pierderi, pentru că „media" se mutase și nu mai era reversibilă.</p>
+
+<p><strong>2. Lichiditatea și costurile de tranzacționare pot copleși avantajul.</strong> Exemplul rezolvat a folosit spread-uri bid/ask de 0,02% și comisioane de 0,01%. La acțiuni cu capitalizare mică, acele spread-uri se pot lărgi la 0,5%–1% pe fiecare parte. Dacă rulezi aceeași împărțire 50/50, costul dus-întors devine 1%–2% din dimensiunea poziției — mai mare decât profitul de revenire de 0,5% așteptat în exemplu. Echilibrul rămâne corect matematic, dar profitul net după costuri devine negativ. Suprapune întotdeauna stratul de costuri; altfel alocarea pare optimă pe hârtie, dar dă greș în cont.</p>
+
+<p><strong>3. Levierul amplifică rupturile de regim.</strong> Metoda îți spune cum să împarți capitalul, nu cât levier să folosești. Dacă aplici levier de 5× portofoliului echilibrat, o mișcare adversă de 2% șterge 10% din capital. Într-o criză, lichiditatea se evaporă, iar brokerul te poate forța să vinzi în cel mai prost moment. Levierul transformă o scurgere lentă într-o oprire bruscă. Folosește echilibrul ca să dimensionezi mai întâi expunerea economică, apoi decide separat asupra levierului.</p>
+
+<p><strong>4. Ruperea corelațiilor în evenimentele de coadă.</strong> Calculul presupune că cele două componente se mișcă independent în jurul mediei lor. În martie 2020, obligațiunile de trezorerie SUA și futures-urile pe S&amp;P 500 au scăzut violent ambele; spread-ul s-a lărgit, dar componenta long a pierdut mai mult decât a câștigat componenta short, deoarece componenta short a fost implementată cu futures care necesitau marjă în numerar. Corelația care susținea echilibrul s-a inversat de la +0,2 la –0,8. O împărțire 50/50 care părea echilibrată pe hârtie a devenit dezechilibrată în practică. Testează întotdeauna perechea la scenarii de cozi groase (fat-tail) înainte de a te baza pe alocare.</p>
+
+<p><strong>5. Nu spune nimic despre moment (timing).</strong> Metoda îți dă o pondere, nu un declanșator. Dacă intri prea devreme sau ieși prea târziu, echilibrul este irelevant. În al doilea scenariu, spread-ul a trecut de la 120 de puncte de bază (bps) la 80 bps în două zile, apoi a oscilat o lună. Un trader care a alocat 50/50 în ziua 1, dar a închis în ziua 5, ar fi ratat ulterioarele 40 bps de profit din revenirea la medie. Echilibrul este static; piața este dinamică. Combină-l cu un semnal simplu de momentum sau de revenire la medie ca să știi când să acționezi.</p>
+
+<p><strong>6. Ignoră finanțarea și carry-ul.</strong> Dacă o componentă plătește un dividend sau un cupon, iar cealaltă nu, carry-ul net poate răsturna economia. O pereche long/short formată dintr-o acțiune cu dividend de 8% față de un ETF cu dividend de 2% poate părea echilibrată pe volatilitatea prețului, dar componenta long finanțează un cost de carry de 6%. Pe șase luni, acel 6% poate depăși profitul de revenire de 3% așteptat. Include întotdeauna carry-ul în decizia de alocare.</p>
+
+<p><strong>7. Nu poate prezice lebede negre.</strong> Nicio regulă de alocare nu prezice un eveniment care apare o dată la un secol. Când Banca Națională a Elveției a eliminat plafonul EUR/CHF în ianuarie 2015, francul elvețian s-a apreciat cu 20% în câteva minute. Un echilibru long/short care fusese stabil ani de zile a intrat instantaneu pe pierdere. Metoda este pentru regimuri normale; pentru evenimente de coadă ai nevoie de limite pe scenarii, stop-loss-uri și rezerve de lichiditate care stau în afara cadrului de alocare.</p>
+
+<p><strong>8. Privește în trecut.</strong> Ponderile sunt derivate din volatilitatea și corelația istorică. Dacă regimul viitor diferă — de exemplu, de la piețe cu volatilitate scăzută, conduse de investitori retail, la o deleveraging instituțională cu volatilitate ridicată — datele de intrare sunt învechite. Recalibrează echilibrul ori de câte ori se schimbă structura pieței (rotație nouă de sectoare, schimbare de reglementare, schimbare majoră de politică a băncii centrale).</p>
+
+<p>Pe scurt, echilibrul long/short este un prim pas necesar, dar niciodată suficient. Tratează-l ca pe un punct de pornire, suprapune costurile, carry-ul și controalele de risc de coadă și întreabă-te mereu: „Ce ar putea rupe media pe care pariez?". Dacă răspunsul este „aproape orice", micșorează dimensiunea poziției sau adaugă acoperiri până când riscul rezidual este ceva cu care poți trăi.</p>
+
+<h2>Idei principale de reținut</h2>
+
+<p>În acest capitol am explorat conceptul de echilibru long/short, un aspect esențial al gestionării riscului și al luării deciziilor de investiții informate. Iată ideile-cheie de reținut:</p>
+
+<ul>
+<li><strong>Pozițiile long și short nu se exclud reciproc:</strong> o poziție long este o investiție într-un activ, mizând că va crește în valoare, în timp ce o poziție short este un pariu împotriva unui activ, mizând că va scădea. Echilibrul long/short înseamnă alocarea între aceste două poziții pentru a gestiona riscul și a maximiza randamentele.</li>
+<li><strong>Echilibrul long/short nu este o soluție universală:</strong> echilibrul optim depinde de condițiile de piață, obiectivele de investiții și toleranța la risc. Este esențial să iei în calcul acești factori când stabilești echilibrul potrivit pentru strategia ta.</li>
+<li><strong>Echilibrul long/short este un concept dinamic:</strong> se schimbă pe măsură ce condițiile de piață evoluează și apar informații noi. Un echilibru static poate dăuna performanței, pentru că nu se adaptează la schimbarea condițiilor.</li>
+<li><strong>Echilibrul long/short nu înlocuiește analiza fundamentală:</strong> deși oferă un cadru pentru decizii de investiții, este esențial să faci o analiză fundamentală temeinică pentru a înțelege valoarea reală a unui activ.</li>
+<li><strong>Echilibrul long/short este un instrument de gestionare a riscului:</strong> alocând între poziții long și short, investitorii pot gestiona riscul și pot crește potențial randamentele. Totuși, nu este o garanție a profitului, iar pierderile pot apărea în continuare.</li>
+<li><strong>Echilibrul long/short necesită monitorizare și ajustare continuă:</strong> pe măsură ce condițiile se schimbă, echilibrul trebuie ajustat pentru a menține o alocare optimă, ceea ce cere monitorizare și analiză permanentă.</li>
+<li><strong>Echilibrul long/short nu este o decizie făcută o singură dată:</strong> este un proces continuu de evaluare și ajustare. Revizuind regulat echilibrul, investitorii se asigură că strategia rămâne aliniată cu obiectivele și toleranța la risc.</li>
+<li><strong>Echilibrul long/short este o componentă-cheie a unei strategii complete de investiții:</strong> încorporându-l, investitorii pot crește potențial randamentele și gestiona riscul mai eficient. Totuși, este esențial să iei în calcul și alți factori, precum alocarea pe clase de active și diversificarea.</li>
+</ul>

@@ -1,0 +1,241 @@
+<p><strong>Alocarea statică (static allocation)</strong> este o metodă de administrare a portofoliului în care fiecare clasă de active primește o pondere fixă, stabilită la început și păstrată neschimbată, fără reechilibrare (rebalancing). Cu alte cuvinte, dacă decizi că 60% din bani merg în acțiuni și 40% în obligațiuni, aceste procente rămân „bătute în cuie", indiferent cum evoluează piețele. Această strategie de investiții cu ponderi fixe este apreciată pentru simplitatea, transparența și costurile reduse de tranzacționare.</p>
+
+<p>În acest capitol din Masterclass Bursă explicăm clar, pentru începători, ce înseamnă alocarea statică fără reechilibrare, cum se calculează ponderile țintă (target allocation), de ce apare fenomenul de derapaj (drift) al portofoliului și când această abordare pasivă funcționează sau, dimpotrivă, dă greș. Vei vedea diferența dintre alocarea statică și cea dinamică, rolul reechilibrării, impactul volatilității și al riscului asupra portofoliului tău.</p>
+
+<p>Înțelegerea acestor noțiuni de bază despre managementul pasiv al portofoliului te ajută să construiești o strategie disciplinată, să eviți greșelile frecvente legate de ponderi și derapaj și să decizi singur dacă o alocare cu greutăți fixe se potrivește obiectivelor tale de investiții.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>În contextul alocării activelor (asset allocation), <strong>alocarea statică</strong> se referă la o metodă de administrare a investițiilor în care o pondere sau o proporție fixă din portofoliul investitorului este alocată unei anumite clase de active, precum acțiuni, obligațiuni sau numerar (cash). Această abordare nu presupune reechilibrare regulată, adică ajustarea periodică a proporțiilor diferitelor active pentru a menține o alocare țintă.</p>
+
+<p>Pentru a înțelege alocarea statică, este esențial să definim câțiva termeni-cheie:</p>
+
+<ul>
+<li><strong>Clasă de active (asset class)</strong>: o categorie largă de investiții care împărtășesc caracteristici similare, precum acțiuni, obligațiuni sau imobiliare. Clasele de active pot fi împărțite în sub-clase, cum ar fi acțiunile cu capitalizare mare (large-cap) sau obligațiunile de stat.</li>
+
+<li><strong>Portofoliu (portfolio)</strong>: o colecție de investiții deținute de o persoană sau de o organizație, care poate include acțiuni, obligațiuni, numerar și alte active.</li>
+
+<li><strong>Pondere (weight)</strong>: proporția din valoarea totală a portofoliului alocată unei anumite clase de active. De exemplu, dacă un portofoliu are o valoare totală de 100.000 $ și 30% din această valoare este alocată acțiunilor, ponderea alocării în acțiuni este de 30%.</li>
+
+<li><strong>Alocare țintă (target allocation)</strong>: proporția dorită din valoarea totală a portofoliului care ar trebui alocată unei anumite clase de active. De exemplu, un investitor poate stabili o alocare țintă de 60% acțiuni și 40% obligațiuni.</li>
+
+<li><strong>Reechilibrare (rebalancing)</strong>: procesul de ajustare a proporțiilor diferitelor active dintr-un portofoliu pentru a menține alocarea țintă. Reechilibrarea poate avea loc regulat, de exemplu trimestrial sau anual, ori ca răspuns la schimbări ale condițiilor de piață.</li>
+
+<li><strong>Alocare statică (static allocation)</strong>: o strategie de investiții în care o pondere fixă dintr-un portofoliu este alocată unei anumite clase de active, fără reechilibrare regulată.</li>
+
+<li><strong>Management pasiv (passive management)</strong>: o abordare investițională care presupune cumpărarea și păstrarea unui portofoliu diversificat de active, fără a încerca activ să „bați" piața sau să iei decizii punctuale de investiții.</li>
+
+<li><strong>Fond indexat (index fund)</strong>: un tip de fond de investiții care urmărește un anumit indice de piață, precum S&P 500, și deține un eșantion reprezentativ al titlurilor din acel indice.</li>
+
+<li><strong>Indice de referință (benchmark)</strong>: un standard sau punct de reper folosit pentru a măsura performanța unui portofoliu de investiții. Indicii de referință pot fi bazați pe un anumit indice de piață, precum S&P 500, ori pe un indice personalizat creat de investitor.</li>
+
+<li><strong>Risc (risk)</strong>: potențialul ca o investiție să piardă valoare sau să genereze un randament mai mic decât cel așteptat. Riscul poate fi asociat cu diverși factori, inclusiv volatilitatea pieței, riscul de credit și riscul de lichiditate.</li>
+
+<li><strong>Randament (return)</strong>: venitul sau profitul generat de o investiție într-o anumită perioadă. Randamentele pot fi măsurate prin venituri din dobânzi, câștiguri de capital sau dividende.</li>
+
+<li><strong>Volatilitate (volatility)</strong>: gradul de fluctuație a valorii unei investiții în timp. Volatilitatea poate fi măsurată prin diverse metrici, inclusiv abaterea standard sau coeficientul beta.</li>
+</ul>
+
+<p>Înțelegerea acestor termeni-cheie este esențială pentru a pătrunde conceptul de alocare statică și rolul său în managementul investițiilor. După ce am definit acești termeni, putem trece la explorarea logicii și a dovezilor care susțin alocarea statică drept strategie de investiții.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că prepari prima ta prăjitură. Deschizi cartea de rețete și vezi ingredientele: 2 cești de făină, 1 ceașcă de zahăr și 3 ouă. Măsori fiecare ingredient exact cum scrie, le amesteci și pui aluatul la cuptor. Odată băgat în cuptor, nu te uiți, nu „împungi" și nu ajustezi nimic. Când sună cronometrul, scoți prăjitura — poate e perfectă, poate e puțin mai densă pe alocuri, dar este prăjitura <em>ta</em>, făcută de fiecare dată în același mod.</p>
+
+<p>Alocarea statică seamănă cu acea rețetă. În loc de ingrediente, ai bucăți din capitalul tău, repartizate pe clase de active — să zicem trei: acțiuni, obligațiuni și numerar. Decizi de la început că acțiunile primesc 40% din portofoliu, obligațiunile 30% și numerarul 30%. Fixezi acele cifre „în piatră". Nu adaugi mai mult la acțiuni doar pentru că piața pare în creștere și nu retragi din obligațiuni dacă dobânzile scad. Urmezi rețeta exact, în fiecare zi, fără schimbări.</p>
+
+<p>De ce ar vrea cineva să facă asta?</p>
+
+<p>Pentru că predictibilitatea aduce disciplină. Când aceleași proporții sunt menținute constant, investitorul știe la ce să se aștepte. Mintea nu mai trebuie să se întrebe „oare măresc azi acțiunile?" sau „oare vând acum?". Asta reduce stresul și ajută la luarea unor decizii calme. De asemenea, te ajută pe tine, investitorul, fiindcă nu trebuie să decizi mereu ce să cumperi sau să vinzi. Planul este deja făcut. Doar îl urmezi, ca pe o rețetă.</p>
+
+<p>Dar există o capcană: ce se întâmplă dacă, într-o lună, acțiunile cresc puternic? Cu alocarea statică tot nu mai cumperi, chiar dacă ai impresia că pierzi o oportunitate. Pe de altă parte, dacă o clasă de active scade brusc, tot nu redistribui resurse acolo unde par necesare. Nu poți muta capital către zona care „pare" să aibă nevoie.</p>
+
+<p>Așadar, de ce există totuși alocarea statică?</p>
+
+<p>Există pentru că este simplă. Este fiabilă. Elimină presupunerile. Pentru începători, a avea un plan fix poate fi o ușurare. Este ca rotițele ajutătoare de la bicicletă. Poate te mai clatini (poate prăjitura nu iese perfectă de fiecare dată), dar înveți ritmul investiției fără complexitatea suplimentară a schimbării planului în fiecare zi.</p>
+
+<p>Și uneori, exact de asta ai nevoie. Alocarea statică nu pretinde că este cea mai bună metodă pentru orice investitor sau orice perioadă. Dar îți oferă un punct de plecare clar — o cale de a-ți construi încrederea, structura și consecvența. Odată ce această fundație este solidă, poți începe să explorezi dacă mici ajustări (precum reechilibrarea după câteva luni) ar putea ajuta și mai mult. Dar deocamdată? Urmezi rețeta. Ai încredere în proces. Asta, în sine, este o forță.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Alocarea statică este o metodă de repartizare a resurselor către diferite active dintr-un portofoliu. În această secțiune vom parcurge în detaliu, pas cu pas, cum funcționează.</p>
+
+<h3>Pasul 1 — Stabilirea ponderilor fixe</h3>
+
+<p>Procesul începe cu stabilirea ponderilor fixe pentru fiecare activ din portofoliu. Aceste ponderi sunt de obicei exprimate ca procente și reprezintă proporția din portofoliul total pe care o va deține fiecare activ. De exemplu, dacă un investitor vrea să aloce 40% din portofoliu acțiunilor, 30% obligațiunilor și 30% numerarului, ponderile fixe ar fi 0,4 pentru acțiuni, 0,3 pentru obligațiuni și 0,3 pentru numerar.</p>
+
+<h3>Pasul 2 — Calcularea valorilor țintă ale activelor</h3>
+
+<p>Următorul pas presupune calcularea valorilor țintă ale activelor, adică valorile dorite pentru fiecare activ din portofoliu. Pentru aceasta, înmulțim ponderile fixe cu valoarea totală a portofoliului. De exemplu, dacă valoarea totală a portofoliului este de 100.000 $ și ponderile fixe sunt 0,4 pentru acțiuni, 0,3 pentru obligațiuni și 0,3 pentru numerar, valorile țintă ar fi:</p>
+
+<ul>
+<li>Acțiuni: 40.000 $ (0,4 × 100.000 $)</li>
+<li>Obligațiuni: 30.000 $ (0,3 × 100.000 $)</li>
+<li>Numerar: 30.000 $ (0,3 × 100.000 $)</li>
+</ul>
+
+<h3>Pasul 3 — Alocarea resurselor</h3>
+
+<p>Odată calculate valorile țintă ale activelor, investitorul alocă resursele către fiecare activ pentru a atinge aceste valori. Acest lucru se poate face prin cumpărarea sau vânzarea de active pe piață până la atingerea valorilor țintă dorite. De exemplu, dacă investitorul vrea să aloce 40.000 $ în acțiuni, va cumpăra acțiuni în valoare de 40.000 $.</p>
+
+<h3>Pasul 4 — Monitorizare și urmărire</h3>
+
+<p>După ce resursele au fost alocate, investitorul monitorizează și urmărește portofoliul pentru a se asigura că rămâne aliniat cu ponderile fixe. Aceasta presupune verificarea periodică a valorilor curente ale activelor.</p>
+
+<h3>Pasul 5 — Fără reechilibrare</h3>
+
+<p>Una dintre caracteristicile-cheie ale alocării statice este că nu presupune reechilibrare. Asta înseamnă că, odată alocate resursele, investitorul nu mai face nicio modificare a portofoliului, chiar dacă valorile de piață ale activelor se schimbă. Ponderile fixe rămân în vigoare, iar investitorul se bazează pe creșterea și performanța activelor în timp.</p>
+
+<h3>Rezultat: un portofoliu cu alocare statică</h3>
+
+<p>Rezultatul procesului de alocare statică este un portofoliu conceput să mențină o alocare cu ponderi fixe pentru fiecare activ. Portofoliul nu este administrat activ, iar investitorul se bazează pe creșterea activelor în timp. Ponderile fixe oferă o strategie de investiții clară și consecventă, ceea ce poate fi benefic pentru investitorii care vor să-și minimizeze implicarea în procesul investițional.</p>
+
+<p>Este esențial de menționat că alocarea statică poate fi sensibilă la schimbările condițiilor de piață și ale valorilor activelor. Dacă valorile de piață ale activelor se modifică semnificativ, portofoliul se poate abate de la valorile țintă dorite. Totuși, aceasta este o alegere deliberată a investitorului, care acceptă riscurile și recompensele potențiale asociate alocării statice.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să parcurgem un exemplu concret care folosește alocarea statică cu ponderi fixe și fără reechilibrare. Vom păstra cifrele mici, ca fiecare pas să fie vizibil, și vom fi expliciți la fiecare calcul.</p>
+
+<p>Să presupunem un portofoliu de 20.000 $ pe care un investitor vrea să îl împartă pe trei active — „Acțiuni", „Obligațiuni" și „Numerar" — astfel încât ponderile să fie mereu aceleași proporții. După analiză, ponderile fixe alese sunt:</p>
+
+<p><strong>Acțiuni : Obligațiuni : Numerar = 4 : 3 : 3</strong></p>
+
+<p>Observă ce înseamnă „ponderi fixe" aici: raportul 4 : 3 : 3 este blocat pe toată durata; investitorul nu va muta bani dintr-un activ în altul și nu va schimba dimensiunile relative pe parcurs.</p>
+
+<p><strong>Pasul 1 — Convertim raportul în sume exacte.</strong> Raportul 4 : 3 : 3 însumează 4 + 3 + 3 = 10 părți. Cu 20.000 $, fiecare parte valorează 20.000 ÷ 10 = 2.000 $. Așadar:</p>
+
+<ul>
+<li>Acțiuni = 4 părți × 2.000 $/parte = 8.000 $</li>
+<li>Obligațiuni = 3 părți × 2.000 $/parte = 6.000 $</li>
+<li>Numerar = 3 părți × 2.000 $/parte = 6.000 $</li>
+</ul>
+
+<p>Verificare: 8.000 + 6.000 + 6.000 = 20.000 $, deci ponderile fixe sunt respectate.</p>
+
+<p><strong>Pasul 2 — Plasarea inițială.</strong> Investitorul alocă acum sumele: cumpără acțiuni de 8.000 $, obligațiuni de 6.000 $ și păstrează 6.000 $ în numerar. Esențial este că alocarea este permanentă pentru această perioadă; odată plasați banii, rămân acolo.</p>
+
+<p><strong>Pasul 3 — Perioada de deținere.</strong> Pe parcurs, valorile de piață fluctuează în interiorul fiecărui activ, dar investitorul nu transferă niciodată bani dintr-un activ în altul. Menține alocarea exact așa cum a stabilit-o inițial.</p>
+
+<p><strong>Pasul 4 — Ce ar schimba reechilibrarea?</strong> Să presupunem, ipotetic, că acțiunile au crescut puternic și au ajuns să valoreze 10.000 $, în timp ce obligațiunile au scăzut la 4.000 $. Dacă am folosi alocarea dinamică, investitorul ar vinde din acțiuni și ar cumpăra obligațiuni până când raportul revine la 4 : 3 : 3. Dar cu alocarea statică investitorul nu face nimic; portofoliul rămâne „derapat", cu acțiunile supraponderate și obligațiunile subponderate. Aceasta este esența lui „fără reechilibrare".</p>
+
+<p><strong>Pasul 5 — Verificarea finală.</strong> Dacă, în schimb, prețurile nu s-ar fi mișcat deloc, sumele ar fi rămas 8.000, 6.000 și 6.000 $, iar ponderile fixe ar fi fost menținute.</p>
+
+<p><strong>Ce susțin dovezile (și ce nu).</strong> În acest exemplu mic și controlat, metoda livrează clar proporțiile fixe promise la început. Totuși, trebuie să fim sinceri cu privire la limite. Dacă prețurile se mișcă, ponderile reale deraiază de la țintă; alocarea statică garantează ponderile doar în momentul inițial. La fel, dacă investitorul adaugă sau retrage bani în timpul perioadei, raportul original nu mai însumează totalul, deci sumele fixe devin imposibil de menținut fără reechilibrare. Metoda presupune așadar un portofoliu „închis" pe durata perioadei.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Pentru a ilustra suplimentar conceptul de alocare statică, să luăm un scenariu diferit. Imaginează-ți un investitor cu un buget de 100 de „unități" de capital, pe care vrea să îl aloce pe mai multe oportunități într-un mod care minimizează inegalitatea expunerii.</p>
+
+<p>În acest scenariu, presupunem că investitorul a decis să aloce capitalul pe baza unei reguli statice simple. Va aloca o pondere fixă de 2 unități fiecărei poziții din primul sfert (cele 25% dintre oportunități considerate prioritare), o pondere fixă de 1 unitate fiecărei poziții din al doilea sfert și o pondere fixă de 0 unități pozițiilor din al treilea și al patrulea sfert (50% dintre oportunități).</p>
+
+<p>Folosind această regulă, investitorul ar aloca 50 de unități primului sfert (25 de poziții × 2 unități fiecare), 25 de unități celui de-al doilea sfert (25 de poziții × 1 unitate fiecare) și 0 unități sfertului al treilea și al patrulea. Astfel ar rămâne 25 de unități nealocate, care ar putea fi distribuite pozițiilor din al doilea sfert sau păstrate pentru viitor.</p>
+
+<p>Un aspect-cheie al acestui scenariu este că evidențiază limitările potențiale ale alocării statice. Investitorul a luat o decizie clară despre cum să aloce capitalul, dar este posibil să nu fi cântărit pe deplin consecințele. De exemplu, pozițiile din al doilea sfert pot părea subexpuse, deși primesc mai mult decât cele din sferturile inferioare.</p>
+
+<p>Acest scenariu ridică și întrebări despre echitatea regulii de alocare statică. Este corect să aloci mai mult capital primului sfert doar pentru că a fost etichetat ca prioritar? Sau ar trebui ca investitorul să ia în calcul și alți factori — precum riscul real și potențialul fiecărei poziții — atunci când decide alocarea?</p>
+
+<p>În acest scenariu vedem că regula de alocare statică poate duce la o situație în care unele poziții primesc mai multe resurse decât altele, chiar dacă nu sunt neapărat mai atractive. Asta poate crea un dezechilibru în portofoliu, cu consecințe asupra randamentului și riscului general.</p>
+
+<p>Pe măsură ce continuăm să explorăm conceptul de alocare statică, este esențial să luăm în calcul astfel de scenarii și să gândim critic asupra consecințelor deciziilor noastre. Astfel dezvoltăm o înțelegere mai profundă a punctelor forte și a limitărilor alocării statice.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Alocarea statică este simplă în principiu — fixezi ponderile o dată și le lași în pace — dar simplitatea ascunde capcane subtile în care începătorii cad în mod repetat. Mai jos sunt cele mai frecvente erori, de ce apar și cum să le eviți. Tratează acest text ca pe o listă de verificare; dacă vreunul dintre puncte îți pare necunoscut, ar trebui să revii la definițiile termenilor „pondere", „fix" și „fără reechilibrare" din secțiunea anterioară.</p>
+
+<h3>1. Confuzia dintre ponderi și sume sau număr de titluri</h3>
+<p>Începătorii cred deseori că „60% acțiuni, 40% obligațiuni" înseamnă „pune 60 $ în acțiuni și 40 $ în obligațiuni". Acest lucru este greșit din două motive. În primul rând, ponderile sunt fracții din portofoliul total, nu sume absolute. În al doilea rând, dacă felia de acțiuni crește la 70 $ în timp ce obligațiunile rămân la 40 $, portofoliul este acum 63,6% acțiuni, nu 60%. Eroarea apare din uitarea faptului că ponderile sunt relative, nu absolute. Pentru a o evita, exprimă mereu alocarea ca procente din valoarea totală curentă și recalculează după fiecare mișcare de preț.</p>
+
+<h3>2. Ignorarea derapajului (drift) după mișcările pieței</h3>
+<p>Un plan cu ponderi fixe este deliberat „orb" la schimbările de preț; acesta este scopul. Totuși, novicii se așteaptă deseori ca el să „se simtă" echilibrat sau să „se autocorecteze". Dacă acțiunile sar 10% într-o lună, portofoliul devine brusc mai greu în acțiuni, deși nimeni nu a atins nimic. Frustrarea începătorului („De ce e atât de riscant acum?") este de fapt surpriza că derapajul este real. Singurul remediu este să accepți derapajul ca pe compromisul pentru zero costuri de reechilibrare. Documentează din timp intervalul de derapaj așteptat, ca să nu fii luat prin surprindere.</p>
+
+<h3>3. Convingerea că „fix" înseamnă „blocat pe veci"</h3>
+<p>Unii investitori îngheață alocarea în prima zi și nu o mai privesc niciodată. Asta transformă o regulă mecanică într-un pariu neadministrat. „Fix" înseamnă doar „fără reechilibrare automată"; nu înseamnă „nu verifica niciodată". O revizuire periodică — să zicem anuală, sau atunci când alocarea deraiază dincolo de o bandă prestabilită — păstrează planul intenționat, nu accidental. Data revizuirii face parte din regulă, nu este o excepție.</p>
+
+<h3>4. Încălcarea regulii pentru că „nu se simte bine"</h3>
+<p>Piețele pot mișca brusc, iar un portofoliu 60/40 poate ajunge la 70/30 într-un singur trimestru. Începătorii care nu au încredere în metodă pot intra în panică și pot muta manual banii înapoi, anulând întregul scop al alocării statice. Reacția corectă este să decizi toleranța la derapaj înainte de prima tranzacție și să o respecți, cu excepția unei schimbări documentate de obiective sau constrângeri. Scrie toleranța într-o declarație de politică investițională, ca regula — nu emoția — să guverneze portofoliul.</p>
+
+<h3>5. Confuzia alocării statice cu fantezia „pune și uită"</h3>
+<p>Alocarea statică nu este o strategie de tip „cumpără o dată și dormi liniștit"; este o strategie de tip „cumpără o dată, monitorizează și acționează doar în punctele prestabilite". Diferența pare mică, dar este crucială. Începătorii care echivalează „fără reechilibrare" cu „fără întreținere" ajung cu portofolii care deraiază mult dincolo de bugetul de risc. Tratează alocarea ca pe un termostat: stabilești temperatura țintă, dar tot verifici indicatorul și ajustezi căldura când camera se abate prea mult.</p>
+
+<h3>6. Amestecarea unor active incompatibile sub aceeași etichetă</h3>
+<p>O greșeală frecventă este să numești o felie „obligațiuni" când de fapt conține titluri de stat pe termen lung, obligațiuni corporative și o porțiune de obligațiuni cu randament ridicat (high-yield). Fiindcă duratele și profilurile de risc diferă, sensibilitatea reală a portofoliului la șocurile de dobândă este ascunsă. Alocarea statică funcționează doar dacă fiecare felie este omogenă intern. Definește fiecare felie printr-un indice de referință precis (de exemplu, Bloomberg U.S. Aggregate Bond Index).</p>
+
+<h3>7. Uitarea taxelor și a costurilor de tranzacționare în calculul derapajului</h3>
+<p>Când derapajul declanșează o reechilibrare, începătorul poate descoperi că vânzarea activelor apreciate generează impozit pe câștigul de capital sau că costurile de tranzacționare „mănâncă" cea mai mare parte din beneficiul așteptat. Alocarea statică este cea mai atractivă atunci când reechilibrarea este ieftină și eficientă fiscal, dar aceste fricțiuni există oricum. Estimează-le înainte de a stabili benzile de derapaj; altfel planul „fix" poate deveni scump în practică, chiar dacă pare ieftin în teorie.</p>
+
+<h3>8. Presupunerea că alocarea este optimă pentru orice obiectiv</h3>
+<p>O alocare 50/50 poate fi potrivită pentru un tânăr de 30 de ani care economisește pentru pensie, dar este adesea prea agresivă pentru unul de 65 de ani care își trage venitul din portofoliu. Începătorii copiază uneori un mix static popular fără să verifice dacă se potrivește orizontului lor de timp și nevoilor de cheltuieli. Alocarea trebuie adaptată circumstanțelor unice ale investitorului; altfel „fix" înseamnă doar „permanent nepotrivit".</p>
+
+<h3>9. Supraevaluarea dovezilor în favoarea superiorității ponderilor fixe</h3>
+<p>Unele cărți populare de finanțe susțin că portofoliile cu ponderi fixe au performanțe superioare după costuri. Datele istorice sunt însă mixte și foarte sensibile la perioada analizată, la definițiile activelor și la fricțiunile de reechilibrare. Alocarea statică poate funcționa, dar nu este garantat că bate orice alternativă pe orice piață. Tratează-o ca pe un punct de plecare sensibil, nu ca pe un câștigător universal dovedit. Dovezile susțin simplitatea și disciplina ei, nu un avantaj de supraperformanță.</p>
+
+<h3>10. Neglijarea exersării întâi pe un portofoliu mic, real</h3>
+<p>Înainte de a angaja o sumă mare, rulează un portofoliu pe hârtie (paper) sau unul micro cel puțin un ciclu de piață complet. Începătorii care sar peste acest pas descoperă adesea că încărcătura psihologică de a privi derapajul — fără a acționa — este mai mare decât se așteptau. Un test mic, real, construiește obiceiul de a monitoriza fără a risca o greșeală care să-ți schimbe viața.</p>
+
+<p>Pe scurt, cea mai frecventă greșeală este să tratezi alocarea statică drept o instrucțiune de unică folosință, nu o regulă vie, cu toleranțe și date de revizuire încorporate. Definește benzile, scrie-le și revizuiește-le conform planului; altfel eticheta „fix" devine o falsă promisiune de siguranță, în loc de un angajament clar față de un proces disciplinat.</p>
+
+<h2>Cum o folosește biroul de tranzacționare</h2>
+
+<p>Alocarea statică este o strategie de management al riscului care presupune atribuirea unui procent fix din portofoliu fiecărei clase de active și păstrarea acelor ponderi constante în timp. Această abordare este folosită adesea de investitorii instituționali, precum fondurile de pensii și fundațiile, dar și de investitorii individuali care vor să mențină o alocare consecventă.</p>
+
+<p>Într-un birou de tranzacționare (trading desk), alocarea statică este folosită de obicei împreună cu o strategie de investiții pe termen lung. Biroul poate stabili o alocare țintă pentru portofoliu și apoi poate folosi ponderi fixe pentru a o atinge. De exemplu, biroul poate decide să aloce 60% din portofoliu acțiunilor, 20% obligațiunilor și 20% activelor alternative, precum imobiliare sau materii prime. Odată stabilite, aceste ponderi nu mai sunt ajustate, indiferent de condițiile de piață.</p>
+
+<p>O modalitate prin care un birou de tranzacționare poate folosi alocarea statică este în dimensionarea pozițiilor (position sizing). Când se face o tranzacție, biroul determină mărimea poziției pe baza ponderii țintă pentru clasa de active respectivă. Această abordare ajută la menținerea portofoliului în linie cu alocarea țintă, chiar dacă condițiile de piață se schimbă.</p>
+
+<p>Alocarea statică ajută și la gestionarea riscului prin limitarea expunerii la oricare clasă de active. Stabilind o pondere fixă pentru fiecare clasă, biroul poate evita supraexpunerea la o anumită piață sau sector, ceea ce reduce riscul general al portofoliului. De exemplu, dacă biroul are o pondere țintă de 20% pentru un anumit sector, nu va investi mai mult de 20% din portofoliu acolo, chiar dacă sectorul performează bine.</p>
+
+<p>În privința calendarului (timing), alocarea statică este folosită adesea împreună cu o strategie de tip „cumpără și păstrează" (buy-and-hold). Biroul stabilește ponderile țintă și apoi le menține constante, indiferent de condițiile de piață. Această abordare ajută la evitarea costurilor și riscurilor asociate tranzacționării frecvente, precum costurile de tranzacționare și obligațiile fiscale.</p>
+
+<p>Totuși, alocarea statică nu este lipsită de limitări. Una dintre principalele provocări este că poate fi dificil să atingi ponderile țintă, mai ales pe piețele volatile. De exemplu, dacă biroul are o pondere țintă de 30% pentru o anumită acțiune, dar prețul scade rapid, poate fi greu să atingi acea pondere fără a înregistra pierderi semnificative. În astfel de cazuri, biroul poate avea nevoie să ajusteze ponderile țintă sau să folosească alte strategii de management al riscului.</p>
+
+<p>În plus, alocarea statică poate fi mai puțin eficientă pe piețele supuse unor schimbări semnificative ale condițiilor economice sau ale cerințelor de reglementare. De exemplu, dacă apare o schimbare bruscă a dobânzilor, biroul poate avea nevoie să ajusteze ponderile țintă pentru a reflecta noile condiții. În astfel de cazuri, strategiile de alocare dinamică pot fi mai eficiente.</p>
+
+<p>În ansamblu, alocarea statică este o strategie utilă de management al riscului, care poate ajuta la obținerea unei alocări consecvente și la gestionarea riscului. Totuși, nu este o soluție universală, iar biroul poate avea nevoie să ajusteze ponderile țintă sau să folosească alte strategii pentru a obține rezultatele dorite.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Alocarea statică este simplă, transparentă și cu costuri reduse, dar exact aceste puncte forte vin cu limite dure. Nu este un instrument universal; funcționează doar atunci când viitorul se comportă suficient de mult ca trecutul, încât ponderile fixe să rămână rezonabile. Când această condiție nu se mai îndeplinește, metoda poate aluneca în riscuri ascunse, poate rata semnale importante sau chiar poate amplifica pierderile.</p>
+
+<p>Primul și cel mai frecvent mod de eșec este <strong>derapajul (drift) expunerilor de bază</strong>. Să presupunem că stabilești o împărțire 60/40 între două active și nu o mai atingi niciodată. Dacă un activ crește mai repede decât celălalt, cota lui în portofoliu urcă fără nicio decizie din partea ta. În timp, eticheta „60/40" nu mai descrie portofoliul; el poate deveni 75/25 sau chiar mai dezechilibrat. Acest derapaj nu este zgomot aleatoriu; este o expunere sistematică la orice se apreciază. Pe piețele calme, cu corelații stabile, derapajul poate fi mic și lent. Pe piețele volatile sau în trend, derapajul poate deveni atât de mare încât să anuleze scopul inițial al alocării.</p>
+
+<p>Un al doilea avertisment este că alocarea statică este <strong>oarbă la schimbările de risc</strong>. Dacă un activ devine mai volatil sau corelația lui cu restul portofoliului se modifică, ponderile fixe nu se ajustează. Profilul de risc real al portofoliului se poate muta în liniște în afara zonei tale de confort. De exemplu, o împărțire 50/50 între un indice larg de acțiuni și o obligațiune de stat pe termen lung poate părea echilibrată într-o lume cu dobânzi mici; după ce dobânzile cresc, obligațiunea se poate comporta mai mult ca o acțiune, iar portofoliul poate deveni, de fapt, 80% acțiuni. Metoda nu îți dă niciun semnal că riscul s-a schimbat; pur și simplu continuă cu ponderile originale. Investitorii atenți la risc trebuie așadar să îmbine alocarea statică cu revizuiri periodice de risc, chiar dacă nu reechilibrează.</p>
+
+<p>Alocarea statică presupune și că <strong>randamentele așteptate relative ale activelor nu se schimbă semnificativ</strong>. Dacă perspectiva unui activ se îmbunătățește sau se deteriorează, ponderile fixe nu îți oferă nicio cale de a înclina către oportunitatea mai bună. Cu alte cuvinte, metoda este pur mecanică; nu încorporează previziuni, semnale de evaluare sau viziuni macroeconomice. Asta e în regulă atunci când chiar nu ai o opinie, dar e periculos când lumea se schimbă și ponderile tale nu mai reflectă noua informație. Metoda funcționează cel mai bine în regimuri în care atractivitatea relativă a activelor este stabilă și poate subperforma când apar trenduri, schimbări de regim sau rupturi structurale.</p>
+
+<p>Un eșec mai subtil provine din <strong>costurile de tranzacționare și impactul de piață</strong>. Dacă ai reechilibra, fiecare tranzacție ar suporta comisioane, spread-uri și, posibil, impact asupra prețului. Alocarea statică evită aceste costuri, dar evită și beneficiul compunerii care vine din a lăsa câștigătorii să crească. Pe piețele cu rulaj scăzut și lichide, economia de cost este reală; pe piețele ilichide sau cu rulaj mare, compunerea pierdută poate fi mai mare decât comisioanele economisite.</p>
+
+<p>În fine, alocarea statică nu îți spune nimic despre <strong>riscul de secvențiere (sequencing risk)</strong>. Două portofolii cu randamente medii identice și ponderi fixe identice pot avea rezultate foarte diferite dacă unul suferă pierderi devreme, iar celălalt târziu. Fiindcă metoda nu se ajustează niciodată, pierderile timpurii rămân „înghețate" și pot afecta capacitatea portofoliului de a-și reveni. Metoda nu oferă așadar nicio protecție împotriva dependenței de traseu (path dependency); este indiferentă la ordinea randamentelor.</p>
+
+<p>Pe scurt, alocarea statică este o cale disciplinată de a exprima o viziune pe termen lung, dar nu este o garanție de echilibru, control al riscului sau supraperformanță. Funcționează când lumea este suficient de stabilă încât ponderile fixe să rămână rezonabile, când lichiditatea este adecvată și când chiar nu ai o opinie care să justifice o înclinare. Dă greș când piețele intră în trend, când corelațiile se schimbă, când riscurile cresc sau când atractivitatea relativă a activelor se modifică. Dovezile susțin folosirea ei în regimuri liniștite, cu revenire la medie, dar nu o susțin ca regulă universală. Investitorul prudent tratează așadar alocarea statică drept un instrument printre multe altele — de folosit când premisele ei se mențin și de pus deoparte când nu.</p>
+
+<h2>Concluzii esențiale</h2>
+
+<ul>
+<li><strong>Definiție</strong>: alocarea statică este o strategie de management al portofoliului în care ponderile diferitelor active sunt fixe și nu se ajustează în timp, fără reechilibrarea portofoliului.</li>
+
+<li><strong>Ponderi fixe</strong>: proporțiile diferitelor active din portofoliu sunt stabilite la început și rămân neschimbate, indiferent de fluctuațiile pieței.</li>
+
+<li><strong>Fără reechilibrare</strong>: spre deosebire de strategiile de alocare dinamică, alocarea statică nu presupune ajustări regulate pentru a menține ponderile țintă.</li>
+
+<li><strong>Avantaje</strong>: alocarea statică poate fi mai simplu de implementat și poate reduce costurile de tranzacționare, fiindcă nu necesită cumpărări și vânzări frecvente.</li>
+
+<li><strong>Dezavantaje</strong>: alocarea statică poate să nu fie potrivită pentru investitorii cu toleranță la risc sau obiective în schimbare, fiindcă ponderile sunt fixe și nu se adaptează la condițiile de piață.</li>
+
+<li><strong>Incertitudine</strong>: eficacitatea alocării statice depinde de acuratețea deciziei inițiale de alocare și de capacitatea de a menține ponderile țintă în timp.</li>
+
+<li><strong>Dovezi</strong>: cercetările arată că strategiile de alocare statică pot fi eficiente în anumite condiții de piață, precum perioadele de volatilitate scăzută. Totuși, dovezile nu sunt concludente.</li>
+
+<li><strong>Limitări</strong>: alocarea statică poate să nu fie potrivită pentru investitorii cu nevoi complexe, precum cei care cer soluții personalizate sau cei cu niveluri ridicate de incertitudine.</li>
+
+<li><strong>Cea mai potrivită pentru</strong>: alocarea statică este cea mai potrivită pentru investitorii cu nevoi simple, care caută o soluție de portofoliu ieftină și ușor de implementat.</li>
+
+<li><strong>Considerații importante</strong>: la implementare, investitorii ar trebui să cântărească atent obiectivele, toleranța la risc și orizontul de timp, pentru ca strategia să li se potrivească.</li>
+
+<li><strong>Monitorizare și revizuire</strong>: investitorii ar trebui să revizuiască periodic portofoliul cu alocare statică, ca să rămână aliniat cu obiectivele și toleranța la risc, și să facă ajustări la nevoie.</li>
+
+<li><strong>Implicații fiscale</strong>: investitorii ar trebui să ia în calcul și implicațiile fiscale, fiindcă tranzacționarea frecventă poate declanșa impozite pe câștigul de capital.</li>
+
+<li><strong>Educație și experiență</strong>: implementarea unei strategii de alocare statică cere o bună înțelegere a conceptelor de investiții, a managementului portofoliului și a celui de risc.</li>
+
+<li><strong>Sfat profesionist</strong>: investitorii pot lua în calcul consultarea unui consilier financiar, ca strategia de alocare statică să fie adaptată nevoilor și obiectivelor individuale.</li>
+</ul>

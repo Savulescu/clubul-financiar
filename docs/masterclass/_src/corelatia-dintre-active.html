@@ -1,0 +1,363 @@
+<h2>Definiție și termeni-cheie</h2>
+
+<p>În acest capitol explorăm <strong>conceptul de corelație</strong> (correlation), un instrument esențial pentru a înțelege cum se mișcă pozițiile împreună sau în direcții opuse. Corelația dintre acțiuni este un număr care îți arată cât de strâns tind două prețuri să crească sau să scadă în același timp, ajutându-te să iei decizii mai bune de alocare a portofoliului și de diversificare.</p>
+
+<p>Pe scurt, corelația este o măsură a co-mișcării: îți spune dacă două variabile merg „mână în mână", în direcții opuse sau fără nicio legătură clară. Această noțiune stă la baza gestionării riscului, a diversificării și a dimensionării pozițiilor (position sizing), motiv pentru care orice investitor începător ar trebui să o stăpânească devreme.</p>
+
+<p>Înainte de a intra în mecanica de calcul a coeficientului de corelație, să definim termenii pe care îi vom folosi pe tot parcursul capitolului — de la corelația pozitivă și negativă, până la graficul de dispersie (scatter plot) și forța relației.</p>
+
+<p><strong>Corelația</strong> (correlation): este o măsură a cât de mult se mișcă două sau mai multe variabile împreună sau în direcții opuse. Ne ajută să înțelegem relația dintre variabile, de exemplu cum prețul unei acțiuni afectează prețul altei acțiuni, sau cum temperatura unei zile influențează vânzările de înghețată.</p>
+
+<p><strong>Variabile</strong> (variables): o variabilă este o mărime sau o caracteristică ce poate lua valori diferite. De exemplu, prețul unei acțiuni, temperatura unei zile sau numărul de cornete de înghețată vândute sunt toate variabile.</p>
+
+<p><strong>Relația</strong> (relationship): o relație este o legătură sau o asociere între două sau mai multe variabile. De exemplu, relația dintre prețul unei acțiuni și numărul de acțiuni vândute, sau relația dintre temperatura unei zile și vânzările de înghețată.</p>
+
+<p><strong>Corelația pozitivă</strong> (positive correlation): apare atunci când două variabile se mișcă împreună, în aceeași direcție. De exemplu, dacă prețul unei acțiuni crește, crește și numărul de acțiuni vândute. În acest caz, când o variabilă crește, crește și cealaltă.</p>
+
+<p><strong>Corelația negativă</strong> (negative correlation): apare atunci când două variabile se mișcă în direcții opuse. De exemplu, dacă prețul unei acțiuni crește, numărul de acțiuni vândute scade. Când o variabilă crește, cealaltă scade.</p>
+
+<p><strong>Lipsa corelației</strong> (no correlation): apare atunci când două variabile nu se mișcă deloc împreună. De exemplu, prețul unei acțiuni și numărul de cornete de înghețată vândute pot să nu aibă nicio legătură, iar modificările uneia nu o afectează pe cealaltă.</p>
+
+<p><strong>Graficul de dispersie</strong> (scatter plot): este o reprezentare grafică a relației dintre două variabile. Este un grafic al valorilor unei variabile în raport cu valorile celeilalte. Graficele de dispersie ne ajută să vizualizăm relația dintre două variabile și să determinăm dacă există o corelație pozitivă, negativă sau nicio corelație.</p>
+
+<p><strong>Coeficientul de corelație</strong> (correlation coefficient): este o măsură statistică ce calculează forța și direcția relației dintre două variabile. Este un număr cuprins între -1 și 1 care indică gradul de corelație. Un coeficient de 1 indică o corelație pozitivă perfectă, un coeficient de -1 indică o corelație negativă perfectă, iar un coeficient de 0 indică lipsa corelației.</p>
+
+<p><strong>Direcția</strong> (direction): direcția unei corelații se referă la faptul că relația dintre două variabile este pozitivă sau negativă. Dacă este pozitivă, variabilele se mișcă în aceeași direcție; dacă este negativă, se mișcă în direcții opuse.</p>
+
+<p><strong>Forța</strong> (strength): forța unei corelații se referă la cât de puternică este relația dintre două variabile. O corelație puternică indică faptul că variabilele sunt strâns legate, în timp ce o corelație slabă indică faptul că variabilele nu sunt strâns legate.</p>
+
+<p>În acest capitol vom explora cum se calculează coeficientul de corelație și cum se interpretează rezultatele. Vom examina, de asemenea, cum folosim graficele de dispersie pentru a vizualiza relația dintre două variabile. Înțelegând conceptul de corelație, putem obține informații despre cum se mișcă variabilele împreună sau separat și putem lua decizii mai bine fundamentate în domenii precum finanțele, economia și afacerile.</p>
+
+<h2>Intuiție</h2>
+
+<p>Imaginează-ți că administrezi o mică grădiniță unde, în fiecare după-amiază, aliniezi copiii pentru a pleca acasă. Fiecare copil ține un balon colorat — roșu, albastru, verde, galben — și observi ceva curios. În zilele în care balonul roșu plutește mai sus, aproape întotdeauna și balonul albastru plutește mai sus; dar balonul verde plutește adesea mai jos în același timp. Ai putea presupune că baloanele roșu și albastru „stau împreună", în timp ce balonul verde preferă „să meargă pe drumul lui". Corelația este pur și simplu un număr care îți spune cât de puternic tind două baloane (sau două prețuri, două temperaturi, orice poate urca sau coborî) să se miște împreună sau în direcții opuse.</p>
+
+<p><strong>De ce există această idee?</strong></p>
+
+<p>Să presupunem că ești singurul adult responsabil de 25 de copii și trebuie să decizi ce baloane să cumperi pentru săptămâna viitoare. Dacă știi că baloanele roșu și albastru cresc de obicei împreună, ai putea cumpăra mai multe din ambele și mai puține verzi, pentru că verdele tinde să coboare când roșul urcă. Fără această cunoaștere, ai ghici orbește — cheltuind bani pe baloane care ar putea sta degeaba într-un colț. Corelația îți oferă o modalitate rapidă de a vedea ce lucruri tind să se miște în pas, ca să poți planifica din timp.</p>
+
+<p><strong>Un exemplu simplu, de zi cu zi</strong></p>
+
+<p>Gândește-te la două tarabe de înghețată din parc. Una vinde ciocolată, cealaltă vanilie. În după-amiezile calde, ambele tarabe se descurcă bine; în cele reci, ambele merg prost. Numărul de clienți la taraba cu ciocolată și cel de la taraba cu vanilie urcă și coboară împreună. Spunem că cele două tarabe au o corelație pozitivă: când una crește, crește și cealaltă. Acum imaginează-ți o a treia tarabă care vinde ceai fierbinte. În zilele calde, taraba de ceai are mai puțini clienți, în timp ce tarabele de înghețată au mai mulți. Taraba de ceai se mișcă în direcția opusă, deci spunem că are o corelație negativă cu tarabele de înghețată.</p>
+
+<p><strong>Ce problemă rezolvă corelația?</strong></p>
+
+<p>Înainte de inventarea corelației, oamenii trebuiau să se uite la liste lungi de numere și să încerce să ghicească tipare. Este greu să observi o legătură clară când privești 100 de cifre zilnice de vânzări. Corelația reduce acea listă lungă la un singur număr între –1 și +1. O valoare aproape de +1 înseamnă „aproape întotdeauna se mișcă împreună", o valoare aproape de –1 înseamnă „aproape întotdeauna se mișcă în direcții opuse", iar o valoare apropiată de zero înseamnă „nicio legătură clară". Acest singur număr îți oferă o verificare rapidă înainte de a decide cât să cumperi dintr-un lucru când știi ceva despre altul.</p>
+
+<p><strong>O notă de sinceritate despre limite</strong></p>
+
+<p>Corelația nu îți spune <em>de ce</em> se mișcă baloanele împreună. Poate roșul și albastrul sunt legate de aceeași sfoară; poate copiii pur și simplu le apucă împreună în zilele cu vânt. Corelația măsoară cât de puternică pare legătura, nu ce o cauzează. De asemenea, dacă urmărești doar câteva zile, ai putea avea o impresie greșită — roșul și albastrul ar putea părea legate doar pentru că s-a întâmplat să alegi două după-amiezi însorite la rând. Corelația este un instrument util, dar nu este magie; este doar o modalitate mai clară de a vedea tipare pe care, teoretic, le-ai putea observa privind numerele suficient de mult.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Când vrei să afli dacă două poziții (de exemplu, două acțiuni) tind să se miște împreună, calculezi o <strong>corelație</strong>. Calculul este o serie de pași mici și repetabili care transformă datele brute de preț într-un singur număr între –1 și 1. Mai jos găsești o parcurgere concretă care arată fiecare intrare necesară, aritmetica ce le leagă și rezultatul pe care îl obții.</p>
+
+<h3>1. Adună datele brute</h3>
+
+<ul>
+<li><strong>Seria de prețuri</strong> — prețul de închidere al fiecărui activ pentru același set de date.<br>
+<em>Activ A</em>: 100, 102, 101, 103, 105 $<br>
+<em>Activ B</em>: 50, 51, 49, 52, 53 $</li>
+<li><strong>Orizontul de timp</strong> — alege o frecvență consecventă (zilnică, săptămânală, lunară) și o durată suficient de lungă pentru a fi relevantă. În acest exemplu folosim cinci zile de tranzacționare consecutive.</li>
+</ul>
+
+<h3>2. Transformă prețurile în randamente (returns)</h3>
+
+<p>Un randament măsoară schimbarea procentuală de la un preț la următorul. Pentru fiecare activ calculăm:</p>
+
+<p><strong>Randament<sub>t</sub> = (P<sub>t</sub> − P<sub>t-1</sub>) / P<sub>t-1</sub></strong></p>
+
+<p>unde P<sub>t</sub> este prețul din ziua t. Folosind numerele de mai sus:</p>
+
+<ul>
+<li>Ziua 1 → 2: A: (102−100)/100 = 0,0200; B: (51−50)/50 = 0,0200</li>
+<li>Ziua 2 → 3: A: −0,0098; B: −0,0392</li>
+<li>Ziua 3 → 4: A: 0,0198; B: 0,0612</li>
+<li>Ziua 4 → 5: A: 0,0194; B: 0,0192</li>
+</ul>
+
+<p>Acum avem două serii paralele de randamente (câte patru observații fiecare). Randamentele sunt intrările pentru calculul corelației, deoarece sunt independente de scară și comparabile între active.</p>
+
+<h3>3. Calculează mediile fiecărei serii de randamente</h3>
+
+<p>Randamentul mediu este suma randamentelor împărțită la numărul de observații.</p>
+
+<p><strong>r̄<sub>A</sub></strong> = (0,0200 − 0,0098 + 0,0198 + 0,0194) / 4 = 0,01235 (1,235%)<br>
+<strong>r̄<sub>B</sub></strong> = (0,0200 − 0,0392 + 0,0612 + 0,0192) / 4 = 0,0153 (1,53%)</p>
+
+<p>Aceste medii sunt necesare pentru a centra datele în jurul lui zero, ceea ce izolează componenta de <em>co-mișcare</em>.</p>
+
+<h3>4. Găsește abaterile de la medie</h3>
+
+<p>Pentru fiecare zi, scade media din randament:</p>
+
+<ul>
+<li><em>Ziua 1</em>: d<sub>A1</sub> = 0,0200 − 0,01235 = 0,00765; d<sub>B1</sub> = 0,0200 − 0,0153 = 0,0047</li>
+<li><em>Ziua 2</em>: d<sub>A2</sub> = −0,0098 − 0,01235 = −0,02215; d<sub>B2</sub> = −0,0392 − 0,0153 = −0,0545</li>
+<li>…și așa mai departe pentru toate cele patru zile.</li>
+</ul>
+
+<h3>5. Calculează covarianța (covariance)</h3>
+
+<p>Covarianța măsoară cum se mișcă împreună abaterile celor două active. Este produsul mediu al abaterilor pereche:</p>
+
+<p><strong>Cov(A,B) = (1 / (n−1)) × Σ d<sub>At</sub> · d<sub>Bt</sub></strong></p>
+
+<p>Folosind cele patru perechi de abateri:</p>
+
+<p>Cov(A,B) = (1/3) × (0,00765·0,0047 + (−0,02215)·(−0,0545) + 0,00745·0,0459 + 0,00705·0,0039) ≈ 0,00024</p>
+
+<p>O covarianță pozitivă ne spune că, în medie, atunci când randamentul Activului A este peste media sa, și randamentul Activului B tinde să fie peste media sa.</p>
+
+<h3>6. Calculează abaterea standard a fiecărui activ</h3>
+
+<p>Abaterea standard (σ) este rădăcina pătrată a varianței, care este abaterea medie pătratică:</p>
+
+<p><strong>σ<sub>A</sub></strong> = √((1/(n−1)) × Σ d<sub>At</sub>²) ≈ √0,00021 = 0,0145<br>
+<strong>σ<sub>B</sub></strong> = √((1/(n−1)) × Σ d<sub>Bt</sub>²) ≈ √0,00106 = 0,0326</p>
+
+<p>Abaterile standard aduc covarianța pe o scară comparabilă.</p>
+
+<h3>7. Împarte pentru a obține coeficientul de corelație</h3>
+
+<p>Pasul final este împărțirea covarianței la produsul celor două abateri standard. Rezultatul este coeficientul de corelație, un număr între –1 și +1 care exprimă forța și direcția relației, indiferent de scara prețurilor inițiale.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Exemplu rezolvat: măsurarea relației dintre prețul merelor și al bananelor</p>
+
+<p>Să spunem că ne interesează să înțelegem cum se mișcă prețul merelor în raport cu prețul bananelor. Adunăm date despre prețurile ambelor fructe pe o perioadă de 10 săptămâni și creăm un tabel cu prețurile corespunzătoare.</p>
+
+<ul>
+<li>Săptămâna 1: măr 0,80; banană 0,60</li>
+<li>Săptămâna 2: măr 0,85; banană 0,65</li>
+<li>Săptămâna 3: măr 0,90; banană 0,70</li>
+<li>Săptămâna 4: măr 0,95; banană 0,75</li>
+<li>Săptămâna 5: măr 1,00; banană 0,80</li>
+<li>Săptămâna 6: măr 1,05; banană 0,85</li>
+<li>Săptămâna 7: măr 1,10; banană 0,90</li>
+<li>Săptămâna 8: măr 1,15; banană 0,95</li>
+<li>Săptămâna 9: măr 1,20; banană 1,00</li>
+<li>Săptămâna 10: măr 1,25; banană 1,05</li>
+</ul>
+
+<p>Scopul nostru este să calculăm corelația dintre prețurile merelor și ale bananelor. Pentru aceasta, trebuie să calculăm prețul mediu al fiecărui fruct și apoi să găsim covarianța dintre cele două variabile.</p>
+
+<p><strong>Pasul 1: Calculează prețul mediu al merelor și al bananelor</strong></p>
+
+<p>Pentru a afla prețul mediu al merelor, adunăm toate prețurile și împărțim la numărul de săptămâni (10).</p>
+
+<p>Preț mediu mere = (0,80 + 0,85 + 0,90 + 0,95 + 1,00 + 1,05 + 1,10 + 1,15 + 1,20 + 1,25) / 10 = 10,25 / 10 = 1,025</p>
+
+<p>În mod similar, calculăm prețul mediu al bananelor.</p>
+
+<p>Preț mediu banane = (0,60 + 0,65 + 0,70 + 0,75 + 0,80 + 0,85 + 0,90 + 0,95 + 1,00 + 1,05) / 10 = 8,25 / 10 = 0,825</p>
+
+<p><strong>Pasul 2: Calculează abaterile de la medie pentru fiecare fruct</strong></p>
+
+<p>În continuare, calculăm abaterile de la prețul mediu pentru fiecare săptămână. De exemplu, în Săptămâna 1 abaterea mărului este 0,80 − 1,025 = −0,28, iar a bananei 0,60 − 0,825 = −0,22. Abaterile evoluează treptat de la valori negative (la început, când prețurile sunt mici) către valori pozitive (la final, când prețurile sunt mari): mere de la −0,28 la +0,17 și banane de la −0,22 la +0,23.</p>
+
+<p><strong>Pasul 3: Calculează covarianța dintre prețurile merelor și bananelor</strong></p>
+
+<p>Pentru a calcula covarianța, înmulțim abaterile de la medie ale fiecărui fruct pentru fiecare săptămână și le însumăm.</p>
+
+<p>Covarianță = Σ (Abatere mere × Abatere banane)<br>
+= (−0,28·−0,22) + (−0,23·−0,17) + (−0,18·−0,12) + (−0,13·−0,07) + (−0,08·−0,02) + (−0,03·0,03) + (0,02·0,08) + (0,07·0,13) + (0,12·0,18) + (0,17·0,23)<br>
+≈ 0,1539</p>
+
+<p><strong>Pasul 4: Calculează coeficientul de corelație</strong></p>
+
+<p>În final, calculăm coeficientul de corelație (ρ) folosind formula:</p>
+
+<p><strong>ρ = Covarianță / (Abaterea standard a prețurilor merelor × Abaterea standard a prețurilor bananelor)</strong></p>
+
+<p>Pentru a calcula abaterile standard, folosim formula:</p>
+
+<p>Abatere standard = √(Σ (Abatere de la medie)² / (n − 1))</p>
+
+<p>Pentru mere, suma pătratelor abaterilor este aproximativ 0,1855, deci abaterea standard este √(0,1855 / 9) = √0,0206 ≈ 0,144. Calculând în mod analog pentru banane și împărțind covarianța la produsul celor două abateri standard, obținem un coeficient de corelație foarte aproape de +1. Acest lucru are sens: în acest exemplu, ambele prețuri cresc constant, săptămână de săptămână, în pas perfect — un caz aproape ideal de corelație pozitivă.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să trecem din lumea liniștită a prețurilor care cresc lin la una mai zgomotoasă: două companii industriale mici (small-cap) care uneori urcă și coboară împreună, iar alteori nu. Vom păstra aceeași metodă în trei pași folosită anterior — adună datele, calculează corelația și apoi interpretează numărul — dar de data aceasta numerele vor fi mai dezordonate și povestea mai puțin evidentă.</p>
+
+<p><strong>Scenariu: „Gears &amp; Wheels" versus „Pipes &amp; Plates"</strong></p>
+
+<p>Gears &amp; Wheels (GW) produce roți dințate minuscule pentru mașinuțe de jucărie; Pipes &amp; Plates (PP) produce plăcuțe metalice pentru trenulețe. Ambele firme au sediul în același parc industrial, deci împart aceiași furnizori locali și aceeași bază de clienți. Totuși, GW este mai sensibilă la comenzile din sezonul de Crăciun, în timp ce PP vinde constant tot anul.</p>
+
+<p>Adunăm prețurile de închidere zilnice ale acțiunilor pentru zece zile de tranzacționare consecutive (în dolari). Prețurile sunt mici, dar acest lucru este normal pentru micro-caps.</p>
+
+<ul>
+<li>Ziua 1: GW = 4,20; PP = 3,80</li>
+<li>Ziua 2: GW = 4,35; PP = 3,85</li>
+<li>Ziua 3: GW = 4,10; PP = 3,95</li>
+<li>Ziua 4: GW = 4,45; PP = 3,70</li>
+<li>Ziua 5: GW = 4,50; PP = 3,90</li>
+<li>Ziua 6: GW = 4,70; PP = 4,05</li>
+<li>Ziua 7: GW = 4,60; PP = 4,20</li>
+<li>Ziua 8: GW = 4,80; PP = 3,85</li>
+<li>Ziua 9: GW = 4,95; PP = 4,15</li>
+<li>Ziua 10: GW = 5,10; PP = 4,30</li>
+</ul>
+
+<p><strong>Pasul 1 – Calculează mediile</strong></p>
+
+<p>Media GW = (4,20 + 4,35 + 4,10 + 4,45 + 4,50 + 4,70 + 4,60 + 4,80 + 4,95 + 5,10) / 10 = 4,575<br>
+Media PP = (3,80 + 3,85 + 3,95 + 3,70 + 3,90 + 4,05 + 4,20 + 3,85 + 4,15 + 4,30) / 10 = 3,975</p>
+
+<p><strong>Pasul 2 – Găsește abaterile de la medie și produsele lor</strong></p>
+
+<p>Scădem fiecare medie și apoi înmulțim cele două abateri pentru aceeași zi.</p>
+
+<ul>
+<li>Ziua 1: (−0,375) × (−0,175) = +0,0656</li>
+<li>Ziua 2: (+0,225) × (−0,125) = −0,0281</li>
+<li>Ziua 3: (−0,475) × (−0,025) = +0,0119</li>
+<li>Ziua 4: (−0,125) × (−0,275) = +0,0344</li>
+<li>Ziua 5: (−0,075) × (−0,075) = +0,0056</li>
+<li>Ziua 6: (+0,125) × (+0,075) = +0,0094</li>
+<li>Ziua 7: (+0,025) × (+0,225) = +0,0056</li>
+<li>Ziua 8: (+0,225) × (−0,125) = −0,0281</li>
+<li>Ziua 9: (+0,375) × (+0,175) = +0,0656</li>
+<li>Ziua 10: (+0,525) × (+0,325) = +0,1706</li>
+</ul>
+
+<p>Suma produselor = +0,3020</p>
+
+<p><strong>Pasul 3 – Calculează abaterile standard</strong></p>
+
+<p>Abaterea standard (GW) ≈ 0,285<br>
+Abaterea standard (PP) ≈ 0,190</p>
+
+<p><strong>Pasul 4 – Coeficientul de corelație</strong></p>
+
+<p>r = Σ[(x − x̄)(y − ȳ)] / [(n − 1) · s<sub>x</sub> · s<sub>y</sub>]<br>
+r ≈ 0,3020 / [9 × 0,285 × 0,190] ≈ 0,3020 / 0,486 ≈ 0,62</p>
+
+<p><strong>Interpretare pentru începători</strong></p>
+
+<p>O corelație de +0,62 ne spune că, de cele mai multe ori, GW și PP se mișcă în aceeași direcție. Când GW urcă, PP tinde să urce și el, iar când GW scade, de obicei scade și PP. Totuși, relația nu este perfectă. Observă că în Ziua 2 și Ziua 8 PP a scăzut de fapt în timp ce GW urca; în Ziua 4, GW a scăzut în timp ce PP a urcat. Aceste „încrucișări" arată de ce corelația nu este +1,00.</p>
+
+<p><strong>Ce înseamnă asta în practică?</strong></p>
+
+<p>Dacă ai deține ambele acțiuni, nu ai renunța la una doar pentru că uneori se mișcă împreună. Corelația pozitivă sugerează că un singur factor local — de exemplu, o grevă la parcul industrial — ar lovi ambele firme în același timp. Dar faptul că este sub 1,00 înseamnă și că deținerea ambelor nu îți oferă o acoperire (hedge) perfectă; în unele zile o acțiune poate urca în timp ce cealaltă scade. În termeni pentru începători, corelația ne spune cât de mult „lucru în echipă" există între două lucruri în mișcare, dar nu garantează niciodată un lucru în echipă perfect.</p>
+
+<h2>Greșeli frecvente și concepții greșite</h2>
+
+<p>Când întâlnești prima dată corelația, este ușor să aluneci în obiceiuri care par plauzibile, dar care ascund de fapt probleme mai profunde. Mai jos sunt cele mai frecvente capcane în care cad începătorii, de ce contează și modalități concrete de a le evita.</p>
+
+<ol>
+<li><strong>Confundarea corelației cu cauzalitatea.</strong> O corelație pozitivă (sau negativă) îți spune că două serii tind să se miște în aceeași direcție (sau opusă), <em>dar nu îți spune de ce</em>. Începătorii citesc uneori o corelație de 0,7 între două prețuri de mărfuri și concluzionează că una „o conduce" pe cealaltă. În realitate, relația ar putea fi mediată de un al treilea factor — de exemplu, un factor macroeconomic comun — sau ar putea fi o coincidență care dispare imediat ce condițiile de piață se schimbă. Întreabă-te mereu: „Ce mecanism ar putea lega în mod plauzibil aceste variabile?"</li>
+
+<li><strong>Tratarea unei corelații de 0 ca „nicio relație".</strong> O corelație Pearson de 0 înseamnă doar că nu există o relație <em>liniară</em> detectabilă în eșantion. Două serii ar putea fi legate printr-un tipar curbat (neliniar) sau ar putea fi legate doar în timpul mișcărilor extreme de piață (dependență de coadă). Reprezentarea datelor pe un grafic de dispersie dezvăluie adesea structuri ascunse. Dacă vezi o curbă sau aglomerări, ai nevoie de o măsură mai flexibilă (de exemplu, corelația Spearman bazată pe ranguri).</li>
+
+<li><strong>Presupunerea că corelația este fixă în timp.</strong> Corelația este o estimare statistică ce depinde de fereastra de date aleasă. O corelație calculată pe 30 de zile poate arăta foarte diferit de una pe 250 de zile, mai ales pe piețe volatile. Corelațiile pot oscila dramatic în timpul crizelor sau al schimbărilor de regim. Un obicei bun este să examinezi corelațiile pe mai multe orizonturi (scurt, mediu, lung) și să monitorizezi cum evoluează.</li>
+
+<li><strong>Ignorarea impactului valorilor extreme (outliers).</strong> Corelația Pearson este foarte sensibilă la observațiile extreme. Un singur outlier — poate un salt de preț cauzat de un șoc de știri — poate trage corelația în sus sau în jos dramatic, dând o impresie înșelătoare. Înainte de a accepta o corelație, scanează datele pentru puncte neobișnuite și ia în considerare alternative robuste (de exemplu, corelația de rang Spearman).</li>
+
+<li><strong>Nepotrivirea seriilor de date.</strong> Corelația cere ca cele două serii să fie aliniate în timp și frecvență. O greșeală frecventă este corelarea prețurilor zilnice de închidere ale Activului A cu randamentele săptămânale ale Activului B. Numărul rezultat poate fi corect matematic, dar nu reflectă relația dorită. Reeșantionează mereu seriile la o frecvență comună.</li>
+
+<li><strong>Folosirea prețurilor brute în loc de randamente.</strong> Prețurile sunt nestaționare; tind să deriveze în sus (sau în jos) în timp, ceea ce poate umfla estimările de corelație chiar și când mișcările de bază nu au legătură. Corelarea seriilor de prețuri brute produce adesea un număr pozitiv mare doar pentru că ambele serii împart un trend comun. Practica standard este să calculezi mai întâi <em>randamentele</em> (de exemplu, randamente logaritmice) și apoi să le corelezi.</li>
+
+<li><strong>Convingerea că o corelație mare implică predictibilitate.</strong> O corelație de 0,8 sună puternic, dar nu înseamnă că poți prezice o serie din cealaltă cu 80% acuratețe. Corelația măsoară co-mișcarea, nu proporția de varianță explicată. Coeficientul de determinare (R²) într-o regresie liniară simplă este egal cu corelația la pătrat, deci o corelație de 0,8 se traduce într-un R² de 0,64 — lăsând încă 36% din variație neexplicată.</li>
+
+<li><strong>Bazarea excesivă pe corelație pentru alocarea portofoliului.</strong> Beneficiile diversificării apar din corelații scăzute sau negative <em>combinate</em> cu diferențe de volatilitate și expunere la factori de risc distincți. Începătorii cred uneori că adăugarea unui activ cu o corelație de 0,2 reduce automat riscul portofoliului, ignorând faptul că noul activ ar putea fi mult mai volatil.</li>
+</ol>
+
+<h2>Cum folosește biroul de tranzacționare corelația</h2>
+
+<p>În secțiunile anterioare am explorat conceptul de corelație și cum poate fi calculat. Acum să vedem cum folosește un birou de tranzacționare (trading desk) corelația în procesul zilnic de luare a deciziilor.</p>
+
+<p><strong>Dimensionarea pozițiilor și gestionarea riscului</strong></p>
+
+<p>Corelația este un factor crucial în determinarea mărimii poziției și în gestionarea riscului. Când un trader ia în considerare deschiderea unei poziții într-un anumit activ, trebuie să evalueze impactul potențial al acelei poziții asupra întregului portofoliu.</p>
+
+<p>De exemplu, imaginează-ți un trader care ia în considerare deschiderea unei poziții long pe acțiunea Apple (AAPL). Însă are deja și o poziție long pe Amazon (AMZN), care are o corelație ridicată cu AAPL. În acest caz, traderul poate decide să reducă mărimea poziției pe AAPL pentru a evita supra-expunerea la sectorul tehnologic, deoarece corelația dintre cele două acțiuni sugerează că tind să se miște împreună.</p>
+
+<p>Pe de altă parte, dacă traderul are o poziție long pe aur (GC) și o poziție short pe dolarul american (USD), care au o corelație scăzută, poate decide să mărească poziția pe aur, deoarece corelația scăzută sugerează că cele două active tind să se miște independent.</p>
+
+<p><strong>Corelația și diversificarea</strong></p>
+
+<p>Corelația este, de asemenea, un factor esențial în strategiile de diversificare. Un birou de tranzacționare poate folosi corelația pentru a identifica active care tind să se miște împreună sau separat, și apoi să folosească această informație pentru a crea un portofoliu diversificat.</p>
+
+<p>De exemplu, un trader care creează un portofoliu de acțiuni cu un mix de titluri din tehnologie, finanțe și sănătate poate folosi analiza de corelație pentru a identifica cele mai corelate acțiuni din fiecare sector, apoi să selecteze o acțiune reprezentativă din fiecare sector pentru a o include în portofoliu.</p>
+
+<p><strong>Sincronizarea și sentimentul pieței</strong></p>
+
+<p>Corelația poate fi folosită și pentru a evalua sentimentul pieței și sincronizarea (timing). Când un trader observă că două sau mai multe active puternic corelate se mișcă în aceeași direcție, acest lucru poate indica un trend de piață puternic. Invers, dacă corelația dintre două active este scăzută, poate sugera o lipsă de convingere pe piață.</p>
+
+<p>De exemplu, dacă un trader observă că corelația dintre petrol (CL) și indicele S&amp;P 500 (SPX) este ridicată, iar ambele active urcă, acest lucru poate sugera că piața trece printr-un trend bull puternic, iar traderul poate decide să-și mărească expunerea.</p>
+
+<p><strong>Exemplu din lumea reală</strong></p>
+
+<p>Să luăm un exemplu real. Imaginează-ți un trader care lucrează la un birou specializat în tranzacționarea criptomonedelor. Observă că corelația dintre Bitcoin (BTC) și Ethereum (ETH) este ridicată, iar ambele active urcă.</p>
+
+<p>Traderul decide să deschidă o poziție long pe ambele, BTC și ETH, dar cu o mărime mai mică pe ETH din cauza corelației sale ridicate cu BTC. De asemenea, decide să monitorizeze îndeaproape corelația dintre cele două active, deoarece o schimbare bruscă a corelației ar putea indica o schimbare a sentimentului pieței.</p>
+
+<p>În acest exemplu, traderul folosește corelația pentru a-și informa deciziile de dimensionare a pozițiilor și de gestionare a riscului, dar și pentru a evalua sentimentul și sincronizarea pieței.</p>
+
+<p><strong>Concluzie</strong></p>
+
+<p>În concluzie, corelația este un instrument puternic pe care birourile de tranzacționare îl folosesc pentru a-și informa procesul zilnic de decizie. Înțelegând cum tind diferitele active să se miște împreună sau separat, traderii pot lua decizii mai bine fundamentate privind dimensionarea pozițiilor, gestionarea riscului, diversificarea și sincronizarea pieței. Deși corelația nu este un indicator infailibil, poate oferi informații valoroase despre comportamentul pieței.</p>
+
+<h2>Limite, avertismente și când eșuează</h2>
+
+<p>Corelația este un număr minunat de compact — o singură cifră între –1 și +1 — dar este și un rezumat fragil. Ca o fotografie făcută printr-o lentilă murdară, poate ascunde adevărata formă a ceea ce se întâmplă. Mai jos sunt principalele situații în care corelația te poate induce în eroare și de ce nu ar trebui niciodată să o tratezi ca pe o garanție.</p>
+
+<ol>
+<li><strong>Măsoară doar relațiile liniare (în linie dreaptă).</strong> Corelația măsoară cât de strâns urcă sau coboară împreună două serii într-un mod lin, liniar. Dacă legătura este curbată, neregulată sau își schimbă direcția, corelația poate părea slabă chiar și când cele două lucruri sunt strâns conectate. Reprezintă mereu punctele mai întâi; un grafic de dispersie va dezvălui curbe pe care un singur număr nu le poate arăta.</li>
+
+<li><strong>Nu spune nimic despre cauză și efect.</strong> O corelație de +0,95 între vânzările de înghețată și incidentele de înec nu înseamnă că înghețata cauzează înecul. Ambele cresc vara din cauza vremii calde. Corelația măsoară co-mișcarea, nu mecanismul.</li>
+
+<li><strong>Își poate schimba semnul fără avertizare.</strong> Regimurile se schimbă. Pe piețe calme, două acțiuni pot deriva în sus împreună (corelație pozitivă). Când lovește panica, aceeași pereche poate vinde brusc în pas, sau una poate urca în timp ce cealaltă scade. O corelație care s-a menținut ani de zile se poate prăbuși peste noapte. Verifică mereu ferestrele glisante (rolling windows).</li>
+
+<li><strong>Valorile extreme pot deturna numărul.</strong> O lună extremă în care o acțiune sare cu 50% în timp ce omoloaga ei scade cu 20% poate trage corelația spre zero, chiar dacă în restul timpului se mișcă în tandem perfect. Întreabă-te mereu: „Este acest număr determinat de câteva zile sau este consecvent?"</li>
+
+<li><strong>Ignoră scara și unitățile.</strong> O corelație de 0,85 între doi indici globali de acțiuni pare puternică, dar aceeași 0,85 între un ETF small-cap și un ETF de obligațiuni guvernamentale poate fi lipsită de sens, deoarece cel din urmă abia se mișcă. Corelația este independentă de scară, deci nu îți spune câți bani sunt în pericol. Combin-o cu volatilitatea și mărimea poziției.</li>
+
+<li><strong>Eșuează când datele sunt puține sau învechite.</strong> Cu doar 12 randamente lunare, o corelație poate părea solidă din întâmplare. Cu cât setul de date este mai îngust, cu atât banda de încredere este mai largă. Indică mereu lungimea și frecvența eșantionului.</li>
+
+<li><strong>Nu poate detecta dependențele ascunse.</strong> Două active pot fi ambele determinate de un al treilea factor nevăzut. Aurul și francul elvețian urcă adesea împreună nu pentru că se influențează direct, ci pentru că ambele beneficiază când investitorii caută siguranță. Testează-ți perechile la stres față de un set mai larg de factori — rate ale dobânzii, indici de mărfuri, VIX.</li>
+
+<li><strong>Nu este o măsură de risc.</strong> O corelație de –0,95 sună minunat pentru diversificare, totuși dacă ambele active se prăbușesc împreună 90% din timp și diverg doar în ultimele 10%, tot pierzi bani pe ambele părți. Corelația nu măsoară riscul de coadă (tail risk). Asociaz-o cu statistici de drawdown și analiză de scenarii.</li>
+
+<li><strong>Poate fi manipulată.</strong> Dacă știi că perioada eșantionului se termină chiar înainte de o schimbare de regim, poți selecta datele convenabil pentru a obține o corelație mare. Insistă mereu pe validarea în afara eșantionului (out-of-sample) — testează relația pe date care nu au fost folosite pentru a o estima — înainte de a te baza pe număr.</li>
+</ol>
+
+<p><strong>Concluzie</strong></p>
+
+<p>Corelația este o lanternă într-o cameră întunecată: îți arată unde să te uiți, dar nu îți spune ce este după colț. Folosește-o ca un prim filtru, niciodată ca un răspuns final. Combin-o cu alte lentile — grafice de dispersie, ferestre glisante, scenarii de stres și raționament cauzal — și vei evita cele mai frecvente capcane.</p>
+
+<h2>Concluzii esențiale</h2>
+
+<ul>
+<li><strong>Corelația îți spune cum tind două poziții să se miște una față de cealaltă, nu cât de mari sunt mișcările.</strong> O corelație de +1 înseamnă că urcă și coboară mereu împreună, −1 înseamnă că se mișcă mereu în direcții opuse, iar 0 înseamnă că nu există nicio relație sistematică.</li>
+
+<li><strong>Numărul pe care îl vezi este o medie statistică, nu o garanție.</strong> Chiar și o pereche cu o corelație de +0,8 va diverge ocazional; cu cât valoarea absolută este mai mare, cu atât tiparul este mai fiabil, dar nimic nu este sigur.</li>
+
+<li><strong>Corelația este adimensională — nu are unități și variază doar între −1 și +1.</strong> Pentru că elimină mărimea mișcărilor, trebuie totuși să te uiți la volatilitate pentru a înțelege riscul real pe care ți-l asumi.</li>
+
+<li><strong>Corelațiile pozitive și negative sunt utile în moduri opuse.</strong> Corelația pozitivă te ajută să grupezi pariuri similare (de exemplu, un coș de acțiuni tech), în timp ce corelația negativă este piatra de temelie a diversificării, permițând câștigurilor dintr-o parte să compenseze pierderile din alta.</li>
+
+<li><strong>Corelația este simetrică:</strong> corelația lui A cu B este exact aceeași cu cea a lui B cu A. Nu există un „lider" sau un „urmăritor" implicat de număr.</li>
+
+<li><strong>Corelația pe care o calculezi depinde de fereastra de timp și de frecvența datelor.</strong> O corelație zilnică pe 30 de zile poate arăta foarte diferit de una săptămânală pe 1 an. Ferestrele scurte captează comportamentul recent, dar sunt mai zgomotoase; cele lungi netezesc zgomotul, dar pot rata trendurile emergente.</li>
+
+<li><strong>Corelația nu implică cauzalitate.</strong> Două active se pot mișca împreună fie pentru că împart un factor comun (de exemplu, prețul petrolului), fie pur și simplu din coincidență.</li>
+
+<li><strong>Când combini poziții, corelația portofoliului este o medie ponderată a corelațiilor pereche.</strong> Pozițiile mai mari au o influență mai mare asupra comportamentului general, deci o tranzacție mică, puternic corelată, poate fi acoperită de una mai mare, slab corelată.</li>
+
+<li><strong>Corelația se poate schimba în timp, mai ales în perioadele de stres al pieței.</strong> Activele care de obicei au corelație scăzută sau zero devin adesea mai pozitiv corelate când piețele se prăbușesc, reducând protecția pe care o așteptai de la diversificare.</li>
+
+<li><strong>O corelație de 0 nu înseamnă că cele două poziții sunt independente.</strong> Înseamnă doar că, pe perioada eșantionului, nu există o relație liniară. Ar putea fi totuși legate prin dinamici neliniare sau expunere comună la un al treilea factor.</li>
+
+<li><strong>Semnificația statistică contează.</strong> O corelație de +0,2 bazată pe 10 puncte de date este mult mai puțin demnă de încredere decât același număr derivat din 500 de observații.</li>
+
+<li><strong>Corelația este o măsură relativă.</strong> Interpreteaz-o mereu alături de alte metrici precum beta, volatilitatea și analiza fundamentală.</li>
+
+<li><strong>Când vezi o corelație care pare „prea perfectă", verifică din nou datele.</strong> Probleme comune — precum folosirea aceleiași serii de preț pentru ambele părți sau marcaje de timp nealiniate — pot umfla artificial corelația.</li>
+
+<li><strong>Corelația este un instrument, nu un motor de decizie.</strong> Folosește-o pentru a informa bugetarea riscului, dimensionarea pozițiilor și strategiile de acoperire, dar combin-o cu judecata despre regimul pieței, lichiditate și contextul fiecărei tranzacții.</li>
+
+<li><strong>Amintește-ți limitele corelației:</strong> captează doar co-mișcarea liniară, presupune o relație stabilă și este sensibilă la valorile extreme. În practică, completeaz-o cu analiză de scenarii, teste de stres și intuiție calitativă.</li>
+</ul>

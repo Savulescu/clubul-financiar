@@ -1,0 +1,213 @@
+<p>Riscul de neplata (default risk) este una dintre cele mai importante notiuni din lumea creditului si a investitiilor in obligatiuni. In termeni simpli, riscul de neplata raspunde la o singura intrebare: cat de mare este sansa ca persoana sau compania care a imprumutat bani sa nu plateasca la timp ceea ce a promis? Acest capitol explica pe intelesul incepatorilor ce inseamna neplata (default), cum se masoara riscul de neplata si de ce metrica numita probabilitate de neplata (probability of default, PD) sta in centrul tuturor deciziilor de creditare.</p>
+
+<p>Vom vedea cum probabilitatea de neplata (PD) se combina cu pierderea in caz de neplata (loss given default, LGD) si cu expunerea la momentul neplatii (exposure at default, EAD) pentru a obtine pierderea asteptata (expected loss, EL). Vei intelege cum bancile, agentiile de rating si birourile de tranzactionare estimeaza riscul de credit, ce greseli fac incepatorii cu probabilitatea de neplata si unde aceste modele se pot insela. Scopul este sa transformam un subiect complicat intr-o harta clara, folosind exemple concrete: de la un imprumut catre o mica pepiniera pana la deciziile reale ale unui trading desk.</p>
+
+<p>Ideea-cheie de retinut de la inceput: riscul de neplata nu este un fapt sigur despre viitor, ci o estimare facuta astazi despre ziua de maine. Toate cifrele pe care le vom calcula sunt probabilitati, nu certitudini.</p>
+
+<h2>Definitie si termeni-cheie</h2>
+
+<h3>Ce inseamna „neplata” (default)</h3>
+<p>Imagineaza-ti ca imprumuti 100 de lire de la un prieten si promiti sa-i returnezi peste o luna. Daca, la data scadenta, nu inmanezi cele 100 de lire (sau suma exacta convenita), prietenul tau are dreptul sa spuna ca ai intrat in <strong>neplata</strong> („default”). In limbajul financiar, o <strong>neplata (default)</strong> inseamna pur si simplu nereusita de a respecta la timp o promisiune de plata cu valoare juridica obligatorie. Promisiunea poate fi scrisa intr-un contract de credit bancar, intr-un acord de card de credit, intr-un certificat de obligatiune sau in orice alt document de datorie. Ideea esentiala este ca debitorul a incalcat regula convenita despre cand si cat trebuie sa plateasca.</p>
+
+<h3>Riscul de neplata (default risk)</h3>
+<p>Deoarece un debitor ar putea sa nu plateasca, persoana sau compania care a imprumutat banii se confrunta cu <strong>riscul de neplata (default risk)</strong>. Riscul de neplata este sansa — masurata in procente — ca debitorul sa nu plateasca ceea ce a promis atunci cand plata este scadenta. De exemplu, daca o banca apreciaza ca exista o sansa de 2% ca o mica firma sa rateze urmatoarea rata de credit, banca spune ca imprumutul are un risc de neplata de 2%. Observa ca riscul de neplata nu este un fapt viitor unic; este o probabilitate, o estimare facuta astazi despre ziua de maine.</p>
+
+<h3>Probabilitatea de neplata (PD)</h3>
+<p>Cel mai obisnuit mod de a exprima riscul de neplata este printr-un numar numit <strong>probabilitatea de neplata (probability of default)</strong>, sau <strong>PD</strong>. PD este sansa procentuala ca un debitor sa intre in neplata intr-un interval de timp ales, de obicei un an pentru creditele de consum si pentru cele acordate firmelor mici. Asadar, daca o companie de carduri de credit atribuie unui client o PD de 3%, inseamna ca firma considera ca exista o sansa de 3% ca acel client sa rateze cel putin o plata in urmatoarele douasprezece luni.</p>
+<p>Punct esential: PD este intotdeauna o estimare orientata spre viitor. Nu este acelasi lucru cu rata reala de neplata care poate aparea mai tarziu; este cea mai buna estimare facuta astazi.</p>
+
+<h3>Pierderea in caz de neplata (LGD)</h3>
+<p>Chiar daca un debitor intra in neplata, creditorul pierde rareori intreaga suma datorata. O parte din bani poate fi totusi recuperata. Fractiunea care se pierde se numeste <strong>pierdere in caz de neplata (loss given default)</strong>, sau <strong>LGD</strong>. LGD se exprima ca procent din expunerea initiala. De exemplu, daca o banca se asteapta sa recupereze doar 70 de lire dintr-un imprumut de 100 de lire dupa o neplata, LGD este de 30% (pentru ca se pierd 30 de lire). LGD depinde de garantii (active gajate ca asigurare), de sistemul juridic si de tipul de datorie.</p>
+
+<h3>Expunerea la momentul neplatii (EAD)</h3>
+<p>Suma aflata in risc in momentul neplatii se numeste <strong>expunere la momentul neplatii (exposure at default)</strong>, sau <strong>EAD</strong>. EAD este soldul ramas pe care debitorul il datoreaza atunci cand are loc neplata. Pentru un card de credit, EAD este soldul curent de pe card in momentul in care clientul inceteaza sa plateasca. Pentru un imprumut la termen, EAD este principalul ramas inca de platit la data scadenta.</p>
+
+<h3>Pierderea asteptata (EL)</h3>
+<p>Combinand cele trei elemente de mai sus se obtine un singur numar pe care creditorii il folosesc pentru a planifica pierderile. <strong>Pierderea asteptata (expected loss, EL)</strong> se calculeaza astfel:</p>
+<p><strong>EL = PD &times; LGD &times; EAD</strong></p>
+<p>Daca o banca are un imprumut unde PD = 2%, LGD = 40% si EAD = 50 000 de lire, pierderea asteptata este de 400 de lire (0,02 &times; 0,40 &times; 50 000 de lire). Pierderea asteptata nu este o pierdere sigura; este suma medie pe care banca se asteapta sa o piarda per imprumut, in cazul a numeroase imprumuturi similare.</p>
+
+<h3>Ratingul de credit si scorul de credit</h3>
+<p>Creditorii folosesc adesea <strong>ratinguri de credit (credit ratings)</strong> sau <strong>scoruri de credit (credit scores)</strong> pentru a estima PD. Un rating de credit este o nota sub forma de litera (de exemplu, AAA, BBB, CCC) atribuita de o agentie de rating precum Moody's sau S&amp;P. Un scor de credit este un numar din trei cifre (de exemplu, 300-850 in Statele Unite) produs de un birou de credit precum Experian sau Equifax. Atat ratingurile, cat si scorurile rezuma probabilitatea ca debitorul sa intre in neplata. Ratingurile mai inalte si scorurile mai mari inseamna o PD estimata mai mica.</p>
+
+<h3>Incertitudine si estimare</h3>
+<p>Fiecare cifra de PD, LGD si EAD este o estimare, nu o profetie. Datele din trecut, conditiile economice si comportamentul debitorului se pot schimba. De aceea, creditorii isi actualizeaza permanent estimarile si uneori adauga marje de siguranta. Reglementatorii cer, de asemenea, bancilor sa detina capital suplimentar ca o perna de protectie impotriva pierderilor neasteptate.</p>
+
+<h3>Punand totul cap la cap</h3>
+<p>Riscul de neplata este posibilitatea ca un debitor sa nu plateasca asa cum a promis. Pentru a masura acest risc, creditorii folosesc probabilitatea de neplata (PD), pierderea in caz de neplata (LGD) si expunerea la momentul neplatii (EAD). Inmultindu-le se obtine pierderea asteptata (EL), care ghideaza stabilirea pretului, provizionarea si planificarea capitalului. Ratingurile si scorurile de credit sunt instrumente obisnuite care ii ajuta pe creditori sa transforme informatii complicate despre debitor intr-o singura estimare de PD.</p>
+
+<h2>Intuitie</h2>
+<p>Imagineaza-ti ca ai o taraba cu limonada. Faci o bautura delicioasa si o vinzi trecatorilor. Ca sa faci mai multa limonada, trebuie sa cumperi lamai, zahar si apa. Imprumuti bani de la un prieten ca sa cumperi aceste ingrediente, promitand ca ii returnezi cu ceva bani in plus, ca multumire pentru imprumut. Este la fel ca un credit de la o banca, unde imprumuti bani ca sa pornesti sau sa cresti o afacere.</p>
+<p>Acum imagineaza-ti ca este o zi ploioasa si nimeni nu vrea sa cumpere limonada. Nu poti sa-ti vinzi limonada si nu ai destui bani ca sa-i returnezi prietenului tau. Asta seamana cu o companie care intra in neplata pe un imprumut. Compania nu poate returna banii imprumutati, iar creditorul (banca sau prietenul tau) isi pierde banii.</p>
+<p>Problema este ca, atunci cand imprumuta bani, creditorul nu stie daca va fi o zi ploioasa sau una insorita. Nu poate prezice cu certitudine daca debitorul va fi capabil sa returneze imprumutul. Aici intervine riscul de neplata.</p>
+<p>Riscul de neplata seamana cu incertitudinea daca va fi o zi ploioasa sau una insorita. Este sansa ca debitorul sa nu fie capabil sa returneze imprumutul. Creditorul vrea sa cunoasca aceasta probabilitate ca sa poata decide daca sa imprumute bani si ce dobanda sa perceapa.</p>
+<p>Gandeste-te la riscul de neplata ca la un joc de noroc. Arunci o moneda si exista 50% sanse sa cada cu fata in sus si 50% sanse sa cada cu reversul in sus. Daca imprumuti bani unei persoane cu o sansa de 50% de neplata, s-ar putea sa nu-ti recapeti banii. Dar daca imprumuti bani unei persoane cu o sansa de 1% de neplata, este mai probabil sa-ti recuperezi banii.</p>
+<p>Probabilitatea de neplata (PD) este ca procentul de sanse de a cadea cu reversul in sus. Este o masura a cat de probabil este ca debitorul sa intre in neplata pe imprumut. Creditorul foloseste acest numar ca sa decida daca sa imprumute bani si ce dobanda sa perceapa. Cu cat PD este mai mica, cu atat imprumutul este mai sigur si dobanda mai mica. Cu cat PD este mai mare, cu atat imprumutul este mai riscant si dobanda mai mare.</p>
+<p>In lumea reala, riscul de neplata este mai complex decat o simpla aruncare de moneda. Exista multi factori care influenteaza probabilitatea de neplata, precum istoricul de credit al debitorului, dobanda si starea generala a economiei. Dar ideea de baza ramane aceeasi: riscul de neplata este incertitudinea daca debitorul va putea returna imprumutul, iar probabilitatea de neplata este o masura a acestei incertitudini.</p>
+
+<h2>Cum functioneaza — mecanismul</h2>
+<p>Pentru a intelege cum se masoara riscul de neplata, trebuie sa descompunem procesul in componentele lui esentiale. Sa luam un exemplu simplu de imprumut acordat unui mic antreprenor, John, care vrea sa cumpere o noua duba pentru serviciul sau de livrari. Banca, ABC Bank, ia in considerare sa-i acorde lui John imprumutul. Banca vrea sa evalueze riscul ca John sa intre in neplata, adica sa nu poata rambursa imprumutul.</p>
+
+<h3>Pasul 1: Colectarea datelor</h3>
+<p>Banca aduna date despre afacerea lui John, inclusiv:</p>
+<ul>
+<li>Istoricul sau de credit (de exemplu, plati anterioare la imprumuturi si carduri de credit)</li>
+<li>Veniturile si cheltuielile sale</li>
+<li>Tipul de afacere pe care o conduce (de exemplu, serviciu de livrari)</li>
+<li>Sectorul in care opereaza (de exemplu, transporturi)</li>
+<li>Dimensiunea afacerii sale (de exemplu, numarul de angajati)</li>
+<li>Scorul sau personal de credit</li>
+</ul>
+
+<h3>Pasul 2: Atribuirea ponderilor</h3>
+<p>Banca atribuie ponderi fiecaruia dintre acesti factori in functie de importanta lor in prezicerea riscului de neplata. De exemplu:</p>
+<ul>
+<li>Istoric de credit: 30%</li>
+<li>Venituri si cheltuieli: 25%</li>
+<li>Tipul afacerii: 15%</li>
+<li>Sectorul: 10%</li>
+<li>Dimensiunea afacerii: 10%</li>
+<li>Scor personal de credit: 10%</li>
+</ul>
+<p>Aceste ponderi sunt subiective si pot varia de la o banca la alta.</p>
+
+<h3>Pasul 3: Scorarea</h3>
+<p>Banca atribuie un scor fiecarui factor pe baza datelor colectate. De exemplu:</p>
+<ul>
+<li>Istoric de credit: 700 (bun), 600 (acceptabil), 500 (slab)</li>
+<li>Venituri si cheltuieli: 100 000 $ (ridicat), 50 000 $ (mediu), 20 000 $ (scazut)</li>
+<li>Tipul afacerii: 5 (risc ridicat), 3 (risc mediu), 1 (risc scazut)</li>
+<li>Sectorul: 4 (risc ridicat), 2 (risc mediu), 0 (risc scazut)</li>
+<li>Dimensiunea afacerii: 50 de angajati (mare), 20 de angajati (medie), 10 angajati (mica)</li>
+<li>Scor personal de credit: 850 (excelent), 750 (bun), 650 (acceptabil)</li>
+</ul>
+
+<h3>Pasul 4: Calcularea probabilitatii de neplata (PD)</h3>
+<p>Banca foloseste un model statistic, precum un model de regresie logistica, pentru a calcula probabilitatea de neplata (PD) pe baza scorurilor atribuite la Pasul 3. Modelul tine cont de ponderile atribuite la Pasul 2.</p>
+<p>De exemplu, modelul ar putea genera o PD de 5% pentru imprumutul lui John, ceea ce inseamna ca exista o sansa de 5% ca John sa intre in neplata pe imprumut.</p>
+
+<h3>Pasul 5: Rezultatul</h3>
+<p>Banca produce PD, care este o valoare numerica intre 0 si 1 (sau intre 0% si 100%). Aceasta valoare reprezinta probabilitatea ca John sa intre in neplata pe imprumut.</p>
+<p>In acest exemplu, banca ar putea produce o PD de 0,05 (5%), indicand ca exista o sansa de 5% ca John sa intre in neplata pe imprumut. Banca poate apoi folosi aceasta informatie pentru a decide daca sa-i acorde lui John imprumutul si la ce dobanda.</p>
+<p>Merita mentionat ca procesul real de calcul al PD este mai complex si implica multi mai multi factori decat cei descrisi aici. In plus, ponderile si scorurile atribuite la Pasii 2 si 3 sunt subiective si pot varia de la o banca la alta.</p>
+
+<h2>Exemplu rezolvat</h2>
+<p>Exemplu rezolvat: imprumut catre pepiniera „Sunny Plants”</p>
+<p>Imagineaza-ti ca esti ofiterul de credit la GreenLeaf Bank. O mica pepiniera numita Sunny Plants cere un imprumut pe un an de 50 000 € ca sa cumpere tavi suplimentare pentru sera si rasaduri inainte de aglomeratia de primavara. Pepiniera functioneaza de trei ani, are vanzari constante de aproximativ 200 000 € pe an, iar proprietara ei, Fatima, a fost de acord sa ofere bancii o garantie personala pe imprumut. Dupa ce citesti planul de afaceri al Fatimei si verifici registrele ei fiscale, decizi ca firma este suficient de credibila pentru a fi luata in calcul, dar tot trebuie sa estimezi sansa ca Sunny Plants sa nu ramburseze la timp cei 50 000 €. In limbaj bancar, trebuie sa estimezi probabilitatea de neplata (PD) a firmei Sunny Plants pentru urmatoarele douasprezece luni.</p>
+
+<h3>Pasul 1 – Defineste precis neplata</h3>
+<p>Regula interna a bancii spune ca o neplata se produce daca debitorul intarzie orice plata programata cu mai mult de 90 de zile. Pentru acest imprumut de 50 000 €, singura plata programata este suma forfetara de 52 500 € scadenta peste un an (principal de 50 000 € plus dobanda de 2 500 €). Daca Fatima nu trimite cei 52 500 € exact la data scadenta, iar banii lipsesc inca dupa 90 de zile, banca va inregistra „neplata”.</p>
+
+<h3>Pasul 2 – Aduna date comparabile</h3>
+<p>Deoarece Sunny Plants este o companie privata fara obligatiuni tranzactionate public, nu poti cauta o PD implicita de piata. In schimb, folosesti baza interna de date despre neplati a bancii. Aceasta baza de date contine istoricul de plata a 1 200 de imprumuturi similare pentru firme mici, acordate in ultimii cinci ani unor pepiniere cu vanzari anuale intre 150 000 € si 300 000 €. Din cele 1 200 de imprumuturi, 48 au intrat in neplata in douasprezece luni. Asta da o rata observata de neplata de 48 / 1 200 = 0,04, adica 4%.</p>
+
+<h3>Pasul 3 – Ajusteaza pentru factorii de risc specifici ai firmei Sunny Plants</h3>
+<p>Cifra bruta de 4% este o medie pentru intregul grup. Acum o ajustezi in sus sau in jos, analizand punctele forte si slabe particulare ale firmei Sunny Plants.</p>
+<ul>
+<li>Stabilitatea vanzarilor: vanzarile firmei Sunny Plants se incadreaza in intervalul grupului, deci nu se face nicio ajustare.</li>
+<li>Indatorarea (leverage): datoriile totale ale firmei Sunny Plants sunt de 120 000 € fata de active de 180 000 €, ceea ce da un raport datorii/active de 67%. Media grupului este de 55%. O indatorare mai mare creste usor sansa de neplata, deci adaugi 0,5%.</li>
+<li>Garantia proprietarei: activele personale ale Fatimei valoreaza 250 000 €, adica de peste doua ori valoarea imprumutului. Asta scade PD cu 0,7%.</li>
+<li>Perspectiva sectorului: se asteapta ca preturile din horticultura sa ramana plate anul viitor. Asta adauga 0,3%.</li>
+</ul>
+<p>Ajustare neta = –0,7% + 0,5% + 0,3% = +0,1%.</p>
+<p>PD ajustata = 4% + 0,1% = 4,1%.</p>
+
+<h3>Pasul 4 – Transforma PD intr-o pierdere asteptata</h3>
+<p>Banca trebuie sa stie si cati bani ar putea pierde daca Sunny Plants intra in neplata. Pierderea in caz de neplata (LGD) este procentul din expunere pe care banca se asteapta sa-l piarda dupa ce a recuperat cat de mult posibil. Pentru acest imprumut, banca prognozeaza:</p>
+<ul>
+<li>Poate vinde echipamentul de sera cu 35 000 €.</li>
+<li>Costurile juridice si de recuperare vor fi de 3 000 €.</li>
+<li>Prin urmare, recuperarea = 35 000 € – 3 000 € = 32 000 €.</li>
+<li>Expunerea la momentul neplatii este de 52 500 €.</li>
+<li>LGD = (52 500 € – 32 000 €) / 52 500 € &asymp; 39%.</li>
+</ul>
+<p>Pierdere asteptata = PD &times; LGD = 4,1% &times; 39% &asymp; 1,6%.</p>
+<p>Asadar, in medie, banca se asteapta sa piarda aproximativ 800 € (1,6% din 50 000 €) pe acest imprumut in urmatoarele douasprezece luni.</p>
+
+<h3>Pasul 5 – Regula de decizie</h3>
+<p>GreenLeaf Bank are o politica prin care orice imprumut nou cu o pierdere asteptata peste 2% trebuie escaladat catre un comitet de credit pentru aprobare speciala. Deoarece pierderea asteptata a firmei Sunny Plants este de 1,6%, ofiterul de cont poate aproba imprumutul la propria discretie, cu conditia ca Fatima sa semneze garantia personala si sa accepte raportarea financiara trimestriala.</p>
+
+<h3>Ce arata acest exemplu</h3>
+<ul>
+<li>Probabilitatea de neplata nu este o ghicire din glob de cristal: ea combina date concrete cu ajustari specifice.</li>
+<li>Chiar si o mica schimbare a indatorarii sau a garantiei poate misca PD cu cateva zecimi de procent.</li>
+<li>Pierderea asteptata este numarul real pe care banca il foloseste pentru a stabili pretul imprumutului si pentru a constitui rezerve pentru pierderi din credite.</li>
+</ul>
+
+<h2>Un al doilea scenariu</h2>
+<p>Sa luam un alt tip de imprumut, unul pe care o pepiniera (gradinita, in alta acceptiune) l-ar putea oferi unui parinte care vrea sa plateasca educatia copilului sau pe parcursul mai multor ani. Institutia are un program special pentru copii cu nevoi speciale, iar parintele vrea sa asigure un loc pentru copilul sau in acest program. Institutia ofera un imprumut de 10 000 de lire, de rambursat pe parcursul a cinci ani, la o dobanda de 5% pe an.</p>
+<p>In acest scenariu, institutia isi asuma riscul ca parintele sa nu poata rambursa imprumutul. Acest lucru s-ar putea datora unor cauze diverse, precum pierderea locului de munca, boala sau alte dificultati financiare. Institutia trebuie sa evalueze probabilitatea ca parintele sa intre in neplata pe imprumut si pierderea potentiala daca acest lucru se intampla.</p>
+<p>Pentru a masura riscul de neplata in acest scenariu, institutia ar putea folosi metrica probabilitatii de neplata (PD). Ar trebui sa estimeze probabilitatea ca parintele sa intre in neplata pe imprumut pe parcursul perioadei de cinci ani. Aceasta s-ar putea baza pe date istorice ale unor imprumuturi similare, pe istoricul de credit al parintelui si pe alti factori relevanti.</p>
+<p>Totusi, in acest scenariu, institutia ar putea fi nevoita sa ia in calcul si un alt tip de risc, numit pierdere in caz de neplata (LGD). Aceasta este suma pe care institutia ar pierde-o daca parintele intra in neplata pe imprumut. In acest caz, institutia ar trebui sa estimeze valoarea programului educational pe care l-ar fi primit copilul parintelui daca ar fi finalizat programul. Aceasta ar putea fi o suma importanta, deoarece programul este conceput pentru a oferi educatie si sprijin specializate copiilor cu nevoi speciale.</p>
+<p>Pentru a calcula pierderea asteptata, institutia ar trebui sa inmulteasca probabilitatea de neplata cu pierderea in caz de neplata. Aceasta le-ar oferi o estimare a pierderii potentiale daca parintele intra in neplata pe imprumut.</p>
+<p>De exemplu, sa presupunem ca institutia estimeaza ca probabilitatea de neplata este de 10% pe parcursul perioadei de cinci ani, iar pierderea in caz de neplata este de 8 000 de lire (valoarea programului educational). Pierderea asteptata ar fi:</p>
+<p>Pierdere asteptata = Probabilitate de neplata &times; Pierdere in caz de neplata<br>Pierdere asteptata = 0,10 &times; 8 000 de lire<br>Pierdere asteptata = 800 de lire</p>
+<p>Aceasta inseamna ca institutia s-ar astepta sa piarda 800 de lire daca parintele intra in neplata pe imprumut. Este o suma importanta, iar institutia ar trebui sa ia in calcul acest risc atunci cand acorda imprumutul.</p>
+<p>In acest scenariu, institutia ar trebui sa puna in balanta riscul de neplata si beneficiile potentiale ale oferirii imprumutului. Ar trebui sa ia in calcul pierderea potentiala si sa o cantareasca fata de beneficiile potentiale ale oferirii de educatie si sprijin copilului. Aceasta ar presupune o analiza atenta a credibilitatii parintelui, a valorii programului educational si a altor factori relevanti.</p>
+<p>Folosind metricile probabilitatii de neplata si pierderii in caz de neplata, institutia poate intelege mai bine riscul de neplata si poate lua decizii mai informate cu privire la creditare. Aceasta i-ar ajuta sa-si gestioneze riscul si sa acorde imprumuturi mai profitabile.</p>
+
+<h2>Greseli si conceptii gresite frecvente</h2>
+<ol>
+<li><strong>„Probabilitatea de neplata” este acelasi lucru cu „sansa de a pierde bani”.</strong> Multi incepatori cred ca o probabilitate de neplata de 2% inseamna ca vor pierde 2% din banii lor. Este gresit. Cei 2% reprezinta sansa ca debitorul sa nu plateasca la timp; daca acest lucru se intampla, pierderea ar putea fi intreaga suma imprumutata (sau mai mult, odata socotite costurile de recuperare). Tine intotdeauna cele doua idei separate: probabilitatea de neplata iti spune cat de probabila este neplata, in timp ce pierderea in caz de neplata iti spune cat pierzi daca aceasta se produce.</li>
+<li><strong>Ratele de neplata din trecut sunt aceleasi cu ratele de neplata viitoare.</strong> Sa presupunem ca o banca vede ca doar 1% din imprumuturile ei pentru firme mici au intrat in neplata anul trecut. Un incepator ar putea concluziona ca probabilitatea de neplata pentru orice imprumut nou este tot 1%. Asta ignora schimbarile din economie, din afacerea debitorului sau din propriile standarde de creditare ale bancii. Riscul de neplata nu este un numar fix; poate creste cand creste somajul sau poate scadea cand un debitor castiga un contract mare. Trateaza datele din trecut ca pe un ghid, nu ca pe o garantie.</li>
+<li><strong>O probabilitate de neplata mica inseamna ca imprumutul este sigur.</strong> O probabilitate de 0,5% suna mic, dar nu este zero. La 200 de imprumuturi, te-ai astepta la aproximativ o neplata (200 &times; 0,5% = 1). Daca fiecare neplata costa 5 000 de lire, pierderea asteptata este de 5 000 de lire, chiar daca 99,5% din imprumuturi arata bine. Inmulteste intotdeauna probabilitatea cu pierderea pentru a vedea riscul real.</li>
+<li><strong>„Neplata” si „plata intarziata” sunt acelasi lucru.</strong> Unii incepatori trateaza o intarziere de 30 de zile ca pe o neplata. In regulile bancare, neplata inseamna de obicei ca debitorul este putin probabil sa plateasca vreodata sau ca a ratat plati timp de 90 de zile. O singura intarziere scurta nu este o neplata, asadar probabilitatea de neplata nu este afectata. Verifica definitia exacta folosita de creditor sau de biroul de credit inainte de a numara un caz drept neplata.</li>
+<li><strong>Scorurile de credit includ deja probabilitatea de neplata.</strong> Un incepator ar putea privi un scor de credit de 750 si sa creada ca „inseamna o sansa de 2% de neplata”. Scorul doar clasifica riscul; nu ofera un procent precis. Probabilitatea reala trebuie estimata cu un model (de exemplu, o regresie logistica) care transforma scorul intr-un numar precum 2%. Intreaba mereu: „Ce model a produs aceasta cifra?”</li>
+<li><strong>Ratele de recuperare sunt fixe.</strong> Daca un incepator afla ca creditorii recupereaza 40% din imprumut dupa neplata, ar putea presupune ca fiecare imprumut neplatit pierde 60%. In realitate, recuperarea depinde de valoarea garantiei, de costurile juridice si de timp. Intr-o prabusire imobiliara, recuperarea pe proprietati poate scadea la 20%, in timp ce intr-o economie puternica poate ajunge la 60%. Trateaza recuperarea ca pe ceva incert si dependent de scenariu.</li>
+<li><strong>Garantiile personale elimina riscul de neplata.</strong> Un incepator ar putea crede ca, deoarece un administrator garanteaza personal un imprumut pentru o firma mica, riscul de neplata dispare. Garantia muta pierderea catre activele administratorului, dar nu elimina sansa ca afacerea sa esueze. Probabilitatea de neplata ramane aceeasi; se schimba doar cine suporta pierderea.</li>
+<li><strong>O singura neplata inseamna ca debitorul este mereu riscant.</strong> Dupa o singura neplata, unii incepatori eticheteaza debitorul drept „cu risc ridicat pentru totdeauna”. Riscul de credit se poate imbunatati daca debitorul ramburseaza datoria trecuta, isi imbunatateste fluxul de numerar sau ofera garantii mai puternice. Foloseste informatii financiare actualizate, nu doar greselile din trecut.</li>
+<li><strong>Probabilitatea de neplata este singurul lucru care conteaza.</strong> Incepatorii se concentreaza adesea doar pe sansa de neplata si ignora expunerea la momentul neplatii (cat se imprumuta) si pierderea in caz de neplata. Un imprumut de 10 000 de lire cu PD de 1% si LGD de 50% are o pierdere asteptata de 50 de lire, in timp ce un imprumut de 100 000 de lire cu PD de 0,5% si LGD de 30% are o pierdere asteptata de 150 de lire. Atat riscul, cat si expunerea trebuie luate in calcul impreuna.</li>
+<li><strong>Toate neplatile sunt egale.</strong> Un incepator ar putea trata o plata ratata de 1 000 de lire pe un card de credit la fel ca o plata ratata de 1 milion de lire pe o obligatiune corporativa. In realitate, marimea expunerii schimba impactul asupra capitalului si profitului creditorului. Cantareste mereu atat probabilitatea, cat si marimea pierderii potentiale.</li>
+</ol>
+<p>Cum sa eviti aceste capcane:</p>
+<ul>
+<li>Noteaza definitia exacta a neplatii folosita de sursa ta de date.</li>
+<li>Separa probabilitatea de neplata de pierderea in caz de neplata; nu le amesteca.</li>
+<li>Foloseste intervale sau scenarii (cel mai bun, de baza, cel mai rau) in loc de numere unice atunci cand viitorul este incert.</li>
+<li>Reverifica modelele si datele ori de cate ori se schimba conditiile economice.</li>
+<li>Intreaba: „Daca acest debitor intra in neplata, cati bani voi pierde de fapt si cand?”</li>
+</ul>
+
+<h2>Cum foloseste biroul de tranzactionare aceasta notiune</h2>
+<p>Acum ca am acoperit bazele riscului de neplata si modul in care este masurat, sa vedem cum foloseste un birou de tranzactionare (trading desk) aceasta informatie in luarea deciziilor din lumea reala.</p>
+<p>Atunci cand un trading desk ia in considerare o noua investitie, evalueaza de obicei riscul de neplata al debitorului sau emitentului. Acest lucru presupune evaluarea probabilitatii de neplata (PD) si a pierderii asteptate in caz de neplata (LGD). Biroul de tranzactionare foloseste aceste metrici pentru a determina riscul de credit general al investitiei.</p>
+<p>Un mod esential in care biroul de tranzactionare foloseste riscul de neplata este in dimensionarea pozitiei (position sizing). Dimensionarea pozitiei se refera la cantitatea de capital alocata unei anumite tranzactii sau investitii. Biroul va folosi riscul de neplata al investitiei pentru a stabili o dimensiune potrivita a pozitiei. De exemplu, daca PD a unei anumite obligatiuni este ridicata, biroul ar putea decide sa aloce o pozitie mai mica acelei obligatiuni, chiar daca ofera un randament potential mai mare.</p>
+<p>Biroul de tranzactionare va folosi riscul de neplata si pentru a determina riscul general al portofoliului. Prin agregarea riscului de neplata al investitiilor individuale, biroul poate avea o imagine asupra riscului de credit general al portofoliului. Acest lucru ii permite sa ia decizii mai informate cu privire la expunerea sa generala la risc.</p>
+<p>O alta consideratie importanta pentru biroul de tranzactionare este corelatia dintre diferite investitii. Daca doua investitii au risc de neplata ridicat, biroul ar putea decide sa-si limiteze expunerea la ambele, chiar daca nu sunt direct corelate. Acest lucru se intampla deoarece biroul vrea sa evite asumarea unui risc excesiv, iar investitiile cu risc de neplata ridicat pot fi deosebit de volatile.</p>
+<p>Pe langa dimensionarea pozitiei si riscul de portofoliu, biroul de tranzactionare va folosi riscul de neplata si pentru a-si informa deciziile de moment (timing). De exemplu, daca biroul se asteapta ca riscul de neplata al unei anumite investitii sa creasca in viitorul apropiat, ar putea decide sa-si vanda pozitia inainte ca riscul sa creasca. Invers, daca se asteapta ca riscul de neplata sa scada, ar putea decide sa-si mareasca pozitia.</p>
+<p>Biroul de tranzactionare va folosi riscul de neplata si pentru a-si informa deciziile de acoperire (hedging). De exemplu, daca biroul are o pozitie mare intr-o obligatiune cu risc de neplata ridicat, ar putea decide sa acopere acea pozitie cumparand instrumente derivate de credit (credit default swaps, CDS). Acest lucru i-ar permite sa-si reduca expunerea la riscul de neplata al obligatiunii.</p>
+<p>Merita mentionat ca biroul de tranzactionare va lua in calcul si alti factori atunci cand ia decizii, precum conditiile de piata, tendintele economice si cerintele de reglementare. Totusi, riscul de neplata este o componenta esentiala a procesului sau de luare a deciziilor.</p>
+<p>In practica, biroul de tranzactionare va folosi o varietate de instrumente si modele pentru a evalua riscul de neplata, inclusiv modele de rating de credit, modele statistice si algoritmi de invatare automata (machine learning). Aceste modele vor lua in calcul o gama de factori, inclusiv istoricul de credit al debitorului, tendintele sectoriale si conditiile macroeconomice.</p>
+<p>In cele din urma, scopul biroului de tranzactionare este sa ia decizii informate cu privire la investitiile sale, gestionandu-si in acelasi timp expunerea la risc. Folosind metricile riscului de neplata, poate intelege mai bine riscurile si recompensele potentiale ale unei anumite investitii si poate lua decizii mai informate cu privire la portofoliul sau general.</p>
+
+<h2>Limite, avertismente si cand esueaza</h2>
+<p>Toate masuratorile riscului de neplata seamana cu prognozele meteo: utile, dar niciodata perfecte. Probabilitatea de neplata (PD) pe care tocmai am calculat-o este doar o estimare, nu un glob de cristal. Mai jos sunt principalele limite, avertismente si situatii in care metoda se poate prabusi. Trateaza-le ca pe niste etichete de avertizare pe panoul de bord.</p>
+<ol>
+<li><strong>Problema „necunoscutelor necunoscute”.</strong> Formula PD foloseste date istorice. Daca lumea de maine nu seamana deloc cu cea de ieri, cifrele devin irelevante. Imagineaza-ti o pepiniera care si-a platit mereu facturile la timp pentru ca proprietarul ei este bogat si generos. Daca proprietarul pierde brusc totul intr-un proces, PD istorica de 0% devine instantaneu gresita. Regimurile care nu s-au mai intamplat niciodata — razboaie, pandemii, interdictii bruste de reglementare — sunt invizibile pentru orice model PD construit pe date din trecut.</li>
+<li><strong>Date putine si „capcana esantionului mic”.</strong> Cand avem doar cateva imprumuturi anterioare dintr-un anumit sector sau dintr-o anumita regiune, PD pe care o calculam poate fluctua puternic la fiecare noua observatie. Sa presupunem ca o pepiniera dintr-un sat izolat a acordat doar zece imprumuturi in ultimul deceniu. O singura neplata in acel esantion face ca PD sa sara de la 0% la 10%. Anul urmator, fara alte neplati, scade inapoi la 0%. O asemenea volatilitate arata ca numarul reflecta mai mult norocul decat calitatea reala a creditului.</li>
+<li><strong>Numere statice intr-o lume dinamica.</strong> O PD este un instantaneu facut la un moment dat. Nu surprinde viteza cu care se pot deteriora finantele unui debitor. O pepiniera ar putea arata sanatos azi, dar daca furnizorul ei principal isi dubleaza brusc preturile, pepiniera ar putea intra in neplata in cateva saptamani. PD pe care am calculat-o ieri nu stie despre socul de cost de maine.</li>
+<li><strong>Stimulente si manipularea sistemului.</strong> Debitorii pot uneori manipula datele care alimenteaza PD. Daca o pepiniera stie ca banca foloseste veniturile de anul trecut pentru a estima PD, ar putea amana anumite cheltuieli sau umfla vanzarile in ultimul trimestru. La fel, agentiile de rating de credit au fost, in trecut, acuzate ca au dat ratinguri excesiv de optimiste unor produse complexe, deoarece erau platite chiar de firmele pe care le evaluau — un conflict de interese evident. PD, oricat de sofisticate, sunt la fel de oneste ca datele si stimulentele din spatele lor.</li>
+<li><strong>Corelatii care incalca ipoteza de independenta.</strong> Majoritatea modelelor PD presupun ca neplata fiecarui debitor este un eveniment independent. In realitate, neplatile se pot aglomera. Daca un mare cumparator regional anuleaza dintr-odata comenzile catre multe pepiniere locale, toate ar putea avea dificultati sa-si ramburseze imprumuturile simultan. Un model care trateaza fiecare pepiniera ca fiind izolata va subestima riscul real in timpul unor astfel de evenimente cu soc comun.</li>
+<li><strong>Lichiditate vs. solvabilitate — PD pot rata criza de numerar.</strong> O pepiniera ar putea fi solvabila (activele ei depasesc datoriile), dar nelichida (nu poate transforma acele active in numerar destul de repede ca sa plateasca urmatoarea factura). O PD bazata pe indicatori de bilant va rata descoperirea brusca de cont care forteaza o neplata, chiar daca cifrele pe termen lung arata bine. Riscul de lichiditate este un animal separat, iar PD nu il masoara.</li>
+<li><strong>„Iluzia garantiei”.</strong> Unii utilizatori cred gresit ca o PD mica este o promisiune sau o garantie guvernamentala. Nu este. O PD de 1% inseamna „istoric, 1 din 100 de debitori similari a intrat in neplata intr-un an”. Nu inseamna „acest debitor nu va intra in neplata”. Pietele pot ingheta, auditorii pot gresi, iar sistemele juridice se pot bloca — oricare dintre acestea poate impinge un debitor cu PD mica in neplata, indiferent de estimarea initiala.</li>
+<li><strong>Definitii in schimbare ale „neplatii”.</strong> Ce se considera neplata poate varia de la un creditor la altul, de la o tara la alta si chiar de la un contract la altul. Unele acorduri definesc neplata ca pe o singura plata ratata, in timp ce altele asteapta pana au trecut 90 de zile. Daca definitia se schimba, PD de ieri nu mai este comparabila cu cea de azi. Verifica intotdeauna definitia exacta inainte de a compara numere.</li>
+<li><strong>Supraajustarea la trecut (overfitting).</strong> Daca reglam un model PD prea fidel particularitatilor datelor istorice, el poate esua pe date noi. De exemplu, un model construit intr-un deceniu de dobanzi mici ar putea presupune costuri de finantare mici pentru totdeauna. Cand dobanzile cresc brusc, aceiasi debitori se confrunta dintr-odata cu cheltuieli cu dobanda mult mai mari si intra in neplata la rate pe care modelul nu le-a prezis niciodata.</li>
+<li><strong>Riscuri tacute care nu apar niciodata in date.</strong> Factori umani — riscul de persoana-cheie, disputele familiale, frauda comisa de manageri — nu lasa adesea nicio urma statistica pana cand este prea tarziu. O pepiniera ar putea avea indicatori perfecti pe hartie, dar daca proprietarul deturneaza pe ascuns numerar catre o afacere paralela, PD nu va prevedea prabusirea.</li>
+</ol>
+<p>Concluzie: o PD este o lanterna utila intr-o camera intunecata, dar nu lumineaza fiecare colt si nu opreste camera din zguduit daca loveste un cutremur. Foloseste-o ca pe una dintre numeroasele date de intrare si intreaba mereu: „Ce as putea sa scap din vedere?”</p>
+
+<h2>Concluzii esentiale</h2>
+<ul>
+<li>Riscul de neplata este posibilitatea ca un debitor sau o companie sa nu-si indeplineasca obligatiile de datorie, cum ar fi nereturnarea unui imprumut sau neplata la timp a dobanzii.</li>
+<li>Este o notiune esentiala in domeniul creditului, deoarece afecteaza direct pierderile potentiale ale creditorului si stabilitatea generala a sistemului financiar.</li>
+<li>Probabilitatea de neplata (PD) este o metrica esentiala folosita pentru a masura riscul de neplata. Ea reprezinta probabilitatea ca un debitor sa intre in neplata pe datoria sa intr-un interval de timp dat, de obicei un an.</li>
+<li>PD se exprima de obicei ca procent, variind de la 0% (nicio sansa de neplata) la 100% (neplata sigura).</li>
+<li>O PD mai mica indica un risc de neplata mai mic, ceea ce face din debitor sau companie un candidat de credit mai atractiv. Invers, o PD mai mare sugereaza un risc de neplata mai mare, crescand pierderile potentiale ale creditorului.</li>
+<li>PD este adesea folosita impreuna cu alte metrici de credit, precum pierderea in caz de neplata (LGD) si expunerea la momentul neplatii (EAD), pentru a oferi o imagine mai cuprinzatoare a credibilitatii debitorului.</li>
+<li>Acuratetea PD depinde de mai multi factori, inclusiv calitatea datelor de credit, istoricul de credit al debitorului si conditiile economice generale.</li>
+<li>Creditorii si investitorii folosesc PD pentru a lua decizii informate cu privire la creditare, investitii si gestionarea portofoliilor de credit. O folosesc, de asemenea, pentru a stabili dobanzi, termeni de imprumut si alte conditii care reduc riscul de neplata.</li>
+<li>PD nu este o valoare statica si se poate schimba in timp din cauza mai multor factori, precum schimbari in profilul de credit al debitorului, conditii economice sau tendinte de piata.</li>
+<li>Monitorizarea si actualizarea regulata a PD sunt esentiale pentru a reflecta schimbarile in credibilitatea debitorului si pentru a asigura ca expunerea la risc a creditorului este reflectata corect.</li>
+<li>PD este o componenta esentiala a gestionarii riscului de credit, iar masurarea si aplicarea ei corecte ii pot ajuta pe creditori si investitori sa ia decizii mai informate si sa reduca pierderile potentiale.</li>
+<li>In concluzie, probabilitatea de neplata este o notiune fundamentala in domeniul creditului, iar masurarea si aplicarea ei corecte sunt esentiale pentru ca creditorii si investitorii sa gestioneze eficient riscul de neplata.</li>
+</ul>

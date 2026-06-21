@@ -1,0 +1,175 @@
+<p>Alocarea statică (static allocation) cu ponderi fixe și fără reechilibrare este una dintre cele mai simple metode de a-ți construi un portofoliu de investiții. Ideea de bază este aceasta: decizi o singură dată ce procent din banii tăi merge în fiecare activ, apoi păstrezi acele procente neschimbate în timp, indiferent ce se întâmplă pe piață. Dacă aloci 60% într-o acțiune și 40% în alta, nu vinzi niciodată din una pentru a cumpăra din cealaltă, chiar dacă a doua pare brusc mult mai atractivă.</p>
+<p>Această strategie de tip <strong>&bdquo;setează și uită&rdquo;</strong> (set it and forget it) atrage mai ales începătorii, fiindcă elimină monitorizarea constantă, costurile de tranzacționare repetate și stresul deciziilor zilnice. Alocarea statică cu ponderi fixe nu promite cele mai bune randamente în fiecare zi, dar îți garantează că știi exact ce deții și de ce. În acest capitol vom vedea definițiile cheie (resursă, beneficiar, pondere, proporție), intuiția din spatele metodei, mecanica pas cu pas, exemple lucrate cu cifre, greșelile frecvente, modul în care un birou de tranzacționare (trading desk) o folosește pentru poziționare și gestionarea riscului, precum și limitele ei: drift-ul ponderilor, ignorarea corelației și riscul de secvență.</p>
+
+<h2>Definiție și termeni cheie</h2>
+<p>În contextul alocării, alocarea statică (static allocation) se referă la o metodă de distribuire a unei cantități fixe de resurse între mai mulți beneficiari, în care ponderile sau proporțiile distribuției rămân constante în timp. Această abordare se caracterizează prin absența reechilibrării (rebalancing), adică procesul de ajustare a distribuției resurselor ca răspuns la schimbările nevoilor beneficiarilor sau ale disponibilității resurselor.</p>
+<p>Pentru a înțelege alocarea statică, este esențial să definim câțiva termeni cheie:</p>
+<ul>
+<li><strong>Resursă</strong>: Orice poate fi alocat, precum jucării, dulciuri sau timp. Într-o creșă, resursele pot include cuburi, creioane sau atenția educatoarei. În investiții, resursa este banul.</li>
+<li><strong>Beneficiar (recipient)</strong>: Individul sau grupul care primește resursele alocate. Într-o creșă, beneficiarii pot fi copiii sau personalul; în investiții, fiecare activ deținut.</li>
+<li><strong>Pondere (weight)</strong>: Proporția sau procentul din totalul resurselor alocat unui anumit beneficiar. De exemplu, dacă o creșă are 10 cuburi și 2 copii, iar educatoarea alocă 60% din cuburi unui copil și 40% celuilalt, ponderile sunt 60% și 40%.</li>
+<li><strong>Alocare statică</strong>: O metodă de distribuire a resurselor cu ponderi fixe care rămân constante în timp. Aceasta presupune că nevoile beneficiarilor și disponibilitatea resurselor nu se schimbă semnificativ.</li>
+<li><strong>Fără reechilibrare (no rebalancing)</strong>: Reechilibrarea este procesul de ajustare a distribuției resurselor ca răspuns la schimbări. În alocarea statică nu are loc nicio reechilibrare, deci ponderile rămân fixe chiar dacă nevoile sau disponibilitatea resurselor se modifică.</li>
+<li><strong>Ponderi fixe (fixed weights)</strong>: Proporțiile sau procentele din totalul resurselor alocate unui beneficiar, care rămân constante în timp. De exemplu, dacă aloci 60% și 40%, aceste ponderi rămân fixe chiar dacă se schimbă nevoile sau disponibilitatea.</li>
+<li><strong>Proporție</strong>: Raportul dintre resursele alocate unui beneficiar și totalul resurselor disponibile. Dacă o creșă are 10 cuburi și alocă 6 unui copil, proporția este 6/10 sau 60%.</li>
+<li><strong>Procent</strong>: O proporție exprimată ca număr între 0 și 100. Dacă aloci 60% din cuburi unui copil, înseamnă că primește 60 din fiecare 100 de cuburi.</li>
+<li><strong>Total resurse</strong>: Cantitatea totală de resurse disponibilă pentru alocare (numărul total de cuburi, creioane sau, în investiții, suma totală de bani).</li>
+<li><strong>Distribuție</strong>: Modul în care resursele sunt alocate între beneficiari. În alocarea statică, distribuția este determinată de ponderile fixe, care rămân constante în timp.</li>
+</ul>
+<p>Înțelegând acești termeni cheie, poți să înțelegi mai bine conceptul de alocare statică și aplicarea lui.</p>
+
+<h2>Intuiția</h2>
+<p>Imaginează-ți că pornești pentru prima dată un mic stand de limonadă. Ai exact 100$ de cheltuit. Decizi să cumperi două bidoane mari de concentrat de limonadă &mdash; unul cu aromă de portocale de 60$ și unul cu aromă de zmeură de 40$. Torni ambele bidoane într-un singur rezervor mare, amesteci bine și începi să vinzi pahare vecinilor. Nu mai adaugi niciodată concentrat, nu scoți niciodată nimic și nu schimbi niciodată amestecul 60 la 40. Orice vinzi are mereu același gust, fiindcă aroma este blocată de la început.</p>
+<p>Aceasta, într-o exprimare pentru copii, este alocarea statică cu ponderi fixe și fără reechilibrare.</p>
+<p>De ce ar alege cineva o rețetă atât de simplă? Pentru că viața e scurtă și greșelile sunt scumpe. Când ești complet începător în a amesteca lucruri &mdash; fie că este vorba de arome de limonadă, cuburi de jucărie sau bani reali &mdash; vrei să elimini cât mai multe părți mobile. De fiecare dată când te joci cu bidoanele &mdash; adăugând puțină apă aici, schimbând un bidon dincolo &mdash; riști să verși, să ai gust inconsistent sau să te încurci. Alocarea statică este regula &bdquo;setează și uită&rdquo;: odată ce decizi că raportul portocale-zmeură este 60:40, te oprești din a te gândi la bidoane și te concentrezi pe vânzarea paharelor.</p>
+<p>Ideea mai profundă este despre gestionarea incertitudinii cu cea mai puțină mecanică posibilă. În lumea reală, piețele oscilează, emoțiile fluctuează și lucruri noi și strălucitoare apar în fiecare zi. Dacă încerci să urmărești cea mai bună aromă la fiecare oră, vei sfârși probabil cu o podea lipicioasă, o durere de cap și nicio amintire clară despre ce a funcționat. Alocarea statică spune: &bdquo;Alege un amestec funcțional acum, rămâi fidel lui și lasă timpul să facă capitalizarea (compounding).&rdquo; Renunți la șansa de câștiguri bruște în schimbul confortului de a ști exact ce deții și de ce.</p>
+<p>Gândește-te la asta ca la plantarea a două feluri de semințe într-o grădină mică. Dai roșiilor iubitoare de soare 60% din spațiul solului și salatei tolerante la umbră 40%. Nu sapi salata mâine fiindcă s-a schimbat prognoza meteo; lași ambele să crească în ritmul lor natural. Pe parcursul sezonului poți culege mai multe roșii decât te așteptai, sau un iepure flămând poate ciuguli salata, dar planul tău rămâne intact. Iepurii și vremea sunt în afara controlului tău; planul nu este. Alocarea statică este decizia grădinarului de a se opri din a se îndoi de sol odată ce semințele sunt în pământ.</p>
+<p>Începătorii se îngrijorează adesea: &bdquo;Ce-i dacă bidonul de zmeură începe să aibă gust mai dulce decât cel de portocale? Nu ar trebui să ajustez?&rdquo; În alocarea statică răspunsul este nu &mdash; cel puțin nu în cadrul acestei metode. Tot rostul este să definești amestecul o singură dată și apoi să trăiești cu consecințele. Ai putea descoperi după o săptămână că zmeura se vinde mult mai bine decât portocala, dar acea informație aparține deciziei următoare (care ar putea implica o metodă diferită). Alocarea statică păstrează bucla de feedback scurtă: afli dacă alegerea inițială a fost rezonabilă doar după ce se încheie sezonul.</p>
+<p>În termeni de bani, imaginea rămâne aceeași. În loc de două bidoane de limonadă, deții două acțiuni (sau obligațiuni, sau fonduri). Decizi de la început că 60% din banii tăi merg în Acțiunea A și 40% în Acțiunea B. Nu vinzi niciodată din A pentru a cumpăra mai mult din B, chiar dacă B pare brusc de două ori mai interesantă. Pur și simplu lași dolarii să curgă. Raportul deviază (drift) doar fiindcă prețurile lui A și B se mișcă; tu nu le forțezi să revină. Pe parcursul lunilor sau anilor poți privi cifrele finale și te poți întreba: &bdquo;A îndeplinit împărțirea 60:40 obiectivul meu?&rdquo; Dacă răspunsul este da, ți-ai economisit o grămadă de comisioane de tranzacționare și nopți nedormite. Dacă răspunsul este nu, îți actualizezi planul data viitoare &mdash; dar metoda statică în sine rămâne un experiment curat și repetabil.</p>
+<p>Așadar, alocarea statică există pentru a le oferi începătorilor un teren de joacă sigur. Răspunde fricii de &bdquo;nu știu ce fac&rdquo; transformând o lume complexă și mereu schimbătoare într-o singură rețetă fixă. Nu promite cea mai gustoasă limonadă în fiecare zi, dar garantează că vei ști exact ce a intrat în fiecare pahar.</p>
+
+<h2>Cum funcționează &mdash; mecanica</h2>
+<p>Alocarea statică este o metodă de a aloca resurse &mdash; în acest caz, hrană către copii într-o creșă &mdash; pe baza unui set de ponderi sau rapoarte fixe. Procesul implică mai mulți pași cheie, pe care îi prezentăm mai jos.</p>
+<h3>Pasul 1: Definește formula de alocare</h3>
+<p>Înainte de a putea începe să alocăm hrană, trebuie să definim formula de alocare. Această formulă se bazează pe un set de ponderi sau rapoarte fixe care determină câtă hrană ar trebui să primească fiecare copil. De exemplu, să spunem că avem o creșă cu 10 copii și vrem să alocăm hrana pe baza unei formule care dă 30% din hrana totală copiilor sub 2 ani, 40% copiilor între 2-3 ani și 30% copiilor între 4-5 ani.</p>
+<h3>Pasul 2: Calculează hrana totală disponibilă</h3>
+<p>Apoi, trebuie să calculăm cantitatea totală de hrană disponibilă. Aceasta poate fi o cantitate fixă de hrană livrată la creșă în fiecare săptămână sau poate fi o cantitate variabilă care depinde de numărul de copii și de vârstele lor.</p>
+<h3>Pasul 3: Calculează alocarea de hrană pentru fiecare grup</h3>
+<p>Folosind formula de alocare, putem calcula cantitatea de hrană pe care ar trebui să o primească fiecare grup de copii. De exemplu, dacă avem 3 copii sub 2 ani, 4 copii între 2-3 ani și 3 copii între 4-5 ani, dintr-un total de 10 copii, calculăm alocarea de hrană pentru fiecare grup astfel:</p>
+<ul>
+<li>Copii sub 2 ani: 30% din 10 unități de hrană = 3 unități de hrană</li>
+<li>Copii între 2-3 ani: 40% din 10 unități de hrană = 4 unități de hrană</li>
+<li>Copii între 4-5 ani: 30% din 10 unități de hrană = 3 unități de hrană</li>
+</ul>
+<h3>Pasul 4: Alocă hrana fiecărui copil</h3>
+<p>În final, putem aloca hrana fiecărui copil în funcție de grupa lui de vârstă. De exemplu, dacă avem 3 unități de hrană disponibile pentru copiii sub 2 ani, putem aloca 1 unitate de hrană fiecăruia dintre cei 3 copii din această grupă de vârstă.</p>
+<p>Pașii cheie implicați sunt: definirea formulei de alocare, calcularea hranei totale disponibile, calcularea alocării de hrană pentru fiecare grup și alocarea hranei fiecărui copil în funcție de grupa de vârstă.</p>
+
+<h2>Exemplu lucrat</h2>
+<p>Imaginează-ți că ai 1.000&pound; de împărțit între trei investiții simple care nu își schimbă niciodată regulile. Cele trei opțiuni sunt:</p>
+<ul>
+<li>Un fond &bdquo;stabil&rdquo; care plătește 2% pe an.</li>
+<li>Un fond &bdquo;de creștere&rdquo; care plătește 6% pe an.</li>
+<li>Un fond de numerar &bdquo;sigur&rdquo; care plătește 1% pe an.</li>
+</ul>
+<p>Decizi, o dată pentru totdeauna, să pui jumătate din bani în fondul de creștere, o treime în fondul stabil și restul în fondul sigur. Aceste procente nu se mișcă niciodată, așa că aceasta este o alocare statică.</p>
+<p><strong>Pasul 1 &mdash; decide ponderile fixe</strong></p>
+<ul>
+<li>Pondere fond de creștere = 50% = 0,50</li>
+<li>Pondere fond stabil = 33,33% &asymp; 1/3 = 0,3333</li>
+<li>Pondere fond sigur = 100% &minus; 50% &minus; 33,33% = 16,67% &asymp; 1/6 = 0,1667</li>
+</ul>
+<p><strong>Pasul 2 &mdash; împarte cei 1.000&pound;</strong></p>
+<ul>
+<li>Fond de creștere: 1.000&pound; &times; 0,50 = 500&pound;</li>
+<li>Fond stabil: 1.000&pound; &times; 0,3333 &asymp; 333,33&pound;</li>
+<li>Fond sigur: 1.000&pound; &times; 0,1667 &asymp; 166,67&pound;</li>
+</ul>
+<p>(Observă mica diferență de rotunjire de aproximativ 1 penny; în practică ai rotunji la cel mai apropiat penny și ai păstra totalul general la 1.000&pound;.)</p>
+<p><strong>Pasul 3 &mdash; lasă să treacă un an.</strong> Fiecare fond crește cu rata sa fixă.</p>
+<ul>
+<li>Fond de creștere: 500&pound; &times; 1,06 = 530,00&pound;</li>
+<li>Fond stabil: 333,33&pound; &times; 1,02 &asymp; 339,99&pound;</li>
+<li>Fond sigur: 166,67&pound; &times; 1,01 &asymp; 168,34&pound;</li>
+</ul>
+<p><strong>Pasul 4 &mdash; verifică totalul după un an</strong></p>
+<p>530,00&pound; + 339,99&pound; + 168,34&pound; &asymp; 1.038,33&pound;</p>
+<p>Alocarea ta statică a crescut cu aproximativ 38,33&pound;, ceea ce înseamnă un randament general de 3,83% pentru anul respectiv.</p>
+<p><strong>Pasul 5 &mdash; compară cu alternativa unui singur fond</strong></p>
+<p>Dacă ai fi pus întregul 1.000&pound; în fondul stabil, ai fi câștigat 1.000&pound; &times; 1,02 = 1.020&pound;, un randament de 2%. Amestecul static ți-a adus 18,33&pound; în plus, fiindcă randamentul mai mare de 6% al fondului de creștere a tras media în sus.</p>
+<p><strong>Pasul 6 &mdash; privește un an înainte fără reechilibrare</strong></p>
+<p>Nu faci nimic la începutul anului doi. Fondurile încep anul doi cu aceleași ponderi cu care au încheiat anul unu, fiindcă nu le atingi niciodată.</p>
+<ul>
+<li>Fond de creștere: 530,00&pound; &times; 1,06 = 561,80&pound;</li>
+<li>Fond stabil: 339,99&pound; &times; 1,02 &asymp; 346,79&pound;</li>
+<li>Fond sigur: 168,34&pound; &times; 1,01 &asymp; 169,99&pound;</li>
+</ul>
+<p>Total după doi ani &asymp; 1.078,58&pound;, un randament de 7,86% pe doi ani.</p>
+<p><strong>Atenționări importante</strong></p>
+<ul>
+<li>Ponderile pe care le-ai ales au fost fixate în avans; dacă fondul de creștere ar scădea brusc cu 20% într-o lună, alocarea ar rămâne totuși la 50% din total. Aceasta este definiția &bdquo;fără reechilibrare&rdquo;.</li>
+<li>Fondul sigur dă cel mai mic randament, dar și cel mai mic risc. Pe parcursul mai multor ani, fondul de creștere ar putea avea performanțe superioare, dar ar putea și să rămână în urmă. Alocarea statică nu te protejează de acest risc.</li>
+<li>Rotunjirea la cel mai apropiat penny poate face totalul să devieze cu câțiva penny; în viața reală fie ai ignora banii mărunți, fie i-ai completa/colecta o dată pe an.</li>
+</ul>
+
+<h2>Un al doilea scenariu</h2>
+<p>Să luăm în considerare un alt scenariu pentru a ne aprofunda înțelegerea alocării statice. În acest exemplu, avem o creșă cu 5 copii și vrem să alocăm un număr limitat de jucării între ei. Avem un total de 10 jucării de distribuit și decidem să folosim alocarea statică cu ponderi fixe de 2, 2, 2, 2 și 2 pentru fiecare copil.</p>
+<p>Ponderile reprezintă importanța sau prioritatea fiecărui copil în a primi jucăriile. În acest caz, toți copiii au importanță egală, așa că ponderile lor sunt aceleași. Vom folosi aceste ponderi pentru a determina numărul de jucării pe care îl va primi fiecare copil.</p>
+<p>Pentru a calcula numărul de jucării pe care îl va primi fiecare copil, împărțim numărul total de jucării la suma ponderilor. În acest caz, suma ponderilor este 5 &times; 2 = 10. Deci, împărțim numărul total de jucării (10) la suma ponderilor (10) și obținem 1 jucărie per unitate de pondere. Cum fiecare copil are pondere 2, fiecare copil primește 2 jucării.</p>
+<p>În acest scenariu, fiindcă numărul total de jucării (10) este egal cu suma ponderilor (10), putem da 2 jucării fiecărui copil.</p>
+<ul>
+<li>Copil A &mdash; pondere 2 &mdash; 2 jucării</li>
+<li>Copil B &mdash; pondere 2 &mdash; 2 jucării</li>
+<li>Copil C &mdash; pondere 2 &mdash; 2 jucării</li>
+<li>Copil D &mdash; pondere 2 &mdash; 2 jucării</li>
+<li>Copil E &mdash; pondere 2 &mdash; 2 jucării</li>
+</ul>
+<p>În acest scenariu, fiecare copil primește 2 jucării, iar numărul total de jucării distribuite este 10. Acesta este un exemplu simplu de alocare statică cu ponderi fixe și ilustrează cum pot fi folosite ponderile pentru a determina numărul de jucării pe care îl primește fiecare copil.</p>
+<p>Totuși, merită remarcat că acest scenariu este oarecum artificial, fiindcă avem un număr total de jucării egal sau mai mare decât suma ponderilor. Într-un scenariu real, s-ar putea să nu avem mereu destule jucării pentru a distribui conform ponderilor. În astfel de cazuri, ar trebui să decidem cum să alocăm jucăriile rămase, de exemplu dându-le copiilor cu cele mai mari ponderi sau folosind o metodă de alocare aleatorie.</p>
+<p>Acest scenariu evidențiază importanța de a lua în considerare numărul total de jucării disponibil când folosești alocarea statică cu ponderi fixe. Ilustrează, de asemenea, nevoia de planificare atentă și de decizie corectă când aloci resurse, mai ales când resursele sunt limitate.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+<ul>
+<li><strong>1. Confundarea &bdquo;ponderilor fixe&rdquo; cu &bdquo;randament garantat&rdquo;.</strong> Începătorii cred uneori că a da două active câte 50% produce automat media randamentelor lor. Nu este adevărat. Dacă un activ câștigă 20% și celălalt pierde 10%, portofoliul <strong>nu</strong> ajunge la mijlocul simplu pe care l-ai ghici făcând media cifrelor afișate; trebuie să ponderezi fiecare randament cu banii săi de la început. Ponderile sunt fixate <strong>înainte</strong> ca randamentul să se întâmple, nu <strong>după</strong>. Scrie mereu calculul explicit: valoare finală = (0,5 &times; 1,20) + (0,5 &times; 0,90) = 0,60 + 0,45 = 1,05, adică un câștig de 5%. Ideea: ponderile sunt pe banii <strong>de la început</strong>, nu pe banii de la final.</li>
+<li><strong>2. Ignorarea problemei numitorului.</strong> O capcană clasică este să stabilești ponderi pe <strong>numărul</strong> de unități în loc de <strong>valoarea</strong> unităților. Să presupunem că deții 60 de acțiuni din Acțiunea A la 10&pound; și 40 de acțiuni din Acțiunea B la 5&pound;. Începătorul ar putea spune &bdquo;60% A, 40% B&rdquo; din cauza numărului de acțiuni, dar valorile reale de start sunt 600&pound; și 200&pound;, adică 75% A și 25% B. Calculează mereu valoarea întâi: pondere A = 600 / (600 + 200) = 0,75. Fără acest pas, alocarea deviază deja înainte de orice mișcare de preț.</li>
+<li><strong>3. Convingerea că ponderile fixe elimină tot riscul.</strong> Unii cursanți își imaginează că o împărțire 60/40 &bdquo;mediază&rdquo; riscul. În realitate, volatilitatea portofoliului este în continuare determinată de volatilitățile individuale și de corelația lor. Dacă Acțiunea A este foarte volatilă și Acțiunea B este puțin volatilă, riscul portofoliului este mai apropiat de riscul lui A decât de al lui B. Corelația contează: două active volatile care se mișcă împreună pot lăsa portofoliul aproape la fel de riscant ca un singur activ volatil. Menționează mereu presupunerea că alocarea statică ignoră corelația; dacă ai nevoie de o reducere reală a riscului, trebuie să introduci reguli de reechilibrare sau diversificare dincolo de metoda cu ponderi fixe.</li>
+<li><strong>4. Uitarea reevaluării portofoliului la final.</strong> Un începător ar putea înregistra alocarea inițială (să zicem 50/50) și apoi pur și simplu să raporteze suma celor două randamente. Asta ratează faptul că <strong>ponderile</strong> în sine deviază pe măsură ce prețurile se schimbă. Pentru a verifica alocarea finală trebuie să: calculezi noile valori în bani, împarți fiecare la total, și abia apoi să compari cu ținta originală 50/50. Fără acest pas nu poți spune dacă portofoliul a rămas static sau a deviat.</li>
+<li><strong>5. Confundarea alocării cu strategia.</strong> Alocarea cu ponderi fixe este o regulă mecanică, nu o strategie de investiții. Nu decide <strong>care</strong> active să fie alese; decide doar <strong>cât</strong> din fiecare să deții odată ce activele sunt deja alese. Începătorii care sar peste pasul de selecție a activelor și apoi dau vina pe regula de alocare pentru performanța slabă confundă cele două straturi. Separă decizia &bdquo;Ar trebui să dețin Acțiunea X?&rdquo; de decizia &bdquo;Ce fracțiune din banii mei ar trebui să reprezinte Acțiunea X?&rdquo;</li>
+<li><strong>6. Bazarea excesivă pe back-test-uri cu date puține.</strong> Când testează un portofoliu cu ponderi fixe pe câteva luni, un începător poate vedea o linie lină și poate presupune că metoda este fără risc. În realitate, eșantioanele mici pot ascunde scăderi mari (drawdowns) sau risc de secvență. Un portofoliu 50/50 care întâmplător a evitat un crash de 50% într-un activ pe parcursul a trei ani ar putea înfrunta totuși acel crash în anul patru. Avertizează mereu novicii: un singur set de date nu este dovadă; au nevoie de istorii mai lungi sau de scenarii de stres pentru a judeca robustețea.</li>
+<li><strong>7. Citirea greșită a clauzei &bdquo;fără reechilibrare&rdquo;.</strong> Sintagma &bdquo;fără reechilibrare&rdquo; înseamnă că <strong>niciodată</strong> nu vinzi câștigătorii sau cumperi pierzătorii pentru a restabili ponderile originale. Începătorii cred uneori că înseamnă &bdquo;nu mai atinge niciodată portofoliul&rdquo;, ceea ce este subtil diferit: tot trebuie să evaluezi la preț de piață (mark-to-market), să calculezi randamentele și să ții evidența. Clarifică faptul că &bdquo;fără reechilibrare&rdquo; este o <strong>regulă pentru tranzacții</strong>, nu o regulă pentru ținerea evidenței.</li>
+</ul>
+<p><strong>Listă rapidă pentru a evita capcanele</strong></p>
+<ul>
+<li>Convertește numărul de acțiuni sau sumele nominale în valori în bani de la început.</li>
+<li>Calculează ponderea fiecărui activ ca valoare_i / valoare_totală.</li>
+<li>Reevaluează întregul portofoliu la final pentru a vedea ponderile finale <strong>reale</strong>.</li>
+<li>Menționează corelația presupusă; nu pretinde că riscul este mediat și dispare.</li>
+<li>Păstrează regula de alocare separată de regula de selecție a activelor.</li>
+<li>Folosește istorii mai lungi sau teste de stres, nu un singur back-test, pentru a judeca rezultatele probabile.</li>
+</ul>
+
+<h2>Cum o folosește biroul de tranzacționare</h2>
+<p>Alocarea statică este o strategie directă și simplă care poate fi utilizată eficient de un birou de tranzacționare (trading desk). În această secțiune vom explora cum poate un birou de tranzacționare să implementeze alocarea statică în operațiunile sale zilnice.</p>
+<h3>Dimensionarea poziției (position sizing)</h3>
+<p>Alocarea statică este folosită în principal pentru dimensionarea poziției, adică procesul de determinare a mărimii optime a unei tranzacții pe baza capitalului disponibil și a expunerii la risc dorite. Un birou de tranzacționare poate folosi alocarea statică pentru a aloca un procent fix din capitalul său fiecărei tranzacții, asigurându-se că menține un profil de risc consecvent în toate tranzacțiile.</p>
+<p>De exemplu, să spunem că un birou de tranzacționare are 100.000$ capital și vrea să aloce 5% din capital fiecărei tranzacții. Folosind alocarea statică, poate calcula mărimea poziției pentru fiecare tranzacție astfel:</p>
+<p>Mărime poziție = (Capital &times; Procent alocare) / (Mărime tranzacție &times; Factor de risc)</p>
+<p>În acest caz, mărimea poziției ar fi: Mărime poziție = (100.000$ &times; 0,05) / (Mărime tranzacție &times; Factor de risc). Biroul de tranzacționare poate folosi apoi această mărime de poziție pentru a determina numărul de contracte sau acțiuni de cumpărat sau vândut pentru fiecare tranzacție.</p>
+<h3>Gestionarea riscului</h3>
+<p>Alocarea statică este folosită și în scopuri de gestionare a riscului. Alocând un procent fix din capital fiecărei tranzacții, un birou de tranzacționare se poate asigura că menține un profil de risc consecvent în toate tranzacțiile. Acest lucru ajută la minimizarea pierderilor potențiale și la maximizarea câștigurilor potențiale.</p>
+<p>De exemplu, dacă un birou de tranzacționare alocă 5% din capital unei tranzacții și tranzacția se încheie cu o pierdere, poate ajusta rapid mărimea poziției pentru tranzacțiile viitoare pentru a-și menține profilul de risc dorit.</p>
+<h3>Selecții și momentul tranzacțiilor (picks &amp; timing)</h3>
+<p>Alocarea statică poate fi folosită și pentru a determina momentul optim al tranzacțiilor. Alocând un procent fix din capital fiecărei tranzacții, un birou de tranzacționare se poate asigura că tranzacționează mereu cu un profil de risc consecvent, indiferent de condițiile pieței.</p>
+<p>De exemplu, dacă un birou de tranzacționare ia în considerare intrarea într-o tranzacție pe o piață volatilă, poate folosi alocarea statică pentru a determina mărimea optimă a poziției și momentul tranzacției. Acest lucru ajută la minimizarea pierderilor potențiale și la maximizarea câștigurilor potențiale.</p>
+<h3>Implementarea în lumea reală</h3>
+<p>Într-un cadru real, un birou de tranzacționare poate implementa alocarea statică folosind o varietate de instrumente și software. De exemplu, poate folosi un calculator de dimensionare a poziției pentru a determina mărimea optimă a poziției pentru fiecare tranzacție, sau poate folosi un software de gestionare a riscului pentru a monitoriza expunerea la risc și a ajusta mărimea poziției în consecință.</p>
+<p>Iată un exemplu de cum poate un birou de tranzacționare să implementeze alocarea statică:</p>
+<ul>
+<li>Determină profilul de risc dorit: biroul stabilește profilul de risc dorit pentru tranzacțiile sale, inclusiv procentul de alocare și factorul de risc.</li>
+<li>Calculează mărimea poziției: biroul folosește calculatorul de dimensionare pentru a determina mărimea optimă a poziției pentru fiecare tranzacție pe baza profilului de risc dorit și a capitalului disponibil.</li>
+<li>Monitorizează expunerea la risc: biroul folosește software de gestionare a riscului pentru a monitoriza expunerea și a ajusta mărimea poziției în consecință.</li>
+<li>Ajustează mărimea poziției: biroul ajustează mărimea poziției pe baza expunerii la risc și a profilului de risc dorit.</li>
+</ul>
+<p>Urmând acești pași, un birou de tranzacționare poate implementa eficient alocarea statică în operațiunile zilnice și poate menține un profil de risc consecvent în toate tranzacțiile.</p>
+
+<h2>Limite, atenționări și când eșuează</h2>
+<p>Alocarea statică este simplă și transparentă, dar simplitatea este și cea mai mare slăbiciune a ei. Fiindcă ponderile sunt fixate la început și nu se schimbă niciodată, portofoliul poate devia (drift) mult față de profilul său de risc dorit pe măsură ce prețurile se mișcă. Imaginează-ți un portofoliu 60% acțiuni / 40% obligațiuni care începe anul cu 6.000&euro; în acțiuni și 4.000&euro; în obligațiuni. Dacă acțiunile cresc 20% și obligațiunile scad 5%, portofoliul devine brusc 64% acțiuni și 36% obligațiuni &mdash; nicio reechilibrare nu a avut loc. &bdquo;Perna&rdquo; originală de 40% obligațiuni s-a micșorat la 36%, iar ponderea acțiunilor este mai mare decât dorea investitorul. Pe perioade mai lungi, drift-ul poate deveni extrem; într-o piață puternic crescătoare (bull market) acțiunile pot domina portofoliul, în timp ce într-o piață scăzătoare prelungită (bear market) abordarea cu ponderi fixe poate lăsa investitorul supraexpus exact la activul care scade.</p>
+<p>O a doua problemă, mai subtilă, este că alocarea statică ignoră corelația dintre active. Când două active riscante sunt corelate pozitiv &mdash; să zicem acțiuni globale și obligațiuni globale cu randament ridicat (high-yield) &mdash; portofoliul cu ponderi fixe se poate comporta aproape ca 100% acțiuni într-o criză, chiar dacă investitorul credea că diversifică. Corelația poate crește spre 1 exact atunci când diversificarea este cel mai necesară, așa că riscul real al portofoliului este mai mare decât sugerează simpla sumă a ponderilor fixe. Investitorul descoperă acest lucru abia după fapt, când sosește scăderea (drawdown).</p>
+<p>Alocarea statică presupune, de asemenea, că apetitul de risc al investitorului este constant în timp. În realitate, toleranța la risc scade adesea după pierderi mari și crește după câștiguri. Un portofoliu cu ponderi fixe nu se adaptează; îl forțează pe investitor să rămână pe drum chiar și când emoțiile strigă altceva. Aceasta poate duce la vânzare în panică sau la menținerea câștigătorilor prea mult timp &mdash; ambele comportamente distrug valoare.</p>
+<p>O altă limitare este riscul ascuns de concentrare din interiorul fiecărei clase de active. Un portofoliu &bdquo;echilibrat&rdquo; 60/40 ar putea deține un singur fond de indice de acțiuni globale și un singur fond de obligațiuni guvernamentale. Dacă acel fond de acțiuni se întâmplă să fie supraponderat pe tehnologie, iar fondul de obligațiuni este puternic expus la un singur emitent, portofoliul este mult mai puțin diversificat decât sugerează etichetele. Alocarea statică nu poate vedea în interiorul fondurilor; vede doar ponderile de nivel înalt. Prin urmare, investitorul trebuie să facă verificări suplimentare asupra deținerilor subiacente sau să accepte că alocarea este la fel de diversificată pe cât sunt instrumentele alese.</p>
+<p>Alocarea statică nu surprinde nici impactul comisioanelor și al taxelor. Fiindcă nu vinde niciodată, nu realizează câștiguri de capital și deci amână taxele în conturile impozabile &mdash; acesta este un avantaj. Dar nici nu recoltează pierderi; orice oportunități de recoltare a pierderilor fiscale (tax-loss harvesting) apărute în timpul anului sunt pierdute. În conturile în care comisioanele sunt percepute ca procent din active, drift-ul spre activul cu performanță mai bună poate crește baza de comisioane fără ca investitorul să observe, până sosește extrasul anual.</p>
+<p>În final, alocarea statică nu spune nimic despre riscul de secvență (sequence risk) &mdash; ordinea în care apar randamentele. Doi investitori pot porni cu aceleași ponderi fixe și pot ajunge la rezultate foarte diferite dacă unul are pierderi devreme și celălalt pierderi târziu, chiar dacă randamentul mediu și volatilitatea sunt aceleași. Riscul de secvență este invizibil pentru o regulă de alocare statică; apare doar în soldul final.</p>
+<p>Pe scurt, alocarea statică este un punct de plecare, nu o linie de sosire. Îi oferă investitorului un mod disciplinat, bazat pe reguli, de a intra pe piață, dar nu garantează nivelul de risc dorit, diversificarea sau confortul emoțional. Funcționează cel mai bine când investitorul este cu adevărat indiferent la volatilitatea intermediară, clasele de active rămân necorelate, iar investitorul revizuiește periodic dacă ponderile fixe încă se potrivesc obiectivelor sale în evoluție. Când oricare dintre aceste condiții cedează, abordarea cu ponderi fixe are nevoie de întărire &mdash; fie prin reguli de reechilibrare, fie prin suprapuneri dinamice (dynamic overlays), fie printr-o schimbare a instrumentelor subiacente.</p>
+
+<h2>Concluzii cheie</h2>
+<ul>
+<li>Alocarea statică este o abordare simplă și directă a gestionării portofoliului, în care ponderile diferitelor active sunt fixe și nu se ajustează în timp.</li>
+<li>Beneficiul cheie al alocării statice este că elimină nevoia de monitorizare și reechilibrare continuă, care pot consuma timp și pot fi costisitoare.</li>
+<li>Totuși, alocarea statică înseamnă și că portofoliul s-ar putea să nu fie optimizat pentru condiții de piață în schimbare și s-ar putea să nu poată profita de oportunitățile care apar din când în când.</li>
+<li>Alocarea statică este folosită adesea de investitorii averși la risc care preferă un portofoliu stabil și previzibil, sau de cei care sunt noi în investiții și vor o abordare simplă și ușor de înțeles.</li>
+<li>Ponderile activelor într-un portofoliu cu alocare statică sunt de obicei determinate pe baza toleranței la risc, a obiectivelor de investiții și a orizontului de timp al investitorului, precum și pe baza caracteristicilor activelor în sine.</li>
+<li>Alocarea statică poate fi folosită într-o varietate de contexte, inclusiv conturi de pensii, conturi cu avantaje fiscale și chiar portofolii de investiții pentru organizații non-profit.</li>
+<li>Deși alocarea statică poate să nu fie cea mai sofisticată sau dinamică abordare a gestionării portofoliului, poate fi un mod eficient și eficace de a gestiona riscul și de a atinge obiectivele de investiții, mai ales pentru investitorii la început de drum sau care preferă o abordare cu întreținere redusă.</li>
+<li>Merită remarcat că alocarea statică poate fi un bun punct de plecare pentru strategii mai complexe de gestionare a portofoliului, precum alocarea dinamică sau gestionarea activă, care pot fi construite peste un cadru de alocare statică.</li>
+<li>În cele din urmă, cheia succesului alocării statice este să stabilești corect ponderile activelor și să rămâi fidel planului, în loc să încerci să anticipezi piața sau să faci schimbări frecvente în portofoliu.</li>
+</ul>

@@ -1,0 +1,371 @@
+<p>Corelația (correlation) este o idee simplă pe care o folosești zilnic fără să îți dai seama. Imaginează-ți că observi cum, atunci când plouă, prețul umbrelelor tinde să crească, în timp ce prețul ochelarilor de soare tinde să scadă. <strong>Corelația dintre poziții</strong> este numărul care îți spune cât de puternic se mișcă două lucruri în aceeași direcție (ambele în sus sau ambele în jos) sau în direcții opuse (unul în sus, altul în jos).</p>
+
+<p>În tranzacționare (trading), corelația arată cum tind două poziții diferite — să zicem o poziție pe futures pe petrol și o poziție pe acțiunile unei companii aeriene — să se miște împreună de-a lungul timpului. Dacă cele două poziții cresc sau scad de obicei în același timp, spunem că sunt <strong>corelate pozitiv</strong>. Dacă una crește de obicei când cealaltă scade, spunem că sunt <strong>corelate negativ</strong>. Dacă nu există un tipar clar, spunem că sunt <strong>necorelate</strong>.</p>
+
+<p>Înțelegerea conceptului de corelație și a coeficientului de corelație (correlation coefficient) te ajută să gestionezi riscul, să construiești diversificarea (diversification) unui portofoliu și să eviți capcana clasică de a confunda corelația cu cauzalitatea. Acest capitol din Masterclass Bursă îți explică, pas cu pas, ce înseamnă corelația dintre active, cum se calculează și cum o folosește un birou de tranzacționare real.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Hai să definim acum termenii-cheie pe care îi vei vedea pe ecran atunci când te uiți la numerele de corelație.</p>
+
+<p><strong>Poziție (position)</strong> – Este pur și simplu cantitatea dintr-un anumit activ pe care îl deții sau îl datorezi la un moment dat. De exemplu, dacă ai cumpărat 100 de barili de petrol Brent pentru livrare luna viitoare, aceea este o poziție „long” (de cumpărare) pe petrol. Dacă ai vândut în lipsă („short”) 500 de acțiuni ale unei companii aeriene, aceea este o poziție „short” pe acea companie. O poziție poate fi pozitivă (deții ceva) sau negativă (datorezi ceva).</p>
+
+<p><strong>Activ (asset)</strong> – Orice poți cumpăra, vinde sau tranzacționa. Pe un birou de tranzacționare, activele uzuale includ acțiuni ale companiilor (precum acțiunile Apple), mărfuri (precum aurul sau petrolul), obligațiuni de stat sau chiar valute străine (precum euro sau yen). Fiecare activ are propriul preț, care urcă și coboară în fiecare zi.</p>
+
+<p><strong>Variația prețului (price movement)</strong> – Schimbarea prețului unui activ de la un moment la altul. Dacă petrolul era 80 USD ieri și este 82 USD astăzi, prețul a urcat cu 2 USD. Variațiile de preț sunt cele pe care le urmăresc traderii pentru a decide dacă fac sau pierd bani.</p>
+
+<p><strong>Corelație pozitivă</strong> – Atunci când două active tind să se miște în aceeași direcție în cea mai mare parte a timpului. De exemplu, dacă prețul petrolului și prețul acțiunilor companiilor petroliere cresc adesea împreună, corelația lor ar putea fi +0,8 (vom explica numărul imediat). O corelație pozitivă nu înseamnă că se mișcă mereu împreună, ci doar că o fac mai des decât nu.</p>
+
+<p><strong>Corelație negativă</strong> – Atunci când două active tind să se miște în direcții opuse. De exemplu, dacă prețul aurului tinde să crească atunci când piețele de acțiuni scad, corelația lor ar putea fi –0,7. Din nou, asta nu înseamnă că se întâmplă în fiecare zi, ci doar mai des decât ar prezice întâmplarea.</p>
+
+<p><strong>Necorelat</strong> – Atunci când două active nu arată niciun tipar clar în mișcările lor. Unul ar putea urca în timp ce celălalt coboară, sau ambele ar putea urca, sau ambele coborî, fără o legătură fiabilă. Numărul corelației în acest caz ar fi aproape de zero, precum +0,1 sau –0,1.</p>
+
+<p><strong>Coeficientul de corelație (notat adesea „rho” sau „ρ”)</strong> – Acesta este numărul pe care îl vei vedea pe ecran și care rezumă relația. Se află întotdeauna între –1 și +1.</p>
+
+<ul>
+<li><strong>+1</strong> înseamnă corelație pozitivă perfectă: cele două active se mișcă în pas cadențat de fiecare dată.</li>
+<li><strong>–1</strong> înseamnă corelație negativă perfectă: ori de câte ori unul urcă, celălalt coboară exact în aceeași proporție.</li>
+<li><strong>0</strong> înseamnă lipsa oricărei corelații.</li>
+</ul>
+
+<p>În viața reală, aproape niciodată nu vei vedea exact +1, –1 sau 0. Cele mai multe numere se află undeva între. De exemplu, o corelație de +0,6 înseamnă corelație pozitivă moderată, în timp ce –0,4 înseamnă corelație negativă moderată.</p>
+
+<p><strong>Fereastra de timp (time window)</strong> – Corelația se măsoară întotdeauna pe o anumită perioadă. Dacă te uiți la ultima lună, ai putea vedea o corelație de +0,7 între două active. Dacă te uiți la ultimii cinci ani, aceleași două active ar putea arăta o corelație de doar +0,3. Fereastra de timp contează, pentru că relațiile dintre active se pot schimba pe măsură ce piețele evoluează.</p>
+
+<p><strong>Corelație glisantă (rolling correlation)</strong> – În loc să folosească o singură perioadă fixă, traderii folosesc adesea o fereastră „glisantă” — de exemplu, o fereastră de 30 de zile care înaintează câte o zi pe rând. Acest lucru oferă o imagine dinamică asupra modului în care relația se schimbă de la o zi la alta.</p>
+
+<p><strong>Diversificare (diversification)</strong> – Ideea de a împrăștia riscul prin deținerea unor active care nu se mișcă toate în aceeași direcție. Dacă două poziții sunt corelate negativ, o pierdere pe una poate fi parțial compensată de un câștig pe cealaltă, reducând riscul general al portofoliului.</p>
+
+<p><strong>Portofoliu (portfolio)</strong> – Setul total de poziții pe care le deții la un moment dat. Un portofoliu poate conține multe active diferite, iar corelația dintre ele ajută la stabilirea cât de riscant este întregul portofoliu.</p>
+
+<p>Ține minte: corelația măsoară cum se mișcă două lucruri împreună, nu dacă unul îl cauzează pe celălalt. Doar pentru că petrolul și acțiunile companiilor aeriene sunt corelate pozitiv nu înseamnă că prețul petrolului face acțiunile companiilor aeriene să crească; ambele ar putea crește din cauza unui al treilea factor, precum o creștere economică puternică. Corelația îți spune despre tipare, nu despre cauze.</p>
+
+<h2>Intuiție</h2>
+
+<p>Imaginează-ți că ești într-o cafenea cu un prieten. Comandați amândoi câte o cafea și vă așezați la o măsuță lângă fereastră. Pe măsură ce luați primele înghițituri, observați că temperatura de afară începe să scadă. Prietenul tău, care poartă o jachetă subțire, începe să simtă frigul și decide să își pună un pulover. Tu, în schimb, porți o haină groasă și nu simți nevoia să te schimbi.</p>
+
+<p>În acest scenariu, tu și prietenul tău sunteți ca două active — haina ta și puloverul prietenului. Când temperatura scade, puloverul prietenului devine mai valoros (are nevoie de el ca să stea la căldură), iar haina ta devine mai puțin valoroasă (ție îți este deja cald). Acest lucru seamănă cu modul în care se comportă activele pe piețele financiare atunci când există o schimbare a condițiilor de piață.</p>
+
+<p>Acum hai să introducem o a treia variabilă — prognoza meteo. Dacă prognoza spune că va fi o zi rece, atât tu, cât și prietenul tău ați putea decide să purtați mai multe straturi. În acest caz, haina ta și puloverul prietenului devin mai valoroase în același timp. Asta seamănă cu o corelație pozitivă între cele două active — când unul crește, crește și celălalt.</p>
+
+<p>Dar dacă prognoza spune că va fi o zi caldă? Tu ai putea decide să porți un tricou, dar prietenul tău ar putea purta în continuare un pulover pentru că nu este sigur ce temperatură va fi. În acest caz, valoarea hainei tale și a puloverului prietenului diferă în direcții opuse. Asta seamănă cu o corelație negativă între cele două active — când unul crește, celălalt scade.</p>
+
+<p>Conceptul de corelație este ca o hartă care ne ajută să înțelegem cum se mișcă diferite active împreună sau separat ca răspuns la schimbările din condițiile de piață. Nu este vorba despre a prezice viitorul, ci mai degrabă despre a înțelege relațiile dintre active diferite și cum s-ar putea comporta în diferite scenarii.</p>
+
+<p>În contextul unui birou de tranzacționare, corelația este esențială pentru luarea unor decizii de investiții informate. Înțelegând cum sunt corelate diferitele active, traderii pot identifica oportunități de a-și diversifica portofoliile și de a gestiona riscul mai eficient. De exemplu, dacă două active sunt puternic corelate, un trader ar putea decide să investească doar într-unul dintre ele pentru a evita dublarea riscului.</p>
+
+<p>Totuși, corelația nu este întotdeauna un concept simplu. În realitate, prețurile activelor pot fi influențate de o gamă complexă de factori, inclusiv indicatori economici, rate ale dobânzii și chiar tendințe din rețelele sociale. Drept urmare, corelația se poate schimba în timp, iar ceea ce pare o corelație puternică astăzi ar putea să nu fie la fel de puternică mâine.</p>
+
+<p>În ciuda acestor complexități, construirea unei intuiții în jurul corelației este esențială pentru luarea unor decizii de investiții informate. Înțelegând relațiile dintre diferite active și cum s-ar putea comporta în diverse scenarii, traderii pot lua decizii mai bine fundamentate și pot gestiona riscul mai eficient.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Când stai la un birou de tranzacționare și vrei să afli cum se mișcă două poziții împreună sau separat, ai nevoie de o metodă repetabilă pentru a transforma istoricul prețurilor într-un singur număr. Acel număr este coeficientul de corelație, numit de obicei „rho” (ρ) sau pur și simplu „corelație”. Mai jos găsești mecanica exactă, pas cu pas, pe care o vei rula în fiecare dimineață, prânz și seară.</p>
+
+<h3>1. Adună datele brute de intrare</h3>
+<ul>
+<li>Două serii de prețuri: alege ultimele N închideri zilnice pentru Poziția A și Poziția B.</li>
+<li>Exemplu: A = S&P 500 E-mini (simbol ES), B = futures pe obligațiuni de trezorerie americane la 10 ani (simbol TY).</li>
+<li>N este de obicei 30, 60 sau 90 de zile; biroul folosește 60 dacă volatilitatea nu sare brusc.</li>
+<li>Ai nevoie și de rata fără risc (risk-free rate) pentru mai târziu; folosește rata SOFR overnight.</li>
+</ul>
+
+<h3>2. Convertește prețurile în randamente (returns)</h3>
+<ul>
+<li>Pentru fiecare zi i, calculează randamentul simplu: r_i = (P_i – P_{i–1}) / P_{i–1}.</li>
+<li>Acum ai doi vectori de câte 60 de randamente zilnice: r_A și r_B.</li>
+</ul>
+
+<h3>3. Calculează cele două medii</h3>
+<ul>
+<li>μ_A = (r_A1 + r_A2 + … + r_A60) / 60</li>
+<li>μ_B = (r_B1 + r_B2 + … + r_B60) / 60</li>
+</ul>
+
+<h3>4. Calculează abaterile de la medie</h3>
+<ul>
+<li>Pentru fiecare zi i, calculează d_Ai = r_Ai – μ_A și d_Bi = r_Bi – μ_B.</li>
+<li>Aceste abateri îți spun cât de departe s-a îndepărtat fiecare randament de propria medie.</li>
+</ul>
+
+<h3>5. Înmulțește abaterile și adună</h3>
+<ul>
+<li>Pentru fiecare zi i, înmulțește cele două abateri: d_Ai × d_Bi.</li>
+<li>Adună toate cele 60 de produse: Σ(d_Ai × d_Bi). Această sumă se numește „produsul încrucișat” (cross-product).</li>
+</ul>
+
+<h3>6. Calculează cele două varianțe</h3>
+<ul>
+<li>σ²_A = Σ(d_Ai²) / (N – 1)</li>
+<li>σ²_B = Σ(d_Bi²) / (N – 1)</li>
+<li>„– 1” este corecția lui Bessel; biroul o folosește pentru a evita distorsiunea (bias).</li>
+</ul>
+
+<h3>7. Extrage rădăcinile pătrate pentru a obține cele două abateri standard</h3>
+<ul>
+<li>σ_A = √σ²_A</li>
+<li>σ_B = √σ²_B</li>
+</ul>
+
+<h3>8. Calculează numitorul</h3>
+<ul>
+<li>Numitor = (N – 1) × σ_A × σ_B</li>
+<li>De ce (N – 1)? Pentru că suma produsului încrucișat poartă deja un grad de libertate.</li>
+</ul>
+
+<h3>9. Împarte pentru a obține coeficientul de corelație</h3>
+<ul>
+<li>ρ = Σ(d_Ai × d_Bi) / [(N – 1) × σ_A × σ_B]</li>
+<li>ρ se află întotdeauna între –1 și +1.</li>
+<li>ρ = +1 înseamnă că cele două serii se mișcă în pas cadențat; ρ = –1 înseamnă că se mișcă în direcții opuse; ρ = 0 înseamnă lipsa unei legături liniare.</li>
+</ul>
+
+<h3>10. Verifică incertitudinea</h3>
+<ul>
+<li>Biroul nu tratează ρ = 0,80 ca pe un adevăr absolut. Calculează intervalul de încredere de 95% folosind transformarea z a lui Fisher:
+<ul>
+<li>z = 0,5 × ln((1 + ρ)/(1 – ρ))</li>
+<li>eroarea standard ≈ 1/√(N – 3)</li>
+<li>marja ≈ 1,96 × eroarea standard</li>
+<li>IÎ = z ± marja, apoi se face transformarea inversă înapoi la ρ.</li>
+</ul>
+</li>
+<li>Dacă intervalul cuprinde zero, biroul consideră corelația slabă din punct de vedere statistic.</li>
+</ul>
+
+<h3>11. Furnizează numerele pe care biroul le folosește efectiv</h3>
+<ul>
+<li>ρ în sine (estimarea punctuală).</li>
+<li>Intervalul de încredere de 95%.</li>
+<li>Fereastra glisantă de 60 de zile, ca traderul să vadă dacă ρ derivează.</li>
+<li>Un cod de culoare tip semafor: verde dacă |ρ| > 0,7 și IÎ exclude zero; chihlimbar (galben) dacă 0,4 < |ρ| ≤ 0,7; roșu în rest.</li>
+</ul>
+
+<p>Note practice pe care le vei auzi strigate prin birou:</p>
+<ul>
+<li>„Nu folosi date săptămânale decât dacă acoperi (hedge) un swap care se decontează săptămânal.”</li>
+<li>„Dacă o serie e în randamente simple și cealaltă în randamente logaritmice, convertește-le pe ambele la aceeași scară, altfel corelația va fi un gunoi.”</li>
+<li>„Dacă vezi ρ trecând de la +0,9 la –0,2 într-o săptămână, caută o ruptură de regim — poate Fed-ul tocmai a urcat dobânda.”</li>
+</ul>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să luăm un exemplu simplu pentru a ilustra cum funcționează corelația în practică. Să presupunem că analizăm evoluția istorică a prețurilor a două acțiuni: Apple (AAPL) și Microsoft (MSFT). Vrem să înțelegem cum tind prețurile lor să se miște împreună sau separat în timp.</p>
+
+<p>Să presupunem că avem prețuri zilnice de închidere pentru ambele acțiuni pe parcursul ultimelor 100 de zile de tranzacționare. Datele arată astfel:</p>
+
+<ul>
+<li>2022-01-01 — AAPL: 100,00 USD; MSFT: 200,00 USD</li>
+<li>2022-01-03 — AAPL: 105,00 USD; MSFT: 205,00 USD</li>
+<li>2022-01-05 — AAPL: 110,00 USD; MSFT: 210,00 USD</li>
+<li>… — … ; …</li>
+<li>2022-06-30 — AAPL: 140,00 USD; MSFT: 280,00 USD</li>
+</ul>
+
+<p>Pentru a calcula corelația dintre AAPL și MSFT, trebuie să urmăm acești pași:</p>
+
+<p><strong>1. Calculează randamentele zilnice</strong> pentru ambele acțiuni. Folosim formula: Randament = (Prețul curent – Prețul anterior) / Prețul anterior.</p>
+
+<p>Pentru AAPL, randamentele ar fi:</p>
+<ul>
+<li>(105,00 – 100,00) / 100,00 = 0,05</li>
+<li>(110,00 – 105,00) / 105,00 = 0,0488</li>
+<li>…</li>
+</ul>
+
+<p>Pentru MSFT, randamentele ar fi:</p>
+<ul>
+<li>(205,00 – 200,00) / 200,00 = 0,025</li>
+<li>(210,00 – 205,00) / 205,00 = 0,0244</li>
+<li>…</li>
+</ul>
+
+<p><strong>2. Calculează randamentul mediu</strong> pentru fiecare acțiune pe parcursul perioadei de 100 de zile. Folosim formula: Randament mediu = (Suma randamentelor) / Numărul de zile.</p>
+
+<p>Pentru AAPL, randamentul mediu ar fi aproximativ 0,0132 (calculat din datele reale ale randamentelor).</p>
+
+<p>Pentru MSFT, randamentul mediu ar fi aproximativ 0,0121 (calculat din datele reale ale randamentelor).</p>
+
+<p><strong>3. Calculează covarianța (covariance)</strong> dintre randamentele AAPL și MSFT. Folosim formula: Covarianță = (Suma [Randament AAPL × Randament MSFT]) / (Numărul de zile – 1).</p>
+
+<p>Covarianța dintre randamentele AAPL și MSFT ar fi aproximativ 0,00016 (calculată din datele reale).</p>
+
+<p><strong>4. Calculează abaterile standard (standard deviation)</strong> ale randamentelor pentru ambele acțiuni. Folosim formula: Abatere standard = √(Varianță).</p>
+
+<p>Abaterea standard a randamentelor AAPL ar fi aproximativ 0,0235 (calculată din datele reale).</p>
+
+<p>Abaterea standard a randamentelor MSFT ar fi aproximativ 0,0208 (calculată din datele reale).</p>
+
+<p><strong>5. Calculează coeficientul de corelație</strong> dintre AAPL și MSFT folosind formula: Coeficient de corelație = Covarianță / (Abaterea standard a AAPL × Abaterea standard a MSFT).</p>
+
+<p>Coeficientul de corelație dintre AAPL și MSFT ar fi aproximativ 0,63 (calculat din datele reale).</p>
+
+<p><strong>Interpretare:</strong> Un coeficient de corelație de 0,63 indică o relație pozitivă moderată între randamentele AAPL și MSFT. Asta înseamnă că, atunci când randamentele AAPL sunt peste medie, randamentele MSFT tind să fie și ele peste medie, și invers. Totuși, intensitatea relației nu este extrem de mare, ceea ce sugerează că ar putea exista și alți factori care influențează randamentele acestor acțiuni.</p>
+
+<p>Ține minte că <strong>corelația nu implică cauzalitate</strong>. O corelație ridicată între două acțiuni nu înseamnă neapărat că una o face pe cealaltă să se miște. Pot exista factori subiacenți, precum tendințele de piață sau condițiile economice, care determină variațiile de preț ale ambelor acțiuni.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Să folosim același birou, aceleași instrumente, dar o altă zi și o altă stare de spirit.</p>
+
+<p>Este ora 14:45, ora Londrei, într-o vineri liniștită de la sfârșit de vară. Biroul este long pe 10 milioane GBP din swap-ul Sonia la 3 luni (costul nostru de finanțare) și short pe 5 milioane EUR din swap-ul €STR la 3 luni (costul nostru de finanțare în euro). Cele două swap-uri sunt cotate în monede diferite, așa că dimensiunile noționale par dezechilibrate, dar noi păstrăm întotdeauna riscul în aceeași unitate — volatilitatea P&L în GBP — așa că cele 5 milioane EUR sunt echivalente ca risc cu aproximativ 4,3 milioane GBP la cursul spot de astăzi (EUR/GBP = 0,86). Riscul net este, prin urmare, de +1,7 milioane GBP de expunere la costul de finanțare.</p>
+
+<p>La 14:47, BCE (ECB) publică o declarație neprogramată prin care anunță că își va reduce imediat rata facilității de depozit cu 25 de puncte de bază (bp), cu efect din aceeași zi. Piața interpretează acest lucru ca pe un semnal de tip „orice este nevoie”, iar EUR/GBP scade cu 1,8% în două minute. Ratele Sonia scad cu 1 bp (pentru că se așteaptă ca Banca Angliei să mențină dobânda), în timp ce ratele €STR scad cu 23 bp (pentru că BCE tocmai a tăiat). Costul de finanțare în GBP al biroului scade, prin urmare, foarte ușor, dar costul de finanțare în EUR se prăbușește, așa că poziția short pe €STR generează un profit mare exprimat în GBP.</p>
+
+<p>Ce ne spune aici lentila corelației?</p>
+
+<h3>1. Corelația la nivel de instrument</h3>
+<ul>
+<li>Sonia vs €STR: cele două swap-uri pe indice overnight sunt corelate pozitiv în cea mai mare parte a timpului, pentru că deciziile de politică ale băncilor centrale globale tind să fie sincronizate. Astăzi, însă, BCE a acționat de una singură, creând o schimbare de regim.</li>
+<li>Corelația măsurată pe ultimele 30 de zile era +0,72; pe ultima oră s-a prăbușit la –0,15. Modelul de risc al biroului, care folosește o fereastră glisantă de 30 de zile, încă crede că pozițiile se compensează reciproc, dar P&L spune o altă poveste.</li>
+</ul>
+
+<h3>2. Corelația valutară (cross-currency)</h3>
+<ul>
+<li>Cursul spot EUR/GBP și cele două rate de swap sunt legate mecanic: când EUR se slăbește, finanțarea în EUR devine mai ieftină pentru oricine este short pe finanțarea în EUR (adică noi). Corelația dintre EUR/GBP și diferența (spread-ul) dintre €STR și Sonia s-a inversat, prin urmare, de la ușor negativă la puternic pozitivă (+0,8) în fereastra de două minute.</li>
+</ul>
+
+<h3>3. Atribuirea P&L</h3>
+<ul>
+<li>P&L din costul de finanțare: +1,7 milioane GBP (în principal din piciorul short pe €STR).</li>
+<li>P&L din cursul spot pe dezechilibrul valutar: –0,1 milioane GBP (pentru că garanția noastră în EUR valorează acum mai puțini GBP).</li>
+<li>P&L net al biroului: +1,6 milioane GBP.</li>
+</ul>
+
+<p>Concluzii-cheie pentru birou:</p>
+<ul>
+<li>Schimbările de regim pot rupe corelațiile istorice în câteva secunde. Suprapune întotdeauna un monitor de corelație pe orizont scurt (de ex. glisant pe 5 minute) când ai registre de finanțare valutară.</li>
+<li>Riscul de conversie valutară este adesea ignorat în ecranele de corelație. Asigură-te că sistemul tău de risc evaluează la prețul pieței (marks-to-market) într-un singur numerar de referință (aici, GBP) și arată contribuția FX în mod explicit.</li>
+<li>Nu acoperi excesiv (over-hedge) pe baza unor numere de corelație învechite. Dacă corelația pe 30 de zile este +0,7, dar cea pe 5 minute este –0,1, hedge-ul este probabil greșit. Repreciază sau reechilibrează imediat.</li>
+</ul>
+
+<p><strong>Onestitate în privința cazurilor-limită:</strong> Biroul a presupus că Sonia și €STR se vor mișca împreună; acțiunea-surpriză a BCE a dovedit că această presupunere era fragilă. Corelația nu este o lege a naturii — este un artefact statistic care se poate inversa fără avertisment. Tratează-o ca pe un ghid, nu ca pe o garanție, și testează-ți întotdeauna pozițiile la stres în fața schimbărilor de regim.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p>Când lucrezi cu corelația în contextul alocării pozițiilor, este esențial să fii conștient de capcanele care pot duce la concluzii incorecte sau la decizii greșite. Iată câteva greșeli și concepții greșite frecvente pe care le întâlnesc adesea începătorii:</p>
+
+<p><strong>1. Confundarea corelației cu cauzalitatea.</strong> Aceasta este una dintre cele mai semnificative erori din finanțe. Corelația măsoară gradul în care două variabile se mișcă împreună, dar nu implică o relație de cauzalitate. Doar pentru că două poziții sunt puternic corelate nu înseamnă că una o face pe cealaltă să se miște. Această concepție greșită poate duce la concluzii eronate despre factorii care stau cu adevărat în spatele mișcărilor pieței.</p>
+
+<p>De exemplu, dacă două acțiuni, A și B, sunt puternic corelate, ar putea fi tentant să concluzionezi că A o face pe B să se miște. Totuși, este mai probabil ca ambele acțiuni să reacționeze la aceiași factori de piață subiacenți, precum indicatorii economici sau tendințele din industrie.</p>
+
+<p><strong>2. Ignorarea importanței dimensiunii eșantionului.</strong> Calculele de corelație sunt la fel de bune ca datele folosite pentru a le calcula. Dacă eșantionul este prea mic, coeficientul de corelație poate fi nesigur sau chiar înșelător. Acest lucru este deosebit de problematic când lucrezi cu date pe termen scurt sau când analizezi poziții cu un istoric de tranzacționare limitat.</p>
+
+<p>Pentru a evita această capcană, este esențial să folosești suficiente date pentru a calcula coeficienții de corelație. O regulă empirică este să folosești cel puțin 100 până la 200 de puncte de date pentru a obține o estimare fiabilă a corelației.</p>
+
+<p><strong>3. Neglijarea relațiilor neliniare.</strong> Coeficienții de corelație presupun o relație liniară între variabilele analizate. Totuși, multe relații din lumea reală sunt neliniare, ceea ce înseamnă că relația dintre variabile se schimbă în timp sau în condiții diferite.</p>
+
+<p>De exemplu, un coeficient de corelație ar putea indica o relație pozitivă puternică între două poziții în perioade de volatilitate ridicată, dar o relație negativă slabă în perioade de volatilitate scăzută. Ignorarea relațiilor neliniare poate duce la concluzii incorecte despre dinamica de fond a pieței.</p>
+
+<p><strong>4. Interpretarea greșită a semnificației coeficienților de corelație.</strong> Coeficienții de corelație sunt adesea interpretați greșit ca o măsură a intensității relației dintre două variabile. Totuși, coeficienții de corelație măsoară doar gradul în care variabilele se mișcă împreună, nu intensitatea relației ca atare.</p>
+
+<p>De exemplu, un coeficient de corelație de 0,5 ar putea fi interpretat ca o relație slabă între două poziții. Însă un coeficient de corelație nu înseamnă că pozițiile se mișcă împreună un anumit procent din timp; el măsoară intensitatea și direcția relației liniare, unde 0 este lipsa unei legături liniare, iar ±1 este o relație liniară perfectă.</p>
+
+<p><strong>5. Nereluarea în calcul a valorilor extreme (outliers).</strong> Valorile extreme pot afecta semnificativ calculele de corelație, mai ales dacă sunt valori extreme care distorsionează distribuția datelor. Ignorarea valorilor extreme poate duce la concluzii incorecte despre dinamica de fond a pieței.</p>
+
+<p>Pentru a evita această capcană, este esențial să folosești metode de corelație robuste, rezistente la valori extreme, precum coeficientul de corelație al rangurilor Spearman. Alternativ, poți folosi tehnici precum winsorizarea sau retezarea (trimming) pentru a reduce impactul valorilor extreme asupra calculului corelației.</p>
+
+<p>Fiind conștient de aceste greșeli și concepții greșite frecvente, poți evita capcanele și poți lua decizii mai bine fundamentate când lucrezi cu corelația în contextul alocării pozițiilor. Ține minte să folosești întotdeauna suficiente date, să iei în calcul relațiile neliniare și să cântărești impactul valorilor extreme asupra calculelor tale de corelație.</p>
+
+<h2>Cum o folosește biroul de tranzacționare</h2>
+
+<p>Pe un birou de tranzacționare, numărul corelației nu este o curiozitate academică; este lentila zilnică prin care decidem ce să cumpărăm, cât să cumpărăm și când să cumpărăm. Mai jos găsești fluxul de lucru concret pe care îl urmăm în fiecare dimineață, când registrul (blotter) este încă „cald”, iar limitele de risc sunt încă necompletate.</p>
+
+<h3>1. Scanarea de dimineață — „Unde este avantajul?”</h3>
+<ul>
+<li>Pornim de la un univers de 30–40 de instrumente lichide (swap-uri pe rate, CDS pe nume individuale, obligațiuni cash IG și HY, picioare de futures).</li>
+<li>Pentru fiecare pereche extragem corelația glisantă pe 30 de zile din motorul de prețuri (Bloomberg CORR sau EWMA construit intern).</li>
+<li>Păstrăm doar perechile a căror corelație este între 0,60 și 0,90; sub 0,60 instrumentele sunt prea independente pentru a oferi un hedge fiabil, peste 0,90 sunt aproape aceeași tranzacție și nu obținem diversificare.</li>
+<li>Marcăm primele cinci perechi care au și carry pozitiv (adică spread-ul este mai mare decât costul de finanțare).</li>
+</ul>
+
+<h3>2. Construcția coșului — „Cum dimensionăm?”</h3>
+<ul>
+<li>Pentru fiecare pereche marcată calculăm raportul de hedge (hedge ratio): β = ρ × (σ₁ / σ₂), unde ρ este corelația, iar σ₁ și σ₂ sunt volatilitățile realizate pe 20 de zile.</li>
+<li>Apoi dimensionăm picioarele astfel încât riscul în dolari al celor două picioare să fie egal. Exemplu: dacă β = 1,2, cumpărăm 100 mil. $ din piciorul cu randament mai mare și vindem 120 mil. $ din piciorul cu randament mai mic, ca DV01 să fie echilibrat.</li>
+<li>Notăm rapoartele noționale în registru și etichetăm tranzacția „CARRY-PAIR 001”. Această etichetă rămâne pe tichet pe toată durata poziției.</li>
+</ul>
+
+<h3>3. Verificarea riscului — „Ce poate merge prost peste noapte?”</h3>
+<ul>
+<li>Rulăm un scenariu: „Ce se întâmplă dacă corelația scade la 0,40 peste noapte?” Motorul de prețuri repreciază perechea folosind noua corelație și citim impactul asupra P&L în ultima coloană.</li>
+<li>Dacă pierderea potențială depășește 25 bp din bugetul nostru zilnic de risc, fie (a) reducem dimensiunea, fie (b) adăugăm un al treilea picior (de obicei un futures lichid) pentru a readuce expunerea la corelație în limite.</li>
+<li>Nu ne bazăm niciodată pe faptul că corelația va rămâne ridicată; presupunem mereu că se poate rupe în sesiunile volatile.</li>
+</ul>
+
+<h3>4. Sincronizarea execuției — „Așteptăm o scădere?”</h3>
+<ul>
+<li>Urmărim corelația glisantă în timpul zilei. Dacă începe să urce peste 0,85, am putea aștepta un moment de „ieftinire a spread-ului” (adică spread-ul se lărgește cu o abatere standard) înainte de a intra.</li>
+<li>Invers, dacă corelația scade spre 0,55, am putea grăbi intrarea, pentru că beneficiul de diversificare este temporar mai mare.</li>
+<li>Folosim harta de căldură (heat-map) a corelației pe al doilea monitor: celulele verzi (0,70–0,80) înseamnă „mergi”, celulele roșii (<0,50) înseamnă „nu intra”.</li>
+</ul>
+
+<h3>5. Atribuirea zilnică a P&L — „Cine ce a mișcat?”</h3>
+<ul>
+<li>La ora 16:00 (Londra) exportăm registrul în cubul de risc.</li>
+<li>Rulăm o descompunere pe factori: ΔP&L = Δspread₁ × DV01₁ + Δspread₂ × DV01₂ + ρ × σ₁ × σ₂ × Δtimp × DV01₁ × DV01₂.</li>
+<li>Ultimul termen este „P&L din corelație”. Dacă este pozitiv, îl notăm în jurnalul biroului; dacă este negativ, decidem dacă reechilibrăm sau lăsăm poziția să ruleze mai departe, atâta timp cât carry-ul depășește pierderea din marcarea la piață.</li>
+</ul>
+
+<h3>6. Curățenia de la sfârșit de lună — „Mai credem în asta?”</h3>
+<ul>
+<li>În ultima zi de tranzacționare a lunii, reîmprospătăm toate corelațiile folosind ferestre de 90 de zile.</li>
+<li>Dacă vreo pereche arată acum ρ < 0,55, închidem automat (flatten) 50% din noțional pentru a reduce riscul de coadă (tail risk).</li>
+<li>Verificăm și dacă s-a lărgit costul de finanțare; dacă da, am putea ieși mai devreme din întreaga pereche pentru a evita erodarea carry-ului.</li>
+</ul>
+
+<p>Reguli pe care nu le încălcăm niciodată:</p>
+<ul>
+<li>Nu dimensiona niciodată o pereche unde ρ > 0,90 — diversificarea este iluzorie.</li>
+<li>Nu intra niciodată într-o pereche unde ρ < 0,40 — hedge-ul este prea slab pentru riscul de bază (basis risk).</li>
+<li>Repreciază întotdeauna scenariul de corelație înainte de a apăsa „execută”.</li>
+<li>Etichetează întotdeauna tichetul cu banda de corelație (de ex. „CARRY-PAIR 001 ρ=0,74”), ca biroul următor să vadă dintr-o privire cum a fost concepută poziția.</li>
+</ul>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Deși analiza corelației poate fi un instrument valoros pentru înțelegerea relațiilor dintre diferite active, este esențial să îi recunoaștem limitele și capcanele potențiale. Corelația măsoară intensitatea și direcția relației liniare dintre două variabile, dar nu implică neapărat cauzalitate și nu prezice comportamentul viitor.</p>
+
+<p>Una dintre limitele principale ale analizei corelației este că nu ia în calcul relațiile neliniare sau interacțiunile complexe dintre variabile. În realitate, multe piețe financiare au un comportament neliniar, iar analiza corelației ar putea să nu surprindă această dinamică. De exemplu, o corelație pozitivă puternică între două active într-o piață în creștere (bull market) se poate rupe într-o piață în scădere (bear market), unde activele s-ar putea mișca în direcții opuse.</p>
+
+<p>O altă limită a analizei corelației este că este sensibilă la perioada și la frecvența datelor folosite. Coeficienții de corelație se pot schimba semnificativ în timp, iar diferite perioade pot prezenta tipare de corelație diferite. De exemplu, o corelație pozitivă puternică între două active pe o perioadă scurtă ar putea să nu se mențină pe o perioadă mai lungă.</p>
+
+<p>Analiza corelației nu ia în calcul nici conceptul de „contagiune” (contagion), în care mișcarea unui activ afectează mișcarea altui activ, chiar dacă nu sunt legate direct. Acest lucru se poate produce prin diverse canale, precum schimbări în sentimentul pieței, indicatori economici sau evenimente de reglementare.</p>
+
+<p>În plus, analiza corelației nu oferă, în sine, informații despre magnitudinea relației. Un coeficient de corelație ridicat nu implică neapărat o relație de cauzalitate, iar un coeficient scăzut nu înseamnă neapărat lipsa oricărei legături. De asemenea, analiza corelației nu ia în calcul conceptul de „corelație falsă” (spurious correlation), în care două variabile par corelate pur și simplu din întâmplare.</p>
+
+<p>Pe lângă asta, analiza corelației poate fi afectată de valorile extreme (outliers), care pot influența semnificativ coeficientul de corelație. Valorile extreme pot fi cauzate de diverși factori, precum erori la colectarea datelor, evenimente de piață neobișnuite sau schimbări ale condițiilor de piață.</p>
+
+<p>Este, de asemenea, esențial să recunoaștem că analiza corelației nu este o garanție a comportamentului viitor. Coeficienții de corelație se pot schimba în timp și, chiar dacă două active au avut o corelație pozitivă puternică în trecut, asta nu implică neapărat că vor continua să se miște împreună în viitor.</p>
+
+<p>În contextul unui birou de tranzacționare cu frecvență ridicată, analiza corelației poate fi deosebit de dificilă din cauza frecvenței mari și a volatilității piețelor. Analiza corelației ar putea să nu surprindă dinamica complexă și relațiile neliniare care există pe aceste piețe, iar traderii trebuie să fie conștienți de aceste limite atunci când o folosesc.</p>
+
+<p>Pentru a atenua aceste limite, traderii pot combina analiza corelației cu alte instrumente și tehnici, precum analiza tendinței, indicatorii de moment (momentum) și analiza fundamentală. Printr-o abordare multifațetată, traderii pot obține o înțelegere mai cuprinzătoare a relațiilor dintre diferite active și pot lua decizii de tranzacționare mai bine fundamentate.</p>
+
+<p>În concluzie, deși analiza corelației poate fi un instrument valoros pentru înțelegerea relațiilor dintre diferite active, este esențial să îi recunoaștem limitele și capcanele potențiale. Traderii trebuie să fie conștienți de avertismentele și limitele analizei corelației și să o folosească împreună cu alte instrumente și tehnici pentru a lua decizii de tranzacționare mai bine fundamentate.</p>
+
+<h2>Concluzii-cheie</h2>
+
+<ul>
+<li>Corelația este un număr între –1 și +1 care îți spune cum se mișcă două serii de prețuri împreună în vremuri normale. +1 înseamnă că se mișcă în pas cadențat; –1 înseamnă că se mișcă în direcții opuse; 0 înseamnă lipsa unei legături liniare. Verifică întotdeauna fereastra de timp și dimensiunea eșantionului — corelația se poate inversa dacă schimbi oricare dintre ele.</li>
+
+<li>Folosește foaia zilnică „Matricea de corelație” a biroului. Este reîmprospătată peste noapte cu ultimele 60 de zile de tranzacționare ale prețurilor de închidere. Fiecare celulă arată corelația Pearson pe 60 de zile dintre două instrumente. Ignoră nuanța de culoare; numărul brut este cel pe care îl tranzacționezi.</li>
+
+<li>Nu te baza niciodată pe o singură cifră de corelație. Piețele își schimbă regimul. O corelație de 0,85 poate scădea la 0,35 într-o criză. Suprapune întotdeauna o a doua măsură — corelație glisantă pe 20 de zile sau o corelație a rangurilor glisantă pe 30 de zile — ca să vezi dacă relația slăbește.</li>
+
+<li>Când dimensionezi o nouă tranzacție de valoare relativă (relative-value), insistă pe o corelație minimă pe 30 de zile de 0,70 și pe o scădere maximă (draw-down) pe 90 de zile a spread-ului mai mică de 8%. Dacă vreunul dintre praguri este încălcat, lărgește stop-ul sau renunță la idee. Politica de risc a biroului impune acest lucru; nu o suprascrie fără escaladare.</li>
+
+<li>Corelația este un instrument retrospectiv. Răspunde la „ce s-a întâmplat”, nu la „de ce s-a întâmplat”. Dacă corelația crește brusc pentru că ambele picioare sunt împinse în sus de același flux de ETF-uri, legătura se poate rupe când fluxul se inversează. Ține un ochi pe datele de flux al ordinelor sau pe poziționarea implicată de opțiuni ca verificare de bun-simț.</li>
+
+<li>Corelația negativă nu înseamnă bani gratis. O pereche de –0,90 poate totuși să facă un salt (gap) de 10% pe un singur picior dacă un titlu de presă lovește doar un nume. Testează întotdeauna la stres scenariul de coadă: ce se întâmplă dacă spread-ul se lărgește cu 2 abateri standard peste noapte? Dimensionează în consecință.</li>
+
+<li>Acoperirea (hedging) cu instrumente corelate reduce riscul direcțional, dar introduce riscul de bază (basis risk). Riscul de bază este șansa ca însăși corelația să se schimbe. Dacă acoperi un ETF de acțiuni long cu futures short, riscul de bază este de obicei mic, dar dacă acoperi o obligațiune de credit pe un singur nume cu un CDS pe indice, riscul de bază poate fi mare. Cunoaște particularitățile instrumentului înainte de a apăsa „tranzacționează”.</li>
+
+<li>Corelația se rupe cel mai repede în ferestrele de criză. În timpul „goanei după lichiditate” (dash-for-cash) din martie 2020, S&P 500 și futures pe petrol au tipărit pentru scurt timp o corelație de –0,70, pentru că vânzările forțate pe petrol au copleșit indicele. Dacă vezi corelația mișcându-se cu peste 0,40 într-o singură zi, tratează asta ca pe un steag roșu și ia în calcul reducerea riscului.</li>
+
+<li>Corelația nu este cauzalitate. Două active pot crește amândouă din cauza unui al treilea factor — să zicem, un dolar în scădere — și totuși corelația lor poate arăta perfectă. Nu presupune că, dacă cumperi unul, celălalt va crește automat. Întreabă-te mereu: care este factorul comun și mai este în vigoare?</li>
+
+<li>Ține un jurnal personal. De fiecare dată când intri într-o tranzacție de valoare relativă, notează corelația de la intrare, corelația glisantă pe 10 zile și cea mai mare schimbare a corelației pe parcursul unei singure zile. Revizuiește jurnalul săptămânal. Vor apărea tipare — de ex. tranzacțiile tale cu „corelație ridicată” tind să se rupă după ședințele FOMC — și îți vei rafina pragurile în timp.</li>
+
+<li>În fine, ține minte că corelația este doar o lentilă. Combin-o cu dispersia, beta și fluxurile sectoriale înainte de a aloca capital. Sistemul de risc al biroului te va bloca dacă încerci să ieși prea mult în afara barierelor de corelație, dar nu te poate opri să ignori imaginea de ansamblu. Folosește instrumentele împreună, nu izolat.</li>
+</ul>

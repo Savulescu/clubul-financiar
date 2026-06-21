@@ -1,0 +1,401 @@
+<p><strong>Reechilibrarea portofoliului (rebalancing)</strong> este procesul prin care ajustezi ponderile activelor pentru a menține alocarea-țintă (target allocation) stabilită la început. Cu alte cuvinte, reechilibrarea aduce portofoliul înapoi la rețeta inițială de risc atunci când prețurile mișcă greutatea fiecărui activ în afara liniei sale. Este un pilon esențial al managementului de portofoliu și al disciplinei de investiții, pentru că păstrează profilul de risc stabil și predictibil, indiferent de cum evoluează piața.</p>
+
+<p>Acest capitol explică pas cu pas ce înseamnă reechilibrarea, de ce derivă ponderile (drift) chiar și fără să tranzacționezi, cum se calculează ponderile curente față de ponderile-țintă și cum decide un birou de tranzacționare (trading desk) când să cumpere sau să vândă. Vei vedea exemple numerice concrete cu praguri de toleranță (tolerance bands), costuri de tranzacționare, constrângeri reale și capcanele frecvente.</p>
+
+<p>Ideea centrală pe care trebuie să o reții este simplă: reechilibrarea nu prezice care activ va performa mai bine și nici nu „blochează profitul". Ea doar menține riscul portofoliului în limitele pe care ți le-ai asumat. Dacă ținta ta este 60% acțiuni și 40% obligațiuni, reechilibrarea înseamnă să readuci acel raport la 60/40 atunci când derivă, aplicând o regulă, nu o pariu pe viitor.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p>Reechilibrarea (rebalancing) este un proces esențial în managementul de portofoliu, care presupune ajustarea ponderilor diferitelor active dintr-un portofoliu pentru a menține o alocare-țintă. Acest proces este esențial pentru a asigura că portofoliul rămâne aliniat cu toleranța la risc a investitorului, cu obiectivele de investiție și cu condițiile de piață.</p>
+
+<p><strong>Termeni-cheie:</strong></p>
+
+<ul>
+<li><strong>Portofoliu (portfolio):</strong> o colecție de active, precum acțiuni, obligațiuni și mărfuri (commodities), deținute de un investitor sau de o instituție financiară.</li>
+<li><strong>Activ (asset):</strong> un tip de investiție, precum o acțiune, o obligațiune sau o marfă, care reprezintă o creanță asupra activelor sau veniturilor unei companii ori ale unui stat.</li>
+<li><strong>Pondere (weight):</strong> proporția unui activ într-un portofoliu, exprimată de obicei ca procent.</li>
+<li><strong>Alocare-țintă (target allocation):</strong> mixul dorit de active dintr-un portofoliu, stabilit pe baza toleranței la risc, a obiectivelor de investiție și a condițiilor de piață.</li>
+<li><strong>Reechilibrare (rebalancing):</strong> procesul de ajustare a ponderilor activelor dintr-un portofoliu pentru a menține alocarea-țintă.</li>
+<li><strong>Poziție (position):</strong> cantitatea dintr-un activ deținută în portofoliu, măsurată de obicei în unități monetare sau în număr de acțiuni.</li>
+<li><strong>Reper / benchmark:</strong> un standard sau un punct de referință față de care se măsoară performanța unui portofoliu.</li>
+<li><strong>Toleranță la risc (risk tolerance):</strong> capacitatea investitorului de a suporta pierderi potențiale, în funcție de situația financiară, orizontul de investiție și preferințele personale.</li>
+<li><strong>Obiective de investiție (investment objectives):</strong> țelurile pe care investitorul vrea să le atingă, precum creșterea pe termen lung, generarea de venit sau conservarea capitalului.</li>
+<li><strong>Condiții de piață (market conditions):</strong> starea curentă a piețelor financiare, inclusiv indicatorii economici, ratele dobânzii și sentimentul pieței.</li>
+</ul>
+
+<p><strong>Procesul de reechilibrare:</strong></p>
+
+<p>Reechilibrarea presupune mai mulți pași, printre care:</p>
+
+<ul>
+<li><strong>Monitorizare:</strong> revizuirea regulată a performanței și a compoziției portofoliului pentru a identifica orice abatere de la alocarea-țintă.</li>
+<li><strong>Analiză:</strong> evaluarea condițiilor curente de piață și a impactului lor asupra performanței portofoliului.</li>
+<li><strong>Decizie:</strong> stabilirea ajustărilor necesare pentru a menține alocarea-țintă.</li>
+<li><strong>Execuție:</strong> implementarea strategiei de reechilibrare prin cumpărarea sau vânzarea activelor, după caz.</li>
+</ul>
+
+<p><strong>Importanța reechilibrării:</strong></p>
+
+<p>Reechilibrarea este esențială pentru a menține alinierea portofoliului cu toleranța la risc, obiectivele de investiție și condițiile de piață. Revizuind și ajustând regulat compoziția portofoliului, investitorii pot:</p>
+
+<ul>
+<li><strong>Gestiona riscul:</strong> reducerea pierderilor potențiale prin ajustarea ponderilor activelor.</li>
+<li><strong>Optimiza randamentele:</strong> creșterea randamentelor potențiale prin alocarea activelor către cele mai promițătoare oportunități.</li>
+<li><strong>Menține diversificarea:</strong> asigurarea că portofoliul rămâne diversificat prin distribuirea investițiilor pe clase de active și sectoare diferite.</li>
+</ul>
+
+<p>Pe scurt, reechilibrarea este un proces critic în managementul de portofoliu, care presupune ajustarea ponderilor activelor pentru a menține o alocare-țintă. Înțelegând termenii și conceptele-cheie, investitorii pot lua decizii informate pentru a gestiona riscul, a optimiza randamentele și a menține diversificarea.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că faci un tort, iar rețeta cere două căni de făină și o cană de zahăr. Măsori totul cu grijă, amesteci aluatul și îl pui la cuptor. O jumătate de oră mai târziu tortul iese — auriu perfect și mirosind grozav. Iei o felie, guști și brusc îți dai seama: tortul e de două ori mai dulce decât ai vrut. Ai uitat că făina absoarbe umezeala, iar zahărul a rămas mai concentrat decât plănuiseși. Proporțiile au derivat. Ai două opțiuni: să arunci tortul sau să încerci să-l repari. Repararea înseamnă să adaugi mai multă făină pentru a readuce dulceața în linie cu rețeta.</p>
+
+<p>Reechilibrarea este exact acel pas de „reparare", dar pentru un portofoliu, nu pentru un tort.</p>
+
+<p>Iată de ce derivă proporțiile în primul rând. Fiecare activ pe care îl deții — fie o acțiune, o obligațiune sau o marfă — se mișcă în sus sau în jos după propriul ritm. Unele cresc 10% azi, altele scad 5% mâine. Pentru că se mișcă în proporții diferite, felia din avuția ta totală pe care o reprezintă fiecare activ se schimbă chiar dacă nu cumperi și nu vinzi nicio acțiune. În timp, tortul devine mai dulce sau mai sărat decât intenționa rețeta.</p>
+
+<p>Problema rezolvată de reechilibrare este simplă: ți-ai promis ție însuți (sau clientului tău) că niciun ingredient nu va depăși vreodată ponderea-țintă. Dacă o face, profilul tău de risc s-a schimbat pe nesimțite. Poate că acum îți asumi de două ori mai mult risc pe piața de acțiuni decât ai vrut, sau poate felia de obligațiuni e prea mică pentru a amortiza următoarea scădere. Reechilibrarea readuce tortul la proporțiile inițiale, astfel încât riscul pe care ți-l asumi să corespundă riscului pe care l-ai planificat.</p>
+
+<p>Gândește-te la ea ca la un regulator de turație (governor) al unui motor. Regulatorul nu-i pasă dacă mașina urcă sau coboară; el doar menține turația motorului într-o bandă sigură. La fel, reechilibrarea nu prezice care activ va performa mai bine — doar împinge portofoliul înapoi în limita de viteză ori de câte ori ponderea unui activ derivă în afara benzii sale.</p>
+
+<p>O greșeală frecventă a începătorilor este să creadă că reechilibrarea „blochează" profiturile sau „adaugă valoare". Nu face asta, nu într-un sens magic. Ceea ce face este să mențină profilul de risc al portofoliului stabil și predictibil. Dacă ținta ta este 60% acțiuni și 40% obligațiuni, iar după o piață de acțiuni puternică raportul devine 70% acțiuni și 30% obligațiuni, reechilibrarea înseamnă să vinzi niște acțiuni și să cumperi obligațiuni până când raportul revine la 60/40. Nu pariezi pe randamentele viitoare; aplici o regulă pe care ai stabilit-o la început.</p>
+
+<p>Intuiția se înțelege cel mai ușor cu un exemplu mic și concret. Să presupunem că pornești un portofoliu de probă cu 100 $: 60 $ în Acțiunea A și 40 $ în Obligațiunea B. O lună mai târziu, Acțiunea A urcă la 75 $, în timp ce Obligațiunea B rămâne plată la 40 $. Acum raportul este 65% acțiuni și 35% obligațiuni. Pentru a reechilibra, vinzi 5 $ din Acțiunea A (readucând-o la 70 $) și folosești numerarul respectiv pentru a cumpăra 5 $ din Obligațiunea B (ridicând-o la 45 $). Totalul este în continuare 115 $, dar ponderile sunt din nou 60/40. Nu ai ghicit piața și nici nu ai cronometrat tranzacția; ai urmat pur și simplu rețeta.</p>
+
+<p>Observă că actul de a reechilibra poate părea contraintuitiv la început. Dacă Acțiunea A tocmai a crescut, să o vinzi pare că renunți la câștiguri. Totuși, scopul nu este să urmărești câștigurile, ci să ții riscul portofoliului sub control. Gândește-te la el ca la ajustarea cârmei pe o barcă cu pânze. Nu cârmezi spre vânt; cârmezi ca să rămâi pe traseu. Fără cârmă, barca ar devia de la rută — și exact asta se întâmplă cu un portofoliu nereechilibrat.</p>
+
+<p>Pe birourile reale de tranzacționare, procesul este automatizat de cele mai multe ori, dar intuiția rămâne aceeași: în fiecare zi, sistemul verifică în liniște dacă ponderea vreunui activ a deviat de la banda sa. Dacă a făcut-o, sistemul semnalează derivă și fie execută o tranzacție, fie alertează un om să o facă. Scopul nu este niciodată să bați piața, ci doar să menții portofoliul fidel planului inițial.</p>
+
+<h2>Cum funcționează — mecanismul</h2>
+
+<p>Reechilibrarea este un proces esențial în menținerea ponderilor-țintă ale unui portofoliu. Presupune ajustarea pozițiilor diferitelor active pentru a asigura alinierea lor cu ponderile dorite. În această secțiune detaliem mecanismul reechilibrării, evidențiind datele de intrare, procesul și rezultatele.</p>
+
+<p><strong>Date de intrare (inputs):</strong></p>
+
+<ul>
+<li><strong>Ponderi-țintă (target weights):</strong> ponderile dorite ale fiecărui activ din portofoliu, exprimate de obicei ca procent; reprezintă alocarea ideală a fiecărui activ.</li>
+<li><strong>Poziții curente (current positions):</strong> dețineri curente ale fiecărui activ, exprimate în număr de unități sau în valoarea activului.</li>
+<li><strong>Prețuri de piață (market prices):</strong> prețurile curente de piață ale fiecărui activ, folosite pentru a calcula valoarea curentă a fiecărei poziții.</li>
+<li><strong>Valoarea portofoliului (portfolio value):</strong> valoarea totală a portofoliului, folosită pentru a calcula ponderile-țintă.</li>
+</ul>
+
+<p><strong>Procesul:</strong></p>
+
+<ul>
+<li><strong>Calculează valoarea curentă a fiecărei poziții:</strong> prețurile de piață curente sunt folosite pentru a calcula valoarea curentă a fiecărei poziții.</li>
+<li><strong>Calculează ponderea curentă a fiecărui activ:</strong> valoarea curentă a poziției se împarte la valoarea portofoliului pentru a obține ponderea curentă.</li>
+<li><strong>Compară ponderea curentă cu ponderea-țintă:</strong> diferența dintre ele indică abaterea.</li>
+<li><strong>Determină suma de reechilibrare:</strong> diferența dintre ponderea curentă și cea țintă reprezintă suma care trebuie adăugată sau scăzută pentru a atinge ținta.</li>
+<li><strong>Execută tranzacțiile de reechilibrare:</strong> cumperi sau vinzi cantitatea necesară din fiecare activ pentru a atinge ponderea-țintă.</li>
+</ul>
+
+<p><strong>Rezultate (outputs):</strong></p>
+
+<ul>
+<li><strong>Portofoliu reechilibrat:</strong> portofoliul este aliniat la ponderile-țintă.</li>
+<li><strong>Poziții actualizate:</strong> pozițiile curente reflectă tranzacțiile de reechilibrare.</li>
+<li><strong>Valori de piață noi:</strong> valorile de piață reflectă schimbările din portofoliu.</li>
+<li><strong>Valoarea portofoliului reechilibrat:</strong> valoarea totală reflectă tranzacțiile de reechilibrare.</li>
+</ul>
+
+<p><strong>Tipuri de reechilibrare:</strong></p>
+
+<p>Reechilibrarea se poate face în mai multe moduri, printre care:</p>
+
+<ul>
+<li><strong>Reechilibrare discretă (discrete rebalancing):</strong> reechilibrarea portofoliului la intervale fixe, precum lunar sau trimestrial.</li>
+<li><strong>Reechilibrare continuă (continuous rebalancing):</strong> reechilibrarea portofoliului în mod continuu, pe măsură ce prețurile de piață se schimbă.</li>
+<li><strong>Reechilibrare pe prag (threshold rebalancing):</strong> reechilibrarea portofoliului atunci când diferența dintre ponderea curentă și cea țintă depășește un anumit prag.</li>
+</ul>
+
+<p>În practică, reechilibrarea se face de obicei printr-o combinație a acestor abordări. Alegerea metodei depinde de nevoile și obiectivele specifice ale portofoliului.</p>
+
+<p><strong>Incertitudine și limitări:</strong></p>
+
+<p>Reechilibrarea nu este o știință exactă și există diverse surse de incertitudine și limitări, printre care:</p>
+
+<ul>
+<li><strong>Volatilitatea pieței:</strong> prețurile pot fluctua rapid, ceea ce îngreunează calculul exact al ponderii curente a fiecărui activ.</li>
+<li><strong>Costuri de tranzacționare:</strong> costurile de tranzacționare, precum comisioanele și slippage-ul (alunecarea prețului), pot eroda randamentele portofoliului.</li>
+<li><strong>Implicații fiscale:</strong> reechilibrarea poate declanșa obligații fiscale, care pot reduce randamentele.</li>
+</ul>
+
+<p>În ciuda acestor limitări, reechilibrarea rămâne un proces esențial în menținerea ponderilor-țintă. Înțelegându-i mecanismul, investitorii pot lua decizii informate și își pot atinge obiectivele.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să parcurgem un singur ciclu de reechilibrare pentru un portofoliu mic, de nivel începător, numit „TinyGrowth". Portofoliul deține doar două instrumente, așa că matematica rămâne simplă. Facem totul ca pe un birou real de tranzacționare: pornim de la prețuri live, calculăm ponderile curente în dolari, le comparăm cu ponderile-țintă, decidem dacă tranzacționăm și apoi executăm tranzacțiile.</p>
+
+<h3>1. Setarea inițială (ce știe biroul la ora 09:00)</h3>
+
+<p>Ponderi-țintă (stabilite de managerul de portofoliu săptămâna trecută):</p>
+<ul>
+<li>Instrumentul A (un ETF de acțiuni tech cu capitalizare mare): 60%</li>
+<li>Instrumentul B (un ETF de acțiuni de creștere cu capitalizare mică): 40%</li>
+</ul>
+
+<p>Dețineri curente înainte de reechilibrare (de la închiderea de ieri, dar prețurile live sunt acum diferite):</p>
+<ul>
+<li>1.000 de acțiuni A la închiderea de ieri de 150,00 → 150.000 $</li>
+<li>2.000 de acțiuni B la închiderea de ieri de 50,00 → 100.000 $</li>
+<li>Valoarea totală a portofoliului la închiderea de ieri: 250.000 $</li>
+</ul>
+
+<p>Prețuri medii (mid) live la ora 09:00 azi:</p>
+<ul>
+<li>A: 151,25</li>
+<li>B: 51,10</li>
+</ul>
+
+<h3>2. Marcare la piață (mark-to-market — primul pas pe birou)</h3>
+
+<p>Reevaluăm fiecare deținere folosind prețul mid live, ca să cunoaștem expunerea reală în dolari chiar acum.</p>
+<ul>
+<li>A: 1.000 × 151,25 = 151.250 $</li>
+<li>B: 2.000 × 51,10 = 102.200 $</li>
+<li>Valoarea totală a portofoliului la 09:00: 253.450 $</li>
+</ul>
+
+<h3>3. Calculul ponderilor curente</h3>
+
+<p>Ponderea A = 151.250 ÷ 253.450 ≈ 0,5968 → 59,68%</p>
+<p>Ponderea B = 102.200 ÷ 253.450 ≈ 0,4032 → 40,32%</p>
+
+<h3>4. Decizia: reechilibrăm sau nu?</h3>
+
+<p>Ponderile-țintă sunt 60% / 40%. Derivă este:</p>
+<ul>
+<li>A: 59,68% față de 60,00% → cu 0,32% sub țintă</li>
+<li>B: 40,32% față de 40,00% → cu 0,32% peste țintă</li>
+</ul>
+
+<p>Politica biroului spune „reechilibrează dacă vreo pondere derivă cu mai mult de 0,50%". Pentru că 0,32% &lt; 0,50%, portofoliul este încă în interiorul toleranței. Prin urmare, <strong>nu sunt necesare tranzacții astăzi</strong>.</p>
+
+<p>Notă: pe un birou real, banda de toleranță este adesea mai strânsă (de exemplu, 0,20%), iar portofoliul este mai mare, deci mișcările mici se acumulează mai repede. Dar pentru acest exemplu rămânem la politica enunțată.</p>
+
+<h3>5. Ce s-ar întâmpla dacă ar trebui să reechilibrăm? (ziua următoare, ipotetic)</h3>
+
+<p>Să presupunem că peste noapte A urcă la 155,00, în timp ce B rămâne plată la 51,10. Reevaluăm:</p>
+<ul>
+<li>A: 1.000 × 155,00 = 155.000 $</li>
+<li>B: 2.000 × 51,10 = 102.200 $</li>
+<li>Total = 257.200 $</li>
+</ul>
+
+<p>Ponderi:</p>
+<ul>
+<li>A: 155.000 ÷ 257.200 ≈ 60,26%</li>
+<li>B: 102.200 ÷ 257.200 ≈ 39,74%</li>
+</ul>
+
+<p>Derivă:</p>
+<ul>
+<li>A: 60,26% față de 60,00% → +0,26%</li>
+<li>B: 39,74% față de 40,00% → −0,26%</li>
+</ul>
+
+<p>Tot în interiorul benzii de 0,50%, deci din nou nicio acțiune.</p>
+
+<h3>6. O mișcare mai mare (doar ilustrativ)</h3>
+
+<p>Acum să spunem că A scade la 145,00, în timp ce B rămâne la 51,10:</p>
+<ul>
+<li>A: 1.000 × 145,00 = 145.000 $</li>
+<li>B: 2.000 × 51,10 = 102.200 $</li>
+<li>Total = 247.200 $</li>
+</ul>
+
+<p>Ponderi:</p>
+<ul>
+<li>A: 145.000 ÷ 247.200 ≈ 58,66%</li>
+<li>B: 102.200 ÷ 247.200 ≈ 41,34%</li>
+</ul>
+
+<p>Derivă:</p>
+<ul>
+<li>A: −1,34%</li>
+<li>B: +1,34%</li>
+</ul>
+
+<p>Ambele depășesc banda de 0,50%, deci trebuie să reechilibrăm.</p>
+
+<h3>7. Calculul sumelor necesare în dolari</h3>
+
+<p>Expunere-țintă în dolari:</p>
+<ul>
+<li>A: 60% × 247.200 $ = 148.320 $</li>
+<li>B: 40% × 247.200 $ = 98.880 $</li>
+</ul>
+
+<p>Expunere curentă în dolari:</p>
+<ul>
+<li>A: 145.000 $</li>
+<li>B: 102.200 $</li>
+</ul>
+
+<p>Prin urmare, trebuie să:</p>
+<ul>
+<li>Cumpărăm 3.320 $ din A</li>
+<li>Vindem 3.320 $ din B</li>
+</ul>
+
+<h3>8. Conversia în acțiuni și plasarea ordinelor</h3>
+
+<p>Prețurile live sunt încă A = 145,00, B = 51,10.</p>
+<ul>
+<li>Acțiuni de cumpărat din A: 3.320 ÷ 145,00 ≈ 22,90 → rotunjit la 23 de acțiuni (biroul rotunjește la cea mai apropiată acțiune întreagă pe care o poate tranzacționa).</li>
+<li>Acțiuni de vândut din B: 3.320 ÷ 51,10 ≈ 64,97 → rotunjit la 65 de acțiuni.</li>
+</ul>
+
+<h3>9. Verificarea rezultatului după execuție</h3>
+
+<p>Dețineri noi:</p>
+<ul>
+<li>A: 1.000 + 23 = 1.023 de acțiuni</li>
+<li>B: 2.000 − 65 = 1.935 de acțiuni</li>
+</ul>
+
+<p>Reevaluate la aceleași niveluri live, ponderile revin foarte aproape de ținta de 60/40, demonstrând că o regulă mecanică simplă a readus portofoliul în linie fără a paria pe direcția pieței.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Un al doilea scenariu: reechilibrarea cu mai multe clase de active și constrângeri.</p>
+
+<p>În exemplul rezolvat anterior am arătat un scenariu simplu, cu o singură clasă de active și fără constrângeri. În tranzacționarea reală însă, avem adesea de-a face cu mai multe clase de active — acțiuni, obligațiuni și mărfuri — și cu constrângeri care ne limitează capacitatea de a reechilibra. Să luăm un scenariu mai complex care ilustrează cum gestionezi acești factori suplimentari.</p>
+
+<p>Să presupunem că administrăm un portofoliu de nivel începător care investește în trei clase de active: acțiuni americane, acțiuni internaționale și obligațiuni. Ponderile-țintă pentru fiecare clasă sunt:</p>
+<ul>
+<li>Acțiuni americane: 40%</li>
+<li>Acțiuni internaționale: 30%</li>
+<li>Obligațiuni: 30%</li>
+</ul>
+
+<p>Avem și constrângeri care ne limitează capacitatea de a reechilibra:</p>
+<ul>
+<li>Putem reechilibra doar 10% din portofoliu într-o singură zi.</li>
+<li>Nu putem vinde mai mult de 20% din deținerile dintr-o singură clasă de active într-o singură zi.</li>
+<li>Avem o cerință minimă de deținere de 5% pentru fiecare clasă de active.</li>
+</ul>
+
+<p>Deținerile curente ale portofoliului sunt:</p>
+<ul>
+<li>Acțiuni americane: 38%</li>
+<li>Acțiuni internaționale: 32%</li>
+<li>Obligațiuni: 30%</li>
+</ul>
+
+<p>Vrem să reechilibrăm portofoliul pentru a atinge ponderile-țintă, respectând în același timp constrângerile.</p>
+
+<p><strong>Pasul 1: Calculul dimensiunilor de poziție necesare pentru fiecare clasă de active</strong></p>
+
+<p>Pentru a determina dimensiunile de poziție necesare, comparăm ponderea-țintă cu valoarea portofoliului. Pe un portofoliu de 100.000 $, ținta în dolari este: acțiuni americane 40.000 $, acțiuni internaționale 30.000 $, obligațiuni 30.000 $.</p>
+
+<p><strong>Pasul 2: Stabilirea tranzacțiilor de reechilibrare</strong></p>
+
+<p>Comparăm dimensiunile-țintă cu deținerile curente și stabilim tranzacțiile:</p>
+<ul>
+<li>Acțiuni americane: trebuie să cumpărăm acțiuni americane pentru a ajunge la țintă (40% − 38% = 2% din 100.000 $ = 2.000 $).</li>
+<li>Acțiuni internaționale: trebuie să vindem acțiuni internaționale pentru a ajunge la țintă (32% − 30% = 2% din 100.000 $, adică surplusul de ~2.000 $).</li>
+<li>Obligațiuni: nu este nevoie de nicio tranzacție, deoarece obligațiunile sunt deja la ținta de 30% (30% din 100.000 $ = 30.000 $, egal cu deținerile curente).</li>
+</ul>
+
+<p>Totuși, trebuie să ținem cont de constrângerile noastre:</p>
+<ul>
+<li>Putem reechilibra doar 10% din portofoliu într-o singură zi, adică 10.000 $.</li>
+<li>Nu putem vinde mai mult de 20% din deținerile dintr-o singură clasă într-o singură zi.</li>
+<li>Avem o cerință minimă de deținere de 5% pentru fiecare clasă; trebuie să ne asigurăm că tranzacțiile nu încalcă această constrângere.</li>
+</ul>
+
+<p>Pe baza acestor constrângeri, executăm reechilibrarea în limitele permise, fără a depăși plafonul zilnic și fără a coborî vreo clasă sub minimul de deținere. Acest scenariu ilustrează cât de important este să iei în calcul mai multe clase de active și constrângeri atunci când reechilibrezi un portofoliu — calculul ideal trebuie întotdeauna filtrat prin limitele reale de execuție.</p>
+
+<h2>Greșeli frecvente și concepții greșite</h2>
+
+<ul>
+<li><strong>1. A crede că reechilibrarea „blochează" câștiguri sau „mediază în scădere".</strong> Începătorii cred adesea că vânzarea câștigătorului și cumpărarea perdantului este o modalitate de a „lua profit" la câștigător sau de a „prinde o ofertă" la perdant. În realitate, reechilibrarea este pur și simplu un instrument de control al riscului: menține profilul de risc al portofoliului în linie cu țintele declarate. Dacă activul câștigător a crescut pentru că randamentul său așteptat a crescut, ponderea mai mare poate fi exact ce vrea strategia; forțarea unei vânzări doar pentru că prețul s-a mișcat nu este reechilibrare — este tranzacționare ad-hoc. Disciplina corectă este să întrebi: „Mai este ponderea în interiorul benzii de toleranță?". Dacă da, nu faci nimic; dacă nu, ajustezi înapoi la țintă, indiferent de direcția prețului.</li>
+<li><strong>2. Folosirea unor praguri fixe rigide în loc de benzi de toleranță.</strong> Un novice ar putea seta o regulă de tipul „reechilibrează de fiecare dată când o poziție se mișcă 5% de la țintă". Problema e că mișcările mici se compun rapid în piețele volatile, iar într-o piață în trend pragul de 5% se poate declanșa repetat în aceeași direcție, generând rulaj și comisioane inutile. Abordarea profesionistă este să definești benzi de toleranță (de exemplu, ±2% pentru acțiuni, ±1% pentru obligațiuni) și să reechilibrezi doar când abaterea agregată depășește banda, nu abaterea individuală.</li>
+<li><strong>3. Ignorarea costurilor de tranzacționare și a impactului asupra pieței.</strong> Începătorii reechilibrează uneori întreaga carte la închidere „ca să fie simplu", fără să-și dea seama că traversarea spread-ului în volum mare poate mișca prețurile împotriva lor. Un spread de 0,1% pe un ordin de 100 de milioane $ poate costa 100.000 $ dintr-o singură lovitură. Biroul ar trebui să estimeze costurile implicite înainte de a tranzacționa, să împartă ordinele mari, să folosească algoritmi TWAP sau VWAP și să reechilibreze doar când costul așteptat al abaterii depășește costul așteptat al tranzacției.</li>
+<li><strong>4. Confundarea reechilibrării cu atribuirea performanței.</strong> După un trimestru puternic, un trader ar putea spune „am ieșit din tech prin reechilibrare pentru că a performat mai bine". Această frază amestecă două conversații diferite. Reechilibrarea este un proces mecanic care restabilește ponderile; atribuirea performanței explică de ce s-au schimbat ponderile. Dacă biroul vrea să reducă riscul pe tech, ar trebui să schimbe ponderile-țintă din IPS (politica de investiții), nu să folosească reechilibrarea ca portiță.</li>
+<li><strong>5. Reechilibrarea intraday pe prețuri zgomotoase.</strong> Prețurile de pe ecran pâlpâie, contractele futures se rostogolesc, apar acțiuni corporative. Un începător care urmărește datele Level-2 ar putea apăsa „reechilibrează" la 11:03 pentru că ecranul arată o abatere de 2%, doar ca să vadă prețul revenind la 11:05. Rezultatul este rulaj și regret. Biroul ar trebui să folosească prețuri de referință de la închidere sau de a doua zi dimineața și să aplice banda de toleranță la aceste numere stabile.</li>
+<li><strong>6. Uitarea acțiunilor corporative și a fluxurilor de numerar.</strong> Dividendele, divizările (spin-offs) și cupoanele de obligațiuni schimbă ponderile fără nicio tranzacție. Un începător care reechilibrează în fiecare vineri ar putea rata un dividend de 3% într-o acțiune care aruncă întreaga carte cu 0,5% în afara țintei. Biroul are nevoie de o listă de verificare permanentă: după fiecare acțiune corporativă, recalculează ponderile folosind noul număr de acțiuni sau noua sumă în numerar, apoi decide dacă abaterea depășește toleranța.</li>
+<li><strong>7. Supra-optimizarea programului de reechilibrare.</strong> Unele birouri rulează simulări Monte Carlo pentru a găsi frecvența „optimă" de reechilibrare. Pentru un nivel începător, concluzia e mai simplă: rămâi la un calendar fix (săptămânal sau lunar) sau la reguli pe prag, dar nu schimba setul de reguli de fiecare dată când un backtest arată ceva mai bine. Supra-optimizarea duce la supra-ajustare (overfitting) și la rulaj care nu poate fi justificat în piețele reale.</li>
+<li><strong>8. Amestecarea reechilibrării cu înclinațiile tactice (tactical tilts).</strong> O capcană frecventă este să reechilibrezi în timp ce exprimi simultan o opinie — „ne plac acțiunile de valoare, deci le supraponderăm și reechilibrăm la noua țintă". Asta amestecă două decizii separate: controlul riscului (reechilibrarea) și căutarea randamentului (înclinația). Biroul ar trebui să separe procesele: mai întâi restabilește mecanic ponderile din IPS, apoi, într-un pas separat, aplică orice suprapuneri tactice.</li>
+<li><strong>9. Nearhivarea jurnalului de tranzacții (blotter).</strong> Când un începător reechilibrează în sfârșit, adesea notează tranzacțiile pe un bilet și merge mai departe. Mai târziu, departamentul de conformitate (compliance) întreabă de ce ponderea pe tech este 18% în loc de 16%. Fără o înregistrare datată în blotter, biroul nu poate dovedi că abaterea a fost în toleranță sau că reechilibrarea a fost executată corect. Fiecare decizie de reechilibrare — marcaj temporal, prețuri de referință, dimensiuni de ordine, loc de execuție — ar trebui scrisă în blotter în maximum cincisprezece minute.</li>
+<li><strong>10. A presupune că toate activele se reechilibrează la fel.</strong> Acțiunile, obligațiunile, contractele futures, swap-urile și ETF-urile au cicluri de decontare (settlement), marje (haircuts) și costuri de finanțare diferite. Un începător care tratează identic fiecare activ poate ajunge descoperit cu o zi înainte de decontare sau să plătească apeluri de marjă inutile. Biroul ar trebui să mențină o fișă de referință pe clase de active: decontare T+1 vs T+2, procentaje de haircut și dacă activul poate fi reutilizat drept garanție.</li>
+</ul>
+
+<p>Regula de aur pentru birourile de nivel începător este: reechilibrarea nu înseamnă să prezici prețurile, ci să impui disciplină. Orice abatere de la această regulă — fie din emoție, din optimizare, fie din neglijență — adaugă zgomot fără a adăuga avantaj (edge).</p>
+
+<h2>Cum folosește biroul de tranzacționare reechilibrarea</h2>
+
+<p>Reechilibrarea este un proces esențial în menținerea ponderilor-țintă ale unui portofoliu. Pe un birou de tranzacționare, reechilibrarea este o ocurență regulată, mai ales când condițiile de piață se schimbă rapid. În această secțiune explorăm cum folosește un birou reechilibrarea în scenarii reale.</p>
+
+<p><strong>Monitorizare și urmărire</strong></p>
+
+<p>Înainte de a reechilibra, biroul monitorizează și urmărește continuu ponderile curente ale portofoliului. Asta presupune verificarea regulată a prețurilor de piață și a pozițiilor pentru a identifica orice abatere de la ponderile-țintă. Biroul folosește diverse instrumente și softuri pentru a urmări performanța și a identifica oportunități de reechilibrare.</p>
+
+<p><strong>Identificarea oportunităților de reechilibrare</strong></p>
+
+<p>Biroul folosește o combinație de factori cantitativi și calitativi. Factorii cantitativi includ:</p>
+<ul>
+<li><strong>Eroarea de urmărire (tracking error):</strong> diferența dintre ponderile curente ale portofoliului și cele țintă.</li>
+<li><strong>Volatilitatea:</strong> nivelul volatilității pieței, care poate afecta performanța.</li>
+<li><strong>Metrici de risc:</strong> metrici precum Value-at-Risk (VaR) și Expected Shortfall (ES) ajută biroul să evalueze profilul de risc.</li>
+</ul>
+
+<p>Factorii calitativi includ:</p>
+<ul>
+<li><strong>Sentimentul pieței:</strong> biroul evaluează sentimentul pieței și ajustează ponderile în consecință.</li>
+<li><strong>Indicatorii economici:</strong> schimbările din indicatori precum creșterea PIB sau ratele inflației pot afecta performanța.</li>
+<li><strong>Schimbările de reglementare:</strong> modificările de reglementări sau legi pot afecta performanța.</li>
+</ul>
+
+<p><strong>Strategii de reechilibrare</strong></p>
+
+<ul>
+<li><strong>Reechilibrare periodică:</strong> biroul reechilibrează la intervale regulate, precum trimestrial sau anual.</li>
+<li><strong>Reechilibrare bazată pe evenimente:</strong> biroul reechilibrează ca răspuns la evenimente specifice, precum schimbări ale ratelor dobânzii sau ale indicatorilor economici.</li>
+<li><strong>Reechilibrare bazată pe risc:</strong> biroul reechilibrează în funcție de schimbările metricilor de risc, precum VaR sau ES.</li>
+</ul>
+
+<p><strong>Dimensionarea pozițiilor și managementul riscului</strong></p>
+
+<p>La reechilibrare, biroul ia în calcul dimensionarea pozițiilor (position sizing) și managementul riscului, urmărind o dimensiune optimă care echilibrează riscul și randamentele potențiale. Asta presupune evaluarea riscului fiecărei poziții, stabilirea dimensiunii optime și folosirea ordinelor stop-loss pentru a limita pierderile potențiale.</p>
+
+<p><strong>Cronometrare și frecvență</strong></p>
+
+<p>Biroul stabilește momentul și frecvența reechilibrării în funcție de condițiile de piață și de performanța portofoliului. Biroul poate reechilibra zilnic (în piețe foarte volatile), săptămânal sau bisăptămânal (în piețe mai puțin volatile), ori lunar sau trimestrial (în piețe stabile).</p>
+
+<h2>Limite, avertismente și când eșuează</h2>
+
+<p>Reechilibrarea nu este o baghetă magică. Este o regulă mecanică ce menține derivă mică, dar se poate strica, te poate induce în eroare sau chiar te poate răni atunci când ipotezele din spatele ei nu mai sunt valabile. Mai jos sunt principalele moduri de eșec pe care le vei întâlni pe birou, avertismentele tăcute pe care trebuie să le urmărești și adevărul brutal că reechilibrarea este la fel de bună ca numerele pe care i le dai.</p>
+
+<ul>
+<li><strong>1. Derivă prea rapidă pentru ca reechilibrarea să o prindă.</strong> Prețurile se mișcă atât de violent încât fereastra de reechilibrare se închide înainte ca biletul de tranzacție să fie tipărit. Un gap intraday de 5% într-o acțiune ilichidă cu capitalizare mică poate șterge în câteva minute întreaga rezervă de alocare pe un trimestru. Ce NU îți spune: raportul de la închidere va arăta tot „ponderi în toleranță", pentru că toleranța a fost măsurată la închidere, nu în timpul zilei. Protecție practică: nu te baza niciodată pe reechilibrarea la închidere pentru nume cu volatilitate intraday &gt; 2% din noțional sau cu volum mediu zilnic &lt; de 10× dimensiunea reechilibrării; marchează-le în blotter cu o etichetă roșie „risc de gap".</li>
+<li><strong>2. Eroziunea prin costuri de tranzacționare.</strong> Reechilibrările mici și frecvente în strategii cu rulaj mare (de exemplu, rotația de factori) se pot transforma într-o gaură de costuri. Un comision dus-întors de 5 bp plus 3 bp impact de piață la fiecare reechilibrare de 1% depășește rapid cei 8 bp de alfa așteptată din semnal. Ce NU îți spune: raportul de alocare arată tot ordonat, dar linia de P&amp;L realizat sângerează. Protecție practică: setează un prag minim de derivă (de obicei 5–10% din bandă) înainte de a tranzacționa; dacă semnalul se degradează mai lent decât costul de tranzacționare, oprește reechilibrarea și lasă poziția să derive până la următoarea revizuire programată.</li>
+<li><strong>3. Șocuri de lichiditate și închideri de piață.</strong> Un nume devine brusc greu de împrumutat sau se tranzacționează cu întrerupător (circuit breaker). Ordinul tău de reechilibrare rămâne neexecutat; portofoliul derivă peste limita superioară și nu poate fi corectat până la redeschiderea piețelor. Ce NU îți spune: sistemul de risc marchează tot poziția la prețul mediu, dând un fals sentiment de control. Protecție practică: rulează un test zilnic de stres pe lichiditate — pentru fiecare 1% din dimensiunea reechilibrării, verifică dacă volumul mediu pe 5 minute este de cel puțin 5× dimensiunea; dacă eșuează, lărgește banda de toleranță sau exclude numele din reechilibrarea automată.</li>
+<li><strong>4. Schimbare de regim: structura de corelație se prăbușește.</strong> În timpul unei crize, corelațiile stabile ani la rând se inversează brusc. Un portofoliu 60/40 acțiuni/obligațiuni poate ajunge la 100% acțiuni în câteva minute, în timp ce scriptul tău de reechilibrare alocă în continuare pe baza vechii matrici de covarianță. Ce NU îți spune: tabelul de ponderi arată perfect, dar portofoliul este acum expus unui singur risc de coadă (tail risk). Protecție practică: recalculează matricea de covarianță-țintă cel puțin săptămânal și forțează o reoptimizare completă ori de câte ori corelația mobilă pe 21 de zile dintre cele două picioare cele mai mari se mișcă cu mai mult de 0,3.</li>
+<li><strong>5. Nepotriviri de monedă și de finanțare.</strong> Reechilibrezi felia de acțiuni în USD, dar felia de obligațiuni este finanțată în JPY. O apreciere bruscă a JPY ridică valoarea în USD a feliei de obligațiuni, împingând ponderea acțiunilor sub banda inferioară. Scriptul emite un ordin de cumpărare pentru acțiuni, dar biroul de finanțare nu poate elibera USD pentru că piciorul JPY este deja blocat. Protecție practică: adaugă o suprapunere de finanțare — pentru fiecare nepotrivire de monedă, calculează mișcarea FX cea mai nefavorabilă pe orizontul de reechilibrare și rezervă o marjă egală cu 1,5× derivă.</li>
+<li><strong>6. Evenimente discrete: dividende, acțiuni corporative, schimbări de indice.</strong> O acțiune trece în ex-dividend; prețul scade 5%, dar dividendul se plătește în numerar. Sistemul tău vede o derivă de 5% și emite un ordin de cumpărare, creând un drag de numerar neintenționat. Sau un indice adaugă un nume nou; ponderea-țintă trebuie să sară de la 0% la 2%, dar scriptul tratează cei 2% ca derivă în loc de alocare nouă. Protecție practică: menține un calendar de evenimente cu trei coloane — impact pe preț, impact pe numerar și indicator de eligibilitate; orice eveniment cu impact pe numerar &gt; 2% din VAN trebuie gestionat manual înainte de a rula scriptul.</li>
+<li><strong>7. Suprascrieri umane și parametri învechiți.</strong> Un manager de portofoliu suprascrie banda de toleranță „doar de data asta" și uită să o reseteze. Săptămâna următoare banda este încă 15% în loc de 5%, așa că o derivă de 6% este ignorată. Ce NU îți spune: suprascrierea e îngropată într-un e-mail; raportul arată banda suprascrisă, dând un fals sentiment de siguranță. Protecție practică: stochează banda de toleranță într-un fișier de configurare partajat cu istoric git; orice suprascriere trebuie înregistrată cu un motiv și o dată de expirare, iar echipa de risc primește o alertă automată dacă banda rămâne în afara politicii mai mult de 48 de ore.</li>
+</ul>
+
+<p>Concluzia: reechilibrarea este un proces disciplinat, nu o garanție. Menține greșelile mici mici, dar nu te poate proteja de mișcări mari și neașteptate, de costuri ascunse sau de ipoteze sparte. Tratează fiecare reechilibrare ca pe testarea unei ipoteze: dacă piața se comportă diferit mâine, tabelul tău îngrijit de ponderi poate fi un miraj.</p>
+
+<h2>Concluzii-cheie</h2>
+
+<p>Reechilibrarea este un proces esențial în menținerea ponderilor-țintă ale unui portofoliu. Iată concluziile-cheie de reținut:</p>
+
+<ul>
+<li><strong>Reechilibrarea nu este un eveniment unic:</strong> este un proces continuu, executat regulat, ideal la intervale predefinite, pentru a menține ponderile-țintă.</li>
+<li><strong>Ponderile-țintă nu sunt fixe:</strong> se pot schimba în timp din cauza factorilor de piață și economici, iar reechilibrarea ar trebui să reflecte aceste schimbări.</li>
+<li><strong>Reechilibrarea nu este o strategie de tranzacționare:</strong> este un instrument de management al riscului menit să mențină ponderile-țintă, nu să genereze profit.</li>
+<li><strong>Reechilibrarea se poate face în moduri diferite:</strong> prin cumpărarea sau vânzarea de titluri, ori prin ajustarea poziției de numerar.</li>
+<li><strong>Reechilibrarea se poate face la frecvențe diferite:</strong> zilnic, săptămânal, lunar sau la orice alt interval predefinit.</li>
+<li><strong>Reechilibrarea nu este o soluție universală:</strong> trebuie adaptată portofoliului specific și ponderilor sale-țintă.</li>
+<li><strong>Reechilibrarea se poate face manual sau automat:</strong> manual de către un trader sau automat prin algoritmi și softuri.</li>
+<li><strong>Reechilibrarea nu este o garanție:</strong> nu este o metodă infailibilă de a menține ponderile-țintă; este posibil ca ele să nu fie atinse nici după reechilibrare.</li>
+<li><strong>Reechilibrarea necesită monitorizare și analiză:</strong> presupune monitorizarea și analiza continuă a performanței și a condițiilor de piață.</li>
+<li><strong>Reechilibrarea este o componentă-cheie a managementului riscului:</strong> ar trebui făcută regulat pentru a menține ponderile-țintă și a reflecta schimbările din piață și economie.</li>
+</ul>
+
+<p>Ținând minte aceste concluzii, vei putea să-ți gestionezi eficient portofoliul și să menții ponderile-țintă prin reechilibrare.</p>

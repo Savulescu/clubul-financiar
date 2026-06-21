@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Criteriul Kelly: dimensionarea optimă a poziției pentru un singur pariu — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Criteriul Kelly îți arată ce fracțiune din capital să riști pe un singur pariu sau o tranzacție: formula f*, intuiția, exemple rezolvate și capcanele frecvente."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/criteriul-kelly-dimensionarea-optima-a-pozitiei.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Criteriul Kelly: dimensionarea optimă a poziției pentru un singur pariu"><meta property="og:description" content="Criteriul Kelly îți arată ce fracțiune din capital să riști pe un singur pariu sau o tranzacție: formula f*, intuiția, exemple rezolvate și capcanele frecvente."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/criteriul-kelly-dimensionarea-optima-a-pozitiei.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Criteriul Kelly: dimensionarea optimă a poziției pentru un singur pariu"><meta name="twitter:description" content="Criteriul Kelly îți arată ce fracțiune din capital să riști pe un singur pariu sau o tranzacție: formula f*, intuiția, exemple rezolvate și capcanele frecvente."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Criteriul Kelly: dimensionarea optimă a poziției pentru un singur pariu", "description": "Criteriul Kelly îți arată ce fracțiune din capital să riști pe un singur pariu sau o tranzacție: formula f*, intuiția, exemple rezolvate și capcanele frecvente.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/criteriul-kelly-dimensionarea-optima-a-pozitiei.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="kelly-fractionat-reducerea-riscului" data-prev-title="Kelly fracționat: cum reduci riscul folosind o fracțiune din Kelly" data-next="echilibrul-long-short" data-next-title="Echilibrul long/short: cum aloci capitalul între long și short" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#allocation">Alocarea activelor</a> · 25 min · Actualizat 21 iun. 2026</p><h1>Criteriul Kelly: dimensionarea optimă a poziției pentru un singur pariu</h1><p>Criteriul Kelly este o regulă matematică precisă de <strong>dimensionare optimă a poziției</strong> (optimal position sizing) pentru un singur pariu sau o singură tranzacție. Pe scurt, criteriul Kelly îți spune ce fracțiune din capitalul tău (bankroll) ar trebui să riști pe următoarea oportunitate, astfel încât banii tăi să crească în medie cât mai repede posibil, păstrând în același timp o șansă foarte mică de a pierde totul. Dacă vrei să înveți cum se calculează fracțiunea Kelly (Kelly fraction) pentru un singur pariu cu avantaj (edge) pozitiv, acest capitol din Masterclass Bursă îți arată pas cu pas formula, intuiția din spatele ei și capcanele frecvente.</p>
+
+<p>Imaginează-ți că ai o pușculiță mică cu 100 de lei înăuntru. Ți se oferă un joc simplu: plătești 1 leu ca să arunci un zar cu șase fețe. Dacă zarul arată un șase, câștigi 5 lei; altfel nu primești nimic. Poți juca jocul de câte ori vrei. Câtă parte din cei 100 de lei ar trebui să riști la fiecare aruncare, astfel încât, în medie, pușculița ta să crească cât mai repede posibil, fără să rămâi vreodată fără bani?</p>
+
+<p>Criteriul Kelly este regula precisă care răspunde exact la această întrebare. Îți spune fracțiunea din capitalul tău curent pe care să o pariezi la următoarea ocazie, ca banii tăi să crească la cea mai mare rată medie posibilă, oferindu-ți totuși o șansă foarte mică de a pierde totul. Poartă numele lui John L. Kelly Jr., un matematician care a publicat ideea în 1956.</p>
+
+<h2>Definiție și termeni-cheie</h2>
+
+<p><strong>Capital de risc (bankroll)</strong> — Întregul fond de bani pe care ești dispus să-l riști. În exemplul nostru cu pușculița, capitalul pornește de la 100 de lei. Trebuie să decizi câți lei să pariezi de fiecare dată; criteriul Kelly îți spune ce fracțiune din acei 100 de lei să riști.</p>
+
+<p><strong>Fracțiune (sau „fracțiunea de pariat", fraction to bet)</strong> — Un număr între 0 și 1 care îți spune ce parte din capitalul tău să plasezi pe următorul pariu. De exemplu, 0,10 înseamnă „riști 10% din capital", ceea ce pe 100 de lei înseamnă 10 lei.</p>
+
+<p><strong>Avantaj (edge)</strong> — Un pariu are un avantaj pozitiv atunci când, în medie, te aștepți să câștigi mai mulți bani decât riști. Avantajul se exprimă de obicei ca un procent din suma pariată. În jocul nostru cu zarul, riști 1 leu la fiecare aruncare; în medie câștigi 5 lei o șesime din timp și 0 lei cinci șesimi din timp, deci câștigul tău mediu este (1/6)×5 lei = 0,83 lei. Pentru că riști 1 leu și te aștepți să câștigi în medie 0,83 lei, avantajul este negativ: –17% din pariu. Un avantaj negativ înseamnă că jocul este împotriva ta dacă continui să joci.</p>
+
+<p><strong>Cotă (odds)</strong> — Raportul dintre cât câștigi și cât riști, exprimat în forma „b-la-1". În jocul cu zarul, dacă primești 5 lei pentru fiecare 1 leu riscat, cota oferită este 5-la-1.</p>
+
+<p><strong>Probabilitatea de câștig (p)</strong> — Proporția din cazuri în care te aștepți să câștigi pariul. Pentru un zar corect, p = 1/6 ≈ 0,1667.</p>
+
+<p><strong>Probabilitatea de pierdere (q)</strong> — Proporția din cazuri în care te aștepți să pierzi pariul. Pentru că ori câștigi, ori pierzi, q = 1 – p. În jocul cu zarul, q = 5/6 ≈ 0,8333.</p>
+
+<p><strong>Fracțiunea Kelly (f*)</strong> — Fracțiunea exactă din capitalul tău pe care criteriul Kelly spune să o pariezi atunci când jocul are avantaj pozitiv. Se calculează ca:</p>
+
+<p>f* = (b·p – q) / b</p>
+
+<p>unde:</p>
+
+<ul>
+<li>p este probabilitatea de câștig,</li>
+<li>q este probabilitatea de pierdere (q = 1 – p), și</li>
+<li>b sunt cotele nete pe care le primești la pariu (suma câștigată împărțită la suma riscată, exprimată ca număr pur; în jocul nostru cu zarul, b = 5).</li>
+</ul>
+
+<p>Dacă jocul nu are avantaj sau are avantaj negativ, f* este zero sau negativ; în acest caz, criteriul Kelly spune „nu paria deloc".</p>
+
+<p><strong>Rata optimă de creștere (optimal growth rate)</strong> — Procentul mediu pe termen lung cu care capitalul tău crește de fiecare dată când plasezi pariul, dacă urmezi exact fracțiunea Kelly. Este dat de formula:</p>
+
+<p>rata optimă de creștere = p·ln(1 + b·f*) + q·ln(1 – f*)</p>
+
+<p>unde „ln" este logaritmul natural (un buton de pe orice calculator științific). Acest număr îți spune cât de repede cresc banii tăi în medie, la fiecare pariu, dacă pariezi mereu fracțiunea Kelly.</p>
+
+<p><strong>Riscul de ruină (risk of ruin)</strong> — Șansa mică ca acel capital al tău să scadă la zero înainte să apuce să crească. Criteriul Kelly nu elimină riscul de ruină, dar îl menține foarte mic — de obicei mult sub 1% pentru jocuri rezonabile — cu condiția să pariezi fracțiunea exactă de fiecare dată și ca estimările tale de avantaj să fie corecte.</p>
+
+<p><strong>Pariere excesivă (over-betting)</strong> — A risca o fracțiune mai mare decât f*. Asta face ca pe termen scurt capitalul să crească mai repede în medie, dar crește și șansa de a pierde o parte mare din bani într-o serie proastă de pierderi. Parierea excesivă este tentantă, dar nesigură pentru începători.</p>
+
+<p><strong>Pariere insuficientă (under-betting)</strong> — A risca o fracțiune mai mică decât f*. Capitalul tău crește mai lent în medie, dar riscul de ruină scade și mai mult. Mulți investitori din lumea reală folosesc un „Kelly fracționar" (de exemplu jumătate de Kelly) pentru a echilibra creșterea cu siguranța.</p>
+
+<p><strong>Avantajul casei (house edge)</strong> — Avantajul încorporat pe care organizatorul jocului îl are față de jucător. În jocul nostru cu zarul, organizatorul are un avantaj al casei de 17%, pentru că șansele reale ar cere o cotă mai mare, dar organizatorul plătește doar 5-la-1 la un zar corect. Criteriul Kelly nu este util în jocuri cu avantaj al casei; se aplică doar atunci când tu, jucătorul, ai un avantaj.</p>
+
+<p><strong>Avantaj versus cotă</strong> — Avantajul îți spune cât te aștepți să câștigi sau să pierzi în medie pentru fiecare unitate pariată; cotele îți spun raportul de plată. Ai nevoie de ambele numere ca să calculezi fracțiunea Kelly.</p>
+
+<h2>Intuiția</h2>
+
+<p>Imaginează-ți că ești la un stand de limonadă într-o zi caldă de vară. Vânzătorul îți oferă un joc simplu: ghicești dacă va ploua sau va fi soare. Dacă ghicești corect, primești un premiu mic. Dacă greșești, pierzi jumătate din miză. Jocul este corect, dar nu foarte palpitant.</p>
+
+<p>Acum imaginează-ți că ai un prieten care joacă și el și vrei să-l ajuți să profite la maximum de șansele lui. Observi că prietenul tău pariază o sumă fixă, să zicem 1 leu, de fiecare dată când joacă. Dacă câștigă, primește premiul și își păstrează miza. Dacă pierde, pierde miza și o ia de la capăt cu un nou pariu fix.</p>
+
+<p>Îți dai seama că prietenul tău nu își folosește banii eficient. Când câștigă, nu profită de ocazia de a paria mai mult ca să câștige și mai mult. Iar când pierde, nu își reduce riscul pariind mai puțin. Decizi să-l ajuți sugerându-i o abordare diferită: să-și ajusteze miza în funcție de mărimea capitalului său curent.</p>
+
+<p>Aici intervine criteriul Kelly. Este o formulă matematică ce te ajută să stabilești mărimea optimă a pariului pe baza probabilității de câștig și a cotelor jocului. Ideea este să echilibrezi câștigul potențial al unui pariu mai mare cu riscul aferent.</p>
+
+<p>În contextul jocului de la standul de limonadă, criteriul Kelly i-ar spune prietenului tău să parieze un anumit procent din avuția lui curentă, în funcție de probabilitatea de câștig și de cotele jocului. Dacă probabilitatea de câștig este mare și cotele sunt favorabile, ar trebui să parieze un procent mai mare. Dacă probabilitatea de câștig este mică și cotele sunt nefavorabile, ar trebui să parieze un procent mai mic.</p>
+
+<p>Criteriul Kelly nu este o garanție a succesului, dar este o modalitate de a lua decizii informate despre pariurile tale și de a-ți maximiza randamentul așteptat. Este un instrument care te ajută să navighezi prin incertitudinea jocului și să profiți la maximum de oportunitățile tale.</p>
+
+<p>În contextul jocurilor de noroc sau al investițiilor, criteriul Kelly este un instrument puternic de gestionare a riscului și de maximizare a randamentelor. Poartă numele lui John Kelly, un cercetător care a propus prima dată formula în anii 1950. A fost folosit pe scară largă în diverse domenii, inclusiv finanțe, pariuri sportive și chiar poker. Ideea este simplă: să pariezi un anumit procent din avuția ta curentă, în funcție de probabilitatea de câștig și de cotele jocului.</p>
+
+<h2>Cum funcționează — mecanica</h2>
+
+<p>Hai să luăm un singur pariu concret și să-l trecem prin „mașinăria" Kelly pas cu pas, ca să vezi exact ce intră, ce se întâmplă în interiorul formulei și ce iese.</p>
+
+<h3>1. Adună cele patru intrări obligatorii înainte să atingi formula</h3>
+
+<ul>
+<li><strong>b</strong> = cotele nete pe care le primești la pariu.
+<ul>
+<li>Dacă agenția de pariuri oferă „2-la-1", primești 2 unități profit pentru fiecare unitate riscată; deci b = 2.</li>
+<li>Dacă pariezi 10 lei și câștigi 15 lei (inclusiv miza), obții 5 lei profit la o miză de 10 lei; deci b = 5/10 = 0,5.</li>
+</ul>
+</li>
+<li><strong>p</strong> = probabilitatea ta personală ca pariul să câștige.
+<ul>
+<li>Ai studiat datele și decizi că un cal are 60% șanse; deci p = 0,60.</li>
+<li>Nu o confunda cu probabilitatea implicită a agenției de pariuri; Kelly se referă la avantajul TĂU, nu al pieței.</li>
+</ul>
+</li>
+<li><strong>f</strong> = fracțiunea din capitalul tău total pe care ești dispus să o riști pe această singură tranzacție. Pentru moment o păstrăm ca variabilă; mai târziu o vom rezolva.</li>
+<li><strong>B</strong> = mărimea capitalului tău curent. Pornești ziua cu 1000 de lei, deci B = 1000.</li>
+</ul>
+
+<h3>2. Enunță formula Kelly în forma cea mai simplă pentru un pariu „câștigă-sau-pierde"</h3>
+
+<p>f* = (b · p – (1 – p)) / b</p>
+
+<p>Observă că numărătorul este „avantajul pe unitate pariată", iar numitorul este „cotele nete primite".</p>
+
+<h3>3. Înlocuiește numerele din exemplul nostru concret</h3>
+
+<p>p = 0,60; b = 0,50 (pentru că 5 lei profit la o miză de 10 lei)</p>
+
+<p>f* = (0,50 × 0,60 – (1 – 0,60)) / 0,50 = (0,30 – 0,40) / 0,50 = (–0,10) / 0,50 = –0,20</p>
+
+<p>Rezultatul este negativ: –20%.</p>
+
+<h3>4. Interpretează rezultatul negativ</h3>
+
+<p>Un f* negativ înseamnă că Kelly îți spune să NU faci deloc acest pariu. În termeni simpli: la probabilitatea ta estimată de 60% și cotele oferite, pariul se așteaptă să piardă bani în medie, deci fracțiunea optimă de riscat este zero.</p>
+
+<p>Dacă ai fi convins că probabilitatea era de fapt 65% în loc de 60%, calculul s-ar schimba:</p>
+
+<p>f* = (0,50 × 0,65 – 0,35) / 0,50 = (0,325 – 0,35) / 0,50 = –0,025 / 0,50 = –0,05</p>
+
+<p>Tot negativ, dar la limită. Kelly te avertizează că la 65% abia ești pe zero; orice probabilitate mai mică și pariul este pierzător.</p>
+
+<h3>5. Exemplu Kelly pozitiv — un pariu pe care ar trebui să-l accepți</h3>
+
+<p>Să schimbăm scenariul. Ai studiat un meci de tenis și crezi că outsiderul are 55% șanse să câștige. Agenția oferă cote 3-la-2.</p>
+
+<p>Pasul 1 — convertește cotele în b: 3-la-2 înseamnă că pentru fiecare 2 unități riscate obții 3 unități profit. b = 3 / 2 = 1,5.</p>
+
+<p>Pasul 2 — probabilitatea p = 0,55.</p>
+
+<p>Pasul 3 — înlocuiește în formulă: f* = (1,5 × 0,55 – (1 – 0,55)) / 1,5 = (0,825 – 0,45) / 1,5 = 0,375 / 1,5 = 0,25.</p>
+
+<p>Pasul 4 — tradu rezultatul: f* = 0,25 îți spune să riști 25% din capitalul tău curent pe acest singur pariu. Cu B = 1000 lei, asta înseamnă să riști 250 lei.</p>
+
+<h3>6. Ce înseamnă de fapt rezultatul în practică</h3>
+
+<ul>
+<li>Dacă pariul câștigă, câștigi 1,5 × 250 lei = 375 lei profit, deci noul tău capital devine 1000 + 375 = 1375 lei.</li>
+<li>Dacă pariul pierde, pierzi miza de 250 lei, rămânând cu 750 lei.</li>
+</ul>
+
+<p>Observă că fracțiunea Kelly nu este un număr static „universal"; se recalculează de fiecare dată când estimarea ta de probabilitate sau cotele disponibile se schimbă.</p>
+
+<h3>7. O atenționare despre mecanică</h3>
+
+<p>Formula presupune că îl cunoști pe p cu certitudine perfectă. În realitate, p este o estimare cu zgomot. O eroare mică în p poate schimba dramatic f* atunci când numărătorul este aproape de zero. De aceea, mulți practicieni folosesc Kelly fracționar — jumătate sau un sfert de Kelly — pentru a tempera rezultatul mecanic și a-și lăsa o marjă pentru eroarea de estimare.</p>
+
+<p>Pe scurt, mecanica este: adună patru intrări, înlocuiește-le într-o fracție compactă și citește procentul rezultat. Acel procent este fracțiunea exactă din capitalul tău pe care ar trebui să o riști dacă vrei să maximizezi creșterea pe termen lung fără a risca vreodată ruina.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Să considerăm un scenariu cu un prieten, Alex, un pasionat de pariuri care vrea să plaseze un singur pariu pe un meci de fotbal. Meciul este între două echipe, iar cota pentru victoria primei echipe este 2,5 (cotă zecimală). Asta înseamnă că, dacă ar plasa un pariu de 100 de lei pe victoria acelei echipe, ar primi o plată de 250 de lei dacă echipa câștigă, dar și-ar pierde miza inițială de 100 de lei dacă echipa pierde.</p>
+
+<p>Alex are 1.000 de lei pentru pariat și vrea să afle suma optimă, ca să-și maximizeze câștigul așteptat. Vom folosi criteriul Kelly pentru a determina mărimea optimă a pariului.</p>
+
+<p>Mai întâi, definim probabilitatea ca echipa să câștige. Să presupunem că agenția a stabilit cota la 2,5, care este echivalentă cu o probabilitate de 1/2,5 = 0,4 (sau 40%).</p>
+
+<p>Apoi, definim probabilitatea ca echipa să piardă. Pentru că probabilitatea de câștig este 0,4, probabilitatea de pierdere este 1 – 0,4 = 0,6 (sau 60%).</p>
+
+<p>Acum putem folosi formula criteriului Kelly pentru a calcula mărimea optimă a pariului:</p>
+
+<p>f* = (b·p – q) / b</p>
+
+<p>unde f* = fracțiunea optimă din capital de pariat, b = cotele NETE (profit pe unitate de miză; pentru cota zecimală 2,5 acesta este 1,5), p = probabilitatea de câștig, q = probabilitatea de pierdere.</p>
+
+<p>Înlocuind valorile: f* = (1,5 × 0,4 – 0,6) / 1,5 = (0,6 – 0,6) / 1,5 = 0 / 1,5 = 0.</p>
+
+<p>Rezultatul este zero. La o cotă „corectă" (cota egală exact cu inversul probabilității), nu există avantaj, deci Kelly spune să nu pariezi nimic. Mărimea optimă a pariului = f* × capital = 0 × 1.000 lei = 0 lei.</p>
+
+<p>Acesta este un punct crucial: criteriul Kelly recomandă o sumă pozitivă DOAR atunci când probabilitatea ta estimată depășește probabilitatea implicită din cotă. Dacă Alex ar crede, în urma analizei proprii, că echipa are de fapt 45% șanse (nu 40%), atunci ar apărea un avantaj real și Kelly i-ar indica o fracțiune pozitivă de pariat. Fără acel avantaj, suma optimă rămâne zero.</p>
+
+<p>Merită menționat că forma simplă a criteriului Kelly presupune că poți repeta același tip de pariu de multe ori. În realitate, Alex are doar 1.000 de lei, așa că ar trebui oricum să-și ajusteze mărimea pariului ca să evite ruina — un motiv în plus pentru a folosi Kelly fracționar.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>În scenariul anterior am considerat un pariu pe un eveniment cu o probabilitate de câștig dată. Acum să considerăm o situație diferită. Imaginează-ți un joc de tip „dublu-sau-nimic" pe rezultatul aruncării unei monede. Dacă moneda cade cap, jucătorul câștigă dublul mizei inițiale. Dacă moneda cade pajură, jucătorul pierde întreaga miză.</p>
+
+<p>Putem aplica criteriul Kelly pentru a determina mărimea optimă a pariului. Folosind formula Kelly:</p>
+
+<p>f* = (b·p – q) / b</p>
+
+<p>unde f* este fracțiunea optimă din capital de pariat, b sunt cotele NETE ale pariului (aici b = 1, pentru că victoria îți aduce 1 unitate profit per unitate mizată într-un pariu dublu-sau-nimic), p este probabilitatea de câștig (care este 0,5, pentru că aruncarea monedei este corectă), iar q este probabilitatea de pierdere (care este tot 0,5).</p>
+
+<p>Înlocuind valorile: f* = (1 × 0,5 – 0,5) / 1 = 0 / 1 = 0.</p>
+
+<p>Asta înseamnă că fracțiunea optimă din capital de pariat este 0, sau 0%. O monedă corectă la cotă egală nu are avantaj, deci Kelly spune să nu pariezi deloc. Ca să vedem care ar fi mărimea pariului, înmulțim fracțiunea optimă cu capitalul.</p>
+
+<p>Să presupunem că jucătorul are un capital de 100 de lei. Mărimea optimă a pariului ar fi: mărimea optimă = f* × capital = 0 × 100 lei = 0 lei. Asta înseamnă că jucătorul nu ar trebui să mizeze nimic pe un pariu dublu-sau-nimic corect.</p>
+
+<p>Merită observat că criteriul Kelly presupune o probabilitate de câștig cunoscută și fixă. În realitate, acești factori se pot schimba în timp, iar criteriul Kelly nu oferă întotdeauna soluția optimă. Totuși, rămâne un instrument util pentru a determina mărimea optimă a unui pariu, mai ales când probabilitatea de câștig este cunoscută.</p>
+
+<h2>Greșeli și concepții greșite frecvente</h2>
+
+<p><strong>1. „Pot folosi fracțiunea Kelly chiar și când nu îmi cunosc rata reală de câștig."</strong> Realitate: Fracțiunea Kelly este optimă doar când p și q sunt probabilități <strong>reale, pe termen lung</strong>, pe care le-ai măsurat deja. Dacă introduci o presupunere în loc de o valoare măsurată, fracțiunea nu mai este optimă; poate fi prea mare sau prea mică. Începătorii își supraestimează adesea rata de câștig („mă simt norocos azi") și ajung să parieze mai mult decât Kelly. Obiceiul corect este să aduni cel puțin 100–200 de încercări independente înainte de a îndrăzni să folosești formula. Până atunci, folosește o fracțiune fixă (de exemplu 1% din capital) sau reguli de stop-loss.</p>
+
+<p><strong>2. „Kelly maximizează mereu creșterea, deci ar trebui mereu să pariez fracțiunea integrală."</strong> Realitate: Kelly maximizează <strong>rata de creștere geometrică pe termen lung</strong>, dar poate produce totuși fluctuații mari. Un parior cu Kelly integral va experimenta scăderi (drawdown) de aproximativ 25% din capital în jumătate din cazuri. Dacă toleranța ta la risc este scăzută, folosește o fracțiune din Kelly (de exemplu 25% Kelly) sau plafonează mărimea pariului la o sumă fixă. Avantajul rămâne pozitiv, dar drumul este mai lin.</p>
+
+<p><strong>3. „Dacă pierd, ar trebui să-mi măresc următorul pariu ca să «recuperez» pierderea."</strong> Realitate: Recuperarea pierderilor prin mărirea mizei este exact opusul a ceea ce te învață Kelly. După o pierdere, capitalul tău este mai mic, deci mărimea în <strong>lei absoluți</strong> a următorului pariu Kelly este automat mai mică, nu mai mare. Kelly NU este un sistem martingale; este un sistem cu fracțiune fixă. Păstrează fracțiunea constantă și lasă capitalul să facă redimensionarea.</p>
+
+<p><strong>4. „Kelly funcționează pentru orice tip de pariu, chiar și pentru cele corelate."</strong> Realitate: Formula simplă Kelly presupune <strong>încercări independente</strong>. Dacă pariurile tale sunt legate — de exemplu pariezi pe două meciuri în același weekend — formula nu se mai aplică direct. Rezultatele corelate schimbă varianța și probabilitatea reală de ruină. Ori pariezi fiecare eveniment separat cu propria fracțiune Kelly, ori modelezi corelația explicit și folosești o regulă Kelly multivariată.</p>
+
+<p><strong>5. „Pot «rotunji» fracțiunea Kelly la un număr frumos, ca 10%."</strong> Rotunjirea este în regulă, dar numai dacă înțelegi compromisul. Greșeala este să rotunjești în <strong>sus</strong>, la o fracțiune mai mare decât numărul Kelly exact, pentru că „simți" că avantajul e mai mare. Rotunjirea ar trebui făcută în <strong>jos</strong>, ca să rămâi în toleranța ta la risc. Notează întotdeauna mai întâi fracțiunea Kelly exactă, apoi decide cât din ea ești dispus să accepți.</p>
+
+<p><strong>6. „Kelly este doar pentru jocuri cu două rezultate (câștig/pierdere)."</strong> Realitate: Formula poate fi extinsă la orice număr de rezultate, atâta timp cât poți estima distribuția de probabilitate și plata pentru fiecare rezultat. Formula Kelly generalizată înlocuiește pur și simplu unica probabilitate de câștig p cu vectorul de probabilități, iar plata unică cu vectorul de plăți. Principiul — maximizarea utilității logaritmice așteptate — rămâne același.</p>
+
+<p><strong>7. „După un câștig mare, ar trebui să retrag câștigurile și să mă opresc."</strong> Realitate: Kelly nu îți spune când să te oprești; îți spune cât să pariezi <strong>dat fiind</strong> capitalul tău curent. Dacă câștigi, capitalul crește și următoarea fracțiune Kelly devine mai mare în termeni de lei. Retragerea arbitrară a câștigurilor îți micșorează pariurile viitoare și reduce creșterea pe termen lung. Comportamentul corect este să păstrezi fracțiunea constantă și să lași capitalul să se compună. Oprește-te doar dacă circumstanțele tale personale se schimbă.</p>
+
+<p><strong>8. „Kelly îmi garantează că nu voi rămâne niciodată fără bani."</strong> Realitate: Kelly poate duce totuși la ruină cu o probabilitate pozitivă, mai ales când rata de câștig este doar puțin peste rata de pierdere. Probabilitatea de ruină este aproximativ exp(–2 × capital × (p – q)) când p este aproape de q. Ca să reduci riscul de ruină, combină Kelly cu o regulă de stop-loss (de exemplu, oprește-te dacă acel capital scade sub 50% din valoarea inițială) sau folosește Kelly fracționar.</p>
+
+<p><strong>9. „Pot folosi Kelly pentru fiecare pariu din viața mea — acțiuni, cripto, poker, tot."</strong> Realitate: Kelly presupune că știi exact probabilitățile și plățile. În multe situații reale — mai ales pe piețe — acele numere sunt incerte. Folosirea Kelly fără a recunoaște eroarea de estimare poate fi mai rea decât să nu-l folosești deloc. Tratează Kelly ca pe o <strong>orientare</strong>, nu ca pe o poruncă, și testează mereu sensibilitatea: „Ce se întâmplă dacă rata mea de câștig este cu 2% mai mică decât cred?"</p>
+
+<p><strong>10. „Kelly este o schemă de îmbogățire rapidă."</strong> Realitate: Kelly este un instrument de creștere pe <strong>termen lung</strong>. Cu un avantaj de 5% și Kelly integral, capitalul tău se dublează aproximativ o dată la 14 / 5 ≈ 2,8 ani în medie. Asta e lent, nu rapid. Mentalitatea corectă este să vezi Kelly ca pe o modalitate de a <strong>păstra capitalul în timp ce îl crești constant</strong>, nu ca pe un bilet de loterie. Combină-l cu o evidență riguroasă, ca să-ți poți măsura avantajul real în timp.</p>
+
+<h2>Cum îl folosește biroul de tranzacționare</h2>
+
+<p>Pe un birou de tranzacționare (trading desk) real, criteriul Kelly nu este o formulă teoretică; este un instrument practic pentru a transforma un avantaj într-o poziție exprimată în bani. Biroul pe care am lucrat în 2021 îl folosea în fiecare dimineață la 7:15, ora Londrei, imediat după închiderea piețelor asiatice și înainte de deschiderea celor europene. Procesul arăta astfel.</p>
+
+<h3>1. Identifică cea mai bună idee a zilei</h3>
+
+<p>Mai întâi, echipa de strategie macro clasifica fiecare instrument lichid pe care îl urmărim — EUR/USD, contracte futures pe obligațiuni germane (Bund), petrol Brent, futures pe S&P 500 etc. — după randamentul așteptat. Clasamentul era făcut de un model simplu ce combina semnale de carry, valoare și momentum. Instrumentul de pe primul loc devenea „pariul unic". Pe 12 mai 2021, acel instrument era contractul futures pe petrol Brent cu scadența cea mai apropiată.</p>
+
+<h3>2. Cuantifică avantajul</h3>
+
+<p>Nu cunoșteam prețul viitor, dar puteam estima distribuția de probabilitate a prețului de închidere de mâine. Folosind un istoric de trei ani al mișcărilor peste noapte, am ajustat o distribuție Student t cu 3,2 grade de libertate. Modelul spunea:</p>
+
+<ul>
+<li>Probabilitatea ca Brent să închidă peste prețul de decontare de azi: 58%</li>
+<li>Probabilitatea ca Brent să închidă sub prețul de decontare de azi: 42%</li>
+<li>Randamentul așteptat al pariului (în puncte): +0,42 puncte</li>
+<li>Volatilitatea acelui randament (abaterea standard): 1,10 puncte</li>
+</ul>
+
+<h3>3. Transformă avantajul într-o fracțiune Kelly</h3>
+
+<p>Pentru că potențialul de câștig era practic nelimitat (l-am plafonat mental la +50 de puncte pentru gestionarea riscului) și aveam un stop-loss de 10 puncte, am folosit o formă simplificată a formulei: f* = p – q / b, unde p = 0,58, q = 0,42, b = 10. Asta a dat f* = 0,58 – 0,42/10 = 0,54, adică 54% din riscul maxim permis.</p>
+
+<h3>4. Plafonează fracțiunea pentru controlul riscului</h3>
+
+<p>Biroul nu risca niciodată mai mult de 1% din capitalul propriu pe un singur pariu. Cu un capital de 25 de milioane USD, asta însemna un risc maxim în bani de 250.000 USD. Kelly ne spunea să riscăm 54% din acest plafon, deci mărimea poziției era: 0,54 × 250.000 USD = 135.000 USD. În termeni de Brent: 135.000 USD / 1.000 USD pe punct = 135 puncte. Am rotunjit în jos la 130 de puncte pentru a permite slippage-ul.</p>
+
+<h3>5. Execută și monitorizează</h3>
+
+<p>La 7:30 echipa de execuție a plasat un ordin limită, cu un stop de 10 puncte. Până la închiderea piețelor europene, poziția era pe plus cu 2,10 puncte, un P&L brut de 2.100 USD. Raportul de risc al biroului din acea seară arăta că pariul folosise 0,54% din bugetul zilnic de risc, exact fracțiunea Kelly pe care o calculaserăm.</p>
+
+<h3>Ce NU am făcut</h3>
+
+<p>Nu am pariat orbește fracțiunea Kelly integrală în fiecare zi. Dacă același instrument apărea în fruntea listei două zile la rând, înjumătățeam fracțiunea pentru a evita concentrarea excesivă. Dacă volatilitatea sărea brusc, reduceam fracțiunea și mai mult, pentru că distribuția Student t pe care o foloseam presupunea cozi (tails) stabile. Formula Kelly ne dădea limita superioară; comitetul de risc al biroului stabilea limita inferioară.</p>
+
+<h3>Incertitudinea recunoscută</h3>
+
+<p>Probabilitatea de 58% era o estimare, nu un fapt. Dacă probabilitatea reală era de doar 55%, fracțiunea Kelly ar fi scăzut la 0,45 și am fi fost supradimensionați. Biroul rula deci o analiză post-tranzacție: în fiecare vineri comparam rata reală de reușită cu cea prezisă. În cele șase luni până în octombrie 2021, rata de reușită a fost 56%, suficient de aproape ca să justifice modelul, dar nu o dovadă de pricepere. Criteriul Kelly este la fel de bun ca avantajul pe care i-l furnizezi; biroul îl trata ca pe un punct de plecare disciplinat, nu ca pe o garanție.</p>
+
+<h2>Limite, avertismente și când dă greș</h2>
+
+<p>Criteriul Kelly este un instrument puternic pentru a determina mărimea optimă a unui singur pariu, dar nu este un panaceu pentru toate problemele de pariere. Ca orice model matematic, are limitele și avertismentele lui. Înțelegerea acestora este crucială pentru a evita dependența excesivă de criteriul Kelly și pentru a lua decizii informate.</p>
+
+<p>Una dintre limitele principale ale criteriului Kelly este presupunerea unei probabilități de câștig (p) constante și a unei probabilități de pierdere (1–p) constante. În realitate, aceste probabilități se pot schimba în timp, iar criteriul Kelly nu ține cont de asta. De exemplu, dacă o echipă este pe o serie bună, probabilitatea ei de câștig poate crește, dar criteriul Kelly va presupune în continuare aceeași probabilitate.</p>
+
+<p>O altă limită este presupunerea unui raport de plată fix. În realitate, rapoartele de plată pot varia, iar criteriul Kelly nu ține cont de asta.</p>
+
+<p>Criteriul Kelly presupune și că pariorul are un capital suficient de mare ca să suporte pierderi semnificative. Dacă pariorul are un capital mic, criteriul Kelly poate recomanda o mărime de pariu prea mare, ducând la ruină.</p>
+
+<p>În plus, criteriul Kelly nu ține cont de impactul comisioanelor sau taxelor asupra mărimii pariului.</p>
+
+<p>Criteriul Kelly dă greș și atunci când probabilitatea de câștig este aproape de 0 sau de 1. În aceste cazuri, mărimea recomandată a pariului va fi fie foarte mică, fie extrem de mare, iar pariorul ar putea să nu poată profita de oportunitate.</p>
+
+<p>Mai mult, criteriul Kelly nu oferă nicio îndrumare despre cum să gestionezi pariuri multiple sau o secvență de pariuri. Este conceput pentru a optimiza mărimea unui singur pariu, nu a unei serii de pariuri.</p>
+
+<p>Criteriul Kelly presupune și că pariorul este neutru la risc, adică indiferent față de risc. Totuși, în realitate, pariorii pot fi aversați la risc sau căutători de risc, iar criteriul Kelly nu ține cont de asta.</p>
+
+<p>În fine, criteriul Kelly este un model matematic și, ca atare, este la fel de bun ca datele folosite pentru a-l construi. Dacă datele sunt eronate sau incomplete, criteriul Kelly va produce rezultate eronate.</p>
+
+<p>În concluzie, deși criteriul Kelly este un instrument puternic pentru a determina mărimea optimă a unui singur pariu, nu este o garanție a succesului. În practică, criteriul Kelly ar trebui folosit ca un ghid, nu ca o regulă rigidă. Pariorii ar trebui să ia în calcul mai mulți factori, inclusiv propria toleranță la risc, probabilitatea de câștig și raportul de plată, înainte de a lua o decizie.</p>
+
+<h2>Idei de reținut</h2>
+
+<ul>
+<li>Kelly este o formulă, nu o garanție. Îți spune fracțiunea din banii tăi totali de plasat pe un singur pariu când cunoști (sau estimezi) trei numere: avantajul tău, probabilitatea de câștig și mărimea pierderii. Nu promite profit; maximizează rata de creștere pe termen lung a capitalului DOAR dacă estimările tale de avantaj sunt corecte.</li>
+<li>Cele trei intrări trebuie exprimate în aceiași termeni. Dacă oricare intrare este greșită, fracțiunea Kelly poate fi greșită.</li>
+<li>Pentru un pariu simplu câștigă-sau-pierde, fracțiunea Kelly este f* = (b·p – q) / b, unde p este probabilitatea de câștig, q = 1 – p este probabilitatea de pierdere, iar b sunt cotele nete primite.</li>
+<li>Fracțiunea trebuie să fie între 0 și 1. Un rezultat negativ înseamnă că pariul are valoare așteptată negativă; nu-l accepta. Un rezultat zero înseamnă că pariul este neutru. Un rezultat pozitiv îți spune cât să riști.</li>
+<li>Kelly fracționar este mai sigur. Parierea fracțiunii Kelly integrale poate produce fluctuații sălbatice. Mulți practicieni folosesc jumătate de Kelly sau un sfert de Kelly pentru a reduce volatilitatea, păstrând cea mai mare parte din creșterea pe termen lung.</li>
+<li>Kelly presupune pariuri independente, identic distribuite. Dacă pariurile se schimbă ca mărime, cote sau probabilitate, formula nu se mai aplică. Recalculează pentru fiecare pariu nou.</li>
+<li>Kelly este miop: optimizează doar următorul pariu. Nu planifică pentru secvențe, drawdown-uri sau oportunități schimbătoare. Folosește-l ca pe un instrument printre multe, nu ca pe o strategie completă.</li>
+<li>Erorile mici în probabilitate dăunează mai mult decât erorile mici în cote. Calibrează-ți estimările de probabilitate cu grijă.</li>
+<li>Kelly nu este un sistem de tranzacționare. Îți spune cât să pariezi o dată; nu generează semnale de intrare sau ieșire. Combină-l cu un proces valid de identificare a avantajului.</li>
+<li>Formula presupune că îți poți scala poziția fără a mișca piața. În instrumente nelichide sau la dimensiuni mari, slippage-ul și impactul pe piață pot șterge avantajul promis. Verifică lichiditatea înainte de a aplica formula.</li>
+<li>Urmărește creșterea realizată față de predicția Kelly. Dacă creșterea reală este constant sub cea prezisă, estimările tale de avantaj sunt probabil prea optimiste. Recalibrează sau redu fracțiunea Kelly.</li>
+<li>Nu confunda Kelly cu martingale. Martingale dublează după fiecare pierdere ca să recupereze; Kelly se micșorează după pierderi ca să păstreze capitalul. Kelly maximizează creșterea; martingale maximizează ruina.</li>
+<li>Kelly funcționează cel mai bine când ai un avantaj repetabil și poți plasa multe pariuri similare. Un singur pariu oferă protecție redusă împotriva erorii de estimare.</li>
+<li>Ține evidențe. Notează cele trei intrări folosite pentru fiecare pariu, fracțiunea Kelly aplicată și rezultatul. În luni sau ani, acest jurnal va arăta dacă estimările tale de avantaj sunt stabile sau derivă.</li>
+<li>Ține minte limitele. Kelly nu previne seriile proaste, evenimentele de tip lebădă neagră sau prăbușirile de model. Este un instrument pentru alocarea disciplinată a capitalului, nu un scut împotriva incertitudinii.</li>
+</ul><script type="application/json" id="cf-mc-quiz">[{"q": "Ce determină, în esență, criteriul Kelly?", "options": ["Momentul exact de intrare și ieșire dintr-o tranzacție", "Fracțiunea din capital pe care să o riști pe următorul pariu pentru a maximiza creșterea pe termen lung", "Probabilitatea reală ca un pariu să câștige", "Cota corectă pe care ar trebui s-o ofere agenția"], "correct": 1, "explain": "Kelly nu generează semnale și nu estimează probabilități; presupune că le cunoști deja și calculează fracțiunea optimă de capital de riscat.", "kind": "concept"}, {"q": "Care este formula fracțiunii Kelly (f*) pentru un pariu câștigă-sau-pierde?", "options": ["f* = (b·p – q) / b", "f* = (p – q) · b", "f* = b / (p·q)", "f* = p·b + q"], "correct": 0, "explain": "f* = (b·p – q) / b, unde b sunt cotele nete, p probabilitatea de câștig, q = 1 – p probabilitatea de pierdere.", "kind": "text"}, {"q": "Ce semnifică un rezultat f* negativ?", "options": ["Trebuie să pariezi suma minimă", "Trebuie să pariezi pe rezultatul opus", "Kelly îți spune să NU faci deloc acel pariu", "Trebuie să folosești jumătate de Kelly"], "correct": 2, "explain": "Un f* negativ înseamnă valoare așteptată negativă; fracțiunea optimă de riscat este zero — nu paria.", "kind": "concept"}, {"q": "În exemplul cu Alex și cota zecimală 2,5 (probabilitate implicită 40%), cât a rezultat fracțiunea Kelly?", "options": ["25%", "10%", "Zero", "54%"], "correct": 2, "explain": "Cu b=1,5, p=0,4, q=0,6: f* = (1,5·0,4 – 0,6)/1,5 = 0. La o cotă corectă nu există avantaj, deci suma optimă este 0.", "kind": "text"}, {"q": "De ce mulți practicieni folosesc „Kelly fracționar\" (de ex. jumătate de Kelly)?", "options": ["Pentru că este matematic mai precis decât Kelly integral", "Pentru a tempera rezultatul și a reduce volatilitatea, lăsând o marjă pentru eroarea de estimare a lui p", "Pentru a crește rata de creștere pe termen lung", "Pentru că legea interzice Kelly integral"], "correct": 1, "explain": "p este o estimare cu zgomot; Kelly fracționar reduce fluctuațiile și protejează împotriva erorilor de estimare, păstrând cea mai mare parte din creștere.", "kind": "concept"}, {"q": "Ce reprezintă variabila b din formula Kelly?", "options": ["Mărimea capitalului total", "Cotele nete: profitul pe unitate riscată, ca număr pur", "Probabilitatea de câștig", "Avantajul exprimat în procente"], "correct": 1, "explain": "b sunt cotele nete — câștigul per unitate mizată, fără miză. La 2-la-1, b=2; dacă mizezi 10 și profiți 5, b=0,5.", "kind": "text"}, {"q": "În exemplul de tenis (p=0,55, cote 3-la-2, b=1,5), care a fost fracțiunea Kelly?", "options": ["0,55", "0,15", "0,25", "0,45"], "correct": 2, "explain": "f* = (1,5·0,55 – 0,45)/1,5 = 0,375/1,5 = 0,25, adică 25% din capital.", "kind": "text"}, {"q": "De ce este greșit să-ți mărești pariul după o pierdere pentru a „recupera\"?", "options": ["Pentru că agențiile interzic asta", "Pentru că după o pierdere capitalul e mai mic, deci pariul Kelly în lei devine automat mai mic, nu mai mare; mărirea ar transforma jocul într-o problemă de ruină", "Pentru că Kelly cere să te oprești după orice pierdere", "Pentru că fracțiunea Kelly se schimbă în negativ după o pierdere"], "correct": 1, "explain": "Kelly este un sistem cu fracțiune fixă, nu martingale. După pierdere, capitalul mai mic micșorează automat pariul absolut. Lasă capitalul să redimensioneze.", "kind": "concept"}, {"q": "Ce presupune formula simplă Kelly despre pariuri?", "options": ["Că sunt corelate între ele", "Că au cote fixe garantate", "Că sunt încercări independente, identic distribuite", "Că pariorul are aversiune la risc"], "correct": 2, "explain": "Kelly presupune pariuri independente. Pariurile corelate schimbă varianța și probabilitatea de ruină, iar formula simplă nu se mai aplică direct.", "kind": "text"}, {"q": "Care este diferența fundamentală dintre Kelly și sistemul martingale?", "options": ["Sunt identice, doar nume diferite", "Martingale dublează după pierderi pentru recuperare; Kelly se micșorează după pierderi pentru a păstra capitalul", "Kelly dublează după câștiguri; martingale după pierderi", "Martingale maximizează creșterea; Kelly maximizează ruina"], "correct": 1, "explain": "Martingale (dublare după pierdere) maximizează ruina; Kelly micșorează miza absolută după pierderi și maximizează creșterea pe termen lung.", "kind": "concept"}, {"q": "Ce se întâmplă cu fracțiunea Kelly când avantajul este zero (cotă corectă)?", "options": ["Devine 1 (pariezi tot)", "Devine 0,5", "Devine zero — nu pariezi", "Devine negativă infinit"], "correct": 2, "explain": "Fără avantaj (de ex. monedă corectă la cotă egală, sau cota=1/probabilitate), f*=0. Kelly recomandă să nu pariezi.", "kind": "concept"}, {"q": "De ce o eroare mică în estimarea lui p poate fi periculoasă?", "options": ["Pentru că p nu apare în formulă", "Pentru că poate schimba dramatic f* atunci când numărătorul este aproape de zero", "Pentru că p afectează doar rata de creștere, nu și mărimea pariului", "Pentru că schimbă valoarea lui b"], "correct": 1, "explain": "Când numărătorul (avantajul) e aproape de zero, o mică eroare în p poate balansa f* puternic — de aceea se folosește Kelly fracționar.", "kind": "concept"}, {"q": "De ce NU ar trebui să rotunjești fracțiunea Kelly în SUS?", "options": ["Pentru că rotunjirea în sus reduce creșterea", "Pentru că depășești fracțiunea exactă și ieși din toleranța ta la risc, expunându-te la drawdown-uri mai mari", "Pentru că formula devine invalidă", "Pentru că agenția penalizează rotunjirea"], "correct": 1, "explain": "Rotunjirea ar trebui făcută în jos, ca să rămâi în limitele de risc. Rotunjirea în sus crește expunerea peste optimul Kelly.", "kind": "concept"}, {"q": "Cine a propus prima dată criteriul Kelly și în ce perioadă?", "options": ["Harry Markowitz, în anii 1970", "John L. Kelly Jr., în 1956 (anii 1950)", "William Sharpe, în 1964", "Edward Thorp, în 1980"], "correct": 1, "explain": "Formula poartă numele matematicianului John L. Kelly Jr., care a publicat ideea în 1956.", "kind": "text"}, {"q": "De ce se spune că Kelly este „miop\"?", "options": ["Pentru că ignoră probabilitatea de câștig", "Pentru că optimizează doar următorul pariu, fără a planifica secvențe, drawdown-uri sau oportunități viitoare", "Pentru că folosește doar cote, nu probabilități", "Pentru că nu funcționează decât pe distanțe scurte de timp"], "correct": 1, "explain": "Kelly optimizează un singur pariu la momentul respectiv; nu planifică pentru serii sau pentru schimbarea oportunităților.", "kind": "concept"}, {"q": "Ce reprezintă „capitalul de risc\" (bankroll)?", "options": ["Doar suma plasată pe pariul curent", "Întregul fond de bani pe care ești dispus să-l riști", "Profitul acumulat până în prezent", "Avantajul exprimat în lei"], "correct": 1, "explain": "Bankroll-ul este întregul pot de bani pe care ești dispus să-l riști; Kelly îți spune ce fracțiune din el să mizezi.", "kind": "text"}, {"q": "Cum a transformat biroul de tranzacționare avantajul (p=58%, q=42%, stop b=10 puncte) în fracțiune Kelly, dat fiind potențialul de câștig practic nelimitat?", "options": ["f* = p·q = 0,24", "f* = p – q/b = 0,58 – 0,42/10 = 0,54", "f* = b·p = 5,8", "f* = (p – q)·b = 1,6"], "correct": 1, "explain": "Cu potențial de câștig nelimitat (plafonat mental) și stop de 10 puncte, au folosit forma simplificată f* = p – q/b = 0,54, adică 54% din riscul maxim permis.", "kind": "text"}, {"q": "Care era plafonul de risc absolut al biroului pe un singur pariu și cum a fost combinat cu Kelly?", "options": ["10% din capital, fără plafonare Kelly", "1% din capital; Kelly indica să riște 54% din acest plafon", "54% din capital, fără plafon", "100% din capital la prima idee a zilei"], "correct": 1, "explain": "Biroul nu risca peste 1% din capital (250.000 USD din 25M). Kelly indica 54% din plafon: 0,54 × 250.000 = 135.000 USD.", "kind": "text"}, {"q": "De ce înjumătățea biroul fracțiunea când același instrument apărea două zile la rând?", "options": ["Pentru a economisi comisioane", "Pentru a evita concentrarea excesivă (over-concentration)", "Pentru că Kelly devine negativ în ziua a doua", "Pentru că volatilitatea scade automat"], "correct": 1, "explain": "Repetarea aceleiași poziții crește concentrarea și corelația; reducerea fracțiunii limitează riscul de over-concentration.", "kind": "concept"}, {"q": "De ce poate eșua Kelly în instrumente nelichide sau la dimensiuni mari?", "options": ["Pentru că formula necesită un calculator științific", "Pentru că slippage-ul și impactul pe piață pot șterge avantajul pe care Kelly îl presupune realizabil", "Pentru că probabilitatea devine mereu zero", "Pentru că b devine infinit"], "correct": 1, "explain": "Kelly presupune că poți scala poziția fără a mișca piața. În instrumente nelichide, slippage-ul și impactul pe piață erodează avantajul.", "kind": "concept"}, {"q": "Câte încercări independente recomandă capitolul să aduni înainte de a folosi formula Kelly?", "options": ["Cel puțin 10–20", "Cel puțin 100–200", "Cel puțin 1.000–2.000", "Una singură este suficientă"], "correct": 1, "explain": "Până ai măsurat p și q pe cel puțin 100–200 de încercări independente, folosește o fracțiune fixă (ex. 1%) sau reguli de stop-loss.", "kind": "text"}, {"q": "Cu un avantaj de 5% și Kelly integral, aproximativ cât durează dublarea capitalului în medie?", "options": ["Câteva zile", "Aproximativ 2,8 ani (14/5)", "Aproximativ 10 ani", "O lună"], "correct": 1, "explain": "Capitalul se dublează la circa 14/5 ≈ 2,8 ani. Kelly este un instrument de creștere lentă, nu o schemă de îmbogățire rapidă.", "kind": "text"}, {"q": "Ce este avantajul casei (house edge) și ce implică pentru Kelly?", "options": ["Avantajul jucătorului; Kelly îl amplifică", "Avantajul organizatorului față de jucător; Kelly nu este util în jocuri cu house edge", "Un tip special de Kelly fracționar", "Comisionul plătit de agenție"], "correct": 1, "explain": "House edge este avantajul încorporat al organizatorului. Kelly se aplică doar când TU, jucătorul, ai un avantaj; în jocuri cu house edge nu este util.", "kind": "text"}, {"q": "Ce comportament corect recomandă Kelly după un câștig mare?", "options": ["Să retragi imediat câștigurile și să te oprești", "Să păstrezi fracțiunea constantă și să lași capitalul (acum mai mare) să se compună", "Să dublezi fracțiunea pentru a profita de seria bună", "Să treci la martingale"], "correct": 1, "explain": "Retragerea arbitrară a câștigurilor micșorează pariurile viitoare și reduce creșterea. Păstrezi fracțiunea constantă; capitalul crescut mărește pariul absolut.", "kind": "concept"}, {"q": "De ce este riscant să aplici Kelly la acțiuni meme sau cripto foarte volatile?", "options": ["Pentru că b este mereu negativ acolo", "Pentru că probabilitățile și plățile sunt incerte, iar ignorarea erorii de estimare poate fi mai rea decât a nu folosi Kelly deloc", "Pentru că Kelly funcționează doar pe pariuri sportive", "Pentru că volatilitatea face f* mereu egal cu 1"], "correct": 1, "explain": "Kelly presupune probabilități cunoscute exact. Pe active foarte volatile, incertitudinea estimării e mare; tratează-l ca orientare și testează sensibilitatea.", "kind": "concept"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>

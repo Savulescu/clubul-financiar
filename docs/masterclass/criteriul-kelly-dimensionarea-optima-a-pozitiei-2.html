@@ -1,0 +1,389 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Criteriul Kelly: dimensionarea optima a pozitiei — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="Criteriul Kelly iti arata ce fractiune din capital sa pariezi pentru a maximiza cresterea pe termen lung fara risc de ruina: formula, exemple si capcane."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/criteriul-kelly-dimensionarea-optima-a-pozitiei-2.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Criteriul Kelly: dimensionarea optima a pozitiei"><meta property="og:description" content="Criteriul Kelly iti arata ce fractiune din capital sa pariezi pentru a maximiza cresterea pe termen lung fara risc de ruina: formula, exemple si capcane."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/criteriul-kelly-dimensionarea-optima-a-pozitiei-2.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Criteriul Kelly: dimensionarea optima a pozitiei"><meta name="twitter:description" content="Criteriul Kelly iti arata ce fractiune din capital sa pariezi pentru a maximiza cresterea pe termen lung fara risc de ruina: formula, exemple si capcane."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "headline": "Criteriul Kelly: dimensionarea optima a pozitiei", "description": "Criteriul Kelly iti arata ce fractiune din capital sa pariezi pentru a maximiza cresterea pe termen lung fara risc de ruina: formula, exemple si capcane.", "inLanguage": "ro-RO", "datePublished": "2026-06-21", "dateModified": "2026-06-21", "author": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro/despre.html"}, "image": "https://clubulfinanciar.ro/og-image.jpg", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "logo": {"@type": "ImageObject", "url": "https://clubulfinanciar.ro/icon-512.png"}}, "mainEntityOfPage": "https://clubulfinanciar.ro/masterclass/criteriul-kelly-dimensionarea-optima-a-pozitiei-2.html", "isAccessibleForFree": false, "hasPart": {"@type": "WebPageElement", "isAccessibleForFree": false, "cssSelector": ".premium-rest"}}</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=27"><link rel="stylesheet" href="/assets/upgrade.css?v=27"></head><body><header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/calculatoare.html">Calculatoare</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header><article class="article" data-premium="1" data-prev="kelly-fractionat-dimensionare-pozitie" data-prev-title="Kelly fracționat: ghid complet de dimensionare a poziției și control al riscului" data-next="echilibrul-long-short-alocarea-intre-pozitii-long-si-short" data-next-title="Echilibrul long/short: alocarea capitalului între poziții long și short" data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#allocation">Alocarea activelor</a> · 29 min · Actualizat 21 iun. 2026</p><h1>Criteriul Kelly: dimensionarea optima a pozitiei</h1><p>Criteriul Kelly este o formula matematica de dimensionare optima a pozitiei (optimal position sizing) care iti spune ce fractiune din capital sa pariezi pe o singura tranzactie pentru a-ti creste averea cat mai repede pe termen lung, fara sa risti ruina. Daca te-ai intrebat vreodata cat sa investesti intr-o singura tranzactie atunci cand ai un avantaj statistic (edge), criteriul Kelly iti ofera un raspuns precis, bazat pe probabilitatea de castig si pe raportul recompensa-risc.</p>
+
+<p>Ideea de baza este simpla: nu pariezi nici prea mult, nici prea putin. Daca pariezi tot capitalul de fiecare data, o singura tranzactie pierzatoare te poate lasa fara nimic; daca pariezi prea putin, nu profiti suficient de avantajul tau si cresti incet. Criteriul Kelly gaseste fractiunea optima de pariu (optimal bet size) care maximizeaza rata de crestere compusa (compound growth) a capitalului.</p>
+
+<p>In acest capitol vei intelege intuitia din spatele formulei Kelly, mecanica exacta de calcul al fractiunii Kelly, exemple rezolvate pas cu pas, capcanele frecvente (de la confundarea avantajului cu rata de castig pana la ignorarea corelatiei) si motivul pentru care multi traderi profesionisti folosesc Kelly fractionar (fractional Kelly) ca sa se protejeze de erorile de estimare.</p>
+
+<h2>Definitie si termeni cheie</h2>
+
+<p>Criteriul Kelly (Kelly criterion) este o formula matematica folosita pentru a determina dimensiunea optima a unui singur pariu intr-o situatie cu mai multe rezultate posibile. Este un instrument statistic care ii ajuta pe traderi si investitori sa decida ce parte din capitalul disponibil sa aloce unui anumit pariu, astfel incat sa-si maximizeze castigurile potentiale, minimizand in acelasi timp riscul de pierdere.</p>
+
+<p>Pentru a intelege criteriul Kelly, este esential sa definim cativa termeni cheie:</p>
+
+<ul>
+<li><strong>Valoarea asteptata (Expected Value, EV)</strong>: valoarea asteptata a unui pariu este castigul mediu pe care un trader se poate astepta sa-l obtina facand acel pariu de-a lungul unui numar mare de incercari. Se calculeaza inmultind probabilitatea de castig cu suma castigata si scazand probabilitatea de pierdere inmultita cu suma pierduta.</li>
+
+<li><strong>Avantaj (Edge)</strong>: avantajul este diferenta dintre valoarea asteptata a unui pariu si zero. Cu alte cuvinte, este suma cu care se asteapta ca un pariu sa returneze mai mult decat miza. Un pariu cu avantaj pozitiv este considerat un pariu bun, in timp ce un pariu cu avantaj negativ este un pariu prost.</li>
+
+<li><strong>Probabilitatea de castig (Probability of Winning, Pw)</strong>: probabilitatea de castig este sansa ca un pariu sa se incheie cu un castig. Este o valoare intre 0 si 1, unde 0 reprezinta 0% sanse de castig, iar 1 reprezinta 100% sanse de castig.</li>
+
+<li><strong>Probabilitatea de pierdere (Probability of Losing, Pl)</strong>: probabilitatea de pierdere este sansa ca un pariu sa se incheie cu o pierdere. Este o valoare intre 0 si 1, unde 0 reprezinta 0% sanse de pierdere, iar 1 reprezinta 100% sanse de pierdere.</li>
+
+<li><strong>Randamentul investitiei (Return on Investment, ROI)</strong>: randamentul investitiei este raportul dintre castigul obtinut dintr-un pariu si suma investita. Este o masura a profitabilitatii pariului.</li>
+
+<li><strong>Randamentul ajustat la risc (Risk-Adjusted Return)</strong>: randamentul ajustat la risc este o masura a castigului obtinut dintr-un pariu, ajustat in functie de nivelul de risc asumat. Este o modalitate de a compara castigurile unor pariuri diferite care au niveluri de risc diferite.</li>
+
+<li><strong>Kelly fractionar (Fractional Kelly)</strong>: pariul Kelly fractionar este o varianta a criteriului Kelly care permite traderilor sa parieze o fractiune din suma optima. Este util cand un trader vrea sa-si reduca riscul sau cand nu are suficient capital pentru a paria suma optima completa.</li>
+
+<li><strong>Dimensiunea optima a pariului (Optimal Bet Size)</strong>: dimensiunea optima a pariului este suma pe care un trader ar trebui sa o parieze pentru a-si maximiza castigurile potentiale, minimizand in acelasi timp riscul de pierdere. Se calculeaza cu ajutorul formulei criteriului Kelly.</li>
+
+<li><strong>Formula criteriului Kelly (Kelly Criterion Formula)</strong>: formula criteriului Kelly este o formula matematica ce calculeaza dimensiunea optima a pariului pe baza valorii asteptate, a probabilitatii de castig si a probabilitatii de pierdere. Formula este:</li>
+</ul>
+
+<p>k = (b &times; p &minus; q) / b</p>
+
+<p>Unde:</p>
+<ul>
+<li>k este dimensiunea optima a pariului ca fractiune din capitalul total (bankroll);</li>
+<li>b reprezinta cota neta primita pe pariu (profitul per unitate mizata);</li>
+<li>p este probabilitatea de castig;</li>
+<li>q este probabilitatea de pierdere (1 &minus; p).</li>
+</ul>
+
+<p>Criteriul Kelly este un instrument puternic pentru traderii si investitorii care vor sa-si maximizeze castigurile potentiale, minimizand riscul de pierdere. Totusi, este esential de retinut ca acest criteriu presupune ca pariul este independent si identic distribuit si ca avantajul si probabilitatea de castig raman constante in timp. In realitate, aceste ipoteze nu se confirma intotdeauna, asa ca traderii ar trebui sa-si foloseasca discernamantul cand aplica practic criteriul Kelly.</p>
+
+<h2>Intuitia</h2>
+
+<p>Imagineaza-ti ca esti la un balci si joci un joc simplu cu aruncarea unei monede. Platesti 1 dolar ca sa joci. Daca moneda cade cap, castigi 1,90 dolari (deci iti recuperezi dolarul plus 90 de centi profit). Daca pica pajura, iti pierzi dolarul. Moneda nu este corecta &mdash; este usor masluita. Ai aruncat-o de 100 de ori si a iesit cap de 55 de ori si pajura de 45 de ori. Deci, in timp, te astepti sa castigi 55% din cazuri si sa pierzi 45%.</p>
+
+<p>Acum, intrebarea este: <strong>cat din banii tai ar trebui sa pariezi de fiecare data pentru a-ti creste cat mai repede capitalul total, fara sa risti sa ramai pe drumuri?</strong></p>
+
+<p>Daca pariezi tot de fiecare data, vei da faliment in cele din urma cand apare o pajura &mdash; chiar daca e rara. Daca pariezi prea putin, iti vei creste banii incet. Criteriul Kelly raspunde: <strong>pariaza fractiunea din capitalul tau actual care maximizeaza rata de crestere pe termen lung.</strong></p>
+
+<p>Iata intuitia in termeni simpli: vrei sa pariezi o suma care iti ofera cea mai buna crestere compusa (compound growth) de-a lungul multor jocuri. Prea mult, si o singura aruncare nefavorabila te sterge de pe harta. Prea putin, si nu profiti destul de avantajul tau. Kelly gaseste mijlocul perfect.</p>
+
+<p>Gandeste-te la asta ca la udatul unei plante. Ai nevoie de suficienta apa ca sa o ajuti sa creasca, dar nu atat de multa incat sa ineci radacinile. Kelly iti spune cata &bdquo;apa&rdquo; (dimensiune a pariului) sa dai &bdquo;plantei&rdquo; tale (capitalului) ca sa creasca cel mai rapid fara sa putrezeasca.</p>
+
+<p>Sa revenim la moneda. Castigi 55% din cazuri, pierzi 45%. Cand castigi, obtii 90% din ce ai pariat. Cand pierzi, pierzi 100% din ce ai pariat.</p>
+
+<p>Kelly spune: fractiunea optima de pariat este:</p>
+
+<p>(b &middot; p &minus; q) / b</p>
+
+<p>Unde:</p>
+<ul>
+<li>p = probabilitatea de castig = 0,55;</li>
+<li>q = probabilitatea de pierdere = 0,45;</li>
+<li>b = cota neta primita pe pariu = 0,90 (castigi 90 de centi la un pariu de 1 dolar).</li>
+</ul>
+
+<p>Inlocuind cifrele:</p>
+
+<p>(0,90 &times; 0,55 &minus; 0,45) / 0,90 = (0,495 &minus; 0,45) / 0,90 = 0,045 / 0,90 = 0,05</p>
+
+<p>Deci ar trebui sa pariezi 5% din capitalul tau total la fiecare aruncare.</p>
+
+<p>De ce 5%? Pentru ca echilibreaza cresterea cu supravietuirea. Daca pariezi 5%, cresti incet dar sigur. Daca pariezi 10%, poate iti dublezi banii mai repede &mdash; dar o serie nefavorabila te-ar putea sterge. Kelly gaseste rata <strong>maxima</strong> de crestere pe care o poti sustine fara a risca ruina.</p>
+
+<p>Nu este vorba despre a avea dreptate de fiecare data. Este vorba despre a avea dreptate <strong>mai des decat gresesti</strong>, cu raportul corect recompensa-risc, si despre a dimensiona pariurile astfel incat castigurile sa se compuna fara sa explodezi.</p>
+
+<p>In tranzactionarea reala, &bdquo;pariurile&rdquo; pot fi tranzactii, dimensiuni ale pozitiilor sau chiar alocari intre strategii. Se aplica aceeasi idee: dimensioneaza-ti pozitiile astfel incat, de-a lungul multor repetari, capitalul tau total sa creasca cat mai repede posibil, fara sa te expui ruinei din cauza catorva rezultate nefavorabile.</p>
+
+<p>Dar atentie: Kelly presupune ca stii probabilitatile si castigurile reale. In viata reala, acestea sunt incerte. De aceea multi traderi folosesc <strong>Kelly fractionar</strong> &mdash; pariind jumatate sau o treime din suma Kelly &mdash; ca sa fie mai prudenti. Asta incetineste cresterea, dar protejeaza impotriva erorilor de estimare.</p>
+
+<p>Deci intuitia este simpla: Kelly iti spune cat sa-ti &bdquo;hranesti&rdquo; capitalul ca sa creasca cel mai rapid fara sa se sufoce de risc. Nu este vorba sa castigi fiecare pariu &mdash; este vorba sa joci sansele intr-un mod care lasa compunerea sa lucreze in favoarea ta de-a lungul timpului.</p>
+
+<h2>Cum functioneaza &mdash; mecanica</h2>
+
+<p>Criteriul Kelly este o formula matematica folosita pentru a determina dimensiunea optima a unui pariu, avand in vedere probabilitatea de castig si probabilitatea de pierdere. Formula poarta numele lui John Larry Kelly Jr., care a propus-o prima data in anii 1950 ca modalitate de a maximiza rata de crestere a unei serii de pariuri.</p>
+
+<p>Pentru a aplica criteriul Kelly, trebuie sa cunosti urmatoarele date de intrare:</p>
+
+<ol>
+<li><strong>Probabilitatea de castig (p)</strong>: probabilitatea ca pariul sa fie castigator, exprimata ca zecimala (de exemplu, 0,6 pentru o sansa de 60%).</li>
+<li><strong>Probabilitatea de pierdere (q)</strong>: probabilitatea ca pariul sa fie pierzator, egala cu 1 minus probabilitatea de castig (de exemplu, 1 &minus; 0,6 = 0,4 pentru o sansa de castig de 60%).</li>
+<li><strong>Avantajul (e)</strong>: randamentul asteptat al investitiei (ROI) al pariului, exprimat ca zecimala (de exemplu, 0,02 pentru un avantaj de 2%). Avantajul este diferenta dintre probabilitatea de castig si probabilitatea de pierdere, inmultita cu miza.</li>
+<li><strong>Miza (s)</strong>: suma de bani pe care esti dispus sa o pariezi.</li>
+</ol>
+
+<p>Procesul de aplicare a criteriului Kelly presupune urmatorii pasi:</p>
+
+<ol>
+<li>Calculeaza <strong>raportul informational (information ratio, IR)</strong>, care este raportul dintre avantaj si radacina patrata a probabilitatii de pierdere: IR = e / sqrt(q).</li>
+<li>Calculeaza <strong>fractiunea Kelly (f)</strong>, care este fractiunea optima de capital de pariat: f = (b&times;p &minus; q) / b, unde b reprezinta cota neta (profitul per unitate mizata).</li>
+<li>Calculeaza <strong>miza optima (s_opt)</strong>, suma de bani pe care ar trebui sa o pariezi pentru a maximiza cresterea: s_opt = s &times; f.</li>
+</ol>
+
+<p>Rezultatul criteriului Kelly este miza optima, pe care ar trebui sa o pariezi pentru a maximiza cresterea. Totusi, este esential de retinut ca acest criteriu presupune o serie de pariuri cu rezultate independente si nu este potrivit pentru pariuri cu rezultate corelate sau pentru cele care implica mai multe pariuri cu probabilitati de castig diferite.</p>
+
+<p>In practica, poti folosi criteriul Kelly pentru a determina miza optima a unui singur pariu introducand datele de intrare si urmand pasii descrisi mai sus. Insa este esential de inteles ca acest criteriu este o formula matematica, nu o garantie a succesului. Rezultatul efectiv al unui pariu poate diferi de cel asteptat, asa ca este esential sa gestionezi riscul si sa-ti stabilesti un buget pentru pariuri.</p>
+
+<p>Pentru a ilustra mecanica criteriului Kelly, sa luam un exemplu. Sa presupunem ca ai un pariu cu o sansa de castig de 60% (p = 0,6) si o sansa de pierdere de 40% (q = 0,4). Avantajul este de 2% (e = 0,02), iar tu esti dispus sa pariezi 100 de dolari. Pentru a aplica criteriul Kelly, vei calcula mai intai raportul informational (IR = 0,02 / sqrt(0,4) = 0,05) si fractiunea Kelly (f = (0,6 &minus; 0,4) / (1 &minus; 0,4) = 0,4). Apoi vei calcula miza optima (s_opt = 100 dolari &times; 0,4 = 40 de dolari). In acest caz, miza optima este de 40 de dolari, suma pe care ar trebui sa o pariezi pentru a maximiza cresterea. Insa, asa cum am mentionat, rezultatul efectiv al pariului poate diferi de cel asteptat, deci este esential sa gestionezi riscul si sa stabilesti un buget.</p>
+
+<h2>Exemplu rezolvat</h2>
+
+<p>Exemplu rezolvat: aplicarea criteriului Kelly pentru optimizarea dimensiunii pariului.</p>
+
+<p>Pentru a ilustra aplicarea practica a criteriului Kelly, sa luam un scenariu ipotetic. Imagineaza-ti ca suntem un trader si analizam un pariu pe o actiune populara. Am analizat piata si credem ca probabilitatea ca actiunea sa creasca in valoare in trimestrul urmator este de 60%. Suntem, de asemenea, increzatori ca, daca va creste in valoare, va urca cu 20%.</p>
+
+<p>Contul nostru de tranzactionare are un sold de 10.000 &pound;, iar noi luam in considerare un singur pariu. Vrem sa determinam dimensiunea optima a pariului folosind criteriul Kelly.</p>
+
+<h3>Pasul 1: Defineste variabilele</h3>
+
+<ul>
+<li>Soldul actual al contului nostru: 10.000 &pound;;</li>
+<li>Probabilitatea ca actiunea sa creasca in valoare: 60% sau 0,6;</li>
+<li>Castigul potential daca actiunea creste in valoare: 20% sau 0,2;</li>
+<li>Pierderea potentiala daca actiunea scade in valoare: &minus;10% sau &minus;0,1 (vom presupune o pierdere simetrica, pentru simplitate).</li>
+</ul>
+
+<h3>Pasul 2: Calculeaza fractiunea de capital de pariat</h3>
+
+<p>Fractiunea Kelly, adica fractiunea din capitalul nostru de pariat, este data de formula:</p>
+
+<p>f = (b&times;p &minus; q) / b</p>
+
+<p>unde:</p>
+<ul>
+<li>f = fractiunea Kelly;</li>
+<li>b = castigul potential (in forma zecimala);</li>
+<li>p = probabilitatea de castig;</li>
+<li>q = probabilitatea de pierdere (1 &minus; p).</li>
+</ul>
+
+<p>Inlocuind valorile noastre, obtinem:</p>
+
+<p>f = (0,6 &times; 0,2 &minus; 0,4 &times; 0,1) / 0,2<br>
+f = (0,12 &minus; 0,04) / 0,2<br>
+f = 0,08 / 0,2<br>
+f = 0,4</p>
+
+<p>Asta inseamna ca ar trebui sa pariem 40% din capitalul nostru, adica 4.000 &pound;.</p>
+
+<h3>Pasul 3: Calculeaza dimensiunea optima a pariului</h3>
+
+<p>Pentru a afla dimensiunea optima a pariului, inmultim fractiunea Kelly cu soldul actual al contului:</p>
+
+<p>Dimensiunea optima a pariului = fractiunea Kelly &times; soldul contului = 0,4 &times; 10.000 &pound; = 4.000 &pound;</p>
+
+<p>Prin urmare, dimensiunea optima a pariului pentru aceasta tranzactie este de 4.000 &pound;.</p>
+
+<h3>Pasul 4: Cantareste compromisul dintre risc si recompensa</h3>
+
+<p>Este esential sa ne amintim ca criteriul Kelly este o formula de dimensionare optima, nu o garantie a succesului. Pariind 40% din capital, ne asumam un nivel mai ridicat de risc. Daca actiunea scade in valoare, vom pierde 4.000 &pound;, adica 40% din capitalul nostru initial.</p>
+
+<p>Pe de alta parte, daca actiunea creste in valoare, vom castiga (un castig considerabil raportat la investitia initiala). In acest exemplu, am aplicat criteriul Kelly pentru a determina dimensiunea optima a pariului pentru o singura tranzactie. Folosind aceasta formula, ne-am echilibrat asteptarile de risc si recompensa, asumandu-ne un nivel mai ridicat de risc in cautarea unui castig potential mai mare. Totusi, este esential de retinut ca criteriul Kelly este doar un instrument, iar eficacitatea lui depinde de acuratetea analizei noastre de piata si de ipotezele pe care le facem despre piata.</p>
+
+<h2>Un al doilea scenariu</h2>
+
+<p>Sa trecem la un birou (desk) care tranzactioneaza credit default swaps (CDS) pe corporatii europene. Biroul tocmai a cumparat protectie pe un emitent cu rating BBB, cu scadenta la cinci ani. Prima initiala (upfront premium) cotata este de 200 de puncte de baza (bps), adica 2% din valoarea nominala (notional). Orice trader stie ca, prin conventie, se coteaza &bdquo;CDS pe 5 ani se tranzactioneaza la 200 bps&rdquo;, chiar daca suma reala schimbata este valoarea prezenta a spreadului de 200 bps esalonat pe cinci ani. Pentru dimensionare ne intereseaza doar castigul sau pierderea dintr-o singura perioada, asa ca vom trata cele 200 bps ca payoff dintr-o perioada daca creditul supravietuieste si pierdere de 100% din nominal daca emitentul intra in incapacitate de plata (default).</p>
+
+<p>Datele istorice din ultimii zece ani arata 3 defaulturi din 120 de emitenti BBB, ceea ce da o probabilitate empirica de default p = 3 / 120 = 0,025 (2,5%). Rata de recuperare (recovery rate), tot din acelasi set de date, este in medie de 40%, deci pierderea in caz de default (loss given default, LGD) este de 60% din nominal. Avem prin urmare:</p>
+
+<ul>
+<li>Probabilitatea rezultatului bun (fara default): 1 &minus; p = 0,975;</li>
+<li>Payoff daca e bun: +2% din nominal (prima incasata);</li>
+<li>Payoff daca e rau: &minus;60% din nominal (LGD).</li>
+</ul>
+
+<p>Inlocuind in formula Kelly:</p>
+
+<p>f* = p &minus; (1 &minus; p)/b<br>
+unde b = (payoff daca e bun) / (pierdere daca e rau) = 0,02 / 0,60 &asymp; 0,0333</p>
+
+<p>f* = 0,025 &minus; (0,975 / 0,0333) &asymp; 0,025 &minus; 29,28 &asymp; &minus;29,25</p>
+
+<p>O fractiune negativa este primul clopot de alarma. Ne spune ca avantajul este de fapt negativ: in medie pierdem bani pe fiecare unitate de nominal riscata. Asadar, traderul ar trebui sa se retraga, nu sa dimensioneze ceva. In practica, biroul ar cota un spread mai larg sau ar refuza tranzactia, in loc sa parieze impotriva ratei istorice de default.</p>
+
+<h3>Caz limita: &bdquo;problema esantionului mic&rdquo;</h3>
+
+<p>Sa luam acum un al doilea nume CDS pentru care avem doar doi ani de date, pentru ca emitentul a intrat de curand in indice. In acei doi ani, emitentul a intrat in default o data. Numarul brut de defaulturi este 1 din 2, ceea ce da p = 0,50 (50%). Recuperarea este iar presupusa la 40%, deci LGD = 60%. Prima initiala este de 300 bps.</p>
+
+<p>b = 0,03 / 0,60 = 0,05</p>
+
+<p>f* = 0,50 &minus; (0,50 / 0,05) = 0,50 &minus; 10 = &minus;9,50</p>
+
+<p>Din nou negativ, deci niciun pariu. Dar aici dimensiunea esantionului este periculos de mica. Un singur an in plus fara default ar reduce p la 1/3 si:</p>
+
+<p>f* = 1/3 &minus; (2/3)/0,05 &asymp; 0,333 &minus; 13,33 &asymp; &minus;13,00</p>
+
+<p>Tot negativ. Doi ani in plus fara default (p = 1/4):</p>
+
+<p>f* = 0,25 &minus; (0,75 / 0,05) = 0,25 &minus; 15 = &minus;14,75</p>
+
+<p>Abia cand ajungem la p = 0,60 (trei defaulturi din cinci) trecem pe pozitiv? Sa verificam:</p>
+
+<p>f* = 0,60 &minus; (0,40 / 0,05) = 0,60 &minus; 8 = &minus;7,40</p>
+
+<p>Tot negativ! La p = 0,70:</p>
+
+<p>f* = 0,70 &minus; (0,30 / 0,05) = 0,70 &minus; 6 = &minus;5,30</p>
+
+<p>La p = 0,80:</p>
+
+<p>f* = 0,80 &minus; (0,20 / 0,05) = 0,80 &minus; 4 = &minus;3,20</p>
+
+<p>In sfarsit, la p = 0,90:</p>
+
+<p>f* = 0,90 &minus; (0,10 / 0,05) = 0,90 &minus; 2 = &minus;1,10</p>
+
+<p>Abia la p = 0,95 Kelly se apropie de pozitiv:</p>
+
+<p>f* = 0,95 &minus; (0,05 / 0,05) = 0,95 &minus; 1 = &minus;0,05 (tot negativ, la limita)</p>
+
+<p>La p = 0,96:</p>
+
+<p>f* = 0,96 &minus; (0,04 / 0,05) = 0,96 &minus; 0,80 = +0,16</p>
+
+<p>Ce invata biroul este ca, la o LGD atat de mare (60%) si la un esantion mic si volatil, probabilitatea de prag de rentabilitate (break-even) este de 96%. Daca traderul nu este convins ca probabilitatea reala de default este de cel putin 96%, Kelly spune &bdquo;nu tranzactiona&rdquo;. In limbaj simplu: esantionul istoric este prea zgomotos pentru a justifica orice dimensiune a pozitiei mai mare decat zero.</p>
+
+<h3>Concluzia practica</h3>
+
+<p>Cand fractiunea Kelly este negativa sau extrem de mica, tranzactia nu este doar neatractiva &mdash; este dominata statistic. Traderul ar trebui fie (a) sa largeasca spreadul ca sa creasca b, fie (b) sa astepte mai multe date ca sa rafineze p, fie (c) sa refuze direct tranzactia. Niciodata nu &bdquo;dimensiona la jumatate&rdquo; o tranzactie pe care Kelly o respinge; formula tine deja cont de intregul risc de ruina.</p>
+
+<h2>Greseli si conceptii gresite frecvente</h2>
+
+<p><strong>1. Folosirea ratei brute de castig ca &bdquo;p&rdquo;</strong><br>
+Instinctul incepatorului: &bdquo;Castig 60% din timp, deci p = 0,60.&rdquo;<br>
+De ce e gresit: p este probabilitatea de a castiga pariul, nu rata istorica de castig. Daca pierzi 3% din capital la fiecare tranzactie pierzatoare, probabilitatea reala a unui rezultat pozitiv este mai mica decat rata bruta de reusita. Elimina intotdeauna comisioanele, alunecarea de pret (slippage) si riscul de ruina inainte de a introduce un numar in formula.</p>
+
+<p><strong>2. Tratarea fractiunii Kelly ca tinta de miza, nu ca limita</strong><br>
+Instinctul incepatorului: &bdquo;Kelly spune 0,25, deci voi paria 25% din capital de fiecare data.&rdquo;<br>
+De ce e gresit: Kelly este un maximizator al cresterii pe termen lung, nu o dimensiune de pozitie pe care trebuie sa o atingi la fiecare tranzactie. In practica, ar trebui sa rotunjesti agresiv in jos &mdash; deseori la jumatate de Kelly sau chiar un sfert de Kelly &mdash; pentru ca avantajul real nu se cunoaste niciodata exact, iar formula presupune ca nu exista eroare de estimare. Supradimensionarea transforma un avantaj usor intr-o sansa mare de a exploda.</p>
+
+<p><strong>3. Ignorarea corelatiei dintre pariuri</strong><br>
+Instinctul incepatorului: &bdquo;Am calculat Kelly pentru aceasta tranzactie; voi folosi aceeasi dimensiune si la urmatoarea.&rdquo;<br>
+De ce e gresit: Kelly presupune independenta. Daca doua tranzactii sunt corelate pozitiv (de exemplu, doua tranzactii de credit din acelasi sector), riscul combinat este mai mare decat suma partilor. Trebuie sa reduci dimensiunea pozitiei sau sa agregi pozitiile intr-un singur pariu &bdquo;de portofoliu&rdquo; inainte de a aplica Kelly.</p>
+
+<p><strong>4. Folosirea preturilor de inchidere in loc de preturile de intrare</strong><br>
+Instinctul incepatorului: &bdquo;Ma uit la inchiderea de ieri; probabilitatea mea de castig este 55%.&rdquo;<br>
+De ce e gresit: fractiunea Kelly se bazeaza pe pretul la care intri si iesi efectiv. Daca cumperi la 100 si iesi la stop la 95, pierderea de 5% &mdash; nu intervalul zilnic de inchidere &mdash; este ceea ce conteaza. Inregistreaza intotdeauna pretul de intrare, pretul de stop-loss si pretul-tinta pentru fiecare ordin.</p>
+
+<p><strong>5. Uitarea ca formula are nevoie de rezultate in bani, nu in procente</strong><br>
+Instinctul incepatorului: &bdquo;Avantajul meu este 2% per tranzactie; voi folosi p = 0,52 si b = 0,02.&rdquo;<br>
+De ce e gresit: b trebuie sa fie raportul dintre profitul asteptat si pierderea asteptata exprimat in termeni monetari, nu procente. Daca risti 100 de dolari ca sa castigi 120, atunci b = 120/100 = 1,20, indiferent cat de mare este suma de 100 de dolari raportata la capitalul tau. Introducand 0,02 aici, obtii o fractiune complet gresita.</p>
+
+<p><strong>6. Convingerea ca Kelly este optim pentru fiecare pariu izolat</strong><br>
+Instinctul incepatorului: &bdquo;Kelly spune 0,12, deci voi paria exact atat la fiecare tranzactie.&rdquo;<br>
+De ce e gresit: Kelly maximizeaza cresterea pe termen lung a capitalului, nu rezultatul urmatoarei tranzactii. Daca mai ai un singur pariu in cont, Kelly poate recomanda sa pariezi totul, ceea ce este evident imprudent. Impune intotdeauna o dimensiune maxima a pariului (de exemplu, 5% din capital sau cel mai mic nominal care te tine in limitele de risc), chiar daca formula sugereaza mai mult.</p>
+
+<p><strong>7. Confundarea &bdquo;avantajului&rdquo; cu &bdquo;rata de castig&rdquo;</strong><br>
+Instinctul incepatorului: &bdquo;Am o rata de castig de 60%, deci am avantaj.&rdquo;<br>
+De ce e gresit: avantajul este (p &times; profit) &minus; (1 &minus; p) &times; pierdere. O rata de castig de 60% cu un raport de plata de 1:1 este la prag de rentabilitate. Ai nevoie fie de o rata de castig mai mare, fie de un castig mediu mai mare fata de pierderea medie. Calculeaza intotdeauna valoarea asteptata in bani inainte de a alimenta p si b in Kelly.</p>
+
+<p><strong>8. Neactualizarea parametrilor dupa fiecare tranzactie</strong><br>
+Instinctul incepatorului: &bdquo;Am facut calculul Kelly o data, la inceputul lunii, si il voi folosi toata luna.&rdquo;<br>
+De ce e gresit: probabilitatea de castig si raportul de plata se schimba odata cu regimul de piata, volatilitatea si propria ta curba de competenta. Reestimeaza p si b dupa fiecare tranzactie inchisa si ajusteaza fractiunea in consecinta. O dimensiune Kelly statica devine rapid sub-optima.</p>
+
+<p><strong>9. Supraoptimizarea datelor de intrare</strong><br>
+Instinctul incepatorului: &bdquo;Voi rula un backtest si voi alege p si b care dau cel mai mare randament.&rdquo;<br>
+De ce e gresit: datele de intrare optimizate se suprapotrivesc (overfit) pe esantionul specific. Parametrii reali se afla intr-un interval de incredere, nu intr-un singur punct. Foloseste estimari conservatoare &mdash; rotunjeste p in jos, rotunjeste b in jos &mdash; si adauga o marja de siguranta de 10-20% la fractiunea finala pentru a tine cont de eroarea de estimare.</p>
+
+<p><strong>10. Ignorarea diferentei dintre &bdquo;Kelly complet&rdquo; si &bdquo;Kelly fractionar&rdquo;</strong><br>
+Instinctul incepatorului: &bdquo;Kelly spune 0,30, deci voi paria 30%.&rdquo;<br>
+De ce e gresit: Kelly complet (full Kelly) este o limita teoretica. In practica, ar trebui sa folosesti cel mult jumatate de Kelly (0,15 in acest exemplu), cu exceptia cazului in care ai mii de pariuri independente si poti tolera o volatilitate ridicata. Incepe cu un sfert de Kelly (0,075) si creste doar daca toleranta ta la scaderi (drawdown) si baza de capital iti permit.</p>
+
+<p>Lista rapida de verificare inainte sa apesi &bdquo;trimite&rdquo;:</p>
+<ul>
+<li>Am folosit pretul de intrare si pretul de stop-loss, nu preturile de inchidere?</li>
+<li>Am masurat profitul si pierderea in bani, nu in procente?</li>
+<li>Am eliminat comisioanele si alunecarea de pret din raportul de plata?</li>
+<li>Am rotunjit fractiunea in jos, nu in sus?</li>
+<li>Am stabilit o dimensiune maxima a pariului mai mica decat numarul brut Kelly?</li>
+</ul>
+<p>Daca raspunsul la oricare este &bdquo;nu&rdquo;, nu tranzactiona.</p>
+
+<h2>Cum foloseste biroul de tranzactionare criteriul</h2>
+
+<p>Criteriul Kelly este o formula matematica folosita pentru a determina dimensiunea optima a unui singur pariu pe o piata data. Desi poate parea un concept matematic complicat, in practica, biroul de tranzactionare (trading desk) il foloseste ca instrument pentru a lua decizii informate despre dimensionarea pozitiilor. Iata cum este folosit in scenarii reale de tranzactionare:</p>
+
+<p><strong>Gestionarea riscului</strong>: criteriul Kelly este adesea folosit ca instrument de gestionare a riscului pentru a determina dimensiunea optima a pariului in functie de capitalul disponibil si de castigul potential. Biroul il foloseste pentru a se asigura ca dimensiunea pariului nu este nici prea mare, ceea ce ar putea duce la pierderi semnificative, nici prea mica, ceea ce ar duce la oportunitati ratate.</p>
+
+<p><strong>Dimensionarea pozitiilor</strong>: criteriul Kelly este folosit pentru a determina dimensiunea optima a pozitiei pentru un anumit pariu. Asta implica calcularea fractiunii din capitalul disponibil care ar trebui alocata pariului. Biroul foloseste acest calcul pentru a determina numarul optim de contracte sau unitati de cumparat sau vandut.</p>
+
+<p><strong>Analiza de piata</strong>: inainte de a aplica criteriul Kelly, biroul efectueaza o analiza amanuntita a pietei pentru a estima castigul potential si probabilitatea de succes. Asta implica analizarea tendintelor pietei, a stirilor si a altor factori relevanti pentru a determina probabilitatea ca pariul sa fie castigator.</p>
+
+<p><strong>Exemplu din lumea reala</strong>: sa spunem ca biroul ia in considerare un pariu pe o actiune asteptata sa creasca cu 10% in saptamana urmatoare. Probabilitatea de succes este estimata la 60%, iar castigul potential este de 12%. Folosind criteriul Kelly, biroul calculeaza dimensiunea optima a pariului ca fractiune din capitalul disponibil. In acest caz, calculul ar fi:</p>
+
+<p>f = (b &times; p &minus; q) / b</p>
+
+<p>unde f este fractiunea optima de capital de alocat, p este probabilitatea de succes (0,6), q este probabilitatea de pierdere (0,4), iar b reprezinta cota neta (profitul per unitate mizata). Inlocuind numerele, biroul calculeaza f la aproximativ 0,25. Asta inseamna ca dimensiunea optima a pariului este 25% din capitalul disponibil.</p>
+
+<p><strong>Sincronizarea (timing)</strong>: biroul foloseste criteriul Kelly si pentru a determina momentul optim al pariului. Asta implica analizarea conditiilor de piata si estimarea probabilitatii ca pariul sa fie castigator pe baza mediului de piata actual.</p>
+
+<p><strong>Considerente practice</strong>: desi criteriul Kelly ofera un cadru matematic pentru determinarea dimensiunii optime a pariului, biroul ia in considerare si aspecte practice precum lichiditatea, volatilitatea si conditiile de piata. Acesti factori pot influenta dimensiunea efectiva a pariului si castigul potential.</p>
+
+<p>Pe scurt, criteriul Kelly este un instrument valoros pentru biroul de tranzactionare in determinarea dimensiunii optime a unui singur pariu. Combinandu-l cu o analiza amanuntita a pietei si cu considerente practice, biroul poate lua decizii informate despre dimensionarea pozitiilor si gestionarea riscului. Totusi, este esential de retinut ca acest criteriu este o formula matematica, iar aplicarea lui ar trebui temperata cu prudenta si cu o intelegere profunda a dinamicii pietei.</p>
+
+<h2>Limite, avertismente si cand esueaza</h2>
+
+<p>Kelly este un instrument taios ca un brici, dar nu este un panaceu universal. Fiecare birou care se bazeaza pe el tine o lista scurta de limite stricte lipita pe monitor; daca apare oricare dintre ele, formula trebuie pusa deoparte pana se schimba regimul.</p>
+
+<p><strong>1. Avantajul este necunoscut sau instabil</strong><br>
+Kelly presupune ca iti cunosti deja avantajul real: profitul asteptat per unitate pariata. Pe un birou de tranzactionare, acest avantaj este rareori un numar fix. El se modifica odata cu regimul de piata, aglomerarea (crowding), latenta, socurile de reglementare sau pur si simplu trecerea timpului. Cand avantajul se schimba mai repede decat poti recalcula fractiunea, rezultatul Kelly devine zgomot. Un birou care isi repozitioneaza orbeste portofoliul in fiecare ora va rasuci cartea de tranzactii si va plati spreadul bid-ask fara niciun castig net. Regula: nu folosi Kelly decat daca poti estima avantajul cu o fereastra mobila a carei lungime este de cel putin zece ori timpul caracteristic de descompunere al avantajului.</p>
+
+<p><strong>2. Riscul de coada (tail risk) este mare si neacoperit</strong><br>
+Kelly este derivat din primele doua momente ale distributiei randamentelor; ignora tot ce este dincolo de medie si varianta. Daca al treilea moment (asimetria, skew) sau al patrulea moment (boltirea, kurtosis) este mare, riscul real de ruina poate fi mult mai mare decat prezice formula. Un exemplu clasic este o strategie de volatilitate scurta (short volatility): profitul asteptat este mic dar pozitiv, in timp ce o miscare brusca ocazionala (gap) poate sterge luni intregi de castiguri. Kelly va prescrie cu bucurie o pozitie mare pentru ca media este pozitiva, dar biroul va suferi un soc de profit/pierdere despre care formula nu a avertizat niciodata. Mitigare: plafoneaza fractiunea Kelly la o fractiune mica din capital (de exemplu, 10%) ori de cate ori indicatorul Sharpe al strategiei este sub 1 sau indexul de coada este sub 3.</p>
+
+<p><strong>3. Lichiditatea si impactul asupra pietei</strong><br>
+Kelly presupune ca poti scala pariul fara sa misti pretul. In practica, fiecare unitate suplimentara de dimensiune impinge piata impotriva ta. Un birou care foloseste Kelly pe o carte ilichida va constata ca avantajul realizat se prabuseste odata ce se include impactul. Corectia corecta este sa inlocuiesti avantajul teoretic cu un avantaj dupa impact (after-impact edge), strict mai mic; Kelly micsoreaza atunci pozitia in consecinta. Daca impactul este convex (frecvent pe pietele electronice), fractiunea optima este mai mica decat valoarea Kelly naiva si poate fi chiar zero pentru pariuri mari.</p>
+
+<p><strong>4. Incertitudinea parametrilor si eroarea de estimare</strong><br>
+Kelly este extrem de sensibil la datele de intrare p si b. O supraestimare de 5% a lui p dubleaza fractiunea pentru p mic; o subestimare de 5% a lui b o injumatateste. In practica, p si b sunt estimate dintr-un esantion finit de tranzactii, deci poarta o eroare statistica. Un birou care foloseste estimarea directa fara un interval de incredere pariaza pe parametri, nu pe tranzactie. O masura de siguranta simpla este sa rulezi un test Monte-Carlo asupra datelor de intrare si sa iei percentila a 5-a a distributiei rezultate ca fractiune conservatoare. Daca percentila a 5-a este negativa, tranzactia nu este optima Kelly la niciun nivel rezonabil de incredere.</p>
+
+<p><strong>5. Costurile de tranzactionare si finantarea</strong><br>
+Kelly ignora costul dus-intors al deschiderii si inchiderii pariului. Cand costurile sunt mari (de exemplu, futures pe companii mici sau swapuri OTC), avantajul efectiv se micsoreaza si dimensiunea optima se micsoreaza odata cu el. Conteaza si costurile de finantare: daca pariul este finantat cu bani imprumutati, costul de carry reduce avantajul net. Kelly trebuie rulat pe avantajul net de costuri, nu pe avantajul brut.</p>
+
+<p><strong>6. Schimbarile de regim si nestationaritatea</strong><br>
+Pietele nu sunt stationare; procesul care ti-a generat avantajul ieri s-ar putea sa nu mai existe maine. Kelly presupune ca distributia este stabila. Cand are loc o schimbare de regim &mdash; de volatilitate, de corelatie, de reglementare &mdash; valorile istorice p si b nu mai sunt valabile. Un birou care continua sa foloseasca vechea fractiune Kelly va fi supra- sau sub-dimensionat pana cand noul regim este detectat si parametrii sunt reestimati. O solutie practica este sa rulezi Kelly doar pe strategiile care au trecut un test de stabilitate (de exemplu, un test CUSUM pe indicatorul Sharpe) si sa suspenzi fractiunea in perioadele semnalate de test.</p>
+
+<p><strong>7. Limitele psihologice si operationale</strong><br>
+Kelly este un optim matematic, nu unul psihologic. Un trader care nu se simte confortabil cu fractiunea prescrisa va pune la indoiala pozitia si poate iesi prematur, distrugand avantajul. Invers, un trader care crede ca formula este infailibila poate ignora limitele de risc si poate supralevereaza. Asadar, biroul trebuie sa combine Kelly cu limite de risc stricte si cu un angajament prealabil fata de dimensiunea pozitiei inainte de a intra in tranzactie. Kelly este un ghid, nu o porunca.</p>
+
+<p>Pe scurt, Kelly este un instrument puternic de dimensionare a unui singur pariu, dar esueaza ori de cate ori se incalca ipotezele de avantaj cunoscut si stabil, executie lichida si risc de coada neglijabil. Sarcina biroului este sa monitorizeze aceste ipoteze continuu; cand oricare dintre ele se rupe, fractiunea Kelly trebuie suprascrisa sau suspendata. Formula in sine nu te avertizeaza &mdash; depinde de trader sa stie cand sa o puna deoparte.</p>
+
+<h2>Concluzii cheie</h2>
+
+<p>Criteriul Kelly este o formula matematica ce ii ajuta pe traderi sa determine dimensiunea optima a unui singur pariu pentru a-si maximiza rata de crestere asteptata. Pentru a aplica eficient criteriul Kelly, retine urmatoarele concluzii cheie:</p>
+
+<ul>
+<li><strong>Intelege avantajul</strong>: criteriul Kelly presupune ca ai un avantaj pozitiv, adica probabilitatea ta de castig este mai mare decat probabilitatea de pierdere. Daca nu ai un avantaj pozitiv, criteriul Kelly poate sa nu fie potrivit pentru strategia ta.</li>
+
+<li><strong>Cunoaste-ti probabilitatea de castig</strong>: criteriul Kelly iti cere sa estimezi probabilitatea de castig (p) si probabilitatea de pierdere (q). Asigura-te ca ai o metoda de incredere pentru a estima aceste probabilitati, deoarece acuratetea estimarilor influenteaza direct eficacitatea criteriului.</li>
+
+<li><strong>Calculeaza fractiunea optima</strong>: formula criteriului Kelly calculeaza fractiunea optima din capitalul tau de pariat. Aceasta fractiune este o valoare zecimala intre 0 si 1, unde 0 inseamna sa nu pariezi deloc, iar 1 inseamna sa pariezi tot capitalul.</li>
+
+<li><strong>Nu paria mai mult decat iti permiti sa pierzi</strong>: criteriul Kelly este o formula matematica, dar este esential sa retii ca ramane totusi un pariu. Nu paria niciodata mai mult decat iti permiti sa pierzi, deoarece criteriul Kelly nu tine cont de riscul de ruina sau de factorii emotionali.</li>
+
+<li><strong>Fii prudent cu abordarea &bdquo;totul sau nimic&rdquo;</strong>: criteriul Kelly presupune ca vei continua sa pariezi cu aceeasi fractiune optima pana iti atingi tinta sau pierzi tot capitalul. Insa aceasta abordare &bdquo;totul sau nimic&rdquo; poate sa nu fie potrivita pentru toti traderii, mai ales pentru cei care prefera sa gestioneze riscul sau sa-si ajusteze pariurile in functie de conditiile pietei.</li>
+
+<li><strong>Monitorizeaza si ajusteaza</strong>: criteriul Kelly este o formula dinamica ce necesita monitorizare si ajustare regulata. Pe masura ce avantajul si probabilitatea ta de castig se schimba, s-ar putea sa fie nevoie sa recalculezi fractiunea optima pentru a mentine o crestere optima.</li>
+
+<li><strong>Nu complica</strong>: criteriul Kelly este un instrument simplu, dar puternic, de optimizare a dimensiunii pariurilor. Evita sa complici formula sau sa incerci sa o aplici unor strategii complexe. Ramai la elementele de baza si concentreaza-te pe luarea unor decizii informate.</li>
+
+<li><strong>Foloseste-l ca ghid, nu ca regula stricta</strong>: criteriul Kelly este o formula matematica, nu o regula batuta in cuie. Foloseste-l ca ghid pentru a lua decizii informate, dar fii pregatit sa-ti ajustezi abordarea in functie de conditiile pietei si de stilul tau individual de tranzactionare.</li>
+</ul>
+
+<p>Urmand aceste concluzii cheie, poti aplica eficient criteriul Kelly pentru a-ti optimiza dimensiunea pariurilor si a-ti maximiza rata de crestere asteptata. Tine minte sa ramai prudent, sa monitorizezi si sa ajustezi regulat si sa nu pariezi niciodata mai mult decat iti permiti sa pierzi.</p><script type="application/json" id="cf-mc-quiz">[{"q": "Ce determina, in esenta, criteriul Kelly?", "options": ["Fractiunea optima din capital de pariat pentru a maximiza cresterea pe termen lung", "Momentul exact in care piata va atinge un maxim", "Pretul-tinta al unei actiuni dupa un trimestru", "Rata dobanzii fara risc folosita la actualizare"], "correct": 0, "explain": "Kelly raspunde la intrebarea cat din capitalul actual sa pariezi pentru a maximiza rata de crestere compusa pe termen lung, fara a risca ruina.", "kind": "concept"}, {"q": "In formula Kelly k = (b*p - q) / b, ce reprezinta b?", "options": ["Cota neta primita pe pariu, adica profitul per unitate mizata", "Soldul total al contului de tranzactionare", "Probabilitatea de pierdere a pariului", "Numarul de tranzactii dintr-un an"], "correct": 0, "explain": "b este cota neta (net odds), adica profitul net obtinut per unitate mizata atunci cand pariul este castigator.", "kind": "text"}, {"q": "De ce pariul cu intregul capital de fiecare data duce, in cele din urma, la ruina?", "options": ["Pentru ca o singura tranzactie pierzatoare iti sterge tot capitalul, oricat de rara ar fi", "Pentru ca comisioanele depasesc intotdeauna castigul", "Pentru ca brokerul interzice pozitii mari", "Pentru ca probabilitatea de castig devine zero"], "correct": 0, "explain": "Daca pariezi tot, este suficient un singur rezultat nefavorabil (oricat de putin probabil) pentru a pierde tot capitalul si a opri compunerea.", "kind": "concept"}, {"q": "In exemplul cu moneda (castig 55%, profit 90% la castig), ce fractiune recomanda Kelly?", "options": ["5% din capital la fiecare aruncare", "55% din capital", "45% din capital", "90% din capital"], "correct": 0, "explain": "(0,90 x 0,55 - 0,45)/0,90 = 0,045/0,90 = 0,05, deci 5% din capital pe fiecare aruncare.", "kind": "text"}, {"q": "De ce multi traderi profesionisti folosesc Kelly fractionar (jumatate sau o treime din suma Kelly)?", "options": ["Pentru a se proteja impotriva erorilor de estimare a probabilitatilor si castigurilor reale", "Pentru ca brokerul le ofera comisioane mai mici", "Pentru ca formula completa este ilegala", "Pentru a creste mai repede capitalul"], "correct": 0, "explain": "In realitate p si b nu se cunosc exact; Kelly fractionar incetineste cresterea dar reduce riscul de ruina cauzat de erorile de estimare.", "kind": "concept"}, {"q": "Ce este avantajul (edge) in contextul criteriului Kelly?", "options": ["Diferenta dintre valoarea asteptata a pariului si zero", "Rata istorica bruta de castig a traderului", "Comisionul perceput de broker", "Volatilitatea zilnica a actiunii"], "correct": 0, "explain": "Avantajul este suma cu care un pariu este asteptat sa returneze peste miza; un avantaj pozitiv inseamna un pariu bun.", "kind": "text"}, {"q": "De ce este gresit sa confunzi rata de castig de 60% cu un avantaj?", "options": ["Pentru ca o rata de 60% cu raport de plata 1:1 este doar la prag de rentabilitate", "Pentru ca 60% este intotdeauna prea putin", "Pentru ca rata de castig nu poate depasi 50%", "Pentru ca avantajul se masoara doar in procente"], "correct": 0, "explain": "Avantajul = (p x profit) - (1-p) x pierdere. Cu plata 1:1 si 60% castig, EV iese aproape zero; ai nevoie de win-rate mai mare sau castig mediu mai mare.", "kind": "concept"}, {"q": "In al doilea scenariu (CDS pe emitent BBB), de ce fractiunea Kelly iese negativa?", "options": ["Pentru ca avantajul este de fapt negativ: in medie se pierd bani per unitate de nominal riscata", "Pentru ca prima initiala era prea mare", "Pentru ca rata de recuperare era 100%", "Pentru ca scadenta era prea scurta"], "correct": 0, "explain": "O LGD de 60% fata de o prima de doar 2% face ca valoarea asteptata sa fie negativa; fractiunea negativa semnaleaza ca nu exista avantaj.", "kind": "concept"}, {"q": "Ce ar trebui sa faca un trader cand criteriul Kelly da o fractiune negativa?", "options": ["Sa nu deschida pozitia: tranzactia este dominata statistic", "Sa parieze jumatate din suma calculata", "Sa parieze suma minima permisa de broker", "Sa inverseze semnul si sa parieze valoarea absoluta"], "correct": 0, "explain": "O fractiune negativa inseamna avantaj negativ; corect este sa nu tranzactionezi, sa largesti spreadul sau sa astepti mai multe date, nu sa half-size-zi.", "kind": "concept"}, {"q": "Ce evidentiaza 'problema esantionului mic' din scenariul CDS cu doar doi ani de date?", "options": ["Ca un esantion mic si volatil face break-even-ul foarte ridicat (96%), deci pozitia justificata e zero", "Ca esantioanele mici dau intotdeauna fractiuni Kelly mari", "Ca doi ani de date sunt suficienti pentru orice estimare", "Ca recuperarea de 40% elimina riscul"], "correct": 0, "explain": "Cu LGD mare si date putine, abia la p=96% Kelly devine pozitiv; pana atunci esantionul e prea zgomotos pentru a justifica vreo pozitie.", "kind": "text"}, {"q": "De ce nu trebuie sa 'dimensionezi la jumatate' o tranzactie pe care Kelly o respinge?", "options": ["Pentru ca formula tine deja cont de intregul risc de ruina", "Pentru ca jumatatile sunt interzise de reglementari", "Pentru ca half-size dubleaza comisioanele", "Pentru ca asta ar inversa semnul lui b"], "correct": 0, "explain": "Daca Kelly da negativ sau zero, tranzactia e statistic dominata; reducerea la jumatate nu o face buna, fiindca formula a inclus deja riscul de ruina.", "kind": "concept"}, {"q": "De ce trebuie folosite preturile de intrare si de stop-loss, nu preturile de inchidere?", "options": ["Pentru ca fractiunea Kelly se bazeaza pe pretul la care intri si iesi efectiv", "Pentru ca preturile de inchidere nu sunt publice", "Pentru ca stop-loss-ul nu conteaza in Kelly", "Pentru ca inchiderea reflecta mai bine riscul real"], "correct": 0, "explain": "Daca cumperi la 100 si iesi la 95, pierderea de 5% (nu intervalul zilnic de inchidere) este cea care intra in calculul lui b si p.", "kind": "concept"}, {"q": "Cum trebuie exprimat corect raportul b pentru formula Kelly?", "options": ["Ca raport intre profitul asteptat si pierderea asteptata in termeni monetari", "Ca procent fix de 2% per tranzactie", "Ca diferenta dintre p si q", "Ca media volatilitatii lunare"], "correct": 0, "explain": "Daca risti 100 pentru a castiga 120, b = 120/100 = 1,20; folosirea unui procent precum 0,02 da o fractiune complet gresita.", "kind": "text"}, {"q": "De ce ignorarea corelatiei dintre pariuri este o greseala la aplicarea Kelly?", "options": ["Pentru ca Kelly presupune independenta, iar pariurile corelate au risc combinat mai mare", "Pentru ca pariurile corelate au intotdeauna avantaj zero", "Pentru ca formula cere minimum trei pariuri", "Pentru ca corelatia reduce comisioanele"], "correct": 0, "explain": "Doua tranzactii corelate pozitiv (ex. acelasi sector) au risc combinat peste suma partilor; trebuie reduse pozitiile sau agregate intr-un pariu de portofoliu.", "kind": "concept"}, {"q": "Pe ce momente ale distributiei randamentelor se bazeaza criteriul Kelly?", "options": ["Doar pe primele doua: media si varianta", "Pe toate cele patru momente, inclusiv skew si kurtosis", "Doar pe mediana", "Pe niciunul, fiind pur empiric"], "correct": 0, "explain": "Kelly foloseste doar media si varianta; ignora asimetria (skew) si boltirea (kurtosis), de aceea poate subestima riscul de coada.", "kind": "text"}, {"q": "De ce o strategie de volatilitate scurta (short volatility) este periculoasa cu Kelly?", "options": ["Pentru ca media e mic pozitiva, dar miscarile bruste ocazionale pot sterge luni de castiguri", "Pentru ca are intotdeauna avantaj negativ", "Pentru ca este complet lichida", "Pentru ca nu are coada de distributie"], "correct": 0, "explain": "Kelly va prescrie o pozitie mare deoarece media e pozitiva, dar ignora riscul de coada gros care poate provoca un soc major de profit/pierdere.", "kind": "concept"}, {"q": "Cum trebuie ajustat avantajul atunci cand exista impact asupra pietei (market impact)?", "options": ["Se inlocuieste avantajul teoretic cu un avantaj dupa impact, strict mai mic", "Se ignora impactul pentru ca e neglijabil", "Se dubleaza avantajul pentru a compensa", "Se foloseste avantajul brut, nu net"], "correct": 0, "explain": "Fiecare unitate suplimentara misca pretul impotriva ta; folosind avantajul dupa impact, Kelly micsoreaza corect pozitia, uneori pana la zero.", "kind": "concept"}, {"q": "Cat de sensibil este Kelly la o supraestimare de 5% a probabilitatii p (pentru p mic)?", "options": ["Poate dubla fractiunea recomandata", "Nu o afecteaza deloc", "O reduce la jumatate", "O face automat negativa"], "correct": 0, "explain": "Kelly e extrem de sensibil la date: o supraestimare de 5% a lui p poate dubla fractiunea pentru p mic, iar o subestimare de 5% a lui b o injumatateste.", "kind": "text"}, {"q": "Ce masura de siguranta se recomanda pentru a gestiona eroarea de estimare a parametrilor?", "options": ["Rularea unui test Monte-Carlo si folosirea percentilei a 5-a ca fractiune conservatoare", "Folosirea celei mai mari valori posibile a lui p", "Eliminarea completa a lui b din formula", "Marirea pozitiei pentru a compensa incertitudinea"], "correct": 0, "explain": "Estimarea directa fara interval de incredere e un pariu pe parametri; percentila a 5-a dintr-un Monte-Carlo ofera o fractiune prudenta. Daca e negativa, nu tranzactiona.", "kind": "concept"}, {"q": "De ce trebuie reestimati p si b dupa fiecare tranzactie inchisa?", "options": ["Pentru ca se schimba odata cu regimul de piata, volatilitatea si competenta traderului", "Pentru ca reglementarile o cer zilnic", "Pentru ca b creste mereu in timp", "Pentru ca altfel formula da numere negative"], "correct": 0, "explain": "O dimensiune Kelly statica devine rapid sub-optima fiindca probabilitatea de castig si raportul de plata variaza cu conditiile pietei si abilitatea ta.", "kind": "concept"}, {"q": "Ce inseamna 'Kelly complet' (full Kelly) fata de practica recomandata incepatorilor?", "options": ["Full Kelly e o limita teoretica; in practica se foloseste cel mult jumatate sau un sfert", "Full Kelly e cea mai sigura optiune pentru incepatori", "Full Kelly inseamna mereu 30% din capital", "Full Kelly elimina volatilitatea"], "correct": 0, "explain": "Full Kelly e limita teoretica; daca formula da 0,30, in practica se incepe cu sfert de Kelly (0,075) si se creste doar daca toleranta la drawdown permite.", "kind": "text"}, {"q": "Care este o regula buna inainte de a folosi Kelly pe un avantaj instabil?", "options": ["Sa ai o fereastra mobila de cel putin zece ori timpul de descompunere al avantajului", "Sa repozitionezi portofoliul in fiecare ora", "Sa folosesti doar date de o singura zi", "Sa ignori complet schimbarile de regim"], "correct": 0, "explain": "Daca avantajul se schimba mai repede decat poti recalcula, Kelly devine zgomot; fereastra trebuie sa fie cel putin de zece ori timpul de decay al avantajului.", "kind": "concept"}, {"q": "De ce limitele psihologice conteaza la aplicarea criteriului Kelly?", "options": ["Pentru ca un trader incomodat de fractiune iese prematur si distruge avantajul", "Pentru ca formula cere validare psihologica obligatorie", "Pentru ca emotiile cresc valoarea lui b", "Pentru ca Kelly include automat un factor de stres"], "correct": 0, "explain": "Kelly e un optim matematic, nu psihologic; combina-l cu limite de risc stricte si angajament prealabil fata de marimea pozitiei, fiind un ghid, nu o porunca.", "kind": "concept"}, {"q": "Cine a propus prima data criteriul si in ce deceniu?", "options": ["John Larry Kelly Jr., in anii 1950", "Harry Markowitz, in anii 1970", "Benjamin Graham, in anii 1930", "Eugene Fama, in anii 1990"], "correct": 0, "explain": "Formula poarta numele lui John Larry Kelly Jr., care a propus-o in anii 1950 pentru a maximiza rata de crestere a unei serii de pariuri.", "kind": "text"}, {"q": "Care dintre urmatoarele NU este o ipoteza pe care se bazeaza criteriul Kelly?", "options": ["Ca exista corelatie puternica intre pariuri succesive", "Ca pariurile sunt independente si identic distribuite", "Ca avantajul ramane constant in timp", "Ca probabilitatile si castigurile sunt cunoscute"], "correct": 0, "explain": "Kelly presupune independenta, distributie identica, avantaj stabil si parametri cunoscuti; corelatia puternica incalca ipoteza de independenta, nu o sustine.", "kind": "concept"}]</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article><footer class="foot"><div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v=27"></script><script defer src="/assets/site.js?v=27"></script></body></html>
