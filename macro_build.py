@@ -94,6 +94,22 @@ def ecb_obs(key):
 
 
 EUROSTAT_BASE = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+TREASURY = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/"
+            "daily-treasury-rates.csv/{0}/all?type=daily_treasury_yield_curve"
+            "&field_tdr_date_value={0}&_format=csv")
+
+
+def treasury_10y():
+    """Randamentul titlurilor de stat SUA pe 10 ani (date publice US Treasury, public domain)."""
+    yr = datetime.now(timezone.utc).year
+    rows = fetch(TREASURY.format(yr)).decode("utf-8").splitlines()
+    if len(rows) < 2:
+        return (None, None)
+    cols = rows[1].split(",")  # cel mai recent rând (CSV sortat newest-first), "10 Yr" la index 12
+    try:
+        return (cols[0], round(float(cols[12]), 2))
+    except (IndexError, ValueError):
+        return (None, None)
 
 
 def eurostat_last(dataset, query):
@@ -152,7 +168,7 @@ def main():
 
     # ---- Piețe & randamente ----
     piete = [
-        item("Titluri de stat SUA, 10 ani", safe(fred_last, "DGS10"), src="FRED"),
+        item("Titluri de stat SUA, 10 ani", safe(treasury_10y), unit="%", src="Trezoreria SUA"),
         item("Petrol Brent", safe(fred_last, "DCOILBRENTEU"), unit=" $/baril", src="FRED"),
     ]
     groups.append({"title": "Piețe & randamente", "items": piete})
