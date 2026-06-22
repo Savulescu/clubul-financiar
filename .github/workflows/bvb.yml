@@ -1,0 +1,41 @@
+name: Dividende BVB (dividends.json)
+
+on:
+  schedule:
+    - cron: '20 5 * * 1-5'    # ~08:20 RO, zile lucrătoare (dividendele se schimbă rar)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  bvb:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: bvb-push
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python bvb_div_build.py
+      - name: Commit dacă s-au schimbat datele
+        run: |
+          git config user.name "Clubul Financiar"
+          git config user.email "clubulfinanciar@gmail.com"
+          git add docs/data/dividends.json
+          if git diff --staged --quiet; then
+            echo "dividende neschimbate"; exit 0
+          fi
+          git commit -m "Actualizare automată dividende BVB ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3 4 5 6; do
+            if git push origin HEAD:main; then echo "pushed"; exit 0; fi
+            echo "push respins, rebase (#$i)…"
+            git fetch origin main
+            git rebase -X theirs origin/main || git rebase --abort
+            sleep $((i * 3))
+          done
+          echo "push eșuat după retry"; exit 1

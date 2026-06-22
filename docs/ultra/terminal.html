@@ -252,7 +252,7 @@
 (function(){
   "use strict";
   var U = CF.U, $ = CF.$;
-  var FX = null, byCur = {};
+  var FX = null, byCur = {}, DIV = {};
 
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
   function fmt(n, d){ return (n).toLocaleString("ro-RO",{minimumFractionDigits:d||2,maximumFractionDigits:d||2}); }
@@ -344,6 +344,26 @@
       });
     });
   }
+  // potrivește ORICE companie listată (cele 15 curate cu descriere + toate cele din dividends.json)
+  function mergeDiv(t,n,s,desc){
+    var x=DIV[t]||{};
+    return {t:t, n:n||x.n||t, s:s||x.s||"BVB", desc:desc||"",
+            div:x.d, divYear:x.dy, yield:x.y, eps:x.e, price:x.p};
+  }
+  function findCo(q){
+    var c=findBVB(q); if(c) return mergeDiv(c.t,c.n,c.s,c.d);   // întâi cele curate (au descriere)
+    var m=nrm(q); var words=m.split(/\s+/).filter(function(w){return w.length>=2;});
+    if(!words.length) return null;
+    for(var sym in DIV){
+      var it=DIV[sym];
+      if(words.indexOf(nrm(sym))>=0) return mergeDiv(sym,it.n,it.s,"");   // ticker exact
+      var nw=nrm((it.n||"")+" "+(it.full||"")).split(/\s+/);
+      var hit=words.some(function(w){ return w.length>=4 && nw.some(function(x){
+        return x.length>=4 && (x===w || x.indexOf(w)===0 || w.indexOf(x)===0); }); });
+      if(hit) return mergeDiv(sym,it.n,it.s,"");
+    }
+    return null;
+  }
   var TOPICS=[
     {k:/titluri de stat|fidelis|tezaur/, t:"Titluri de stat · Fidelis / Tezaur",
      h:"Împrumuți statul român și primești dobândă fixă, scutită de impozit. Fidelis se listează la bursă (le poți vinde înainte de scadență); Tezaur se cumpără online sau la poștă, fără comision. Reazemul sigur al unui portofoliu.",
@@ -403,16 +423,26 @@
     // întrebări simple de curs → răspuns gratuit, direct din BNR
     var m = q.toLowerCase().replace(/[?!.]/g,"");
     // companie BVB ÎNAINTE de valută (companiile nu se suprapun cu valutele; evită false-match)
-    var co = findBVB(m);
+    var co = findCo(m);
     if(co){
-      var askDiv = /dividend|randament|yield|c[âa]t (d[aă]|pl[aă]te)/.test(m);
       var bvbUrl = "https://bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s="+encodeURIComponent(co.t);
-      var lead = askDiv
-        ? 'Dividendul exact (lei/acțiune), randamentul și data ex-dividend se schimbă la fiecare distribuție și se anunță oficial. Nu le afișăm în timp real (cotațiile live cer licență BVB) — vezi-le direct la sursă:'
-        : 'Companie listată la Bursa de Valori București. Pentru cotație, dividende și rapoarte oficiale, vezi pagina ei la sursă:';
-      out.innerHTML='<div class="u-alert gold"><p class="h">💰 '+esc(co.t)+' · '+esc(co.n)+'</p>'+
-        '<p style="margin:0 0 8px">'+esc(co.s)+' — '+esc(co.d)+'</p>'+
-        '<p style="margin:0 0 12px;font-size:.88rem;color:var(--u-muted)">'+lead+'</p>'+
+      function row(k,v){ return '<div class="u-row" style="padding:7px 0"><span class="k">'+k+'</span><span class="lead-dots"></span><span class="v">'+v+'</span></div>'; }
+      var head, body;
+      if(co.div){
+        head='💰 '+esc(co.n)+' dă <b>'+fmt(co.div, co.div<1?4:2)+' lei/acțiune</b>'+(co.yield?(' · randament <b>'+fmt(co.yield,2)+'%</b>'):'');
+        var rows=row('Dividend'+(co.divYear?(' ('+co.divYear+')'):''), fmt(co.div,co.div<1?4:2)+' lei/acțiune');
+        if(co.yield) rows+=row('Randament (DIVY)', '<span class="u-gold-t">'+fmt(co.yield,2)+'%</span>');
+        if(co.eps)   rows+=row('Profit/acțiune (EPS)', fmt(co.eps,2)+' lei');
+        if(co.price) rows+=row('Preț de referință', fmt(co.price, co.price<1?4:2)+' lei');
+        body=(co.desc?'<p style="margin:0 0 6px">'+esc(co.s)+' — '+esc(co.desc)+'</p>':'')+
+          '<div style="margin:4px 0 10px">'+rows+'</div>'+
+          '<p style="margin:0 0 12px;font-size:.82rem;color:var(--u-muted)">Ultima distribuție cunoscută, din datele publice BVB. Pentru data ex-dividend și istoric complet, vezi pagina oficială.</p>';
+      } else {
+        head='💰 '+esc(co.t)+' · '+esc(co.n);
+        body='<p style="margin:0 0 8px">'+esc(co.s)+(co.desc?(' — '+esc(co.desc)):'')+'</p>'+
+          '<p style="margin:0 0 12px;font-size:.88rem;color:var(--u-muted)">Nu apare un dividend recent pentru această companie în datele BVB (poate nu a distribuit). Verifică pe pagina oficială.</p>';
+      }
+      out.innerHTML='<div class="u-alert gold"><p class="h">'+head+'</p>'+body+
         '<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">'+
           '<a class="u-btn u-btn-gold" style="padding:8px 16px;font-size:.85rem" href="'+bvbUrl+'" target="_blank" rel="noopener">Vezi '+esc(co.t)+' pe BVB →</a>'+
           '<a href="/calculatoare/impozit-investitii.html" style="color:var(--u-gold);font-weight:700;font-size:.88rem">Cât rămâne după impozit →</a>'+
@@ -544,6 +574,9 @@
     if(el && eu!=null) el.innerHTML = '<b class="term-num" style="color:var(--u-gold)">'+eu.toLocaleString("ro-RO",{maximumFractionDigits:2})+'%</b> · credite în euro';
   }
   fetch("/data/macro.json").then(function(r){return r.json();}).then(renderMacro).catch(function(){ renderMacro(null); });
+
+  // ---- dividende BVB (toate companiile listate; actualizate zilnic prin GitHub Actions) ----
+  fetch("/data/dividends.json").then(function(r){return r.json();}).then(function(d){ DIV=d.items||{}; renderBVB(); }).catch(function(){});
 
   // ---- wiring ----
   fetch("/data/fx.json").then(function(r){return r.json();}).then(function(d){
