@@ -10,17 +10,19 @@
 //
 // (aceleași valori ca în GitHub Secrets ale StockCap)
 
+// Ordine FAST-FIRST: cele rapide & fiabile primele (cerebras/groq/gemini ~1-3s);
+// nvidia/siliconflow sunt lente (12-75s) → ultimele, ca să nu blocheze răspunsul.
 const PROVIDERS: [string, string, string, string][] = [
   ["cerebras",    "https://api.cerebras.ai/v1",                              "gpt-oss-120b",                                    "CEREBRAS_API_KEY"],
   ["groq",        "https://api.groq.com/openai/v1",                          "llama-3.3-70b-versatile",                         "GROQ_API_KEY"],
-  ["together",    "https://api.together.xyz/v1",                             "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",    "TOGETHER_API_KEY"],
   ["gemini",      "https://generativelanguage.googleapis.com/v1beta/openai", "gemini-2.0-flash",                                "GEMINI_API_KEY"],
   ["mistral",     "https://api.mistral.ai/v1",                               "mistral-small-latest",                            "MISTRAL_API_KEY"],
-  ["sambanova",   "https://api.sambanova.ai/v1",                             "Meta-Llama-3.3-70B-Instruct",                     "SAMBANOVA_API_KEY"],
+  ["together",    "https://api.together.xyz/v1",                             "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",    "TOGETHER_API_KEY"],
   ["deepseek",    "https://api.deepseek.com/v1",                             "deepseek-chat",                                   "DEEPSEEK_API_KEY"],
+  ["sambanova",   "https://api.sambanova.ai/v1",                             "Meta-Llama-3.3-70B-Instruct",                     "SAMBANOVA_API_KEY"],
+  ["fireworks",   "https://api.fireworks.ai/inference/v1",                   "accounts/fireworks/models/llama-v3p3-70b-instruct","FIREWORKS_API_KEY"],
   ["openrouter",  "https://openrouter.ai/api/v1",                            "nvidia/nemotron-3-nano-30b-a3b:free",             "OPENROUTER_API_KEY"],
   ["nvidia",      "https://integrate.api.nvidia.com/v1",                     "meta/llama-3.3-70b-instruct",                     "NVIDIA_API_KEY"],
-  ["fireworks",   "https://api.fireworks.ai/inference/v1",                   "accounts/fireworks/models/llama-v3p3-70b-instruct","FIREWORKS_API_KEY"],
   ["siliconflow", "https://api.siliconflow.cn/v1",                           "deepseek-ai/DeepSeek-V3",                         "SILICONFLOW_API_KEY"],
 ];
 
@@ -127,7 +129,7 @@ async function callOne(c: { name: string; base: string; model: string; key: stri
     method: "POST",
     headers: { "Authorization": "Bearer " + c.key, "Content-Type": "application/json" },
     body: JSON.stringify({ model: c.model, messages, max_tokens: maxTokens, temperature }),
-    signal: AbortSignal.timeout(45000),
+    signal: AbortSignal.timeout(22000), // fail-fast: nu aștepta un provider lent mai mult de 22s
   });
   if (!resp.ok) throw new Error(`${c.name} HTTP ${resp.status}`);
   const j = await resp.json();
@@ -148,14 +150,17 @@ async function chat(messages: any[], maxTokens = 4000, temperature = 0.4) {
     }
   }
   if (!cands.length) throw new Error("nicio cheie setată");
-  const BATCH = 6; // câte chei se încearcă SIMULTAN
+  const BATCH = 8; // câte chei se încearcă SIMULTAN (mai multe = șansă mai mare la primul lot)
+  const DEADLINE = 38000; // nu depăși ~38s în total (sub timeout-ul clientului)
+  const start = Date.now();
   let last = "n/a";
   for (let i = 0; i < cands.length; i += BATCH) {
+    if (Date.now() - start > DEADLINE) { last = "deadline atins"; break; }
     const batch = cands.slice(i, i + BATCH);
     try {
       return await Promise.any(batch.map((c) => callOne(c, messages, maxTokens, temperature)));
-    } catch (e) {
-      last = `lot ${i / BATCH + 1} (${batch.length} chei) au eșuat`;
+    } catch (_e) {
+      last = `lot ${Math.floor(i / BATCH) + 1} (${batch.length} chei) au eșuat`;
     }
   }
   throw new Error("toate cheile au eșuat: " + last);
