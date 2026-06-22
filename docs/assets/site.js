@@ -161,6 +161,11 @@
   document.body.appendChild(foot);
   }
 
+  // ---- pe paginile premium (.u-page), nav + footer capătă accente aurii ----
+  if (document.querySelector("main.u-page")) {
+    document.querySelectorAll("header.nav, footer.foot").forEach(function(el){ el.classList.add("ultra"); });
+  }
+
   // ---- roluri (admin / premium / pro / ultra) ----
   const ADMIN_EMAILS = ["clubulfinanciar@gmail.com"];
   const RANK = { free:0, premium:1, pro:2, ultra:3 };
