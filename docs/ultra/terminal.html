@@ -87,6 +87,7 @@
         <p class="u-label" style="margin:0">Curs valutar & aur · BNR</p>
         <span class="u-kpi-sub term-num" id="fxDate" style="margin:0">—</span>
       </div>
+      <div id="fxMovers" class="u-kpi-sub" style="margin-top:6px"></div>
       <div class="fx-top" id="fxTop" style="margin-top:14px"></div>
 
       <details style="margin-top:18px">
@@ -210,6 +211,12 @@
     if(!FX) return;
     $("fxDate").textContent = FX.date;
     $("fxCount").textContent = FX.count;
+    // top-movers azi (cea mai mare mișcare în plus/minus)
+    var sorted = FX.rates.slice().sort(function(a,b){ return b.chg-a.chg; });
+    var up=sorted[0], dn=sorted[sorted.length-1];
+    if(up && dn && (up.chg||dn.chg)){
+      $("fxMovers").innerHTML = 'Azi: <b style="color:var(--u-pos)">'+esc(up.cur)+' '+chgHTML(up.chg).replace(/<[^>]+>/g,"")+'</b> · <b style="color:var(--u-neg)">'+esc(dn.cur)+' '+chgHTML(dn.chg).replace(/<[^>]+>/g,"")+'</b>';
+    }
     var top = FX.rates.filter(function(r){return r.top;});
     $("fxTop").innerHTML = top.map(function(r){
       var dec = r.rate<1?4:r.rate>100?2:4;
@@ -247,9 +254,21 @@
   }
 
   // ---- bara de comandă ----
+  var ALIAS={euro:"EUR",eur:"EUR",dolar:"USD",dolari:"USD",dolarul:"USD",usd:"USD",lira:"GBP",
+    lire:"GBP",lirei:"GBP",sterlina:"GBP",franc:"CHF",franci:"CHF",francul:"CHF",elvetian:"CHF",
+    forint:"HUF",forinti:"HUF",zlot:"PLN",zloti:"PLN",leva:"BGN",levei:"BGN",aur:"XAU",aurul:"XAU",
+    yen:"JPY",yuan:"CNY",coroana:"SEK"};
+  function nrm(s){ return (s||"").toLowerCase().replace(/[ăâ]/g,"a").replace(/î/g,"i").replace(/ș|ş/g,"s").replace(/ț|ţ/g,"t"); }
   function findCur(q){
-    q=q.toLowerCase();
-    return FX.rates.find(function(r){ return r.cur.toLowerCase()===q || r.name.toLowerCase().indexOf(q)>=0; });
+    q=nrm(q).trim(); if(!q) return null;
+    var words=q.split(/\s+/).filter(function(w){return w.length>2 && !/^\d/.test(w);});
+    for(var i=0;i<words.length;i++){ if(ALIAS[words[i]] && byCur[ALIAS[words[i]]]) return byCur[ALIAS[words[i]]]; }
+    return FX.rates.find(function(r){
+      var c=nrm(r.cur), n=nrm(r.name);
+      return c===q || n.indexOf(q)>=0 || q.indexOf(c)>=0 ||
+        words.some(function(w){ return c===w || n.indexOf(w)>=0 ||
+          n.split(/\s+/).some(function(nw){ return nw.length>3 && (w.indexOf(nw)===0 || nw.indexOf(w)===0); }); });
+    });
   }
   function command(raw){
     var out=$("cmdOut"); var q=(raw||"").trim(); if(!q){ out.innerHTML=""; return; }
@@ -259,7 +278,13 @@
     var cur = findCur(m.replace(/c[âa]t e|curs|valoare|azi|cat e/g,"").trim()) || findCur(m);
     if(cur){
       var dec = cur.rate<1?4:cur.rate>100?2:4;
-      out.innerHTML = '<div class="u-alert gold"><p class="h term-num">1 '+esc(cur.cur)+' = '+fmt(cur.rate,dec)+' lei</p>'+
+      // dacă întrebarea conține o sumă → conversie ("100 euro", "50 dolari în lei")
+      var nm = (m.match(/[\d]+([.,][\d]+)?/)||[])[0];
+      var amt = nm ? parseFloat(nm.replace(",",".")) : null;
+      var head = (amt && isFinite(amt))
+        ? fmt(amt,2)+' '+esc(cur.cur)+' = '+fmt(amt*cur.rate, amt*cur.rate<1?4:2)+' lei'
+        : '1 '+esc(cur.cur)+' = '+fmt(cur.rate,dec)+' lei';
+      out.innerHTML = '<div class="u-alert gold"><p class="h term-num">'+head+'</p>'+
         '<p style="margin:0">'+esc(cur.name)+' · '+chgHTML(cur.chg)+' față de ziua precedentă · curs oficial BNR '+FX.date+'</p></div>';
       var row=$("fx-"+cur.cur); if(row){ var d=document.querySelector("details"); if(d)d.open=true; row.scrollIntoView({block:"center"}); }
       return;
