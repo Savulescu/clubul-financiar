@@ -163,11 +163,11 @@
   // Definiția scenariilor. apply(clona, params) mutează DOAR clona.
   var SCENARII = [
     {
-      id: "job", ic: "💼", t: "Pierd jobul",
-      d: "Salariul net dispare. Cât rezistă bugetul?",
-      desc: "Salariul net devine 0. Restul veniturilor (firmă, chirii, dividende) rămân.",
+      id: "job", ic: "💼", t: "Pierd venitul din muncă",
+      d: "Salariul, PFA-ul sau firma se opresc. Cât rezistă bugetul?",
+      desc: "Tot venitul tău activ — salariu, încasări PFA și cifra firmei — devine 0. Rămân doar veniturile pasive (chirii, dividende) și economiile. Cât rezistă bugetul?",
       hasParams: false,
-      apply: function(c){ c.venituri.salariuNet = 0; }
+      apply: function(c){ var v = c.venituri; v.salariuNet = 0; v.pfaIncasari = 0; v.srlCifraAfaceri = 0; }
     },
     {
       id: "copil", ic: "👶", t: "Fac un copil",
