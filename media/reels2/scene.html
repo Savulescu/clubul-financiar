@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="ro"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1424;--navy2:#0f2540;--gold:#E8C268;--green:#5cf0aa;--red:#ff6b6b;--text:#eef4fc;--muted:#9fb3d1}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:var(--text);overflow:hidden;background:radial-gradient(125% 80% at 50% 8%,#17386310 0%,var(--navy2) 40%,var(--navy) 80%)}
+/* grid + glow */
+#stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:96px 96px;mask:radial-gradient(70% 55% at 50% 40%,#000 25%,transparent 100%)}
+#glow{position:absolute;left:50%;top:46%;width:1200px;height:1200px;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(92,240,170,.16),transparent 60%);filter:blur(20px)}
+/* progress bar (very top, thin, safe) */
+#prog{position:absolute;top:0;left:0;height:8px;background:linear-gradient(90deg,var(--gold),var(--green));z-index:20;box-shadow:0 0 16px rgba(92,240,170,.5)}
+/* small brand watermark — top center, mic, NU se dubleaza cu @user (care e jos pe platforme) */
+#wm{position:absolute;top:46px;left:0;right:0;text-align:center;z-index:18;font-size:30px;font-weight:700;letter-spacing:.5px;color:#cdddf5;opacity:.0}
+#wm b{color:var(--gold)}
+/* ===== ZONA SAFE de conținut: y 360..1380, x 90..990 (departe de top status, butoane dreapta, caption jos) ===== */
+#wrap{position:absolute;left:90px;right:90px;top:360px;height:1020px;z-index:10;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center}
+.eyebrow{font-size:40px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:0;margin-bottom:30px}
+.big{font-weight:800;line-height:1.02;letter-spacing:-2px;opacity:0}
+.big.num{font-size:230px;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#bfe9d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big.word{font-size:128px;color:#fff}
+.big em{font-style:normal;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.big .g{color:var(--green);-webkit-text-fill-color:var(--green)}
+.big .r{color:var(--red);-webkit-text-fill-color:var(--red)}
+.sub{margin-top:42px;font-size:60px;font-weight:600;line-height:1.22;color:#e4edf9;opacity:0;max-width:880px}
+.sub em{font-style:normal;color:var(--gold)}
+.sub .g{color:var(--green)}
+/* CTA accent line bottom of safe zone */
+#cta-url{position:absolute;left:0;right:0;top:1230px;text-align:center;z-index:12;font-size:58px;font-weight:800;color:var(--gold);opacity:0}
+#cta-url .h{display:block;margin-top:18px;font-size:40px;font-weight:600;color:#dfe8f6}
+#cta-url .h b{color:var(--gold)}
+</style></head>
+<body>
+<div id="stage">
+  <div id="glow"></div>
+  <div id="prog" style="width:0"></div>
+  <div id="wm">⚡ <b>Clubul</b> Financiar</div>
+  <div id="wrap">
+    <div class="eyebrow" id="eb"></div>
+    <div class="big" id="big"></div>
+    <div class="sub" id="sub"></div>
+  </div>
+  <div id="cta-url" id="ctaurl"><span id="urlmain">clubulfinanciar.ro</span><span class="h" id="urlh"></span></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+function ease(x){return 1-Math.pow(1-x,3)} // easeOutCubic
+function fmt(n){return Math.round(n).toLocaleString('ro-RO')}
+// secunda curenta -> beat activ
+function frame(t){ // t in secunde
+  const BEATS = window.BEATS || [];   // citit dinamic (injectat de CDP dupa load)
+  const TOTAL = window.TOTAL || 20;
+  if(!BEATS.length) return;
+  $('prog').style.width = Math.min(100, t/TOTAL*100)+'%';
+  // watermark fade in dupa 0.4s
+  $('wm').style.opacity = Math.min(1, Math.max(0,(t-0.3))*2)*0.9;
+  let b=BEATS[0], idx=0;
+  for(let i=0;i<BEATS.length;i++){ if(t>=BEATS[i].start){ b=BEATS[i]; idx=i; } }
+  const lt = t - b.start;            // timp local in beat
+  const inA = ease(Math.min(1, lt/0.42));      // intrare 0.42s
+  const outStart = b.dur - 0.32;
+  const outA = lt>outStart ? 1-ease(Math.min(1,(lt-outStart)/0.32)) : 1; // iesire
+  const A = inA*outA;
+  const yIn = (1-inA)*46;
+  // populeaza
+  $('eb').textContent = b.eyebrow||'';
+  $('big').className = 'big '+(b.cls||'word');
+  if(b.num){ // count-up pe numar
+    const v = b.num * Math.min(1, ease(lt/Math.min(b.dur-0.3,1.1)));
+    $('big').innerHTML = fmt(v)+(b.numSuf||'');
+  } else { $('big').innerHTML = b.big||''; }
+  $('sub').innerHTML = b.sub||'';
+  $('eb').style.cssText = `opacity:${b.eyebrow?A:0};transform:translateY(${yIn*0.4}px)`;
+  $('big').style.cssText = ($('big').className.includes('num')?'':'')+`;opacity:${A};transform:translateY(${yIn}px) scale(${0.97+0.03*inA})`;
+  $('sub').style.cssText = `opacity:${b.sub?A*0.96:0};transform:translateY(${(1-inA)*30}px);margin-top:42px;font-size:60px;font-weight:600;line-height:1.22;max-width:880px`;
+  // CTA url doar pe ultimul beat
+  const last = BEATS[BEATS.length-1];
+  if(b===last && b.cta){ $('cta-url').style.opacity = A; $('urlh').innerHTML='Urmărește <b>@clubulfinanciar</b>'; }
+  else $('cta-url').style.opacity = 0;
+  // glow pulse
+  $('glow').style.opacity = 0.7+0.3*Math.sin(t*2.2);
+}
+window.frame=frame;
+// pentru preview live (browser): ruleaza animatia
+if(!location.search.includes('static')){
+  let s=performance.now();
+  function loop(now){ frame(((now-s)/1000)%TOTAL); requestAnimationFrame(loop); }
+  // doar daca nu e randat de CDP (CDP apeleaza frame(t) direct)
+  if(location.search.includes('preview')) requestAnimationFrame(loop);
+}
+</script></body></html>
