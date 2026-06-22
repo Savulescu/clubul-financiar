@@ -308,8 +308,17 @@ def send_email(to, subject, html_body):
         headers={"Authorization": "Bearer " + RESEND, "Content-Type": "application/json"})
     try:
         urllib.request.urlopen(req, timeout=30); return True
+    except urllib.error.URLError as e:
+        if "CERTIFICATE_VERIFY_FAILED" in str(e):
+            import ssl
+            ctx = ssl.create_default_context(); ctx.check_hostname = False; ctx.verify_mode = ssl.CERT_NONE
+            try:
+                urllib.request.urlopen(req, timeout=30, context=ctx); return True
+            except Exception as e2:
+                print("  send FAIL", str(e2)[:100]); return False
+        print("  send FAIL", str(e)[:100]); return False
     except Exception as e:
-        print("  send FAIL", str(e)[:80]); return False
+        print("  send FAIL", str(e)[:100]); return False
 
 
 def fetch_recipients(tier):
