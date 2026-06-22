@@ -9,8 +9,8 @@ import json, os, ssl, subprocess, time, urllib.request
 from datetime import datetime, timezone, timedelta
 
 OUT = os.path.join(os.path.dirname(__file__), "docs", "data", "macro.json")
-# doar ultimii ~2.2 ani → răspuns mic & rapid (evită timeout pe istoricul complet)
-_COSD = (datetime.now(timezone.utc) - timedelta(days=820)).strftime("%Y-%m-%d")
+# ~14 luni → destul pt YoY CPI, CSV mic & rapid (820 zile = CSV prea mare → timeout)
+_COSD = (datetime.now(timezone.utc) - timedelta(days=430)).strftime("%Y-%m-%d")
 FRED = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}&cosd=" + _COSD
 EUROSTAT = ("https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
             "prc_hicp_manr?geo={}&coicop=CP00&format=JSON&lastTimePeriod=1")
@@ -20,11 +20,11 @@ UA = {"User-Agent": "ClubulFinanciar/1.0 (+clubulfinanciar.ro)"}
 def _once(url):
     req = urllib.request.Request(url, headers=UA)
     try:
-        return urllib.request.urlopen(req, timeout=8).read()
+        return urllib.request.urlopen(req, timeout=14).read()
     except Exception:
         return subprocess.run(
-            ["curl", "-fsSL", "--http1.1", "--max-time", "8", "-A", UA["User-Agent"], url],
-            capture_output=True, timeout=12, check=True).stdout
+            ["curl", "-fsSL", "--http1.1", "--max-time", "14", "-A", UA["User-Agent"], url],
+            capture_output=True, timeout=18, check=True).stdout
 
 
 def fetch(url):
@@ -45,6 +45,7 @@ def fred_series(sid):
     """Întoarce listă [(date, value)] din fredgraph.csv, ignorând valorile lipsă ('.')."""
     if _fred_down[0]:
         return []
+    time.sleep(1.2)  # spațiere: FRED rate-limitează burst-urile (funcționează, dar nu rapid)
     try:
         rows = fetch(FRED.format(sid)).decode("utf-8").splitlines()
     except Exception:
