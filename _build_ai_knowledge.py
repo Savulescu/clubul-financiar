@@ -45,6 +45,8 @@ consts=[
  "Penalități ANAF: dobândă 0,02%/zi + penalitate de întârziere 0,01%/zi + penalitate de nedeclarare 0,08%/zi. Contestație decizie de impunere: 45 zile.",
  "Plan de conturi (OMFP 1802/2014): Mărfuri=371, Materii prime=301, Clienți=411, Furnizori=401, Casa=5311, Bancă lei=5121, Capital=101, Profit curent=121, Profit reportat=117, TVA plată=4423/deductibilă=4426/colectată=4427, energie/apă=605, rezervă legală=1061, dividende de plată=457.",
  "Titluri de stat (Fidelis, Tezaur): dobânda/cupoanele sunt SCUTITE de impozit pe venit pentru persoane fizice. Dobânda la depozite bancare = 10% reținut la sursă. Câștigul din vânzarea titlurilor înainte de scadență = impozabil ca venit din investiții.",
+ "Nerezidenți: dividende/dobânzi/redevențe/comisioane plătite de o firmă din RO unui nerezident = 16% reținut la sursă, redus prin convenția de dublă impunere (cu certificat de rezidență fiscală).",
+ "Impozitul pe construcții speciale este ABROGAT. OSS: servicii digitale B2C în UE peste 10.000 €/an se taxează la cota statului clientului, declarat prin decont OSS unic.",
 ]
 for c in consts:
     entries.append({"t":"Constante fiscale 2026","x":c,"k":kw(c),"src":"constante"})
