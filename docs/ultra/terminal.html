@@ -75,10 +75,10 @@
 
       <div class="term-cmd" style="margin-top:22px">
         <span class="slash">/</span>
-        <input id="cmd" autocomplete="off" placeholder="Întreabă orice — „cât e euro”, „aur”, „dividende Hidroelectrica”…">
+        <input id="cmd" autocomplete="off" aria-label="Caută o valută sau întreabă orice" placeholder="Întreabă orice — „cât e euro”, „aur”, „dividende Hidroelectrica”…">
       </div>
       <div class="term-cmd-out" id="cmdOut"></div>
-      <p class="term-hint">Încearcă: <b data-cmd="cât e euro">cât e euro</b> · <b data-cmd="dolar">dolar</b> · <b data-cmd="aur">aur</b> · <b data-cmd="forint">forint</b></p>
+      <p class="term-hint">Încearcă: <b role="button" tabindex="0" data-cmd="cât e euro">cât e euro</b> · <b role="button" tabindex="0" data-cmd="dolar">dolar</b> · <b role="button" tabindex="0" data-cmd="aur">aur</b> · <b role="button" tabindex="0" data-cmd="forint">forint</b></p>
     </div>
 
     <!-- BOARD VALUTAR (gratuit, BNR live) -->
@@ -392,7 +392,11 @@
 
   var cmdEl=$("cmd");
   cmdEl.addEventListener("keydown",function(e){ if(e.key==="Enter") command(cmdEl.value); });
-  document.querySelectorAll("[data-cmd]").forEach(function(b){ b.addEventListener("click",function(){ cmdEl.value=b.getAttribute("data-cmd"); command(cmdEl.value); }); });
+  document.querySelectorAll("[data-cmd]").forEach(function(b){
+    function run(){ cmdEl.value=b.getAttribute("data-cmd"); command(cmdEl.value); cmdEl.focus(); }
+    b.addEventListener("click",run);
+    b.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); run(); } });
+  });
   ["cvAmt","cvFrom","cvTo"].forEach(function(id){ var el=$(id); el.addEventListener("input",convert); el.addEventListener("change",convert); });
   $("fxSearch").addEventListener("input",function(e){ drawBody(e.target.value); });
   $("alSet").addEventListener("click",setAlert);
