@@ -56,9 +56,9 @@ def chat(messages, max_tokens=900, temperature=0.5):
     raise RuntimeError("toți providerii au eșuat: " + last)
 
 V = "23"
-MAX_NEW = 14          # explainer-e noi generate pe rulare (restul vin din store)
-KEEP_H = 36           # cât stă o știre în pagină
-DISPLAY = 42          # max carduri afișate
+MAX_NEW = 24          # explainer-e noi generate pe rulare (restul vin din store)
+KEEP_H = 168          # cât stă o știre în pagină (7 zile)
+DISPLAY = 110         # max carduri afișate (o săptămână de știri)
 STORE_F = os.path.join(CF, "_external_store.json")
 DOCS = os.path.join(CF, "docs")
 
@@ -220,8 +220,8 @@ def main():
 <button class="news-tab nt-range" data-range="24h">Ultimele 24h</button>
 <button class="news-tab nt-range" data-range="7d">Ultima săptămână</button></div>
 <div class="news-grp"><span class="news-lbl">Sortare</span>
-<button class="news-tab nt-sort active" data-sort="relevant">Cele mai relevante</button>
-<button class="news-tab nt-sort" data-sort="recent">Cele mai recente</button></div>
+<button class="news-tab nt-sort active" data-sort="recent">Cele mai recente</button>
+<button class="news-tab nt-sort" data-sort="relevant">Cele mai relevante</button></div>
 </div>
 <div class="news-tabs" id="catTabs">{tabs}</div>
 <p id="newsEmpty" class="lead" hidden style="text-align:center;margin:14px auto">Nicio știre în acest interval.</p>
@@ -235,7 +235,7 @@ def main():
 (function(){{
   var grid=document.getElementById('newsGrid');
   var cards=[].slice.call(document.querySelectorAll('.news-card'));
-  var st={{cat:'all',range:'all',sort:'relevant'}};
+  var st={{cat:'all',range:'all',sort:'recent'}};
   var now=Date.now()/1000;
   function inRange(ts){{ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }}
   function apply(){{
@@ -268,7 +268,7 @@ def main():
     json.dump(store, open(STORE_F, "w"), ensure_ascii=False)
     # feed compact pentru Terminal (știri inline, refolosește același store)
     news_top = [{"titlu": s.get("titlu", ""), "fapt": s.get("fapt", ""), "src": s.get("src", ""),
-                 "cat": s.get("cat", ""), "link": s.get("link") or s.get("url", "")} for s in disp[:10]]
+                 "cat": s.get("cat", ""), "link": s.get("link") or s.get("url", "")} for s in disp[:15]]
     os.makedirs(os.path.join(DOCS, "data"), exist_ok=True)
     json.dump({"updated": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "items": news_top},
               open(os.path.join(DOCS, "data", "news.json"), "w"), ensure_ascii=False)

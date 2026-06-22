@@ -65,8 +65,8 @@ KW = ["ban", "leu", "euro", "dolar", "bnr", "inflați", "infla", "dobând", "dob
       "taxe", "taxă", "impozit", "anaf", "bursă", "bursa", "bvb", "acțiun", "investiți", "economi",
       "salari", "pensi", "preț", "pret", "buget", "pib", "bancă", "banca", "fisc", "tva", "energie",
       "piață", "piata", "datorie", "deficit", "criz", "scump", "ieftin", "randament", "etf", "imobiliar"]
-MAX_ITEMS = 110
-MAX_AGE_DAYS = 4
+MAX_ITEMS = 140
+MAX_AGE_DAYS = 7
 
 # Categorii (cheie, etichetă, cuvinte) — ordine = prioritate la clasificare
 NEWS_CATS = [
@@ -218,8 +218,8 @@ def build():
 <button class="news-tab nt-range" data-range="24h">Ultimele 24h</button>
 <button class="news-tab nt-range" data-range="7d">Ultima săptămână</button></div>
 <div class="news-grp"><span class="news-lbl">Sortare</span>
-<button class="news-tab nt-sort active" data-sort="relevant">Cele mai relevante</button>
-<button class="news-tab nt-sort" data-sort="recent">Cele mai recente</button></div>
+<button class="news-tab nt-sort active" data-sort="recent">Cele mai recente</button>
+<button class="news-tab nt-sort" data-sort="relevant">Cele mai relevante</button></div>
 </div>
 <div class="news-tabs">{tabs}</div>
 <p id="newsEmpty" class="lead" hidden style="text-align:center;margin:14px auto">Nicio știre în acest interval. Încearcă alt filtru.</p>
@@ -235,7 +235,7 @@ def build():
   var cards=[].slice.call(document.querySelectorAll('.news-card'));
   var FREE=18;
   var prem=!!window.cfPremium;
-  var st={{cat:'all',range:'all',sort:'relevant'}};
+  var st={{cat:'all',range:'all',sort:'recent'}};
   var now=Date.now()/1000;
   function inRange(ts){{ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }}
   function gateUI(){{ /* controale + tab-uri vizibile pentru toți; gating = doar nr. de carduri */ }}
