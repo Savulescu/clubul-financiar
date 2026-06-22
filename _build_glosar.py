@@ -3,8 +3,8 @@ import json, re, html, unicodedata, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _shell import NAV_HTML, FOOTER_HTML  # nav+footer pre-randate static
 
-SRC = "/private/tmp/claude-501/-Users-savulescucristian/2d8bd220-1ab9-4311-b6f9-e180142ffdfa/tasks/wu28oa28b.output"
-OUT = "/Users/savulescucristian/clubul-financiar/docs/glosar.html"
+SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_data", "glosar.json")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "docs", "glosar.html")
 
 data = json.load(open(SRC, encoding="utf-8"))
 terms = data["result"] if isinstance(data, dict) and "result" in data else data
