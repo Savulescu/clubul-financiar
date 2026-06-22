@@ -296,6 +296,36 @@
      h:"Dividendele primite de persoanele fizice de la companiile listate se impozitează (reținut la sursă). Calculează cât îți rămâne net în mână.",
      l:"/calculatoare/impozit-investitii.html",lt:"Calculează impozitul →"}
   ];
+  // comanda-calculator: răspunde la calcule, nu doar lookup (gratuit, pe fiscal-2026)
+  function calc(m){
+    var F=window.CF_FISCAL; if(!F) return null;
+    var nums=(m.match(/\d+([.,]\d+)?/g)||[]).map(function(s){return parseFloat(s.replace(/\./g,"").replace(",","."));});
+    if(!nums.length) return null;
+    if(/salar|brut/.test(m)){
+      var s=F.salariuNet(nums[0],0);
+      return {h:CF.lei(nums[0])+" brut → "+CF.lei(s.net)+" net",
+        p:"CAS (pensie) "+CF.lei(s.cas)+" · CASS (sănătate) "+CF.lei(s.cass)+" · impozit "+CF.lei(s.impozit)+" · cost angajator "+CF.lei(s.costAngajator)};
+    }
+    if(/dividend/.test(m)){
+      var d=nums[0],imp=d*F.cote.dividende,cd=F.cassPasiv(d).cass;
+      return {h:"Dividende "+CF.lei(d)+" → "+CF.lei(d-imp-cd)+" net",
+        p:"Impozit 16% = "+CF.lei(imp)+(cd?(" · CASS = "+CF.lei(cd)):"")+" (persoană fizică, reținut la sursă)"};
+    }
+    if(/\bpfa\b/.test(m)){
+      var r=F.pfaReal(nums[0],nums[1]||0);
+      return {h:"PFA "+CF.lei(nums[0])+(nums[1]?(" − "+CF.lei(nums[1])+" chelt."):"")+" → "+CF.lei(r.netInMana)+" net",
+        p:"CAS "+CF.lei(r.cas.cas)+" · CASS "+CF.lei(r.cass.cass)+" · impozit "+CF.lei(r.impozit)+" · total taxe "+CF.lei(r.totalTaxe)};
+    }
+    if(/credit|rat[aă]|imprumut|împrumut|ipotec/.test(m)){
+      var suma=nums[0],dob=null,ani=null,i;
+      for(i=1;i<nums.length;i++){ if(nums[i]<=20&&dob===null)dob=nums[i]; else if(nums[i]<=40&&ani===null)ani=nums[i]; }
+      if(dob===null)dob=7; if(ani===null)ani=25;
+      var rl=dob/100/12,n=ani*12,rata=rl?suma*rl/(1-Math.pow(1+rl,-n)):suma/n;
+      return {h:"Credit "+CF.lei(suma)+" · "+dob+"% · "+ani+" ani → "+CF.lei(rata)+"/lună",
+        p:"Total plătit ~"+CF.lei(rata*n)+" · dobândă ~"+CF.lei(rata*n-suma)+" (estimare orientativă)"};
+    }
+    return null;
+  }
   function command(raw){
     var out=$("cmdOut"); var q=(raw||"").trim(); if(!q){ out.innerHTML=""; return; }
     if(!FX){ out.innerHTML='<div class="u-alert">Datele se încarcă…</div>'; return; }
@@ -324,6 +354,9 @@
       var row=$("fx-"+cur.cur); if(row){ var d=document.querySelector("details"); if(d)d.open=true; row.scrollIntoView({block:"center"}); }
       return;
     }
+    // calcule fiscale (salariu/dividende/PFA/credit) → răspuns calculat gratuit
+    var cc=calc(m);
+    if(cc){ out.innerHTML='<div class="u-alert gold"><p class="h">'+esc(cc.h)+'</p><p style="margin:0">'+esc(cc.p)+'</p></div>'; return; }
     // subiecte populare → răspuns scurt gratuit + link educativ
     for(var ti=0;ti<TOPICS.length;ti++){
       if(TOPICS[ti].k.test(m)){
