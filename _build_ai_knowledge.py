@@ -44,6 +44,7 @@ consts=[
  "Declarația Unică (D212): termen 25 mai; bonificație 3% la plata integrală până 15 aprilie.",
  "Penalități ANAF: dobândă 0,02%/zi + penalitate de întârziere 0,01%/zi + penalitate de nedeclarare 0,08%/zi. Contestație decizie de impunere: 45 zile.",
  "Plan de conturi (OMFP 1802/2014): Mărfuri=371, Materii prime=301, Clienți=411, Furnizori=401, Casa=5311, Bancă lei=5121, Capital=101, Profit curent=121, Profit reportat=117, TVA plată=4423/deductibilă=4426/colectată=4427, energie/apă=605, rezervă legală=1061, dividende de plată=457.",
+ "Titluri de stat (Fidelis, Tezaur): dobânda/cupoanele sunt SCUTITE de impozit pe venit pentru persoane fizice. Dobânda la depozite bancare = 10% reținut la sursă. Câștigul din vânzarea titlurilor înainte de scadență = impozabil ca venit din investiții.",
 ]
 for c in consts:
     entries.append({"t":"Constante fiscale 2026","x":c,"k":kw(c),"src":"constante"})
