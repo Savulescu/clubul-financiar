@@ -285,6 +285,17 @@
       });
     });
   }
+  var TOPICS=[
+    {k:/titluri de stat|fidelis|tezaur/, t:"Titluri de stat · Fidelis / Tezaur",
+     h:"Împrumuți statul român și primești dobândă fixă, scutită de impozit. Fidelis se listează la bursă (le poți vinde înainte de scadență); Tezaur se cumpără online sau la poștă, fără comision. Reazemul sigur al unui portofoliu.",
+     l:"/investitii.html",lt:"Vezi titlurile de stat →"},
+    {k:/\betf\b|fond.*indice|indice bursier/, t:"ETF-uri",
+     h:"Un ETF cumpără sute de companii dintr-o singură mișcare — diversificare instant, costuri mici. Cel mai simplu mod de a investi pe termen lung, prin broker.",
+     l:"/investitii.html",lt:"Învață despre ETF-uri →"},
+    {k:/dividend/, t:"Impozit pe dividende",
+     h:"Dividendele primite de persoanele fizice de la companiile listate se impozitează (reținut la sursă). Calculează cât îți rămâne net în mână.",
+     l:"/calculatoare/impozit-investitii.html",lt:"Calculează impozitul →"}
+  ];
   function command(raw){
     var out=$("cmdOut"); var q=(raw||"").trim(); if(!q){ out.innerHTML=""; return; }
     if(!FX){ out.innerHTML='<div class="u-alert">Datele se încarcă…</div>'; return; }
@@ -312,6 +323,16 @@
         '<p style="margin:0">'+esc(cur.name)+' · '+chgHTML(cur.chg)+' față de ziua precedentă · curs oficial BNR '+FX.date+'</p></div>';
       var row=$("fx-"+cur.cur); if(row){ var d=document.querySelector("details"); if(d)d.open=true; row.scrollIntoView({block:"center"}); }
       return;
+    }
+    // subiecte populare → răspuns scurt gratuit + link educativ
+    for(var ti=0;ti<TOPICS.length;ti++){
+      if(TOPICS[ti].k.test(m)){
+        var T=TOPICS[ti];
+        out.innerHTML='<div class="u-alert gold"><p class="h">'+esc(T.t)+'</p>'+
+          '<p style="margin:0 0 8px">'+esc(T.h)+'</p>'+
+          '<a href="'+T.l+'" style="color:var(--u-gold);font-weight:700">'+esc(T.lt)+'</a></div>';
+        return;
+      }
     }
     // orice altceva → asistentul AI (Ultra)
     if(U && CF.hasTier && CF.hasTier("ultra")){
