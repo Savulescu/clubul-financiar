@@ -20,29 +20,36 @@ UA = {"User-Agent": "ClubulFinanciar/1.0 (+clubulfinanciar.ro)"}
 def _once(url):
     req = urllib.request.Request(url, headers=UA)
     try:
-        return urllib.request.urlopen(req, timeout=20).read()
+        return urllib.request.urlopen(req, timeout=8).read()
     except Exception:
         return subprocess.run(
-            ["curl", "-fsSL", "--http1.1", "--max-time", "25", "-A", UA["User-Agent"], url],
-            capture_output=True, timeout=30, check=True).stdout
+            ["curl", "-fsSL", "--http1.1", "--max-time", "8", "-A", UA["User-Agent"], url],
+            capture_output=True, timeout=12, check=True).stdout
 
 
 def fetch(url):
-    # FRED throttle-uiește cererile rapide → retry cu backoff
     last = None
-    for i in range(3):
+    for i in range(2):  # 1 retry; circuit-breaker-ul oprește restul seriilor FRED
         try:
             return _once(url)
         except Exception as e:
             last = e
-            time.sleep(2 + i * 3)
+            time.sleep(1 + i)
     raise last
+
+
+_fred_down = [False]  # circuit breaker: dacă FRED e jos (ex. throttle local), nu mai insistăm
 
 
 def fred_series(sid):
     """Întoarce listă [(date, value)] din fredgraph.csv, ignorând valorile lipsă ('.')."""
-    time.sleep(1.5)  # spațiere anti-throttle FRED
-    rows = fetch(FRED.format(sid)).decode("utf-8").splitlines()
+    if _fred_down[0]:
+        return []
+    try:
+        rows = fetch(FRED.format(sid)).decode("utf-8").splitlines()
+    except Exception:
+        _fred_down[0] = True  # prima cădere FRED → sărim restul rapid
+        raise
     out = []
     for ln in rows[1:]:
         parts = ln.split(",")
@@ -113,6 +120,7 @@ def main():
     dob = [
         item("Dobânda Fed (SUA)", safe(fred_last, "FEDFUNDS"), src="Rezerva Federală / FRED"),
         item("Dobânda ECB (refinanțare)", safe(ecb_obs, "FM/D.U2.EUR.4F.KR.MRR_FR.LEV"), src="BCE"),
+        item("Euribor 3 luni", safe(ecb_obs, "FM/M.U2.EUR.RT.MM.EURIBOR3MD_.HSTA"), src="BCE / EMMI"),
         item("Dobânda-cheie BNR", (None, None), src="BNR",
              note="Vezi valoarea oficială la zi pe bnr.ro"),
     ]
