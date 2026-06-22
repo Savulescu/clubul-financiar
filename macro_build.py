@@ -158,6 +158,7 @@ def main():
 
     # ---- Economia României ----
     ro = [
+        item("Creștere PIB (anual)", safe(eurostat_last, "namq_10_gdp", "geo=RO&na_item=B1GQ&s_adj=SCA&unit=CLV_PCH_SM"), src="Eurostat"),
         item("Șomaj", safe(eurostat_last, "une_rt_m", "geo=RO&age=TOTAL&unit=PC_ACT&s_adj=SA&sex=T"), src="Eurostat"),
     ]
     groups.append({"title": "Economia României", "items": ro})
