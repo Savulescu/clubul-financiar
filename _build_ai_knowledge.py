@@ -48,6 +48,15 @@ consts=[
 for c in consts:
     entries.append({"t":"Constante fiscale 2026","x":c,"k":kw(c),"src":"constante"})
 
+# 4) Articole avansate (din search-index) neacoperite de teste — acoperire pe toate articolele
+have=set(e["src"] for e in entries)
+for e in si.values():
+    s=e.get("s")
+    if not s or s in have: continue
+    t=e.get("t",""); d=e.get("d","")
+    if not t or len(d)<30: continue
+    entries.append({"t":t,"x":(t+". "+d)[:900],"k":kw(t+" "+d),"src":s}); have.add(s)
+
 json.dump(entries,open("docs/assets/ai-knowledge.json","w"),ensure_ascii=False)
 sz=os.path.getsize("docs/assets/ai-knowledge.json")
 print(f"ai-knowledge.json: {len(entries)} intrări, {sz//1024} KB (glosar:{sum(1 for e in entries if e['src']=='glosar')}, lecții:{sum(1 for e in entries if e['src'] not in ('glosar','constante'))}, constante:{len(consts)})")
