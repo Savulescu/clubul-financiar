@@ -86,6 +86,14 @@ for e in si.values():
     if not t or len(d)<30: continue
     entries.append({"t":t,"x":(t+". "+d)[:900],"k":kw(t+" "+d),"src":s}); have.add(s)
 
+# corecție: „broker străin 10%" e cota VECHE → 16% din 2026 (Legea 239/2025); aliniez sursele RAG
+for e in entries:
+    x=e["x"]
+    x=re.sub(r'(broker\w*\s+str[ăa]in\w*[^.]{0,70}?)10(\s?%)', r'\g<1>16\g<2>', x, flags=re.I)
+    x=re.sub(r'(str[ăa]in\w*,?\s+impozitul\s+(?:este\s+)?de\s+)10(\s?%)', r'\g<1>16\g<2>', x, flags=re.I)
+    x=re.sub(r'10(\s?%[^.]{0,50}?broker\w*\s+str[ăa]in)', r'16\g<1>', x, flags=re.I)
+    e["x"]=x
+
 json.dump(entries,open("docs/assets/ai-knowledge.json","w"),ensure_ascii=False)
 sz=os.path.getsize("docs/assets/ai-knowledge.json")
 print(f"ai-knowledge.json: {len(entries)} intrări, {sz//1024} KB (glosar:{sum(1 for e in entries if e['src']=='glosar')}, lecții:{sum(1 for e in entries if e['src'] not in ('glosar','constante'))}, constante:{len(consts)})")
