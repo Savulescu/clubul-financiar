@@ -270,11 +270,33 @@
           n.split(/\s+/).some(function(nw){ return nw.length>3 && (w.indexOf(nw)===0 || nw.indexOf(w)===0); }); });
     });
   }
+  function findBVB(q){
+    q=nrm(q); if(!q) return null;
+    var words=q.split(/\s+/).filter(function(w){return w.length>=3;});
+    if(!words.length) return null;
+    return BVB.find(function(c){
+      var t=nrm(c.t);
+      if(words.indexOf(t)>=0) return true;                       // ticker ca cuvânt întreg
+      var nw=nrm(c.n).split(/\s+/);                              // cuvintele din nume
+      return words.some(function(w){
+        return nw.some(function(x){ return x.length>=4 && (x===w || x.indexOf(w)===0 || w.indexOf(x)===0); });
+      });
+    });
+  }
   function command(raw){
     var out=$("cmdOut"); var q=(raw||"").trim(); if(!q){ out.innerHTML=""; return; }
     if(!FX){ out.innerHTML='<div class="u-alert">Datele se încarcă…</div>'; return; }
     // întrebări simple de curs → răspuns gratuit, direct din BNR
     var m = q.toLowerCase().replace(/[?!.]/g,"");
+    // companie BVB ÎNAINTE de valută (companiile nu se suprapun cu valutele; evită false-match)
+    var co = findBVB(m);
+    if(co){
+      out.innerHTML='<div class="u-alert gold"><p class="h">'+esc(co.t)+' · '+esc(co.n)+'</p>'+
+        '<p style="margin:0 0 8px">'+esc(co.s)+' — '+esc(co.d)+'</p>'+
+        '<p style="margin:0">Dividendele primite de persoanele fizice de la companiile listate se impozitează (reținut la sursă). '+
+        '<a href="/calculatoare/impozit-investitii.html" style="color:var(--u-gold);font-weight:700">Calculează impozitul pe dividende →</a></p></div>';
+      return;
+    }
     var cur = findCur(m.replace(/c[âa]t e|curs|valoare|azi|cat e/g,"").trim()) || findCur(m);
     if(cur){
       var dec = cur.rate<1?4:cur.rate>100?2:4;
