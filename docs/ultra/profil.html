@@ -1,0 +1,413 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profilul meu — Biroul tău financiar privat — Clubul Financiar</title>
+<meta name="description" content="Profilul tău financiar: o singură dată completezi veniturile, cheltuielile, datoriile și averea — toate uneltele Ultra calculează automat din el.">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/profil.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <div class="u-hero">
+      <div class="u-badge-ultra">Ultra</div>
+      <p class="u-eyebrow" style="margin-top:16px"><a href="/ultra.html" style="color:inherit;text-decoration:none">Biroul tău financiar privat</a> · Profil</p>
+      <h1 class="u-crest">Profilul <em>meu</em></h1>
+      <p class="u-lead" style="margin-top:16px">
+        Completează-l o dată. Tot biroul Ultra — cockpit, simulator, optimizator, FIRE — calculează
+        automat din aceste cifre. Rămâne privat la tine; sincronizarea în cloud e opțională.
+      </p>
+    </div>
+
+    <!-- zona interactivă gated -->
+    <div id="uTool">
+      <div class="u-grid u-grid-2" style="align-items:start">
+
+        <!-- ============ FORMULAR ============ -->
+        <form id="formProfil" autocomplete="off">
+
+          <fieldset class="u-fieldset"><legend>Persoană</legend>
+            <div class="u-grid u-grid-2" style="gap:0 16px">
+              <div class="u-field"><label>Nume (opțional)</label>
+                <input class="u-input" type="text" id="f_nume" placeholder="ex. Andrei"></div>
+              <div class="u-field"><label>Oraș (opțional)</label>
+                <input class="u-input" type="text" id="f_oras" placeholder="ex. Cluj-Napoca"></div>
+              <div class="u-field"><label>Vârstă</label>
+                <input class="u-input" type="number" id="f_varsta" min="16" max="100" inputmode="numeric"></div>
+              <div class="u-field"><label>Persoane în întreținere</label>
+                <span class="hint">Copii / persoane pe care le susții</span>
+                <input class="u-input" type="number" id="f_dependenti" min="0" max="12" inputmode="numeric"></div>
+              <div class="u-field"><label>Stare civilă</label>
+                <select class="u-select" id="f_stareCivila">
+                  <option value="necasatorit">Necăsătorit(ă)</option>
+                  <option value="casatorit">Căsătorit(ă)</option>
+                </select></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="u-fieldset"><legend>Structură &amp; venituri</legend>
+            <div class="u-field"><label>Cum câștigi banii?</label>
+              <select class="u-select" id="f_structura"></select></div>
+            <div class="u-field" id="wrap_tva" hidden>
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <input type="checkbox" id="f_tvaPlatitor" style="width:auto"> Sunt plătitor de TVA
+              </label>
+            </div>
+            <!-- câmpuri dinamice pe structură -->
+            <div id="venituriDinamice"></div>
+
+            <div class="u-hr"></div>
+            <p class="u-label" style="margin-bottom:8px">Alte venituri</p>
+            <div class="u-grid u-grid-2" style="gap:0 16px">
+              <div class="u-field"><label>Chirii încasate</label><span class="hint">lei / lună (brut)</span>
+                <input class="u-input" type="number" id="f_chiriiLunar" min="0" inputmode="numeric"></div>
+              <div class="u-field"><label>Dividende din portofoliu</label><span class="hint">lei / an</span>
+                <input class="u-input" type="number" id="f_dividendeAnual" min="0" inputmode="numeric"></div>
+              <div class="u-field"><label>Alte venituri nete</label><span class="hint">lei / lună</span>
+                <input class="u-input" type="number" id="f_alteLunar" min="0" inputmode="numeric"></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="u-fieldset"><legend>Cheltuieli lunare (lei)</legend>
+            <div class="u-grid u-grid-2" style="gap:0 16px" id="cheltGrid"></div>
+          </fieldset>
+
+          <fieldset class="u-fieldset"><legend>Datorii</legend>
+            <p class="hint" style="margin-bottom:10px">Credite, IFN, carduri. Adaugă fiecare datorie.</p>
+            <div id="datoriiList"></div>
+            <button type="button" class="u-btn u-btn-ghost" id="btnAddDatorie" style="margin-top:6px">+ Adaugă datorie</button>
+          </fieldset>
+
+          <fieldset class="u-fieldset"><legend>Avere (active, lei)</legend>
+            <div class="u-grid u-grid-2" style="gap:0 16px" id="activeGrid"></div>
+          </fieldset>
+
+          <fieldset class="u-fieldset"><legend>Obiective &amp; risc</legend>
+            <div class="u-grid u-grid-2" style="gap:0 16px">
+              <div class="u-field"><label>Fond de urgență dorit</label><span class="hint">luni de cheltuieli</span>
+                <input class="u-input" type="number" id="f_fondUrgentaLuni" min="0" max="24" inputmode="numeric"></div>
+              <div class="u-field"><label>Vârsta libertății financiare</label><span class="hint">când vrei independență</span>
+                <input class="u-input" type="number" id="f_varstaLibertate" min="30" max="90" inputmode="numeric"></div>
+              <div class="u-field"><label>Randament real estimat</label><span class="hint">% pe an, peste inflație</span>
+                <input class="u-input" type="number" id="f_randamentReal" min="0" max="15" step="0.5" inputmode="decimal"></div>
+              <div class="u-field"><label>Toleranță la risc</label>
+                <select class="u-select" id="f_toleranteRisc">
+                  <option value="mica">Mică — vreau stabilitate</option>
+                  <option value="medie">Medie — echilibrat</option>
+                  <option value="mare">Mare — accept volatilitate</option>
+                </select></div>
+            </div>
+          </fieldset>
+
+          <div class="u-field" style="margin:4px 0 18px">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+              <input type="checkbox" id="f_sync" style="width:auto">
+              Sincronizează în cloud (cross-device)
+            </label>
+            <span class="hint">Salvăm criptat în contul tău ca să-ți regăsești profilul pe orice dispozitiv. Necesită cont logat.</span>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+            <button type="submit" class="u-btn u-btn-gold">Salvează profilul</button>
+            <span id="savedMsg" class="u-chip" hidden>✓ Salvat</span>
+          </div>
+
+          <p class="cf-mini" style="margin-top:16px;color:var(--u-muted)">
+            Estimare educativă pe regulile RO 2026. Nu e consultanță fiscală.
+          </p>
+        </form>
+
+        <!-- ============ REZUMAT LIVE ============ -->
+        <aside>
+          <div class="u-panel" id="rezumatPanel" style="position:sticky;top:90px">
+            <p class="u-label">Rezumat live</p>
+            <h2 class="u-panel-h" id="rez_titlu">Profilul tău</h2>
+            <div id="rezumatBody"></div>
+            <div class="u-hr"></div>
+            <a class="u-btn u-btn-ghost" href="/ultra/cockpit.html" style="width:100%">Vezi cockpitul →</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+
+  // câmpuri de cheltuieli & active (cheie -> etichetă)
+  var CHELT = [
+    ["locuinta","Locuință (chirie/rată)"],["mancare","Mâncare"],["transport","Transport"],
+    ["utilitati","Utilități"],["rate","Rate credite"],["abonamente","Abonamente"],
+    ["copii","Copii"],["sanatate","Sănătate"],["distractie","Distracție"],["alte","Altele"]
+  ];
+  var ACTIVE = [
+    ["cash","Cash / conturi curente"],["depozite","Depozite bancare"],
+    ["investitii","Investiții (acțiuni/ETF/fonduri)"],["crypto","Crypto"],
+    ["titluriStat","Titluri de stat (Fidelis/Tezaur)"],["pensiePilon3","Pensie Pilon III"],
+    ["imobiliareInvestitii","Imobiliare de investiții"],["locuintaProprie","Locuința proprie"],
+    ["auto","Auto"],["alte","Alte active"]
+  ];
+
+  // câmpuri venituri relevante pe structură
+  function venituriPentru(structura){
+    var s = structura;
+    var blocuri = [];
+    if (s === "salariat" || s === "mixt"){
+      blocuri.push(num("salariuNet","Salariu net", "lei / lună, în mână"));
+    }
+    if (s === "pfa_real" || s === "pfa_norma" || s === "mixt"){
+      blocuri.push(num("pfaIncasari","Încasări PFA", "lei / an (brut)"));
+      blocuri.push(num("pfaCheltuieli","Cheltuieli deductibile PFA", "lei / an"));
+    }
+    if (s === "srl_micro" || s === "srl_real" || s === "mixt"){
+      blocuri.push(num("srlCifraAfaceri","Cifră de afaceri SRL", "lei / an"));
+      blocuri.push(num("srlCheltuieli","Cheltuieli SRL", "lei / an"));
+      blocuri.push(num("srlDividendePct","Dividend scos din profit", "% din profit (0–100)"));
+    }
+    return blocuri.join("");
+  }
+  function num(key, label, hint){
+    return '<div class="u-field"><label>'+label+'</label><span class="hint">'+hint+'</span>'+
+      '<input class="u-input" type="number" min="0" inputmode="numeric" data-venit="'+key+'"></div>';
+  }
+
+  function val(id){ var el = $(id); if(!el) return 0; return el.value; }
+  function numv(id){ var n = parseFloat(val(id)); return isFinite(n) ? n : 0; }
+
+  // ---------- construire formular static ----------
+  (function buildStatic(){
+    var sel = $("f_structura");
+    U.STRUCTURI.forEach(function(o){
+      var op = document.createElement("option"); op.value = o.v; op.textContent = o.t; sel.appendChild(op);
+    });
+    $("cheltGrid").innerHTML = CHELT.map(function(c){
+      return '<div class="u-field"><label>'+c[1]+'</label>'+
+        '<input class="u-input" type="number" min="0" inputmode="numeric" data-chelt="'+c[0]+'"></div>';
+    }).join("");
+    $("activeGrid").innerHTML = ACTIVE.map(function(c){
+      var hint = c[0]==="locuintaProprie"||c[0]==="auto" ? '<span class="hint">nu intră în calculul FIRE</span>' : "";
+      return '<div class="u-field"><label>'+c[1]+'</label>'+hint+
+        '<input class="u-input" type="number" min="0" inputmode="numeric" data-activ="'+c[0]+'"></div>';
+    }).join("");
+  })();
+
+  // ---------- datorii (rânduri dinamice) ----------
+  function datorieRow(d){
+    d = d || { nume:"", sold:"", dobanda:"", rataLunara:"" };
+    var row = document.createElement("div");
+    row.className = "u-grid u-grid-4";
+    row.style.cssText = "gap:0 10px;align-items:end;margin-bottom:6px";
+    row.innerHTML =
+      '<div class="u-field" style="margin-bottom:8px"><label>Nume</label>'+
+        '<input class="u-input" type="text" data-dat="nume" placeholder="ex. Credit auto"></div>'+
+      '<div class="u-field" style="margin-bottom:8px"><label>Sold (lei)</label>'+
+        '<input class="u-input" type="number" min="0" inputmode="numeric" data-dat="sold"></div>'+
+      '<div class="u-field" style="margin-bottom:8px"><label>Dobândă (%)</label>'+
+        '<input class="u-input" type="number" min="0" step="0.1" inputmode="decimal" data-dat="dobanda"></div>'+
+      '<div class="u-field" style="margin-bottom:8px;display:flex;gap:8px;align-items:end">'+
+        '<div style="flex:1"><label>Rată (lei/lună)</label>'+
+        '<input class="u-input" type="number" min="0" inputmode="numeric" data-dat="rataLunara"></div>'+
+        '<button type="button" class="u-btn u-btn-ghost" data-del="1" title="Șterge" '+
+          'style="padding:11px 13px">✕</button></div>';
+    row.querySelector('[data-dat="nume"]').value = d.nume || "";
+    row.querySelector('[data-dat="sold"]').value = d.sold != null ? d.sold : "";
+    row.querySelector('[data-dat="dobanda"]').value = d.dobanda != null ? d.dobanda : "";
+    row.querySelector('[data-dat="rataLunara"]').value = d.rataLunara != null ? d.rataLunara : "";
+    row.querySelector('[data-del]').addEventListener("click", function(){ row.remove(); });
+    return row;
+  }
+  $("btnAddDatorie").addEventListener("click", function(){
+    $("datoriiList").appendChild(datorieRow());
+  });
+
+  // ---------- structură -> câmpuri venituri dinamice ----------
+  function renderVenituri(structura, prefill){
+    var host = $("venituriDinamice");
+    host.innerHTML = '<div class="u-grid u-grid-2" style="gap:0 16px">'+venituriPentru(structura)+'</div>';
+    // TVA vizibil doar pentru PFA/SRL
+    var areFirma = structura !== "salariat";
+    $("wrap_tva").hidden = !areFirma;
+    // re-aplică valorile pentru câmpurile nou create
+    if (prefill){
+      host.querySelectorAll("[data-venit]").forEach(function(el){
+        var k = el.getAttribute("data-venit");
+        if (prefill[k] != null) el.value = prefill[k];
+      });
+    }
+  }
+  $("f_structura").addEventListener("change", function(){
+    // păstrează ce e deja scris în câmpurile de venit
+    var cur = collectVenituri();
+    renderVenituri(this.value, cur);
+  });
+  function collectVenituri(){
+    var out = {};
+    $("venituriDinamice").querySelectorAll("[data-venit]").forEach(function(el){
+      out[el.getAttribute("data-venit")] = el.value;
+    });
+    return out;
+  }
+
+  // ---------- pre-populare din profil ----------
+  function fill(p){
+    $("f_nume").value = p.nume || "";
+    $("f_oras").value = p.oras || "";
+    $("f_varsta").value = p.varsta != null ? p.varsta : "";
+    $("f_dependenti").value = p.dependenti != null ? p.dependenti : "";
+    $("f_stareCivila").value = p.stareCivila || "necasatorit";
+    $("f_structura").value = p.structura || "salariat";
+    $("f_tvaPlatitor").checked = !!p.tvaPlatitor;
+    renderVenituri(p.structura || "salariat", p.venituri || {});
+
+    var v = p.venituri || {};
+    $("f_chiriiLunar").value = v.chiriiLunar || "";
+    $("f_dividendeAnual").value = v.dividendeAnual || "";
+    $("f_alteLunar").value = v.alteLunar || "";
+
+    var c = p.cheltuieli || {};
+    document.querySelectorAll("[data-chelt]").forEach(function(el){
+      var k = el.getAttribute("data-chelt"); el.value = c[k] || "";
+    });
+    var a = p.active || {};
+    document.querySelectorAll("[data-activ]").forEach(function(el){
+      var k = el.getAttribute("data-activ"); el.value = a[k] || "";
+    });
+
+    $("datoriiList").innerHTML = "";
+    (p.datorii || []).forEach(function(d){ $("datoriiList").appendChild(datorieRow(d)); });
+
+    var ob = p.obiective || {};
+    $("f_fondUrgentaLuni").value = ob.fondUrgentaLuni != null ? ob.fondUrgentaLuni : 6;
+    $("f_varstaLibertate").value = ob.varstaLibertate != null ? ob.varstaLibertate : 55;
+    $("f_randamentReal").value = ob.randamentReal != null ? ob.randamentReal : 5;
+    $("f_toleranteRisc").value = p.toleranteRisc || "medie";
+    $("f_sync").checked = !!p.sync;
+  }
+
+  // ---------- citire formular -> profil ----------
+  function readForm(){
+    var p = U.gol();
+    p.nume = val("f_nume").trim();
+    p.oras = val("f_oras").trim();
+    p.varsta = numv("f_varsta") || 35;
+    p.dependenti = numv("f_dependenti");
+    p.stareCivila = val("f_stareCivila");
+    p.structura = val("f_structura");
+    p.tvaPlatitor = $("f_tvaPlatitor").checked;
+
+    // venituri: dinamice + fixe
+    var vd = collectVenituri();
+    Object.keys(vd).forEach(function(k){
+      var n = parseFloat(vd[k]); p.venituri[k] = isFinite(n) ? n : 0;
+    });
+    p.venituri.chiriiLunar = numv("f_chiriiLunar");
+    p.venituri.dividendeAnual = numv("f_dividendeAnual");
+    p.venituri.alteLunar = numv("f_alteLunar");
+
+    document.querySelectorAll("[data-chelt]").forEach(function(el){
+      var n = parseFloat(el.value); p.cheltuieli[el.getAttribute("data-chelt")] = isFinite(n) ? n : 0;
+    });
+    document.querySelectorAll("[data-activ]").forEach(function(el){
+      var n = parseFloat(el.value); p.active[el.getAttribute("data-activ")] = isFinite(n) ? n : 0;
+    });
+
+    p.datorii = [];
+    $("datoriiList").querySelectorAll(".u-grid").forEach(function(row){
+      var nume = row.querySelector('[data-dat="nume"]').value.trim();
+      var sold = parseFloat(row.querySelector('[data-dat="sold"]').value) || 0;
+      var dob = parseFloat(row.querySelector('[data-dat="dobanda"]').value) || 0;
+      var rata = parseFloat(row.querySelector('[data-dat="rataLunara"]').value) || 0;
+      if (nume || sold || dob || rata){
+        p.datorii.push({ nume: nume || "Datorie", sold: sold, dobanda: dob, rataLunara: rata });
+      }
+    });
+
+    p.obiective.fondUrgentaLuni = numv("f_fondUrgentaLuni") || 6;
+    p.obiective.varstaLibertate = numv("f_varstaLibertate") || 55;
+    var rr = parseFloat(val("f_randamentReal")); p.obiective.randamentReal = isFinite(rr) ? rr : 5;
+    p.toleranteRisc = val("f_toleranteRisc");
+    p.sync = $("f_sync").checked;
+    return p;
+  }
+
+  // ---------- rezumat live ----------
+  function row(k, v, cls){
+    return '<div class="u-row"><span class="k">'+k+'</span><span class="lead-dots"></span>'+
+      '<span class="v '+(cls||"")+'">'+v+'</span></div>';
+  }
+  function renderRezumat(p){
+    var an = U.avereNeta(p), cf = U.cashFlow(p), scor = U.scorSanatate(p);
+    var venit = U.venitNetLunar(p);
+    var econCls = cf.economii >= 0 ? "u-pos" : "u-neg";
+    var scorCls = scor.scor >= 80 ? "u-pos" : scor.scor >= 40 ? "u-gold-t" : "u-neg";
+    $("rezumatBody").innerHTML =
+      row("Venit net lunar", CF.lei(venit)) +
+      row("Cheltuieli lunare", CF.lei(U.cheltuieliLunar(p))) +
+      row("Economii / lună", CF.lei(cf.economii), econCls) +
+      row("Avere netă", CF.lei(an.net), "u-gold-t") +
+      row("Scor de sănătate", scor.scor + "/100 · " + scor.eticheta, scorCls);
+  }
+
+  // ---------- init ----------
+  var current = U.getProfil();
+  fill(current);
+  renderRezumat(current);
+
+  // re-randează rezumatul pe orice modificare (live)
+  $("formProfil").addEventListener("input", function(){
+    try { renderRezumat(readForm()); } catch(e){}
+  });
+
+  $("formProfil").addEventListener("submit", function(e){
+    e.preventDefault();
+    var p = readForm();
+    var saved = U.salveaza(p);   // emite cf-profil; sync cloud dacă saved.sync
+    fill(saved);
+    renderRezumat(saved);
+    var msg = $("savedMsg");
+    msg.hidden = false;
+    msg.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    clearTimeout(window.__cfSaveT);
+    window.__cfSaveT = setTimeout(function(){ msg.hidden = true; }, 4000);
+  });
+
+  // la login, trage profilul din cloud și re-populează
+  window.addEventListener("cf-auth", function(){
+    U.syncCloud().then(function(p){ fill(p); renderRezumat(p); });
+  });
+
+  CF.requireTier("uTool","ultra",{msg:"Profilul personal face parte din planul Ultra."});
+})();
+</script>
+</body></html>

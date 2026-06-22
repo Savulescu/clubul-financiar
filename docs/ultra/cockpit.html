@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cockpit — Clubul Financiar</title>
+<meta name="description" content="Centrul de comandă al biroului tău financiar privat: avere netă, flux lunar, scor de sănătate, proiecție fiscală și alerte, totul într-un singur loc."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/cockpit.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+  /* doar mici aranjamente de layout, nimic ce nu există deja în cf-ultra.css */
+  .ck-kpi-foot{ margin-top:12px; }
+  .ck-kpi-foot .u-row{ padding:6px 0; }
+  .ck-ringpanel{ display:flex; gap:22px; align-items:flex-start; flex-wrap:wrap; }
+  .ck-ringpanel .ring{ flex:0 0 auto; }
+  .ck-ringpanel .body{ flex:1 1 220px; min-width:200px; }
+  .ck-prio{ list-style:none; margin:0; padding:0; }
+  .ck-prio li{ padding:10px 0; border-bottom:1px solid var(--u-line-soft); }
+  .ck-prio li:last-child{ border-bottom:0; }
+  .ck-prio .pn{ color:var(--u-ink); font-weight:700; font-size:.96rem; }
+  .ck-prio .ps{ color:var(--u-muted); font-size:.88rem; margin-top:3px; line-height:1.5; }
+  .ck-fisc-big{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin:4px 0 14px; }
+  .ck-zile{ font-size:.92rem; font-weight:700; }
+  .ck-flow-bar{ display:flex; height:14px; border-radius:999px; overflow:hidden; margin:16px 0 8px;
+    border:1px solid var(--u-line-soft); background:var(--u-gold-soft); }
+  .ck-flow-bar span{ display:block; height:100%; }
+  .ck-flow-bar .s-chelt{ background:linear-gradient(90deg,#caa44a,#9a7414); }
+  .ck-flow-bar .s-rate{ background:linear-gradient(90deg,#e0a33a,#d2453b); }
+  .ck-flow-bar .s-econ{ background:linear-gradient(90deg,var(--u-pos),#5fe0b6); }
+  .ck-legend{ display:flex; gap:16px; flex-wrap:wrap; font-size:.8rem; color:var(--u-muted); margin-top:4px; }
+  .ck-legend i{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:middle; }
+  .ck-empty{ text-align:center; max-width:520px; margin:30px auto; }
+  .ck-empty .u-crest{ margin:10px 0 14px; }
+  .ck-empty p{ color:var(--u-muted); line-height:1.6; margin:0 0 22px; }
+  .ck-foot-link{ margin-top:14px; }
+  .ck-foot-link a{ color:var(--u-gold); font-weight:700; text-decoration:none; font-size:.9rem; }
+  .ck-disclaim{ color:var(--u-muted); font-size:.78rem; margin-top:24px; text-align:center; }
+</style>
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <!-- HERO -->
+    <header class="u-hero" id="ckHero">
+      <p class="u-eyebrow">Cockpit</p>
+      <h1 class="u-crest" id="ckGreet">Cockpitul tău</h1>
+      <p class="u-lead" id="ckState">Privire de ansamblu asupra întregii tale situații financiare.</p>
+    </header>
+
+    <!-- ZONA GATED -->
+    <div id="uTool">
+
+      <!-- EMPTY STATE -->
+      <div id="ckEmpty" class="u-panel ck-empty" style="display:none">
+        <p class="u-eyebrow">Biroul tău financiar privat</p>
+        <h2 class="u-crest">Cockpitul prinde viață<br>când îți <em>cunoaște cifrele</em></h2>
+        <p>Completează-ți profilul o singură dată. Apoi vezi aici, dintr-o privire, averea netă, fluxul lunar, scorul de sănătate, proiecția fiscală și ce ai de făcut în continuare.</p>
+        <a class="u-btn u-btn-gold" href="/ultra/profil.html">Completează profilul →</a>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div id="ckDash" style="display:none">
+
+        <!-- TOP STAT ROW -->
+        <div class="u-grid u-grid-4" style="margin-bottom:18px">
+          <div class="u-panel">
+            <p class="u-label">Avere netă</p>
+            <div class="u-kpi" id="kAvere">—</div>
+            <div class="ck-kpi-foot">
+              <div class="u-row"><span class="k">Active</span><span class="lead-dots"></span><span class="v" id="kActive">—</span></div>
+              <div class="u-row"><span class="k">Datorii</span><span class="lead-dots"></span><span class="v u-neg" id="kDatorii">—</span></div>
+            </div>
+          </div>
+          <div class="u-panel">
+            <p class="u-label">Venit net lunar</p>
+            <div class="u-kpi" id="kVenit">—</div>
+            <p class="u-kpi-sub" id="kVenitSub">din toate sursele, după taxe</p>
+          </div>
+          <div class="u-panel">
+            <p class="u-label">Economii / lună</p>
+            <div class="u-kpi" id="kEcon">—</div>
+            <p class="u-kpi-sub">rată de economisire <span class="u-delta" id="kRata">—</span></p>
+          </div>
+          <div class="u-panel">
+            <p class="u-label">Venit pasiv azi</p>
+            <div class="u-kpi" id="kPasiv">—</div>
+            <p class="u-kpi-sub">ce produce averea ta, la 4% / an</p>
+          </div>
+        </div>
+
+        <!-- SCOR + FIRE -->
+        <div class="u-grid u-grid-2" style="margin-bottom:18px">
+          <div class="u-panel">
+            <p class="u-label">Scor de sănătate</p>
+            <div class="ck-ringpanel">
+              <div class="ring" id="kScorRing"></div>
+              <div class="body">
+                <p class="u-kpi-sub" style="margin-top:0">Top priorități pentru tine</p>
+                <ul class="ck-prio" id="kPrio"></ul>
+              </div>
+            </div>
+          </div>
+          <div class="u-panel">
+            <p class="u-label">Drumul spre libertate</p>
+            <div class="ck-ringpanel">
+              <div class="ring" id="kFireRing"></div>
+              <div class="body">
+                <div class="u-row"><span class="k">Capital curent</span><span class="lead-dots"></span><span class="v" id="kFireCur">—</span></div>
+                <div class="u-row"><span class="k">Țintă (regula 4%)</span><span class="lead-dots"></span><span class="v u-gold-t" id="kFireTinta">—</span></div>
+                <div class="u-row"><span class="k">Ani rămași</span><span class="lead-dots"></span><span class="v" id="kFireAni">—</span></div>
+                <div class="u-row"><span class="k">Data libertății</span><span class="lead-dots"></span><span class="v" id="kFireData">—</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FISCAL + FLUX -->
+        <div class="u-grid u-grid-2" style="margin-bottom:18px">
+          <div class="u-panel">
+            <p class="u-label">Proiecție fiscală</p>
+            <div id="kFiscBody"></div>
+            <p class="u-kpi-sub ck-disclaim" style="text-align:left;margin-top:14px">Estimare educativă pe regulile RO 2026. Nu e consultanță fiscală.</p>
+          </div>
+          <div class="u-panel">
+            <p class="u-label">Flux lunar</p>
+            <div class="u-row"><span class="k">Venit</span><span class="lead-dots"></span><span class="v u-pos" id="kFlVenit">—</span></div>
+            <div class="u-row"><span class="k">Cheltuieli</span><span class="lead-dots"></span><span class="v" id="kFlChelt">—</span></div>
+            <div class="u-row"><span class="k">Rate datorii</span><span class="lead-dots"></span><span class="v" id="kFlRate">—</span></div>
+            <div class="u-row"><span class="k">Economii</span><span class="lead-dots"></span><span class="v" id="kFlEcon">—</span></div>
+            <div class="ck-flow-bar" id="kFlowBar"></div>
+            <div class="ck-legend">
+              <span><i style="background:linear-gradient(90deg,#caa44a,#9a7414)"></i>Cheltuieli</span>
+              <span><i style="background:linear-gradient(90deg,#e0a33a,#d2453b)"></i>Rate</span>
+              <span><i style="background:linear-gradient(90deg,var(--u-pos),#5fe0b6)"></i>Economii</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TERMENE + ALERTE -->
+        <div class="u-grid u-grid-2" style="margin-bottom:18px">
+          <div class="u-panel">
+            <p class="u-label">Următoarele termene</p>
+            <div class="u-timeline" id="kTimeline"></div>
+            <div class="ck-foot-link"><a href="/ultra/calendar.html">Vezi tot calendarul fiscal →</a></div>
+          </div>
+          <div class="u-panel">
+            <p class="u-label">Alerte</p>
+            <div id="kAlerte"></div>
+          </div>
+        </div>
+
+        <p class="ck-disclaim">Cifrele se calculează din profilul tău, determinist. Estimările fiscale sunt educative, pe regulile RO 2026 — nu sunt consultanță fiscală.</p>
+
+      </div><!-- /ckDash -->
+    </div><!-- /uTool -->
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var F = window.CF_FISCAL;
+  var p = U.getProfil();
+
+  function setText(id, v){ var el = $(id); if (el) el.textContent = v; }
+  function setHTML(id, v){ var el = $(id); if (el) el.innerHTML = v; }
+  function show(id, on){ var el = $(id); if (el) el.style.display = on ? "" : "none"; }
+
+  function render(){
+    p = U.getProfil();
+    var hasData = U.areDate(p);
+
+    // Greeting (mereu)
+    var nume = (p.nume || "").trim();
+    setHTML("ckGreet", nume ? ("Bună, <em>" + esc(nume) + "</em>") : "Cockpitul tău");
+
+    show("ckEmpty", !hasData);
+    show("ckDash", hasData);
+
+    if (!hasData){
+      setText("ckState", "Cockpitul tău așteaptă cifrele. Completează profilul ca să prindă viață.");
+      return;
+    }
+
+    var an = U.avereNeta(p);
+    var cf = U.cashFlow(p);
+    var fire = U.fire(p);
+    var scor = U.scorSanatate(p);
+    var fisc = U.proiectieFiscala(p);
+
+    // --- HERO state line ---
+    var stareTxt = "Avere netă " + CF.lei(an.net) + " · economisești " +
+      (cf.economii >= 0 ? CF.lei(cf.economii) : "−" + CF.lei(Math.abs(cf.economii))) +
+      "/lună · scor de sănătate " + scor.scor + "/100 (" + scor.eticheta.toLowerCase() + ").";
+    setText("ckState", stareTxt);
+
+    // --- TOP KPI ---
+    setText("kAvere", CF.lei(an.net));
+    setText("kActive", CF.lei(an.active));
+    setText("kDatorii", an.datorii > 0 ? "−" + CF.lei(an.datorii) : CF.lei(0));
+    setText("kVenit", CF.lei(U.venitNetLunar(p)));
+    var econEl = $("kEcon");
+    setText("kEcon", (cf.economii < 0 ? "−" : "") + CF.lei(Math.abs(cf.economii)));
+    if (econEl) econEl.className = "u-kpi " + (cf.economii >= 0 ? "u-pos" : "u-neg");
+    var rataEl = $("kRata");
+    setText("kRata", CF.pct(cf.rataEconomisire));
+    if (rataEl) rataEl.className = "u-delta " + (cf.rataEconomisire >= 0.20 ? "u-pos" : cf.rataEconomisire < 0 ? "u-neg" : "u-gold-t");
+    setText("kPasiv", CF.lei(fire.venitPasivLunar));
+
+    // --- SCOR ---
+    var scorCol = scor.scor >= 80 ? "var(--u-pos)" : scor.scor >= 50 ? "#E8C268" : "var(--u-neg)";
+    setHTML("kScorRing", U.ringSVG(scor.scor / 100, { size:150, label:scor.scor, sub:scor.eticheta, color:scorCol }));
+    var prioH = (scor.prioritati && scor.prioritati.length)
+      ? scor.prioritati.map(function(s){
+          return '<li><div class="pn">' + esc(s.nume) + '</div><div class="ps">' + esc(s.sfat) + '</div></li>';
+        }).join("")
+      : '<li><div class="pn u-pos">Totul arată solid.</div><div class="ps">Niciun punct critic. Continuă disciplina.</div></li>';
+    setHTML("kPrio", prioH);
+
+    // --- FIRE ---
+    setHTML("kFireRing", U.ringSVG(fire.progres, { size:150, label:CF.pct(fire.progres), sub:"spre libertate" }));
+    setText("kFireCur", CF.lei(fire.capitalCurent));
+    setText("kFireTinta", CF.lei(fire.capitalTinta));
+    if (isFinite(fire.aniRamasi)){
+      setText("kFireAni", fire.aniRamasi <= 0 ? "Ai ajuns!" : fire.aniRamasi.toFixed(1) + " ani");
+      var dEl = $("kFireData");
+      if (fire.dataLibertate){
+        setText("kFireData", CF.dataRO(fire.dataLibertate) +
+          (fire.varstaLibertate != null ? " (la " + Math.round(fire.varstaLibertate) + " ani)" : ""));
+      } else setText("kFireData", "—");
+    } else {
+      setHTML("kFireAni", '<span class="u-gold-t">crește rata de economisire</span>');
+      setText("kFireData", "—");
+    }
+
+    // --- PROIECȚIE FISCALĂ ---
+    renderFiscal(fisc);
+
+    // --- FLUX LUNAR ---
+    setText("kFlVenit", CF.lei(cf.venit));
+    setText("kFlChelt", CF.lei(cf.cheltuieli));
+    setText("kFlRate", CF.lei(cf.rate));
+    var flEcon = $("kFlEcon");
+    setText("kFlEcon", (cf.economii < 0 ? "−" : "") + CF.lei(Math.abs(cf.economii)));
+    if (flEcon) flEcon.className = "v " + (cf.economii >= 0 ? "u-pos" : "u-neg");
+    renderFlowBar(cf);
+
+    // --- TERMENE ---
+    renderTimeline();
+
+    // --- ALERTE ---
+    renderAlerte(p, an, cf, fire, scor, fisc);
+
+    // --- SNAPSHOT ---
+    try {
+      CF.logEntry("ultra-cockpit", CF.perioadaCurenta(), {
+        avere: Math.round(an.net),
+        venit: Math.round(U.venitNetLunar(p)),
+        economii: Math.round(cf.economii),
+        scor: scor.scor
+      });
+    } catch (e) {}
+  }
+
+  function renderFiscal(fisc){
+    var html = "";
+    if (!fisc || !(fisc.total > 0)){
+      html = '<div class="u-alert ok"><div class="h">Nimic estimat de plată acum</div>' +
+        'Pe structura ta actuală nu rezultă obligații la Declarația Unică. Verifică din nou când îți cresc veniturile.</div>';
+      setHTML("kFiscBody", html);
+      return;
+    }
+    var zile = fisc.zileRamase;
+    var zileCls = (zile != null && zile < 30) ? "u-neg" : "u-gold-t";
+    html += '<div class="ck-fisc-big">' +
+      '<span class="u-kpi sm">datorezi ~ <span class="u-gold-t">' + CF.lei(fisc.total) + '</span></span>';
+    if (zile != null){
+      html += '<span class="ck-zile ' + zileCls + '">' +
+        (zile <= 0 ? "termen depășit" : "peste " + zile + " zile") + '</span>';
+    }
+    html += '</div>';
+    (fisc.componente || []).forEach(function(c){
+      html += '<div class="u-row"><span class="k">' + esc(c.nume) + '</span><span class="lead-dots"></span>' +
+        '<span class="v">' + CF.lei(c.suma) + '</span></div>';
+    });
+    if (fisc.termen){
+      html += '<p class="u-kpi-sub" style="margin-top:12px">Termen Declarația Unică: <strong>' +
+        CF.dataRO(fisc.termen) + '</strong></p>';
+    }
+    setHTML("kFiscBody", html);
+  }
+
+  function renderFlowBar(cf){
+    var base = Math.max(cf.venit, cf.cheltuieli + cf.rate + Math.max(0, cf.economii));
+    if (!(base > 0)){ setHTML("kFlowBar", ""); return; }
+    function w(n){ return Math.max(0, n) / base * 100; }
+    var html =
+      '<span class="s-chelt" style="width:' + w(cf.cheltuieli).toFixed(1) + '%"></span>' +
+      '<span class="s-rate" style="width:' + w(cf.rate).toFixed(1) + '%"></span>' +
+      '<span class="s-econ" style="width:' + w(cf.economii).toFixed(1) + '%"></span>';
+    setHTML("kFlowBar", html);
+  }
+
+  function renderTimeline(){
+    var dl = U.deadlines(p).slice(0, 3);
+    if (!dl.length){
+      setHTML("kTimeline", '<p class="u-kpi-sub">Niciun termen apropiat pe structura ta actuală.</p>');
+      return;
+    }
+    var html = dl.map(function(e){
+      var zile = CF.zilePana(e.data);
+      var soon = zile != null && zile < 30;
+      return '<div class="u-tl-item' + (soon ? ' soon' : '') + '">' +
+        '<div class="u-tl-date">' + CF.dataRO(e.data) +
+          (zile != null ? ' · peste ' + Math.max(0, zile) + ' zile' : '') + '</div>' +
+        '<div class="u-tl-title">' + esc(e.titlu) + '</div>' +
+        (e.desc ? '<div class="u-tl-desc">' + esc(e.desc) + '</div>' : '') +
+        '</div>';
+    }).join("");
+    setHTML("kTimeline", html);
+  }
+
+  function renderAlerte(p, an, cf, fire, scor, fisc){
+    var al = [];
+
+    // Fond de urgență sub țintă
+    var fondComp = (scor.componente || []).filter(function(c){ return c.nume === "Fond de urgență"; })[0];
+    if (fondComp && fondComp.scor < 100){
+      var luniMatch = /([\d.]+) luni/.exec(fondComp.detaliu);
+      var luni = luniMatch ? luniMatch[1] : "puține";
+      al.push({ cls:"warn", h:"Fond de urgență sub țintă",
+        b:"Ai " + luni + " luni acoperite din ținta de 6. " + fondComp.sfat });
+    }
+
+    // Rată de economisire negativă
+    if (cf.rataEconomisire < 0){
+      al.push({ cls:"warn", h:"Cheltuiești mai mult decât câștigi",
+        b:"Fluxul lunar e negativ (" + CF.lei(cf.economii) + "/lună). Taie din cheltuieli sau crește veniturile înainte de orice investiție." });
+    } else if (cf.rataEconomisire < 0.10 && cf.venit > 0){
+      al.push({ cls:"gold", h:"Rată de economisire mică",
+        b:"Economisești doar " + CF.pct(cf.rataEconomisire) + " din venit. Țintește 20% — automatizează un transfer la fiecare salariu." });
+    }
+
+    // Datorii scumpe (dobândă > 15%)
+    var scumpe = (p.datorii || []).filter(function(d){ return (+d.dobanda || 0) > 15; });
+    if (scumpe.length){
+      var sold = scumpe.reduce(function(s,d){ return s + (+d.sold || 0); }, 0);
+      al.push({ cls:"warn", h:"Datorii scumpe de achitat",
+        b:"Ai " + CF.lei(sold) + " cu dobândă peste 15% (card / IFN). Achită-le primele — costă cel mai mult." });
+    }
+
+    // TVA plafon apropiat
+    var plafonTVA = (F && F.tva && F.tva.plafonInregistrare) ? F.tva.plafonInregistrare : 395000;
+    var cifra = 0;
+    if (p.structura && p.structura.indexOf("pfa") === 0) cifra = +(p.venituri && p.venituri.pfaIncasari) || 0;
+    else if (p.structura && p.structura.indexOf("srl") === 0) cifra = +(p.venituri && p.venituri.srlCifraAfaceri) || 0;
+    if (!p.tvaPlatitor && cifra > plafonTVA * 0.85){
+      var pctPlafon = Math.min(100, cifra / plafonTVA * 100);
+      al.push({ cls:"gold", h:"Te apropii de plafonul TVA",
+        b:"Cifra ta de afaceri (" + CF.lei(cifra) + ") e la " + Math.round(pctPlafon) + "% din plafonul de înregistrare TVA (" +
+          CF.lei(plafonTVA) + "). Pregătește-te de înregistrare." });
+    }
+
+    // Declarația Unică în < 30 zile
+    if (fisc && fisc.total > 0 && fisc.zileRamase != null && fisc.zileRamase < 30){
+      al.push({ cls:"warn", h:"Declarația Unică se apropie",
+        b:"Mai sunt " + Math.max(0, fisc.zileRamase) + " zile până la termen și ai de plătit ~" + CF.lei(fisc.total) + ". Pregătește banii." });
+    }
+
+    if (!al.length){
+      setHTML("kAlerte", '<div class="u-alert ok"><div class="h">Totul e sub control</div>' +
+        'Niciun semnal de atenție acum. Fluxul, datoriile și fondul de urgență sunt în parametri buni.</div>');
+      return;
+    }
+    setHTML("kAlerte", al.map(function(a){
+      return '<div class="u-alert ' + a.cls + '"><div class="h">' + esc(a.h) + '</div>' + esc(a.b) + '</div>';
+    }).join(""));
+  }
+
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  render();
+  window.addEventListener("cf-profil", render);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
+  CF.requireTier("uTool", "ultra", { msg: "Cockpitul face parte din planul Ultra." });
+})();
+</script>
+</body></html>

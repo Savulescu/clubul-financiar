@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drumul spre Libertate — Clubul Financiar</title>
+<meta name="description" content="Raportul tău lunar de independență financiară (FIRE): cât ai, cât îți trebuie, în câți ani și mesajul tău personalizat."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/libertate.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <!-- HERO -->
+    <div class="u-hero">
+      <div class="u-eyebrow">Raport lunar <span class="u-badge-ultra">◆ Ultra</span></div>
+      <h1 class="u-crest">Drumul tău spre <em>libertate</em></h1>
+      <p class="u-lead" id="uLuna">—</p>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div id="uEmpty" class="u-panel" style="display:none;text-align:center">
+      <div class="u-label">Niciun profil completat</div>
+      <p class="u-lead" style="margin:.4rem auto 1.2rem;max-width:34rem">Ca să-ți construim raportul „Drumul spre Libertate", avem nevoie de cifrele tale: venituri, cheltuieli și avere. Durează câteva minute și rămâne privat.</p>
+      <a class="u-btn u-btn-gold" href="/ultra/profil.html">Completează profilul</a>
+    </div>
+
+    <!-- TOOL (gated) -->
+    <div id="uTool" style="display:none">
+
+      <!-- SIGNATURE: FIRE ring + capital -->
+      <div class="u-panel" style="text-align:center">
+        <div class="u-label">Independența ta financiară</div>
+        <div class="u-ringwrap" id="uRing" style="margin:.6rem auto"></div>
+        <div class="u-grid u-grid-2" style="max-width:30rem;margin:1rem auto 0">
+          <div>
+            <div class="u-kpi-sub">Capital investibil azi</div>
+            <div class="u-kpi" id="uCapCurent">—</div>
+          </div>
+          <div>
+            <div class="u-kpi-sub">Țintă (regula 4%)</div>
+            <div class="u-kpi u-gold-t" id="uCapTinta">—</div>
+          </div>
+        </div>
+        <div class="u-gauge" style="max-width:32rem;margin:1.2rem auto 0">
+          <div class="track">
+            <div class="fill" id="uGaugeFill" style="width:0%"></div>
+            <div class="marker" id="uGaugeMarker" style="left:0%"></div>
+          </div>
+          <div class="ends"><span>0</span><span id="uGaugeEnd">Țintă</span></div>
+        </div>
+      </div>
+
+      <!-- MOTIVATING MESSAGE -->
+      <div class="u-alert gold" id="uMesaj" style="margin-top:1.1rem">
+        <div class="h">Mesajul tău</div>
+        <span id="uMesajTxt">—</span>
+      </div>
+
+      <!-- KPI PANELS -->
+      <div class="u-grid u-grid-3" style="margin-top:1.1rem">
+        <div class="u-panel">
+          <div class="u-label">Economii / lună</div>
+          <div class="u-kpi" id="uEconomii">—</div>
+          <div class="u-kpi-sub">cât pui la treabă lunar</div>
+        </div>
+        <div class="u-panel">
+          <div class="u-label">Ani rămași</div>
+          <div class="u-kpi" id="uAni">—</div>
+          <div class="u-kpi-sub" id="uAniSub">până la independență</div>
+        </div>
+        <div class="u-panel">
+          <div class="u-label">Data libertății</div>
+          <div class="u-kpi" id="uData">—</div>
+          <div class="u-kpi-sub" id="uVarsta">la vârsta ta estimată</div>
+        </div>
+        <div class="u-panel">
+          <div class="u-label">Venit pasiv azi</div>
+          <div class="u-kpi" id="uPasivAzi">—</div>
+          <div class="u-kpi-sub">ce produce averea la 4%/an</div>
+        </div>
+        <div class="u-panel">
+          <div class="u-label">Venit pasiv țintă</div>
+          <div class="u-kpi u-gold-t" id="uPasivTinta">—</div>
+          <div class="u-kpi-sub">cât îți acoperă cheltuielile</div>
+        </div>
+        <div class="u-panel">
+          <div class="u-label">Cheltuieli anuale</div>
+          <div class="u-kpi" id="uCheltAn">—</div>
+          <div class="u-kpi-sub">baza calculului FIRE</div>
+        </div>
+      </div>
+
+      <!-- PROJECTION -->
+      <div class="u-panel" style="margin-top:1.1rem">
+        <div class="u-panel-h">
+          <div class="u-label">Proiecția averii investibile</div>
+        </div>
+        <p class="u-kpi-sub" style="margin:.2rem 0 .8rem">Capitalul de azi, compus la randamentul tău real, cu economiile lunare adăugate. Rândul marcat <span class="u-gold-t">◆</span> e momentul în care atingi ținta.</p>
+        <div id="uProiectie"></div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="u-chips" style="margin-top:1.2rem">
+        <button class="u-btn u-btn-gold" id="uPdf">Descarcă raportul (PDF)</button>
+        <button class="u-btn u-btn-ghost" id="uSnap">Salvează snapshot-ul lunii</button>
+      </div>
+      <p class="cf-mini" id="uSnapOk" style="display:none;margin-top:.5rem">Snapshot salvat pentru luna curentă.</p>
+
+      <!-- DISCLAIMER -->
+      <p class="u-kpi-sub" style="margin-top:1.4rem">Proiecție educativă bazată pe regula 4% și un randament real estimat. Piețele variază — cifrele nu sunt o garanție.</p>
+
+    </div>
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var p = U.getProfil(), f = null;
+
+  function rand(p){ return ((p.obiective && p.obiective.randamentReal) || 5) / 100; }
+
+  // Replică compoundingul din U._aniPanaLa: lunar bal = bal*(1+r/12)+economii.
+  function proiecteaza(capital, economii, r, ani){
+    var bal = capital, luni = ani * 12, mr = r / 12;
+    for (var i = 0; i < luni; i++) bal = bal * (1 + mr) + economii;
+    return bal;
+  }
+
+  function mesaj(prog, ani){
+    if (prog >= 0.75) return "Ești aproape. Mai e puțin până nu mai depinzi de salariu.";
+    if (prog >= 0.25){
+      if (isFinite(ani)) return "Ești pe drum. La ritmul ăsta, libertatea vine în " + Math.round(ani) + " ani.";
+      return "Ești pe drum. Crește rata de economisire ca să scurtezi distanța.";
+    }
+    return "Ești la început — dar fiecare leu investit lucrează pentru tine.";
+  }
+
+  function render(){
+    p = U.getProfil();
+
+    // luna curentă în hero
+    var lunaTxt = (new Date()).toLocaleDateString("ro-RO", { month: "long", year: "numeric" });
+    $("uLuna").textContent = lunaTxt.charAt(0).toUpperCase() + lunaTxt.slice(1);
+
+    var hasData = U.areDate(p);
+    $("uEmpty").style.display = hasData ? "none" : "block";
+    $("uTool").style.display  = hasData ? "block" : "none";
+    if (!hasData) return;
+
+    f = U.fire(p);
+    var r = rand(p);
+
+    // Ring
+    $("uRing").innerHTML = U.ringSVG(f.progres, { size: 200, label: CF.pct(f.progres), sub: "spre libertate" });
+
+    // Capital
+    $("uCapCurent").textContent = CF.lei(f.capitalCurent);
+    $("uCapTinta").textContent  = CF.lei(f.capitalTinta);
+
+    // Gauge
+    var g = Math.max(0, Math.min(100, f.progres * 100));
+    $("uGaugeFill").style.width   = g.toFixed(1) + "%";
+    $("uGaugeMarker").style.left  = g.toFixed(1) + "%";
+    $("uGaugeFill").classList.toggle("ok", f.progres >= 0.5);
+    $("uGaugeEnd").textContent    = CF.lei(f.capitalTinta);
+
+    // Mesaj
+    $("uMesajTxt").textContent = mesaj(f.progres, f.aniRamasi);
+
+    // KPI
+    $("uEconomii").textContent = CF.lei(f.economiiLunare) + "/lună";
+
+    if (isFinite(f.aniRamasi)){
+      $("uAni").textContent    = f.aniRamasi.toFixed(1) + " ani";
+      $("uAniSub").textContent = "până la independență";
+    } else {
+      $("uAni").textContent    = "— ";
+      $("uAniSub").textContent = "crește rata de economisire ca să apară o estimare";
+    }
+
+    if (f.dataLibertate){
+      $("uData").textContent   = CF.dataRO(f.dataLibertate);
+      $("uVarsta").textContent = f.varstaLibertate != null
+        ? "la " + Math.round(f.varstaLibertate) + " de ani" : "la vârsta ta estimată";
+    } else {
+      $("uData").textContent   = "—";
+      $("uVarsta").textContent = "indisponibil la ritmul actual";
+    }
+
+    $("uPasivAzi").textContent   = CF.lei(f.venitPasivLunar) + "/lună";
+    $("uPasivTinta").textContent = CF.lei(f.cheltAnual / 12) + "/lună";
+    $("uCheltAn").textContent    = CF.lei(f.cheltAnual);
+
+    // Proiecție
+    var anii = [5, 10, 15, 20, 25], atins = false, html = "";
+    anii.forEach(function(a){
+      var val = proiecteaza(f.capitalCurent, f.economiiLunare, r, a);
+      var cross = !atins && val >= f.capitalTinta;
+      if (cross) atins = true;
+      html += '<div class="u-row">' +
+        '<span class="k">Peste ' + a + ' ani' + (cross ? ' <span class="u-gold-t">◆</span>' : '') + '</span>' +
+        '<span class="lead-dots"></span>' +
+        '<span class="v' + (cross ? ' u-gold-t' : '') + '">' + CF.lei(val) + '</span></div>';
+    });
+    $("uProiectie").innerHTML = html;
+  }
+
+  // PDF
+  function exportaPDF(){
+    if (!f) return;
+    var lunaTxt = (new Date()).toLocaleDateString("ro-RO", { month: "long", year: "numeric" });
+    var r = rand(p);
+    var rows = [
+      ["Progres spre libertate", CF.pct(f.progres)],
+      ["Capital investibil azi", CF.lei(f.capitalCurent)],
+      ["Țintă (regula 4%)", CF.lei(f.capitalTinta)],
+      ["Economii / lună", CF.lei(f.economiiLunare)],
+      ["Ani rămași", isFinite(f.aniRamasi) ? f.aniRamasi.toFixed(1) + " ani" : "—"],
+      ["Data libertății", f.dataLibertate ? CF.dataRO(f.dataLibertate) : "—"],
+      ["Vârsta la libertate", f.varstaLibertate != null ? Math.round(f.varstaLibertate) + " de ani" : "—"],
+      ["Venit pasiv azi", CF.lei(f.venitPasivLunar) + "/lună"],
+      ["Venit pasiv țintă", CF.lei(f.cheltAnual / 12) + "/lună"],
+      ["Cheltuieli anuale", CF.lei(f.cheltAnual)]
+    ];
+    var body = '<p class="muted">' + lunaTxt.charAt(0).toUpperCase() + lunaTxt.slice(1) + '</p>';
+    body += '<p class="big">' + CF.pct(f.progres) + ' spre libertate</p><table>';
+    rows.forEach(function(rw){ body += '<tr><td>' + rw[0] + '</td><td>' + rw[1] + '</td></tr>'; });
+    body += '</table>';
+    body += '<table><tr><td colspan="2"><b>Proiecția averii investibile</b></td></tr>';
+    [5,10,15,20,25].forEach(function(a){
+      var val = proiecteaza(f.capitalCurent, f.economiiLunare, r, a);
+      var hit = val >= f.capitalTinta ? " ✓ atinge ținta" : "";
+      body += '<tr><td>Peste ' + a + ' ani' + hit + '</td><td>' + CF.lei(val) + '</td></tr>';
+    });
+    body += '</table>';
+    body += '<p>' + mesaj(f.progres, f.aniRamasi) + '</p>';
+    CF.printResult("Drumul spre Libertate", body);
+  }
+
+  // Snapshot
+  function salveazaSnapshot(){
+    if (!f) return;
+    CF.logEntry("ultra-cockpit", CF.perioadaCurenta(), {
+      avere: Math.round(U.avereNeta(p).net),
+      capital: Math.round(f.capitalCurent),
+      progres: f.progres
+    });
+    var ok = $("uSnapOk"); ok.style.display = "block";
+  }
+
+  render();
+  $("uPdf").addEventListener("click", exportaPDF);
+  $("uSnap").addEventListener("click", salveazaSnapshot);
+
+  window.addEventListener("cf-profil", render);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
+  CF.requireTier("uTool", "ultra", { msg: "Raportul „Drumul spre Libertate” face parte din planul Ultra." });
+})();
+</script>
+</body></html>

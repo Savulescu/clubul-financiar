@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scutul familiei — Clubul Financiar</title>
+<meta name="description" content="De ce ar avea nevoie familia ta dacă ție ți s-ar întâmpla ceva azi: asigurare de viață, succesiune și dosarul de urgență.">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/protectie.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+  /* checklist Ultra — folosește variabilele temei (light + dark) */
+  .u-check{ list-style:none; margin:8px 0 0; padding:0; }
+  .u-check li{ margin:0; }
+  .u-check label{
+    display:flex; align-items:flex-start; gap:12px; cursor:pointer;
+    padding:11px 4px; border-bottom:1px solid var(--u-line-soft);
+    transition:opacity .18s;
+  }
+  .u-check li:last-child label{ border-bottom:0; }
+  .u-check input{
+    appearance:none; -webkit-appearance:none; flex:0 0 auto;
+    width:21px; height:21px; margin:1px 0 0; border-radius:6px;
+    border:1.5px solid var(--u-line); background:var(--u-panel2);
+    display:grid; place-content:center; cursor:pointer; transition:all .16s;
+  }
+  .u-check input:hover{ border-color:var(--u-gold); }
+  .u-check input:checked{
+    background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); border-color:var(--u-gold);
+  }
+  .u-check input:checked::after{
+    content:"✓"; color:#13263f; font-size:13px; font-weight:800; line-height:1;
+  }
+  .u-check input:focus-visible{ outline:2px solid var(--u-gold); outline-offset:2px; }
+  .u-check .ct{ color:var(--u-ink); font-size:.97rem; line-height:1.45; }
+  .u-check .ct small{ display:block; color:var(--u-muted); font-size:.82rem; margin-top:2px; }
+  .u-check input:checked + .ct{ color:var(--u-muted); }
+  .u-check input:checked + .ct b{ text-decoration:line-through; text-decoration-color:var(--u-line); }
+  .u-prog{ display:flex; align-items:center; gap:10px; margin-top:14px; font-size:.85rem; color:var(--u-muted); }
+  .u-prog b{ color:var(--u-gold); font-variant-numeric:tabular-nums; }
+  @media (prefers-reduced-motion:reduce){ .u-check label,.u-check input{ transition:none; } }
+</style>
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <div class="u-hero">
+      <p class="u-eyebrow">Protecție</p>
+      <h1 class="u-crest">Scutul <em>familiei</em></h1>
+      <p class="u-lead">Nimeni nu vrea să se gândească la asta — dar a o face acum, cu calm, este unul
+        dintre cele mai grijulii lucruri pe care le poți pune la punct. Aici vezi de ce ar avea nevoie
+        familia ta dacă ție ți s-ar întâmpla ceva azi, ce ai deja acoperit și ce mai rămâne de pus la punct.</p>
+    </div>
+
+    <!-- empty state (când nu are profil) -->
+    <div id="uEmpty" class="u-panel" style="display:none; text-align:center; padding:40px 24px;">
+      <p class="u-label" style="justify-content:center;">Completează-ți profilul</p>
+      <p class="u-lead" style="margin:0 auto 18px;">Ca să calculăm de câtă protecție are nevoie familia ta,
+        avem nevoie de câteva cifre: venitul, datoriile și averea ta. Le introduci o singură dată.</p>
+      <a class="u-btn u-btn-gold" href="/ultra/profil.html">Completează profilul</a>
+    </div>
+
+    <!-- zona interactivă gated -->
+    <div id="uTool" style="display:none;">
+
+      <div class="u-grid u-grid-2" style="align-items:start;">
+
+        <!-- PANEL PRINCIPAL: nevoia de asigurare -->
+        <div class="u-panel u-span-2">
+          <p class="u-label">Asigurare de viață de care ai nevoie</p>
+          <div class="u-grid u-grid-2" style="align-items:end; gap:8px 24px;">
+            <div>
+              <div class="u-kpi lg" id="kNevoie">—</div>
+              <p class="u-kpi-sub">acoperire totală recomandată pentru familia ta</p>
+            </div>
+            <div>
+              <div class="u-gauge">
+                <div class="track"><div class="fill" id="gFill" style="width:0%"></div>
+                  <div class="marker" id="gMark" style="left:0%"></div></div>
+                <div class="ends"><span id="gAcop">0</span><span id="gNev">nevoie</span></div>
+              </div>
+              <p class="u-kpi-sub" style="margin-top:8px;">cât acoperă deja averea ta lichidă</p>
+            </div>
+          </div>
+
+          <div id="gapBox" style="margin:18px 0 4px;"></div>
+
+          <div class="u-hr"></div>
+          <p class="u-label" style="margin-top:4px;">Din ce se compune</p>
+          <div id="breakdown"></div>
+          <p class="cf-mini" style="margin-top:14px;">De ce aceste trei lucruri: <b>datoriile</b> nu trebuie să rămână
+            pe umerii familiei; <b>anii de venit</b> îi dau timp să se reașeze fără să se prăbușească financiar;
+            <b>fondul de educație</b> protejează viitorul copiilor. Asigurarea de viață e modul cel mai ieftin de a
+            acoperi un gol mare cu o sumă mică lunar.</p>
+        </div>
+
+        <!-- PANEL SUCCESIUNE -->
+        <div class="u-panel" id="succPanel" style="display:none;">
+          <p class="u-label">Succesiune — ce lași în urmă</p>
+          <p class="u-kpi-sub" style="margin:0 0 6px;">Ai avere de transmis (proprietăți / firmă). Fără pași clari,
+            familia poate pierde luni întregi și bani pe notariat și taxe. Bifează ce ai pus deja la punct.</p>
+          <ul class="u-check" id="checkSucc"></ul>
+          <div class="u-prog"><span>Pus la punct:</span> <b id="progSucc">0 / 0</b></div>
+          <div id="firmaNote" style="display:none; margin-top:16px;">
+            <div class="u-alert gold"><p class="h">Atenție la firmă</p>
+              Părțile sociale dintr-un SRL se moștenesc — dar nu automat „funcțional”. E nevoie de un act constitutiv
+              clar (cine continuă, cum se votează) și, ideal, clauze de continuare sau o convenție între asociați.
+              Altfel firma poate rămâne blocată până se finalizează succesiunea. Discută cu un avocat / notar.</div>
+          </div>
+        </div>
+
+        <!-- PANEL DOSARUL DE URGENȚĂ -->
+        <div class="u-panel" id="dosarPanel">
+          <p class="u-label">Dosarul de urgență</p>
+          <p class="u-kpi-sub" style="margin:0 0 6px;">Cea mai mare problemă practică nu sunt banii — e că familia
+            nu știe <em>unde</em> sunt lucrurile. Pregătește un document (un plic sigilat sau o notă într-un seif /
+            password manager) cu unde se găsesc cele de mai jos. Aici bifezi doar ce ai pregătit — nu scrie aici parolele.</p>
+          <ul class="u-check" id="checkDosar"></ul>
+          <div class="u-prog"><span>Pregătit:</span> <b id="progDosar">0 / 0</b></div>
+          <div class="u-alert ok" style="margin-top:16px;"><p class="h">Sfat</p>
+            Pune totul într-un singur document sigilat și spune-i unei persoane de încredere unde îl găsește.
+            Actualizează-l o dată pe an — de exemplu, când îți faci Declarația Unică.</div>
+        </div>
+
+      </div>
+
+      <p class="cf-mini" style="margin-top:22px;">Estimare educativă, orientativă. Nu este consultanță juridică,
+        fiscală sau de asigurări. Pentru testament, succesiune sau acte ale firmei mergi la un notar / avocat;
+        pentru o poliță de viață, cere oferte de la mai mulți asigurători.</p>
+
+    </div>
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var LS_KEY = "ultra-protectie:check";
+  var p = U.getProfil();
+
+  var SUCC_ITEMS = [
+    { id:"testament", t:"Am un testament", s:"redactat și, ideal, autentificat la notar" },
+    { id:"donatie", t:"Știu diferența donație vs moștenire pentru casă", s:"și am ales conștient varianta potrivită" },
+    { id:"comodat", t:"Am contract de comodat pentru sediul firmei", s:"dacă sediul social e la domiciliu" },
+    { id:"beneficiari", t:"Beneficiarii conturilor și asigurărilor sunt actualizați", s:"verificați recent, fără nume vechi" },
+    { id:"acte_firma", t:"Familia știe unde sunt actele firmei", s:"act constitutiv, ștampilă, acces contabil" }
+  ];
+  var DOSAR_ITEMS = [
+    { id:"conturi", t:"Lista conturilor bancare", s:"bănci, IBAN-uri, depozite, eventual carduri" },
+    { id:"parole", t:"Parolele importante (într-un manager)", s:"acces la email, bancă, telefon — nu scrise pe hârtie la vedere" },
+    { id:"polite", t:"Polițele de asigurare", s:"viață, locuință, sănătate — unde sunt și ce acoperă" },
+    { id:"proprietati", t:"Actele proprietăților", s:"contracte, extrase de carte funciară, acte auto" },
+    { id:"contabil", t:"Datele contabilului", s:"nume, telefon, ce firmă, ce conturi gestionează" },
+    { id:"seif", t:"Codurile de la seif / telefon", s:"și unde se găsesc cheile fizice importante" }
+  ];
+
+  function loadState(){
+    try { return JSON.parse(localStorage.getItem(LS_KEY) || "{}") || {}; } catch(e){ return {}; }
+  }
+  function saveState(st){
+    try { localStorage.setItem(LS_KEY, JSON.stringify(st)); } catch(e){}
+  }
+
+  function renderChecklist(ulId, progId, items){
+    var st = loadState();
+    var ul = $(ulId); if(!ul) return;
+    ul.innerHTML = items.map(function(it){
+      var on = !!st[it.id];
+      return '<li><label><input type="checkbox" data-id="'+it.id+'"'+(on?" checked":"")+'>'+
+        '<span class="ct"><b>'+it.t+'</b>'+(it.s?'<small>'+it.s+'</small>':'')+'</span></label></li>';
+    }).join("");
+    ul.querySelectorAll("input[type=checkbox]").forEach(function(cb){
+      cb.addEventListener("change", function(){
+        var s = loadState();
+        s[cb.getAttribute("data-id")] = cb.checked;
+        saveState(s);
+        updateProg(progId, items);
+      });
+    });
+    updateProg(progId, items);
+  }
+  function updateProg(progId, items){
+    var st = loadState();
+    var done = items.filter(function(it){ return !!st[it.id]; }).length;
+    var el = $(progId); if(el) el.textContent = done + " / " + items.length;
+  }
+
+  function pct(n){ n = Math.max(0, Math.min(100, n)); return n.toFixed(0) + "%"; }
+
+  function render(){
+    p = U.getProfil();
+
+    if(!U.areDate(p)){
+      $("uEmpty").style.display = "";
+      $("uTool").style.display = "none";
+      return;
+    }
+    $("uEmpty").style.display = "none";
+    $("uTool").style.display = "";
+
+    var pr = U.protectie(p);
+
+    // KPI nevoie
+    $("kNevoie").textContent = CF.lei(pr.nevoie);
+
+    // gauge: fill = acoperitDeAvere / nevoie
+    var ratio = pr.nevoie > 0 ? (pr.acoperitDeAvere / pr.nevoie) * 100 : (pr.acoperitDeAvere > 0 ? 100 : 0);
+    var fill = $("gFill"), mark = $("gMark");
+    fill.style.width = pct(ratio);
+    mark.style.left = pct(ratio);
+    fill.className = "fill" + (pr.gap <= 0 ? " ok" : "");
+    $("gAcop").textContent = CF.lei(pr.acoperitDeAvere);
+    $("gNev").textContent = CF.lei(pr.nevoie);
+
+    // GAP
+    var gap = $("gapBox");
+    if(pr.gap > 0){
+      gap.innerHTML = '<div class="u-alert warn"><p class="h u-neg">Îți lipsește o acoperire de ~'+CF.lei(pr.gap)+'</p>'+
+        'Averea ta lichidă ar acoperi o parte, dar rămâne un gol. O poliță de asigurare de viață cu această sumă '+
+        'asigurată ar umple golul pentru o primă lunară mică — exact pentru asta există.</div>';
+    } else {
+      gap.innerHTML = '<div class="u-alert ok"><p class="h u-pos">Ești acoperit</p>'+
+        'Averea ta lichidă acoperă deja întreaga nevoie estimată. Verifică totuși periodic — pe măsură ce apar '+
+        'datorii sau copii, nevoia crește.</div>';
+    }
+
+    // breakdown registry
+    var rows = [];
+    rows.push(["Datorii de stins (să nu rămână familiei)", CF.lei(pr.datorii)]);
+    rows.push([pr.aniSprijin + " ani de venit pentru familie (" + CF.lei(pr.venitAnual) + "/an)", CF.lei(pr.venitAnual * pr.aniSprijin)]);
+    rows.push(["Fond educație copii", CF.lei(pr.fondCopii)]);
+    $("breakdown").innerHTML = rows.map(function(r){
+      return '<div class="u-row"><span class="k">'+r[0]+'</span><span class="lead-dots"></span><span class="v">'+r[1]+'</span></div>';
+    }).join("") +
+    '<div class="u-row"><span class="k"><b>Total acoperire</b></span><span class="lead-dots"></span><span class="v u-gold-t">'+CF.lei(pr.nevoie)+'</span></div>';
+
+    // succesiune panel
+    $("succPanel").style.display = pr.necesitaSuccesiune ? "" : "none";
+    $("firmaNote").style.display = pr.areFirma ? "" : "none";
+
+    // checklists (persistente)
+    renderChecklist("checkSucc", "progSucc", SUCC_ITEMS);
+    renderChecklist("checkDosar", "progDosar", DOSAR_ITEMS);
+  }
+
+  render();
+  window.addEventListener("cf-profil", render);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
+  CF.requireTier("uTool","ultra",{msg:"Scutul familiei face parte din planul Ultra."});
+})();
+</script>
+</body></html>

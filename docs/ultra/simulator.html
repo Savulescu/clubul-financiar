@@ -1,0 +1,497 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulator „Și dacă…" — Clubul Financiar</title>
+<meta name="description" content="Testează scenarii de viață și business pe profilul tău real: pierzi jobul, faci un copil, cumperi o casă, treci PFA→SRL. Vezi înainte→după pe banii tăi."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/simulator.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+  /* mici extensii locale — în idiomul Ultra, fără a redefini componente */
+  .sim-scn{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; width:100%;
+    text-align:left; cursor:pointer; padding:16px; border-radius:14px;
+    border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+    transition:transform .15s, border-color .2s, box-shadow .2s; }
+  .sim-scn:hover{ transform:translateY(-3px); border-color:var(--u-line); }
+  .sim-scn.is-on{ border-color:var(--u-gold); background:var(--u-gold-soft);
+    box-shadow:0 0 0 2px var(--u-gold-soft); }
+  .sim-scn .ic{ font-size:1.5rem; }
+  .sim-scn .t{ font-weight:700; font-size:1rem; }
+  .sim-scn .d{ color:var(--u-muted); font-size:.84rem; line-height:1.4; }
+  .sim-cmp{ display:grid; grid-template-columns:1.4fr .9fr .9fr 1fr; gap:8px 14px;
+    align-items:baseline; }
+  .sim-cmp .hd{ font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--u-gold); font-weight:600; padding-bottom:6px; border-bottom:1px solid var(--u-line-soft); }
+  .sim-cmp .hd.num, .sim-cmp .num{ text-align:right; font-variant-numeric:tabular-nums; }
+  .sim-cmp .rk{ color:var(--u-muted); font-size:.94rem; padding:9px 0; border-bottom:1px solid var(--u-line-soft); }
+  .sim-cmp .rv{ font-weight:700; color:var(--u-ink); padding:9px 0; border-bottom:1px solid var(--u-line-soft);
+    font-variant-numeric:tabular-nums; }
+  .sim-cmp .rd{ padding:9px 0; border-bottom:1px solid var(--u-line-soft); }
+  .sim-cmp > div:nth-last-child(-n+4){ border-bottom:0; }
+  @media(max-width:680px){
+    .sim-cmp{ grid-template-columns:1.3fr 1fr 1fr; }
+    .sim-cmp .hd.dd, .sim-cmp .rd{ display:none; }
+  }
+  .sim-params .u-field:last-child{ margin-bottom:0; }
+  .sim-range{ width:100%; accent-color:var(--u-gold); height:6px; cursor:pointer; }
+  .sim-rangeval{ font-family:'Sora',sans-serif; font-weight:700; color:var(--u-gold);
+    font-variant-numeric:tabular-nums; }
+  .sim-verdict{ font-size:1.02rem; line-height:1.55; }
+</style>
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <div class="u-hero">
+      <span class="u-badge-ultra">Ultra</span>
+      <p class="u-eyebrow" style="margin-top:14px">Simulator</p>
+      <h1 class="u-crest">Și dacă… <em>se schimbă viața?</em></h1>
+      <p class="u-lead">Testează scenarii de viață și de business pe cifrele tale reale, fără să-ți atingi profilul. Vezi exact cum se mută venitul, economiile, scorul de sănătate și anii până la libertate — înainte și după.</p>
+    </div>
+
+    <!-- ============ ZONA INTERACTIVĂ (gated ultra) ============ -->
+    <div id="uTool">
+
+      <!-- empty state când nu există profil -->
+      <div id="simEmpty" style="display:none">
+        <div class="u-panel" style="text-align:center; padding:46px 24px">
+          <div style="font-size:2rem; margin-bottom:8px">🧭</div>
+          <p class="u-label" style="justify-content:center">Niciun profil încă</p>
+          <h2 class="u-panel-h" style="font-size:1.4rem">Simulatorul are nevoie de cifrele tale</h2>
+          <p class="u-lead" style="margin:8px auto 20px">Ca să-ți arate ce se întâmplă „dacă…", simulatorul pleacă de la profilul tău financiar real. Durează câteva minute să-l completezi.</p>
+          <a class="u-btn u-btn-gold" href="/ultra/profil.html">Completează profilul →</a>
+        </div>
+      </div>
+
+      <!-- aplicația -->
+      <div id="simApp" style="display:none">
+        <div class="u-grid u-grid-2" style="align-items:start">
+
+          <!-- STÂNGA: scenarii + parametri -->
+          <div>
+            <div class="u-panel">
+              <p class="u-label">Alege un scenariu</p>
+              <div class="u-grid u-grid-2" id="simScenarii" style="gap:12px"></div>
+            </div>
+
+            <div class="u-panel sim-params" id="simParamsPanel" style="margin-top:18px; display:none">
+              <p class="u-label" id="simParamsTitle">Parametri</p>
+              <div id="simParams"></div>
+            </div>
+          </div>
+
+          <!-- DREAPTA: comparație înainte → după -->
+          <div>
+            <div class="u-panel">
+              <p class="u-label" id="simCmpLabel">Înainte → după</p>
+              <h2 class="u-panel-h" id="simScnTitle">Selectează un scenariu</h2>
+              <p class="u-kpi-sub" id="simScnDesc" style="margin-bottom:14px">Apasă pe un scenariu din stânga ca să vezi efectul pe banii tăi.</p>
+
+              <div class="sim-cmp" id="simCmp" style="display:none">
+                <div class="hd">Indicator</div>
+                <div class="hd num">Acum</div>
+                <div class="hd num">După</div>
+                <div class="hd num dd">Schimbare</div>
+                <!-- rândurile se injectează aici -->
+              </div>
+
+              <div class="u-alert gold" id="simVerdict" style="display:none; margin-top:18px">
+                <p class="h">Verdict</p>
+                <div class="sim-verdict" id="simVerdictTxt"></div>
+              </div>
+            </div>
+
+            <p class="cf-mini" style="margin-top:14px; color:var(--u-muted)">Estimare educativă pe regulile RO 2026. Simulatorul nu-ți modifică profilul real și nu e consultanță fiscală sau de investiții.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- ============ /ZONA INTERACTIVĂ ============ -->
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+
+  // ---- helpers numerice (fără NaN) ----
+  function num(x){ x = +x; return isFinite(x) ? x : 0; }
+  function clone(p){ return JSON.parse(JSON.stringify(p)); }
+  function ani(a){ return isFinite(a) ? a : Infinity; }
+
+  // rată lunară credit (anuitate). Guard divide-by-zero.
+  function rataCredit(P, dobAnuala, aniDurata){
+    P = num(P); var n = Math.round(num(aniDurata) * 12);
+    if (P <= 0 || n <= 0) return 0;
+    var r = num(dobAnuala) / 100 / 12;
+    if (r <= 0) return P / n;
+    var rata = P * r / (1 - Math.pow(1 + r, -n));
+    return isFinite(rata) ? rata : 0;
+  }
+
+  // ---- starea simulatorului ----
+  var state = { id: null, params: {} };
+
+  // Definiția scenariilor. apply(clona, params) mutează DOAR clona.
+  var SCENARII = [
+    {
+      id: "job", ic: "💼", t: "Pierd jobul",
+      d: "Salariul net dispare. Cât rezistă bugetul?",
+      desc: "Salariul net devine 0. Restul veniturilor (firmă, chirii, dividende) rămân.",
+      hasParams: false,
+      apply: function(c){ c.venituri.salariuNet = 0; }
+    },
+    {
+      id: "copil", ic: "👶", t: "Fac un copil",
+      d: "+1 persoană în întreținere și costuri lunare noi.",
+      desc: "Un dependent în plus și cheltuieli suplimentare cu copilul.",
+      hasParams: true,
+      params: [
+        { key: "cost", label: "Cost lunar estimat cu copilul", min: 500, max: 5000, step: 100, def: 1500, fmt: "lei" }
+      ],
+      apply: function(c, pr){
+        c.dependenti = num(c.dependenti) + 1;
+        c.cheltuieli.copii = num(c.cheltuieli.copii) + num(pr.cost);
+      }
+    },
+    {
+      id: "casa", ic: "🏠", t: "Cumpăr casă",
+      d: "Un credit ipotecar nou — rată lunară din sumă, dobândă, ani.",
+      desc: "Adaugă o datorie ipotecară: rata lunară se calculează din sumă, dobândă și durată.",
+      hasParams: true,
+      params: [
+        { key: "suma", label: "Sumă împrumutată", min: 50000, max: 1500000, step: 10000, def: 400000, fmt: "lei" },
+        { key: "dob",  label: "Dobândă anuală", min: 1, max: 12, step: 0.1, def: 6, fmt: "pct" },
+        { key: "ani",  label: "Durata creditului", min: 5, max: 35, step: 1, def: 25, fmt: "ani" }
+      ],
+      apply: function(c, pr){
+        var rata = rataCredit(pr.suma, pr.dob, pr.ani);
+        c.datorii = (c.datorii || []).slice();
+        c.datorii.push({ nume: "Credit ipotecar", sold: num(pr.suma), dobanda: num(pr.dob), rataLunara: rata });
+      }
+    },
+    {
+      id: "venit", ic: "📈", t: "Îmi cresc veniturile",
+      d: "Toate sursele de venit cresc cu X%.",
+      desc: "Mărește proporțional salariul, cifra de afaceri / încasările și chiriile.",
+      hasParams: true,
+      params: [
+        { key: "pct", label: "Creștere venit", min: 5, max: 100, step: 5, def: 20, fmt: "pct" }
+      ],
+      apply: function(c, pr){
+        var k = 1 + num(pr.pct) / 100, v = c.venituri;
+        v.salariuNet = num(v.salariuNet) * k;
+        v.pfaIncasari = num(v.pfaIncasari) * k;
+        v.srlCifraAfaceri = num(v.srlCifraAfaceri) * k;
+        v.chiriiLunar = num(v.chiriiLunar) * k;
+        v.alteLunar = num(v.alteLunar) * k;
+        v.dividendeAnual = num(v.dividendeAnual) * k;
+      }
+    },
+    {
+      id: "structura", ic: "🔁", t: "Schimb structura",
+      d: "Treci PFA↔SRL micro, păstrând cifra și cheltuielile.",
+      desc: "Comută între PFA (sistem real) și SRL micro 1%, păstrând cifra de afaceri și cheltuielile.",
+      hasParams: true,
+      params: [
+        { key: "tinta", label: "Trec la", type: "select",
+          options: [
+            { v: "srl_micro", t: "SRL micro 1%" },
+            { v: "pfa_real",  t: "PFA — sistem real" },
+            { v: "srl_real",  t: "SRL — profit 16%" }
+          ], def: "srl_micro" }
+      ],
+      apply: function(c, pr){
+        var tinta = pr.tinta || "srl_micro";
+        var vechi = c.structura, v = c.venituri;
+        // adu cifra/cheltuielile din vechea structură în noua structură, ca să fie comparabil
+        var cifra = 0, chelt = 0;
+        if (vechi.indexOf("pfa") === 0){ cifra = num(v.pfaIncasari); chelt = num(v.pfaCheltuieli); }
+        else if (vechi.indexOf("srl") === 0){ cifra = num(v.srlCifraAfaceri); chelt = num(v.srlCheltuieli); }
+        // dacă vechea structură n-avea cifră (ex. salariat), păstrează ce există deja pe ținta
+        if (tinta.indexOf("pfa") === 0){
+          if (cifra > 0){ v.pfaIncasari = cifra; v.pfaCheltuieli = chelt; }
+        } else {
+          if (cifra > 0){ v.srlCifraAfaceri = cifra; v.srlCheltuieli = chelt; }
+        }
+        c.structura = tinta;
+      }
+    },
+    {
+      id: "pensie", ic: "🌅", t: "Ies la pensie la Y ani",
+      d: "Schimbă vârsta-țintă de libertate financiară.",
+      desc: "Mută vârsta la care vrei independența financiară și recalculează drumul.",
+      hasParams: true,
+      params: [
+        { key: "varsta", label: "Vârsta de libertate", min: 40, max: 70, step: 1, def: 55, fmt: "ani" }
+      ],
+      apply: function(c, pr){
+        c.obiective.varstaLibertate = num(pr.varsta);
+      }
+    }
+  ];
+
+  // ---- KPI-uri comparați ----
+  function snapshot(p){
+    var cf = U.cashFlow(p), av = U.avereNeta(p), fire = U.fire(p), scor = U.scorSanatate(p);
+    return {
+      venit: U.venitNetLunar(p),
+      economii: cf.economii,
+      scor: scor.scor,
+      ani: fire.aniRamasi,
+      avere: av.net
+    };
+  }
+
+  var KPIS = [
+    { key: "venit",   nume: "Venit net lunar",   kind: "lei", goodUp: true },
+    { key: "economii",nume: "Economii / lună",   kind: "lei", goodUp: true },
+    { key: "scor",    nume: "Scor de sănătate",  kind: "pts", goodUp: true },
+    { key: "ani",     nume: "Ani până la libertate", kind: "ani", goodUp: false },
+    { key: "avere",   nume: "Avere netă",        kind: "lei", goodUp: true }
+  ];
+
+  function fmtVal(k, kind){
+    if (kind === "lei") return CF.lei(Math.round(num(k)));
+    if (kind === "pts") return Math.round(num(k)) + " / 100";
+    if (kind === "ani"){
+      if (!isFinite(k)) return "—";
+      return (k <= 0 ? "acum" : k.toFixed(1) + " ani");
+    }
+    return String(k);
+  }
+
+  function deltaHTML(kpi, before, after){
+    var b = before[kpi.key], a = after[kpi.key];
+    // ani Infinity → fără deltă numerică
+    if (kpi.kind === "ani" && (!isFinite(b) || !isFinite(a))){
+      if (!isFinite(b) && !isFinite(a)) return '<span class="u-delta" style="color:var(--u-muted)">—</span>';
+      var imbun = !isFinite(b) && isFinite(a);
+      return '<span class="u-delta ' + (imbun ? 'u-pos' : 'u-neg') + '">' + (imbun ? '↘ posibil' : '↗ nedefinit') + '</span>';
+    }
+    var d = num(a) - num(b);
+    if (Math.abs(d) < (kpi.kind === "ani" ? 0.05 : 0.5)) return '<span class="u-delta" style="color:var(--u-muted)">fără schimbare</span>';
+    var pozitiv = kpi.goodUp ? d > 0 : d < 0;
+    var cls = pozitiv ? "u-pos" : "u-neg";
+    var sgn = d > 0 ? "+" : "−";
+    var mag = Math.abs(d), txt;
+    if (kpi.kind === "lei") txt = sgn + CF.lei(Math.round(mag));
+    else if (kpi.kind === "pts") txt = sgn + Math.round(mag) + " pct";
+    else txt = sgn + mag.toFixed(1) + " ani";
+    return '<span class="u-delta ' + cls + '">' + txt + '</span>';
+  }
+
+  // ---- verdict în limbaj natural ----
+  function verdict(before, after){
+    var parts = [];
+    var dAni = (isFinite(before.ani) && isFinite(after.ani)) ? (after.ani - before.ani) : null;
+    if (dAni != null && Math.abs(dAni) >= 0.1){
+      parts.push("ieși la libertate cu <strong>" + Math.abs(dAni).toFixed(1).replace(".0","") + " ani " +
+        (dAni > 0 ? "mai târziu" : "mai devreme") + "</strong>");
+    } else if (!isFinite(before.ani) && isFinite(after.ani)){
+      parts.push("libertatea financiară devine <strong>tangibilă</strong> (înainte: niciodată la ritmul actual)");
+    } else if (isFinite(before.ani) && !isFinite(after.ani)){
+      parts.push("la acest ritm <strong>nu mai atingi libertatea</strong> financiară");
+    }
+
+    var dEcon = after.economii - before.economii;
+    if (Math.abs(dEcon) >= 50){
+      parts.push((dEcon > 0 ? "economisești <strong class='u-pos'>" : "economisești <strong class='u-neg'>") +
+        (dEcon > 0 ? "+" : "−") + CF.lei(Math.round(Math.abs(dEcon))) + "</strong>/lună" +
+        (after.economii < 0 ? " (buget pe minus)" : ""));
+    } else if (before.economii >= 0 && after.economii < 0){
+      parts.push("bugetul tău intră <strong class='u-neg'>pe minus</strong>");
+    }
+
+    var dScor = after.scor - before.scor;
+    if (Math.abs(dScor) >= 1){
+      parts.push("scorul de sănătate " + (dScor > 0 ? "<strong class='u-pos'>crește" : "<strong class='u-neg'>scade") +
+        " cu " + Math.abs(Math.round(dScor)) + " puncte</strong>");
+    }
+
+    var dAv = after.avere - before.avere;
+    if (Math.abs(dAv) >= 1000 && parts.length < 3){
+      parts.push("averea netă " + (dAv > 0 ? "crește" : "scade") + " cu " + CF.lei(Math.round(Math.abs(dAv))));
+    }
+
+    if (!parts.length) return "Efectul pe cifrele tale e neglijabil — scenariul nu-ți mută semnificativ situația.";
+
+    // construiește fraza
+    var first = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+    var rest = parts.slice(1);
+    var s = "Dacă faci asta, " + parts[0];
+    if (rest.length === 1) s = "Dacă faci asta, " + parts[0] + ", iar " + rest[0] + ".";
+    else if (rest.length >= 2) s = "Dacă faci asta, " + parts[0] + ", " + rest[0] + ", iar " + rest.slice(1).join(", ") + ".";
+    else s = "Dacă faci asta, " + parts[0] + ".";
+    return s;
+  }
+
+  // ---- randare scenarii ----
+  function renderScenarii(){
+    var wrap = $("simScenarii"); if (!wrap) return;
+    wrap.innerHTML = "";
+    SCENARII.forEach(function(s){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "sim-scn" + (state.id === s.id ? " is-on" : "");
+      b.setAttribute("aria-pressed", state.id === s.id ? "true" : "false");
+      b.innerHTML = '<span class="ic">' + s.ic + '</span><span class="t">' + s.t + '</span><span class="d">' + s.d + '</span>';
+      b.addEventListener("click", function(){ selectScenariu(s.id); });
+      wrap.appendChild(b);
+    });
+  }
+
+  function selectScenariu(id){
+    var s = SCENARII.filter(function(x){ return x.id === id; })[0];
+    if (!s) return;
+    state.id = id;
+    state.params = {};
+    if (s.params) s.params.forEach(function(pr){ state.params[pr.key] = pr.def; });
+    renderScenarii();
+    renderParams(s);
+    runScenariu();
+  }
+
+  // ---- randare parametri ----
+  function fmtParam(pr, val){
+    if (pr.fmt === "lei") return CF.lei(Math.round(num(val)));
+    if (pr.fmt === "pct") return (Math.round(num(val) * 10) / 10) + "%";
+    if (pr.fmt === "ani") return num(val) + (num(val) === 1 ? " an" : " ani");
+    return String(val);
+  }
+
+  function renderParams(s){
+    var panel = $("simParamsPanel"), box = $("simParams"), title = $("simParamsTitle");
+    if (!panel || !box) return;
+    if (!s.hasParams){ panel.style.display = "none"; box.innerHTML = ""; return; }
+    panel.style.display = "";
+    title.textContent = "Parametrii scenariului";
+    box.innerHTML = "";
+    s.params.forEach(function(pr){
+      var field = document.createElement("div");
+      field.className = "u-field";
+      if (pr.type === "select"){
+        var opts = pr.options.map(function(o){
+          return '<option value="' + o.v + '"' + (state.params[pr.key] === o.v ? " selected" : "") + '>' + o.t + '</option>';
+        }).join("");
+        field.innerHTML = '<label>' + pr.label + '</label><select class="u-select" id="pp_' + pr.key + '">' + opts + '</select>';
+        box.appendChild(field);
+        $("pp_" + pr.key).addEventListener("change", function(){
+          state.params[pr.key] = this.value; runScenariu();
+        });
+      } else {
+        field.innerHTML =
+          '<label>' + pr.label + ' <span class="sim-rangeval" id="pv_' + pr.key + '">' + fmtParam(pr, state.params[pr.key]) + '</span></label>' +
+          '<input type="range" class="sim-range" id="pp_' + pr.key + '" min="' + pr.min + '" max="' + pr.max +
+          '" step="' + pr.step + '" value="' + state.params[pr.key] + '">';
+        box.appendChild(field);
+        var inp = $("pp_" + pr.key), lab = $("pv_" + pr.key);
+        inp.addEventListener("input", function(){
+          state.params[pr.key] = num(this.value);
+          lab.textContent = fmtParam(pr, state.params[pr.key]);
+          runScenariu();
+        });
+      }
+    });
+    // pentru creditul ipotecar: arată rata lunară calculată
+    if (s.id === "casa"){
+      var info = document.createElement("p");
+      info.className = "u-kpi-sub"; info.id = "casaRata"; info.style.marginTop = "4px";
+      box.appendChild(info);
+      updCasaRata();
+    }
+  }
+
+  function updCasaRata(){
+    var el = $("casaRata"); if (!el) return;
+    var r = rataCredit(state.params.suma, state.params.dob, state.params.ani);
+    el.innerHTML = 'Rată lunară estimată: <strong class="u-gold-t">' + CF.lei(Math.round(r)) + '</strong>/lună';
+  }
+
+  // ---- rulează scenariul: before (profil real) vs after (clonă modificată) ----
+  function runScenariu(){
+    var p = U.getProfil();
+    var s = SCENARII.filter(function(x){ return x.id === state.id; })[0];
+    if (!s) return;
+
+    var before = snapshot(p);
+    var c = clone(p);
+    try { s.apply(c, state.params); } catch(e){}
+    var after = snapshot(c);
+
+    if (s.id === "casa") updCasaRata();
+
+    // titlu + descriere
+    $("simScnTitle").textContent = s.t;
+    $("simScnDesc").textContent = s.desc;
+
+    // tabel comparativ
+    var cmp = $("simCmp");
+    // păstrează cele 4 headere, șterge restul
+    while (cmp.children.length > 4) cmp.removeChild(cmp.lastChild);
+    KPIS.forEach(function(kpi){
+      var rk = document.createElement("div"); rk.className = "rk"; rk.textContent = kpi.nume;
+      var rb = document.createElement("div"); rb.className = "rv num"; rb.textContent = fmtVal(before[kpi.key], kpi.kind);
+      var ra = document.createElement("div"); ra.className = "rv num"; ra.textContent = fmtVal(after[kpi.key], kpi.kind);
+      var rd = document.createElement("div"); rd.className = "rd num"; rd.innerHTML = deltaHTML(kpi, before, after);
+      cmp.appendChild(rk); cmp.appendChild(rb); cmp.appendChild(ra); cmp.appendChild(rd);
+    });
+    cmp.style.display = "";
+
+    // verdict
+    $("simVerdictTxt").innerHTML = verdict(before, after);
+    $("simVerdict").style.display = "";
+  }
+
+  // ---- ciclu de viață ----
+  function render(){
+    var p = U.getProfil();
+    var has = U.areDate(p);
+    $("simEmpty").style.display = has ? "none" : "";
+    $("simApp").style.display = has ? "" : "none";
+    if (has){
+      renderScenarii();
+      if (!state.id){
+        selectScenariu("venit"); // un default prietenos
+      } else {
+        var s = SCENARII.filter(function(x){ return x.id === state.id; })[0];
+        renderParams(s); runScenariu();
+      }
+    }
+  }
+
+  render();
+  window.addEventListener("cf-profil", render);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
+  CF.requireTier("uTool", "ultra", { msg: "Simulatorul „Și dacă…” face parte din planul Ultra." });
+})();
+</script>
+</body></html>

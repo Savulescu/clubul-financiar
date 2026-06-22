@@ -184,17 +184,26 @@
   CF.AI_ENDPOINT = "https://maumjqciuxdbwjtvcpsy.functions.supabase.co/ai-anaf";
   CF.aiChat = function (messages, opts) {
     opts = opts || {};
-    var body = JSON.stringify({ messages: messages, context: opts.context || null });
-    return fetch(CF.AI_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: body
-    }).then(function (r) {
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      return r.json();
-    }).then(function (j) {
-      return { content: j.content || j.answer || "", provider: j.provider || "ai", sources: j.sources || [] };
-    });
+    var body = JSON.stringify({ messages: messages, context: opts.context || null, maxTokens: opts.maxTokens || null });
+    var tries = opts.retries != null ? opts.retries : 3;
+    function fail(content) { return /momentan asistentul ai nu e disponibil|nu am putut obține/i.test(content || ""); }
+    function attempt(n) {
+      return fetch(CF.AI_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: body })
+        .then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (j) {
+          var content = j.content || j.answer || "";
+          // funcția întoarce 200 + {error,...} sau mesajul de fallback când toți providerii pică → reîncearcă
+          if ((j.error || !content || fail(content)) && n < tries) {
+            return new Promise(function (res) { setTimeout(res, 1000 * n); }).then(function () { return attempt(n + 1); });
+          }
+          return { content: content, provider: j.provider || "ai", sources: j.sources || [], failed: !!(j.error || !content || fail(content)) };
+        })
+        .catch(function () {
+          if (n < tries) return new Promise(function (res) { setTimeout(res, 1000 * n); }).then(function () { return attempt(n + 1); });
+          return { content: "Momentan nu am putut obține un răspuns. Mai încearcă o dată în câteva momente.", provider: "none", sources: [], failed: true };
+        });
+    }
+    return attempt(1);
   };
 
   /* ---------- QUOTA AI (pe tier) ---------- */

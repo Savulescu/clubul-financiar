@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Optimizator de structură — Clubul Financiar</title>
+<meta name="description" content="Vezi ce formă legală și fiscală (PFA, SRL micro, SRL real) îți lasă cei mai mulți bani în mână, pe cifra ta de afaceri."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/optimizator.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <div class="u-hero">
+      <p class="u-eyebrow">Biroul tău financiar privat</p>
+      <h1 class="u-crest">Optimizator de <em>structură</em></h1>
+      <p class="u-lead">Pe aceeași cifră de afaceri, forma legală pe care o alegi îți poate lăsa mii de lei în plus sau în minus pe an. Compară PFA, SRL micro și SRL real și vezi care îți păstrează cei mai mulți bani în mână.</p>
+    </div>
+
+    <div id="uTool">
+      <!-- Inputuri -->
+      <div class="u-panel" style="margin-bottom:18px">
+        <p class="u-label">Cifrele tale</p>
+        <div class="u-grid u-grid-3">
+          <div class="u-field">
+            <label for="oCifra">Cifră de afaceri anuală (lei)</label>
+            <span class="hint">Cât încasezi într-un an, înainte de taxe.</span>
+            <input class="u-input" id="oCifra" type="number" inputmode="numeric" min="0" step="1000" placeholder="200000">
+          </div>
+          <div class="u-field">
+            <label for="oChelt">Cheltuieli deductibile anuale (lei)</label>
+            <span class="hint">Cheltuieli de business pe care le poți deduce.</span>
+            <input class="u-input" id="oChelt" type="number" inputmode="numeric" min="0" step="1000" placeholder="40000">
+          </div>
+          <div class="u-field">
+            <label for="oDep">Persoane în întreținere</label>
+            <span class="hint">Contează la reperul de salariat.</span>
+            <input class="u-input" id="oDep" type="number" inputmode="numeric" min="0" step="1" placeholder="0">
+          </div>
+        </div>
+        <button class="u-btn u-btn-gold" id="oCalc" type="button">Calculează structura optimă</button>
+      </div>
+
+      <!-- Empty / zero guard -->
+      <div class="u-alert gold" id="oZero" style="display:none">
+        <p class="h">Introdu cifrele tale</p>
+        <p style="margin:0">Completează cifra de afaceri anuală ca să comparăm structurile. Sau <a href="/ultra/profil.html" style="color:var(--u-gold);font-weight:700">completează-ți profilul</a> și aducem datele automat.</p>
+      </div>
+
+      <!-- Rezultate -->
+      <div id="oOut" style="display:none">
+
+        <!-- Headline: structura actuală vs optim -->
+        <div class="u-panel" id="oHead" style="margin-bottom:18px"></div>
+
+        <!-- Variante (grid de panouri) -->
+        <p class="u-label" style="margin-top:6px">Variantele tale, de la cea mai bună la cea mai slabă</p>
+        <div class="u-grid u-grid-4" id="oCards" style="margin-bottom:18px"></div>
+
+        <!-- Comparativ -->
+        <div class="u-panel" style="margin-bottom:18px">
+          <p class="u-label">Comparativ — net în mână pe an</p>
+          <div id="oRows"></div>
+          <div class="u-hr"></div>
+          <p class="u-kpi-sub" id="oDiff" style="margin:0"></p>
+        </div>
+
+        <p class="cf-mini" style="color:var(--u-muted);max-width:70ch">
+          Estimare educativă pe regulile RO 2026. Nu e consultanță fiscală. Structura optimă depinde
+          și de pensia pe care o construiești, de concedii și concediu medical, de riscul de business,
+          de costul contabilității și de planurile pe termen lung — confirmă alegerea cu un contabil
+          înainte de a-ți schimba forma legală.
+        </p>
+      </div>
+    </div>
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var elCifra = $("oCifra"), elChelt = $("oChelt"), elDep = $("oDep");
+
+  function num(el, fb){ var n = parseFloat(el.value); return isFinite(n) && n >= 0 ? n : fb; }
+
+  // Pre-populare din profil (dacă are venituri de business), altfel default-uri sensibile.
+  function prefill(){
+    var p = U.getProfil();
+    var v = (p && p.venituri) || {};
+    var cifra = 0, chelt = 0;
+    if ((+v.srlCifraAfaceri || 0) > 0){ cifra = +v.srlCifraAfaceri; chelt = +v.srlCheltuieli || 0; }
+    else if ((+v.pfaIncasari || 0) > 0){ cifra = +v.pfaIncasari; chelt = +v.pfaCheltuieli || 0; }
+    elCifra.value = cifra > 0 ? cifra : 200000;
+    elChelt.value = chelt > 0 ? chelt : (cifra > 0 ? 0 : 40000);
+    elDep.value = (p && +p.dependenti) || 0;
+  }
+
+  function render(){
+    var cifra = num(elCifra, 0), chelt = num(elChelt, 0), dep = num(elDep, 0);
+
+    // Zero guard — niciun NaN.
+    if (!(cifra > 0)){
+      $("oOut").style.display = "none";
+      $("oZero").style.display = "";
+      return;
+    }
+    $("oZero").style.display = "none";
+
+    var res = U.optimStructura(cifra, chelt, dep);
+    var variante = res.variante || [];
+    if (!variante.length){ $("oOut").style.display = "none"; return; }
+    $("oOut").style.display = "";
+    var best = res.best;
+
+    // --- Headline: structura ta actuală vs optim ---
+    var p = U.getProfil();
+    var headEl = $("oHead");
+    var head = "";
+    var actual = U.venitStructuraAnual(p);            // net anual din structura curentă din profil
+    var areStruct = p && p.structura && p.structura.indexOf("salariat") !== 0 &&
+                    (actual && actual.netInMana > 0);
+    if (areStruct){
+      var lipsa = best.net - actual.netInMana;
+      var lbl = U.structuraLabel(p.structura);
+      if (lipsa > 1){
+        head =
+          '<p class="u-label">Structura ta actuală</p>' +
+          '<p class="u-panel-h" style="margin-bottom:10px">Cu structura ta actuală (<span class="u-gold-t">' + lbl + '</span>) lași pe masă</p>' +
+          '<div class="u-kpi lg u-neg">~' + CF.lei(Math.round(lipsa)) + '</div>' +
+          '<p class="u-kpi-sub">pe an, față de varianta optimă (<strong>' + best.tip + '</strong>, ~' + CF.lei(Math.round(best.net)) + ' net). Cifrele tale curente, recalculate pe fiecare formă.</p>';
+      } else {
+        head =
+          '<div class="u-alert ok" style="margin:0">' +
+          '<p class="h">Ești deja pe structura optimă</p>' +
+          '<p style="margin:0">Structura ta (<strong>' + lbl + '</strong>) îți lasă cei mai mulți bani în mână pe aceste cifre — ~' + CF.lei(Math.round(actual.netInMana)) + ' net/an. Nu ai nimic de schimbat.</p>' +
+          '</div>';
+      }
+    } else {
+      head =
+        '<p class="u-label">Recomandare</p>' +
+        '<p class="u-panel-h" style="margin-bottom:10px">Pe cifrele introduse, cei mai mulți bani în mână ți-i lasă</p>' +
+        '<div class="u-kpi lg u-gold-t">' + best.tip + '</div>' +
+        '<p class="u-kpi-sub">~' + CF.lei(Math.round(best.net)) + ' net/an, din ' + CF.lei(Math.round(cifra)) + ' cifră de afaceri. ' +
+        'Cu ' + CF.lei(Math.round(best.taxe)) + ' taxe totale.</p>';
+    }
+    headEl.innerHTML = head;
+
+    // --- Carduri variante ---
+    var cards = variante.map(function(vr){
+      var isBest = vr.best;
+      var style = isBest ? ' style="border-color:var(--u-gold)"' : '';
+      var badge = isBest ? '<span class="u-badge-ultra" style="margin-bottom:10px">Optim</span>' : '';
+      return '<div class="u-panel"' + style + '>' +
+        badge +
+        '<p class="u-panel-h" style="margin:' + (isBest ? '0' : '0') + ' 0 8px">' + vr.tip + '</p>' +
+        '<div class="u-kpi ' + (isBest ? 'u-gold-t' : '') + '">' + CF.lei(Math.round(vr.net)) + '</div>' +
+        '<p class="u-kpi-sub">net în mână / an</p>' +
+        '<div class="u-row" style="margin-top:12px"><span class="k">Taxe totale</span><span class="lead-dots"></span><span class="v">' + CF.lei(Math.round(vr.taxe)) + '</span></div>' +
+        '<p class="u-kpi-sub" style="margin-top:10px">' + vr.nota + '</p>' +
+      '</div>';
+    }).join("");
+    $("oCards").innerHTML = cards;
+
+    // --- Comparativ registru ---
+    var rows = variante.map(function(vr){
+      return '<div class="u-row"><span class="k">' + (vr.best ? '<span class="u-gold-t">★</span> ' : '') + vr.tip + '</span>' +
+             '<span class="lead-dots"></span>' +
+             '<span class="v' + (vr.best ? ' u-gold-t' : '') + '">' + CF.lei(Math.round(vr.net)) + '</span></div>';
+    }).join("");
+    $("oRows").innerHTML = rows;
+
+    var diff = res.diferenta || 0;
+    if (variante.length > 1 && diff > 0){
+      $("oDiff").innerHTML = 'Între prima alegere (<strong>' + variante[0].tip + '</strong>) și a doua (<strong>' +
+        variante[1].tip + '</strong>) sunt <span class="u-gold-t" style="font-weight:700">' +
+        CF.lei(Math.round(diff)) + '/an</span> diferență în mâna ta.';
+    } else {
+      $("oDiff").textContent = "";
+    }
+  }
+
+  // Evenimente
+  $("oCalc").addEventListener("click", render);
+  [elCifra, elChelt, elDep].forEach(function(el){ el.addEventListener("change", render); });
+
+  prefill();
+  render();
+
+  window.addEventListener("cf-profil", function(){ prefill(); render(); });
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(function(){ prefill(); render(); }); });
+  CF.requireTier("uTool","ultra",{msg:"Optimizatorul de structură face parte din planul Ultra."});
+})();
+</script>
+</body></html>

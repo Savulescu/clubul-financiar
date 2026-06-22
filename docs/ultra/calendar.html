@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendar fiscal personal — Clubul Financiar</title>
+<meta name="description" content="Agenda ta de termene fiscale, generată pe structura ta (Declarația Unică, TVA, SRL, salarii). Adaugă în calendar și primește memento-uri."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/calendar.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <div class="u-hero">
+      <p class="u-eyebrow">Biroul tău financiar privat</p>
+      <h1 class="u-crest">Calendar <em>fiscal personal</em></h1>
+      <p class="u-lead">Agenda ta de termene fiscale, construită din structura ta — Declarația Unică, TVA, impozite SRL și salarii. Adaugă fiecare termen în calendarul tău și primește un memento înainte să expire.</p>
+    </div>
+
+    <div id="uTool">
+
+      <!-- ===== EMPTY STATE (fără termene proprii) ===== -->
+      <div id="calGol" class="u-panel" style="display:none">
+        <p class="u-label">Agenda ta</p>
+        <h2 class="u-panel-h">Pe structura ta nu sunt termene fiscale proprii acum</h2>
+        <p style="color:var(--u-muted);max-width:62ch;line-height:1.6">
+          Ca salariat fără investiții, declarațiile și plățile sunt gestionate de angajator —
+          nu ai termene de depus pe cont propriu. Dacă adaugi investiții, chirii, PFA sau un SRL în profil,
+          calendarul se completează automat cu termenele tale reale.
+        </p>
+        <div style="margin-top:16px">
+          <a class="u-btn u-btn-gold" href="/ultra/profil.html">Completează profilul</a>
+        </div>
+      </div>
+
+      <!-- ===== CONȚINUT (când are termene) ===== -->
+      <div id="calBody" style="display:none">
+
+        <div class="u-grid u-grid-3" style="align-items:start">
+
+          <!-- Următorul termen (mare) -->
+          <div class="u-panel u-span-2" id="nextPanel">
+            <p class="u-label">Următorul termen</p>
+            <h2 class="u-panel-h" id="nextTitle">—</h2>
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin:6px 0 4px">
+              <span class="u-kpi lg" id="nextDays">—</span>
+              <span class="u-kpi-sub" id="nextDaysLbl" style="margin:0">zile rămase</span>
+            </div>
+            <p class="u-kpi-sub" id="nextDate" style="margin:0 0 10px"></p>
+            <p style="color:var(--u-muted);line-height:1.55;max-width:60ch" id="nextDesc"></p>
+          </div>
+
+          <!-- Legendă tipuri -->
+          <div class="u-panel" id="legendPanel">
+            <p class="u-label">Ce sunt termenele</p>
+            <div class="u-row"><span class="k">Declarația Unică</span><span class="lead-dots"></span><span class="v">venituri PFA, chirii, investiții</span></div>
+            <div class="u-row"><span class="k">TVA</span><span class="lead-dots"></span><span class="v">decont D300 (lunar/trim.)</span></div>
+            <div class="u-row"><span class="k">SRL</span><span class="lead-dots"></span><span class="v">impozit micro/profit + bilanț</span></div>
+            <div class="u-row"><span class="k">Salarii</span><span class="lead-dots"></span><span class="v">D112 contribuții (cu salariați)</span></div>
+            <p class="u-kpi-sub" style="margin-top:10px">Termenele marcate ◆ sunt sub 30 de zile.</p>
+          </div>
+
+        </div>
+
+        <!-- Filtre -->
+        <div class="u-panel is-flush" style="margin-top:18px">
+          <p class="u-label">Filtrează</p>
+          <div class="u-chips" id="filterChips"></div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="u-panel" style="margin-top:18px">
+          <p class="u-label">Toate termenele tale</p>
+          <ol class="u-timeline" id="timeline" style="list-style:none"></ol>
+          <p class="u-kpi-sub" id="tlEmpty" style="display:none;margin-top:4px">Niciun termen pentru acest filtru.</p>
+        </div>
+
+      </div>
+
+      <!-- Disclaimer -->
+      <p class="cf-mini" style="margin-top:18px;color:var(--u-muted)">
+        Termenele sunt orientative, pe regulile fiscale RO 2026. Verifică întotdeauna pe
+        <a href="https://anaf.ro" target="_blank" rel="noopener">anaf.ro</a> —
+        unele depind de regimul tău exact (TVA lunar vs. trimestrial, plătitor de impozit pe profit etc.).
+        Estimare educativă, nu consultanță fiscală.
+      </p>
+
+    </div>
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var p = U.getProfil();
+  var activeFilter = "toate";
+
+  var TIPURI = {
+    du:      { lbl: "Declarația Unică" },
+    tva:     { lbl: "TVA" },
+    srl:     { lbl: "SRL" },
+    salarii: { lbl: "Salarii" }
+  };
+
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){
+    return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]; }); }
+  function iso(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+
+  function render(){
+    p = U.getProfil();
+    var dl = U.deadlines(p) || [];
+
+    var golEl  = $("calGol"), bodyEl = $("calBody");
+    if (!dl.length){
+      golEl.style.display = "";
+      bodyEl.style.display = "none";
+      return;
+    }
+    golEl.style.display = "none";
+    bodyEl.style.display = "";
+
+    // --- Următorul termen ---
+    var nx = dl[0];
+    var zile = CF.zilePana(nx.data);
+    $("nextTitle").textContent = nx.titlu;
+    var daysEl = $("nextDays");
+    daysEl.textContent = zile;
+    daysEl.className = "u-kpi lg" + (zile < 14 ? " u-neg" : zile < 30 ? " u-gold-t" : "");
+    $("nextDaysLbl").textContent = zile === 1 ? "zi rămasă" : "zile rămase";
+    $("nextDate").textContent = CF.dataRO(nx.data);
+    $("nextDesc").textContent = nx.desc || "";
+
+    // --- Chips de filtrare (doar tipurile prezente) ---
+    var prezente = {};
+    dl.forEach(function(e){ prezente[e.tip] = true; });
+    var chips = [{ v:"toate", lbl:"Toate" }];
+    ["du","tva","srl","salarii"].forEach(function(t){
+      if (prezente[t]) chips.push({ v:t, lbl:TIPURI[t].lbl });
+    });
+    if (chips.length <= 2) activeFilter = "toate"; // un singur tip → fără sens să filtrezi mai mult
+    var cWrap = $("filterChips");
+    cWrap.innerHTML = "";
+    chips.forEach(function(c){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "u-chip";
+      b.textContent = c.lbl;
+      b.setAttribute("aria-pressed", String(c.v === activeFilter));
+      if (c.v === activeFilter){
+        b.style.borderColor = "var(--u-gold)";
+        b.style.boxShadow = "inset 0 0 0 1px var(--u-gold)";
+        b.style.fontWeight = "700";
+      }
+      b.addEventListener("click", function(){ activeFilter = c.v; render(); });
+      cWrap.appendChild(b);
+    });
+
+    // --- Timeline ---
+    var tl = $("timeline");
+    tl.innerHTML = "";
+    var vizibile = 0;
+    dl.forEach(function(e, i){
+      if (activeFilter !== "toate" && e.tip !== activeFilter) return;
+      vizibile++;
+      var z = CF.zilePana(e.data);
+      var soon = z <= 30;
+      var li = document.createElement("li");
+      li.className = "u-tl-item" + (soon ? " soon" : "");
+
+      var peste = z === 0 ? "astăzi" : z === 1 ? "peste 1 zi" : "peste " + z + " zile";
+      var tipLbl = TIPURI[e.tip] ? TIPURI[e.tip].lbl : e.tip;
+
+      li.innerHTML =
+        '<div class="u-tl-date">' + esc(CF.dataRO(e.data)) + ' · ' + esc(peste) + '</div>' +
+        '<div class="u-tl-title">' + esc(e.titlu) + '</div>' +
+        (e.desc ? '<div class="u-tl-desc">' + esc(e.desc) + '</div>' : '') +
+        '<div class="u-tl-desc" style="margin-top:3px"><span class="u-chip" style="font-size:.74rem;padding:2px 9px">' + esc(tipLbl) + '</span></div>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:9px">' +
+          '<button type="button" class="u-btn u-btn-ghost" data-act="ics" data-i="' + i + '" style="padding:7px 14px;font-size:.84rem">Adaugă în calendar</button>' +
+          '<button type="button" class="u-btn u-btn-ghost" data-act="rem" data-i="' + i + '" style="padding:7px 14px;font-size:.84rem">Amintește-mi</button>' +
+          '<span class="u-kpi-sub" data-conf="' + i + '" style="margin:0;align-self:center;opacity:0;transition:opacity .2s"></span>' +
+        '</div>';
+
+      li.querySelector('[data-act="ics"]').addEventListener("click", function(){
+        CF.icsDownload(e.titlu, e.desc, e.data);
+        showConf(li, i, "Descărcat ↓");
+      });
+      li.querySelector('[data-act="rem"]').addEventListener("click", function(){
+        CF.setReminder("ultra-calendar", {
+          kind: "deadline", note: e.titlu, date: iso(e.data), channel: "telegram"
+        });
+        showConf(li, i, "Memento setat ✓");
+      });
+
+      tl.appendChild(li);
+    });
+
+    $("tlEmpty").style.display = vizibile ? "none" : "";
+  }
+
+  function showConf(li, i, txt){
+    var s = li.querySelector('[data-conf="' + i + '"]');
+    if (!s) return;
+    s.textContent = txt;
+    s.style.opacity = "1";
+    s.style.color = "var(--u-pos)";
+    setTimeout(function(){ s.style.opacity = "0"; }, 2600);
+  }
+
+  render();
+  window.addEventListener("cf-profil", render);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
+  CF.requireTier("uTool","ultra",{msg:"Calendarul fiscal personal face parte din planul Ultra."});
+})();
+</script>
+</body></html>

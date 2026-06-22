@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concierge AI — Clubul Financiar</title>
+<meta name="description" content="Concierge-ul tău financiar privat: un AI care îți cunoaște venitul, averea, scorul și structura fiscală și îți răspunde pe cifrele tale reale.">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/concierge.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+/* Chat restilizat pe paleta Ultra (auriu pe navy / hârtie caldă) */
+.uc-chat{display:flex;flex-direction:column;gap:14px}
+.uc-log{display:flex;flex-direction:column;gap:14px;min-height:300px;max-height:60vh;overflow-y:auto;padding:4px 2px}
+.uc-msg{max-width:88%;padding:13px 16px;border-radius:14px;font-size:.95rem;line-height:1.6;word-wrap:break-word}
+.uc-msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));color:#1a1205;font-weight:600;border-bottom-right-radius:5px}
+.uc-msg.ai{align-self:flex-start;background:var(--u-panel2);color:var(--u-ink);border:1px solid var(--u-line-soft);border-bottom-left-radius:5px}
+.uc-msg.ai.md{white-space:normal}
+.uc-msg.ai.md p{margin:.5em 0}
+.uc-msg.ai.md p:first-child{margin-top:0}.uc-msg.ai.md p:last-child{margin-bottom:0}
+.uc-msg.ai.md h3,.uc-msg.ai.md h4,.uc-msg.ai.md h5{margin:.7em 0 .3em;font-size:1rem;font-weight:800;color:var(--u-gold)}
+.uc-msg.ai.md ul,.uc-msg.ai.md ol{margin:.4em 0;padding-left:1.2em}
+.uc-msg.ai.md li{margin:.2em 0}
+.uc-msg.ai.md code{background:var(--u-gold-soft);padding:1px 5px;border-radius:5px;font-size:.88em}
+.uc-msg.ai.md table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.84rem;display:block;overflow-x:auto}
+.uc-msg.ai.md th,.uc-msg.ai.md td{border:1px solid var(--u-line-soft);padding:5px 8px;text-align:left;vertical-align:top}
+.uc-msg.ai.md th{background:var(--u-gold-soft);font-weight:700;color:var(--u-ink)}
+.uc-msg .src{display:block;margin-top:8px;font-size:.74rem;color:var(--u-muted)}
+.uc-in{display:flex;gap:10px;align-items:stretch}
+.uc-in textarea{flex:1;resize:vertical;min-height:48px;font-family:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--u-line-soft);background:var(--u-panel2);color:var(--u-ink);font-size:.95rem}
+.uc-in textarea:focus{outline:none;border-color:var(--u-gold);box-shadow:0 0 0 3px var(--u-gold-soft)}
+.uc-typing{display:inline-flex;gap:5px;align-items:center;padding:4px 0}
+.uc-typing i{width:7px;height:7px;border-radius:50%;background:var(--u-gold);opacity:.45;animation:ucb 1s infinite}
+.uc-typing i:nth-child(2){animation-delay:.18s}.uc-typing i:nth-child(3){animation-delay:.36s}
+@keyframes ucb{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.uc-prof{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:flex-end}
+.uc-profitem{display:flex;flex-direction:column;gap:2px}
+.uc-profitem .lbl{font-size:.72rem;color:var(--u-muted);text-transform:uppercase;letter-spacing:.06em}
+.uc-profitem .val{font-family:'Sora',sans-serif;font-weight:700;font-size:1.25rem;color:var(--u-ink);font-variant-numeric:tabular-nums}
+.uc-quota{font-size:.82rem;color:var(--u-gold);font-weight:600}
+@media (prefers-reduced-motion:reduce){.uc-typing i{animation:none}}
+</style>
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <p class="u-eyebrow">Birou privat · concierge</p>
+    <h1 class="u-crest" style="font-size:clamp(1.9rem,4.5vw,2.8rem)">Concierge-ul tău care <em>îți știe cifrele</em></h1>
+    <p class="u-lead">Un AI care nu îți dă răspunsuri generale: îți cunoaște venitul, averea, scorul de sănătate și structura fiscală și îți răspunde pe situația ta reală. Întreabă orice — de la „cât pun deoparte" până la „PFA sau SRL".</p>
+
+    <div id="uTool" style="margin-top:24px">
+
+      <!-- Card de profil: dovada că AI-ul îi cunoaște cifrele -->
+      <div class="u-panel" id="profCard" style="margin-bottom:18px">
+        <p class="u-label" id="profLabel">Profilul pe care îl folosesc</p>
+        <div id="profBody"></div>
+      </div>
+
+      <!-- Sugestii tailorate -->
+      <p class="u-label" style="margin-bottom:8px">Întreabă-mă, de exemplu</p>
+      <div class="u-chips" id="chips" style="margin-bottom:18px"></div>
+
+      <div class="u-panel">
+        <p class="u-label">Conversație <span class="uc-quota" id="quotaLine"></span></p>
+        <div class="uc-chat">
+          <div class="uc-log" id="chatLog" aria-live="polite"></div>
+          <div class="uc-in">
+            <textarea id="chatInput" rows="2" placeholder="Scrie întrebarea ta, pe cifrele tale…" aria-label="Întrebarea ta"></textarea>
+            <button class="u-btn u-btn-gold" id="sendBtn" style="white-space:nowrap">Trimite</button>
+          </div>
+        </div>
+        <div class="u-hr"></div>
+        <button class="u-btn u-btn-ghost" id="clearBtn" style="font-size:.84rem">Șterge conversația</button>
+      </div>
+
+      <div class="u-alert gold" style="margin-top:18px">
+        <span>Răspunsuri educative pe regulile RO 2026, nu consultanță fiscală. Verifică deciziile mari cu un specialist.</span>
+      </div>
+
+    </div>
+  </div></section>
+</main>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var LS_KEY = "ultra-concierge:chat";
+
+  var log = $("chatLog"), input = $("chatInput"), sendBtn = $("sendBtn"),
+      clearBtn = $("clearBtn"), quotaLine = $("quotaLine"), chipsBox = $("chips"),
+      profBody = $("profBody"), profLabel = $("profLabel");
+
+  var WELCOME = "Bună! Sunt concierge-ul tău financiar privat. Spre deosebire de un asistent obișnuit, eu îți cunosc cifrele reale — venitul, averea, structura și scorul de sănătate — și îți răspund pe situația ta, nu la general.\n\nÎntreabă-mă orice: cât să pui deoparte, dacă merită trecerea pe SRL, cât vei datora la Declarația Unică sau unde pierzi bani acum. Reține: ofer informații educative, nu consultanță fiscală.";
+
+  /* ---------- Markdown → HTML sigur (copiat din asistent-anaf) ---------- */
+  function esc(s){ var d=document.createElement("div"); d.textContent=String(s==null?"":s); return d.innerHTML; }
+  function mdToHtml(src){
+    function inline(t){
+      return esc(t)
+        .replace(/&lt;br\s*\/?&gt;/gi, "<br>")
+        .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+        .replace(/`([^`]+)`/g, "<code>$1</code>");
+    }
+    function cells(line){
+      var c = line.split("|");
+      if (c.length && c[0].trim() === "") c.shift();
+      if (c.length && c[c.length-1].trim() === "") c.pop();
+      return c.map(function(x){ return x.trim(); });
+    }
+    var L = String(src == null ? "" : src).split("\n"), out = [], i = 0;
+    while (i < L.length){
+      var ln = L[i];
+      if (!/^\s*#/.test(ln) && /\|/.test(ln) && i+1 < L.length && /^\s*\|?[\s:|-]*-[\s:|-]*\|?\s*$/.test(L[i+1])){
+        var head = cells(ln); i += 2; var rows = [];
+        while (i < L.length && /\|/.test(L[i])){ rows.push(cells(L[i])); i++; }
+        out.push('<table><thead><tr>' + head.map(function(c){ return "<th>"+inline(c)+"</th>"; }).join("") +
+          '</tr></thead><tbody>' + rows.map(function(r){
+            return "<tr>" + r.map(function(c){ return "<td>"+inline(c)+"</td>"; }).join("") + "</tr>";
+          }).join("") + '</tbody></table>');
+        continue;
+      }
+      var h = ln.match(/^(#{1,4})\s+(.*)/);
+      if (h){
+        var htxt = h[2], rest2 = "", pi = htxt.indexOf("|");
+        if (pi > 0){ rest2 = htxt.slice(pi); htxt = htxt.slice(0, pi).trim(); }
+        var lv = Math.min(6, h[1].length + 2);
+        out.push("<h"+lv+">"+inline(htxt)+"</h"+lv+">");
+        if (rest2){ L.splice(i+1, 0, rest2); }
+        i++; continue;
+      }
+      if (/^\s*[-*]\s+/.test(ln)){ var u=[]; while(i<L.length && /^\s*[-*]\s+/.test(L[i])){ u.push("<li>"+inline(L[i].replace(/^\s*[-*]\s+/,""))+"</li>"); i++; } out.push("<ul>"+u.join("")+"</ul>"); continue; }
+      if (/^\s*\d+\.\s+/.test(ln)){ var o=[]; while(i<L.length && /^\s*\d+\.\s+/.test(L[i])){ o.push("<li>"+inline(L[i].replace(/^\s*\d+\.\s+/,""))+"</li>"); i++; } out.push("<ol>"+o.join("")+"</ol>"); continue; }
+      if (ln.trim() === ""){ i++; continue; }
+      out.push("<p>"+inline(ln)+"</p>"); i++;
+    }
+    return out.join("");
+  }
+
+  /* ---------- Persistență conversație ---------- */
+  function loadMsgs(){
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(LS_KEY) || "null"); } catch(e){}
+    if(saved && saved.length) return saved;
+    return [{ role:"assistant", content: WELCOME }];
+  }
+  function saveMsgs(){ try { localStorage.setItem(LS_KEY, JSON.stringify(messages)); } catch(e){} }
+  var messages = loadMsgs();
+
+  /* ---------- Render chat ---------- */
+  function render(){
+    log.innerHTML = "";
+    messages.forEach(function(m){
+      var div = document.createElement("div");
+      div.className = "uc-msg " + (m.role === "user" ? "user" : "ai md");
+      div.innerHTML = (m.role === "user") ? esc(m.content) : mdToHtml(m.content);
+      if(m.role !== "user" && m.sources && m.sources.length){
+        var s = document.createElement("span");
+        s.className = "src";
+        s.textContent = "Surse: " + m.sources.join(", ");
+        div.appendChild(s);
+      }
+      log.appendChild(div);
+    });
+    log.scrollTop = log.scrollHeight;
+  }
+  function showTyping(){
+    var div = document.createElement("div");
+    div.className = "uc-msg ai"; div.id = "uc-typing-row";
+    div.innerHTML = '<span class="uc-typing"><i></i><i></i><i></i></span>';
+    log.appendChild(div); log.scrollTop = log.scrollHeight;
+  }
+  function clearTyping(){ var t = $("uc-typing-row"); if(t) t.remove(); }
+
+  /* ---------- Card de profil + sugestii tailorate ---------- */
+  function profItem(lbl, val){
+    return '<div class="uc-profitem"><span class="lbl">' + esc(lbl) + '</span><span class="val">' + esc(val) + '</span></div>';
+  }
+
+  // Sugestii implicite + per structură
+  function suggestionsFor(p){
+    var base = [
+      "Unde pierd cei mai mulți bani acum?",
+      "Cât să pun deoparte lunar ca să ies la pensie la 55?",
+      "Cum îmi îmbunătățesc scorul de sănătate financiară?"
+    ];
+    var s = p && p.structura;
+    if (s === "pfa_real" || s === "pfa_norma"){
+      return [
+        "Cât voi plăti la Declarația Unică pe ritmul ăsta?",
+        "Ar fi mai bine să trec pe SRL?",
+        "Cât să-mi pun deoparte lunar ca să ies la pensie la 55?",
+        "Unde pierd cei mai mulți bani acum?"
+      ];
+    }
+    if (s === "srl_micro" || s === "srl_real" || s === "mixt"){
+      return [
+        "Cât îmi rămâne net dacă scot toți banii ca dividend?",
+        "Ar fi mai eficient salariu sau dividend pe cazul meu?",
+        "Cât voi datora în total firma anul ăsta?",
+        "Unde pierd cei mai mulți bani acum?"
+      ];
+    }
+    if (s === "salariat"){
+      return [
+        "Cât pot economisi realist din venitul meu?",
+        "Merită să-mi deschid un PFA pe lângă salariu?",
+        "Cât să pun deoparte ca să fiu liber financiar la 55?",
+        "Unde pierd cei mai mulți bani acum?"
+      ];
+    }
+    return base.concat(["Ar fi mai bine PFA sau SRL pentru mine?"]);
+  }
+
+  function renderProfile(){
+    var p = U.getProfil();
+    chipsBox.innerHTML = "";
+    if (!U.areDate(p)){
+      profLabel.textContent = "Profil";
+      profBody.innerHTML = '<p style="color:var(--u-muted);margin:.2em 0 .8em">Încă nu am cifrele tale, așa că îți voi răspunde la general. ' +
+        'Completează profilul ca să-ți răspund pe cifrele tale — venit, avere, structură, scor.</p>' +
+        '<a class="u-btn u-btn-gold" href="/ultra/profil.html">Completează profilul</a>';
+    } else {
+      var an = U.avereNeta(p), scor = U.scorSanatate(p);
+      profLabel.textContent = "Profilul pe care îl folosesc";
+      profBody.innerHTML =
+        '<div class="uc-prof">' +
+          profItem("Venit net / lună", CF.lei(U.venitNetLunar(p))) +
+          profItem("Avere netă", CF.lei(an.net)) +
+          profItem("Scor sănătate", scor.scor + "/100") +
+          profItem("Structură", U.structuraLabel(p.structura) + (p.tvaPlatitor ? " · TVA" : "")) +
+        '</div>';
+    }
+    // Sugestii
+    suggestionsFor(U.areDate(p) ? p : null).forEach(function(q){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "u-chip"; b.textContent = q;
+      b.style.cursor = "pointer";
+      b.addEventListener("click", function(){ if(!input.disabled){ input.value = q; input.focus(); } });
+      chipsBox.appendChild(b);
+    });
+  }
+
+  /* ---------- Quota (Ultra = nelimitat) ---------- */
+  function updateQuota(){
+    if (CF.aiQuota() === Infinity){
+      quotaLine.textContent = "· Concierge nelimitat";
+    } else {
+      quotaLine.textContent = "";
+    }
+  }
+
+  /* ---------- Trimitere ---------- */
+  var busy = false;
+  function buildPayload(){
+    var hist = messages.filter(function(m){ return m.content !== WELCOME; });
+    return hist.slice(-12).map(function(m){ return { role: m.role, content: m.content }; });
+  }
+
+  function send(text){
+    if(busy) return;
+    text = (text || input.value || "").trim();
+    if(!text) return;
+
+    busy = true; sendBtn.disabled = true;
+    messages.push({ role:"user", content: text });
+    saveMsgs(); render();
+    input.value = "";
+    showTyping();
+
+    CF.aiChat(buildPayload(), { context: U.profileContext() }).then(function(res){
+      clearTyping();
+      var content = (res && res.content && res.content.trim()) ||
+        "Momentan nu am putut genera un răspuns. Încearcă să reformulezi întrebarea sau revino mai târziu.";
+      messages.push({ role:"assistant", content: content, sources: (res && res.sources) || [] });
+      saveMsgs(); render();
+    }).catch(function(){
+      clearTyping();
+      messages.push({ role:"assistant", content:
+        "Îmi pare rău, concierge-ul nu este disponibil momentan. Te rog încearcă din nou peste câteva minute." });
+      saveMsgs(); render();
+    }).then(function(){
+      busy = false; sendBtn.disabled = false;
+    });
+  }
+
+  /* ---------- Evenimente ---------- */
+  sendBtn.addEventListener("click", function(){ send(); });
+  input.addEventListener("keydown", function(e){
+    if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); send(); }
+  });
+  clearBtn.addEventListener("click", function(){
+    messages = [{ role:"assistant", content: WELCOME }];
+    saveMsgs(); render();
+  });
+
+  /* ---------- Init ---------- */
+  function refresh(){ renderProfile(); updateQuota(); }
+  render();
+  refresh();
+  window.addEventListener("cf-profil", refresh);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(refresh); refresh(); });
+
+  CF.requireTier("uTool", "ultra", { msg: "Concierge AI personalizat face parte din planul Ultra." });
+})();
+</script>
+</body></html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seiful de documente — Clubul Financiar</title>
+<meta name="description" content="Generează șabloane de documente esențiale pentru firma ta: decizie AGA de dividende, contract de comodat pentru sediu social, prestări servicii și antet de factură. Personalizate, gata de printat."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/seif.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+  /* Tab-uri seif (chips selectabile) */
+  .seif-tab{ cursor:pointer; user-select:none; transition:background .15s, border-color .15s, color .15s; }
+  .seif-tab[aria-selected="true"]{
+    background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+    color:#1a1304; border-color:transparent; font-weight:700;
+    box-shadow:0 6px 16px rgba(168,134,49,.25);
+  }
+  /* Documentul randat — coală selectabilă/copiabilă */
+  .seif-doc{
+    background:var(--u-paper, #fff);
+    color:var(--u-ink);
+    border:1px solid var(--u-line);
+    border-radius:12px;
+    padding:26px clamp(18px,4vw,40px);
+    font-family:"Plus Jakarta Sans", system-ui, sans-serif;
+    font-size:.94rem; line-height:1.62;
+    user-select:text; -webkit-user-select:text;
+    overflow-x:auto;
+  }
+  [data-theme="dark"] .seif-doc{ background:rgba(255,255,255,.04); }
+  .seif-doc h2{ font-family:"Fraunces", serif; font-size:1.18rem; text-align:center;
+    margin:0 0 4px; letter-spacing:.01em; color:var(--u-ink); }
+  .seif-doc .sub{ text-align:center; color:var(--u-muted); font-size:.85rem; margin:0 0 22px; }
+  .seif-doc p{ margin:0 0 12px; }
+  .seif-doc .lead-firm{ text-align:center; font-weight:700; }
+  .seif-doc .clause-h{ font-weight:700; margin:18px 0 6px; }
+  .seif-doc ol, .seif-doc ul{ margin:0 0 12px; padding-left:22px; }
+  .seif-doc li{ margin-bottom:6px; }
+  .seif-doc .sign{ display:flex; justify-content:space-between; gap:24px; margin-top:34px; flex-wrap:wrap; }
+  .seif-doc .sign div{ flex:1; min-width:160px; text-align:center; }
+  .seif-doc .sign .sig-line{ margin-top:36px; border-top:1px solid var(--u-line); padding-top:6px; color:var(--u-muted); font-size:.85rem; }
+  .seif-doc table.inv{ width:100%; border-collapse:collapse; margin:8px 0 12px; }
+  .seif-doc table.inv th, .seif-doc table.inv td{ padding:9px 10px; border-bottom:1px solid var(--u-line); text-align:left; font-size:.9rem; }
+  .seif-doc table.inv th{ color:var(--u-muted); font-weight:600; }
+  .seif-doc table.inv td.num, .seif-doc table.inv th.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .seif-doc table.inv tr.tot td{ font-weight:800; border-bottom:none; padding-top:14px; }
+  .seif-doc .gold-em{ color:var(--u-gold); font-weight:700; }
+</style>
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <div class="u-hero">
+      <p class="u-eyebrow">Biroul tău financiar privat</p>
+      <h1 class="u-crest">Seiful de <em>documente</em></h1>
+      <p class="u-lead">Documentele de care un antreprenor are nevoie iar și iar — decizia de dividende, comodatul pentru sediu social, contractul de prestări servicii, antetul de factură. Completezi câmpurile rămase, generezi șablonul personalizat și îl printezi sau salvezi ca PDF.</p>
+    </div>
+
+    <div id="uTool">
+
+      <!-- Selector tip document -->
+      <div class="u-chips" id="sTabs" role="tablist" aria-label="Tip de document" style="margin-bottom:18px">
+        <button class="u-chip seif-tab" role="tab" data-doc="aga"      aria-selected="true">📜 Decizie AGA — dividende</button>
+        <button class="u-chip seif-tab" role="tab" data-doc="comodat"  aria-selected="false">🏠 Comodat — sediu social</button>
+        <button class="u-chip seif-tab" role="tab" data-doc="servicii" aria-selected="false">🤝 Prestări servicii</button>
+        <button class="u-chip seif-tab" role="tab" data-doc="factura"  aria-selected="false">🧾 Antet / model factură</button>
+      </div>
+
+      <div class="u-grid u-grid-2" style="align-items:start">
+
+        <!-- Formularul -->
+        <div class="u-panel" style="margin-bottom:18px">
+          <p class="u-label" id="sFormTitle">Completează datele</p>
+          <div id="sForm"></div>
+          <button class="u-btn u-btn-gold" id="sGen" type="button" style="margin-top:6px">Generează documentul</button>
+        </div>
+
+        <!-- Previzualizare document -->
+        <div class="u-panel" style="margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+            <p class="u-label" style="margin:0">Previzualizare</p>
+            <button class="u-btn u-btn-ghost" id="sPrint" type="button" style="padding:9px 16px">🖨️ Printează / PDF</button>
+          </div>
+          <div class="seif-doc" id="sDoc" aria-live="polite">
+            <p style="color:var(--u-muted);text-align:center;margin:18px 0">Alege un tip de document, completează câmpurile și apasă <strong>Generează</strong>.</p>
+          </div>
+          <p class="cf-mini" style="color:var(--u-muted);margin:12px 0 0">Textul de mai sus este selectabil — îl poți copia direct.</p>
+        </div>
+
+      </div>
+
+      <div class="u-alert warn" style="margin-bottom:8px">
+        <p class="h">Șabloane orientative</p>
+        <p style="margin:0">Verifică cu un contabil/jurist înainte de utilizare oficială; nu înlocuiesc consultanța de specialitate. Adaptează-le la situația ta concretă (act constitutiv, prevederi specifice, valori reale).</p>
+      </div>
+
+    </div>
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+
+  // ---- helpers ----
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
+    return ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" })[c]; }); }
+  function val(id){ var el = $(id); return el ? el.value.trim() : ""; }
+  function ph(v, placeholder){ // afișează valoarea sau un placeholder gri pentru câmp gol
+    v = (v == null ? "" : String(v)).trim();
+    return v ? esc(v) : '<span style="color:var(--u-muted)">' + esc(placeholder || "____________") + '</span>';
+  }
+  function numLei(id){ var n = parseFloat(val(id).replace(/[^0-9.,-]/g,"").replace(/\./g,"").replace(",",".")); return isFinite(n) ? n : 0; }
+  function azi(){ return CF.dataRO(new Date()); }
+  function dataAzi(){ var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+  function rev(s){ return ({ srl_micro:"S.R.L.", srl_real:"S.R.L." })[s] || ""; }
+
+  // input helper (returnează HTML pentru un câmp)
+  function field(o){
+    // o = {id, label, hint, type, placeholder, value, step}
+    return '<div class="u-field">' +
+      '<label for="' + o.id + '">' + esc(o.label) + '</label>' +
+      (o.hint ? '<span class="hint">' + esc(o.hint) + '</span>' : '') +
+      (o.type === "select"
+        ? '<select class="u-select" id="' + o.id + '">' + (o.options || []).map(function(op){
+            return '<option value="' + esc(op.v) + '"' + (op.v === o.value ? ' selected' : '') + '>' + esc(op.t) + '</option>'; }).join("") + '</select>'
+        : '<input class="u-input" id="' + o.id + '" type="' + (o.type || "text") + '"' +
+            (o.type === "number" ? ' inputmode="numeric" min="0"' + (o.step ? ' step="' + o.step + '"' : '') : '') +
+            ' placeholder="' + esc(o.placeholder || "") + '"' +
+            ' value="' + esc(o.value == null ? "" : o.value) + '">') +
+      '</div>';
+  }
+
+  // ---- definițiile celor 4 generatoare ----
+  var DOCS = {
+
+    /* ============ 1. DECIZIE AGA — DIVIDENDE ============ */
+    aga: {
+      titlu: "Decizie de distribuire a dividendelor",
+      form: function(p){
+        var v = (p && p.venituri) || {};
+        return [
+          field({ id:"agaFirma",  label:"Denumire firmă", placeholder:"SC EXEMPLU SRL", value: (p && p.nume) ? "" : "", hint:"Denumirea completă a societății." }),
+          field({ id:"agaCUI",    label:"CUI / Cod fiscal", placeholder:"RO12345678" }),
+          field({ id:"agaJ",      label:"Nr. înmatriculare Reg. Com.", placeholder:"J40/1234/2024" }),
+          field({ id:"agaAsociat",label:"Nume asociat", placeholder:"Popescu Ion", value: (p && p.nume) || "", hint:"Asociatul unic sau cel care decide." }),
+          field({ id:"agaPct",    label:"% deținere", type:"number", step:"1", placeholder:"100", value:"100" }),
+          field({ id:"agaProfit", label:"Profit de distribuit (lei)", type:"number", step:"100", placeholder:"50000", hint:"Profit net repartizabil ca dividend." }),
+          field({ id:"agaData",   label:"Data deciziei", type:"date", value: dataAzi() }),
+          field({ id:"agaNr",     label:"Număr decizie", placeholder:"1" })
+        ].join("");
+      },
+      genera: function(){
+        var firma = val("agaFirma"), cui = val("agaCUI"), j = val("agaJ");
+        var asociat = val("agaAsociat"), pct = val("agaPct") || "100";
+        var profit = numLei("agaProfit");
+        var nr = val("agaNr") || "__";
+        var dataD = val("agaData") ? CF.dataRO(val("agaData")) : azi();
+        var unic = (parseFloat(pct) >= 100);
+        var titluAct = unic ? "DECIZIA ASOCIATULUI UNIC" : "HOTĂRÂREA ADUNĂRII GENERALE A ASOCIAȚILOR";
+        // 16% impozit pe dividende reținut la sursă (2026)
+        var imp = Math.round(profit * 0.16);
+        var net = profit - imp;
+        var brutAsociat = profit; // dacă <100%, partea sa
+        if (!unic){ var pp = parseFloat(pct); if(isFinite(pp) && pp>0 && pp<100){ brutAsociat = Math.round(profit * pp / 100); } }
+        var impAsoc = Math.round(brutAsociat * 0.16);
+        var netAsoc = brutAsociat - impAsoc;
+
+        var body =
+          '<h2>' + titluAct + ' nr. ' + esc(nr) + '</h2>' +
+          '<p class="sub">din ' + esc(dataD) + '</p>' +
+          '<p class="lead-firm">' + ph(firma, "SC ___________ SRL") + '</p>' +
+          '<p style="text-align:center;color:var(--u-muted);font-size:.86rem;margin-top:-6px">CUI ' + ph(cui, "RO________") + ' · ' + ph(j, "J__/____/____") + '</p>' +
+
+          '<p style="margin-top:18px">' + (unic
+            ? 'Subsemnatul/a <strong>' + ph(asociat, "____________") + '</strong>, în calitate de <strong>asociat unic</strong> al societății, deținând ' + esc(pct) + '% din părțile sociale,'
+            : 'Adunarea Generală a Asociaților, întrunită statutar, cu participarea asociatului <strong>' + ph(asociat, "____________") + '</strong> (' + esc(pct) + '% din capitalul social),') +
+          ' luând în considerare situațiile financiare și profitul net realizat, în temeiul Legii nr. 31/1990 privind societățile și a actului constitutiv,</p>' +
+
+          '<p class="clause-h">' + (unic ? 'DECIDE:' : 'HOTĂRĂȘTE:') + '</p>' +
+          '<ol>' +
+            '<li>Aprobarea repartizării profitului net în sumă de <strong>' + CF.lei(profit) + '</strong> sub formă de dividende către asociați, proporțional cu cota de participare la capitalul social.</li>' +
+            '<li>Din suma brută a dividendelor se reține la sursă impozit pe dividende de <span class="gold-em">16%</span> (cota aplicabilă în anul 2026), respectiv <strong>' + CF.lei(imp) + '</strong>, urmând a fi plătit bugetului de stat până la data de 25 a lunii următoare celei în care se distribuie dividendul.</li>' +
+            '<li>Dividendul net cuvenit asociaților, după reținerea impozitului, este de <strong>' + CF.lei(net) + '</strong>' +
+              (unic ? '' : ', din care asociatului ' + ph(asociat, "____") + ' (' + esc(pct) + '%) îi revine net suma de <strong>' + CF.lei(netAsoc) + '</strong>') +
+              '.</li>' +
+            '<li>Plata dividendelor nete se va efectua în condițiile legii. Societatea datorează, dacă este cazul, și contribuția de asigurări sociale de sănătate (CASS) conform plafoanelor în vigoare, declarată prin Declarația Unică.</li>' +
+          '</ol>' +
+
+          '<table class="inv"><tbody>' +
+            '<tr><td>Profit brut distribuit</td><td class="num">' + CF.lei(profit) + '</td></tr>' +
+            '<tr><td>Impozit pe dividende (16%)</td><td class="num">− ' + CF.lei(imp) + '</td></tr>' +
+            '<tr class="tot"><td>Dividend net de plată</td><td class="num">' + CF.lei(net) + '</td></tr>' +
+          '</tbody></table>' +
+
+          '<p style="margin-top:16px">Prezentul act a fost ' + (unic ? 'adoptat' : 'încheiat') + ' azi, ' + esc(dataD) + ', și produce efecte de la data semnării.</p>' +
+
+          '<div class="sign">' +
+            '<div><div class="sig-line">' + (unic ? 'Asociat unic' : 'Asociat') + '<br>' + ph(asociat, "____________") + '<br>(semnătura)</div></div>' +
+            '<div><div class="sig-line">Administrator<br>____________<br>(semnătura)</div></div>' +
+          '</div>';
+        return body;
+      }
+    },
+
+    /* ============ 2. CONTRACT DE COMODAT — SEDIU SOCIAL ============ */
+    comodat: {
+      titlu: "Contract de comodat",
+      form: function(p){
+        return [
+          field({ id:"coNume",   label:"Comodant — nume complet", placeholder:"Popescu Ion", value: (p && p.nume) || "", hint:"Proprietarul care pune la dispoziție spațiul." }),
+          field({ id:"coCNP",    label:"Comodant — CNP", placeholder:"1900101________" }),
+          field({ id:"coAdresa", label:"Adresa imobilului (sediul social)", placeholder:"Str. Exemplu nr. 1, ap. 2, București", value: (p && p.oras) ? "" : "" }),
+          field({ id:"coFirma",  label:"Comodatar — denumire firmă", placeholder:"SC EXEMPLU SRL" }),
+          field({ id:"coCUI",    label:"Comodatar — CUI", placeholder:"RO12345678" }),
+          field({ id:"coSupraf", label:"Suprafața pusă la dispoziție (mp)", type:"number", step:"1", placeholder:"15" }),
+          field({ id:"coDurata", label:"Durata", placeholder:"durata de existență a societății", value:"durata de existență a societății" }),
+          field({ id:"coData",   label:"Data contractului", type:"date", value: dataAzi() })
+        ].join("");
+      },
+      genera: function(){
+        var nume = val("coNume"), cnp = val("coCNP"), adresa = val("coAdresa");
+        var firma = val("coFirma"), cui = val("coCUI");
+        var supraf = val("coSupraf"), durata = val("coDurata") || "durata de existență a societății";
+        var dataD = val("coData") ? CF.dataRO(val("coData")) : azi();
+
+        return '<h2>CONTRACT DE COMODAT</h2>' +
+          '<p class="sub">(folosință gratuită) · încheiat azi, ' + esc(dataD) + '</p>' +
+
+          '<p class="clause-h">PĂRȚILE</p>' +
+          '<p><strong>Comodant:</strong> ' + ph(nume, "____________") + ', CNP ' + ph(cnp, "____________") + ', proprietar al imobilului situat în ' + ph(adresa, "____________") + ', denumit în continuare „Comodantul”.</p>' +
+          '<p><strong>Comodatar:</strong> ' + ph(firma, "SC ___________ SRL") + ', cu CUI ' + ph(cui, "RO________") + ', reprezentată legal prin administrator, denumită în continuare „Comodatarul”.</p>' +
+
+          '<p class="clause-h">Art. 1 — Obiectul contractului</p>' +
+          '<p>Comodantul transmite Comodatarului, cu titlu gratuit, dreptul de folosință asupra unei suprafețe de <strong>' + ph(supraf, "__") + ' mp</strong> din imobilul situat la adresa de mai sus, în scopul stabilirii și funcționării <strong>sediului social</strong> al Comodatarului.</p>' +
+
+          '<p class="clause-h">Art. 2 — Durata</p>' +
+          '<p>Prezentul contract se încheie pe <strong>' + esc(durata) + '</strong>, cu începere de la data semnării. Folosința este și rămâne gratuită pe toată durata contractului.</p>' +
+
+          '<p class="clause-h">Art. 3 — Obligațiile părților</p>' +
+          '<ol>' +
+            '<li>Comodatarul folosește spațiul exclusiv ca sediu social/punct de corespondență, fără a desfășura în acel spațiu activitate care să modifice destinația imobilului.</li>' +
+            '<li>Comodatarul suportă cheltuielile de folosință aferente activității sale, dacă este cazul, și păstrează bunul în bune condiții.</li>' +
+            '<li>Comodantul garantează folosința liniștită a spațiului pe durata contractului.</li>' +
+            '<li>Comodatarul nu poate transmite folosința unui terț fără acordul scris al Comodantului.</li>' +
+          '</ol>' +
+
+          '<p class="clause-h">Art. 4 — Încetarea contractului</p>' +
+          '<p>Contractul încetează la expirarea duratei, prin acordul părților sau prin denunțare unilaterală cu un preaviz de 30 de zile. La încetare, Comodatarul își mută sediul social, conform legii.</p>' +
+
+          '<p class="clause-h">Art. 5 — Dispoziții finale</p>' +
+          '<p>Prezentul contract a fost încheiat în 3 (trei) exemplare, câte unul pentru fiecare parte și unul pentru Registrul Comerțului, și este însoțit, după caz, de acordul asociației de proprietari/vecinilor, dacă imobilul este într-un bloc de locuințe.</p>' +
+
+          '<div class="sign">' +
+            '<div><div class="sig-line">COMODANT<br>' + ph(nume, "____________") + '<br>(semnătura)</div></div>' +
+            '<div><div class="sig-line">COMODATAR<br>' + ph(firma, "____________") + '<br>(administrator, semnătura)</div></div>' +
+          '</div>';
+      }
+    },
+
+    /* ============ 3. CONTRACT DE PRESTĂRI SERVICII ============ */
+    servicii: {
+      titlu: "Contract de prestări servicii",
+      form: function(p){
+        return [
+          field({ id:"prPrestator", label:"Prestator (tu / firma ta)", placeholder:"SC EXEMPLU SRL", value: (p && p.nume) || "", hint:"Cine prestează serviciile." }),
+          field({ id:"prBenef",     label:"Beneficiar (client)", placeholder:"SC CLIENT SRL" }),
+          field({ id:"prObiect",    label:"Obiectul contractului", placeholder:"servicii de consultanță / marketing / IT", hint:"Ce livrezi, pe scurt." }),
+          field({ id:"prValoare",   label:"Valoare (lei)", type:"number", step:"100", placeholder:"5000" }),
+          field({ id:"prTVA",       label:"TVA", type:"select", value:"nu", options:[{v:"nu",t:"Fără TVA"},{v:"da",t:"Cu TVA 21%"}] }),
+          field({ id:"prTermen",    label:"Termen de plată", placeholder:"15 zile de la emiterea facturii", value:"15 zile de la emiterea facturii" }),
+          field({ id:"prData",      label:"Data contractului", type:"date", value: dataAzi() })
+        ].join("");
+      },
+      genera: function(){
+        var prest = val("prPrestator"), benef = val("prBenef"), obiect = val("prObiect");
+        var valoare = numLei("prValoare"), tva = val("prTVA") === "da";
+        var termen = val("prTermen") || "15 zile de la emiterea facturii";
+        var dataD = val("prData") ? CF.dataRO(val("prData")) : azi();
+        var tvaSuma = tva ? Math.round(valoare * 0.21) : 0;
+        var totalPlata = valoare + tvaSuma;
+
+        return '<h2>CONTRACT DE PRESTĂRI SERVICII</h2>' +
+          '<p class="sub">încheiat azi, ' + esc(dataD) + '</p>' +
+
+          '<p class="clause-h">PĂRȚILE</p>' +
+          '<p><strong>Prestator:</strong> ' + ph(prest, "____________") + ', denumit în continuare „Prestatorul”.</p>' +
+          '<p><strong>Beneficiar:</strong> ' + ph(benef, "____________") + ', denumit în continuare „Beneficiarul”.</p>' +
+
+          '<p class="clause-h">Art. 1 — Obiectul contractului</p>' +
+          '<p>Prestatorul se obligă să presteze în favoarea Beneficiarului următoarele servicii: <strong>' + ph(obiect, "____________") + '</strong>, conform cerințelor agreate între părți.</p>' +
+
+          '<p class="clause-h">Art. 2 — Prețul și modalitatea de plată</p>' +
+          '<p>Valoarea serviciilor este de <strong>' + CF.lei(valoare) + '</strong>' +
+            (tva ? ', la care se adaugă TVA <span class="gold-em">21%</span> în sumă de <strong>' + CF.lei(tvaSuma) + '</strong>, total de plată <strong>' + CF.lei(totalPlata) + '</strong>' : ' (prestatorul nu este plătitor de TVA / serviciu fără TVA)') +
+            '. Plata se face pe baza facturii emise de Prestator, în termen de <strong>' + esc(termen) + '</strong>.</p>' +
+
+          '<p class="clause-h">Art. 3 — Obligațiile părților</p>' +
+          '<ol>' +
+            '<li>Prestatorul execută serviciile cu profesionalism, în termenele convenite, și păstrează confidențialitatea informațiilor primite.</li>' +
+            '<li>Beneficiarul pune la dispoziție informațiile necesare și achită contravaloarea serviciilor la termen.</li>' +
+            '<li>Pentru întârzieri la plată se pot percepe penalități de 0,1%/zi din suma restantă, dacă părțile nu convin altfel.</li>' +
+          '</ol>' +
+
+          '<p class="clause-h">Art. 4 — Durata și încetarea</p>' +
+          '<p>Contractul produce efecte de la data semnării până la îndeplinirea obligațiilor. Poate înceta prin acordul părților, prin executare integrală sau prin denunțare cu preaviz de 15 zile.</p>' +
+
+          '<p class="clause-h">Art. 5 — Dispoziții finale</p>' +
+          '<p>Litigiile se soluționează pe cale amiabilă sau, în caz contrar, de instanțele competente. Contractul s-a încheiat în 2 (două) exemplare, câte unul pentru fiecare parte.</p>' +
+
+          '<div class="sign">' +
+            '<div><div class="sig-line">PRESTATOR<br>' + ph(prest, "____________") + '<br>(semnătura)</div></div>' +
+            '<div><div class="sig-line">BENEFICIAR<br>' + ph(benef, "____________") + '<br>(semnătura)</div></div>' +
+          '</div>';
+      }
+    },
+
+    /* ============ 4. ANTET / MODEL FACTURĂ ============ */
+    factura: {
+      titlu: "Factură",
+      form: function(p){
+        return [
+          field({ id:"faFurnizor", label:"Furnizor — firmă", placeholder:"SC EXEMPLU SRL", value: (p && p.nume) || "", hint:"Cine emite factura." }),
+          field({ id:"faFurnCUI",  label:"Furnizor — CUI", placeholder:"RO12345678" }),
+          field({ id:"faIBAN",     label:"Furnizor — IBAN", placeholder:"RO00 BANK 0000 0000 0000 0000" }),
+          field({ id:"faClient",   label:"Client", placeholder:"SC CLIENT SRL · CUI RO87654321" }),
+          field({ id:"faDescriere",label:"Descriere produs / serviciu", placeholder:"Servicii consultanță — iunie 2026" }),
+          field({ id:"faSuma",     label:"Sumă (fără TVA, lei)", type:"number", step:"10", placeholder:"5000" }),
+          field({ id:"faTVA",      label:"TVA", type:"select", value:"nu", options:[{v:"nu",t:"Fără TVA"},{v:"da",t:"Cu TVA 21%"}] }),
+          field({ id:"faSerie",    label:"Serie / număr factură", placeholder:"CF-2026-001" }),
+          field({ id:"faData",     label:"Data emiterii", type:"date", value: dataAzi() })
+        ].join("");
+      },
+      genera: function(){
+        var furn = val("faFurnizor"), furnCUI = val("faFurnCUI"), iban = val("faIBAN");
+        var client = val("faClient"), desc = val("faDescriere");
+        var suma = numLei("faSuma"), tva = val("faTVA") === "da";
+        var serie = val("faSerie") || "____";
+        var dataD = val("faData") ? CF.dataRO(val("faData")) : azi();
+        var tvaSuma = tva ? Math.round(suma * 0.21) : 0;
+        var total = suma + tvaSuma;
+
+        return '<h2>FACTURĂ</h2>' +
+          '<p class="sub">Seria/nr. ' + esc(serie) + ' · data ' + esc(dataD) + '</p>' +
+
+          '<div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:6px">' +
+            '<div style="flex:1;min-width:180px">' +
+              '<p style="margin:0 0 4px;color:var(--u-muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em">Furnizor</p>' +
+              '<p style="margin:0;font-weight:700">' + ph(furn, "SC ___________ SRL") + '</p>' +
+              '<p style="margin:0;font-size:.86rem">CUI ' + ph(furnCUI, "RO________") + '</p>' +
+              '<p style="margin:0;font-size:.86rem">IBAN ' + ph(iban, "RO__ ____ ____ ____") + '</p>' +
+            '</div>' +
+            '<div style="flex:1;min-width:180px">' +
+              '<p style="margin:0 0 4px;color:var(--u-muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em">Client</p>' +
+              '<p style="margin:0;font-weight:700">' + ph(client, "____________") + '</p>' +
+            '</div>' +
+          '</div>' +
+
+          '<table class="inv"><thead><tr>' +
+            '<th>Descriere</th><th class="num">Cantitate</th><th class="num">Valoare</th>' +
+          '</tr></thead><tbody>' +
+            '<tr><td>' + ph(desc, "____________") + '</td><td class="num">1</td><td class="num">' + CF.lei(suma) + '</td></tr>' +
+            '<tr><td colspan="2">Subtotal (fără TVA)</td><td class="num">' + CF.lei(suma) + '</td></tr>' +
+            (tva
+              ? '<tr><td colspan="2">TVA <span class="gold-em">21%</span></td><td class="num">' + CF.lei(tvaSuma) + '</td></tr>'
+              : '<tr><td colspan="3" style="color:var(--u-muted);font-size:.84rem">Neplătitor de TVA / scutit conform legii.</td></tr>') +
+            '<tr class="tot"><td colspan="2">TOTAL DE PLATĂ</td><td class="num">' + CF.lei(total) + '</td></tr>' +
+          '</tbody></table>' +
+
+          '<p style="font-size:.85rem;color:var(--u-muted);margin-top:10px">Factura este valabilă fără semnătură și ștampilă, conform Codului fiscal. Plata se efectuează în contul IBAN de mai sus.</p>';
+      }
+    }
+  };
+
+  // ---- starea curentă ----
+  var cur = "aga";
+
+  function buildForm(){
+    var p = U.getProfil();
+    var d = DOCS[cur];
+    $("sForm").innerHTML = d.form(p);
+    $("sFormTitle").textContent = "Completează datele — " + d.titlu;
+    // resetează previzualizarea la schimbarea tipului
+    $("sDoc").innerHTML = '<p style="color:var(--u-muted);text-align:center;margin:18px 0">Completează câmpurile și apasă <strong>Generează</strong>.</p>';
+  }
+
+  function genera(){
+    var d = DOCS[cur];
+    $("sDoc").innerHTML = d.genera();
+  }
+
+  function printeaza(){
+    var d = DOCS[cur];
+    var doc = $("sDoc");
+    // dacă nu s-a generat încă, generăm acum
+    if (!doc.querySelector("h2")) genera();
+    var html = doc.innerHTML;
+    CF.printResult(d.titlu, html);
+  }
+
+  // ---- tab-uri ----
+  Array.prototype.forEach.call(document.querySelectorAll(".seif-tab"), function(tab){
+    tab.addEventListener("click", function(){
+      cur = tab.getAttribute("data-doc");
+      document.querySelectorAll(".seif-tab").forEach(function(t){
+        t.setAttribute("aria-selected", t === tab ? "true" : "false");
+      });
+      buildForm();
+    });
+  });
+
+  $("sGen").addEventListener("click", genera);
+  $("sPrint").addEventListener("click", printeaza);
+
+  function render(){ buildForm(); }
+  render();
+
+  window.addEventListener("cf-profil", render);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
+  CF.requireTier("uTool","ultra",{msg:"Seiful de documente face parte din planul Ultra."});
+})();
+</script>
+</body></html>

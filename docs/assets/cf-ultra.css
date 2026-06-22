@@ -1,0 +1,211 @@
+/* =============================================================================
+   cf-ultra.css — identitatea vizuală a suitei ULTRA ("Biroul tău financiar privat")
+   -----------------------------------------------------------------------------
+   Teză: extras de bancă privată, nu dashboard SaaS. Auriu pe navy nocturn (dark)
+   sau hârtie caldă (light), linii AURII subțiri ca metal gravat, cifre tabulare
+   aliniate ca într-un extras de cont. Eyebrow/crest = serif Fraunces (bespoke).
+   Paginile încarcă Fraunces:
+     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+   Depinde de style.css/upgrade.css (variabile brand) — le suprascrie doar în .u-page.
+   ============================================================================= */
+
+.u-page{
+  /* paletă Ultra — light (hârtie caldă) */
+  --u-bg1:#f4efe3; --u-bg2:#efe7d6;
+  --u-panel:#fffdf9; --u-panel2:#fbf6ec;
+  --u-ink:#13263f; --u-muted:#6a7686;
+  --u-line:rgba(168,134,49,.30);        /* hairline auriu */
+  --u-line-soft:rgba(168,134,49,.16);
+  --u-gold:#9a7414; --u-gold2:#caa44a; --u-gold-soft:rgba(168,134,49,.10);
+  --u-pos:#0f9d6e; --u-neg:#d2453b;
+  --u-shadow:0 18px 50px rgba(40,30,8,.10);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, var(--u-bg2), transparent 60%),
+    linear-gradient(180deg, var(--u-bg1), var(--u-bg1));
+  min-height:70vh;
+}
+[data-theme="dark"] .u-page{
+  /* paletă Ultra — dark (navy nocturn) */
+  --u-bg1:#081627; --u-bg2:#0c2138;
+  --u-panel:#0f2238; --u-panel2:#122a44;
+  --u-ink:#eaf1fb; --u-muted:#93a7c4;
+  --u-line:rgba(232,194,104,.24);
+  --u-line-soft:rgba(232,194,104,.12);
+  --u-gold:#E8C268; --u-gold2:#F3D690; --u-gold-soft:rgba(232,194,104,.08);
+  --u-pos:#19c08a; --u-neg:#ef6b62;
+  --u-shadow:0 24px 60px rgba(0,0,0,.45);
+  background:
+    radial-gradient(1100px 560px at 82% -12%, #103154, transparent 62%),
+    radial-gradient(900px 500px at 10% 0%, #0a2036, transparent 55%),
+    linear-gradient(180deg,#081627,#0a1a2c);
+}
+
+/* ---------- TIPOGRAFIE BESPOKE ---------- */
+.u-page .u-eyebrow,.u-page .u-crest,.u-page .u-label,.u-page .u-panel-h{
+  font-family:'Fraunces',Georgia,serif;
+}
+.u-eyebrow{
+  font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--u-gold); font-weight:600; margin:0 0 10px;
+}
+.u-crest{
+  font-weight:600; color:var(--u-ink); line-height:1.05;
+  font-size:clamp(2rem,4.4vw,3.4rem); letter-spacing:-.01em;
+}
+.u-crest em{ color:var(--u-gold); font-style:italic; }
+.u-badge-ultra{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:'Fraunces',serif; font-weight:600; font-size:.82rem; letter-spacing:.04em;
+  color:var(--u-gold); border:1px solid var(--u-line);
+  background:var(--u-gold-soft); padding:5px 13px; border-radius:999px;
+}
+.u-badge-ultra::before{ content:"◆"; font-size:.7em; }
+
+/* ---------- LAYOUT ---------- */
+.u-page .container{ position:relative; }
+.u-hero{ padding:54px 0 26px; }
+.u-lead{ color:var(--u-muted); font-size:1.08rem; max-width:60ch; line-height:1.6; }
+.u-grid{ display:grid; gap:18px; }
+.u-grid-2{ grid-template-columns:repeat(2,1fr); }
+.u-grid-3{ grid-template-columns:repeat(3,1fr); }
+.u-grid-4{ grid-template-columns:repeat(4,1fr); }
+.u-span-2{ grid-column:span 2; }
+@media(max-width:860px){
+  .u-grid-2,.u-grid-3,.u-grid-4{ grid-template-columns:1fr; }
+  .u-span-2{ grid-column:auto; }
+}
+
+/* ---------- PANOU = secțiune de extras ---------- */
+.u-panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden;
+}
+.u-panel::before{ /* hairline auriu sus */
+  content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7;
+}
+.u-panel.is-flush::before{ display:none; }
+.u-label{
+  font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--u-gold); font-weight:600; margin:0 0 12px; display:flex;
+  align-items:center; gap:8px;
+}
+.u-panel-h{ color:var(--u-ink); font-size:1.18rem; font-weight:600; margin:0 0 6px; }
+
+/* ---------- CIFRE (extras de cont) ---------- */
+.u-kpi{
+  font-family:'Sora',system-ui,sans-serif; font-weight:800;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em; line-height:1;
+  font-size:clamp(1.7rem,3.4vw,2.5rem); color:var(--u-ink);
+}
+.u-kpi.lg{ font-size:clamp(2.2rem,5vw,3.2rem); }
+.u-kpi.sm{ font-size:1.32rem; }
+.u-kpi-sub{ color:var(--u-muted); font-size:.84rem; margin-top:6px; letter-spacing:.01em; }
+.u-pos{ color:var(--u-pos); } .u-neg{ color:var(--u-neg); } .u-gold-t{ color:var(--u-gold); }
+.u-delta{ font-size:.86rem; font-weight:700; font-variant-numeric:tabular-nums; }
+
+/* ---------- RÂND DE REGISTRU (label … valoare) ---------- */
+.u-row{
+  display:flex; align-items:baseline; gap:10px; padding:9px 0;
+  border-bottom:1px solid var(--u-line-soft);
+}
+.u-row:last-child{ border-bottom:0; }
+.u-row .k{ color:var(--u-muted); font-size:.94rem; }
+.u-row .lead-dots{ flex:1; border-bottom:1px dotted var(--u-line); transform:translateY(-3px); }
+.u-row .v{ font-variant-numeric:tabular-nums; font-weight:700; color:var(--u-ink); white-space:nowrap; }
+
+/* ---------- INEL DE PROGRES (FIRE / scor) ---------- */
+.u-ring{ display:block; }
+.u-ringwrap{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+
+/* ---------- GAUGE-LINIE (praguri: TVA, micro, fond urgență) ---------- */
+.u-gauge{ margin:14px 0 4px; }
+.u-gauge .track{
+  position:relative; height:8px; border-radius:999px;
+  background:var(--u-gold-soft); border:1px solid var(--u-line-soft); overflow:visible;
+}
+.u-gauge .fill{
+  position:absolute; inset:0 auto 0 0; border-radius:999px;
+  background:linear-gradient(90deg,var(--u-gold),var(--u-gold2));
+}
+.u-gauge .fill.warn{ background:linear-gradient(90deg,#e0a33a,#d2453b); }
+.u-gauge .fill.ok{ background:linear-gradient(90deg,var(--u-pos),#5fe0b6); }
+.u-gauge .marker{
+  position:absolute; top:50%; width:14px; height:14px; border-radius:50%;
+  background:var(--u-panel); border:2px solid var(--u-gold);
+  transform:translate(-50%,-50%); box-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+.u-gauge .ends{ display:flex; justify-content:space-between; margin-top:7px;
+  font-size:.76rem; color:var(--u-muted); font-variant-numeric:tabular-nums; }
+
+/* ---------- TIMELINE (agenda bancherului) ---------- */
+.u-timeline{ position:relative; margin:6px 0 0; padding-left:26px; }
+.u-timeline::before{ content:""; position:absolute; left:7px; top:6px; bottom:6px;
+  width:2px; background:linear-gradient(var(--u-gold),transparent); opacity:.5; }
+.u-tl-item{ position:relative; padding:0 0 20px; }
+.u-tl-item::before{ content:""; position:absolute; left:-23px; top:4px; width:12px; height:12px;
+  border-radius:50%; background:var(--u-panel); border:2px solid var(--u-gold); }
+.u-tl-item.soon::before{ background:var(--u-gold); box-shadow:0 0 0 4px var(--u-gold-soft); }
+.u-tl-date{ font-variant-numeric:tabular-nums; color:var(--u-gold); font-weight:700; font-size:.86rem; }
+.u-tl-title{ color:var(--u-ink); font-weight:600; margin:2px 0 2px; }
+.u-tl-desc{ color:var(--u-muted); font-size:.88rem; }
+
+/* ---------- ALERTE / SFATURI ---------- */
+.u-alert{ border:1px solid var(--u-line-soft); border-left-width:3px;
+  border-radius:12px; padding:13px 15px; background:var(--u-panel2); margin:10px 0;
+  color:var(--u-ink); font-size:.94rem; }
+.u-alert .h{ font-weight:700; margin:0 0 3px; }
+.u-alert.gold{ border-left-color:var(--u-gold); }
+.u-alert.warn{ border-left-color:var(--u-neg); }
+.u-alert.ok{ border-left-color:var(--u-pos); }
+
+/* ---------- CHIPS / PILULE ---------- */
+.u-chip{ display:inline-flex; align-items:center; gap:6px; font-size:.82rem;
+  color:var(--u-ink); border:1px solid var(--u-line); background:var(--u-gold-soft);
+  padding:5px 12px; border-radius:999px; }
+.u-chips{ display:flex; gap:8px; flex-wrap:wrap; }
+
+/* ---------- BUTOANE AURII ---------- */
+.u-btn{ display:inline-flex; align-items:center; gap:8px; justify-content:center;
+  font-weight:700; padding:12px 22px; border-radius:12px; cursor:pointer;
+  border:1px solid transparent; text-decoration:none; transition:transform .15s, box-shadow .2s; }
+.u-btn:hover{ transform:translateY(-2px); }
+.u-btn-gold{ background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  color:#1a1304; box-shadow:0 10px 26px rgba(168,134,49,.30); }
+.u-btn-ghost{ background:transparent; color:var(--u-gold); border-color:var(--u-line); }
+
+/* ---------- CARD-LINK MODUL (pe hub) ---------- */
+.u-mod{ display:block; text-decoration:none; }
+.u-mod .u-panel{ height:100%; transition:transform .18s, border-color .2s, box-shadow .2s; }
+.u-mod:hover .u-panel{ transform:translateY(-4px); border-color:var(--u-line); box-shadow:0 30px 70px rgba(0,0,0,.30); }
+.u-mod .ic{ font-size:1.7rem; margin-bottom:8px; display:block; }
+.u-mod h3{ color:var(--u-ink); font-size:1.12rem; margin:0 0 6px; }
+.u-mod p{ color:var(--u-muted); font-size:.92rem; margin:0; }
+.u-mod .more{ color:var(--u-gold); font-weight:700; font-size:.86rem; margin-top:12px;
+  display:inline-flex; gap:6px; }
+
+/* ---------- FORME (profil / simulator) ---------- */
+.u-field{ margin-bottom:14px; }
+.u-field label{ display:block; font-size:.88rem; color:var(--u-ink); font-weight:600; margin-bottom:5px; }
+.u-field .hint{ display:block; font-size:.76rem; color:var(--u-muted); margin-bottom:6px; }
+.u-input,.u-select{ width:100%; padding:11px 13px; border-radius:11px;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums; }
+.u-input:focus,.u-select:focus{ outline:none; border-color:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft); }
+.u-fieldset{ border:1px solid var(--u-line-soft); border-radius:14px; padding:16px; margin:0 0 16px; }
+.u-fieldset > legend{ font-family:'Fraunces',serif; color:var(--u-gold); font-size:.9rem;
+  padding:0 8px; font-weight:600; }
+
+/* ---------- DIVIDER ---------- */
+.u-hr{ height:1px; background:linear-gradient(90deg,transparent,var(--u-line),transparent);
+  border:0; margin:20px 0; }
+
+/* ---------- GATE Ultra (suprascrie .cf-gate pe paginile Ultra) ---------- */
+.u-page .cf-gate-in{ background:var(--u-panel); border:1px solid var(--u-line); }
+.u-page .cf-gate-in h3{ font-family:'Fraunces',serif; color:var(--u-gold); }
+
+/* respectă reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .u-btn,.u-mod .u-panel{ transition:none; }
+}

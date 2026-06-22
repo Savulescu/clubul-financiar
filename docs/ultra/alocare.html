@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harta banilor — Clubul Financiar</title>
+<meta name="description" content="Am bani — ce fac cu ei? Vezi alocarea țintă pe vârsta și riscul tău (acțiuni/ETF, titluri de stat, cash) vs. ce ai acum, plus fondul de urgență."><meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/alocare.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <div class="u-hero">
+      <p class="u-eyebrow">Alocare</p>
+      <h1 class="u-crest">Harta banilor <em>tăi</em></h1>
+      <p class="u-lead">„Am bani — ce fac cu ei?" Aici vezi o alocare țintă pe vârsta și riscul tău — cât în acțiuni/ETF, cât în titluri de stat, cât în cash tactic — și o compari cu ce ai acum. Întâi însă: fondul de urgență, fundația de pe care pleci.</p>
+    </div>
+
+    <div id="uTool">
+
+      <!-- Empty state (fără profil) -->
+      <div class="u-panel" id="aEmpty" style="display:none">
+        <p class="u-label">Hai să-ți facem harta</p>
+        <p class="u-panel-h" style="margin-bottom:10px">Încă n-avem cifrele tale</p>
+        <p style="margin:0 0 16px;color:var(--u-muted);max-width:62ch">Completează-ți profilul (vârstă, active, cheltuieli, toleranța la risc) și-ți construim alocarea țintă vs. cea reală, cu sumele exacte de pus pe fiecare clasă.</p>
+        <a class="u-btn u-btn-gold" href="/ultra/profil.html">Completează profilul</a>
+      </div>
+
+      <!-- Conținut (cu profil) -->
+      <div id="aOut" style="display:none">
+
+        <!-- FOND DE URGENȚĂ -->
+        <div class="u-panel" style="margin-bottom:18px">
+          <p class="u-label">Fundația — fondul de urgență</p>
+          <p class="u-panel-h" style="margin-bottom:4px">Întâi fondul de urgență, abia apoi investești</p>
+          <p class="u-kpi-sub" style="margin-bottom:14px">Bani lichizi care să-ți acopere cheltuielile dacă dispare venitul. Țintă: 6 luni.</p>
+          <div class="u-ringwrap" style="align-items:flex-start">
+            <div style="flex:1;min-width:240px">
+              <div class="u-kpi lg" id="aFLuni"></div>
+              <p class="u-kpi-sub" id="aFsub"></p>
+              <div class="u-gauge">
+                <div class="track"><div class="fill" id="aFfill" style="width:0%"></div>
+                  <div class="marker" id="aFmark" style="left:0%"></div></div>
+                <div class="ends"><span>0 luni</span><span>Țintă 6 luni</span></div>
+              </div>
+            </div>
+          </div>
+          <div id="aFverdict" style="margin-top:6px"></div>
+        </div>
+
+        <!-- SLIDER RISC -->
+        <div class="u-panel" style="margin-bottom:18px">
+          <p class="u-label">Profilul de risc</p>
+          <p class="u-kpi-sub" style="margin-bottom:12px">Mută riscul ca să vezi cum se schimbă alocarea țintă. Nu-ți modifică profilul salvat — e doar o simulare.</p>
+          <div class="u-chips" id="aRiscChips"></div>
+          <p class="u-kpi-sub" id="aRiscNota" style="margin-top:12px"></p>
+        </div>
+
+        <!-- ALOCARE ȚINTĂ vs REALĂ -->
+        <p class="u-label" style="margin-top:6px">Alocarea ta — țintă vs. realitate</p>
+
+        <!-- Caz: nimic investit încă -->
+        <div class="u-panel" id="aNoInvest" style="display:none;margin-bottom:18px">
+          <p class="u-panel-h" style="margin-bottom:6px">Încă n-ai bani investiți — hai să facem un plan</p>
+          <p style="margin:0 0 14px;color:var(--u-muted);max-width:64ch">Nu-i nimic — toți pleacă de undeva. Mai jos e cum ar arăta un portofoliu echilibrat pentru tine. Începe cu sume mici și constante: primul ETF, primul Fidelis. Important e să începi.</p>
+          <div id="aPlanRows"></div>
+        </div>
+
+        <!-- Caz: are deja investiții -->
+        <div id="aClase" style="margin-bottom:6px"></div>
+
+        <p class="cf-mini" id="aDisc" style="color:var(--u-muted);max-width:74ch;margin-top:10px">
+          Educativ, nu sfat de investiții. Alocarea e un punct de plecare general pe vârstă și risc,
+          nu o recomandare personalizată. Numele de instrumente (Fidelis, Tezaur, ETF prin broker)
+          sunt exemple, nu îndemnuri de cumpărare. Înainte de orice decizie, informează-te și,
+          la nevoie, vorbește cu un consultant autorizat.
+        </p>
+
+      </div>
+    </div>
+
+  </div></section>
+</main>
+
+<!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var p = U.getProfil();
+  var riscSel = null; // riscul selectat în simulator (null = ia din profil)
+
+  var RISCURI = [
+    { v: "mica",  t: "Mică",  nota: "Prudent: mai puține acțiuni, mai mult în titluri de stat și cash. Volatilitate mică, creștere mai lentă." },
+    { v: "medie", t: "Medie", nota: "Echilibrat: un mix clasic acțiuni / titluri de stat pe vârsta ta." },
+    { v: "mare",  t: "Mare",  nota: "Ofensiv: pondere mare de acțiuni și un strop de alternative. Creștere potențială mai mare, dar și fluctuații mai dure." }
+  ];
+
+  function clamp(x){ return Math.max(0, Math.min(100, x)); }
+
+  // Profilul cu riscul din simulator aplicat pe un CLONE (nu salvăm nimic).
+  function profilSimulat(){
+    var c = JSON.parse(JSON.stringify(p));
+    if (riscSel) c.toleranteRisc = riscSel;
+    return c;
+  }
+
+  function renderChips(){
+    var activ = riscSel || (p.toleranteRisc || "medie");
+    $("aRiscChips").innerHTML = RISCURI.map(function(r){
+      var on = r.v === activ;
+      return '<button type="button" class="u-chip" data-risc="' + r.v + '"' +
+        (on ? ' style="border-color:var(--u-gold);color:var(--u-gold);font-weight:700"' : '') +
+        ' aria-pressed="' + on + '">' + r.t + '</button>';
+    }).join("");
+    var rnota = RISCURI.filter(function(r){ return r.v === activ; })[0];
+    $("aRiscNota").textContent = rnota ? rnota.nota : "";
+    Array.prototype.forEach.call($("aRiscChips").querySelectorAll("[data-risc]"), function(b){
+      b.addEventListener("click", function(){ riscSel = b.getAttribute("data-risc"); draw(); });
+    });
+  }
+
+  // Fond de urgență din scorSanatate (componenta cu cheia "Fond de urgență").
+  function fond(){
+    var a = p.active || {};
+    var cf = U.cashFlow(p);
+    var cheltLunar = U.cheltuieliLunar(p) + cf.rate;
+    var lichid = (+a.cash || 0) + (+a.depozite || 0);
+    var luni = cheltLunar > 0 ? lichid / cheltLunar : (lichid > 0 ? 6 : 0);
+    var lipsa = Math.max(0, 6 * cheltLunar - lichid);
+    return { luni: luni, lichid: lichid, cheltLunar: cheltLunar, lipsa: lipsa };
+  }
+
+  function drawFond(){
+    var f = fond();
+    var pctFill = clamp((f.luni / 6) * 100);
+    $("aFLuni").innerHTML = (isFinite(f.luni) ? f.luni.toFixed(1) : "0.0") +
+      ' <span style="font-size:1.1rem;color:var(--u-muted);font-weight:600">luni acoperite</span>';
+    $("aFsub").textContent = CF.lei(Math.round(f.lichid)) + " lichizi · cheltuieli ~" +
+      CF.lei(Math.round(f.cheltLunar)) + "/lună";
+    var fill = $("aFfill"), mark = $("aFmark");
+    fill.style.width = pctFill + "%";
+    mark.style.left = pctFill + "%";
+    fill.className = "fill" + (f.luni >= 6 ? " ok" : f.luni < 3 ? " warn" : "");
+    var v = $("aFverdict");
+    if (f.luni >= 6){
+      v.innerHTML = '<div class="u-alert ok" style="margin:0"><p class="h">Fundație solidă</p>' +
+        '<p style="margin:0">Ai peste 6 luni acoperite. Restul economiilor pot lucra investit — vezi alocarea de mai jos.</p></div>';
+    } else if (f.luni >= 3){
+      v.innerHTML = '<div class="u-alert gold" style="margin:0"><p class="h">Aproape acolo</p>' +
+        '<p style="margin:0">Mai pune <span class="u-gold-t" style="font-weight:700">' + CF.lei(Math.round(f.lipsa)) +
+        '</span> ca să ajungi la 6 luni. Întâi fondul de urgență, abia apoi investești serios.</p></div>';
+    } else {
+      v.innerHTML = '<div class="u-alert warn" style="margin:0"><p class="h">Începe cu fundația</p>' +
+        '<p style="margin:0">Înainte de investiții, construiește fondul de urgență: îți mai trebuie ~<span style="font-weight:700">' +
+        CF.lei(Math.round(f.lipsa)) + '</span> (cont separat, lichid). E plasa ta de siguranță.</p></div>';
+    }
+  }
+
+  // Bară comparativă țintă vs real pentru o clasă.
+  function gaugeClasa(t){
+    var pctReal = clamp(t.pctCurent);
+    var pctTinta = clamp(t.pct);
+    return '<div class="u-gauge" style="margin:10px 0 2px">' +
+      '<div class="track"><div class="fill" style="width:' + pctReal.toFixed(0) + '%"></div>' +
+      '<div class="marker" style="left:' + pctTinta.toFixed(0) + '%"></div></div>' +
+      '<div class="ends"><span>Acum ' + Math.round(pctReal) + '%</span>' +
+      '<span>Țintă ' + Math.round(pctTinta) + '%</span></div></div>';
+  }
+
+  function drawAlocare(){
+    var ps = profilSimulat();
+    var al = U.alocare(ps);
+    var clase = $("aClase"), plan = $("aNoInvest"), planRows = $("aPlanRows");
+
+    if (!(al.investibil > 0)){
+      // Niciun ban investibil — arătăm doar planul țintă (procente).
+      clase.innerHTML = "";
+      clase.style.display = "none";
+      plan.style.display = "";
+      planRows.innerHTML = al.tinta.map(function(t){
+        return '<div class="u-row"><span class="k">' + t.clasa + '</span><span class="lead-dots"></span>' +
+          '<span class="v u-gold-t">' + Math.round(t.pct) + '%</span></div>';
+      }).join("") +
+      '<p class="u-kpi-sub" style="margin-top:14px">' + al.tinta.map(function(t){ return t.nota; }).join(" ") + '</p>';
+      return;
+    }
+
+    plan.style.display = "none";
+    clase.style.display = "";
+    clase.innerHTML = al.tinta.map(function(t){
+      var rec;
+      if (t.diferenta > 1){
+        rec = '<span class="u-chip" style="border-color:var(--u-pos);color:var(--u-pos);font-weight:700">▲ Mai pune ' + CF.lei(Math.round(t.diferenta)) + '</span>';
+      } else if (t.diferenta < -1){
+        rec = '<span class="u-chip" style="border-color:var(--u-gold);color:var(--u-gold);font-weight:700">Ai peste țintă cu ' + CF.lei(Math.round(-t.diferenta)) + '</span>';
+      } else {
+        rec = '<span class="u-chip" style="border-color:var(--u-line);color:var(--u-muted)">La țintă</span>';
+      }
+      return '<div class="u-panel" style="margin-bottom:14px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap">' +
+          '<div><p class="u-panel-h" style="margin:0 0 2px">' + t.clasa + '</p>' +
+            '<p class="u-kpi-sub" style="margin:0">' + t.nota + '</p></div>' +
+          '<div style="text-align:right"><div class="u-kpi sm u-gold-t">' + Math.round(t.pct) + '%</div>' +
+            '<p class="u-kpi-sub" style="margin:0">țintă</p></div>' +
+        '</div>' +
+        gaugeClasa(t) +
+        '<div class="u-row" style="margin-top:10px"><span class="k">Ai acum</span><span class="lead-dots"></span>' +
+          '<span class="v">' + CF.lei(Math.round(t.sumaCurenta)) + '</span></div>' +
+        '<div class="u-row"><span class="k">Țintă</span><span class="lead-dots"></span>' +
+          '<span class="v">' + CF.lei(Math.round(t.sumaTinta)) + '</span></div>' +
+        '<div style="margin-top:12px">' + rec + '</div>' +
+      '</div>';
+    }).join("") +
+    '<p class="u-kpi-sub" style="margin-top:4px">Total investibil (exclude locuința proprie și mașina): <strong>' +
+      CF.lei(Math.round(al.investibil)) + '</strong>.</p>';
+  }
+
+  function draw(){
+    renderChips();
+    drawFond();
+    drawAlocare();
+  }
+
+  function render(){
+    p = U.getProfil();
+    if (!U.areDate(p)){
+      $("aEmpty").style.display = "";
+      $("aOut").style.display = "none";
+      return;
+    }
+    $("aEmpty").style.display = "none";
+    $("aOut").style.display = "";
+    riscSel = null; // resetăm simularea la riscul real al profilului
+    draw();
+  }
+
+  render();
+  window.addEventListener("cf-profil", render);
+  window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
+  CF.requireTier("uTool","ultra",{msg:"Harta banilor face parte din planul Ultra."});
+})();
+</script>
+</body></html>
