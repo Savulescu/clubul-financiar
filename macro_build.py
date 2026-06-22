@@ -92,6 +92,21 @@ def ecb_obs(key):
         return (None, None)
 
 
+EUROSTAT_BASE = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+
+
+def eurostat_last(dataset, query):
+    """Ultima valoare DISPONIBILĂ dintr-un dataset Eurostat (lunile recente pot lipsi)."""
+    j = json.loads(fetch(EUROSTAT_BASE + dataset + "?format=JSON&lastTimePeriod=4&" + query).decode("utf-8"))
+    vals = j.get("value", {})
+    if not vals:
+        return (None, None)
+    times = list(j.get("dimension", {}).get("time", {}).get("category", {}).get("index", {}).keys())
+    k = max(vals, key=lambda x: int(x))
+    period = times[int(k)] if int(k) < len(times) else None
+    return (period, round(float(vals[k]), 1))
+
+
 def eurostat_infl(geo):
     j = json.loads(fetch(EUROSTAT.format(geo)).decode("utf-8"))
     val = list(j.get("value", {}).values())
@@ -140,6 +155,12 @@ def main():
         item("Petrol Brent", safe(fred_last, "DCOILBRENTEU"), unit=" $/baril", src="FRED"),
     ]
     groups.append({"title": "Piețe & randamente", "items": piete})
+
+    # ---- Economia României ----
+    ro = [
+        item("Șomaj", safe(eurostat_last, "une_rt_m", "geo=RO&age=TOTAL&unit=PC_ACT&s_adj=SA&sex=T"), src="Eurostat"),
+    ]
+    groups.append({"title": "Economia României", "items": ro})
 
     data = {
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
