@@ -10,7 +10,7 @@
     c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   const NAV = [
-    ["Începe aici", "/incepe-aici.html"],
+    ["Prezentare", "/incepe-aici.html"],
     ["Învață", "/educatie.html"],
     ["Masterclass", "/masterclass.html"],
     ["Calculatoare", "/calculatoare.html"],
@@ -137,7 +137,7 @@
 
   // ---- footer ----
   const cols = [
-    ["Educație", [["Începe aici","/incepe-aici.html"],["Buget personal","/educatie.html"],["Economisire","/educatie.html"],["Psihologia banilor","/educatie.html"]]],
+    ["Educație", [["Prezentare","/incepe-aici.html"],["Buget personal","/educatie.html"],["Economisire","/educatie.html"],["Psihologia banilor","/educatie.html"]]],
     ["Investiții", [["Bursă & acțiuni","/investitii.html"],["ETF-uri","/investitii.html"],["Titluri de stat","/investitii.html"],["Calculatoare","/calculatoare.html"]]],
     ["Platformă", [["Despre noi","/despre.html"],["Cursuri","/cursuri.html"],["Premium","/premium.html"],["Cont","/login.html"],["Contact","/contact.html"]]],
   ];
@@ -165,6 +165,11 @@
   if (document.querySelector("main.u-page")) {
     document.querySelectorAll("header.nav, footer.foot").forEach(function(el){ el.classList.add("ultra"); });
   }
+
+  // ---- redenumire „Începe aici" → „Prezentare" pe paginile statice (nav + footer) ----
+  document.querySelectorAll('a[href="/incepe-aici.html"]').forEach(function(a){
+    if (a.textContent.trim() === "Începe aici") a.textContent = "Prezentare";
+  });
 
   // ---- abonare newsletter: wire ORICE formular .nl-form (banda injectată + cele din pagini) ----
   function nlGet(){ try { return JSON.parse(localStorage.getItem("cf-nl") || "null"); } catch(e){ return null; } }
