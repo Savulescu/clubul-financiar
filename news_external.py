@@ -19,17 +19,18 @@ except Exception: pass
 
 # ---- LLM self-contained: providri OpenAI-compatibili, fallback peste toți + toate cheile ----
 PROVIDERS = [
-    ("cerebras",   "https://api.cerebras.ai/v1",                       "gpt-oss-120b",                                   "CEREBRAS_API_KEY"),
-    ("groq",       "https://api.groq.com/openai/v1",                   "llama-3.3-70b-versatile",                        "GROQ_API_KEY"),
-    ("together",   "https://api.together.xyz/v1",                      "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",   "TOGETHER_API_KEY"),
+    # cele mai bune la ROMÂNĂ primele (gemini/mistral), apoi modelele mari, nemotron-nano ultimul
     ("gemini",     "https://generativelanguage.googleapis.com/v1beta/openai", "gemini-2.0-flash",                       "GEMINI_API_KEY"),
     ("mistral",    "https://api.mistral.ai/v1",                        "mistral-small-latest",                           "MISTRAL_API_KEY"),
-    ("sambanova",  "https://api.sambanova.ai/v1",                      "Meta-Llama-3.3-70B-Instruct",                    "SAMBANOVA_API_KEY"),
+    ("cerebras",   "https://api.cerebras.ai/v1",                       "gpt-oss-120b",                                   "CEREBRAS_API_KEY"),
     ("deepseek",   "https://api.deepseek.com/v1",                      "deepseek-chat",                                  "DEEPSEEK_API_KEY"),
-    ("openrouter", "https://openrouter.ai/api/v1",                     "nvidia/nemotron-3-nano-30b-a3b:free",            "OPENROUTER_API_KEY"),
+    ("siliconflow","https://api.siliconflow.cn/v1",                    "deepseek-ai/DeepSeek-V3",                        "SILICONFLOW_API_KEY"),
+    ("groq",       "https://api.groq.com/openai/v1",                   "llama-3.3-70b-versatile",                        "GROQ_API_KEY"),
+    ("together",   "https://api.together.xyz/v1",                      "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",   "TOGETHER_API_KEY"),
+    ("sambanova",  "https://api.sambanova.ai/v1",                      "Meta-Llama-3.3-70B-Instruct",                    "SAMBANOVA_API_KEY"),
     ("nvidia",     "https://integrate.api.nvidia.com/v1",              "meta/llama-3.3-70b-instruct",                    "NVIDIA_API_KEY"),
     ("fireworks",  "https://api.fireworks.ai/inference/v1",            "accounts/fireworks/models/llama-v3p3-70b-instruct", "FIREWORKS_API_KEY"),
-    ("siliconflow","https://api.siliconflow.cn/v1",                    "deepseek-ai/DeepSeek-V3",                        "SILICONFLOW_API_KEY"),
+    ("openrouter", "https://openrouter.ai/api/v1",                     "nvidia/nemotron-3-nano-30b-a3b:free",            "OPENROUTER_API_KEY"),
 ]
 def _keys(base):
     ks = []
@@ -143,11 +144,18 @@ def main():
 
     for it in new:
         prompt = (
-            "Ești redactor la Clubul Financiar, site de educație financiară din România. "
-            "Primești o știre economică internațională (în engleză). Scrie în ROMÂNĂ, conținut ORIGINAL — "
-            "NU traduce și NU copia textul sursei. Răspunde DOAR cu JSON valid pe o linie:\n"
-            '{"titlu":"titlu nou clar în română, reformulat","fapt":"1-2 propoziții neutre cu faptul principal",'
-            '"ce_inseamna":"2-4 propoziții: Ce înseamnă pentru tine — leagă de banii unui român (rată, economii, prețuri, leu, job, investiții). Concret, fără jargon.",'
+            "Ești redactor senior la Clubul Financiar (educație financiară, România). "
+            "Primești o știre economică internațională în engleză. Scrie un rezumat ORIGINAL în ROMÂNĂ — NU traduce cuvânt cu cuvânt, NU copia.\n\n"
+            "REGULI DE LIMBĂ (obligatorii, altfel răspunsul e respins):\n"
+            "- Română corectă, naturală, fluentă. ZERO cuvinte din alte limbi (engleză, italiană, germană, franceză). Diacritice corecte.\n"
+            "- Termeni financiari CORECȚI: oil / crude oil = «țiței» (sau «petrol»), NICIODATĂ «ulei»; barrel = baril; yield = randament; "
+            "shares / stocks / equities = acțiuni; bonds = obligațiuni; bear market = piață în scădere; rally / surge = creștere puternică; "
+            "Fed = Rezerva Federală; ECB = BCE; tariffs = tarife / taxe vamale; vessels / tankers = nave / petroliere.\n"
+            "- Verifică numele proprii (țări, companii, persoane): ex. Iran ≠ Irak, Hong Kong, OMV Petrom.\n"
+            "- Dacă nu ești sigur de un termen, folosește un cuvânt simplu românesc. Recitește mental: să sune ca scris de un român, nu tradus automat.\n\n"
+            "Răspunde DOAR cu JSON valid pe o linie:\n"
+            '{"titlu":"titlu clar în română corectă, reformulat","fapt":"1-2 propoziții neutre cu faptul principal",'
+            '"ce_inseamna":"2-4 propoziții: ce înseamnă pentru banii unui român (rată, economii, prețuri, leu, job, investiții). Concret, fără jargon.",'
             '"categorie":"una din: banci-centrale, piete, companii, crypto, marfuri, macro"}\n\n'
             f"ȘTIRE — TITLU: {it['title']}\nREZUMAT: {it['desc']}\nSURSĂ: {it['src']}"
         )
