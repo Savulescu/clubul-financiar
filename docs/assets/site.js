@@ -15,10 +15,9 @@
     ["Masterclass", "/masterclass.html"],
     ["Calculatoare", "/calculatoare.html"],
     ["Instrumente", "/instrumente.html"],
+    ["Feedback", "/feedback.html"],
     ["Știri", "/stiri.html"],
     ["Premium", "/premium.html"],
-    ["Ultra", "/ultra.html"],
-    ["Feedback", "/feedback.html"],
   ];
   const SOC = [
     ["Instagram","https://www.instagram.com/clubulfinanciar"],["TikTok","https://www.tiktok.com/@clubulfinanciar"],
