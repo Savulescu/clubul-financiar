@@ -405,10 +405,18 @@
     // companie BVB ÎNAINTE de valută (companiile nu se suprapun cu valutele; evită false-match)
     var co = findBVB(m);
     if(co){
-      out.innerHTML='<div class="u-alert gold"><p class="h">'+esc(co.t)+' · '+esc(co.n)+'</p>'+
+      var askDiv = /dividend|randament|yield|c[âa]t (d[aă]|pl[aă]te)/.test(m);
+      var bvbUrl = "https://bvb.ro/FinancialInstruments/Details/FinancialInstrumentsDetails.aspx?s="+encodeURIComponent(co.t);
+      var lead = askDiv
+        ? 'Dividendul exact (lei/acțiune), randamentul și data ex-dividend se schimbă la fiecare distribuție și se anunță oficial. Nu le afișăm în timp real (cotațiile live cer licență BVB) — vezi-le direct la sursă:'
+        : 'Companie listată la Bursa de Valori București. Pentru cotație, dividende și rapoarte oficiale, vezi pagina ei la sursă:';
+      out.innerHTML='<div class="u-alert gold"><p class="h">💰 '+esc(co.t)+' · '+esc(co.n)+'</p>'+
         '<p style="margin:0 0 8px">'+esc(co.s)+' — '+esc(co.d)+'</p>'+
-        '<p style="margin:0">Dividendele primite de persoanele fizice de la companiile listate se impozitează (reținut la sursă). '+
-        '<a href="/calculatoare/impozit-investitii.html" style="color:var(--u-gold);font-weight:700">Calculează impozitul pe dividende →</a></p></div>';
+        '<p style="margin:0 0 12px;font-size:.88rem;color:var(--u-muted)">'+lead+'</p>'+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">'+
+          '<a class="u-btn u-btn-gold" style="padding:8px 16px;font-size:.85rem" href="'+bvbUrl+'" target="_blank" rel="noopener">Vezi '+esc(co.t)+' pe BVB →</a>'+
+          '<a href="/calculatoare/impozit-investitii.html" style="color:var(--u-gold);font-weight:700;font-size:.88rem">Cât rămâne după impozit →</a>'+
+        '</div></div>';
       return;
     }
     var cur = findCur(m.replace(/c[âa]t e|curs|valoare|azi|cat e/g,"").trim()) || findCur(m);
