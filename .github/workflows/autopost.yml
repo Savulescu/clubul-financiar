@@ -1,10 +1,10 @@
 name: Auto-post Clubul Financiar
 
 on:
-  schedule:
-    # 16:30 UTC = 19:30 ora României (vara). Iarna devine 18:30 local.
-    - cron: '30 16 * * *'
-  workflow_dispatch: {}   # buton de test manual (Actions -> Run workflow)
+  # SCHEDULE DEZACTIVAT temporar (postare manuală 2026-06-22). Reactivează decomentând:
+  # schedule:
+  #   - cron: '30 16 * * *'   # 16:30 UTC = 19:30 RO vara
+  workflow_dispatch: {}   # buton manual (Actions -> Run workflow)
 
 jobs:
   post:
