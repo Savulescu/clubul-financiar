@@ -12,6 +12,40 @@
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+/* ── Semnătura paginii: harta-donut a alocării țintă ───────────────────────── */
+.a-donut-panel{ padding:26px 26px 22px; }
+.a-donut-wrap{ display:flex; gap:34px; align-items:center; flex-wrap:wrap; }
+.a-donut-fig{ position:relative; flex:0 0 auto; width:208px; height:208px; }
+.a-donut-fig svg{ width:100%; height:100%; display:block; transform:rotate(-90deg); }
+.a-donut-seg{ fill:none; stroke-width:20; stroke-linecap:butt;
+  /* desenare în ceas, respectând reduced-motion */
+  animation:aDonutDraw .9s cubic-bezier(.3,.7,.2,1) both; }
+@keyframes aDonutDraw{ from{ stroke-dashoffset:var(--len) } }
+.a-donut-track{ fill:none; stroke:var(--u-gold-soft); stroke-width:20; }
+.a-donut-center{ position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; pointer-events:none; }
+.a-donut-cap{ font-family:'Fraunces',serif; font-size:.6rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--u-gold); margin:0 0 2px; }
+.a-donut-fig-num{ font-family:'Fraunces',Georgia,serif; font-variant-numeric:tabular-nums lining-nums;
+  font-weight:600; letter-spacing:-.015em; line-height:1; color:var(--u-ink);
+  font-size:1.5rem; }
+.a-donut-fig-sub{ font-size:.7rem; color:var(--u-muted); margin:5px 0 0; }
+.a-donut-legend{ flex:1; min-width:240px; display:flex; flex-direction:column; gap:2px; }
+.a-leg{ display:flex; align-items:center; gap:11px; padding:9px 0;
+  border-bottom:1px solid var(--u-line-soft); }
+.a-leg:last-child{ border-bottom:0; }
+.a-leg .sw{ width:11px; height:11px; border-radius:3px; flex:0 0 auto; }
+.a-leg .nm{ flex:1; color:var(--u-ink); font-size:.92rem; }
+.a-leg .pc{ font-family:'Sora',sans-serif; font-weight:800; font-variant-numeric:tabular-nums;
+  color:var(--u-ink); font-size:1.02rem; }
+.a-leg .pc small{ color:var(--u-muted); font-weight:600; font-size:.66rem; letter-spacing:.04em; }
+@media(max-width:560px){
+  .a-donut-wrap{ gap:22px; justify-content:center; }
+  .a-donut-fig{ width:176px; height:176px; }
+}
+@media(prefers-reduced-motion:reduce){ .a-donut-seg{ animation:none; } }
+</style>
 </head><body>
 <header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
@@ -75,6 +109,9 @@
 
         <!-- ALOCARE ȚINTĂ vs REALĂ -->
         <p class="u-label" style="margin-top:6px">Alocarea ta — țintă vs. realitate</p>
+
+        <!-- SEMNĂTURĂ: donut alocare țintă (centrul = total investibil) -->
+        <div class="u-panel a-donut-panel" id="aDonut" style="display:none;margin-bottom:18px"></div>
 
         <!-- Caz: nimic investit încă -->
         <div class="u-panel" id="aNoInvest" style="display:none;margin-bottom:18px">
@@ -191,10 +228,72 @@
       '<span>Țintă ' + Math.round(pctTinta) + '%</span></div></div>';
   }
 
+  // Paleta wedge-urilor: tonuri gradate de auriu (NU semantic verde/roșu).
+  function wedgeColor(i, n){
+    var pal = ["var(--u-gold)", "var(--u-gold2)",
+      "color-mix(in srgb,var(--u-gold2) 62%,var(--u-muted))",
+      "color-mix(in srgb,var(--u-gold) 50%,var(--u-muted))"];
+    return pal[Math.min(i, pal.length - 1)];
+  }
+
+  // Donut-ul alocării țintă. Centrul = total investibil (cifra-erou).
+  // Citește DOAR valori deja calculate (t.pct, al.investibil) — nu recalculează nimic.
+  function drawDonut(al){
+    var box = $("aDonut");
+    var tinta = al.tinta.filter(function(t){ return t.pct > 0; });
+    if (!tinta.length){ box.style.display = "none"; return; }
+    box.style.display = "";
+
+    var R = 90, SW = 20, C = 2 * Math.PI * R;
+    var gap = 2.2; // gol navy între felii (în unități de circumferință)
+    var off = 0, segs = "";
+    tinta.forEach(function(t, i){
+      var frac = t.pct / 100;
+      var seg = Math.max(0, C * frac - gap);
+      segs += '<circle class="a-donut-seg" cx="110" cy="110" r="' + R + '"' +
+        ' stroke="' + wedgeColor(i, tinta.length) + '"' +
+        ' stroke-dasharray="' + seg.toFixed(2) + ' ' + (C - seg).toFixed(2) + '"' +
+        ' stroke-dashoffset="' + (-off).toFixed(2) + '"' +
+        ' style="--len:' + (C - seg).toFixed(2) + ';animation-delay:' + (i * 0.12).toFixed(2) + 's">' +
+        '<title>' + t.clasa + ' — ' + Math.round(t.pct) + '%</title></circle>';
+      off += C * frac;
+    });
+
+    var centruNum, centruSub;
+    if (al.investibil > 0){
+      centruNum = CF.lei(Math.round(al.investibil));
+      centruSub = "de pus la lucru";
+    } else {
+      centruNum = "Plan";
+      centruSub = "pe vârstă și risc";
+    }
+
+    var legend = tinta.map(function(t, i){
+      return '<div class="a-leg"><span class="sw" style="background:' + wedgeColor(i, tinta.length) + '"></span>' +
+        '<span class="nm">' + t.clasa + '</span>' +
+        '<span class="pc">' + Math.round(t.pct) + '<small>%</small></span></div>';
+    }).join("");
+
+    box.innerHTML =
+      '<p class="u-label" style="margin-bottom:16px">Harta țintă — unde merg banii</p>' +
+      '<div class="a-donut-wrap">' +
+        '<div class="a-donut-fig">' +
+          '<svg viewBox="0 0 220 220" role="img" aria-label="Alocarea țintă pe clase de active">' +
+            '<circle class="a-donut-track" cx="110" cy="110" r="' + R + '"/>' + segs +
+          '</svg>' +
+          '<div class="a-donut-center"><p class="a-donut-cap">Total investibil</p>' +
+            '<div class="a-donut-fig-num">' + centruNum + '</div>' +
+            '<p class="a-donut-fig-sub">' + centruSub + '</p></div>' +
+        '</div>' +
+        '<div class="a-donut-legend">' + legend + '</div>' +
+      '</div>';
+  }
+
   function drawAlocare(){
     var ps = profilSimulat();
     var al = U.alocare(ps);
     var clase = $("aClase"), plan = $("aNoInvest"), planRows = $("aPlanRows");
+    drawDonut(al);
 
     if (!(al.investibil > 0)){
       // Niciun ban investibil — arătăm doar planul țintă (procente).

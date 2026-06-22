@@ -197,35 +197,90 @@
   }
 
   // ---- auth account area ----
+  function tierMeta(tier, isAdmin){
+    if(isAdmin) return { ic:"👑", nm:"Administrator", cls:"" };
+    return ({
+      ultra:  { ic:"◆",  nm:"Ultra · birou privat", cls:"" },
+      pro:    { ic:"🛰️", nm:"Pro · Hub Fiscal",      cls:"" },
+      premium:{ ic:"⭐", nm:"Premium",               cls:"" },
+      free:   { ic:"",   nm:"Cont gratuit",          cls:"free" }
+    })[tier] || { ic:"", nm:"Cont gratuit", cls:"free" };
+  }
+  // rândurile cu planuri (dreapta în dropdown): evidențiază planul curent, marchează upgrade-urile
+  function plansHTML(rank){
+    const P = [["premium","⭐ Premium","49 lei"],["pro","🛰️ Pro","99 lei"],["ultra","◆ Ultra","199 lei"]];
+    return P.map(function(row){
+      const k=row[0], nm=row[1], pr=row[2], r=RANK[k];
+      let cls,tag,href;
+      if(rank > r){ cls="owned"; tag="Inclus"; href="/instrumente.html#"+k; }
+      else if(rank === r){ cls="cur"; tag="Activ ✓"; href="/instrumente.html#"+k; }
+      else { cls="up"; tag="Treci →"; href="/premium.html#alege"; }
+      return `<a class="acct-plan ${cls}" href="${href}"><span class="pn">${nm} <span style="color:var(--muted);font-weight:600">· ${pr}</span></span><span class="pp">${tag}</span></a>`;
+    }).join("");
+  }
+  function plansColHTML(rank){
+    return `<h5>Planul tău</h5>${plansHTML(rank)}<a class="acct-manage" href="/premium.html">Gestionează abonamentul →</a>`;
+  }
+
   function renderAcct(session){
     const { isAdmin, isPremium } = applyRole(session);
     const slot = document.getElementById("acctSlot");
     if(!slot) return;
     if(session && session.user){
       const name = session.user.email || "cont";
-      const roleLine = isAdmin
-        ? `<div style="font-size:.72rem;font-weight:800;color:var(--gold,#E8C268);margin-top:3px">👑 Administrator · acces complet</div>`
-        : (isPremium ? `<div style="font-size:.72rem;font-weight:800;color:var(--gold,#E8C268);margin-top:3px">⭐ Premium activ</div>` : ``);
-      const avBg = isAdmin ? "linear-gradient(135deg,#E8C268,#caa23f)" : "var(--grad)";
+      const tier = isAdmin ? "ultra" : (window.cfTier || "free");
+      const rank = isAdmin ? 3 : (RANK[tier] != null ? RANK[tier] : 0);
+      const tm = tierMeta(isAdmin ? null : tier, isAdmin);
+      const avBg = (isAdmin || tier==="ultra") ? "linear-gradient(135deg,#E8C268,#caa23f)" : "var(--grad)";
+      const isDark = document.documentElement.getAttribute("data-theme")==="dark";
+      const initial = (name[0]||"U").toUpperCase();
       slot.innerHTML = `<span style="position:relative">
-        <button class="icon-btn" id="avatarBtn" title="Contul meu" style="background:${avBg};border:none;color:#fff;font-weight:800">${(name[0]||"U").toUpperCase()}</button>
-        <div id="acctMenu" hidden style="position:absolute;top:46px;right:0;width:240px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:8px;box-shadow:var(--shadow-lg)">
-          <div style="padding:8px 10px 10px;border-bottom:1px solid var(--border);margin-bottom:6px"><div style="font-weight:700;font-size:.84rem;color:var(--emerald);word-break:break-all">${name}</div>${roleLine}</div>
-          <a href="/account.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">👤 Contul meu</a>
-          <a href="/cursuri.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">🎓 Cursurile mele</a>
-          ${isPremium ? `<a href="/cursuri.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">🔓 Cursuri premium (deblocate)</a>` : ``}
-          ${isAdmin ? `<a href="/statistici.html" style="display:block;padding:10px;border-radius:8px;color:var(--text);font-size:.9rem">📊 Statistici</a>` : ``}
-          <button id="logoutBtn" style="width:100%;text-align:left;background:transparent;border:none;border-top:1px solid var(--border);margin-top:6px;padding:10px;color:#e25555;font-size:.9rem;cursor:pointer">↩︎ Deconectează-te</button>
+        <button class="icon-btn" id="avatarBtn" title="Contul meu" style="background:${avBg};border:none;color:#fff;font-weight:800">${initial}</button>
+        <div id="acctMenu" class="acct-pop" hidden>
+          <div class="acct-head">
+            <span class="acct-av" style="background:${avBg}">${initial}</span>
+            <div class="acct-id"><div class="em">${esc(name)}</div><div class="tier ${tm.cls}">${tm.ic} ${esc(tm.nm)}</div></div>
+          </div>
+          <div class="acct-body">
+            <div class="acct-col">
+              <h5>Cont &amp; setări</h5>
+              <a class="acct-link" href="/account.html"><span class="ico">👤</span>Contul meu</a>
+              <a class="acct-link" href="/ultra/profil.html"><span class="ico">🧭</span>Profilul financiar</a>
+              <a class="acct-link" href="/cursuri.html"><span class="ico">🎓</span>Cursurile mele${isPremium?` <span class="meta">deblocate</span>`:``}</a>
+              <a class="acct-link" href="/instrumente.html"><span class="ico">🧰</span>Instrumentele mele</a>
+              <a class="acct-link" href="/feedback.html"><span class="ico">💬</span>Trimite feedback</a>
+              ${isAdmin ? `<a class="acct-link" href="/statistici.html"><span class="ico">📊</span>Statistici</a>` : ``}
+            </div>
+            <div class="acct-col" id="acctPlans">${plansColHTML(rank)}</div>
+          </div>
+          <div class="acct-foot">
+            <button class="acct-theme" id="acctTheme"><span class="theme-ic">${isDark?"☀️":"🌙"}</span> <span id="acctThemeT">${isDark?"Mod luminos":"Mod întunecat"}</span></button>
+            <button class="acct-logout" id="logoutBtn">↩︎ Deconectează-te</button>
+          </div>
         </div></span>`;
       const menu = document.getElementById("acctMenu");
       document.getElementById("avatarBtn").onclick=(e)=>{e.stopPropagation();menu.hidden=!menu.hidden;};
       menu.onclick=(e)=>e.stopPropagation();
       document.getElementById("logoutBtn").onclick=()=>sb.auth.signOut();
+      const tBtn=document.getElementById("acctTheme");
+      if(tBtn) tBtn.onclick=()=>{ toggleTheme(); const d=document.documentElement.getAttribute("data-theme")==="dark";
+        const t=document.getElementById("acctThemeT"); if(t) t.textContent=d?"Mod luminos":"Mod întunecat"; };
       document.addEventListener("click",()=>{menu.hidden=true;});
     } else {
       slot.innerHTML = `<a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a>`;
     }
   }
+  // când vine tierul real din DB, reîmprospătează coloana de planuri + badge-ul (fără re-render complet)
+  window.addEventListener("cf-auth", function(e){
+    const d = e.detail || {};
+    const isAdmin = !!d.isAdmin;
+    const tier = isAdmin ? "ultra" : (d.tier || "free");
+    const rank = isAdmin ? 3 : (RANK[tier] != null ? RANK[tier] : 0);
+    const plansEl = document.getElementById("acctPlans");
+    if(plansEl) plansEl.innerHTML = plansColHTML(rank);
+    const tierEl = document.querySelector("#acctMenu .acct-id .tier");
+    if(tierEl){ const tm = tierMeta(isAdmin ? null : tier, isAdmin); tierEl.className = "tier "+tm.cls; tierEl.textContent = tm.ic+" "+tm.nm; }
+  });
   if(sb){
     sb.auth.getSession().then(({data})=>renderAcct(data.session));
     sb.auth.onAuthStateChange((_e,s)=>renderAcct(s));

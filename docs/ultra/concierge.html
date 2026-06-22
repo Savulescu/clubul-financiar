@@ -14,12 +14,38 @@
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
 <style>
-/* Chat restilizat pe paleta Ultra (auriu pe navy / hârtie caldă) */
-.uc-chat{display:flex;flex-direction:column;gap:14px}
-.uc-log{display:flex;flex-direction:column;gap:14px;min-height:300px;max-height:60vh;overflow-y:auto;padding:4px 2px}
-.uc-msg{max-width:88%;padding:13px 16px;border-radius:14px;font-size:.95rem;line-height:1.6;word-wrap:break-word}
-.uc-msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));color:#1a1205;font-weight:600;border-bottom-right-radius:5px}
-.uc-msg.ai{align-self:flex-start;background:var(--u-panel2);color:var(--u-ink);border:1px solid var(--u-line-soft);border-bottom-left-radius:5px}
+/* =========================================================================
+   Concierge — corespondență cu biroul privat (paleta Ultra)
+   Semnătura paginii: fiecare răspuns poartă sigiliul-monogramă al biroului,
+   ca o scrisoare de la bancherul tău. Restul = liniștit și disciplinat.
+   ========================================================================= */
+.uc-chat{display:flex;flex-direction:column;gap:16px}
+.uc-log{display:flex;flex-direction:column;gap:18px;min-height:320px;max-height:60vh;
+  overflow-y:auto;padding:6px 4px 4px;scrollbar-width:thin}
+.uc-log::-webkit-scrollbar{width:8px}
+.uc-log::-webkit-scrollbar-thumb{background:var(--u-line-soft);border-radius:999px}
+
+/* rândul unui mesaj de la concierge: sigiliu + bula */
+.uc-row{display:flex;gap:12px;align-items:flex-start;max-width:92%}
+.uc-row.me{align-self:flex-end;justify-content:flex-end}
+.uc-row.them{align-self:flex-start}
+
+/* sigiliul-monogramă (semnătura) */
+.uc-seal{flex:0 0 auto;width:34px;height:34px;border-radius:50%;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-weight:600;font-size:.74rem;letter-spacing:.02em;
+  color:var(--u-gold);background:var(--u-gold-soft);
+  border:1px solid var(--u-line);box-shadow:inset 0 0 0 3px var(--u-panel)}
+.uc-seal::after{content:"◆";position:absolute;font-size:.5rem;opacity:0}
+.uc-seal span{position:relative}
+
+.uc-msg{padding:14px 17px;border-radius:15px;font-size:.95rem;line-height:1.62;
+  word-wrap:break-word;overflow-wrap:anywhere}
+.uc-msg.user{background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  color:#1a1205;font-weight:600;border-bottom-right-radius:5px;
+  box-shadow:0 8px 22px rgba(168,134,49,.22)}
+.uc-msg.ai{background:var(--u-panel2);color:var(--u-ink);
+  border:1px solid var(--u-line-soft);border-bottom-left-radius:5px}
 .uc-msg.ai.md{white-space:normal}
 .uc-msg.ai.md p{margin:.5em 0}
 .uc-msg.ai.md p:first-child{margin-top:0}.uc-msg.ai.md p:last-child{margin-bottom:0}
@@ -30,20 +56,66 @@
 .uc-msg.ai.md table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.84rem;display:block;overflow-x:auto}
 .uc-msg.ai.md th,.uc-msg.ai.md td{border:1px solid var(--u-line-soft);padding:5px 8px;text-align:left;vertical-align:top}
 .uc-msg.ai.md th{background:var(--u-gold-soft);font-weight:700;color:var(--u-ink)}
-.uc-msg .src{display:block;margin-top:8px;font-size:.74rem;color:var(--u-muted)}
-.uc-in{display:flex;gap:10px;align-items:stretch}
-.uc-in textarea{flex:1;resize:vertical;min-height:48px;font-family:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--u-line-soft);background:var(--u-panel2);color:var(--u-ink);font-size:.95rem}
-.uc-in textarea:focus{outline:none;border-color:var(--u-gold);box-shadow:0 0 0 3px var(--u-gold-soft)}
+.uc-msg .src{display:block;margin-top:9px;padding-top:8px;border-top:1px solid var(--u-line-soft);
+  font-size:.74rem;color:var(--u-muted)}
+
+/* intrare subtilă a mesajelor (o dată, fără zumzet) */
+@keyframes uc-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.uc-row{animation:uc-in .35s ease both}
+
+/* composer — caseta de redactare */
+.uc-in{display:flex;gap:10px;align-items:flex-end;padding:10px;border-radius:16px;
+  border:1px solid var(--u-line-soft);background:var(--u-panel2);
+  transition:border-color .18s, box-shadow .18s}
+.uc-in:focus-within{border-color:var(--u-gold);box-shadow:0 0 0 3px var(--u-gold-soft)}
+.uc-in textarea{flex:1;resize:none;min-height:24px;max-height:160px;font-family:inherit;
+  padding:8px 6px;border:0;background:transparent;color:var(--u-ink);font-size:.95rem;line-height:1.5}
+.uc-in textarea:focus{outline:none}
+.uc-in .u-btn{align-self:stretch}
+.uc-hint{font-size:.74rem;color:var(--u-muted);margin:8px 2px 0}
+.uc-hint kbd{font-family:inherit;font-size:.72rem;color:var(--u-gold);
+  border:1px solid var(--u-line-soft);border-radius:5px;padding:0 5px;background:var(--u-gold-soft)}
+
+/* indicator de tastare */
 .uc-typing{display:inline-flex;gap:5px;align-items:center;padding:4px 0}
 .uc-typing i{width:7px;height:7px;border-radius:50%;background:var(--u-gold);opacity:.45;animation:ucb 1s infinite}
 .uc-typing i:nth-child(2){animation-delay:.18s}.uc-typing i:nth-child(3){animation-delay:.36s}
 @keyframes ucb{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
-.uc-prof{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:flex-end}
-.uc-profitem{display:flex;flex-direction:column;gap:2px}
-.uc-profitem .lbl{font-size:.72rem;color:var(--u-muted);text-transform:uppercase;letter-spacing:.06em}
-.uc-profitem .val{font-family:'Sora',sans-serif;font-weight:700;font-size:1.25rem;color:var(--u-ink);font-variant-numeric:tabular-nums}
-.uc-quota{font-size:.82rem;color:var(--u-gold);font-weight:600}
-@media (prefers-reduced-motion:reduce){.uc-typing i{animation:none}}
+
+/* dosarul de profil = antet de extras */
+.uc-prof{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid var(--u-line-soft)}
+.uc-profitem{display:flex;flex-direction:column;gap:4px;padding:14px 18px;
+  border-right:1px solid var(--u-line-soft)}
+.uc-profitem:last-child{border-right:0}
+.uc-profitem .lbl{font-size:.66rem;color:var(--u-muted);text-transform:uppercase;letter-spacing:.1em}
+.uc-profitem .val{font-family:'Sora',sans-serif;font-weight:700;font-size:1.3rem;color:var(--u-ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.uc-proflive{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;
+  color:var(--u-muted);margin:14px 0 0}
+.uc-proflive .dot{width:7px;height:7px;border-radius:50%;background:var(--u-pos);
+  box-shadow:0 0 0 0 color-mix(in srgb,var(--u-pos) 60%,transparent);animation:uc-pulse 2.4s infinite}
+@keyframes uc-pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--u-pos) 55%,transparent)}
+  70%{box-shadow:0 0 0 6px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+.uc-quota{font-size:.78rem;color:var(--u-gold);font-weight:600;letter-spacing:0;text-transform:none}
+
+/* prompturi sugerate = cartonașe curate */
+#chips.u-chips{gap:10px}
+#chips .u-chip{cursor:pointer;padding:9px 15px;font-size:.84rem;background:var(--u-panel);
+  border-color:var(--u-line-soft);transition:transform .15s, border-color .18s, background .18s}
+#chips .u-chip::before{content:"◇";color:var(--u-gold);font-size:.78em;margin-right:2px}
+#chips .u-chip:hover{transform:translateY(-2px);border-color:var(--u-gold);background:var(--u-gold-soft)}
+#chips .u-chip:focus-visible{outline:none;border-color:var(--u-gold);box-shadow:0 0 0 3px var(--u-gold-soft)}
+
+@media(max-width:680px){
+  .uc-prof{grid-template-columns:repeat(2,1fr)}
+  .uc-profitem:nth-child(2){border-right:0}
+  .uc-profitem:nth-child(1),.uc-profitem:nth-child(2){border-bottom:1px solid var(--u-line-soft)}
+  .uc-row{max-width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .uc-typing i,.uc-proflive .dot,.uc-row{animation:none}
+}
 </style>
 </head><body>
 <header class="nav"><div class="container nav-in">
@@ -75,7 +147,7 @@
       </div>
 
       <!-- Sugestii tailorate -->
-      <p class="u-label" style="margin-bottom:8px">Întreabă-mă, de exemplu</p>
+      <p class="u-label" style="margin-bottom:10px">Întreabă-mă, de exemplu</p>
       <div class="u-chips" id="chips" style="margin-bottom:18px"></div>
 
       <div class="u-panel">
@@ -83,10 +155,11 @@
         <div class="uc-chat">
           <div class="uc-log" id="chatLog" aria-live="polite"></div>
           <div class="uc-in">
-            <textarea id="chatInput" rows="2" placeholder="Scrie întrebarea ta, pe cifrele tale…" aria-label="Întrebarea ta"></textarea>
+            <textarea id="chatInput" rows="1" placeholder="Scrie întrebarea ta, pe cifrele tale…" aria-label="Întrebarea ta"></textarea>
             <button class="u-btn u-btn-gold" id="sendBtn" style="white-space:nowrap">Trimite</button>
           </div>
         </div>
+        <p class="uc-hint"><kbd>Enter</kbd> trimite · <kbd>Shift</kbd>+<kbd>Enter</kbd> rând nou</p>
         <div class="u-hr"></div>
         <button class="u-btn u-btn-ghost" id="clearBtn" style="font-size:.84rem">Șterge conversația</button>
       </div>
@@ -171,7 +244,21 @@
   function saveMsgs(){ try { localStorage.setItem(LS_KEY, JSON.stringify(messages)); } catch(e){} }
   var messages = loadMsgs();
 
-  /* ---------- Render chat ---------- */
+  /* ---------- Render chat ----------
+     Fiecare mesaj e un rând; răspunsurile concierge poartă sigiliul biroului. */
+  function sealEl(){
+    var s = document.createElement("div");
+    s.className = "uc-seal"; s.setAttribute("aria-hidden", "true");
+    s.innerHTML = '<span>CF</span>';
+    return s;
+  }
+  function rowFor(msg){
+    var row = document.createElement("div");
+    row.className = "uc-row " + (msg.className || "");
+    if(msg.role === "them") row.appendChild(sealEl());
+    row.appendChild(msg.bubble);
+    return row;
+  }
   function render(){
     log.innerHTML = "";
     messages.forEach(function(m){
@@ -184,15 +271,21 @@
         s.textContent = "Surse: " + m.sources.join(", ");
         div.appendChild(s);
       }
-      log.appendChild(div);
+      log.appendChild(rowFor({
+        role: m.role === "user" ? "me" : "them",
+        className: m.role === "user" ? "me" : "them",
+        bubble: div
+      }));
     });
     log.scrollTop = log.scrollHeight;
   }
   function showTyping(){
     var div = document.createElement("div");
-    div.className = "uc-msg ai"; div.id = "uc-typing-row";
-    div.innerHTML = '<span class="uc-typing"><i></i><i></i><i></i></span>';
-    log.appendChild(div); log.scrollTop = log.scrollHeight;
+    div.className = "uc-msg ai";
+    div.innerHTML = '<span class="uc-typing" role="status" aria-label="Concierge-ul scrie"><i></i><i></i><i></i></span>';
+    var row = rowFor({ role:"them", className:"them", bubble:div });
+    row.id = "uc-typing-row";
+    log.appendChild(row); log.scrollTop = log.scrollHeight;
   }
   function clearTyping(){ var t = $("uc-typing-row"); if(t) t.remove(); }
 
@@ -253,14 +346,16 @@
           profItem("Avere netă", CF.lei(an.net)) +
           profItem("Scor sănătate", scor.scor + "/100") +
           profItem("Structură", U.structuraLabel(p.structura) + (p.tvaPlatitor ? " · TVA" : "")) +
-        '</div>';
+        '</div>' +
+        '<p class="uc-proflive"><span class="dot" aria-hidden="true"></span>' +
+        'Citesc aceste cifre din profilul tău. Le actualizezi oricând și răspunsurile se schimbă cu ele.</p>';
     }
     // Sugestii
     suggestionsFor(U.areDate(p) ? p : null).forEach(function(q){
       var b = document.createElement("button");
       b.type = "button"; b.className = "u-chip"; b.textContent = q;
       b.style.cursor = "pointer";
-      b.addEventListener("click", function(){ if(!input.disabled){ input.value = q; input.focus(); } });
+      b.addEventListener("click", function(){ if(!input.disabled){ input.value = q; input.focus(); try{ input.dispatchEvent(new Event("input")); }catch(e){} } });
       chipsBox.appendChild(b);
     });
   }
@@ -313,6 +408,9 @@
   input.addEventListener("keydown", function(e){
     if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); send(); }
   });
+  // auto-grow al casetei de redactare (doar prezentare)
+  function autogrow(){ input.style.height = "auto"; input.style.height = Math.min(160, input.scrollHeight) + "px"; }
+  input.addEventListener("input", autogrow);
   clearBtn.addEventListener("click", function(){
     messages = [{ role:"assistant", content: WELCOME }];
     saveMsgs(); render();

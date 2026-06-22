@@ -13,6 +13,102 @@
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style id="profilSkin">
+  /* ---- Skin de pagină pentru formularul Profil (doar prezentare) ---- */
+  #formProfil{ counter-reset: ufs; }
+
+  /* Fieldset = secțiune numerotată, ca paginile unui dosar */
+  #formProfil .u-fieldset{
+    position:relative; padding:20px 20px 8px; margin:0 0 18px;
+    border-radius:16px; border-color:var(--u-line-soft);
+    background:linear-gradient(180deg,var(--u-panel),var(--u-panel2));
+  }
+  #formProfil .u-fieldset > legend{
+    counter-increment: ufs;
+    display:inline-flex; align-items:center; gap:10px;
+    margin-left:-2px; padding:0 10px 0 0;
+    font-size:1rem; letter-spacing:.01em;
+  }
+  #formProfil .u-fieldset > legend::before{
+    content: counter(ufs, decimal-leading-zero);
+    font-family:'Sora',system-ui,sans-serif; font-weight:800;
+    font-variant-numeric:tabular-nums; font-size:.74rem; letter-spacing:.04em;
+    color:var(--u-gold); line-height:1;
+    width:26px; height:26px; flex:0 0 auto;
+    display:inline-flex; align-items:center; justify-content:center;
+    border:1px solid var(--u-line); border-radius:8px;
+    background:var(--u-gold-soft);
+  }
+
+  /* Antetul formularului: titlu de dosar + indicatorul de completare (semnătura) */
+  .u-formhead{
+    position:sticky; top:62px; z-index:5; margin:0 0 18px;
+    padding:14px 18px; border-radius:16px;
+    border:1px solid var(--u-line-soft);
+    background:color-mix(in srgb, var(--u-panel) 88%, transparent);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(40,30,8,.07);
+  }
+  [data-theme="dark"] .u-formhead{ box-shadow:0 16px 40px rgba(0,0,0,.35); }
+  .u-formhead::before{
+    content:""; position:absolute; inset:0 0 auto 0; height:2px; border-radius:16px 16px 0 0;
+    background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7;
+  }
+  .u-formhead-row{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; }
+  .u-formhead-row .lab{
+    font-family:'Fraunces',serif; font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--u-gold); font-weight:600;
+  }
+  .u-prog-pct{
+    font-family:'Sora',sans-serif; font-weight:800; font-variant-numeric:tabular-nums;
+    color:var(--u-ink); font-size:1.02rem; letter-spacing:-.01em;
+  }
+  .u-prog-track{
+    position:relative; height:7px; border-radius:999px; margin-top:11px;
+    background:var(--u-gold-soft); border:1px solid var(--u-line-soft); overflow:hidden;
+  }
+  .u-prog-fill{
+    position:absolute; inset:0 auto 0 0; width:0; border-radius:999px;
+    background:linear-gradient(90deg,var(--u-gold),var(--u-gold2));
+    transition:width .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .u-prog-fill.is-full{ background:linear-gradient(90deg,var(--u-pos),#5fe0b6); }
+  .u-prog-note{ font-size:.78rem; color:var(--u-muted); margin:9px 0 0; }
+  .u-prog-note b{ color:var(--u-ink); font-weight:700; }
+
+  /* Bara de salvare — ancoră clară jos, în limbajul extrasului */
+  .u-savebar{
+    position:sticky; bottom:14px; z-index:4; margin-top:18px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:14px 16px; border-radius:16px;
+    border:1px solid var(--u-line); background:var(--u-panel);
+    box-shadow:0 14px 34px rgba(40,30,8,.10);
+  }
+  [data-theme="dark"] .u-savebar{ box-shadow:0 18px 44px rgba(0,0,0,.4); }
+  .u-savebar .grow{ flex:1 1 180px; min-width:0; }
+  .u-savebar .u-btn-gold{ flex:0 0 auto; }
+  #savedMsg{ color:var(--u-pos); border-color:color-mix(in srgb,var(--u-pos) 34%,transparent);
+    background:color-mix(in srgb,var(--u-pos) 12%,transparent); }
+  #savedMsg[hidden]{ display:none; }   /* .u-chip e inline-flex; readucem ascunderea până la salvare */
+
+  /* focus vizibil pe butoane (quality floor) */
+  #formProfil .u-btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:2px; }
+
+  /* Opțiunea de sincronizare — card discret, nu o casetă pierdută */
+  .u-syncbox{
+    margin:2px 0 0; padding:13px 15px; border-radius:13px;
+    border:1px solid var(--u-line-soft); background:var(--u-panel2);
+  }
+  .u-syncbox label{ margin:0; }
+  .u-syncbox .hint{ margin-top:6px; }
+
+  @media(max-width:860px){
+    .u-formhead{ top:56px; }
+  }
+  @media(prefers-reduced-motion:reduce){
+    .u-prog-fill{ transition:none; }
+  }
+</style>
 </head><body>
 <header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
@@ -44,6 +140,18 @@
 
         <!-- ============ FORMULAR ============ -->
         <form id="formProfil" autocomplete="off">
+
+          <!-- antet de dosar + indicator de completare (semnătura paginii) -->
+          <div class="u-formhead">
+            <div class="u-formhead-row">
+              <span class="lab">Profil completat</span>
+              <span class="u-prog-pct" id="progPct">0%</span>
+            </div>
+            <div class="u-prog-track" aria-hidden="true">
+              <div class="u-prog-fill" id="progFill"></div>
+            </div>
+            <p class="u-prog-note" id="progNote">Completează secțiunile de mai jos — cu cât adaugi mai mult, cu atât biroul calculează mai precis.</p>
+          </div>
 
           <fieldset class="u-fieldset"><legend>Persoană</legend>
             <div class="u-grid u-grid-2" style="gap:0 16px">
@@ -118,20 +226,24 @@
             </div>
           </fieldset>
 
-          <div class="u-field" style="margin:4px 0 18px">
+          <div class="u-field u-syncbox" style="margin:4px 0 0">
             <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
               <input type="checkbox" id="f_sync" style="width:auto">
-              Sincronizează în cloud (cross-device)
+              Sincronizează în cloud (pe toate dispozitivele)
             </label>
-            <span class="hint">Salvăm criptat în contul tău ca să-ți regăsești profilul pe orice dispozitiv. Necesită cont logat.</span>
+            <span class="hint">Îți salvăm profilul criptat în cont, ca să-l regăsești de pe orice dispozitiv. Ai nevoie de cont logat.</span>
           </div>
 
-          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <div class="u-savebar">
             <button type="submit" class="u-btn u-btn-gold">Salvează profilul</button>
             <span id="savedMsg" class="u-chip" hidden>✓ Salvat</span>
+            <span class="grow"></span>
+            <span class="cf-mini" style="color:var(--u-muted);font-size:.78rem">
+              Rămâne pe dispozitivul tău până salvezi.
+            </span>
           </div>
 
-          <p class="cf-mini" style="margin-top:16px;color:var(--u-muted)">
+          <p class="cf-mini" style="margin-top:14px;color:var(--u-muted)">
             Estimare educativă pe regulile RO 2026. Nu e consultanță fiscală.
           </p>
         </form>
@@ -249,6 +361,7 @@
   }
   $("btnAddDatorie").addEventListener("click", function(){
     $("datoriiList").appendChild(datorieRow());
+    if (window.__cfRenderProgres) window.__cfRenderProgres();
   });
 
   // ---------- structură -> câmpuri venituri dinamice ----------
@@ -379,14 +492,59 @@
       row("Scor de sănătate", scor.scor + "/100 · " + scor.eticheta, scorCls);
   }
 
+  // ---------- indicator de completare (doar prezentare; nu intră în calcule) ----------
+  // Numără câte „semnale" cheie a completat userul, ca să arate cât de plin e profilul.
+  function progresProfil(){
+    var done = 0, total = 0;
+    function check(ok){ total++; if(ok) done++; }
+    function anyFilled(sel){
+      var any = false;
+      document.querySelectorAll(sel).forEach(function(el){
+        if (parseFloat(el.value) > 0) any = true;
+      });
+      return any;
+    }
+    var cheltFilled = anyFilled("[data-chelt]");
+    var activeFilled = anyFilled("[data-activ]");
+    var hasDatorii = $("datoriiList").children.length > 0;
+    check(numv("f_varsta") > 0);                              // vârstă
+    check(!!val("f_structura"));                              // structură (mereu setată)
+    check(anyFilled("#venituriDinamice [data-venit], #f_chiriiLunar, #f_dividendeAnual, #f_alteLunar")); // un venit
+    check(cheltFilled);                                       // cheltuieli
+    check(hasDatorii || (cheltFilled && activeFilled));      // datorii: completate SAU debt-free asumat (ai trecut deja prin profil)
+    check(activeFilled);                                     // active
+    check(numv("f_fondUrgentaLuni") > 0);                    // fond de urgență
+    check(numv("f_varstaLibertate") > 0);                    // vârsta libertății
+    return { done: done, total: total, pct: total ? Math.round(done/total*100) : 0 };
+  }
+  function renderProgres(){
+    var p = progresProfil();
+    var fill = $("progFill"), pct = $("progPct"), note = $("progNote");
+    if (!fill) return;
+    fill.style.width = p.pct + "%";
+    fill.classList.toggle("is-full", p.pct >= 100);
+    pct.textContent = p.pct + "%";
+    if (p.pct >= 100){
+      note.innerHTML = "Profil complet. Tot biroul Ultra lucrează acum cu cifrele tale.";
+    } else {
+      var ramase = p.total - p.done;
+      note.innerHTML = "Ai completat <b>" + p.done + " din " + p.total + "</b> secțiuni cheie · " +
+        (ramase === 1 ? "mai e una" : "mai sunt " + ramase) + " de adăugat pentru un calcul precis.";
+    }
+  }
+
+  window.__cfRenderProgres = renderProgres;
+
   // ---------- init ----------
   var current = U.getProfil();
   fill(current);
   renderRezumat(current);
+  renderProgres();
 
   // re-randează rezumatul pe orice modificare (live)
   $("formProfil").addEventListener("input", function(){
     try { renderRezumat(readForm()); } catch(e){}
+    try { renderProgres(); } catch(e){}
   });
 
   $("formProfil").addEventListener("submit", function(e){
@@ -395,6 +553,7 @@
     var saved = U.salveaza(p);   // emite cf-profil; sync cloud dacă saved.sync
     fill(saved);
     renderRezumat(saved);
+    renderProgres();
     var msg = $("savedMsg");
     msg.hidden = false;
     msg.scrollIntoView({ behavior: "smooth", block: "nearest" });

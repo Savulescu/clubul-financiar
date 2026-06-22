@@ -1,17 +1,146 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Salariu vs Dividend SRL — Clubul Financiar</title>
-<meta name="description" content="Compară cum scoți banii din micro-SRL: tot pe salariu, tot pe dividend sau mixul optim. Calculează net maxim ținând cont de pragurile CASS 6/12/24 salarii minime."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Compară cum scoți banii din micro-SRL: tot pe salariu, tot pe dividend sau mixul optim. Calculează net maxim ținând cont de pragurile CASS 6/12/24 salarii minime."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/instrumente/salariu-vs-dividend.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Salariu vs Dividend SRL"><meta property="og:description" content="Compară cum scoți banii din micro-SRL: tot pe salariu, tot pe dividend sau mixul optim. Net maxim + mixul recomandat."><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/salariu-vs-dividend.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Salariu vs Dividend SRL"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
-<link rel="stylesheet" href="/assets/cf-tool.css?v=1"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Salariu vs Dividend SRL", "url": "https://clubulfinanciar.ro/instrumente/salariu-vs-dividend.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Compară cum scoți banii din micro-SRL: tot pe salariu, tot pe dividend sau mixul optim. Calculează net maxim ținând cont de pragurile CASS 6/12/24 salarii minime.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Salariu vs Dividend SRL", "item": "https://clubulfinanciar.ro/instrumente/salariu-vs-dividend.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Ultra — Salariu vs Dividend SRL. Doar prezentare; calculul rămâne neatins.
+   Strategia (ca în pilotul plafon-tva): pe .u-page remapăm tokenii vechi
+   (verzi) la tokenii Ultra, ca tot HTML-ul emis din JS (cf-card-opt / cf-row /
+   cf-alert / cf-badge / cf-log + butoanele .btn) să se randeze în limbajul
+   auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile var(--…) moștenite de clasele vechi */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:transparent; --bg-soft2:var(--u-gold-soft);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  --radius:18px;
+}
+
+/* 2) Re-skin clase structurale vechi emise de JS în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .panel .title{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+
+.u-page .cf-row{ border-bottom:1px solid var(--u-line-soft); }
+.u-page .cf-row span{ color:var(--u-muted); font-size:.94rem; }
+.u-page .cf-row b{ font-variant-numeric:tabular-nums; color:var(--u-ink); }
+.u-page .cf-row.total{ border-top:2px solid var(--u-line-soft); }
+.u-page .cf-note{ color:var(--u-muted); }
+
+/* SEMNĂTURA: cele 3 strategii = axa procentului de dividend (0% → optim → 100%).
+   Le redăm ca trei coloane „de extras", cu optimul ridicat și gravat auriu. */
+.u-page .cf-compare{
+  display:grid; gap:16px; align-items:stretch;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.u-page .cf-card-opt{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:16px;
+  padding:20px 18px; box-shadow:var(--u-shadow); overflow:hidden;
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+.u-page .cf-card-opt h4{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink);
+  margin:0 0 4px; font-size:1.12rem;
+}
+.u-page .cf-card-opt .net{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  color:var(--u-ink); -webkit-text-fill-color:currentColor; background:none;
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(1.7rem,4.4vw,2.2rem); margin-top:2px;
+}
+/* cardul recomandat = optimul: ridicat, gravat auriu, cu hairline aurie sus */
+.u-page .cf-card-opt.best{
+  border-color:var(--u-line); background:linear-gradient(180deg,var(--u-gold-soft),var(--u-panel));
+  box-shadow:0 22px 50px rgba(168,134,49,.22), 0 0 0 1px var(--u-line);
+}
+.u-page .cf-card-opt.best::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px;
+  background:linear-gradient(90deg,transparent,var(--u-gold),var(--u-gold2),transparent);
+}
+.u-page .cf-card-opt.best .net{ color:var(--u-gold); }
+.u-page .cf-card-opt.best h4{ color:var(--u-gold); }
+/* coloana optimă „spike-uiește" — doar pe desktop (stivuite pe mobil, rămân flush) */
+@media(min-width:760px){
+  .u-page .cf-card-opt.best{ transform:translateY(-8px); }
+  .u-page .cf-card-opt:not(.best){ transform:translateY(4px); }
+}
+
+/* badge „Recomandat / PRO" → pastilă aurie de tier */
+.u-page .cf-badge.pro{
+  background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line);
+  -webkit-text-fill-color:currentColor; font-family:'Fraunces',serif; letter-spacing:.04em;
+}
+
+/* alerte vechi → bară laterală aurie/verde/roșie (extras de bancă privată) */
+.u-page .cf-alert{
+  display:flex; gap:11px; align-items:flex-start;
+  border:1px solid var(--u-line-soft); border-left-width:3px; border-radius:12px;
+  padding:13px 15px; background:var(--u-panel2); color:var(--u-ink); margin:12px 0; font-size:.94rem;
+}
+.u-page .cf-alert b{ color:var(--u-ink); }
+.u-page .cf-alert.ok{ border-left-color:var(--u-pos); }
+.u-page .cf-alert.warn{ border-left-color:var(--u-gold); }
+.u-page .cf-alert.danger{ border-left-color:var(--u-neg); }
+
+/* tabel istoric → registru curat */
+.u-page .cf-log th, .u-page .cf-log td{ border-bottom:1px solid var(--u-line-soft); }
+.u-page .cf-log th{ font-family:'Fraunces',serif; color:var(--u-gold); letter-spacing:.04em; }
+.u-page .cf-log td{ color:var(--u-ink); font-variant-numeric:tabular-nums; }
+
+/* câmpuri (profit, persoane) în stil Ultra */
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field .cf-mini{ color:var(--u-muted); }
+.u-page .field input[type=number]{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* butoane vechi (inclusiv cele emise de JS) → auriu / contur auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* secțiunea explicativă + disclaimer + linkuri */
+.u-page .title{ font-family:'Fraunces',serif; color:var(--u-ink); font-weight:600; }
+.u-page .disc{ color:var(--u-muted); }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .cf-card-opt{ transition:none; }
+}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Salariu vs Dividend SRL", "url": "https://clubulfinanciar.ro/instrumente/salariu-vs-dividend.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Compară cum scoți banii din micro-SRL: tot pe salariu, tot pe dividend sau mixul optim. Calculează net maxim ținând cont de pragurile CASS 6/12/24 salarii minime.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Salariu vs Dividend SRL", "item": "https://clubulfinanciar.ro/instrumente/salariu-vs-dividend.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -21,52 +150,71 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header>
-<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Salariu vs Dividend SRL</h1><p class="lead" style="margin-inline:auto">Pentru asociatul-administrator de micro-SRL: află cum să scoți banii din firmă cu cele mai mici taxe — tot pe salariu, tot pe dividend sau mixul optim.</p></div></section>
+<main class="u-page">
+<section class="section"><div class="container">
 
-<section class="section" style="padding-bottom:8px">
-  <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
-      <h2 style="margin-top:0">La ce te ajută</h2>
-      <p style="color:var(--muted);font-size:1.02rem">Dacă ai un SRL și vrei să scoți banii din firmă, există mai multe căi: ca salariu, ca dividend sau un amestec din cele două — fiecare cu taxe diferite. Tu îi spui cât profit vrei să scoți, iar unealta îți arată ce variantă îți lasă cei mai mulți bani în mână. La un profit de 120.000 lei, alegerea bună poate însemna câteva mii de lei în plus pe an, fără niciun efort suplimentar.</p>
-    </div>
-    <div class="grid grid-3" style="margin-top:16px">
-      <div class="card"><h3>📝 Ce introduci</h3><ul>
-        <li><b>Profit disponibil</b> = câți lei vrei să scoți din firmă într-un an, înainte de taxe (suma rămasă după ce firma și-a plătit cheltuielile). De exemplu: 120.000 lei pe an.</li>
-        <li><b>Persoane în întreținere</b> = câți copii sau membri de familie ai în grijă. Contează doar pentru salariu, unde îți reduce puțin impozitul.</li>
-      </ul></div>
-      <div class="card"><h3>📊 Ce afli</h3><ul>
-        <li>Cât îți rămâne <b>net în mână</b> pentru fiecare variantă: tot pe salariu, tot pe dividend sau mixul optim.</li>
-        <li>Care variantă câștigă și <b>cu câți lei</b> e mai bună decât celelalte.</li>
-        <li>Cât plătești la taxe la fiecare opțiune (CAS = pensie, CASS = sănătate, impozit), ca să vezi clar unde se duc banii.</li>
-      </ul></div>
-      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru tine, asociatul-administrator al unui micro-SRL, care la final de an te întrebi: „Îmi iau salariu, dividend sau un mix?". Ești patron de firmă mică și vrei să scoți profitul cât mai eficient, fără să dai mai multe taxe decât e nevoie.</p></div>
-    </div>
-    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
-      <p style="color:var(--muted);margin-top:8px">Unealta calculează net-ul pentru fiecare cale: salariul plătește contribuții pe tot brutul (CAS = pensie, CASS = sănătate, plus impozit), iar dividendul plătește 16% impozit la care se adaugă CASS doar peste anumite praguri, pe trepte fixe (6, 12 sau 24 de salarii minime), nu pe toată suma. Apoi încearcă sute de combinații salariu+dividend și o alege pe cea care îți lasă cel mai mult în mână. Cifrele sunt pe regulile fiscale din 2026 și reprezintă o estimare educativă — confirmă cu contabilul tău înainte de a decide.</p></details>
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Salariu vs <em>dividend</em> SRL</h1>
+    <p class="u-lead">Ești asociatul-administrator al unui micro-SRL și vrei să scoți banii din firmă cu cele mai mici taxe. Spune-ne cât profit vrei să distribui, iar noi îți arătăm ce-ți lasă mai mult net în mână: tot pe salariu, tot pe dividend sau mixul optim dintre cele două.</p>
   </div>
-</section>
+
+  <div class="u-panel" style="margin-bottom:18px">
+    <p class="u-label">La ce te ajută</p>
+    <p style="color:var(--u-muted);font-size:1.02rem;margin:0;line-height:1.65">Dacă ai un SRL și vrei să scoți banii din firmă, ai mai multe căi: ca salariu, ca dividend sau un amestec din cele două — fiecare cu taxe diferite. Tu spui cât profit vrei să scoți, iar instrumentul îți arată ce variantă îți lasă cei mai mulți bani în mână. La un profit de 120.000 lei, alegerea bună poate însemna câteva mii de lei în plus pe an, fără niciun efort suplimentar.</p>
+  </div>
+
+  <div class="u-grid u-grid-3" style="margin-bottom:18px">
+    <div class="u-panel">
+      <p class="u-label">Ce introduci</p>
+      <div class="u-row"><span class="k"><b>Profitul disponibil</b> — câți lei vrei să scoți din firmă într-un an, înainte de taxe. De exemplu, 120.000 lei.</span></div>
+      <div class="u-row"><span class="k"><b>Persoane în întreținere</b> — câți copii sau membri de familie ai în grijă. Contează doar pentru salariu, unde îți reduce puțin impozitul.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Ce afli</p>
+      <div class="u-row"><span class="k">Cât îți rămâne net în mână la fiecare variantă: tot pe salariu, tot pe dividend sau mixul optim.</span></div>
+      <div class="u-row"><span class="k">Care variantă câștigă și cu câți lei e mai bună decât celelalte.</span></div>
+      <div class="u-row"><span class="k">Cât plătești la taxe la fiecare opțiune (CAS, CASS, impozit), ca să vezi unde se duc banii.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Pentru cine e</p>
+      <p style="color:var(--u-muted);margin:0;line-height:1.6">Pentru tine, asociatul-administrator al unui micro-SRL, care la final de an te întrebi: „Îmi iau salariu, dividend sau un mix?". Ești patron de firmă mică și vrei să scoți profitul cât mai eficient, fără să dai mai multe taxe decât e nevoie.</p>
+    </div>
+  </div>
+
+  <details class="u-panel" style="margin-bottom:22px">
+    <summary style="cursor:pointer;font-family:'Fraunces',serif;font-weight:600;color:var(--u-gold)">Cum funcționează, pe scurt</summary>
+    <p style="color:var(--u-muted);margin-top:10px;line-height:1.65">Calculăm net-ul pentru fiecare cale: salariul plătește contribuții pe tot brutul (CAS = pensie, CASS = sănătate, plus impozit), iar dividendul plătește 16% impozit, la care se adaugă CASS doar peste anumite praguri, pe trepte fixe (6, 12 sau 24 de salarii minime), nu pe toată suma. Apoi încercăm sute de combinații salariu+dividend și o alegem pe cea care îți lasă cel mai mult în mână. Cifrele sunt pe regulile fiscale din 2026 și reprezintă o estimare educativă — confirmă cu contabilul tău înainte de a decide.</p>
+  </details>
+
+</div></section>
 
 <section class="section"><div class="container" id="tool">
 
   <div class="panel">
+    <p class="u-label" style="margin-bottom:10px">Cât scoți din firmă <span class="cf-badge pro">PRO</span></p>
     <div class="grid grid-2">
-      <div class="field"><label>Profit disponibil de scos din firmă (lei/an)</label><span class="cf-mini">în lei, pe tot anul</span><input type="number" id="profit" value="120000" min="0" step="1000"></div>
-      <div class="field"><label>Persoane în întreținere (pt. deducerea salariului)</label><span class="cf-mini">câți copii/membri ai în grijă</span><input type="number" id="dep" value="0" min="0" max="4" step="1"></div>
+      <div class="field"><label>Profit de scos din firmă (lei/an)</label><span class="cf-mini">în lei, pe tot anul</span><input type="number" id="profit" value="120000" min="0" step="1000"></div>
+      <div class="field"><label>Persoane în întreținere</label><span class="cf-mini">câți copii/membri ai în grijă (contează la salariu)</span><input type="number" id="dep" value="0" min="0" max="4" step="1"></div>
     </div>
-    <p class="cf-note">„Profit disponibil" = suma brută pe care vrei s-o transferi din firmă în buzunarul tău, fie ca salariu de administrator, fie ca dividend. Comparăm cele 3 strategii și căutăm mixul care îți lasă cei mai mulți bani net în mână.</p>
+    <p class="cf-note">Profitul disponibil e suma brută pe care vrei s-o transferi din firmă în buzunarul tău — fie ca salariu de administrator, fie ca dividend. Comparăm cele trei strategii și căutăm mixul care îți lasă cei mai mulți bani net în mână.</p>
     <button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button>
   </div>
 
   <div id="out" style="margin-top:22px"></div>
 
-  <div style="max-width:760px;margin:30px auto 0">
-    <h2 class="title">De ce contează mixul (efectul CASS pe trepte)</h2>
-    <p style="color:var(--muted)">Salariul de administrator este o <b>cheltuială deductibilă</b> a firmei și îți dă acces la pensie și sănătate, dar are contribuții mari pe tot brutul (CAS 25% + CASS 10% + impozit 10%). Dividendul are doar 16% impozit, însă peste anumite praguri se adaugă <b>CASS pe trepte fixe</b> (6, 12 sau 24 de salarii minime), nu pe toată suma. Tocmai pentru că CASS-ul pe dividend „sare" în trepte, există de obicei un punct optim: un salariu mic (care îți acoperă deducerile și asigurările) plus restul ca dividend îți poate lăsa mai mult net decât oricare variantă pură.</p>
-    <a class="btn btn-ghost" href="/instrumente.html" style="margin-top:8px">← Toate instrumentele</a>
-    <div class="disc">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
+  <div class="u-panel" style="margin-top:30px">
+    <p class="u-label">De ce contează mixul</p>
+    <p style="color:var(--u-muted);margin:0;line-height:1.65">Salariul de administrator este o cheltuială deductibilă a firmei și îți dă acces la pensie și sănătate, dar are contribuții mari pe tot brutul (CAS 25% + CASS 10% + impozit 10%). Dividendul are doar 16% impozit, însă peste anumite praguri se adaugă CASS pe trepte fixe (6, 12 sau 24 de salarii minime), nu pe toată suma. Tocmai pentru că CASS-ul pe dividend „sare" în trepte, există de obicei un punct optim: un salariu mic, care îți acoperă deducerile și asigurările, plus restul ca dividend îți poate lăsa mai mult net decât oricare variantă pură.</p>
   </div>
 
+  <div style="margin-top:26px">
+    <a class="btn btn-ghost" href="/instrumente.html">← Toate instrumentele</a>
+  </div>
+  <div class="disc" style="margin-top:18px">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
+
 </div></section>
+</main>
 
 <footer class="foot"><div class="container">
     <div class="foot-grid">

@@ -1,17 +1,170 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scaner credit & refinanțare — Clubul Financiar</title>
-<meta name="description" content="Calculează rata lunară (PMT), DAE real cu comisioane incluse, costul total și dobânda. Simulează refinanțarea și rambursarea anticipată. Alertă IRCC lunară."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Calculează rata lunară (PMT), DAE real cu comisioane incluse, costul total și dobânda. Simulează refinanțarea și rambursarea anticipată. Alertă IRCC lunară."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/instrumente/scaner-credit.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Scaner credit & refinanțare"><meta property="og:description" content="Calculează rata lunară (PMT), DAE real cu comisioane incluse, costul total și dobânda. Simulează refinanțarea și rambursarea anticipată."><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/scaner-credit.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Scaner credit & refinanțare"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
-<link rel="stylesheet" href="/assets/cf-tool.css?v=1"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Scaner credit & refinanțare", "url": "https://clubulfinanciar.ro/instrumente/scaner-credit.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Calculează rata lunară (PMT), DAE real cu comisioane incluse, costul total și dobânda. Simulează refinanțarea și rambursarea anticipată. Alertă IRCC lunară.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Scaner credit & refinanțare", "item": "https://clubulfinanciar.ro/instrumente/scaner-credit.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Ultra — Scaner credit & refinanțare. Doar prezentare; calculul e neatins.
+   Pe .u-page remapăm tokenii vechi (verzi/albaștri) la tokenii Ultra, ca tot
+   HTML-ul emis de JS (cf-big / cf-row / cf-alert / cf-compare / cf-card-opt +
+   butoanele .btn) să se randeze în limbajul auriu/navy fără să atingem scriptul.
+   Semnătura: registrul gravat de DAE/cost din panoul de rezultat (extras privat).
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS + clasele vechi */
+.u-page{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold2); --blue:var(--u-gold2); --blue-d:var(--u-gold);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:transparent; --bg-soft2:var(--u-gold-soft);
+  --radius:18px;
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin clase structurale vechi emise de JS / din markup în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+
+/* carduri introductive (La ce te ajută / Ce introduci…) → panou Ultra liniștit */
+.u-page .card{
+  background:var(--u-panel); border:1px solid var(--u-line-soft);
+  border-radius:18px; box-shadow:var(--u-shadow);
+}
+.u-page .card h2,.u-page .card h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page .card h3{ color:var(--u-gold); }
+.u-page .card ul{ color:var(--u-muted); }
+.u-page .card li b{ color:var(--u-ink); }
+.u-page details summary{ color:var(--u-gold) !important; }
+
+/* SEMNĂTURA — registrul gravat: număr-erou serif, ca soldul dintr-un extras privat */
+.u-page .cf-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.2rem,5.4vw,3.2rem); margin:4px 0 2px;
+}
+/* păstrează semantica de culoare a cifrelor-erou (economie pe verde, pierdere pe roșu) */
+.u-page .cf-big.cf-pos{ color:var(--u-pos); -webkit-text-fill-color:var(--u-pos); }
+.u-page .cf-big.cf-neg{ color:var(--u-neg); -webkit-text-fill-color:var(--u-neg); }
+
+/* rândurile de registru: etichetă discretă, valoare tabulară aliniată */
+.u-page .cf-row{ border-bottom:1px solid var(--u-line-soft); }
+.u-page .cf-row span{ color:var(--u-muted); font-size:.94rem; }
+.u-page .cf-row b{ font-variant-numeric:tabular-nums; color:var(--u-ink); }
+.u-page .cf-row.total{ border-top:2px solid var(--u-line); }
+.u-page .cf-note{ color:var(--u-muted); }
+.u-page .cf-pos{ color:var(--u-pos); }
+.u-page .cf-neg{ color:var(--u-neg); }      /* era #e25555 hardcodat, nu token */
+
+/* rândul DAE — accentul memorabil al extrasului: fundal auriu fin + serif gravat.
+   În JS, primul .cf-row din #out e DAE; vine fie direct după .cf-big (fără comisioane
+   lunare), fie după .cf-big + .cf-note (cu comisioane lunare). Țintim ambele cazuri. */
+.u-page #out .cf-big + .cf-row,
+.u-page #out .cf-big + .cf-note + .cf-row{
+  margin-top:8px; padding:13px 15px; border:1px solid var(--u-line);
+  border-radius:13px; background:var(--u-gold-soft);
+}
+.u-page #out .cf-big + .cf-row span,
+.u-page #out .cf-big + .cf-note + .cf-row span{ color:var(--u-ink); font-weight:600; }
+.u-page #out .cf-big + .cf-row b,
+.u-page #out .cf-big + .cf-note + .cf-row b{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-gold);
+  font-size:1.35rem; letter-spacing:-.01em;
+}
+
+/* titlul panoului (din markup: h2/h3 inline) */
+.u-page h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+
+/* alerte vechi → bară aurie/roșie laterală, limbaj Ultra */
+.u-page .cf-alert{
+  display:flex; gap:11px; align-items:flex-start;
+  border:1px solid var(--u-line-soft); border-left-width:3px; border-radius:12px;
+  padding:13px 15px; background:var(--u-panel2); color:var(--u-ink); margin:12px 0; font-size:.92rem;
+}
+.u-page .cf-alert b{ color:var(--u-ink); }
+.u-page .cf-alert.ok{ border-left-color:var(--u-pos); }
+.u-page .cf-alert.warn{ border-left-color:var(--u-gold); }
+.u-page .cf-alert.danger{ border-left-color:var(--u-neg); }
+
+/* comparator rambursare anticipată → două fișe de extras, cea mai bună gravată auriu */
+.u-page .cf-card-opt{
+  border:1px solid var(--u-line-soft); border-radius:16px;
+  background:var(--u-panel2); padding:18px;
+}
+.u-page .cf-card-opt h4{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; margin:0 0 6px; }
+.u-page .cf-card-opt.best{
+  border-color:var(--u-gold);
+  box-shadow:0 0 0 2px var(--u-gold-soft), var(--u-shadow);
+}
+
+/* taburi → pastile Ultra; activul = auriu cu text navy (nu alb pe auriu) */
+.u-page .cf-tab{
+  background:var(--u-panel2); border:1px solid var(--u-line-soft); color:var(--u-muted);
+  font-family:'Sora',system-ui,sans-serif; font-weight:700;
+}
+.u-page .cf-tab.active{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)) !important;
+  color:#1a1304 !important; border-color:transparent !important;
+  box-shadow:0 8px 20px rgba(168,134,49,.28);
+}
+.u-page .cf-tab:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* tabel istoric → registru curat */
+.u-page .cf-log .cf-row{ border-bottom:1px solid var(--u-line-soft); }
+.u-page .cf-log b{ font-variant-numeric:tabular-nums; }
+
+/* câmpuri în stil Ultra */
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field .cf-mini,.u-page .cf-mini{ color:var(--u-muted); }
+.u-page .field input[type=number]{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* butoane (inclusiv cele din markup) → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn.btn-ghost:hover{ border-color:var(--u-gold); color:var(--u-gold); }
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* disclaimer + linkuri */
+.u-page .disc{ color:var(--u-muted); }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media(max-width:640px){
+  .u-page #out .cf-row:first-of-type{ flex-wrap:wrap; }
+}
+@media(prefers-reduced-motion:reduce){
+  .u-page .cf-pane.active{ animation:none; }
+  .u-page .cf-tab{ transition:none; }
+}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Scaner credit & refinanțare", "url": "https://clubulfinanciar.ro/instrumente/scaner-credit.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Calculează rata lunară (PMT), DAE real cu comisioane incluse, costul total și dobânda. Simulează refinanțarea și rambursarea anticipată. Alertă IRCC lunară.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Scaner credit & refinanțare", "item": "https://clubulfinanciar.ro/instrumente/scaner-credit.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -21,9 +174,16 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header>
-<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Scaner credit & refinanțare</h1><p class="lead" style="margin-inline:auto">Rata lunară reală (PMT), DAE cu comisioane incluse, cost total — plus simulator de refinanțare și rambursare anticipată.</p></div></section>
-<section class="section" style="padding-bottom:8px">
+<main class="u-page">
+<section class="section" style="padding-top:42px;padding-bottom:8px">
   <div class="container">
+
+    <div class="u-hero">
+      <p class="u-eyebrow">Biroul tău financiar privat</p>
+      <h1 class="u-crest">Scaner credit <em>&amp; refinanțare</em></h1>
+      <p class="u-lead">Vezi cât te costă cu adevărat un credit: rata ta lunară reală, DAE cu toate comisioanele incluse și costul total peste suma împrumutată. Apoi simulează dacă merită să refinanțezi sau să plătești anticipat — totul în lei, pe ritmul tău.</p>
+    </div>
+
     <div class="card" style="border-left:4px solid var(--emerald)">
       <h2 style="margin-top:0">La ce te ajută</h2>
       <p style="color:var(--muted);font-size:1.02rem">Îți arată cât te costă cu adevărat un credit — nu doar dobânda din reclamă, ci suma totală pe care o dai înapoi băncii, cu tot cu comisioane. Vezi rata ta lunară reală și afli, de exemplu, că un împrumut de 200.000 lei pe 20 de ani te poate costa peste 180.000 lei doar în dobândă și comisioane. În plus, calculezi cât economisești dacă muți creditul la altă bancă (refinanțare) sau dacă plătești o parte mai devreme.</p>
@@ -143,6 +303,7 @@
   <div class="disc">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
 
 </div></section>
+</main>
 
 <footer class="foot"><div class="container">
     <div class="foot-grid">

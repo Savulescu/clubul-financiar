@@ -17,39 +17,87 @@
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
 <style>
   .term-num{ font-family:'JetBrains Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; }
-  /* bara de comandă — semnătura terminalului */
-  .term-cmd{ position:relative; margin:8px 0 4px; }
-  .term-cmd input{ width:100%; padding:16px 18px 16px 46px; border-radius:14px;
-    border:1px solid var(--u-line); background:var(--u-panel2); color:var(--u-ink);
-    font-size:1.05rem; font-family:'JetBrains Mono',ui-monospace,monospace; }
-  .term-cmd input:focus{ outline:none; border-color:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft); }
-  .term-cmd .slash{ position:absolute; left:16px; top:50%; transform:translateY(-50%);
-    color:var(--u-gold); font-family:'JetBrains Mono',monospace; font-weight:700; }
+
+  /* ===== bara de comandă — SEMNĂTURA terminalului ===== */
+  .term-cmd{ position:relative; margin:8px 0 4px;
+    background:
+      linear-gradient(180deg, var(--u-panel2), var(--u-panel2)) padding-box,
+      linear-gradient(120deg, var(--u-line), transparent 38%, transparent 62%, var(--u-line)) border-box;
+    border:1px solid transparent; border-radius:15px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    transition:box-shadow .22s ease, border-color .22s ease; }
+  .term-cmd::after{ /* linie aurie de bază, ca un prompt de consolă */
+    content:""; position:absolute; left:46px; right:18px; bottom:11px; height:1px;
+    background:linear-gradient(90deg, var(--u-line-soft), transparent);
+    opacity:0; transition:opacity .25s ease; pointer-events:none; }
+  .term-cmd:focus-within{ box-shadow:0 0 0 3px var(--u-gold-soft), var(--u-shadow); }
+  .term-cmd:focus-within::after{ opacity:1; }
+  .term-cmd input{ width:100%; padding:17px 18px 17px 48px; border-radius:15px;
+    border:0; background:transparent; color:var(--u-ink);
+    font-size:1.06rem; line-height:1.3; font-family:'JetBrains Mono',ui-monospace,monospace; }
+  .term-cmd input:focus{ outline:none; }
+  .term-cmd input::placeholder{ color:var(--u-muted); opacity:.75; }
+  .term-cmd .slash{ position:absolute; left:17px; top:50%; transform:translateY(-50%);
+    color:var(--u-gold); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.15rem;
+    text-shadow:0 0 12px var(--u-gold-soft); }
+  /* cursor care clipește, doar când câmpul nu e focusat (invitație discretă) */
+  .term-cmd .caret{ position:absolute; left:39px; top:50%; width:8px; height:1.15rem;
+    transform:translateY(-50%); background:var(--u-gold); opacity:.55; border-radius:1px;
+    animation:term-blink 1.15s steps(1) infinite; pointer-events:none; }
+  .term-cmd:focus-within .caret{ display:none; }
+  @keyframes term-blink{ 50%{ opacity:0; } }
+  @media(prefers-reduced-motion:reduce){ .term-cmd .caret{ animation:none; } }
+
   .term-cmd-out{ margin-top:12px; }
-  .term-hint{ color:var(--u-muted); font-size:.84rem; margin-top:8px; }
-  .term-hint b{ color:var(--u-gold); font-weight:700; cursor:pointer; }
-  /* board valutar */
+  .term-cmd-out:empty{ margin-top:0; }
+  .term-hint{ color:var(--u-muted); font-size:.84rem; margin-top:11px; line-height:1.9; }
+  .term-hint .lbl{ letter-spacing:.04em; }
+  .term-hint b{ display:inline-flex; align-items:center; color:var(--u-gold); font-weight:700;
+    cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:.82rem;
+    border:1px solid var(--u-line-soft); background:var(--u-gold-soft);
+    padding:3px 11px; border-radius:999px; margin:0 2px; transition:border-color .15s, background .15s; }
+  .term-hint b:hover{ border-color:var(--u-gold); }
+  .term-hint b:focus-visible{ outline:none; border-color:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+  /* focus vizibil pe toate toggle-urile cu tastatura */
+  .u-page summary{ border-radius:8px; }
+  .u-page summary:focus-visible{ outline:none; box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+  /* ===== board valutar ===== */
   .fx-top{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   @media(max-width:760px){ .fx-top{ grid-template-columns:1fr 1fr; } }
   @media(max-width:440px){ .fx-top{ grid-template-columns:1fr; } }
-  .fx-card{ background:var(--u-panel); border:1px solid var(--u-line-soft); border-radius:16px;
-    padding:16px 18px; position:relative; overflow:hidden; }
-  .fx-card .cur{ font-family:'Fraunces',serif; color:var(--u-gold); font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; }
-  .fx-card .name{ color:var(--u-muted); font-size:.78rem; margin-top:1px; }
-  .fx-card .rate{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.7rem;
-    color:var(--u-ink); margin-top:6px; font-variant-numeric:tabular-nums; }
-  .fx-card .chg{ font-family:'JetBrains Mono',monospace; font-size:.86rem; font-weight:700; }
-  .fx-spark{ position:absolute; right:14px; bottom:14px; width:84px; height:30px; opacity:.85; }
+  .fx-card{ background:var(--u-panel2); border:1px solid var(--u-line-soft); border-radius:16px;
+    padding:15px 17px 16px; position:relative; overflow:hidden;
+    transition:border-color .18s ease, transform .18s ease; }
+  .fx-card:hover{ border-color:var(--u-line); transform:translateY(-2px); }
+  .fx-card::before{ content:""; position:absolute; inset:0 auto 0 0; width:2px;
+    background:linear-gradient(var(--u-gold2),transparent); opacity:.5; }
+  .fx-card .cur{ font-family:'Fraunces',serif; color:var(--u-gold); font-size:.84rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; }
+  .fx-card .name{ color:var(--u-muted); font-size:.76rem; margin-top:1px; }
+  .fx-card .rate{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.72rem;
+    color:var(--u-ink); margin-top:8px; font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+  .fx-card .chg{ font-family:'JetBrains Mono',monospace; font-size:.84rem; font-weight:700; display:inline-block; margin-top:3px; }
+  .fx-spark{ position:absolute; right:13px; bottom:14px; width:84px; height:30px; opacity:.8; }
+
   .fx-table{ width:100%; border-collapse:collapse; margin-top:6px; }
-  .fx-table th{ text-align:left; color:var(--u-muted); font-size:.74rem; text-transform:uppercase;
-    letter-spacing:.1em; padding:8px 10px; border-bottom:1px solid var(--u-line-soft); font-weight:600; }
-  .fx-table td{ padding:9px 10px; border-bottom:1px solid var(--u-line-soft); }
+  .fx-table th{ text-align:left; color:var(--u-muted); font-size:.72rem; text-transform:uppercase;
+    letter-spacing:.12em; padding:9px 10px; border-bottom:1px solid var(--u-line); font-weight:600; }
+  .fx-table td{ padding:10px 10px; border-bottom:1px solid var(--u-line-soft); }
   .fx-table td.n{ font-family:'JetBrains Mono',monospace; text-align:right; font-variant-numeric:tabular-nums; }
-  .fx-table tr:hover td{ background:var(--u-gold-soft); }
-  .fx-search{ width:100%; max-width:280px; padding:9px 12px; border-radius:10px;
-    border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink); margin-bottom:10px; }
+  .fx-table tbody tr{ transition:background .12s ease; }
+  .fx-table tbody tr:hover td{ background:var(--u-gold-soft); }
+  .fx-search{ width:100%; max-width:300px; padding:10px 13px; border-radius:11px;
+    border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink); margin-bottom:12px; font-size:.95rem; }
+  .fx-search:focus{ outline:none; border-color:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+  /* convertor — rândul + rezultatul citit ca un total */
   .conv-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:end; }
   .conv-row .u-field{ margin:0; flex:1; min-width:120px; }
+  .conv-out{ margin-top:14px; padding:14px 16px; border-radius:13px;
+    background:var(--u-gold-soft); border:1px solid var(--u-line-soft);
+    border-left:3px solid var(--u-gold); color:var(--u-gold); }
+
   .term-co{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
   @media(max-width:760px){ .term-co{ grid-template-columns:1fr; } }
 </style>
@@ -77,10 +125,11 @@
 
       <div class="term-cmd" style="margin-top:22px">
         <span class="slash">/</span>
+        <span class="caret" aria-hidden="true"></span>
         <input id="cmd" autocomplete="off" aria-label="Caută o valută sau întreabă orice" placeholder="Întreabă orice — „cât e euro”, „aur”, „dividende Hidroelectrica”…">
       </div>
       <div class="term-cmd-out" id="cmdOut"></div>
-      <p class="term-hint">Încearcă: <b role="button" tabindex="0" data-cmd="100 euro în lei">100 euro în lei</b> · <b role="button" tabindex="0" data-cmd="aur">aur</b> · <b role="button" tabindex="0" data-cmd="Hidroelectrica">Hidroelectrica</b> · <b role="button" tabindex="0" data-cmd="titluri de stat">titluri de stat</b></p>
+      <p class="term-hint"><span class="lbl">Încearcă:</span> <b role="button" tabindex="0" data-cmd="100 euro în lei">100 euro în lei</b> <b role="button" tabindex="0" data-cmd="aur">aur</b> <b role="button" tabindex="0" data-cmd="Hidroelectrica">Hidroelectrica</b> <b role="button" tabindex="0" data-cmd="titluri de stat">titluri de stat</b></p>
       <details style="margin-top:6px"><summary style="cursor:pointer;color:var(--u-gold);font-size:.84rem;font-weight:700">Ce pot întreba aici?</summary>
         <div class="u-kpi-sub" style="margin-top:8px;line-height:1.7">
           Scrii în limbaj normal, nu coduri. Terminalul îți răspunde la:<br>
@@ -115,7 +164,7 @@
         <div class="u-field"><label>Din</label><select class="u-select" id="cvFrom"></select></div>
         <div class="u-field"><label>În</label><select class="u-select" id="cvTo"></select></div>
       </div>
-      <div class="u-kpi sm term-num" id="cvOut" style="margin-top:12px;color:var(--u-gold)">—</div>
+      <div class="u-kpi sm term-num conv-out" id="cvOut">—</div>
       <p class="u-kpi-sub">Curs oficial BNR, orientativ. Băncile și casele de schimb aplică marje proprii.</p>
     </div>
 

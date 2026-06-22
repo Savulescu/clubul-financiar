@@ -1,17 +1,144 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Marja reală pe produs — Clubul Financiar</title>
-<meta name="description" content="Pentru comercianți online: află marja netă reală în lei și procent după ce scazi TVA-ul colectat, comisionul de marketplace, taxa fixă, transportul și pierderea din retururi. Vezi dacă vinzi în profit sau pierdere."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Pentru comercianți online: află marja netă reală în lei și procent după ce scazi TVA-ul colectat, comisionul de marketplace, taxa fixă, transportul și pierderea din retururi. Vezi dacă vinzi în profit sau pierdere."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/instrumente/marja-produs.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Marja reală pe produs"><meta property="og:description" content="Marja netă reală pe un produs vândut online, după TVA, comisioane marketplace, taxă fixă, transport și retururi. Profit sau pierdere?"><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/marja-produs.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Marja reală pe produs"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
-<link rel="stylesheet" href="/assets/cf-tool.css?v=1"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Marja reală pe produs", "url": "https://clubulfinanciar.ro/instrumente/marja-produs.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Pentru comercianți online: află marja netă reală în lei și procent după ce scazi TVA-ul colectat, comisionul de marketplace, taxa fixă, transportul și pierderea din retururi. Vezi dacă vinzi în profit sau pierdere.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Marja reală pe produs", "item": "https://clubulfinanciar.ro/instrumente/marja-produs.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Ultra — Marja reală pe produs. Doar prezentare; calculul JS e neatins.
+   Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot HTML-ul
+   emis de JS cu clase vechi (cf-big / cf-row / cf-alert / cf-note / cf-pos /
+   cf-neg + butoanele .btn) să se randeze în auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni vechi → Ultra (prinde inline var(--…) emis din JS) */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft2:var(--u-gold-soft);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin panourile structurale emise în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .panel .title{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+
+/* SEMNĂTURA: cifra-erou a marjei nete — gravată serif, ca într-un extras */
+.u-page .cf-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none;
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.6rem,6.5vw,3.9rem); margin:6px 0 2px;
+}
+/* JS injectează inline color: pozitiv var(--emerald)→auriu (remapat sus); negativ #e25555 rămâne roșu */
+
+.u-page .cf-note{ color:var(--u-muted); }
+.u-page .cf-mini{ color:var(--u-muted); }
+.u-page .cf-pos{ color:var(--u-pos); }
+.u-page .cf-neg{ color:var(--u-neg); }
+
+/* ledger „de la preț la marjă" → registru curat de bancă privată */
+.u-page .cf-row{
+  display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  padding:9px 0; border-bottom:1px solid var(--u-line-soft);
+}
+.u-page .cf-row span{ color:var(--u-muted); font-size:.94rem; }
+.u-page .cf-row b{ color:var(--u-ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.u-page .cf-row.cf-neg span{ color:var(--u-muted); }
+.u-page .cf-row.cf-neg b{ color:var(--u-neg); }
+/* rândurile-total (= Marjă livrată / = Marjă reală / Profit lunar) ies în relief */
+.u-page .cf-row.total{
+  margin-top:6px; padding-top:13px; border-top:1.5px solid var(--u-line);
+  border-bottom:0;
+}
+.u-page .cf-row.total span{ color:var(--u-ink); font-weight:600;
+  font-family:'Fraunces',Georgia,serif; font-size:1rem; }
+.u-page .cf-row.total b{ font-size:1.12rem; }
+
+/* alerte profit/pierdere → limbajul u-alert (bară laterală aurie/roșie/verde) */
+.u-page .cf-alert{
+  display:flex; gap:11px; align-items:flex-start;
+  border:1px solid var(--u-line-soft); border-left-width:3px; border-radius:12px;
+  padding:13px 15px; background:var(--u-panel2); color:var(--u-ink); margin:12px 0; font-size:.94rem;
+}
+.u-page .cf-alert b{ color:var(--u-ink); }
+.u-page .cf-alert.ok{ border-left-color:var(--u-pos); }
+.u-page .cf-alert.warn{ border-left-color:var(--u-gold); }
+.u-page .cf-alert.danger{ border-left-color:var(--u-neg); }
+
+/* tabel istoric → registru curat */
+.u-page .cf-log{ width:100%; border-collapse:collapse; margin-top:6px; }
+.u-page .cf-log th, .u-page .cf-log td{ text-align:left; padding:9px 10px; border-bottom:1px solid var(--u-line-soft); }
+.u-page .cf-log th{ font-family:'Fraunces',serif; color:var(--u-gold); letter-spacing:.04em; font-weight:600; }
+.u-page .cf-log td{ color:var(--u-ink); font-variant-numeric:tabular-nums; }
+
+/* titluri de secțiune din rezultat (h3 injectat de JS) */
+.u-page #rezultat h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+
+/* badge PRO → pastilă aurie de tier */
+.u-page .cf-badge.pro{
+  display:inline-block; padding:2px 9px; border-radius:999px; font-size:.68rem; vertical-align:middle;
+  background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line);
+  -webkit-text-fill-color:currentColor; font-family:'Fraunces',serif; letter-spacing:.06em;
+}
+
+/* câmpuri (inputuri + selectul de TVA) în stil Ultra */
+.u-page .field{ margin-bottom:2px; }
+.u-page .field label{ display:block; color:var(--u-ink); font-weight:600; margin-bottom:6px; }
+.u-page .field input[type=number],
+.u-page .field select{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums; font-family:inherit;
+}
+.u-page .field select{ appearance:none; -webkit-appearance:none; cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--u-gold) 50%),linear-gradient(135deg,var(--u-gold) 50%,transparent 50%);
+  background-position:calc(100% - 18px) center, calc(100% - 13px) center;
+  background-size:5px 5px, 5px 5px; background-repeat:no-repeat; padding-right:34px;
+}
+.u-page .field input[type=number]:focus,
+.u-page .field select:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+.u-page .field .cf-mini{ display:block; margin-top:5px; }
+
+/* butoane vechi (calcBtn / logBtn / remBtn / pdfBtn) → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page .cf-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+
+/* disclaimer + linkuri */
+.u-page .disc{ color:var(--u-muted); }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .u-figure-rule{ animation:none; }
+}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Marja reală pe produs", "url": "https://clubulfinanciar.ro/instrumente/marja-produs.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Pentru comercianți online: află marja netă reală în lei și procent după ce scazi TVA-ul colectat, comisionul de marketplace, taxa fixă, transportul și pierderea din retururi. Vezi dacă vinzi în profit sau pierdere.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Marja reală pe produs", "item": "https://clubulfinanciar.ro/instrumente/marja-produs.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -21,41 +148,50 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header>
-<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Marja reală pe produs</h1><p class="lead" style="margin-inline:auto">Pentru comerciant online. Vezi cât îți rămâne cu adevărat dintr-un produs vândut prin marketplace, după ce scazi TVA-ul colectat, comisioanele, taxa fixă, transportul și pierderea din retururi.</p></div></section>
-<section class="section" style="padding-bottom:8px">
-  <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
-      <h2 style="margin-top:0">La ce te ajută</h2>
-      <p style="color:var(--muted);font-size:1.02rem">Vinzi pe un marketplace (eMAG, Amazon și altele) și vrei să știi cât îți rămâne CU ADEVĂRAT dintr-un produs? Unealta îți arată marja reală, după ce scazi din preț TVA-ul, comisionul marketplace-ului, taxa fixă, transportul și pierderea din retururi. Așa vezi pe loc dacă un produs vândut cu 120 lei îți aduce profit sau, de fapt, te bagă pe minus.</p>
-    </div>
-    <div class="grid grid-3" style="margin-top:16px">
-      <div class="card"><h3>📝 Ce introduci</h3><ul>
-        <li><b>Preț de vânzare</b> = cât plătește clientul, cu TVA inclus (prețul afișat pe site).</li>
-        <li><b>Cost achiziție</b> = cât te-a costat pe tine produsul de la furnizor.</li>
-        <li><b>Cotă TVA</b> = taxa pe valoare adăugată inclusă în preț (standard sau redusă).</li>
-        <li><b>Comision marketplace</b> = procentul reținut de platformă din fiecare vânzare.</li>
-        <li><b>Taxă fixă</b> = costul de procesare și ambalare pentru o comandă.</li>
-        <li><b>Cost transport</b> = livrarea, dacă o suporți tu, nu clientul.</li>
-        <li><b>Rată retur</b> = din 100 de comenzi, câte se întorc înapoi.</li>
-        <li><b>Comenzi pe lună</b> = câte bucăți vinzi într-o lună (pentru proiecție).</li>
-      </ul></div>
-      <div class="card"><h3>📊 Ce afli</h3><ul>
-        <li><b>Marja reală pe comandă</b>, în lei — cât îți rămâne net după TOATE costurile.</li>
-        <li><b>Marja în procent</b> — cât de gras (sau subțire) e profitul față de vânzare.</li>
-        <li>O <b>defalcare pas cu pas</b>, ca să vezi exact unde se duc banii.</li>
-        <li><b>Profitul lunar estimat</b> — cât scoți pe lună la volumul tău de comenzi.</li>
-        <li>O alertă clară: <b>vinzi în profit sau în pierdere</b>.</li>
-      </ul></div>
-      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru oricine vinde online prin marketplace: dropshipping, magazin propriu listat pe eMAG sau revânzare. Ești comerciant și ai impresia că „merge bine", dar la final de lună banii nu se văd? Comisionul de 15%, retururile și transportul îți pot mânca tot profitul fără să-ți dai seama — aici vezi negru pe alb ce rămâne.</p></div>
-    </div>
-    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
-      <p style="color:var(--muted);margin-top:8px">Pornim de la prețul cu TVA, scoatem TVA-ul (rămâne venitul tău real), apoi scădem pe rând: costul produsului, comisionul marketplace, taxa fixă și transportul. Din ce rămâne ținem cont și de retururi — la o comandă returnată pierzi transportul dus-întors, taxa fixă și comisionul (produsul revine pe stoc, deci nu îl pierzi). Rezultatul e marja medie reală pe comandă. Cifrele de TVA sunt pe regulile 2026 (21% standard, 11% redusă) și totul e o estimare educativă, nu consultanță fiscală.</p></details>
+<main class="u-page">
+<section class="section"><div class="container">
+
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Marja reală <em>pe produs</em></h1>
+    <p class="u-lead">Vinzi prin marketplace? Vezi cât îți rămâne cu adevărat dintr-o comandă, după ce scazi TVA-ul colectat, comisionul platformei, taxa fixă, transportul și pierderea din retururi. Afli pe loc dacă un produs te aduce în profit sau, de fapt, te bagă pe minus.</p>
   </div>
-</section>
-<section class="section"><div class="container" id="tool">
+
+  <div class="u-panel" style="margin-bottom:18px">
+    <p class="u-label">La ce te ajută</p>
+    <p style="color:var(--u-muted);font-size:1.02rem;margin:0;line-height:1.65">Vinzi pe eMAG, Amazon sau alt marketplace și vrei să știi cât îți rămâne net dintr-un produs? Treci aici datele unei comenzi tipice, iar instrumentul îți arată marja reală — după ce scoatem din preț TVA-ul, comisionul platformei, taxa fixă, transportul și pierderea din retururi. Așa vezi dacă un produs vândut cu 120 lei îți aduce profit sau te trage în pierdere fără să-ți dai seama.</p>
+  </div>
+
+  <div class="u-grid u-grid-3" style="margin-bottom:18px">
+    <div class="u-panel">
+      <p class="u-label">Ce introduci</p>
+      <div class="u-row"><span class="k">Prețul de vânzare, cu TVA inclus (cât plătește clientul).</span></div>
+      <div class="u-row"><span class="k">Costul tău de achiziție de la furnizor.</span></div>
+      <div class="u-row"><span class="k">Cota de TVA, comisionul marketplace și taxa fixă pe comandă.</span></div>
+      <div class="u-row"><span class="k">Transportul suportat de tine, rata de retur și comenzile pe lună.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Ce afli</p>
+      <div class="u-row"><span class="k">Marja reală pe comandă, în lei — ce rămâne net după toate costurile.</span></div>
+      <div class="u-row"><span class="k">Marja în procent, ca să vezi cât de gras sau subțire e profitul.</span></div>
+      <div class="u-row"><span class="k">O defalcare pas cu pas, de la preț la marja finală.</span></div>
+      <div class="u-row"><span class="k">Profitul lunar estimat și o alertă: profit sau pierdere.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Pentru cine e</p>
+      <p style="color:var(--u-muted);margin:0;line-height:1.6">Pentru oricine vinde online prin marketplace: dropshipping, magazin propriu listat pe eMAG sau revânzare. Ai impresia că „merge bine", dar la final de lună banii nu se văd? Comisionul, retururile și transportul îți pot mânca tot profitul — aici îl vezi negru pe alb.</p>
+    </div>
+  </div>
+
+  <details class="u-panel" style="margin-bottom:22px">
+    <summary style="cursor:pointer;font-family:'Fraunces',serif;font-weight:600;color:var(--u-gold)">Cum funcționează, pe scurt</summary>
+    <p style="color:var(--u-muted);margin-top:10px;line-height:1.65">Pornim de la prețul cu TVA, scoatem TVA-ul (rămâne venitul tău real), apoi scădem pe rând costul produsului, comisionul marketplace, taxa fixă și transportul. Din ce rămâne ținem cont și de retururi — la o comandă returnată pierzi transportul dus-întors, taxa fixă și comisionul (produsul revine pe stoc, deci nu îl pierzi). Rezultatul e marja medie reală pe comandă. Cotele de TVA sunt pe regulile 2026; totul e o estimare educativă, nu consultanță fiscală.</p>
+  </details>
+
+  <div id="tool">
 
   <div class="panel">
-    <h2 class="title" style="font-size:1.4rem;margin-bottom:6px">Datele produsului <span class="cf-badge pro">PRO</span></h2>
+    <p class="u-label" style="margin-bottom:6px">Datele produsului <span class="cf-badge pro">PRO</span></p>
     <p class="cf-note" style="margin-top:0">Completează valorile pentru o comandă tipică. Calculul se actualizează automat la fiecare modificare.</p>
 
     <div class="grid grid-2">
@@ -106,7 +242,7 @@
   </div>
 
   <div class="panel" id="istoricPanel" style="margin-top:22px;display:none">
-    <h2 class="title" style="font-size:1.3rem">Istoric logări lunare</h2>
+    <p class="u-label" style="margin-bottom:4px">Istoric logări lunare</p>
     <p class="cf-note" style="margin-top:0">Fiecare lună salvată apare mai jos, pentru evidența marjelor tale în timp.</p>
     <table class="cf-log" id="istoricTbl"><thead><tr><th>Lună</th><th>Marjă / produs</th><th>Marjă %</th><th>Profit lunar estimat</th></tr></thead><tbody></tbody></table>
   </div>
@@ -116,7 +252,9 @@
   </div>
   <div class="disc" style="margin-top:18px">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
 
+  </div><!-- /#tool -->
 </div></section>
+</main>
 
 <footer class="foot"><div class="container">
     <div class="foot-grid">
