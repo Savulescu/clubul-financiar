@@ -165,3 +165,54 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
 .lesson-intro .li-bar{height:6px;border-radius:999px;background:rgba(0,0,0,.06);overflow:hidden;margin:8px 0}
 .lesson-intro .li-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--emerald),#2563eb)}
 .lesson-intro .li-hook{margin:6px 0 0;font-size:1.02rem;line-height:1.5;color:var(--text)}
+
+/* ============ DROPDOWN DE CONT (avatar) — setări + planuri ============ */
+.acct-pop{position:absolute;top:48px;right:0;width:466px;max-width:calc(100vw - 24px);
+  background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-lg);
+  overflow:hidden;z-index:200;animation:acct-in .16s cubic-bezier(.2,.8,.2,1)}
+@keyframes acct-in{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+.acct-head{display:flex;align-items:center;gap:12px;padding:15px 16px;border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 9%,transparent),transparent)}
+.acct-av{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;
+  font-weight:800;font-size:1.1rem;flex:0 0 auto}
+.acct-id{min-width:0}
+.acct-id .em{font-weight:700;font-size:.86rem;color:var(--text);word-break:break-all;line-height:1.25}
+.acct-id .tier{font-size:.72rem;font-weight:800;margin-top:3px;display:inline-flex;align-items:center;gap:5px;color:var(--gold)}
+.acct-id .tier.free{color:var(--muted)}
+.acct-body{display:grid;grid-template-columns:1fr 1fr}
+.acct-col{padding:11px 10px}
+.acct-col+.acct-col{border-left:1px solid var(--border)}
+.acct-col h5{font-size:.64rem;text-transform:uppercase;letter-spacing:.11em;color:var(--muted);
+  margin:4px 8px 8px;font-weight:800}
+.acct-link{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--text);
+  font-size:.88rem;text-decoration:none;cursor:pointer;width:100%;background:transparent;border:0;
+  text-align:left;font-family:inherit;line-height:1.2;transition:background .14s;white-space:nowrap}
+.acct-link:hover{background:var(--bg-soft)}
+.acct-link .ico{width:18px;text-align:center;flex:0 0 auto;font-size:.98rem}
+.acct-link .meta{margin-left:auto;font-size:.68rem;color:var(--muted);font-weight:700}
+.acct-plan{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:12px;
+  border:1px solid var(--border);margin-bottom:7px;text-decoration:none;color:var(--text);transition:.15s}
+.acct-plan .pn{font-weight:700;font-size:.84rem;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.acct-plan .pp{margin-left:auto;font-size:.72rem;color:var(--muted);font-weight:800;font-variant-numeric:tabular-nums}
+.acct-plan.cur{border-color:color-mix(in srgb,var(--emerald) 55%,var(--border));
+  background:color-mix(in srgb,var(--emerald) 9%,transparent)}
+.acct-plan.cur .pp{color:var(--emerald)}
+.acct-plan.owned{opacity:.72}
+.acct-plan.up{border-color:color-mix(in srgb,var(--gold) 45%,var(--border))}
+.acct-plan.up:hover{background:color-mix(in srgb,var(--gold) 12%,transparent);transform:translateX(2px)}
+.acct-plan.up .pp{color:var(--gold)}
+.acct-manage{display:block;text-align:center;font-size:.76rem;color:var(--muted);text-decoration:none;
+  padding:7px;border-radius:9px;margin-top:2px}
+.acct-manage:hover{color:var(--gold)}
+.acct-foot{display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:var(--bg-soft)}
+.acct-foot .acct-theme{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--border);
+  border-radius:9px;padding:7px 12px;cursor:pointer;color:var(--text);font-size:.82rem;font-weight:600;font-family:inherit}
+.acct-foot .acct-theme:hover{border-color:var(--gold)}
+.acct-foot .acct-logout{margin-left:auto;background:transparent;border:0;color:#e25555;font-size:.85rem;
+  font-weight:700;cursor:pointer;padding:7px 10px;border-radius:9px;font-family:inherit}
+.acct-foot .acct-logout:hover{background:color-mix(in srgb,#e25555 12%,transparent)}
+@media(max-width:560px){
+  .acct-pop{position:fixed;top:58px;right:12px;left:12px;width:auto;max-width:none}
+  .acct-body{grid-template-columns:1fr}
+  .acct-col+.acct-col{border-left:0;border-top:1px solid var(--border)}
+}

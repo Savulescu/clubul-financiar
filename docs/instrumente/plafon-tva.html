@@ -1,17 +1,129 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radar plafon TVA & micro — Clubul Financiar</title>
-<meta name="description" content="Loghează încasările lunare și urmărește în timp real cât mai ai până la plafonul de TVA (395.000 lei) și plafonul de microîntreprindere (100.000 €). Proiecție a datei de depășire și remindere lunare."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Loghează încasările lunare și urmărește în timp real cât mai ai până la plafonul de TVA (395.000 lei) și plafonul de microîntreprindere (100.000 €). Proiecție a datei de depășire și remindere lunare."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/instrumente/plafon-tva.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Radar plafon TVA & micro"><meta property="og:description" content="Loghează încasările lunare și urmărește cât mai ai până la plafonul de TVA și de microîntreprindere. Proiecție a datei de depășire."><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/plafon-tva.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Radar plafon TVA & micro"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
-<link rel="stylesheet" href="/assets/cf-tool.css?v=1"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Radar plafon TVA & micro", "url": "https://clubulfinanciar.ro/instrumente/plafon-tva.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Loghează încasările lunare și urmărește în timp real cât mai ai până la plafonul de TVA (395.000 lei) și plafonul de microîntreprindere (100.000 €). Proiecție a datei de depășire și remindere lunare.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Radar plafon TVA & micro", "item": "https://clubulfinanciar.ro/instrumente/plafon-tva.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Radar plafon TVA & micro. Doar prezentare; calculul e neatins.
+   Strategia: pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot
+   HTML-ul generat de JS (cf-big / cf-meter / cf-row / cf-alert / cf-note +
+   butoanele .btn) să se randeze în limbajul auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft2:var(--u-gold-soft);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin clase structurale vechi emise de JS în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .panel .title{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+
+/* număr-erou cumulat: gravat serif, ca în extras */
+.u-page .cf-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.4rem,6vw,3.6rem); margin:4px 0 2px;
+}
+
+.u-page .cf-row{ border-bottom:1px solid var(--u-line-soft); }
+.u-page .cf-row span{ color:var(--u-muted); font-size:.94rem; }
+.u-page .cf-row b{ font-variant-numeric:tabular-nums; }
+.u-page .cf-note{ color:var(--u-muted); }
+
+/* SEMNĂTURA: termometrul-prag re-skinat ca „perete" auriu spre 395.000 lei */
+.u-page .cf-meter{
+  height:30px; border-radius:999px; overflow:hidden; position:relative;
+  margin:14px 0; background:var(--u-gold-soft);
+  border:1px solid var(--u-line-soft);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.18);
+}
+.u-page .cf-meter-fill{
+  background:linear-gradient(90deg,var(--u-gold),var(--u-gold2));
+  box-shadow:0 0 18px rgba(168,134,49,.45); transition:width .7s cubic-bezier(.2,.8,.2,1);
+}
+.u-page .cf-meter-fill.warn{ background:linear-gradient(90deg,#e0a33a,#d2453b); box-shadow:0 0 18px rgba(210,69,59,.40); }
+.u-page .cf-meter-fill.danger{ background:linear-gradient(90deg,#d2453b,#ef6b62); box-shadow:0 0 22px rgba(210,69,59,.55); }
+.u-page .cf-meter-lbl{ font-family:'Sora',system-ui,sans-serif; font-weight:800; color:var(--u-ink);
+  font-variant-numeric:tabular-nums; letter-spacing:.01em; text-shadow:0 1px 2px rgba(255,253,249,.5); }
+[data-theme="dark"] .u-page .cf-meter-lbl{ text-shadow:0 1px 3px rgba(0,0,0,.55); }
+
+/* alerte vechi → limbajul u-alert (bară aurie/roșie laterală) */
+.u-page .cf-alert{
+  display:flex; gap:11px; align-items:flex-start;
+  border:1px solid var(--u-line-soft); border-left-width:3px; border-radius:12px;
+  padding:13px 15px; background:var(--u-panel2); color:var(--u-ink); margin:12px 0; font-size:.94rem;
+}
+.u-page .cf-alert b{ color:var(--u-ink); }
+.u-page .cf-alert.ok{ border-left-color:var(--u-pos); }
+.u-page .cf-alert.warn{ border-left-color:var(--u-gold); }
+.u-page .cf-alert.danger{ border-left-color:var(--u-neg); }
+
+/* tabel istoric → registru curat */
+.u-page .cf-log th, .u-page .cf-log td{ border-bottom:1px solid var(--u-line-soft); }
+.u-page .cf-log th{ font-family:'Fraunces',serif; color:var(--u-gold); letter-spacing:.04em; }
+.u-page .cf-log td{ color:var(--u-ink); font-variant-numeric:tabular-nums; }
+
+/* badge PRO → pastilă aurie de tier */
+.u-page .cf-badge.pro{
+  background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line);
+  -webkit-text-fill-color:currentColor; font-family:'Fraunces',serif; letter-spacing:.06em;
+}
+
+/* câmpuri (grila celor 12 luni + quick add) în stil Ultra */
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field .cf-mini{ color:var(--u-muted); }
+.u-page .field input[type=number]{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* butoane vechi (inclusiv cele emise de JS: quickAddBtn, icsTvaBtn) → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* disclaimer + linkuri */
+.u-page .disc{ color:var(--u-muted); }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .cf-meter-fill{ transition:none; }
+  .u-page .u-figure-rule{ animation:none; }
+}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Radar plafon TVA & micro", "url": "https://clubulfinanciar.ro/instrumente/plafon-tva.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Loghează încasările lunare și urmărește în timp real cât mai ai până la plafonul de TVA (395.000 lei) și plafonul de microîntreprindere (100.000 €). Proiecție a datei de depășire și remindere lunare.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Radar plafon TVA & micro", "item": "https://clubulfinanciar.ro/instrumente/plafon-tva.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -21,34 +133,48 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header>
-<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Radar plafon TVA &amp; micro</h1><p class="lead" style="margin-inline:auto">Loghează încasările lună de lună și vezi în timp real cât mai ai până la plafonul de TVA și cel de microîntreprindere. Îți estimăm și data la care le atingi, pe ritmul tău.</p></div></section>
-<section class="section" style="padding-bottom:8px">
-  <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
-      <h2 style="margin-top:0">La ce te ajută</h2>
-      <p style="color:var(--muted);font-size:1.02rem">Dacă ai un PFA sau un SRL, există două praguri de bani peste care regulile fiscale se schimbă brusc: <b>395.000 lei</b> (te obligă să te înregistrezi la TVA) și <b>100.000 €</b> (ieși din regimul de microîntreprindere). Tu îți treci aici cât ai încasat lună de lună, iar unealta îți arată exact cât mai ai până la fiecare prag și pe ce dată îl vei atinge dacă mergi în ritmul de acum — ca să nu te trezești peste limită fără să fi pregătit hârtiile.</p>
-    </div>
-    <div class="grid grid-3" style="margin-top:16px">
-      <div class="card"><h3>📝 Ce introduci</h3><ul>
-        <li><b>Încasările pe fiecare lună</b> — cât ai facturat/încasat în acea lună, în lei, <b>fără TVA</b> (suma netă, fără taxa adăugată pe factură).</li>
-        <li><b>Luna curentă, rapid</b> — poți completa doar luna de acum în câmpul de sus și apeși „Loghează luna curentă".</li>
-        <li>Nu trebuie să le ai pe toate; merge și cu o singură lună completată.</li>
-      </ul></div>
-      <div class="card"><h3>📊 Ce afli</h3><ul>
-        <li><b>Cifra de afaceri cumulată</b> — totalul încasat de la începutul anului până acum.</li>
-        <li><b>Cât la sută din fiecare plafon ai atins</b>, cu un termometru colorat (verde / galben / roșu).</li>
-        <li><b>Data estimată</b> la care vei depăși pragul, calculată pe ritmul tău mediu lunar — ca să acționezi din timp.</li>
-      </ul></div>
-      <div class="card"><h3>👤 Pentru cine e</h3><p>Pentru orice PFA, întreprindere individuală sau SRL micro care vinde produse sau servicii. Exemplu: ești freelancer, facturezi lunar și nu știi dacă mai poți rămâne fără TVA până la final de an — completezi lunile încasate și vezi pe loc dacă te apropii periculos de cele 395.000 lei.</p></div>
-    </div>
-    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
-      <p style="color:var(--muted);margin-top:8px">Adună toate lunile pe care le-ai completat și obține cifra de afaceri cumulată pe an. Apoi calculează ritmul tău mediu lunar (media lunilor cu încasări) și estimează în câte luni, mergând tot așa, ajungi la fiecare plafon — de unde rezultă data afișată. Plafonul de microîntreprindere e în euro, așa că îl transformă în lei la cursul oficial. Toate cifrele sunt pe regulile fiscale din 2026; rezultatul este o estimare educativă, nu o declarație oficială.</p></details>
+<main class="u-page">
+<section class="section"><div class="container">
+
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Radar plafon <em>TVA &amp; micro</em></h1>
+    <p class="u-lead">Loghează încasările lună de lună și vezi în timp real cât mai ai până la pragul de TVA și cel de microîntreprindere. Îți estimăm și data la care le atingi, pe ritmul tău de acum — ca să pregătești hârtiile din vreme, nu peste limită.</p>
   </div>
-</section>
-<section class="section"><div class="container" id="tool">
+
+  <div class="u-panel" style="margin-bottom:18px">
+    <p class="u-label">La ce te ajută</p>
+    <p style="color:var(--u-muted);font-size:1.02rem;margin:0;line-height:1.65">Dacă ai un PFA sau un SRL, există două praguri peste care regulile fiscale se schimbă brusc: pragul care te obligă să te înregistrezi la TVA și cel la care ieși din regimul de microîntreprindere. Treci aici cât ai încasat lună de lună, iar radarul îți arată exact cât mai ai până la fiecare prag și pe ce dată îl vei atinge dacă mergi în ritmul de acum.</p>
+  </div>
+
+  <div class="u-grid u-grid-3" style="margin-bottom:18px">
+    <div class="u-panel">
+      <p class="u-label">Ce introduci</p>
+      <div class="u-row"><span class="k">Încasările pe fiecare lună, în lei, fără TVA (suma netă).</span></div>
+      <div class="u-row"><span class="k">Luna curentă rapid, din câmpul de sus.</span></div>
+      <div class="u-row"><span class="k">Merge și cu o singură lună completată.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Ce afli</p>
+      <div class="u-row"><span class="k">Cifra de afaceri cumulată pe an.</span></div>
+      <div class="u-row"><span class="k">Cât la sută din fiecare prag ai atins, pe un termometru auriu.</span></div>
+      <div class="u-row"><span class="k">Data estimată la care depășești pragul, pe ritmul tău.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Pentru cine e</p>
+      <p style="color:var(--u-muted);margin:0;line-height:1.6">Pentru orice PFA, întreprindere individuală sau SRL micro. Ești freelancer, facturezi lunar și nu știi dacă mai poți rămâne fără TVA până la final de an — completezi lunile și vezi pe loc dacă te apropii periculos de prag.</p>
+    </div>
+  </div>
+
+  <details class="u-panel" style="margin-bottom:22px">
+    <summary style="cursor:pointer;font-family:'Fraunces',serif;font-weight:600;color:var(--u-gold)">Cum funcționează, pe scurt</summary>
+    <p style="color:var(--u-muted);margin-top:10px;line-height:1.65">Adunăm lunile completate și obținem cifra de afaceri cumulată pe an. Apoi calculăm ritmul tău mediu lunar (media lunilor cu încasări) și estimăm în câte luni, mergând tot așa, ajungi la fiecare prag — de unde rezultă data afișată. Pragul de microîntreprindere e în euro, așa că îl transformăm în lei la cursul oficial. Toate cifrele sunt pe regulile fiscale din 2026; rezultatul e o estimare educativă, nu o declarație oficială.</p>
+  </details>
+
+  <div id="tool">
 
   <div class="panel">
-    <h2 class="title" style="font-size:1.4rem;margin-bottom:6px">Încasările tale pe 2026 <span class="cf-badge pro">PRO</span></h2>
+    <p class="u-label" style="margin-bottom:6px">Încasările tale pe 2026 <span class="cf-badge pro">PRO</span></p>
     <p class="cf-note" style="margin-top:0">Completează încasările (fără TVA) pentru fiecare lună din anul curent. Calculul se actualizează automat. Datele se salvează pe contul tău și revin pe orice dispozitiv.</p>
 
     <div class="field">
@@ -74,7 +200,7 @@
   </div>
 
   <div class="panel" id="istoricPanel" style="margin-top:22px;display:none">
-    <h2 class="title" style="font-size:1.3rem">Istoric logări</h2>
+    <p class="u-label" style="margin-bottom:4px">Istoric logări</p>
     <p class="cf-note" style="margin-top:0">Fiecare salvare a unei luni este înregistrată mai jos, pentru evidența ta.</p>
     <table class="cf-log" id="istoricTbl"><thead><tr><th>Lună</th><th>Încasări lunare</th><th>Cumulat an</th></tr></thead><tbody></tbody></table>
   </div>
@@ -84,7 +210,9 @@
   </div>
   <div class="disc" style="margin-top:18px">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
 
+  </div><!-- /#tool -->
 </div></section>
+</main>
 
 <footer class="foot"><div class="container">
     <div class="foot-grid">

@@ -14,35 +14,77 @@
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
 <style>
   /* mici extensii locale — în idiomul Ultra, fără a redefini componente */
-  .sim-scn{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; width:100%;
-    text-align:left; cursor:pointer; padding:16px; border-radius:14px;
+
+  /* ---- pastile de scenariu (ce poți testa) ---- */
+  .sim-scn{ display:flex; flex-direction:column; align-items:flex-start; gap:7px; width:100%;
+    text-align:left; cursor:pointer; padding:16px 16px 15px; border-radius:14px;
     border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
-    transition:transform .15s, border-color .2s, box-shadow .2s; }
-  .sim-scn:hover{ transform:translateY(-3px); border-color:var(--u-line); }
+    transition:transform .15s, border-color .2s, box-shadow .2s, background .2s; }
+  .sim-scn:hover{ transform:translateY(-3px); border-color:var(--u-line);
+    box-shadow:0 12px 28px rgba(40,30,8,.10); }
+  .sim-scn:focus-visible{ outline:none; border-color:var(--u-gold);
+    box-shadow:0 0 0 3px var(--u-gold-soft); }
   .sim-scn.is-on{ border-color:var(--u-gold); background:var(--u-gold-soft);
-    box-shadow:0 0 0 2px var(--u-gold-soft); }
-  .sim-scn .ic{ font-size:1.5rem; }
-  .sim-scn .t{ font-weight:700; font-size:1rem; }
-  .sim-scn .d{ color:var(--u-muted); font-size:.84rem; line-height:1.4; }
-  .sim-cmp{ display:grid; grid-template-columns:1.4fr .9fr .9fr 1fr; gap:8px 14px;
-    align-items:baseline; }
-  .sim-cmp .hd{ font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--u-gold); font-weight:600; padding-bottom:6px; border-bottom:1px solid var(--u-line-soft); }
-  .sim-cmp .hd.num, .sim-cmp .num{ text-align:right; font-variant-numeric:tabular-nums; }
-  .sim-cmp .rk{ color:var(--u-muted); font-size:.94rem; padding:9px 0; border-bottom:1px solid var(--u-line-soft); }
-  .sim-cmp .rv{ font-weight:700; color:var(--u-ink); padding:9px 0; border-bottom:1px solid var(--u-line-soft);
+    box-shadow:0 0 0 1px var(--u-line) inset; }
+  .sim-scn .ic{ font-size:1.4rem; line-height:1; filter:saturate(.9); }
+  .sim-scn .t{ font-weight:700; font-size:.98rem; line-height:1.2; }
+  .sim-scn .d{ color:var(--u-muted); font-size:.82rem; line-height:1.4; }
+  .sim-scn.is-on .t{ color:var(--u-gold); }
+
+  /* ---- tablou comparativ: ÎNAINTE → DUPĂ (semnătura paginii) ---- */
+  .sim-cmp{ display:grid; grid-template-columns:1.5fr .92fr .92fr .95fr; gap:0 0;
+    align-items:stretch; position:relative; border-radius:14px; overflow:hidden;
+    border:1px solid var(--u-line-soft); }
+  .sim-cmp > div{ position:relative; z-index:1; padding:11px 14px; }
+  .sim-cmp .hd{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--u-muted); font-weight:700; padding-top:12px; padding-bottom:10px;
+    border-bottom:1px solid var(--u-line); display:flex; align-items:center; }
+  .sim-cmp .hd.num, .sim-cmp .num{ justify-content:flex-end; text-align:right;
     font-variant-numeric:tabular-nums; }
-  .sim-cmp .rd{ padding:9px 0; border-bottom:1px solid var(--u-line-soft); }
+  /* evidențiază coloana DUPĂ (a 3-a celulă din fiecare rând de 4) */
+  .sim-cmp > div:nth-child(4n+3){ background:var(--u-gold-soft); }
+  .sim-cmp .hd:nth-child(3){ color:var(--u-gold); }
+  .sim-cmp .hd:nth-child(2)::after{ content:"→"; margin-left:7px; color:var(--u-gold);
+    font-weight:400; opacity:.85; }
+  .sim-cmp .rk{ color:var(--u-muted); font-size:.92rem;
+    border-bottom:1px solid var(--u-line-soft); }
+  .sim-cmp .rv{ font-weight:700; color:var(--u-ink);
+    border-bottom:1px solid var(--u-line-soft); font-variant-numeric:tabular-nums; }
+  .sim-cmp .rv.num:nth-child(4n+2){ color:var(--u-muted); font-weight:600; }  /* „Acum" mai discret */
+  .sim-cmp > div:nth-child(4n+3).rv{ color:var(--u-ink); font-weight:800;
+    border-bottom-color:var(--u-line); }                                        /* „După" = vedeta */
+  .sim-cmp .rd{ border-bottom:1px solid var(--u-line-soft); }
   .sim-cmp > div:nth-last-child(-n+4){ border-bottom:0; }
+  /* delta sub formă de pastilă */
+  .sim-cmp .rd .u-delta{ display:inline-flex; align-items:center; gap:4px;
+    padding:3px 9px; border-radius:999px; font-size:.8rem; line-height:1.2;
+    border:1px solid var(--u-line-soft); background:var(--u-panel2); }
+  .sim-cmp .rd .u-delta.u-pos{ color:var(--u-pos);
+    border-color:color-mix(in srgb, var(--u-pos) 35%, transparent);
+    background:color-mix(in srgb, var(--u-pos) 9%, transparent); }
+  .sim-cmp .rd .u-delta.u-neg{ color:var(--u-neg);
+    border-color:color-mix(in srgb, var(--u-neg) 35%, transparent);
+    background:color-mix(in srgb, var(--u-neg) 9%, transparent); }
   @media(max-width:680px){
-    .sim-cmp{ grid-template-columns:1.3fr 1fr 1fr; }
+    .sim-cmp{ grid-template-columns:1.35fr 1fr 1fr; }
     .sim-cmp .hd.dd, .sim-cmp .rd{ display:none; }
+    .sim-cmp > div:nth-child(4n+3){ background:transparent; }
+    .sim-cmp .rv.num:nth-child(3n+3){ background:var(--u-gold-soft); }
   }
+
+  /* ---- parametri (ce reglezi) ---- */
   .sim-params .u-field:last-child{ margin-bottom:0; }
-  .sim-range{ width:100%; accent-color:var(--u-gold); height:6px; cursor:pointer; }
+  .sim-range{ width:100%; accent-color:var(--u-gold); height:6px; cursor:pointer;
+    background:transparent; }
+  .sim-range:focus-visible{ outline:2px solid var(--u-gold); outline-offset:4px; border-radius:6px; }
   .sim-rangeval{ font-family:'Sora',sans-serif; font-weight:700; color:var(--u-gold);
     font-variant-numeric:tabular-nums; }
   .sim-verdict{ font-size:1.02rem; line-height:1.55; }
+
+  @media(prefers-reduced-motion:reduce){
+    .sim-scn{ transition:border-color .2s, box-shadow .2s; }
+    .sim-scn:hover{ transform:none; }
+  }
 </style>
 </head><body>
 <header class="nav"><div class="container nav-in">

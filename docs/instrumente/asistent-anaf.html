@@ -1,27 +1,176 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Asistent ANAF (AI) — Clubul Financiar</title>
-<meta name="description" content="Asistent AI dedicat fiscalității din România: întreabă despre PFA, TVA, dividende, impozit pe câștiguri din investiții și declarația unică. Răspunsuri educative, în limba română."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Asistent AI dedicat fiscalității din România: întreabă despre PFA, TVA, dividende, impozit pe câștiguri din investiții și declarația unică. Răspunsuri educative, în limba română."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/instrumente/asistent-anaf.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Asistent ANAF (AI)"><meta property="og:description" content="Asistent AI dedicat fiscalității din România: PFA, TVA, dividende, impozit pe investiții, declarația unică. Răspunsuri educative în limba română."><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/asistent-anaf.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Asistent ANAF (AI)"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
 <style>
-.cf-msg.ai.md{white-space:normal}
-.cf-msg.ai.md p{margin:.5em 0}
-.cf-msg.ai.md h3,.cf-msg.ai.md h4,.cf-msg.ai.md h5{margin:.7em 0 .3em;font-size:1rem;font-weight:800}
-.cf-msg.ai.md ul,.cf-msg.ai.md ol{margin:.4em 0;padding-left:1.2em}
-.cf-msg.ai.md li{margin:.2em 0}
-.cf-msg.ai.md code{background:rgba(0,0,0,.08);padding:1px 5px;border-radius:5px;font-size:.88em}
-.cf-msg.ai.md table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.84rem;display:block;overflow-x:auto}
-.cf-msg.ai.md th,.cf-msg.ai.md td{border:1px solid var(--border);padding:5px 8px;text-align:left;vertical-align:top}
-.cf-msg.ai.md th{background:var(--bg-soft2);font-weight:700}
+/* =============================================================================
+   Ultra — Asistent ANAF (AI). Doar prezentare; logica de chat/quota e neatinsă.
+   Strategia (ca în pilotul plafon-tva): pe .u-page remapăm tokenii vechi (verzi)
+   la tokenii Ultra, ca tot HTML-ul emis de JS (cf-msg / cf-chat / cf-typing /
+   cf-alert / butoanele .btn) să se randeze auriu/navy fără să atingem scriptul.
+   SEMNĂTURA paginii: corespondența de birou privat — bulele AI poartă un accent
+   serif auriu și un colț asimetric, ca o scrisoare de la bancherul tău.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile var(--…) moștenite din cf-tool.css în zonă */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:var(--u-panel2);
+  --bg-soft2:var(--u-gold-soft);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Panoul vechi → cartonaș Ultra cu hairline auriu sus */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+
+.u-page .cf-note{ color:var(--u-muted); }
+.u-page .cf-mini{ color:var(--u-muted); }
+
+/* badge PRO (dacă apare) → pastilă aurie de tier */
+.u-page .cf-badge.pro{
+  background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line);
+  -webkit-text-fill-color:currentColor; font-family:'Fraunces',serif; letter-spacing:.06em;
+}
+
+/* alerte vechi → limbajul u-alert (bară laterală aurie/roșie) */
+.u-page .cf-alert{
+  display:flex; gap:11px; align-items:flex-start;
+  border:1px solid var(--u-line-soft); border-left-width:3px; border-radius:12px;
+  padding:13px 15px; background:var(--u-panel2); color:var(--u-ink); margin:12px 0; font-size:.92rem;
+}
+.u-page .cf-alert b{ color:var(--u-ink); }
+.u-page .cf-alert a{ color:var(--u-gold); font-weight:600; }
+.u-page .cf-alert.ok{ border-left-color:var(--u-pos); }
+.u-page .cf-alert.warn{ border-left-color:var(--u-gold); }
+.u-page .cf-alert.danger{ border-left-color:var(--u-neg); }
+
+/* =========================================================================
+   SEMNĂTURA — corespondența de birou privat. Reskin al casetei de chat.
+   ========================================================================= */
+.u-page .cf-chat{
+  border:1px solid var(--u-line-soft); border-radius:18px; overflow:hidden;
+  background:var(--u-panel); box-shadow:inset 0 1px 0 var(--u-gold-soft);
+  height:460px;
+}
+.u-page .cf-chat-log{ padding:18px; gap:16px; background:
+  radial-gradient(120% 80% at 50% -10%, var(--u-gold-soft), transparent 60%); }
+.u-page .cf-chat-log::-webkit-scrollbar{ width:8px; }
+.u-page .cf-chat-log::-webkit-scrollbar-thumb{ background:var(--u-line-soft); border-radius:999px; }
+
+/* bula utilizatorului → sigiliu auriu, text închis (contrast bun pe auriu) */
+.u-page .cf-msg{ max-width:86%; padding:13px 16px; border-radius:15px; font-size:.94rem; line-height:1.6; }
+.u-page .cf-msg.user{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  color:#1a1205; font-weight:600; border-bottom-right-radius:5px;
+  box-shadow:0 8px 22px rgba(168,134,49,.22);
+}
+
+/* bula AI → scrisoarea biroului: hairline auriu + colț asimetric + accent serif */
+.u-page .cf-msg.ai{
+  background:var(--u-panel2); color:var(--u-ink);
+  border:1px solid var(--u-line-soft); border-bottom-left-radius:5px;
+}
+/* accentul de semnătură: filet auriu pe muchia stângă a răspunsului real */
+.u-page .cf-msg.ai.md{ position:relative; padding-left:18px; }
+.u-page .cf-msg.ai.md::before{
+  content:""; position:absolute; left:0; top:11px; bottom:11px; width:2px;
+  border-radius:999px; background:linear-gradient(var(--u-gold),var(--u-gold2));
+  opacity:.8;
+}
+.u-page .cf-msg.ai .src{ display:block; margin-top:9px; padding-top:8px;
+  border-top:1px solid var(--u-line-soft); font-size:.76rem; color:var(--u-muted); }
+
+/* markdown din răspunsuri — în paleta Ultra (titluri serif aurii, tabel curat) */
+.u-page .cf-msg.ai.md{ white-space:normal; }
+.u-page .cf-msg.ai.md p{ margin:.5em 0; }
+.u-page .cf-msg.ai.md p:first-child{ margin-top:0; }
+.u-page .cf-msg.ai.md p:last-child{ margin-bottom:0; }
+.u-page .cf-msg.ai.md h3,.u-page .cf-msg.ai.md h4,.u-page .cf-msg.ai.md h5{
+  margin:.7em 0 .3em; font-size:1rem; font-weight:600;
+  font-family:'Fraunces',Georgia,serif; color:var(--u-gold); }
+.u-page .cf-msg.ai.md ul,.u-page .cf-msg.ai.md ol{ margin:.4em 0; padding-left:1.2em; }
+.u-page .cf-msg.ai.md li{ margin:.2em 0; }
+.u-page .cf-msg.ai.md code{ background:var(--u-gold-soft); color:var(--u-gold);
+  padding:1px 5px; border-radius:5px; font-size:.88em; }
+.u-page .cf-msg.ai.md table{ border-collapse:collapse; width:100%; margin:.6em 0;
+  font-size:.84rem; display:block; overflow-x:auto; font-variant-numeric:tabular-nums; }
+.u-page .cf-msg.ai.md th,.u-page .cf-msg.ai.md td{
+  border:1px solid var(--u-line-soft); padding:5px 8px; text-align:left; vertical-align:top; }
+.u-page .cf-msg.ai.md th{ background:var(--u-gold-soft); font-weight:700; color:var(--u-ink);
+  font-family:'Fraunces',serif; }
+
+/* indicator de tastare → puncte aurii (rândul de typing NU are clasa .md) */
+.u-page .cf-typing i{ background:var(--u-gold); }
+
+/* composer — caseta de redactare */
+.u-page .cf-chat-in{
+  border-top:1px solid var(--u-line-soft); background:var(--u-panel2);
+  padding:12px; gap:10px;
+}
+.u-page .cf-chat-in textarea{
+  border:1px solid var(--u-line-soft); border-radius:12px; background:var(--u-panel);
+  color:var(--u-ink); font-size:.94rem;
+}
+.u-page .cf-chat-in textarea:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* linia de quota → notă aurie discretă */
+.u-page .cf-quota{ color:var(--u-muted); }
+.u-page .cf-quota b{ color:var(--u-ink); }
+.u-page .cf-quota a{ color:var(--u-gold); font-weight:600; }
+
+/* butoane vechi emise în markup + de JS → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:disabled{ opacity:.55; cursor:not-allowed; }
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* chips de întrebări frecvente (.btn-ghost emise de JS) — cartonașe curate */
+.u-page #chips .btn.btn-ghost{ background:var(--u-panel); border-color:var(--u-line-soft);
+  transition:transform .15s, border-color .18s, background .18s; }
+.u-page #chips .btn.btn-ghost::before{ content:"◇"; color:var(--u-gold);
+  font-size:.82em; margin-right:5px; }
+.u-page #chips .btn.btn-ghost:hover{ transform:translateY(-2px);
+  border-color:var(--u-gold); background:var(--u-gold-soft); }
+
+/* disclaimer + linkuri */
+.u-page .disc{ color:var(--u-muted); }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media (max-width:680px){
+  .u-page .cf-msg{ max-width:100%; }
+  .u-page .cf-chat{ height:auto; min-height:420px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .u-page #chips .btn.btn-ghost{ transition:none; }
+  .u-page .cf-typing i{ animation:none; }
+}
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Asistent ANAF (AI)", "url": "https://clubulfinanciar.ro/instrumente/asistent-anaf.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Asistent AI dedicat fiscalității din România: întreabă despre PFA, TVA, dividende, impozit pe câștiguri din investiții și declarația unică. Răspunsuri educative, în limba română.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Asistent ANAF (AI)", "item": "https://clubulfinanciar.ro/instrumente/asistent-anaf.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
@@ -32,13 +181,20 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header>
-<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Asistent ANAF (AI)</h1><p class="lead" style="margin-inline:auto">Pune întrebări despre taxe, PFA, TVA, dividende, impozitul pe câștigurile din investiții sau declarația unică. Răspunsuri educative, în limba română, bazate pe regulile fiscale 2026.</p></div></section>
-<section class="section"><div class="container" id="tool">
+<main class="u-page">
+<section class="section"><div class="container">
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Asistentul tău <em>pentru taxe</em></h1>
+    <p class="u-lead">Întreabă orice despre fiscalitatea din România — PFA, TVA, dividende, impozitul pe câștigurile din investiții sau declarația unică. Îți răspund pe înțelesul tuturor, în limba română, pe regulile fiscale din 2026. Educativ, nu consultanță.</p>
+  </div>
+</div></section>
+<section class="section" style="padding-top:0"><div class="container" id="tool">
 
   <div class="panel" style="max-width:860px;margin:0 auto">
     <div class="cf-alert warn"><span>⚠️</span><span><b>Atenție:</b> Acest asistent oferă informații <b>educative</b> despre fiscalitatea din România, nu consultanță fiscală sau de investiții. Nu recomandă achiziția unui anume produs financiar și nu înlocuiește un contabil autorizat. Verifică întotdeauna pe <a href="https://anaf.ro" target="_blank" rel="noopener">anaf.ro</a> sau cu un expert înainte de a acționa.</span></div>
 
-    <p class="cf-note" style="margin-bottom:10px">Întrebări frecvente — apasă pentru a porni:</p>
+    <p class="u-label" style="margin-bottom:10px">Întreabă-mă, de exemplu</p>
     <div class="cf-actions" id="chips" style="margin-top:0;margin-bottom:16px"></div>
 
     <div class="cf-chat">
@@ -61,6 +217,7 @@
   </div>
 
 </div></section>
+</main>
 
 <footer class="foot"><div class="container">
     <div class="foot-grid">

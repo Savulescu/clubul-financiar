@@ -12,6 +12,56 @@
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+  /* —— Semnătura paginii: curba spre libertate —— */
+  .u-fire{ padding:28px 28px 24px; }
+  .u-fire-head{ display:flex; align-items:flex-start; justify-content:space-between;
+    gap:22px; flex-wrap:wrap; }
+  .u-fire .u-figure{ font-size:clamp(2.6rem,6.4vw,4.2rem); }
+  .u-fire-tag{ font-family:'Fraunces',serif; font-style:italic; color:var(--u-muted);
+    font-size:.96rem; white-space:nowrap; }
+  .u-fire-ring{ flex:0 0 auto; margin-top:2px; }
+  .u-fire-ring .cf-ring{ display:block; }
+
+  .u-curve{ position:relative; margin:20px 0 4px; }
+  .u-curve-svg{ width:100%; height:clamp(170px,26vw,236px); display:block; overflow:visible; }
+  .u-curve-cap{ color:var(--u-muted); font-size:.84rem; line-height:1.5;
+    margin:12px 0 0; max-width:62ch; }
+
+  /* etichete peste curbă */
+  .u-curve-anno{ position:absolute; inset:0; pointer-events:none; }
+  .u-curve-target{ position:absolute; right:2px; transform:translateY(-130%);
+    font-size:.72rem; font-weight:700; letter-spacing:.02em; color:var(--u-gold);
+    font-variant-numeric:tabular-nums; background:var(--u-panel);
+    padding:1px 7px; border-radius:999px; border:1px solid var(--u-line-soft);
+    white-space:nowrap; max-width:calc(100% - 4px); }
+  .u-curve-hit{ position:absolute; transform:translate(-50%,-260%);
+    font-family:'Fraunces',serif; font-weight:600; font-size:.92rem; color:var(--u-ink);
+    font-variant-numeric:tabular-nums lining-nums; white-space:nowrap;
+    background:var(--u-gold-soft); border:1px solid var(--u-line);
+    padding:2px 10px; border-radius:999px; box-shadow:var(--u-shadow); }
+  @media(max-width:680px){
+    .u-curve-target{ font-size:.66rem; padding:1px 6px; }
+    .u-curve-target .amt{ display:none; }
+    .u-curve-hit{ font-size:.78rem; padding:1px 8px; }
+  }
+
+  /* repere sub curbă */
+  .u-fire-ledger{ display:grid; grid-template-columns:repeat(3,1fr);
+    gap:14px; margin-top:18px; padding-top:16px;
+    border-top:1px solid var(--u-line-soft); }
+  .u-fire-cell + .u-fire-cell{ border-left:1px solid var(--u-line-soft); padding-left:16px; }
+  .u-fire-cell .u-kpi-sub{ margin:0 0 6px; }
+
+  @media(max-width:680px){
+    .u-fire-head{ flex-direction:column; align-items:flex-start; gap:8px; }
+    .u-fire-ring{ order:-1; }
+    .u-fire-ledger{ grid-template-columns:1fr; gap:0; }
+    .u-fire-cell{ padding:11px 0; border-top:1px solid var(--u-line-soft); }
+    .u-fire-cell + .u-fire-cell{ border-left:0; padding-left:0; }
+    .u-fire-cell:first-child{ border-top:0; padding-top:0; }
+  }
+</style>
 </head><body>
 <header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
@@ -50,26 +100,45 @@
     <!-- TOOL (gated) -->
     <div id="uTool" style="display:none">
 
-      <!-- SIGNATURE: FIRE ring + capital -->
-      <div class="u-panel" style="text-align:center">
-        <div class="u-label">Independența ta financiară</div>
-        <div class="u-ringwrap" id="uRing" style="margin:.6rem auto"></div>
-        <div class="u-grid u-grid-2" style="max-width:30rem;margin:1rem auto 0">
+      <!-- SIGNATURE: curba de creștere spre țintă -->
+      <div class="u-stmt u-fire">
+        <div class="u-guilloche" aria-hidden="true"></div>
+        <div class="u-fire-head">
           <div>
-            <div class="u-kpi-sub">Capital investibil azi</div>
-            <div class="u-kpi" id="uCapCurent">—</div>
+            <p class="u-eyebrow" style="margin:0 0 6px">Anul libertății tale</p>
+            <p class="u-figure" id="uAnLib">—</p>
+            <div class="u-figure-sub">
+              <span class="u-fire-tag" id="uAnLibTag">—</span>
+              <span class="u-figure-rule"></span>
+            </div>
           </div>
-          <div>
-            <div class="u-kpi-sub">Țintă (regula 4%)</div>
-            <div class="u-kpi u-gold-t" id="uCapTinta">—</div>
-          </div>
+          <div class="u-ringwrap u-fire-ring" id="uRing" aria-hidden="true"></div>
         </div>
-        <div class="u-gauge" style="max-width:32rem;margin:1.2rem auto 0">
-          <div class="track">
-            <div class="fill" id="uGaugeFill" style="width:0%"></div>
-            <div class="marker" id="uGaugeMarker" style="left:0%"></div>
+
+        <!-- curba -->
+        <figure class="u-curve" id="uCurveFig">
+          <svg class="u-curve-svg" id="uCurveSvg" viewBox="0 0 1000 300" preserveAspectRatio="none"
+               role="img" aria-labelledby="uCurveDesc"></svg>
+          <figcaption id="uCurveDesc" class="u-curve-cap">
+            Capitalul de azi, compus la randamentul tău real, cu economiile lunare adăugate —
+            până atinge ținta (regula 4%).
+          </figcaption>
+        </figure>
+
+        <!-- repere sub curbă -->
+        <div class="u-fire-ledger">
+          <div class="u-fire-cell">
+            <div class="u-kpi-sub">Capital investibil azi</div>
+            <div class="u-kpi sm" id="uCapCurent">—</div>
           </div>
-          <div class="ends"><span>0</span><span id="uGaugeEnd">Țintă</span></div>
+          <div class="u-fire-cell">
+            <div class="u-kpi-sub">Țintă (regula 4%)</div>
+            <div class="u-kpi sm u-gold-t" id="uCapTinta">—</div>
+          </div>
+          <div class="u-fire-cell">
+            <div class="u-kpi-sub">Progres</div>
+            <div class="u-kpi sm" id="uProgT">—</div>
+          </div>
         </div>
       </div>
 
@@ -115,10 +184,8 @@
 
       <!-- PROJECTION -->
       <div class="u-panel" style="margin-top:1.1rem">
-        <div class="u-panel-h">
-          <div class="u-label">Proiecția averii investibile</div>
-        </div>
-        <p class="u-kpi-sub" style="margin:.2rem 0 .8rem">Capitalul de azi, compus la randamentul tău real, cu economiile lunare adăugate. Rândul marcat <span class="u-gold-t">◆</span> e momentul în care atingi ținta.</p>
+        <div class="u-label">Reperele drumului</div>
+        <p class="u-kpi-sub" style="margin:.2rem 0 .8rem">Cât ajunge să valoreze averea ta investibilă la fiecare etapă. Rândul marcat <span class="u-gold-t">◆</span> e momentul în care atingi ținta.</p>
         <div id="uProiectie"></div>
       </div>
 
@@ -168,6 +235,91 @@
     return "Ești la început — dar fiecare leu investit lucrează pentru tine.";
   }
 
+  var REDUCE = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Construiește curba de creștere spre țintă. Pur prezentare:
+  // folosește EXACT compoundingul din proiecteaza() — nicio cifră nouă.
+  function deseneazaCurba(f, r){
+    var svg = $("uCurveSvg"); if (!svg) return;
+    var W = 1000, H = 300, padL = 8, padR = 8, padT = 20, padB = 8;
+
+    // Orizont: până atinge ținta (+un pic de respiro), cu minim 12 ani ca să arate creșterea.
+    var aniH = isFinite(f.aniRamasi) && f.aniRamasi > 0 ? Math.ceil(f.aniRamasi * 1.12) : 25;
+    aniH = Math.max(12, Math.min(45, aniH));
+
+    // Eșantionează lunar, ca o curbă netedă.
+    var luni = aniH * 12, pts = [], maxV = Math.max(f.capitalTinta, 1);
+    for (var i = 0; i <= luni; i++){
+      var v = proiecteaza(f.capitalCurent, f.economiiLunare, r, i / 12);
+      if (v > maxV) maxV = v;
+      pts.push(v);
+    }
+    var topV = maxV * 1.06;
+    function X(idx){ return padL + (idx / luni) * (W - padL - padR); }
+    function Y(val){ return padT + (1 - val / topV) * (H - padT - padB); }
+
+    // Path-ul liniei + aria de sub ea.
+    var line = "", area = "";
+    for (var j = 0; j < pts.length; j++){
+      var x = X(j).toFixed(1), y = Y(pts[j]).toFixed(1);
+      line += (j ? " L" : "M") + x + " " + y;
+    }
+    area = line + " L" + X(luni).toFixed(1) + " " + (H - padB) + " L" + X(0).toFixed(1) + " " + (H - padB) + " Z";
+
+    // Linia-țintă + punctul de intersecție (◆).
+    var yT = Y(f.capitalTinta);
+    var crossIdx = -1;
+    for (var k = 0; k < pts.length; k++){ if (pts[k] >= f.capitalTinta){ crossIdx = k; break; } }
+    var crossX = crossIdx >= 0 ? X(crossIdx) : null;
+
+    var dur = REDUCE ? "0s" : "1.2s";
+    var s =
+      '<defs>' +
+        '<linearGradient id="uCurveFill" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0" stop-color="var(--u-gold)" stop-opacity=".26"/>' +
+          '<stop offset="1" stop-color="var(--u-gold)" stop-opacity="0"/>' +
+        '</linearGradient>' +
+      '</defs>' +
+      // aria
+      '<path d="' + area + '" fill="url(#uCurveFill)" stroke="none"/>' +
+      // linia-țintă
+      '<line x1="' + padL + '" y1="' + yT.toFixed(1) + '" x2="' + (W - padR) + '" y2="' + yT.toFixed(1) +
+        '" stroke="var(--u-gold2)" stroke-width="1.4" stroke-dasharray="2 6" vector-effect="non-scaling-stroke" opacity=".75"/>' +
+      // curba
+      '<path d="' + line + '" fill="none" stroke="var(--u-gold)" stroke-width="2.6" ' +
+        'vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" ' +
+        'pathLength="1" stroke-dasharray="1" stroke-dashoffset="' + (REDUCE ? 0 : 1) + '">' +
+        (REDUCE ? '' : '<animate attributeName="stroke-dashoffset" from="1" to="0" dur="' + dur + '" begin="0s" fill="freeze" calcMode="spline" keySplines=".2 .8 .2 1" keyTimes="0;1" values="1;0"/>') +
+      '</path>' +
+      // punctul „azi"
+      '<circle cx="' + X(0).toFixed(1) + '" cy="' + Y(pts[0]).toFixed(1) + '" r="3.4" fill="var(--u-panel)" stroke="var(--u-gold)" stroke-width="2" vector-effect="non-scaling-stroke"/>';
+
+    // marker ◆ la atingerea țintei
+    if (crossX != null){
+      var cy = yT.toFixed(1), cx = crossX.toFixed(1);
+      s +=
+        '<circle cx="' + cx + '" cy="' + cy + '" r="6.5" fill="var(--u-gold)"/>' +
+        '<circle cx="' + cx + '" cy="' + cy + '" r="6.5" fill="none" stroke="var(--u-panel)" stroke-width="2" vector-effect="non-scaling-stroke"/>';
+    }
+    svg.innerHTML = s;
+
+    // Etichete HTML peste SVG (procente fluide, ca să nu se deformeze fontul).
+    var fig = $("uCurveFig");
+    var old = fig.querySelector(".u-curve-anno"); if (old) old.remove();
+    var anno = document.createElement("div");
+    anno.className = "u-curve-anno";
+    var html = '<span class="u-curve-target" style="top:' + (yT / H * 100).toFixed(2) + '%">' +
+                 'Țintă<span class="amt"> · ' + CF.lei(f.capitalTinta) + '</span></span>';
+    if (crossX != null){
+      var leftPct = (crossX / W * 100);
+      html += '<span class="u-curve-hit" style="left:' + Math.min(80, Math.max(10, leftPct)).toFixed(2) +
+              '%;top:' + (yT / H * 100).toFixed(2) + '%">' +
+              (f.dataLibertate ? f.dataLibertate.getFullYear() : "ținta atinsă") + '</span>';
+    }
+    anno.innerHTML = html;
+    fig.appendChild(anno);
+  }
+
   function render(){
     p = U.getProfil();
 
@@ -186,19 +338,30 @@
     f = U.fire(p);
     var r = rand(p);
 
-    // Ring
-    $("uRing").innerHTML = U.ringSVG(f.progres, { size: 200, label: CF.pct(f.progres), sub: "spre libertate" });
+    // — Cifra-erou: anul libertății —
+    if (f.dataLibertate){
+      $("uAnLib").textContent  = f.dataLibertate.getFullYear();
+      $("uAnLibTag").textContent = isFinite(f.aniRamasi)
+        ? "peste " + f.aniRamasi.toFixed(1) + " ani"
+        : "la ritmul actual";
+    } else {
+      $("uAnLib").textContent  = "—";
+      $("uAnLibTag").textContent = "indisponibil la ritmul actual";
+    }
 
-    // Capital
+    // Ring mic, auriu (cue de progres lângă cifră) — culoare forțată la brand
+    $("uRing").innerHTML = U.ringSVG(f.progres, {
+      size: 116, stroke: 9, color: "var(--u-gold)",
+      label: CF.pct(f.progres), sub: "din țintă"
+    });
+
+    // Capital + progres (sub curbă)
     $("uCapCurent").textContent = CF.lei(f.capitalCurent);
     $("uCapTinta").textContent  = CF.lei(f.capitalTinta);
+    $("uProgT").textContent     = CF.pct(f.progres);
 
-    // Gauge
-    var g = Math.max(0, Math.min(100, f.progres * 100));
-    $("uGaugeFill").style.width   = g.toFixed(1) + "%";
-    $("uGaugeMarker").style.left  = g.toFixed(1) + "%";
-    $("uGaugeFill").classList.toggle("ok", f.progres >= 0.5);
-    $("uGaugeEnd").textContent    = CF.lei(f.capitalTinta);
+    // — Curba de creștere spre țintă (semnătura paginii) —
+    deseneazaCurba(f, r);
 
     // Mesaj
     $("uMesajTxt").textContent = mesaj(f.progres, f.aniRamasi);

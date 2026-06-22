@@ -43,7 +43,71 @@
   .u-check input:checked + .ct b{ text-decoration:line-through; text-decoration-color:var(--u-line); }
   .u-prog{ display:flex; align-items:center; gap:10px; margin-top:14px; font-size:.85rem; color:var(--u-muted); }
   .u-prog b{ color:var(--u-gold); font-variant-numeric:tabular-nums; }
-  @media (prefers-reduced-motion:reduce){ .u-check label,.u-check input{ transition:none; } }
+
+  /* === SEMNĂTURĂ: scutul de acoperire — meter vertical, golul = eroul === */
+  .shield-wrap{
+    display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:stretch;
+    margin:6px 0 2px;
+  }
+  @media(max-width:560px){ .shield-wrap{ grid-template-columns:1fr; gap:18px; } }
+  /* coloana-scut: bară verticală groasă; partea goală (golul) gravată */
+  .shield{
+    position:relative; width:96px; min-height:188px; border-radius:16px;
+    border:1px solid var(--u-line); overflow:hidden; align-self:stretch;
+    background:
+      repeating-linear-gradient(-45deg, var(--u-line-soft) 0 1px, transparent 1px 7px),
+      var(--u-panel2);
+  }
+  /* partea acoperită deja, crește de jos în sus; folosește --cov (setat din width-ul existent prin JS? NU — vezi mai jos) */
+  .shield .cov{
+    position:absolute; left:0; right:0; bottom:0; border-radius:0 0 15px 15px;
+    background:linear-gradient(180deg,var(--u-gold2),var(--u-gold));
+    box-shadow:0 -1px 0 var(--u-gold2), 0 -10px 30px rgba(168,134,49,.28) inset;
+    transition:height .9s cubic-bezier(.2,.7,.2,1);
+  }
+  .shield.is-ok .cov{ background:linear-gradient(180deg,#5fe0b6,var(--u-pos)); box-shadow:0 -1px 0 #5fe0b6, 0 -10px 30px rgba(15,157,110,.30) inset; }
+  .shield .cov-line{ /* linia de nivel (marcaj de acoperire) */
+    position:absolute; left:-1px; right:-1px; height:2px;
+    background:var(--u-panel); box-shadow:0 0 0 1px var(--u-gold);
+    transition:bottom .9s cubic-bezier(.2,.7,.2,1);
+  }
+  .shield .cov-pct{
+    position:absolute; left:0; right:0; text-align:center; transform:translateY(50%);
+    font-family:'Sora',sans-serif; font-weight:800; font-size:.86rem; letter-spacing:-.01em;
+    color:#13263f; font-variant-numeric:tabular-nums; text-shadow:0 1px 0 rgba(255,255,255,.25);
+    transition:bottom .9s cubic-bezier(.2,.7,.2,1); pointer-events:none;
+  }
+  /* când acoperirea e mică, eticheta % stă DEASUPRA liniei, pe partea gravată (golul) */
+  .shield .cov-pct.out{ color:var(--u-gold); text-shadow:none; transform:translateY(-6px); }
+  /* când acoperirea e aproape totală, eticheta coboară SUB linie (altfel s-ar tăia sus) */
+  .shield .cov-pct.high{ transform:translateY(140%); }
+  .shield.is-ok .cov-pct.high{ color:#0a3a2a; }
+  /* coloana-cifră */
+  .shield-fig{ display:flex; flex-direction:column; justify-content:center; }
+  .shield-need{
+    font-family:'Sora',system-ui,sans-serif; font-weight:800; font-variant-numeric:tabular-nums;
+    letter-spacing:-.02em; line-height:1; font-size:clamp(2.1rem,4.6vw,3rem); color:var(--u-ink);
+  }
+  .shield-legend{ display:flex; flex-direction:column; gap:9px; margin-top:16px; }
+  .shield-leg{ display:flex; align-items:center; gap:10px; font-size:.9rem; color:var(--u-muted); }
+  .shield-leg .dot{ width:11px; height:11px; border-radius:3px; flex:0 0 auto; }
+  .shield-leg .dot.gold{ background:linear-gradient(135deg,var(--u-gold2),var(--u-gold)); }
+  .shield-leg .dot.gap{ border:1px solid var(--u-line); background:
+      repeating-linear-gradient(-45deg, var(--u-line) 0 1px, transparent 1px 4px); }
+  .shield-leg .dot.ok{ background:linear-gradient(135deg,#5fe0b6,var(--u-pos)); }
+  .shield-leg .v{ color:var(--u-ink); font-weight:700; font-variant-numeric:tabular-nums; margin-left:auto; }
+
+  /* breakdown: rescope pe markup-ul emis de render() (.u-row) — doar prezentare */
+  #breakdown .u-row{ padding:11px 0; }
+  #breakdown .u-row .k{ color:var(--u-ink); }
+  #breakdown .u-row:last-child{ margin-top:2px; padding-top:13px; border-top:1px solid var(--u-line); border-bottom:0; }
+  #breakdown .u-row:last-child .k b{ font-family:'Fraunces',serif; font-weight:600; }
+  #breakdown .u-row:last-child .v{ font-size:1.06rem; }
+
+  @media (prefers-reduced-motion:reduce){
+    .u-check label,.u-check input{ transition:none; }
+    .shield .cov,.shield .cov-line,.shield .cov-pct{ transition:none; }
+  }
 </style>
 </head><body>
 <header class="nav"><div class="container nav-in">
@@ -84,19 +148,31 @@
         <!-- PANEL PRINCIPAL: nevoia de asigurare -->
         <div class="u-panel u-span-2">
           <p class="u-label">Asigurare de viață de care ai nevoie</p>
-          <div class="u-grid u-grid-2" style="align-items:end; gap:8px 24px;">
-            <div>
-              <div class="u-kpi lg" id="kNevoie">—</div>
-              <p class="u-kpi-sub">acoperire totală recomandată pentru familia ta</p>
+
+          <!-- SEMNĂTURĂ: scutul — meter vertical, golul de acoperire e eroul -->
+          <div class="shield-wrap">
+            <div class="shield" id="shield" aria-hidden="true">
+              <div class="cov" id="shCov" style="height:0%"></div>
+              <div class="cov-line" id="shLine" style="bottom:0%"></div>
+              <div class="cov-pct out" id="shPct" style="bottom:0%">0%</div>
             </div>
-            <div>
-              <div class="u-gauge">
-                <div class="track"><div class="fill" id="gFill" style="width:0%"></div>
-                  <div class="marker" id="gMark" style="left:0%"></div></div>
-                <div class="ends"><span id="gAcop">0</span><span id="gNev">nevoie</span></div>
+            <div class="shield-fig">
+              <div class="shield-need" id="kNevoie">—</div>
+              <p class="u-kpi-sub" style="margin-top:7px;">acoperire totală recomandată pentru familia ta</p>
+              <div class="shield-legend">
+                <div class="shield-leg"><span class="dot gold" id="legDot"></span>
+                  Acoperit de averea ta lichidă<span class="v" id="gAcop">0</span></div>
+                <div class="shield-leg"><span class="dot gap"></span>
+                  Rămas de acoperit<span class="v u-neg" id="legGap">0</span></div>
               </div>
-              <p class="u-kpi-sub" style="margin-top:8px;">cât acoperă deja averea ta lichidă</p>
             </div>
+          </div>
+
+          <!-- sursa de date (gauge orizontal original) — păstrată, ascunsă, hrănește scutul -->
+          <div class="u-gauge" id="gaugeSrc" hidden style="display:none;">
+            <div class="track"><div class="fill" id="gFill" style="width:0%"></div>
+              <div class="marker" id="gMark" style="left:0%"></div></div>
+            <div class="ends"><span id="gNev">nevoie</span></div>
           </div>
 
           <div id="gapBox" style="margin:18px 0 4px;"></div>
@@ -272,6 +348,36 @@
   window.addEventListener("cf-profil", render);
   window.addEventListener("cf-auth", function(){ U.syncCloud().then(render); });
   CF.requireTier("uTool","ultra",{msg:"Scutul familiei face parte din planul Ultra."});
+})();
+
+/* PREZENTARE — oglindește acoperirea (deja calculată în #gFill) pe scutul vertical.
+   Nu schimbă nicio cifră: doar citește lățimea setată de render() și o reflectă. */
+(function(){
+  "use strict";
+  var gFill = document.getElementById("gFill"); if(!gFill) return;
+  function sync(){
+    var w = Math.max(0, Math.min(100, parseFloat(gFill.style.width) || 0));
+    var cov = document.getElementById("shCov"),
+        line = document.getElementById("shLine"),
+        pct = document.getElementById("shPct"),
+        shield = document.getElementById("shield");
+    if(!cov) return;
+    cov.style.height = w + "%";
+    line.style.bottom = w + "%";
+    pct.style.bottom = w + "%";
+    pct.textContent = Math.round(w) + "%";
+    pct.classList.toggle("out", w < 16);
+    pct.classList.toggle("high", w >= 85);
+    var ok = gFill.classList.contains("ok");
+    shield.classList.toggle("is-ok", ok);
+    document.getElementById("legDot").className = "dot " + (ok ? "ok" : "gold");
+    try {
+      var g = CF.U.protectie(CF.U.getProfil()).gap;
+      document.getElementById("legGap").textContent = CF.lei(g);
+    } catch(e){}
+  }
+  new MutationObserver(sync).observe(gFill, { attributes:true, attributeFilter:["style","class"] });
+  sync();
 })();
 </script>
 </body></html>

@@ -12,6 +12,57 @@
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+/* --- Calendar fiscal: stiluri proprii paginii (nu ating clasele partajate) --- */
+#timeline.u-timeline{ padding-left:30px; }
+/* Antet de lună pe firul agendei */
+.cal-month{ position:relative; margin:2px 0 14px; padding-top:6px; }
+.cal-month:not(:first-child){ margin-top:10px; }
+.cal-month::before{ /* nod-romb auriu, gol, pe rail */
+  content:""; position:absolute; left:-27px; top:9px; width:11px; height:11px;
+  background:var(--u-panel); border:2px solid var(--u-gold);
+  transform:rotate(45deg); border-radius:2px; }
+.cal-month-lbl{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:1.04rem;
+  color:var(--u-ink); letter-spacing:.005em; display:flex; align-items:baseline; gap:10px; }
+.cal-month-lbl .cnt{
+  font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--u-muted); font-family:'Plus Jakarta Sans',system-ui,sans-serif; font-weight:600; }
+.cal-month-rule{ height:1px; margin-top:8px;
+  background:linear-gradient(90deg,var(--u-gold-soft),transparent); }
+/* Card termen — pe firul agendei, cu accent discret pentru cele apropiate */
+.u-tl-item.cal-card{
+  padding:13px 16px 14px; margin-bottom:14px; border-radius:14px;
+  background:var(--u-panel2); border:1px solid var(--u-line-soft); }
+.u-tl-item.cal-card::before{ left:-29px; top:18px; }
+.u-tl-item.cal-card.soon{
+  background:linear-gradient(180deg,var(--u-gold-soft),var(--u-panel2));
+  border-color:color-mix(in srgb,var(--u-gold) 38%,transparent); }
+/* Eticheta „apropiat” */
+.cal-soon-tag{
+  display:inline-flex; align-items:center; gap:5px; font-size:.68rem; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase; color:#1a1304;
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  padding:2px 9px; border-radius:999px; vertical-align:middle; margin-left:8px; }
+/* Bara de export întreaga agendă */
+.cal-export-bar{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:12px; margin-bottom:4px; }
+.cal-export-bar .meta{ color:var(--u-muted); font-size:.86rem; }
+.cal-export-bar .meta b{ color:var(--u-ink); font-variant-numeric:tabular-nums; }
+/* Focus vizibil pe controale */
+#uTool .u-btn:focus-visible,
+#uTool .u-chip:focus-visible{
+  outline:2px solid var(--u-gold); outline-offset:2px; border-radius:12px; }
+/* Respectă reduce-motion (singura animație = fade confirmarea) */
+@media (prefers-reduced-motion:reduce){
+  #uTool [data-conf]{ transition:none !important; }
+}
+@media (max-width:520px){
+  .cal-export-bar{ align-items:flex-start; }
+  .cal-export-bar .u-btn{ width:100%; }
+}
+</style>
 </head><body>
 <header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
@@ -73,7 +124,7 @@
             <div class="u-row"><span class="k">TVA</span><span class="lead-dots"></span><span class="v">decont D300 (lunar/trim.)</span></div>
             <div class="u-row"><span class="k">SRL</span><span class="lead-dots"></span><span class="v">impozit micro/profit + bilanț</span></div>
             <div class="u-row"><span class="k">Salarii</span><span class="lead-dots"></span><span class="v">D112 contribuții (cu salariați)</span></div>
-            <p class="u-kpi-sub" style="margin-top:10px">Termenele marcate ◆ sunt sub 30 de zile.</p>
+            <p class="u-kpi-sub" style="margin-top:10px">Termenele cu eticheta „apropiat" sunt sub 30 de zile; „urgent" sub 14.</p>
           </div>
 
         </div>
@@ -86,7 +137,14 @@
 
         <!-- Timeline -->
         <div class="u-panel" style="margin-top:18px">
-          <p class="u-label">Toate termenele tale</p>
+          <div class="cal-export-bar">
+            <p class="u-label" style="margin:0">Toate termenele tale</p>
+            <div style="display:flex;align-items:center;gap:14px">
+              <span class="meta" id="tlMeta"></span>
+              <button type="button" class="u-btn u-btn-ghost" id="exportAll" style="padding:9px 16px;font-size:.86rem">Exportă toată agenda</button>
+            </div>
+          </div>
+          <p class="u-kpi-sub" id="exportHint" style="margin:2px 0 14px">Descarcă un singur fișier .ics cu toate termenele de mai jos — se adaugă în Google Calendar, Apple sau Outlook, cu memento cu 7 zile înainte.</p>
           <ol class="u-timeline" id="timeline" style="list-style:none"></ol>
           <p class="u-kpi-sub" id="tlEmpty" style="display:none;margin-top:4px">Niciun termen pentru acest filtru.</p>
         </div>
@@ -119,6 +177,15 @@
   var U = CF.U, $ = CF.$;
   var p = U.getProfil();
   var activeFilter = "toate";
+  var exportabile = [];   // termenele vizibile la filtrul curent (pentru export în masă)
+
+  var LUNI = ["ianuarie","februarie","martie","aprilie","mai","iunie",
+              "iulie","august","septembrie","octombrie","noiembrie","decembrie"];
+  function lunaKey(d){ return d.getFullYear() + "-" + d.getMonth(); }
+  function lunaLabel(d){
+    var s = LUNI[d.getMonth()] + " " + d.getFullYear();
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
 
   var TIPURI = {
     du:      { lbl: "Declarația Unică" },
@@ -180,23 +247,47 @@
       cWrap.appendChild(b);
     });
 
-    // --- Timeline ---
+    // --- Timeline (grupat pe lună) ---
     var tl = $("timeline");
     tl.innerHTML = "";
-    var vizibile = 0;
-    dl.forEach(function(e, i){
-      if (activeFilter !== "toate" && e.tip !== activeFilter) return;
-      vizibile++;
+    // termenele vizibile pentru filtrul curent — folosite și la grupare și la export
+    var vizDl = dl.filter(function(e){ return activeFilter === "toate" || e.tip === activeFilter; });
+    var vizibile = vizDl.length;
+    exportabile = vizDl;
+
+    // câte termene pe fiecare lună (pentru antet)
+    var perLuna = {};
+    vizDl.forEach(function(e){ var k = lunaKey(e.data); perLuna[k] = (perLuna[k]||0)+1; });
+
+    var lunaCurenta = null;
+    vizDl.forEach(function(e){
+      var i = dl.indexOf(e); // index stabil în lista completă (pentru data-i)
       var z = CF.zilePana(e.data);
       var soon = z <= 30;
+
+      // --- Antet de lună (când se schimbă luna) ---
+      var lk = lunaKey(e.data);
+      if (lk !== lunaCurenta){
+        lunaCurenta = lk;
+        var mh = document.createElement("li");
+        mh.className = "cal-month";
+        var n = perLuna[lk];
+        mh.innerHTML =
+          '<div class="cal-month-lbl">' + esc(lunaLabel(e.data)) +
+            '<span class="cnt">' + n + (n === 1 ? ' termen' : ' termene') + '</span></div>' +
+          '<div class="cal-month-rule"></div>';
+        tl.appendChild(mh);
+      }
+
       var li = document.createElement("li");
-      li.className = "u-tl-item" + (soon ? " soon" : "");
+      li.className = "u-tl-item cal-card" + (soon ? " soon" : "");
 
       var peste = z === 0 ? "astăzi" : z === 1 ? "peste 1 zi" : "peste " + z + " zile";
       var tipLbl = TIPURI[e.tip] ? TIPURI[e.tip].lbl : e.tip;
+      var soonTag = soon ? '<span class="cal-soon-tag">' + (z <= 14 ? 'urgent' : 'apropiat') + '</span>' : '';
 
       li.innerHTML =
-        '<div class="u-tl-date">' + esc(CF.dataRO(e.data)) + ' · ' + esc(peste) + '</div>' +
+        '<div class="u-tl-date">' + esc(CF.dataRO(e.data)) + ' · ' + esc(peste) + soonTag + '</div>' +
         '<div class="u-tl-title">' + esc(e.titlu) + '</div>' +
         (e.desc ? '<div class="u-tl-desc">' + esc(e.desc) + '</div>' : '') +
         '<div class="u-tl-desc" style="margin-top:3px"><span class="u-chip" style="font-size:.74rem;padding:2px 9px">' + esc(tipLbl) + '</span></div>' +
@@ -220,6 +311,14 @@
       tl.appendChild(li);
     });
 
+    // --- Sumar + buton export ---
+    var soonN = vizDl.filter(function(e){ return CF.zilePana(e.data) <= 30; }).length;
+    $("tlMeta").innerHTML = '<b>' + vizibile + '</b> ' + (vizibile === 1 ? 'termen' : 'termene') +
+      (soonN ? ' · <b>' + soonN + '</b> sub 30 de zile' : '');
+    var btnExp = $("exportAll");
+    btnExp.disabled = !vizibile;
+    btnExp.style.opacity = vizibile ? "1" : ".5";
+
     $("tlEmpty").style.display = vizibile ? "none" : "";
   }
 
@@ -231,6 +330,40 @@
     s.style.color = "var(--u-pos)";
     setTimeout(function(){ s.style.opacity = "0"; }, 2600);
   }
+
+  // Export întreaga agendă vizibilă într-un singur fișier .ics (același format ca per-termen).
+  function icsEsc(s){ return String(s == null ? "" : s).replace(/[,;\\]/g, "\\$&").replace(/\n/g, "\\n"); }
+  function exportAgenda(){
+    var ev = exportabile || [];
+    if (!ev.length) return;
+    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Clubul Financiar//RO", "CALSCALE:GREGORIAN",
+                 "X-WR-CALNAME:Agenda fiscală — Clubul Financiar"];
+    ev.forEach(function(e){
+      var dt = e.data.getFullYear() +
+               String(e.data.getMonth() + 1).padStart(2, "0") +
+               String(e.data.getDate()).padStart(2, "0");
+      lines.push("BEGIN:VEVENT",
+        "UID:cf-agenda-" + dt + "-" + Math.abs(hashStr(e.titlu)) + "@clubulfinanciar.ro",
+        "DTSTART;VALUE=DATE:" + dt,
+        "SUMMARY:" + icsEsc(e.titlu),
+        "DESCRIPTION:" + icsEsc(e.desc || ""),
+        "BEGIN:VALARM", "TRIGGER:-P7D", "ACTION:DISPLAY", "DESCRIPTION:" + icsEsc(e.titlu), "END:VALARM",
+        "END:VEVENT");
+    });
+    lines.push("END:VCALENDAR");
+    var blob = new Blob([lines.join("\r\n")], { type: "text/calendar" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "agenda-fiscala-clubul-financiar.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  function hashStr(s){ var h = 0; for (var i = 0; i < s.length; i++) { h = (h << 5) - h + s.charCodeAt(i) | 0; } return h; }
+  $("exportAll").addEventListener("click", function(){
+    exportAgenda();
+    var b = $("exportAll"), t = b.textContent;
+    b.textContent = "Descărcat ↓";
+    setTimeout(function(){ b.textContent = t; }, 2400);
+  });
 
   render();
   window.addEventListener("cf-profil", render);

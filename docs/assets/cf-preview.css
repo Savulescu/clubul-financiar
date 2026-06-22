@@ -1,0 +1,255 @@
+/* =============================================================================
+   cf-preview.css — MINI-PREVIEW pentru cardurile de instrumente
+   -----------------------------------------------------------------------------
+   Fiecare instrument primește un "geam" mic în partea de sus a cardului care
+   arată, schematic, CE produce unealta: un gauge spre plafon, o curbă de
+   creștere, bare comparative, un inel de alocare, rânduri de registru, o agendă,
+   bule de chat, un scut de acoperire sau un teanc de documente.
+   Tokens din cf-ultra.css (--u-gold, --u-ink, --u-line...) — paginile care
+   folosesc previewurile trebuie să fie .u-page (sau să definească tokenii).
+   ============================================================================= */
+
+/* ---------- GEAMUL (rama comună) ---------- */
+.u-prev{
+  position:relative; height:96px; border-radius:13px; overflow:hidden;
+  background:
+    linear-gradient(180deg, var(--u-panel2), var(--u-panel));
+  border:1px solid var(--u-line-soft);
+  margin:-4px -4px 14px; padding:12px 14px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.u-prev::after{ /* lumină auriedin colț, ca pe extras */
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(120% 90% at 88% -20%, var(--u-gold-soft), transparent 60%);
+}
+.u-prev > *{ position:relative; z-index:1; }
+.u-prev-cap{ /* eticheta micuță din colț */
+  position:absolute; top:9px; right:11px; z-index:2;
+  font-family:'Fraunces',serif; font-size:.6rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--u-gold); opacity:.8;
+}
+/* previewurile se redau în starea FINALĂ (bune la screenshot), cu intrare animată */
+
+/* ---------- 1. KPI MINI (avere netă, cockpit) ---------- */
+.u-prev-kpi{ display:flex; align-items:baseline; gap:9px; }
+.u-prev-kpi b{
+  font-family:'Sora',system-ui,sans-serif; font-weight:800;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+  font-size:1.62rem; color:var(--u-ink); line-height:1;
+}
+.u-prev-kpi .d{ font-size:.78rem; font-weight:800; font-variant-numeric:tabular-nums; }
+.u-prev-kpi .d.up{ color:var(--u-pos); } .u-prev-kpi .d.down{ color:var(--u-neg); }
+.u-prev-kpi small{ display:block; color:var(--u-muted); font-size:.7rem; margin-top:5px; letter-spacing:.02em; }
+
+/* ---------- 2. GAUGE MINI (plafon TVA, grad îndatorare, scor) ---------- */
+.u-gauge-mini{ width:100%; }
+.u-gauge-mini .track{
+  position:relative; height:9px; border-radius:999px;
+  background:var(--u-gold-soft); border:1px solid var(--u-line-soft); overflow:hidden;
+}
+.u-gauge-mini .fill{
+  position:absolute; inset:0 auto 0 0; border-radius:999px;
+  background:linear-gradient(90deg,var(--u-gold),var(--u-gold2));
+  transform-origin:left; animation:u-fill-x 1.1s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes u-fill-x{ from{ transform:scaleX(0) } to{ transform:scaleX(1) } }
+.u-gauge-mini .fill.warn{ background:linear-gradient(90deg,#e0a33a,var(--u-neg)); }
+.u-gauge-mini .fill.ok{ background:linear-gradient(90deg,var(--u-pos),#5fe0b6); }
+.u-gauge-mini .ends{ display:flex; justify-content:space-between; margin-top:8px;
+  font-size:.68rem; color:var(--u-muted); font-variant-numeric:tabular-nums; }
+.u-gauge-mini .ends b{ color:var(--u-ink); }
+
+/* ---------- 3. SPARKLINE / CURBĂ DE CREȘTERE (dobândă, FIRE, inflație) ---------- */
+.u-spark{ width:100%; height:54px; display:block; }
+.u-spark .u-spark-area{ fill:url(#uSparkFill); opacity:.5; }
+.u-spark .u-spark-line{
+  fill:none; stroke:var(--u-gold); stroke-width:2.2; stroke-linecap:round;
+  stroke-dasharray:240; animation:u-draw-line 1.3s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes u-draw-line{ from{ stroke-dashoffset:240 } to{ stroke-dashoffset:0 } }
+.u-spark .u-spark-dot{ fill:var(--u-gold2); }
+
+/* ---------- 4. BARE COMPARATIVE (PFA vs SRL, salariu vs dividend) ---------- */
+.u-bar{ display:flex; align-items:flex-end; gap:8px; height:50px; }
+.u-bar i{
+  flex:1; border-radius:5px 5px 2px 2px;
+  transform-origin:bottom; animation:u-grow-y 1s cubic-bezier(.2,.8,.2,1) both;
+  background:linear-gradient(180deg,var(--u-line),var(--u-gold-soft));
+  border:1px solid var(--u-line-soft); border-bottom:0;
+}
+@keyframes u-grow-y{ from{ transform:scaleY(.05) } to{ transform:scaleY(1) } }
+.u-bar i.win{ background:linear-gradient(180deg,var(--u-gold2),var(--u-gold)); border-color:transparent; }
+.u-bar-lbl{ display:flex; gap:8px; margin-top:7px; }
+.u-bar-lbl span{ flex:1; text-align:center; font-size:.66rem; color:var(--u-muted); }
+.u-bar-lbl span.win{ color:var(--u-gold); font-weight:700; }
+
+/* ---------- 5. INEL / DONUT MINI (alocare, scor sănătate) ---------- */
+.u-ring-mini{ width:54px; height:54px; flex:0 0 auto; }
+.u-ring-mini circle{ fill:none; stroke-width:7; }
+.u-ring-mini circle.bg{ stroke:var(--u-gold-soft); }
+.u-ring-mini circle.val{
+  stroke:var(--u-gold); stroke-linecap:round;
+  stroke-dasharray:151; transform:rotate(-90deg); transform-origin:50% 50%;
+}
+.u-ring-row{ display:flex; align-items:center; gap:14px; }
+.u-ring-legend{ display:flex; flex-direction:column; gap:5px; font-size:.7rem; color:var(--u-muted); }
+.u-ring-legend span{ display:flex; align-items:center; gap:6px; }
+.u-ring-legend i{ width:8px; height:8px; border-radius:2px; }
+
+/* ---------- 6. RÂNDURI DE REGISTRU MINI (radar fiscal, declarația unică) ---------- */
+.u-prev-ledger{ display:flex; flex-direction:column; gap:7px; width:100%; }
+.u-prev-ledger .r{ display:flex; align-items:baseline; gap:8px; font-size:.74rem; }
+.u-prev-ledger .r .k{ color:var(--u-muted); white-space:nowrap; }
+.u-prev-ledger .r .dots{ flex:1; border-bottom:1px dotted var(--u-line); transform:translateY(-3px); }
+.u-prev-ledger .r .v{ color:var(--u-ink); font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.u-prev-ledger .r .v.due{ color:var(--u-neg); }
+
+/* ---------- 7. AGENDĂ / TIMELINE MINI (calendar fiscal) ---------- */
+.u-prev-agenda{ display:flex; flex-direction:column; gap:8px; width:100%; }
+.u-prev-agenda .e{ display:flex; align-items:center; gap:9px; font-size:.73rem; }
+.u-prev-agenda .e .dt{ font-variant-numeric:tabular-nums; color:var(--u-gold); font-weight:700; width:34px; flex:0 0 auto; }
+.u-prev-agenda .e .ln{ flex:1; height:1px; background:var(--u-line-soft); }
+.u-prev-agenda .e .tg{ color:var(--u-muted); }
+.u-prev-agenda .e.soon .tg{ color:var(--u-ink); font-weight:600; }
+.u-prev-agenda .e .pin{ width:7px; height:7px; border-radius:50%; background:var(--u-panel); border:2px solid var(--u-gold); flex:0 0 auto; }
+.u-prev-agenda .e.soon .pin{ background:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* ---------- 8. CHAT MINI (concierge AI, asistent ANAF) ---------- */
+.u-prev-chat{ display:flex; flex-direction:column; gap:7px; width:100%; }
+.u-prev-chat .b{ max-width:80%; padding:6px 10px; border-radius:11px; font-size:.7rem; line-height:1.3; }
+.u-prev-chat .b.q{ align-self:flex-end; background:var(--u-gold-soft); border:1px solid var(--u-line-soft); color:var(--u-ink); border-bottom-right-radius:3px; }
+.u-prev-chat .b.a{ align-self:flex-start; background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304; font-weight:600; border-bottom-left-radius:3px; }
+.u-prev-chat .dots-typing{ display:inline-flex; gap:3px; }
+.u-prev-chat .dots-typing i{ width:4px; height:4px; border-radius:50%; background:#1a1304; opacity:.7; }
+
+/* ---------- 9. SCUT / ACOPERIRE (protecție, garda familiei) ---------- */
+.u-prev-shield{ display:flex; align-items:center; gap:13px; width:100%; }
+.u-prev-shield svg{ width:38px; height:42px; flex:0 0 auto; }
+.u-prev-shield .meta{ flex:1; }
+.u-prev-shield .meta b{ font-family:'Sora',sans-serif; font-weight:800; font-size:1.05rem; color:var(--u-ink); font-variant-numeric:tabular-nums; }
+.u-prev-shield .cov{ height:6px; border-radius:999px; background:var(--u-gold-soft); margin-top:7px; overflow:hidden; }
+.u-prev-shield .cov i{ display:block; height:100%; width:74%; border-radius:999px; background:linear-gradient(90deg,var(--u-pos),#5fe0b6); }
+
+/* ---------- 10. TEANC DE DOCUMENTE (seif) ---------- */
+.u-prev-docs{ display:flex; gap:9px; width:100%; align-items:flex-end; height:54px; }
+.u-prev-docs .doc{
+  flex:1; height:48px; border-radius:5px; background:var(--u-panel);
+  border:1px solid var(--u-line); position:relative; box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+.u-prev-docs .doc::before{ content:""; position:absolute; left:7px; right:7px; top:9px; height:2px;
+  background:var(--u-line); box-shadow:0 6px 0 var(--u-line-soft), 0 12px 0 var(--u-line-soft); }
+.u-prev-docs .doc::after{ content:"◆"; position:absolute; bottom:5px; right:6px; font-size:.6rem; color:var(--u-gold); }
+.u-prev-docs .doc:nth-child(1){ transform:rotate(-4deg) translateY(2px); }
+.u-prev-docs .doc:nth-child(3){ transform:rotate(4deg) translateY(2px); }
+
+/* ---------- 11. TERMINAL / TICKER (terminalul gratuit) ---------- */
+.u-prev-ticker{ display:flex; flex-direction:column; gap:6px; width:100%; }
+.u-prev-ticker .t{ display:flex; align-items:baseline; gap:8px; font-size:.72rem; font-variant-numeric:tabular-nums; }
+.u-prev-ticker .t .sym{ color:var(--u-muted); width:42px; }
+.u-prev-ticker .t .px{ color:var(--u-ink); font-weight:700; }
+.u-prev-ticker .t .ch.up{ color:var(--u-pos); } .u-prev-ticker .t .ch.down{ color:var(--u-neg); }
+.u-prev-ticker .t .ch{ font-weight:700; margin-left:auto; }
+
+/* ---------- 12. SIMULATOR „ÎNAINTE → DUPĂ" ---------- */
+.u-prev-sim{ display:flex; align-items:center; gap:11px; width:100%; }
+.u-prev-sim .col{ flex:1; text-align:center; }
+.u-prev-sim .col .lab{ font-size:.62rem; text-transform:uppercase; letter-spacing:.12em; color:var(--u-muted); }
+.u-prev-sim .col b{ display:block; font-family:'Sora',sans-serif; font-weight:800; font-variant-numeric:tabular-nums; font-size:1.12rem; margin-top:3px; }
+.u-prev-sim .col.after b{ color:var(--u-gold); }
+.u-prev-sim .arr{ color:var(--u-gold); font-size:1.1rem; flex:0 0 auto; }
+
+/* ---------- BADGE DE NIVEL (pe titlul cardului) ---------- */
+.u-tag{ display:inline-flex; align-items:center; gap:4px; font-size:.6rem; font-weight:800;
+  letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:999px;
+  vertical-align:middle; margin-left:7px; white-space:nowrap; }
+.u-tag.ultra{ font-family:'Fraunces',serif; text-transform:none; letter-spacing:.02em;
+  color:#1a1304; background:linear-gradient(135deg,var(--u-gold2),var(--u-gold)); }
+.u-tag.ultra::before{ content:"◆"; font-size:.7em; }
+.u-tag.pro{ color:var(--u-gold); border:1px solid var(--u-line); background:var(--u-gold-soft); }
+.u-tag.free{ color:var(--u-pos); border:1px solid color-mix(in srgb,var(--u-pos) 30%,transparent);
+  background:color-mix(in srgb,var(--u-pos) 10%,transparent); }
+
+/* ---------- SELECTOR DE TIER (Premium / Pro / Ultra) ---------- */
+.u-tiers{ position:sticky; top:62px; z-index:30; margin:6px 0 26px;
+  padding:12px 0; background:color-mix(in srgb,var(--u-bg1) 85%,transparent); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--u-line-soft); }
+.u-tiertabs{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.u-tiertab{ position:relative; text-align:left; cursor:pointer; appearance:none;
+  border:1px solid var(--u-line-soft); border-radius:15px; padding:13px 15px;
+  background:var(--u-panel); color:var(--u-ink); transition:transform .16s, border-color .2s, box-shadow .2s; overflow:hidden; }
+.u-tiertab::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:0; transition:opacity .2s; }
+.u-tiertab:hover{ transform:translateY(-2px); border-color:var(--u-line); }
+.u-tiertab .nm{ font-family:'Fraunces',serif; font-weight:600; font-size:1.06rem; display:flex; align-items:center; gap:7px; }
+.u-tiertab .sub{ display:block; color:var(--u-muted); font-size:.74rem; margin-top:1px; }
+.u-tiertab .pr{ display:block; margin-top:9px; font-family:'Sora',sans-serif; font-weight:800;
+  font-variant-numeric:tabular-nums; color:var(--u-ink); font-size:1.02rem; }
+.u-tiertab .pr small{ color:var(--u-muted); font-weight:600; font-size:.7rem; }
+.u-tiertab .yours{ position:absolute; top:11px; right:12px; font-size:.58rem; font-weight:800;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--u-pos);
+  border:1px solid color-mix(in srgb,var(--u-pos) 34%,transparent); background:color-mix(in srgb,var(--u-pos) 12%,transparent);
+  border-radius:999px; padding:2px 8px; display:none; }
+.u-tiertab.is-yours .yours{ display:inline-block; }
+.u-tiertab.active{ border-color:var(--u-gold); background:var(--u-gold-soft);
+  box-shadow:0 12px 30px rgba(168,134,49,.18); }
+.u-tiertab.active::before{ opacity:.9; }
+.u-tiertab.active .nm{ color:var(--u-gold); }
+.u-tier-ic{ font-size:1.05em; }
+@media(max-width:680px){
+  .u-tiertabs{ grid-template-columns:1fr; }
+  .u-tiertab{ display:flex; align-items:center; gap:12px; padding:11px 14px; }
+  .u-tiertab .nm{ font-size:.98rem; } .u-tiertab .pr{ margin:0 0 0 auto; }
+  .u-tiertab .sub{ display:none; }
+}
+
+/* banner de upgrade când previzualizezi un tier peste abonamentul tău */
+.u-upsell{ display:none; align-items:center; gap:16px; flex-wrap:wrap;
+  border:1px solid var(--u-line); border-radius:16px; padding:16px 20px; margin:0 0 22px;
+  background:linear-gradient(120deg,var(--u-gold-soft),transparent); }
+.u-upsell.show{ display:flex; }
+.u-upsell .tx{ flex:1; min-width:220px; }
+.u-upsell .tx b{ font-family:'Fraunces',serif; color:var(--u-ink); font-size:1.04rem; }
+.u-upsell .tx p{ color:var(--u-muted); font-size:.88rem; margin:3px 0 0; }
+
+/* benzi de tier (secțiuni) ascunse/afișate de taburi */
+.u-band[hidden]{ display:none; }
+.u-band-lock .u-mod .u-panel{ } /* loc pentru stil viitor de „blocat" */
+
+/* card blocat (peste tierul tău) — semn discret de lacăt */
+.u-mod.locked .u-panel{ opacity:.92; }
+.u-mod.locked .more{ color:var(--u-muted); }
+.u-lockpill{ display:none; align-items:center; gap:4px; font-size:.6rem; font-weight:800;
+  text-transform:uppercase; letter-spacing:.05em; color:var(--u-muted);
+  border:1px solid var(--u-line-soft); border-radius:999px; padding:3px 8px; margin-left:7px; }
+.u-mod.locked .u-lockpill{ display:inline-flex; }
+
+/* ---------- BARĂ STICKY DE CATEGORII (jump nav) ---------- */
+.u-jump{ position:sticky; top:64px; z-index:30; margin:0 0 22px;
+  background:color-mix(in srgb,var(--u-bg1) 86%,transparent); backdrop-filter:blur(10px);
+  border-top:1px solid var(--u-line-soft); border-bottom:1px solid var(--u-line-soft);
+  padding:11px 0; }
+.u-jump-in{ display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; }
+.u-jump-in::-webkit-scrollbar{ display:none; }
+.u-jump a{ flex:0 0 auto; font-size:.82rem; font-weight:600; color:var(--u-muted);
+  text-decoration:none; padding:7px 14px; border-radius:999px; border:1px solid transparent;
+  white-space:nowrap; transition:.18s; }
+.u-jump a:hover{ color:var(--u-ink); border-color:var(--u-line-soft); background:var(--u-gold-soft); }
+.u-jump a.is-active{ color:var(--u-gold); border-color:var(--u-line); background:var(--u-gold-soft); }
+
+/* ---------- ANTET DE CATEGORIE ---------- */
+.u-cat{ display:flex; align-items:baseline; gap:12px; margin:36px 0 4px; scroll-margin-top:128px; }
+.u-cat h2{ font-family:'Fraunces',serif; font-weight:600; color:var(--u-ink);
+  font-size:1.5rem; margin:0; letter-spacing:-.01em; }
+.u-cat .n{ font-family:'Sora',sans-serif; font-variant-numeric:tabular-nums; font-weight:700;
+  font-size:.78rem; color:var(--u-gold); border:1px solid var(--u-line); border-radius:999px; padding:2px 9px; }
+.u-cat .rule{ flex:1; height:1px; background:linear-gradient(90deg,var(--u-line),transparent); }
+.u-cat-sub{ color:var(--u-muted); font-size:.94rem; margin:6px 0 18px; max-width:62ch; }
+
+/* card-ul de instrument capătă titlu cu badge aliniat */
+.u-mod h3{ display:flex; align-items:center; flex-wrap:wrap; }
+
+/* ---------- responsiv: pe carduri foarte mici, geam mai jos ---------- */
+@media(max-width:520px){ .u-prev{ height:88px; } }
+@media(prefers-reduced-motion:reduce){
+  .u-spark .u-spark-line,.u-bar i,.u-gauge-mini .fill{ animation:none; }
+}

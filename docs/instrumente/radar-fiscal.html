@@ -1,18 +1,21 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radar fiscal ANAF — cât datorezi anul ăsta — Clubul Financiar</title>
-<meta name="description" content="Dashboard fiscal personal: bifează sursele de venit (salariu, PFA, chirii, dividende, investiții, crypto) și află cât datorezi la ANAF — impozit, CASS și CAS, praguri și termenul Declarației Unice."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Dashboard fiscal personal: bifează sursele de venit (salariu, PFA, chirii, dividende, investiții, crypto) și află cât datorezi la ANAF — impozit, CASS și CAS, praguri și termenul Declarației Unice."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/instrumente/radar-fiscal.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Radar fiscal ANAF"><meta property="og:description" content="Dashboard fiscal personal: cât datorezi la ANAF anul ăsta din toate sursele de venit."><meta property="og:url" content="https://clubulfinanciar.ro/instrumente/radar-fiscal.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Radar fiscal ANAF"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
 <style>
+  /* markdown din răspunsurile asistentului — neutru, lăsat funcțional */
   .cf-msg.ai.md{white-space:normal}
   .cf-msg.ai.md p{margin:.5em 0}
   .cf-msg.ai.md h3,.cf-msg.ai.md h4,.cf-msg.ai.md h5{margin:.7em 0 .3em;font-size:1rem;font-weight:800}
@@ -21,12 +24,176 @@
   .cf-msg.ai.md table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.84rem;display:block;overflow-x:auto}
   .cf-msg.ai.md th,.cf-msg.ai.md td{border:1px solid var(--border);padding:5px 8px;text-align:left;vertical-align:top}
   .cf-msg.ai.md th{background:var(--bg-soft2);font-weight:700}
-  .cf-src{border:1px solid var(--border,#e6edf5);border-radius:12px;padding:12px 14px;margin-bottom:10px}
-  .cf-chk{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:1rem}
-  .cf-chk input{width:18px;height:18px;accent-color:#10b981;cursor:pointer}
   .cf-fields{margin-top:10px}
   .cf-fields .field{margin-bottom:10px}
   .cf-fields .field:last-child{margin-bottom:0}
+
+/* =============================================================================
+   Ultra — Radar fiscal ANAF. Doar prezentare; calculul / id-urile / JS rămân
+   neatinse. Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot
+   HTML-ul emis din JS (cf-big / cf-row / cf-meter / cf-alert / cf-badge / chat)
+   să se randeze în limbajul auriu/navy fără să atingem scriptul. Semnătura:
+   cifra-erou cu suma datorată (#out) + ledger-ul de obligații al Declarației
+   Unice (#duBox), citite ca un extras de bancă privată.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft2:var(--u-gold-soft);
+  --bg-soft:var(--u-panel2); --radius:16px;
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin panourile structurale în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .panel > h3:first-child,.u-page .panel > h2:first-child{
+  font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page .panel h4{ font-family:'Fraunces',Georgia,serif; color:var(--u-gold);
+  font-weight:600; letter-spacing:.01em; }
+
+/* ---- SEMNĂTURA 1: cifra-erou (suma datorată) gravată serif, ca într-un extras */
+.u-page #out{ position:relative; }
+/* caption-ul de extras apare doar când există o cifră reală (după calcul) */
+.u-page #out:has(.cf-big)::after{ content:"obligație fiscală estimată"; position:absolute;
+  top:18px; right:22px; font-family:'Fraunces',serif; font-style:italic;
+  font-size:.72rem; letter-spacing:.04em; color:var(--u-gold); opacity:.85; }
+.u-page #out .cf-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.5rem,6vw,3.7rem); margin:6px 0 4px;
+}
+.u-page #out .cf-big::before{ /* linia ghilloche aurie de sub cifră */
+  content:""; display:block; height:2px; width:54px; margin-bottom:14px;
+  background:linear-gradient(90deg,var(--u-gold),var(--u-gold2)); border-radius:2px; }
+
+/* rânduri de defalcare → registru curat, cifre tabulare */
+.u-page .cf-row{ border-bottom:1px solid var(--u-line-soft); padding:11px 0; }
+.u-page .cf-row span{ color:var(--u-muted); }
+.u-page .cf-row b{ color:var(--u-ink); font-variant-numeric:tabular-nums; }
+.u-page .cf-row.total{ border-top:2px solid var(--u-line); border-bottom:0; }
+.u-page .cf-row.total b{ color:var(--u-gold); font-family:'Fraunces',serif; }
+.u-page .cf-note{ color:var(--u-muted); }
+
+/* praguri CASS: termometrul re-skinat ca „perete" auriu spre prag */
+.u-page .cf-meter{
+  height:28px; border-radius:999px; overflow:hidden; position:relative; margin:12px 0;
+  background:var(--u-gold-soft); border:1px solid var(--u-line-soft);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.18);
+}
+.u-page .cf-meter-fill{
+  background:linear-gradient(90deg,var(--u-gold),var(--u-gold2));
+  box-shadow:0 0 18px rgba(168,134,49,.40); transition:width .7s cubic-bezier(.2,.8,.2,1);
+}
+.u-page .cf-meter-fill.warn{ background:linear-gradient(90deg,#e0a33a,#d2453b); box-shadow:0 0 18px rgba(210,69,59,.40); }
+.u-page .cf-meter-fill.danger{ background:linear-gradient(90deg,#d2453b,#ef6b62); box-shadow:0 0 22px rgba(210,69,59,.55); }
+/* aici .cf-meter-lbl e o linie de etichetă (span+b), nu overlay centrat */
+.u-page .cf-meter-lbl{
+  position:static; inset:auto; display:flex; align-items:baseline;
+  justify-content:space-between; gap:10px; color:var(--u-ink);
+  font-weight:600; font-size:.92rem; margin:14px 0 4px;
+  font-variant-numeric:tabular-nums;
+}
+.u-page .cf-meter-lbl span{ color:var(--u-muted); font-weight:500; }
+.u-page .cf-meter-lbl b{ color:var(--u-ink); font-variant-numeric:tabular-nums; }
+
+/* alerte → bară aurie/roșie laterală, sobre */
+.u-page .cf-alert{
+  display:flex; gap:11px; align-items:flex-start;
+  border:1px solid var(--u-line-soft); border-left-width:3px; border-radius:12px;
+  padding:13px 15px; background:var(--u-panel2); color:var(--u-ink); margin:12px 0; font-size:.94rem;
+}
+.u-page .cf-alert b{ color:var(--u-ink); }
+.u-page .cf-alert.ok{ border-left-color:var(--u-pos); }
+.u-page .cf-alert.warn{ border-left-color:var(--u-gold); }
+.u-page .cf-alert.danger{ border-left-color:var(--u-neg); }
+
+/* ---- SEMNĂTURA 2: ledger-ul de obligații — Declarația Unică citită ca extras */
+.u-page #duBox{ position:relative;
+  background:linear-gradient(180deg,var(--u-panel2),var(--u-panel)); }
+.u-page #duBox > h3:first-child{ display:flex; align-items:center; gap:10px; }
+.u-page #duBox .cf-meter-lbl b{ font-family:'Fraunces',serif; color:var(--u-gold); }
+
+/* surse de venit (carduri bifabile) → carduri sobre cu accent auriu */
+.cf-src{
+  border:1px solid var(--u-line-soft); border-radius:14px; padding:13px 15px;
+  margin-bottom:10px; background:var(--u-panel2); transition:border-color .18s;
+}
+.cf-src:has(input:checked){ border-color:var(--u-line);
+  box-shadow:inset 3px 0 0 var(--u-gold); }
+.cf-chk{ display:flex; align-items:center; gap:10px; cursor:pointer; font-size:1rem; color:var(--u-ink); }
+.cf-chk b{ color:var(--u-ink); }
+.cf-chk input{ width:18px; height:18px; accent-color:var(--u-gold); cursor:pointer; }
+
+/* câmpuri (input/select) în stil Ultra */
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field .cf-mini{ color:var(--u-muted); }
+.u-page .field input[type=number],.u-page .field input[type=text],.u-page .field select{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums;
+}
+.u-page .field input:focus,.u-page .field select:focus{ outline:none;
+  border-color:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* badge PRO / AI → pastilă aurie de tier */
+.u-page .cf-badge.pro{
+  background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line);
+  -webkit-text-fill-color:currentColor; font-family:'Fraunces',serif; letter-spacing:.06em;
+}
+
+/* asistent AI: încadrare sobră, bule aurii pentru user */
+.u-page .cf-chat{ border:1px solid var(--u-line-soft); background:var(--u-panel); border-radius:16px; }
+.u-page .cf-chat-log{ background:var(--u-panel); }
+.u-page .cf-chat-in{ background:var(--u-panel2); border-top:1px solid var(--u-line-soft); }
+.u-page .cf-chat-in input[type=text]{
+  flex:1; border:1px solid var(--u-line-soft); border-radius:12px; padding:10px 12px;
+  background:var(--u-panel); color:var(--u-ink); font:inherit; font-size:.92rem;
+}
+.u-page .cf-chat-in input[type=text]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+.u-page .cf-msg.user{ background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304; }
+.u-page .cf-msg.ai{ background:var(--u-panel2); color:var(--u-ink); border:1px solid var(--u-line-soft); }
+.u-page .cf-msg.ai.md code{ background:var(--u-gold-soft); color:var(--u-ink); }
+.u-page .cf-msg.ai.md th{ background:var(--u-gold-soft); }
+.u-page .cf-msg.ai.md th,.u-page .cf-msg.ai.md td{ border-color:var(--u-line-soft); }
+.u-page .cf-quota{ color:var(--u-muted); }
+
+/* istoric fiscal → registru sobru */
+.u-page #logBox .cf-row b{ font-family:'Fraunces',serif; color:var(--u-gold); }
+
+/* butoane (statice + cele emise de JS) în limbaj auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.28);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* disclaimer + linkuri + focus */
+.u-page .disc{ color:var(--u-muted); }
+.u-page a:focus-visible,.u-page input:focus-visible,.u-page select:focus-visible{
+  outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .cf-meter-fill{ transition:none; }
+  .cf-src{ transition:none; }
+}
+@media(max-width:560px){
+  .u-page #out::after{ position:static; display:block; text-align:left; margin-bottom:2px; }
+}
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "Radar fiscal ANAF", "url": "https://clubulfinanciar.ro/instrumente/radar-fiscal.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Dashboard fiscal personal: bifează sursele de venit (salariu, PFA, chirii, dividende, investiții, crypto) și află cât datorezi la ANAF — impozit, CASS și CAS, praguri și termenul Declarației Unice.", "inLanguage": "ro-RO", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RON"}, "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente.html"}, {"@type": "ListItem", "position": 3, "name": "Radar fiscal ANAF", "item": "https://clubulfinanciar.ro/instrumente/radar-fiscal.html"}]}]}</script></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
@@ -37,47 +204,53 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header>
-<section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Instrument Pro</p><h1 class="title">Radar fiscal ANAF</h1><p class="lead" style="margin-inline:auto">Bifează-ți sursele de venit, scrie sumele anuale și vezi într-o secundă cât datorezi la ANAF — impozit, CASS și CAS, prag cu prag.</p></div></section>
+<main class="u-page">
+<section class="section"><div class="container">
 
-<section class="section" style="padding-bottom:8px">
-  <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
-      <h2 style="margin-top:0">La ce te ajută</h2>
-      <p style="color:var(--muted);font-size:1.02rem">Dacă ai bani din mai multe locuri — salariu, PFA, chirii, dividende, investiții sau crypto — e ușor să te pierzi și să nu știi cât datorezi de fapt statului. Aici aduni totul într-un singur loc și afli pe loc cât ai de plată la ANAF într-un an și până când. Așa eviți surprize, penalități și plăți uitate — și vezi că plătind integral mai devreme poți economisi 3% din total (la o factură de 10.000 lei înseamnă 300 lei în buzunarul tău).</p>
-    </div>
-    <div class="grid grid-3" style="margin-top:16px">
-      <div class="card"><h3>📝 Ce introduci</h3>
-        <ul style="color:var(--muted);padding-left:1.1em;line-height:1.6">
-          <li><b>Bifezi sursele tale de venit</b> — adică de unde îți vin banii (salariu, PFA, chirii etc.).</li>
-          <li><b>Salariul brut lunar</b> = suma de pe contract, înainte de taxe (nu banii pe care îi primești „în mână").</li>
-          <li><b>Încasări PFA pe an</b> = tot ce ai facturat și încasat într-un an; <b>cheltuielile deductibile</b> = costuri pentru afacere (chirie birou, abonamente, echipamente).</li>
-          <li><b>Chiria pe tot anul</b>, <b>dividendele</b> primite și <b>câștigul</b> din investiții sau crypto — toate sumele pe un an întreg, în lei.</li>
-        </ul>
-      </div>
-      <div class="card"><h3>📊 Ce afli</h3>
-        <ul style="color:var(--muted);padding-left:1.1em;line-height:1.6">
-          <li><b>Cât datorezi în total</b> la ANAF anul ăsta, dintr-o privire.</li>
-          <li>Defalcat pe cele 3 taxe: <b>impozit pe venit</b>, <b>CASS</b> (contribuția la sănătate) și <b>CAS</b> (contribuția la pensie).</li>
-          <li>Cât „costă" fiecare sursă în parte, ca să vezi unde se duc banii.</li>
-          <li><b>Până când</b> trebuie depusă și plătită Declarația Unică — cu un calendar de descărcat ca să nu uiți.</li>
-        </ul>
-      </div>
-      <div class="card"><h3>👤 Pentru cine e</h3>
-        <p style="color:var(--muted);line-height:1.6">Pentru oricine are venituri din mai multe surse și vrea claritate. Ești freelancer pe PFA și nu știi dacă mai datorezi CASS și pe dividendele din acțiuni? Ai un apartament dat în chirie pe lângă salariu? Ai investit în bursă sau crypto și te întrebi „acum ce fac cu taxele"? Acest radar îți pune cap la cap totul și îți spune suma exactă.</p>
-      </div>
-    </div>
-    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
-      <p style="color:var(--muted);margin-top:8px">Pentru fiecare sursă bifată, calculatorul aplică regulile fiscale din 2026: impozitul pe venit, plus contribuțiile la sănătate (CASS) și la pensie (CAS), acolo unde se datorează. Pentru veniturile „pasive" (chirii, dividende, investiții, crypto) le adună pe toate și verifică dacă treci de pragurile de 6, 12 sau 24 de salarii minime — pragurile de la care apare CASS. La final îți arată suma totală și termenul Declarației Unice. Cifrele sunt pe regulile anului 2026 și reprezintă o estimare educativă, nu consultanță fiscală — pentru sume mari, verifică pe anaf.ro sau cu un contabil.</p></details>
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Radar fiscal <em>ANAF</em></h1>
+    <p class="u-lead">Bifează-ți sursele de venit, treci sumele anuale și vezi într-o secundă dacă datorezi, cât și până când — impozit, CASS și CAS, prag cu prag, plus termenul Declarației Unice.</p>
   </div>
-</section>
 
-<section class="section"><div class="container" id="tool">
+  <div class="u-panel" style="margin-bottom:18px">
+    <p class="u-label">La ce te ajută</p>
+    <p style="color:var(--u-muted);font-size:1.02rem;margin:0;line-height:1.65">Dacă ai bani din mai multe locuri — salariu, PFA, chirii, dividende, investiții sau crypto — e ușor să te pierzi și să nu știi cât datorezi de fapt statului. Aici aduni totul într-un singur loc și afli pe loc cât ai de plată la ANAF într-un an și până când. Așa eviți surprizele, penalitățile și plățile uitate — și vezi că, dacă plătești integral mai devreme, poți economisi 3% din total (la o sumă de 10.000 lei înseamnă 300 lei rămași la tine).</p>
+  </div>
+
+  <div class="u-grid u-grid-3" style="margin-bottom:18px">
+    <div class="u-panel">
+      <p class="u-label">Ce introduci</p>
+      <div class="u-row"><span class="k">Bifezi sursele tale de venit — de unde îți vin banii (salariu, PFA, chirii etc.).</span></div>
+      <div class="u-row"><span class="k">Salariul brut lunar, adică suma de pe contract, înainte de taxe — nu banii primiți „în mână".</span></div>
+      <div class="u-row"><span class="k">Încasările PFA pe an și cheltuielile deductibile; chiria, dividendele și câștigul din investiții sau crypto, toate pe un an, în lei.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Ce afli</p>
+      <div class="u-row"><span class="k">Cât datorezi în total la ANAF anul ăsta, dintr-o privire.</span></div>
+      <div class="u-row"><span class="k">Defalcat pe cele trei taxe: impozit pe venit, CASS (sănătate) și CAS (pensie).</span></div>
+      <div class="u-row"><span class="k">Cât „costă" fiecare sursă în parte și până când depui Declarația Unică, cu un calendar de descărcat.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Pentru cine e</p>
+      <p style="color:var(--u-muted);margin:0;line-height:1.6">Pentru oricine are venituri din mai multe surse și vrea claritate. Ești freelancer pe PFA și nu știi dacă mai datorezi CASS și pe dividendele din acțiuni? Ai un apartament în chirie pe lângă salariu? Ai investit în bursă sau crypto și te întrebi „acum ce fac cu taxele"? Radarul îți pune cap la cap totul și îți spune suma exactă.</p>
+    </div>
+  </div>
+
+  <details class="u-panel" style="margin-bottom:22px">
+    <summary style="cursor:pointer;font-family:'Fraunces',serif;font-weight:600;color:var(--u-gold)">Cum funcționează, pe scurt</summary>
+    <p style="color:var(--u-muted);margin-top:10px;line-height:1.65">Pentru fiecare sursă bifată aplicăm regulile fiscale din 2026: impozitul pe venit, plus contribuțiile la sănătate (CASS) și la pensie (CAS), acolo unde se datorează. Pentru veniturile „pasive" (chirii, dividende, investiții, crypto) le adunăm pe toate și verificăm dacă treci de pragurile de 6, 12 sau 24 de salarii minime — pragurile de la care apare CASS. La final îți arătăm suma totală și termenul Declarației Unice. Cifrele sunt pe regulile anului 2026 și reprezintă o estimare educativă, nu consultanță fiscală — pentru sume mari, verifică pe anaf.ro sau cu un contabil.</p>
+  </details>
+
+</div></section>
+
+<section class="section" style="padding-top:0"><div class="container" id="tool">
 
   <div class="grid grid-2" style="align-items:start">
     <!-- INTRARE -->
     <div class="panel">
-      <h3 style="margin-top:0">Sursele tale de venit (sume ANUALE)</h3>
-      <p class="cf-note">Bifează ce ai și completează venitul brut anual. Calculul e instant.</p>
+      <h3 style="margin-top:0">Sursele tale de venit <span style="font-weight:400;color:var(--u-muted);font-size:.82em">· sume anuale</span></h3>
+      <p class="cf-note">Bifează ce ai și completează venitul brut anual. Calculul se face instant.</p>
 
       <div class="cf-src" data-key="salariu">
         <label class="cf-chk"><input type="checkbox" id="c_salariu"> <b>Salariu</b></label>
@@ -174,6 +347,7 @@
   <div class="disc" style="margin-top:18px">⚠️ Estimare educativă, actualizată 2026. Nu e consultanță fiscală. Verifică pe anaf.ro.</div>
 
 </div></section>
+</main>
 
 <footer class="foot"><div class="container">
     <div class="foot-grid">

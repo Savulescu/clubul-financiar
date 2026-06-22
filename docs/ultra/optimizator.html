@@ -12,6 +12,41 @@
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+/* ---- Semnătura paginii: clasamentul comparativ cu bare orizontale ---- */
+.o-cmp{ display:flex; flex-direction:column; gap:2px; margin-top:2px; }
+.o-cmp-row{ position:relative; padding:13px 2px 12px; border-bottom:1px solid var(--u-line-soft); }
+.o-cmp-row:last-child{ border-bottom:0; }
+.o-cmp-top{ display:flex; align-items:baseline; gap:10px; margin-bottom:8px; }
+.o-cmp-rank{ font-family:'Fraunces',Georgia,serif; font-variant-numeric:tabular-nums;
+  font-size:.86rem; color:var(--u-muted); width:1.4em; flex:0 0 auto; }
+.o-cmp-name{ color:var(--u-ink); font-weight:600; font-size:.98rem; }
+.o-cmp-row.is-win .o-cmp-name{ color:var(--u-gold); }
+.o-cmp-row.is-win .o-cmp-rank{ color:var(--u-gold); }
+.o-cmp-tag{ font-family:'Fraunces',serif; font-style:italic; font-size:.74rem;
+  color:var(--u-muted); margin-left:2px; }
+.o-cmp-val{ margin-left:auto; font-family:'Sora',system-ui,sans-serif; font-weight:800;
+  font-variant-numeric:tabular-nums; letter-spacing:-.01em; color:var(--u-ink);
+  white-space:nowrap; font-size:1.06rem; }
+.o-cmp-row.is-win .o-cmp-val{ color:var(--u-gold); }
+.o-cmp-unit{ font-weight:600; font-size:.7rem; color:var(--u-muted); margin-left:5px; letter-spacing:.02em; }
+.o-cmp-track{ position:relative; height:11px; border-radius:999px;
+  background:var(--u-gold-soft); border:1px solid var(--u-line-soft); overflow:hidden; }
+.o-cmp-fill{ position:absolute; inset:0 auto 0 0; border-radius:999px; width:var(--w,0%);
+  background:linear-gradient(90deg, color-mix(in srgb,var(--u-gold) 55%,transparent), var(--u-line));
+  transform-origin:left; animation:o-grow .8s cubic-bezier(.2,.8,.2,1) both; }
+.o-cmp-row.is-win .o-cmp-fill{
+  background:linear-gradient(90deg,var(--u-gold),var(--u-gold2)); }
+/* reperul „salariat" — bară marcată distinct, nu o structură de ales */
+.o-cmp-row.is-ref .o-cmp-track{ background:transparent; border-style:dashed; }
+.o-cmp-row.is-ref .o-cmp-fill{ opacity:.5;
+  background:repeating-linear-gradient(90deg,var(--u-line) 0 6px,transparent 6px 11px); }
+@keyframes o-grow{ from{ transform:scaleX(0) } to{ transform:scaleX(1) } }
+@media(prefers-reduced-motion:reduce){ .o-cmp-fill{ animation:none; } }
+@media(max-width:520px){
+  .o-cmp-name{ font-size:.92rem; } .o-cmp-tag{ display:none; }
+}
+</style>
 </head><body>
 <header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
@@ -186,13 +221,24 @@
     }).join("");
     $("oCards").innerHTML = cards;
 
-    // --- Comparativ registru ---
-    var rows = variante.map(function(vr){
-      return '<div class="u-row"><span class="k">' + (vr.best ? '<span class="u-gold-t">★</span> ' : '') + vr.tip + '</span>' +
-             '<span class="lead-dots"></span>' +
-             '<span class="v' + (vr.best ? ' u-gold-t' : '') + '">' + CF.lei(Math.round(vr.net)) + '</span></div>';
+    // --- Comparativ: clasament cu bare orizontale (prezentare; cifrele vin din motor) ---
+    var maxNet = variante.reduce(function(m, vr){ return Math.max(m, vr.net); }, 0) || 1;
+    var rows = variante.map(function(vr, i){
+      var isRef = !vr.best && /salariat/i.test(vr.tip);     // reper, nu o structură de ales (cedează în fața câștigătorului)
+      var w = Math.max(2, Math.round(vr.net / maxNet * 100));
+      var cls = "o-cmp-row" + (vr.best ? " is-win" : "") + (isRef ? " is-ref" : "");
+      var tag = vr.best ? '<span class="o-cmp-tag">câștigătorul tău</span>'
+                        : (isRef ? '<span class="o-cmp-tag">reper, nu o opțiune</span>' : '');
+      return '<div class="' + cls + '">' +
+        '<div class="o-cmp-top">' +
+          '<span class="o-cmp-rank">' + (i + 1) + '</span>' +
+          '<span class="o-cmp-name">' + vr.tip + '</span>' + tag +
+          '<span class="o-cmp-val">' + CF.lei(Math.round(vr.net)) + '</span>' +
+        '</div>' +
+        '<div class="o-cmp-track"><span class="o-cmp-fill" style="--w:' + w + '%"></span></div>' +
+      '</div>';
     }).join("");
-    $("oRows").innerHTML = rows;
+    $("oRows").innerHTML = '<div class="o-cmp">' + rows + '</div>';
 
     var diff = res.diferenta || 0;
     if (variante.length > 1 && diff > 0){

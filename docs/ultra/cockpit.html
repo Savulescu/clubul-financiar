@@ -40,6 +40,47 @@
   .ck-foot-link{ margin-top:14px; }
   .ck-foot-link a{ color:var(--u-gold); font-weight:700; text-decoration:none; font-size:.9rem; }
   .ck-disclaim{ color:var(--u-muted); font-size:.78rem; margin-top:24px; text-align:center; }
+
+  /* --- Extras: ledger-ul hero, citit ca un sumar de bancher --- */
+  .ck-ledger{ gap:0; margin-top:20px; padding-top:16px;
+    border-top:1px solid var(--u-line-soft); }
+  .ck-ledger .u-row{ flex:1 1 0; min-width:130px; flex-direction:column;
+    align-items:flex-start; gap:5px; padding:2px 26px 2px 0; position:relative; border:0; }
+  .ck-ledger .u-row + .u-row{ padding-left:26px; }
+  .ck-ledger .u-row + .u-row::before{ content:""; position:absolute; left:0; top:2px; bottom:2px;
+    width:1px; background:var(--u-line-soft); }
+  .ck-ledger .k{ font-family:'Fraunces',serif; font-size:.7rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--u-gold); }
+  .ck-ledger .v{ font-size:1.18rem; font-weight:700; }
+  .ck-state-v{ font-weight:600 !important; font-size:1rem !important; color:var(--u-ink); }
+  @media(max-width:560px){
+    .ck-ledger{ flex-direction:column; gap:0; }
+    .ck-ledger .u-row{ flex-direction:row; align-items:baseline; justify-content:space-between;
+      width:100%; padding:11px 0 !important; border-bottom:1px solid var(--u-line-soft); }
+    .ck-ledger .u-row:last-child{ border-bottom:0; }
+    .ck-ledger .u-row + .u-row::before{ display:none; }
+  }
+
+  /* --- Alerte mai acționabile: titlu cu pastilă de severitate + corp lizibil --- */
+  #kAlerte .u-alert{ line-height:1.5; padding:14px 16px; }
+  #kAlerte .u-alert .h{ display:flex; align-items:center; gap:9px;
+    font-size:.96rem; margin:0 0 5px; padding-left:0; }
+  #kAlerte .u-alert .h::before{ content:""; flex:0 0 auto; width:8px; height:8px; border-radius:50%;
+    box-shadow:0 0 0 4px var(--u-gold-soft); }
+  #kAlerte .u-alert.warn .h::before{ background:var(--u-neg); }
+  #kAlerte .u-alert.gold .h::before{ background:var(--u-gold); }
+  #kAlerte .u-alert.ok   .h::before{ background:var(--u-pos); }
+  #kAlerte .u-alert{ color:var(--u-muted); }
+  #kAlerte .u-alert .h{ color:var(--u-ink); }
+
+  /* focus vizibil pe linkurile din pagină (taste) */
+  .u-page a:focus-visible, .u-page .u-btn:focus-visible{
+    outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+  /* pe ecrane înguste, eyebrow-ul lung din extras nu mai e tăiat */
+  @media(max-width:560px){
+    .u-stmt-top .u-eyebrow{ letter-spacing:.16em; word-spacing:-.05em; }
+  }
 </style>
 </head><body>
 <header class="nav"><div class="container nav-in">
@@ -87,10 +128,10 @@
             <span class="u-delta" id="kAvereDelta"></span>
             <span class="u-figure-rule"></span>
           </div>
-          <div class="u-stmt-ledger">
+          <div class="u-stmt-ledger ck-ledger">
             <div class="u-row"><span class="k">Active</span><span class="v" id="kActive">—</span></div>
             <div class="u-row"><span class="k">Datorii</span><span class="v u-neg" id="kDatorii">—</span></div>
-            <div class="u-row"><span class="k">Stare</span><span class="v" id="ckState" style="font-weight:600">—</span></div>
+            <div class="u-row"><span class="k">Stare</span><span class="v ck-state-v" id="ckState">—</span></div>
           </div>
         </div>
 
@@ -107,9 +148,9 @@
             <p class="u-kpi-sub">rată de economisire <span class="u-delta" id="kRata">—</span></p>
           </div>
           <div class="u-panel">
-            <p class="u-label">Venit pasiv azi</p>
+            <p class="u-label">Venit pasiv lunar</p>
             <div class="u-kpi" id="kPasiv">—</div>
-            <p class="u-kpi-sub">ce produce averea ta, la 4% / an</p>
+            <p class="u-kpi-sub">cât produce averea ta acum, la 4% pe an</p>
           </div>
         </div>
 
