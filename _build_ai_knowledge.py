@@ -51,6 +51,27 @@ consts=[
 for c in consts:
     entries.append({"t":"Constante fiscale 2026","x":c,"k":kw(c),"src":"constante"})
 
+# 3b) FAPTE AVANSATE VERIFICATE (proceduri/contabilitate frecvente unde modelul ezita)
+facts=[
+ "Taxare inversă TVA: la operațiuni precum deșeuri/fier vechi, anumite construcții, cereale, lemn, beneficiarul datorează ȘI deduce simultan TVA (4426=4427), fără plată efectivă de TVA. Se aplică între plătitori de TVA din România.",
+ "TVA la încasare: regim OPȚIONAL pentru firme cu cifra de afaceri sub ~4,5 milioane lei; exigibilitatea TVA apare la momentul încasării facturii, nu la emitere.",
+ "Rambursare TVA: când TVA deductibilă > TVA colectată, ai TVA de recuperat; ceri rambursarea bifând opțiunea în decontul D300; ANAF poate aproba cu sau fără inspecție fiscală.",
+ "Declarații TVA: D300 = decont de TVA (lunar sau trimestrial, după cifra de afaceri); D390 = declarație recapitulativă pentru operațiuni intracomunitare (VIES); D394 = declarație informativă privind livrările/achizițiile pe teritoriul național între plătitori RO.",
+ "Eșalonare datorii ANAF: forma SIMPLIFICATĂ = maxim 12 luni, fără garanții; forma CLASICĂ = maxim 60 de luni (5 ani), cu garanții. Se cere prin cerere la ANAF, nu prin D100.",
+ "Inspecția fiscală: ANAF verifică obligațiile pe perioada de prescripție (5 ani); primești un aviz de inspecție; la final, raport de inspecție + eventual decizie de impunere (pe care o poți contesta în 45 de zile).",
+ "Concediu medical (boală obișnuită): primele 5 zile suportate de angajator, restul din FNUASS; indemnizația = 75% din baza de calcul; indemnizațiile de concediu medical sunt SCUTITE de CAS și CASS, se reține DOAR impozit 10%.",
+ "PFA la normă de venit: ANAF stabilește un venit anual fix (norma) pe tipul de activitate; NU deduci cheltuieli reale; CAS/CASS și impozitul 10% se raportează la normă (cu pragurile 6/12/24 salarii minime).",
+ "Avans de la client: se înregistrează 5121=419 (clienți-creditori) la încasare, cu TVA colectată la avans (411=4427 sau prin 419); la livrare se regularizează cu factura finală.",
+ "Stornarea unei facturi greșite: se emite o factură de storno (sumă în roșu/negativă) sau o factură de corecție; în contabilitate se înregistrează în roșu aceleași conturi ca factura inițială.",
+ "Notă de recepție (NIR): document care atestă primirea mărfii/materialelor în gestiune; stă la baza înregistrării 371/301 = 401.",
+ "Vânzare marfă cu adaos: 411 = 707 (venit) + 4427 (TVA colectată); scoaterea din gestiune 607 = 371 (la cost).",
+ "Salariu (înregistrări): 641 = 421 (brut datorat); reținerile angajatului 421 = 4315 (CAS 25%) + 4316 (CASS 10%) + 444 (impozit 10%); CAM angajator 646 = 436 (2,25%); plata netă 421 = 5121.",
+ "Inspecția/poprirea: poprirea = ANAF blochează sumele din conturi pentru recuperarea datoriilor; se ridică după plata/eșalonarea datoriei.",
+ "Neplătitor de TVA: NU colectezi TVA pe facturi, dar NICI nu deduci TVA-ul de la achiziții (îl treci pe cheltuială/cost). Devii plătitor obligatoriu la depășirea plafonului de 395.000 lei.",
+]
+for fct in facts:
+    entries.append({"t":"Fapt fiscal verificat","x":fct,"k":kw(fct),"src":"fapt"})
+
 # 4) Articole avansate (din search-index) neacoperite de teste — acoperire pe toate articolele
 have=set(e["src"] for e in entries)
 for e in si.values():
