@@ -71,6 +71,20 @@ def fred_yoy(sid):
     return (d, round((last / prev - 1) * 100, 1)) if prev else (None, None)
 
 
+def ecb_obs(key):
+    """Ultima observație dintr-o serie ECB SDW (csvdata): (TIME_PERIOD, OBS_VALUE)."""
+    url = ("https://data-api.ecb.europa.eu/service/data/" + key +
+           "?lastNObservations=1&format=csvdata")
+    rows = fetch(url).decode("utf-8").splitlines()
+    if len(rows) < 2:
+        return (None, None)
+    cols = rows[-1].split(",")
+    try:
+        return (cols[8], round(float(cols[9]), 2))
+    except (IndexError, ValueError):
+        return (None, None)
+
+
 def eurostat_infl(geo):
     j = json.loads(fetch(EUROSTAT.format(geo)).decode("utf-8"))
     val = list(j.get("value", {}).values())
@@ -98,7 +112,7 @@ def main():
     # ---- Dobânzi de politică monetară ----
     dob = [
         item("Dobânda Fed (SUA)", safe(fred_last, "FEDFUNDS"), src="Rezerva Federală / FRED"),
-        item("Dobânda ECB (depozit)", safe(fred_last, "ECBDFR"), src="BCE / FRED"),
+        item("Dobânda ECB (refinanțare)", safe(ecb_obs, "FM/D.U2.EUR.4F.KR.MRR_FR.LEV"), src="BCE"),
         item("Dobânda-cheie BNR", (None, None), src="BNR",
              note="Vezi valoarea oficială la zi pe bnr.ro"),
     ]
