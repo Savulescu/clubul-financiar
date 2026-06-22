@@ -1,25 +1,119 @@
 <!DOCTYPE html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Feedback — părerea ta contează | Clubul Financiar</title>
 <meta name="description" content="Spune-ne ce să îmbunătățim, reparăm sau adăugăm pe Clubul Financiar. Construim platforma împreună cu tine — părerea ta chiar contează.">
-<meta name="theme-color" content="#10b981"><link rel="canonical" href="https://clubulfinanciar.ro/feedback.html">
+<meta name="theme-color" content="#0f2540"><link rel="canonical" href="https://clubulfinanciar.ro/feedback.html">
 <link rel="icon" type="image/png" href="/favicon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar">
 <meta property="og:title" content="Feedback — părerea ta contează"><meta property="og:url" content="https://clubulfinanciar.ro/feedback.html">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24"><link rel="stylesheet" href="/assets/upgrade.css?v=27">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
 <style>
-.fb-form .field{margin-bottom:14px}
-.fb-form label{display:block;font-weight:700;margin-bottom:5px;font-size:.95rem}
-.fb-form select,.fb-form input,.fb-form textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font:inherit;font-size:1rem}
-.fb-form textarea{min-height:140px;resize:vertical}
-.fb-cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.fb-cat{padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-weight:600;font-size:.9rem;cursor:pointer;transition:.2s}
-.fb-cat.on{background:var(--grad,linear-gradient(135deg,#10b981,#2563eb));color:#fff;border-color:transparent}
-.fb-item{border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:var(--card)}
-.fb-item .meta{font-size:.78rem;color:var(--muted);margin-bottom:6px}
-.fb-tag{display:inline-block;padding:2px 9px;border-radius:999px;background:var(--bg-soft2);font-size:.72rem;font-weight:700;margin-right:6px}
+/* =============================================================================
+   Pilot Ultra — Feedback. Doar prezentare; logica Supabase + id-urile sunt neatinse.
+   Strategia: pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot
+   HTML-ul emis din JS (lista admin .fb-item/.fb-tag, butoanele .btn, alerta
+   .cf-alert.ok de succes, stările inline var(--emerald)/var(--grad)) să se
+   randeze în limbajul auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni vechi → Ultra (prinde și var(--…) inline emis din JS) */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft2:var(--u-gold-soft);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Carduri vechi → panou de extras */
+.u-page .card{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 24px; box-shadow:var(--u-shadow); overflow:hidden;
+}
+.u-page .card h2{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+/* cardul „de ce contează" păstrează accentul lateral, dar auriu, nu verde */
+.u-page .card[style*="border-left"]{ border-left:3px solid var(--u-gold) !important; }
+
+/* ---- FORMULARUL în stil Ultra ---- */
+.u-page .fb-form .field{ margin-bottom:16px; }
+.u-page .fb-form label{
+  display:block; font-size:.88rem; color:var(--u-ink); font-weight:600; margin-bottom:6px;
+}
+.u-page .fb-form select,
+.u-page .fb-form input,
+.u-page .fb-form textarea{
+  width:100%; padding:12px 14px; border-radius:12px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font:inherit; font-size:1rem;
+}
+.u-page .fb-form textarea{ min-height:150px; resize:vertical; line-height:1.6; }
+.u-page .fb-form input:focus,
+.u-page .fb-form textarea:focus,
+.u-page .fb-form select:focus{
+  outline:none; border-color:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft);
+}
+
+/* ---- SEMNĂTURA: pilulele de categorie, gravate auriu pe starea activă ---- */
+.u-page .fb-cats{ display:flex; flex-wrap:wrap; gap:9px; margin-bottom:18px; }
+.u-page .fb-cat{
+  padding:9px 16px; border-radius:999px; border:1px solid var(--u-line);
+  background:var(--u-panel2); color:var(--u-muted); font-weight:600; font-size:.9rem;
+  cursor:pointer; transition:transform .15s, border-color .2s, color .2s, box-shadow .2s;
+  user-select:none;
+}
+.u-page .fb-cat:hover{ transform:translateY(-1px); border-color:var(--u-gold); color:var(--u-ink); }
+.u-page .fb-cat.on{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border-color:transparent; font-family:'Fraunces',Georgia,serif; letter-spacing:.01em;
+  box-shadow:0 8px 20px rgba(168,134,49,.32);
+}
+.u-page .fb-cat:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* ---- BUTOANE vechi (statice + emise din admin JS) → auriu Ultra ---- */
+.u-page .btn.btn-primary{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30); transition:transform .15s, box-shadow .2s;
+}
+.u-page .btn.btn-primary:hover{ transform:translateY(-2px); }
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+/* ---- LISTA ADMIN (markup baked în JS) → registru curat ---- */
+.u-page .fb-item{
+  border:1px solid var(--u-line-soft); border-radius:14px; padding:15px 17px;
+  margin-bottom:11px; background:var(--u-panel2);
+}
+.u-page .fb-item .meta{ font-size:.78rem; color:var(--u-muted); margin-bottom:6px; }
+.u-page .fb-tag{
+  display:inline-block; padding:2px 10px; border-radius:999px;
+  background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line);
+  font-family:'Fraunces',Georgia,serif; font-size:.72rem; font-weight:700;
+  letter-spacing:.03em; margin-right:6px;
+}
+
+/* ---- ALERTA DE SUCCES (înlocuiește fbForm.innerHTML din JS) ---- */
+.u-page .cf-alert{
+  border:1px solid var(--u-line-soft); border-left-width:3px; border-radius:12px;
+  padding:18px; background:var(--u-panel2); color:var(--u-ink);
+}
+.u-page .cf-alert.ok{ border-left-color:var(--u-pos); }
+.u-page .cf-alert.ok h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .fb-cat, .u-page .btn.btn-primary{ transition:none; }
+  .u-page .fb-cat:hover, .u-page .btn.btn-primary:hover{ transform:none; }
+}
 </style></head><body>
 <header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
@@ -31,11 +125,13 @@
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
   </div></header>
-<section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
-<p class="eyebrow">Feedback</p><h1 class="title">Părerea ta contează</h1>
-<p class="lead" style="margin-inline:auto">Clubul Financiar se construiește <strong>împreună cu tine</strong>. Tu ești cel care folosește platforma zi de zi — așa că tu știi cel mai bine ce merge, ce nu, și ce ar trebui să adăugăm. Spune-ne sincer și ne ajuți să o facem mai bună pentru toți.</p>
-</div></section>
+<main class="u-page">
 <section class="section"><div class="container" style="max-width:720px">
+  <div class="u-hero" style="text-align:center">
+    <p class="u-eyebrow">Atelierul deschis al clubului</p>
+    <h1 class="u-crest">Părerea ta <em>contează</em></h1>
+    <p class="u-lead" style="margin-inline:auto">Clubul Financiar se construiește <strong>împreună cu tine</strong>. Tu folosești platforma zi de zi — așa că tu știi cel mai bine ce merge, ce nu, și ce ar trebui să adăugăm. Spune-ne sincer și ne ajuți să o facem mai bună pentru toți.</p>
+  </div>
 <div class="card" style="border-left:4px solid var(--emerald)">
 <h2 style="margin-top:0">De ce contează feedback-ul tău</h2>
 <p style="color:var(--muted)">Fiecare sugestie e citită. Ce ne ceri des, construim. Ce ne semnalezi ca greșit, reparăm. Nu vindem un produs gata făcut — îl modelăm după nevoile tale reale. 30 de secunde din timpul tău pot face platforma mai bună pentru mii de oameni.</p>
@@ -69,6 +165,7 @@
 
 <p style="margin-top:24px"><a class="btn btn-ghost" href="/index.html">← Acasă</a></p>
 </div></section>
+</main>
 <footer class="foot"><div class="container">
     <div class="foot-grid">
       <div>

@@ -217,14 +217,20 @@ def main():
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Știri economice externe — ce înseamnă pentru tine | Clubul Financiar</title>
 <meta name="description" content="Cele mai importante știri economice mondiale, explicate pe înțelesul tău: ce înseamnă fiecare pentru banii, rata și economiile tale. Surse citate.">
-<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/stiri-externe.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO"><meta property="og:title" content="Știri economice externe — ce înseamnă pentru tine"><meta property="og:description" content="Știri economice mondiale explicate pentru banii tăi."><meta property="og:url" content="https://clubulfinanciar.ro/stiri-externe.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Știri economice externe — ce înseamnă pentru tine"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v={V}"><link rel="stylesheet" href="/assets/upgrade.css?v={V}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v={V}"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=1"><link rel="stylesheet" href="/assets/cf-preview.css?v=1">
 <style>
+/* premium auriu pe pagina de stiri (remap tokeni pe .u-page) */
+.u-page{{--emerald:var(--u-gold);--emerald-link:var(--u-gold);--grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));--card:var(--u-panel);--border:var(--u-line-soft);--bg-soft:var(--u-panel2);--bg-soft2:var(--u-panel2);--text:var(--u-ink);--muted:var(--u-muted)}}
+.u-page .news-tab.active{{color:#1a1304}}
+.u-page .ne-cti{{border-left-color:var(--u-gold)}}
+.u-page .title{{font-family:'Fraunces',serif;font-weight:600}}
+.u-page .eyebrow{{color:var(--u-gold)}}
 .news-tabs{{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:30px}}
 .news-tab{{font:inherit;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.2s}}
 .news-tab span{{color:var(--muted);font-weight:600}}.news-tab:hover{{border-color:var(--emerald)}}
@@ -236,7 +242,7 @@ def main():
 .ne-src{{font-size:.74rem;font-weight:800;color:var(--emerald-link);text-transform:uppercase;letter-spacing:.04em}}.ne-when{{font-size:.78rem;color:var(--muted);white-space:nowrap}}
 .news-card h2{{font-size:1.18rem;margin:2px 0 10px;line-height:1.3}}.ne-fapt{{color:var(--muted);font-size:.94rem;margin:0 0 12px}}.ne-link{{color:var(--emerald-link);font-weight:700;white-space:nowrap}}
 .ne-cti{{background:var(--bg-soft);border-left:4px solid var(--emerald);border-radius:10px;padding:13px 15px;font-size:.93rem}}
-</style></head><body>{NAV_HTML}
+</style></head><body>{NAV_HTML}<main class="u-page">
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri externe · actualizat {today}</p><h1 class="title">Economia lumii, pe înțelesul tău</h1>
 <p class="lead" style="margin-inline:auto">Cele mai importante știri economice mondiale, explicate simplu: <strong>ce înseamnă fiecare pentru banii tăi</strong>. Comentariu original, cu sursa citată.</p>
@@ -257,7 +263,7 @@ def main():
 {"".join(cards)}
 </div>
 <p style="color:var(--muted);font-size:.85rem;margin-top:30px;text-align:center">Analize originale Clubul Financiar pe baza știrilor din surse externe (citate + link). Faptele aparțin publicațiilor sursă; interpretarea „ce înseamnă pentru tine" e a noastră. Caracter educativ, nu sfat de investiții.</p>
-</div></section>
+</div></section></main>
 {FOOTER_HTML}
 <script>
 (function(){{

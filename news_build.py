@@ -188,15 +188,21 @@ def build():
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Știri financiare România — Clubul Financiar</title>
 <meta name="description" content="Cele mai importante știri financiare și economice din România, pe categorii (bursă, bănci, taxe, imobiliare, crypto), agregate din zeci de surse și actualizate automat.">
-<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/stiri.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Știri financiare România — Clubul Financiar"><meta property="og:description" content="Știri financiare RO pe categorii, din zeci de surse, într-un singur loc."><meta property="og:url" content="https://clubulfinanciar.ro/stiri.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
-<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=23"><link rel="stylesheet" href="/assets/upgrade.css?v=23"><link rel="stylesheet" href="/assets/cf-ultra.css?v=1"><link rel="stylesheet" href="/assets/cf-preview.css?v=1">
 <style>
+/* premium auriu pe pagina de stiri (remap tokeni pe .u-page) */
+.u-page{{--emerald:var(--u-gold);--emerald-link:var(--u-gold);--grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));--card:var(--u-panel);--border:var(--u-line-soft);--bg-soft:var(--u-panel2);--bg-soft2:var(--u-panel2);--text:var(--u-ink);--muted:var(--u-muted)}}
+.u-page .news-tab.active{{color:#1a1304}}
+.u-page .title{{font-family:'Fraunces',serif;font-weight:600}}
+.u-page .eyebrow{{color:var(--u-gold)}}
 .news-tabs{{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:30px}}
 .news-tab{{font:inherit;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.2s}}
 .news-tab span{{color:var(--muted);font-weight:600}}
@@ -206,7 +212,7 @@ def build():
 .news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:34px}}
 .news-grp{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
 .news-lbl{{color:var(--muted);font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}}
-</style></head><body>{NAV_HTML}
+</style></head><body>{NAV_HTML}<main class="u-page">
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri · {n_src} surse · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
 <p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, pe categorii, din zeci de surse, ordonate după relevanță.</p>
@@ -227,7 +233,7 @@ def build():
 {cards}
 </div>
 <p style="color:var(--muted);font-size:.85rem;margin-top:30px;text-align:center">Știrile sunt agregate automat din surse externe (titlu + scurt rezumat + link către sursă). Drepturile aparțin publicațiilor sursă. Actualizat automat la fiecare 30 de minute.</p>
-</div></section>
+</div></section></main>
 {FOOTER_HTML}
 <script>
 (function(){{
