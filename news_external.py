@@ -39,7 +39,17 @@ def _keys(base):
         v = os.getenv(f"{base}_{i}")
         if v: ks.append(v)
     return ks
-def chat(messages, max_tokens=900, temperature=0.5):
+# Filtru de calitate RO: respinge output cu contaminare engleză/italiană/garbage tipic
+_BAD_RE = re.compile(
+    r"\b(the|and|with|from|after|before|market|markets|oil|crude|stocks?|shares?|equity|equities|"
+    r"tariffs?|vessels?|tankers?|trade|growth|prices?|rising|falling|barrel|yield|bonds?|economy)\b"
+    r"|acciun|lanc[eă]az|lancă|vasoare|internazional|prevezi|pre[țt]ele|subire|irachen|"
+    r"più|della|degli|nicht|werden|haben|aujourd", re.I)
+
+def is_good_ro(text):
+    return not _BAD_RE.search(text or "")
+
+def chat(messages, max_tokens=900, temperature=0.5, accept=None):
     last = "n/a"
     for name, api_base, model, envb in PROVIDERS:
         for key in _keys(envb):
@@ -49,7 +59,10 @@ def chat(messages, max_tokens=900, temperature=0.5):
                     headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
                 resp = urllib.request.urlopen(req, timeout=45)
                 j = json.loads(resp.read())
-                return {"content": j["choices"][0]["message"]["content"], "provider": name}
+                content = j["choices"][0]["message"]["content"]
+                if accept and not accept(content):
+                    last = f"{name} (RO respins de filtru)"; continue   # text prost → încearcă alt model
+                return {"content": content, "provider": name}
             except urllib.error.HTTPError as e:
                 last = f"{name} HTTP {e.code}"
             except Exception as e:
@@ -160,7 +173,7 @@ def main():
             f"ȘTIRE — TITLU: {it['title']}\nREZUMAT: {it['desc']}\nSURSĂ: {it['src']}"
         )
         try:
-            r = chat([{"role": "user", "content": prompt}], max_tokens=900, temperature=0.5)
+            r = chat([{"role": "user", "content": prompt}], max_tokens=900, temperature=0.5, accept=is_good_ro)
             c = r.get("content", "").strip(); m = re.search(r"\{.*\}", c, re.S)
             d = json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
             cat = d.get("categorie", "").strip()
