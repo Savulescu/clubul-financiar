@@ -72,6 +72,8 @@ facts=[
  "Vânzare marfă cu adaos: 411 = 707 (venit) + 4427 (TVA colectată); scoaterea din gestiune 607 = 371 (la cost).",
  "Salariu (înregistrări): 641 = 421 (brut datorat); reținerile angajatului 421 = 4315 (CAS 25%) + 4316 (CASS 10%) + 444 (impozit 10%); CAM angajator 646 = 436 (2,25%); plata netă 421 = 5121.",
  "Inspecția/poprirea: poprirea = ANAF blochează sumele din conturi pentru recuperarea datoriilor; se ridică după plata/eșalonarea datoriei.",
+ "Amenzile/penalitățile către stat = cont 6581 (NEdeductibile fiscal), NU 635. Reducere comercială primită de la furnizor = 609; acordată clienților = 709. Sconturi: primite 767, acordate 667.",
+ "Cote TVA 2026: standard 21%; redusă 11% pentru alimente, medicamente, cărți/ziare, cazare, restaurant/catering, apă, lemne de foc.",
  "Neplătitor de TVA: NU colectezi TVA pe facturi, dar NICI nu deduci TVA-ul de la achiziții (îl treci pe cheltuială/cost). Devii plătitor obligatoriu la depășirea plafonului de 395.000 lei.",
 ]
 for fct in facts:
