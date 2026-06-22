@@ -266,6 +266,12 @@ def main():
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v={V}"></script><script defer src="/assets/site.js?v={V}"></script></body></html>'''
     open(os.path.join(DOCS, "stiri-externe.html"), "w", encoding="utf-8").write(page)
     json.dump(store, open(STORE_F, "w"), ensure_ascii=False)
+    # feed compact pentru Terminal (știri inline, refolosește același store)
+    news_top = [{"titlu": s.get("titlu", ""), "fapt": s.get("fapt", ""), "src": s.get("src", ""),
+                 "cat": s.get("cat", ""), "link": s.get("link") or s.get("url", "")} for s in disp[:10]]
+    os.makedirs(os.path.join(DOCS, "data"), exist_ok=True)
+    json.dump({"updated": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "items": news_top},
+              open(os.path.join(DOCS, "data", "news.json"), "w"), ensure_ascii=False)
     print(f"✅ stiri-externe.html: {len(disp)} afișate ({len(new)} noi generate azi)")
 
 if __name__ == "__main__":

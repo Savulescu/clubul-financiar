@@ -157,14 +157,13 @@
       <p class="u-kpi-sub" id="alMsg" style="margin-top:10px;min-height:1.2em"></p>
     </div>
 
-    <!-- ȘTIRI CTA -->
-    <div class="u-panel" style="margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
-      <div><p class="u-label" style="margin:0 0 4px">Fluxul de știri</p>
-        <p style="color:var(--u-muted);margin:0">Ce mișcă piețele azi, pe înțelesul tău.</p></div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="u-btn u-btn-ghost" href="/stiri.html">Știri România</a>
-        <a class="u-btn u-btn-ghost" href="/stiri-externe.html">Piețe externe</a>
+    <!-- ȘTIRI (inline din pipeline-ul existent) -->
+    <div class="u-panel" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">
+        <p class="u-label" style="margin:0">Fluxul de știri · ce mișcă piețele</p>
+        <span style="display:flex;gap:14px"><a class="more" style="color:var(--u-gold);font-weight:700" href="/stiri.html">Știri RO →</a><a class="more" style="color:var(--u-gold);font-weight:700" href="/stiri-externe.html">Externe →</a></span>
       </div>
+      <div id="newsList" style="margin-top:6px"></div>
     </div>
 
     <p class="u-kpi-sub" style="margin-top:20px;text-align:center">
@@ -315,6 +314,19 @@
     CF.setReminder("terminal-fx", {kind:"alerta", note:"Alertă "+cur+" peste "+lvl+" lei", channel:"telegram"});
     $("alMsg").innerHTML='<span class="u-pos">✓ Alertă setată: te anunțăm când '+cur+' trece de '+fmt(lvl,2)+' lei.</span>';
   }
+
+  // ---- știri inline (din pipeline-ul existent /data/news.json) ----
+  function renderNews(items){
+    var host=$("newsList");
+    if(!items || !items.length){ host.innerHTML='<a class="u-btn u-btn-ghost" href="/stiri.html" style="margin-top:8px">Vezi toate știrile →</a>'; return; }
+    host.innerHTML = items.slice(0,7).map(function(n){
+      return '<a href="'+esc(n.link)+'" target="_blank" rel="noopener" style="display:block;padding:11px 0;border-bottom:1px solid var(--u-line-soft);text-decoration:none">'+
+        '<div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><span class="u-chip" style="font-size:.64rem;padding:1px 8px">'+esc(n.src||n.cat||"")+'</span>'+
+        '<span style="color:var(--u-ink);font-weight:600;font-size:.95rem">'+esc(n.titlu)+'</span></div>'+
+        (n.fapt?'<p style="color:var(--u-muted);font-size:.85rem;margin:3px 0 0;line-height:1.45">'+esc(n.fapt)+'</p>':'')+'</a>';
+    }).join("");
+  }
+  fetch("/data/news.json").then(function(r){return r.json();}).then(function(d){ renderNews(d.items); }).catch(function(){ renderNews(null); });
 
   // ---- wiring ----
   fetch("/data/fx.json").then(function(r){return r.json();}).then(function(d){
