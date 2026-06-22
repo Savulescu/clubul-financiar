@@ -126,7 +126,7 @@
         </p>
         <div class="u-row"><span class="k">IRCC</span><span class="lead-dots"></span><span class="v">credite noi în lei</span></div>
         <div class="u-row"><span class="k">ROBOR 3M / 6M</span><span class="lead-dots"></span><span class="v">credite mai vechi în lei</span></div>
-        <div class="u-row"><span class="k">EURIBOR</span><span class="lead-dots"></span><span class="v">credite în euro</span></div>
+        <div class="u-row"><span class="k">EURIBOR 3M</span><span class="lead-dots"></span><span class="v" id="euriborLive">credite în euro</span></div>
         <div class="u-row"><span class="k">Dobânda-cheie BNR</span><span class="lead-dots"></span><span class="v">o influențează pe toate</span></div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
           <a class="u-btn u-btn-gold" href="/instrumente/scaner-credit.html">Vezi impactul pe rata ta →</a>
@@ -425,6 +425,11 @@
     }).join("");
     var upd = d.updated ? (" · Actualizat " + (CF.dataRO ? CF.dataRO(d.updated.slice(0,10)) : d.updated.slice(0,10))) : "";
     $("macroSrc").textContent = (d.atribuire || "") + upd;
+    // leagă Euribor-ul live în panoul de indici de credit
+    var eu = null;
+    d.groups.forEach(function(g){ g.items.forEach(function(it){ if(/euribor/i.test(it.label) && it.value!=null) eu=it.value; }); });
+    var el = $("euriborLive");
+    if(el && eu!=null) el.innerHTML = '<b class="term-num" style="color:var(--u-gold)">'+eu.toLocaleString("ro-RO",{maximumFractionDigits:2})+'%</b> · credite în euro';
   }
   fetch("/data/macro.json").then(function(r){return r.json();}).then(renderMacro).catch(function(){ renderMacro(null); });
 
