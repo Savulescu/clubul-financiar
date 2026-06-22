@@ -41,6 +41,36 @@ async function getSystem(): Promise<string> {
   return _promptCache.text || FALLBACK_SYSTEM;
 }
 
+// ---- RAG: bază de cunoștințe verificată (glosar + concepte lecții + constante) ----
+// Editezi docs/assets/ai-knowledge.json + push → se actualizează în ≤5 min, FĂRĂ re-deploy.
+const KB_URL = "https://clubulfinanciar.ro/assets/ai-knowledge.json";
+let _kbCache: { data: any[]; ts: number } = { data: [], ts: 0 };
+async function getKnowledge(): Promise<any[]> {
+  const now = Date.now();
+  if (_kbCache.data.length && now - _kbCache.ts < 300000) return _kbCache.data;
+  try {
+    const r = await fetch(KB_URL, { signal: AbortSignal.timeout(6000) });
+    if (r.ok) { const d = await r.json(); if (Array.isArray(d) && d.length) { _kbCache = { data: d, ts: now }; return d; } }
+  } catch (_e) { /* fallback */ }
+  return _kbCache.data;
+}
+function tokenize(s: string): string[] {
+  return (String(s).toLowerCase().match(/[a-zăâîșț0-9]{4,}/g) || []);
+}
+// scor simplu prin suprapunere de cuvinte-cheie; întoarce top-k intrări relevante
+function retrieve(question: string, kb: any[], k = 6): any[] {
+  const qt = new Set(tokenize(question));
+  if (!qt.size || !kb.length) return [];
+  const scored = kb.map((e) => {
+    let sc = 0;
+    for (const w of (e.k || [])) if (qt.has(w)) sc += 2;
+    const xl = String(e.x || "").toLowerCase();
+    for (const w of qt) if (xl.includes(w)) sc += 1;
+    return { e, sc };
+  }).filter((x) => x.sc >= 3).sort((a, b) => b.sc - a.sc).slice(0, k);
+  return scored.map((x) => x.e);
+}
+
 const FALLBACK_SYSTEM = `Ești "Asistentul ANAF" al Clubul Financiar — un ghid fiscal prietenos pentru România, actualizat la legislația 2026.
 
 REGULI DE FIER:
@@ -142,7 +172,19 @@ Deno.serve(async (req) => {
     // Limită de output reglabilă din frontend (default 4000, max 6000) — fără re-deploy la viitoare ajustări.
     const mt = Math.min(Math.max(parseInt(maxTokens, 10) || 4000, 256), 6000);
     const baseSystem = await getSystem();
-    const sys = baseSystem + (context ? `\n\nContextul utilizatorului (cifrele lui, folosește-le): ${JSON.stringify(context)}` : "");
+    // RAG: caută surse verificate pentru ultima întrebare a utilizatorului și injectează-le
+    const lastQ = [...messages].reverse().find((m: any) => m.role !== "assistant")?.content
+                  || messages[messages.length - 1]?.content || "";
+    let kbBlock = "";
+    try {
+      const kb = await getKnowledge();
+      const hits = retrieve(String(lastQ), kb, 6);
+      if (hits.length) {
+        kbBlock = "\n\n=== SURSE VERIFICATE (din conținutul fact-checkat Clubul Financiar — TRATEAZĂ-LE CA ADEVĂR, citează cifrele de aici; dacă răspunsul NU se află în aceste surse și nu ești 100% sigur, spune clar să verifice pe anaf.ro sau cu un contabil — NU inventa cifre/articole) ===\n"
+          + hits.map((h: any, i: number) => `[${i + 1}] ${h.x}`).join("\n");
+      }
+    } catch (_e) { /* fără RAG dacă pică */ }
+    const sys = baseSystem + kbBlock + (context ? `\n\nContextul utilizatorului (cifrele lui, folosește-le): ${JSON.stringify(context)}` : "");
     const trimmed = messages.slice(-12).map((m: any) => ({
       role: m.role === "assistant" ? "assistant" : "user",
       content: String(m.content || "").slice(0, 4000),
