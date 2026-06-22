@@ -74,6 +74,7 @@ facts=[
  "Inspecția/poprirea: poprirea = ANAF blochează sumele din conturi pentru recuperarea datoriilor; se ridică după plata/eșalonarea datoriei.",
  "Amenzile/penalitățile către stat = cont 6581 (NEdeductibile fiscal), NU 635. Reducere comercială primită de la furnizor = 609; acordată clienților = 709. Sconturi: primite 767, acordate 667.",
  "Cote TVA 2026: standard 21%; redusă 11% pentru alimente, medicamente, cărți/ziare, cazare, restaurant/catering, apă, lemne de foc.",
+ "Subvenții pentru investiții = cont 475 (NU 474, NU 131). Formularul 230 = cerere redirecționare 3,5% din impozit către ONG (NU declarație salarii). Formularul 200 = înlocuit de D212.",
  "Neplătitor de TVA: NU colectezi TVA pe facturi, dar NICI nu deduci TVA-ul de la achiziții (îl treci pe cheltuială/cost). Devii plătitor obligatoriu la depășirea plafonului de 395.000 lei.",
 ]
 for fct in facts:
