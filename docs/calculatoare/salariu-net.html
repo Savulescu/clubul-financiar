@@ -1,16 +1,113 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator salariu net din brut — Clubul Financiar</title>
-<meta name="description" content="Află cât iei net dintr-un salariu brut în România: CAS, CASS și impozit pe venit."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Află cât iei net dintr-un salariu brut în România: CAS, CASS și impozit pe venit."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/salariu-net.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Calculator salariu net din brut"><meta property="og:description" content="Află cât iei net dintr-un salariu brut în România: CAS, CASS și impozit pe venit."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/salariu-net.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator salariu net din brut"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Calculator salariu net. Doar prezentare; calculul e neatins.
+   Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot HTML-ul
+   emis de JS (result-big / result-row + var(--emerald)) să se randeze în
+   limbajul auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:transparent;
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin clase structurale vechi în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+
+/* câmpuri (brut + persoane în întreținere) în stil Ultra */
+.u-page .field{ margin:0 0 14px; }
+.u-page .field label{ color:var(--u-ink); font-weight:600; display:block; }
+.u-page .field span{ color:var(--u-muted)!important; }
+.u-page .field input[type=number],
+.u-page .field select{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums; margin-top:6px;
+}
+.u-page .field input[type=number]:focus,
+.u-page .field select:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* SEMNĂTURA: panoul de rezultat = extras de bancă privată.
+   Netul = cifră-erou gravată serif; CAS/CASS/deducere/impozit = registru. */
+.u-page #out p:first-child{ color:var(--u-muted)!important; font-size:.9rem;
+  letter-spacing:.05em; text-transform:uppercase; margin:0 0 2px; }
+.u-page #out .result-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.4rem,6vw,3.6rem); margin:4px 0 18px;
+}
+.u-page #out .result-big::after{
+  content:""; display:block; height:1px; margin-top:14px;
+  background:linear-gradient(90deg,var(--u-gold2),transparent);
+}
+.u-page #out .result-row{
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  padding:11px 0; border-bottom:1px solid var(--u-line-soft);
+}
+.u-page #out .result-row:last-child{ border-bottom:0; }
+.u-page #out .result-row span{ color:var(--u-muted); font-size:.95rem; }
+.u-page #out .result-row b{ color:var(--u-ink); font-variant-numeric:tabular-nums;
+  font-weight:700; white-space:nowrap; }
+
+/* hero local + card „la ce te ajută" în limbaj Ultra */
+.u-page .card{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:16px;
+  padding:20px 22px; box-shadow:var(--u-shadow);
+}
+.u-page .card h2, .u-page .card h3{ font-family:'Fraunces',Georgia,serif;
+  color:var(--u-ink); font-weight:600; }
+.u-page .card p, .u-page .card li, .u-page .card ul{ color:var(--u-muted); }
+.u-page .card li strong, .u-page .card p strong{ color:var(--u-ink); }
+.u-page h2.title{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page details summary{ font-family:'Fraunces',serif!important; color:var(--u-gold)!important; }
+.u-page details p{ color:var(--u-muted); }
+.u-page .disc{ color:var(--u-muted); }
+
+/* butoane vechi → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .result-big::after{ transition:none; }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,10 +116,15 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator salariu net (brut → net)</h1></div></section>
+  </div></header><main class="u-page"><section class="section-sm"><div class="container">
+    <div class="u-hero">
+      <p class="u-eyebrow">Biroul tău financiar privat</p>
+      <h1 class="u-crest">Salariu brut <em>în net</em></h1>
+      <p class="u-lead">Pui salariul brut din contract și vezi exact cât îți ajunge net „în mână", după ce statul reține pensia (CAS), sănătatea (CASS) și impozitul. Fără surprize la primul fluturaș.</p>
+    </div></div></section>
 <section class="section" style="padding-bottom:8px">
   <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
+    <div class="card" style="border-left:3px solid var(--u-gold)">
       <h2 style="margin-top:0">La ce te ajută</h2>
       <p style="color:var(--muted);font-size:1.02rem">Când vezi „salariu brut 5.000 lei" într-un anunț de job, nu primești toți banii ăștia în cont — statul reține pensia, sănătatea și impozitul. Acest calculator îți arată exact cât rămâne net „în mână", ca să știi din timp pe ce te bazezi. De exemplu, la un brut de 5.000 lei ajungi cu aproximativ 3.000 lei net pe lună — restul merge la stat.</p>
     </div>
@@ -69,7 +171,7 @@ $("out").innerHTML=`<p style="color:var(--muted)">Salariu net estimat</p><div cl
 <div class="result-row"><span>Deducere personală</span><b style="color:var(--emerald)">${lei(ded)}</b></div>
 <div class="result-row"><span>Impozit 10% (după deducere)</span><b>${lei(imp)}</b></div>`; }
 $("calcBtn").addEventListener("click",calc); $("B").addEventListener("input",calc); $("dep").addEventListener("change",calc); calc();
-</script><footer class="foot"><div class="container">
+</script></main><footer class="foot"><div class="container">
     <div class="foot-grid">
       <div>
         <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>

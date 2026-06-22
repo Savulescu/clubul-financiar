@@ -1,16 +1,136 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator chirie vs cumpărare — ce e mai avantajos — Clubul Financiar</title>
-<meta name="description" content="Compară costul total al cumpărării unei locuințe cu creditul față de chirie, pe un orizont de timp ales. Vezi care e mai avantajos financiar."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Compară costul total al cumpărării unei locuințe cu creditul față de chirie, pe un orizont de timp ales. Vezi care e mai avantajos financiar."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/chirie-vs-cumparare.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Calculator chirie vs cumpărare"><meta property="og:description" content="Compară costul total al cumpărării cu creditul față de chirie, pe un orizont de timp ales."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/chirie-vs-cumparare.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator chirie vs cumpărare"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Chirie vs cumpărare. Doar prezentare; calculul e neatins.
+   Strategia: pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot
+   HTML-ul generat de JS (.result-big / .result-row + butoanele .btn) să se
+   randeze în limbajul auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni vechi → Ultra (prinde stilurile inline var(--…) emise din JS) */
+.u-page{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --blue:var(--u-muted);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:transparent;
+  --emerald-link:var(--u-gold);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin clase structurale vechi în zona convertită */
+.u-page .calc{ gap:22px; align-items:start; }
+.u-page .calc .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:24px; box-shadow:var(--u-shadow); overflow:hidden;
+}
+.u-page .calc .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+
+/* câmpurile de input → stil Ultra */
+.u-page .field{ margin-bottom:14px; }
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field input[type=number]{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums; margin-top:6px;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* butoane (calcBtn + linkuri ghost) → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+/* ---------------------------------------------------------------------------
+   SEMNĂTURA: panoul de rezultat = „verdictul" comparației pe termen lung.
+   Câștigătorul gravat în aur (Fraunces), iar cele două costuri devin bare
+   comparative orizontale într-un registru de extras de bancă privată.
+   --------------------------------------------------------------------------- */
+.u-page #out{ display:flex; flex-direction:column; }
+.u-page #out > p:first-child{ color:var(--u-muted); font-size:.9rem;
+  letter-spacing:.08em; text-transform:uppercase; margin:0 0 2px; }
+
+.u-page .result-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  background:none !important; -webkit-text-fill-color:currentColor !important;
+  color:var(--u-gold) !important; font-variant-numeric:tabular-nums lining-nums;
+  line-height:1.04; font-size:clamp(2.4rem,6vw,3.4rem); margin:2px 0 16px;
+}
+
+.u-page .result-row{
+  position:relative; display:flex; justify-content:space-between; align-items:center;
+  gap:14px; padding:12px 2px; border-bottom:1px solid var(--u-line-soft);
+}
+.u-page .result-row span{ color:var(--u-muted); font-size:.95rem; }
+.u-page .result-row b{ font-variant-numeric:tabular-nums; color:var(--u-ink); font-weight:700; }
+
+/* Bara comparativă: cele două costuri (cumpărare vs chirie) capătă o linie
+   aurie de bază sub ele, ca un registru gravat — semnătura paginii. */
+.u-page .result-row:nth-child(2),
+.u-page .result-row:nth-child(3){
+  padding:14px 0 16px; border-bottom:1px solid var(--u-line-soft);
+}
+.u-page .result-row:nth-child(2)::after,
+.u-page .result-row:nth-child(3)::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+  background:linear-gradient(90deg,var(--u-gold),var(--u-gold2),transparent);
+  opacity:.55; border-radius:2px;
+}
+.u-page .result-row:nth-child(3)::after{ opacity:.22;
+  background:linear-gradient(90deg,var(--u-muted),transparent); }
+
+.u-page #out > p:last-child{ color:var(--u-muted) !important; line-height:1.6; }
+
+/* hairline auriu pe carduri editoriale + detalii */
+.u-page .card{
+  position:relative; background:var(--u-panel); border:1px solid var(--u-line-soft);
+  border-radius:18px; box-shadow:var(--u-shadow);
+}
+.u-page .card[style*="border-left"]{ border-left:3px solid var(--u-gold) !important; }
+.u-page .card h2,.u-page .card h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page .card ul li strong{ color:var(--u-ink); }
+.u-page .disc{ color:var(--u-muted); }
+.u-page details summary{ color:var(--u-gold) !important; font-family:'Fraunces',serif; font-weight:600; }
+.u-page .title{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); }
+
+/* premium-lock în limbaj Ultra (dacă apare în loc de calculator) */
+.u-page .cf-premium-lock{
+  background:var(--u-panel); border:1px solid var(--u-line); border-radius:20px;
+  box-shadow:var(--u-shadow); position:relative; overflow:hidden;
+}
+.u-page .cf-premium-lock::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); }
+.u-page .cf-premium-lock h2{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page .cf-premium-lock .price-line{ color:var(--u-gold); }
+.u-page .cf-premium-lock a[style*="emerald-link"]{ color:var(--u-gold) !important; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .result-big{ transition:none; }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,8 +139,15 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Chirie sau cumpărare?</h1></div></section>
-<section class="section" style="padding-bottom:8px">
+  </div></header><main class="u-page">
+<section class="section"><div class="container">
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Chirie sau <em>cumpărare</em>?</h1>
+    <p class="u-lead">Una dintre cele mai mari decizii din viața ta, pusă în cifre. Compari, pe orizontul tău, cât te costă net creditul față de chirie — și vezi limpede care variantă iese în față.</p>
+  </div>
+</div></section>
+<section class="section" style="padding-top:0;padding-bottom:8px">
   <div class="container">
     <div class="card" style="border-left:4px solid var(--emerald)">
       <h2 style="margin-top:0">La ce te ajută</h2>
@@ -56,6 +183,7 @@
 <div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum citești comparația</h2><p style="color:var(--muted)">Calculatorul estimează <strong>costul net</strong> al fiecărei variante pe orizontul ales. La cumpărare, adună avansul, costurile de achiziție (~2%), ratele și întreținerea, apoi scade capitalul propriu acumulat (partea de proprietate plus aprecierea). La chirie, însumează chiriile plătite. Nu este o decizie pur financiară — contează și flexibilitatea, stabilitatea și planurile tale de viață.</p><div class="disc">⚠️ Estimare educativă simplificată. Nu include costul de oportunitate al avansului investit, impozite locale sau fluctuațiile pieței. Nu reprezintă consultanță financiară.</div>
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
 </div></section>
+</main>
 <script>
 const $=id=>document.getElementById(id);
 const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";

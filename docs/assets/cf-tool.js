@@ -169,8 +169,8 @@
     w.document.write(
       '<html><head><meta charset="utf-8"><title>' + esc(titlu) + ' — Clubul Financiar</title>' +
       '<style>body{font-family:system-ui,Segoe UI,Arial;max-width:720px;margin:30px auto;color:#0f2540;padding:0 20px}' +
-      'h1{color:#10b981}table{width:100%;border-collapse:collapse;margin:16px 0}td{padding:8px 6px;border-bottom:1px solid #e6edf5}' +
-      'td:last-child{text-align:right;font-weight:700}.muted{color:#5b7088;font-size:.85rem}.big{font-size:2rem;font-weight:800;color:#10b981}' +
+      'h1{color:#0e2750;border-bottom:2px solid #caa44a;padding-bottom:8px}table{width:100%;border-collapse:collapse;margin:16px 0}td{padding:8px 6px;border-bottom:1px solid #e6edf5}' +
+      'td:last-child{text-align:right;font-weight:700}.muted{color:#5b7088;font-size:.85rem}.big{font-size:2rem;font-weight:800;color:#9a7414}' +
       '</style></head><body><h1>' + esc(titlu) + '</h1>' + htmlBody +
       '<p class="muted">Clubul Financiar · clubulfinanciar.ro · ' + CF.dataRO(new Date()) +
       ' · Estimare educativă, nu consultanță fiscală.</p>' +

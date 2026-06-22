@@ -1,16 +1,106 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator inflație — puterea de cumpărare — Clubul Financiar</title>
-<meta name="description" content="Vezi cât vor valora banii tăi în viitor sub efectul inflației. Cât pierzi dacă banii stau pe loc."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Vezi cât vor valora banii tăi în viitor sub efectul inflației. Cât pierzi dacă banii stau pe loc."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/inflatie.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Calculator inflație — puterea de cumpărare"><meta property="og:description" content="Vezi cât vor valora banii tăi în viitor sub efectul inflației. Cât pierzi dacă banii stau pe loc."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/inflatie.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator inflație — puterea de cumpărare"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Calculator inflație. Doar prezentare; calculul e neatins.
+   Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot HTML-ul
+   generat de JS (.result-big / .result-row) să se randeze auriu/navy fără să
+   atingem scriptul. Semnătura: curba descendentă a puterii de cumpărare.
+   ============================================================================= */
+
+/* 1) Remap tokeni vechi → Ultra (prinde var(--…) emis inline din JS) */
+.u-page{
+  --emerald:var(--u-gold); --muted:var(--u-muted); --text:var(--u-ink);
+  --navy:var(--u-ink); --border:var(--u-line-soft); --card:var(--u-panel);
+  --bg-soft:transparent;
+}
+
+/* 2) Hero — eyebrow auriu + crest serif + curba-semnătură */
+.u-page .u-erohero{ padding:54px 0 18px; }
+.u-page .u-erohero .u-eyebrow{ justify-content:flex-start; }
+.u-page .u-erohero .u-crest{ font-size:clamp(2rem,5.2vw,3rem); margin:0 0 14px; }
+
+.u-curve{ position:relative; margin:18px 0 2px; max-width:640px; }
+.u-curve-svg{ width:100%; height:clamp(120px,18vw,168px); display:block; overflow:visible; }
+.u-curve-cap{ color:var(--u-muted); font-size:.82rem; line-height:1.5; margin:8px 0 0; }
+.u-curve .start-dot,.u-curve .end-dot{ r:5; }
+
+/* 3) Conținut explicativ: cardurile vechi → panouri Ultra liniștite */
+.u-page .card{
+  position:relative; background:var(--u-panel); border:1px solid var(--u-line-soft);
+  border-radius:18px; padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden;
+  border-left:1px solid var(--u-line-soft) !important;
+}
+.u-page .card::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .card h2,.u-page .card h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page .card h3{ font-size:1.04rem; }
+.u-page .card ul li b,.u-page .card p b{ color:var(--u-ink); }
+.u-page details summary{ font-family:'Fraunces',serif; font-weight:600; color:var(--u-gold) !important; }
+.u-page .title{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+
+/* 4) Calculatorul: panouri + câmpuri Ultra */
+.u-page .panel{
+  position:relative; background:var(--u-panel); border:1px solid var(--u-line-soft);
+  border-radius:18px; padding:22px; box-shadow:var(--u-shadow); overflow:hidden;
+}
+.u-page #out.panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field input[type=number]{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* număr-erou: puterea de cumpărare rămasă, gravat serif ca în extras */
+.u-page .result-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-gold);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.4rem,6vw,3.6rem); margin:6px 0 14px;
+}
+.u-page .result-row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  padding:11px 0; border-bottom:1px solid var(--u-line-soft);
+}
+.u-page .result-row:last-child{ border-bottom:none; }
+.u-page .result-row span{ color:var(--u-muted); font-size:.94rem; }
+.u-page .result-row b{ color:var(--u-ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
+
+/* 5) butoane vechi → auriu Ultra */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+.u-page .disc{ color:var(--u-muted); }
+
+@media(prefers-reduced-motion:reduce){
+  .u-curve-line{ animation:none; }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,7 +109,40 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator inflație</h1></div></section>
+  </div></header>
+<main class="u-page">
+<section class="section u-erohero"><div class="container">
+  <div class="u-hero" style="padding:0">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Cât valorează banii tăi <em>peste ani</em></h1>
+    <p class="u-lead">Banii stau pe loc, dar prețurile urcă — așa că aceeași sumă cumpără tot mai puțin în fiecare an. Vezi mai jos cât mai valorează cu adevărat economiile tale în viitor și cât se topește pe drum doar pentru că au stat nemișcate.</p>
+
+    <!-- SEMNĂTURA: curba descendentă a puterii de cumpărare -->
+    <figure class="u-curve" aria-hidden="true">
+      <svg class="u-curve-svg" viewBox="0 0 640 168" preserveAspectRatio="none" role="img">
+        <defs>
+          <linearGradient id="cfInflFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--u-gold2)" stop-opacity=".26"/>
+            <stop offset="1" stop-color="var(--u-gold2)" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="cfInflLine" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="var(--u-gold2)"/>
+            <stop offset="1" stop-color="var(--u-gold)"/>
+          </linearGradient>
+        </defs>
+        <!-- linia de bază (valoarea nominală, neschimbată) -->
+        <line x1="0" y1="24" x2="640" y2="24" stroke="var(--u-line-soft)" stroke-width="1.5" stroke-dasharray="4 6"/>
+        <!-- aria erodată sub curbă -->
+        <path d="M0,24 C150,30 300,64 440,108 C520,134 590,150 640,158 L640,168 L0,168 Z" fill="url(#cfInflFill)"/>
+        <!-- curba descendentă a puterii de cumpărare -->
+        <path class="u-curve-line" d="M0,24 C150,30 300,64 440,108 C520,134 590,150 640,158" fill="none" stroke="url(#cfInflLine)" stroke-width="3" stroke-linecap="round"/>
+        <circle class="start-dot" cx="0" cy="24" fill="var(--u-gold)"/>
+        <circle class="end-dot" cx="640" cy="158" fill="var(--u-neg)"/>
+      </svg>
+      <figcaption class="u-curve-cap">Puterea de cumpărare a aceleiași sume scade an de an, în timp ce cifra de pe hârtie rămâne neschimbată (linia punctată).</figcaption>
+    </figure>
+  </div>
+</div></section>
 <section class="section" style="padding-bottom:8px">
   <div class="container">
     <div class="card" style="border-left:4px solid var(--emerald)">
@@ -52,7 +175,9 @@ $("out").innerHTML=`<p style="color:var(--muted)">Puterea de cumpărare peste ${
 <div class="result-row"><span>Sumă nominală (neschimbată)</span><b>${lei(S)}</b></div>
 <div class="result-row"><span>Pierdere putere de cumpărare</span><b style="color:#e25555">${lei(pierd)}</b></div>`; }
 $("calcBtn").addEventListener("click",calc); ["S","yr","r"].forEach(id=>$(id).addEventListener("input",calc)); calc();
-</script><footer class="foot"><div class="container">
+</script>
+</main>
+<footer class="foot"><div class="container">
     <div class="foot-grid">
       <div>
         <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>

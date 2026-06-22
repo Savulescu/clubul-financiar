@@ -1,16 +1,105 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator rată credit — Clubul Financiar</title>
-<meta name="description" content="Calculează rata lunară, totalul plătit și dobânda pentru un credit. Funcționează pentru nevoi personale, ipotecar sau auto."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Calculează rata lunară, totalul plătit și dobânda pentru un credit. Funcționează pentru nevoi personale, ipotecar sau auto."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/credit.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Calculator rată credit"><meta property="og:description" content="Calculează rata lunară, totalul plătit și dobânda pentru un credit. Funcționează pentru nevoi personale, ipotecar sau auto."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/credit.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator rată credit"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Calculator rată credit. Doar prezentare; calculul e neatins.
+   Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot HTML-ul
+   emis de <script> (.result-big / .result-row + butoanele .btn) să se randeze
+   în limbajul auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS + markup */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:var(--u-panel2);
+  --bg-soft2:var(--u-gold-soft);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin clase structurale vechi în zona convertită */
+.u-page .card,.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .card[style*="border-left"]{ border-left:1px solid var(--u-line-soft) !important; }
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .card h2,.u-page .card h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page .card ul li b{ color:var(--u-ink); }
+.u-page details summary{ font-family:'Fraunces',serif; color:var(--u-gold) !important; }
+
+/* SEMNĂTURA: rata lunară gravată ca într-un extras de bancă privată */
+.u-page .result-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.6rem,7vw,4rem); margin:6px 0 14px;
+}
+
+/* ledger: dobândă totală / total plătit / număr rate — registru aliniat */
+.u-page .result-row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  padding:12px 0; border-bottom:1px solid var(--u-line-soft);
+}
+.u-page #out .result-row:last-of-type{ border-bottom:none; }
+.u-page .result-row span{ color:var(--u-muted); font-size:.96rem; }
+.u-page .result-row b{ font-variant-numeric:tabular-nums; color:var(--u-ink); font-size:1.05rem; }
+/* dobânda totală vine cu inline color roșu din JS — o aducem pe tonul Ultra neg */
+.u-page .result-row b[style*="e25555"]{ color:var(--u-neg) !important; }
+
+/* câmpurile formularului în stil Ultra */
+.u-page .field{ margin-bottom:14px; }
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field input[type=number]{
+  width:100%; padding:12px 13px; border-radius:11px; box-sizing:border-box; margin-top:8px;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* butoane */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* layout calc: formular + rezultat lângă, ca un pupitru */
+.u-page .calc{
+  display:grid; grid-template-columns:0.9fr 1.1fr; gap:18px; align-items:start;
+}
+@media(max-width:760px){ .u-page .calc{ grid-template-columns:1fr; } }
+
+/* titlu secundar + disclaimer */
+.u-page h2.title{ font-family:'Fraunces',serif; color:var(--u-ink); font-weight:600; }
+.u-page .disc{ color:var(--u-muted); }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .field input,.u-page .btn{ transition:none; }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,10 +108,17 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator rată credit</h1></div></section>
+  </div></header><main class="u-page">
+<section class="section"><div class="container">
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Calculator <em>rată credit</em></h1>
+    <p class="u-lead">Înainte să semnezi un împrumut — nevoi personale, mașină sau casă — vezi exact ce rată plătești în fiecare lună și cât dai în plus, peste banii împrumutați, pe toată durata creditului. Schimbi suma, dobânda sau perioada și totul se recalculează pe loc.</p>
+  </div>
+</div></section>
 <section class="section" style="padding-bottom:8px">
   <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
+    <div class="card">
       <h2 style="margin-top:0">La ce te ajută</h2>
       <p style="color:var(--muted);font-size:1.02rem">Înainte să iei un împrumut (nevoi personale, mașină sau casă), vrei să știi cât te costă de fapt — nu doar cât primești. Calculatorul îți spune ce rată plătești în fiecare lună și cât dai în plus, peste banii împrumutați, pe toată durata creditului. De exemplu, la 100.000 lei pe 5 ani cu o dobândă de 7%, rata e în jur de 1.980 lei pe lună și ajungi să plătești aproape 19.000 lei doar dobândă. Așa vezi din timp dacă rata îți încape în buget și dacă merită.</p>
     </div>
@@ -36,12 +132,13 @@
   </div>
 </section>
 <section class="section"><div class="container"><div class="calc">
-<div class="panel"><div class="field"><label>Sumă împrumutată (lei)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Banii pe care îi iei de la bancă</span><input type="number" id="P" value="100000" min="1" step="1000"></div><div class="field"><label>Dobândă anuală (%)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Din oferta băncii, ex. 7</span><input type="number" id="r" value="7" min="0" max="100" step="0.1"></div><div class="field"><label>Perioadă (ani)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">În câți ani dai banii înapoi</span><input type="number" id="yr" value="5" min="1" max="40" step="1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
+<div class="panel"><p class="u-label">Datele creditului</p><div class="field"><label>Sumă împrumutată (lei)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Banii pe care îi iei de la bancă</span><input type="number" id="P" value="100000" min="1" step="1000"></div><div class="field"><label>Dobândă anuală (%)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Din oferta băncii, ex. 7</span><input type="number" id="r" value="7" min="0" max="100" step="0.1"></div><div class="field"><label>Perioadă (ani)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">În câți ani dai banii înapoi</span><input type="number" id="yr" value="5" min="1" max="40" step="1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
 <div style="max-width:760px;margin:34px auto 0"><h2 class="title">Despre rata creditului</h2><p style="color:var(--muted)">Rata lunară depinde de suma împrumutată, dobândă și perioadă. O perioadă mai lungă scade rata lunară, dar crește dobânda totală plătită. Compară mereu DAE-ul (dobânda anuală efectivă), nu doar dobânda nominală.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
 </div></section>
+</main>
 <script>
 const $=id=>document.getElementById(id);
 const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";

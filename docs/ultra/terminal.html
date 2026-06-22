@@ -524,12 +524,18 @@
   ];
   function renderBVB(){
     $("bvbGrid").innerHTML = BVB.map(function(c){
-      var dv = /ividend/i.test(c.d) ? '<span style="font-size:.58rem;font-weight:700;color:var(--u-gold);border:1px solid var(--u-line);border-radius:999px;padding:1px 7px;margin-left:7px;white-space:nowrap">💰 Dividende</span>' : '';
+      var x = DIV[c.t] || {};
+      var badge = x.y
+        ? '<span style="font-size:.58rem;font-weight:800;color:#1a1304;background:linear-gradient(135deg,var(--u-gold2),var(--u-gold));border-radius:999px;padding:2px 8px;margin-left:7px;white-space:nowrap">💰 '+fmt(x.y,2)+'%</span>'
+        : (/ividend/i.test(c.d) ? '<span style="font-size:.58rem;font-weight:700;color:var(--u-gold);border:1px solid var(--u-line);border-radius:999px;padding:1px 7px;margin-left:7px;white-space:nowrap">💰 Dividende</span>' : '');
+      var sub = x.d
+        ? 'Dividend <b style="color:var(--u-ink)">'+fmt(x.d, x.d<1?4:2)+' lei/acț.</b>'+(x.dy?(' · '+x.dy):'')
+        : esc(c.d);
       return '<div class="u-panel" style="margin:0"><div style="display:flex;justify-content:space-between;align-items:baseline">'+
         '<span class="cur term-num" style="font-family:Fraunces,serif;color:var(--u-gold);font-weight:600">'+esc(c.t)+'</span>'+
         '<span class="u-kpi-sub" style="margin:0">'+esc(c.s)+'</span></div>'+
-        '<p style="color:var(--u-ink);font-weight:600;margin:4px 0 2px">'+esc(c.n)+dv+'</p>'+
-        '<p class="u-kpi-sub" style="margin:0">'+esc(c.d)+'</p></div>';
+        '<p style="color:var(--u-ink);font-weight:600;margin:4px 0 2px">'+esc(c.n)+badge+'</p>'+
+        '<p class="u-kpi-sub" style="margin:0">'+sub+'</p></div>';
     }).join("");
   }
 

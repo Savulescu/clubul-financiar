@@ -1,16 +1,129 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator impozit investiții și dividende — Clubul Financiar</title>
-<meta name="description" content="Estimează impozitul pe câștigurile din acțiuni/ETF și pe dividende, în funcție de brokerul folosit și perioada de deținere (România 2025)."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Estimează impozitul pe câștigurile din acțiuni/ETF și pe dividende, în funcție de brokerul folosit și perioada de deținere (România 2025)."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/impozit-investitii.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Calculator impozit investiții și dividende"><meta property="og:description" content="Estimează impozitul pe câștigurile din acțiuni/ETF și pe dividende, în funcție de broker și perioada de deținere."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/impozit-investitii.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator impozit investiții și dividende"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Calculator impozit investiții & dividende. Doar prezentare;
+   calculul, id-urile și scriptul rămân neatinse. Pe .u-page remapăm tokenii
+   vechi (verzi) la cei Ultra, ca tot HTML-ul emis de JS (result-big /
+   result-row + var(--emerald)) să se randeze în limbajul auriu/navy.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:transparent;
+  --emerald-link:var(--u-gold);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin clase structurale vechi în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+
+/* câmpuri (tip venit / broker / deținere / sumă) în stil Ultra */
+.u-page .field{ margin:0 0 14px; }
+.u-page .field label{ color:var(--u-ink); font-weight:600; display:block; }
+.u-page .field span{ color:var(--u-muted)!important; }
+.u-page .field input[type=number],
+.u-page .field select{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums; margin-top:6px;
+}
+.u-page .field input[type=number]:focus,
+.u-page .field select:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* SEMNĂTURA: panoul de rezultat = extras de bancă privată.
+   Impozitul = cifră-erou gravată serif; cota/„rămâi cu" = registru (ledger). */
+.u-page #out > p:first-child{ color:var(--u-muted)!important; font-size:.84rem;
+  letter-spacing:.06em; text-transform:uppercase; margin:0 0 2px; }
+.u-page #out .result-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.4rem,6vw,3.6rem); margin:4px 0 18px;
+}
+.u-page #out .result-big::after{
+  content:""; display:block; height:1px; margin-top:14px;
+  background:linear-gradient(90deg,var(--u-gold2),transparent);
+}
+.u-page #out .result-row{
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  padding:11px 0; border-bottom:1px solid var(--u-line-soft);
+}
+.u-page #out .result-row:last-of-type{ border-bottom:0; }
+.u-page #out .result-row span{ color:var(--u-muted); font-size:.95rem; }
+.u-page #out .result-row b{ color:var(--u-ink); font-variant-numeric:tabular-nums;
+  font-weight:700; white-space:nowrap; }
+
+/* hero local + carduri explicative în limbaj Ultra */
+.u-page .card{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:16px;
+  padding:20px 22px; box-shadow:var(--u-shadow);
+}
+.u-page .card h2, .u-page .card h3{ font-family:'Fraunces',Georgia,serif;
+  color:var(--u-ink); font-weight:600; }
+.u-page .card p, .u-page .card li, .u-page .card ul{ color:var(--u-muted); }
+.u-page .card li strong, .u-page .card p strong{ color:var(--u-ink); }
+.u-page h2.title{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page section > .container > div p{ color:var(--u-muted); }
+.u-page section p strong{ color:var(--u-ink); }
+.u-page details summary{ font-family:'Fraunces',serif!important; color:var(--u-gold)!important; }
+.u-page details p{ color:var(--u-muted); }
+.u-page .disc{ color:var(--u-muted); }
+
+/* butoane vechi → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+/* cardul de lock premium → pastilă navy/auriu, fără verde */
+.u-page .cf-premium-lock{
+  background:linear-gradient(180deg,var(--u-panel2),var(--u-panel));
+  border:1px solid var(--u-line-soft); border-radius:18px; box-shadow:var(--u-shadow);
+}
+.u-page .cf-premium-lock h2{ font-family:'Fraunces',serif; color:var(--u-ink); font-weight:600; }
+.u-page .cf-premium-lock p{ color:var(--u-muted); }
+.u-page .cf-premium-lock .price-line{ color:var(--u-gold); font-family:'Fraunces',serif; }
+.u-page .cf-premium-lock a[href="/login.html"]{ color:var(--u-gold)!important; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page #out .result-big::after{ animation:none; }
+}
+@media(max-width:680px){
+  .u-page #out .result-big{ font-size:clamp(2rem,9vw,2.6rem); }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,10 +132,15 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Cât impozit plătesc pe investiții?</h1></div></section>
+  </div></header><main class="u-page"><section class="section-sm"><div class="container">
+    <div class="u-hero">
+      <p class="u-eyebrow">Biroul tău financiar privat</p>
+      <h1 class="u-crest">Cât rămâne <em>după impozit</em>?</h1>
+      <p class="u-lead">Pui câștigul din acțiuni, ETF-uri sau dividendele primite și vezi pe loc cât oprește statul și cât îți rămâne ție în mână. Cota se schimbă după broker și după cât timp ai ținut titlurile — îți arătăm exact ce procent ți se aplică.</p>
+    </div></div></section>
 <section class="section" style="padding-bottom:8px">
   <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
+    <div class="card" style="border-left:3px solid var(--u-gold)">
       <h2 style="margin-top:0">La ce te ajută</h2>
       <p style="color:var(--muted);font-size:1.02rem">Când câștigi bani din acțiuni, ETF-uri sau dividende, statul îți ia o parte sub formă de impozit — dar cât anume depinde de tipul venitului, de brokerul prin care investești și de cât timp ai ținut titlurile. Acest calculator îți spune instant câți lei dai la stat și câți îți rămân ție. De exemplu, la un câștig de 10.000 lei printr-un broker român, ținut peste un an, plătești doar 300 lei (3%) și rămâi cu 9.700 lei — în timp ce la un broker străin ai plăti 1.600 lei (16%).</p>
     </div>
@@ -41,7 +159,7 @@
       </ul></div>
       <div class="card"><h3>👤 Pentru cine e</h3><p style="color:var(--muted);line-height:1.6">Pentru oricine investește la bursă sau în ETF-uri și vrea să știe dinainte cât va plăti la stat. De exemplu: ai vândut acțiuni cu profit prin Tradeville și vrei să afli cât îți oprește brokerul, sau investești prin Trading 212 / Interactive Brokers și trebuie să-ți pregătești Declarația Unică.</p></div>
     </div>
-    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
+    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700">Cum funcționează, pe scurt</summary>
       <p style="color:var(--muted);margin-top:8px">Calculatorul aplică pe suma ta cota de impozit corectă: 3% (broker român, peste 1 an), 6% (broker român, sub 1 an), respectiv 16% (broker străin sau dividende). Apoi scade impozitul din sumă ca să vezi cât îți rămâne. Cifrele sunt pe regulile fiscale 2026 (cote majorate, Legea 239/2025) și reprezintă o estimare educativă — nu include pierderile reportate, CASS sau situații particulare. Pentru cazul tău exact, verifică legislația în vigoare sau întreabă un contabil.</p></details>
   </div>
 </section>
@@ -74,7 +192,7 @@ $("out").innerHTML=`<p style="color:var(--muted)">Impozit estimat</p><div class=
 $("tip").addEventListener("change",calc); $("broker").addEventListener("change",calc); $("hold").addEventListener("change",calc);
 $("sum").addEventListener("input",calc);
 $("calcBtn").addEventListener("click",calc); calc();
-</script><footer class="foot"><div class="container">
+</script></main><footer class="foot"><div class="container">
     <div class="foot-grid">
       <div>
         <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>

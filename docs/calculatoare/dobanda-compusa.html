@@ -1,16 +1,107 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator dobândă compusă — Clubul Financiar</title>
-<meta name="description" content="Calculează cât cresc banii tăi în timp cu dobândă compusă. Sumă inițială, contribuție lunară, dobândă și ani."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Calculează cât cresc banii tăi în timp cu dobândă compusă. Sumă inițială, contribuție lunară, dobândă și ani."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/dobanda-compusa.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Calculator dobândă compusă"><meta property="og:description" content="Calculează cât cresc banii tăi în timp cu dobândă compusă. Sumă inițială, contribuție lunară, dobândă și ani."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/dobanda-compusa.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator dobândă compusă"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Calculator dobândă compusă. Doar prezentare; calculul e neatins.
+   Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot HTML-ul
+   generat de JS (.result-big / .result-row + graficul SVG cu var(--emerald) /
+   var(--blue)) să se randeze în limbajul auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS (graficul) */
+.u-page{
+  --emerald:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:transparent; --bg:var(--u-panel2);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Re-skin clase structurale vechi în zona convertită */
+.u-page .calc{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+@media(max-width:760px){ .u-page .calc{ grid-template-columns:1fr; } }
+
+.u-page .calc .panel,.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+
+/* câmpurile de input în stil Ultra */
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field input[type=number]{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+
+/* SEMNĂTURA: suma finală gravată Fraunces, ca un extras de bancă privată.
+   .result-big e emis de JS — îl scoatem din modul gradient-clip și îl gravăm serif. */
+.u-page .result-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  background:none; -webkit-background-clip:border-box; background-clip:border-box;
+  -webkit-text-fill-color:var(--u-ink); color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.4rem,6vw,3.5rem); margin:4px 0 6px;
+}
+.u-page #out > p:first-child{ color:var(--u-muted); }
+
+/* defalcare rezultat → registru curat, cifre tabulare */
+.u-page .result-row{ border-bottom:1px solid var(--u-line-soft); padding:11px 0; }
+.u-page .result-row span{ color:var(--u-muted); }
+.u-page .result-row b{ font-variant-numeric:tabular-nums; color:var(--u-ink); }
+/* dobânda câștigată e marcată inline color:var(--emerald) din JS → devine auriu via remap */
+
+/* legenda graficului */
+.u-page #out svg + div{ color:var(--u-muted); }
+
+/* butoane vechi → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+/* titluri secundare + disclaimer */
+.u-page h2.title{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); }
+.u-page .disc{ color:var(--u-muted); }
+
+/* semnătura din hero: curba decorativă de creștere */
+.u-page .u-herocurve{ position:relative; margin:22px 0 2px; }
+.u-page .u-herocurve svg{ width:100%; height:clamp(120px,18vw,168px); display:block; overflow:visible; }
+.u-page .u-herocurve-cap{ color:var(--u-muted); font-size:.84rem; margin:6px 0 0; line-height:1.5; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .u-herocurve .u-hc-line{ animation:none; stroke-dashoffset:0; }
+}
+.u-page .u-hc-line{ stroke-dasharray:1; stroke-dashoffset:1; }
+@keyframes uHcDraw{ to{ stroke-dashoffset:0; } }
+@media(prefers-reduced-motion:no-preference){
+  .u-page .u-hc-line{ animation:uHcDraw 1.6s cubic-bezier(.2,.8,.2,1) .15s forwards; }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,29 +110,71 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Calculator dobândă compusă</h1></div></section>
-<section class="section" style="padding-bottom:8px">
-  <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
-      <h2 style="margin-top:0">La ce te ajută</h2>
-      <p style="color:var(--muted);font-size:1.02rem">Îți arată cum cresc banii puși deoparte dacă îi lași să lucreze ani la rând, prin „dobândă la dobândă". De exemplu, dacă pui 1.000 lei la început și adaugi 300 lei în fiecare lună timp de 30 de ani cu un randament de 8% pe an, ajungi la peste 440.000 lei — deși din buzunarul tău ies doar 109.000 lei, restul vine din dobândă. Așa vezi negru pe alb cât de mult contează să începi devreme și să fii constant.</p>
-    </div>
-    <div class="grid grid-3" style="margin-top:16px">
-      <div class="card"><h3>📝 Ce introduci</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6"><li><b>Suma inițială</b> — banii pe care îi pui chiar acum, la start.</li><li><b>Contribuția lunară</b> — cât adaugi în fiecare lună, constant.</li><li><b>Numărul de ani</b> — cât timp lași banii să crească.</li><li><b>Randamentul anual</b> — câștigul mediu pe an, în procente (ex. un depozit, un ETF).</li></ul></div>
-      <div class="card"><h3>📊 Ce afli</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6"><li><b>Suma finală</b> — câți bani ai la sfârșit, cu tot cu dobândă.</li><li><b>Banii depuși de tine</b> — cât ai pus efectiv din buzunar.</li><li><b>Dobânda câștigată</b> — partea care a crescut „singură".</li><li>Un grafic care arată cum se desparte depunerea ta de câștig, an de an.</li></ul></div>
-      <div class="card"><h3>👤 Pentru cine e</h3><p style="color:var(--muted);line-height:1.6">Pentru oricine vrea să economisească sau să investească pe termen lung: pentru pensie, pentru educația copilului sau pentru un fond pe viitor. De exemplu, un părinte care pune deoparte 200 lei pe lună pentru copilul de 1 an poate vedea cât strânge până la 18 ani.</p></div>
-    </div>
-    <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
-      <p style="color:var(--muted);margin-top:8px">Calculatorul aplică randamentul lună de lună atât pe suma inițială, cât și pe fiecare contribuție pe care o adaugi, și apoi adaugă dobândă și peste dobânda acumulată anterior. Cu cât perioada e mai lungă, cu atât acest efect „bulgăre de zăpadă" devine mai puternic. Rezultatul presupune un randament constant și e o estimare educativă — în realitate randamentele variază de la an la an.</p></details>
+  </div></header>
+<main class="u-page">
+<section class="section"><div class="container">
+
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Dobândă <em>compusă</em></h1>
+    <p class="u-lead">Vezi cum cresc banii puși deoparte când îi lași să lucreze ani la rând — dobândă peste dobândă. Introdu cât pui la start, cât adaugi lunar și pe câți ani, iar noi îți arătăm suma finală și cât din ea vine din câștig, nu din buzunarul tău.</p>
+    <figure class="u-herocurve" aria-hidden="true">
+      <svg viewBox="0 0 1000 220" preserveAspectRatio="none" focusable="false">
+        <defs>
+          <linearGradient id="hcFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--u-gold2)" stop-opacity=".28"/>
+            <stop offset="1" stop-color="var(--u-gold2)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,210 C260,206 480,196 640,150 C780,110 880,60 1000,14 L1000,220 L0,220 Z" fill="url(#hcFill)" stroke="none"/>
+        <path class="u-hc-line" pathLength="1" d="M0,210 C260,206 480,196 640,150 C780,110 880,60 1000,14"
+              fill="none" stroke="var(--u-gold)" stroke-width="2.6" vector-effect="non-scaling-stroke"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="1000" cy="14" r="4.2" fill="var(--u-panel)" stroke="var(--u-gold)" stroke-width="2.4" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <figcaption class="u-herocurve-cap">Curba creșterii: la început adaugi tu, apoi dobânda preia ritmul și urcă tot mai abrupt.</figcaption>
+    </figure>
   </div>
-</section>
-<section class="section"><div class="container"><div class="calc">
+
+  <div class="u-panel" style="margin-bottom:18px">
+    <p class="u-label">La ce te ajută</p>
+    <p style="color:var(--u-muted);font-size:1.02rem;margin:0;line-height:1.65">Îți arată cum cresc banii puși deoparte dacă îi lași să lucreze ani la rând, prin „dobândă la dobândă". De exemplu, dacă pui 1.000 lei la început și adaugi 300 lei în fiecare lună timp de 30 de ani cu un randament de 8% pe an, ajungi la peste 440.000 lei — deși din buzunarul tău ies doar 109.000 lei, restul vine din dobândă. Așa vezi negru pe alb cât de mult contează să începi devreme și să fii constant.</p>
+  </div>
+
+  <div class="u-grid u-grid-3" style="margin-bottom:18px">
+    <div class="u-panel">
+      <p class="u-label">Ce introduci</p>
+      <div class="u-row"><span class="k">Suma inițială — banii pe care îi pui chiar acum, la start.</span></div>
+      <div class="u-row"><span class="k">Contribuția lunară — cât adaugi în fiecare lună, constant.</span></div>
+      <div class="u-row"><span class="k">Numărul de ani — cât timp lași banii să crească.</span></div>
+      <div class="u-row"><span class="k">Randamentul anual — câștigul mediu pe an, în procente (un depozit, un ETF).</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Ce afli</p>
+      <div class="u-row"><span class="k">Suma finală — câți bani ai la sfârșit, cu tot cu dobândă.</span></div>
+      <div class="u-row"><span class="k">Banii depuși de tine — cât ai pus efectiv din buzunar.</span></div>
+      <div class="u-row"><span class="k">Dobânda câștigată — partea care a crescut „singură".</span></div>
+      <div class="u-row"><span class="k">Un grafic care desparte depunerea ta de câștig, an de an.</span></div>
+    </div>
+    <div class="u-panel">
+      <p class="u-label">Pentru cine e</p>
+      <p style="color:var(--u-muted);margin:0;line-height:1.6">Pentru oricine vrea să economisească sau să investească pe termen lung: pentru pensie, pentru educația copilului sau pentru un fond pe viitor. De exemplu, un părinte care pune deoparte 200 lei pe lună pentru copilul de 1 an poate vedea cât strânge până la 18 ani.</p>
+    </div>
+  </div>
+
+  <details class="u-panel" style="margin-bottom:22px">
+    <summary style="cursor:pointer;font-family:'Fraunces',serif;font-weight:600;color:var(--u-gold)">Cum funcționează, pe scurt</summary>
+    <p style="color:var(--u-muted);margin-top:10px;line-height:1.65">Calculatorul aplică randamentul lună de lună atât pe suma inițială, cât și pe fiecare contribuție pe care o adaugi, și apoi adaugă dobândă și peste dobânda acumulată anterior. Cu cât perioada e mai lungă, cu atât acest efect „bulgăre de zăpadă" devine mai puternic. Rezultatul presupune un randament constant și e o estimare educativă — în realitate randamentele variază de la an la an.</p>
+  </details>
+
+  <div class="calc">
 <div class="panel"><div class="field"><label>Sumă inițială (lei)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Banii pe care îi pui la start</span><input type="number" id="p0" value="1000" min="0" step="100"></div><div class="field"><label>Contribuție lunară (lei)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Cât adaugi în fiecare lună</span><input type="number" id="pm" value="300" min="0" step="50"></div><div class="field"><label>Număr de ani</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Cât timp lași banii să crească</span><input type="number" id="yr" value="30" min="1" max="80" step="1"></div><div class="field"><label>Randament anual (%)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Câștigul mediu pe an, ex. 7-8%</span><input type="number" id="r" value="8" min="0" max="50" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
-<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum funcționează dobânda compusă</h2><p style="color:var(--muted)">Dobânda compusă înseamnă că primești dobândă nu doar la banii depuși, ci și la dobânda acumulată anterior. Cu cât începi mai devreme, cu atât efectul e mai puternic — timpul e cel mai important ingredient.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Cum funcționează dobânda compusă</h2><p style="color:var(--u-muted)">Dobânda compusă înseamnă că primești dobândă nu doar la banii depuși, ci și la dobânda acumulată anterior. Cu cât începi mai devreme, cu atât efectul e mai puternic — timpul e cel mai important ingredient.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
 </div></section>
+</main>
 <script>
 const $=id=>document.getElementById(id);
 const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";

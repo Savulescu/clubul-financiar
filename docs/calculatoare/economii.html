@@ -1,16 +1,124 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculator economii — cât pui lunar pentru o țintă — Clubul Financiar</title>
-<meta name="description" content="Află cât trebuie să economisești lunar ca să atingi o sumă-țintă într-un anumit număr de ani."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Află cât trebuie să economisești lunar ca să atingi o sumă-țintă într-un anumit număr de ani."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/calculatoare/economii.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Calculator economii — cât pui lunar pentru o țintă"><meta property="og:description" content="Află cât trebuie să economisești lunar ca să atingi o sumă-țintă într-un anumit număr de ani."><meta property="og:url" content="https://clubulfinanciar.ro/calculatoare/economii.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Calculator economii — cât pui lunar pentru o țintă"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Calculator economii. Doar prezentare; calculul JS e neatins.
+   Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca tot HTML-ul
+   generat de calc() (result-big / result-row + var(--emerald)/var(--muted)) să
+   se randeze în limbajul auriu/navy fără să atingem scriptul.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile inline var(--…) emise din JS */
+.u-page{
+  --emerald:var(--u-gold); --muted:var(--u-muted); --text:var(--u-ink);
+  --navy:var(--u-ink); --border:var(--u-line-soft); --card:var(--u-panel);
+  --bg-soft:transparent; --bg-soft2:var(--u-gold-soft);
+}
+
+/* 2) Re-skin clase structurale vechi în zona convertită */
+.u-page .panel{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:22px 22px 20px; box-shadow:var(--u-shadow); overflow:hidden; margin:0;
+}
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+
+.u-page .card{
+  position:relative; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:18px;
+  padding:20px 20px 18px; box-shadow:var(--u-shadow);
+}
+.u-page .card h2,.u-page .card h3{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page .card h3{ font-size:1.04rem; }
+.u-page .card b{ color:var(--u-ink); }
+
+/* layout calc: formular + rezultat, două coloane pe desktop */
+.u-page .calc{ display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; }
+@media(max-width:760px){ .u-page .calc{ grid-template-columns:1fr; } }
+
+/* câmpuri în stil Ultra */
+.u-page .field label{ color:var(--u-ink); font-weight:600; }
+.u-page .field input[type=number]{
+  width:100%; padding:11px 13px; border-radius:11px; box-sizing:border-box;
+  border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink);
+  font-size:1rem; font-variant-numeric:tabular-nums; margin-top:6px;
+}
+.u-page .field input[type=number]:focus{ outline:none; border-color:var(--u-gold);
+  box-shadow:0 0 0 3px var(--u-gold-soft); }
+.u-page .field{ margin-bottom:14px; }
+
+/* SEMNĂTURĂ secundară: număr-erou (suma lunară) gravat serif, ca un extras */
+.u-page .result-big{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  -webkit-text-fill-color:currentColor; background:none; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; line-height:1;
+  font-size:clamp(2.4rem,6vw,3.4rem); margin:4px 0 14px;
+}
+.u-page .result-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:11px 0; border-bottom:1px solid var(--u-line-soft); gap:14px;
+}
+.u-page .result-row:last-child{ border-bottom:none; }
+.u-page .result-row span{ color:var(--u-muted); font-size:.94rem; }
+.u-page .result-row b{ font-variant-numeric:tabular-nums; color:var(--u-ink); }
+
+/* butoane vechi → auriu */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+
+/* titlu secțiune jos + disclaimer */
+.u-page h2.title{ font-family:'Fraunces',Georgia,serif; color:var(--u-ink); font-weight:600; }
+.u-page details summary{ color:var(--u-gold); font-family:'Fraunces',serif; font-weight:600; }
+.u-page .disc{ color:var(--u-muted); }
+
+/* ===== SEMNĂTURA VIZUALĂ: curba de acumulare spre țintă ===== */
+.u-page .u-curve{ position:relative; margin:6px 0 2px; }
+.u-page .u-curve-svg{ width:100%; height:clamp(150px,22vw,200px); display:block; overflow:visible; }
+.u-page .u-curve-target{
+  position:absolute; right:0; top:6px; font-size:.72rem; letter-spacing:.02em;
+  color:var(--u-gold); background:var(--u-gold-soft); border:1px solid var(--u-line);
+  padding:3px 9px; border-radius:999px; font-weight:700;
+  font-variant-numeric:tabular-nums; font-family:'Sora',system-ui,sans-serif;
+}
+.u-page .u-curve-base{
+  position:absolute; left:0; bottom:24px; font-size:.72rem; color:var(--u-muted);
+  font-family:'Sora',system-ui,sans-serif; letter-spacing:.02em;
+}
+.u-page .u-curve-cap{ color:var(--u-muted); font-size:.84rem; line-height:1.5; margin:6px 0 0; }
+.u-page .u-curve-line{ stroke:var(--u-gold); stroke-width:2.5; fill:none;
+  stroke-linecap:round; stroke-dasharray:1200; stroke-dashoffset:0;
+  animation:uDraw 1.6s cubic-bezier(.2,.8,.2,1) both; }
+.u-page .u-curve-dot{ fill:var(--u-panel); stroke:var(--u-gold); stroke-width:2.5; }
+@keyframes uDraw{ from{ stroke-dashoffset:1200; } to{ stroke-dashoffset:0; } }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .u-curve-line{ animation:none; stroke-dashoffset:0; }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,27 +127,53 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Calculator</p><h1 class="title">Cât economisesc lunar pentru ținta mea?</h1></div></section>
-<section class="section" style="padding-bottom:8px">
-  <div class="container">
-    <div class="card" style="border-left:4px solid var(--emerald)">
-      <h2 style="margin-top:0">La ce te ajută</h2>
-      <p style="color:var(--muted);font-size:1.02rem">Ai o țintă în minte — să strângi 50.000 lei pentru avansul la o casă, un fond de urgență sau o vacanță — dar nu știi cât să pui deoparte în fiecare lună ca să ajungi acolo la timp. Acest calculator îți spune exact suma lunară. De exemplu, pentru 50.000 lei în 5 ani, cu un randament de 5% pe an, afli că trebuie să economisești în jur de 735 lei pe lună, iar restul până la țintă vine din dobânda câștigată.</p>
+  </div></header>
+<main class="u-page">
+<section class="section"><div class="container">
+
+  <div class="u-hero">
+    <p class="u-eyebrow">Biroul tău financiar privat</p>
+    <h1 class="u-crest">Plan de <em>economii</em></h1>
+    <p class="u-lead">Spune-ne ținta și termenul, iar noi calculăm exact cât trebuie să pui deoparte în fiecare lună ca să ajungi acolo — și cât din sumă lucrează singură, din dobândă. Vezi acumularea cum urcă, lună de lună, până la țintă.</p>
+  </div>
+
+  <div class="u-panel" style="margin-bottom:18px">
+    <div class="u-curve">
+      <span class="u-curve-base">azi</span>
+      <span class="u-curve-target" aria-hidden="true">ținta ◆</span>
+      <svg class="u-curve-svg" viewBox="0 0 1000 300" preserveAspectRatio="none" role="img" aria-label="Curbă ilustrativă a acumulării economiilor care urcă spre țintă">
+        <defs>
+          <linearGradient id="ecoFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--u-gold)" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="var(--u-gold)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,288 C220,278 420,250 600,185 C760,128 880,70 1000,22 L1000,300 L0,300 Z" fill="url(#ecoFill)" stroke="none"/>
+        <path class="u-curve-line" d="M0,288 C220,278 420,250 600,185 C760,128 880,70 1000,22"/>
+        <circle class="u-curve-dot" cx="1000" cy="22" r="7"/>
+      </svg>
+      <p class="u-curve-cap">Banul pus deoparte constant plus dobânda capitalizată: la început crește lent, apoi accelerează spre țintă. Curba e ilustrativă — cifrele tale apar mai jos.</p>
     </div>
+  </div>
+
+  <div class="u-panel" style="margin-bottom:18px">
+    <p class="u-label">La ce te ajută</p>
+    <p style="color:var(--u-muted);font-size:1.02rem;margin:0;line-height:1.65">Ai o țintă în minte — să strângi 50.000 lei pentru avansul la o casă, un fond de urgență sau o vacanță — dar nu știi cât să pui deoparte în fiecare lună ca să ajungi acolo la timp. Calculatorul îți spune exact suma lunară. De exemplu, pentru 50.000 lei în 5 ani, cu un randament de 5% pe an, afli că trebuie să economisești în jur de 735 lei pe lună, iar restul până la țintă vine din dobânda câștigată.</p>
+  </div>
     <div class="grid grid-3" style="margin-top:16px">
       <div class="card"><h3>📝 Ce introduci</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6"><li><b>Suma-țintă</b> — cât vrei să ai strâns la final (în lei).</li><li><b>În câți ani</b> — în cât timp vrei să atingi ținta.</li><li><b>Randament anual</b> — cât crește banul pe an dacă îi pui într-un depozit, titluri de stat sau investiții. Pune 0 dacă doar îi strângi „la saltea".</li></ul></div>
       <div class="card"><h3>📊 Ce afli</h3><ul style="color:var(--muted);padding-left:1.1em;line-height:1.6"><li><b>Suma lunară</b> de pus deoparte ca să ajungi la țintă.</li><li><b>Total depus de tine</b> — cât scoți efectiv din buzunar pe toată perioada.</li><li><b>Dobânda câștigată</b> — partea din țintă care vine „gratis", din randament.</li></ul></div>
       <div class="card"><h3>👤 Pentru cine e</h3><p style="color:var(--muted);line-height:1.6">Pentru oricine vrea să-și transforme un vis într-un plan concret. De exemplu, ești la 28 de ani, vrei avans de casă în 6 ani și vrei să știi dacă îți permiți să pui deoparte suma necesară din salariu.</p></div>
     </div>
     <details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--emerald)">Cum funcționează, pe scurt</summary>
-      <p style="color:var(--muted);margin-top:8px">Calculatorul folosește formula de economisire periodică (anuitate): pornește de la suma-țintă și calculează ce depunere lunară fixă, plus dobânda capitalizată lunar, te duce exact la ținta dorită în perioada aleasă. Dacă pui randament 0%, împarte simplu ținta la numărul de luni. Cu cât randamentul e mai mare, cu atât trebuie să pui mai puțin din buzunar, pentru că dobânda lucrează în locul tău. Rezultatele sunt estimative și au scop educativ.</p></details>
+      <p style="color:var(--u-muted);margin-top:8px;line-height:1.65">Calculatorul folosește formula de economisire periodică (anuitate): pornește de la suma-țintă și calculează ce depunere lunară fixă, plus dobânda capitalizată lunar, te duce exact la ținta dorită în perioada aleasă. Dacă pui randament 0%, împarte simplu ținta la numărul de luni. Cu cât randamentul e mai mare, cu atât trebuie să pui mai puțin din buzunar, pentru că dobânda lucrează în locul tău. Rezultatele sunt estimative și au scop educativ.</p></details>
   </div>
 </section>
-<section class="section"><div class="container"><div class="calc">
+<section class="section" style="padding-top:0"><div class="container"><div class="calc">
 <div class="panel"><div class="field"><label>Sumă-țintă (lei)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">Cât vrei să ai strâns la final</span><input type="number" id="T" value="50000" min="1" step="1000"></div><div class="field"><label>În câți ani</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">În cât timp atingi ținta</span><input type="number" id="yr" value="5" min="1" max="80" step="1"></div><div class="field"><label>Randament anual (%)</label><span style="color:var(--muted);font-size:.82rem;display:block;margin-top:2px">0 dacă doar îi strângi, fără dobândă</span><input type="number" id="r" value="5" min="0" max="50" step="0.1"></div><button class="btn btn-primary" id="calcBtn" style="width:100%;justify-content:center;margin-top:6px">Calculează</button></div>
 <div class="panel" id="out"><p style="color:var(--muted)">Completează câmpurile și apasă „Calculează".</p></div>
 </div>
-<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Planifică-ți economiile</h2><p style="color:var(--muted)">Stabilește o țintă (fond de urgență, avans, vacanță) și află exact cât să pui deoparte lunar. Automatizează transferul în ziua salariului — „plătește-te primul".</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
+<div style="max-width:760px;margin:34px auto 0"><h2 class="title">Planifică-ți economiile</h2><p style="color:var(--u-muted);line-height:1.65">Stabilește o țintă — fond de urgență, avans, vacanță — și află exact cât să pui deoparte lunar. Apoi automatizează transferul în ziua salariului, ca să te plătești pe tine primul, înainte de orice altă cheltuială.</p><div class="disc">⚠️ Rezultatele sunt orientative, pentru scop educativ. Nu reprezintă consultanță financiară.</div>
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/calculatoare.html">← Toate calculatoarele</a></p></div>
 </div></section>
 <script>
@@ -53,7 +187,9 @@ $("out").innerHTML=`<p style="color:var(--muted)">Trebuie să economisești luna
 <div class="result-row"><span>Total depus de tine</span><b>${lei(contrib)}</b></div>
 <div class="result-row"><span>Dobândă câștigată</span><b style="color:var(--emerald)">${lei(dob)}</b></div>`; }
 $("calcBtn").addEventListener("click",calc); ["T","yr","r"].forEach(id=>$(id).addEventListener("input",calc)); calc();
-</script><footer class="foot"><div class="container">
+</script>
+</main>
+<footer class="foot"><div class="container">
     <div class="foot-grid">
       <div>
         <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
