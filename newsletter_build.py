@@ -271,6 +271,40 @@ def send_email(to, subject, html_body):
         print("  send FAIL", str(e)[:80]); return False
 
 
+def fetch_recipients(tier):
+    """Cheamă RPC-ul newsletter_recipients(tier) din Supabase (service key)."""
+    if not SB_KEY:
+        print("  SUPABASE_SERVICE_KEY lipsește — nu pot lua abonații."); return []
+    body = json.dumps({"want_tier": tier}).encode()
+    req = urllib.request.Request(SB_URL.rstrip("/") + "/rest/v1/rpc/newsletter_recipients", data=body,
+        headers={"apikey": SB_KEY, "Authorization": "Bearer " + SB_KEY, "Content-Type": "application/json"})
+    try:
+        return json.loads(urllib.request.urlopen(req, timeout=30).read())
+    except Exception as e:
+        print("  fetch abonați FAIL", str(e)[:100]); return []
+
+
+def send_tier(tier, limit=None):
+    """Trimite newsletterul unui tier tuturor abonaților lui, cu link de dezabonare real."""
+    subj, fn = TIERS[tier]
+    recips = fetch_recipients(tier)
+    if limit:
+        recips = recips[:int(limit)]
+    print(f"[--send {tier}] {len(recips)} abonați")
+    html_body = fn()
+    sent = 0
+    for r in recips:
+        em = r.get("email"); tok = r.get("unsub_token", "")
+        if not em:
+            continue
+        unsub = f"{SITE}/dezabonare.html?t={tok}"
+        personal = html_body.replace("%unsubscribe_url%", unsub)
+        if send_email(em, subj + " — Clubul Financiar", personal):
+            sent += 1
+        import time as _t; _t.sleep(0.25)   # politicos cu Resend
+    print(f"  trimise: {sent}/{len(recips)}")
+
+
 TIERS = {
     "free": ("Dimineața pe scurt", build_free),
     "premium": ("Ordinea din zgomot", build_premium),
@@ -299,10 +333,19 @@ def main():
         subj, body = built.get("free", ("", ""))
         print(f"trimit test «{subj}» → {to}:", "OK" if send_email(to, subj + " — Clubul Financiar", body) else "EȘUAT")
 
-    # 3) --send TIER  → live abonaților (necesită Supabase + Resend); GATED, implicit nu rulează
+    # 3) --send TIER  → LIVE abonaților (necesită Supabase + Resend verificat).
+    #    Cere și --confirm ca să nu trimită din greșeală. Opțional --limit N.
     if "--send" in args:
         tier = args[args.index("--send") + 1]
-        print(f"[--send {tier}] trimiterea live necesită fetch abonați din Supabase (subscriptions) + RESEND. Neimplementat ca să nu trimită accidental — de activat manual după review.")
+        if tier not in TIERS:
+            print(f"tier necunoscut: {tier} (alege: {', '.join(TIERS)})"); return
+        if "--confirm" not in args:
+            recips = fetch_recipients(tier)
+            print(f"[DRY-RUN] aș trimite «{TIERS[tier][0]}» către {len(recips)} abonați '{tier}'.")
+            print("Adaugă --confirm ca să trimit pe bune. Opțional --limit N pentru un test parțial.")
+            return
+        limit = args[args.index("--limit") + 1] if "--limit" in args else None
+        send_tier(tier, limit=limit)
 
 
 if __name__ == "__main__":

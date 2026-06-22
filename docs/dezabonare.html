@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dezabonare — Clubul Financiar</title>
+<style>
+  :root{--navy:#0e2750;--navy2:#081428;--gold:#E8C268;--green:#36D67E;--ink:#cbd7ea;--white:#f4ecd8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:linear-gradient(160deg,var(--navy),var(--navy2));color:var(--white);min-height:100vh;
+    display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{width:100%;max-width:440px;background:rgba(255,255,255,.04);border:1px solid rgba(232,194,104,.18);
+    border-radius:18px;padding:34px 28px;text-align:center}
+  .brand{letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;color:var(--gold);font-weight:700;margin-bottom:14px}
+  h1{font-size:1.4rem;margin-bottom:10px}
+  p{color:var(--ink);line-height:1.6;margin-bottom:18px}
+  .ok{color:var(--green);font-weight:700}.err{color:#ff9a9a}
+  a.home{display:inline-block;margin-top:10px;color:var(--gold);text-decoration:none;font-weight:700}
+  .spin{display:inline-block;width:22px;height:22px;border:3px solid rgba(232,194,104,.3);border-top-color:var(--gold);border-radius:50%;animation:s .8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style></head>
+<body>
+  <div class="card">
+    <p class="brand">Clubul Financiar</p>
+    <h1>Dezabonare newsletter</h1>
+    <div id="state"><div class="spin"></div><p style="margin-top:14px">Te dezabonăm…</p></div>
+    <a class="home" href="/index.html">← Înapoi la site</a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    var sb = window.supabase.createClient(
+      "https://maumjqciuxdbwjtvcpsy.supabase.co",
+      "sb_publishable_N6X3B_Sn7oWkxJF-iHCfbg__w4J7ONR");
+    var st = document.getElementById("state");
+    var token = new URLSearchParams(location.search).get("t");
+    function show(html){ st.innerHTML = html; }
+    if (!token) {
+      show('<p class="err">Link invalid (lipsește tokenul). Dacă vrei să te dezabonezi, scrie-ne la contact.</p>');
+    } else {
+      sb.rpc("newsletter_unsubscribe", { token: token }).then(function(r){
+        if (r.error) show('<p class="err">Nu am putut procesa dezabonarea. Încearcă din nou sau scrie-ne.</p>');
+        else show('<p class="ok">✓ Te-ai dezabonat.</p><p>Nu vei mai primi newsletterul. Ne pare rău că pleci — te poți reabona oricând din cont.</p>');
+      }, function(){
+        show('<p class="err">A apărut o eroare. Încearcă din nou.</p>');
+      });
+    }
+  </script>
+</body></html>
