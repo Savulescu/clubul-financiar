@@ -23,11 +23,12 @@ jobs:
         with:
           python-version: '3.11'
       - run: python fx_build.py
-      - name: Commit dacă s-a schimbat cursul
+      - run: python macro_build.py || echo "macro parțial (surse externe)"
+      - name: Commit dacă s-au schimbat datele
         run: |
           git config user.name "Clubul Financiar"
           git config user.email "clubulfinanciar@gmail.com"
-          git add docs/data/fx.json
+          git add docs/data/fx.json docs/data/macro.json
           if git diff --staged --quiet; then
             echo "curs neschimbat"; exit 0
           fi
