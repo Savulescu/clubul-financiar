@@ -673,4 +673,26 @@
   };
 
   CF.U = U;
+
+  // Auto-semnătură: pune sigiliul-monogramă + guilloche pe orice hero Ultra care
+  // nu le are deja (paginile-erou cockpit/hub/libertate le pun manual). DRY peste suită.
+  function initHeroSeal() {
+    try {
+      var heroes = document.querySelectorAll(".u-page .u-hero");
+      Array.prototype.forEach.call(heroes, function (h) {
+        if (h.querySelector(".u-seal") || h.querySelector("#uSeal,#ckSeal") || h.getAttribute("data-no-seal")) return;
+        if (!h.style.position) h.style.position = "relative";
+        var g = document.createElement("div");
+        g.className = "u-guilloche"; g.setAttribute("aria-hidden", "true");
+        h.insertBefore(g, h.firstChild);
+        var s = document.createElement("div");
+        s.style.marginBottom = "14px"; s.innerHTML = U.sealSVG();
+        h.insertBefore(s, g.nextSibling);
+      });
+    } catch (e) {}
+  }
+  if (root.document) {
+    if (document.readyState !== "loading") initHeroSeal();
+    else document.addEventListener("DOMContentLoaded", initHeroSeal);
+  }
 })(typeof window !== "undefined" ? window : this);
