@@ -17,6 +17,7 @@
     ["Instrumente", "/instrumente.html"],
     ["Știri", "/stiri.html"],
     ["Premium", "/premium.html"],
+    ["Ultra", "/ultra.html"],
     ["Feedback", "/feedback.html"],
   ];
   const SOC = [
@@ -51,7 +52,7 @@
   nav.className = "nav";
   nav.innerHTML = `<div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
-    <nav class="nav-links" id="navLinks">${NAV.map(([t,h])=>`<a href="${h}">${t}</a>`).join("")}</nav>
+    <nav class="nav-links" id="navLinks">${NAV.map(([t,h])=>`<a href="${h}"${t==="Ultra"?' style="color:#E8C268;font-weight:700"':""}>${t}</a>`).join("")}</nav>
     <div class="nav-right">
       <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
       <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">${document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"🌙"}</span></button>

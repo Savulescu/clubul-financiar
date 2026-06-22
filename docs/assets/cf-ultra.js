@@ -445,8 +445,11 @@
   U.deadlines = function (p, an) {
     p = p || U.getProfil();
     var f = F();
-    an = an || (new Date()).getFullYear();
+    var anBaza = an || (new Date()).getFullYear();
     var ev = [];
+    // fereastră rulantă: anul curent + următorul, ca să existe mereu termene viitoare
+    [anBaza, anBaza + 1].forEach(function (anul) { populaAn(anul); });
+    function populaAn(an) {
     function add(luna, zi, titlu, tip, desc) {
       ev.push({ data: new Date(an, luna - 1, zi), titlu: titlu, tip: tip, desc: desc || "" });
     }
@@ -474,9 +477,12 @@
       // angajatori / cei cu salariați: D112 lunar
       add((new Date()).getMonth() + 1, 25, "D112 — salarii & contribuții", "salarii", "Lunar, pentru cei cu salariați.");
     }
-    // Doar termenele viitoare, sortate.
+    } // populaAn
+    // Doar termenele viitoare, sortate, dedublate.
     var azi = new Date(); azi.setHours(0, 0, 0, 0);
+    var vazut = {};
     return ev.filter(function (e) { return e.data >= azi; })
+             .filter(function (e) { var k = e.data.getTime() + e.titlu; if (vazut[k]) return false; vazut[k] = 1; return true; })
              .sort(function (a, b) { return a.data - b.data; });
   };
 
@@ -625,31 +631,4 @@
   };
 
   CF.U = U;
-
-  /* ===== DEMO/QA HOOK (TEMPORAR — de șters înainte de commit) =====
-     Cu ?cfdemo=1: deblochează gate-ul Ultra + injectează un profil demo bogat,
-     ca să putem face screenshot la conținutul real al paginilor. */
-  try {
-    if (root.location && /[?&]cfdemo=1/.test(root.location.search)) {
-      CF.hasTier = function () { return true; };
-      CF.requireTier = function () {};
-      if (/[?&]dark=1/.test(root.location.search)) document.documentElement.setAttribute("data-theme", "dark");
-      if (!localStorage.getItem(U.LS_KEY)) {
-        U.salveaza({
-          nume: "Andrei", varsta: 38, dependenti: 2, oras: "Cluj-Napoca", stareCivila: "casatorit",
-          structura: "pfa_real", tvaPlatitor: false,
-          venituri: { salariuNet: 0, pfaIncasari: 240000, pfaCheltuieli: 40000, srlCifraAfaceri: 0,
-            srlCheltuieli: 0, srlDividendePct: 100, chiriiLunar: 2500, dividendeAnual: 0, alteLunar: 0 },
-          cheltuieli: { locuinta: 3000, mancare: 2500, transport: 800, utilitati: 700, rate: 2200,
-            abonamente: 300, copii: 1500, sanatate: 300, distractie: 800, alte: 500 },
-          datorii: [{ nume: "Credit ipotecar", sold: 320000, dobanda: 6.5, rataLunara: 2200 },
-            { nume: "Card de credit", sold: 8000, dobanda: 24, rataLunara: 0 }],
-          active: { cash: 25000, depozite: 30000, investitii: 60000, crypto: 12000, titluriStat: 40000,
-            pensiePilon3: 15000, imobiliareInvestitii: 0, locuintaProprie: 650000, auto: 90000, alte: 0 },
-          obiective: { fondUrgentaLuni: 6, varstaLibertate: 55, randamentReal: 5, custom: [] },
-          toleranteRisc: "medie"
-        });
-      }
-    }
-  } catch (e) {}
 })(typeof window !== "undefined" ? window : this);
