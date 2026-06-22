@@ -49,28 +49,35 @@ _BAD_RE = re.compile(
 def is_good_ro(text):
     return not _BAD_RE.search(text or "")
 
-def chat(messages, max_tokens=900, temperature=0.5, accept=None):
-    last = "n/a"
+def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3):
+    last = "n/a"; fallback = None; tries = 0
     for name, api_base, model, envb in PROVIDERS:
         for key in _keys(envb):
             try:
                 body = json.dumps({"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": temperature}).encode()
                 req = urllib.request.Request(api_base + "/chat/completions", data=body,
                     headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
-                resp = urllib.request.urlopen(req, timeout=45)
+                resp = urllib.request.urlopen(req, timeout=30)
                 j = json.loads(resp.read())
                 content = j["choices"][0]["message"]["content"]
+                tries += 1
                 if accept and not accept(content):
-                    last = f"{name} (RO respins de filtru)"; continue   # text prost → încearcă alt model
+                    if fallback is None: fallback = content        # prima variantă validă = rezervă
+                    last = f"{name} (RO respins)"
+                    if tries >= max_tries:                         # nu te învârti la nesfârșit
+                        return {"content": fallback, "provider": name + " (fallback)"}
+                    continue
                 return {"content": content, "provider": name}
             except urllib.error.HTTPError as e:
                 last = f"{name} HTTP {e.code}"
             except Exception as e:
                 last = f"{name} {e}"
+    if fallback is not None:
+        return {"content": fallback, "provider": "fallback"}
     raise RuntimeError("toți providerii au eșuat: " + last)
 
 V = "23"
-MAX_NEW = 24          # explainer-e noi generate pe rulare (restul vin din store)
+MAX_NEW = 18          # explainer-e noi generate pe rulare (restul vin din store)
 KEEP_H = 168          # cât stă o știre în pagină (7 zile)
 DISPLAY = 110         # max carduri afișate (o săptămână de știri)
 STORE_F = os.path.join(CF, "_external_store.json")
