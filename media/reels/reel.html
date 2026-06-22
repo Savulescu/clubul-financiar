@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Clubul Financiar — Reel Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1424; --navy2:#0f2540; --gold:#E8C268; --green:#5cf0aa;
+  --amber:#e0a955; --red:#ff6b6b;
+  --text:#eef4fc; --muted:#9fb3d1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--text);overflow:hidden;
+  background:radial-gradient(120% 80% at 50% -10%, #16335a 0%, var(--navy2) 38%, var(--navy) 75%)}
+#stage::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:90px 90px;mask:radial-gradient(75% 60% at 50% 42%,#000 30%,transparent 100%)}
+#stage::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 120%, rgba(0,0,0,.55), transparent 55%)}
+
+#brand{position:absolute;top:70px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:18px;z-index:6;opacity:0}
+#brand .dot{width:60px;height:60px;border-radius:50%;overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 2px rgba(232,194,104,.45)}
+#brand .dot img,#cta .badge img{width:100%;height:100%;object-fit:cover;display:block}
+#brand .name{font-weight:700;font-size:34px;letter-spacing:.5px}
+#brand .name b{color:var(--gold)}
+
+#headline{position:absolute;top:240px;left:80px;right:80px;text-align:center;z-index:6}
+.hook-l1{font-size:108px;font-weight:800;line-height:1.02;letter-spacing:-1px;
+  background:linear-gradient(180deg,#fff,#cfe0ff);-webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:0;transform:translateY(40px)}
+.hook-l1 em{font-style:normal;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.hook-l2{margin-top:24px;font-size:46px;font-weight:600;color:var(--muted);opacity:0;transform:translateY(30px)}
+
+#counter{position:absolute;top:512px;left:0;right:0;text-align:center;z-index:7;opacity:0;will-change:opacity,transform}
+#counter .eyebrow{font-size:32px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0;margin-bottom:18px}
+#counter .big{font-size:172px;font-weight:800;letter-spacing:-4px;line-height:1;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+  background:linear-gradient(180deg,#ffffff 0%,#d8e6ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  display:inline-flex;align-items:baseline;justify-content:center}
+#counter .cur{font-size:84px;font-weight:700;letter-spacing:-1px;margin-left:16px;-webkit-text-fill-color:var(--green);color:var(--green)}
+#counter .yr{margin-top:18px;font-size:42px;font-weight:600;color:#c4d4ee;opacity:.92;letter-spacing:2px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+
+#baseline{position:absolute;bottom:360px;left:150px;right:150px;height:3px;z-index:4;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(232,194,104,.55) 30%,rgba(92,240,170,.55) 70%,transparent);
+  box-shadow:0 0 24px rgba(92,240,170,.35)}
+#floor{position:absolute;bottom:346px;left:50%;transform:translateX(-50%);width:880px;height:230px;border-radius:50%;z-index:4;opacity:0;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(92,240,170,.40),rgba(92,240,170,.10) 55%,transparent 72%);filter:blur(10px)}
+
+#scene3d{position:absolute;bottom:360px;left:0;right:0;height:600px;z-index:5;perspective:1900px;perspective-origin:50% 22%}
+#chart{position:absolute;bottom:0;left:50%;transform:translateX(-50%) rotateX(38deg) translateZ(0);
+  transform-style:preserve-3d;display:flex;align-items:flex-end;justify-content:center;gap:12px;height:100%;
+  will-change:transform;backface-visibility:hidden;
+  -webkit-box-reflect:below 1px linear-gradient(transparent 58%, rgba(255,255,255,.10) 100%)}
+
+/* generic bar */
+.bar{width:44px;transform-origin:bottom;display:flex;flex-direction:column-reverse;position:relative;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));backface-visibility:hidden;will-change:transform}
+.bar>div{position:relative}
+.bar .seg-gold{background:linear-gradient(180deg,#f3d792,#c79f4a)}
+.bar .seg-green{background:linear-gradient(180deg,var(--green),#1ea877)}
+.bar .seg-amber{background:linear-gradient(180deg,#f0c378,#cf9a44)}
+.bar .seg-red{background:linear-gradient(180deg,#ff8f8f,#d24a4a)}
+.bar>div::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,rgba(255,255,255,.5),transparent 45%);opacity:.5}
+.bar>div:first-child{border-radius:0 0 3px 3px}
+.bar>div:last-child{border-radius:7px 7px 0 0}
+.bar .glow{box-shadow:0 0 22px rgba(92,240,170,.5)}
+/* labels floating above bars/groups */
+.lab{position:absolute;left:50%;transform:translateX(-50%) rotateX(-38deg);bottom:100%;margin-bottom:14px;
+  font-size:30px;font-weight:700;white-space:nowrap;opacity:0;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.lab small{display:block;font-size:22px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+/* group wrapper for split/diversify */
+.grp{display:flex;align-items:flex-end;gap:10px;position:relative}
+.grp .gtitle{position:absolute;left:50%;transform:translateX(-50%) rotateX(-38deg);top:100%;margin-top:18px;
+  font-size:28px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);white-space:nowrap;opacity:0}
+.marker{position:absolute;left:0;right:0;height:0;border-top:2px dashed rgba(255,255,255,.4);opacity:0;z-index:3}
+
+#sub{position:absolute;bottom:230px;left:70px;right:70px;text-align:center;z-index:8;
+  font-size:48px;font-weight:600;line-height:1.3;opacity:0;transform:translateY(30px);text-shadow:0 3px 16px rgba(5,12,24,.9)}
+#sub::before{content:"";position:absolute;left:-60px;right:-60px;top:-70px;bottom:-70px;z-index:-1;
+  background:radial-gradient(72% 110% at 50% 50%, rgba(8,16,30,.94) 30%, rgba(8,16,30,.55) 60%, transparent 82%);filter:blur(10px)}
+.g{color:var(--green)} .y{color:var(--gold)} .m{color:var(--amber)} .r{color:var(--red)}
+#step{position:absolute;bottom:250px;left:64px;right:64px;text-align:center;z-index:8;
+  font-size:50px;font-weight:700;line-height:1.28;opacity:0;text-shadow:0 3px 16px rgba(5,12,24,.95)}
+#step::before{content:"";position:absolute;left:-60px;right:-60px;top:-60px;bottom:-60px;z-index:-1;
+  background:radial-gradient(72% 110% at 50% 50%, rgba(8,16,30,.92) 30%, rgba(8,16,30,.5) 60%, transparent 82%);filter:blur(10px)}
+
+#cta{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;
+  background:radial-gradient(120% 80% at 50% 38%, #16335a 0%, #0f2540 40%, #0a1424 80%)}
+#cta .badge{width:140px;height:140px;border-radius:50%;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 3px rgba(232,194,104,.55),0 0 50px rgba(232,194,104,.3);transform:scale(.7);opacity:0}
+#cta .q{margin-top:46px;font-size:64px;font-weight:800;text-align:center;opacity:0;transform:translateY(20px);padding:0 60px}
+#cta .q em{font-style:normal;color:var(--green)}
+#cta .sub2{margin-top:22px;font-size:42px;color:var(--muted);opacity:0;transform:translateY(20px);text-align:center;padding:0 60px}
+#cta .url{margin-top:60px;font-size:58px;font-weight:800;color:var(--gold);padding:24px 56px;border:2px solid rgba(232,194,104,.5);border-radius:999px;box-shadow:0 0 50px rgba(232,194,104,.18);opacity:0;transform:scale(.9)}
+#cta .handle{margin-top:34px;font-size:40px;font-weight:600;color:var(--text);opacity:0}
+#cta .handle b{color:var(--gold)}
+#cta .disc{position:absolute;bottom:104px;left:60px;right:60px;text-align:center;font-size:28px;color:var(--muted);opacity:0}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="brand"><div class="dot"><img src="profile.png" alt=""></div><div class="name">Clubul <b>Financiar</b></div></div>
+  <div id="headline"><div class="hook-l1"></div><div class="hook-l2"></div></div>
+  <div id="counter"><div class="eyebrow"></div><div class="big"><span id="num">0</span><span class="cur">lei</span></div><div class="yr" id="yr"></div></div>
+  <div id="baseline"></div>
+  <div id="floor"></div>
+  <div id="scene3d"><div id="chart"></div></div>
+  <div id="step"></div>
+  <div id="sub"></div>
+  <div id="cta">
+    <div class="badge"><img src="profile.png" alt=""></div>
+    <div class="q"></div>
+    <div class="sub2"></div>
+    <div class="url">clubulfinanciar.ro</div>
+    <div class="handle">Urmărește <b>@clubulfinanciar</b></div>
+    <div class="disc"></div>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeOut=t=>1-Math.pow(1-t,3);
+const easeInOut=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const fmt=n=>Math.round(n).toLocaleString('ro-RO');
+const MAXH=430;
+
+// ---------- mechanics ----------
+const chart=$('chart');
+function bar(w){const b=document.createElement('div');b.className='bar';if(w)b.style.width=w+'px';return b;}
+function seg(cls){const d=document.createElement('div');d.className=cls;return d;}
+
+const MECH={
+  // 6 months filling a runway; 1-2 gold (insuficient), 3-6 green (safe)
+  months(){
+    const bars=[];
+    for(let i=0;i<6;i++){const b=bar(58);const s=seg(i<2?'seg-gold':'seg-green');b.appendChild(s);chart.appendChild(b);bars.push(s);}
+    return {update(gp){for(let i=0;i<6;i++){const local=clamp(gp*6-i,0,1);bars[i].style.height=(easeOut(local)*MAXH*0.92)+'px';bars[i].classList.toggle('glow',i>=2&&local>0.2);}}};
+  },
+  // salary splits into 3: needs/wants/savings
+  split(){
+    const data=[['seg-gold',2000,'50%','Nevoi'],['seg-amber',1200,'30%','Dorințe'],['seg-green',800,'20%','Economii']];
+    const bars=[];const sc=MAXH/2000;
+    data.forEach(d=>{const b=bar(120);const s=seg(d[0]);b.appendChild(s);const l=document.createElement('div');l.className='lab';l.innerHTML=d[2]+'<small>'+d[3]+'</small>';b.appendChild(l);chart.appendChild(b);bars.push({s,l,h:d[1]*sc});});
+    chart.style.gap='40px';
+    return {update(gp){bars.forEach((o,i)=>{const local=clamp(gp*3.2-i*0.7,0,1);o.s.style.height=(easeOut(local)*o.h)+'px';o.l.style.opacity=clamp((gp*3.2-i*0.7-0.5),0,1);});}};
+  },
+  // 1000 lei eroding to 558; ghost outline of original, lost part red on top
+  erode(){
+    const b=bar(220);const real=seg('seg-gold');const lost=seg('seg-red');lost.style.opacity='0.5';
+    b.appendChild(real);b.appendChild(lost);
+    const ghost=document.createElement('div');ghost.className='marker';ghost.style.borderColor='rgba(232,194,104,.6)';
+    const wrap=document.createElement('div');wrap.style.position='relative';wrap.appendChild(b);wrap.appendChild(ghost);chart.appendChild(wrap);
+    const full=MAXH;
+    return {update(gp){const val=lerp(1000,558,easeInOut(gp));const realH=val/1000*full;const lostH=(1000-val)/1000*full;
+      real.style.height=realH+'px';lost.style.height=lostH+'px';lost.style.opacity=clamp(gp,0,1)*0.55;
+      ghost.style.bottom=full+'px';ghost.style.left='-12px';ghost.style.right='-12px';ghost.style.opacity=clamp(gp*2,0,1)*0.7;}};
+  },
+  // borrow 10k (fixed) vs repay growing to 14.6k; excess = red cost
+  twobars(){
+    const sc=MAXH/14600;
+    const a=bar(150);const as=seg('seg-gold');a.appendChild(as);
+    const la=document.createElement('div');la.className='lab';la.innerHTML='10.000<small>Împrumuți</small>';a.appendChild(la);
+    const b=bar(150);const bp=seg('seg-amber');const bc=seg('seg-red');b.appendChild(bp);b.appendChild(bc);
+    const lb=document.createElement('div');lb.className='lab';lb.style.color='var(--red)';lb.innerHTML='<span class="lbv">0</span><small>Dai înapoi</small>';b.appendChild(lb);
+    chart.appendChild(a);chart.appendChild(b);chart.style.gap='80px';
+    const lbv=lb.querySelector('.lbv');
+    return {update(gp){as.style.height=(easeOut(clamp(gp*3,0,1))*10000*sc)+'px';la.style.opacity=clamp(gp*3-0.4,0,1);
+      const val=easeInOut(gp)*14600;const prin=Math.min(val,10000),cost=Math.max(val-10000,0);
+      bp.style.height=(prin*sc)+'px';bc.style.height=(cost*sc)+'px';bc.classList.toggle('glow',false);
+      lbv.textContent=fmt(val);lb.style.opacity=clamp(gp*3-0.4,0,1);}};
+  },
+  // 1 stock crashes vs 20 spread barely dips
+  diversify(){
+    const left=document.createElement('div');left.className='grp';
+    const big=bar(150);const bs=seg('seg-gold');big.appendChild(bs);left.appendChild(big);
+    const lt=document.createElement('div');lt.className='gtitle';lt.textContent='1 acțiune';left.appendChild(lt);
+    const right=document.createElement('div');right.className='grp';const small=[];
+    for(let i=0;i<10;i++){const sb=bar(26);const ss=seg('seg-green');sb.appendChild(ss);right.appendChild(sb);small.push(ss);}
+    const rt=document.createElement('div');rt.className='gtitle';rt.textContent='20 acțiuni';right.appendChild(rt);
+    chart.appendChild(left);chart.appendChild(right);chart.style.gap='120px';
+    const scBig=MAXH/10000, eachFull=MAXH*0.82;
+    return {update(gp){
+      const grow=clamp(gp/0.4,0,1), crash=clamp((gp-0.45)/0.35,0,1);
+      // concentrated: rise then crash to 2000
+      const bigVal=lerp(10000,2000,easeOut(crash));
+      bs.style.height=(easeOut(grow)*bigVal*scBig)+'px';
+      bs.className='seg'+(crash>0.1?' seg-red':' seg-gold');bs.classList.add(crash>0.1?'seg-red':'seg-gold');
+      bs.style.background=crash>0.5?'linear-gradient(180deg,#ff8f8f,#d24a4a)':'linear-gradient(180deg,#f3d792,#c79f4a)';
+      lt.style.opacity=clamp(gp*3-0.3,0,1);
+      // diversified: 10 bars, one drops 80%, rest hold
+      small.forEach((s,i)=>{let v=eachFull;if(i===4)v=eachFull*lerp(1,0.2,easeOut(crash));s.style.height=(easeOut(grow)*v)+'px';});
+      rt.style.opacity=clamp(gp*3-0.3,0,1);
+    }};
+  },
+  // two outcome bars (values count up); optional start marker line
+  compare(cfg){
+    const m=cfg.mechData, sc=(MAXH*(cfg.barScale||1))/m.max, W=cfg.barW||160;
+    const mk=o=>{const b=bar(W);const s=seg('seg-'+o.color);b.appendChild(s);
+      const l=document.createElement('div');l.className='lab';if(o.color==='red')l.style.color='var(--red)';if(o.color==='green')l.style.color='var(--green)';
+      l.innerHTML='<span class="v">0</span><small>'+o.label+'</small>';b.appendChild(l);chart.appendChild(b);
+      return{s,l,v:l.querySelector('.v'),val:o.val};};
+    const A=mk(m.a),B=mk(m.b);chart.style.gap=(cfg.barGap||100)+'px';
+    let marker=null;
+    if(m.marker){marker=document.createElement('div');marker.className='marker';marker.style.borderColor='rgba(255,255,255,.45)';chart.appendChild(marker);}
+    return {update(gp){const e=easeOut(clamp(gp*1.2,0,1));
+      [A,B].forEach(o=>{o.s.style.height=(e*o.val*sc)+'px';o.v.textContent=fmt(e*o.val);o.l.style.opacity=clamp(gp*2-0.3,0,1);});
+      if(marker){marker.style.bottom=(m.marker*sc)+'px';marker.style.left='8%';marker.style.right='8%';marker.style.opacity=clamp(gp*2,0,1)*0.55;}}};
+  },
+  // debt that barely shrinks
+  debt(cfg){
+    const sc=MAXH/5000;const b=bar(180);const s=seg('seg-red');b.appendChild(s);
+    const l=document.createElement('div');l.className='lab';l.style.color='var(--red)';l.innerHTML='<span class="v">5.000</span><small>Rămas de plată</small>';b.appendChild(l);chart.appendChild(b);
+    return {update(gp){const rem=lerp(5000,300,easeInOut(gp));s.style.height=(rem*sc)+'px';l.querySelector('.v').textContent=fmt(rem);l.style.opacity=clamp(gp*3,0,1);}};
+  },
+  // money doubling in steps
+  doubling(cfg){
+    const vals=[10000,20000,40000,80000],sc=MAXH/80000,bars=[];
+    vals.forEach((v,i)=>{const b=bar(76);const s=seg(i<3?'seg-gold':'seg-green');b.appendChild(s);
+      const l=document.createElement('div');l.className='lab';l.innerHTML=fmt(v);b.appendChild(l);chart.appendChild(b);bars.push({s,l,v});});
+    chart.style.gap='40px';
+    return {update(gp){bars.forEach((o,i)=>{const local=clamp(gp*4-i,0,1);o.s.style.height=(easeOut(local)*o.v*sc)+'px';o.s.classList.toggle('glow',i===3&&local>0.3);o.l.style.opacity=clamp(gp*4-i-0.4,0,1);});}};
+  },
+  // pillar III: contribution (gold) + state bonus (green) per year
+  pilon(cfg){
+    const bars=[],sc=MAXH/2400;
+    for(let i=0;i<10;i++){const b=bar(48);const c=seg('seg-gold');const g=seg('seg-green');b.appendChild(c);b.appendChild(g);chart.appendChild(b);bars.push({c,g});}
+    return {update(gp){for(let i=0;i<10;i++){const local=clamp(gp*10-i,0,1),e=easeOut(local);
+      bars[i].c.style.height=(e*2000*sc)+'px';bars[i].g.style.height=(e*200*sc)+'px';bars[i].g.classList.toggle('glow',local>0.3);}}};
+  },
+  // FIRE nest egg tower + passive-income marker
+  tower(cfg){
+    const N=12,sc=MAXH/900000,bars=[];
+    for(let i=0;i<N;i++){const b=bar(42);const s=seg(i>=N-4?'seg-green':'seg-gold');b.appendChild(s);chart.appendChild(b);bars.push(s);}
+    const marker=document.createElement('div');marker.className='marker';marker.style.borderColor='rgba(92,240,170,.7)';chart.appendChild(marker);
+    return {update(gp){for(let i=0;i<N;i++){const local=clamp(gp*N-i,0,1),target=900000*Math.pow((i+1)/N,1.4);
+      bars[i].style.height=(easeOut(local)*target*sc)+'px';bars[i].classList.toggle('glow',i>=N-4&&local>0.2);}
+      marker.style.bottom=(900000*sc)+'px';marker.style.left='8%';marker.style.right='8%';marker.style.opacity=clamp(gp*1.5-0.5,0,1)*0.7;}};
+  },
+  // credit score gauge (flat horizontal track + needle)
+  score(cfg){
+    const track=document.createElement('div');
+    track.style.cssText='position:relative;width:780px;height:56px;border-radius:30px;align-self:center;margin-bottom:140px;background:linear-gradient(90deg,#d24a4a 0%,#e0a955 50%,#23b87e 100%);box-shadow:0 12px 34px rgba(0,0,0,.45)';
+    const needle=document.createElement('div');
+    needle.style.cssText='position:absolute;top:-24px;left:8%;width:12px;height:104px;border-radius:7px;background:#fff;box-shadow:0 0 20px rgba(255,255,255,.85);transform:translateX(-50%)';
+    const tag=document.createElement('div');
+    tag.style.cssText='position:absolute;top:-92px;left:8%;transform:translateX(-50%);font-size:34px;font-weight:800;white-space:nowrap;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)';
+    track.appendChild(needle);track.appendChild(tag);chart.appendChild(track);chart.style.alignItems='center';
+    return {update(gp){const p=easeInOut(clamp(gp,0,1));const x=8+p*84;needle.style.left=x+'%';tag.style.left=x+'%';
+      tag.textContent=p<.4?'Slab':p<.7?'Ok':'Bun';tag.style.color=p<.4?'#ff8f8f':p<.7?'#f0c378':'#5cf0aa';}};
+  },
+  // compound interest: stacked bars (gold contribution + green interest)
+  stacked(cfg){
+    const PMT=300,R=0.08/12,YEARS=30;
+    const fvAt=yr=>PMT*((Math.pow(1+R,12*yr)-1)/R);
+    const FVT=fvAt(YEARS),sc=MAXH/FVT,gold=[],green=[];
+    for(let i=0;i<YEARS;i++){const yr=i+1,c=PMT*12*yr,fv=fvAt(yr);gold.push(c*sc);green.push((fv-c)*sc);}
+    const bars=[];
+    for(let i=0;i<YEARS;i++){const b=bar(26);const c=seg('seg-gold');const g=seg('seg-green');b.appendChild(c);b.appendChild(g);chart.appendChild(b);bars.push({c,g});}
+    chart.style.gap='6px';
+    return {update(gp){for(let i=0;i<YEARS;i++){const local=clamp(gp*YEARS-i,0,1),e=easeOut(local);
+      bars[i].c.style.height=(gold[i]*e)+'px';bars[i].g.style.height=(green[i]*e)+'px';
+      bars[i].g.classList.toggle('glow',green[i]>40&&local>0.2);}}};
+  },
+  // two bars start equal, then diverge (one shrinks red, one grows green)
+  diverge(cfg){
+    const m=cfg.mechData, sc=(MAXH*1.3)/m.max, start=m.start;
+    const mk=o=>{const b=bar(215);const s=seg('seg-gold');b.appendChild(s);
+      const l=document.createElement('div');l.className='lab';l.innerHTML='<span class="v">0</span><small>'+o.label+'</small>';b.appendChild(l);
+      chart.appendChild(b);return{s,l,v:l.querySelector('.v'),o};};
+    const A=mk(m.a),B=mk(m.b);chart.style.gap='96px';
+    const marker=document.createElement('div');marker.className='marker';marker.style.borderColor='rgba(255,255,255,.45)';chart.appendChild(marker);
+    return {update(gp){const e=easeInOut(gp);
+      [A,B].forEach(x=>{const val=lerp(start,x.o.val,e);const up=x.o.val>=start;
+        x.s.style.height=(val*sc)+'px';
+        x.s.style.background=up?'linear-gradient(180deg,#5cf0aa,#1ea877)':'linear-gradient(180deg,#ff8f8f,#d24a4a)';
+        x.s.classList.toggle('glow',up&&gp>0.5);
+        x.v.textContent=fmt(val);x.v.style.color=up?'var(--green)':'var(--red)';
+        x.l.style.opacity=clamp(gp*2-0.2,0,1);});
+      marker.style.bottom=(start*sc)+'px';marker.style.left='8%';marker.style.right='8%';marker.style.opacity=clamp(gp*1.5,0,1)*0.5;}};
+  },
+};
+
+// ---------- config ----------
+const REELS={
+  fond_urgenta:{ unit:'lei', start:0, target:18000, mech:'months',
+    hookL1:'Mâine rămâi <em>fără salariu</em>.', hookL2:'Câte luni mai reziști?',
+    eyebrow:'Cheltuieli ~3.000 lei/lună', progLabel:gp=>'Luna '+clamp(Math.ceil(gp*6),1,6),
+    revealHTML:'Fond sigur = <span class="g">3-6 luni</span> (9.000–18.000 lei).<br><span class="r">1 din 4 români</span> au 0 lei.',
+    ctaQ:'Câte luni îți ține <em>rezerva</em>?', ctaSub:'Construiește-l de la zero, pas cu pas.',
+    disc:'Exemplu educativ · nu e sfat financiar' },
+  buget_503020:{ unit:'lei', start:0, target:4000, mech:'split',
+    hookL1:'Salariul intră. Și <em>dispare</em>.', hookL2:'Pe 15 ești pe zero. De ce?',
+    eyebrow:'Regula 50/30/20 · salariu 4.000', progLabel:()=>'',
+    revealHTML:'<span class="y">2.000</span> nevoi · <span class="m">1.200</span> dorințe · <span class="g">800</span> economii.<br>Cei <span class="g">800</span> lipseau.',
+    ctaQ:'Vrei cele 3 <em>borcane</em> pas cu pas?', ctaSub:'Ghid + calculator în 1 minut.',
+    disc:'Exemplu educativ · nu e sfat financiar' },
+  inflatie:{ unit:'lei', start:1000, target:558, mech:'erode',
+    hookL1:'Banii tăi mor în <em>tăcere</em>.', hookL2:'Stau în sertar și nici nu-i cheltui.',
+    eyebrow:'Hoțul tăcut: inflația · 10 ani', progLabel:gp=>'Anul '+clamp(Math.ceil(gp*10),1,10),
+    revealHTML:'Aceiași 1.000 lei = doar <span class="r">558 lei</span> reali.<br>Inflația ți-a luat <span class="r">442</span> fără să cheltui.',
+    ctaQ:'Cum îți <em>aperi</em> banii?', ctaSub:'Explicat pas cu pas pe site.',
+    disc:'Exemplu educativ · inflație 6%/an presupusă · nu e sfat financiar' },
+  credit_dae:{ unit:'lei', start:0, target:14600, mech:'twobars',
+    hookL1:'Rata e <em>mică</em>. Atât verifici.', hookL2:'Dar tu cât dai înapoi, de fapt?',
+    eyebrow:'Împrumuți 10.000 lei · 4 ani', progLabel:gp=>'Luna '+clamp(Math.ceil(gp*48),1,48),
+    revealHTML:'Dai înapoi <span class="r">~14.600 lei</span>.<br>Rata mică ≠ ieftin: <span class="r">+4.600</span> (DAE 20%).',
+    ctaQ:'Știi să citești un <em>DAE</em>?', ctaSub:'Costul real al unui credit.',
+    disc:'Exemplu educativ · DAE 20% presupus · nu e sfat financiar' },
+  diversificare:{ unit:'lei', start:10000, target:2000, mech:'diversify',
+    hookL1:'O <em>greșeală</em> de 8.000 lei.', hookL2:'Aproape toți o fac fără să știe.',
+    eyebrow:'10.000 lei · 1 loc vs 20 acțiuni', progLabel:()=>'',
+    valueFn:gp=>{const crash=clamp((gp-0.45)/0.35,0,1);return lerp(10000,2000,easeOut(crash));},
+    revealHTML:'Tot într-un loc: pierzi <span class="r">8.000 lei</span>.<br>Împărțit în 20? Doar <span class="g">~400</span> (-4%).',
+    ctaQ:'Tu ești tipul cu <em>un singur loc</em>?', ctaSub:'Cum împarți corect riscul.',
+    disc:'Exemplu educativ · nu e sfat de investiții' },
+
+  dobanda_compusa:{ unit:'lei', start:0, target:447108, mech:'stacked', dur:22000,
+    hookL1:'O cafea pe zi. <em>10 lei</em>.', hookL2:'Cât fac în 30 de ani?',
+    eyebrow:'10 lei/zi · 8%/an · 30 ani', progLabel:gp=>'Anul '+clamp(Math.ceil(gp*30),1,30),
+    valueFn:gp=>447108*Math.pow(easeInOut(gp),1.55),
+    steps:[
+      {t:3500,text:'Pui ~10 lei pe zi — vreo 300 lei pe lună.'},
+      {t:8000,text:'La un randament mediu de <span class="g">~8%/an</span>...'},
+      {t:12000,text:'<span class="g">Dobânda</span> se adună peste dobândă.'},
+      {t:15500,text:'Și crește tot mai repede spre final.'},
+    ],
+    revealHTML:'<span class="g">447.108 lei.</span> Tu pui doar 108.000.<br>Restul, <span class="g">339.000</span>, e dobânda compusă.',
+    ctaQ:'Vrei să știi <em>cum</em>?', ctaSub:'Învață banii de la zero.',
+    disc:'Exemplu educativ · 8%/an presupus · nu e sfat financiar' },
+  titluri_stat:{ unit:'lei', mech:'diverge', noCounter:true, dur:24000, chartBottom:470,
+    hookL1:'Ții <em>10.000 lei</em> în cont.', hookL2:'„E cel mai sigur", nu?',
+    eyebrow:'10.000 lei · 5 ani', progLabel:gp=>'Anul '+clamp(Math.ceil(gp*5),1,5),
+    steps:[
+      {t:3500,text:'An de an, <span class="r">inflația</span> le roade puterea de cumpărare.'},
+      {t:8500,text:'<span class="y">Titlurile de stat</span> = îi împrumuți statului.'},
+      {t:13000,text:'Primești dobândă fixă, <span class="g">garantată</span> (~6,5%/an).'},
+      {t:16500,text:'Așa banii <span class="g">cresc</span>, nu se topesc.'},
+    ],
+    mechData:{a:{label:'Titluri de stat',val:13701},b:{label:'Cash în cont',val:7473},start:10000,max:14000},
+    revealHTML:'După 5 ani: <span class="g">~13.700 lei</span> în titluri.<br>Cash în cont: doar <span class="r">~7.500</span> reali.',
+    ctaQ:'Cum cumperi <em>titluri de stat</em>?', ctaSub:'Tezaur & Fidelis, pas cu pas.',
+    disc:'Exemplu educativ · 6,5%/an vs inflație 6% · nu e sfat financiar' },
+  card_minim:{ unit:'lei', start:0, target:8322, mech:'debt', dur:20000,
+    hookL1:'Plătești doar <em>minimul</em> la card.', hookL2:'„Scap eu de el cândva."',
+    eyebrow:'Card 5.000 lei · 24%/an', progLabel:gp=>'Luna '+clamp(Math.ceil(gp*55),1,55),
+    steps:[
+      {t:3500,text:'Ai 5.000 lei pe card. Plătești minimul: ~150 lei/lună.'},
+      {t:8000,text:'Dar aproape tot e <span class="r">dobândă</span> (24%/an).'},
+      {t:12000,text:'Datoria abia scade... lună după lună.'},
+    ],
+    revealHTML:'~<span class="r">55 de luni</span> (aproape 5 ani).<br>Plătești <span class="r">~8.300 lei</span> (3.300 dobândă).',
+    ctaQ:'Cum scapi <em>repede</em> de card?', ctaSub:'Strategia, pas cu pas.',
+    disc:'Exemplu educativ · 24%/an presupus · nu e sfat financiar' },
+  regula72:{ unit:'lei', mech:'doubling', noCounter:true, dur:22000,
+    hookL1:'În câți ani se <em>dublează</em> banii?', hookL2:'Există un truc de 5 secunde.',
+    eyebrow:'Regula 72', progLabel:()=>'',
+    steps:[
+      {t:3500,text:'Trucul: împarte <span class="y">72</span> la dobânda anuală.'},
+      {t:7500,text:'Ai <span class="g">8%</span> pe an?&nbsp;&nbsp;72 ÷ 8 = <span class="g">9 ani</span>.'},
+      {t:11000,text:'Doar 4%?&nbsp;&nbsp;72 ÷ 4 = <span class="m">18 ani</span>.'},
+      {t:14500,text:'Cu 12%?&nbsp;&nbsp;72 ÷ 12 = <span class="g">6 ani</span>.'},
+    ],
+    revealHTML:'<span class="y">72 ÷ dobândă</span> = anii în care se dublează banii.<br>Dobândă mai mare → mai repede.',
+    ctaQ:'Cât de repede cresc <em>banii tăi</em>?', ctaSub:'Calculează în 10 secunde.',
+    disc:'Exemplu educativ · regulă aproximativă · nu e sfat financiar' },
+  pilon3:{ unit:'lei', start:0, target:2000, mech:'pilon', dur:20000,
+    hookL1:'Statul îți dă bani <em>înapoi</em>.', hookL2:'Și aproape nimeni nu-i cere.',
+    eyebrow:'Pilon III · înapoi de la stat · 10 ani', progLabel:gp=>'Anul '+clamp(Math.ceil(gp*10),1,10),
+    steps:[
+      {t:3500,text:'Pui bani la pensia facultativă (Pilon III).'},
+      {t:8000,text:'Statul îți dă <span class="g">10% înapoi</span> din ei (deducere).'},
+      {t:12000,text:'~200 lei pe an, doar fiindcă ai economisit.'},
+    ],
+    revealHTML:'În 10 ani: <span class="g">~2.000 lei</span> gratis de la stat.<br>+ banii tăi cresc pentru pensie.',
+    ctaQ:'Cum îți iei <em>deducerea</em>?', ctaSub:'Pas cu pas pe site.',
+    disc:'Exemplu educativ · impozit 10% · nu e sfat financiar' },
+  fire:{ unit:'lei', start:0, target:900000, mech:'tower', dur:22000,
+    hookL1:'Câți bani ca să nu mai <em>muncești</em>?', hookL2:'Există un număr exact.',
+    eyebrow:'Regula 4% · cheltuieli 36.000/an', progLabel:()=>'',
+    steps:[
+      {t:3500,text:'Aduni bani și îi investești, an de an.'},
+      {t:8000,text:'Ținta: de <span class="g">25 de ori</span> cheltuielile anuale.'},
+      {t:12000,text:'Cheltui 3.000/lună = 36.000/an → 900.000.'},
+      {t:15500,text:'Apoi retragi 4%/an — și banii nu se termină.'},
+    ],
+    revealHTML:'<span class="g">~900.000 lei</span> = libertate.<br>Banii muncesc, tu nu mai ești obligat.',
+    ctaQ:'Care e <em>numărul tău</em>?', ctaSub:'Calculează-ți libertatea.',
+    disc:'Exemplu educativ · regula 4% · nu e sfat de investiții' },
+  datorie_buna_rea:{ unit:'lei', mech:'compare', noCounter:true, dur:20000,
+    hookL1:'Nu toate datoriile sunt <em>rele</em>.', hookL2:'Una te-mbogățește. Una te sărăcește.',
+    eyebrow:'Datorie bună vs datorie rea', progLabel:()=>'',
+    steps:[
+      {t:3500,text:'Datorie <span class="g">bună</span>: pe ceva ce crește (casă, educație).'},
+      {t:8000,text:'Lucrează PENTRU tine — te îmbogățește în timp.'},
+      {t:12000,text:'Datorie <span class="r">rea</span>: consum scump pe card 24%.'},
+    ],
+    mechData:{a:{label:'Lucrează pt tine',val:9000,color:'green'},b:{label:'Împotriva ta',val:2500,color:'red'},max:10000},
+    revealHTML:'Una te <span class="g">îmbogățește</span>. Una te <span class="r">sărăcește</span>.<br>Întreabă: lucrează pentru mine?',
+    ctaQ:'A ta lucrează <em>pentru</em> tine?', ctaSub:'Învață diferența.',
+    disc:'Exemplu educativ · nu e sfat financiar' },
+  masina_rate:{ unit:'lei', mech:'compare', noCounter:true, dur:20000, chartBottom:470, barW:215, barScale:1.3, barGap:90,
+    hookL1:'Mașina ta costă <em>80.000</em>?', hookL2:'Atât scrie pe etichetă.',
+    eyebrow:'80.000 lei · în rate · 5 ani', progLabel:()=>'',
+    steps:[
+      {t:3500,text:'Mașină de 80.000 lei, luată în rate.'},
+      {t:8000,text:'Rate + dobândă (8%, 5 ani) = plătești ~94.000.'},
+      {t:12000,text:'Dar pierde ~<span class="r">50%</span> din valoare în 5 ani.'},
+    ],
+    mechData:{a:{label:'Plătești în total',val:94000,color:'red'},b:{label:'Valoare după 5 ani',val:40000,color:'amber'},max:96000},
+    revealHTML:'Plătești <span class="r">~94.000 lei</span>.<br>Mașina ajunge <span class="y">~40.000</span> în 5 ani.',
+    ctaQ:'Cât costă <em>cu adevărat</em>?', ctaSub:'Socoteala reală, pe site.',
+    disc:'Exemplu educativ · 8%/an + depreciere · nu e sfat financiar' },
+  scor_credit:{ unit:'', mech:'score', noCounter:true, flat:true, dur:21000,
+    hookL1:'Ceri un credit. Te <em>refuză</em>.', hookL2:'Și nici nu știi de ce.',
+    eyebrow:'Scorul tău · Biroul de Credit', progLabel:()=>'',
+    steps:[
+      {t:3500,text:'Când ceri un credit, banca verifică Biroul de Credit.'},
+      {t:7000,text:'Acolo e istoricul tău: rate, carduri, întârzieri.'},
+      {t:10500,text:'Plătești la timp → scor <span class="g">mare</span> → te aprobă, dobândă mică.'},
+      {t:13500,text:'Întârzii des → scor <span class="r">mic</span> → refuz sau dobândă mare.'},
+    ],
+    revealHTML:'Scorul se construiește din <span class="g">plăți la timp</span>.<br>Îl poți verifica gratis o dată pe an.',
+    ctaQ:'Cum îți crești <em>scorul</em>?', ctaSub:'Pași concreți, pe site.',
+    disc:'Exemplu educativ · nu e sfat financiar' },
+};
+
+const params=new URLSearchParams(location.search);
+const KEY=params.get('reel')||'fond_urgenta';
+const C=REELS[KEY];
+
+const DUR=C.dur||15000;
+window.DUR=DUR;
+const RE=DUR-5400;                 // grow/reveal end scales with duration
+const T={brandIn:120, hookIn:180, hookOut:Math.min(3000,DUR*0.18),
+  growStart:Math.min(3000,DUR*0.18), growEnd:RE, revealStart:RE, subIn:RE+200, ctaStart:DUR-3400};
+
+// init copy
+document.querySelector('.hook-l1').innerHTML=C.hookL1;
+document.querySelector('.hook-l2').innerHTML=C.hookL2;
+document.querySelector('#counter .eyebrow').textContent=C.eyebrow;
+document.querySelector('#cta .q').innerHTML=C.ctaQ;
+document.querySelector('#cta .sub2').textContent=C.ctaSub;
+document.querySelector('#cta .disc').textContent=C.disc;
+const mech=MECH[C.mech](C);
+if(C.noCounter){document.querySelector('#counter .big').style.display='none';}
+if(C.flat){chart.style.transform='translateX(-50%)';chart.style.webkitBoxReflect='none';chart.style.height='auto';chart.style.bottom='180px';}
+if(C.chartBottom){$('scene3d').style.bottom=C.chartBottom+'px';$('floor').style.bottom=(C.chartBottom-14)+'px';$('baseline').style.bottom=C.chartBottom+'px';}
+
+function frame(t){
+  t=clamp(t,0,DUR);
+  const ctaFade=t>=T.ctaStart?clamp(1-(t-T.ctaStart)/350,0,1):1;
+  $('brand').style.opacity=clamp((t-T.brandIn)/500,0,1)*(t<T.ctaStart?1:0);
+
+  const h1=document.querySelector('.hook-l1'),h2=document.querySelector('.hook-l2');
+  const hp=easeOut(clamp((t-T.hookIn)/420,0,1));
+  h1.style.opacity=hp;h1.style.transform=`translateY(${lerp(46,0,hp)}px) scale(${lerp(1.06,1,hp)})`;
+  const h2p=easeOut(clamp((t-T.hookIn-260)/420,0,1));
+  h2.style.opacity=h2p;h2.style.transform=`translateY(${lerp(30,0,h2p)}px)`;
+  // first-2s impact: keyword glow pulse (no scale -> no overlap with neighbours)
+  const em1=h1.querySelector('em');
+  if(em1){ const pt=t-(T.hookIn+520); const gl=clamp(1-Math.abs(pt)/560,0,1);
+    em1.style.textShadow=`0 0 ${lerp(6,40,gl)}px rgba(232,194,104,.92)`; }
+  const hl=$('headline');
+  if(t>T.growStart){const f=clamp((t-T.growStart)/650,0,1);
+    hl.style.transform=`translateY(${lerp(0,-60,easeOut(f))}px) scale(${lerp(1,.9,f)})`;hl.style.opacity=lerp(1,0,f);}
+  else{hl.style.transform='';hl.style.opacity=1;}
+  $('counter').querySelector('.eyebrow').style.opacity=clamp((t-T.growStart-250)/500,0,1)*ctaFade;
+  $('baseline').style.opacity=t<T.growStart?(0.45+0.25*Math.sin(t/350))*clamp(t/600,0,1):clamp(1-(t-T.growStart)/500,0,1)*0.4;
+
+  const gp=clamp((t-T.growStart)/(T.growEnd-T.growStart),0,1);
+  const ge=easeInOut(gp);
+  $('counter').style.opacity=clamp((t-T.growStart)/400,0,1)*ctaFade;
+  $('scene3d').style.opacity=ctaFade;
+  $('floor').style.opacity=clamp((t-T.growStart-300)/600,0,1)*lerp(.4,1,ge)*ctaFade;
+  $('counter').style.transform=t>=T.ctaStart?`scale(${lerp(1,1.12,clamp((t-T.ctaStart)/350,0,1))})`:'scale(1)';
+
+  // counter value
+  const val=C.valueFn?C.valueFn(gp):lerp(C.start,C.target,ge);
+  $('num').textContent=fmt(val);
+  $('yr').textContent=C.progLabel?C.progLabel(gp):'';
+
+  // number glow + pop
+  const baseGlow=clamp((t-T.growStart)/900,0,1);
+  const climax=clamp((t-T.growEnd+1300)/1500,0,1);
+  const lvl=Math.max(baseGlow*0.35,climax);
+  const big=document.querySelector('#counter .big');
+  big.style.filter=`drop-shadow(0 0 ${lerp(6,48,lvl)}px rgba(92,240,170,${lerp(.16,.7,lvl)}))`;
+  const popT=t-T.growEnd;
+  const pop=(popT>-60&&popT<520)?1+0.07*Math.sin(clamp((popT+60)/580,0,1)*Math.PI):1;
+  big.style.transform=`scale(${pop})`;
+
+  // mechanic
+  mech.update(gp,t);
+  // reveal punctuation: brief brightness pulse on the visual, synced with audio impact
+  if(!C.flat){ const rp=t-T.growEnd;
+    const fl=(rp>-60&&rp<480)?Math.sin(clamp((rp+60)/540,0,1)*Math.PI):0;
+    chart.style.filter=`brightness(${1+0.22*fl})`; }
+
+  // step captions during explain phase
+  const step=$('step');
+  if(C.steps && t>=T.growStart && t<T.revealStart){
+    let i=-1; for(let k=0;k<C.steps.length;k++){ if(t>=C.steps[k].t) i=k; }
+    if(i>=0){ const s=C.steps[i]; const next=C.steps[i+1]?C.steps[i+1].t:T.revealStart;
+      step.innerHTML=s.text;
+      const fi=clamp((t-s.t)/350,0,1), fo=clamp((next-t)/350,0,1);
+      step.style.opacity=Math.min(fi,fo); }
+    else step.style.opacity=0;
+  } else step.style.opacity=0;
+
+  // reveal sub
+  const sub=$('sub');
+  if(t>=T.subIn&&t<T.ctaStart){const sp=clamp((t-T.subIn)/600,0,1);sub.innerHTML=C.revealHTML;
+    sub.style.opacity=easeOut(sp);sub.style.transform=`translateY(${lerp(30,0,easeOut(sp))}px) scale(${lerp(1.05,1,easeOut(sp))})`;}
+  else if(t<T.subIn){sub.style.opacity=0;}
+
+  // CTA
+  const cta=$('cta');
+  if(t>=T.ctaStart){const c=clamp((t-T.ctaStart)/500,0,1);cta.style.opacity=c;
+    const seq=(d,dur=500)=>clamp((t-T.ctaStart-d)/dur,0,1);
+    const badge=cta.querySelector('.badge'),be=easeOut(seq(80));badge.style.opacity=be;badge.style.transform=`scale(${lerp(.7,1,be)})`;
+    const q=cta.querySelector('.q'),qe=easeOut(seq(280));q.style.opacity=qe;q.style.transform=`translateY(${lerp(20,0,qe)}px)`;
+    const s2=cta.querySelector('.sub2'),se=easeOut(seq(520));s2.style.opacity=se;s2.style.transform=`translateY(${lerp(20,0,se)}px)`;
+    const url=cta.querySelector('.url'),ue=easeOut(seq(800));url.style.opacity=ue;url.style.transform=`scale(${lerp(.9,1,ue)})`;
+    if(ue>=1)url.style.transform=`scale(${1+0.03*Math.sin((t-T.ctaStart-800)/250)})`;
+    cta.querySelector('.handle').style.opacity=easeOut(seq(1050));
+    cta.querySelector('.disc').style.opacity=easeOut(seq(1300))*0.9;}
+  else{cta.style.opacity=0;}
+}
+
+if(params.has('t')){frame(parseInt(params.get('t'),10)||0);}
+else{let start=null;function loop(ts){if(start===null)start=ts;let e=ts-start;if(e>DUR+1200){start=ts;e=0;}frame(e);requestAnimationFrame(loop);}requestAnimationFrame(loop);}
+window.frame=frame;
+</script>
+</body>
+</html>

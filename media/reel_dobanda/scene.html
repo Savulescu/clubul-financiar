@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Clubul Financiar — Reel Dobânda Compusă</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1424; --navy2:#0f2540; --gold:#E8C268; --green:#5cf0aa;
+  --text:#eef4fc; --muted:#9fb3d1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow:hidden}
+#stage{
+  position:relative;width:1080px;height:1920px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:var(--text);overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 50% -10%, #16335a 0%, var(--navy2) 38%, var(--navy) 75%);
+}
+/* subtle grid + vignette */
+#stage::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:90px 90px;mask:radial-gradient(75% 60% at 50% 42%,#000 30%,transparent 100%);
+}
+#stage::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 120%, rgba(0,0,0,.55), transparent 55%);
+}
+#baseline{position:absolute;bottom:300px;left:150px;right:150px;height:3px;z-index:4;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(232,194,104,.55) 30%,rgba(92,240,170,.55) 70%,transparent);
+  box-shadow:0 0 24px rgba(92,240,170,.35)}
+
+/* ===== top brand bar ===== */
+#brand{position:absolute;top:70px;left:0;right:0;display:flex;align-items:center;
+  justify-content:center;gap:18px;z-index:6;opacity:0}
+#brand .dot{width:60px;height:60px;border-radius:50%;overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 2px rgba(232,194,104,.45)}
+#brand .dot img,#cta .badge img{width:100%;height:100%;object-fit:cover;display:block}
+#brand .name{font-weight:700;font-size:34px;letter-spacing:.5px}
+#brand .name b{color:var(--gold)}
+
+/* ===== headline / phases ===== */
+#headline{position:absolute;top:240px;left:80px;right:80px;text-align:center;z-index:6}
+.hook-l1{font-size:120px;font-weight:800;line-height:1;letter-spacing:-1px;
+  background:linear-gradient(180deg,#fff,#cfe0ff);-webkit-background-clip:text;background-clip:text;
+  color:transparent;opacity:0;transform:translateY(40px)}
+.hook-l1 em{font-style:normal;color:var(--gold);-webkit-text-fill-color:var(--gold)}
+.hook-l2{margin-top:26px;font-size:46px;font-weight:600;color:var(--muted);opacity:0;transform:translateY(30px)}
+
+/* ===== number ===== */
+#counter{position:absolute;top:512px;left:0;right:0;text-align:center;z-index:7;opacity:0;
+  will-change:opacity,transform}
+#counter .eyebrow{font-size:36px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);opacity:0;margin-bottom:18px}
+#counter .big{font-size:182px;font-weight:800;letter-spacing:-4px;line-height:1;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+  background:linear-gradient(180deg,#ffffff 0%,#d8e6ff 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  display:inline-flex;align-items:baseline;justify-content:center}
+#counter #num{display:inline-block;min-width:540px;text-align:right}
+#counter .cur{font-size:90px;font-weight:700;letter-spacing:-1px;margin-left:18px;
+  -webkit-text-fill-color:var(--green);color:var(--green)}
+#counter .yr{margin-top:18px;font-size:42px;font-weight:600;color:#c4d4ee;opacity:.92;
+  letter-spacing:2px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+
+/* ===== 3D chart ===== */
+#scene3d{position:absolute;bottom:300px;left:0;right:0;height:780px;z-index:5;
+  perspective:1900px;perspective-origin:50% 18%}
+#chart{position:absolute;bottom:0;left:50%;
+  transform:translateX(-50%) rotateX(40deg) translateZ(0);
+  transform-style:preserve-3d;display:flex;align-items:flex-end;gap:10px;height:100%;
+  will-change:transform;backface-visibility:hidden;
+  -webkit-box-reflect:below 1px linear-gradient(transparent 58%, rgba(255,255,255,.10) 100%)}
+.bar{width:42px;transform-origin:bottom;display:flex;flex-direction:column-reverse;
+  position:relative;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));
+  backface-visibility:hidden;will-change:transform}
+.bar .contrib{background:linear-gradient(180deg,#f3d792,#c79f4a);border-radius:0 0 3px 3px;
+  position:relative}
+.bar .contrib::after{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.5),transparent 45%);opacity:.55}
+.bar .interest{background:linear-gradient(180deg,var(--green),#1ea877);border-radius:7px 7px 0 0;
+  position:relative}
+.bar .interest::after{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.55),transparent 45%);opacity:.5}
+/* floor glow */
+#floor{position:absolute;bottom:286px;left:50%;transform:translateX(-50%);
+  width:880px;height:230px;border-radius:50%;z-index:4;opacity:0;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(92,240,170,.42),rgba(92,240,170,.10) 55%,transparent 72%);
+  filter:blur(10px)}
+
+/* ===== bottom caption ===== */
+#sub{position:absolute;bottom:230px;left:70px;right:70px;text-align:center;z-index:8;
+  font-size:48px;font-weight:600;line-height:1.3;opacity:0;transform:translateY(30px);
+  text-shadow:0 3px 16px rgba(5,12,24,.9)}
+#sub::before{content:"";position:absolute;left:-60px;right:-60px;top:-70px;bottom:-70px;z-index:-1;
+  background:radial-gradient(72% 110% at 50% 50%, rgba(8,16,30,.94) 30%, rgba(8,16,30,.55) 60%, transparent 82%);
+  filter:blur(10px)}
+#sub .g{color:var(--green)} #sub .y{color:var(--gold)}
+
+/* ===== CTA card ===== */
+#cta{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:0;opacity:0;
+  background:radial-gradient(120% 80% at 50% 38%, #16335a 0%, #0f2540 40%, #0a1424 80%);}
+#cta .badge{width:140px;height:140px;border-radius:50%;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 3px rgba(232,194,104,.55),0 0 50px rgba(232,194,104,.3);
+  transform:scale(.7);opacity:0}
+#cta .q{margin-top:46px;font-size:66px;font-weight:800;text-align:center;opacity:0;transform:translateY(20px)}
+#cta .q em{font-style:normal;color:var(--green)}
+#cta .sub2{margin-top:22px;font-size:44px;color:var(--muted);opacity:0;transform:translateY(20px)}
+#cta .url{margin-top:60px;font-size:60px;font-weight:800;color:var(--gold);
+  padding:24px 56px;border:2px solid rgba(232,194,104,.5);border-radius:999px;
+  box-shadow:0 0 50px rgba(232,194,104,.18);opacity:0;transform:scale(.9)}
+#cta .handle{margin-top:34px;font-size:40px;font-weight:600;color:var(--text);opacity:0}
+#cta .handle b{color:var(--gold)}
+#cta .disc{position:absolute;bottom:110px;font-size:30px;color:var(--muted);opacity:0}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="brand"><div class="dot"><img src="profile.png" alt=""></div><div class="name">Clubul <b>Financiar</b></div></div>
+
+  <div id="headline">
+    <div class="hook-l1">O cafea pe zi. <em>10 lei</em>.</div>
+    <div class="hook-l2">Cât fac în 30 de ani?</div>
+  </div>
+
+  <div id="counter">
+    <div class="eyebrow" id="eyebrow">10 lei/zi · 30 de ani</div>
+    <div class="big"><span id="num">0</span><span class="cur">lei</span></div>
+    <div class="yr" id="yr">Anul 1</div>
+  </div>
+
+  <div id="baseline"></div>
+  <div id="floor"></div>
+  <div id="scene3d"><div id="chart"></div></div>
+
+  <div id="sub"></div>
+
+  <div id="cta">
+    <div class="badge"><img src="profile.png" alt=""></div>
+    <div class="q">Vrei să știi <em>cum?</em></div>
+    <div class="sub2">Învață banii de la zero, pas cu pas.</div>
+    <div class="url">clubulfinanciar.ro</div>
+    <div class="handle">Urmărește <b>@clubulfinanciar</b></div>
+    <div class="disc">Exemplu educativ · randament mediu presupus 8%/an · nu e sfat de investiții</div>
+  </div>
+</div>
+
+<script>
+const TOTAL = 447108;       // valoarea finala verificata
+const YEARS = 30;
+const DUR   = 15000;        // 15s
+
+// ---- compute the TRUTH behind each bar: contribution (gold) vs compound interest (green) ----
+const PMT=300, R=0.08/12; // 300 lei/luna ~ 10 lei/zi, 8%/an
+const fvAt=yr=>PMT*((Math.pow(1+R,12*yr)-1)/R);
+const FV_TOTAL=fvAt(YEARS);          // ~447.108
+const maxH=640;
+const SCALE=maxH/FV_TOTAL;
+const gold=[], green=[];             // px heights per bar (year 1..30)
+for(let i=0;i<YEARS;i++){
+  const yr=i+1;
+  const contrib=PMT*12*yr;           // ce pui tu (liniar)
+  const fv=fvAt(yr);                 // total
+  gold.push(contrib*SCALE);
+  green.push((fv-contrib)*SCALE);    // ce face dobanda compusa (exploziv)
+}
+
+// ---- build two-segment bars ----
+const chart = document.getElementById('chart');
+const bars = [];
+for(let i=0;i<YEARS;i++){
+  const b=document.createElement('div'); b.className='bar';
+  const c=document.createElement('div'); c.className='contrib';
+  const n=document.createElement('div'); n.className='interest';
+  b.appendChild(c); b.appendChild(n);   // column-reverse => contrib bottom, interest top
+  chart.appendChild(b); bars.push({c,n});
+}
+
+// ---- helpers ----
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeOut=t=>1-Math.pow(1-t,3);
+const easeInOut=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const fmt=n=>Math.round(n).toLocaleString('ro-RO');
+function show(el,o,y=0,s=null){el.style.opacity=o;el.style.transform=
+  `translateY(${y}px)`+(s!=null?` scale(${s})`:'');}
+
+// phase windows (ms)
+const T={brandIn:300, hookIn:500, hookHold:2300, growStart:2300, growEnd:9200,
+         revealStart:9200, subIn:9400, ctaStart:11600};
+
+function frame(t){
+  t=clamp(t,0,DUR);
+  const ctaFade = t>=T.ctaStart ? clamp(1-(t-T.ctaStart)/350,0,1) : 1;
+  // brand
+  $('brand').style.opacity = clamp((t-T.brandIn)/500,0,1)*(t<T.ctaStart?1:0);
+
+  // hook
+  const h1=document.querySelector('.hook-l1'), h2=document.querySelector('.hook-l2');
+  const hp=clamp((t-T.hookIn)/600,0,1);
+  show(h1,easeOut(hp),lerp(40,0,easeOut(hp)));
+  const h2p=clamp((t-T.hookIn-350)/600,0,1);
+  show(h2,easeOut(h2p),lerp(30,0,easeOut(h2p)));
+  // hook lifts/fades as growth begins
+  const hl=document.getElementById('headline');
+  if(t>T.growStart){
+    const f=clamp((t-T.growStart)/650,0,1);
+    hl.style.transform=`translateY(${lerp(0,-60,easeOut(f))}px) scale(${lerp(1,.9,f)})`;
+    hl.style.opacity=lerp(1,0,f);
+  } else { hl.style.transform=''; hl.style.opacity=1; }
+  // eyebrow context during growth
+  $('eyebrow').style.opacity = clamp((t-T.growStart-250)/500,0,1)*ctaFade;
+  // anticipation baseline during hook, retires as bars grow
+  $('baseline').style.opacity = t<T.growStart
+    ? (0.45+0.25*Math.sin(t/350))*clamp(t/600,0,1)
+    : clamp(1-(t-T.growStart)/500,0,1)*0.4;
+
+  // growth phase: bars + number
+  const gp=clamp((t-T.growStart)/(T.growEnd-T.growStart),0,1);
+  const ge=easeInOut(gp);
+  $('counter').style.opacity = clamp((t-T.growStart)/400,0,1)*ctaFade;
+  $('scene3d').style.opacity = ctaFade;
+  $('floor').style.opacity = clamp((t-T.growStart-300)/600,0,1)*lerp(.4,1,ge)*ctaFade;
+  // continuity: counter lifts/zooms slightly as CTA takes over
+  $('counter').style.transform = t>=T.ctaStart
+    ? `scale(${lerp(1,1.12,clamp((t-T.ctaStart)/350,0,1))})` : 'scale(1)';
+  // each bar grows in sequence; gold = your money, green = compound interest
+  for(let i=0;i<YEARS;i++){
+    const local=clamp(gp*YEARS - i,0,1);
+    const e=easeOut(local);
+    bars[i].c.style.height=(gold[i]*e)+'px';
+    bars[i].n.style.height=(green[i]*e)+'px';
+    bars[i].n.style.boxShadow = green[i]>40 && local>0
+      ? `0 0 22px rgba(92,240,170,${.55*e})` : 'none';
+  }
+  // number counts with compound curve
+  const val = TOTAL*Math.pow(ge,1.55);
+  $('num').textContent = fmt(val);
+  $('yr').textContent = 'Anul ' + clamp(Math.ceil(gp*YEARS),1,YEARS);
+  // green glow present through the whole count-up, intensifying toward climax
+  const baseGlow = clamp((t-T.growStart)/900,0,1);
+  const climax = clamp((t-T.growEnd+1300)/1500,0,1);
+  const lvl = Math.max(baseGlow*0.35, climax);
+  document.querySelector('#counter .big').style.filter =
+    `drop-shadow(0 0 ${lerp(6,48,lvl)}px rgba(92,240,170,${lerp(.16,.7,lvl)}))`;
+  // satisfying scale-pop on the number right when it locks at climax (synced w/ audio impact)
+  const popT=t-T.growEnd;
+  const pop = (popT>-60 && popT<520) ? 1+0.07*Math.sin(clamp((popT+60)/580,0,1)*Math.PI) : 1;
+  document.querySelector('#counter .big').style.transform=`scale(${pop})`;
+
+  // reveal subtitle
+  const sub=$('sub');
+  if(t>=T.subIn && t<T.ctaStart){
+    const sp=clamp((t-T.subIn)/600,0,1);
+    sub.innerHTML='Tu pui doar <span class="y">108.000 lei</span> din buzunar.<br>Restul de <span class="g">339.000 lei</span> îi face<br>dobânda compusă.';
+    show(sub,easeOut(sp),lerp(30,0,easeOut(sp)));
+  } else if(t<T.subIn){ sub.style.opacity=0; }
+
+  // CTA
+  const cta=$('cta');
+  if(t>=T.ctaStart){
+    const c=clamp((t-T.ctaStart)/500,0,1);
+    cta.style.opacity=c;
+    const seq=(d,dur=500)=>clamp((t-T.ctaStart-d)/dur,0,1);
+    const badge=cta.querySelector('.badge'); const be=easeOut(seq(80));
+    badge.style.opacity=be; badge.style.transform=`scale(${lerp(.7,1,be)})`;
+    const q=cta.querySelector('.q'); const qe=easeOut(seq(280));
+    q.style.opacity=qe; q.style.transform=`translateY(${lerp(20,0,qe)}px)`;
+    const s2=cta.querySelector('.sub2'); const se=easeOut(seq(520));
+    s2.style.opacity=se; s2.style.transform=`translateY(${lerp(20,0,se)}px)`;
+    const url=cta.querySelector('.url'); const ue=easeOut(seq(800));
+    url.style.opacity=ue; url.style.transform=`scale(${lerp(.9,1,ue)})`;
+    // pulse url
+    const pulse=1+0.03*Math.sin((t-T.ctaStart-800)/250);
+    if(ue>=1) url.style.transform=`scale(${pulse})`;
+    cta.querySelector('.handle').style.opacity=easeOut(seq(1050));
+    cta.querySelector('.disc').style.opacity=easeOut(seq(1300))*0.9;
+  } else { cta.style.opacity=0; }
+}
+
+// ---- driver: ?t=ms for static screenshot, else autoplay loop ----
+const params=new URLSearchParams(location.search);
+if(params.has('t')){ frame(parseInt(params.get('t'),10)||0); }
+else{
+  let start=null;
+  function loop(ts){ if(start===null)start=ts; let e=ts-start;
+    if(e>DUR+1200){ start=ts; e=0; } frame(e); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>
