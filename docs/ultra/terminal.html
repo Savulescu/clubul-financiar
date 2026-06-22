@@ -423,7 +423,8 @@
       }).join("");
       return '<div><p class="u-kpi-sub" style="margin:0 0 4px;color:var(--u-gold);font-weight:700">'+esc(g.title)+'</p>'+rows+'</div>';
     }).join("");
-    $("macroSrc").textContent = d.atribuire || "";
+    var upd = d.updated ? (" · Actualizat " + (CF.dataRO ? CF.dataRO(d.updated.slice(0,10)) : d.updated.slice(0,10))) : "";
+    $("macroSrc").textContent = (d.atribuire || "") + upd;
   }
   fetch("/data/macro.json").then(function(r){return r.json();}).then(renderMacro).catch(function(){ renderMacro(null); });
 
