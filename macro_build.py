@@ -161,6 +161,8 @@ def main():
     ro = [
         item("Creștere PIB (anual)", safe(eurostat_last, "namq_10_gdp", "geo=RO&na_item=B1GQ&s_adj=SCA&unit=CLV_PCH_SM"), src="Eurostat"),
         item("Șomaj", safe(eurostat_last, "une_rt_m", "geo=RO&age=TOTAL&unit=PC_ACT&s_adj=SA&sex=T"), src="Eurostat"),
+        item("Deficit bugetar", safe(eurostat_last, "gov_10dd_edpt1", "geo=RO&unit=PC_GDP&sector=S13&na_item=B9"), unit="% din PIB", src="Eurostat"),
+        item("Datorie publică", safe(eurostat_last, "gov_10q_ggdebt", "geo=RO&unit=PC_GDP&sector=S13&na_item=GD"), unit="% din PIB", src="Eurostat"),
     ]
     groups.append({"title": "Economia României", "items": ro})
 
