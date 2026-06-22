@@ -37,7 +37,8 @@ def email(user_email, subject, html):
         return False
     body = json.dumps({"from": FROM, "to": [user_email], "subject": subject, "html": html}).encode()
     req = urllib.request.Request("https://api.resend.com/emails", data=body,
-        headers={"Authorization": "Bearer " + RESEND, "Content-Type": "application/json"})
+        headers={"Authorization": "Bearer " + RESEND, "Content-Type": "application/json",
+                 "User-Agent": "ClubulFinanciar/1.0 (+clubulfinanciar.ro)"})  # UA obligatoriu (Cloudflare blochează altfel)
     try:
         urllib.request.urlopen(req, timeout=30); return True
     except Exception as e:

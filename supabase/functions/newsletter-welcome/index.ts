@@ -71,7 +71,8 @@ Deno.serve(async (req: Request) => {
     if (!RESEND) return new Response(JSON.stringify({ error: "RESEND lipsește" }), { status: 500, headers: cors });
     const r = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { "Authorization": "Bearer " + RESEND, "Content-Type": "application/json" },
+      headers: { "Authorization": "Bearer " + RESEND, "Content-Type": "application/json",
+                 "User-Agent": "ClubulFinanciar/1.0 (+clubulfinanciar.ro)" },
       body: JSON.stringify({ from: FROM, to: [email], subject: "Bun venit la Clubul Financiar 👋", html: welcomeHtml() }),
     });
     return new Response(JSON.stringify({ ok: r.ok }), { headers: cors });

@@ -305,7 +305,8 @@ def send_email(to, subject, html_body):
         print("  RESEND_API_KEY lipsește — nu trimit."); return False
     body = json.dumps({"from": FROM, "to": [to], "subject": subject, "html": html_body}).encode()
     req = urllib.request.Request("https://api.resend.com/emails", data=body,
-        headers={"Authorization": "Bearer " + RESEND, "Content-Type": "application/json"})
+        headers={"Authorization": "Bearer " + RESEND, "Content-Type": "application/json",
+                 "User-Agent": "ClubulFinanciar/1.0 (+clubulfinanciar.ro)"})  # UA obligatoriu (Cloudflare blochează altfel)
     try:
         urllib.request.urlopen(req, timeout=30); return True
     except urllib.error.URLError as e:
