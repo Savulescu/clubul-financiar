@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminalul — piețe, valute și date pentru investitorul român | Clubul Financiar</title>
+<meta name="description" content="Cursul oficial BNR live (valute + aur), indicii care îți mișcă rata, companiile de la Bursa de Valori București și un asistent AI care înțelege ce întrebi. Gratuit.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
+<link rel="canonical" href="https://clubulfinanciar.ro/ultra/terminal.html">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Terminalul — piețe, valute și date pentru investitorul român"><meta property="og:description" content="Curs BNR live, valute + aur, companii BVB și asistent AI. Gratuit."><meta property="og:url" content="https://clubulfinanciar.ro/ultra/terminal.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-tool.css?v=1">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<style>
+  .term-num{ font-family:'JetBrains Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; }
+  /* bara de comandă — semnătura terminalului */
+  .term-cmd{ position:relative; margin:8px 0 4px; }
+  .term-cmd input{ width:100%; padding:16px 18px 16px 46px; border-radius:14px;
+    border:1px solid var(--u-line); background:var(--u-panel2); color:var(--u-ink);
+    font-size:1.05rem; font-family:'JetBrains Mono',ui-monospace,monospace; }
+  .term-cmd input:focus{ outline:none; border-color:var(--u-gold); box-shadow:0 0 0 3px var(--u-gold-soft); }
+  .term-cmd .slash{ position:absolute; left:16px; top:50%; transform:translateY(-50%);
+    color:var(--u-gold); font-family:'JetBrains Mono',monospace; font-weight:700; }
+  .term-cmd-out{ margin-top:12px; }
+  .term-hint{ color:var(--u-muted); font-size:.84rem; margin-top:8px; }
+  .term-hint b{ color:var(--u-gold); font-weight:700; cursor:pointer; }
+  /* board valutar */
+  .fx-top{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media(max-width:760px){ .fx-top{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:440px){ .fx-top{ grid-template-columns:1fr; } }
+  .fx-card{ background:var(--u-panel); border:1px solid var(--u-line-soft); border-radius:16px;
+    padding:16px 18px; position:relative; overflow:hidden; }
+  .fx-card .cur{ font-family:'Fraunces',serif; color:var(--u-gold); font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; }
+  .fx-card .name{ color:var(--u-muted); font-size:.78rem; margin-top:1px; }
+  .fx-card .rate{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.7rem;
+    color:var(--u-ink); margin-top:6px; font-variant-numeric:tabular-nums; }
+  .fx-card .chg{ font-family:'JetBrains Mono',monospace; font-size:.86rem; font-weight:700; }
+  .fx-spark{ position:absolute; right:14px; bottom:14px; width:84px; height:30px; opacity:.85; }
+  .fx-table{ width:100%; border-collapse:collapse; margin-top:6px; }
+  .fx-table th{ text-align:left; color:var(--u-muted); font-size:.74rem; text-transform:uppercase;
+    letter-spacing:.1em; padding:8px 10px; border-bottom:1px solid var(--u-line-soft); font-weight:600; }
+  .fx-table td{ padding:9px 10px; border-bottom:1px solid var(--u-line-soft); }
+  .fx-table td.n{ font-family:'JetBrains Mono',monospace; text-align:right; font-variant-numeric:tabular-nums; }
+  .fx-table tr:hover td{ background:var(--u-gold-soft); }
+  .fx-search{ width:100%; max-width:280px; padding:9px 12px; border-radius:10px;
+    border:1px solid var(--u-line-soft); background:var(--u-panel2); color:var(--u-ink); margin-bottom:10px; }
+  .conv-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:end; }
+  .conv-row .u-field{ margin:0; flex:1; min-width:120px; }
+  .term-co{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  @media(max-width:760px){ .term-co{ grid-template-columns:1fr; } }
+</style>
+</head><body>
+<header class="nav"><div class="container nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a><a href="/ultra.html" style="color:#E8C268;font-weight:700">Ultra</a><a href="/feedback.html">Feedback</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+  <section class="section"><div class="container">
+
+    <!-- HERO + COMMAND BAR -->
+    <div class="u-hero" style="position:relative">
+      <p class="u-eyebrow">Terminal · piețe & date</p>
+      <h1 class="u-crest">Terminalul <em>tău</em></h1>
+      <p class="u-lead">Cursul oficial BNR live, indicii care îți mișcă rata, companiile de la bursa românească și un asistent care înțelege ce întrebi. Datele sunt gratuite, pentru toată lumea.</p>
+
+      <div class="term-cmd" style="margin-top:22px">
+        <span class="slash">/</span>
+        <input id="cmd" autocomplete="off" placeholder="Întreabă orice — „cât e euro”, „aur”, „dividende Hidroelectrica”…">
+      </div>
+      <div class="term-cmd-out" id="cmdOut"></div>
+      <p class="term-hint">Încearcă: <b data-cmd="cât e euro">cât e euro</b> · <b data-cmd="dolar">dolar</b> · <b data-cmd="aur">aur</b> · <b data-cmd="forint">forint</b></p>
+    </div>
+
+    <!-- BOARD VALUTAR (gratuit, BNR live) -->
+    <div class="u-panel" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">
+        <p class="u-label" style="margin:0">Curs valutar & aur · BNR</p>
+        <span class="u-kpi-sub term-num" id="fxDate" style="margin:0">—</span>
+      </div>
+      <div class="fx-top" id="fxTop" style="margin-top:14px"></div>
+
+      <details style="margin-top:18px">
+        <summary style="cursor:pointer;color:var(--u-gold);font-weight:700">Toate cele <span id="fxCount">—</span> de valute</summary>
+        <input class="fx-search" id="fxSearch" placeholder="Caută valută (ex. yen, zlot)…" style="margin-top:12px">
+        <div style="overflow-x:auto"><table class="fx-table"><thead><tr><th>Valută</th><th style="text-align:right">1 unitate</th><th style="text-align:right">Variație</th></tr></thead><tbody id="fxBody"></tbody></table></div>
+      </details>
+
+      <!-- CONVERTOR -->
+      <div class="u-hr"></div>
+      <p class="u-label">Convertor</p>
+      <div class="conv-row">
+        <div class="u-field"><label>Sumă</label><input class="u-input term-num" id="cvAmt" type="number" value="100" min="0"></div>
+        <div class="u-field"><label>Din</label><select class="u-select" id="cvFrom"></select></div>
+        <div class="u-field"><label>În</label><select class="u-select" id="cvTo"></select></div>
+      </div>
+      <div class="u-kpi sm term-num" id="cvOut" style="margin-top:12px;color:var(--u-gold)">—</div>
+      <p class="u-kpi-sub">Curs oficial BNR, orientativ. Băncile și casele de schimb aplică marje proprii.</p>
+    </div>
+
+    <div class="term-co" style="margin-top:18px">
+      <!-- DOBÂNZI / INDICI (gratuit, educativ + link sursă) -->
+      <div class="u-panel">
+        <p class="u-label">Indicii care îți mișcă rata</p>
+        <p style="color:var(--u-muted);font-size:.95rem;line-height:1.55;margin:0 0 12px">
+          Dacă ai un credit, rata ta urmărește unul dintre acești indici. Valoarea oficială la zi e publicată de BNR.
+        </p>
+        <div class="u-row"><span class="k">IRCC</span><span class="lead-dots"></span><span class="v">credite noi în lei</span></div>
+        <div class="u-row"><span class="k">ROBOR 3M / 6M</span><span class="lead-dots"></span><span class="v">credite mai vechi în lei</span></div>
+        <div class="u-row"><span class="k">EURIBOR</span><span class="lead-dots"></span><span class="v">credite în euro</span></div>
+        <div class="u-row"><span class="k">Dobânda-cheie BNR</span><span class="lead-dots"></span><span class="v">o influențează pe toate</span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <a class="u-btn u-btn-gold" href="/instrumente/scaner-credit.html">Vezi impactul pe rata ta →</a>
+          <a class="u-btn u-btn-ghost" href="https://www.bnr.ro/Indici-de-referinta-pentru-creditele-consumatorilor-19492.aspx" target="_blank" rel="noopener">Valoarea oficială BNR</a>
+        </div>
+      </div>
+
+      <!-- CALENDAR ECONOMIC -->
+      <div class="u-panel">
+        <p class="u-label">Calendar — ce urmează</p>
+        <div id="calFree"></div>
+        <div id="calUltra" style="margin-top:8px"></div>
+        <p class="u-kpi-sub" id="calNote" style="margin-top:10px"></p>
+      </div>
+    </div>
+
+    <!-- COMPANII BVB (gratuit, educativ; fără cotații live = legal) -->
+    <div class="u-panel" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">
+        <p class="u-label" style="margin:0">Bursa de Valori București · companii</p>
+        <span class="u-kpi-sub" style="margin:0">cine sunt & cum sunt impozitate dividendele</span>
+      </div>
+      <div class="u-grid u-grid-3" id="bvbGrid" style="margin-top:14px"></div>
+      <p class="u-kpi-sub" style="margin-top:12px">Fără cotații live: afișarea prețurilor bursiere în timp real cere licență de la BVB. Aici primești ce contează educativ — cine sunt companiile și cum te impozitează dividendele. <a href="/calculatoare/impozit-investitii.html" style="color:var(--u-gold)">Calculează impozitul pe dividende →</a></p>
+    </div>
+
+    <!-- ALERTE / WATCHLIST (Ultra) -->
+    <div class="u-panel" id="uAlerts" style="margin-top:18px">
+      <p class="u-label">Alerte & watchlist</p>
+      <p style="color:var(--u-muted);font-size:.95rem;line-height:1.55;margin:0 0 12px">
+        Urmărește o valută sau aurul și primește o alertă pe Telegram când trece de pragul tău — fără să mai verifici zilnic.
+      </p>
+      <div class="conv-row">
+        <div class="u-field"><label>Urmărește</label><select class="u-select" id="alCur"></select></div>
+        <div class="u-field"><label>Mă anunți când trece de (lei)</label><input class="u-input term-num" id="alLvl" type="number" step="0.01" placeholder="ex. 5.30"></div>
+        <button class="u-btn u-btn-gold" id="alSet" style="align-self:end">Setează alerta</button>
+      </div>
+      <p class="u-kpi-sub" id="alMsg" style="margin-top:10px;min-height:1.2em"></p>
+    </div>
+
+    <!-- ȘTIRI CTA -->
+    <div class="u-panel" style="margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+      <div><p class="u-label" style="margin:0 0 4px">Fluxul de știri</p>
+        <p style="color:var(--u-muted);margin:0">Ce mișcă piețele azi, pe înțelesul tău.</p></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="u-btn u-btn-ghost" href="/stiri.html">Știri România</a>
+        <a class="u-btn u-btn-ghost" href="/stiri-externe.html">Piețe externe</a>
+      </div>
+    </div>
+
+    <p class="u-kpi-sub" style="margin-top:20px;text-align:center">
+      Date: curs oficial BNR. Educativ, nu recomandare de investiții sau consultanță. Verifică sursele oficiale înainte de decizii.
+    </p>
+
+  </div></section>
+</main>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=23"></script>
+<script src="/assets/fiscal-2026.js?v=1"></script>
+<script src="/assets/cf-tool.js?v=1"></script>
+<script src="/assets/cf-ultra.js?v=1"></script>
+<script>
+(function(){
+  "use strict";
+  var U = CF.U, $ = CF.$;
+  var FX = null, byCur = {};
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function fmt(n, d){ return (n).toLocaleString("ro-RO",{minimumFractionDigits:d||2,maximumFractionDigits:d||2}); }
+
+  // ---- sparkline SVG dintr-o serie ----
+  function spark(arr, up){
+    if(!arr || arr.length<2) return "";
+    var w=84,h=30,mn=Math.min.apply(null,arr),mx=Math.max.apply(null,arr),rg=(mx-mn)||1;
+    var pts=arr.map(function(v,i){ return (i/(arr.length-1)*w).toFixed(1)+","+(h-(v-mn)/rg*h).toFixed(1); }).join(" ");
+    var col=up>=0?"var(--u-pos)":"var(--u-neg)";
+    return '<svg class="fx-spark" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+  }
+  function chgHTML(c){ var cls=c>0?"u-pos":c<0?"u-neg":"u-muted"; var ar=c>0?"▲":c<0?"▼":"–"; return '<span class="chg '+cls+'">'+ar+" "+fmt(Math.abs(c),2)+"%</span>"; }
+
+  // ---- randare board ----
+  function renderFX(){
+    if(!FX) return;
+    $("fxDate").textContent = FX.date;
+    $("fxCount").textContent = FX.count;
+    var top = FX.rates.filter(function(r){return r.top;});
+    $("fxTop").innerHTML = top.map(function(r){
+      var dec = r.rate<1?4:r.rate>100?2:4;
+      return '<div class="fx-card"><div class="cur">'+esc(r.cur)+'</div><div class="name">'+esc(r.name)+'</div>'+
+        '<div class="rate">'+fmt(r.rate,dec)+'</div>'+chgHTML(r.chg)+spark(r.spark,r.chg)+'</div>';
+    }).join("");
+    drawBody("");
+    // selecturi
+    var opts = FX.rates.map(function(r){return '<option value="'+r.cur+'">'+r.cur+' — '+esc(r.name)+'</option>';}).join("");
+    var ron = '<option value="RON">RON — Leu românesc</option>';
+    $("cvFrom").innerHTML = opts+ron; $("cvFrom").value="EUR";
+    $("cvTo").innerHTML = ron+opts; $("cvTo").value="RON";
+    $("alCur").innerHTML = opts; $("alCur").value="EUR";
+    convert();
+  }
+  function drawBody(q){
+    q=(q||"").toLowerCase();
+    $("fxBody").innerHTML = FX.rates.filter(function(r){
+      return !q || r.cur.toLowerCase().indexOf(q)>=0 || r.name.toLowerCase().indexOf(q)>=0;
+    }).map(function(r){
+      var dec = r.rate<1?4:r.rate>100?2:4;
+      return '<tr id="fx-'+r.cur+'"><td><b>'+esc(r.cur)+'</b> <span style="color:var(--u-muted)">'+esc(r.name)+'</span></td>'+
+        '<td class="n">'+fmt(r.rate,dec)+'</td><td class="n">'+chgHTML(r.chg)+'</td></tr>';
+    }).join("");
+  }
+
+  // ---- convertor ----
+  function rateOf(cur){ return cur==="RON"?1:(byCur[cur]?byCur[cur].rate:null); }
+  function convert(){
+    var a=+$("cvAmt").value||0, f=$("cvFrom").value, t=$("cvTo").value;
+    var rf=rateOf(f), rt=rateOf(t);
+    if(rf==null||rt==null){ $("cvOut").textContent="—"; return; }
+    var ron=a*rf, res=ron/rt;
+    $("cvOut").textContent = fmt(a,2)+" "+f+" = "+fmt(res, res<1?4:2)+" "+t;
+  }
+
+  // ---- bara de comandă ----
+  function findCur(q){
+    q=q.toLowerCase();
+    return FX.rates.find(function(r){ return r.cur.toLowerCase()===q || r.name.toLowerCase().indexOf(q)>=0; });
+  }
+  function command(raw){
+    var out=$("cmdOut"); var q=(raw||"").trim(); if(!q){ out.innerHTML=""; return; }
+    if(!FX){ out.innerHTML='<div class="u-alert">Datele se încarcă…</div>'; return; }
+    // întrebări simple de curs → răspuns gratuit, direct din BNR
+    var m = q.toLowerCase().replace(/[?!.]/g,"");
+    var cur = findCur(m.replace(/c[âa]t e|curs|valoare|azi|cat e/g,"").trim()) || findCur(m);
+    if(cur){
+      var dec = cur.rate<1?4:cur.rate>100?2:4;
+      out.innerHTML = '<div class="u-alert gold"><p class="h term-num">1 '+esc(cur.cur)+' = '+fmt(cur.rate,dec)+' lei</p>'+
+        '<p style="margin:0">'+esc(cur.name)+' · '+chgHTML(cur.chg)+' față de ziua precedentă · curs oficial BNR '+FX.date+'</p></div>';
+      var row=$("fx-"+cur.cur); if(row){ var d=document.querySelector("details"); if(d)d.open=true; row.scrollIntoView({block:"center"}); }
+      return;
+    }
+    // orice altceva → asistentul AI (Ultra)
+    if(U && CF.hasTier && CF.hasTier("ultra")){
+      out.innerHTML='<div class="u-alert">Trimit întrebarea către Concierge…</div>';
+      CF.aiChat([{role:"user",content:q}], {context:U.profileContext&&U.profileContext()}).then(function(r){
+        out.innerHTML='<div class="u-alert gold"><p style="margin:0;white-space:pre-wrap">'+esc(r.content||"")+'</p></div>';
+      }, function(){ out.innerHTML='<div class="u-alert warn">Asistentul nu e disponibil acum. Încearcă din nou.</div>'; });
+    } else {
+      out.innerHTML='<div class="u-alert gold"><p class="h">Răspuns AI pe întrebarea ta — în Ultra</p>'+
+        '<p style="margin:0 0 10px">Cursurile și conversiile sunt gratuite. Pentru răspunsuri AI la orice întrebare („ar trebui să cumpăr euro acum?", „ce companii dau dividende?"), deblochează Concierge-ul.</p>'+
+        '<a class="u-btn u-btn-gold" href="/ultra.html">Vezi Ultra →</a></div>';
+    }
+  }
+
+  // ---- calendar ----
+  function renderCal(){
+    var p=U.getProfil();
+    var dl = U.deadlines(p).slice(0,4);
+    if(dl.length){
+      $("calUltra").innerHTML = '<p class="u-kpi-sub" style="margin:0 0 6px">Termenele tale fiscale</p>'+dl.map(function(e){
+        return '<div class="u-row"><span class="k">'+CF.dataRO(e.data)+'</span><span class="lead-dots"></span><span class="v" style="font-size:.86rem">'+esc(e.titlu)+'</span></div>';
+      }).join("");
+      $("calNote").textContent = "Termenele de mai sus sunt pe structura ta fiscală (din profilul Ultra).";
+    } else {
+      $("calUltra").innerHTML='';
+      $("calNote").innerHTML = 'Completează-ți profilul în <a href="/ultra/profil.html" style="color:var(--u-gold)">Ultra</a> ca să-ți apară aici termenele tale fiscale, personalizate.';
+    }
+  }
+
+  // ---- companii BVB (educativ, fără cotații live) ----
+  var BVB = [
+    {t:"TLV",n:"Banca Transilvania",s:"Bănci",d:"Cea mai mare bancă listată din România. Plătește dividende constant."},
+    {t:"H2O",n:"Hidroelectrica",s:"Energie",d:"Producătorul de energie hidro. Dividende generoase, „bijuteria” bursei."},
+    {t:"SNP",n:"OMV Petrom",s:"Petrol & gaze",d:"Cel mai mare grup de energie din RO. Dividende + programe de răscumpărare."},
+    {t:"SNG",n:"Romgaz",s:"Gaze naturale",d:"Principalul producător de gaze. Companie de stat, dividende mari."},
+    {t:"SNN",n:"Nuclearelectrica",s:"Energie nucleară",d:"Operatorul de la Cernavodă. Profituri și dividende solide."},
+    {t:"BRD",n:"BRD - SocGen",s:"Bănci",d:"A doua bancă listată. Randament al dividendului ridicat."},
+    {t:"DIGI",n:"Digi Communications",s:"Telecom",d:"Operatorul telecom în expansiune regională (RO, ES, IT, PT)."},
+    {t:"EL",n:"Electrica",s:"Distribuție energie",d:"Distribuție și furnizare de electricitate. Companie de stat."},
+    {t:"FP",n:"Fondul Proprietatea",s:"Fond de investiții",d:"Fond cu participații în companii mari. Se tranzacționează cu discount."}
+  ];
+  function renderBVB(){
+    $("bvbGrid").innerHTML = BVB.map(function(c){
+      return '<div class="u-panel" style="margin:0"><div style="display:flex;justify-content:space-between;align-items:baseline">'+
+        '<span class="cur term-num" style="font-family:Fraunces,serif;color:var(--u-gold);font-weight:600">'+esc(c.t)+'</span>'+
+        '<span class="u-kpi-sub" style="margin:0">'+esc(c.s)+'</span></div>'+
+        '<p style="color:var(--u-ink);font-weight:600;margin:4px 0 2px">'+esc(c.n)+'</p>'+
+        '<p class="u-kpi-sub" style="margin:0">'+esc(c.d)+'</p></div>';
+    }).join("");
+  }
+
+  // ---- alerte (Ultra) ----
+  function setAlert(){
+    var cur=$("alCur").value, lvl=+$("alLvl").value;
+    if(!lvl){ $("alMsg").textContent="Pune un prag (în lei)."; return; }
+    CF.setReminder("terminal-fx", {kind:"alerta", note:"Alertă "+cur+" peste "+lvl+" lei", channel:"telegram"});
+    $("alMsg").innerHTML='<span class="u-pos">✓ Alertă setată: te anunțăm când '+cur+' trece de '+fmt(lvl,2)+' lei.</span>';
+  }
+
+  // ---- wiring ----
+  fetch("/data/fx.json").then(function(r){return r.json();}).then(function(d){
+    FX=d; d.rates.forEach(function(r){ byCur[r.cur]=r; });
+    renderFX(); renderBVB(); renderCal();
+  }).catch(function(){
+    $("fxTop").innerHTML='<div class="u-alert warn">Cursul valutar nu e disponibil momentan. Revino în câteva minute.</div>';
+    renderBVB(); renderCal();
+  });
+
+  var cmdEl=$("cmd");
+  cmdEl.addEventListener("keydown",function(e){ if(e.key==="Enter") command(cmdEl.value); });
+  document.querySelectorAll("[data-cmd]").forEach(function(b){ b.addEventListener("click",function(){ cmdEl.value=b.getAttribute("data-cmd"); command(cmdEl.value); }); });
+  ["cvAmt","cvFrom","cvTo"].forEach(function(id){ var el=$(id); el.addEventListener("input",convert); el.addEventListener("change",convert); });
+  $("fxSearch").addEventListener("input",function(e){ drawBody(e.target.value); });
+  $("alSet").addEventListener("click",setAlert);
+  window.addEventListener("cf-profil",renderCal);
+  window.addEventListener("cf-auth",renderCal);
+
+  // doar stratul „smart" e Ultra: alertele. Datele rămân gratuite pentru toți.
+  CF.requireTier("uAlerts","ultra",{msg:"Alertele și watchlist-ul fac parte din Ultra. Cursurile, convertorul și companiile rămân gratuite."});
+})();
+</script>
+</body></html>
