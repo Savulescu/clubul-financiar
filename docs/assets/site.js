@@ -166,39 +166,73 @@
     document.querySelectorAll("header.nav, footer.foot").forEach(function(el){ el.classList.add("ultra"); });
   }
 
-  // ---- bandă de abonare newsletter (site-wide, deasupra footer-ului) ----
+  // ---- abonare newsletter: wire ORICE formular .nl-form (banda injectată + cele din pagini) ----
+  function nlGet(){ try { return JSON.parse(localStorage.getItem("cf-nl") || "null"); } catch(e){ return null; } }
+  function attachNl(form){
+    if (form.getAttribute("data-nl-wired")) return;
+    form.setAttribute("data-nl-wired", "1");
+    const inputHTML = form.innerHTML;   // starea cu input (pentru revenire la dezabonare)
+
+    function showInput(){ form.innerHTML = inputHTML; }
+    function showSubscribed(email){
+      form.innerHTML =
+        '<span class="nl-ok">✓ Abonat</span>' +
+        (email ? '<span class="nl-sub-em">' + esc(email) + '</span>' : '') +
+        '<button type="button" class="nl-unsub">Dezabonează-te</button>' +
+        '<div class="nl-msg" role="status"></div>';
+      form.querySelector(".nl-unsub").addEventListener("click", function(){
+        const sub = nlGet(); const msg = form.querySelector(".nl-msg");
+        const done = (ok, t) => { if (msg) { msg.textContent = t; msg.className = "nl-msg " + (ok ? "ok" : "err"); } };
+        const clear = () => { localStorage.removeItem("cf-nl"); showInput(); };
+        if (!sb || !sub || !sub.token) { clear(); return; }   // fără token (alt device) → doar curăță local
+        done(true, "Se procesează…");
+        sb.rpc("newsletter_unsubscribe", { token: sub.token }).then(clear, function(){ done(false, "N-a mers, încearcă din nou."); });
+      });
+    }
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      const input = form.querySelector('input[type="email"]');
+      const msg = form.querySelector(".nl-msg");
+      const em = ((input && input.value) || "").trim();
+      const done = (ok, t) => { if (msg) { msg.textContent = t; msg.className = "nl-msg " + (ok ? "ok" : "err"); } };
+      if (!em || em.indexOf("@") < 1) { done(false, "Scrie o adresă de email validă."); return; }
+      done(true, "Se abonează…"); if (msg) msg.className = "nl-msg";
+      if (!sb) { done(false, "Momentan indisponibil. Încearcă mai târziu."); return; }
+      const token = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (Date.now() + "" + Math.random().toString(36).slice(2));
+      const ins = (uid) => sb.from("newsletter_subscribers").insert({ email: em, user_id: uid || null, source: "site", unsub_token: token }).then(function(res){
+        if (res.error) {
+          const m = (res.error.message || "").toLowerCase();
+          if (res.error.code === "23505" || m.indexOf("duplicate") >= 0) {
+            localStorage.setItem("cf-nl", JSON.stringify({ email: em, token: null })); showSubscribed(em);
+          } else done(false, "N-a mers, încearcă din nou.");
+        } else {
+          localStorage.setItem("cf-nl", JSON.stringify({ email: em, token: token })); showSubscribed(em);
+        }
+      }, function(){ done(false, "N-a mers, încearcă din nou."); });
+      sb.auth.getSession().then(function(r){ ins(r && r.data && r.data.session && r.data.session.user && r.data.session.user.id); }, function(){ ins(null); });
+    });
+
+    // stare inițială: dacă ești deja abonat (salvat local), arată „Abonat · Dezabonează-te"
+    const sub = nlGet();
+    if (sub && sub.email) showSubscribed(sub.email);
+  }
+  // banda site-wide deasupra footer-ului (mai puțin pe login/reset/account/dezabonare)
   if (!document.querySelector(".nl-band") && !/\/(login|reset|account|dezabonare)\.html/.test(location.pathname)) {
     const band = document.createElement("section");
     band.className = "nl-band";
     band.innerHTML = `<div class="container nl-in">
       <div class="nl-tx"><div class="nl-h">📬 Dimineața pe scurt</div>
         <div class="nl-p">Știrile care-ți mișcă banii + un concept explicat simplu, în 5 minute. Gratuit, în fiecare dimineață.</div></div>
-      <form class="nl-form" id="nlForm" novalidate>
-        <input type="email" id="nlEmail" placeholder="adresa ta de email" autocomplete="email" required aria-label="Email">
+      <form class="nl-form" novalidate>
+        <input type="email" placeholder="adresa ta de email" autocomplete="email" required aria-label="Email">
         <button type="submit">Abonează-mă</button>
-        <div class="nl-msg" id="nlMsg" role="status"></div>
+        <div class="nl-msg" role="status"></div>
       </form></div>`;
     const ft = document.querySelector("footer.foot");
     if (ft && ft.parentNode) ft.parentNode.insertBefore(band, ft); else document.body.appendChild(band);
-    const form = document.getElementById("nlForm");
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-      const em = (document.getElementById("nlEmail").value || "").trim();
-      const msg = document.getElementById("nlMsg");
-      if (!em || em.indexOf("@") < 1) { msg.textContent = "Scrie o adresă de email validă."; msg.className = "nl-msg err"; return; }
-      msg.textContent = "Se abonează…"; msg.className = "nl-msg";
-      const done = (ok, t) => { msg.textContent = t; msg.className = "nl-msg " + (ok ? "ok" : "err"); };
-      if (!sb) { done(false, "Momentan indisponibil. Încearcă mai târziu."); return; }
-      const ins = (uid) => sb.from("newsletter_subscribers").insert({ email: em, user_id: uid || null, source: "site" }).then(function(res){
-        if (res.error) {
-          const m = (res.error.message || "").toLowerCase();
-          if (res.error.code === "23505" || m.indexOf("duplicate") >= 0) done(true, "Ești deja abonat ✓");
-          else done(false, "N-a mers, încearcă din nou.");
-        } else { done(true, "Gata! Verifică inboxul mâine dimineață ✓"); form.reset(); }
-      }, function(){ done(false, "N-a mers, încearcă din nou."); });
-      sb.auth.getSession().then(function(r){ ins(r && r.data && r.data.session && r.data.session.user && r.data.session.user.id); }, function(){ ins(null); });
-    });
   }
+  document.querySelectorAll("form.nl-form").forEach(attachNl);
 
   // ---- roluri (admin / premium / pro / ultra) ----
   const ADMIN_EMAILS = ["clubulfinanciar@gmail.com"];
