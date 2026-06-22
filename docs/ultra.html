@@ -29,9 +29,12 @@
   <section class="section"><div class="container">
 
     <!-- ============ HERO ============ -->
-    <div class="u-hero">
-      <div class="u-badge-ultra">Ultra</div>
-      <p class="u-eyebrow" style="margin-top:16px">Clubul Financiar · Ultra</p>
+    <div class="u-hero" style="position:relative">
+      <div class="u-guilloche" aria-hidden="true"></div>
+      <div class="u-stmt-top" style="margin-bottom:14px">
+        <span id="uSeal"></span>
+        <div class="u-stmt-meta"><div class="u-badge-ultra">Ultra</div><p class="u-eyebrow" style="margin:8px 0 0">Clubul Financiar · birou privat</p></div>
+      </div>
       <h1 class="u-crest">Biroul tău <em>financiar privat</em></h1>
       <p class="u-lead" style="margin-top:16px">
         Un singur profil al banilor tăi alimentează tot: averea netă, cât economisești, ce datorezi
@@ -143,6 +146,7 @@
 
   function render(){
     var p = U.getProfil();
+    var seal = $("uSeal"); if (seal && !seal.firstChild && U.sealSVG) seal.innerHTML = U.sealSVG();
     var host = $("uHeadline");
     if (!host) return;
 

@@ -630,5 +630,47 @@
       '</svg>';
   };
 
+  // Sigiliu-monogramă CF (crest de bancă privată) — folosit o dată per pagină.
+  U.sealSVG = function () {
+    return '<svg class="u-seal" viewBox="0 0 100 100" role="img" aria-label="Clubul Financiar">' +
+      '<circle cx="50" cy="50" r="47" fill="none" stroke="var(--u-gold)" stroke-width="1.3"/>' +
+      '<circle cx="50" cy="50" r="40" fill="none" stroke="var(--u-gold)" stroke-width=".6" stroke-dasharray="1 3.4"/>' +
+      '<text x="50" y="59" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="600" font-size="30" letter-spacing="-1" fill="var(--u-gold)">CF</text>' +
+      '</svg>';
+  };
+
+  // Count-up animat pentru cifra-erou. Respectă prefers-reduced-motion.
+  U.countUp = function (el, target, opts) {
+    el = typeof el === "string" ? CF.$(el) : el;
+    if (!el) return;
+    opts = opts || {};
+    var fmt = opts.fmt || function (n) { return CF.lei(n); };
+    var dur = opts.dur || 900;
+    var reduce = root.matchMedia && root.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !isFinite(target)) { el.textContent = fmt(target || 0); return; }
+    var t0 = null, from = 0;
+    function step(ts) {
+      if (t0 == null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt(from + (target - from) * e);
+      if (k < 1) root.requestAnimationFrame(step);
+    }
+    root.requestAnimationFrame(step);
+  };
+
+  // Variația averii nete față de luna trecută (din snapshot-urile tool_logs).
+  // Întoarce {pct, abs, are} sau {are:false} dacă nu există istoric.
+  U.deltaAvere = function (netAcum, tool) {
+    try {
+      var log = CF.getLog(tool || "ultra-cockpit") || {};
+      var curent = CF.perioadaCurenta();
+      var perioade = Object.keys(log).filter(function (k) { return k < curent && log[k] && isFinite(log[k].avere); }).sort();
+      if (!perioade.length) return { are: false };
+      var prev = log[perioade[perioade.length - 1]].avere;
+      if (!prev) return { are: false };
+      return { are: true, abs: netAcum - prev, pct: (netAcum - prev) / Math.abs(prev) };
+    } catch (e) { return { are: false }; }
+  };
+
   CF.U = U;
 })(typeof window !== "undefined" ? window : this);

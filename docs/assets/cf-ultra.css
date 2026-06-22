@@ -209,3 +209,42 @@
 @media(prefers-reduced-motion:reduce){
   .u-btn,.u-mod .u-panel{ transition:none; }
 }
+
+/* =============================================================================
+   SEMNĂTURĂ DE ELEVAȚIE — „Extrasul de la miezul nopții"
+   Hârtie gravată (guilloche) + sigiliu-monogramă + cifra-erou serif. O dată/pagină.
+   ============================================================================= */
+.u-stmt{
+  position:relative; overflow:hidden; background:var(--u-panel);
+  border:1px solid var(--u-line-soft); border-radius:22px;
+  padding:30px 30px 26px; box-shadow:var(--u-shadow); margin-bottom:18px;
+}
+.u-stmt::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.8; }
+.u-stmt > *{ position:relative; z-index:1; }
+/* guilloche — gravura fină din certificatele de acțiuni, subtilă, în colțul hero */
+.u-guilloche{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.6;
+  background:
+    repeating-linear-gradient(58deg, var(--u-line-soft) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(-58deg, var(--u-line-soft) 0 1px, transparent 1px 8px);
+  -webkit-mask:radial-gradient(135% 95% at 80% 6%, #000 8%, transparent 66%);
+          mask:radial-gradient(135% 95% at 80% 6%, #000 8%, transparent 66%); }
+/* sigiliu-monogramă */
+.u-seal{ width:48px; height:48px; flex:0 0 auto; display:block; }
+.u-stmt-top{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.u-stmt-meta .u-eyebrow{ margin:0 0 2px; }
+.u-stmt-date{ font-family:'Fraunces',serif; color:var(--u-muted); font-size:.9rem; font-style:italic; margin:0; }
+.u-stmt-greet{ font-family:'Fraunces',serif; color:var(--u-ink); font-size:1.05rem; font-weight:600; margin:0 0 6px; }
+.u-stmt-greet em{ color:var(--u-gold); font-style:italic; }
+/* cifra-erou gravată (serif tabular) */
+.u-figure{ font-family:'Fraunces',Georgia,serif; font-variant-numeric:tabular-nums lining-nums;
+  font-weight:600; letter-spacing:-.015em; line-height:1; color:var(--u-ink);
+  font-size:clamp(2.7rem,7vw,4.4rem); }
+.u-figure-sub{ display:flex; align-items:center; gap:12px; margin-top:13px; flex-wrap:wrap; }
+.u-figure-rule{ height:1px; flex:1; min-width:50px; transform-origin:left;
+  background:linear-gradient(90deg,var(--u-gold),transparent);
+  animation:u-draw .9s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes u-draw{ from{ transform:scaleX(0) } to{ transform:scaleX(1) } }
+.u-stmt-ledger{ display:flex; gap:28px; margin-top:18px; flex-wrap:wrap; }
+.u-stmt-ledger .u-row{ border:0; padding:0; gap:8px; }
+@media(prefers-reduced-motion:reduce){ .u-figure-rule{ animation:none } }

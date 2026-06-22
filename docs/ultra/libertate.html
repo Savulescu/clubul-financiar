@@ -28,10 +28,16 @@
   <section class="section"><div class="container">
 
     <!-- HERO -->
-    <div class="u-hero">
-      <div class="u-eyebrow">Raport lunar <span class="u-badge-ultra">◆ Ultra</span></div>
+    <div class="u-hero" style="position:relative">
+      <div class="u-guilloche" aria-hidden="true"></div>
+      <div class="u-stmt-top" style="margin-bottom:14px">
+        <span id="uSeal"></span>
+        <div class="u-stmt-meta">
+          <p class="u-eyebrow" style="margin:0">Raport lunar · confidențial</p>
+          <p class="u-stmt-date" id="uLuna">—</p>
+        </div>
+      </div>
       <h1 class="u-crest">Drumul tău spre <em>libertate</em></h1>
-      <p class="u-lead" id="uLuna">—</p>
     </div>
 
     <!-- EMPTY STATE -->
@@ -164,6 +170,9 @@
 
   function render(){
     p = U.getProfil();
+
+    // sigiliu-monogramă
+    var seal = $("uSeal"); if (seal && !seal.firstChild && U.sealSVG) seal.innerHTML = U.sealSVG();
 
     // luna curentă în hero
     var lunaTxt = (new Date()).toLocaleDateString("ro-RO", { month: "long", year: "numeric" });

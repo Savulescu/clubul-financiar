@@ -56,13 +56,6 @@
 <main class="u-page">
   <section class="section"><div class="container">
 
-    <!-- HERO -->
-    <header class="u-hero" id="ckHero">
-      <p class="u-eyebrow">Cockpit</p>
-      <h1 class="u-crest" id="ckGreet">Cockpitul tău</h1>
-      <p class="u-lead" id="ckState">Privire de ansamblu asupra întregii tale situații financiare.</p>
-    </header>
-
     <!-- ZONA GATED -->
     <div id="uTool">
 
@@ -77,16 +70,32 @@
       <!-- DASHBOARD -->
       <div id="ckDash" style="display:none">
 
-        <!-- TOP STAT ROW -->
-        <div class="u-grid u-grid-4" style="margin-bottom:18px">
-          <div class="u-panel">
-            <p class="u-label">Avere netă</p>
-            <div class="u-kpi" id="kAvere">—</div>
-            <div class="ck-kpi-foot">
-              <div class="u-row"><span class="k">Active</span><span class="lead-dots"></span><span class="v" id="kActive">—</span></div>
-              <div class="u-row"><span class="k">Datorii</span><span class="lead-dots"></span><span class="v u-neg" id="kDatorii">—</span></div>
+        <!-- HEADER-EXTRAS (semnătură): sigiliu + guilloche + cifra-erou serif -->
+        <div class="u-stmt">
+          <div class="u-guilloche"></div>
+          <div class="u-stmt-top">
+            <span id="ckSeal"></span>
+            <div class="u-stmt-meta">
+              <p class="u-eyebrow">Extras de avere · confidențial</p>
+              <p class="u-stmt-date" id="ckMonth">—</p>
             </div>
           </div>
+          <p class="u-stmt-greet" id="ckGreet">Cockpitul tău</p>
+          <div class="u-figure" id="kAvereHero">—</div>
+          <div class="u-figure-sub">
+            <span class="u-kpi-sub" style="margin:0">avere netă</span>
+            <span class="u-delta" id="kAvereDelta"></span>
+            <span class="u-figure-rule"></span>
+          </div>
+          <div class="u-stmt-ledger">
+            <div class="u-row"><span class="k">Active</span><span class="v" id="kActive">—</span></div>
+            <div class="u-row"><span class="k">Datorii</span><span class="v u-neg" id="kDatorii">—</span></div>
+            <div class="u-row"><span class="k">Stare</span><span class="v" id="ckState" style="font-weight:600">—</span></div>
+          </div>
+        </div>
+
+        <!-- TOP STAT ROW -->
+        <div class="u-grid u-grid-3" style="margin-bottom:18px">
           <div class="u-panel">
             <p class="u-label">Venit net lunar</p>
             <div class="u-kpi" id="kVenit">—</div>
@@ -213,16 +222,23 @@
     var scor = U.scorSanatate(p);
     var fisc = U.proiectieFiscala(p);
 
-    // --- HERO state line ---
-    var stareTxt = "Avere netă " + CF.lei(an.net) + " · economisești " +
-      (cf.economii >= 0 ? CF.lei(cf.economii) : "−" + CF.lei(Math.abs(cf.economii))) +
-      "/lună · scor de sănătate " + scor.scor + "/100 (" + scor.eticheta.toLowerCase() + ").";
-    setText("ckState", stareTxt);
-
-    // --- TOP KPI ---
-    setText("kAvere", CF.lei(an.net));
+    // --- HEADER-EXTRAS: sigiliu, lună, cifra-erou serif ---
+    var sealEl = $("ckSeal"); if (sealEl && !sealEl.firstChild) sealEl.innerHTML = U.sealSVG();
+    var luna = new Date().toLocaleDateString("ro-RO", { month: "long", year: "numeric" });
+    setText("ckMonth", luna.charAt(0).toUpperCase() + luna.slice(1));
+    if (!window._ckAnimat) { U.countUp("kAvereHero", an.net); window._ckAnimat = true; }
+    else setText("kAvereHero", CF.lei(an.net));
     setText("kActive", CF.lei(an.active));
     setText("kDatorii", an.datorii > 0 ? "−" + CF.lei(an.datorii) : CF.lei(0));
+    // variația lunară a averii (din snapshot-uri)
+    var dlt = U.deltaAvere(an.net), dltEl = $("kAvereDelta");
+    if (dltEl) {
+      if (dlt.are) { dltEl.textContent = (dlt.pct >= 0 ? "▲ " : "▼ ") + CF.pct(Math.abs(dlt.pct)) + " luna aceasta";
+        dltEl.className = "u-delta " + (dlt.pct >= 0 ? "u-pos" : "u-neg"); }
+      else dltEl.textContent = "";
+    }
+    // stare scurtă (averea e deja afișată mare deasupra)
+    setText("ckState", scor.scor + "/100 · " + scor.eticheta.toLowerCase());
     setText("kVenit", CF.lei(U.venitNetLunar(p)));
     var econEl = $("kEcon");
     setText("kEcon", (cf.economii < 0 ? "−" : "") + CF.lei(Math.abs(cf.economii)));
