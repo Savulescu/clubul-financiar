@@ -307,19 +307,33 @@ def send_email(to, subject, html_body):
     req = urllib.request.Request("https://api.resend.com/emails", data=body,
         headers={"Authorization": "Bearer " + RESEND, "Content-Type": "application/json",
                  "User-Agent": "ClubulFinanciar/1.0 (+clubulfinanciar.ro)"})  # UA obligatoriu (Cloudflare blochează altfel)
+    def _go(ctx=None):
+        urllib.request.urlopen(req, timeout=30, context=ctx); return True
     try:
-        urllib.request.urlopen(req, timeout=30); return True
+        return _go()
+    except urllib.error.HTTPError as e:
+        try:
+            detail = e.read().decode()[:300]
+        except Exception:
+            detail = ""
+        print(f"  send FAIL Resend HTTP {e.code}: {detail}"); return False
     except urllib.error.URLError as e:
         if "CERTIFICATE_VERIFY_FAILED" in str(e):
             import ssl
             ctx = ssl.create_default_context(); ctx.check_hostname = False; ctx.verify_mode = ssl.CERT_NONE
             try:
-                urllib.request.urlopen(req, timeout=30, context=ctx); return True
+                return _go(ctx)
+            except urllib.error.HTTPError as e2:
+                try:
+                    detail = e2.read().decode()[:300]
+                except Exception:
+                    detail = ""
+                print(f"  send FAIL Resend HTTP {e2.code}: {detail}"); return False
             except Exception as e2:
-                print("  send FAIL", str(e2)[:100]); return False
-        print("  send FAIL", str(e)[:100]); return False
+                print("  send FAIL", str(e2)[:120]); return False
+        print("  send FAIL", str(e)[:120]); return False
     except Exception as e:
-        print("  send FAIL", str(e)[:100]); return False
+        print("  send FAIL", str(e)[:120]); return False
 
 
 def fetch_recipients(tier):
@@ -382,7 +396,10 @@ def main():
     if "--test" in args:
         to = args[args.index("--test") + 1]
         subj, body = built.get("free", ("", ""))
-        print(f"trimit test «{subj}» → {to}:", "OK" if send_email(to, subj + " — Clubul Financiar", body) else "EȘUAT")
+        ok = send_email(to, subj + " — Clubul Financiar", body)
+        print(f"trimit test «{subj}» → {to}:", "OK ✅" if ok else "EȘUAT ❌")
+        if not ok:
+            sys.exit(1)   # rularea devine ROȘIE dacă emailul nu a plecat (ca să nu pară fals „verde")
 
     # 3) --send TIER  → LIVE abonaților (necesită Supabase + Resend verificat).
     #    Cere și --confirm ca să nu trimită din greșeală. Opțional --limit N.
