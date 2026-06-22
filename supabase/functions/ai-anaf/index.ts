@@ -191,8 +191,8 @@ Deno.serve(async (req) => {
       const kb = await getKnowledge();
       const hits = retrieve(String(lastQ), kb, 6);
       if (hits.length) {
-        kbBlock = "\n\n=== SURSE VERIFICATE (din conținutul fact-checkat Clubul Financiar — TRATEAZĂ-LE CA ADEVĂR, citează cifrele de aici; dacă răspunsul NU se află în aceste surse și nu ești 100% sigur, spune clar să verifice pe anaf.ro sau cu un contabil — NU inventa cifre/articole) ===\n"
-          + hits.map((h: any, i: number) => `[${i + 1}] ${h.x}`).join("\n");
+        const head = `\n\n=== SURSE VERIFICATE (foloseste-le ca adevar, citeaza cifrele de aici; daca raspunsul nu e in surse si nu esti 100% sigur, spune sa verifice pe anaf.ro, NU inventa) ===\n`;
+        kbBlock = head + hits.map((h: any, i: number) => `[${i + 1}] ${h.x}`).join("\n");
       }
     } catch (_e) { /* fără RAG dacă pică */ }
     const sys = baseSystem + kbBlock + (context ? `\n\nContextul utilizatorului (cifrele lui, folosește-le): ${JSON.stringify(context)}` : "");
