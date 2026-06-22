@@ -4,11 +4,16 @@ pentru RAG-ul asistentului AI ANAF. Surse (toate deja fact-checkate, fără LLM)
 glosar + explicațiile testelor (5000) grupate pe lecție + constante 2026."""
 import json, glob, re, html, os
 
+def _norm(s):
+    s=(s or "").lower()
+    for a,b in [("ă","a"),("â","a"),("î","i"),("ș","s"),("ț","t"),("ş","s"),("ţ","t")]: s=s.replace(a,b)
+    return s
 def kw(text):
-    text=re.sub(r'<[^>]+>','',text or '').lower()
-    words=re.findall(r'[a-zăâîșț0-9]{4,}', text)
+    text=_norm(re.sub(r'<[^>]+>','',text or ''))
+    words=re.findall(r'[a-z0-9]{4,}', text)
     stop=set("este care cum sunt pentru dintr daca trebuie acest aceasta avea face poate fiecare conform articol lectie cele unei unui mai pe la in si cu de din ce".split())
-    return list(dict.fromkeys(w for w in words if w not in stop))[:18]
+    # radacini de 6 caractere (potrivire diacritic-insensitiv + forme de cuvant: taxare/taxarea -> taxare)
+    return list(dict.fromkeys(w[:6] for w in words if w not in stop))[:22]
 
 entries=[]
 

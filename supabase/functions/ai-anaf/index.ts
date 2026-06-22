@@ -54,17 +54,23 @@ async function getKnowledge(): Promise<any[]> {
   } catch (_e) { /* fallback */ }
   return _kbCache.data;
 }
-function tokenize(s: string): string[] {
-  return (String(s).toLowerCase().match(/[a-zăâîșț0-9]{4,}/g) || []);
+// normalizare diacritic-insensitivă (trebuie să fie IDENTICĂ cu _norm din _build_ai_knowledge.py)
+function norm(s: string): string {
+  return String(s).toLowerCase()
+    .replace(/[ăâ]/g, "a").replace(/î/g, "i").replace(/[șş]/g, "s").replace(/[țţ]/g, "t");
 }
-// scor simplu prin suprapunere de cuvinte-cheie; întoarce top-k intrări relevante
+// rădăcini de 6 caractere → potrivire diacritic-insensitiv + forme de cuvânt (taxare/taxarea)
+function tokenize(s: string): string[] {
+  return (norm(s).match(/[a-z0-9]{4,}/g) || []).map((w) => w.slice(0, 6));
+}
+// scor simplu prin suprapunere de rădăcini; întoarce top-k intrări relevante
 function retrieve(question: string, kb: any[], k = 6): any[] {
   const qt = new Set(tokenize(question));
   if (!qt.size || !kb.length) return [];
   const scored = kb.map((e) => {
     let sc = 0;
     for (const w of (e.k || [])) if (qt.has(w)) sc += 2;
-    const xl = String(e.x || "").toLowerCase();
+    const xl = norm(e.x || "");
     for (const w of qt) if (xl.includes(w)) sc += 1;
     return { e, sc };
   }).filter((x) => x.sc >= 3).sort((a, b) => b.sc - a.sc).slice(0, k);
