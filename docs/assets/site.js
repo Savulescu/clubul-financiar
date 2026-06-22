@@ -208,6 +208,7 @@
           } else done(false, "N-a mers, încearcă din nou.");
         } else {
           localStorage.setItem("cf-nl", JSON.stringify({ email: em, token: token })); showSubscribed(em);
+          try { sb.functions.invoke("newsletter-welcome", { body: { email: em } }); } catch(e){}  // email de bun-venit (best-effort)
         }
       }, function(){ done(false, "N-a mers, încearcă din nou."); });
       sb.auth.getSession().then(function(r){ ins(r && r.data && r.data.session && r.data.session.user && r.data.session.user.id); }, function(){ ins(null); });

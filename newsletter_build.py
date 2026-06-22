@@ -112,69 +112,96 @@ def h_section(label):
     return f'<tr><td style="padding:22px 28px 4px"><div style="font-family:{SERIF};font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:{GOLD};font-weight:bold">{html.escape(label)}</div></td></tr>'
 
 
-# ---------- FREE: Dimineața pe scurt (determinist) ----------
+# ---------- FREE: Dimineața pe scurt (determinist, full max) ----------
+def chg_html(chg):
+    chg = chg or 0
+    if abs(chg) < 0.005:
+        return f'<span style="color:{MUT};font-size:12px">0,0%</span>'
+    cls = POS if chg > 0 else NEG
+    arr = "▲" if chg > 0 else "▼"
+    return f'<span style="color:{cls};font-size:12px;font-weight:700">{arr}&nbsp;{lei(abs(chg),2)}%</span>'
+
+
+def macro_val(macro, *labels):
+    for g in macro.get("groups", []):
+        for it in g.get("items", []):
+            lab = it.get("label", "").lower()
+            if any(l.lower() in lab for l in labels) and it.get("value") is not None:
+                return it
+    return None
+
+
 def build_free():
     fx = load("fx.json"); news = load("news.json"); div = load("dividends.json"); macro = load("macro.json")
     byc = {r["cur"]: r for r in fx.get("rates", [])}
     items = (news.get("items") or [])[:5]
+    ditems = (div.get("items") or {})
 
-    # intro
-    eur = byc.get("EUR", {})
-    eur_chg = eur.get("chg", 0) or 0
-    trend = "stabil" if abs(eur_chg) < 0.1 else ("în creștere" if eur_chg > 0 else "în scădere")
-    intro = f"Leul e {trend} față de euro azi. Iată ce mișcă banii înainte să-ți începi ziua."
+    def srow(k, v, chg=None):
+        extra = f' {chg_html(chg)}' if chg is not None else ""
+        return (f'<tr><td style="font-family:{SANS};font-size:13px;color:{MUT};padding:7px 0;border-bottom:1px solid {LINE}">{k}</td>'
+                f'<td align="right" style="font-family:{SANS};font-size:14px;color:{INK};font-weight:700;padding:7px 0;border-bottom:1px solid {LINE}">{v}{extra}</td></tr>')
 
+    def table(rows):
+        return f'<tr><td style="padding:2px 28px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">{rows}</table></td></tr>'
+
+    # ---- intro ----
+    eur = byc.get("EUR", {}); eur_chg = eur.get("chg", 0) or 0
+    trend = "stabil" if abs(eur_chg) < 0.1 else ("în urcare" if eur_chg > 0 else "în scădere")
+    intro = (f"Leul e {trend} față de euro azi — 1 € = {lei(eur.get('rate'), 4)} lei. "
+             f"Iată tot ce-ți mișcă banii înainte să-ți începi ziua, în 5 minute.")
     inner = f'<tr><td style="padding:14px 28px 4px"><div style="font-family:{SANS};font-size:15px;color:{MUT};line-height:1.6">{html.escape(intro)}</div></td></tr>'
 
-    # 5 puncte
+    # ---- cele 5 lucruri ----
     inner += h_section("Cele 5 lucruri de azi")
     rows = ""
     for i, it in enumerate(items, 1):
-        t = html.escape((it.get("titlu") or "")[:140])
-        fapt = html.escape((it.get("fapt") or "")[:200])
-        src = html.escape(it.get("src") or "")
-        link = html.escape(it.get("link") or SITE)
+        t = html.escape((it.get("titlu") or "")[:140]); fapt = html.escape((it.get("fapt") or "")[:200])
+        src = html.escape(it.get("src") or ""); link = html.escape(it.get("link") or SITE)
         rows += f'''<tr><td style="padding:11px 0;border-bottom:1px solid {LINE}" valign="top">
           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
             <td valign="top" style="font-family:{SERIF};font-size:18px;color:{GOLD};font-weight:bold;padding-right:12px;width:24px">{i}</td>
             <td><div style="font-family:{SANS};font-size:14px;color:{INK};font-weight:700;line-height:1.4">{t}</div>
             <div style="font-family:{SANS};font-size:13px;color:{MUT};line-height:1.55;margin-top:3px">{fapt} <a href="{link}" style="color:{GOLD};text-decoration:none">{src} →</a></div></td>
           </tr></table></td></tr>'''
-    inner += f'<tr><td style="padding:2px 28px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">{rows}</table></td></tr>'
+    inner += table(rows)
 
-    # snapshot
-    def macro_val(label):
-        for g in macro.get("groups", []):
-            for it in g.get("items", []):
-                if label.lower() in it.get("label", "").lower() and it.get("value") is not None:
-                    return it
-        return None
-    ecb = macro_val("ECB")
-    usd = byc.get("USD", {}); xau = byc.get("XAU", {})
-    # dividend lider (randament maxim cu sens, din top companii cunoscute)
-    big = ["H2O", "SNN", "SNP", "TGN", "TLV", "SNG", "BRD"]
-    ditems = (div.get("items") or {})
-    divlead = None
-    for s in big:
-        if s in ditems and ditems[s].get("y"):
-            divlead = (ditems[s].get("n"), ditems[s]["y"]); break
+    # ---- cursul BNR (mai multe valute) ----
+    inner += h_section("Cursul oficial BNR")
+    fxrows = ""
+    for cur, label in [("EUR", "Euro"), ("USD", "Dolar american"), ("GBP", "Liră sterlină"),
+                       ("CHF", "Franc elvețian"), ("XAU", "Aur (1 gram)")]:
+        r = byc.get(cur)
+        if r:
+            dec = 2 if (r.get("rate") or 0) > 100 else 4
+            fxrows += srow(label, lei(r.get("rate"), dec) + " lei", r.get("chg"))
+    inner += table(fxrows)
 
-    def snap_row(k, v):
-        return f'<tr><td style="font-family:{SANS};font-size:13px;color:{MUT};padding:7px 0;border-bottom:1px solid {LINE}">{k}</td><td align="right" style="font-family:{SANS};font-size:14px;color:{INK};font-weight:700;padding:7px 0;border-bottom:1px solid {LINE}">{v}</td></tr>'
-    snap = ""
-    if eur: snap += snap_row("EUR / RON", lei(eur.get("rate"), 4) + " lei")
-    if usd: snap += snap_row("USD / RON", lei(usd.get("rate"), 4) + " lei")
-    if ecb: snap += snap_row("Dobânda ECB", lei(ecb.get("value"), 2) + "%")
-    if xau: snap += snap_row("Aur (1 g)", lei(xau.get("rate"), 2) + " lei")
-    if divlead: snap += snap_row(f"Top dividend · {html.escape(divlead[0])}", lei(divlead[1], 2) + "% randament")
-    inner += h_section("Snapshot piață")
-    inner += f'<tr><td style="padding:2px 28px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">{snap}</table></td></tr>'
+    # ---- indicatori macro ----
+    ecb = macro_val(macro, "ECB", "BCE"); fed = macro_val(macro, "Fed"); infl = macro_val(macro, "inflați", "IPC")
+    mrows = ""
+    if ecb: mrows += srow("Dobânda BCE", lei(ecb.get("value"), 2) + "%")
+    if fed: mrows += srow("Dobânda Fed (SUA)", lei(fed.get("value"), 2) + "%")
+    if infl: mrows += srow("Inflație", lei(infl.get("value"), 1) + "%")
+    if mrows:
+        inner += h_section("Indicatori")
+        inner += table(mrows)
 
-    # conceptul zilei (din glosar, rotație pe zi)
+    # ---- dividende de urmărit (blue-chips) ----
+    big = ["H2O", "SNN", "SNP", "TGN", "TLV", "SNG", "BRD", "EL", "TEL", "DIGI"]
+    drows = ""
+    for s in sorted([x for x in big if x in ditems and ditems[x].get("y")], key=lambda x: -ditems[x]["y"])[:4]:
+        v = ditems[s]
+        drows += srow(html.escape(v.get("n", s)), f'{lei(v["y"], 2)}% randament')
+    if drows:
+        inner += h_section("Dividende de urmărit · BVB")
+        inner += table(drows)
+        inner += f'<tr><td style="padding:0 28px"><div style="font-family:{SANS};font-size:11px;color:{MUT}">Randament istoric, orientativ. <a href="{SITE}/ultra/terminal.html" style="color:{GOLD};text-decoration:none">Vezi toate companiile →</a></div></td></tr>'
+
+    # ---- conceptul zilei (glosar, rotație pe zi) ----
     gl = glosar()
     if gl:
-        idx = datetime.date.today().toordinal() % len(gl)
-        term = gl[idx]
+        term = gl[datetime.date.today().toordinal() % len(gl)]
         inner += h_section("Conceptul zilei")
         inner += f'''<tr><td style="padding:2px 28px 4px">
           <div style="background:{PANEL};border:1px solid {LINE};border-left:3px solid {GOLD};border-radius:12px;padding:14px 16px">
@@ -183,8 +210,22 @@ def build_free():
             <a href="{SITE}/glosar.html" style="font-family:{SANS};font-size:12px;color:{GOLD};text-decoration:none;display:inline-block;margin-top:8px">Vezi tot glosarul (807 termeni) →</a>
           </div></td></tr>'''
 
-    # CTA soft text
-    inner += f'<tr><td style="padding:18px 28px 2px"><div style="font-family:{SANS};font-size:14px;color:{MUT};line-height:1.6">Vrei și <i>cum</i> să gândești despre asta, nu doar <i>ce</i> s-a întâmplat? Newsletterul Premium îți dă analiza, nu doar faptele.</div></td></tr>'
+    # ---- sfatul zilei (rotație) ----
+    tips = [
+        "Plătește-te primul: pune economiile deoparte chiar în ziua de salariu, nu la final de lună.",
+        "Fondul de urgență (3–6 luni de cheltuieli) e prima investiție — abia apoi bursa.",
+        "Compară DAE, nu dobânda, când iei un credit. DAE include toate comisioanele.",
+        "Un ETF pe un indice larg bate, pe termen lung, majoritatea fondurilor active — cu costuri mai mici.",
+        "Inflația îți mănâncă banii din cont. Chiar și un depozit e mai bun decât cash sub saltea.",
+        "Verifică-ți averea netă o dată pe lună: active minus datorii. E busola ta financiară.",
+        "Înainte de orice cumpărătură mare, așteaptă 48 de ore. Jumătate din dorințe dispar.",
+    ]
+    tip = tips[datetime.date.today().toordinal() % len(tips)]
+    inner += h_section("Sfatul zilei")
+    inner += f'<tr><td style="padding:2px 28px 6px"><div style="font-family:{SANS};font-size:14px;color:{INK};line-height:1.6">💡 {html.escape(tip)}</div></td></tr>'
+
+    # ---- CTA soft ----
+    inner += f'<tr><td style="padding:16px 28px 2px"><div style="font-family:{SANS};font-size:14px;color:{MUT};line-height:1.6">Vrei și <i>cum</i> să gândești despre asta, nu doar <i>ce</i> s-a întâmplat? Newsletterul Premium îți dă analiza și vocea, nu doar faptele.</div></td></tr>'
 
     return shell("Dimineața pe scurt — Clubul Financiar", "Dimineața pe scurt", inner)
 
