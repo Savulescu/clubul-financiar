@@ -10,7 +10,7 @@ ART = os.path.join(ROOT, "articole")
 SRC = os.path.join(ART, "_src")
 RECORDS = "/Users/savulescucristian/clubul-financiar/_records.json"
 GLOS_SRC = "/private/tmp/claude-501/-Users-savulescucristian/2d8bd220-1ab9-4311-b6f9-e180142ffdfa/tasks/wu28oa28b.output"
-V = "28"  # cache bust
+V = "29"  # cache bust
 BUILD_DATE = "2026-06-19"  # dată build pentru date noi (articolele existente păstrează data lor)
 
 CATS = [
