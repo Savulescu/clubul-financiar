@@ -211,7 +211,7 @@
   // ---- randare board ----
   function renderFX(){
     if(!FX) return;
-    $("fxDate").textContent = FX.date;
+    $("fxDate").textContent = "Curs oficial din " + (CF.dataRO ? CF.dataRO(FX.date) : FX.date);
     $("fxCount").textContent = FX.count;
     // top-movers azi (cea mai mare mișcare în plus/minus)
     var sorted = FX.rates.slice().sort(function(a,b){ return b.chg-a.chg; });
