@@ -1,0 +1,53 @@
+name: Newsletter (preview + test)
+
+# MANUAL (workflow_dispatch) — NU trimite automat la abonați.
+# Generează preview-urile (cu conținut de autor real, chei LLM) și le comite.
+# Dacă dai un test_email, trimite varianta Free DOAR la acea adresă.
+on:
+  workflow_dispatch:
+    inputs:
+      test_email:
+        description: "Email pentru un test (lasă gol = doar preview, fără trimitere)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  newsletter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generează preview-uri (+ test opțional)
+        env:
+          RESEND_API_KEY:    ${{ secrets.RESEND_API_KEY }}
+          NEWSLETTER_FROM:   ${{ secrets.REMINDER_FROM }}
+          GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
+          TOGETHER_API_KEY:  ${{ secrets.TOGETHER_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
+          SAMBANOVA_API_KEY: ${{ secrets.SAMBANOVA_API_KEY }}
+          FIREWORKS_API_KEY: ${{ secrets.FIREWORKS_API_KEY }}
+        run: |
+          if [ -n "${{ github.event.inputs.test_email }}" ]; then
+            python newsletter_build.py --test "${{ github.event.inputs.test_email }}"
+          else
+            python newsletter_build.py
+          fi
+      - name: Commit preview-uri dacă s-au schimbat
+        run: |
+          git config user.name "Clubul Financiar"
+          git config user.email "clubulfinanciar@gmail.com"
+          git add docs/newsletter/preview/*.html
+          if git diff --staged --quiet; then echo "preview neschimbat"; exit 0; fi
+          git commit -m "Newsletter: preview actualizat ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3 4 5 6; do
+            if git push origin HEAD:main; then echo "pushed"; exit 0; fi
+            git fetch origin main; git rebase -X theirs origin/main || git rebase --abort; sleep $((i*3))
+          done
