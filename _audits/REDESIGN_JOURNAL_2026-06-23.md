@@ -172,3 +172,9 @@ consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
   (privacy, terms, reset, dezabonare) = impact mic, TODO. ⚠️ hairline verde/albastru sub nav pe
   nav non-ultra = pas de consistență nav (schimb _shell_nav.html → "nav ultra" + navurile hand-authored).
   NEXT: pas consistență nav + a 2-a iterație homepage + pricing psychology premium.
+
+- **[tick 6 — consistență nav]** Hairline `.nav::after` + underline + dot-glow erau verde/albastru
+  (--grad-tri/--grad-cool); aurite global în upgrade.css. site.js nav dinamic → "nav ultra".
+  Verificat hairline auriu pe glosar+articol. ⚠️ TODO găsit: nav AGLOMERAT la 1440 (8 link-uri →
+  „Premium"+brand pe 2 rânduri) = densitate meniu, ține de structura IA (nu schimb autonom).
+  ⚠️ TODO: bump cache ?v= pe CSS/JS înainte de merge live (altfel browserele servesc stale).
