@@ -211,3 +211,8 @@ consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
   • HANDOFF doc: _audits/REDESIGN_HANDOFF_2026-06-23.md.
   STARE: redesign MERGE-READY. Rămas opțional (ROI mic): pagini legal premium, densitate nav IA,
   strat date-live RO. Task #4 (propagare) + #6 (cache) DONE.
+
+- **[tick 9 — polish]** Stat count-up pe homepage la scroll-into-view (0→1.000+/11/17/100%, RO fmt,
+  reduced-motion safe, IntersectionObserver+unobserve). Verificat mid 863+/9/15/86% → final corect.
+  compound.js?v=2. STARE: designul e complet+rafinat; țin disciplina „spend boldness in ONE place"
+  (hero/instrument) — nu mai încarc cu micro-features. Adaug doar la îmbunătățiri reale / direcție.
