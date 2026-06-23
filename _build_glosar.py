@@ -86,7 +86,7 @@ page = f'''<!DOCTYPE html><html lang="ro"><head>
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"DefinedTermSet","name":"Glosar financiar Clubul Financiar","inLanguage":"ro-RO","url":"https://clubulfinanciar.ro/glosar.html"}}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=23">
+<link rel="stylesheet" href="/assets/style.css?v=31">
 <link rel="stylesheet" href="/assets/upgrade.css?v=30">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=3"></head><body class="u-page">{NAV_HTML}
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
