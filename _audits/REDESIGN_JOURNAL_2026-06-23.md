@@ -178,3 +178,11 @@ consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
   Verificat hairline auriu pe glosar+articol. ⚠️ TODO găsit: nav AGLOMERAT la 1440 (8 link-uri →
   „Premium"+brand pe 2 rânduri) = densitate meniu, ține de structura IA (nu schimb autonom).
   ⚠️ TODO: bump cache ?v= pe CSS/JS înainte de merge live (altfel browserele servesc stale).
+
+- **[tick 6b — COERENȚĂ ATINSĂ ✓]** Nav layout fix (brand nowrap + nav-links pe un rând la 1280+).
+  Overview 9 pagini (_audits/redesign_shots/05_current_overview.png): index/premium/educatie/
+  calculatoare/glosar/contact/despre/instrumente/stiri = TOATE acum același limbaj premium
+  auriu/navy/crem + tipografie unită + hairline auriu. Split-brain REZOLVAT pe conținut.
+  Task #4 (propagare) ~90%: rămas doar legal/utilitar (privacy/terms/reset/dezabonare, impact mic).
+  NEXT (task #5): pricing psychology premium (ancoră anuală + decoy, research) = valoare business;
+  a 2-a iterație homepage; legal pages; investigat hang masterclass; FINAL: bump ?v= + doc before/after.
