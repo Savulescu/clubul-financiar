@@ -80,7 +80,7 @@ def shell(title, eyebrow, inner, accent_cta=True):
       <tr><td style="padding:8px 28px 30px">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
           <td align="center" style="border-radius:12px;background:linear-gradient(135deg,{GOLD},{GOLD2})">
-            <a href="{SITE}/premium.html" style="display:inline-block;padding:13px 26px;font-family:{SANS};font-weight:800;font-size:14px;color:#1a1304;text-decoration:none">Vezi planurile →</a>
+            <a href="{SITE}/premium" style="display:inline-block;padding:13px 26px;font-family:{SANS};font-weight:800;font-size:14px;color:#1a1304;text-decoration:none">Vezi planurile →</a>
           </td></tr></table>
       </td></tr>''' if accent_cta else ""
     return f'''<!DOCTYPE html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -100,7 +100,7 @@ def shell(title, eyebrow, inner, accent_cta=True):
       <div style="font-family:{SANS};font-size:11px;color:{MUT};line-height:1.6">
         Primești acest email pentru că ești abonat la Clubul Financiar. Conținut educativ, nu sfat de investiții.<br>
         <a href="{SITE}" style="color:{GOLD};text-decoration:none">clubulfinanciar.ro</a> ·
-        <a href="{SITE}/account.html" style="color:{MUT}">Preferințe</a> ·
+        <a href="{SITE}/account" style="color:{MUT}">Preferințe</a> ·
         <a href="%unsubscribe_url%" style="color:{MUT}">Dezabonare</a>
       </div>
     </td></tr>
@@ -196,7 +196,7 @@ def build_free():
     if drows:
         inner += h_section("Dividende de urmărit · BVB")
         inner += table(drows)
-        inner += f'<tr><td style="padding:0 28px"><div style="font-family:{SANS};font-size:11px;color:{MUT}">Randament istoric, orientativ. <a href="{SITE}/ultra/terminal.html" style="color:{GOLD};text-decoration:none">Vezi toate companiile →</a></div></td></tr>'
+        inner += f'<tr><td style="padding:0 28px"><div style="font-family:{SANS};font-size:11px;color:{MUT}">Randament istoric, orientativ. <a href="{SITE}/ultra/terminal" style="color:{GOLD};text-decoration:none">Vezi toate companiile →</a></div></td></tr>'
 
     # ---- conceptul zilei (glosar, rotație pe zi) ----
     gl = glosar()
@@ -207,7 +207,7 @@ def build_free():
           <div style="background:{PANEL};border:1px solid {LINE};border-left:3px solid {GOLD};border-radius:12px;padding:14px 16px">
             <div style="font-family:{SERIF};font-size:16px;color:{GOLD};font-weight:bold">{html.escape(term["term"])}</div>
             <div style="font-family:{SANS};font-size:13px;color:{INK};line-height:1.6;margin-top:5px">{html.escape(term["definition"])}</div>
-            <a href="{SITE}/glosar.html" style="font-family:{SANS};font-size:12px;color:{GOLD};text-decoration:none;display:inline-block;margin-top:8px">Vezi tot glosarul (807 termeni) →</a>
+            <a href="{SITE}/glosar" style="font-family:{SANS};font-size:12px;color:{GOLD};text-decoration:none;display:inline-block;margin-top:8px">Vezi tot glosarul (807 termeni) →</a>
           </div></td></tr>'''
 
     # ---- sfatul zilei (rotație) ----
@@ -370,7 +370,7 @@ def send_tier(tier, limit=None):
         em = r.get("email"); tok = r.get("unsub_token", "")
         if not em:
             continue
-        unsub = f"{SITE}/dezabonare.html?t={tok}"
+        unsub = f"{SITE}/dezabonare?t={tok}"
         personal = html_body.replace("%unsubscribe_url%", unsub)
         if send_email(em, subj + " — Clubul Financiar", personal):
             sent += 1

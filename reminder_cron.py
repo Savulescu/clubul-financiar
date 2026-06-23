@@ -74,7 +74,7 @@ def monthly_msg(tool, logs):
         return None  # deja logat luna asta — nu mai bate la cap
     return (f"📊 <b>{label}</b>\n\nNu ți-ai logat datele pentru luna asta ({PERIOD}). "
             f"Intră 1 minut și actualizează cifrele ca să rămâi la zi cu plafoanele și provizionul de taxe.\n\n"
-            f"👉 https://clubulfinanciar.ro/fiscal.html")
+            f"👉 https://clubulfinanciar.ro/fiscal")
 
 
 def deadline_msg(rem):
@@ -89,7 +89,7 @@ def deadline_msg(rem):
     if days in (30, 14, 7, 3, 1, 0):
         when = "AZI" if days == 0 else f"în {days} zile"
         return (f"⏰ <b>Termen fiscal {when}</b>\n\n{rem.get('note') or 'Ai un termen fiscal apropiat.'}\n"
-                f"Data: {dd.strftime('%d.%m.%Y')}\n\n👉 https://clubulfinanciar.ro/fiscal.html")
+                f"Data: {dd.strftime('%d.%m.%Y')}\n\n👉 https://clubulfinanciar.ro/fiscal")
     return None
 
 

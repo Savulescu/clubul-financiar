@@ -251,8 +251,8 @@ def main():
 <title>Știri economice externe — ce înseamnă pentru tine | Clubul Financiar</title>
 <meta name="description" content="Cele mai importante știri economice mondiale, explicate pe înțelesul tău: ce înseamnă fiecare pentru banii, rata și economiile tale. Surse citate.">
 <meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
-<link rel="canonical" href="https://clubulfinanciar.ro/stiri-externe.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO"><meta property="og:title" content="Știri economice externe — ce înseamnă pentru tine"><meta property="og:description" content="Știri economice mondiale explicate pentru banii tăi."><meta property="og:url" content="https://clubulfinanciar.ro/stiri-externe.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<link rel="canonical" href="https://clubulfinanciar.ro/stiri-externe"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO"><meta property="og:title" content="Știri economice externe — ce înseamnă pentru tine"><meta property="og:description" content="Știri economice mondiale explicate pentru banii tăi."><meta property="og:url" content="https://clubulfinanciar.ro/stiri-externe"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Știri economice externe — ce înseamnă pentru tine"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
@@ -279,7 +279,7 @@ def main():
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri externe · actualizat {today}</p><h1 class="title">Economia lumii, pe înțelesul tău</h1>
 <p class="lead" style="margin-inline:auto">Cele mai importante știri economice mondiale, explicate simplu: <strong>ce înseamnă fiecare pentru banii tăi</strong>. Comentariu original, cu sursa citată.</p>
-<div class="news-tabs" style="justify-content:center;margin-top:14px"><a class="news-tab" href="/stiri.html">🇷🇴 Știri România</a><a class="news-tab active" href="/stiri-externe.html"><span>🌍 Știri externe</span></a></div></div></section>
+<div class="news-tabs" style="justify-content:center;margin-top:14px"><a class="news-tab" href="/stiri">🇷🇴 Știri România</a><a class="news-tab active" href="/stiri-externe"><span>🌍 Știri externe</span></a></div></div></section>
 <section class="section"><div class="container">
 <div class="news-controls">
 <div class="news-grp"><span class="news-lbl">Interval</span>

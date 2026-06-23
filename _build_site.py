@@ -66,25 +66,25 @@ def ro_date(iso):
 PAGE_TMPL = '''<!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — Clubul Financiar</title><meta name="description" content="{desc}"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
-<link rel="canonical" href="https://clubulfinanciar.ro/articole/{slug}.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://clubulfinanciar.ro/articole/{slug}"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="https://clubulfinanciar.ro/articole/{slug}.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="https://clubulfinanciar.ro/articole/{slug}"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script type="application/ld+json">{ldjson}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-preview.css?v=2"><link rel="stylesheet" href="/assets/cf-article.css?v=1"></head><body>{nav}<main class="u-page"><article class="article"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#{cat}">{catname}</a> · {min} min citire · Actualizat {date_disp}</p><h1>{title}</h1>{body}<div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article></main>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-preview.css?v=2"><link rel="stylesheet" href="/assets/cf-article.css?v=1"></head><body>{nav}<main class="u-page"><article class="article"><p class="meta"><a href="/educatie">Educație</a> · <a href="/educatie#{cat}">{catname}</a> · {min} min citire · Actualizat {date_disp}</p><h1>{title}</h1>{body}<div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie">← Toate articolele</a></p></article></main>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
 
 def build_page(slug, title, desc, cat, body):
     mins = reading_minutes(body)
     ld = json.dumps({
         "@context":"https://schema.org","@type":"Article","headline":title,"description":desc,
         "inLanguage":"ro-RO","datePublished":BUILD_DATE,"dateModified":BUILD_DATE,
-        "author":{"@type":"Organization","name":"Clubul Financiar","url":"https://clubulfinanciar.ro/despre.html"},
+        "author":{"@type":"Organization","name":"Clubul Financiar","url":"https://clubulfinanciar.ro/despre"},
         "image":"https://clubulfinanciar.ro/og-image.jpg",
         "publisher":{"@type":"Organization","name":"Clubul Financiar",
         "logo":{"@type":"ImageObject","url":"https://clubulfinanciar.ro/icon-512.png"}},
-        "mainEntityOfPage":f"https://clubulfinanciar.ro/articole/{slug}.html"}, ensure_ascii=False)
+        "mainEntityOfPage":f"https://clubulfinanciar.ro/articole/{slug}"}, ensure_ascii=False)
     return PAGE_TMPL.format(title=esc(title), desc=esc(desc), slug=slug, ldjson=ld,
         cat=cat, catname=esc(CATNAME.get(cat, cat)), min=mins, body=body, v=V,
         date_disp=ro_date(BUILD_DATE), nav=NAV_HTML, footer=FOOTER_HTML)
@@ -118,7 +118,7 @@ def extract(path):
     t = open(path, encoding="utf-8").read()
     title = re.search(r'<meta property="og:title" content="([^"]*)"', t)
     desc = re.search(r'<meta name="description" content="([^"]*)"', t)
-    cat = re.search(r'educatie\.html#([a-z]+)"', t)
+    cat = re.search(r'educatie(?:\.html)?#([a-z]+)"', t)
     if not (title and cat):
         return None
     return {"slug": os.path.basename(path)[:-5], "title": html.unescape(title.group(1)),
@@ -142,7 +142,7 @@ for cat in CATORDER:
     items = bycat.get(cat, [])
     if not items: continue
     cards = "".join(
-        f'<a class="card reveal" href="/articole/{a["slug"]}.html"><h3>{esc(a["title"])}</h3><p>{esc(a["desc"])}</p><span class="more">Citește</span></a>'
+        f'<a class="card reveal" href="/articole/{a["slug"]}"><h3>{esc(a["title"])}</h3><p>{esc(a["desc"])}</p><span class="more">Citește</span></a>'
         for a in items)
     sections.append(
         f'<h2 class="title cat-h" id="{cat}" style="margin-top:44px">{esc(CATNAME[cat])} <span style="color:var(--muted);font-weight:400;font-size:1rem">({len(items)})</span></h2><div class="grid grid-3 cat-grid">{cards}</div>')
@@ -150,8 +150,8 @@ quicknav = "".join(f'<a href="#{cat}" class="pill">{esc(CATNAME[cat])}</a>' for 
 
 EDU_HEAD = '''<!DOCTYPE html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Educație financiară — TOTAL articole și ghiduri — Clubul Financiar</title><meta name="description" content="Cea mai completă bibliotecă RO de educație financiară: TOTAL articole despre buget, economii, investiții, credite, taxe, pensii și FIRE."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
-<link rel="canonical" href="https://clubulfinanciar.ro/educatie.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO"><meta property="og:title" content="Educație financiară — articole și ghiduri"><meta property="og:description" content="Cea mai completă bibliotecă RO de educație financiară."><meta property="og:url" content="https://clubulfinanciar.ro/educatie.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<link rel="canonical" href="https://clubulfinanciar.ro/educatie"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO"><meta property="og:title" content="Educație financiară — articole și ghiduri"><meta property="og:description" content="Cea mai completă bibliotecă RO de educație financiară."><meta property="og:url" content="https://clubulfinanciar.ro/educatie"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Educație financiară — articole și ghiduri"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -187,7 +187,7 @@ print("educatie.html rebuild OK")
 idx = []
 for a in arts:
     idx.append({"s": a["slug"], "t": a["title"], "d": a["desc"], "c": a["cat"],
-                "cn": CATNAME.get(a["cat"], a["cat"]), "u": f"/articole/{a['slug']}.html", "k": "a"})
+                "cn": CATNAME.get(a["cat"], a["cat"]), "u": f"/articole/{a['slug']}", "k": "a"})
 
 # glosar
 try:
@@ -198,22 +198,22 @@ try:
         term = (t.get("term") or "").strip(); deff = (t.get("definition") or "").strip()
         if not term or fold(term) in seen: continue
         seen.add(fold(term))
-        idx.append({"t": term, "d": clip(deff, 160), "u": "/glosar.html#" + slugify(term), "k": "g"})
+        idx.append({"t": term, "d": clip(deff, 160), "u": "/glosar#" + slugify(term), "k": "g"})
 except Exception as e:
     print("glosar search skip:", e)
 
 CALCS = [
-    ("Calculator dobândă compusă", "Cât cresc banii tăi în timp", "/calculatoare/dobanda-compusa.html"),
-    ("Calculator rată credit", "Rata lunară, total și dobândă", "/calculatoare/credit.html"),
-    ("Calculator salariu net", "Din brut în net (CAS, CASS, impozit)", "/calculatoare/salariu-net.html"),
-    ("Calculator economii", "Cât pui lunar pentru o țintă", "/calculatoare/economii.html"),
-    ("Calculator inflație", "Puterea de cumpărare în timp", "/calculatoare/inflatie.html"),
-    ("Calculator FIRE", "Suma pentru independență financiară", "/calculatoare/fire.html"),
-    ("Calculator grad de îndatorare", "Cât din venit merge pe rate", "/calculatoare/grad-indatorare.html"),
-    ("Calculator obiectiv de economisire", "În cât timp atingi ținta", "/calculatoare/obiectiv-economisire.html"),
-    ("Calculator chirie vs cumpărare", "Ce e mai avantajos pe termen lung", "/calculatoare/chirie-vs-cumparare.html"),
-    ("Calculator pensie", "Cât strângi până la pensionare", "/calculatoare/pensie.html"),
-    ("Calculator impozit investiții", "Pe câștiguri și dividende", "/calculatoare/impozit-investitii.html"),
+    ("Calculator dobândă compusă", "Cât cresc banii tăi în timp", "/calculatoare/dobanda-compusa"),
+    ("Calculator rată credit", "Rata lunară, total și dobândă", "/calculatoare/credit"),
+    ("Calculator salariu net", "Din brut în net (CAS, CASS, impozit)", "/calculatoare/salariu-net"),
+    ("Calculator economii", "Cât pui lunar pentru o țintă", "/calculatoare/economii"),
+    ("Calculator inflație", "Puterea de cumpărare în timp", "/calculatoare/inflatie"),
+    ("Calculator FIRE", "Suma pentru independență financiară", "/calculatoare/fire"),
+    ("Calculator grad de îndatorare", "Cât din venit merge pe rate", "/calculatoare/grad-indatorare"),
+    ("Calculator obiectiv de economisire", "În cât timp atingi ținta", "/calculatoare/obiectiv-economisire"),
+    ("Calculator chirie vs cumpărare", "Ce e mai avantajos pe termen lung", "/calculatoare/chirie-vs-cumparare"),
+    ("Calculator pensie", "Cât strângi până la pensionare", "/calculatoare/pensie"),
+    ("Calculator impozit investiții", "Pe câștiguri și dividende", "/calculatoare/impozit-investitii"),
 ]
 for t, d, u in CALCS:
     idx.append({"t": t, "d": d, "u": u, "k": "calc"})
@@ -222,11 +222,11 @@ json.dump(idx, open(os.path.join(ROOT, "search-index.json"), "w", encoding="utf-
 print(f"search-index.json OK ({len(idx)} intrări)")
 
 # ---------- 5. sitemap.xml ----------
-PAGES = ["", "incepe-aici.html", "educatie.html", "teste.html", "glosar.html", "stiri.html", "investitii.html",
-         "credite.html", "calculatoare.html", "cursuri.html", "premium.html", "despre.html", "contact.html",
-         "privacy.html", "terms.html"]
+PAGES = ["", "incepe-aici", "educatie", "teste", "glosar", "stiri", "investitii",
+         "credite", "calculatoare", "cursuri", "premium", "despre", "contact",
+         "privacy", "terms"]
 CALC_PAGES = [u.lstrip("/") for _, _, u in CALCS]
-COURSE_PAGES = ["cursuri/" + os.path.basename(p) for p in glob.glob(os.path.join(ROOT, "cursuri", "*.html"))]
+COURSE_PAGES = ["cursuri/" + os.path.basename(p)[:-5] for p in glob.glob(os.path.join(ROOT, "cursuri", "*.html"))]
 urls = []
 def add(loc, pr="0.6"):
     urls.append(f"<url><loc>https://clubulfinanciar.ro/{loc}</loc><lastmod>{BUILD_DATE}</lastmod><changefreq>weekly</changefreq><priority>{pr}</priority></url>")
@@ -234,7 +234,7 @@ add("", "1.0")
 for p in PAGES[1:]: add(p, "0.8")
 for p in CALC_PAGES: add(p, "0.7")
 for p in COURSE_PAGES: add(p, "0.6")
-for a in arts: add(f"articole/{a['slug']}.html", "0.6")
+for a in arts: add(f"articole/{a['slug']}", "0.6")
 sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + "\n</urlset>\n"
 open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(sitemap)
 print(f"sitemap.xml OK ({len(urls)} url-uri)")

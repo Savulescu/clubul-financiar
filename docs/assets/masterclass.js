@@ -29,7 +29,7 @@
     const gate = document.createElement("div"); gate.className = "premium-gate";
     gate.innerHTML = '<div class="pg-fade"></div><div class="pg-card"><span class="cf-premium-badge">Premium</span><h2>Restul lecției e în Premium</h2>' +
       (heads.length ? '<p style="color:var(--muted)">Ce mai afli în această lecție:</p><ul class="pg-list">' + heads.slice(0, 6).map(h => '<li>' + esc(h) + '</li>').join("") + '</ul>' : '<p style="color:var(--muted)">Deblochează lecția completă + testul + tot Masterclass-ul.</p>') +
-      '<p class="price-line">Tot Masterclass Bursă + cele 1000 de lecții + teste — 49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login.html" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
+      '<p class="price-line">Tot Masterclass Bursă + cele 1000 de lecții + teste — 49 lei/lună</p><a class="btn btn-primary" href="/premium">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
     disc.parentNode.insertBefore(gate, disc);
     disc.parentNode.insertBefore(rest, disc);
     art.classList.add("cf-locked");
@@ -106,7 +106,7 @@
       function fin() {
         const pct = Math.round(correct / qs.length * 100);
         run.innerHTML = '<div class="lq-big">' + pct + '%</div><p style="color:var(--muted)">' + correct + ' din ' + qs.length + ' corecte.' + (prem ? ' +' + (correct * 10) + ' XP' : '') + '</p>' +
-          (prem ? '' : '<p style="font-size:.9rem;margin-top:8px">Cu <a href="/premium.html" style="color:var(--emerald-link);font-weight:700">Premium</a> aduni XP și primești certificate.</p>') +
+          (prem ? '' : '<p style="font-size:.9rem;margin-top:8px">Cu <a href="/premium" style="color:var(--emerald-link);font-weight:700">Premium</a> aduni XP și primești certificate.</p>') +
           '<button class="btn btn-ghost" id="lqAgain" style="margin-top:12px">Încă o dată</button>';
         document.getElementById("lqAgain").onclick = () => runQuiz(qs);
       }
@@ -117,12 +117,12 @@
   // ---------- navigare prev/next (din data-attrs) — după test, înainte de disclaimer ----------
   const dp = art.getAttribute("data-prev"), dpt = art.getAttribute("data-prev-title");
   const dn = art.getAttribute("data-next"), dnt = art.getAttribute("data-next-title");
-  const hub = art.getAttribute("data-hub") || "/masterclass.html";
+  const hub = art.getAttribute("data-hub") || "/masterclass";
   const nav = document.createElement("nav"); nav.className = "lesson-nav";
   nav.innerHTML =
-    (dp ? '<a class="lnav prev" href="/masterclass/' + enc(dp) + '.html"><span>← Lecția anterioară</span><b>' + esc(dpt || "") + '</b></a>'
+    (dp ? '<a class="lnav prev" href="/masterclass/' + enc(dp) + '"><span>← Lecția anterioară</span><b>' + esc(dpt || "") + '</b></a>'
         : '<a class="lnav prev" href="' + hub + '"><span>← Înapoi la</span><b>Masterclass Bursă</b></a>') +
-    (dn ? '<a class="lnav next" href="/masterclass/' + enc(dn) + '.html"><span>Lecția următoare →</span><b>' + esc(dnt || "") + '</b></a>'
+    (dn ? '<a class="lnav next" href="/masterclass/' + enc(dn) + '"><span>Lecția următoare →</span><b>' + esc(dnt || "") + '</b></a>'
         : '<a class="lnav next" href="' + hub + '"><span>Toate lecțiile →</span><b>Masterclass Bursă</b></a>');
   if (disc) disc.parentNode.insertBefore(nav, disc); else art.appendChild(nav);
 

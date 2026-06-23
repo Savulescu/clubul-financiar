@@ -10,14 +10,14 @@
     c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   const NAV = [
-    ["Prezentare", "/incepe-aici.html"],
-    ["Învață", "/educatie.html"],
-    ["Masterclass", "/masterclass.html"],
-    ["Știri", "/stiri.html"],
-    ["Calculatoare", "/calculatoare.html"],
-    ["Instrumente", "/instrumente.html"],
-    ["Premium", "/premium.html"],
-    ["Feedback", "/feedback.html"],
+    ["Prezentare", "/incepe-aici"],
+    ["Învață", "/educatie"],
+    ["Masterclass", "/masterclass"],
+    ["Știri", "/stiri"],
+    ["Calculatoare", "/calculatoare"],
+    ["Instrumente", "/instrumente"],
+    ["Premium", "/premium"],
+    ["Feedback", "/feedback"],
   ];
   const SOC = [
     ["Instagram","https://www.instagram.com/clubulfinanciar"],["TikTok","https://www.tiktok.com/@clubulfinanciar"],
@@ -50,7 +50,7 @@
   const nav = document.createElement("header");
   nav.className = "nav ultra";
   nav.innerHTML = `<div class="container nav-in">
-    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <a class="brand-logo" href="/"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks">${NAV.map(([t,h])=>`<a href="${h}"${t==="Ultra"?' style="color:#E8C268;font-weight:700"':""}>${t}</a>`).join("")}</nav>
     <div class="nav-right">
       <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
@@ -137,9 +137,9 @@
 
   // ---- footer ----
   const cols = [
-    ["Educație", [["Prezentare","/incepe-aici.html"],["Buget personal","/educatie.html"],["Economisire","/educatie.html"],["Psihologia banilor","/educatie.html"]]],
-    ["Investiții", [["Bursă & acțiuni","/investitii.html"],["ETF-uri","/investitii.html"],["Titluri de stat","/investitii.html"],["Calculatoare","/calculatoare.html"]]],
-    ["Platformă", [["Despre noi","/despre.html"],["Cursuri","/cursuri.html"],["Premium","/premium.html"],["Cont","/login.html"],["Contact","/contact.html"]]],
+    ["Educație", [["Prezentare","/incepe-aici"],["Buget personal","/educatie"],["Economisire","/educatie"],["Psihologia banilor","/educatie"]]],
+    ["Investiții", [["Bursă & acțiuni","/investitii"],["ETF-uri","/investitii"],["Titluri de stat","/investitii"],["Calculatoare","/calculatoare"]]],
+    ["Platformă", [["Despre noi","/despre"],["Cursuri","/cursuri"],["Premium","/premium"],["Cont","/login"],["Contact","/contact"]]],
   ];
   if (!document.querySelector("footer.foot")) {
   const foot = document.createElement("footer");
@@ -147,7 +147,7 @@
   foot.innerHTML = `<div class="container">
     <div class="foot-grid">
       <div>
-        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <a class="brand-logo" href="/"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
         <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
         <p class="soc-h">Urmărește-ne</p><div class="soc">${SOC.map(([t,h])=>`<a href="${h}" title="${t}" aria-label="${t}" rel="noopener" target="_blank">${SOC_ICONS[t.toLowerCase()]||t[0]}</a>`).join("")}</div>
       </div>
@@ -155,7 +155,7 @@
     </div>
     <div class="foot-bottom">
       <span>© Clubul Financiar · clubulfinanciar.ro</span>
-      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+      <span><a href="/privacy">Confidențialitate</a> · <a href="/terms">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
     </div>
   </div>`;
   document.body.appendChild(foot);
@@ -167,7 +167,7 @@
   }
 
   // ---- redenumire „Începe aici" → „Prezentare" pe paginile statice (nav + footer) ----
-  document.querySelectorAll('a[href="/incepe-aici.html"]').forEach(function(a){
+  document.querySelectorAll('a[href="/incepe-aici"]').forEach(function(a){
     if (a.textContent.trim() === "Începe aici") a.textContent = "Prezentare";
   });
 
@@ -224,7 +224,7 @@
     if (sub && sub.email) showSubscribed(sub.email);
   }
   // banda site-wide deasupra footer-ului (mai puțin pe login/reset/account/dezabonare)
-  if (!document.querySelector(".nl-band") && !/\/(login|reset|account|dezabonare)\.html/.test(location.pathname)) {
+  if (!document.querySelector(".nl-band") && !/\/(login|reset|account|dezabonare)(?:\.html)?$/.test(location.pathname)) {
     const band = document.createElement("section");
     band.className = "nl-band";
     band.innerHTML = `<div class="container nl-in">
@@ -291,14 +291,14 @@
     return P.map(function(row){
       const k=row[0], nm=row[1], pr=row[2], r=RANK[k];
       let cls,tag,href;
-      if(rank > r){ cls="owned"; tag="Inclus"; href="/instrumente.html#"+k; }
-      else if(rank === r){ cls="cur"; tag="Activ ✓"; href="/instrumente.html#"+k; }
-      else { cls="up"; tag="Treci →"; href="/premium.html#alege"; }
+      if(rank > r){ cls="owned"; tag="Inclus"; href="/instrumente#"+k; }
+      else if(rank === r){ cls="cur"; tag="Activ ✓"; href="/instrumente#"+k; }
+      else { cls="up"; tag="Treci →"; href="/premium#alege"; }
       return `<a class="acct-plan ${cls}" href="${href}"><span class="pn">${nm} <span style="color:var(--muted);font-weight:600">· ${pr}</span></span><span class="pp">${tag}</span></a>`;
     }).join("");
   }
   function plansColHTML(rank){
-    return `<h5>Planul tău</h5>${plansHTML(rank)}<a class="acct-manage" href="/premium.html">Gestionează abonamentul →</a>`;
+    return `<h5>Planul tău</h5>${plansHTML(rank)}<a class="acct-manage" href="/premium">Gestionează abonamentul →</a>`;
   }
 
   function renderAcct(session){
@@ -323,12 +323,12 @@
           <div class="acct-body">
             <div class="acct-col">
               <h5>Cont &amp; setări</h5>
-              <a class="acct-link" href="/account.html"><span class="ico">👤</span>Contul meu</a>
-              <a class="acct-link" href="/ultra/profil.html"><span class="ico">🧭</span>Profilul financiar</a>
-              <a class="acct-link" href="/cursuri.html"><span class="ico">🎓</span>Cursurile mele${isPremium?` <span class="meta">deblocate</span>`:``}</a>
-              <a class="acct-link" href="/instrumente.html"><span class="ico">🧰</span>Instrumentele mele</a>
-              <a class="acct-link" href="/feedback.html"><span class="ico">💬</span>Trimite feedback</a>
-              ${isAdmin ? `<a class="acct-link" href="/statistici.html"><span class="ico">📊</span>Statistici</a>` : ``}
+              <a class="acct-link" href="/account"><span class="ico">👤</span>Contul meu</a>
+              <a class="acct-link" href="/ultra/profil"><span class="ico">🧭</span>Profilul financiar</a>
+              <a class="acct-link" href="/cursuri"><span class="ico">🎓</span>Cursurile mele${isPremium?` <span class="meta">deblocate</span>`:``}</a>
+              <a class="acct-link" href="/instrumente"><span class="ico">🧰</span>Instrumentele mele</a>
+              <a class="acct-link" href="/feedback"><span class="ico">💬</span>Trimite feedback</a>
+              ${isAdmin ? `<a class="acct-link" href="/statistici"><span class="ico">📊</span>Statistici</a>` : ``}
             </div>
             <div class="acct-col" id="acctPlans">${plansColHTML(rank)}</div>
           </div>
@@ -346,7 +346,7 @@
         const t=document.getElementById("acctThemeT"); if(t) t.textContent=d?"Mod luminos":"Mod întunecat"; };
       document.addEventListener("click",()=>{menu.hidden=true;});
     } else {
-      slot.innerHTML = `<a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a>`;
+      slot.innerHTML = `<a class="btn btn-primary" href="/login" style="padding:9px 18px">Cont</a>`;
     }
   }
   // când vine tierul real din DB, reîmprospătează coloana de planuri + badge-ul (fără re-render complet)
@@ -374,7 +374,7 @@
     let read; try{ read=JSON.parse(localStorage.getItem("cf-read")||"[]"); }catch(e){ return; }
     if(!read.length) return;
     document.querySelectorAll('a[href*="/articole/"]').forEach(a=>{
-      const m=(a.getAttribute("href")||"").match(/\/articole\/([^\/]+)\.html/);
+      const m=(a.getAttribute("href")||"").match(/\/articole\/([^\/?#]+?)(?:\.html)?(?:[?#]|$)/);
       if(m && read.includes(decodeURIComponent(m[1])) && !a.querySelector(".read-tick")){
         const h=a.querySelector("h3");
         if(h && !h.querySelector(".read-tick")){ const s=document.createElement("span"); s.className="read-tick"; s.title="Citit"; s.textContent="✓"; h.appendChild(s); }

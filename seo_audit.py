@@ -13,7 +13,7 @@ issues=collections.Counter(); flagged=[]
 for f in files:
     h=open(f,encoding="utf-8").read()
     rel="/"+os.path.relpath(f,"docs").replace("\\","/")
-    url=BASE+("/" if rel=="/index.html" else rel)
+    url=BASE+("/" if rel=="/" else rel)
     if re.search(r'noindex',h,re.I): continue  # sar paginile noindex (redirecturi)
     t=g(h,r'<title>([^<]*)</title>'); d=g(h,r'<meta name="description" content="([^"]*)"')
     can=g(h,r'rel="canonical"\s+href="([^"]*)"') or g(h,r'href="([^"]*)"\s+rel="canonical"')

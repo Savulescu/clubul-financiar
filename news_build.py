@@ -189,10 +189,10 @@ def build():
 <title>Știri financiare România — Clubul Financiar</title>
 <meta name="description" content="Cele mai importante știri financiare și economice din România, pe categorii (bursă, bănci, taxe, imobiliare, crypto), agregate din zeci de surse și actualizate automat.">
 <meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
-<link rel="canonical" href="https://clubulfinanciar.ro/stiri.html">
+<link rel="canonical" href="https://clubulfinanciar.ro/stiri">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="Știri financiare România — Clubul Financiar"><meta property="og:description" content="Știri financiare RO pe categorii, din zeci de surse, într-un singur loc."><meta property="og:url" content="https://clubulfinanciar.ro/stiri.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta property="og:title" content="Știri financiare România — Clubul Financiar"><meta property="og:description" content="Știri financiare RO pe categorii, din zeci de surse, într-un singur loc."><meta property="og:url" content="https://clubulfinanciar.ro/stiri"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
@@ -216,7 +216,7 @@ def build():
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri · {n_src} surse · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
 <p class="lead" style="margin-inline:auto">Cele mai importante știri economice și financiare din România, pe categorii, din zeci de surse, ordonate după relevanță.</p>
-<div class="news-tabs" style="justify-content:center;margin-top:6px"><a class="news-tab active" href="/stiri.html"><span>🇷🇴 Știri România</span></a><a class="news-tab" href="/stiri-externe.html">🌍 Știri externe</a></div></div></section>
+<div class="news-tabs" style="justify-content:center;margin-top:6px"><a class="news-tab active" href="/stiri"><span>🇷🇴 Știri România</span></a><a class="news-tab" href="/stiri-externe">🌍 Știri externe</a></div></div></section>
 <section class="section"><div class="container">
 <div class="news-controls">
 <div class="news-grp"><span class="news-lbl">Interval</span>
@@ -262,7 +262,7 @@ def build():
     var cta=document.getElementById('newsPremCTA');
     if(!prem && vis.length>FREE){{
       if(!cta){{ cta=document.createElement('div'); cta.id='newsPremCTA'; cta.className='cf-premium-lock'; cta.style.margin='26px 0 0';
-        cta.innerHTML='<div class="lock-ic">🔒</div><h2>Vezi toate știrile + filtre cu Premium</h2><p>Free: primele '+FREE+' știri din sursele principale. Premium: toate sursele, pe categorii, cu filtre (24h / 7 zile / relevanță).</p><p class="price-line" style="color:var(--gold);font-weight:800;margin:10px 0 14px">49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Deblochează cu Premium</a>';
+        cta.innerHTML='<div class="lock-ic">🔒</div><h2>Vezi toate știrile + filtre cu Premium</h2><p>Free: primele '+FREE+' știri din sursele principale. Premium: toate sursele, pe categorii, cu filtre (24h / 7 zile / relevanță).</p><p class="price-line" style="color:var(--gold);font-weight:800;margin:10px 0 14px">49 lei/lună</p><a class="btn btn-primary" href="/premium">Deblochează cu Premium</a>';
         grid.parentNode.insertBefore(cta, grid.nextSibling); }}
       cta.style.display='';
     }} else if(cta) cta.style.display='none';

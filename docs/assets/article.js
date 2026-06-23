@@ -29,7 +29,7 @@
     const gate = document.createElement("div"); gate.className = "premium-gate";
     gate.innerHTML = '<div class="pg-fade"></div><div class="pg-card"><span class="cf-premium-badge">Premium</span><h2>Restul lecției e în Premium</h2>' +
       (heads.length ? '<p style="color:var(--muted)">Ce mai afli în această lecție:</p><ul class="pg-list">' + heads.slice(0, 6).map(h => '<li>' + esc(h) + '</li>').join("") + '</ul>' : '<p style="color:var(--muted)">Deblochează lecția completă + toate cele 500 + teste.</p>') +
-      '<p class="price-line">Toate cele 1000 de lecții + teste + instrumente — 49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login.html" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
+      '<p class="price-line">Toate cele 1000 de lecții + teste + instrumente — 49 lei/lună</p><a class="btn btn-primary" href="/premium">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
     disc.parentNode.insertBefore(gate, disc);
     disc.parentNode.insertBefore(rest, disc);
     art.classList.add("cf-locked");
@@ -136,7 +136,7 @@
     rel.className = "related";
     const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     rel.innerHTML = `<h2 class="title" style="font-size:1.4rem">Articole conexe</h2><div class="related-grid">${
-      pick.map(a => `<a class="card" href="/articole/${encodeURIComponent(a.s)}.html"><h3>${esc(a.t)}</h3><p>${esc(a.d || "")}</p><span class="more">Citește</span></a>`).join("")
+      pick.map(a => `<a class="card" href="/articole/${encodeURIComponent(a.s)}"><h3>${esc(a.t)}</h3><p>${esc(a.d || "")}</p><span class="more">Citește</span></a>`).join("")
     }</div>`;
     art.appendChild(rel);
   }).catch(() => {});
@@ -176,10 +176,10 @@
       // prev / next (cu nume)
       var nav = document.createElement("nav"); nav.className = "lesson-nav";
       nav.innerHTML =
-        (e.p ? '<a class="lnav prev" href="/articole/' + encodeURIComponent(e.p[0]) + '.html"><span>← Lecția anterioară</span><b>' + esc(e.p[1]) + '</b></a>'
-             : '<a class="lnav prev" href="/manual/' + e.d + '.html"><span>← Înapoi la</span><b>Capitol</b></a>') +
-        (e.n ? '<a class="lnav next" href="/articole/' + encodeURIComponent(e.n[0]) + '.html"><span>Lecția următoare →</span><b>' + esc(e.n[1]) + '</b></a>'
-             : '<a class="lnav next" href="/teste.html?d=' + e.d + '"><span>Testul capitolului →</span><b>Recapitulare</b></a>');
+        (e.p ? '<a class="lnav prev" href="/articole/' + encodeURIComponent(e.p[0]) + '"><span>← Lecția anterioară</span><b>' + esc(e.p[1]) + '</b></a>'
+             : '<a class="lnav prev" href="/manual/' + e.d + '"><span>← Înapoi la</span><b>Capitol</b></a>') +
+        (e.n ? '<a class="lnav next" href="/articole/' + encodeURIComponent(e.n[0]) + '"><span>Lecția următoare →</span><b>' + esc(e.n[1]) + '</b></a>'
+             : '<a class="lnav next" href="/teste?d=' + e.d + '"><span>Testul capitolului →</span><b>Recapitulare</b></a>');
       if (_disc) art.insertBefore(nav, _disc); else art.appendChild(nav);
 
       fetch("/assets/quiz/d/" + e.d + ".json").then(r => r.json()).then(qd => {
@@ -209,7 +209,7 @@
         function done() {
           var pct = Math.round(correct / qs.length * 100);
           run.innerHTML = '<div class="lq-big">' + pct + '%</div><p style="color:var(--muted)">' + correct + ' din ' + qs.length + ' corecte.' + (prem ? ' +' + (correct * 10) + ' XP' : '') + '</p>' +
-            (prem ? '' : '<p style="font-size:.9rem;margin-top:8px">Cu <a href="/premium.html" style="color:var(--emerald-link);font-weight:700">Premium</a> îți ții seria zilnică, aduni XP și primești certificate.</p>') +
+            (prem ? '' : '<p style="font-size:.9rem;margin-top:8px">Cu <a href="/premium" style="color:var(--emerald-link);font-weight:700">Premium</a> îți ții seria zilnică, aduni XP și primești certificate.</p>') +
             '<button class="btn btn-ghost" id="lqAgain" style="margin-top:12px">Încă o dată</button>';
           document.getElementById("lqAgain").onclick = () => runQuiz(qs);
         }

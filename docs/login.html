@@ -133,7 +133,7 @@
       const email = $("email").value.trim();
       if (!email) return setMsg("Scrie întâi emailul în câmpul de mai sus.", false);
       setMsg("Se trimite linkul de resetare…", true);
-      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + "/reset.html" });
+      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + "/reset" });
       if (error) return setMsg(error.message, false);
       setMsg("Ți-am trimis pe email linkul de resetare ✓", true);
     });

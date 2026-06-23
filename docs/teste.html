@@ -3,10 +3,10 @@
 <title>Teste — învață banii ca la Duolingo — Clubul Financiar</title>
 <meta name="description" content="Verifică-ți cunoștințele financiare cu teste pe 17 domenii: streak zilnic, XP, certificate. ~5.000 de întrebări, de la buget la investiții.">
 <meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
-<link rel="canonical" href="https://clubulfinanciar.ro/teste.html">
+<link rel="canonical" href="https://clubulfinanciar.ro/teste">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="Teste — învață banii ca la Duolingo"><meta property="og:description" content="Teste pe 17 domenii financiare: streak, XP, certificate. ~5.000 de întrebări."><meta property="og:url" content="https://clubulfinanciar.ro/teste.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta property="og:title" content="Teste — învață banii ca la Duolingo"><meta property="og:description" content="Teste pe 17 domenii financiare: streak, XP, certificate. ~5.000 de întrebări."><meta property="og:url" content="https://clubulfinanciar.ro/teste"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Teste — Clubul Financiar"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -102,7 +102,7 @@
     isPremium = !!window.cfPremium;
     document.getElementById("qzGuestNote").innerHTML = isPremium
       ? ""
-      : 'Mod <b>gust</b>: 5 întrebări/domeniu, fără serie/XP/certificat. <a href="/premium.html" style="color:var(--emerald-link);font-weight:700">Premium</a> deblochează toate testele + streak + certificate.';
+      : 'Mod <b>gust</b>: 5 întrebări/domeniu, fără serie/XP/certificat. <a href="/premium" style="color:var(--emerald-link);font-weight:700">Premium</a> deblochează toate testele + streak + certificate.';
     if(isPremium) refreshStats(); else document.getElementById("qzStats").hidden=true;
   }
   window.addEventListener("cf-auth", gate);
@@ -127,7 +127,7 @@
   var cur={cat:null,qs:[],i:0,correct:0,limit:SESSION};
   function start(cat){
     var free=FREE.indexOf(cat)>=0;
-    if(!free && !isPremium){ location.href="/premium.html"; return; }
+    if(!free && !isPremium){ location.href="/premium"; return; }
     fetch("/assets/quiz/d/"+cat+".json").then(function(r){return r.json();}).then(function(d){
       var pool=[];
       Object.keys(d).forEach(function(slug){ d[slug].q.forEach(function(q){ pool.push(q); }); });
@@ -167,7 +167,7 @@
     document.getElementById("qzBody").innerHTML='<div class="qz-result">'+
       '<div class="big">'+pct+'%</div><p style="color:var(--muted);margin-bottom:16px">Ai răspuns corect la '+cur.correct+' din '+Math.min(cur.limit,cur.qs.length)+' întrebări.</p>'+
       (isPremium ? '<p style="font-weight:700">+'+(cur.correct*10)+' XP'+(cert?' · 🏆 Ai promovat! Certificat deblocat la finalizarea cursului.':'')+'</p>'
-                 : '<div class="cf-premium-lock" style="margin:18px auto"><div class="lock-ic">🔓</div><h2>Vrei seria zilnică, XP și certificate?</h2><p>În modul gust nu salvăm progresul. Cu Premium îți ții seria, aduni XP și primești certificate.</p><p class="price-line">Premium — 49 lei/lună</p><a class="btn btn-primary" href="/premium.html">Activează Premium</a></div>')+
+                 : '<div class="cf-premium-lock" style="margin:18px auto"><div class="lock-ic">🔓</div><h2>Vrei seria zilnică, XP și certificate?</h2><p>În modul gust nu salvăm progresul. Cu Premium îți ții seria, aduni XP și primești certificate.</p><p class="price-line">Premium — 49 lei/lună</p><a class="btn btn-primary" href="/premium">Activează Premium</a></div>')+
       '<div style="margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-ghost" id="qzAgain">Încă o rundă</button><button class="btn btn-ghost" id="qzHome">Toate testele</button></div></div>';
     document.getElementById("qzAgain").onclick=function(){ start(cur.cat); };
     document.getElementById("qzHome").onclick=back;

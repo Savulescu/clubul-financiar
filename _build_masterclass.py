@@ -44,23 +44,23 @@ def ro_date(iso): y,m,d = iso.split("-"); return f"{int(d)} {RO_LUNI[m]} {y}"
 PAGE = '''<!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — Masterclass Bursă — Clubul Financiar</title><meta name="description" content="{desc}"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
-<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/{slug}.html"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://clubulfinanciar.ro/masterclass/{slug}"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
-<meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/{slug}.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="https://clubulfinanciar.ro/masterclass/{slug}"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script type="application/ld+json">{ldjson}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-article.css?v=1"></head><body class="u-page">{nav}<article class="article"{prem}{dprev}{dnext} data-hub="/masterclass.html"><p class="meta"><a href="/masterclass.html">Masterclass Bursă</a> · <a href="/masterclass.html#{dom}">{domname}</a> · {min} min · Actualizat {date_disp}</p><h1>{title}</h1>{body}<script type="application/json" id="cf-mc-quiz">{quizjson}</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass.html">← Toate lecțiile Masterclass</a></p></article>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-article.css?v=1"></head><body class="u-page">{nav}<article class="article"{prem}{dprev}{dnext} data-hub="/masterclass"><p class="meta"><a href="/masterclass">Masterclass Bursă</a> · <a href="/masterclass#{dom}">{domname}</a> · {min} min · Actualizat {date_disp}</p><h1>{title}</h1>{body}<script type="application/json" id="cf-mc-quiz">{quizjson}</script><div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/masterclass">← Toate lecțiile Masterclass</a></p></article>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/masterclass.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
 
 def build_page(rec, body, quizjson, prev, nxt):
     mins = reading_minutes(body)
     ld = {"@context":"https://schema.org","@type":"LearningResource","headline":rec["title"],"description":rec["metaDescription"],
           "inLanguage":"ro-RO","datePublished":BUILD_DATE,"dateModified":BUILD_DATE,
-          "author":{"@type":"Organization","name":"Clubul Financiar","url":"https://clubulfinanciar.ro/despre.html"},
+          "author":{"@type":"Organization","name":"Clubul Financiar","url":"https://clubulfinanciar.ro/despre"},
           "image":"https://clubulfinanciar.ro/og-image.jpg",
           "publisher":{"@type":"Organization","name":"Clubul Financiar","logo":{"@type":"ImageObject","url":"https://clubulfinanciar.ro/icon-512.png"}},
-          "mainEntityOfPage":f"https://clubulfinanciar.ro/masterclass/{rec['slug']}.html"}
+          "mainEntityOfPage":f"https://clubulfinanciar.ro/masterclass/{rec['slug']}"}
     if rec.get("premium"):
         ld["isAccessibleForFree"] = False
         ld["hasPart"] = {"@type":"WebPageElement","isAccessibleForFree":False,"cssSelector":".premium-rest"}
@@ -103,8 +103,8 @@ if missing: print("  lipsă:", missing[:10])
 # ---------- hub masterclass.html ----------
 HUBHEAD = '''<!DOCTYPE html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Masterclass Bursă — investiții și trading de la zero — Clubul Financiar</title><meta name="description" content="Masterclass Bursă: curs complet de investiții și tranzacționare, de la zero la avansat, cu lecții și teste de {n} întrebări fiecare.">
-<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981"><link rel="canonical" href="https://clubulfinanciar.ro/masterclass.html"><link rel="icon" type="image/png" href="/favicon.png">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:title" content="Masterclass Bursă — Clubul Financiar"><meta property="og:description" content="Curs complet de investiții și tranzacționare, de la zero la avansat."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981"><link rel="canonical" href="https://clubulfinanciar.ro/masterclass"><link rel="icon" type="image/png" href="/favicon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:title" content="Masterclass Bursă — Clubul Financiar"><meta property="og:description" content="Curs complet de investiții și tranzacționare, de la zero la avansat."><meta property="og:url" content="https://clubulfinanciar.ro/masterclass"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=__V__"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"></head><body class="u-page">__NAV__
@@ -116,7 +116,7 @@ sections, quick = [], []
 for dom in sorted(bydom):
     items = bydom[dom]
     quick.append(f'<a href="#{dom}" class="pill">{esc(domname(dom))}</a>')
-    cards = "".join(f'<a class="card reveal" href="/masterclass/{r["slug"]}.html"><h3>{esc(r["title"])}</h3><p>{esc(r["metaDescription"])}</p><span class="more">Învață →</span></a>' for r in items)
+    cards = "".join(f'<a class="card reveal" href="/masterclass/{r["slug"]}"><h3>{esc(r["title"])}</h3><p>{esc(r["metaDescription"])}</p><span class="more">Învață →</span></a>' for r in items)
     sections.append(f'<h2 class="title cat-h" id="{dom}" style="margin-top:40px">{esc(domname(dom))} <span style="color:var(--muted);font-weight:400;font-size:1rem">({len(items)})</span></h2><div class="grid grid-3">{cards}</div>')
 hub = (HUBHEAD.replace("__V__", V).replace("__NAV__", NAV_HTML).replace("__FOOTER__", FOOTER_HTML)
        .replace("__QUICK__", "".join(quick)).replace("__SECTIONS__", "".join(sections))
@@ -128,10 +128,10 @@ print(f"Hub masterclass.html construit: {len(records)} lecții, {len(bydom)} dom
 smp = os.path.join(DOCS, "sitemap.xml"); sm = open(smp, encoding="utf-8").read()
 add = ""
 for r in records:
-    loc = f"https://clubulfinanciar.ro/masterclass/{r['slug']}.html"
+    loc = f"https://clubulfinanciar.ro/masterclass/{r['slug']}"
     if loc not in sm:
         add += f'<url><loc>{loc}</loc><lastmod>{BUILD_DATE}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>'
-hubloc = "https://clubulfinanciar.ro/masterclass.html"
+hubloc = "https://clubulfinanciar.ro/masterclass"
 if hubloc not in sm: add += f'<url><loc>{hubloc}</loc><lastmod>{BUILD_DATE}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>'
 if add: sm = sm.replace("</urlset>", add + "</urlset>"); open(smp, "w", encoding="utf-8").write(sm)
 print(f"sitemap += {add.count('<url>')} URL-uri masterclass")
