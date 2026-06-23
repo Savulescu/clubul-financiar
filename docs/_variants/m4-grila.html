@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8"><meta name="google-site-verification" content="8gdRmnMrhXMobgoUDYX7XjwVlanQAIY7rkn1nIxzfEM">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clubul Financiar — Educație financiară de la zero</title>
+<meta name="description" content="Învață despre bani, investiții, credite, economii și independență financiară — într-o singură platformă, pe înțelesul tuturor. Gratuit la start.">
+<meta name="keywords" content="educatie financiara, finante personale, buget, economisire, investitii, ETF, bursa, credite, pensii, FIRE, Romania">
+<meta name="author" content="Clubul Financiar">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://clubulfinanciar.ro/">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clubul Financiar">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Clubul Financiar — Educație financiară de la zero">
+<meta property="og:description" content="Învață despre bani, investiții, credite, economii și independență financiară — într-o singură platformă.">
+<meta property="og:url" content="https://clubulfinanciar.ro/">
+<meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clubul Financiar — Educație financiară de la zero">
+<meta name="twitter:description" content="Învață despre bani, investiții, credite și independență financiară.">
+<meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Clubul Financiar","url":"https://clubulfinanciar.ro","logo":"https://clubulfinanciar.ro/icon-512.png","description":"Educație financiară pe înțelesul tuturor.","sameAs":["https://www.instagram.com/clubulfinanciar","https://www.tiktok.com/@clubulfinanciar","https://www.youtube.com/@clubulfinanciar","https://www.facebook.com/clubulfinanciar","https://www.threads.net/@clubulfinanciar","https://x.com/clubulfinanciar","https://t.me/clubul_financiar"]}
+</script>
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=24">
+<link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=3">
+<style>
+/* =============================================================================
+   VARIANT "GRILĂ" — Swiss / editorial-modern. Paper + ink + ONE signal-green.
+   Oversized neo-grotesque headlines, a VISIBLE modular grid, hairline rules,
+   money rendered as huge typographic hero elements. Anti-decoration, razor-sharp.
+   Overrides base tokens via order + specificity. JS hooks (#hero3d, #cc*, #cfTape,
+   .stat .num, .cf-comp-yr) are kept 1:1 so existing scripts keep powering them.
+   ============================================================================= */
+
+:root{
+  --paper:#F4F3EF;        /* warm paper white */
+  --paper-2:#ECEAE3;      /* recessed band */
+  --ink:#0B0B0C;          /* near-black */
+  --ink-2:#3A3A3C;        /* secondary text */
+  --ink-3:#7A7A7E;        /* muted / captions */
+  --line:#0B0B0C;         /* hairline rules = ink */
+  --line-soft:rgba(11,11,12,.14);
+  --accent:#0FB36B;       /* THE single signal-green (echoes 3D #36D67E) */
+  --accent-d:#0A8A52;
+  --accent-ink:#06301F;   /* text on accent */
+  --night:#0A1626;        /* hero stage navy (matches 3D scene) */
+  --font-disp:'Space Grotesk',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-ui:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --gut:24px;             /* grid gutter */
+}
+
+/* Reset the base look: this variant OWNS the page */
+html{ background:var(--paper); --font-body:var(--font-ui); scroll-behavior:smooth; }
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+body{ font-family:var(--font-ui); background:var(--paper); color:var(--ink);
+  -webkit-font-smoothing:antialiased; line-height:1.55; overflow-x:hidden; }
+.u-page{ background:var(--paper); }
+img{ max-width:100%; }
+
+/* tabular money everywhere it matters */
+.stat .num,.price .amt,.gr-money,.gr-stat-num,
+.cf-comp .num,.cf-comp-val,.cf-comp-big{ font-variant-numeric:tabular-nums lining-nums; }
+
+/* shared container — wide editorial measure */
+.gr-wrap{ max-width:1280px; margin:0 auto; padding:0 32px; }
+@media(max-width:560px){ .gr-wrap{ padding:0 20px; } }
+
+/* eyebrow = mono-spaced uppercase index label */
+.gr-eyebrow{ font-family:var(--font-ui); font-weight:700; font-size:.72rem;
+  letter-spacing:.26em; text-transform:uppercase; color:var(--ink);
+  display:inline-flex; align-items:center; gap:10px; margin:0; }
+.gr-eyebrow::before{ content:""; width:26px; height:2px; background:var(--accent); }
+
+/* section index number (00 / 01 …) — Swiss register marker */
+.gr-idx{ font-family:var(--font-disp); font-weight:500; font-size:.8rem;
+  color:var(--ink-3); letter-spacing:.04em; }
+
+/* display headline */
+.gr-h{ font-family:var(--font-disp); font-weight:700; color:var(--ink);
+  letter-spacing:-.025em; line-height:.98; margin:0; }
+
+/* hairline section divider */
+.gr-rule{ height:1px; background:var(--line); border:0; margin:0; opacity:.85; }
+
+/* ====================== NAV ====================== */
+.nav{ background:var(--paper); border-bottom:1px solid var(--line);
+  position:sticky; top:0; z-index:50; }
+.nav-in{ max-width:1280px; margin:0 auto; padding:14px 32px;
+  display:flex; align-items:center; justify-content:space-between; gap:18px; }
+@media(max-width:560px){ .nav-in{ padding:12px 20px; } }
+.brand-logo{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+.brand-img{ border-radius:6px; }
+.brand-txt{ font-family:var(--font-disp); font-weight:600; font-size:1.06rem;
+  color:var(--ink); letter-spacing:-.01em; }
+.nav-links{ display:flex; gap:4px; align-items:center; }
+.nav-links a{ font-family:var(--font-ui); font-size:.86rem; font-weight:500;
+  color:var(--ink-2); text-decoration:none; padding:7px 11px; border-radius:2px;
+  transition:color .15s, background .15s; }
+.nav-links a:hover{ color:var(--ink); background:var(--paper-2); }
+.nav-right{ display:flex; align-items:center; gap:8px; }
+.icon-btn{ background:none; border:1px solid var(--line-soft); border-radius:2px;
+  width:38px; height:38px; cursor:pointer; font-size:1rem; color:var(--ink);
+  display:inline-flex; align-items:center; justify-content:center; transition:.15s; }
+.icon-btn:hover{ border-color:var(--ink); }
+.burger{ display:none; }
+.nav .btn-primary{ background:var(--ink); color:var(--paper); border:1px solid var(--ink);
+  border-radius:2px; font-family:var(--font-ui); font-weight:600; font-size:.86rem;
+  text-decoration:none; padding:9px 18px; transition:.15s; }
+.nav .btn-primary:hover{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+/* site.js rewrites <header> to class "nav ultra" and re-skins it gold — re-assert Grilă */
+.nav.ultra{ background:var(--paper); border-bottom:1px solid var(--line); }
+.nav.ultra .brand-txt{ color:var(--ink); }
+.nav.ultra .nav-links a:hover{ color:var(--ink); background:var(--paper-2); }
+.nav.ultra .icon-btn:hover{ border-color:var(--ink); }
+.nav.ultra .btn-primary{ background:var(--ink); color:var(--paper);
+  border:1px solid var(--ink); box-shadow:none; }
+.nav.ultra .btn-primary:hover{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.foot.ultra{ background:var(--ink); }
+
+/* ====================== BUTTONS ====================== */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:var(--font-ui); font-weight:600; font-size:.94rem; text-decoration:none;
+  padding:13px 22px; border-radius:2px; cursor:pointer; transition:.16s; border:1px solid transparent; }
+.btn-primary,.u-page .btn-primary{ background:var(--accent); color:var(--accent-ink);
+  border-color:var(--accent); box-shadow:none; }
+.btn-primary:hover,.u-page .btn-primary:hover{ background:var(--accent-d); border-color:var(--accent-d); color:var(--accent-ink); }
+.btn-ghost,.u-page .btn-ghost{ background:transparent; color:var(--ink); border:1px solid var(--ink); }
+.btn-ghost:hover,.u-page .btn-ghost:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.btn-light{ background:var(--paper); color:var(--ink); border:1px solid var(--ink); }
+.btn-light:hover{ background:var(--ink); color:var(--paper); }
+
+/* visible keyboard focus everywhere */
+a:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,
+.cf-comp-yr:focus-visible,.cf-comp-range:focus-visible{
+  outline:3px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+/* ====================== HERO ====================== */
+/* Two-column Swiss split: type on the left, 3D stage on the right. NEVER overlap. */
+.gr-hero{ background:var(--paper); border-bottom:1px solid var(--line); position:relative; }
+.cf-tape{ position:relative; z-index:4; display:flex; align-items:stretch;
+  border-bottom:1px solid var(--line); background:var(--paper); overflow:hidden; }
+.cf-tape-tag{ flex:0 0 auto; display:flex; align-items:center; font-family:var(--font-ui);
+  font-size:.62rem; font-weight:800; letter-spacing:.22em; color:var(--paper);
+  background:var(--ink); padding:0 16px; }
+.cf-tape-vp{ flex:1; overflow:hidden; }
+.cf-tape-row{ display:flex; width:max-content; animation:cfTapeScroll 46s linear infinite; }
+.cf-tape:hover .cf-tape-row{ animation-play-state:paused; }
+.cf-tape-row-in{ display:inline-flex; align-items:center; gap:24px; padding:9px 18px; }
+.cf-tape-item{ display:inline-flex; align-items:baseline; gap:6px; font-size:.8rem; color:var(--ink-2);
+  font-variant-numeric:tabular-nums lining-nums; white-space:nowrap; }
+.cf-tape-item .sym{ color:var(--ink); font-weight:700; letter-spacing:.02em; }
+.cf-tape-item b{ color:var(--ink); font-weight:700; }
+.cf-tape-item .up{ color:var(--accent-d); } .cf-tape-item .dn{ color:#C23B2E; }
+.cf-tape-sep{ color:var(--line-soft); padding:0 2px; }
+.cf-tape-load{ padding:9px 18px; color:var(--ink-3); font-size:.78rem; }
+@keyframes cfTapeScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@media(prefers-reduced-motion:reduce){ .cf-tape-row{ animation:none; } }
+
+.gr-hero-grid{ display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  align-items:stretch; min-height:min(78vh,720px); }
+.gr-hero-left{ padding:56px 0 56px; display:flex; flex-direction:column; justify-content:center;
+  border-right:1px solid var(--line); padding-right:56px; }
+.gr-hero-right{ position:relative; background:var(--night);
+  display:flex; flex-direction:column; min-height:420px; overflow:hidden; }
+/* the 3D mount MUST have explicit size — three3d.js reads clientWidth/Height */
+#hero3d{ position:absolute; inset:0; width:100%; height:100%; z-index:1; }
+/* static fallback bars behind the canvas (shown when 3D is off) */
+.gr-fallback{ position:absolute; left:0; right:0; bottom:0; height:62%; z-index:0;
+  display:flex; align-items:flex-end; gap:3.2%; padding:0 9% 12% 9%;
+  background:linear-gradient(180deg, transparent, rgba(15,179,107,.05));
+  -webkit-mask-image:linear-gradient(180deg, transparent, #000 38%);
+  mask-image:linear-gradient(180deg, transparent, #000 38%); }
+.gr-fallback span{ flex:1; border-radius:2px 2px 0 0;
+  background:linear-gradient(180deg, var(--accent), rgba(15,179,107,.28)); }
+.gr-fallback span:nth-child(7),.gr-fallback span:nth-child(8){ background:linear-gradient(180deg,#36D67E,rgba(54,214,126,.35)); }
+.gr-hero-right .gr-stage-label{ position:absolute; left:20px; top:18px; z-index:2;
+  font-family:var(--font-ui); font-size:.66rem; font-weight:700; letter-spacing:.22em;
+  text-transform:uppercase; color:rgba(255,255,255,.55); display:flex; align-items:center; gap:9px; }
+.gr-hero-right .gr-stage-label::before{ content:""; width:7px; height:7px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 12px var(--accent); }
+/* live caption sits at the BOTTOM of the stage — never covers the chart body */
+.gr-stage-cap{ position:absolute; left:0; right:0; bottom:0; z-index:2;
+  padding:16px 20px; display:flex; align-items:baseline; gap:14px;
+  background:linear-gradient(0deg, rgba(10,22,38,.92), rgba(10,22,38,0));
+  font-family:var(--font-ui); }
+.gr-stage-cap .k{ font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  color:rgba(255,255,255,.55); }
+.gr-stage-cap .v{ font-family:var(--font-disp); font-weight:600; color:#fff;
+  font-size:1.02rem; font-variant-numeric:tabular-nums; }
+.gr-stage-cap .v em{ color:var(--accent); font-style:normal; }
+
+.gr-hero-left .gr-eyebrow{ margin-bottom:30px; }
+.gr-h1{ font-family:var(--font-disp); font-weight:700; color:var(--ink);
+  letter-spacing:-.03em; line-height:.92;
+  font-size:clamp(2.7rem,7.4vw,5.6rem); margin:0 0 26px; }
+.gr-h1 .ln{ display:block; }
+.gr-h1 .mk{ color:var(--accent); }
+.gr-lead{ font-size:clamp(1.02rem,1.5vw,1.18rem); color:var(--ink-2);
+  max-width:46ch; margin:0 0 34px; }
+.gr-hero-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px; }
+.gr-trust{ display:flex; flex-wrap:wrap; gap:22px; padding-top:24px;
+  border-top:1px solid var(--line-soft); }
+.gr-trust span{ display:inline-flex; align-items:center; gap:8px; font-size:.84rem;
+  font-weight:600; color:var(--ink-2); }
+.gr-trust span b{ color:var(--accent-d); font-weight:800; }
+
+/* ====================== STATS (numbered grid) ====================== */
+.gr-stats{ border-bottom:1px solid var(--line); }
+.gr-stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); }
+.stat{ padding:38px 26px; border-right:1px solid var(--line);
+  background:var(--paper); display:flex; flex-direction:column; gap:8px; }
+.stat:last-child{ border-right:0; }
+.stat .num,.u-page .stat .num{ font-family:var(--font-disp); font-weight:700;
+  font-size:clamp(2.2rem,4.5vw,3.4rem); letter-spacing:-.03em; line-height:1;
+  color:var(--ink); background:none; -webkit-background-clip:border-box; background-clip:border-box;
+  -webkit-text-fill-color:var(--ink); }
+.stat .lbl{ font-size:.82rem; color:var(--ink-3); font-weight:500;
+  letter-spacing:.02em; max-width:18ch; }
+
+/* ====================== generic SECTION head ====================== */
+.gr-section{ padding:84px 0; }
+.gr-section.alt{ background:var(--paper-2); }
+.gr-head{ display:grid; grid-template-columns:auto 1fr; gap:0 28px;
+  align-items:start; margin-bottom:48px; }
+.gr-head .gr-idx{ padding-top:6px; }
+.gr-head-main{ }
+.gr-head h2{ font-family:var(--font-disp); font-weight:700; color:var(--ink);
+  letter-spacing:-.025em; line-height:1.0; font-size:clamp(1.9rem,3.8vw,3rem);
+  margin:14px 0 0; max-width:20ch; }
+.gr-head .gr-sub{ font-size:1.02rem; color:var(--ink-2); margin:16px 0 0; max-width:54ch; }
+
+/* ====================== COMPOUND INSTRUMENT (huge money hero type) ====================== */
+.gr-comp{ background:var(--ink); color:var(--paper); border-bottom:1px solid var(--line); }
+.gr-comp-grid{ display:grid; grid-template-columns:1.05fr 1fr; align-items:stretch; }
+.gr-comp-pitch{ padding:80px 56px 80px 0; border-right:1px solid rgba(255,255,255,.16);
+  display:flex; flex-direction:column; justify-content:center; }
+.gr-comp-pitch .gr-eyebrow{ color:#fff; margin-bottom:22px; }
+.gr-comp-pitch .gr-eyebrow::before{ background:var(--accent); }
+.gr-comp-pitch h2{ font-family:var(--font-disp); font-weight:700; letter-spacing:-.025em;
+  line-height:1.0; font-size:clamp(1.9rem,3.6vw,2.9rem); margin:0 0 18px; color:#fff; }
+.gr-comp-pitch p{ color:rgba(244,243,239,.74); font-size:1.04rem; max-width:42ch; margin:0 0 30px; }
+.gr-comp-pitch p strong{ color:var(--accent); font-weight:700; }
+.gr-comp-pitch .btn-ghost{ color:#fff; border-color:rgba(255,255,255,.5); align-self:flex-start; }
+.gr-comp-pitch .btn-ghost:hover{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+
+.cf-comp{ padding:48px 56px; display:flex; flex-direction:column; justify-content:center; position:relative; }
+.cf-comp-head{ margin-bottom:6px; }
+.cf-comp-eyebrow{ font-family:var(--font-ui); font-size:.68rem; font-weight:700;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--accent); display:block; }
+.cf-comp-title{ font-family:var(--font-disp); font-weight:600; font-size:1.18rem;
+  line-height:1.12; margin:8px 0 0; color:#fff; letter-spacing:-.01em; }
+.cf-comp-controls{ margin:26px 0 4px; }
+.cf-comp-row{ display:flex; justify-content:space-between; align-items:baseline; }
+.cf-comp-lbl{ font-size:.82rem; color:rgba(255,255,255,.6); font-weight:600;
+  letter-spacing:.04em; text-transform:uppercase; }
+.cf-comp-val{ font-family:var(--font-disp); font-weight:600; font-size:1.08rem; color:#fff; }
+.cf-comp-range{ -webkit-appearance:none; appearance:none; width:100%; height:3px; margin:14px 0 4px;
+  border-radius:0; cursor:pointer;
+  background:linear-gradient(90deg,var(--accent) var(--cc-pct,18%), rgba(255,255,255,.18) var(--cc-pct,18%)); }
+.cf-comp-range::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; height:18px; border-radius:50%;
+  background:var(--accent); border:3px solid var(--ink); box-shadow:0 0 0 1px var(--accent); cursor:grab; }
+.cf-comp-range::-moz-range-thumb{ width:18px; height:18px; border-radius:50%;
+  background:var(--accent); border:3px solid var(--ink); cursor:grab; }
+.cf-comp-range:active::-webkit-slider-thumb{ cursor:grabbing; }
+.cf-comp-years{ display:flex; gap:0; margin-top:18px; border:1px solid rgba(255,255,255,.22); }
+.cf-comp-yr{ flex:1; padding:10px 0; border:0; border-right:1px solid rgba(255,255,255,.22);
+  background:transparent; color:rgba(255,255,255,.66); font-family:var(--font-ui); font-weight:600;
+  font-size:.84rem; cursor:pointer; transition:.15s; font-variant-numeric:tabular-nums; }
+.cf-comp-yr:last-child{ border-right:0; }
+.cf-comp-yr:hover{ color:#fff; background:rgba(255,255,255,.06); }
+.cf-comp-yr.is-on{ background:var(--accent); color:var(--accent-ink); }
+.cf-comp-spark{ width:100%; height:78px; margin:22px 0 6px; display:block; }
+.cf-comp-out{ display:flex; align-items:flex-end; justify-content:space-between; gap:18px;
+  margin-top:10px; padding-top:18px; border-top:1px solid rgba(255,255,255,.16); }
+.cf-comp-out-lbl{ font-size:.78rem; color:rgba(255,255,255,.6); display:block;
+  letter-spacing:.04em; text-transform:uppercase; }
+.cf-comp-out-lbl b{ color:#fff; font-variant-numeric:tabular-nums; }
+/* THE huge typographic money element */
+.cf-comp-big{ font-family:var(--font-disp); font-weight:700; font-size:clamp(2.6rem,5vw,3.4rem);
+  line-height:.92; color:#fff; letter-spacing:-.03em; display:block; margin-top:6px; }
+.cf-comp-split{ margin:0; text-align:right; display:grid; gap:8px; }
+.cf-comp-split dt{ font-size:.66rem; color:rgba(255,255,255,.55); letter-spacing:.08em; text-transform:uppercase; }
+.cf-comp-split dd{ margin:0; font-family:var(--font-disp); font-weight:600; font-size:1.02rem; color:#fff;
+  font-variant-numeric:tabular-nums lining-nums; }
+.cf-comp-gain dd{ color:var(--accent); }
+.cf-comp-note{ margin:16px 0 0; font-size:.7rem; color:rgba(255,255,255,.45); letter-spacing:.02em; }
+
+/* ====================== ÎNCEPE AICI (numbered register) ====================== */
+.gr-levels{ display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+  border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.level{ position:relative; display:flex; align-items:flex-start; gap:18px;
+  padding:30px 28px; text-decoration:none; background:var(--paper);
+  border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  transition:background .15s; }
+.gr-section.alt .level{ background:var(--paper-2); }
+.level:hover{ background:var(--ink); }
+.level:hover h3,.level:hover p,.level:hover .n{ color:var(--paper); }
+.level:hover .n{ border-color:var(--paper); }
+.level .n{ flex:0 0 auto; width:42px; height:42px; border:1.5px solid var(--ink);
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-disp);
+  font-weight:600; font-size:1.04rem; color:var(--ink); border-radius:50%; transition:.15s; }
+.level h3,.u-page .level h3{ font-family:var(--font-disp); font-weight:600; font-size:1.08rem; color:var(--ink);
+  margin:6px 0 6px; letter-spacing:-.01em; transition:.15s; }
+.level p{ font-size:.9rem; color:var(--ink-3); margin:0; transition:.15s; }
+.level.gr-level-cta{ background:var(--accent); }
+.level.gr-level-cta .n{ border-color:var(--accent-ink); color:var(--accent-ink); }
+.level.gr-level-cta h3{ color:var(--accent-ink); }
+.level.gr-level-cta p{ color:var(--accent-ink); opacity:.8; }
+.level.gr-level-cta:hover{ background:var(--accent-d); }
+.level.gr-level-cta:hover h3,.level.gr-level-cta:hover p,.level.gr-level-cta:hover .n{ color:var(--accent-ink); }
+
+/* ====================== CARD GRID (gallery, hairline) ====================== */
+.gr-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+  border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.card{ position:relative; display:flex; flex-direction:column; padding:30px 28px 26px;
+  text-decoration:none; background:transparent; color:inherit;
+  border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  transition:background .15s; min-height:172px; }
+.card:hover{ background:var(--ink); }
+.card:hover h3,.card:hover p,.card:hover .more,.card:hover .ic{ color:var(--paper); }
+.card:hover .more{ color:var(--accent); }
+.card .ic{ font-size:1.4rem; line-height:1; margin-bottom:18px; filter:grayscale(.15); }
+.card h3,.u-page .card h3{ font-family:var(--font-disp); font-weight:600; font-size:1.12rem; color:var(--ink);
+  margin:0 0 8px; letter-spacing:-.01em; }
+.card p{ font-size:.9rem; color:var(--ink-2); margin:0 0 16px; flex:1; }
+.card .more{ font-family:var(--font-ui); font-weight:700; font-size:.78rem; color:var(--ink);
+  letter-spacing:.06em; text-transform:uppercase; display:inline-flex; align-items:center; gap:7px; }
+.card .more::after{ content:"→"; }
+.card .pill{ align-self:flex-start; font-family:var(--font-ui); font-weight:700; font-size:.64rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); background:var(--accent);
+  padding:4px 9px; margin-bottom:14px; }
+.card .pill.prem{ background:var(--ink); color:var(--paper); }
+.card .tag-new{ display:inline-block; background:var(--accent); color:var(--accent-ink);
+  font-size:.58rem; font-weight:800; letter-spacing:.1em; padding:3px 8px; margin-left:8px;
+  vertical-align:middle; }
+.card.gr-card-feat{ outline:2px solid var(--accent); outline-offset:-2px; }
+
+/* ====================== BAND (CTA) ====================== */
+.gr-band{ background:var(--ink); color:var(--paper); padding:64px 56px;
+  display:grid; grid-template-columns:1fr auto; align-items:center; gap:40px; }
+.gr-band h2{ font-family:var(--font-disp); font-weight:700; letter-spacing:-.025em;
+  font-size:clamp(1.7rem,3.2vw,2.5rem); line-height:1.02; margin:0; max-width:18ch; }
+.gr-band p{ color:rgba(244,243,239,.72); margin:14px 0 0; max-width:50ch; }
+.gr-band .gr-band-action{ display:flex; }
+@media(max-width:760px){ .gr-band{ grid-template-columns:1fr; padding:48px 28px; } }
+
+/* ====================== PRICING ====================== */
+.gr-prices{ display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.price{ position:relative; display:flex; flex-direction:column; padding:32px 26px;
+  background:var(--paper); border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+.price.feat{ background:var(--ink); color:var(--paper); }
+.price.feat h3,.price.feat .amt,.price.feat li{ color:var(--paper); }
+.price h3,.u-page .price h3{ font-family:var(--font-disp); font-weight:600; font-size:1.04rem; color:var(--ink);
+  letter-spacing:.04em; text-transform:uppercase; margin:0 0 18px; }
+.price.feat h3,.u-page .price.feat h3{ color:var(--paper); }
+.price .tag{ position:absolute; top:0; right:0; background:var(--accent); color:var(--accent-ink);
+  font-family:var(--font-ui); font-weight:800; font-size:.6rem; letter-spacing:.14em;
+  text-transform:uppercase; padding:5px 10px; }
+.price .amt{ font-family:var(--font-disp); font-weight:700; font-size:2.4rem; letter-spacing:-.03em;
+  line-height:1; color:var(--ink); margin-bottom:22px; }
+.price .amt span{ font-family:var(--font-ui); font-size:.86rem; font-weight:500; color:var(--ink-3);
+  letter-spacing:0; }
+.price.feat .amt span{ color:rgba(255,255,255,.6); }
+.price ul{ list-style:none; padding:0; margin:0 0 24px; flex:1; display:grid; gap:11px; }
+.price li{ font-size:.9rem; color:var(--ink-2); display:flex; gap:10px; align-items:flex-start; }
+.price.feat li{ color:rgba(255,255,255,.82); }
+.price li::before{ content:"—"; color:var(--accent); font-weight:700; flex:0 0 auto; }
+.price .btn{ width:100%; }
+.price.feat .btn-ghost{ color:#fff; border-color:rgba(255,255,255,.5); }
+.price.feat .btn-ghost:hover{ background:#fff; color:var(--ink); border-color:#fff; }
+
+/* ====================== STEPS (cum funcționează) ====================== */
+.gr-steps{ display:grid; grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.gr-step{ padding:36px 28px 32px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  background:var(--paper); }
+.gr-section.alt .gr-step{ background:var(--paper-2); }
+.gr-step .gr-step-n{ font-family:var(--font-disp); font-weight:700; font-size:3.2rem; line-height:1;
+  letter-spacing:-.04em; color:var(--accent); margin-bottom:18px; }
+.gr-step h3{ font-family:var(--font-disp); font-weight:600; font-size:1.24rem; color:var(--ink);
+  margin:0 0 10px; letter-spacing:-.01em; }
+.gr-step p{ font-size:.94rem; color:var(--ink-2); margin:0; }
+
+/* ====================== NEWSLETTER ====================== */
+.gr-nl{ background:var(--accent); color:var(--accent-ink); padding:72px 56px; }
+.gr-nl-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.gr-nl h2{ font-family:var(--font-disp); font-weight:700; letter-spacing:-.025em;
+  font-size:clamp(1.9rem,3.6vw,2.8rem); line-height:1.0; margin:0; }
+.gr-nl p{ color:var(--accent-ink); opacity:.82; margin:16px 0 0; max-width:46ch; }
+.nl-form{ display:flex; flex-wrap:wrap; gap:0; align-items:stretch; }
+.nl-form input{ flex:1; min-width:200px; padding:15px 18px; border:1.5px solid var(--accent-ink);
+  background:var(--paper); color:var(--ink); font-family:var(--font-ui); font-size:.96rem;
+  border-radius:0; }
+.nl-form input::placeholder{ color:var(--ink-3); }
+.nl-form button{ padding:15px 26px; border:1.5px solid var(--accent-ink); border-left:0;
+  background:var(--accent-ink); color:var(--paper); font-family:var(--font-ui); font-weight:700;
+  font-size:.94rem; cursor:pointer; border-radius:0; transition:.15s; white-space:nowrap; }
+.nl-form button:hover{ background:var(--ink); border-color:var(--ink); }
+.nl-msg{ flex-basis:100%; margin-top:12px; font-size:.86rem; font-weight:600; }
+@media(max-width:760px){ .gr-nl{ padding:52px 28px; } .gr-nl-grid{ grid-template-columns:1fr; gap:28px; }
+  .nl-form input{ border-right:1.5px solid var(--accent-ink); }
+  .nl-form button{ border-left:1.5px solid var(--accent-ink); border-top:0; flex:1; } }
+
+/* ====================== FOOTER ====================== */
+.foot{ background:var(--ink); color:var(--paper); padding:64px 0 36px; }
+.foot .gr-wrap{ }
+.foot-grid{ display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.16); }
+.foot .brand-txt{ color:#fff; }
+.foot p{ color:rgba(244,243,239,.6); }
+.foot h4{ font-family:var(--font-ui); font-weight:700; font-size:.72rem; letter-spacing:.16em;
+  text-transform:uppercase; color:rgba(255,255,255,.5); margin:0 0 16px; }
+.foot-grid > div a{ display:block; color:rgba(244,243,239,.78); text-decoration:none;
+  font-size:.92rem; padding:5px 0; transition:color .15s; }
+.foot-grid > div a:hover{ color:var(--accent); }
+.soc-h{ font-family:var(--font-ui); font-weight:700; font-size:.72rem; letter-spacing:.16em;
+  text-transform:uppercase; color:rgba(255,255,255,.5); margin:22px 0 12px; }
+.soc{ display:flex; flex-wrap:wrap; gap:10px; }
+.soc a{ width:38px; height:38px; border:1px solid rgba(255,255,255,.22); border-radius:2px;
+  display:inline-flex; align-items:center; justify-content:center; transition:.15s; padding:0; }
+.soc a:hover{ background:var(--accent); border-color:var(--accent); }
+.soc svg{ width:17px; height:17px; fill:#fff; }
+.soc a:hover svg{ fill:var(--accent-ink); }
+.foot-bottom{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;
+  padding-top:28px; font-size:.82rem; color:rgba(244,243,239,.5); }
+.foot-bottom a{ color:rgba(244,243,239,.7); text-decoration:none; }
+.foot-bottom a:hover{ color:var(--accent); }
+
+/* ====================== RESPONSIVE ====================== */
+@media(max-width:1024px){
+  .gr-hero-grid{ grid-template-columns:1fr; min-height:0; }
+  .gr-hero-left{ border-right:0; padding-right:0; padding:48px 0 44px; }
+  .gr-hero-right{ min-height:300px; border-top:1px solid var(--line); }
+  .gr-comp-grid{ grid-template-columns:1fr; }
+  .gr-comp-pitch{ border-right:0; border-bottom:1px solid rgba(255,255,255,.16);
+    padding:56px 0 48px; }
+  .cf-comp{ padding:48px 0; }
+  .gr-prices{ grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:760px){
+  .nav-links{ position:fixed; inset:60px 0 auto 0; flex-direction:column; gap:0;
+    background:var(--paper); border-bottom:1px solid var(--line); padding:8px 20px 16px;
+    transform:translateY(-130%); transition:transform .22s ease; z-index:40; align-items:stretch; }
+  .nav-links.open{ transform:translateY(0); box-shadow:0 18px 40px rgba(0,0,0,.14); }
+  .nav-links a{ padding:13px 6px; border-bottom:1px solid var(--line-soft); }
+  .burger{ display:inline-flex; }
+  .gr-stats-grid{ grid-template-columns:repeat(2,1fr); }
+  .stat{ border-bottom:1px solid var(--line); }
+  .stat:nth-child(odd){ border-right:1px solid var(--line); }
+  .stat:nth-child(even){ border-right:0; }
+  .gr-levels,.gr-cards,.gr-steps{ grid-template-columns:1fr; }
+  .gr-prices{ grid-template-columns:1fr; }
+  .gr-head{ grid-template-columns:1fr; gap:6px; }
+  .gr-head .gr-idx{ padding-top:0; }
+  .gr-section{ padding:60px 0; }
+  .cf-comp-out{ flex-direction:column; align-items:flex-start; gap:18px; }
+  .cf-comp-split{ text-align:left; }
+}
+@media(max-width:380px){
+  .gr-stats-grid{ grid-template-columns:1fr; }
+  .stat{ border-right:0 !important; }
+}
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Clubul Financiar","url":"https://clubulfinanciar.ro","inLanguage":"ro-RO","publisher":{"@type":"Organization","name":"Clubul Financiar"}}</script></head>
+<body><header class="nav"><div class="nav-in">
+    <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+    <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">🌙</span></button>
+      <span id="acctSlot"><a class="btn btn-primary" href="/login.html">Cont</a></span>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
+    </div>
+  </div></header>
+
+<main class="u-page">
+<!-- HERO — Swiss split: oversized type left, 3D stage right (never overlapping) -->
+<section class="gr-hero">
+  <div class="cf-tape" aria-label="Piața azi (orientativ)">
+    <span class="cf-tape-tag">PIAȚA AZI</span>
+    <div class="cf-tape-vp"><div class="cf-tape-row" id="cfTape"><span class="cf-tape-load">se încarcă…</span></div></div>
+  </div>
+  <div class="gr-wrap">
+    <div class="gr-hero-grid">
+      <div class="gr-hero-left">
+        <p class="gr-eyebrow">Educație financiară · România</p>
+        <h1 class="gr-h1">
+          <span class="ln">Banii tăi,</span>
+          <span class="ln">explicați <span class="mk">simplu.</span></span>
+        </h1>
+        <p class="gr-lead">Investiții, credite, economii, business și independență financiară — un singur loc, în lei și pe legislația României. Fără jargon, fără vânzare.</p>
+        <div class="gr-hero-cta">
+          <a class="btn btn-primary" href="/incepe-aici.html">Începe gratuit →</a>
+          <a class="btn btn-ghost" href="/cursuri.html">Vezi cursurile</a>
+        </div>
+        <div class="gr-trust">
+          <span><b>✓</b> Gratuit la start</span>
+          <span><b>✓</b> În limba română</span>
+          <span><b>✓</b> Fără jargon</span>
+        </div>
+      </div>
+      <div class="gr-hero-right">
+        <!-- static fallback chart (visible <880px / reduced-motion where 3D is off);
+             the WebGL canvas paints over it on capable desktops) -->
+        <div class="gr-fallback" aria-hidden="true">
+          <span style="height:34%"></span><span style="height:48%"></span><span style="height:42%"></span>
+          <span style="height:60%"></span><span style="height:72%"></span><span style="height:66%"></span>
+          <span style="height:88%"></span><span style="height:100%"></span>
+        </div>
+        <div id="hero3d" aria-hidden="true"></div>
+        <span class="gr-stage-label">Creștere · live</span>
+        <div class="gr-stage-cap">
+          <span class="k">Indice educațional</span>
+          <span class="v">+8,0% <em>p.a.</em></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="gr-stats"><div class="gr-wrap" style="padding-left:0;padding-right:0">
+  <div class="gr-stats-grid">
+    <div class="stat reveal"><div class="num">1000+</div><div class="lbl">Articole educaționale</div></div>
+    <div class="stat reveal"><div class="num">11</div><div class="lbl">Calculatoare financiare</div></div>
+    <div class="stat reveal"><div class="num">17</div><div class="lbl">Categorii acoperite</div></div>
+    <div class="stat reveal"><div class="num">100%</div><div class="lbl">Gratuit la start</div></div>
+  </div>
+</div></section>
+
+<!-- COMPOUND INSTRUMENT — money as huge typographic hero -->
+<section class="gr-comp"><div class="gr-wrap">
+  <div class="gr-comp-grid">
+    <div class="gr-comp-pitch">
+      <p class="gr-eyebrow">Vezi cu ochii tăi</p>
+      <h2>Un leu pus deoparte azi — cât face peste ani?</h2>
+      <p>Trage de sumă și uită-te cum lucrează dobânda compusă: partea verde e cât câștigi <strong>fără să muncești</strong>, doar pentru că ai început devreme.</p>
+      <a class="btn btn-ghost" href="/calculatoare.html">Deschide calculatoarele →</a>
+    </div>
+    <aside class="cf-comp" aria-label="Simulator dobândă compusă">
+      <div class="cf-comp-head">
+        <span class="cf-comp-eyebrow">Efectul compus · live</span>
+        <h3 class="cf-comp-title">Cât crește un leu pus deoparte</h3>
+      </div>
+      <div class="cf-comp-controls">
+        <label class="cf-comp-row">
+          <span class="cf-comp-lbl">Pun pe lună</span>
+          <output class="cf-comp-val" id="ccMonthlyOut">500&nbsp;lei</output>
+        </label>
+        <input type="range" id="ccMonthly" class="cf-comp-range" min="50" max="2500" step="50" value="500" aria-label="Sumă lunară în lei">
+        <div class="cf-comp-years" role="group" aria-label="Orizont de timp">
+          <button class="cf-comp-yr" data-y="10">10 ani</button>
+          <button class="cf-comp-yr is-on" data-y="20">20 ani</button>
+          <button class="cf-comp-yr" data-y="30">30 ani</button>
+        </div>
+      </div>
+      <svg class="cf-comp-spark" id="ccSpark" viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="ccFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0FB36B" stop-opacity=".34"/><stop offset="1" stop-color="#0FB36B" stop-opacity="0"/>
+        </linearGradient></defs>
+        <path id="ccArea" fill="url(#ccFill)"/>
+        <path id="ccContrib" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1.4" stroke-dasharray="3 4" opacity=".7"/>
+        <path id="ccLine" fill="none" stroke="#0FB36B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="cf-comp-out">
+        <div class="cf-comp-total">
+          <span class="cf-comp-out-lbl">După <b id="ccYears">20</b> de ani ai</span>
+          <strong class="cf-comp-big" id="ccTotal">0&nbsp;lei</strong>
+        </div>
+        <dl class="cf-comp-split">
+          <div><dt>Ai depus</dt><dd id="ccPaid" class="num">0</dd></div>
+          <div class="cf-comp-gain"><dt>Dobândă, pe gratis</dt><dd id="ccGain" class="num">0</dd></div>
+        </dl>
+      </div>
+      <p class="cf-comp-note">Estimare la 8%/an, dobândă reinvestită. Educativ, nu consultanță.</p>
+    </aside>
+  </div>
+</div></section>
+
+<!-- ÎNCEPE AICI -->
+<section class="gr-section"><div class="gr-wrap">
+  <div class="gr-head">
+    <span class="gr-idx">01</span>
+    <div class="gr-head-main">
+      <p class="gr-eyebrow">Începe aici</p>
+      <h2>Nu știi de unde să începi? Îți arătăm traseul.</h2>
+      <p class="gr-sub">Alege nivelul la care ești acum și urmează pașii, unul câte unul.</p>
+    </div>
+  </div>
+  <div class="gr-levels">
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">1</span><div><h3>Nu știu nimic despre bani</h3><p>Bazele: buget, cheltuieli, primul leu economisit.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">2</span><div><h3>Am economii</h3><p>Fond de urgență și unde îți ții banii.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">3</span><div><h3>Vreau să investesc</h3><p>Bursă, ETF-uri, titluri de stat — de la zero.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">4</span><div><h3>Vreau venit pasiv</h3><p>Dividende, dobânzi, surse de venit recurent.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">5</span><div><h3>Vreau independență financiară</h3><p>Strategia FIRE și planul pe termen lung.</p></div></a>
+    <a class="level reveal gr-level-cta" href="/incepe-aici.html"><span class="n">→</span><div><h3>Vezi tot traseul</h3><p>Planul complet, pas cu pas.</p></div></a>
+  </div>
+</div></section>
+
+<!-- SECȚIUNI -->
+<section class="gr-section alt"><div class="gr-wrap">
+  <div class="gr-head">
+    <span class="gr-idx">02</span>
+    <div class="gr-head-main">
+      <p class="gr-eyebrow">Explorează</p>
+      <h2>Tot ce ai nevoie despre bani, într-un loc</h2>
+    </div>
+  </div>
+  <div class="gr-cards">
+    <a class="card reveal gr-card-feat" href="/ultra/terminal.html"><div class="ic">🖥️</div><h3>Terminalul <span class="tag-new">NOU · GRATUIT</span></h3><p>Curs BNR live (valute + aur), companiile bursei, știri și un asistent care înțelege ce întrebi.</p><span class="more">Deschide</span></a>
+    <a class="card reveal" href="/educatie.html"><div class="ic">📚</div><h3>Educație financiară</h3><p>Buget, economisire, psihologia banilor, obiceiuri sănătoase.</p><span class="more">Explorează</span></a>
+    <a class="card reveal" href="/investitii.html"><div class="ic">📈</div><h3>Investiții</h3><p>Bursă, acțiuni, ETF-uri, titluri de stat, aur, pensii private.</p><span class="more">Explorează</span></a>
+    <a class="card reveal" href="/credite.html"><div class="ic">🏦</div><h3>Credite</h3><p>Ipotecar, nevoi personale, refinanțare, carduri de credit.</p><span class="more">Explorează</span></a>
+    <a class="card reveal" href="/calculatoare.html"><div class="ic">🧮</div><h3>Calculatoare</h3><p>Dobândă compusă, economii, credit, salariu net, FIRE.</p><span class="more">Calculează</span></a>
+    <a class="card reveal" href="/educatie.html#economie"><div class="ic">🌍</div><h3>Economie</h3><p>Inflație, recesiune, PIB, dobânzi — explicat simplu.</p><span class="more">Învață</span></a>
+    <a class="card reveal" href="/cursuri.html"><div class="ic">🎓</div><h3>Cursuri</h3><p>De la „Educație financiară 101" la masterclass-uri avansate.</p><span class="more">Vezi cursuri</span></a>
+    <a class="card reveal" href="/glosar.html"><div class="ic">📖</div><h3>Glosar financiar</h3><p>Peste 130 de termeni despre bani, explicați simplu.</p><span class="more">Caută un termen</span></a>
+    <a class="card reveal" href="/stiri.html"><div class="ic">📰</div><h3>Știri</h3><p>Cele mai importante știri financiare din România, la zi.</p><span class="more">Vezi știrile</span></a>
+  </div>
+</div></section>
+
+<!-- CALCULATOARE BAND -->
+<section style="background:var(--paper)"><div class="gr-wrap" style="padding-top:0;padding-bottom:0">
+  <div class="gr-band reveal" style="margin:0">
+    <div>
+      <h2>Ia decizii cu cifrele în față</h2>
+      <p>Calculatoare gratuite pentru dobândă compusă, credite, economii, salariu net și independență financiară (FIRE).</p>
+    </div>
+    <div class="gr-band-action"><a class="btn btn-light" href="/calculatoare.html">Deschide calculatoarele →</a></div>
+  </div>
+</div></section>
+
+<!-- CURSURI -->
+<section class="gr-section alt"><div class="gr-wrap">
+  <div class="gr-head">
+    <span class="gr-idx">03</span>
+    <div class="gr-head-main">
+      <p class="gr-eyebrow">Academia</p>
+      <h2>Cursuri pas cu pas</h2>
+    </div>
+  </div>
+  <div class="gr-cards" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card reveal"><span class="pill">Gratuit</span><h3>Educație financiară 101</h3><p>Bazele banilor: buget, economisire, datorii, primii pași.</p><span class="more" style="opacity:0;pointer-events:none">.</span></div>
+    <div class="card reveal"><span class="pill">Gratuit</span><h3>Cum funcționează bursa</h3><p>Acțiuni, ETF-uri și cum începi să investești în siguranță.</p><span class="more" style="opacity:0;pointer-events:none">.</span></div>
+    <div class="card reveal"><span class="pill prem">Premium</span><h3>ETF Masterclass</h3><p>Construiește un portofoliu de ETF-uri pe termen lung.</p><span class="more" style="opacity:0;pointer-events:none">.</span></div>
+  </div>
+  <div style="margin-top:34px"><a class="btn btn-ghost" href="/cursuri.html">Toate cursurile →</a></div>
+</div></section>
+
+<!-- ABONAMENTE -->
+<section class="gr-section"><div class="gr-wrap">
+  <div class="gr-head">
+    <span class="gr-idx">04</span>
+    <div class="gr-head-main">
+      <p class="gr-eyebrow">Abonamente</p>
+      <h2>Începe gratuit, crește când ești pregătit</h2>
+    </div>
+  </div>
+  <div class="gr-prices">
+    <div class="price reveal"><h3>Gratuit</h3><div class="amt">0 lei</div><ul><li>Articole &amp; știri</li><li>3 cursuri</li><li>Calculatoare de bază</li><li>Comunitate</li></ul><a class="btn btn-ghost" href="/login.html">Creează cont</a></div>
+    <div class="price feat reveal"><span class="tag">Popular</span><h3>Premium</h3><div class="amt">49 lei<span>/lună</span></div><ul><li>Toate cursurile basic</li><li>Toate calculatoarele</li><li>Newsletter premium</li><li>Fără reclame</li></ul><a class="btn btn-primary" href="/premium.html">În curând</a></div>
+    <div class="price reveal"><h3>Pro</h3><div class="amt">99 lei<span>/lună</span></div><ul><li>Tot din Premium</li><li>Analize săptămânale</li><li>Portofolii model</li><li>Webinarii</li></ul><a class="btn btn-ghost" href="/premium.html">În curând</a></div>
+    <div class="price reveal"><h3>Ultra</h3><div class="amt">199 lei<span>/lună</span></div><ul><li>Tot din Pro</li><li>Comunitate exclusivă</li><li>Sesiuni live &amp; mentorat</li><li>Q&amp;A lunar</li></ul><a class="btn btn-ghost" href="/premium.html">În curând</a></div>
+  </div>
+</div></section>
+
+<!-- CUM FUNCȚIONEAZĂ -->
+<section class="gr-section alt"><div class="gr-wrap">
+  <div class="gr-head">
+    <span class="gr-idx">05</span>
+    <div class="gr-head-main">
+      <p class="gr-eyebrow">Cum funcționează</p>
+      <h2>Trei pași spre control financiar</h2>
+    </div>
+  </div>
+  <div class="gr-steps">
+    <div class="gr-step reveal"><div class="gr-step-n">01</div><h3>Învață</h3><p>Citește articole și ghiduri clare despre bani, investiții și credite — pe înțelesul tuturor.</p></div>
+    <div class="gr-step reveal"><div class="gr-step-n">02</div><h3>Aplică</h3><p>Folosește calculatoarele și pașii concreți ca să iei decizii mai bune cu banii tăi.</p></div>
+    <div class="gr-step reveal"><div class="gr-step-n">03</div><h3>Crește</h3><p>Construiește obiceiuri sănătoase, economisește, investește și ajungi la independență financiară.</p></div>
+  </div>
+</div></section>
+
+<!-- CALCULATOARE POPULARE -->
+<section class="gr-section"><div class="gr-wrap">
+  <div class="gr-head">
+    <span class="gr-idx">06</span>
+    <div class="gr-head-main">
+      <p class="gr-eyebrow">Instrumente</p>
+      <h2>Calculatoare populare</h2>
+    </div>
+  </div>
+  <div class="gr-cards" style="grid-template-columns:repeat(3,1fr)">
+    <a class="card reveal" href="/calculatoare/dobanda-compusa.html"><div class="ic">🧮</div><h3>Dobândă compusă</h3><p>Vezi cât cresc banii tăi în timp.</p><span class="more">Calculează</span></a>
+    <a class="card reveal" href="/calculatoare/credit.html"><div class="ic">🏦</div><h3>Rată credit</h3><p>Rata lunară, total și dobândă.</p><span class="more">Calculează</span></a>
+    <a class="card reveal" href="/calculatoare/salariu-net.html"><div class="ic">💼</div><h3>Salariu net</h3><p>Din brut în net (CAS, CASS, impozit).</p><span class="more">Calculează</span></a>
+  </div>
+</div></section>
+
+<!-- CELE MAI CITITE -->
+<section class="gr-section alt"><div class="gr-wrap">
+  <div class="gr-head">
+    <span class="gr-idx">07</span>
+    <div class="gr-head-main">
+      <p class="gr-eyebrow">Bibliotecă · 1000 articole</p>
+      <h2>Cele mai citite articole</h2>
+    </div>
+  </div>
+  <div class="gr-cards">
+    <a class="card reveal" href="/articole/dobanda-compusa-a-opta-minune-a-lumii.html"><div class="ic">📈</div><h3>Dobânda compusă: a opta minune</h3><p>De ce timpul e cel mai important ingredient în investiții.</p><span class="more">Citește</span></a>
+    <a class="card reveal" href="/articole/cum-iti-faci-primul-buget-personal-pas-cu-pas.html"><div class="ic">💰</div><h3>Cum îți faci primul buget</h3><p>Ghid pas cu pas pentru începători.</p><span class="more">Citește</span></a>
+    <a class="card reveal" href="/articole/ce-este-un-etf-si-de-ce-e-potrivit-pentru-incepatori.html"><div class="ic">📊</div><h3>Ce este un ETF</h3><p>Cel mai simplu mod de a investi diversificat.</p><span class="more">Citește</span></a>
+    <a class="card reveal" href="/articole/fondul-de-urgenta-cat-sa-ai-si-unde-sa-l-tii.html"><div class="ic">🛟</div><h3>Fondul de urgență</h3><p>Cât să ai pus deoparte și unde să-l ții.</p><span class="more">Citește</span></a>
+    <a class="card reveal" href="/articole/ce-este-bitcoin-pe-intelesul-tuturor.html"><div class="ic">₿</div><h3>Ce este Bitcoin</h3><p>Criptomonedele explicate simplu și onest.</p><span class="more">Citește</span></a>
+    <a class="card reveal" href="/articole/creditul-ipotecar-in-romania-ghid-complet-pentru-incepatori.html"><div class="ic">🏠</div><h3>Creditul ipotecar în România</h3><p>Tot ce trebuie să știi înainte să semnezi.</p><span class="more">Citește</span></a>
+  </div>
+  <div style="margin-top:34px"><a class="btn btn-ghost" href="/educatie.html">Vezi toate cele 1000 articole →</a></div>
+</div></section>
+
+<!-- NEWSLETTER -->
+<section class="gr-nl">
+  <div class="gr-wrap">
+    <div class="gr-nl-grid">
+      <div>
+        <p class="gr-eyebrow" style="margin-bottom:18px">Newsletter</p>
+        <h2>Primește „Dimineața pe scurt"</h2>
+        <p>Știrile care-ți mișcă banii + un concept explicat simplu, în 5 minute. În fiecare dimineață.</p>
+      </div>
+      <form class="nl-form" novalidate>
+        <input type="email" placeholder="adresa ta de email" autocomplete="email" required aria-label="Email">
+        <button type="submit">Abonează-mă gratuit</button>
+        <div class="nl-msg" role="status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="gr-wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
+        <p style="font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
+      </div>
+      <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Clubul Financiar · clubulfinanciar.ro</span>
+      <span><a href="/privacy.html">Confidențialitate</a> · <a href="/terms.html">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+    </div>
+  </div></footer><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="/assets/three3d.js?v=23"></script>
+<script defer src="/assets/tilt.js?v=23"></script>
+<script defer src="/assets/site.js?v=30"></script>
+<script defer src="/assets/compound.js?v=3"></script>
+</body>
+</html>

@@ -80,3 +80,39 @@
   }, { threshold: 0.5 });
   nums.forEach(function (n) { io.observe(n); });
 })();
+
+/* Bandă live date RO (terminal) — fx + dividende + macro reale; fallback seed (zero-network-safe). */
+(function () {
+  var tape = document.getElementById('cfTape'); if (!tape) return;
+  var nf = new Intl.NumberFormat('ro-RO', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  function pct(v) { if (v == null || isNaN(v)) return '';
+    var s = (v >= 0 ? '+' : '') + Number(v).toFixed(2).replace('.', ',') + '%';
+    return '<span class="' + (v >= 0 ? 'up' : 'dn') + '">' + (v >= 0 ? '▲' : '▼') + ' ' + s + '</span>'; }
+  function item(sym, val, extra) {
+    return '<span class="cf-tape-item"><span class="sym">' + sym + '</span> <b>' + val + '</b> ' + (extra || '') + '</span>'; }
+  function seed() { return [
+    item('EUR', '5,2386', pct(-0.01)), item('USD', '4,5706', pct(0.08)), item('GBP', '6,11', pct(0.05)),
+    item('TLV', '37,22 lei', '<span class="up">3,45% div</span>'), item('SNN', '75,9 lei', '<span class="up">5,38% div</span>'),
+    item('ECB', '2,40%', ''), item('Euribor 3L', '2,23%', '') ]; }
+  function build(items) {
+    if (!items.length) items = seed();
+    var html = items.join('<span class="cf-tape-sep">·</span>');
+    tape.innerHTML = '<span class="cf-tape-row-in">' + html + '</span><span class="cf-tape-row-in" aria-hidden="true">' + html + '</span>';
+  }
+  function J(u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); }
+  Promise.all([J('/data/fx.json'), J('/data/dividends.json'), J('/data/macro.json')]).then(function (res) {
+    var fx = res[0], div = res[1], macro = res[2], items = [];
+    try {
+      if (fx && fx.rates) ['EUR', 'USD', 'GBP', 'CHF'].forEach(function (c) {
+        var r = fx.rates.filter(function (x) { return x.cur === c; })[0];
+        if (r) items.push(item(c, nf.format(r.rate), pct(r.chg))); });
+      if (div && div.items) Object.keys(div.items).slice(0, 4).forEach(function (k) {
+        var d = div.items[k]; if (d && d.y) items.push(item(k, d.p ? nf.format(d.p) + ' lei' : '',
+          '<span class="up">' + ('' + d.y).replace('.', ',') + '% div</span>')); });
+      if (macro && macro.groups) macro.groups.forEach(function (g) { (g.items || []).forEach(function (it) {
+        if (it.value != null && items.length < 11) items.push(
+          item(it.label.replace(/\s*\(.*?\)/, '').trim(), ('' + it.value).replace('.', ',') + (it.unit || ''), '')); }); });
+    } catch (e) {}
+    build(items.length >= 4 ? items : seed());
+  }).catch(function () { build(seed()); });
+})();
