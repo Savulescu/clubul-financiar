@@ -10,7 +10,7 @@ ART = os.path.join(ROOT, "articole")
 SRC = os.path.join(ART, "_src")
 RECORDS = "/Users/savulescucristian/clubul-financiar/_records.json"
 GLOS_SRC = "/private/tmp/claude-501/-Users-savulescucristian/2d8bd220-1ab9-4311-b6f9-e180142ffdfa/tasks/wu28oa28b.output"
-V = "29"  # cache bust
+V = "30"  # cache bust
 BUILD_DATE = "2026-06-19"  # dată build pentru date noi (articolele existente păstrează data lor)
 
 CATS = [
@@ -73,7 +73,7 @@ PAGE_TMPL = '''<!DOCTYPE html><html lang="ro"><head>
 <script type="application/ld+json">{ldjson}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v={v}"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=1"><link rel="stylesheet" href="/assets/cf-preview.css?v=1"><link rel="stylesheet" href="/assets/cf-article.css?v=1"></head><body>{nav}<main class="u-page"><article class="article"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#{cat}">{catname}</a> · {min} min citire · Actualizat {date_disp}</p><h1>{title}</h1>{body}<div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article></main>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
+<link rel="stylesheet" href="/assets/style.css?v={v}"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-preview.css?v=1"><link rel="stylesheet" href="/assets/cf-article.css?v=1"></head><body>{nav}<main class="u-page"><article class="article"><p class="meta"><a href="/educatie.html">Educație</a> · <a href="/educatie.html#{cat}">{catname}</a> · {min} min citire · Actualizat {date_disp}</p><h1>{title}</h1>{body}<div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie.html">← Toate articolele</a></p></article></main>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/article.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
 
 def build_page(slug, title, desc, cat, body):
     mins = reading_minutes(body)

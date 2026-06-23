@@ -12,7 +12,7 @@ QZ = os.path.join(MC, "_quiz")
 RECORDS = os.path.join(ROOT, "_audits", "masterclass_records.json")
 import sys; sys.path.insert(0, ROOT)
 from _shell import NAV_HTML, FOOTER_HTML
-V = "27"
+V = "30"
 BUILD_DATE = "2026-06-21"
 
 DOMNAMES = {

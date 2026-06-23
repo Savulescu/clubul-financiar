@@ -87,8 +87,8 @@ page = f'''<!DOCTYPE html><html lang="ro"><head>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=23">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23">
-<link rel="stylesheet" href="/assets/cf-ultra.css?v=1"></head><body class="u-page">{NAV_HTML}
+<link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=3"></head><body class="u-page">{NAV_HTML}
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Dicționar</p><h1 class="title">Glosar financiar</h1>
 <p class="lead" style="margin-inline:auto">{count} de termeni despre bani, investiții, credite și taxe — explicați pe înțelesul tuturor.</p>
@@ -131,7 +131,7 @@ alpha.addEventListener("click",e=>{{
 }});
 q.addEventListener("input",()=>{{ if(q.value.trim()){{curL="all";[...alpha.children].forEach(x=>x.classList.remove("active"));alpha.firstElementChild.classList.add("active");}} apply(); }});
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/site.js?v=23"></script></body></html>'''
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/site.js?v=30"></script></body></html>'''
 
 open(OUT, "w", encoding="utf-8").write(page)
 print(f"glosar.html scris: {count} termeni, {len(letters)} litere")

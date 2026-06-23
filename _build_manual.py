@@ -7,7 +7,7 @@ ROOT = "/Users/savulescucristian/clubul-financiar"
 DOCS = os.path.join(ROOT, "docs")
 sys.path.insert(0, ROOT)
 from _shell import NAV_HTML, FOOTER_HTML
-V = "23"
+V = "30"
 
 NAMES = {"buget":"💰 Buget personal","economii":"🐖 Economii","datorii":"💳 Datorii",
  "psihologie":"🧠 Psihologia banilor","venituri":"💵 Venituri","investitii":"📈 Investiții",
