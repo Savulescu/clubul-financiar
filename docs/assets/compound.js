@@ -58,3 +58,25 @@
   });
   render(true);
 })();
+
+/* Stat count-up pe scroll-into-view (homepage). Reduced-motion safe; fallback = valoarea finală. */
+(function () {
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var nums = [].slice.call(document.querySelectorAll('.u-page .stat .num'));
+  if (!nums.length || !('IntersectionObserver' in window)) return;
+  var fmt = new Intl.NumberFormat('ro-RO');
+  function parse(txt) { var m = txt.match(/^([\d.,]+)(.*)$/); if (!m) return null;
+    return { target: parseInt(m[1].replace(/[.,]/g, ''), 10), suffix: m[2] || '' }; }
+  function run(el) {
+    var d = parse(el.textContent.trim()); if (!d || isNaN(d.target)) return;
+    var t0 = null;
+    function step(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / 1100), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt.format(Math.round(d.target * e)) + d.suffix;
+      if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (en) { if (en.isIntersecting) { run(en.target); io.unobserve(en.target); } });
+  }, { threshold: 0.5 });
+  nums.forEach(function (n) { io.observe(n); });
+})();
