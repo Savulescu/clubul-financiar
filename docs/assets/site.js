@@ -48,7 +48,7 @@
   // ---- navbar (hidratează dacă e pre-randat static în HTML, altfel îl creează) ----
   if (!document.querySelector("header.nav")) {
   const nav = document.createElement("header");
-  nav.className = "nav";
+  nav.className = "nav ultra";
   nav.innerHTML = `<div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks">${NAV.map(([t,h])=>`<a href="${h}"${t==="Ultra"?' style="color:#E8C268;font-weight:700"':""}>${t}</a>`).join("")}</nav>

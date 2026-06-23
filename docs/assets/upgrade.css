@@ -235,13 +235,13 @@ h3{ font-size: clamp(1.08rem,.96rem + .7vw, 1.34rem); font-weight: 700; }
 }
 .nav::after{
   content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px;
-  background: var(--grad-tri); opacity:.7;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity:.65;
 }
-.brand-logo .dot{ box-shadow: 0 6px 16px rgba(16,185,129,.4); }
+.brand-logo .dot{ box-shadow: 0 6px 16px rgba(232,194,104,.4); }
 .nav-links a{ position: relative; }
 .nav-links a::after{
   content:''; position:absolute; left:11px; right:11px; bottom:4px; height:2px;
-  background: var(--grad-cool); border-radius:2px;
+  background: linear-gradient(90deg, var(--gold), #caa23f); border-radius:2px;
   transform: scaleX(0); transform-origin: left; transition: transform .22s var(--ease);
 }
 .nav-links a:hover::after{ transform: scaleX(1); }
