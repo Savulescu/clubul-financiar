@@ -162,6 +162,18 @@ def main():
         if len(new) >= MAX_NEW: break
     print(f"noi de generat: {len(new)} | în store: {len(store)}")
 
+    # Notă RO generică pe categorie — folosită ca fallback când LLM-ul nu e disponibil,
+    # ca să nu se mai oprească fluxul de știri externe (calitate mai simplă, dar viu).
+    FB_NOTE = {
+        "banci-centrale": "Deciziile băncilor centrale (Fed, BCE, BNR) influențează dobânzile la credite, depozite și cursul leului.",
+        "piete": "Mișcările piețelor se reflectă în randamentele investițiilor, fondurilor de pensii și ETF-urilor.",
+        "companii": "Rezultatele marilor companii pot mișca bursa și valoarea acțiunilor sau fondurilor deținute.",
+        "crypto": "Volatilitatea crypto e mare — relevantă doar pentru partea de portofoliu pe care ți-o permiți să o riști.",
+        "marfuri": "Prețurile materiilor prime (țiței, gaz, aur) se simt în facturi, la pompă și în inflație.",
+        "macro": "Indicatorii macro (inflație, șomaj, PIB) arată încotro merg prețurile, dobânzile și puterea ta de cumpărare.",
+    }
+    fb_count = 0
+
     for it in new:
         prompt = (
             "Ești redactor senior la Clubul Financiar (educație financiară, România). "
@@ -189,7 +201,14 @@ def main():
                           "ts": it["ts"], "gen_ts": now, "score": it["score"], "cat": cat,
                           "titlu": d["titlu"].strip(), "fapt": d["fapt"].strip(), "ce_inseamna": d["ce_inseamna"].strip()})
         except Exception as e:
-            print("  LLM skip:", it["title"][:40], e); continue
+            print("  LLM fail → fallback fără LLM:", it["title"][:40], e)
+            cat = classify(it["title"] + " " + it["desc"])
+            fapt = re.sub(r"\s+", " ", it.get("desc", "")).strip()[:240] or it["title"].strip()
+            store.append({"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
+                          "ts": it["ts"], "gen_ts": now, "score": it["score"], "cat": cat, "fb": 1,
+                          "titlu": it["title"].strip(), "fapt": fapt,
+                          "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])})
+            fb_count += 1; continue
 
     store.sort(key=lambda s: -s.get("score", 0))
     disp = store[:DISPLAY]
@@ -202,7 +221,7 @@ def main():
         dh = (now - ref) / 3600
         when = f"acum {int(dh)}h" if dh < 24 else f"acum {int(dh/24)}z"
         cards.append(f'''<article class="card news-card reveal" data-cat="{s['cat']}" data-ts="{s['ts'] or s['gen_ts']:.0f}" data-score="{s.get('score',0)}">
-<div class="ne-top"><span class="ne-src">🌍 {html.escape(s['src'])} · {CAT_LABEL[s['cat']]}</span><span class="ne-when">{when}</span></div>
+<div class="ne-top"><span class="ne-src">🌍 {html.escape(s['src'])} · {CAT_LABEL[s['cat']]}{' · rezumat în engleză' if s.get('fb') else ''}</span><span class="ne-when">{when}</span></div>
 <h2>{html.escape(s['titlu'])}</h2>
 <p class="ne-fapt">{html.escape(s['fapt'])} <a class="ne-link" href="{html.escape(s['link'])}" target="_blank" rel="noopener nofollow">Sursă: {html.escape(s['src'])} →</a></p>
 <div class="ne-cti"><strong>💡 Ce înseamnă pentru tine:</strong> {html.escape(s['ce_inseamna'])}</div>

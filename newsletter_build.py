@@ -350,12 +350,20 @@ def fetch_recipients(tier):
 
 
 def send_tier(tier, limit=None):
-    """Trimite newsletterul unui tier tuturor abonaților lui, cu link de dezabonare real."""
+    """Trimite newsletterul unui tier tuturor abonaților lui, cu link de dezabonare real.
+    NU mai eșuează silențios: iese ROȘU dacă lipsesc chei sau dacă nimic nu a plecat."""
     subj, fn = TIERS[tier]
+    if not RESEND or not SB_KEY:
+        print(f"  ❌ Lipsesc chei pentru trimitere (RESEND_API_KEY={'da' if RESEND else 'NU'}, "
+              f"SUPABASE_SERVICE_KEY={'da' if SB_KEY else 'NU'}). Adaugă-le în GitHub Secrets.")
+        sys.exit(1)
     recips = fetch_recipients(tier)
     if limit:
         recips = recips[:int(limit)]
     print(f"[--send {tier}] {len(recips)} abonați")
+    if not recips:
+        print("  ⚠️ 0 abonați confirmați — nu am cui trimite. Verifică abonații (tier, confirmat) în Supabase.")
+        return
     html_body = fn()
     sent = 0
     for r in recips:
@@ -368,6 +376,10 @@ def send_tier(tier, limit=None):
             sent += 1
         import time as _t; _t.sleep(0.25)   # politicos cu Resend
     print(f"  trimise: {sent}/{len(recips)}")
+    if sent == 0:
+        print(f"  ❌ 0 trimise din {len(recips)} — trimiterea eșuează (vezi erorile Resend de mai sus: "
+              f"cheie invalidă, domeniu neverificat la Resend, sau Cloudflare).")
+        sys.exit(1)
 
 
 TIERS = {
