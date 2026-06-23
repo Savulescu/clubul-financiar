@@ -160,3 +160,15 @@ consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
   corp Inter dar SKIN încă vechi → bespoke. masterclass.html ATÂRNĂ la captura CDP (de investigat).
   NEXT: bespoke skin pe stragglers (contact întâi) + unificare titluri Fraunces cu grijă (atenție:
   --font-display=Sora e folosit și la cifre); apoi a doua iterație homepage.
+
+- **[tick 5 — SPLIT-BRAIN REZOLVAT pe conținut ✓]** Cauză reală: remap-ul --emerald→auriu era
+  duplicat inline doar în 6 pagini; altele premium doar prin clase .u-* în markup; contact n-avea
+  nimic. FIX consolidare: mutat remap-ul de tokeni de bază + heading Fraunces + butoane aurii în
+  cf-ultra.css `.u-page` (sursă unică). Acum o pagină devine premium DOAR cu class="u-page" +
+  link cf-ultra.css. Convertit: contact, despre, statistici, teste, glosar (+ builder _build_glosar.py
+  pt durabilitate). Verificat zero regresie pe index/premium/educatie/articole. Buton .btn-primary
+  aurit global pe .u-page (nu mai depinde de class="nav ultra").
+  REDIRECT-uri (skip): account, credite, cursuri, investitii, login. Legal/utilitar rămas
+  (privacy, terms, reset, dezabonare) = impact mic, TODO. ⚠️ hairline verde/albastru sub nav pe
+  nav non-ultra = pas de consistență nav (schimb _shell_nav.html → "nav ultra" + navurile hand-authored).
+  NEXT: pas consistență nav + a 2-a iterație homepage + pricing psychology premium.
