@@ -59,7 +59,7 @@ def head(title, desc, canon, ld=""):
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}">{CSS}</head><body>{NAV_HTML}'''
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-article.css?v=1">{CSS}</head><body class="u-page">{NAV_HTML}'''
 
 FOOT_SCRIPTS = f'{FOOTER_HTML}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/site.js?v={V}"></script>'
 
