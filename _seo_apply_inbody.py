@@ -88,9 +88,8 @@ def apply_article(slug, rec):
         # acceptă doar conținut sigur (p/ul/ol/li/strong/em/h3/a interne)
         if heading and len(re.sub(r"<[^>]+>", "", bodyhtml)) > 200 and "<script" not in bodyhtml.lower():
             sec = f'<h2 class="cf-expand">{esc(heading)}</h2>{bodyhtml}'
-            # inserează înainte de related sau disc
-            anchor = '<section class="related"' if '<section class="related"' in t else '<div class="disc"'
-            t = t.replace(anchor, sec + anchor, 1); note.append("expand")
+            # secțiunea e CONȚINUT de articol -> înainte de disclaimer (în corp), nu după butonul back
+            t = t.replace('<div class="disc"', sec + '<div class="disc"', 1); note.append("expand")
 
     if t != orig:
         open(p, "w", encoding="utf-8").write(t)
