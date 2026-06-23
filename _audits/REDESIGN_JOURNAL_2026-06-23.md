@@ -128,3 +128,14 @@ Recurent RO = card-on-file + 3DS2.
 
 PLAN BUILD: prove-on-homepage întâi → propagare la sursă (componente .btn/.card/.stat),
 consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
+
+- **[tick 2]** Pixel-audit: harta GREȘITĂ — `calculatoare` e DEJA premium (Fraunces/auriu/crem),
+  NU emerald vechi. Trust pixels. _shot.js robustness fix (profil+port Chrome unic per PID, era
+  stall pe profil partajat). Baseline complet relansat (bg). Citit markup hero index.html:
+  `.hero` = #hero3d (Three.js, aria-hidden, ambient) + text stânga + `.hero-caption` static dreapta.
+  Pricing homepage în € (0/9.99/19.99/49.99) vs premium.html lei → bug consistență.
+  SEMNĂTURĂ draftată + math-verificată (scratchpad/compound_component.html): instrument
+  dobândă compusă interactiv (slider lună + pills ani + sparkline auriu SVG + count-up tabular),
+  100% local. 500lei×20ani→294.510 lei (174.510 dobândă). Înlocuiește .hero-caption static.
+  Contact-sheet generator gata. NEXT: contact sheet → vezi toate paginile → integrez instrumentul
+  în hero → screenshot → iterez. Apoi fundație Inter+tabular la sursă.

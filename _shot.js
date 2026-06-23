@@ -15,8 +15,9 @@ const path = require('path');
 const ROOT = __dirname;
 const DOCS = path.join(ROOT, 'docs');
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const PORT = parseInt(process.env.CF_PORT || '8765', 10);
-const DBG = 9344;
+const PORT = parseInt(process.env.CF_PORT || String(8700 + (process.pid % 200)), 10);
+const DBG = 9300 + (process.pid % 400);
+const PROFILE = `/tmp/cf_shot_profile_${process.pid}`;
 const SHOTROOT = process.env.CF_SHOTDIR ||
   '/private/tmp/claude-501/-Users-savulescucristian/164f0cba-a983-42c1-b0b3-2ecb290ca3d2/scratchpad/shots';
 const WIDTHS = (process.env.CF_WIDTHS || '1440,390').split(',').map(s => parseInt(s, 10));
@@ -41,11 +42,11 @@ const server = spawn('python3', ['-m', 'http.server', String(PORT)],
   { cwd: DOCS, stdio: 'ignore' });
 
 // ---- launch chrome ----
-fs.rmSync('/tmp/cf_shot_profile', { recursive: true, force: true });
+fs.rmSync(PROFILE, { recursive: true, force: true });
 const chrome = spawn(CHROME, [
   '--headless=new', '--use-angle=swiftshader', '--disable-gpu', '--hide-scrollbars',
   `--remote-debugging-port=${DBG}`, '--force-device-scale-factor=1',
-  '--user-data-dir=/tmp/cf_shot_profile', 'about:blank',
+  `--user-data-dir=${PROFILE}`, 'about:blank',
 ], { stdio: 'ignore' });
 
 function die(code) { try { chrome.kill(); } catch (e) {} try { server.kill(); } catch (e) {} process.exit(code); }
