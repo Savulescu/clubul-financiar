@@ -222,10 +222,16 @@ def main():
 
     cards = []
     for s in disp:
-        when = ""
         ref = s["ts"] or s["gen_ts"]
-        dh = (now - ref) / 3600
-        when = f"acum {int(dh)}h" if dh < 24 else f"acum {int(dh/24)}z"
+        dmin = max(0, (now - ref) / 60)
+        if dmin < 1:
+            when = "chiar acum"
+        elif dmin < 60:
+            when = f"acum {int(dmin)} min"
+        elif dmin < 1440:
+            when = f"acum {int(dmin // 60)}h"
+        else:
+            when = f"acum {int(dmin // 1440)}z"
         cards.append(f'''<article class="card news-card reveal" data-cat="{s['cat']}" data-ts="{s['ts'] or s['gen_ts']:.0f}" data-score="{s.get('score',0)}">
 <div class="ne-top"><span class="ne-src">🌍 {html.escape(s['src'])} · {CAT_LABEL[s['cat']]}{' · rezumat în engleză' if s.get('fb') else ''}</span><span class="ne-when">{when}</span></div>
 <h2>{html.escape(s['titlu'])}</h2>

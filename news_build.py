@@ -196,7 +196,7 @@ def build():
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=23"><link rel="stylesheet" href="/assets/cf-ultra.css?v=1"><link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=23"><link rel="stylesheet" href="/assets/cf-ultra.css?v=1"><link rel="stylesheet" href="/assets/cf-preview.css?v=2">
 <style>
 /* premium auriu pe pagina de stiri (remap tokeni pe .u-page) */
 .u-page{{--emerald:var(--u-gold);--emerald-link:var(--u-gold);--grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));--card:var(--u-panel);--border:var(--u-line-soft);--bg-soft:var(--u-panel2);--bg-soft2:var(--u-panel2);--text:var(--u-ink);--muted:var(--u-muted)}}
