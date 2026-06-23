@@ -223,6 +223,26 @@
   border:1px solid var(--u-line-soft); border-radius:999px; padding:3px 8px; margin-left:7px; }
 .u-mod.locked .u-lockpill{ display:inline-flex; }
 
+/* ---------- TERMINAL GRATUIT — card featured pe toată lățimea, sus de tot ---------- */
+#band-free .u-grid{ grid-template-columns:1fr; }            /* o singură coloană, lățime completă */
+.u-free-feat .u-panel{
+  display:grid; grid-template-columns:minmax(230px,.78fr) 1.4fr; gap:28px;
+  align-items:stretch; padding:24px 26px;
+  background:linear-gradient(115deg, var(--u-gold-soft), var(--u-panel) 58%);
+}
+.u-free-feat .u-prev{ margin:0; height:100%; min-height:128px; }
+.u-free-feat .u-prev-ticker{ gap:11px; }
+.u-free-feat .u-prev-ticker .t{ font-size:.86rem; }
+.u-free-feat .u-free-body{ display:flex; flex-direction:column; justify-content:center; }
+.u-free-feat .u-free-body h3{ font-size:1.36rem; margin:0 0 8px; }
+.u-free-feat .u-free-body p{ font-size:1rem; line-height:1.5; max-width:54ch; margin:0; }
+.u-free-feat .u-free-body .more{ margin-top:16px; font-size:.94rem; }
+@media(max-width:760px){
+  .u-free-feat .u-panel{ grid-template-columns:1fr; gap:15px; padding:18px; }
+  .u-free-feat .u-prev{ min-height:100px; }
+  .u-free-feat .u-free-body h3{ font-size:1.2rem; }
+}
+
 /* ---------- BARĂ STICKY DE CATEGORII (jump nav) ---------- */
 .u-jump{ position:sticky; top:64px; z-index:30; margin:0 0 22px;
   background:color-mix(in srgb,var(--u-bg1) 86%,transparent); backdrop-filter:blur(10px);
