@@ -93,10 +93,8 @@ async function waitServer() {
 
   await cmd('Page.enable'); await cmd('Runtime.enable');
 
-  for (const page of pages) {
-    const url = `http://localhost:${PORT}/${page}`;
-    const name = page.replace(/\//g, '_').replace(/\.html$/, '');
-    for (const w of WIDTHS) {
+  const capture = async (page, w, name) => {
+      const url = `http://localhost:${PORT}/${page}`;
       const mobile = w < 700;
       await cmd('Emulation.setDeviceMetricsOverride', { width: w, height: 900, deviceScaleFactor: 1, mobile });
       const nav = waitEvent('Page.loadEventFired', 12000);
@@ -121,6 +119,18 @@ async function waitServer() {
       const file = path.join(OUT, `${name}__${w}.png`);
       fs.writeFileSync(file, Buffer.from(shot.data, 'base64'));
       console.log(`${page}  ${w}px  ${h}h  -> ${path.basename(file)}`);
+  };
+
+  for (const page of pages) {
+    const name = page.replace(/\//g, '_').replace(/\.html$/, '');
+    for (const w of WIDTHS) {
+      const timeout = new Promise(r => setTimeout(() => r('TIMEOUT'), 25000));
+      const res = await Promise.race([capture(page, w, name).catch(e => 'ERR:' + e.message), timeout]);
+      if (res === 'TIMEOUT' || (typeof res === 'string' && res.startsWith('ERR'))) {
+        console.log(`${page}  ${w}px  -> SKIP (${res})`);
+        // reset the tab so a hung page doesn't poison the next capture
+        try { await cmd('Page.navigate', { url: 'about:blank' }); await sleep(300); } catch (e) {}
+      }
     }
   }
   ws.close(); console.log('==> ' + OUT); die(0);

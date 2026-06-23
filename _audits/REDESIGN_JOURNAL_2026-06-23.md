@@ -139,3 +139,14 @@ consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
   100% local. 500lei×20ani→294.510 lei (174.510 dobândă). Înlocuiește .hero-caption static.
   Contact-sheet generator gata. NEXT: contact sheet → vezi toate paginile → integrez instrumentul
   în hero → screenshot → iterez. Apoi fundație Inter+tabular la sursă.
+
+- **[tick 3 — HOMEPAGE HERO ELEVAT ✓]** Semnătura LIVE pe index.html, verificată desktop+mobil:
+  • Font link: Inter + Fraunces (dropped Sora+Plus Jakarta de pe homepage).
+  • `html{--font-body:Inter}` + cifre tabulare pe stats/preț/instrument. Toate 'Sora'→'Inter'.
+  • `.hero-caption` static ÎNLOCUIT cu instrument dobândă compusă interactiv (assets/compound.js):
+    slider lună + pills ani + sparkline auriu SVG + count-up tabular, 100% local. 3D rămâne ambient.
+  • Pricing € → lei (0/49/99/199) — consistent cu premium.html.
+  • Verificat: 294.510 lei la 500/lună×20ani (corect), 3D pictat, mobil stivuit OK.
+  Shots: _audits/redesign_shots/01_home_hero_after{,_mobile}.png.
+  NEXT iterație homepage: rafinez (3D să stea mai mult backdrop sub panou? secțiunile de jos?);
+  apoi PROPAGARE Inter+tabular la sursă (upgrade.css + restul paginilor) = task #4.
