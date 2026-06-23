@@ -199,6 +199,23 @@ body{ font-family:var(--font-body); }
 .cf-comp-note{ margin:12px 0 0; font-size:.72rem; color:#8298ba; }
 @media(max-width:880px){ .cf-comp{ max-width:none; } }
 
+/* ════ INTRARE ORCHESTRATĂ HERO (un singur moment, ~1.5s) ════ */
+@media (prefers-reduced-motion: no-preference){
+  @keyframes heroRise{ from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
+  @keyframes heroPanel{ from{opacity:0; transform:translateY(22px) scale(.984)} to{opacity:1; transform:none} }
+  @keyframes ccDraw{ to{ stroke-dashoffset:0 } }
+  .u-page .hero .eyebrow,.u-page .hero h1,.u-page .hero .lead,
+  .u-page .hero-cta,.u-page .hero-trust{
+    opacity:0; animation:heroRise .7s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  .u-page .hero h1{ animation-delay:.10s }
+  .u-page .hero .lead{ animation-delay:.24s }
+  .u-page .hero-cta{ animation-delay:.38s }
+  .u-page .hero-trust{ animation-delay:.50s }
+  .cf-comp{ opacity:0; animation:heroPanel .85s cubic-bezier(.22,.61,.36,1) .32s forwards; }
+  #ccLine{ stroke-dasharray:1400; stroke-dashoffset:1400; animation:ccDraw 1.15s ease .72s forwards; }
+}
+
 @media(prefers-reduced-motion:reduce){
   .u-page .card,.u-page .level,.u-page .stat,.u-page .btn,.cf-comp *{ transition:none; }
 }
