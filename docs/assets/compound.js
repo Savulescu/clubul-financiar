@@ -81,38 +81,60 @@
   nums.forEach(function (n) { io.observe(n); });
 })();
 
-/* Bandă live date RO (terminal) — fx + dividende + macro reale; fallback seed (zero-network-safe). */
+/* Bandă live date RO — grupată pe înțelesul tuturor: Curs BNR / Dividende / Preț / Inflația / Dobânzi. */
 (function () {
   var tape = document.getElementById('cfTape'); if (!tape) return;
   var nf = new Intl.NumberFormat('ro-RO', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
-  function pct(v) { if (v == null || isNaN(v)) return '';
-    var s = (v >= 0 ? '+' : '') + Number(v).toFixed(2).replace('.', ',') + '%';
-    return '<span class="' + (v >= 0 ? 'up' : 'dn') + '">' + (v >= 0 ? '▲' : '▼') + ' ' + s + '</span>'; }
-  function item(sym, val, extra) {
-    return '<span class="cf-tape-item"><span class="sym">' + sym + '</span> <b>' + val + '</b> ' + (extra || '') + '</span>'; }
+  var nf2 = new Intl.NumberFormat('ro-RO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function ro(n) { return ('' + n).replace('.', ','); }
+  function arrow(v) { if (v == null || isNaN(v)) return '';
+    return ' <span class="' + (v >= 0 ? 'up' : 'dn') + '">' + (v >= 0 ? '▲' : '▼') + '</span>'; }
+  function it(name, val, extra) {
+    return '<span class="cf-tape-item"><span class="nm">' + name + '</span> <b>' + val + '</b>' + (extra || '') + '</span>'; }
+  function grp(label, inner) {
+    return '<span class="cf-tape-grp"><span class="cf-tape-lbl">' + label + '</span> ' + inner + '</span>'; }
+  var SEP = ' <span class="cf-tape-dot">·</span> ';
   function seed() { return [
-    item('EUR', '5,2386', pct(-0.01)), item('USD', '4,5706', pct(0.08)), item('GBP', '6,11', pct(0.05)),
-    item('TLV', '37,22 lei', '<span class="up">3,45% div</span>'), item('SNN', '75,9 lei', '<span class="up">5,38% div</span>'),
-    item('ECB', '2,40%', ''), item('Euribor 3L', '2,23%', '') ]; }
-  function build(items) {
-    if (!items.length) items = seed();
-    var html = items.join('<span class="cf-tape-sep">·</span>');
+    grp('Curs BNR:', [it('Euro', '5,2386&nbsp;lei', arrow(-0.01)), it('Dolar', '4,5706&nbsp;lei', arrow(0.08)), it('Liră', '6,11&nbsp;lei', arrow(0.05))].join(SEP)),
+    grp('Dividende:', [it('Banca Transilvania', '3,45%'), it('Nuclearelectrica', '5,38%'), it('Biofarm', '12,32%')].join(SEP)),
+    grp('Inflația (anual):', [it('România', '8,6%'), it('Zona euro', '2,0%')].join(SEP)),
+    grp('Dobânzi:', [it('ECB', '2,40%'), it('Euribor 3 luni', '2,23%')].join(SEP)) ]; }
+  function build(groups) {
+    if (!groups || !groups.length) groups = seed();
+    var html = groups.join(' <span class="cf-tape-pipe">|</span> ');
     tape.innerHTML = '<span class="cf-tape-row-in">' + html + '</span><span class="cf-tape-row-in" aria-hidden="true">' + html + '</span>';
   }
   function J(u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); }
   Promise.all([J('/data/fx.json'), J('/data/dividends.json'), J('/data/macro.json')]).then(function (res) {
-    var fx = res[0], div = res[1], macro = res[2], items = [];
+    var fx = res[0], div = res[1], macro = res[2], groups = [];
+    var NAMES = { EUR: 'Euro', USD: 'Dolar', GBP: 'Liră', CHF: 'Franc elvețian' };
     try {
-      if (fx && fx.rates) ['EUR', 'USD', 'GBP', 'CHF'].forEach(function (c) {
-        var r = fx.rates.filter(function (x) { return x.cur === c; })[0];
-        if (r) items.push(item(c, nf.format(r.rate), pct(r.chg))); });
-      if (div && div.items) Object.keys(div.items).slice(0, 4).forEach(function (k) {
-        var d = div.items[k]; if (d && d.y) items.push(item(k, d.p ? nf.format(d.p) + ' lei' : '',
-          '<span class="up">' + ('' + d.y).replace('.', ',') + '% div</span>')); });
-      if (macro && macro.groups) macro.groups.forEach(function (g) { (g.items || []).forEach(function (it) {
-        if (it.value != null && items.length < 11) items.push(
-          item(it.label.replace(/\s*\(.*?\)/, '').trim(), ('' + it.value).replace('.', ',') + (it.unit || ''), '')); }); });
+      if (fx && fx.rates) {
+        var cur = ['EUR', 'USD', 'GBP', 'CHF'].map(function (c) {
+          var r = fx.rates.filter(function (x) { return x.cur === c; })[0];
+          return r ? it(NAMES[c] || c, nf.format(r.rate) + '&nbsp;lei', arrow(r.chg)) : null;
+        }).filter(Boolean);
+        if (cur.length) groups.push(grp('Curs BNR:', cur.join(SEP)));
+      }
+      if (div && div.items) {
+        var keys = Object.keys(div.items);
+        var dv = keys.filter(function (k) { return div.items[k] && div.items[k].y; }).slice(0, 5)
+          .map(function (k) { return it(div.items[k].n || k, ro(div.items[k].y) + '%'); }).join(SEP);
+        if (dv) groups.push(grp('Dividende (randament):', dv));
+        var pr = keys.filter(function (k) { return div.items[k] && div.items[k].p; }).slice(0, 5)
+          .map(function (k) { return it(div.items[k].n || k, nf2.format(div.items[k].p) + '&nbsp;lei'); }).join(SEP);
+        if (pr) groups.push(grp('Preț acțiuni:', pr));
+      }
+      if (macro && macro.groups) {
+        var find = function (re) { return (macro.groups.filter(function (g) { return re.test(g.title); })[0] || {}).items || []; };
+        var infl = find(/Inflație/i).filter(function (i) { return i.value != null; })
+          .map(function (i) { return it(i.label, ro(i.value) + '%'); }).join(SEP);
+        if (infl) groups.push(grp('Inflația (anual):', infl));
+        var rates = find(/Dobânzi/i).filter(function (i) { return i.value != null; })
+          .map(function (i) { return it(i.label.replace(/\s*\(.*?\)/, '').replace(/Dobânda /, ''), ro(i.value) + '%'); }).join(SEP);
+        if (rates) groups.push(grp('Dobânzi:', rates));
+      }
     } catch (e) {}
-    build(items.length >= 4 ? items : seed());
+    build(groups.length >= 2 ? groups : seed());
   }).catch(function () { build(seed()); });
 })();
