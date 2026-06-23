@@ -150,3 +150,13 @@ consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
   Shots: _audits/redesign_shots/01_home_hero_after{,_mobile}.png.
   NEXT iterație homepage: rafinez (3D să stea mai mult backdrop sub panou? secțiunile de jos?);
   apoi PROPAGARE Inter+tabular la sursă (upgrade.css + restul paginilor) = task #4.
+
+- **[tick 4 — TIPOGRAFIE PROPAGATĂ SITE-WIDE ✓]** Contact-sheet 13 pagini → split-brain MAI MIC
+  decât zicea harta: majoritatea deja premium crem/auriu. Outlieri vechi: contact (alb+albastru
+  „Vorbește cu noi"), cursuri (parțial), pagini-utilitar. Propagare la SURSĂ unică:
+  upgrade.css @import → Inter+Fraunces+Sora pe TOATE paginile (fără a atinge 1287 link-uri);
+  `--font-body: Inter`; `--font-num` nou; cifre tabulare globale (.stat .num, .price .amt, .u-kpi…).
+  Verificat: articol generat + cursuri + premium = corp Inter curat, zero breakage; contact =
+  corp Inter dar SKIN încă vechi → bespoke. masterclass.html ATÂRNĂ la captura CDP (de investigat).
+  NEXT: bespoke skin pe stragglers (contact întâi) + unificare titluri Fraunces cu grijă (atenție:
+  --font-display=Sora e folosit și la cifre); apoi a doua iterație homepage.
