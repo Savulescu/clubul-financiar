@@ -199,3 +199,15 @@ consolidare NU al 7-lea strat. Commit per increment verificat cu _shot.js.
   QA-ul meu pe cache rece nu o vede). De făcut ULTIMUL (un singur bump).
   NEXT: „un moment memorabil în plus" (page-load orchestrat / rafinare hero) per advisor >
   pagini legal (ROI ~0). Apoi cache bump + doc before/after handoff.
+
+- **[tick 8 — moment memorabil + toggle + CACHE BUMP]**
+  • Intrare orchestrată hero (staggered rise + panou slide + sparkline self-draw, ~1.5s,
+    reduced-motion respectat; verificat opacity 0→1 mid-anim + end-state complet).
+  • Premium: toggle interactiv Lunar/Anual (numărul reflectă facturarea; tiere/prețuri neatinse).
+  • QA final: 7 pagini principale = coerente. stiri-externe/masterclass = înalte, sănătoase.
+  • 🚨 CACHE BUMP FĂCUT (mina de merge dezamorsată): upgrade.css v30, cf-ultra.css v3, site.js v30
+    pe 2086 HTML + 4 buildere (V vars + hardcoded). Verificat randare curată index+contact.
+    DOAR cele 3 active schimbate bumpate; restul neatins.
+  • HANDOFF doc: _audits/REDESIGN_HANDOFF_2026-06-23.md.
+  STARE: redesign MERGE-READY. Rămas opțional (ROI mic): pagini legal premium, densitate nav IA,
+  strat date-live RO. Task #4 (propagare) + #6 (cache) DONE.
