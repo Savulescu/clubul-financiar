@@ -24,6 +24,25 @@
     linear-gradient(180deg, var(--u-bg1), var(--u-bg1));
   min-height:70vh;
 }
+/* Remap tokeni de bază (style.css) → limbaj Ultra pe ORICE pagină .u-page care
+   folosește componente de bază (.card/.eyebrow/.btn/.price/.band). Consolidat din inline,
+   ca o pagină nouă să devină premium doar adăugând class="u-page" + acest fișier. */
+.u-page{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold);
+  --blue:var(--u-gold2); --blue-d:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel);
+  --bg-soft:var(--u-bg2); --bg-soft2:var(--u-gold-soft);
+  --shadow:var(--u-shadow);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+.u-page .eyebrow{ color:var(--u-gold); }
+.u-page .title,.u-page h1.title,.u-page h2.title{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); letter-spacing:-.01em;
+}
+.u-page .card h3,.u-page .price h3,.u-page .level h3,.u-page .band h2,.u-page .band h3{
+  font-family:'Fraunces',Georgia,serif; font-weight:600;
+}
 [data-theme="dark"] .u-page{
   /* paletă Ultra — dark (navy nocturn) */
   --u-bg1:#081627; --u-bg2:#0c2138;
