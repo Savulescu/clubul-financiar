@@ -8,7 +8,7 @@
 <meta name="keywords" content="educatie financiara, finante personale, buget, economisire, investitii, ETF, bursa, credite, pensii, FIRE, Romania">
 <meta name="author" content="Clubul Financiar">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#4F46E5">
+<meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -28,374 +28,222 @@
 </script>
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=30">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=3">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
 <style>
 /* =============================================================================
-   VARIANTA "LUMINĂ" — identitate modernă, luminoasă, indigo. (Stripe/Wise/Monzo.)
-   Canvas alb-cald, carduri rotunjite cu umbre fine, UN accent indigo vivid,
-   titluri Space Grotesk uriașe, cifre tabular Inter. Override TOTAL peste tokenii vechi.
-   IDs/clase pentru compound.js + count-up + #cfTape păstrate; #hero3d devine "ecran".
+   Pilot Ultra — Homepage. DOAR prezentare: logica/JS/3D/formularul rămân neatinse.
+   Pe .u-page remapăm tokenii vechi (verde) la limbajul auriu/navy „birou privat".
+   Hero-ul (#hero3d) e re-ancorat în paletă; canvasul 3D rămâne intact.
    ============================================================================= */
 
-/* ---- 0) TOKENI LUMINĂ (override pe :root) ---- */
-:root{
-  --lx-bg:#FAFAFB;            /* canvas aproape-alb */
-  --lx-bg2:#F3F2FB;          /* tentă indigo foarte fină pt benzi */
-  --lx-surface:#FFFFFF;      /* carduri */
-  --lx-ink:#16151F;          /* text principal */
-  --lx-ink2:#5B5A6B;         /* text secundar */
-  --lx-ink3:#8E8DA0;         /* micro / note */
-  --lx-line:#ECEAF4;         /* hairline */
-  --lx-line2:#E0DEEE;
-  --lx-indigo:#4F46E5;       /* ACCENT vivid */
-  --lx-indigo-d:#4338CA;
-  --lx-indigo-l:#7C73F0;
-  --lx-indigo-soft:#EEEDFD;  /* fill pastila */
-  --lx-emerald:#0FB37A;      /* up / câștig */
-  --lx-rose:#E5484D;         /* down */
-  --lx-amber:#E8A33D;
-  --lx-ink-screen:#0C1830;   /* fundal "ecran" 3D */
-  --lx-r-sm:12px; --lx-r:18px; --lx-r-lg:26px; --lx-r-xl:34px;
-  --lx-sh-sm:0 1px 2px rgba(22,21,31,.05), 0 2px 6px rgba(22,21,31,.04);
-  --lx-sh:0 2px 4px rgba(22,21,31,.04), 0 12px 32px rgba(40,36,90,.07);
-  --lx-sh-lg:0 8px 18px rgba(40,36,90,.08), 0 30px 70px rgba(40,36,90,.12);
-  --lx-sh-indigo:0 14px 34px rgba(79,70,229,.30);
-  --lx-font:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  --lx-display:'Space Grotesk','Inter',system-ui,sans-serif;
+/* 0) Tipografie: Inter pt UI/corp/cifre (lizibilitate + tabular), Fraunces serif pt titluri */
+html{ --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+body{ font-family:var(--font-body); }
+.u-page .stat .num,.u-page .price .amt,.u-page .hero-trust,
+.cf-comp .num,.cf-comp-val,.cf-comp-big{ font-variant-numeric:tabular-nums lining-nums; }
+
+/* 1) Remap tokeni vechi → Ultra pe toată pagina convertită */
+.u-page{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold);
+  --blue:var(--u-gold2); --blue-d:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel);
+  --bg-soft:var(--u-bg2); --bg-soft2:var(--u-gold-soft);
+  --shadow:var(--u-shadow);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
 }
 
-html,body{ background:var(--lx-bg); }
-body{ font-family:var(--lx-font); color:var(--lx-ink); -webkit-font-smoothing:antialiased; }
-.u-page{ background:var(--lx-bg); color:var(--lx-ink); }
-.lx *,.lx *::before,.lx *::after{ box-sizing:border-box; }
-.lx{ font-variant-numeric:normal; }
-.lx .num,.lx .amt,.lx .hero-trust,.lx .stat .num,
-.cf-comp .num,.cf-comp-val,.cf-comp-big,.cf-tape-item,
-.lx .price .amt,.lx .lx-money{ font-variant-numeric:tabular-nums lining-nums; }
+/* 2) Tipografie editorială: titluri serif gravat, eyebrow auriu */
+.u-page .section .eyebrow,.u-page .center .eyebrow{
+  color:var(--u-gold); font-family:'Inter',system-ui,sans-serif; letter-spacing:.18em;
+}
+.u-page h2.title{ font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.01em; color:var(--u-ink); }
+.u-page .card h3,.u-page .price h3,.u-page .level h3,.u-page .band h2{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.005em;
+}
 
-/* tipografie de bază remapată pe LUMINĂ (suprascrie tokenii serif vechi) */
-.lx h1,.lx h2,.lx h3,.lx h4,.lx .title,.lx .eyebrow{ font-family:var(--lx-display); }
-.lx .eyebrow{ color:var(--lx-indigo); font-weight:600; letter-spacing:.04em;
-  text-transform:none; font-size:.82rem; font-family:var(--lx-font); }
-.lx .eyebrow::before{ content:""; display:inline-block; width:7px; height:7px; border-radius:50%;
-  background:var(--lx-indigo); margin-right:8px; vertical-align:middle; }
-.lx .title{ color:var(--lx-ink); font-weight:700; letter-spacing:-.025em; line-height:1.06;
-  font-size:clamp(1.9rem,4.4vw,3rem); }
-.lx .lead{ color:var(--lx-ink2); font-size:clamp(1.02rem,1.6vw,1.18rem); line-height:1.6; }
-.lx .center{ text-align:center; max-width:760px; margin-inline:auto; }
-.lx .section{ padding:clamp(56px,8vw,104px) 0; }
-.lx .section-sm{ padding:clamp(40px,6vw,72px) 0; }
-.lx a{ color:var(--lx-indigo); }
-.lx :focus-visible{ outline:3px solid var(--lx-indigo); outline-offset:3px; border-radius:6px; }
-
-/* ---- 1) NAV ---- */
-.nav{ background:rgba(250,250,251,.78); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--lx-line); }
-.nav .brand-txt{ font-family:var(--lx-display); font-weight:700; color:var(--lx-ink); letter-spacing:-.01em; }
-.nav-links a{ color:var(--lx-ink2); font-weight:500; font-size:.94rem; }
-.nav-links a:hover{ color:var(--lx-indigo); }
-.nav .icon-btn{ color:var(--lx-ink2); }
-.nav .btn-primary{ background:var(--lx-indigo); color:#fff; border:none; border-radius:999px;
-  box-shadow:var(--lx-sh-indigo); font-weight:600; }
-.nav .btn-primary:hover{ background:var(--lx-indigo-d); transform:translateY(-1px); }
-
-/* ---- 2) BUTOANE (limbaj nou) ---- */
-.lx .btn{ border-radius:999px; font-family:var(--lx-font); font-weight:600; transition:.18s ease; }
-.lx .btn-primary{ background:var(--lx-indigo); color:#fff !important; border:none;
-  box-shadow:var(--lx-sh-indigo); }
-.lx .btn-primary:hover{ background:var(--lx-indigo-d); transform:translateY(-2px);
-  box-shadow:0 18px 40px rgba(79,70,229,.38); }
-.lx .btn-ghost{ background:#fff; color:var(--lx-ink) !important; border:1px solid var(--lx-line2);
-  box-shadow:var(--lx-sh-sm); }
-.lx .btn-ghost:hover{ border-color:var(--lx-indigo); color:var(--lx-indigo) !important; transform:translateY(-2px); }
-.lx .btn-light{ background:#fff; color:var(--lx-indigo) !important; border:none; box-shadow:var(--lx-sh-sm); }
-.lx .btn-light:hover{ transform:translateY(-2px); box-shadow:var(--lx-sh); }
-
-/* ============================================================================
-   3) HERO — split modern: copy stânga + "ecran" produs cu graficul 3D dreapta.
-   Canvas luminos cu blob-uri indigo difuze + grilă punctată. Niciun panou NU
-   acoperă graficul: 3D-ul stă într-un cadru rotunjit propriu, ca un device.
-   ============================================================================ */
-.lx .hero{
+/* 3) HERO — re-ancorare paletă (tokenii hero din upgrade.css §18 sunt locali pe .hero) */
+.u-page .hero{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold2);
+  --blue:var(--u-gold2); --muted:#b9c8e2; --border:rgba(232,194,104,.18);
   background:
-    radial-gradient(820px 520px at 88% 12%, rgba(124,115,240,.18), transparent 60%),
-    radial-gradient(620px 480px at 2% 90%, rgba(15,179,122,.10), transparent 58%),
-    var(--lx-bg) !important;
-  position:relative; overflow:hidden; padding:0 0 clamp(48px,7vw,88px);
-  --emerald:var(--lx-indigo); --emerald-link:var(--lx-indigo-d); --muted:var(--lx-ink2);
-  --border:var(--lx-line);
+    radial-gradient(960px 640px at 84% 38%, rgba(232,194,104,.20), transparent 62%),
+    radial-gradient(640px 500px at 4% 6%, rgba(232,194,104,.10), transparent 60%),
+    linear-gradient(105deg,#0d2342 0%,#0a1a33 42%,#060f1e 100%) !important;
 }
-.lx .hero::before{ /* grilă punctată discretă */
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background-image:radial-gradient(rgba(79,70,229,.10) 1px, transparent 1px);
-  background-size:30px 30px; mask-image:linear-gradient(180deg,#000 0%,transparent 78%);
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 78%);
+.u-page .hero .eyebrow{ color:#E8C268; font-family:'Inter',system-ui,sans-serif; }
+.u-page .hero h1{ font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.01em; }
+.u-page .hero .grad-text{
+  background:none !important; -webkit-text-fill-color:#E8C268 !important; color:#E8C268 !important;
+  font-style:italic;
 }
+.u-page .hero .hero-trust{ color:#a9bcdc; }
+.u-page .hc-eyebrow{ color:#E8C268; font-family:'Inter',system-ui,sans-serif; }
+.u-page .hc-sub{ color:#E8C268; }
+.u-page .hero :focus-visible{ outline-color:#E8C268; }
 
-/* bandă "PIAȚA AZI" — pastilă luminoasă deasupra hero-ului */
-.lx .cf-tape{ position:relative; z-index:4; display:flex; align-items:stretch; margin-top:18px;
-  border:1px solid var(--lx-line); background:#fff; border-radius:999px; overflow:hidden;
-  box-shadow:var(--lx-sh-sm); max-width:1180px; margin-inline:auto; }
-.lx .cf-tape-tag{ flex:0 0 auto; display:flex; align-items:center; gap:6px; font-family:var(--lx-font);
-  font-size:.62rem; font-weight:800; letter-spacing:.16em; color:#fff;
-  background:var(--lx-indigo); padding:0 16px; border-radius:999px 0 0 999px; }
-.lx .cf-tape-tag::before{ content:""; width:7px; height:7px; border-radius:50%; background:#9CF7CF;
-  box-shadow:0 0 0 0 rgba(156,247,207,.7); animation:lxPulse 2s infinite; }
-@keyframes lxPulse{ 0%{box-shadow:0 0 0 0 rgba(156,247,207,.7)} 70%{box-shadow:0 0 0 7px rgba(156,247,207,0)} 100%{box-shadow:0 0 0 0 rgba(156,247,207,0)} }
-.lx .cf-tape-vp{ flex:1; overflow:hidden; }
-.lx .cf-tape-row{ display:flex; width:max-content; animation:cfTapeScroll 46s linear infinite; }
-.lx .cf-tape:hover .cf-tape-row{ animation-play-state:paused; }
-.lx .cf-tape-row-in{ display:inline-flex; align-items:center; gap:22px; padding:9px 18px; }
-.lx .cf-tape-item{ display:inline-flex; align-items:baseline; gap:6px; font-size:.82rem; color:var(--lx-ink2);
-  white-space:nowrap; }
-.lx .cf-tape-item .sym{ color:var(--lx-indigo); font-weight:700; }
-.lx .cf-tape-item b{ color:var(--lx-ink); font-weight:700; }
-.lx .cf-tape-item .up{ color:var(--lx-emerald); } .lx .cf-tape-item .dn{ color:var(--lx-rose); }
-.lx .cf-tape-sep{ color:var(--lx-line2); padding:0 2px; }
-.lx .cf-tape-load{ padding:9px 18px; color:var(--lx-ink3); font-size:.82rem; }
-@keyframes cfTapeScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-@media(prefers-reduced-motion:reduce){ .lx .cf-tape-row{ animation:none; } .lx .cf-tape-tag::before{ animation:none; } }
-
-.lx .hero-grid{ position:relative; z-index:2; display:grid; grid-template-columns:1.02fr .98fr;
-  gap:clamp(30px,4vw,64px); align-items:center; padding-top:clamp(40px,6vw,76px); }
-.lx .hero-badge{ display:inline-flex; align-items:center; gap:8px; background:var(--lx-indigo-soft);
-  color:var(--lx-indigo-d); font-weight:600; font-size:.8rem; padding:6px 14px; border-radius:999px;
-  margin-bottom:18px; }
-.lx .hero h1{ font-family:var(--lx-display); font-weight:700; color:var(--lx-ink);
-  font-size:clamp(2.1rem,6vw,4.6rem); line-height:1; letter-spacing:-.035em; text-shadow:none; margin:0;
-  overflow-wrap:break-word; word-break:normal; }
-html,body{ overflow-x:hidden; }
-.lx .hero .grad-text{ display:inline-block; background:linear-gradient(115deg,var(--lx-indigo),var(--lx-indigo-l)) !important;
-  -webkit-background-clip:text !important; background-clip:text !important;
-  -webkit-text-fill-color:transparent !important; color:var(--lx-indigo) !important;
-  font-style:normal; }
-@supports not ((-webkit-background-clip:text) or (background-clip:text)){
-  .lx .hero .grad-text{ background:none !important; -webkit-text-fill-color:var(--lx-indigo) !important; }
+/* 4) STATS — cifră gravată aurie pe panou de extras */
+.u-page .stat{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .stat .num{
+  font-family:'Inter',system-ui,sans-serif; font-weight:800; font-variant-numeric:tabular-nums;
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
 }
-.lx .hero .lead{ color:var(--lx-ink2); font-size:clamp(1.05rem,1.6vw,1.24rem); margin:22px 0 30px;
-  max-width:30em; text-shadow:none; }
-.lx .hero-cta{ display:flex; gap:12px; flex-wrap:wrap; }
-.lx .hero-trust{ display:flex; gap:18px; flex-wrap:wrap; margin-top:26px; color:var(--lx-ink2);
-  font-size:.9rem; font-weight:500; }
-.lx .hero-trust span{ display:inline-flex; align-items:center; gap:6px; }
+.u-page .stat .lbl{ color:var(--u-muted); }
 
-/* "ECRAN" produs care găzduiește graficul 3D (#hero3d). Re-ancorat: relative, în cadru. */
-.lx .lx-screen{ position:relative; border-radius:var(--lx-r-lg);
-  background:linear-gradient(160deg,#10213f 0%,#0a1730 60%,#0a1226 100%);
-  box-shadow:var(--lx-sh-lg), inset 0 1px 0 rgba(255,255,255,.08);
-  padding:14px; overflow:hidden; min-height:420px; }
-.lx .lx-screen::after{ /* margine luminoasă subtilă */
-  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-  box-shadow:inset 0 0 0 1px rgba(124,115,240,.28); }
-.lx .lx-screen-bar{ position:relative; z-index:3; display:flex; align-items:center; gap:7px;
-  padding:2px 4px 12px; }
-.lx .lx-screen-dot{ width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.2); }
-.lx .lx-screen-dot:nth-child(1){ background:#FF6058; } .lx .lx-screen-dot:nth-child(2){ background:#FFBD2E; }
-.lx .lx-screen-dot:nth-child(3){ background:#28C840; }
-.lx .lx-screen-cap{ margin-left:8px; font-size:.72rem; font-weight:600; letter-spacing:.04em;
-  color:rgba(208,214,236,.85); font-family:var(--lx-font); }
-.lx .lx-screen-stage{ position:relative; border-radius:16px; overflow:hidden;
-  background:radial-gradient(120% 100% at 70% 0%, rgba(124,115,240,.16), transparent 55%); height:340px; }
-.lx #hero3d{ position:absolute !important; inset:0 !important; z-index:1; pointer-events:none;
-  border-radius:16px; overflow:hidden; }
-.lx #hero3d canvas{ display:block; width:100% !important; height:100% !important; }
-/* fallback când 3D e dezactivat (<880px / reduced-motion / no-webgl): mini-grafic CSS lizibil */
-.lx .lx-screen-fallback{ position:absolute; inset:0; z-index:0; display:flex; align-items:flex-end;
-  gap:10px; padding:28px 26px; }
-.lx .lx-screen-fallback i{ flex:1; border-radius:6px 6px 0 0;
-  background:linear-gradient(180deg,var(--lx-indigo-l),rgba(124,115,240,.18)); }
-.lx .lx-screen-tag{ position:absolute; z-index:3; right:14px; bottom:12px; display:flex; gap:14px;
-  font-size:.72rem; color:rgba(208,214,236,.92); font-weight:600; }
-.lx .lx-screen-tag .up{ color:#5ef0aa; }
+/* 5) CARDURI — panou Ultra, hairline auriu, pastilă-icon aurie */
+.u-page .card{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .card::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.6; }
+.u-page .card{ position:relative; overflow:hidden; }
+.u-page .card:hover{ border-color:var(--u-line); box-shadow:0 30px 70px rgba(40,30,8,.16); }
+.u-page .card .ic{
+  background:var(--u-gold-soft); border:1px solid var(--u-line-soft);
+}
+.u-page .card .more{ color:var(--u-gold); font-weight:700; }
 
-@media(max-width:980px){
-  .lx .hero-grid{ grid-template-columns:1fr; gap:32px; padding-top:34px; }
-  .lx .lx-screen{ min-height:0; order:2; }
-  .lx .lx-screen-stage{ height:240px; }
+/* 6) ÎNCEPE AICI — niveluri ca registru numerotat auriu */
+.u-page .level{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .level:hover{ border-color:var(--u-gold); }
+.u-page .level .n{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  font-family:'Inter',system-ui,sans-serif; box-shadow:0 8px 20px rgba(168,134,49,.26);
 }
 
-/* ---- 4) STATS — pastile albe cu cifră indigo (count-up cere .stat .num) ---- */
-.lx .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-.lx .stat{ background:#fff; border:1px solid var(--lx-line); border-radius:var(--lx-r);
-  box-shadow:var(--lx-sh-sm); padding:24px 22px; text-align:left; }
-.lx .stat .num{ font-family:var(--lx-display); font-weight:700; font-size:clamp(1.9rem,3vw,2.5rem);
-  color:var(--lx-indigo); letter-spacing:-.02em; line-height:1; }
-.lx .stat .lbl{ color:var(--lx-ink2); font-size:.9rem; margin-top:8px; }
-@media(max-width:680px){ .lx .stats{ grid-template-columns:repeat(2,1fr); } }
+/* 7) BENZI (CTA aurii) — „carton" auriu de bancă privată */
+.u-page .band{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  box-shadow:0 24px 60px rgba(168,134,49,.30);
+}
+.u-page .band h2{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:#1a1304; }
+.u-page .band p{ color:#2a2008; opacity:.92; }
+.u-page .band .btn-light{ background:#13263f; color:#f6efdc; border:1px solid rgba(26,19,4,.2); }
+.u-page .band .btn-light:hover{ background:#0f1f33; }
 
-/* ---- 5) GRID utilitar ---- */
-.lx .grid{ display:grid; gap:18px; }
-.lx .grid-3{ grid-template-columns:repeat(3,1fr); }
-.lx .grid-4{ grid-template-columns:repeat(4,1fr); }
-@media(max-width:900px){ .lx .grid-3,.lx .grid-4{ grid-template-columns:repeat(2,1fr); } }
-@media(max-width:560px){ .lx .grid-3,.lx .grid-4{ grid-template-columns:1fr; } }
+/* SEMNĂTURA: banda navy de newsletter — un singur „seif" nocturn auriu */
+.u-page section:last-of-type .band{
+  background:linear-gradient(135deg,#0e2750,#081627); color:#f4ecd8;
+  border:1px solid rgba(232,194,104,.22);
+  box-shadow:0 30px 70px rgba(0,0,0,.34);
+}
+.u-page section:last-of-type .band::after{
+  content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,#E8C268,transparent); opacity:.7;
+}
+.u-page section:last-of-type .band{ position:relative; overflow:hidden; }
+.u-page section:last-of-type .band h2{ color:#E8C268; font-family:'Fraunces',Georgia,serif; font-weight:600; }
+.u-page section:last-of-type .band p{ color:#cbd7ea; opacity:1; }
 
-/* ---- 6) CARDURI — rotunjite, umbre fine, hover ridicat, hairline indigo top ---- */
-.lx .card{ position:relative; background:#fff; border:1px solid var(--lx-line); border-radius:var(--lx-r-lg);
-  box-shadow:var(--lx-sh-sm); padding:26px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s; overflow:hidden; }
-.lx .card:hover{ transform:translateY(-4px); box-shadow:var(--lx-sh-lg); border-color:var(--lx-line2); }
-.lx .card h3{ font-family:var(--lx-display); font-weight:600; color:var(--lx-ink); letter-spacing:-.01em;
-  font-size:1.18rem; margin:14px 0 8px; }
-.lx .card p{ color:var(--lx-ink2); font-size:.96rem; line-height:1.55; }
-.lx .card .ic{ display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px;
-  border-radius:14px; background:var(--lx-indigo-soft); font-size:1.4rem; }
-.lx .card .more{ display:inline-flex; align-items:center; gap:5px; color:var(--lx-indigo); font-weight:600;
-  font-size:.9rem; margin-top:14px; }
-.lx .card .more::after{ content:"→"; transition:transform .2s; }
-.lx .card:hover .more::after{ transform:translateX(4px); }
-.lx a.card{ text-decoration:none; }
-.lx .pill{ display:inline-block; background:var(--lx-indigo-soft); color:var(--lx-indigo-d);
-  font-size:.72rem; font-weight:700; padding:5px 11px; border-radius:999px; letter-spacing:.02em; }
+/* 8) PREȚURI — fișă de plan, plan recomandat marcat auriu */
+.u-page .price{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .price h3{ color:var(--u-ink); }
+.u-page .price.feat{ border-color:var(--u-gold); box-shadow:0 20px 50px rgba(168,134,49,.22); }
+.u-page .price .tag{ background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304; }
+.u-page .price .amt{ font-family:'Inter',system-ui,sans-serif; font-variant-numeric:tabular-nums; color:var(--u-ink); }
+.u-page .price li::before{ color:var(--u-gold); }
+.u-page .pill{ background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line); }
 
-/* ---- 7) ÎNCEPE AICI — niveluri ca pași numerotați ---- */
-.lx .level{ display:flex; gap:16px; align-items:flex-start; background:#fff; border:1px solid var(--lx-line);
-  border-radius:var(--lx-r); box-shadow:var(--lx-sh-sm); padding:22px; text-decoration:none;
-  transition:transform .2s, box-shadow .2s, border-color .2s; }
-.lx .level:hover{ transform:translateY(-3px); box-shadow:var(--lx-sh); border-color:var(--lx-indigo-l); }
-.lx .level .n{ flex:0 0 auto; width:40px; height:40px; border-radius:12px;
-  background:var(--lx-indigo-soft); color:var(--lx-indigo-d); display:flex; align-items:center;
-  justify-content:center; font-family:var(--lx-display); font-weight:700; font-size:1.1rem; }
-.lx .level h3{ font-family:var(--lx-display); font-weight:600; font-size:1.05rem; margin:0 0 4px; color:var(--lx-ink); }
-.lx .level p{ color:var(--lx-ink2); font-size:.92rem; margin:0; }
-/* cardul final "vezi tot traseul" — solid indigo */
-.lx .level.lx-level-go{ background:linear-gradient(135deg,var(--lx-indigo),var(--lx-indigo-l));
-  border:none; box-shadow:var(--lx-sh-indigo); }
-.lx .level.lx-level-go .n{ background:rgba(255,255,255,.22); color:#fff; }
-.lx .level.lx-level-go h3{ color:#fff; }
-.lx .level.lx-level-go p{ color:rgba(255,255,255,.86); }
+/* 9) Butoane vechi în zona convertită → aurii */
+.u-page .btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  box-shadow:0 10px 26px rgba(168,134,49,.28);
+}
+.u-page .btn-ghost{ color:var(--u-gold); border-color:var(--u-line); }
+.u-page .btn-ghost:hover{ border-color:var(--u-gold); color:var(--u-gold); }
+.u-page .btn:focus-visible,.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
 
-/* ---- 8) BENZI CTA — carton indigo rotunjit ---- */
-.lx .band{ position:relative; border-radius:var(--lx-r-xl); padding:clamp(34px,5vw,56px);
-  background:linear-gradient(135deg,var(--lx-indigo) 0%,var(--lx-indigo-l) 100%); color:#fff;
-  box-shadow:var(--lx-sh-indigo); text-align:center; overflow:hidden; }
-.lx .band::before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
-  background:radial-gradient(420px 280px at 88% -10%, rgba(255,255,255,.22), transparent 60%); }
-.lx .band h2{ font-family:var(--lx-display); font-weight:700; color:#fff; letter-spacing:-.02em;
-  font-size:clamp(1.7rem,3.4vw,2.4rem); margin:0 0 12px; position:relative; }
-.lx .band p{ color:rgba(255,255,255,.9); max-width:560px; margin:0 auto 22px; position:relative; line-height:1.55; }
-.lx .band .btn{ position:relative; }
+/* 10) „Cum funcționează" — numere mari serif aurii (override inline color:var(--emerald)) */
+.u-page .card .ic[style*="color"]{ color:var(--u-gold) !important; font-family:'Fraunces',Georgia,serif; }
 
-/* newsletter band — varianta închisă (un singur moment nocturn) */
-.lx .lx-band-dark{ background:linear-gradient(150deg,#13123A 0%,#1B1A4E 55%,#0E0D2C 100%); }
-.lx .lx-band-dark::before{ background:radial-gradient(420px 300px at 14% -20%, rgba(124,115,240,.4), transparent 60%); }
-.lx .nl-form{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px; position:relative; }
-.lx .nl-form input{ flex:1; min-width:240px; max-width:360px; padding:14px 18px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.1); color:#fff; font-size:.98rem; }
-.lx .nl-form input::placeholder{ color:rgba(255,255,255,.6); }
-.lx .nl-form button{ padding:14px 26px; border-radius:999px; border:none; background:#fff; color:var(--lx-indigo-d);
-  font-weight:700; font-family:var(--lx-font); cursor:pointer; transition:.18s; }
-.lx .nl-form button:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(0,0,0,.25); }
-.lx .nl-msg{ flex-basis:100%; color:#fff; font-size:.88rem; }
-
-/* ---- 9) PREȚURI — fișe plan, planul recomandat ridicat indigo ---- */
-.lx .price{ position:relative; background:#fff; border:1px solid var(--lx-line); border-radius:var(--lx-r-lg);
-  box-shadow:var(--lx-sh-sm); padding:30px 26px; display:flex; flex-direction:column; transition:transform .2s, box-shadow .2s; }
-.lx .price:hover{ transform:translateY(-4px); box-shadow:var(--lx-sh); }
-.lx .price h3{ font-family:var(--lx-display); font-weight:600; font-size:1.2rem; color:var(--lx-ink); margin:0 0 6px; }
-.lx .price .amt{ font-family:var(--lx-display); font-weight:700; font-size:2.2rem; color:var(--lx-ink);
-  letter-spacing:-.02em; line-height:1; margin-bottom:18px; }
-.lx .price .amt span{ font-family:var(--lx-font); font-size:.9rem; font-weight:500; color:var(--lx-ink3); }
-.lx .price ul{ list-style:none; padding:0; margin:0 0 22px; display:grid; gap:10px; flex:1; }
-.lx .price li{ position:relative; padding-left:26px; color:var(--lx-ink2); font-size:.94rem; }
-.lx .price li::before{ content:""; position:absolute; left:0; top:2px; width:18px; height:18px; border-radius:50%;
-  background:var(--lx-indigo-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F46E5' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat; }
-.lx .price.feat{ border-color:transparent; background:linear-gradient(180deg,#fff,#fff) padding-box,
-  linear-gradient(135deg,var(--lx-indigo),var(--lx-indigo-l)) border-box; border:2px solid transparent;
-  box-shadow:var(--lx-sh-lg); transform:translateY(-6px); }
-.lx .price.feat:hover{ transform:translateY(-10px); }
-.lx .price .tag{ position:absolute; top:-13px; left:50%; transform:translateX(-50%);
-  background:linear-gradient(135deg,var(--lx-indigo),var(--lx-indigo-l)); color:#fff; font-size:.72rem;
-  font-weight:700; padding:6px 16px; border-radius:999px; letter-spacing:.04em; box-shadow:var(--lx-sh-indigo); }
-
-/* ---- 10) "Cum funcționează" — număr mare indigo ---- */
-.lx .lx-step .ic{ background:transparent; width:auto; height:auto; font-family:var(--lx-display);
-  font-weight:700; font-size:2.6rem; color:var(--lx-indigo); letter-spacing:-.03em; }
-
-/* ============================================================================
-   11) INSTRUMENT dobândă compusă — re-skin LUMINĂ (IDs compound.js păstrate).
-   Card alb, accent indigo, aria de câștig în emerald. Secțiune proprie.
-   ============================================================================ */
-.lx .cf-comp-section{ background:var(--lx-bg2); }
-.lx .cf-comp-wrap{ display:grid; grid-template-columns:1fr 440px; gap:54px; align-items:center; }
-.lx .cf-comp-pitch .title{ margin:12px 0 14px; }
-.lx .cf-comp-pitch .lead{ margin-bottom:22px; }
-.lx .cf-comp-pitch strong{ color:var(--lx-emerald); }
-@media(max-width:880px){ .lx .cf-comp-wrap{ grid-template-columns:1fr; gap:28px; } }
-
-.cf-comp{ background:#fff; border:1px solid var(--lx-line); border-radius:var(--lx-r-lg);
-  box-shadow:var(--lx-sh-lg); padding:26px; position:relative; overflow:hidden; max-width:440px; }
-.cf-comp::before{ content:""; position:absolute; inset:0 0 auto 0; height:4px;
-  background:linear-gradient(90deg,var(--lx-indigo),var(--lx-indigo-l)); }
-.cf-comp-eyebrow{ font-family:var(--lx-font); font-weight:600; font-size:.78rem; color:var(--lx-indigo);
-  letter-spacing:.04em; }
-.cf-comp-title{ font-family:var(--lx-display); font-weight:600; font-size:1.32rem; line-height:1.12;
-  margin:4px 0 0; color:var(--lx-ink); letter-spacing:-.015em; }
-.cf-comp-controls{ margin:20px 0 4px; }
+/* ════ SEMNĂTURĂ: instrument dobândă compusă (înlocuiește .hero-caption) ════ */
+.cf-comp{ background:linear-gradient(165deg,#10233f,#0b1a30); border:1px solid rgba(232,194,104,.26);
+  border-radius:20px; padding:22px 22px 18px; position:relative; overflow:hidden; max-width:430px;
+  box-shadow:0 34px 80px rgba(4,10,22,.5), inset 0 1px 0 rgba(255,255,255,.05); }
+.cf-comp::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,#E8C268,transparent); opacity:.75; }
+.cf-comp-eyebrow{ font-family:'Fraunces',Georgia,serif; font-style:italic; font-size:.84rem; color:#E8C268; }
+.cf-comp-title{ font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:1.34rem; line-height:1.14;
+  margin:2px 0 0; color:#f4ecd8; letter-spacing:-.01em; }
+.cf-comp-controls{ margin:18px 0 4px; }
 .cf-comp-row{ display:flex; justify-content:space-between; align-items:baseline; }
-.cf-comp-lbl{ font-size:.9rem; color:var(--lx-ink2); font-weight:600; }
-.cf-comp-val{ font-family:var(--lx-display); font-weight:700; font-size:1.1rem; color:var(--lx-ink); }
-.cf-comp-range{ -webkit-appearance:none; appearance:none; width:100%; height:7px; margin:14px 0 4px;
+.cf-comp-lbl{ font-size:.88rem; color:#a9bcdc; font-weight:600; }
+.cf-comp-val{ font-weight:700; font-size:1.06rem; color:#f4ecd8; }
+.cf-comp-range{ -webkit-appearance:none; appearance:none; width:100%; height:6px; margin:12px 0 4px;
   border-radius:999px; cursor:pointer;
-  background:linear-gradient(90deg,var(--lx-indigo) var(--cc-pct,18%), var(--lx-line2) var(--cc-pct,18%)); }
-.cf-comp-range::-webkit-slider-thumb{ -webkit-appearance:none; width:22px; height:22px; border-radius:50%;
-  background:#fff; border:5px solid var(--lx-indigo); box-shadow:0 3px 10px rgba(79,70,229,.35); cursor:grab; }
-.cf-comp-range::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background:#fff;
-  border:5px solid var(--lx-indigo); box-shadow:0 3px 10px rgba(79,70,229,.35); cursor:grab; }
+  background:linear-gradient(90deg,#E8C268 var(--cc-pct,18%), rgba(159,176,204,.22) var(--cc-pct,18%)); }
+.cf-comp-range::-webkit-slider-thumb{ -webkit-appearance:none; width:20px; height:20px; border-radius:50%;
+  background:#E8C268; border:3px solid #10233f; box-shadow:0 3px 10px rgba(0,0,0,.45); cursor:grab; }
 .cf-comp-range:active::-webkit-slider-thumb{ cursor:grabbing; }
-.cf-comp-range:focus-visible{ outline:3px solid var(--lx-indigo); outline-offset:4px; }
-.cf-comp-years{ display:flex; gap:8px; margin-top:16px; }
-.cf-comp-yr{ flex:1; padding:9px 0; border-radius:11px; border:1px solid var(--lx-line2);
-  background:#fff; color:var(--lx-ink2); font-family:var(--lx-font); font-weight:600; font-size:.88rem;
-  cursor:pointer; transition:.16s; }
-.cf-comp-yr:hover{ border-color:var(--lx-indigo); color:var(--lx-indigo); }
-.cf-comp-yr.is-on{ background:var(--lx-indigo); color:#fff; border-color:transparent;
-  box-shadow:0 6px 16px rgba(79,70,229,.3); }
-.cf-comp-spark{ width:100%; height:90px; margin:18px 0 6px; display:block; }
-.cf-comp-out{ display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-top:8px;
-  padding-top:16px; border-top:1px solid var(--lx-line); }
-.cf-comp-out-lbl{ font-size:.86rem; color:var(--lx-ink2); display:block; }
-.cf-comp-out-lbl b{ color:var(--lx-ink); }
-.cf-comp-big{ font-family:var(--lx-display); font-weight:700; font-size:2.3rem; line-height:1; color:var(--lx-ink);
-  letter-spacing:-.025em; display:block; margin-top:4px; }
-.cf-comp-split{ margin:0; text-align:right; display:grid; gap:4px; }
-.cf-comp-split dt{ font-size:.72rem; color:var(--lx-ink3); }
-.cf-comp-split dd{ margin:0; font-family:var(--lx-display); font-weight:700; font-size:1rem; color:var(--lx-ink); }
-.cf-comp-gain dd{ color:var(--lx-emerald); }
-.cf-comp-note{ margin:14px 0 0; font-size:.74rem; color:var(--lx-ink3); }
+.cf-comp-range:focus-visible{ outline:2px solid #E8C268; outline-offset:4px; }
+.cf-comp-years{ display:flex; gap:7px; margin-top:14px; }
+.cf-comp-yr{ flex:1; padding:8px 0; border-radius:10px; border:1px solid rgba(232,194,104,.22);
+  background:transparent; color:#a9bcdc; font-family:'Inter',system-ui,sans-serif; font-weight:600;
+  font-size:.86rem; cursor:pointer; transition:.16s; font-variant-numeric:tabular-nums; }
+.cf-comp-yr:hover{ border-color:#E8C268; color:#f4ecd8; }
+.cf-comp-yr.is-on{ background:linear-gradient(135deg,#E8C268,#caa44a); color:#1a1304; border-color:transparent;
+  box-shadow:0 6px 16px rgba(168,134,49,.32); }
+.cf-comp-spark{ width:100%; height:84px; margin:14px 0 6px; display:block; }
+.cf-comp-out{ display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-top:6px; }
+.cf-comp-out-lbl{ font-size:.84rem; color:#a9bcdc; display:block; }
+.cf-comp-out-lbl b{ color:#f4ecd8; font-variant-numeric:tabular-nums; }
+.cf-comp-big{ font-weight:800; font-size:2.2rem; line-height:1; color:#f4ecd8; letter-spacing:-.02em;
+  display:block; margin-top:3px; }
+.cf-comp-split{ margin:0; text-align:right; display:grid; gap:3px; }
+.cf-comp-split dt{ font-size:.7rem; color:#a9bcdc; }
+.cf-comp-split dd{ margin:0; font-weight:700; font-size:.96rem; color:#f4ecd8; font-variant-numeric:tabular-nums lining-nums; }
+.cf-comp-gain dd{ color:#E8C268; }
+.cf-comp-note{ margin:12px 0 0; font-size:.72rem; color:#8298ba; }
 @media(max-width:880px){ .cf-comp{ max-width:none; } }
+/* secțiunea instrumentului (sub hero) — pitch stânga, instrument dreapta */
+.cf-comp-section{ background:var(--u-bg2); }
+.cf-comp-wrap{ display:grid; grid-template-columns:1fr 430px; gap:50px; align-items:center; }
+.cf-comp-pitch .title{ margin:10px 0 12px; }
+.cf-comp-pitch .lead{ margin-bottom:20px; }
+@media(max-width:880px){ .cf-comp-wrap{ grid-template-columns:1fr; gap:26px; } }
+/* ════ BANDĂ LIVE date RO (terminal) ════ */
+.cf-tape{ position:relative; z-index:4; display:flex; align-items:stretch;
+  border-bottom:1px solid rgba(232,194,104,.18); background:rgba(6,14,28,.5);
+  -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); overflow:hidden; }
+.cf-tape-tag{ flex:0 0 auto; display:flex; align-items:center; font-family:'Inter',system-ui,sans-serif;
+  font-size:.64rem; font-weight:800; letter-spacing:.2em; color:#1a1304;
+  background:linear-gradient(135deg,#E8C268,#caa44a); padding:0 13px; }
+.cf-tape-vp{ flex:1; overflow:hidden; }
+.cf-tape-row{ display:flex; width:max-content; animation:cfTapeScroll 46s linear infinite; }
+.cf-tape:hover .cf-tape-row{ animation-play-state:paused; }
+.cf-tape-row-in{ display:inline-flex; align-items:center; gap:22px; padding:8px 16px; }
+.cf-tape-item{ display:inline-flex; align-items:baseline; gap:6px; font-size:.82rem; color:#bdcbe2;
+  font-variant-numeric:tabular-nums lining-nums; white-space:nowrap; }
+.cf-tape-item .sym{ color:#E8C268; font-weight:700; letter-spacing:.01em; }
+.cf-tape-item b{ color:#f4ecd8; font-weight:700; }
+.cf-tape-item .up{ color:#36D67E; } .cf-tape-item .dn{ color:#ff8f8f; }
+.cf-tape-sep{ color:rgba(232,194,104,.35); padding:0 2px; }
+.cf-tape-load{ padding:8px 16px; color:#8298ba; font-size:.8rem; }
+@keyframes cfTapeScroll{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@media(prefers-reduced-motion:reduce){ .cf-tape-row{ animation:none; } }
 
-/* ---- 12) FOOTER ---- */
-.foot{ background:#fff; border-top:1px solid var(--lx-line); color:var(--lx-ink2); }
-.foot .brand-txt{ font-family:var(--lx-display); font-weight:700; color:var(--lx-ink); }
-.foot h4{ font-family:var(--lx-display); font-weight:600; color:var(--lx-ink); }
-.foot a{ color:var(--lx-ink2); }
-.foot a:hover{ color:var(--lx-indigo); }
-.foot .soc a svg{ fill:var(--lx-ink2); }
-.foot .soc a:hover svg{ fill:var(--lx-indigo); }
-.foot .soc-h{ color:var(--lx-ink); font-weight:600; }
-.foot .foot-bottom{ border-top:1px solid var(--lx-line); color:var(--lx-ink3); }
-
-/* ---- 13) REVEAL on scroll (discret) ---- */
+/* ════ INTRARE ORCHESTRATĂ HERO (un singur moment, ~1.5s) ════ */
 @media (prefers-reduced-motion: no-preference){
-  .lx .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s cubic-bezier(.22,.61,.36,1); }
-  .lx .reveal.in,.lx .reveal.is-in,.lx .reveal.visible{ opacity:1; transform:none; }
-  /* fallback: dacă site.js nu adaugă clasă, arată tot după 1.2s via animație */
-  .lx .hero h1,.lx .hero .lead,.lx .hero-cta,.lx .hero-trust,.lx .hero-badge{
-    opacity:0; animation:lxRise .7s cubic-bezier(.22,.61,.36,1) forwards; }
-  .lx .hero-badge{ animation-delay:.02s } .lx .hero h1{ animation-delay:.10s }
-  .lx .hero .lead{ animation-delay:.24s } .lx .hero-cta{ animation-delay:.36s }
-  .lx .hero-trust{ animation-delay:.48s }
-  .lx .lx-screen{ opacity:0; animation:lxPanel .9s cubic-bezier(.22,.61,.36,1) .3s forwards; }
-  #ccLine{ stroke-dasharray:1400; stroke-dashoffset:1400; animation:ccDraw 1.15s ease .7s forwards; }
-  @keyframes lxRise{ from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
-  @keyframes lxPanel{ from{opacity:0;transform:translateY(22px) scale(.985)} to{opacity:1;transform:none} }
-  @keyframes ccDraw{ to{stroke-dashoffset:0} }
+  @keyframes heroRise{ from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
+  @keyframes heroPanel{ from{opacity:0; transform:translateY(22px) scale(.984)} to{opacity:1; transform:none} }
+  @keyframes ccDraw{ to{ stroke-dashoffset:0 } }
+  .u-page .hero .eyebrow,.u-page .hero h1,.u-page .hero .lead,
+  .u-page .hero-cta,.u-page .hero-trust{
+    opacity:0; animation:heroRise .7s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+  .u-page .hero h1{ animation-delay:.10s }
+  .u-page .hero .lead{ animation-delay:.24s }
+  .u-page .hero-cta{ animation-delay:.38s }
+  .u-page .hero-trust{ animation-delay:.50s }
+  .cf-comp{ opacity:0; animation:heroPanel .85s cubic-bezier(.22,.61,.36,1) .32s forwards; }
+  #ccLine{ stroke-dasharray:1400; stroke-dashoffset:1400; animation:ccDraw 1.15s ease .72s forwards; }
 }
+
 @media(prefers-reduced-motion:reduce){
-  .lx .reveal{ opacity:1 !important; transform:none !important; }
+  .u-page .card,.u-page .level,.u-page .stat,.u-page .btn,.cf-comp *{ transition:none; }
 }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Clubul Financiar","url":"https://clubulfinanciar.ro","inLanguage":"ro-RO","publisher":{"@type":"Organization","name":"Clubul Financiar"}}</script></head>
@@ -410,20 +258,19 @@ html,body{ overflow-x:hidden; }
     </div>
   </div></header>
 
-<main class="u-page lx">
-<!-- HERO: split — copy stânga + ecran 3D dreapta (graficul NU e acoperit de niciun panou) -->
+<main class="u-page">
+<!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="cf-tape" aria-label="Piața azi (orientativ)">
-      <span class="cf-tape-tag">PIAȚA AZI</span>
-      <div class="cf-tape-vp"><div class="cf-tape-row" id="cfTape"><span class="cf-tape-load">se încarcă…</span></div></div>
-    </div>
+  <div id="hero3d" aria-hidden="true"></div>
+  <div class="cf-tape" aria-label="Piața azi (orientativ)">
+    <span class="cf-tape-tag">PIAȚA AZI</span>
+    <div class="cf-tape-vp"><div class="cf-tape-row" id="cfTape"><span class="cf-tape-load">se încarcă…</span></div></div>
   </div>
   <div class="container hero-grid">
     <div>
-      <span class="hero-badge">★ Biroul tău financiar privat — gratuit la start</span>
-      <h1>Banii tăi, <span class="grad-text">pe înțelesul tău</span></h1>
-      <p class="lead">Investiții, credite, economii, business și independență financiară — un singur loc, în lei și pe legislația României. Educație de bancă privată, fără jargon.</p>
+      <p class="eyebrow">Biroul tău financiar privat</p>
+      <h1>Construiește-ți <span class="grad-text">viitorul financiar</span></h1>
+      <p class="lead">Bani, investiții, credite, economii, business și independență financiară — un singur loc, în lei și pe legislația României. Educație de bancă privată, pe înțelesul tuturor.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/incepe-aici.html">Începe gratuit →</a>
         <a class="btn btn-ghost" href="/cursuri.html">Vezi cursurile</a>
@@ -432,31 +279,16 @@ html,body{ overflow-x:hidden; }
         <span>✓ Gratuit la start</span><span>✓ În limba română</span><span>✓ Fără jargon</span>
       </div>
     </div>
-    <div class="lx-screen" aria-hidden="true">
-      <div class="lx-screen-bar">
-        <span class="lx-screen-dot"></span><span class="lx-screen-dot"></span><span class="lx-screen-dot"></span>
-        <span class="lx-screen-cap">CRESTERE · LIVE</span>
-      </div>
-      <div class="lx-screen-stage">
-        <!-- 3D WebGL (gold/green bars + curve). Self-disables <880px / reduced-motion. -->
-        <div id="hero3d"></div>
-        <!-- Fallback CSS vizibil când 3D-ul e oprit -->
-        <div class="lx-screen-fallback" aria-hidden="true">
-          <i style="height:26%"></i><i style="height:38%"></i><i style="height:33%"></i><i style="height:52%"></i><i style="height:46%"></i><i style="height:64%"></i><i style="height:58%"></i><i style="height:78%"></i><i style="height:72%"></i><i style="height:92%"></i>
-        </div>
-        <div class="lx-screen-tag"><span>Portofoliu</span><span class="up">▲ +8% / an</span></div>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- INSTRUMENT dobândă compusă — secțiunea lui, NU acoperă graficul 3D -->
+<!-- INSTRUMENT dobândă compusă — secțiunea lui, NU mai acoperă graficul 3D -->
 <section class="section cf-comp-section"><div class="container">
   <div class="cf-comp-wrap">
     <div class="cf-comp-pitch">
       <p class="eyebrow">Vezi cu ochii tăi</p>
       <h2 class="title">Un leu pus deoparte azi — cât face peste ani?</h2>
-      <p class="lead">Trage de sumă și uită-te cum lucrează dobânda compusă: partea verde e cât câștigi <strong>fără să muncești</strong>, doar pentru că ai început devreme.</p>
+      <p class="lead">Trage de sumă și uită-te cum lucrează dobânda compusă: partea aurie e cât câștigi <strong>fără să muncești</strong>, doar pentru că ai început devreme.</p>
       <a class="btn btn-ghost" href="/calculatoare.html">Deschide calculatoarele →</a>
     </div>
     <aside class="cf-comp" aria-label="Simulator dobândă compusă">
@@ -478,11 +310,11 @@ html,body{ overflow-x:hidden; }
       </div>
       <svg class="cf-comp-spark" id="ccSpark" viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true">
         <defs><linearGradient id="ccFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#4F46E5" stop-opacity=".26"/><stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+          <stop offset="0" stop-color="#E8C268" stop-opacity=".34"/><stop offset="1" stop-color="#E8C268" stop-opacity="0"/>
         </linearGradient></defs>
         <path id="ccArea" fill="url(#ccFill)"/>
-        <path id="ccContrib" fill="none" stroke="#9E9DB0" stroke-width="1.4" stroke-dasharray="3 4" opacity=".7"/>
-        <path id="ccLine" fill="none" stroke="#4F46E5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="ccContrib" fill="none" stroke="#9fb0cc" stroke-width="1.4" stroke-dasharray="3 4" opacity=".6"/>
+        <path id="ccLine" fill="none" stroke="#E8C268" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <div class="cf-comp-out">
         <div class="cf-comp-total">
@@ -510,30 +342,30 @@ html,body{ overflow-x:hidden; }
 </div></section>
 
 <!-- ÎNCEPE AICI -->
-<section class="section" style="background:var(--lx-bg2)"><div class="container">
-  <div class="center" style="margin-bottom:38px">
+<section class="section" style="background:var(--bg-soft)"><div class="container">
+  <div class="center" style="margin-bottom:34px">
     <p class="eyebrow">Începe aici</p>
     <h2 class="title">Nu știi de unde să începi? Îți arătăm traseul.</h2>
     <p class="lead">Alege nivelul la care ești acum și urmează pașii, unul câte unul.</p>
   </div>
   <div class="grid grid-3">
-    <a class="level reveal" href="/incepe-aici.html"><span class="n">1</span><div><h3>Nu știu nimic despre bani</h3><p>Bazele: buget, cheltuieli, primul leu economisit.</p></div></a>
-    <a class="level reveal" href="/incepe-aici.html"><span class="n">2</span><div><h3>Am economii</h3><p>Fond de urgență și unde îți ții banii.</p></div></a>
-    <a class="level reveal" href="/incepe-aici.html"><span class="n">3</span><div><h3>Vreau să investesc</h3><p>Bursă, ETF-uri, titluri de stat — de la zero.</p></div></a>
-    <a class="level reveal" href="/incepe-aici.html"><span class="n">4</span><div><h3>Vreau venit pasiv</h3><p>Dividende, dobânzi, surse de venit recurent.</p></div></a>
-    <a class="level reveal" href="/incepe-aici.html"><span class="n">5</span><div><h3>Vreau independență financiară</h3><p>Strategia FIRE și planul pe termen lung.</p></div></a>
-    <a class="level reveal lx-level-go" href="/incepe-aici.html"><span class="n">→</span><div><h3>Vezi tot traseul</h3><p>Planul complet, pas cu pas.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">1</span><div><h3>Nu știu nimic despre bani</h3><p style="color:var(--muted)">Bazele: buget, cheltuieli, primul leu economisit.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">2</span><div><h3>Am economii</h3><p style="color:var(--muted)">Fond de urgență și unde îți ții banii.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">3</span><div><h3>Vreau să investesc</h3><p style="color:var(--muted)">Bursă, ETF-uri, titluri de stat — de la zero.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">4</span><div><h3>Vreau venit pasiv</h3><p style="color:var(--muted)">Dividende, dobânzi, surse de venit recurent.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html"><span class="n">5</span><div><h3>Vreau independență financiară</h3><p style="color:var(--muted)">Strategia FIRE și planul pe termen lung.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html" style="background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));color:#1a1304;border:none"><span class="n" style="background:#fff;color:var(--u-gold)">→</span><div><h3 style="color:#1a1304">Vezi tot traseul</h3><p style="color:#2a2008">Planul complet, pas cu pas.</p></div></a>
   </div>
 </div></section>
 
 <!-- SECȚIUNI -->
 <section class="section"><div class="container">
-  <div class="center" style="margin-bottom:38px">
+  <div class="center" style="margin-bottom:34px">
     <p class="eyebrow">Explorează</p>
     <h2 class="title">Tot ce ai nevoie despre bani, într-un loc</h2>
   </div>
   <div class="grid grid-3">
-    <a class="card reveal" href="/ultra/terminal.html" style="border:2px solid var(--lx-indigo-l)"><div class="ic">🖥️</div><h3>Terminalul <span class="pill" style="vertical-align:middle">NOU · GRATUIT</span></h3><p>Curs BNR live (valute + aur), companiile bursei, știri și un asistent care înțelege ce întrebi.</p><span class="more">Deschide</span></a>
+    <a class="card reveal" href="/ultra/terminal.html" style="border:1px solid #E8C268"><div class="ic">🖥️</div><h3>Terminalul <span style="background:#E8C268;color:#1a1304;font-size:.6rem;font-weight:800;padding:2px 8px;border-radius:999px;vertical-align:middle">NOU · GRATUIT</span></h3><p>Curs BNR live (valute + aur), companiile bursei, știri și un asistent care înțelege ce întrebi.</p><span class="more">Deschide</span></a>
     <a class="card reveal" href="/educatie.html"><div class="ic">📚</div><h3>Educație financiară</h3><p>Buget, economisire, psihologia banilor, obiceiuri sănătoase.</p><span class="more">Explorează</span></a>
     <a class="card reveal" href="/investitii.html"><div class="ic">📈</div><h3>Investiții</h3><p>Bursă, acțiuni, ETF-uri, titluri de stat, aur, pensii private.</p><span class="more">Explorează</span></a>
     <a class="card reveal" href="/credite.html"><div class="ic">🏦</div><h3>Credite</h3><p>Ipotecar, nevoi personale, refinanțare, carduri de credit.</p><span class="more">Explorează</span></a>
@@ -555,40 +387,40 @@ html,body{ overflow-x:hidden; }
 </div></section>
 
 <!-- CURSURI -->
-<section class="section" style="background:var(--lx-bg2)"><div class="container">
-  <div class="center" style="margin-bottom:38px"><p class="eyebrow">Academia</p><h2 class="title">Cursuri pas cu pas</h2></div>
+<section class="section" style="background:var(--bg-soft)"><div class="container">
+  <div class="center" style="margin-bottom:34px"><p class="eyebrow">Academia</p><h2 class="title">Cursuri pas cu pas</h2></div>
   <div class="grid grid-3">
-    <div class="card reveal"><span class="pill">Gratuit</span><h3 style="margin-top:14px">Educație financiară 101</h3><p>Bazele banilor: buget, economisire, datorii, primii pași.</p></div>
-    <div class="card reveal"><span class="pill">Gratuit</span><h3 style="margin-top:14px">Cum funcționează bursa</h3><p>Acțiuni, ETF-uri și cum începi să investești în siguranță.</p></div>
-    <div class="card reveal"><span class="pill">Premium</span><h3 style="margin-top:14px">ETF Masterclass</h3><p>Construiește un portofoliu de ETF-uri pe termen lung.</p></div>
+    <div class="card reveal"><span class="pill">Gratuit</span><h3 style="margin-top:10px">Educație financiară 101</h3><p>Bazele banilor: buget, economisire, datorii, primii pași.</p></div>
+    <div class="card reveal"><span class="pill">Gratuit</span><h3 style="margin-top:10px">Cum funcționează bursa</h3><p>Acțiuni, ETF-uri și cum începi să investești în siguranță.</p></div>
+    <div class="card reveal"><span class="pill" style="color:var(--blue-d)">Premium</span><h3 style="margin-top:10px">ETF Masterclass</h3><p>Construiește un portofoliu de ETF-uri pe termen lung.</p></div>
   </div>
-  <div class="center" style="margin-top:30px"><a class="btn btn-ghost" href="/cursuri.html">Toate cursurile →</a></div>
+  <div class="center" style="margin-top:26px"><a class="btn btn-ghost" href="/cursuri.html">Toate cursurile →</a></div>
 </div></section>
 
 <!-- ABONAMENTE -->
 <section class="section"><div class="container">
-  <div class="center" style="margin-bottom:46px"><p class="eyebrow">Abonamente</p><h2 class="title">Începe gratuit, crește când ești pregătit</h2></div>
+  <div class="center" style="margin-bottom:38px"><p class="eyebrow">Abonamente</p><h2 class="title">Începe gratuit, crește când ești pregătit</h2></div>
   <div class="grid grid-4">
-    <div class="price reveal"><h3>Gratuit</h3><div class="amt">0 lei</div><ul><li>Articole &amp; știri</li><li>3 cursuri</li><li>Calculatoare de bază</li><li>Comunitate</li></ul><a class="btn btn-ghost" href="/login.html" style="width:100%;justify-content:center">Creează cont</a></div>
+    <div class="price reveal"><h3>Gratuit</h3><div class="amt">0 lei</div><ul><li>Articole & știri</li><li>3 cursuri</li><li>Calculatoare de bază</li><li>Comunitate</li></ul><a class="btn btn-ghost" href="/login.html" style="width:100%;justify-content:center">Creează cont</a></div>
     <div class="price feat reveal"><span class="tag">Popular</span><h3>Premium</h3><div class="amt">49 lei<span>/lună</span></div><ul><li>Toate cursurile basic</li><li>Toate calculatoarele</li><li>Newsletter premium</li><li>Fără reclame</li></ul><a class="btn btn-primary" href="/premium.html" style="width:100%;justify-content:center">În curând</a></div>
     <div class="price reveal"><h3>Pro</h3><div class="amt">99 lei<span>/lună</span></div><ul><li>Tot din Premium</li><li>Analize săptămânale</li><li>Portofolii model</li><li>Webinarii</li></ul><a class="btn btn-ghost" href="/premium.html" style="width:100%;justify-content:center">În curând</a></div>
-    <div class="price reveal"><h3>Ultra</h3><div class="amt">199 lei<span>/lună</span></div><ul><li>Tot din Pro</li><li>Comunitate exclusivă</li><li>Sesiuni live &amp; mentorat</li><li>Q&amp;A lunar</li></ul><a class="btn btn-ghost" href="/premium.html" style="width:100%;justify-content:center">În curând</a></div>
+    <div class="price reveal"><h3>Ultra</h3><div class="amt">199 lei<span>/lună</span></div><ul><li>Tot din Pro</li><li>Comunitate exclusivă</li><li>Sesiuni live & mentorat</li><li>Q&A lunar</li></ul><a class="btn btn-ghost" href="/premium.html" style="width:100%;justify-content:center">În curând</a></div>
   </div>
 </div></section>
 
 <!-- CUM FUNCȚIONEAZĂ -->
-<section class="section" style="background:var(--lx-bg2)"><div class="container">
-  <div class="center" style="margin-bottom:38px"><p class="eyebrow">Cum funcționează</p><h2 class="title">Trei pași spre control financiar</h2></div>
+<section class="section"><div class="container">
+  <div class="center" style="margin-bottom:34px"><p class="eyebrow">Cum funcționează</p><h2 class="title">Trei pași spre control financiar</h2></div>
   <div class="grid grid-3">
-    <div class="card lx-step reveal"><div class="ic">01</div><h3>Învață</h3><p>Citește articole și ghiduri clare despre bani, investiții și credite — pe înțelesul tuturor.</p></div>
-    <div class="card lx-step reveal"><div class="ic">02</div><h3>Aplică</h3><p>Folosește calculatoarele și pașii concreți ca să iei decizii mai bune cu banii tăi.</p></div>
-    <div class="card lx-step reveal"><div class="ic">03</div><h3>Crește</h3><p>Construiește obiceiuri sănătoase, economisește, investește și ajungi la independență financiară.</p></div>
+    <div class="card reveal"><div class="ic" style="font-weight:900;color:var(--emerald)">01</div><h3>Învață</h3><p>Citește articole și ghiduri clare despre bani, investiții și credite — pe înțelesul tuturor.</p></div>
+    <div class="card reveal"><div class="ic" style="font-weight:900;color:var(--emerald)">02</div><h3>Aplică</h3><p>Folosește calculatoarele și pașii concreți ca să iei decizii mai bune cu banii tăi.</p></div>
+    <div class="card reveal"><div class="ic" style="font-weight:900;color:var(--emerald)">03</div><h3>Crește</h3><p>Construiește obiceiuri sănătoase, economisește, investește și ajungi la independență financiară.</p></div>
   </div>
 </div></section>
 
 <!-- CALCULATOARE POPULARE -->
-<section class="section"><div class="container">
-  <div class="center" style="margin-bottom:38px"><p class="eyebrow">Instrumente</p><h2 class="title">Calculatoare populare</h2></div>
+<section class="section" style="background:var(--bg-soft)"><div class="container">
+  <div class="center" style="margin-bottom:34px"><p class="eyebrow">Instrumente</p><h2 class="title">Calculatoare populare</h2></div>
   <div class="grid grid-3">
     <a class="card reveal" href="/calculatoare/dobanda-compusa.html"><div class="ic">🧮</div><h3>Dobândă compusă</h3><p>Vezi cât cresc banii tăi în timp.</p><span class="more">Calculează</span></a>
     <a class="card reveal" href="/calculatoare/credit.html"><div class="ic">🏦</div><h3>Rată credit</h3><p>Rata lunară, total și dobândă.</p><span class="more">Calculează</span></a>
@@ -597,8 +429,8 @@ html,body{ overflow-x:hidden; }
 </div></section>
 
 <!-- CELE MAI CITITE -->
-<section class="section" style="background:var(--lx-bg2)"><div class="container">
-  <div class="center" style="margin-bottom:38px"><p class="eyebrow">Bibliotecă · 1000 articole</p><h2 class="title">Cele mai citite articole</h2></div>
+<section class="section"><div class="container">
+  <div class="center" style="margin-bottom:34px"><p class="eyebrow">Bibliotecă · 1000 articole</p><h2 class="title">Cele mai citite articole</h2></div>
   <div class="grid grid-3">
     <a class="card reveal" href="/articole/dobanda-compusa-a-opta-minune-a-lumii.html"><div class="ic">📈</div><h3>Dobânda compusă: a opta minune</h3><p>De ce timpul e cel mai important ingredient în investiții.</p><span class="more">Citește</span></a>
     <a class="card reveal" href="/articole/cum-iti-faci-primul-buget-personal-pas-cu-pas.html"><div class="ic">💰</div><h3>Cum îți faci primul buget</h3><p>Ghid pas cu pas pentru începători.</p><span class="more">Citește</span></a>
@@ -607,15 +439,15 @@ html,body{ overflow-x:hidden; }
     <a class="card reveal" href="/articole/ce-este-bitcoin-pe-intelesul-tuturor.html"><div class="ic">₿</div><h3>Ce este Bitcoin</h3><p>Criptomonedele explicate simplu și onest.</p><span class="more">Citește</span></a>
     <a class="card reveal" href="/articole/creditul-ipotecar-in-romania-ghid-complet-pentru-incepatori.html"><div class="ic">🏠</div><h3>Creditul ipotecar în România</h3><p>Tot ce trebuie să știi înainte să semnezi.</p><span class="more">Citește</span></a>
   </div>
-  <div class="center" style="margin-top:34px"><a class="btn btn-ghost" href="/educatie.html">Vezi toate cele 1000 articole →</a></div>
+  <div class="center" style="margin-top:28px"><a class="btn btn-ghost" href="/educatie.html">Vezi toate cele 1000 articole →</a></div>
 </div></section>
 
-<!-- CTA FINAL / NEWSLETTER -->
+<!-- CTA FINAL -->
 <section class="section-sm"><div class="container">
-  <div class="band lx-band-dark nl-band reveal">
+  <div class="band reveal" style="background:var(--navy)">
     <h2>Primește „Dimineața pe scurt"</h2>
     <p>Newsletter gratuit: știrile care-ți mișcă banii + un concept explicat simplu, în 5 minute. În fiecare dimineață.</p>
-    <form class="nl-form" novalidate>
+    <form class="nl-form" novalidate style="justify-content:center;margin-top:18px">
       <input type="email" placeholder="adresa ta de email" autocomplete="email" required aria-label="Email">
       <button type="submit">Abonează-mă gratuit</button>
       <div class="nl-msg" role="status"></div>
@@ -628,7 +460,7 @@ html,body{ overflow-x:hidden; }
     <div class="foot-grid">
       <div>
         <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
-        <p style="color:var(--lx-ink2);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
         <p class="soc-h">Urmărește-ne</p><div class="soc"><a href="https://www.instagram.com/clubulfinanciar" title="Instagram" aria-label="Instagram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a><a href="https://www.tiktok.com/@clubulfinanciar" title="TikTok" aria-label="TikTok" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a><a href="https://www.youtube.com/@clubulfinanciar" title="YouTube" aria-label="YouTube" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a><a href="https://www.facebook.com/clubulfinanciar" title="Facebook" aria-label="Facebook" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"></path></svg></a><a href="https://www.threads.net/@clubulfinanciar" title="Threads" aria-label="Threads" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><a href="https://x.com/clubulfinanciar" title="X" aria-label="X" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"></path></svg></a><a href="https://t.me/clubul_financiar" title="Telegram" aria-label="Telegram" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></div>
       </div>
       <div><h4>Educație</h4><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Buget personal</a><a href="/educatie.html">Economisire</a><a href="/educatie.html">Psihologia banilor</a></div><div><h4>Investiții</h4><a href="/investitii.html">Bursă &amp; acțiuni</a><a href="/investitii.html">ETF-uri</a><a href="/investitii.html">Titluri de stat</a><a href="/calculatoare.html">Calculatoare</a></div><div><h4>Platformă</h4><a href="/despre.html">Despre noi</a><a href="/cursuri.html">Cursuri</a><a href="/premium.html">Premium</a><a href="/login.html">Cont</a><a href="/contact.html">Contact</a></div>
