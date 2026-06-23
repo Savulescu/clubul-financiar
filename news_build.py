@@ -185,7 +185,7 @@ def build():
 <span class="pill">{html.escape(it['source'])}</span><span style="color:var(--muted);font-size:.8rem">{reltime(it['ts'])}</span></div>
 <h3 style="font-size:1.05rem">{t}</h3>{f'<p>{s}</p>' if s else ''}<span class="more">Citește la sursă →</span></a>\n'''
     page = f'''<!DOCTYPE html><html lang="ro"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Știri financiare România — Clubul Financiar</title>
 <meta name="description" content="Cele mai importante știri financiare și economice din România, pe categorii (bursă, bănci, taxe, imobiliare, crypto), agregate din zeci de surse și actualizate automat.">
 <meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
@@ -280,7 +280,7 @@ def build():
   window.addEventListener('cf-auth', function(){{ prem=!!window.cfPremium; gateUI(); apply(); }});
 }})();
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>'''
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/tilt.js?v=23"></script><script defer src="/assets/site.js?v=23"></script></body></html>'''
     open(os.path.join(ROOT, "docs", "stiri.html"), "w", encoding="utf-8").write(page)
     print(f"stiri.html scris cu {len(items)} știri din {n_src} surse | categorii: {counts}")
 

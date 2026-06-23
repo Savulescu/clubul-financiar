@@ -52,7 +52,7 @@ CSS = '''<style>
 
 def head(title, desc, canon, ld=""):
     return f'''<!DOCTYPE html><html lang="ro"><head>{ld}
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title><meta name="description" content="{esc(desc)}"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
 <link rel="canonical" href="{canon}"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
@@ -61,7 +61,7 @@ def head(title, desc, canon, ld=""):
 {FONT}
 <link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-article.css?v=1">{CSS}</head><body class="u-page">{NAV_HTML}'''
 
-FOOT_SCRIPTS = f'{FOOTER_HTML}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/site.js?v={V}"></script>'
+FOOT_SCRIPTS = f'{FOOTER_HTML}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/site.js?v={V}"></script>'
 
 # ---------- pagini de capitol ----------
 os.makedirs(os.path.join(DOCS,"manual"), exist_ok=True)

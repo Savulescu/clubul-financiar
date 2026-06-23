@@ -247,7 +247,7 @@ def main():
     today = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
 
     page = f'''<!DOCTYPE html><html lang="ro"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Știri economice externe — ce înseamnă pentru tine | Clubul Financiar</title>
 <meta name="description" content="Cele mai importante știri economice mondiale, explicate pe înțelesul tău: ce înseamnă fiecare pentru banii, rata și economiile tale. Surse citate.">
 <meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
@@ -330,7 +330,7 @@ def main():
   apply();
 }})();
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/assets/tilt.js?v={V}"></script><script defer src="/assets/site.js?v={V}"></script></body></html>'''
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/tilt.js?v={V}"></script><script defer src="/assets/site.js?v={V}"></script></body></html>'''
     open(os.path.join(DOCS, "stiri-externe.html"), "w", encoding="utf-8").write(page)
     json.dump(store, open(STORE_F, "w"), ensure_ascii=False)
     # feed compact pentru Terminal (știri inline, refolosește același store)
