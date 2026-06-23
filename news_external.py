@@ -49,15 +49,17 @@ _BAD_RE = re.compile(
 def is_good_ro(text):
     return not _BAD_RE.search(text or "")
 
-def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3):
-    last = "n/a"; fallback = None; tries = 0
+def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, max_attempts=18):
+    last = "n/a"; fallback = None; tries = 0; attempts = 0
     for name, api_base, model, envb in PROVIDERS:
         for key in _keys(envb):
+            if attempts >= max_attempts: break   # nu baleia 40+ chei moarte cu 30s timeout fiecare
+            attempts += 1
             try:
                 body = json.dumps({"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": temperature}).encode()
                 req = urllib.request.Request(api_base + "/chat/completions", data=body,
                     headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
-                resp = urllib.request.urlopen(req, timeout=30)
+                resp = urllib.request.urlopen(req, timeout=12)   # era 30 — cheile moarte care fac hang opreau rularea ~25 min
                 j = json.loads(resp.read())
                 content = j["choices"][0]["message"]["content"]
                 tries += 1
