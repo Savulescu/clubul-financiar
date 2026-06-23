@@ -173,8 +173,18 @@ def main():
         "macro": "Indicatorii macro (inflație, șomaj, PIB) arată încotro merg prețurile, dobânzile și puterea ta de cumpărare.",
     }
     fb_count = 0
+    llm_dead = False  # după ce TOȚI providerii eșuează o dată, nu mai pierdem timp — restul merg direct pe fallback
+
+    def add_fallback(it):
+        cat = classify(it["title"] + " " + it["desc"])
+        fapt = re.sub(r"\s+", " ", it.get("desc", "")).strip()[:240] or it["title"].strip()
+        store.append({"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
+                      "ts": it["ts"], "gen_ts": now, "score": it["score"], "cat": cat, "fb": 1,
+                      "titlu": it["title"].strip(), "fapt": fapt, "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])})
 
     for it in new:
+        if llm_dead:
+            add_fallback(it); fb_count += 1; continue
         prompt = (
             "Ești redactor senior la Clubul Financiar (educație financiară, România). "
             "Primești o știre economică internațională în engleză. Scrie un rezumat ORIGINAL în ROMÂNĂ — NU traduce cuvânt cu cuvânt, NU copia.\n\n"
@@ -202,13 +212,9 @@ def main():
                           "titlu": d["titlu"].strip(), "fapt": d["fapt"].strip(), "ce_inseamna": d["ce_inseamna"].strip()})
         except Exception as e:
             print("  LLM fail → fallback fără LLM:", it["title"][:40], e)
-            cat = classify(it["title"] + " " + it["desc"])
-            fapt = re.sub(r"\s+", " ", it.get("desc", "")).strip()[:240] or it["title"].strip()
-            store.append({"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
-                          "ts": it["ts"], "gen_ts": now, "score": it["score"], "cat": cat, "fb": 1,
-                          "titlu": it["title"].strip(), "fapt": fapt,
-                          "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])})
-            fb_count += 1; continue
+            if "providerii au eșuat" in str(e):
+                llm_dead = True   # toate cheile moarte → restul merg direct pe fallback (fără retry storm)
+            add_fallback(it); fb_count += 1; continue
 
     store.sort(key=lambda s: -s.get("score", 0))
     disp = store[:DISPLAY]
@@ -242,7 +248,7 @@ def main():
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Știri economice externe — ce înseamnă pentru tine"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=1"><link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=1"><link rel="stylesheet" href="/assets/cf-preview.css?v=2">
 <style>
 /* premium auriu pe pagina de stiri (remap tokeni pe .u-page) */
 .u-page{{--emerald:var(--u-gold);--emerald-link:var(--u-gold);--grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));--card:var(--u-panel);--border:var(--u-line-soft);--bg-soft:var(--u-panel2);--bg-soft2:var(--u-panel2);--text:var(--u-ink);--muted:var(--u-muted)}}
