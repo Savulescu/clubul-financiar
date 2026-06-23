@@ -10,7 +10,7 @@ ART = os.path.join(ROOT, "articole")
 SRC = os.path.join(ART, "_src")
 RECORDS = "/Users/savulescucristian/clubul-financiar/_records.json"
 GLOS_SRC = "/private/tmp/claude-501/-Users-savulescucristian/2d8bd220-1ab9-4311-b6f9-e180142ffdfa/tasks/wu28oa28b.output"
-V = "30"  # cache bust
+V = "31"  # cache bust
 BUILD_DATE = "2026-06-19"  # dată build pentru date noi (articolele existente păstrează data lor)
 
 CATS = [
@@ -70,10 +70,14 @@ PAGE_TMPL = '''<!DOCTYPE html><html lang="ro"><head>
 <meta property="og:type" content="article"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="https://clubulfinanciar.ro/articole/{slug}"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
-<script type="application/ld+json">{ldjson}</script>
+<script type="application/ld+json">{ldjson}</script><script type="application/ld+json">{bcjson}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={v}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-preview.css?v=2"><link rel="stylesheet" href="/assets/cf-article.css?v=1"></head><body>{nav}<main class="u-page"><article class="article"><p class="meta"><a href="/educatie">Educație</a> · <a href="/educatie#{cat}">{catname}</a> · {min} min citire · Actualizat {date_disp}</p><h1>{title}</h1>{body}<div class="disc">⚠️ Conținut educativ, nu sfat de investiții. Pentru decizii financiare consultă un specialist autorizat.</div><p style="margin-top:26px"><a class="btn btn-ghost" href="/educatie">← Toate articolele</a></p></article></main>{footer}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/article.js?v={v}"></script><script defer src="/assets/site.js?v={v}"></script></body></html>'''
+
+def clean_cat(cat):
+    # CATNAME include emoji; pentru breadcrumb vrem nume curat
+    return re.sub(r"^[^\wĂÂÎȘȚăâîșț]+", "", CATNAME.get(cat, cat)).strip()
 
 def build_page(slug, title, desc, cat, body):
     mins = reading_minutes(body)
@@ -85,7 +89,13 @@ def build_page(slug, title, desc, cat, body):
         "publisher":{"@type":"Organization","name":"Clubul Financiar",
         "logo":{"@type":"ImageObject","url":"https://clubulfinanciar.ro/icon-512.png"}},
         "mainEntityOfPage":f"https://clubulfinanciar.ro/articole/{slug}"}, ensure_ascii=False)
-    return PAGE_TMPL.format(title=esc(title), desc=esc(desc), slug=slug, ldjson=ld,
+    bc = json.dumps({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Acasă","item":"https://clubulfinanciar.ro/"},
+        {"@type":"ListItem","position":2,"name":"Educație","item":"https://clubulfinanciar.ro/educatie"},
+        {"@type":"ListItem","position":3,"name":clean_cat(cat),"item":f"https://clubulfinanciar.ro/educatie#{cat}"},
+        {"@type":"ListItem","position":4,"name":title,"item":f"https://clubulfinanciar.ro/articole/{slug}"}]},
+        ensure_ascii=False)
+    return PAGE_TMPL.format(title=esc(title), desc=esc(desc), slug=slug, ldjson=ld, bcjson=bc,
         cat=cat, catname=esc(CATNAME.get(cat, cat)), min=mins, body=body, v=V,
         date_disp=ro_date(BUILD_DATE), nav=NAV_HTML, footer=FOOTER_HTML)
 

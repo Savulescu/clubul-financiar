@@ -59,6 +59,7 @@
 
   // ---------- cuprins (din h2/h3, fără titlul duplicat) ----------
   const heads = [...art.querySelectorAll("h2, h3")].filter(h => {
+    if (h.closest("[data-cf-related]")) return false; // nu include „Articole conexe" injectat în cuprins
     const t = h.textContent.trim();
     return t && t.toLowerCase() !== titleText.toLowerCase() && t.toLowerCase() !== "pe scurt";
   });
@@ -120,8 +121,8 @@
     });
   };
 
-  // ---------- articole conexe (aceeași categorie) ----------
-  fetch("/search-index.json").then(r => r.json()).then(idx => {
+  // ---------- articole conexe — server-side (semantic) dacă există, altfel fallback client-side ----------
+  if (!art.querySelector("[data-cf-related]")) fetch("/search-index.json").then(r => r.json()).then(idx => {
     const me = idx.find(a => a.s === slug);
     if (!me) return;
     let pool = idx.filter(a => a.c === me.c && a.s !== slug);

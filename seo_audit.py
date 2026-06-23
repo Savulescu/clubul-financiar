@@ -18,6 +18,8 @@ for f in files:
     t=g(h,r'<title>([^<]*)</title>'); d=g(h,r'<meta name="description" content="([^"]*)"')
     can=g(h,r'rel="canonical"\s+href="([^"]*)"') or g(h,r'href="([^"]*)"\s+rel="canonical"')
     h1=len(re.findall(r'<h1[ >]',h)); og=('og:title' in h); ld=('application/ld+json' in h)
+    # numără linkuri interne către alte articole (semnal de internal linking)
+    inter = len(re.findall(r'href="/articole/[^"#]+', h))
     probs=[]
     if not t: probs.append("fără title"); issues["title lipsă"]+=1
     elif not(25<=len(t)<=70): pass
@@ -29,9 +31,13 @@ for f in files:
     if h1!=1: probs.append(f"{h1} h1"); issues["h1 != 1"]+=1
     if not og: probs.append("fără OG"); issues["OG lipsă"]+=1
     if not ld: issues["JSON-LD lipsă"]+=1
-    # in sitemap?
-    in_sm = (url in sm) or (rel in sm)
-    if not in_sm and not any(x in rel for x in ["/login","/reset","/account","/statistici","/privacy","/terms","/contact"]):
+    if '"BreadcrumbList"' not in h: issues["Breadcrumb lipsă"]+=1
+    if "/articole/" in rel and inter==0: issues["fără internal-link art→art"]+=1
+    # in sitemap? — site-ul folosește URL-uri curate (fără .html / fără /index.html)
+    clean = re.sub(r'/index\.html$','/',rel); clean = re.sub(r'\.html$','',clean)
+    clean_url = BASE+clean
+    in_sm = any(x in sm for x in (url, rel, clean, clean_url, "<loc>"+clean_url+"</loc>"))
+    if not in_sm and not any(x in rel for x in ["/login","/reset","/account","/statistici","/privacy","/terms","/contact","/dezabonare","/feedback","/newsletter/","/_"]):
         probs.append("LIPSĂ din sitemap"); issues["lipsă sitemap"]+=1
     if probs: flagged.append((rel,probs))
 dup_t=[(t,n) for t,n in titles.items() if n>1]
