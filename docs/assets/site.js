@@ -13,11 +13,11 @@
     ["Prezentare", "/incepe-aici.html"],
     ["Învață", "/educatie.html"],
     ["Masterclass", "/masterclass.html"],
+    ["Știri", "/stiri.html"],
     ["Calculatoare", "/calculatoare.html"],
     ["Instrumente", "/instrumente.html"],
-    ["Feedback", "/feedback.html"],
-    ["Știri", "/stiri.html"],
     ["Premium", "/premium.html"],
+    ["Feedback", "/feedback.html"],
   ];
   const SOC = [
     ["Instagram","https://www.instagram.com/clubulfinanciar"],["TikTok","https://www.tiktok.com/@clubulfinanciar"],
