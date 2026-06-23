@@ -51,8 +51,8 @@
 <button class="news-tab nt-range" data-range="24h">Ultimele 24h</button>
 <button class="news-tab nt-range" data-range="7d">Ultima săptămână</button></div>
 <div class="news-grp"><span class="news-lbl">Sortare</span>
-<button class="news-tab nt-sort active" data-sort="relevant">Cele mai relevante</button>
-<button class="news-tab nt-sort" data-sort="recent">Cele mai recente</button></div>
+<button class="news-tab nt-sort active" data-sort="recent">Cele mai recente</button>
+<button class="news-tab nt-sort" data-sort="relevant">Cele mai relevante</button></div>
 </div>
 <div class="news-tabs" id="catTabs"><button class="news-tab active" data-f="all">Toate <span>(42)</span></button><button class="news-tab" data-f="banci-centrale">🏦 Bănci centrale <span>(4)</span></button><button class="news-tab" data-f="piete">📈 Piețe & Burse <span>(16)</span></button><button class="news-tab" data-f="companii">🏢 Companii <span>(7)</span></button><button class="news-tab" data-f="crypto">₿ Crypto <span>(1)</span></button><button class="news-tab" data-f="marfuri">🛢️ Mărfuri & Energie <span>(2)</span></button><button class="news-tab" data-f="macro">🌍 Macro & Economie <span>(12)</span></button></div>
 <p id="newsEmpty" class="lead" hidden style="text-align:center;margin:14px auto">Nicio știre în acest interval.</p>
@@ -289,7 +289,7 @@
 (function(){
   var grid=document.getElementById('newsGrid');
   var cards=[].slice.call(document.querySelectorAll('.news-card'));
-  var st={cat:'all',range:'all',sort:'relevant'};
+  var st={cat:'all',range:'all',sort:'recent'};
   var now=Date.now()/1000;
   function inRange(ts){ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }
   function apply(){
