@@ -8,7 +8,7 @@
 <meta name="keywords" content="educatie financiara, finante personale, buget, economisire, investitii, ETF, bursa, credite, pensii, FIRE, Romania">
 <meta name="author" content="Clubul Financiar">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#10b981">
+<meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -28,9 +28,135 @@
 </script>
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
 <link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Homepage. DOAR prezentare: logica/JS/3D/formularul rămân neatinse.
+   Pe .u-page remapăm tokenii vechi (verde) la limbajul auriu/navy „birou privat".
+   Hero-ul (#hero3d) e re-ancorat în paletă; canvasul 3D rămâne intact.
+   ============================================================================= */
+
+/* 1) Remap tokeni vechi → Ultra pe toată pagina convertită */
+.u-page{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold);
+  --blue:var(--u-gold2); --blue-d:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel);
+  --bg-soft:var(--u-bg2); --bg-soft2:var(--u-gold-soft);
+  --shadow:var(--u-shadow);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+}
+
+/* 2) Tipografie editorială: titluri serif gravat, eyebrow auriu */
+.u-page .section .eyebrow,.u-page .center .eyebrow{
+  color:var(--u-gold); font-family:'Sora',system-ui,sans-serif; letter-spacing:.18em;
+}
+.u-page h2.title{ font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.01em; color:var(--u-ink); }
+.u-page .card h3,.u-page .price h3,.u-page .level h3,.u-page .band h2{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.005em;
+}
+
+/* 3) HERO — re-ancorare paletă (tokenii hero din upgrade.css §18 sunt locali pe .hero) */
+.u-page .hero{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold2);
+  --blue:var(--u-gold2); --muted:#b9c8e2; --border:rgba(232,194,104,.18);
+  background:
+    radial-gradient(960px 640px at 84% 38%, rgba(232,194,104,.20), transparent 62%),
+    radial-gradient(640px 500px at 4% 6%, rgba(232,194,104,.10), transparent 60%),
+    linear-gradient(105deg,#0d2342 0%,#0a1a33 42%,#060f1e 100%) !important;
+}
+.u-page .hero .eyebrow{ color:#E8C268; font-family:'Sora',system-ui,sans-serif; }
+.u-page .hero h1{ font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.01em; }
+.u-page .hero .grad-text{
+  background:none !important; -webkit-text-fill-color:#E8C268 !important; color:#E8C268 !important;
+  font-style:italic;
+}
+.u-page .hero .hero-trust{ color:#a9bcdc; }
+.u-page .hc-eyebrow{ color:#E8C268; font-family:'Sora',system-ui,sans-serif; }
+.u-page .hc-sub{ color:#E8C268; }
+.u-page .hero :focus-visible{ outline-color:#E8C268; }
+
+/* 4) STATS — cifră gravată aurie pe panou de extras */
+.u-page .stat{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .stat .num{
+  font-family:'Sora',system-ui,sans-serif; font-weight:800; font-variant-numeric:tabular-nums;
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.u-page .stat .lbl{ color:var(--u-muted); }
+
+/* 5) CARDURI — panou Ultra, hairline auriu, pastilă-icon aurie */
+.u-page .card{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .card::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.6; }
+.u-page .card{ position:relative; overflow:hidden; }
+.u-page .card:hover{ border-color:var(--u-line); box-shadow:0 30px 70px rgba(40,30,8,.16); }
+.u-page .card .ic{
+  background:var(--u-gold-soft); border:1px solid var(--u-line-soft);
+}
+.u-page .card .more{ color:var(--u-gold); font-weight:700; }
+
+/* 6) ÎNCEPE AICI — niveluri ca registru numerotat auriu */
+.u-page .level{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .level:hover{ border-color:var(--u-gold); }
+.u-page .level .n{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  font-family:'Sora',system-ui,sans-serif; box-shadow:0 8px 20px rgba(168,134,49,.26);
+}
+
+/* 7) BENZI (CTA aurii) — „carton" auriu de bancă privată */
+.u-page .band{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  box-shadow:0 24px 60px rgba(168,134,49,.30);
+}
+.u-page .band h2{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:#1a1304; }
+.u-page .band p{ color:#2a2008; opacity:.92; }
+.u-page .band .btn-light{ background:#13263f; color:#f6efdc; border:1px solid rgba(26,19,4,.2); }
+.u-page .band .btn-light:hover{ background:#0f1f33; }
+
+/* SEMNĂTURA: banda navy de newsletter — un singur „seif" nocturn auriu */
+.u-page section:last-of-type .band{
+  background:linear-gradient(135deg,#0e2750,#081627); color:#f4ecd8;
+  border:1px solid rgba(232,194,104,.22);
+  box-shadow:0 30px 70px rgba(0,0,0,.34);
+}
+.u-page section:last-of-type .band::after{
+  content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,#E8C268,transparent); opacity:.7;
+}
+.u-page section:last-of-type .band{ position:relative; overflow:hidden; }
+.u-page section:last-of-type .band h2{ color:#E8C268; font-family:'Fraunces',Georgia,serif; font-weight:600; }
+.u-page section:last-of-type .band p{ color:#cbd7ea; opacity:1; }
+
+/* 8) PREȚURI — fișă de plan, plan recomandat marcat auriu */
+.u-page .price{ background:var(--u-panel); border:1px solid var(--u-line-soft); box-shadow:var(--u-shadow); }
+.u-page .price h3{ color:var(--u-ink); }
+.u-page .price.feat{ border-color:var(--u-gold); box-shadow:0 20px 50px rgba(168,134,49,.22); }
+.u-page .price .tag{ background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304; }
+.u-page .price .amt{ font-family:'Sora',system-ui,sans-serif; font-variant-numeric:tabular-nums; color:var(--u-ink); }
+.u-page .price li::before{ color:var(--u-gold); }
+.u-page .pill{ background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line); }
+
+/* 9) Butoane vechi în zona convertită → aurii */
+.u-page .btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  box-shadow:0 10px 26px rgba(168,134,49,.28);
+}
+.u-page .btn-ghost{ color:var(--u-gold); border-color:var(--u-line); }
+.u-page .btn-ghost:hover{ border-color:var(--u-gold); color:var(--u-gold); }
+.u-page .btn:focus-visible,.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+
+/* 10) „Cum funcționează" — numere mari serif aurii (override inline color:var(--emerald)) */
+.u-page .card .ic[style*="color"]{ color:var(--u-gold) !important; font-family:'Fraunces',Georgia,serif; }
+
+@media(prefers-reduced-motion:reduce){
+  .u-page .card,.u-page .level,.u-page .stat,.u-page .btn{ transition:none; }
+}
+</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Clubul Financiar","url":"https://clubulfinanciar.ro","inLanguage":"ro-RO","publisher":{"@type":"Organization","name":"Clubul Financiar"}}</script></head>
 <body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
@@ -43,14 +169,15 @@
     </div>
   </div></header>
 
+<main class="u-page">
 <!-- HERO -->
 <section class="hero">
   <div id="hero3d" aria-hidden="true"></div>
   <div class="container hero-grid">
     <div>
-      <p class="eyebrow">Învață · Aplică · Crește</p>
+      <p class="eyebrow">Biroul tău financiar privat</p>
       <h1>Construiește-ți <span class="grad-text">viitorul financiar</span></h1>
-      <p class="lead">Învață despre bani, investiții, credite, economii, business și independență financiară — într-o singură platformă, pe înțelesul tuturor.</p>
+      <p class="lead">Bani, investiții, credite, economii, business și independență financiară — un singur loc, în lei și pe legislația României. Educație de bancă privată, pe înțelesul tuturor.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/incepe-aici.html">Începe gratuit →</a>
         <a class="btn btn-ghost" href="/cursuri.html">Vezi cursurile</a>
@@ -92,7 +219,7 @@
     <a class="level reveal" href="/incepe-aici.html"><span class="n">3</span><div><h3>Vreau să investesc</h3><p style="color:var(--muted)">Bursă, ETF-uri, titluri de stat — de la zero.</p></div></a>
     <a class="level reveal" href="/incepe-aici.html"><span class="n">4</span><div><h3>Vreau venit pasiv</h3><p style="color:var(--muted)">Dividende, dobânzi, surse de venit recurent.</p></div></a>
     <a class="level reveal" href="/incepe-aici.html"><span class="n">5</span><div><h3>Vreau independență financiară</h3><p style="color:var(--muted)">Strategia FIRE și planul pe termen lung.</p></div></a>
-    <a class="level reveal" href="/incepe-aici.html" style="background:var(--grad);color:#fff;border:none"><span class="n" style="background:#fff;color:var(--emerald-d)">→</span><div><h3>Vezi tot traseul</h3><p style="color:#eafff6">Planul complet, pas cu pas.</p></div></a>
+    <a class="level reveal" href="/incepe-aici.html" style="background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));color:#1a1304;border:none"><span class="n" style="background:#fff;color:var(--u-gold)">→</span><div><h3 style="color:#1a1304">Vezi tot traseul</h3><p style="color:#2a2008">Planul complet, pas cu pas.</p></div></a>
   </div>
 </div></section>
 
@@ -192,6 +319,7 @@
     </form>
   </div>
 </div></section>
+</main>
 
 <footer class="foot"><div class="container">
     <div class="foot-grid">

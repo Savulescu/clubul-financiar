@@ -1,16 +1,145 @@
 <!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Abonamente Premium — Clubul Financiar</title>
-<meta name="description" content="Începe gratuit și treci la Premium, Pro sau Ultra pentru cursuri complete, calculatoare, analize și comunitate exclusivă."><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="description" content="Începe gratuit și treci la Premium, Pro sau Ultra pentru cursuri complete, calculatoare, analize și comunitate exclusivă."><meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/premium.html">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Abonamente Premium — Clubul Financiar"><meta property="og:description" content="Începe gratuit și treci la Premium, Pro sau Ultra pentru cursuri complete, calculatoare, analize și comunitate exclusivă."><meta property="og:url" content="https://clubulfinanciar.ro/premium.html"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Abonamente Premium — Clubul Financiar"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=24">
-<link rel="stylesheet" href="/assets/upgrade.css?v=23"></head><body><header class="nav"><div class="container nav-in">
+<link rel="stylesheet" href="/assets/upgrade.css?v=23">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=1">
+<link rel="stylesheet" href="/assets/cf-preview.css?v=1">
+<style>
+/* =============================================================================
+   Pilot Ultra — Abonamente. Doar prezentare; formularul + JS Supabase neatinse.
+   Pe .u-page remapăm tokenii vechi (verzi) la tokenii Ultra, ca toate clasele
+   moștenite (.price/.amt/.tag/.feat/.band/.card/.pill/.btn) să se randeze în
+   limbajul auriu/navy. Plus override-uri pentru verdele hardcodat (rgba) care
+   nu trece prin variabile.
+   ============================================================================= */
+
+/* 1) Remap tokeni: prinde stilurile var(--…) emise din CSS-ul vechi */
+.u-page{
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold); --blue:var(--u-gold2);
+  --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --border:var(--u-line-soft); --card:var(--u-panel); --bg-soft:var(--u-bg2);
+  --bg-soft2:var(--u-gold-soft);
+  --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  --shadow:var(--u-shadow); --shadow-lg:var(--u-shadow); --shadow-soft:var(--u-shadow);
+}
+
+/* 2) Hero → limbajul Ultra */
+.u-page .u-hero{ text-align:center; }
+.u-page .u-hero .u-lead{ margin-inline:auto; }
+.u-page .u-hero .u-pills{ margin-top:16px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+
+/* 3) Carduri de preț → panou-extras navy cu fir auriu */
+.u-page .price{
+  background:var(--u-panel); border:1px solid var(--u-line-soft);
+  border-radius:18px; box-shadow:var(--u-shadow);
+}
+.u-page .price h3{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); letter-spacing:-.01em; }
+.u-page .price .amt{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; letter-spacing:-.015em;
+}
+.u-page .price .amt span{ color:var(--u-muted); font-weight:400; font-family:'Plus Jakarta Sans',system-ui,sans-serif; }
+.u-page .price li{ color:var(--u-muted); }
+.u-page .price li strong{ color:var(--u-ink); }
+.u-page .price li::before{ color:var(--u-gold); }
+.u-page .price li a{ color:var(--u-gold)!important; }
+
+/* tag-uri (pastile de tier) — pe firul auriu */
+.u-page .price .tag{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  font-family:'Fraunces',serif; letter-spacing:.05em; box-shadow:0 6px 16px rgba(168,134,49,.30);
+}
+
+/* SEMNĂTURA: cardul „Ordine" gravat în aur — bordură + glow auriu, fir de sus */
+.u-page .price.feat{
+  border-color:var(--u-gold);
+  box-shadow:0 20px 50px rgba(168,134,49,.22), inset 0 0 0 1px var(--u-gold-soft);
+  background:linear-gradient(180deg,var(--u-gold-soft),var(--u-panel) 120px);
+}
+.u-page .price.feat::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px; border-radius:18px 18px 0 0;
+  background:linear-gradient(90deg,transparent,var(--u-gold),transparent);
+}
+.u-page .price.feat h3{ color:var(--u-gold); }
+
+/* 4) Carduri „de ce Premium" → panouri liniștite */
+.u-page .card{
+  background:var(--u-panel); border:1px solid var(--u-line-soft);
+  border-radius:16px; box-shadow:var(--u-shadow);
+}
+.u-page .card h3{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); }
+.u-page .card p{ color:var(--u-muted); }
+.u-page .card:hover{ border-color:var(--u-gold); }
+.u-page .card .ic{ background:linear-gradient(135deg,var(--u-gold-soft),var(--u-panel2)); }
+
+/* titluri de secțiune în serif */
+.u-page h2.title{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); letter-spacing:-.01em; }
+.u-page .lead{ color:var(--u-muted); }
+
+/* pastile hero */
+.u-page .pill{
+  background:var(--u-gold-soft); color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:600;
+}
+
+/* 5) Banda de waitlist → panou navy cu sigiliu auriu (nu bloc auriu plin) */
+.u-page .band{
+  background:linear-gradient(160deg,var(--u-bg2),var(--u-panel));
+  color:var(--u-ink); border:1px solid var(--u-line);
+  border-radius:20px; box-shadow:var(--u-shadow); position:relative; overflow:hidden;
+}
+.u-page .band::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px;
+  background:linear-gradient(90deg,transparent,var(--u-gold),transparent); opacity:.85;
+}
+.u-page .band h2{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); }
+.u-page .band p{ color:var(--u-muted); opacity:1; }
+.u-page .band p strong{ color:var(--u-gold); }
+.u-page .band #wlEmail{
+  background:var(--u-panel2); color:var(--u-ink); border:1px solid var(--u-line-soft)!important;
+  font-variant-numeric:tabular-nums;
+}
+.u-page .band #wlEmail:focus{ outline:none; border-color:var(--u-gold)!important; box-shadow:0 0 0 3px var(--u-gold-soft); }
+.u-page .band #wlEmail::placeholder{ color:var(--u-muted); }
+
+/* 6) Butoane → auriu/navy */
+.u-page .btn.btn-primary{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn.btn-ghost{
+  background:transparent; color:var(--u-gold); border:1px solid var(--u-line);
+  font-weight:700; border-radius:12px;
+}
+.u-page .band .btn.btn-light{
+  background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
+  border:1px solid transparent; border-radius:12px;
+  box-shadow:0 10px 26px rgba(168,134,49,.30);
+}
+.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; }
+.u-page a:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:8px; }
+.u-page #wlMsg{ color:var(--u-ink); }
+
+/* eyebrow auriu */
+.u-page .u-eyebrow{ color:var(--u-gold); }
+
+@media(max-width:600px){
+  .u-page .price.feat{ background:linear-gradient(180deg,var(--u-gold-soft),var(--u-panel) 90px); }
+}
+@media(prefers-reduced-motion:reduce){
+  .u-page .price, .u-page .card{ transition:none; }
+}
+</style></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/index.html"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici.html">Începe aici</a><a href="/educatie.html">Învață</a><a href="/masterclass.html">Masterclass</a><a href="/calculatoare.html">Calculatoare</a><a href="/instrumente.html">Instrumente</a><a href="/feedback.html">Feedback</a><a href="/stiri.html">Știri</a><a href="/premium.html">Premium</a></nav>
     <div class="nav-right">
@@ -19,7 +148,14 @@
       <span id="acctSlot"><a class="btn btn-primary" href="/login.html" style="padding:9px 18px">Cont</a></span>
       <button class="icon-btn burger" id="burger" aria-label="Meniu" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
-  </div></header><section class="section-sm" style="background:var(--bg-soft)"><div class="container center"><p class="eyebrow">Abonamente</p><h1 class="title">Treci de la „știu teoria" la „am un plan și îl execut"</h1><p class="lead" style="margin-inline:auto">Gratuit înveți temeinic. Cu Premium chiar <strong>faci</strong> — cu lecții, teste, cursuri și instrumente care lucrează pe banii <em>tăi</em>.</p><p style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><span class="pill">💡 Plata anuală = 2 luni gratis</span><span class="pill">🎁 Ofertă „membru fondator" la lansare</span></p></div></section>
+  </div></header><main class="u-page"><section class="section-sm"><div class="container">
+  <div class="u-hero">
+    <p class="u-eyebrow">Abonamente</p>
+    <h1 class="u-crest">Treci de la „știu teoria" la <em>„am un plan și îl execut"</em></h1>
+    <p class="u-lead">Gratuit înveți temeinic. Cu Premium chiar <strong>faci</strong> — cu lecții, teste, cursuri și instrumente care lucrează pe banii <em>tăi</em>.</p>
+    <p class="u-pills"><span class="pill">💡 Plata anuală = 2 luni gratis</span><span class="pill">🎁 Ofertă „membru fondator" la lansare</span></p>
+  </div>
+</div></section>
 <section class="section"><div class="container"><div class="grid grid-4">
 <div class="price reveal"><h3>Gratuit</h3><div class="amt">0 lei<span></span></div><ul><li>308 de lecții complete</li><li>6 calculatoare esențiale</li><li>Glosar (131 termeni) + căutare</li><li>Știri financiare (surse alese)</li><li>Quiz-uri de probă</li><li>Cont gratuit pentru totdeauna</li></ul><a class="btn btn-ghost" href="/login.html" style="width:100%;justify-content:center">Creează cont gratuit</a></div>
 <div class="price reveal feat"><span class="tag">Cel mai ales</span><h3>Premium · „Ordine"</h3><div class="amt">49 lei<span>/lună</span></div><p style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">sau 490 lei/an (~41/lună)</p><ul><li><strong>Toate cele 1000 de lecții</strong></li><li>17 cursuri structurate, cu progres</li><li>Teste cu streak, XP și certificate</li><li><strong>Planul Meu Financiar</strong> (PDF personalizat)</li><li>Plan Anti-Datorii</li><li>Tracker de avere + reminder lunar</li><li>Toate cele 11 calculatoare</li><li>Newsletter premium + toate știrile & filtre</li><li>Trusă de șabloane (buget, contracte)</li></ul><a class="btn btn-primary" href="#alege" style="width:100%;justify-content:center">Vreau Premium</a></div>
@@ -49,7 +185,7 @@
 <p id="wlMsg" style="margin-top:12px;font-weight:700;min-height:1.2em"></p>
 <p style="opacity:.85;font-size:.85rem;margin-top:6px">Fără spam. Cele 308 de lecții gratuite rămân ale tale oricum, pentru totdeauna.</p>
 </div>
-</div></section>
+</div></section></main>
 <script>
 (function(){
   var btns=document.querySelectorAll('a[href="#alege"]');
