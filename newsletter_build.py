@@ -24,7 +24,8 @@ FROM = os.environ.get("NEWSLETTER_FROM", "Clubul Financiar <noreply@clubulfinanc
 SB_URL = os.environ.get("SUPABASE_URL", "https://maumjqciuxdbwjtvcpsy.supabase.co")
 SB_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
 # Copie garantată: primește mereu newsletterul, indiferent de lista de abonați (canar de livrare).
-OWNER = os.environ.get("NEWSLETTER_OWNER", "clubulfinanciar@gmail.com").strip()
+# `or` (nu doar default-ul .get) ca un secret GOL din Actions să cadă tot pe adresa de rezervă.
+OWNER = (os.environ.get("NEWSLETTER_OWNER") or "clubulfinanciar@gmail.com").strip()
 # Guard idempotent: reține ce s-a trimis azi, ca sloturile cron redundante să nu trimită de 2 ori.
 STATE_FILE = "docs/newsletter/.sent_state.json"
 
