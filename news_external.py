@@ -337,7 +337,7 @@ def main():
             when = f"acum {int(dmin // 60)}h"
         else:
             when = f"acum {int(dmin // 1440)}z"
-        cards.append(f'''<article class="card news-card reveal" data-cat="{s['cat']}" data-ts="{s['ts'] or s['gen_ts']:.0f}" data-score="{s.get('score',0)}">
+        cards.append(f'''<article class="card news-card" data-cat="{s['cat']}" data-ts="{s['ts'] or s['gen_ts']:.0f}" data-score="{s.get('score',0)}">
 <div class="ne-top"><span class="ne-src">🌍 {html.escape(s['src'])} · {CAT_LABEL[s['cat']]}{' · rezumat în engleză' if s.get('fb') else ''}</span><span class="ne-when">{when}</span></div>
 <h2>{html.escape(s['titlu'])}</h2>
 <p class="ne-fapt">{html.escape(s['fapt'])} <a class="ne-link" href="{html.escape(s['link'])}" target="_blank" rel="noopener nofollow">Sursă: {html.escape(s['src'])} →</a></p>
@@ -409,8 +409,9 @@ def main():
   var now=Date.now()/1000;
   // Timestamp LIVE: recalculează „acum X" din data-ts la fiecare încărcare (textul server-side
   // se învechea între rulări — zicea „acum 5 min" și la 4h). Server-side rămâne fallback fără JS.
-  function rel(ts){{ var d=now-ts; if(d<60)return 'chiar acum'; if(d<3600)return 'acum '+Math.floor(d/60)+' min'; if(d<86400)return 'acum '+Math.floor(d/3600)+'h'; return 'acum '+Math.floor(d/86400)+'z'; }}
-  cards.forEach(function(c){{ var w=c.querySelector('.ne-when'); var ts=parseFloat(c.dataset.ts)||0; if(w&&ts){{ w.textContent=rel(ts); }} }});
+  function rel(ts){{ var d=(Date.now()/1000)-ts; if(d<0)d=0; if(d<60)return 'chiar acum'; if(d<3600)return 'acum '+Math.floor(d/60)+' min'; if(d<86400)return 'acum '+Math.floor(d/3600)+'h'; return 'acum '+Math.floor(d/86400)+'z'; }}
+  function tick(){{ cards.forEach(function(c){{ var w=c.querySelector('.ne-when'); var ts=parseFloat(c.dataset.ts)||0; if(w&&ts){{ w.textContent=rel(ts); }} }}); }}
+  tick(); setInterval(tick,60000);
   function inRange(ts){{ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }}
   function apply(){{
     var vis=cards.filter(function(c){{
