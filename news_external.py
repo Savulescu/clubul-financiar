@@ -71,20 +71,23 @@ def _selftest_filter():
     return bf, gf
 
 _DIAG = {"ok": {}, "err": {}, "ro_reject": {}, "samples": [], "no_keys": []}   # telemetrie cloud → docs/data/news_debug.json
+_DEADLINE = 0.0   # buget global de timp (setat în main); după el, chat() iese pe fallback rapid
 
 def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, max_attempts=40):
     last = "n/a"; fallback = None; tries = 0; attempts = 0
+    if _DEADLINE and time.time() > _DEADLINE:
+        raise RuntimeError("buget de timp depășit — fallback rapid pe restul")
     for name, api_base, model, envb in PROVIDERS:
         ks = _keys(envb)
         if not ks and name not in _DIAG["no_keys"]: _DIAG["no_keys"].append(name)
         for key in ks:
-            if attempts >= max_attempts: break   # plasă de siguranță (cu skip-on-auth ajunge la toți providerii)
+            if attempts >= max_attempts or (_DEADLINE and time.time() > _DEADLINE): break
             attempts += 1
             try:
                 body = json.dumps({"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": temperature}).encode()
                 req = urllib.request.Request(api_base + "/chat/completions", data=body,
                     headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
-                resp = urllib.request.urlopen(req, timeout=12)   # era 30 — cheile moarte care fac hang opreau rularea ~25 min
+                resp = urllib.request.urlopen(req, timeout=10)   # era 30 — cheile moarte care fac hang opreau rularea ~25 min
                 j = json.loads(resp.read())
                 content = j["choices"][0]["message"]["content"]
                 tries += 1
@@ -267,6 +270,8 @@ def main():
         try: store = json.load(open(STORE_F))
         except: store = []
     now = time.time()
+    global _DEADLINE
+    _DEADLINE = now + 300   # buget total ~5 min (fetch + LLM); după el, restul știrilor → fallback rapid
     store = [s for s in store if s.get("gen_ts", 0) > now - KEEP_H*3600]
     new = []
     if "--rebuild-only" in sys.argv:
