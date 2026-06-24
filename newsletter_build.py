@@ -386,40 +386,41 @@ def send_tier(tier, limit=None, guard=False):
         print(f"  ⏭️  «{subj}» deja trimis azi ({tier}) — sar (idempotent, slot cron redundant).")
         return
     html_body = fn()
-    sent = 0
-    # 1) Copie GARANTATĂ la owner — independent de Supabase/abonați (canar de livrare).
-    if OWNER:
-        owner_html = html_body.replace("%unsubscribe_url%", f"{SITE}/dezabonare")
-        if send_email(OWNER, subj + " — Clubul Financiar", owner_html):
-            sent += 1; print(f"  ✓ copie garantată → {OWNER}")
-        else:
-            print(f"  ⚠️ copia către owner ({OWNER}) a eșuat — vezi eroarea Resend de mai sus.")
-    # 2) Abonații tierului din Supabase.
+    # Lista de abonați din Supabase.
     recips = fetch_recipients(tier) if SB_KEY else []
     if not SB_KEY:
-        print("  ⚠️ SUPABASE_SERVICE_KEY lipsește — sar peste abonați (owner tot a primit).")
+        print("  ⚠️ SUPABASE_SERVICE_KEY lipsește — sar peste abonați (owner tot primește copia).")
     if limit:
         recips = recips[:int(limit)]
-    sub_sent = 0
-    for r in recips:
-        em = r.get("email"); tok = r.get("unsub_token", "")
+    sub_total = len(recips)
+    # Garantăm că OWNER primește — DAR fără dublare: dacă e deja abonat, primește
+    # un singur email (cel personalizat, cu link-ul lui de dezabonare).
+    owner_l = OWNER.lower() if OWNER else None
+    emails_lower = {(r.get("email") or "").strip().lower() for r in recips}
+    targets = list(recips)
+    if owner_l and owner_l not in emails_lower:
+        targets.append({"email": OWNER, "unsub_token": ""})   # copie sintetică, doar dacă nu e abonat
+    delivered = 0; owner_ok = (owner_l is None)
+    for r in targets:
+        em = (r.get("email") or "").strip(); tok = r.get("unsub_token", "")
         if not em:
             continue
-        unsub = f"{SITE}/dezabonare?t={tok}"
+        unsub = f"{SITE}/dezabonare?t={tok}" if tok else f"{SITE}/dezabonare"
         personal = html_body.replace("%unsubscribe_url%", unsub)
         if send_email(em, subj + " — Clubul Financiar", personal):
-            sub_sent += 1
+            delivered += 1
+            if owner_l and em.lower() == owner_l:
+                owner_ok = True
         import time as _t; _t.sleep(0.25)   # politicos cu Resend
-    sent += sub_sent
-    print(f"[--send {tier}] abonați: {sub_sent}/{len(recips)} | owner: {'da' if OWNER else 'nu'} | total trimis: {sent}")
-    if sent == 0:
+    print(f"[--send {tier}] livrate: {delivered}/{len(targets)} (abonați: {sub_total}, owner: {OWNER or 'nesetat'})")
+    if delivered == 0:
         print(f"  ❌ 0 emailuri trimise — eșec (cheie Resend invalidă, domeniu neverificat sau Cloudflare).")
         sys.exit(1)
-    if recips and sub_sent == 0:
-        print(f"  ❌ existau {len(recips)} abonați dar 0 au primit — trimiterea către abonați e ruptă.")
+    if OWNER and not owner_ok:
+        print(f"  ❌ {OWNER} NU a primit copia — Resend a respins adresa (vezi eroarea de mai sus).")
         sys.exit(1)
-    if not recips:
-        print("  ⚠️ 0 abonați confirmați în Supabase (normal pe site nou). Owner a primit copia.")
+    if sub_total == 0:
+        print("  ⚠️ 0 abonați confirmați în Supabase. Owner a primit copia, dar verifică lista de abonați.")
     if guard:
         _mark_sent_today(tier)
 
