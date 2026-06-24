@@ -9,9 +9,10 @@
   const disc = art.querySelector(".disc");
   const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-  // ---------- gating premium (preview ~25% + lock, SEO-safe) ----------
+  // ---------- gating Pro (preview ~25% + lock, SEO-safe) ----------
+  var hasPro = function () { return !!window.cfAdmin || window.cfTier === "pro" || window.cfTier === "ultra"; };
   (function () {
-    if (art.getAttribute("data-premium") !== "1" || window.cfPremium) return;
+    if (art.getAttribute("data-premium") !== "1" || hasPro()) return;
     if (!h1 || !disc) return;
     const nodes = []; let nn = h1.nextElementSibling;
     while (nn && nn !== disc) { nodes.push(nn); nn = nn.nextElementSibling; }
@@ -27,14 +28,14 @@
     const rest = document.createElement("div"); rest.className = "premium-rest";
     for (let k = cut; k < nodes.length; k++) rest.appendChild(nodes[k]);
     const gate = document.createElement("div"); gate.className = "premium-gate";
-    gate.innerHTML = '<div class="pg-fade"></div><div class="pg-card"><span class="cf-premium-badge">Premium</span><h2>Restul lecției e în Premium</h2>' +
+    gate.innerHTML = '<div class="pg-fade"></div><div class="pg-card"><span class="cf-premium-badge">Pro</span><h2>Restul lecției e în Pro</h2>' +
       (heads.length ? '<p style="color:var(--muted)">Ce mai afli în această lecție:</p><ul class="pg-list">' + heads.slice(0, 6).map(h => '<li>' + esc(h) + '</li>').join("") + '</ul>' : '<p style="color:var(--muted)">Deblochează lecția completă + testul + tot Masterclass-ul.</p>') +
-      '<p class="price-line">Tot Masterclass Bursă + cele 1000 de lecții + teste — 49 lei/lună</p><a class="btn btn-primary" href="/premium">Deblochează cu Premium</a><p style="margin-top:10px;font-size:.85rem"><a href="/login" style="color:var(--emerald-link)">Ai cont Premium? Conectează-te</a></p></div>';
+      '<p class="price-line">Tot Masterclass Bursă + cele 1000 de lecții + Hub Fiscal — 99 lei/lună</p><a class="btn btn-primary" href="/premium#alege">Deblochează cu Pro</a><p style="margin-top:10px;font-size:.85rem"><a href="/login" style="color:var(--emerald-link)">Ai cont Pro? Conectează-te</a></p></div>';
     disc.parentNode.insertBefore(gate, disc);
     disc.parentNode.insertBefore(rest, disc);
     art.classList.add("cf-locked");
     window.addEventListener("cf-auth", function () {
-      if (window.cfPremium) { art.classList.remove("cf-locked"); while (rest.firstChild) disc.parentNode.insertBefore(rest.firstChild, rest); gate.remove(); rest.remove(); }
+      if (hasPro()) { art.classList.remove("cf-locked"); while (rest.firstChild) disc.parentNode.insertBefore(rest.firstChild, rest); gate.remove(); rest.remove(); }
     });
   })();
 
