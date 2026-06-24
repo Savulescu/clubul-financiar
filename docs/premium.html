@@ -149,6 +149,59 @@
 @media(prefers-reduced-motion:reduce){
   .u-page .price, .u-page .card{ transition:none; }
 }
+
+/* Linie „pentru cine e" sub titlul fiecărui card */
+.u-page .price .who{
+  font-family:'Inter',system-ui,sans-serif; font-size:.82rem; font-weight:600;
+  color:var(--u-gold); margin:2px 0 8px; letter-spacing:.01em;
+}
+/* Punctul de graniță („Tot din … plus:") — evidențiat */
+.u-page .price li.li-bound{
+  list-style:none; margin:0 0 8px -1.2em; padding:8px 0 10px;
+  border-bottom:1px dashed var(--u-line-soft); color:var(--u-ink);
+}
+.u-page .price li.li-bound::before{ content:none; }
+.u-page .price li.li-bound strong{ color:var(--u-gold); }
+
+/* ===== Tabel comparativ ===== */
+.cmp-wrap{ overflow-x:auto; border-radius:16px; border:1px solid var(--u-line-soft);
+  box-shadow:var(--u-shadow); background:var(--u-panel); -webkit-overflow-scrolling:touch; }
+.cmp-wrap:focus-visible{ outline:2px solid var(--u-gold); outline-offset:2px; }
+table.cmp{ border-collapse:collapse; width:100%; min-width:680px;
+  font-family:'Inter',system-ui,sans-serif; font-size:.92rem; }
+table.cmp th, table.cmp td{ padding:12px 14px; text-align:center;
+  border-bottom:1px solid var(--u-line-soft); color:var(--u-muted);
+  font-variant-numeric:tabular-nums lining-nums; }
+table.cmp thead th{ position:sticky; top:0; background:var(--u-bg2); z-index:2;
+  font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink);
+  font-size:1rem; padding:14px; border-bottom:2px solid var(--u-line); }
+table.cmp .cmp-pr{ display:block; font-family:'Inter',system-ui,sans-serif;
+  font-weight:600; font-size:.74rem; color:var(--u-muted); margin-top:3px; }
+table.cmp tbody th[scope=row]{ text-align:left; color:var(--u-ink); font-weight:600;
+  position:sticky; left:0; background:var(--u-panel); z-index:1; min-width:230px; }
+table.cmp td.y{ color:var(--u-gold); font-weight:800; font-size:1.05rem; }
+table.cmp td.x{ color:var(--u-muted); opacity:.55; }
+/* Coloana Premium evidențiată (oglindește cardul .feat) */
+table.cmp thead th.cmp-hi{ background:linear-gradient(180deg,var(--u-gold-soft),var(--u-bg2));
+  color:var(--u-gold); box-shadow:inset 0 3px 0 var(--u-gold); }
+table.cmp td.cmp-hi{ background:var(--u-gold-soft); }
+table.cmp td.cmp-hi.y{ color:var(--u-gold); }
+/* Rânduri-secțiune = granițele dintre tier-uri */
+table.cmp tr.cmp-sec td{ text-align:left; font-family:'Fraunces',Georgia,serif;
+  font-weight:600; color:var(--u-ink); font-size:.98rem; letter-spacing:.01em;
+  background:var(--u-panel2); border-top:1px solid var(--u-line);
+  border-bottom:1px solid var(--u-line); padding:11px 14px; position:sticky; left:0; }
+table.cmp tr.cmp-sec-pro td{ background:linear-gradient(90deg,var(--u-gold-soft),var(--u-panel2));
+  box-shadow:inset 4px 0 0 var(--u-gold); }
+table.cmp tr.cmp-sec-ultra td{ background:linear-gradient(90deg,rgba(168,134,49,.16),var(--u-panel2));
+  box-shadow:inset 4px 0 0 var(--u-gold2); }
+table.cmp .cmp-from{ display:inline-block; margin-left:8px; font-family:'Inter',system-ui,sans-serif;
+  font-weight:800; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase;
+  color:#1a1304; background:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
+  padding:2px 9px; border-radius:999px; vertical-align:middle; }
+table.cmp tbody tr:last-child th, table.cmp tbody tr:last-child td{ border-bottom:none; }
+.cmp-hint{ text-align:center; color:var(--u-muted); font-size:.82rem; margin:10px 0 0; }
+@media(min-width:780px){ .cmp-hint{ display:none; } }
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Abonamente Premium", "url": "https://clubulfinanciar.ro/premium", "inLanguage": "ro-RO", "description": "Începe gratuit și treci la Premium, Pro sau Ultra pentru cursuri complete, calculatoare, analize și comunitate exclusivă.", "isPartOf": {"@type": "WebSite", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Premium", "item": "https://clubulfinanciar.ro/premium"}]}</script></head><body><header class="nav"><div class="container nav-in">
     <a class="brand-logo" href="/"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks"><a href="/incepe-aici">Prezentare</a><a href="/educatie">Învață</a><a href="/masterclass">Masterclass</a><a href="/stiri">Știri</a><a href="/calculatoare">Calculatoare</a><a href="/instrumente">Instrumente</a><a href="/premium">Premium</a><a href="/feedback">Feedback</a></nav>
@@ -173,10 +226,10 @@
   <button type="button" class="bt-opt" data-bill="a" aria-pressed="false">Anual <span class="bt-save">2 luni gratis</span></button>
 </div>
 <div class="grid grid-4">
-<div class="price"><h3>Gratuit</h3><div class="amt">0 lei<span></span></div><ul><li>308 de lecții complete</li><li>6 calculatoare esențiale</li><li>Glosar (807 termeni) + căutare</li><li>Știri financiare (surse alese)</li><li>Quiz-uri de probă</li><li>Cont gratuit pentru totdeauna</li></ul><a class="btn btn-ghost" href="/login" style="width:100%;justify-content:center">Creează cont gratuit</a></div>
-<div class="price feat" data-m="49" data-a="490"><span class="tag">Cel mai ales</span><h3>Premium · „Ordine"</h3><div class="amt">49 lei<span>/lună</span></div><p class="price-sub" style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">sau 490 lei/an (~41/lună)</p><ul><li><strong>Toate cele 1000 de lecții</strong></li><li>17 cursuri structurate, cu progres</li><li>Teste cu streak, XP și certificate</li><li><a href="/unelte/planul-meu-financiar"><strong>Planul Meu Financiar</strong></a> (PDF personalizat)</li><li><a href="/unelte/plan-anti-datorii">Plan Anti-Datorii</a></li><li><a href="/unelte/tracker-avere">Tracker de avere</a> + reminder lunar</li><li>Toate cele 11 calculatoare</li><li>Newsletter premium + toate știrile & filtre</li><li><a href="/unelte/sabloane">Trusă de șabloane</a> (buget, contracte)</li><li><a href="/instrumente/asistent-anaf">Asistent ANAF (AI)</a> — 5 întrebări/lună (60/lună pe Pro, nelimitat pe Ultra)</li></ul><a class="btn btn-primary" href="#alege" style="width:100%;justify-content:center">Vreau Premium</a></div>
-<div class="price" data-m="99" data-a="990"><h3>Pro · „Decizii"</h3><div class="amt">99 lei<span>/lună</span></div><p class="price-sub" style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">sau 990 lei/an · pentru PFA/antreprenori</p><ul><li><strong>Tot din Premium</strong>, plus <a href="/instrumente" style="color:var(--emerald);font-weight:700">Hub-ul Fiscal</a>:</li><li>Asistent ANAF (AI) — 60 întrebări/lună, pe cazul tău</li><li>Radar fiscal ANAF + Radar plafon TVA</li><li>PFA vs SRL vs micro · Salariu vs Dividend</li><li>Asistent Declarația Unică + Crypto FIFO</li><li>Scaner credit & refinanțare (alertă ROBOR)</li><li>Marjă reală pe produs · Pachet diaspora</li><li>Garda Familiei (anti-escrocherii)</li></ul><a class="btn btn-ghost" href="#alege" style="width:100%;justify-content:center">Vreau Pro</a></div>
-<div class="price" data-m="199" data-a="1990"><span class="tag" style="background:linear-gradient(135deg,#E8C268,#caa44a);color:#1a1304">Biroul tău privat</span><h3>Ultra · „Concierge"</h3><div class="amt">199 lei<span>/lună</span></div><p class="price-sub" style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">sau 1.990 lei/an · biroul tău financiar privat</p><ul><li><strong>Tot din Pro</strong>, plus un birou financiar privat:</li><li><strong>Cockpit</strong> — avere netă, flux, scor de sănătate, alerte</li><li><strong>Concierge AI</strong> care îți știe cifrele (nelimitat)</li><li><strong>Optimizator de structură</strong> — PFA/SRL, net maxim</li><li>Simulator „Și dacă…" — job, casă, copil, pensie</li><li>Calendar fiscal personal + alerte la termene</li><li>Raport lunar „Drumul spre Libertate" (FIRE)</li><li>Scutul familiei · Harta banilor · Seiful de documente</li></ul><a class="btn btn-primary" href="/ultra" style="width:100%;justify-content:center">Explorează Ultra</a></div>
+<div class="price"><h3>Gratuit</h3><p class="who">Pentru oricine începe de la zero</p><div class="amt">0 lei<span></span></div><p class="price-sub" style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">pe veci · fără card</p><ul><li><strong>308 lecții gratuite</strong> — bazele banilor, explicate simplu</li><li><strong>6 calculatoare esențiale</strong> — dobândă, economii, credit</li><li><strong>Glosar 807 termeni</strong> + căutare pe tot site-ul</li><li><strong>Știri financiare</strong> — interne și externe, zilnic</li><li><strong>Quiz-uri de probă</strong> — testează-ți ce-ai învățat</li><li><strong>Cont pe veci</strong> — gratuit, fără card, fără termen</li></ul><a class="btn btn-ghost" href="/login" style="width:100%;justify-content:center">Creează cont gratuit</a></div>
+<div class="price feat" data-m="49" data-a="490"><span class="tag">Cel mai ales</span><h3>Premium · „Ordine"</h3><p class="who">Pentru cine vrea un plan și rezultate</p><div class="amt">49 lei<span>/lună</span></div><p class="price-sub" style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">sau 490 lei/an (~41/lună)</p><ul><li class="li-bound"><strong>Tot din Gratuit</strong>, plus:</li><li><strong>Toate cele 1000 de lecții</strong> — inclusiv 200 lecții Masterclass Bursă</li><li><strong>17 cursuri structurate</strong> — în ordine logică, cu progres</li><li><strong>Teste cu streak, XP și certificate</strong> — înveți puțin în fiecare zi</li><li><a href="/unelte/planul-meu-financiar"><strong>Planul Meu Financiar</strong></a> — răspunzi la câteva întrebări și primești planul tău în PDF</li><li><a href="/unelte/plan-anti-datorii"><strong>Plan Anti-Datorii</strong></a> — ordinea exactă în care scapi de datorii</li><li><a href="/unelte/tracker-avere"><strong>Tracker de avere</strong></a> — vezi-ți averea netă și cum crește lună de lună</li><li><strong>Toate cele 11 calculatoare</strong> — cele 6 gratuite + 5 doar pe Premium</li><li><a href="/unelte/sabloane"><strong>Trusă de șabloane</strong></a> — buget, contracte, fișiere gata făcute</li><li><strong>Newsletter premium</strong> — toate știrile și filtrele</li><li><a href="/instrumente/asistent-anaf"><strong>Asistent ANAF (AI)</strong></a> — 5 întrebări pe lună, pe situația ta</li></ul><a class="btn btn-primary" href="#alege" style="width:100%;justify-content:center">Vreau Premium</a></div>
+<div class="price" data-m="99" data-a="990"><h3>Pro · „Decizii"</h3><p class="who">Pentru PFA, freelanceri și antreprenori</p><div class="amt">99 lei<span>/lună</span></div><p class="price-sub" style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">sau 990 lei/an (~83/lună)</p><ul><li class="li-bound"><strong>Tot din Premium</strong>, plus <a href="/instrumente" style="color:var(--emerald);font-weight:700">Hub Fiscal</a> (11 unelte):</li><li><a href="/instrumente/asistent-anaf"><strong>Asistent ANAF (AI)</strong></a> — 60 întrebări pe lună, pe cazul tău</li><li><strong>Radar fiscal ANAF</strong> — afli ce taxe ai de plătit și când</li><li><strong>Radar plafon TVA</strong> — te avertizează înainte să depășești plafonul</li><li><strong>Asistent Declarația Unică</strong> — te ghidează rând cu rând</li><li><strong>Crypto FIFO</strong> — calculează câștigul impozabil din crypto</li><li><strong>PFA vs SRL · Salariu vs Dividend</strong> — afli ce-ți lasă mai mulți bani net</li><li><strong>Marjă reală pe produs</strong> — vezi cât câștigi de fapt</li><li><strong>Scaner credit & refinanțare</strong> — alertă ROBOR, vezi când merită refinanțarea</li><li><strong>Garda Familiei</strong> — protecție anti-escrocherii</li><li><strong>Pachet diaspora</strong> — pentru românii din afară</li></ul><a class="btn btn-ghost" href="#alege" style="width:100%;justify-content:center">Vreau Pro</a></div>
+<div class="price" data-m="199" data-a="1990"><span class="tag" style="background:linear-gradient(135deg,#E8C268,#caa44a);color:#1a1304">Biroul tău privat</span><h3>Ultra · „Concierge"</h3><p class="who">Biroul tău financiar privat</p><div class="amt">199 lei<span>/lună</span></div><p class="price-sub" style="color:var(--muted);font-size:.86rem;margin:-4px 0 6px">sau 1.990 lei/an (~166/lună)</p><ul><li class="li-bound"><strong>Tot din Pro</strong>, plus biroul financiar privat:</li><li><strong>Cockpit</strong> — averea netă, fluxul, scorul de sănătate și alertele, într-un loc</li><li><strong>Concierge AI nelimitat</strong> — un asistent care îți știe cifrele tale</li><li><strong>Optimizator de structură</strong> — PFA/SRL aranjat ca să-ți rămână net maxim</li><li><strong>Simulator „Și dacă…"</strong> — job nou, casă, copil, pensie: vezi efectul în bani</li><li><strong>Calendar fiscal personal</strong> — alerte la fiecare termen al tău</li><li><strong>Raport lunar FIRE</strong> — „Drumul spre Libertate", actualizat lunar</li><li><strong>Scutul familiei</strong> — protecția celor dragi</li><li><strong>Harta banilor</strong> — unde-ți pleacă și de unde-ți vin banii</li><li><strong>Seiful de documente</strong> — actele importante la un loc, în siguranță</li></ul><a class="btn btn-primary" href="/ultra" style="width:100%;justify-content:center">Explorează Ultra</a></div>
 </div>
 
 <div style="max-width:820px;margin:50px auto 0">
@@ -188,6 +241,56 @@
 <div class="card"><h3>🔥 Obiceiul care te ține</h3><p>Teste cu streak și XP, ca la Duolingo. Înveți puțin în fiecare zi și chiar ții minte — pentru că revii.</p></div>
 <div class="card"><h3>📈 Vezi că mergi în direcția bună</h3><p>Trackerul de avere și raportul lunar îți arată negru pe alb progresul. Cel mai puternic motiv să continui.</p></div>
 </div>
+</div>
+
+<div style="margin:54px auto 0;max-width:1000px">
+<h2 class="title center" style="font-size:clamp(1.5rem,3vw,2rem)">Compară planurile dintr-o privire</h2>
+<p class="lead center" style="margin:0 auto 22px">Vezi exact unde se termină Gratuit, unde începe Premium, unde Pro și unde Ultra.</p>
+<div class="cmp-wrap" role="region" aria-label="Tabel comparativ planuri" tabindex="0">
+<table class="cmp">
+<thead><tr>
+  <th scope="col" class="cmp-feat">Ce primești</th>
+  <th scope="col">Gratuit<br><span class="cmp-pr">0 lei</span></th>
+  <th scope="col" class="cmp-hi">Premium<br><span class="cmp-pr">49 lei/lună</span></th>
+  <th scope="col">Pro<br><span class="cmp-pr">99 lei/lună</span></th>
+  <th scope="col">Ultra<br><span class="cmp-pr">199 lei/lună</span></th>
+</tr></thead>
+<tbody>
+  <tr class="cmp-sec"><td colspan="5">📚 Învățare</td></tr>
+  <tr><th scope="row">Lecții & articole</th><td>308 gratuite</td><td class="cmp-hi">1000 (toate)</td><td>1000 (toate)</td><td>1000 (toate)</td></tr>
+  <tr><th scope="row">Masterclass Bursă (200 lecții)</th><td class="x">—</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Cursuri structurate, cu progres</th><td class="x">—</td><td class="cmp-hi">17 cursuri</td><td>17 cursuri</td><td>17 cursuri</td></tr>
+  <tr><th scope="row">Teste cu streak, XP & certificate</th><td>de probă</td><td class="cmp-hi y">✓ complet</td><td class="y">✓ complet</td><td class="y">✓ complet</td></tr>
+  <tr><th scope="row">Glosar (807 termeni) + căutare</th><td class="y">✓</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Știri financiare (interne + externe)</th><td class="y">✓</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+
+  <tr class="cmp-sec"><td colspan="5">🧰 Unelte personale</td></tr>
+  <tr><th scope="row">Calculatoare</th><td>6</td><td class="cmp-hi">11</td><td>11</td><td>11</td></tr>
+  <tr><th scope="row">Planul Meu Financiar (PDF)</th><td class="x">—</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Plan Anti-Datorii</th><td class="x">—</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Tracker de avere</th><td class="x">—</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Trusă de șabloane</th><td class="x">—</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Newsletter premium</th><td class="x">—</td><td class="cmp-hi y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Asistent ANAF (AI)</th><td class="x">—</td><td class="cmp-hi">5 / lună</td><td>60 / lună</td><td class="y">nelimitat</td></tr>
+
+  <tr class="cmp-sec cmp-sec-pro"><td colspan="5">🧾 Hub Fiscal — 11 unelte <span class="cmp-from">de la Pro</span></td></tr>
+  <tr><th scope="row">Radar fiscal ANAF + plafon TVA</th><td class="x">—</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Declarația Unică + Crypto FIFO</th><td class="x">—</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">PFA vs SRL · Salariu vs Dividend</th><td class="x">—</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Marjă produs · Scaner credit & refinanțare</th><td class="x">—</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Garda Familiei · Pachet diaspora</th><td class="x">—</td><td class="x">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+
+  <tr class="cmp-sec cmp-sec-ultra"><td colspan="5">👔 Biroul financiar privat <span class="cmp-from">doar Ultra</span></td></tr>
+  <tr><th scope="row">Cockpit (avere · flux · scor · alerte)</th><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Concierge AI (nelimitat)</th><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Optimizator de structură</th><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Simulator „Și dacă" · Calendar fiscal personal</th><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Raport lunar FIRE</th><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+  <tr><th scope="row">Scutul familiei · Harta banilor · Seiful de documente</th><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+</tbody>
+</table>
+</div>
+<p class="cmp-hint">↔ Glisează lateral pe telefon pentru a vedea toate coloanele.</p>
 </div>
 
 <div id="alege" class="band" style="margin-top:54px">
