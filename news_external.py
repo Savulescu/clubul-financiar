@@ -305,6 +305,22 @@ def main():
         if new:
             print(f"generate: {len(new) - fb_count} traduse RO / {fb_count} fallback engleză")
 
+        # VINDECĂ fallback-urile: re-încearcă traducerea știrilor rămase în engleză (providerii
+        # free pică intermitent; fără asta, o știre prinsă pe fallback rămânea engleză pe veci).
+        # Întâi cele mai vizibile (scor mare); în limita bugetului de timp.
+        healed = 0
+        for s in sorted([x for x in store if x.get("fb")], key=lambda x: -x.get("score", 0)):
+            if _DEADLINE and time.time() > _DEADLINE - 25: break   # lasă timp de scriere/commit
+            it = {"title": s.get("titlu", ""), "desc": s.get("fapt", ""), "src": s.get("src", ""),
+                  "link": s.get("link") or s["url"], "ts": s.get("ts", 0), "score": s.get("score", 0)}
+            rec = make_record(it, now)   # None dacă tot nu iese română → rămâne fallback
+            if rec:
+                s["titlu"] = rec["titlu"]; s["fapt"] = rec["fapt"]; s["ce_inseamna"] = rec["ce_inseamna"]
+                s["cat"] = rec["cat"]; s.pop("fb", None)
+                if rec.get("tier2"): s["tier2"] = 1
+                healed += 1
+        if healed: print(f"vindecate (fallback→RO): {healed}")
+
     store.sort(key=lambda s: -s.get("score", 0))
     disp = store[:DISPLAY]
     counts = {k: sum(1 for s in disp if s["cat"] == k) for k, _ in CATS}
