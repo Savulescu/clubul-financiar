@@ -31,8 +31,8 @@
     border:none;padding:13px;border-radius:10px;cursor:pointer;font-size:.98rem}
   .toggle{text-align:center;margin-top:16px;font-size:.9rem;color:var(--ink)}
   .toggle a{color:var(--gold);cursor:pointer;text-decoration:none}
-  #msg{text-align:center;margin-top:14px;font-size:.88rem;min-height:18px}
-  #msg.err{color:#ff9a9a}#msg.ok{color:var(--green)}
+  #msg,#setPwMsg{text-align:center;margin-top:14px;font-size:.88rem;min-height:18px}
+  #msg.err,#setPwMsg.err{color:#ff9a9a}#msg.ok,#setPwMsg.ok{color:var(--green)}
   .logged{text-align:center}
   .logged .email{color:var(--gold);font-weight:700;margin:10px 0 22px;word-break:break-all}
   .logout{background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--white);
@@ -72,6 +72,21 @@
       <button class="logout" id="logoutBtn">Deconectează-te</button>
     </div>
 
+    <!-- SETEAZĂ PAROLĂ (după Google, dacă nu are una) -->
+    <div id="setPw" style="display:none">
+      <h1>Bine ai venit! 🎉</h1>
+      <p class="email" id="setPwEmail"></p>
+      <p style="text-align:center;color:var(--ink);font-size:.92rem;margin-bottom:18px">
+        Te-ai conectat cu Google. Setează o parolă ca să te poți conecta data viitoare și cu emailul.
+      </p>
+      <form id="setPwForm">
+        <input type="password" id="setPwInput" placeholder="Alege o parolă (min. 6 caractere)" autocomplete="new-password" minlength="6" required>
+        <button type="submit" class="submit">Salvează parola</button>
+      </form>
+      <p class="toggle"><a id="skipPw">Continuă fără parolă →</a></p>
+      <p id="setPwMsg"></p>
+    </div>
+
     <a class="home" href="./index.html">← Înapoi la site</a>
     <p class="note">⚠️ Conținut educativ, nu sfat de investiții.</p>
   </div>
@@ -88,15 +103,43 @@
 
     function setMsg(text, ok) { const m = $("msg"); m.textContent = text; m.className = ok ? "ok" : "err"; }
 
+    function needsPassword(user) {
+      // conectat prin Google fără parolă setată: nu are providerul "email" și nu și-a setat încă o parolă
+      const md = user.user_metadata || {};
+      const providers = (user.app_metadata && user.app_metadata.providers) || [];
+      const hasEmailIdentity = (user.identities || []).some(i => i.provider === "email");
+      return !md.has_password && !providers.includes("email") && !hasEmailIdentity;
+    }
+
     function renderSession(session) {
       if (session && session.user) {
+        if (needsPassword(session.user)) {
+          // întâi oferă setarea unei parole, apoi mergi pe site
+          $("loggedOut").style.display = "none";
+          $("loggedIn").style.display = "none";
+          $("setPw").style.display = "block";
+          $("setPwEmail").textContent = session.user.email || "";
+          return;
+        }
         // conectat -> mergi pe site, unde contul apare sus-dreapta
         window.location.replace("./index.html");
       } else {
         $("loggedOut").style.display = "block";
         $("loggedIn").style.display = "none";
+        $("setPw").style.display = "none";
       }
     }
+
+    // setează parola după conectarea cu Google
+    $("setPwForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const m = $("setPwMsg"); m.textContent = "Se salvează…"; m.className = "ok";
+      const { error } = await sb.auth.updateUser({ password: $("setPwInput").value, data: { has_password: true } });
+      if (error) { m.textContent = error.message; m.className = "err"; return; }
+      m.textContent = "Parolă setată ✓ Te poți conecta și cu email + parolă."; m.className = "ok";
+      setTimeout(() => window.location.replace("./index.html"), 800);
+    });
+    $("skipPw").addEventListener("click", () => window.location.replace("./index.html"));
 
     // toggle înregistrare / conectare
     $("toggleLink").addEventListener("click", () => {
