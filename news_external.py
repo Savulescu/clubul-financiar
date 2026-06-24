@@ -72,13 +72,13 @@ def _selftest_filter():
 
 _DIAG = {"ok": {}, "err": {}, "ro_reject": {}, "samples": [], "no_keys": []}   # telemetrie cloud → docs/data/news_debug.json
 
-def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, max_attempts=18):
+def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, max_attempts=40):
     last = "n/a"; fallback = None; tries = 0; attempts = 0
     for name, api_base, model, envb in PROVIDERS:
         ks = _keys(envb)
         if not ks and name not in _DIAG["no_keys"]: _DIAG["no_keys"].append(name)
         for key in ks:
-            if attempts >= max_attempts: break   # nu baleia 40+ chei moarte cu 30s timeout fiecare
+            if attempts >= max_attempts: break   # plasă de siguranță (cu skip-on-auth ajunge la toți providerii)
             attempts += 1
             try:
                 body = json.dumps({"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": temperature}).encode()
@@ -100,6 +100,8 @@ def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, ma
                 return {"content": content, "provider": name}
             except urllib.error.HTTPError as e:
                 last = f"{name} HTTP {e.code}"; _DIAG["err"][f"{name}:{e.code}"] = _DIAG["err"].get(f"{name}:{e.code}", 0) + 1
+                if e.code in (401, 403, 404):
+                    break   # cheie/provider inutilizabil → sari TOATE cheile lui (nu mânca bugetul de încercări)
             except Exception as e:
                 last = f"{name} {e}"; k = f"{name}:{type(e).__name__}"; _DIAG["err"][k] = _DIAG["err"].get(k, 0) + 1
     if fallback is not None:
