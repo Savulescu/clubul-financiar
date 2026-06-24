@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracker de avere + reminder lunar — calculează-ți averea netă — Clubul Financiar</title>
+<meta name="description" content="Adaugă-ți activele și datoriile și află-ți averea netă pe loc. Salvează un instantaneu lunar, vezi cum crește averea de la lună la lună și primește reminder lunar de actualizare.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/unelte/tracker-avere">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Tracker de avere + reminder lunar"><meta property="og:description" content="Calculează-ți averea netă, salvează instantanee lunare și vezi cum crește averea ta în timp."><meta property="og:url" content="https://clubulfinanciar.ro/unelte/tracker-avere"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Tracker de avere + reminder lunar"><meta name="twitter:description" content="Calculează-ți averea netă și urmărește-i creșterea lună de lună."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<style>
+.cat-block{margin-bottom:18px}
+.cat-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 8px}
+.cat-head h4{margin:0;font-size:.95rem}
+.cat-head .cat-sum{font-weight:700;font-size:.9rem}
+.asset-row{display:grid;grid-template-columns:1.5fr 1fr auto;gap:8px;align-items:end;margin-bottom:8px}
+.asset-row .field{margin-bottom:0}
+.asset-row label{font-size:.72rem}
+.rm-btn{height:44px;width:42px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:#e25555;cursor:pointer;font-size:1.05rem}
+@media(max-width:680px){.asset-row{grid-template-columns:1fr 1fr;}.asset-row .rm-btn{grid-column:2;justify-self:end}}
+.add-link{background:none;border:1px dashed var(--border);color:var(--emerald-link);border-radius:10px;padding:7px 12px;cursor:pointer;font-size:.82rem;font-weight:600}
+.add-link:hover{border-color:var(--emerald)}
+.group-title{display:flex;align-items:center;gap:8px;font-family:Sora,sans-serif;font-weight:700;font-size:1.05rem;margin:4px 0 14px}
+.group-title.debt{color:#e25555}
+.bars{margin-top:6px}
+.bar-line{margin-bottom:9px}
+.bar-top{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;gap:10px}
+.bar-track{height:9px;border-radius:6px;background:var(--bg-soft);overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--emerald),color-mix(in srgb,var(--emerald) 55%,var(--gold)));transition:width .5s ease}
+.bar-fill.neg{background:linear-gradient(90deg,#e25555,#f0a0a0)}
+.hist-list{list-style:none;margin:12px 0 0;padding:0}
+.hist-list li{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:.88rem}
+.hist-list li:last-child{border-bottom:none}
+.hist-list .h-date{color:var(--muted);font-size:.82rem}
+.hist-list .h-net{font-weight:700}
+.delta{font-size:.82rem;font-weight:700;white-space:nowrap}
+.delta.up{color:var(--emerald)}.delta.down{color:#e25555}.delta.flat{color:var(--muted)}
+.reminder-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.switch{position:relative;display:inline-block;width:50px;height:28px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;cursor:pointer;inset:0;background:var(--bg-soft);border:1px solid var(--border);border-radius:28px;transition:.25s}
+.slider:before{content:"";position:absolute;height:20px;width:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.25s}
+.switch input:checked+.slider{background:var(--emerald);border-color:var(--emerald)}
+.switch input:checked+.slider:before{transform:translateX(22px)}
+.next-check{background:color-mix(in srgb,var(--emerald) 9%,var(--card));border:1px solid color-mix(in srgb,var(--emerald) 30%,var(--border));border-radius:12px;padding:13px 16px;margin-top:12px;font-size:.9rem}
+.tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.tool-actions .btn{flex:1;justify-content:center;min-width:160px}
+.cat-total-row{display:flex;justify-content:space-between;gap:10px;font-size:.92rem;padding:6px 0}
+.cat-total-row.big{font-size:1rem;font-weight:700;border-top:1px solid var(--border);padding-top:10px;margin-top:4px}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Tracker de avere + reminder lunar", "url": "https://clubulfinanciar.ro/unelte/tracker-avere", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ro-RO", "isAccessibleForFree": true, "description": "Adaugă-ți activele și datoriile și află-ți averea netă pe loc. Salvează instantanee lunare, urmărește creșterea averii și primește reminder lunar de actualizare.", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente"}, {"@type": "ListItem", "position": 3, "name": "Tracker de avere + reminder lunar", "item": "https://clubulfinanciar.ro/unelte/tracker-avere"}]}</script></head><body>
+<section class="section"><div class="container">
+<div class="center" style="margin-bottom:8px">
+  <span class="cf-premium-badge">Premium</span>
+  <h1 class="title" style="margin-top:10px">Tracker de avere + reminder lunar</h1>
+  <p class="lead" style="margin-inline:auto">Adună tot ce ai și tot ce datorezi, vezi-ți <strong>averea netă</strong> pe loc și urmărește cum crește lună de lună.</p>
+</div>
+
+<!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
+<div class="cf-premium-lock">
+  <div class="lock-ic">🔓</div>
+  <h2>Vezi-ți averea netă reală și cum crește în timp</h2>
+  <p>Adaugă-ți conturile, depozitele, investițiile, pensiile, imobilele și aurul — minus datoriile — și afli pe loc <strong>cât valorezi cu adevărat</strong>. Salvezi un <strong>instantaneu lunar</strong>, vezi variația față de luna trecută și primești <strong>reminder lunar</strong> să-ți actualizezi averea. Totul rămâne pe dispozitivul tău.</p>
+  <p class="price-line">Inclus în Premium — 49 lei/lună</p>
+  <a class="btn btn-primary" href="/premium">Vezi ce conține Premium</a>
+  <p style="margin-top:14px;font-size:.85rem;color:var(--muted)">Ai deja cont Premium? <a href="/login" style="color:var(--emerald-link)">Conectează-te</a>.</p>
+</div>
+
+<!-- pentru cei CU premium: instrumentul -->
+<div class="cf-premium-only">
+<div class="calc">
+  <div class="panel">
+    <div class="group-title">💰 Ce ai (active)</div>
+    <div id="assets"></div>
+
+    <div class="group-title debt" style="margin-top:22px">💳 Ce datorezi (datorii)</div>
+    <div id="debts"></div>
+
+    <p style="color:var(--muted);font-size:.82rem;margin-top:14px">Totul se calculează automat și se salvează pe dispozitivul tău. Trece sumele în lei, la valoarea de azi (cât ai obține dacă ai vinde / cât mai ai de plătit).</p>
+  </div>
+
+  <div class="panel" id="out">
+    <p style="color:var(--muted);font-size:.85rem;text-align:center">Averea ta netă</p>
+    <div class="result-big" id="netBig">—</div>
+    <p style="color:var(--muted);font-size:.85rem;text-align:center;margin-top:-4px" id="netSub"></p>
+
+    <div class="cat-total-row"><span>Total active</span><b id="totA">0 lei</b></div>
+    <div class="cat-total-row"><span>Total datorii</span><b id="totD" style="color:#e25555">0 lei</b></div>
+    <div class="cat-total-row big"><span>Avere netă</span><b id="totN">0 lei</b></div>
+
+    <h4 style="margin:18px 0 6px;font-size:.92rem">Defalcare pe categorii</h4>
+    <div class="bars" id="bars"></div>
+
+    <div class="tool-actions" style="margin-top:18px">
+      <button class="btn btn-primary" id="snapBtn">📸 Salvează instantaneul lunii</button>
+    </div>
+
+    <h4 style="margin:22px 0 0;font-size:.92rem">Istoricul averii tale</h4>
+    <div id="history"><p style="color:var(--muted);font-size:.85rem;margin-top:8px">Niciun instantaneu salvat încă. Apasă „Salvează instantaneul lunii" ca să începi să urmărești evoluția.</p></div>
+
+    <h4 style="margin:24px 0 0;font-size:.92rem">Reminder lunar</h4>
+    <div class="reminder-row">
+      <span style="font-size:.9rem">Amintește-mi lunar să-mi actualizez averea</span>
+      <label class="switch"><input type="checkbox" id="remToggle"><span class="slider"></span></label>
+    </div>
+    <div id="remInfo"></div>
+  </div>
+</div>
+<div class="disc">⚠️ Instrument educativ care îți oglindește propriile cifre. Folosește valori de piață actuale; valorile activelor (acțiuni, imobile, mașină, aur) fluctuează. Datele rămân doar în browserul tău (localStorage) și nu sunt trimise nicăieri. Nu reprezintă consultanță financiară, de investiții sau de evaluare.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie#economisire">← Articole despre avere și economisire</a></p>
+</div>
+</div></section>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+  const leiSign=n=>(n>=0?"+":"−")+Math.abs(Math.round(n)).toLocaleString("ro-RO")+" lei";
+  const RO_LUNI=["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
+  const K_STATE="cf-networth-state";
+  const K_HIST="cf-networth-history";
+  const K_REM="cf-networth-reminder";
+
+  // categorii de active și datorii
+  const ASSET_CATS=[
+    {key:"numerar",label:"Numerar / conturi curente"},
+    {key:"depozite",label:"Depozite bancare"},
+    {key:"investitii",label:"Investiții / bursă (acțiuni, ETF)"},
+    {key:"pensii",label:"Fonduri de pensie (Pilon II / III)"},
+    {key:"imobile",label:"Imobile"},
+    {key:"masina",label:"Mașină"},
+    {key:"aur",label:"Aur / metale prețioase"},
+    {key:"alte_a",label:"Alte active"}
+  ];
+  const DEBT_CATS=[
+    {key:"credite",label:"Credite (nevoi personale, imobiliar, auto)"},
+    {key:"carduri",label:"Carduri de credit / overdraft"},
+    {key:"alte_d",label:"Alte datorii"}
+  ];
+
+  // date exemplu precompletate
+  const SAMPLE={
+    numerar:[["Cont curent",5000]],
+    depozite:[["Depozit la termen",20000]],
+    investitii:[["Investiții ETF",15000]],
+    pensii:[], imobile:[], masina:[], aur:[], alte_a:[],
+    credite:[["Credit nevoi personale",12000]],
+    carduri:[], alte_d:[]
+  };
+
+  const assetsEl=$("assets"), debtsEl=$("debts");
+
+  // ---- construiește blocurile pe categorii ----
+  function buildCat(cat,isDebt){
+    const block=document.createElement("div");
+    block.className="cat-block";
+    block.dataset.key=cat.key;
+    block.innerHTML=`<div class="cat-head"><h4>${cat.label}</h4><span class="cat-sum" data-sum>0 lei</span></div>
+      <div class="rows"></div>
+      <button class="add-link" type="button">+ Adaugă ${isDebt?"datorie":"activ"}</button>`;
+    const rowsEl=block.querySelector(".rows");
+    block.querySelector(".add-link").onclick=()=>{ addRow(rowsEl,null,isDebt); recompute(); save(); };
+    (isDebt?debtsEl:assetsEl).appendChild(block);
+    return rowsEl;
+  }
+  function addRow(rowsEl,data,isDebt){
+    const w=document.createElement("div");
+    w.className="asset-row";
+    w.innerHTML=`<div class="field"><label>Denumire</label><input type="text" class="r-name" value="${data?escAttr(data[0]):""}" placeholder="ex: ${isDebt?"Credit":"Cont"}"></div>
+      <div class="field"></div>
+      <div class="field"><label>Sumă (lei)</label><input type="number" class="r-amt" value="${data?data[1]:""}" min="0" step="100" inputmode="decimal"></div>
+      <button class="rm-btn" type="button" title="Șterge">✕</button>`;
+    // mută câmpul sumă lângă nume vizual pe desktop: re-aranjăm coloanele (nume larg, sumă, șterge)
+    w.children[1].remove(); // scoatem placeholder-ul gol
+    w.querySelector(".rm-btn").onclick=()=>{ w.remove(); recompute(); save(); };
+    rowsEl.appendChild(w);
+  }
+  function escAttr(s){ return String(s).replace(/"/g,"&quot;").replace(/</g,"&lt;"); }
+
+  const assetRows={}, debtRows={};
+  ASSET_CATS.forEach(c=>{ assetRows[c.key]=buildCat(c,false); });
+  DEBT_CATS.forEach(c=>{ debtRows[c.key]=buildCat(c,true); });
+
+  // ---- citește valorile ----
+  function readBlock(rowsEl){
+    let sum=0; const items=[];
+    rowsEl.querySelectorAll(".asset-row").forEach(r=>{
+      const name=r.querySelector(".r-name").value||"";
+      const amt=+r.querySelector(".r-amt").value;
+      if(isFinite(amt)&&amt>0){ sum+=amt; items.push([name,amt]); }
+    });
+    return {sum,items};
+  }
+  function readAll(){
+    const a={}, d={}; let totA=0, totD=0;
+    const catA=[], catD=[];
+    ASSET_CATS.forEach(c=>{ const r=readBlock(assetRows[c.key]); a[c.key]=r.items; totA+=r.sum; catA.push({label:c.label,sum:r.sum}); });
+    DEBT_CATS.forEach(c=>{ const r=readBlock(debtRows[c.key]); d[c.key]=r.items; totD+=r.sum; catD.push({label:c.label,sum:r.sum}); });
+    return {a,d,totA,totD,net:totA-totD,catA,catD};
+  }
+
+  // ---- recalcul + randare ----
+  function recompute(){
+    const s=readAll();
+    // sume pe categorie în antet
+    ASSET_CATS.forEach(c=>{ assetRows[c.key].parentElement.querySelector("[data-sum]").textContent=lei(s.catA.find(x=>x.label===c.label).sum); });
+    DEBT_CATS.forEach(c=>{ debtRows[c.key].parentElement.querySelector("[data-sum]").textContent=lei(s.catD.find(x=>x.label===c.label).sum); });
+
+    $("netBig").textContent=lei(s.net);
+    $("netBig").style.color = s.net>=0 ? "var(--emerald)" : "#e25555";
+    $("netSub").textContent = s.net>=0 ? "Tot ce ai, minus tot ce datorezi" : "Datoriile depășesc activele — atenție la echilibru";
+    $("totA").textContent=lei(s.totA);
+    $("totD").textContent=lei(s.totD);
+    $("totN").textContent=lei(s.net);
+    $("totN").style.color = s.net>=0 ? "var(--emerald)" : "#e25555";
+
+    // bare orizontale: toate categoriile cu sumă > 0 (active + datorii), scalate la max
+    const rows=[];
+    s.catA.forEach(c=>{ if(c.sum>0) rows.push({label:c.label,val:c.sum,neg:false}); });
+    s.catD.forEach(c=>{ if(c.sum>0) rows.push({label:c.label,val:c.sum,neg:true}); });
+    const max=Math.max(1,...rows.map(r=>r.val));
+    $("bars").innerHTML = rows.length ? rows.map(r=>`
+      <div class="bar-line">
+        <div class="bar-top"><span>${r.label}${r.neg?' <span style="color:#e25555">(datorie)</span>':''}</span><b>${lei(r.val)}</b></div>
+        <div class="bar-track"><div class="bar-fill ${r.neg?'neg':''}" style="width:${Math.max(3,r.val/max*100)}%"></div></div>
+      </div>`).join("")
+      : `<p style="color:var(--muted);font-size:.85rem">Adaugă active sau datorii ca să vezi defalcarea.</p>`;
+    return s;
+  }
+
+  // ---- persistă starea curentă ----
+  function save(){
+    const a={}, d={};
+    ASSET_CATS.forEach(c=>{ a[c.key]=readBlock(assetRows[c.key]).items; });
+    DEBT_CATS.forEach(c=>{ d[c.key]=readBlock(debtRows[c.key]).items; });
+    try{ localStorage.setItem(K_STATE,JSON.stringify({a,d})); }catch(e){}
+  }
+  function loadState(){
+    let st=null;
+    try{ st=JSON.parse(localStorage.getItem(K_STATE)); }catch(e){}
+    const src = st && st.a ? st : {a:SAMPLE,d:SAMPLE};
+    ASSET_CATS.forEach(c=>{ (src.a[c.key]||[]).forEach(it=>addRow(assetRows[c.key],it,false)); });
+    DEBT_CATS.forEach(c=>{ (src.d[c.key]||[]).forEach(it=>addRow(debtRows[c.key],it,true)); });
+  }
+
+  // ---- istoric lunar ----
+  function monthKey(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"); }
+  function getHist(){ try{ return JSON.parse(localStorage.getItem(K_HIST))||[]; }catch(e){ return []; } }
+  function setHist(h){ try{ localStorage.setItem(K_HIST,JSON.stringify(h)); }catch(e){} }
+  function fmtMonth(mk){ const [y,m]=mk.split("-"); return RO_LUNI[(+m)-1]+" "+y; }
+
+  function snapshot(){
+    const s=readAll();
+    const now=new Date(), mk=monthKey(now);
+    let h=getHist();
+    const entry={mk,date:now.toISOString().slice(0,10),activeTotal:s.totA,datoriiTotal:s.totD,net:s.net};
+    const i=h.findIndex(x=>x.mk===mk);
+    if(i>=0) h[i]=entry; else h.push(entry);
+    h.sort((a,b)=>a.mk<b.mk?-1:1);
+    setHist(h);
+    renderHist();
+    const btn=$("snapBtn"); const old=btn.textContent;
+    btn.textContent="✔ Instantaneu salvat pentru "+fmtMonth(mk);
+    setTimeout(()=>{btn.textContent=old;},2200);
+  }
+
+  function renderHist(){
+    const h=getHist();
+    if(!h.length){ $("history").innerHTML=`<p style="color:var(--muted);font-size:.85rem;margin-top:8px">Niciun instantaneu salvat încă. Apasă „Salvează instantaneul lunii" ca să începi să urmărești evoluția.</p>`; return; }
+    // afișăm cel mai recent sus
+    const ord=[...h].reverse();
+    let html="<ul class='hist-list'>";
+    ord.forEach((e,idx)=>{
+      // luna anterioară din serie = elementul următor în lista inversată
+      const prev=ord[idx+1];
+      let delta="";
+      if(prev){
+        const dv=e.net-prev.net;
+        const pct=prev.net!==0 ? (dv/Math.abs(prev.net)*100) : 0;
+        const cls=dv>0?"up":(dv<0?"down":"flat");
+        const arrow=dv>0?"▲":(dv<0?"▼":"=");
+        delta=`<span class="delta ${cls}">${arrow} ${leiSign(dv)}${prev.net!==0?` (${(pct>=0?"+":"−")+Math.abs(pct).toFixed(1)}%)`:""}</span>`;
+      } else {
+        delta=`<span class="delta flat">prima lună</span>`;
+      }
+      html+=`<li><span><span class="h-date">${fmtMonth(e.mk)}</span><br><span class="h-net" style="color:${e.net>=0?'var(--emerald)':'#e25555'}">${lei(e.net)}</span></span>`;
+      html+=`<span style="font-size:.78rem;color:var(--muted);text-align:right">${lei(e.activeTotal)} active<br>${lei(e.datoriiTotal)} datorii</span>`;
+      html+=delta+`</li>`;
+    });
+    html+="</ul>";
+    html+=`<button class="btn btn-ghost" id="clearHist" style="margin-top:12px;font-size:.8rem">Șterge istoricul</button>`;
+    $("history").innerHTML=html;
+    const ch=$("clearHist");
+    if(ch) ch.onclick=()=>{ if(confirm("Ștergi tot istoricul lunar salvat?")){ setHist([]); renderHist(); } };
+  }
+
+  // ---- reminder lunar ----
+  function firstOfNextMonth(){
+    const d=new Date(); return new Date(d.getFullYear(), d.getMonth()+1, 1);
+  }
+  function fmtDate(d){ return d.getDate()+" "+RO_LUNI[d.getMonth()]+" "+d.getFullYear(); }
+  function getRem(){ try{ return JSON.parse(localStorage.getItem(K_REM))||{on:false}; }catch(e){ return {on:false}; } }
+  function setRem(r){ try{ localStorage.setItem(K_REM,JSON.stringify(r)); }catch(e){} }
+
+  function renderRem(){
+    const r=getRem();
+    $("remToggle").checked=!!r.on;
+    const info=$("remInfo");
+    if(!r.on){ info.innerHTML=`<p style="color:var(--muted);font-size:.84rem;margin-top:10px">Activează ca să-ți reținem data următoarei verificări a averii.</p>`; return; }
+    const next=firstOfNextMonth();
+    let html=`<div class="next-check">📅 Următoarea verificare: <b>${fmtDate(next)}</b><br><span style="color:var(--muted);font-size:.82rem">Revino la această dată, actualizează-ți sumele și salvează un nou instantaneu.</span></div>`;
+    const canNotify = ("Notification" in window);
+    if(canNotify){
+      if(Notification.permission==="granted"){
+        html+=`<p style="color:var(--muted);font-size:.82rem;margin-top:10px">✅ Notificările sunt activate în acest browser. Îți vom afișa un memento când deschizi pagina după data de mai sus.</p>`;
+      } else if(Notification.permission==="denied"){
+        html+=`<p style="color:var(--muted);font-size:.82rem;margin-top:10px">🔕 Notificările sunt blocate în setările browserului. Data de mai sus rămâne afișată aici ori de câte ori revii.</p>`;
+      } else {
+        html+=`<button class="btn btn-ghost" id="notifyBtn" style="margin-top:10px;font-size:.84rem">🔔 Activează notificările</button>`;
+      }
+    } else {
+      html+=`<p style="color:var(--muted);font-size:.82rem;margin-top:10px">Browserul tău nu suportă notificări. Nicio problemă — data verificării rămâne afișată aici de fiecare dată când revii pe pagină.</p>`;
+    }
+    info.innerHTML=html;
+    const nb=$("notifyBtn");
+    if(nb) nb.onclick=()=>{ Notification.requestPermission().then(()=>{ renderRem(); maybeNotify(); }); };
+  }
+
+  // dacă a trecut data țintă și avem permisiune, afișează un memento la deschidere
+  function maybeNotify(){
+    const r=getRem();
+    if(!r.on || !("Notification" in window) || Notification.permission!=="granted") return;
+    const today=new Date(); today.setHours(0,0,0,0);
+    // data de la care e datorat reminderul = prima zi a lunii curente, dacă nu am salvat deja luna asta
+    const h=getHist();
+    const thisMonth=monthKey(new Date());
+    const savedThisMonth=h.some(x=>x.mk===thisMonth);
+    const lastNotif=r.lastNotif||"";
+    if(!savedThisMonth && lastNotif!==thisMonth){
+      try{
+        new Notification("Clubul Financiar — actualizează-ți averea",{
+          body:"E o lună nouă. Deschide trackerul, actualizează sumele și salvează instantaneul lunii.",
+          icon:"/favicon.png"
+        });
+        r.lastNotif=thisMonth; setRem(r);
+      }catch(e){}
+    }
+  }
+
+  $("remToggle").addEventListener("change",function(){
+    const r=getRem(); r.on=this.checked; setRem(r); renderRem(); if(r.on) maybeNotify();
+  });
+
+  // ---- evenimente globale ----
+  $("snapBtn").addEventListener("click",snapshot);
+  assetsEl.addEventListener("input",()=>{ recompute(); save(); });
+  debtsEl.addEventListener("input",()=>{ recompute(); save(); });
+
+  // ---- init ----
+  loadState();
+  recompute();
+  renderHist();
+  renderRem();
+  maybeNotify();
+})();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
+<script defer src="/assets/site.js?v=30"></script>
+</body></html>

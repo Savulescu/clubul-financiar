@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planul Meu Financiar — plan personalizat în PDF — Clubul Financiar</title>
+<meta name="description" content="Răspunde la câteva întrebări și primești un plan financiar personalizat: rata de economisire, fond de urgență, buget 50/30/20, alocare investiții pe vârstă și numărul tău FIRE. Exportabil ca PDF.">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/unelte/planul-meu-financiar">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Planul Meu Financiar — plan personalizat în PDF"><meta property="og:description" content="Un plan financiar personalizat din datele tale: economisire, fond de urgență, buget, investiții și FIRE. Descărcabil ca PDF."><meta property="og:url" content="https://clubulfinanciar.ro/unelte/planul-meu-financiar"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Planul Meu Financiar"><meta name="twitter:description" content="Un plan financiar personalizat din datele tale, descărcabil ca PDF."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<style>
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.form-grid .field.full{grid-column:1 / -1}
+@media(max-width:680px){.form-grid{grid-template-columns:1fr}}
+.fg-title{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;grid-column:1 / -1}
+.fg-title:first-child{margin-top:0}
+
+#plan{display:none}
+#plan.show{display:block}
+.plan-sec{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:16px;box-shadow:var(--shadow-soft,0 8px 24px rgba(0,0,0,.05))}
+.plan-sec h3{margin:0 0 4px;font-size:1.12rem}
+.plan-sec .sub{color:var(--muted);font-size:.86rem;margin:0 0 14px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;margin-bottom:8px}
+.kpi{flex:1;min-width:130px}
+.kpi .lbl{color:var(--muted);font-size:.8rem;margin:0 0 2px}
+.kpi .val{font-size:1.6rem;font-weight:900;line-height:1.1}
+.kpi .val.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.bars{margin:12px 0 4px}
+.bar-line{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:5px}
+.bar-track{height:10px;border-radius:6px;background:var(--bg-soft,color-mix(in srgb,var(--text) 8%,var(--card)));overflow:hidden;margin-bottom:13px}
+.bar-fill{height:100%;border-radius:6px}
+.bar-fill.g{background:linear-gradient(90deg,var(--emerald),#34d399)}
+.bar-fill.gold{background:linear-gradient(90deg,var(--gold,#d4af37),#f0d27a)}
+.alloc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+@media(max-width:680px){.alloc{grid-template-columns:1fr}}
+.alloc .a-card{border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.alloc .a-card .p{font-size:1.5rem;font-weight:900}
+.alloc .a-card .n{color:var(--muted);font-size:.8rem;margin-top:2px}
+.steps{list-style:none;margin:6px 0 0;padding:0;counter-reset:s}
+.steps li{position:relative;padding:11px 0 11px 40px;border-bottom:1px solid var(--border);font-size:.93rem}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:9px;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--emerald) 16%,var(--card));color:var(--emerald-link);font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+.verdict-box{background:color-mix(in srgb,var(--emerald) 10%,var(--card));border:1px solid color-mix(in srgb,var(--emerald) 35%,var(--border));border-radius:14px;padding:16px 18px;margin-top:14px;font-size:.92rem}
+.verdict-box.warn{background:color-mix(in srgb,#e2a655 13%,var(--card));border-color:color-mix(in srgb,#e2a655 40%,var(--border))}
+.result-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.result-row:last-child{border-bottom:none}
+.plan-head{display:none}
+.plan-actions{display:flex;gap:12px;flex-wrap:wrap;margin:4px 0 22px}
+@media(max-width:680px){.plan-actions .btn{flex:1;justify-content:center}}
+
+@media print{
+  @page{size:A4;margin:16mm 14mm}
+  body{background:#fff!important;color:#111!important}
+  .nav,header.nav,footer,.cf-premium-lock,#planForm,.plan-actions,.disc,.no-print,nav,.section>.container>.center{display:none!important}
+  .section{padding:0!important}
+  .cf-premium-only{display:block!important}
+  #plan{display:block!important}
+  .plan-head{display:block!important;border-bottom:2px solid #111;padding-bottom:8px;margin-bottom:16px}
+  .plan-head .ph-t{font-size:1.3rem;font-weight:800;margin:0}
+  .plan-head .ph-d{font-size:.85rem;color:#444;margin:2px 0 0}
+  .plan-sec{break-inside:avoid;box-shadow:none!important;border:1px solid #ccc!important;background:#fff!important;color:#111!important}
+  .plan-sec h3,.kpi .val,.alloc .a-card .p{color:#111!important;-webkit-text-fill-color:#111!important}
+  .verdict-box{background:#f4faf6!important;border:1px solid #b6d8c4!important;color:#111!important}
+  .bar-track{background:#eee!important}
+}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Planul Meu Financiar — plan personalizat în PDF", "url": "https://clubulfinanciar.ro/unelte/planul-meu-financiar", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ro-RO", "isAccessibleForFree": true, "description": "Răspunde la câteva întrebări și primești un plan financiar personalizat: rata de economisire, fond de urgență, buget 50/30/20, alocare investiții pe vârstă și numărul tău FIRE. Exportabil ca PDF.", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente"}, {"@type": "ListItem", "position": 3, "name": "Planul Meu Financiar — plan personalizat în PDF", "item": "https://clubulfinanciar.ro/unelte/planul-meu-financiar"}]}</script></head><body>
+<section class="section"><div class="container">
+<div class="center" style="margin-bottom:8px">
+  <span class="cf-premium-badge">Premium</span>
+  <h1 class="title" style="margin-top:10px">Planul Meu Financiar</h1>
+  <p class="lead" style="margin-inline:auto">Răspunde la câteva întrebări și primești un <strong>plan financiar personalizat</strong> — economisire, fond de urgență, buget, investiții și numărul tău FIRE. Îl poți descărca ca PDF.</p>
+</div>
+
+<!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
+<div class="cf-premium-lock">
+  <div class="lock-ic">🔓</div>
+  <h2>Primește planul tău financiar, scris pe numele tău</h2>
+  <p>Dintr-un chestionar de 2 minute, generăm un <strong>plan complet și personalizat</strong>: cât economisești de fapt, ce fond de urgență ai nevoie și în câte luni îl strângi, bugetul tău 50/30/20 în lei, ce alocare de investiții ți se potrivește pe vârstă și risc, <strong>numărul tău FIRE</strong> și pașii concreți de urmat. Totul descărcabil ca <strong>PDF</strong>.</p>
+  <p class="price-line">Inclus în Premium — 49 lei/lună</p>
+  <a class="btn btn-primary" href="/premium">Vezi ce conține Premium</a>
+  <p style="margin-top:14px;font-size:.85rem;color:var(--muted)">Ai deja cont Premium? <a href="/login" style="color:var(--emerald-link)">Conectează-te</a>.</p>
+</div>
+
+<!-- pentru cei CU premium: instrumentul -->
+<div class="cf-premium-only">
+<div class="calc">
+  <div class="panel" id="planForm">
+    <h3 style="margin-bottom:4px">Datele tale</h3>
+    <p style="color:var(--muted);font-size:.82rem;margin:0 0 16px">Sunt precompletate cu un exemplu — schimbă-le cu cifrele tale.</p>
+    <div class="form-grid">
+      <div class="fg-title">Despre tine</div>
+      <div class="field full"><label>Numele tău (apare pe plan)</label><input type="text" id="name" value="" placeholder="ex: Andrei Popescu" maxlength="60"></div>
+      <div class="field"><label>Vârsta (ani)</label><input type="number" id="age" value="30" min="16" max="100" step="1"></div>
+      <div class="field"><label>Toleranță la risc</label><select id="risk"><option value="low">Scăzută</option><option value="med" selected>Medie</option><option value="high">Ridicată</option></select></div>
+
+      <div class="fg-title">Bani în fiecare lună</div>
+      <div class="field"><label>Venit net lunar (lei)</label><input type="number" id="income" value="6000" min="0" step="100"></div>
+      <div class="field"><label>Cheltuieli lunare totale (lei)</label><input type="number" id="expenses" value="4000" min="0" step="100"></div>
+
+      <div class="fg-title">Ce ai deja</div>
+      <div class="field"><label>Economii / active curente (lei)</label><input type="number" id="savings" value="15000" min="0" step="500"></div>
+      <div class="field"><label>Fond de urgență actual (lei)</label><input type="number" id="ef" value="6000" min="0" step="500"></div>
+
+      <div class="fg-title">Datorii</div>
+      <div class="field"><label>Total datorii (lei)</label><input type="number" id="debt" value="0" min="0" step="500"></div>
+      <div class="field"><label>Dobândă medie datorii (% / an, opțional)</label><input type="number" id="debtApr" value="" min="0" step="0.5" placeholder="ex: 18"></div>
+
+      <div class="fg-title">Obiectivul tău</div>
+      <div class="field full"><label>Obiectiv principal pe următorul an</label><select id="goal">
+        <option value="ef">Construiesc fondul de urgență</option>
+        <option value="debt">Scap de datorii</option>
+        <option value="house">Strâng pentru o casă / avans</option>
+        <option value="invest">Încep / cresc investițiile</option>
+        <option value="fire">Pensie anticipată (FIRE)</option>
+      </select></div>
+    </div>
+    <button class="btn btn-primary" id="genBtn" style="width:100%;justify-content:center;margin-top:10px">Generează planul</button>
+  </div>
+
+  <div class="panel" id="rightCol">
+    <div id="empty"><p style="color:var(--muted)">Completează datele și apasă <strong>„Generează planul"</strong>. Planul apare aici și îl poți descărca ca PDF.</p></div>
+    <div id="plan">
+      <div class="plan-head"><p class="ph-t" id="phTitle">Planul Meu Financiar</p><p class="ph-d" id="phDate"></p></div>
+      <div class="plan-actions no-print">
+        <button class="btn btn-primary" id="pdfBtn">⬇ Descarcă PDF</button>
+        <button class="btn btn-ghost" id="reGen">↻ Recalculează</button>
+      </div>
+      <div id="planBody"></div>
+    </div>
+  </div>
+</div>
+<div class="disc">⚠️ Plan generat automat din cifrele introduse, cu scop educativ. Folosește ipoteze simplificate (randament real ~5%/an la investiții, plăți și venituri constante) și nu ține cont de impozite, inflație personală sau situații neprevăzute. Nu reprezintă consultanță financiară personalizată.</div>
+<p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie#planificare">← Articole despre planificare financiară</a></p>
+</div>
+</div></section>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const KEY="cf-plan-meu";
+  const FIELDS=["name","age","risk","income","expenses","savings","ef","debt","debtApr","goal"];
+  const lei=n=>Math.round(n).toLocaleString("ro-RO")+" lei";
+  const pct=n=>(Math.round(n*10)/10).toLocaleString("ro-RO")+"%";
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const dur=m=>{m=Math.round(m);if(m<=0)return "acum";const y=Math.floor(m/12),mo=m%12;return (y?y+(y===1?" an":" ani"):"")+(y&&mo?" și ":"")+(mo?mo+(mo===1?" lună":" luni"):(y?"":"sub o lună"));};
+
+  // --- persistență ---
+  function save(){const o={};FIELDS.forEach(f=>o[f]=$(f).value);try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+  function load(){try{const o=JSON.parse(localStorage.getItem(KEY)||"null");if(o)FIELDS.forEach(f=>{if(o[f]!==undefined&&o[f]!=="")$(f).value=o[f];});}catch(e){}}
+
+  function num(id){const v=parseFloat($(id).value);return isFinite(v)?v:0;}
+
+  function build(){
+    const age=clamp(Math.round(num("age"))||30,16,100);
+    const risk=$("risk").value, goal=$("goal").value;
+    const income=Math.max(0,num("income")), expenses=Math.max(0,num("expenses"));
+    const savings=Math.max(0,num("savings")), ef=Math.max(0,num("ef"));
+    const debt=Math.max(0,num("debt")), debtApr=Math.max(0,num("debtApr"));
+    const surplus=income-expenses;
+    const rate=income>0?surplus/income*100:0;
+    let H="";
+
+    // ===== 1. Rata de economisire =====
+    let rv,rcls;
+    if(income<=0){rv="Adaugă-ți venitul ca să calculăm.";rcls="warn";}
+    else if(surplus<=0){rv="Cheltuiești tot sau mai mult decât câștigi. Primul pas: reducerea cheltuielilor sau creșterea venitului — fără un surplus, restul planului nu poate porni.";rcls="warn";}
+    else if(rate<10)rv="Economisești ceva, dar sub pragul recomandat. Ținta sănătoasă este <b>minim 20%</b> din venit.";
+    else if(rate<20)rv="Ești pe drumul bun. Mai ai puțin până la <b>20%</b>, ținta clasică de sănătate financiară.";
+    else if(rate<35)rv="Foarte bine — economisești la un nivel solid, peste media populației.";
+    else rv="Excelent — economisești agresiv. Asta îți accelerează masiv obiectivele pe termen lung.";
+    H+=`<div class="plan-sec"><h3>1. Rata ta de economisire</h3><p class="sub">Cât din venit îți rămâne în fiecare lună.</p>
+      <div class="kpi-row">
+        <div class="kpi"><p class="lbl">Rata de economisire</p><p class="val grad">${income>0?pct(Math.max(0,rate)):"—"}</p></div>
+        <div class="kpi"><p class="lbl">Îți rămâne lunar</p><p class="val">${surplus>0?lei(surplus):"0 lei"}</p></div>
+        <div class="kpi"><p class="lbl">Pe an</p><p class="val">${surplus>0?lei(surplus*12):"0 lei"}</p></div>
+      </div>
+      <div class="verdict-box ${rcls||""}">${rv}</div></div>`;
+
+    // ===== 2. Fond de urgență =====
+    const efMin=expenses*3, efMax=expenses*6;
+    const efPct=efMax>0?clamp(ef/efMax*100,0,100):0;
+    const efGap=Math.max(0,efMin-ef);
+    let efTxt;
+    if(expenses<=0)efTxt="Adaugă cheltuielile lunare pentru a calcula ținta.";
+    else if(ef>=efMax)efTxt="Felicitări — ai un fond de urgență complet (peste 6 luni de cheltuieli). Surplusul îl poți direcționa către investiții.";
+    else if(ef>=efMin)efTxt=`Ai deja minimul recomandat (3 luni). Ideal ar fi să-l duci spre <b>${lei(efMax)}</b> (6 luni), mai ales dacă venitul e variabil.`;
+    else{
+      const m=surplus>0?efGap/surplus:Infinity;
+      efTxt=`Mai ai de strâns <b>${lei(efGap)}</b> până la minimul de 3 luni. `+(surplus>0?`La ritmul tău actual de economisire, ajungi acolo în aproximativ <b>${dur(m)}</b>.`:`Întâi ai nevoie de un surplus lunar ca să-l poți construi.`);
+    }
+    H+=`<div class="plan-sec"><h3>2. Fondul de urgență</h3><p class="sub">Plasa ta de siguranță: 3–6 luni de cheltuieli, ușor accesibile.</p>
+      <div class="bars">
+        <div class="bar-line"><span>Actual: <b>${lei(ef)}</b></span><span>Țintă 3–6 luni: ${lei(efMin)} – ${lei(efMax)}</span></div>
+        <div class="bar-track"><div class="bar-fill g" style="width:${efPct}%"></div></div>
+      </div>
+      <div class="result-row"><span>Țintă minimă (3 luni)</span><b>${lei(efMin)}</b></div>
+      <div class="result-row"><span>Țintă confortabilă (6 luni)</span><b>${lei(efMax)}</b></div>
+      <div class="result-row"><span>Mai ai de strâns până la minim</span><b>${lei(efGap)}</b></div>
+      <div class="verdict-box ${expenses<=0||surplus<=0&&efGap>0?"warn":""}">${efTxt}</div></div>`;
+
+    // ===== 3. Buget 50/30/20 =====
+    const needs=income*0.5, wants=income*0.3, save5=income*0.2;
+    H+=`<div class="plan-sec"><h3>3. Bugetul tău recomandat (50/30/20)</h3><p class="sub">Un cadru simplu, aplicat pe venitul tău net de ${lei(income)}.</p>
+      <div class="alloc">
+        <div class="a-card"><p class="p" style="color:var(--emerald-link)">${lei(needs)}</p><p class="n">50% Nevoi<br><span style="font-size:.74rem">chirie, mâncare, utilități, transport</span></p></div>
+        <div class="a-card"><p class="p" style="color:var(--gold,#d4af37)">${lei(wants)}</p><p class="n">30% Dorințe<br><span style="font-size:.74rem">ieșiri, hobby, abonamente</span></p></div>
+        <div class="a-card"><p class="p">${lei(save5)}</p><p class="n">20% Economii &amp; investiții<br><span style="font-size:.74rem">fond urgență, datorii extra, investiții</span></p></div>
+      </div>
+      <div class="verdict-box">${expenses>needs+wants?`Cheltuielile tale actuale (<b>${lei(expenses)}</b>) depășesc partea de „Nevoi + Dorințe" din acest model (${lei(needs+wants)}). Caută unde poți tăia ca să eliberezi bani pentru partea de 20%.`:`Cheltuielile tale actuale (<b>${lei(expenses)}</b>) încap în partea de „Nevoi + Dorințe" (${lei(needs+wants)}). Asigură-te că aloci cei <b>${lei(save5)}</b> lunari către economii și investiții.`}</div></div>`;
+
+    // ===== 4. Strategie datorii (doar dacă are) =====
+    if(debt>0){
+      const apr=debtApr>0?debtApr:null;
+      const yearCost=apr?debt*apr/100:null;
+      H+=`<div class="plan-sec"><h3>4. Strategia ta de datorii</h3><p class="sub">Ai <b>${lei(debt)}</b> în datorii${apr?` la o dobândă medie de ${pct(apr)}/an`:""}.</p>
+        ${yearCost?`<div class="result-row"><span>Cât te costă dobânda pe an (estimativ)</span><b style="color:#e25555">${lei(yearCost)}</b></div>`:""}
+        <div class="result-row"><span>Metoda Avalanșă</span><span style="color:var(--muted)">ataci prima dobânda cea mai mare → plătești cel mai puțin</span></div>
+        <div class="result-row"><span>Metoda Bulgăre</span><span style="color:var(--muted)">ataci prima datoria cea mai mică → motivație rapidă</span></div>
+        <div class="verdict-box ${apr&&apr>=10?"warn":""}">${apr&&apr>=10?`Cu o dobândă de ${pct(apr)}, datoriile sunt prioritatea ta: orice leu pus pe ele „câștigă" garantat ${pct(apr)}, mai mult decât majoritatea investițiilor. `:""}Plata cu prioritate a datoriilor scumpe ar trebui să vină <b>înaintea</b> investițiilor. Construiește planul exact (date, ordine, economii) cu instrumentul dedicat: <a href="/unelte/plan-anti-datorii" style="color:var(--emerald-link);font-weight:700">Plan Anti-Datorii →</a></div></div>`;
+    }
+
+    // ===== 5. Alocare investiții pe vârstă + risc =====
+    let stocks=110-age;
+    if(risk==="low")stocks-=10; else if(risk==="high")stocks+=10;
+    stocks=clamp(Math.round(stocks),10,95);
+    const bonds=Math.round((100-stocks)*0.7);
+    const cash=100-stocks-bonds;
+    const riskRo={low:"scăzută",med:"medie",high:"ridicată"}[risk];
+    H+=`<div class="plan-sec"><h3>5. Alocarea ta de investiții (orientativ)</h3><p class="sub">Pe baza vârstei (${age} ani) și a toleranței tale la risc (${riskRo}). Regula „110 − vârstă", ajustată după risc.</p>
+      <div class="alloc">
+        <div class="a-card"><p class="p" style="color:var(--emerald-link)">${stocks}%</p><p class="n">Acțiuni / ETF<br><span style="font-size:.74rem">creștere pe termen lung</span></p></div>
+        <div class="a-card"><p class="p">${bonds}%</p><p class="n">Obligațiuni / titluri de stat<br><span style="font-size:.74rem">stabilitate, venit</span></p></div>
+        <div class="a-card"><p class="p" style="color:var(--gold,#d4af37)">${cash}%</p><p class="n">Cash / depozite<br><span style="font-size:.74rem">lichiditate, tampon</span></p></div>
+      </div>
+      <div class="verdict-box">Pe măsură ce înaintezi în vârstă, scade treptat partea de acțiuni în favoarea obligațiunilor. Această alocare e un punct de plecare — investește doar bani de care nu ai nevoie pe termen scurt și abia <b>după</b> ce ai fondul de urgență și datoriile scumpe sub control.</div></div>`;
+
+    // ===== 6. Numărul FIRE =====
+    const annualExp=expenses*12;
+    const fire=annualExp*25;
+    const firePct=fire>0?clamp(savings/fire*100,0,100):0;
+    let yearsTxt;
+    if(annualExp<=0)yearsTxt="Adaugă cheltuielile lunare pentru a calcula numărul FIRE.";
+    else if(savings>=fire)yearsTxt="Ai deja atins independența financiară pe acest model. Felicitări!";
+    else if(surplus<=0)yearsTxt="Cu cheltuieli ≥ venit nu poți avansa spre FIRE. Creează întâi un surplus lunar.";
+    else{
+      let bal=savings,yrs=0;const annualSave=surplus*12,r=0.05;
+      while(bal<fire&&yrs<100){bal=bal*(1+r)+annualSave;yrs++;}
+      yearsTxt=yrs>=100?"La ritmul actual, FIRE durează peste 100 de ani — crește rata de economisire ca să-l aduci în viața ta.":`La rata ta actuală de economisire și un randament real de ~5%/an, ai atinge numărul FIRE în aproximativ <b>${yrs} ${yrs===1?"an":"ani"}</b> (în jurul vârstei de <b>${age+yrs} ani</b>).`;
+    }
+    H+=`<div class="plan-sec"><h3>6. Numărul tău FIRE</h3><p class="sub">Suma care, investită, îți acoperă cheltuielile la nesfârșit (25× cheltuielile anuale, regula 4%).</p>
+      <div class="kpi-row">
+        <div class="kpi"><p class="lbl">Numărul tău FIRE</p><p class="val grad">${annualExp>0?lei(fire):"—"}</p></div>
+        <div class="kpi"><p class="lbl">Ai atins</p><p class="val">${annualExp>0?pct(firePct):"—"}</p></div>
+      </div>
+      <div class="bars"><div class="bar-track"><div class="bar-fill gold" style="width:${firePct}%"></div></div></div>
+      <div class="verdict-box ${annualExp<=0||surplus<=0?"warn":""}">${yearsTxt}</div></div>`;
+
+    // ===== 7. Pașii tăi următori (prioritizați după obiectiv) =====
+    const steps=[];
+    const hasDebt=debt>0, debtExpensive=debtApr>=10||(debt>0&&!debtApr);
+    const efDone=ef>=efMin&&expenses>0;
+    // pas universal de bază
+    if(surplus<=0)steps.push("Reechilibrează-ți bugetul ca să obții un surplus lunar — fără el, niciun obiectiv nu pornește. Începe prin a lista toate cheltuielile.");
+    // în funcție de obiectiv, ridică prioritatea
+    if(goal==="debt"&&hasDebt)steps.push(`Direcționează surplusul lunar (${surplus>0?lei(surplus):"de îndată ce există"}) către datorii, cu metoda Avalanșă. Construiește planul exact cu instrumentul Plan Anti-Datorii.`);
+    if(goal==="ef")steps.push(`Pune deoparte un mini-fond de urgență de o lună (${expenses>0?lei(expenses):"~1× cheltuieli"}), apoi crește-l spre 3 luni (${lei(efMin)}).`);
+    if(!efDone&&goal!=="ef"&&goal!=="debt")steps.push(`Înainte de orice investiție, completează fondul de urgență până la minimul de 3 luni (${lei(efMin)}).`);
+    if(hasDebt&&goal!=="debt")steps.push(`Plătește accelerat datoriile scumpe (peste ~10% dobândă) — randamentul „garantat" bate investițiile.`);
+    if(goal==="house")steps.push("Deschide un cont separat pentru avans și automatizează un transfer lunar fix. Ține banii pentru avans în instrumente cu risc mic (depozite, titluri de stat).");
+    if(goal==="invest"||goal==="fire"){if(efDone&&!debtExpensive&&surplus>0)steps.push(`Automatizează investiția lunară (ex. ${lei(income*0.2)} = partea de 20%) într-un ETF global diversificat, conform alocării de mai sus.`); else steps.push("Pregătește terenul pentru investiții: întâi un surplus lunar, fond de urgență complet și datorii scumpe achitate, apoi pornește investiția automată lunară.");}
+    if(goal==="fire")steps.push("Crește rata de economisire (mai mult venit sau mai puține cheltuieli) — e pârghia care scurtează cel mai mult drumul spre FIRE.");
+    // umplere până la minim 3
+    if(steps.length<3)steps.push(`Automatizează un transfer lunar de minim 20% din venit (${lei(income*0.2)}) către economii și investiții, în ziua de salariu.`);
+    if(steps.length<3)steps.push("Revino la acest plan o dată la 3–6 luni și actualizează cifrele pe măsură ce situația ta se schimbă.");
+    const top=steps.slice(0,5);
+    H+=`<div class="plan-sec"><h3>7. Pașii tăi următori</h3><p class="sub">Acțiuni concrete, în ordinea priorității, pentru obiectivul ales.</p>
+      <ol class="steps">${top.map(s=>`<li>${s}</li>`).join("")}</ol></div>`;
+
+    return H;
+  }
+
+  function generate(){
+    $("planBody").innerHTML=build();
+    const nm=($("name").value||"").trim().slice(0,60);
+    $("phTitle").textContent=nm?("Planul Financiar al lui "+nm):"Planul Meu Financiar";
+    $("phDate").textContent="Clubul Financiar · generat la "+new Date().toLocaleDateString("ro-RO",{day:"numeric",month:"long",year:"numeric"});
+    $("empty").style.display="none";
+    $("plan").classList.add("show");
+    save();
+  }
+
+  // events
+  $("genBtn").addEventListener("click",generate);
+  $("reGen").addEventListener("click",generate);
+  $("pdfBtn").addEventListener("click",()=>window.print());
+  FIELDS.forEach(f=>$(f).addEventListener("change",save));
+
+  // init: prefill exemplu (din HTML) → suprascrie din localStorage → arată un plan imediat
+  load();
+  generate();
+})();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
+<script defer src="/assets/site.js?v=30"></script>
+</body></html>

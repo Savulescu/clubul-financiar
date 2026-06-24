@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trusă de șabloane — buget și contracte gata de folosit — Clubul Financiar</title>
+<meta name="description" content="Descarcă șabloane gata de folosit: buget 50/30/20, zero-based, tracker cheltuieli, planificator datorii (CSV pentru Excel) și contracte printabile (închiriere, împrumut, proces-verbal, chitanță).">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://clubulfinanciar.ro/unelte/sabloane">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
+<meta property="og:title" content="Trusă de șabloane — buget și contracte"><meta property="og:description" content="Șabloane CSV pentru buget și contracte printabile gata de folosit — închiriere, împrumut, proces-verbal, chitanță."><meta property="og:url" content="https://clubulfinanciar.ro/unelte/sabloane"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Trusă de șabloane"><meta name="twitter:description" content="Șabloane de buget (CSV) și contracte printabile gata de folosit."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<style>
+.tpl-section{margin-top:30px}
+.tpl-section h3{font-size:1.18rem;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.tpl-section .sub{color:var(--muted);font-size:.9rem;margin:0 0 16px}
+.tpl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:680px){.tpl-grid{grid-template-columns:1fr}}
+.tpl-card{display:flex;flex-direction:column}
+.tpl-card .ic{margin-bottom:12px}
+.tpl-card h4{font-size:1.04rem;margin:0 0 6px;font-family:"Sora",sans-serif}
+.tpl-card p{color:var(--muted);font-size:.88rem;margin:0 0 16px;flex:1}
+.tpl-actions{display:flex;flex-wrap:wrap;gap:8px}
+.tpl-actions .btn{font-size:.84rem;padding:9px 14px}
+.fmt-tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-left:auto;align-self:flex-start}
+.fmt-csv{background:color-mix(in srgb,var(--emerald) 14%,transparent);color:var(--emerald-link)}
+.fmt-pdf{background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold)}
+.tpl-card .top{display:flex;align-items:flex-start;gap:10px}
+/* ---- print overlay (modal preview A4) ---- */
+.cf-doc-overlay{position:fixed;inset:0;z-index:9000;background:rgba(12,18,30,.72);backdrop-filter:blur(3px);display:none;overflow:auto;padding:24px 16px}
+.cf-doc-overlay.open{display:block}
+.cf-doc-bar{max-width:820px;margin:0 auto 14px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+#cfDocPage{max-width:820px;margin:0 auto;background:#fff;color:#1a1a1a;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.5);padding:54px 60px;font-family:Georgia,"Times New Roman",serif;line-height:1.55;font-size:15px}
+#cfDocPage h1{font-size:21px;text-align:center;margin:0 0 4px;letter-spacing:.02em;font-family:Georgia,serif;color:#1a1a1a}
+#cfDocPage .doc-sub{text-align:center;color:#555;font-size:12.5px;margin:0 0 26px;font-style:italic}
+#cfDocPage h2{font-size:15px;margin:24px 0 8px;border-bottom:1px solid #ccc;padding-bottom:4px;font-family:Georgia,serif;color:#1a1a1a}
+#cfDocPage p{margin:0 0 11px}
+#cfDocPage .fill{display:inline-block;border-bottom:1px dotted #555;min-width:120px}
+#cfDocPage ol,#cfDocPage ul{margin:0 0 11px;padding-left:22px}
+#cfDocPage li{margin-bottom:6px}
+#cfDocPage table{width:100%;border-collapse:collapse;margin:6px 0 14px;font-size:13.5px}
+#cfDocPage th,#cfDocPage td{border:1px solid #999;padding:7px 9px;text-align:left;vertical-align:top}
+#cfDocPage th{background:#f0f0f0}
+#cfDocPage .sign{display:flex;justify-content:space-between;gap:40px;margin-top:48px}
+#cfDocPage .sign div{flex:1;text-align:center}
+#cfDocPage .sign .line{border-top:1px solid #444;padding-top:6px;font-size:12.5px;color:#444}
+#cfDocPage .legal{margin-top:34px;font-size:11.5px;color:#777;font-style:italic;border-top:1px solid #ddd;padding-top:12px}
+@media(max-width:680px){#cfDocPage{padding:34px 24px;font-size:14px}.cf-doc-bar{justify-content:stretch}.cf-doc-bar .btn{flex:1;justify-content:center}}
+@media print{
+  @page{size:A4;margin:18mm 16mm}
+  body>*:not(#cfDocOverlay){display:none!important}
+  #cfDocOverlay{position:static;display:block!important;background:#fff;backdrop-filter:none;padding:0;overflow:visible}
+  .cf-doc-bar{display:none!important}
+  #cfDocPage{max-width:none;margin:0;box-shadow:none;border-radius:0;padding:0;color:#000;font-size:12pt}
+  #cfDocPage table{page-break-inside:auto}#cfDocPage tr{page-break-inside:avoid}
+}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Trusă de șabloane — buget și contracte gata de folosit", "url": "https://clubulfinanciar.ro/unelte/sabloane", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ro-RO", "isAccessibleForFree": true, "description": "Descarcă șabloane gata de folosit: buget 50/30/20, zero-based, tracker cheltuieli, planificator datorii (CSV pentru Excel) și contracte printabile (închiriere, împrumut, proces-verbal, chitanță).", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente"}, {"@type": "ListItem", "position": 3, "name": "Trusă de șabloane — buget și contracte", "item": "https://clubulfinanciar.ro/unelte/sabloane"}]}</script></head><body>
+<section class="section"><div class="container">
+<div class="center" style="margin-bottom:8px">
+  <span class="cf-premium-badge">Premium</span>
+  <h1 class="title" style="margin-top:10px">Trusă de șabloane</h1>
+  <p class="lead" style="margin-inline:auto">Șabloane gata de folosit pentru <strong>buget</strong> și <strong>contracte</strong> — descarcă fișiere pentru Excel sau printează documente formatate A4, în câteva secunde.</p>
+</div>
+
+<!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
+<div class="cf-premium-lock">
+  <div class="lock-ic">🔓</div>
+  <h2>Bibliotecă de șabloane gata de folosit</h2>
+  <p>Descarcă într-un click <strong>fișiere de buget</strong> (50/30/20, zero-based, tracker de cheltuieli, planificator datorii) care se deschid perfect în Excel și <strong>contracte printabile</strong> (închiriere, împrumut între persoane, proces-verbal de predare-primire, chitanță). Le completezi, le printezi sau le salvezi ca PDF.</p>
+  <p class="price-line">Inclus în Premium — 49 lei/lună</p>
+  <a class="btn btn-primary" href="/premium">Vezi ce conține Premium</a>
+  <p style="margin-top:14px;font-size:.85rem;color:var(--muted)">Ai deja cont Premium? <a href="/login" style="color:var(--emerald-link)">Conectează-te</a>.</p>
+</div>
+
+<!-- pentru cei CU premium: instrumentul -->
+<div class="cf-premium-only">
+
+  <!-- ===== BUGET ===== -->
+  <div class="tpl-section">
+    <h3>💰 Șabloane de buget</h3>
+    <p class="sub">Fișiere <strong>.csv</strong> cu rânduri exemplu, gata de deschis în Excel sau Google Sheets (separator „;", diacritice corecte). Apasă „Descarcă CSV", șterge exemplele și completează-le cu cifrele tale.</p>
+    <div class="tpl-grid">
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">📊</div><span class="fmt-tag fmt-csv">CSV</span></div>
+        <h4>Buget lunar 50/30/20</h4>
+        <p>Împarte venitul: 50% nevoi, 30% dorințe, 20% economii. Coloane pentru sumă planificată vs. reală și diferență, ca să vezi unde te abați.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-csv="b503020">↓ Descarcă CSV</button></div>
+      </div>
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">🎯</div><span class="fmt-tag fmt-csv">CSV</span></div>
+        <h4>Buget zero-based</h4>
+        <p>Fiecare leu primește o destinație, până venitul minus cheltuieli = 0. Categorii românești pregătite, de la chirie la fondul de urgență.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-csv="zero">↓ Descarcă CSV</button></div>
+      </div>
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">🧾</div><span class="fmt-tag fmt-csv">CSV</span></div>
+        <h4>Tracker cheltuieli lunare</h4>
+        <p>Notează fiecare cheltuială: dată, categorie, descriere, sumă și metodă de plată. La final de lună vezi exact pe ce s-au dus banii.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-csv="tracker">↓ Descarcă CSV</button></div>
+      </div>
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">⛓️</div><span class="fmt-tag fmt-csv">CSV</span></div>
+        <h4>Planificator datorii</h4>
+        <p>Listează datoriile cu sold, dobândă și rată minimă, ca să decizi ordinea de plată. Pentru planul automat cu data scăpării, folosește unealta dedicată.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-csv="datorii">↓ Descarcă CSV</button><a class="btn btn-ghost" href="/unelte/plan-anti-datorii">Plan Anti-Datorii →</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== CONTRACTE ===== -->
+  <div class="tpl-section">
+    <h3>📄 Contracte și documente</h3>
+    <p class="sub">Modele orientative în limba română, cu spații punctate de completat. Apasă „Vezi & Printează", verifică documentul A4 și folosește butonul <strong>Printează / Salvează PDF</strong> (din fereastra de print alegi „Salvează ca PDF").</p>
+    <div class="tpl-grid">
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">🏠</div><span class="fmt-tag fmt-pdf">PDF</span></div>
+        <h4>Contract de închiriere locuință</h4>
+        <p>Model între proprietar și chiriaș: datele imobilului, chiria, garanția, durata și obligațiile părților. Spații de completat și semnat.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-doc="inchiriere">Vezi &amp; Printează</button></div>
+      </div>
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">🤝</div><span class="fmt-tag fmt-pdf">PDF</span></div>
+        <h4>Contract de împrumut între persoane</h4>
+        <p>Pentru un împrumut între prieteni sau rude: împrumutător, împrumutat, sumă, termen și modul de restituire. Util ca dovadă scrisă.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-doc="imprumut">Vezi &amp; Printează</button></div>
+      </div>
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">📋</div><span class="fmt-tag fmt-pdf">PDF</span></div>
+        <h4>Proces-verbal de predare-primire</h4>
+        <p>La predarea unei locuințe închiriate: lista dotărilor, starea lor și indecșii utilităților (apă, gaz, curent) la momentul predării.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-doc="pv">Vezi &amp; Printează</button></div>
+      </div>
+
+      <div class="card tpl-card">
+        <div class="top"><div class="ic">🧮</div><span class="fmt-tag fmt-pdf">PDF</span></div>
+        <h4>Notă de calcul / chitanță simplă</h4>
+        <p>Confirmă o sumă primită: cine plătește, cine încasează, suma în cifre și litere, motivul plății și data. Cu o mică notă de calcul.</p>
+        <div class="tpl-actions"><button class="btn btn-primary" data-doc="chitanta">Vezi &amp; Printează</button></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="disc">⚠️ Șabloanele sunt orientative și educative. Modelele de contracte nu înlocuiesc consultanța juridică — pentru situații importante consultă un avocat sau un notar. Verifică cifrele și clauzele înainte de a le folosi. Nu reprezintă consultanță financiară sau juridică.</div>
+  <p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie#buget">← Articole despre bugetare</a></p>
+</div>
+</div></section>
+
+<!-- ===== Overlay preview + print (sibling de body, izolat la print) ===== -->
+<div class="cf-doc-overlay" id="cfDocOverlay" role="dialog" aria-modal="true" aria-label="Previzualizare document">
+  <div class="cf-doc-bar">
+    <button class="btn btn-primary" id="cfDocPrint">🖨️ Printează / Salvează PDF</button>
+    <button class="btn btn-ghost" id="cfDocClose">✕ Închide</button>
+  </div>
+  <div id="cfDocPage"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+
+  /* ---------------- CSV ---------------- */
+  function downloadCSV(filename, rows){
+    // rows = array de array-uri de string-uri; separator ";" pt. Excel RO
+    const esc=v=>{ v=String(v==null?"":v); return /[";\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; };
+    const body=rows.map(r=>r.map(esc).join(";")).join("\r\n");
+    const blob=new Blob(["﻿"+body],{type:"text/csv;charset=utf-8"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url; a.download=filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); },100);
+  }
+
+  const CSV={
+    b503020:{ file:"buget-50-30-20.csv", rows:[
+      ["Categorie","Tip","Sumă planificată","Sumă reală","Diferență"],
+      ["Chirie / Rată locuință","Nevoi","2000","2000","0"],
+      ["Utilități (curent, apă, gaz)","Nevoi","450","480","-30"],
+      ["Mâncare / Cumpărături","Nevoi","1200","1100","100"],
+      ["Transport","Nevoi","350","320","30"],
+      ["Restaurant / Distracție","Dorințe","600","720","-120"],
+      ["Abonamente (streaming, sală)","Dorințe","180","180","0"],
+      ["Cumpărături / Haine","Dorințe","300","250","50"],
+      ["Fond de urgență","Economii","800","800","0"],
+      ["Investiții / Pensie","Economii","600","600","0"],
+      ["TOTAL","","6480","6450","30"]
+    ]},
+    zero:{ file:"buget-zero-based.csv", rows:[
+      ["Categorie","Tip","Sumă alocată"],
+      ["Venit net total","Venit","6500"],
+      ["Chirie / Rată locuință","Cheltuială","2000"],
+      ["Utilități","Cheltuială","450"],
+      ["Mâncare","Cheltuială","1200"],
+      ["Transport / Combustibil","Cheltuială","350"],
+      ["Telefon / Internet","Cheltuială","120"],
+      ["Asigurări","Cheltuială","200"],
+      ["Distracție / Restaurant","Cheltuială","500"],
+      ["Fond de urgență","Economii","700"],
+      ["Investiții","Economii","600"],
+      ["Rezervă cheltuieli neprevăzute","Economii","380"],
+      ["Rămas de alocat (trebuie să fie 0)","Verificare","0"]
+    ]},
+    tracker:{ file:"tracker-cheltuieli.csv", rows:[
+      ["Dată","Categorie","Descriere","Sumă","Metodă plată"],
+      ["01.06.2026","Mâncare","Cumpărături săptămânale","240","Card"],
+      ["02.06.2026","Transport","Abonament transport public","80","Card"],
+      ["03.06.2026","Distracție","Cafea cu prietenii","35","Numerar"],
+      ["05.06.2026","Utilități","Factură curent","210","Transfer bancar"],
+      ["07.06.2026","Sănătate","Farmacie","65","Card"],
+      ["","","","",""],
+      ["","","","",""]
+    ]},
+    datorii:{ file:"planificator-datorii.csv", rows:[
+      ["Datorie","Sold rămas","Dobândă % / an","Rată minimă / lună"],
+      ["Card de credit","8000","28","400"],
+      ["Credit nevoi personale","25000","14","650"],
+      ["Rate telefon","3000","0","300"],
+      ["Descoperit de cont","1500","20","150"],
+      ["","","",""]
+    ]}
+  };
+
+  document.querySelectorAll("[data-csv]").forEach(b=>{
+    b.addEventListener("click",()=>{
+      const cfg=CSV[b.getAttribute("data-csv")];
+      if(cfg) downloadCSV(cfg.file,cfg.rows);
+    });
+  });
+
+  /* ---------------- DOCUMENTE PRINTABILE ---------------- */
+  const F='<span class="fill">&nbsp;</span>';                 // spațiu scurt
+  const FL='<span class="fill" style="min-width:240px">&nbsp;</span>'; // spațiu lung
+  const today=()=>{ const d=new Date(); return ("0"+d.getDate()).slice(-2)+"."+("0"+(d.getMonth()+1)).slice(-2)+"."+d.getFullYear(); };
+
+  const LEGAL='<p class="legal">Acest document este un model orientativ, oferit în scop educativ de Clubul Financiar. Nu constituie consultanță juridică și nu garantează conformitatea cu legislația în vigoare. Pentru situații cu valoare sau risc ridicat, consultați un avocat ori un notar.</p>';
+
+  const DOCS={
+    inchiriere:{ title:"CONTRACT DE ÎNCHIRIERE", build(){ return `
+      <h1>CONTRACT DE ÎNCHIRIERE A UNEI LOCUINȚE</h1>
+      <p class="doc-sub">Model orientativ · încheiat astăzi, ${today()}</p>
+      <h2>1. Părțile contractante</h2>
+      <p><b>Proprietar (locator):</b> ${FL}, domiciliat în ${FL}, posesor al CI seria ${F} nr. ${F}, CNP ${FL}.</p>
+      <p><b>Chiriaș (locatar):</b> ${FL}, domiciliat în ${FL}, posesor al CI seria ${F} nr. ${F}, CNP ${FL}.</p>
+      <h2>2. Obiectul contractului</h2>
+      <p>Proprietarul închiriază locuința situată în ${FL}, compusă din ${F} camere, în suprafață de ${F} mp, împreună cu dotările existente.</p>
+      <h2>3. Durata</h2>
+      <p>Contractul se încheie pe o perioadă de ${F} luni, începând cu data de ${F} și până la data de ${F}, cu posibilitate de prelungire prin acordul părților.</p>
+      <h2>4. Chiria și garanția</h2>
+      <p>Chiria lunară este de ${F} lei, plătibilă până la data de ${F} a fiecărei luni, prin ${F} (numerar / transfer bancar).</p>
+      <p>La semnare, chiriașul achită o garanție de ${F} lei, restituibilă la încetarea contractului dacă locuința este predată în stare corespunzătoare, mai puțin eventualele datorii la utilități sau pagube.</p>
+      <h2>5. Obligațiile părților</h2>
+      <ul>
+        <li>Proprietarul predă locuința în stare de folosință și asigură liniștita folosință a acesteia.</li>
+        <li>Chiriașul plătește chiria și utilitățile la termen și folosește locuința cu grijă, ca un bun proprietar.</li>
+        <li>Reparațiile majore revin proprietarului, iar întreținerea curentă chiriașului.</li>
+        <li>Subînchirierea este permisă doar cu acordul scris al proprietarului.</li>
+      </ul>
+      <h2>6. Încetarea contractului</h2>
+      <p>Contractul încetează la expirarea termenului, prin acordul părților sau prin denunțare cu un preaviz de ${F} zile. Alte clauze: ${FL}.</p>
+      <div class="sign"><div><div class="line">Proprietar (semnătura)</div></div><div><div class="line">Chiriaș (semnătura)</div></div></div>
+      ${LEGAL}`; }},
+
+    imprumut:{ title:"CONTRACT DE ÎMPRUMUT", build(){ return `
+      <h1>CONTRACT DE ÎMPRUMUT ÎNTRE PERSOANE FIZICE</h1>
+      <p class="doc-sub">Model orientativ · încheiat astăzi, ${today()}</p>
+      <h2>1. Părțile</h2>
+      <p><b>Împrumutător:</b> ${FL}, domiciliat în ${FL}, CNP ${FL}, care acordă împrumutul.</p>
+      <p><b>Împrumutat:</b> ${FL}, domiciliat în ${FL}, CNP ${FL}, care primește împrumutul.</p>
+      <h2>2. Obiectul împrumutului</h2>
+      <p>Împrumutătorul predă împrumutatului suma de ${F} lei (în litere: ${FL}), pe care împrumutatul declară că a primit-o integral la data semnării.</p>
+      <h2>3. Termen și restituire</h2>
+      <p>Suma se restituie integral până la data de ${F}, sau în ${F} rate lunare egale de ${F} lei fiecare, plătibile până în data de ${F} a fiecărei luni.</p>
+      <p>Restituirea se face prin ${F} (numerar / transfer bancar în contul ${FL}).</p>
+      <h2>4. Dobândă</h2>
+      <p>Împrumutul este acordat: ☐ fără dobândă   ☐ cu o dobândă de ${F}% pe an. (Bifați varianta aplicabilă.)</p>
+      <h2>5. Întârzieri și alte clauze</h2>
+      <p>În caz de întârziere, părțile pot conveni o penalitate de ${F}% pe zi de întârziere. Alte mențiuni: ${FL}.</p>
+      <p>Prezentul contract a fost redactat în două exemplare, câte unul pentru fiecare parte.</p>
+      <div class="sign"><div><div class="line">Împrumutător (semnătura)</div></div><div><div class="line">Împrumutat (semnătura)</div></div></div>
+      ${LEGAL}`; }},
+
+    pv:{ title:"PROCES-VERBAL DE PREDARE-PRIMIRE", build(){ return `
+      <h1>PROCES-VERBAL DE PREDARE-PRIMIRE</h1>
+      <p class="doc-sub">Anexă la contractul de închiriere · întocmit astăzi, ${today()}</p>
+      <p>Încheiat între <b>proprietar</b> ${FL} și <b>chiriaș</b> ${FL}, cu ocazia predării locuinței situate în ${FL}.</p>
+      <h2>1. Indecși utilități la predare</h2>
+      <table><thead><tr><th>Utilitate</th><th>Index citit</th><th>Observații</th></tr></thead>
+      <tbody>
+        <tr><td>Energie electrică (kWh)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Apă rece (mc)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Apă caldă (mc)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Gaze naturale (mc)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Gigacalorii / căldură</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      </tbody></table>
+      <h2>2. Dotări și starea lor</h2>
+      <table><thead><tr><th>Dotare</th><th>Cantitate</th><th>Stare (bună / uzată)</th></tr></thead>
+      <tbody>
+        <tr><td>Frigider</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Aragaz / plită</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Mașină de spălat</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Mobilier (pat, canapea, dulapuri)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Centrală termică / boiler</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>Alte dotări</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      </tbody></table>
+      <h2>3. Chei și acces</h2>
+      <p>S-au predat ${F} seturi de chei, ${F} cartele/telecomenzi acces. Observații: ${FL}.</p>
+      <p>Părțile confirmă că locuința a fost predată/primită în starea descrisă mai sus.</p>
+      <div class="sign"><div><div class="line">A predat (proprietar)</div></div><div><div class="line">A primit (chiriaș)</div></div></div>
+      ${LEGAL}`; }},
+
+    chitanta:{ title:"CHITANȚĂ", build(){ return `
+      <h1>CHITANȚĂ</h1>
+      <p class="doc-sub">Notă de calcul și confirmare a plății · ${today()}</p>
+      <p>Subsemnatul ${FL}, domiciliat în ${FL}, CNP ${FL}, am primit de la ${FL} suma de:</p>
+      <p style="font-size:18px;text-align:center;margin:18px 0"><b>${F} lei</b> &nbsp;(în litere: ${FL})</p>
+      <p>reprezentând ${FL}.</p>
+      <h2>Notă de calcul</h2>
+      <table><thead><tr><th>Descriere</th><th>Cantitate</th><th>Preț unitar (lei)</th><th>Valoare (lei)</th></tr></thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td colspan="3" style="text-align:right"><b>TOTAL</b></td><td>&nbsp;</td></tr>
+      </tbody></table>
+      <p>Plata s-a efectuat prin ${F} (numerar / transfer bancar). Prezenta chitanță confirmă încasarea sumei de mai sus.</p>
+      <div class="sign"><div><div class="line">Am primit (semnătura)</div></div><div><div class="line">Am plătit (semnătura)</div></div></div>
+      ${LEGAL}`; }}
+  };
+
+  const overlay=$("cfDocOverlay"), page=$("cfDocPage");
+  function openDoc(key){
+    const d=DOCS[key]; if(!d) return;
+    page.innerHTML=d.build();
+    overlay.classList.add("open");
+    overlay.scrollTop=0;
+    document.body.style.overflow="hidden";
+  }
+  function closeDoc(){
+    overlay.classList.remove("open");
+    document.body.style.overflow="";
+  }
+  document.querySelectorAll("[data-doc]").forEach(b=>{
+    b.addEventListener("click",()=>openDoc(b.getAttribute("data-doc")));
+  });
+  $("cfDocClose").addEventListener("click",closeDoc);
+  $("cfDocPrint").addEventListener("click",()=>window.print());
+  overlay.addEventListener("click",e=>{ if(e.target===overlay) closeDoc(); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&overlay.classList.contains("open")) closeDoc(); });
+})();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
+<script defer src="/assets/site.js?v=30"></script>
+</body></html>
