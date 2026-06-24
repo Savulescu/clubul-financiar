@@ -100,7 +100,7 @@ def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, ma
     raise RuntimeError("toți providerii au eșuat: " + last)
 
 V = "23"
-MAX_NEW = 18          # explainer-e noi generate pe rulare (restul vin din store)
+MAX_NEW = 24          # explainer-e noi pe rulare (mărit de la 18: rulările sunt rare din cauza throttle-ului GitHub, deci prindem mai multe știri/rulare = acoperire mai bună)
 KEEP_H = 168          # cât stă o știre în pagină (7 zile)
 DISPLAY = 110         # max carduri afișate (o săptămână de știri)
 STORE_F = os.path.join(CF, "_external_store.json")
