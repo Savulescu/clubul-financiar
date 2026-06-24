@@ -48,7 +48,7 @@ _BAD_RE = re.compile(
     r"tariffs?|vessels?|tankers?|trade|growth|prices?|rising|falling|barrel|yield|bonds?|economy|"
     r"bear market|bull market|stock|earnings|revenue|federal reserve)\b"
     # 2) mistranslări tipice / termeni greșiți (oil→ulei, bonds→bonduri)
-    r"|\bulei(ul|uri)?\b|\bbondu(ri|l|rile)?\b|\bstocu(ri|l)?\b"
+    r"|\bulei(ul|uri)?\b|\bbondu(ri|l|rile)?\b"
     # 3) garbage / conjugări inexistente / alte limbi
     r"|possibil|publicăz|publicaz[ăa]|econometr|trimestren|p[ăa]șiț|pasiț|vasoare|"
     r"acciun|lanc[eă]az|lancă|internazional|prevezi|pre[țt]ele|subire|irachen|"
@@ -175,15 +175,29 @@ def _base(it, now):
     return {"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
             "ts": it["ts"], "gen_ts": now, "score": it["score"]}
 
+def _parse_json(c):
+    m = re.search(r"\{.*\}", c, re.S)
+    return json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
+
+def _ro_penalty(text):
+    """Cât de «ne-românesc» e textul: cuvinte engleze/garbage + (mare) dacă n-are diacritice.
+    0 = română curată. Folosit ca RANG de calitate, nu ca poartă spre engleză."""
+    t = text or ""
+    hits = len(_BAD_RE.findall(t))
+    has_diac = bool(re.search(r"[ăâîșțĂÂÎȘȚ]", t))
+    return hits + (0 if has_diac else 5)   # fără diacritice = aproape sigur netradus
+
 def make_record(it, now):
-    """Generează un record cu română CORECTĂ, în 2 trepte. Întoarce dict sau None.
-    NU mai există latch global 'llm_dead' — fiecare știre încearcă independent (un eșec
-    tranzitoriu la o știre nu mai aruncă restul rulării pe engleză brută)."""
+    """Întoarce CEL MAI BUN record ROMÂNESC disponibil. Filtrul de calitate e RANG, nu poartă
+    spre engleză: o română cu o mică scăpare e tot mai bună decât engleza brută. Engleză (None)
+    DOAR dacă niciun provider nu produce ceva românesc. Fără latch global — fiecare știre încearcă
+    independent (un eșec tranzitoriu nu mai aruncă restul rulării pe engleză)."""
+    cands = []  # (penalty, record)
     # ── Treapta 1: explainer complet (titlu + fapt + ce înseamnă) ──
     p1 = (
         "Ești redactor senior la Clubul Financiar (educație financiară, România). "
         "Primești o știre economică internațională în engleză. Scrie un rezumat ORIGINAL în ROMÂNĂ — NU traduce cuvânt cu cuvânt.\n\n"
-        "REGULI DE LIMBĂ (obligatorii, altfel răspunsul e respins):\n"
+        "REGULI DE LIMBĂ (obligatorii):\n"
         "- Română corectă, naturală. ZERO cuvinte din alte limbi. Diacritice corecte.\n"
         "- Termeni CORECȚI: oil/crude = «țiței» (NICIODATĂ «ulei»); barrel=baril; yield=randament; "
         "shares/stocks/equities=acțiuni; bonds=obligațiuni (NU «bonduri»); bear market=piață în scădere; "
@@ -197,33 +211,39 @@ def make_record(it, now):
     )
     try:
         r = chat([{"role": "user", "content": p1}], max_tokens=900, temperature=0.5, accept=is_good_ro)
-        c = r.get("content", "").strip(); m = re.search(r"\{.*\}", c, re.S)
-        d = json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
+        d = _parse_json(r.get("content", "").strip())
         titlu, fapt, ce = d["titlu"].strip(), d["fapt"].strip(), d["ce_inseamna"].strip()
         cat = d.get("categorie", "").strip()
         if cat not in CAT_KEYS: cat = classify(it["title"] + " " + it["desc"])
-        if titlu and len(ce) > 20 and is_good_ro(titlu + " " + fapt + " " + ce):
-            return {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt, "ce_inseamna": ce}
-        print("  treapta1 RO slabă → încerc traducere simplă:", it["title"][:40])
+        if titlu and len(ce) > 20:
+            pen = _ro_penalty(titlu + " " + fapt + " " + ce)
+            cands.append((pen, {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt, "ce_inseamna": ce}))
+            if pen == 0:
+                return cands[0][1]   # română curată — gata
     except Exception as e:
         print("  treapta1 fail:", it["title"][:40], str(e)[:50])
-    # ── Treapta 2: traducere simplă (prompt minimal — reușește des când JSON-ul complex nu) ──
+    # ── Treapta 2: traducere simplă (reușește des când explainerul complex nu) ──
     p2 = ("Tradu în română naturală și corectă (oil=țiței NU ulei, bonds=obligațiuni, stocks/shares=acțiuni, "
           "yield=randament, Fed=Rezerva Federală). Răspunde DOAR JSON pe o linie: "
           '{"titlu":"titlul tradus","fapt":"o propoziție cu faptul principal"}\n\n'
           f"TITLU: {it['title']}\nREZUMAT: {it['desc'][:300]}")
     try:
         r = chat([{"role": "user", "content": p2}], max_tokens=400, temperature=0.3, accept=is_good_ro)
-        c = r.get("content", "").strip(); m = re.search(r"\{.*\}", c, re.S)
-        d = json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
+        d = _parse_json(r.get("content", "").strip())
         titlu, fapt = d.get("titlu", "").strip(), d.get("fapt", "").strip()
         cat = classify(it["title"] + " " + it["desc"])
-        if titlu and is_good_ro(titlu + " " + fapt):
-            return {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt or titlu,
-                    "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"]), "tier2": 1}
+        if titlu:
+            pen = _ro_penalty(titlu + " " + fapt)
+            cands.append((pen, {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt or titlu,
+                                "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"]), "tier2": 1}))
     except Exception as e:
         print("  treapta2 fail:", it["title"][:40], str(e)[:50])
-    return None
+    if cands:
+        cands.sort(key=lambda x: x[0])
+        pen, best = cands[0]
+        if pen < 5:          # are diacritice / e românesc → mai bun decât engleza brută
+            return best
+    return None              # nimic românesc → engleză brută badge-uită
 
 def make_fallback(it, now):
     """Ultimă instanță: păstrăm faptul în engleză (badge «rezumat în engleză») + notă RO pe categorie."""
