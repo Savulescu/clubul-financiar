@@ -5,10 +5,8 @@
    dramatic si adauga componente noi optionale.
    ============================================================ */
 
-/* @import TREBUIE sa fie prima regula din fisier (spec CSS).
-   Sursa unica de fonturi pentru TOATE paginile (chiar daca <link> din HTML difera):
-   Inter = UI/corp/cifre (tabular), Fraunces = titluri serif, Sora = legacy fallback. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap');
+/* Fonturile (Inter + Fraunces + Sora) sunt incarcate prin <link> in <head>-ul
+   fiecarei pagini (sursa unica). @import-ul render-blocking a fost eliminat. */
 
 /* ============================================================
    1. TOKENI NOI (extind, nu inlocuiesc cei din style.css)

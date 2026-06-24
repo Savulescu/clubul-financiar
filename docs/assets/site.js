@@ -151,7 +151,7 @@
         <p style="color:var(--muted);font-size:.92rem;margin-top:12px;max-width:300px">Învață banii de la zero — educație financiară pe înțelesul tuturor.</p>
         <p class="soc-h">Urmărește-ne</p><div class="soc">${SOC.map(([t,h])=>`<a href="${h}" title="${t}" aria-label="${t}" rel="noopener" target="_blank">${SOC_ICONS[t.toLowerCase()]||t[0]}</a>`).join("")}</div>
       </div>
-      ${cols.map(([h,links])=>`<div><h4>${h}</h4>${links.map(([t,u])=>`<a href="${u}">${t}</a>`).join("")}</div>`).join("")}
+      ${cols.map(([h,links])=>`<div><h2>${h}</h2>${links.map(([t,u])=>`<a href="${u}">${t}</a>`).join("")}</div>`).join("")}
     </div>
     <div class="foot-bottom">
       <span>© Clubul Financiar · clubulfinanciar.ro</span>
@@ -366,7 +366,7 @@
   } else { renderAcct(null); }
 
   // ---- reveal on scroll ----
-  const io = new IntersectionObserver((es)=>es.forEach(x=>{if(x.isIntersecting)x.target.classList.add("in")}),{threshold:.12});
+  const io = new IntersectionObserver((es)=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}}),{threshold:.12});
   window.addEventListener("DOMContentLoaded",()=>document.querySelectorAll(".reveal").forEach(e=>io.observe(e)));
 
   // ---- bifează articolele deja citite (orice card spre /articole/...) ----

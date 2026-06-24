@@ -41,8 +41,11 @@
 
   // ---------- bară progres citire ----------
   const bar = document.createElement("div"); bar.className = "read-progress"; document.body.appendChild(bar);
-  function onScroll() { const t = document.documentElement.scrollHeight - window.innerHeight; bar.style.width = Math.min(100, Math.max(0, t > 0 ? (window.scrollY / t) * 100 : 0)) + "%"; }
-  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  let ticking = false, sh = document.documentElement.scrollHeight;
+  function onScroll() { ticking = false; const t = sh - window.innerHeight; bar.style.width = Math.min(100, Math.max(0, t > 0 ? (window.scrollY / t) * 100 : 0)) + "%"; }
+  window.addEventListener("scroll", () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  window.addEventListener("resize", () => { sh = document.documentElement.scrollHeight; onScroll(); }, { passive: true });
+  onScroll();
 
   function slugify(s) { return s.toLowerCase().replace(/[ăâ]/g, "a").replace(/î/g, "i").replace(/ș|ş/g, "s").replace(/ț|ţ/g, "t").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 50); }
 

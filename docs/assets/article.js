@@ -42,12 +42,15 @@
   const bar = document.createElement("div");
   bar.className = "read-progress";
   document.body.appendChild(bar);
+  let ticking = false, sh = document.documentElement.scrollHeight;
   function onScroll() {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
+    ticking = false;
+    const total = sh - window.innerHeight;
     const p = total > 0 ? (window.scrollY / total) * 100 : 0;
     bar.style.width = Math.min(100, Math.max(0, p)) + "%";
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  window.addEventListener("resize", () => { sh = document.documentElement.scrollHeight; onScroll(); }, { passive: true });
   onScroll();
 
   // ---------- slugify pentru id-uri ----------
@@ -150,11 +153,11 @@
     document.head.appendChild(st);
 
     // ---- INTRO LECȚIE: hook captivant (TOATE lecțiile cu intro) + pas X/Y (doar cele din manual) ----
-    Promise.all([
-      fetch("/assets/lesson-intros.json").then(function (r) { return r.json(); }).catch(function () { return {}; }),
-      fetch("/assets/manual-order.json").then(function (r) { return r.json(); }).catch(function () { return {}; })
-    ]).then(function (arr) {
-      var hooks = arr[0] || {}, ord = arr[1] || {}, hook = hooks[slug], e = ord[slug];
+    // Datele sunt injectate in-place per-articol în window.__cfLesson (script de injecție),
+    // ca să nu mai descărcăm lesson-intros.json + manual-order.json (~312KB) pe fiecare pagină.
+    var __cf = window.__cfLesson || {};
+    var hook = __cf.hook, e = __cf.e;
+    (function () {
       if (!hook && !e) return;
       var DOMN = { buget:"Buget",economii:"Economisire",datorii:"Scăpat de datorii",venituri:"Venituri",psihologie:"Psihologia banilor",credite:"Credite",asigurari:"Asigurări",planificare:"Planificare financiară",investitii:"Investiții",pensii:"Pensii",fire:"Libertate financiară (FIRE)",imobiliare:"Imobiliare",crypto:"Crypto",taxe:"Taxe & fiscalitate",antreprenoriat:"Antreprenoriat",economie:"Economie",siguranta:"Siguranță financiară" };
       var html = "";
@@ -164,10 +167,10 @@
       if (hook) { html += '<p class="li-hook">✨ ' + esc(hook) + '</p>'; }
       var box = document.createElement("div"); box.className = "lesson-intro"; box.innerHTML = html;
       if (h1 && h1.nextSibling) art.insertBefore(box, h1.nextSibling); else art.insertBefore(box, art.firstChild);
-    });
+    })();
 
-    fetch("/assets/manual-order.json").then(r => r.json()).then(ord => {
-      var e = ord[slug]; if (!e) return;
+    (function () {
+      if (!e) return;
       // test după lecție
       var box = document.createElement("section"); box.className = "lesson-quiz";
       box.innerHTML = '<div id="lqStart"><p class="eyebrow">Testează-te</p><h2 style="font-size:1.3rem;margin:4px 0 10px">Ai înțeles lecția? Verifică în 10 întrebări.</h2><button class="btn btn-primary" id="lqBtn">Începe testul</button></div><div id="lqRun"></div>';
@@ -216,6 +219,6 @@
         }
         q();
       }
-    }).catch(() => {});
+    })();
   })();
 })();

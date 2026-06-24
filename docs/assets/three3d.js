@@ -97,9 +97,13 @@
   const nodeP = new THREE.Mesh(nodeGeo, nodeMat); nodeP.position.copy(prevTop); chart.add(nodeP);
 
   // segment DINAMIC (penultima -> ultima bară care se mișcă) + vârf luminos + SĂGEATĂ
+  // cilindru reutilizat (rază 0.055, înălțime 1) — orientat/scalat per-cadru, fără realocare de geometrie
   const dynMat = new THREE.MeshBasicMaterial({ color: 0x36D67E });
-  let dynSeg = new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(prevTop, topPts[LAST]), 1, 0.055, 12, false), dynMat);
+  const dynSeg = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 1, 12), dynMat);
   chart.add(dynSeg);
+  const DYN_UP = new THREE.Vector3(0, 1, 0); // axa nativă a CylinderGeometry
+  const _movingTop = new THREE.Vector3(); // scratch — evită alocări/frame
+  const _dynDir = new THREE.Vector3();
   const tip = new THREE.Mesh(new THREE.SphereGeometry(0.1, 20, 20), new THREE.MeshBasicMaterial({ color: 0xffffff }));
   chart.add(tip);
   const arrowMat = new THREE.MeshBasicMaterial({ color: 0x36D67E });
@@ -114,7 +118,8 @@
   let tx = 0, ty = 0, cx = 0, cy = 0;
   addEventListener("pointermove", e => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; }, { passive: true });
   function resize() { camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()); composer.setSize(W(), H()); }
-  addEventListener("resize", resize);
+  let resizeRaf = 0;
+  addEventListener("resize", () => { if (resizeRaf) return; resizeRaf = requestAnimationFrame(() => { resizeRaf = 0; resize(); }); });
 
   let running = false, raf = 0, t0 = performance.now();
   function ease(x) { return 1 - Math.pow(1 - x, 3); }
@@ -142,10 +147,14 @@
     const prevH = lastBar.userData.prevH != null ? lastBar.userData.prevH : curH;
     const rising = curH >= prevH;
     lastBar.userData.prevH = curH;
-    const movingTop = new THREE.Vector3(lastX, curH, 0);
+    const movingTop = _movingTop.set(lastX, curH, 0);
     const dirCol = rising ? cUp : cDown;
-    dynSeg.geometry.dispose();
-    dynSeg.geometry = new THREE.TubeGeometry(new THREE.LineCurve3(prevTop, movingTop), 1, 0.055, 12, false);
+    // cilindru reutilizat: scalează pe lungime, poziționează la mijloc, orientează prevTop->movingTop
+    _dynDir.subVectors(movingTop, prevTop);
+    const segLen = _dynDir.length();
+    dynSeg.scale.y = segLen;
+    dynSeg.position.copy(prevTop).addScaledVector(_dynDir, 0.5);
+    if (segLen > 1e-6) dynSeg.quaternion.setFromUnitVectors(DYN_UP, _dynDir.divideScalar(segLen));
     dynMat.color.copy(dirCol);
     tip.position.copy(movingTop);
     arrow.position.set(lastX, curH + 0.46, 0);

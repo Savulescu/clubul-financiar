@@ -30,7 +30,7 @@ manifest = json.load(open(os.path.join(DOCS,"assets/quiz/manifest.json"),encodin
 FREE_DOMAINS = {"buget","economii","datorii"}
 
 def esc(s): return html.escape(s or "", quote=True)
-FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">'
+FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">'
 CSS = '''<style>
 .chap-card{display:block;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s,border-color .18s;position:relative;margin-bottom:14px}
 .chap-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:color-mix(in srgb,var(--emerald) 45%,var(--border))}
@@ -56,7 +56,7 @@ def head(title, desc, canon, ld=""):
 <title>{esc(title)}</title><meta name="description" content="{esc(desc)}"><meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
 <link rel="canonical" href="{canon}"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(desc)}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
 <link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-article.css?v=1">{CSS}</head><body class="u-page">{NAV_HTML}'''
@@ -157,6 +157,15 @@ hub += f'''<section class="section"><div class="container" style="max-width:880p
     var b=el.querySelector(".cprog i");if(b)b.style.width=(sl.length?Math.round(d/sl.length*100):0)+"%";
   }});
 }})();
+function eduGoToHash(){{
+  var raw=decodeURIComponent((location.hash||"").replace(/^#/,""));
+  if(!raw) return;
+  var slug = raw==="economisire" ? "economii" : raw;
+  var el=document.querySelector('a[href="/manual/'+slug+'"]');
+  if(el) el.scrollIntoView({{block:"start"}});
+}}
+window.addEventListener("hashchange",eduGoToHash);
+if(location.hash) requestAnimationFrame(function(){{requestAnimationFrame(eduGoToHash);}});
 </script>
 {FOOT_SCRIPTS}</body></html>'''
 open(os.path.join(DOCS,"educatie.html"),"w",encoding="utf-8").write(hub)

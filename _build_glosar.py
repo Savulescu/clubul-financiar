@@ -82,10 +82,10 @@ page = f'''<!DOCTYPE html><html lang="ro"><head>
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Glosar financiar — termeni explicați simplu"><meta property="og:description" content="{desc}"><meta property="og:url" content="https://clubulfinanciar.ro/glosar"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Glosar financiar — termeni explicați simplu"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Glosar financiar — termeni explicați simplu"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"DefinedTermSet","name":"Glosar financiar Clubul Financiar","inLanguage":"ro-RO","url":"https://clubulfinanciar.ro/glosar"}}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=31">
 <link rel="stylesheet" href="/assets/upgrade.css?v=30">
 <link rel="stylesheet" href="/assets/cf-ultra.css?v=3"></head><body class="u-page">{NAV_HTML}
