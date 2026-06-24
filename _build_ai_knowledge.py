@@ -59,7 +59,7 @@ for c in consts:
 # 3b) FAPTE AVANSATE VERIFICATE (proceduri/contabilitate frecvente unde modelul ezita)
 facts=[
  "Taxare inversă TVA: la operațiuni precum deșeuri/fier vechi, anumite construcții, cereale, lemn, beneficiarul datorează ȘI deduce simultan TVA (4426=4427), fără plată efectivă de TVA. Se aplică între plătitori de TVA din România.",
- "TVA la încasare: regim OPȚIONAL pentru firme cu cifra de afaceri sub ~4,5 milioane lei; exigibilitatea TVA apare la momentul încasării facturii, nu la emitere.",
+ "TVA la încasare: regim OPȚIONAL pentru firme cu cifra de afaceri sub 5.000.000 lei (din 01.03.2026; baza din Codul fiscal era 4.500.000 lei, din 01.01.2027 urcă la 5.500.000 lei); exigibilitatea TVA apare la momentul încasării facturii, nu la emitere.",
  "Rambursare TVA: când TVA deductibilă > TVA colectată, ai TVA de recuperat; ceri rambursarea bifând opțiunea în decontul D300; ANAF poate aproba cu sau fără inspecție fiscală.",
  "Declarații TVA: D300 = decont de TVA (lunar sau trimestrial, după cifra de afaceri); D390 = declarație recapitulativă pentru operațiuni intracomunitare (VIES); D394 = declarație informativă privind livrările/achizițiile pe teritoriul național între plătitori RO.",
  "Eșalonare datorii ANAF: forma SIMPLIFICATĂ = maxim 12 luni, fără garanții; forma CLASICĂ = maxim 60 de luni (5 ani), cu garanții. Se cere prin cerere la ANAF, nu prin D100.",
@@ -80,6 +80,13 @@ facts=[
 for fct in facts:
     entries.append({"t":"Fapt fiscal verificat","x":fct,"k":kw(fct),"src":"fapt"})
 
+# 3c) APROFUNDAT: contabilitate, firme, PFA/II/IF, procuri, situații financiare
+# (RO 2026, OMFP 1802/2014 — fact-checkat manual; vezi _kb_contabilitate.py).
+# k trece prin kw() ca să fie LISTĂ (la fel ca restul KB-ului; edge function iterează e.k).
+from _kb_contabilitate import KB_DEEP
+for t,x,k,src in KB_DEEP:
+    entries.append({"t":t,"x":x,"k":kw(k+" "+t),"src":src})
+
 # 4) Articole avansate (din search-index) neacoperite de teste — acoperire pe toate articolele
 have=set(e["src"] for e in entries)
 for e in si.values():
@@ -95,6 +102,12 @@ for e in entries:
     x=re.sub(r'(broker\w*\s+str[ăa]in\w*[^.]{0,70}?)10(\s?%)', r'\g<1>16\g<2>', x, flags=re.I)
     x=re.sub(r'(str[ăa]in\w*,?\s+impozitul\s+(?:este\s+)?de\s+)10(\s?%)', r'\g<1>16\g<2>', x, flags=re.I)
     x=re.sub(r'10(\s?%[^.]{0,50}?broker\w*\s+str[ăa]in)', r'16\g<1>', x, flags=re.I)
+    # corecție: plafon micro 2026 = 100.000 € (cotele 500.000/1 milion sunt VECHI)
+    x=re.sub(r'(plafon\w*[^.]{0,40}?redus[^.]{0,40}?)de la 1 milion la 500\.000 euro începând cu 2024',
+             r'\g<1>treptat: de la 1 milion euro, la 500.000 euro, iar din 2026 la 100.000 euro/an', x, flags=re.I)
+    # corecție: plafon TVA 2026 = 395.000 lei (nu 300.000)
+    x=re.sub(r'(înregistrarea în scopuri de TVA[^.]{0,40}?la depășirea plafonului de )300\.000 lei',
+             r'\g<1>395.000 lei cifră de afaceri', x, flags=re.I)
     e["x"]=x
 
 json.dump(entries,open("docs/assets/ai-knowledge.json","w"),ensure_ascii=False)
