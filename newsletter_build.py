@@ -23,6 +23,30 @@ RESEND = os.environ.get("RESEND_API_KEY", "")
 FROM = os.environ.get("NEWSLETTER_FROM", "Clubul Financiar <noreply@clubulfinanciar.ro>")
 SB_URL = os.environ.get("SUPABASE_URL", "https://maumjqciuxdbwjtvcpsy.supabase.co")
 SB_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
+# Copie garantată: primește mereu newsletterul, indiferent de lista de abonați (canar de livrare).
+OWNER = os.environ.get("NEWSLETTER_OWNER", "clubulfinanciar@gmail.com").strip()
+# Guard idempotent: reține ce s-a trimis azi, ca sloturile cron redundante să nu trimită de 2 ori.
+STATE_FILE = "docs/newsletter/.sent_state.json"
+
+def _today_iso():
+    import datetime
+    return datetime.date.today().isoformat()
+
+def _already_sent_today(tier):
+    try:
+        return json.load(open(STATE_FILE, encoding="utf-8")).get(tier) == _today_iso()
+    except Exception:
+        return False
+
+def _mark_sent_today(tier):
+    st = {}
+    try:
+        st = json.load(open(STATE_FILE, encoding="utf-8"))
+    except Exception:
+        pass
+    st[tier] = _today_iso()
+    os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
+    json.dump(st, open(STATE_FILE, "w", encoding="utf-8"))
 
 # paleta (inline, email-safe)
 NAVY = "#0e2750"; NAVY2 = "#081627"; PANEL = "#0f2238"; GOLD = "#E8C268"; GOLD2 = "#caa44a"
@@ -349,23 +373,34 @@ def fetch_recipients(tier):
         print("  fetch abonați FAIL", str(e)[:100]); return []
 
 
-def send_tier(tier, limit=None):
-    """Trimite newsletterul unui tier tuturor abonaților lui, cu link de dezabonare real.
-    NU mai eșuează silențios: iese ROȘU dacă lipsesc chei sau dacă nimic nu a plecat."""
+def send_tier(tier, limit=None, guard=False):
+    """Trimite newsletterul unui tier abonaților + o copie garantată la OWNER.
+    NU eșuează silențios: iese ROȘU dacă lipsesc chei, dacă nimic nu a plecat,
+    sau dacă existau abonați dar niciunul nu a primit. guard=True sare dacă s-a
+    trimis deja azi (idempotent pentru sloturi cron redundante)."""
     subj, fn = TIERS[tier]
-    if not RESEND or not SB_KEY:
-        print(f"  ❌ Lipsesc chei pentru trimitere (RESEND_API_KEY={'da' if RESEND else 'NU'}, "
-              f"SUPABASE_SERVICE_KEY={'da' if SB_KEY else 'NU'}). Adaugă-le în GitHub Secrets.")
+    if not RESEND:
+        print(f"  ❌ Lipsește RESEND_API_KEY — nu pot trimite. Adaugă-l în GitHub Secrets.")
         sys.exit(1)
-    recips = fetch_recipients(tier)
-    if limit:
-        recips = recips[:int(limit)]
-    print(f"[--send {tier}] {len(recips)} abonați")
-    if not recips:
-        print("  ⚠️ 0 abonați confirmați — nu am cui trimite. Verifică abonații (tier, confirmat) în Supabase.")
+    if guard and _already_sent_today(tier):
+        print(f"  ⏭️  «{subj}» deja trimis azi ({tier}) — sar (idempotent, slot cron redundant).")
         return
     html_body = fn()
     sent = 0
+    # 1) Copie GARANTATĂ la owner — independent de Supabase/abonați (canar de livrare).
+    if OWNER:
+        owner_html = html_body.replace("%unsubscribe_url%", f"{SITE}/dezabonare")
+        if send_email(OWNER, subj + " — Clubul Financiar", owner_html):
+            sent += 1; print(f"  ✓ copie garantată → {OWNER}")
+        else:
+            print(f"  ⚠️ copia către owner ({OWNER}) a eșuat — vezi eroarea Resend de mai sus.")
+    # 2) Abonații tierului din Supabase.
+    recips = fetch_recipients(tier) if SB_KEY else []
+    if not SB_KEY:
+        print("  ⚠️ SUPABASE_SERVICE_KEY lipsește — sar peste abonați (owner tot a primit).")
+    if limit:
+        recips = recips[:int(limit)]
+    sub_sent = 0
     for r in recips:
         em = r.get("email"); tok = r.get("unsub_token", "")
         if not em:
@@ -373,13 +408,20 @@ def send_tier(tier, limit=None):
         unsub = f"{SITE}/dezabonare?t={tok}"
         personal = html_body.replace("%unsubscribe_url%", unsub)
         if send_email(em, subj + " — Clubul Financiar", personal):
-            sent += 1
+            sub_sent += 1
         import time as _t; _t.sleep(0.25)   # politicos cu Resend
-    print(f"  trimise: {sent}/{len(recips)}")
+    sent += sub_sent
+    print(f"[--send {tier}] abonați: {sub_sent}/{len(recips)} | owner: {'da' if OWNER else 'nu'} | total trimis: {sent}")
     if sent == 0:
-        print(f"  ❌ 0 trimise din {len(recips)} — trimiterea eșuează (vezi erorile Resend de mai sus: "
-              f"cheie invalidă, domeniu neverificat la Resend, sau Cloudflare).")
+        print(f"  ❌ 0 emailuri trimise — eșec (cheie Resend invalidă, domeniu neverificat sau Cloudflare).")
         sys.exit(1)
+    if recips and sub_sent == 0:
+        print(f"  ❌ existau {len(recips)} abonați dar 0 au primit — trimiterea către abonați e ruptă.")
+        sys.exit(1)
+    if not recips:
+        print("  ⚠️ 0 abonați confirmați în Supabase (normal pe site nou). Owner a primit copia.")
+    if guard:
+        _mark_sent_today(tier)
 
 
 TIERS = {
@@ -425,7 +467,7 @@ def main():
             print("Adaugă --confirm ca să trimit pe bune. Opțional --limit N pentru un test parțial.")
             return
         limit = args[args.index("--limit") + 1] if "--limit" in args else None
-        send_tier(tier, limit=limit)
+        send_tier(tier, limit=limit, guard=("--once" in args))
 
 
 if __name__ == "__main__":

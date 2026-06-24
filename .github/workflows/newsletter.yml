@@ -5,7 +5,11 @@ name: Newsletter (Dimineața pe scurt)
 # - manual fără test_email → doar regenerează preview-urile
 on:
   schedule:
-    - cron: '30 5 * * 1-5'   # ~07:30 RO (vara ~08:30), luni–vineri
+    # Sloturi REDUNDANTE: dacă GitHub sare un slot (cron-ul lor e nesigur pe repo-uri
+    # cu multe Actions), următorul prinde. Guard idempotent (--once) împiedică dublu-send.
+    - cron: '30 5 * * 1-5'   # ~08:30 RO vara / 07:30 iarna
+    - cron: '30 6 * * 1-5'   # backup +1h
+    - cron: '30 7 * * 1-5'   # backup +2h
   workflow_dispatch:
     inputs:
       test_email:
@@ -30,6 +34,7 @@ jobs:
         env:
           RESEND_API_KEY:       ${{ secrets.RESEND_API_KEY }}
           NEWSLETTER_FROM:      ${{ secrets.REMINDER_FROM }}
+          NEWSLETTER_OWNER:     ${{ secrets.NEWSLETTER_OWNER }}
           SUPABASE_URL:         ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           GROQ_API_KEY:         ${{ secrets.GROQ_API_KEY }}
@@ -40,21 +45,21 @@ jobs:
           FIREWORKS_API_KEY:    ${{ secrets.FIREWORKS_API_KEY }}
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            echo "Trimitere LIVE Free către abonați…"
-            python newsletter_build.py --send free --confirm
+            echo "Trimitere LIVE Free către abonați (idempotent, --once)…"
+            python newsletter_build.py --send free --confirm --once
           elif [ -n "${{ github.event.inputs.test_email }}" ]; then
             python newsletter_build.py --test "${{ github.event.inputs.test_email }}"
           else
             python newsletter_build.py
           fi
-      - name: Commit preview-uri dacă s-au schimbat
-        if: github.event_name != 'schedule'
+      - name: Commit preview-uri + state (mereu — state-ul e necesar guard-ului idempotent)
+        if: always()
         run: |
           git config user.name "Clubul Financiar"
           git config user.email "clubulfinanciar@gmail.com"
-          git add docs/newsletter/preview/*.html
-          if git diff --staged --quiet; then echo "preview neschimbat"; exit 0; fi
-          git commit -m "Newsletter: preview actualizat ($(date -u +%Y-%m-%d))"
+          git add docs/newsletter/preview/*.html docs/newsletter/.sent_state.json 2>/dev/null || true
+          if git diff --staged --quiet; then echo "nimic de comis"; exit 0; fi
+          git commit -m "Newsletter: preview + state trimitere ($(date -u +%Y-%m-%dT%H:%MZ))"
           for i in 1 2 3 4 5 6; do
             if git push origin HEAD:main; then echo "pushed"; exit 0; fi
             git fetch origin main; git rebase -X theirs origin/main || git rebase --abort; sleep $((i*3))
