@@ -5,11 +5,15 @@ name: Newsletter (Dimineața pe scurt)
 # - manual fără test_email → doar regenerează preview-urile
 on:
   schedule:
-    # Sloturi REDUNDANTE: dacă GitHub sare un slot (cron-ul lor e nesigur pe repo-uri
-    # cu multe Actions), următorul prinde. Guard idempotent (--once) împiedică dublu-send.
-    - cron: '30 5 * * 1-5'   # ~08:30 RO vara / 07:30 iarna
-    - cron: '30 6 * * 1-5'   # backup +1h
-    - cron: '30 7 * * 1-5'   # backup +2h
+    # Țintă: 07:30 ora României, în fiecare zi lucrătoare. GitHub rulează în UTC și NU
+    # știe de ora de vară, iar cron-urile lor se mai întârzie/sar. De aceea pornim mai
+    # multe sloturi UTC, iar scriptul (--gate-0730) trimite DOAR de la 07:30 RO, o singură
+    # dată/zi (--once). 04:30 UTC = 07:30 RO vara; 05:30 UTC = 07:30 RO iarna.
+    - cron: '30 4 * * *'   # 07:30 RO (vara) — în fiecare zi
+    - cron: '0 5 * * *'    # backup întârziere
+    - cron: '30 5 * * *'   # 07:30 RO (iarna) — în fiecare zi
+    - cron: '0 6 * * *'    # backup
+    - cron: '30 6 * * *'   # backup final
   workflow_dispatch:
     inputs:
       test_email:
@@ -50,8 +54,8 @@ jobs:
           FIREWORKS_API_KEY:    ${{ secrets.FIREWORKS_API_KEY }}
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            echo "Trimitere LIVE toate tier-urile (free/premium/pro/ultra←pro), idempotent…"
-            python newsletter_build.py --send-all --confirm --once
+            echo "Trimitere LIVE toate tier-urile (free/premium/pro/ultra←pro), 07:30 RO, idempotent…"
+            python newsletter_build.py --send-all --confirm --once --gate-0730
           elif [ "${{ github.event.inputs.live }}" = "true" ]; then
             echo "Trimitere LIVE manuală (toate tier-urile, fără guard ca să poți retesta)…"
             python newsletter_build.py --send-all --confirm

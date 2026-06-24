@@ -33,6 +33,17 @@ def _today_iso():
     import datetime
     return datetime.date.today().isoformat()
 
+def _ro_before(h, m):
+    """True dacă ora curentă în Europe/Bucharest e ÎNAINTE de h:m (corect și vara, și iarna).
+    Folosit ca poartă: sloturile cron UTC pornesc devreme, dar trimitem doar de la 7:30 RO."""
+    try:
+        from zoneinfo import ZoneInfo
+        import datetime
+        now = datetime.datetime.now(ZoneInfo("Europe/Bucharest"))
+        return (now.hour, now.minute) < (h, m)
+    except Exception:
+        return False  # dacă fusul orar nu e disponibil, nu bloca trimiterea
+
 def _already_sent_today(tier):
     try:
         return json.load(open(STATE_FILE, encoding="utf-8")).get(tier) == _today_iso()
@@ -503,6 +514,9 @@ def main():
 
     # 3) --send-all  → TOATE tier-urile abonaților lor (cron-ul de dimineață).
     if "--send-all" in args:
+        # Poartă de oră: sloturile cron UTC pornesc devreme; trimitem doar de la 07:30 RO.
+        if "--gate-0730" in args and _ro_before(7, 30):
+            print("  ⏳ Sub 07:30 ora României — prea devreme, aștept slotul de după 7:30."); return
         if "--confirm" not in args:
             print("[DRY-RUN] --send-all ar trimite free/premium/pro + ultra←pro fiecărui abonat.")
             print("Adaugă --confirm ca să trimit pe bune.")
