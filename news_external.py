@@ -39,15 +39,36 @@ def _keys(base):
         v = os.getenv(f"{base}_{i}")
         if v: ks.append(v)
     return ks
-# Filtru de calitate RO: respinge output cu contaminare engleză/italiană/garbage tipic
+# Filtru de calitate RO: respinge output cu contaminare engleză/altă limbă/garbage tipic.
+# Co-proiectat pe garbage-ul REAL găsit în store (ulei, bonduri, possibiliți, publicăză,
+# să-l pășiți, econometrice, trimestrene) + asigură că exemplele BUNE trec (vezi _selftest).
 _BAD_RE = re.compile(
+    # 1) cuvinte engleze lăsate netraduse
     r"\b(the|and|with|from|after|before|market|markets|oil|crude|stocks?|shares?|equity|equities|"
-    r"tariffs?|vessels?|tankers?|trade|growth|prices?|rising|falling|barrel|yield|bonds?|economy)\b"
-    r"|acciun|lanc[eă]az|lancă|vasoare|internazional|prevezi|pre[țt]ele|subire|irachen|"
+    r"tariffs?|vessels?|tankers?|trade|growth|prices?|rising|falling|barrel|yield|bonds?|economy|"
+    r"bear market|bull market|stock|earnings|revenue|federal reserve)\b"
+    # 2) mistranslări tipice / termeni greșiți (oil→ulei, bonds→bonduri)
+    r"|\bulei(ul|uri)?\b|\bbondu(ri|l|rile)?\b|\bstocu(ri|l)?\b"
+    # 3) garbage / conjugări inexistente / alte limbi
+    r"|possibil|publicăz|publicaz[ăa]|econometr|trimestren|p[ăa]șiț|pasiț|vasoare|"
+    r"acciun|lanc[eă]az|lancă|internazional|prevezi|pre[țt]ele|subire|irachen|"
     r"più|della|degli|nicht|werden|haben|aujourd", re.I)
 
 def is_good_ro(text):
     return not _BAD_RE.search(text or "")
+
+def _selftest_filter():
+    """Co-design: garbage-ul real TREBUIE respins, exemplele bune TREBUIE acceptate."""
+    bad = ["se apropie de un bear market", "Bondurile arse de schimbarea politicii Fed... uleiul",
+           "possibiliți schimbări ale ratelor", "Un stock de energie puțin cunoscut",
+           "publicăză rapoartele trimestrene", "ar putea să-l pășiți", "economii de econometrice"]
+    good = ["Rezerva Federală a redus dobânda de referință cu 0,25 puncte procentuale.",
+            "Prețul țițeiului a crescut după decizia OPEC, ceea ce împinge inflația în sus.",
+            "Bursele europene au scăzut, afectând randamentul fondurilor de pensii.",
+            "Obligațiunile de stat oferă un randament mai sigur pentru economiile tale."]
+    bf = [t for t in bad if is_good_ro(t)]      # garbage care a trecut greșit
+    gf = [t for t in good if not is_good_ro(t)]  # bun respins greșit
+    return bf, gf
 
 def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, max_attempts=18):
     last = "n/a"; fallback = None; tries = 0; attempts = 0
@@ -119,9 +140,14 @@ def fetch(url):
             link = (it.findtext("link") or "").strip()
             desc = re.sub("<[^>]+>", "", it.findtext("description") or "").strip()
             pub = it.findtext("pubDate") or ""; ts = 0
-            for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S %Z"):
-                try: ts = datetime.datetime.strptime(pub, fmt).timestamp(); break
-                except: pass
+            if pub:
+                try:
+                    from email.utils import parsedate_to_datetime
+                    ts = parsedate_to_datetime(pub).timestamp()   # RFC822 robust (incl. GMT/zone)
+                except Exception:
+                    for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%a, %d %b %Y %H:%M:%S %Z"):
+                        try: ts = datetime.datetime.strptime(pub, fmt).timestamp(); break
+                        except: pass
             if t and link: out.append({"title": t, "link": link, "desc": desc[:600], "ts": ts})
         return out
     except Exception as e:
@@ -135,6 +161,77 @@ def classify(txt):
         if n > bn: best, bn = k, n
     return best
 
+# Notă RO generică pe categorie — fallback de ULTIMĂ instanță (doar dacă nici traducerea simplă nu reușește).
+FB_NOTE = {
+    "banci-centrale": "Deciziile băncilor centrale (Fed, BCE, BNR) influențează dobânzile la credite, depozite și cursul leului.",
+    "piete": "Mișcările piețelor se reflectă în randamentele investițiilor, fondurilor de pensii și ETF-urilor.",
+    "companii": "Rezultatele marilor companii pot mișca bursa și valoarea acțiunilor sau fondurilor deținute.",
+    "crypto": "Volatilitatea crypto e mare — relevantă doar pentru partea de portofoliu pe care ți-o permiți să o riști.",
+    "marfuri": "Prețurile materiilor prime (țiței, gaz, aur) se simt în facturi, la pompă și în inflație.",
+    "macro": "Indicatorii macro (inflație, șomaj, PIB) arată încotro merg prețurile, dobânzile și puterea ta de cumpărare.",
+}
+
+def _base(it, now):
+    return {"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
+            "ts": it["ts"], "gen_ts": now, "score": it["score"]}
+
+def make_record(it, now):
+    """Generează un record cu română CORECTĂ, în 2 trepte. Întoarce dict sau None.
+    NU mai există latch global 'llm_dead' — fiecare știre încearcă independent (un eșec
+    tranzitoriu la o știre nu mai aruncă restul rulării pe engleză brută)."""
+    # ── Treapta 1: explainer complet (titlu + fapt + ce înseamnă) ──
+    p1 = (
+        "Ești redactor senior la Clubul Financiar (educație financiară, România). "
+        "Primești o știre economică internațională în engleză. Scrie un rezumat ORIGINAL în ROMÂNĂ — NU traduce cuvânt cu cuvânt.\n\n"
+        "REGULI DE LIMBĂ (obligatorii, altfel răspunsul e respins):\n"
+        "- Română corectă, naturală. ZERO cuvinte din alte limbi. Diacritice corecte.\n"
+        "- Termeni CORECȚI: oil/crude = «țiței» (NICIODATĂ «ulei»); barrel=baril; yield=randament; "
+        "shares/stocks/equities=acțiuni; bonds=obligațiuni (NU «bonduri»); bear market=piață în scădere; "
+        "rally/surge=creștere puternică; Fed=Rezerva Federală; ECB=BCE; tariffs=tarife/taxe vamale; vessels/tankers=nave/petroliere.\n"
+        "- Verifică numele proprii (Iran ≠ Irak etc.).\n\n"
+        "Răspunde DOAR cu JSON valid pe o linie:\n"
+        '{"titlu":"titlu clar în română, reformulat","fapt":"1-2 propoziții neutre cu faptul principal",'
+        '"ce_inseamna":"2-4 propoziții: ce înseamnă pentru banii unui român (rată, economii, prețuri, leu, job, investiții). Concret.",'
+        '"categorie":"una din: banci-centrale, piete, companii, crypto, marfuri, macro"}\n\n'
+        f"ȘTIRE — TITLU: {it['title']}\nREZUMAT: {it['desc']}\nSURSĂ: {it['src']}"
+    )
+    try:
+        r = chat([{"role": "user", "content": p1}], max_tokens=900, temperature=0.5, accept=is_good_ro)
+        c = r.get("content", "").strip(); m = re.search(r"\{.*\}", c, re.S)
+        d = json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
+        titlu, fapt, ce = d["titlu"].strip(), d["fapt"].strip(), d["ce_inseamna"].strip()
+        cat = d.get("categorie", "").strip()
+        if cat not in CAT_KEYS: cat = classify(it["title"] + " " + it["desc"])
+        if titlu and len(ce) > 20 and is_good_ro(titlu + " " + fapt + " " + ce):
+            return {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt, "ce_inseamna": ce}
+        print("  treapta1 RO slabă → încerc traducere simplă:", it["title"][:40])
+    except Exception as e:
+        print("  treapta1 fail:", it["title"][:40], str(e)[:50])
+    # ── Treapta 2: traducere simplă (prompt minimal — reușește des când JSON-ul complex nu) ──
+    p2 = ("Tradu în română naturală și corectă (oil=țiței NU ulei, bonds=obligațiuni, stocks/shares=acțiuni, "
+          "yield=randament, Fed=Rezerva Federală). Răspunde DOAR JSON pe o linie: "
+          '{"titlu":"titlul tradus","fapt":"o propoziție cu faptul principal"}\n\n'
+          f"TITLU: {it['title']}\nREZUMAT: {it['desc'][:300]}")
+    try:
+        r = chat([{"role": "user", "content": p2}], max_tokens=400, temperature=0.3, accept=is_good_ro)
+        c = r.get("content", "").strip(); m = re.search(r"\{.*\}", c, re.S)
+        d = json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
+        titlu, fapt = d.get("titlu", "").strip(), d.get("fapt", "").strip()
+        cat = classify(it["title"] + " " + it["desc"])
+        if titlu and is_good_ro(titlu + " " + fapt):
+            return {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt or titlu,
+                    "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"]), "tier2": 1}
+    except Exception as e:
+        print("  treapta2 fail:", it["title"][:40], str(e)[:50])
+    return None
+
+def make_fallback(it, now):
+    """Ultimă instanță: păstrăm faptul în engleză (badge «rezumat în engleză») + notă RO pe categorie."""
+    cat = classify(it["title"] + " " + it["desc"])
+    fapt = re.sub(r"\s+", " ", it.get("desc", "")).strip()[:240] or it["title"].strip()
+    return {**_base(it, now), "cat": cat, "fb": 1,
+            "titlu": it["title"].strip(), "fapt": fapt, "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])}
+
 def main():
     store = []
     if os.path.exists(STORE_F):
@@ -142,81 +239,37 @@ def main():
         except: store = []
     now = time.time()
     store = [s for s in store if s.get("gen_ts", 0) > now - KEEP_H*3600]
-    have = {s["url"] for s in store}
-
-    items, seent = [], set()
-    for src, url, w in FEEDS:
-        got = fetch(url); print(f"  {src}: {len(got)}")
-        for it in got:
-            txt = (it["title"] + " " + it["desc"]).lower()
-            kw = sum(1 for k in KW if k in txt)
-            if kw == 0: continue
-            age_h = max(0.5, (now - it["ts"]) / 3600) if it["ts"] else 48
-            it["score"] = round(w * (1 + 0.25*kw) * (1 / (1 + age_h/24)), 3)
-            it["src"] = src; items.append(it)
-    items.sort(key=lambda x: -x["score"])
-
     new = []
-    for it in items:
-        u = it["link"].split("?")[0]; k = norm(it["title"])
-        if u in have or k in seent: continue
-        seent.add(k); new.append(it)
-        if len(new) >= MAX_NEW: break
-    print(f"noi de generat: {len(new)} | în store: {len(store)}")
-
-    # Notă RO generică pe categorie — folosită ca fallback când LLM-ul nu e disponibil,
-    # ca să nu se mai oprească fluxul de știri externe (calitate mai simplă, dar viu).
-    FB_NOTE = {
-        "banci-centrale": "Deciziile băncilor centrale (Fed, BCE, BNR) influențează dobânzile la credite, depozite și cursul leului.",
-        "piete": "Mișcările piețelor se reflectă în randamentele investițiilor, fondurilor de pensii și ETF-urilor.",
-        "companii": "Rezultatele marilor companii pot mișca bursa și valoarea acțiunilor sau fondurilor deținute.",
-        "crypto": "Volatilitatea crypto e mare — relevantă doar pentru partea de portofoliu pe care ți-o permiți să o riști.",
-        "marfuri": "Prețurile materiilor prime (țiței, gaz, aur) se simt în facturi, la pompă și în inflație.",
-        "macro": "Indicatorii macro (inflație, șomaj, PIB) arată încotro merg prețurile, dobânzile și puterea ta de cumpărare.",
-    }
-    fb_count = 0
-    llm_dead = False  # după ce TOȚI providerii eșuează o dată, nu mai pierdem timp — restul merg direct pe fallback
-
-    def add_fallback(it):
-        cat = classify(it["title"] + " " + it["desc"])
-        fapt = re.sub(r"\s+", " ", it.get("desc", "")).strip()[:240] or it["title"].strip()
-        store.append({"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
-                      "ts": it["ts"], "gen_ts": now, "score": it["score"], "cat": cat, "fb": 1,
-                      "titlu": it["title"].strip(), "fapt": fapt, "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])})
-
-    for it in new:
-        if llm_dead:
-            add_fallback(it); fb_count += 1; continue
-        prompt = (
-            "Ești redactor senior la Clubul Financiar (educație financiară, România). "
-            "Primești o știre economică internațională în engleză. Scrie un rezumat ORIGINAL în ROMÂNĂ — NU traduce cuvânt cu cuvânt, NU copia.\n\n"
-            "REGULI DE LIMBĂ (obligatorii, altfel răspunsul e respins):\n"
-            "- Română corectă, naturală, fluentă. ZERO cuvinte din alte limbi (engleză, italiană, germană, franceză). Diacritice corecte.\n"
-            "- Termeni financiari CORECȚI: oil / crude oil = «țiței» (sau «petrol»), NICIODATĂ «ulei»; barrel = baril; yield = randament; "
-            "shares / stocks / equities = acțiuni; bonds = obligațiuni; bear market = piață în scădere; rally / surge = creștere puternică; "
-            "Fed = Rezerva Federală; ECB = BCE; tariffs = tarife / taxe vamale; vessels / tankers = nave / petroliere.\n"
-            "- Verifică numele proprii (țări, companii, persoane): ex. Iran ≠ Irak, Hong Kong, OMV Petrom.\n"
-            "- Dacă nu ești sigur de un termen, folosește un cuvânt simplu românesc. Recitește mental: să sune ca scris de un român, nu tradus automat.\n\n"
-            "Răspunde DOAR cu JSON valid pe o linie:\n"
-            '{"titlu":"titlu clar în română corectă, reformulat","fapt":"1-2 propoziții neutre cu faptul principal",'
-            '"ce_inseamna":"2-4 propoziții: ce înseamnă pentru banii unui român (rată, economii, prețuri, leu, job, investiții). Concret, fără jargon.",'
-            '"categorie":"una din: banci-centrale, piete, companii, crypto, marfuri, macro"}\n\n'
-            f"ȘTIRE — TITLU: {it['title']}\nREZUMAT: {it['desc']}\nSURSĂ: {it['src']}"
-        )
-        try:
-            r = chat([{"role": "user", "content": prompt}], max_tokens=900, temperature=0.5, accept=is_good_ro)
-            c = r.get("content", "").strip(); m = re.search(r"\{.*\}", c, re.S)
-            d = json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
-            cat = d.get("categorie", "").strip()
-            if cat not in CAT_KEYS: cat = classify(it["title"] + " " + it["desc"])
-            store.append({"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
-                          "ts": it["ts"], "gen_ts": now, "score": it["score"], "cat": cat,
-                          "titlu": d["titlu"].strip(), "fapt": d["fapt"].strip(), "ce_inseamna": d["ce_inseamna"].strip()})
-        except Exception as e:
-            print("  LLM fail → fallback fără LLM:", it["title"][:40], e)
-            if "providerii au eșuat" in str(e):
-                llm_dead = True   # toate cheile moarte → restul merg direct pe fallback (fără retry storm)
-            add_fallback(it); fb_count += 1; continue
+    if "--rebuild-only" in sys.argv:
+        # Reconstruiește pagina + feed din store, FĂRĂ fetch/LLM (pentru cleanup/regenerare).
+        print("--rebuild-only: reconstruiesc din store, fără fetch/LLM")
+    else:
+        have = {s["url"] for s in store}
+        items, seent = [], set()
+        for src, url, w in FEEDS:
+            got = fetch(url); print(f"  {src}: {len(got)}")
+            for it in got:
+                txt = (it["title"] + " " + it["desc"]).lower()
+                kw = sum(1 for k in KW if k in txt)
+                if kw == 0: continue
+                age_h = max(0.5, (now - it["ts"]) / 3600) if it["ts"] else 48
+                it["score"] = round(w * (1 + 0.25*kw) * (1 / (1 + age_h/24)), 3)
+                it["src"] = src; items.append(it)
+        items.sort(key=lambda x: -x["score"])
+        for it in items:
+            u = it["link"].split("?")[0]; k = norm(it["title"])
+            if u in have or k in seent: continue
+            seent.add(k); new.append(it)
+            if len(new) >= MAX_NEW: break
+        print(f"noi de generat: {len(new)} | în store: {len(store)}")
+        fb_count = 0
+        for it in new:
+            rec = make_record(it, now)         # 2 trepte: explainer complet → traducere simplă
+            if rec is None:
+                rec = make_fallback(it, now); fb_count += 1   # ultimă instanță: engleză badge-uită
+            store.append(rec)
+        if new:
+            print(f"generate: {len(new) - fb_count} traduse RO / {fb_count} fallback engleză")
 
     store.sort(key=lambda s: -s.get("score", 0))
     disp = store[:DISPLAY]
@@ -304,6 +357,10 @@ def main():
   var cards=[].slice.call(document.querySelectorAll('.news-card'));
   var st={{cat:'all',range:'all',sort:'recent'}};
   var now=Date.now()/1000;
+  // Timestamp LIVE: recalculează „acum X" din data-ts la fiecare încărcare (textul server-side
+  // se învechea între rulări — zicea „acum 5 min" și la 4h). Server-side rămâne fallback fără JS.
+  function rel(ts){{ var d=now-ts; if(d<60)return 'chiar acum'; if(d<3600)return 'acum '+Math.floor(d/60)+' min'; if(d<86400)return 'acum '+Math.floor(d/3600)+'h'; return 'acum '+Math.floor(d/86400)+'z'; }}
+  cards.forEach(function(c){{ var w=c.querySelector('.ne-when'); var ts=parseFloat(c.dataset.ts)||0; if(w&&ts){{ w.textContent=rel(ts); }} }});
   function inRange(ts){{ if(st.range==='all')return true; var d=now-ts; return st.range==='24h'?d<=86400:d<=604800; }}
   function apply(){{
     var vis=cards.filter(function(c){{
