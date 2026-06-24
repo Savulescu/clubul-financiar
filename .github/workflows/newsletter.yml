@@ -45,8 +45,8 @@ jobs:
           FIREWORKS_API_KEY:    ${{ secrets.FIREWORKS_API_KEY }}
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            echo "Trimitere LIVE Free către abonați (idempotent, --once)…"
-            python newsletter_build.py --send free --confirm --once
+            echo "Trimitere LIVE toate tier-urile (free/premium/pro/ultra←pro), idempotent…"
+            python newsletter_build.py --send-all --confirm --once
           elif [ -n "${{ github.event.inputs.test_email }}" ]; then
             python newsletter_build.py --test "${{ github.event.inputs.test_email }}"
           else

@@ -373,34 +373,39 @@ def fetch_recipients(tier):
         print("  fetch abonați FAIL", str(e)[:100]); return []
 
 
-def send_tier(tier, limit=None, guard=False):
-    """Trimite newsletterul unui tier abonaților + o copie garantată la OWNER.
-    NU eșuează silențios: iese ROȘU dacă lipsesc chei, dacă nimic nu a plecat,
-    sau dacă existau abonați dar niciunul nu a primit. guard=True sare dacă s-a
-    trimis deja azi (idempotent pentru sloturi cron redundante)."""
-    subj, fn = TIERS[tier]
+_BODY_CACHE = {}
+def _build_body(ctier):
+    """Construiește (și memoizează pe rulare) conținutul unui tier."""
+    if ctier not in _BODY_CACHE:
+        subj, fn = TIERS[ctier]
+        _BODY_CACHE[ctier] = (subj, fn())
+    return _BODY_CACHE[ctier]
+
+
+def send_tier(tier, limit=None, guard=False, include_owner=True, content_tier=None, hard_fail=False):
+    """Trimite newsletterul abonaților `tier`-ului (RPC Supabase, un email/abonat).
+    content_tier: ce CONȚINUT se trimite (default = tier; ex. ultra←pro ca stopgap).
+    include_owner: adaugă o copie garantată la OWNER (pentru trimiterea pe un singur tier).
+    guard=True: sare dacă tier-ul a fost deja trimis azi (idempotent).
+    Întoarce (set_emailuri_livrate, nr_abonați). Iese ROȘU doar la config lipsă (RESEND);
+    problemele de livrare le decide apelantul, ca să nu abandoneze celelalte tier-uri."""
     if not RESEND:
-        print(f"  ❌ Lipsește RESEND_API_KEY — nu pot trimite. Adaugă-l în GitHub Secrets.")
-        sys.exit(1)
+        print("  ❌ Lipsește RESEND_API_KEY — nu pot trimite. Adaugă-l în GitHub Secrets."); sys.exit(1)
     if guard and _already_sent_today(tier):
-        print(f"  ⏭️  «{subj}» deja trimis azi ({tier}) — sar (idempotent, slot cron redundant).")
-        return
-    html_body = fn()
-    # Lista de abonați din Supabase.
+        print(f"  ⏭️  tier «{tier}» deja trimis azi — sar (idempotent, slot redundant)."); return set(), 0
+    subj, html_body = _build_body(content_tier or tier)
     recips = fetch_recipients(tier) if SB_KEY else []
     if not SB_KEY:
-        print("  ⚠️ SUPABASE_SERVICE_KEY lipsește — sar peste abonați (owner tot primește copia).")
+        print("  ⚠️ SUPABASE_SERVICE_KEY lipsește — sar peste abonați.")
     if limit:
         recips = recips[:int(limit)]
     sub_total = len(recips)
-    # Garantăm că OWNER primește — DAR fără dublare: dacă e deja abonat, primește
-    # un singur email (cel personalizat, cu link-ul lui de dezabonare).
     owner_l = OWNER.lower() if OWNER else None
     emails_lower = {(r.get("email") or "").strip().lower() for r in recips}
     targets = list(recips)
-    if owner_l and owner_l not in emails_lower:
-        targets.append({"email": OWNER, "unsub_token": ""})   # copie sintetică, doar dacă nu e abonat
-    delivered = 0; owner_ok = (owner_l is None)
+    if include_owner and owner_l and owner_l not in emails_lower:
+        targets.append({"email": OWNER, "unsub_token": ""})   # copie owner doar dacă nu e deja abonat
+    delivered = set()
     for r in targets:
         em = (r.get("email") or "").strip(); tok = r.get("unsub_token", "")
         if not em:
@@ -408,21 +413,60 @@ def send_tier(tier, limit=None, guard=False):
         unsub = f"{SITE}/dezabonare?t={tok}" if tok else f"{SITE}/dezabonare"
         personal = html_body.replace("%unsubscribe_url%", unsub)
         if send_email(em, subj + " — Clubul Financiar", personal):
-            delivered += 1
-            if owner_l and em.lower() == owner_l:
-                owner_ok = True
+            delivered.add(em.lower())
         import time as _t; _t.sleep(0.25)   # politicos cu Resend
-    print(f"[--send {tier}] livrate: {delivered}/{len(targets)} (abonați: {sub_total}, owner: {OWNER or 'nesetat'})")
-    if delivered == 0:
-        print(f"  ❌ 0 emailuri trimise — eșec (cheie Resend invalidă, domeniu neverificat sau Cloudflare).")
-        sys.exit(1)
-    if OWNER and not owner_ok:
-        print(f"  ❌ {OWNER} NU a primit copia — Resend a respins adresa (vezi eroarea de mai sus).")
-        sys.exit(1)
-    if sub_total == 0:
-        print("  ⚠️ 0 abonați confirmați în Supabase. Owner a primit copia, dar verifică lista de abonați.")
-    if guard:
+    label = tier if not content_tier else f"{tier}←{content_tier}"
+    print(f"[{label}] livrate: {len(delivered)}/{len(targets)} (abonați: {sub_total})")
+    broken = (len(targets) > 0 and not delivered)
+    if broken:
+        print(f"  ❌ tier «{tier}»: 0 livrate din {len(targets)} — Resend respinge (cheie/domeniu/Cloudflare).")
+    if include_owner and owner_l and owner_l not in delivered:
+        print(f"  ❌ {OWNER} NU a primit copia — vezi eroarea Resend de mai sus.")
+    if include_owner and sub_total == 0:
+        print("  ⚠️ 0 abonați în Supabase pe acest tier. Owner a primit copia, dar verifică lista.")
+    if hard_fail:
+        if len(targets) > 0 and not delivered:
+            sys.exit(1)
+        if include_owner and owner_l and owner_l not in delivered:
+            sys.exit(1)
+    if guard and not broken:
         _mark_sent_today(tier)
+    return delivered, sub_total
+
+
+# Stopgap: abonații Ultra primesc conținutul Pro până la raportul personalizat (ultra_profile/CF.U).
+SEND_ALL_PLAN = [("free", None), ("premium", None), ("pro", None), ("ultra", "pro")]
+
+def send_all(limit=None, guard=False):
+    """Trimite TOATE tier-urile, fiecare abonaților lui (Ultra←Pro stopgap).
+    OWNER primește exact O copie garantată (digestul Free). Iese ROȘU dacă un tier
+    cu abonați nu a livrat nimic sau dacă owner-ul nu a primit."""
+    delivered = set(); broken = []
+    for tier, ctier in SEND_ALL_PLAN:
+        d, sub_total = send_tier(tier, limit=limit, guard=guard, include_owner=False, content_tier=ctier)
+        delivered |= d
+        if sub_total > 0 and not d:
+            broken.append(tier)
+    # Copie garantată la owner (digest Free), exact o dată, dacă nu e deja acoperit de un tier.
+    owner_l = OWNER.lower() if OWNER else None
+    if owner_l:
+        if owner_l in delivered:
+            if guard: _mark_sent_today("__owner__")          # deja acoperit prin tier-ul lui azi
+        elif guard and _already_sent_today("__owner__"):
+            print("  ⏭️  copie owner deja trimisă azi.")
+        else:
+            subj, html_body = _build_body("free")
+            html = html_body.replace("%unsubscribe_url%", f"{SITE}/dezabonare")
+            if send_email(OWNER, subj + " — Clubul Financiar", html):
+                print(f"  ✓ copie garantată owner → {OWNER}"); delivered.add(owner_l)
+                if guard: _mark_sent_today("__owner__")
+            else:
+                print(f"  ❌ copia owner ({OWNER}) a eșuat."); sys.exit(1)
+    print(f"== send-all: {len(delivered)} destinatari unici | tier-uri rupte: {broken or 'niciunul'} ==")
+    # NU eșuăm pe „0 trimise total" (poate fi o rulare complet sărită de guard sau liste goale +
+    # owner deja acoperit). Eșuăm doar pe tier-uri RUPTE (abonați dar 0 livrate) — problemă reală.
+    if broken:
+        print(f"  ❌ Tier-uri cu abonați dar 0 livrate: {broken}."); sys.exit(1)
 
 
 TIERS = {
@@ -456,8 +500,17 @@ def main():
         if not ok:
             sys.exit(1)   # rularea devine ROȘIE dacă emailul nu a plecat (ca să nu pară fals „verde")
 
-    # 3) --send TIER  → LIVE abonaților (necesită Supabase + Resend verificat).
-    #    Cere și --confirm ca să nu trimită din greșeală. Opțional --limit N.
+    # 3) --send-all  → TOATE tier-urile abonaților lor (cron-ul de dimineață).
+    if "--send-all" in args:
+        if "--confirm" not in args:
+            print("[DRY-RUN] --send-all ar trimite free/premium/pro + ultra←pro fiecărui abonat.")
+            print("Adaugă --confirm ca să trimit pe bune.")
+            return
+        limit = args[args.index("--limit") + 1] if "--limit" in args else None
+        send_all(limit=limit, guard=("--once" in args))
+        return
+
+    # 4) --send TIER  → un singur tier (manual). Cere --confirm. Opțional --limit N.
     if "--send" in args:
         tier = args[args.index("--send") + 1]
         if tier not in TIERS:
@@ -468,7 +521,7 @@ def main():
             print("Adaugă --confirm ca să trimit pe bune. Opțional --limit N pentru un test parțial.")
             return
         limit = args[args.index("--limit") + 1] if "--limit" in args else None
-        send_tier(tier, limit=limit, guard=("--once" in args))
+        send_tier(tier, limit=limit, guard=("--once" in args), hard_fail=True)
 
 
 if __name__ == "__main__":
