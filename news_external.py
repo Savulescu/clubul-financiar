@@ -70,10 +70,14 @@ def _selftest_filter():
     gf = [t for t in good if not is_good_ro(t)]  # bun respins greșit
     return bf, gf
 
+_DIAG = {"ok": {}, "err": {}, "ro_reject": {}, "samples": [], "no_keys": []}   # telemetrie cloud → docs/data/news_debug.json
+
 def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, max_attempts=18):
     last = "n/a"; fallback = None; tries = 0; attempts = 0
     for name, api_base, model, envb in PROVIDERS:
-        for key in _keys(envb):
+        ks = _keys(envb)
+        if not ks and name not in _DIAG["no_keys"]: _DIAG["no_keys"].append(name)
+        for key in ks:
             if attempts >= max_attempts: break   # nu baleia 40+ chei moarte cu 30s timeout fiecare
             attempts += 1
             try:
@@ -84,17 +88,20 @@ def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, ma
                 j = json.loads(resp.read())
                 content = j["choices"][0]["message"]["content"]
                 tries += 1
+                if len(_DIAG["samples"]) < 6: _DIAG["samples"].append({"p": name, "raw": (content or "")[:200]})
                 if accept and not accept(content):
                     if fallback is None: fallback = content        # prima variantă validă = rezervă
                     last = f"{name} (RO respins)"
+                    _DIAG["ro_reject"][name] = _DIAG["ro_reject"].get(name, 0) + 1
                     if tries >= max_tries:                         # nu te învârti la nesfârșit
                         return {"content": fallback, "provider": name + " (fallback)"}
                     continue
+                _DIAG["ok"][name] = _DIAG["ok"].get(name, 0) + 1
                 return {"content": content, "provider": name}
             except urllib.error.HTTPError as e:
-                last = f"{name} HTTP {e.code}"
+                last = f"{name} HTTP {e.code}"; _DIAG["err"][f"{name}:{e.code}"] = _DIAG["err"].get(f"{name}:{e.code}", 0) + 1
             except Exception as e:
-                last = f"{name} {e}"
+                last = f"{name} {e}"; k = f"{name}:{type(e).__name__}"; _DIAG["err"][k] = _DIAG["err"].get(k, 0) + 1
     if fallback is not None:
         return {"content": fallback, "provider": "fallback"}
     raise RuntimeError("toți providerii au eșuat: " + last)
@@ -416,7 +423,15 @@ def main():
     os.makedirs(os.path.join(DOCS, "data"), exist_ok=True)
     json.dump({"updated": time.strftime("%Y-%m-%d %H:%M", time.gmtime()), "items": news_top},
               open(os.path.join(DOCS, "data", "news.json"), "w"), ensure_ascii=False)
+    # Telemetrie diagnostic (de ce eșuează LLM-urile în cloud) — comisă de workflow, citită de pe main.
+    fresh = [s for s in store if s.get("gen_ts", 0) > now - 360]
+    _DIAG["summary"] = {"new": len(new), "fresh": len(fresh),
+                        "fb": sum(1 for s in fresh if s.get("fb")),
+                        "tier2": sum(1 for s in fresh if s.get("tier2")),
+                        "explainer": sum(1 for s in fresh if not s.get("fb") and not s.get("tier2"))}
+    json.dump(_DIAG, open(os.path.join(DOCS, "data", "news_debug.json"), "w"), ensure_ascii=False, indent=1)
     print(f"✅ stiri-externe.html: {len(disp)} afișate ({len(new)} noi generate azi)")
+    print(f"DIAG: ok={_DIAG['ok']} | err={_DIAG['err']} | ro_reject={_DIAG['ro_reject']} | no_keys={_DIAG['no_keys']}")
 
 if __name__ == "__main__":
     main()
