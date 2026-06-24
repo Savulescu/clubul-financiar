@@ -1,56 +1,56 @@
 {
  "ok": {
   "sambanova": 6,
-  "nvidia": 3
+  "nvidia": 1
  },
  "err": {
-  "gemini:429": 12,
-  "mistral:401": 12,
-  "cerebras:403": 12,
-  "deepseek:402": 24,
-  "siliconflow:401": 12,
-  "groq:403": 12,
-  "together:403": 12,
-  "sambanova:402": 12,
-  "sambanova:429": 30,
-  "nvidia:TimeoutError": 20,
-  "fireworks:404": 2
+  "gemini:429": 10,
+  "mistral:401": 10,
+  "cerebras:403": 10,
+  "deepseek:402": 20,
+  "siliconflow:401": 10,
+  "groq:403": 10,
+  "together:403": 10,
+  "sambanova:402": 10,
+  "sambanova:429": 20,
+  "nvidia:TimeoutError": 22,
+  "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 6
  },
  "samples": [
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Rețeaua feroviară din Germania, paralizată din cauza lucrărilor de mentenanță IT\",\"fapt\":\"Rețeaua feroviară din Germania a fost adusă la standstill după ce lucrările de mentenanță IT au eșua"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Schimbarea de strategie a Germaniei în ceea ce privește navele de război afectează comerțul de apărare\", \"fapt\":\"Germania a anunțat o schimbare neașteptată în strategia sa de apărare, ceea c"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"NVIDIA, una dintre cele mai bune acțiuni ale marilor companii tehnologice de cumpărat\", \"fapt\":\"Analisti de pe Wall Street consideră că NVIDIA (NVDA) este una dintre cele mai bune acțiuni al"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary original, not literal translation. Must follow language rules: correct"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use specific term replacements: oil/crude = \"țe"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian, correct, no foreign words. Use requi"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output a JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words. Use correct terms. Title must be clear Romanian reformul"
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Inflația este despre mai mult decât țiței. Aceste două declanșatoare ascunse ar putea forța o creștere a ratelor Rezervei Federale\",\"fapt\":\"Raportul inflației PCE va calma fie Wall Street, f"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Prețurile aurului astăzi, miercuri, 24 iunie: Prețurile scad sub 4.100 dolari acest dimineață\",\"fapt\":\"Prețul aurului a scăzut sub 4.100 dolari în această dimineață, potrivit informațiilor d"
+   "raw": "{\"titlu\":\"Piața țițeiului arată semne de ofertă excedentară pe termen scurt\", \"fapt\":\"Petrolierele care ies din Strâmtoarea Hormuz indică o posibilă ofertă excedentară de țiței pe termen scurt\", \"ce_i"
+  },
+  {
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Deschiderea strâmtorii Hormuz inundă rapid piețele cu țiței\",\"fapt\":\"Deschiderea strâmtorii Hormuz a dus la o creștere semnificativă a ofertei de țiței pe piață, potrivit Bloomberg. Acest lu"
+  },
+  {
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Prețul aurului scade sub 4.000 de dolari din cauza temerilor legate de majorarea ratelor dobânzilor de către Rezerva Federală\",\"fapt\":\"Prețul aurului a scăzut sub 4.000 de dolari pe fondul t"
   }
  ],
  "no_keys": [],
  "summary": {
   "new": 24,
   "fresh": 24,
-  "fb": 15,
-  "tier2": 2,
+  "fb": 16,
+  "tier2": 1,
   "explainer": 7
  }
 }
