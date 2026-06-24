@@ -879,6 +879,11 @@
       <span><a href="/privacy">Confidențialitate</a> · <a href="/terms">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
     </div>
   </div></footer>
+<style>
+.glos-card{scroll-margin-top:94px}
+@keyframes glosHit{0%{background:color-mix(in srgb,var(--emerald,#1c9e6b) 22%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--emerald,#1c9e6b) 55%,transparent)}100%{background:transparent;box-shadow:0 0 0 0 transparent}}
+.glos-hit{animation:glosHit 2.4s ease-out;border-radius:14px}
+</style>
 <script>
 const cards=[...document.querySelectorAll(".glos-card")];
 const letters=[...document.querySelectorAll(".glos-letter")];
@@ -906,5 +911,31 @@ alpha.addEventListener("click",e=>{
   if(curL!=="all"){const el=document.getElementById("lit-"+curL); } apply();
 });
 q.addEventListener("input",()=>{ if(q.value.trim()){curL="all";[...alpha.children].forEach(x=>x.classList.remove("active"));alpha.firstElementChild.classList.add("active");} apply(); });
+
+/* Deep-link: /glosar#slug sare direct la termen (cu fallback fuzzy când ancora nu se potrivește exact) */
+function glosResolve(slug){
+  if(!slug) return null;
+  slug=norm(slug.replace(/[#]/g,"").trim());
+  let el=document.getElementById(slug);
+  if(el&&el.classList.contains("glos-card")) return el;
+  el=cards.find(c=>norm(c.id).startsWith(slug)); if(el) return el;      // prefix: fond-de-urgenta -> fond-de-urgenta-emergency-fund
+  el=cards.find(c=>norm(c.id).includes(slug)); if(el) return el;        // conține
+  const txt=slug.replace(/-/g," ");
+  el=cards.find(c=>c.dataset.search.startsWith(txt))
+     ||cards.find(c=>c.dataset.search.includes(txt));                   // după textul termenului
+  return el||null;
+}
+function glosGoToHash(){
+  const raw=decodeURIComponent((location.hash||"").replace(/^#/,""));
+  const el=glosResolve(raw);
+  if(!el) return;
+  curL="all"; [...alpha.children].forEach(x=>x.classList.remove("active")); alpha.firstElementChild.classList.add("active");
+  if(q.value) q.value="";
+  apply();                                  // asigură că termenul e vizibil (resetează filtrul/căutarea)
+  el.scrollIntoView({block:"start"});
+  el.classList.remove("glos-hit"); void el.offsetWidth; el.classList.add("glos-hit");
+}
+window.addEventListener("hashchange",glosGoToHash);
+if(location.hash) requestAnimationFrame(()=>requestAnimationFrame(glosGoToHash));
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/site.js?v=30"></script></body></html>
