@@ -1,52 +1,56 @@
 {
  "ok": {
-  "nvidia": 2
+  "nvidia": 17
  },
  "err": {
-  "gemini:429": 6,
-  "mistral:401": 6,
-  "cerebras:403": 6,
-  "deepseek:402": 12,
-  "siliconflow:401": 6,
-  "groq:403": 6,
-  "together:403": 6,
-  "sambanova:402": 6,
-  "sambanova:429": 30,
-  "nvidia:TimeoutError": 25,
-  "fireworks:404": 3,
-  "openrouter:429": 3
+  "gemini:429": 19,
+  "mistral:401": 19,
+  "cerebras:403": 19,
+  "deepseek:402": 38,
+  "siliconflow:401": 19,
+  "groq:403": 19,
+  "together:403": 19,
+  "sambanova:402": 19,
+  "sambanova:429": 95,
+  "nvidia:TimeoutError": 15,
+  "fireworks:404": 1,
+  "openrouter:429": 1
  },
  "ro_reject": {
-  "openrouter": 3
+  "openrouter": 1
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON only, one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct language, no other languages. Must use correc"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON only, one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian summary original, not literal translation. Must follow language rules"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian language, correct diacritics, no fo"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Bitcoinul scade sub 60.000 de dolari pe cand actiunile criptografice intra in prabusire libera\",\"fapt\":\"Bitcoinul a scazut sub 60.000 de dolari in timp ce actiunile criptografice au intrat i"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian, correct diacritics, no foreign "
+   "raw": "{\"titlu\":\"Irakul împinge OPEC să îi permită să pompeze mai mult țiței\",\"fapt\":\"Irakul încearcă să convingă Organizația Țărilor Exportatoare de Țiței (OPEC) să îi permită să crească producția de țiței."
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Fluxurile de obligațiuni ETF explodează în căutarea randamentului: 'Piața simte ceva aici,' spune un executiv BlackRock\",\"fapt\":\"Investitorii în obligațiuni renunță la benchmark-urile agrega"
+   "raw": "{\"titlu\":\" Arabia Saudită pregătește relansarea exporturilor de țiței din Ras Tanura pe fondul creșterii fluxurilor din Golful Persic\", \"fapt\":\" Arabia Saudită intenționează să reactiveze exporturile "
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Indicatorul de inflație preferat al Rezervei Federale a SUA atinge un maxim de trei ani\",\"fapt\":\"Indicatorul de inflație preferat al Rezervei Federale a SUA a înregistrat o creștere și a ati"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Este momentul potrivit pentru a cumpăra acțiuni din domeniul tehnologiei?\", \"fapt\":\"Istoria oferă un răspuns surprinzător și clar despre oportunitatea de a investi în acțiuni tehnologice în "
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Bursa de valori din SUA arată semne de creștere\",\"fapt\":\"Futures-urile pentru indicii Dow, S&P 500 și Nasdaq au înregistrat o creștere puternică, după ce compania Micron a calmat temerile le"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 12,
-  "fresh": 12,
-  "fb": 10,
+  "new": 4,
+  "fresh": 4,
+  "fb": 0,
   "tier2": 1,
-  "explainer": 1
+  "explainer": 3
  }
 }
