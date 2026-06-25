@@ -53,16 +53,15 @@ jobs:
           SAMBANOVA_API_KEY:    ${{ secrets.SAMBANOVA_API_KEY }}
           FIREWORKS_API_KEY:    ${{ secrets.FIREWORKS_API_KEY }}
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ]; then
-            echo "Trimitere LIVE toate tier-urile (free/premium/pro/ultra←pro), 07:30 RO, idempotent…"
-            python newsletter_build.py --send-all --confirm --once --gate-0730
+          if [ -n "${{ github.event.inputs.test_email }}" ]; then
+            python newsletter_build.py --test "${{ github.event.inputs.test_email }}"
           elif [ "${{ github.event.inputs.live }}" = "true" ]; then
             echo "Trimitere LIVE manuală (toate tier-urile, fără guard ca să poți retesta)…"
             python newsletter_build.py --send-all --confirm
-          elif [ -n "${{ github.event.inputs.test_email }}" ]; then
-            python newsletter_build.py --test "${{ github.event.inputs.test_email }}"
           else
-            python newsletter_build.py
+            # schedule SAU workflow_dispatch (din cron-job.org extern) → trimitere LIVE gated 07:30 RO, idempotent
+            echo "Trimitere LIVE toate tier-urile (free/premium/pro/ultra←pro), 07:30 RO, idempotent…"
+            python newsletter_build.py --send-all --confirm --once --gate-0730
           fi
       - name: Commit preview-uri + state (mereu — state-ul e necesar guard-ului idempotent)
         if: always()
