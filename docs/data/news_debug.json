@@ -1,57 +1,48 @@
 {
  "ok": {
-  "sambanova": 9,
-  "nvidia": 3
+  "openrouter": 1
  },
  "err": {
-  "gemini:429": 16,
-  "mistral:401": 16,
-  "cerebras:403": 16,
-  "deepseek:402": 32,
-  "siliconflow:401": 16,
-  "groq:403": 16,
-  "together:403": 16,
-  "sambanova:402": 16,
-  "sambanova:429": 35,
-  "nvidia:TimeoutError": 19,
-  "fireworks:404": 3,
-  "openrouter:429": 3
+  "gemini:429": 5,
+  "mistral:401": 5,
+  "cerebras:403": 5,
+  "deepseek:402": 10,
+  "siliconflow:401": 5,
+  "groq:403": 5,
+  "together:403": 5,
+  "sambanova:402": 5,
+  "sambanova:429": 25,
+  "nvidia:TimeoutError": 25,
+  "fireworks:404": 4,
+  "openrouter:429": 4
  },
  "ro_reject": {
   "openrouter": 3
  },
  "samples": [
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Bursa mondială înregistrează o creștere puternică\", \"fapt\":\"Indicii bursieri Dow, S&P 500 și Nasdaq au înregistrat o creștere semnificativă, după ce compania Micron a calmat temerile legate "
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no words from other languages. Must use correct terms: oil/crude = \""
   },
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Piața bursieră astăzi: Dow, S&P 500, Nasdaq cresc pe fondul reducerii temerilor legate de inteligența artificială de către Micron, în timp ce PCE vine cu un randament ridicat\",\"fapt\":\"Piața "
+   "p": "openrouter",
+   "raw": "{\"titlu\":\"France confisnește petroliera „flota umbră”, creșterea presiunii asupra Rusiei - Reuters\",\"fapt\":\"France a capturat o petroliera din „flota umbră”, intensificând presiunea asupra Rusiei\"}"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Ce își doresc investitorii de pe piața obligațiunilor de la Andy Burnham\",\"fapt\":\"Investitorii de pe piața obligațiunilor așteaptă semnale clare din partea lui Andy Burnham, liderul Consiliu"
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must follow constraints: Romanian correct, no foreign "
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Vânzarea de obligațiuni a SpaceX arată că piețele financiare sunt supralicate\", \"fapt\":\"Vânzarea de obligațiuni a companiei SpaceX a stârnit avertizări că piețele financiare se află într-un "
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Vânzarea de obligațiuni a SpaceX arată că piețele sunt în „teritoriu de bulă”, avertizează directorul Allianz\",\"fapt\":\"Directorul Allianz avertizează că vânzarea de obligațiuni a SpaceX este"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Indicele preferat de Rezerva Federală pentru măsurarea inflației atinge un maxim de 3 ani\",\"fapt\":\"Indicele PCE a înregistrat o creștere semnificativă, ajungând la cel mai înalt nivel din ul"
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}\n\nWe must translate naturally and correctly, using given terms: oil=tiței NU ulei, bonds=obl"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 24,
-  "fresh": 24,
-  "fb": 12,
-  "tier2": 3,
-  "explainer": 9
+  "new": 19,
+  "fresh": 19,
+  "fb": 17,
+  "tier2": 2,
+  "explainer": 0
  }
 }
