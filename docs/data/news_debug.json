@@ -1,53 +1,52 @@
 {
- "ok": {},
+ "ok": {
+  "nvidia": 3
+ },
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:402": 4,
-  "sambanova:429": 20,
-  "nvidia:TimeoutError": 24,
-  "fireworks:404": 4
+  "gemini:429": 6,
+  "mistral:401": 6,
+  "cerebras:403": 6,
+  "deepseek:402": 12,
+  "siliconflow:401": 6,
+  "groq:403": 6,
+  "together:403": 6,
+  "sambanova:402": 6,
+  "sambanova:429": 30,
+  "nvidia:TimeoutError": 23,
+  "fireworks:404": 2,
+  "openrouter:429": 2
  },
  "ro_reject": {
-  "openrouter": 8
+  "openrouter": 2
  },
  "samples": [
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary, original, not word-for-word translation. Must follow language rules: correct R"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Prețul cuprului crește din cauza scăderii dolarului și a creșterii puternice a tehnologiei inteligente\", \"fapt\":\"Prețul cuprului a crescut recent, contrar așteptărilor, datorită scăderii val"
   },
   {
    "p": "openrouter",
    "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct language, no foreign words. Must use correc"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate title naturally and correctly, using given mappings: oil=tiței NU ulei, bond"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Piața bursieră astăzi: Dow, S&P 500, futures Nasdaq cresc pe măsură ce Micron înlătură temerile legate de IA, PCE atinge un maxim de 3 ani\", \"fapt\":\"Piața bursieră a înregistrat creșteri la "
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate naturally and correctly, using specified terms: oil = \"tiței NU ulei\"? Actua"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian original summary, not literal translation. Must foll"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary original, not word-for-word translation. Must follow language rules: correct R"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must be neutral 1-2 sentences"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"SUA refuză autorizarea Polestar de a vinde vehicule în ultimul atac împotriva vehiculelor electrice fabricate în China - Reuters\",\"fapt\":\"SUA a refuzat autorizarea companiei Polestar de a vi"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 12,
-  "fresh": 12,
-  "fb": 10,
-  "tier2": 1,
+  "new": 11,
+  "fresh": 11,
+  "fb": 8,
+  "tier2": 2,
   "explainer": 1
  }
 }
