@@ -343,33 +343,35 @@ def send_email(to, subject, html_body):
     req = urllib.request.Request("https://api.resend.com/emails", data=body,
         headers={"Authorization": "Bearer " + RESEND, "Content-Type": "application/json",
                  "User-Agent": "ClubulFinanciar/1.0 (+clubulfinanciar.ro)"})  # UA obligatoriu (Cloudflare blochează altfel)
+    import time as _t
     def _go(ctx=None):
         urllib.request.urlopen(req, timeout=30, context=ctx); return True
-    try:
-        return _go()
-    except urllib.error.HTTPError as e:
+    # Retry pe erori TRANZITORII (timeout, 429, 5xx) — 4 încercări cu backoff,
+    # ca o singură sughițătură Resend/rețea să NU pice tot newsletterul.
+    RETRYABLE = {429, 500, 502, 503, 504}
+    ctx = None
+    for attempt in range(4):
         try:
-            detail = e.read().decode()[:300]
-        except Exception:
-            detail = ""
-        print(f"  send FAIL Resend HTTP {e.code}: {detail}"); return False
-    except urllib.error.URLError as e:
-        if "CERTIFICATE_VERIFY_FAILED" in str(e):
-            import ssl
-            ctx = ssl.create_default_context(); ctx.check_hostname = False; ctx.verify_mode = ssl.CERT_NONE
-            try:
-                return _go(ctx)
-            except urllib.error.HTTPError as e2:
-                try:
-                    detail = e2.read().decode()[:300]
-                except Exception:
-                    detail = ""
-                print(f"  send FAIL Resend HTTP {e2.code}: {detail}"); return False
-            except Exception as e2:
-                print("  send FAIL", str(e2)[:120]); return False
-        print("  send FAIL", str(e)[:120]); return False
-    except Exception as e:
-        print("  send FAIL", str(e)[:120]); return False
+            return _go(ctx)
+        except urllib.error.HTTPError as e:
+            try: detail = e.read().decode()[:300]
+            except Exception: detail = ""
+            if e.code in RETRYABLE and attempt < 3:
+                print(f"  send retry {attempt+1}/3 (HTTP {e.code})…"); _t.sleep(3 * (attempt + 1)); continue
+            print(f"  send FAIL Resend HTTP {e.code}: {detail}"); return False
+        except urllib.error.URLError as e:
+            if "CERTIFICATE_VERIFY_FAILED" in str(e) and ctx is None:
+                import ssl
+                ctx = ssl.create_default_context(); ctx.check_hostname = False; ctx.verify_mode = ssl.CERT_NONE
+                continue  # reîncearcă imediat cu contextul relaxat
+            if attempt < 3:
+                print(f"  send retry {attempt+1}/3 ({str(e)[:60]})…"); _t.sleep(3 * (attempt + 1)); continue
+            print("  send FAIL", str(e)[:120]); return False
+        except Exception as e:
+            if attempt < 3:
+                print(f"  send retry {attempt+1}/3 ({str(e)[:60]})…"); _t.sleep(3 * (attempt + 1)); continue
+            print("  send FAIL", str(e)[:120]); return False
+    return False
 
 
 def fetch_recipients(tier):
