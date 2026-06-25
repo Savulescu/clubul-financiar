@@ -1,56 +1,55 @@
 {
  "ok": {
-  "sambanova": 30,
-  "openrouter": 1
+  "sambanova": 4
  },
  "err": {
-  "gemini:429": 32,
-  "mistral:401": 32,
-  "cerebras:403": 32,
-  "deepseek:402": 64,
-  "siliconflow:401": 32,
-  "groq:403": 32,
-  "together:403": 32,
-  "sambanova:402": 32,
-  "sambanova:429": 84,
-  "nvidia:TimeoutError": 12,
-  "fireworks:404": 2
+  "gemini:429": 8,
+  "mistral:401": 8,
+  "cerebras:403": 8,
+  "deepseek:402": 16,
+  "siliconflow:401": 8,
+  "groq:403": 8,
+  "together:403": 8,
+  "sambanova:402": 8,
+  "sambanova:429": 32,
+  "nvidia:TimeoutError": 23,
+  "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 3
+  "openrouter": 6
  },
  "samples": [
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Aurul se confruntă cu presiuni la un minim de șapte luni\", \"fapt\":\"Prețul aurului este sub presiune, aproape de un minim de șapte luni, din cauza creșterii parierilor pe majorarea ratelor do"
+   "raw": "{\"titlu\":\"Moneda din Hong Kong atinge minim istoric din cauza volatilității scăzute și ratelor joase\",\"fapt\":\"Dolarul din Hong Kong a ajuns la un nivel istoric de minim din cauza scăderii volatilități"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian, correct, no foreign words. Use requir"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no foreign words, diacritics correct, terms correct. Must not trans"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, correct diacritics, no foreign words. Must use specified term replacemen"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Provide original Romanian summary, not word-for-word translation. Must follow language rul"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"China își propune să reducă numărul obligațiunilor cu rating AAA pe piața internă\",\"fapt\":\"Autoritățile chineze cer agențiilor de rating să reevalueze numărul mare de obligațiuni cu rating A"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Incertitudine pentru acțiunile companiilor de apărare din Europa\",\"fapt\":\"Acțiunile companiilor de apărare din Europa se confruntă cu incertitudine, potrivit Financial Times. Acest lucru se "
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"China lansează o emisiune record de obligațiuni suverane în valoare de 5 miliarde de euro\",\"fapt\":\"China a început comercializarea unei emisiuni record de obligațiuni suverane în valoare de "
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Băncile centrale ar trebui să crească ratele dobânzilor la intervale regulate\", \"fapt\":\"Un membru al Băncii Centrale a Japoniei a sugerat creșterea ratei dobânzii la intervale de câteva luni"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"BOJ: Tamura solicită majorarea ratei dobânzii la fiecare câteva luni - Bloomberg\",\"fapt\":\"Bancherul central al Băncii Japoniei, Tamura, solicită majorarea ratei dobânzii la fiecare câteva lu"
+   "raw": "{\"titlu\":\"Acțiunile Owens Corning și Quanex cresc, ce trebuie să știți\",\"fapt\":\"Acțiunile companiilor Owens Corning și Quanex au înregistrat o creștere, informație esențială pentru investitori\"}"
   }
  ],
  "no_keys": [],
  "summary": {
   "new": 24,
   "fresh": 24,
-  "fb": 0,
-  "tier2": 4,
-  "explainer": 20
+  "fb": 19,
+  "tier2": 2,
+  "explainer": 3
  }
 }
