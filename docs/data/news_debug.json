@@ -1,56 +1,56 @@
 {
  "ok": {
+  "nvidia": 4,
   "openrouter": 1
  },
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:402": 4,
-  "sambanova:429": 19,
-  "nvidia:TimeoutError": 24,
-  "fireworks:404": 4,
-  "sambanova:URLError": 1
+  "gemini:429": 7,
+  "mistral:401": 7,
+  "cerebras:403": 7,
+  "deepseek:402": 14,
+  "siliconflow:401": 7,
+  "groq:403": 7,
+  "together:403": 7,
+  "sambanova:402": 7,
+  "sambanova:429": 35,
+  "nvidia:TimeoutError": 21,
+  "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 5
+  "openrouter": 3
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, one line. Must be Romanian summary original, not literal translation. Must follow la"
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian summary, original, not literal translation. Must foll"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be original Romanian summary, not word-for-word translation. Must follow language rul"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct diacritics, no foreign words. Must use corr"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian correct, diacritics correct, use"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Piața obligațiunilor americane se așteaptă la majorări ale ratelor de dobândă\", \"fapt\":\"Piața obligațiunilor americane se așteaptă la majorări ale ratelor de dobândă, dar Rezerva Federală ar"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not literal translation. Must follow language rules: correct Romanian"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Bursa de la Wall Street ar putea înregistra o creștere puternică\", \"fapt\":\"Indexul Russell 1000 urmează să includă compania SpaceX și alte acțiuni ale unor companii mici, ceea ce ar putea du"
   },
   {
-   "p": "openrouter",
-   "raw": "{\"titlu\":\"Șase grafice care explică slăb"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Argintul ar putea ceda teren în fața aurului pe piață\",\"fapt\":\"Prețul argintului a scăzut recent, ceea ce ar putea duce la o creștere a valorii aurului în raport cu argintul. Această tendinț"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian summary original, not literal translation. Must foll"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Raportul inflației ar putea întări temerile privind ratele mai mari ale dobânzilor\", \"fapt\":\"Un raport recent arată că inflația continuă să fie o preocupare majoră, chiar dacă prețurile la ț"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 17,
-  "fresh": 17,
-  "fb": 15,
+  "new": 16,
+  "fresh": 16,
+  "fb": 11,
   "tier2": 0,
-  "explainer": 2
+  "explainer": 5
  }
 }
