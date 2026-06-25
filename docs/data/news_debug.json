@@ -1,52 +1,56 @@
 {
  "ok": {
-  "nvidia": 1
+  "nvidia": 3
  },
  "err": {
-  "gemini:429": 5,
-  "mistral:401": 5,
-  "cerebras:403": 5,
-  "deepseek:402": 10,
-  "siliconflow:401": 5,
-  "groq:403": 5,
-  "together:403": 5,
-  "sambanova:402": 5,
-  "sambanova:429": 25,
-  "nvidia:TimeoutError": 24,
-  "fireworks:404": 4,
-  "openrouter:429": 4
+  "gemini:429": 7,
+  "mistral:401": 7,
+  "cerebras:403": 7,
+  "deepseek:402": 14,
+  "siliconflow:401": 7,
+  "groq:403": 7,
+  "together:403": 7,
+  "sambanova:402": 7,
+  "sambanova:429": 35,
+  "nvidia:TimeoutError": 22,
+  "fireworks:404": 3,
+  "openrouter:429": 3
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 3
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct terms, no foreign words. Use only Romanian. Title must be clear Romanian refor"
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must not translate word-for-word. Must "
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Prețul țițeiului scade la nivelurile de dinainte de războiul din Iran, pe măsură ce mai multe tancuri ies din strâmtoarea Hormuz\",\"fapt\":\"Prețul țițeiului a scăzut la nivelurile de dinainte "
+   "raw": "{\"titlu\":\"Indicatorul cheie al Rezervei Federale pentru inflație ajunge la un maxim de trei ani în mai, după ce prețurile la gaze au atins un vârf\",\"fapt\":\"Prețurile de consum au crescut cu 4,1% în ma"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be original summary in Romanian, not word-for-word translation. Must use correc"
+   "raw": "We need to output JSON on a single line, valid JSON. Must contain fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Title in Romanian, reformulated, clear. Fact: 1-2 neutral sentences with main fact. "
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Piața bursieră astăzi: Dow și S&P 500 cresc, Nasdaq scade pe fondul unor date PCE mai mari decât așteptat, Big Tech înregistrează pierderi\",\"fapt\":\"Dow și S&P 500 au înregistrat creșteri, în"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must follow language rules: oil/crude = \"ț"
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must not translate word for word. Must be origin"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian summary original, not translation wor"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Investitorii amatori schimbă modul în care funcționează piața bursieră, creând oportunități pentru cei care știu unde să caute\",\"fapt\":\"Ascensiunea investitorilor individuali face piața mai "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 15,
-  "fresh": 15,
-  "fb": 12,
-  "tier2": 1,
-  "explainer": 2
+  "new": 9,
+  "fresh": 9,
+  "fb": 6,
+  "tier2": 3,
+  "explainer": 0
  }
 }
