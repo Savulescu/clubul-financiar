@@ -1,56 +1,58 @@
 {
  "ok": {
-  "sambanova": 22,
-  "nvidia": 4
+  "sambanova": 9,
+  "nvidia": 3
  },
  "err": {
-  "gemini:429": 27,
-  "mistral:401": 27,
-  "cerebras:403": 27,
-  "deepseek:402": 54,
-  "siliconflow:401": 27,
-  "groq:403": 27,
-  "together:403": 27,
-  "sambanova:402": 27,
-  "sambanova:429": 88,
-  "nvidia:TimeoutError": 11,
-  "fireworks:404": 1
+  "gemini:429": 14,
+  "mistral:401": 14,
+  "cerebras:403": 14,
+  "deepseek:402": 28,
+  "siliconflow:401": 14,
+  "groq:403": 14,
+  "together:403": 14,
+  "sambanova:402": 14,
+  "sambanova:429": 59,
+  "nvidia:TimeoutError": 17,
+  "fireworks:404": 2
  },
  "ro_reject": {
-  "openrouter": 2
+  "openrouter": 3,
+  "sambanova": 1,
+  "nvidia": 1
  },
  "samples": [
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Noul plan energetic al Chinei oferă spațiu pentru creșterea producției de cărbune\",\"fapt\":\"China a anunțat un nou plan energetic pe cinci ani care permite o creștere a producției de cărbune,"
+   "raw": "{\"titlu\":\"Investitorii americani renunță la acțiuni pentru prima dată de la începutul primăverii\",\"fapt\":\"Piața americană de acțiuni a înregistrat prima retragere de capital din partea investitorilor "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output a JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: correct"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line. Must follow constraints: Romanian correct, no foreign words, use specific te"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Producția de țiței din Kazahstan scade după atacul cu drone asupra unei instalații rusești\",\"fapt\":\"Un câmp petrolier important din Kazahstan a redus producția de țiței după ce drone au lovi"
+   "raw": "{\"titlu\":\"Acțiunile scad pe fondul majorării prețurilor Apple, care alimentează nervozitatea în sectorul tehnologiei, în timp ce prețul țițeiului scade\",\"fapt\":\"Acțiunile au scăzut din cauza majorării"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Comerțul global cu cocaină și metanfetamină este în plină expansiune, arată un raport al ONU\",\"fapt\":\"Un raport al Organizației Națiunilor Unite (ONU) a constatat o creștere semnificativă a "
+   "raw": "{\"titlu\":\"Yuanul chinez, prea scump după o creștere puternică\",\"fapt\":\"Un strategist de la T. Rowe Price, Chung, preconizează o corecție a monedei chineze, yuanul, după o perioadă de apreciere semnifi"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Kazahstanul reduce producția de țiței și gaze după atacul cu dronă asupra unei instalații rusești\",\"fapt\":\"Kazahstanul a redus producția de țiței și gaze din cauza unui atac cu dronă asupra "
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Schimbarea conducerii pe piața acțiunilor americane\",\"fapt\":\"Piața acțiunilor americane a înregistrat o schimbare a conducerii, potrivit Financial Times. Acest lucru se reflectă în modul în "
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Compania DeepSeek se pregătește de o campanie de angajări masive în domeniul inteligenței artificiale\",\"fapt\":\"Compania chineză DeepSeek intenționează să angajeze un număr mare de specialișt"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Yuanul chinezesc ar putea cunoaște o corecție după creșterea puternică\",\"fapt\":\"Un strategist de la T. Rowe Price consideră că moneda chineză este supravalorizată și ar putea suferi o scăder"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 9,
-  "fresh": 9,
-  "fb": 0,
-  "tier2": 0,
-  "explainer": 9
+  "new": 19,
+  "fresh": 19,
+  "fb": 7,
+  "tier2": 2,
+  "explainer": 10
  }
 }
