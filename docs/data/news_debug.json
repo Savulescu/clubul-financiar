@@ -1,6 +1,6 @@
 {
  "ok": {
-  "nvidia": 6
+  "nvidia": 7
  },
  "err": {
   "gemini:429": 9,
@@ -10,45 +10,46 @@
   "siliconflow:401": 9,
   "groq:403": 9,
   "together:403": 9,
-  "sambanova:402": 9,
+  "sambanova:402": 8,
   "sambanova:429": 45,
-  "nvidia:TimeoutError": 22,
-  "fireworks:404": 2
+  "nvidia:TimeoutError": 18,
+  "fireworks:404": 1,
+  "sambanova:URLError": 1
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 2
  },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Investitorii reduc estimările privind creșterea ratelor dobânzilor de către BCE în 2026\",\"fapt\":\"Investitorii pariază pe o creștere a ratelor dobânzilor de către Banca Centrală Europeană (BC"
+   "raw": "{\"titlu\":\"Bursa americană în scădere după zvonuri despre amânarea listării OpenAI\",\"fapt\":\"Indicii bursieri Dow, S&P 500 și Nasdaq au înregistrat scăderi după apariția unor rapoarte despre posibila am"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output a JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words. Use specific terms as per rules. Must not translate word "
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use specific terms. Must not translate "
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian summary, original, no direct translation. Must follow language rule"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use specified term mappings. Must not t"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original summary in Romanian, not word-for-word translation. Must use correct terms. Must "
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use correct terms. The news is about Bitcoin bo"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Oferta de dimineață: Când cipurile sunt jos și sus și jos\",\"fapt\":\"Rezerva Federală a anunțat o nouă creștere a ratelor dobânzilor, afectând randamentul obligațiunilor și prețul acțiunilor, "
+   "raw": "{\"titlu\":\"Vânătorii de fundal al lui Bitcoin se tem de noi dureri după o cădere de 1,3 trilioane de dolari\",\"fapt\":\"Investitorii care speră la o revenire a prețului lui Bitcoin se confruntă cu perspec"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Strategist de la Goldman Sachs: Investițiile în tehnologie ar putea fi oportune în perioada de volatilitate a cipului\", \"fapt\":\"Un strategist de la Goldman Sachs consideră că investițiile în"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Rezerva Federală a SUA își consolidează echipa de consilieri\",\"fakt\":\"Rezerva Federală a Statelor Unite, condusă de Warsh, a numit doi noi consilieri cheie pentru a-și reconfigura abordarea "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 20,
-  "fresh": 20,
-  "fb": 15,
+  "new": 18,
+  "fresh": 18,
+  "fb": 13,
   "tier2": 2,
   "explainer": 3
  }
