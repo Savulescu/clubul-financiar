@@ -1,53 +1,54 @@
 {
  "ok": {
-  "nvidia": 10
+  "nvidia": 6
  },
  "err": {
-  "gemini:429": 11,
-  "mistral:401": 11,
-  "cerebras:403": 11,
-  "deepseek:402": 22,
-  "siliconflow:401": 11,
-  "groq:403": 11,
-  "together:403": 11,
-  "sambanova:402": 11,
-  "sambanova:429": 55,
-  "nvidia:TimeoutError": 17,
-  "fireworks:404": 1,
-  "openrouter:429": 2
+  "gemini:429": 8,
+  "mistral:401": 8,
+  "cerebras:403": 8,
+  "deepseek:402": 16,
+  "siliconflow:401": 8,
+  "groq:403": 8,
+  "together:403": 8,
+  "sambanova:402": 8,
+  "sambanova:429": 40,
+  "nvidia:TimeoutError": 19,
+  "fireworks:404": 2
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 4
+ },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Atac asupra unei nave în Strâmtoarea Hormuz\", \"fapt\":\"O navă a fost lovită în Strâmtoarea Hormuz, iar supertankerelor cu țiței li s-a ordonat să se întoarcă, după o serie de incidente care a"
+   "raw": "{\"titlu\":\"Bursa asiatică se pregătește de o deschidere turbulentă din cauza volatilității tehnologiei\", \"fapt\":\"Piețele bursiere asiatice arată semne de instabilitate din cauza fluctuațiilor puternice"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary original, not word-for-word translation. Must follow language rules: correct R"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no foreign words. Must use correct terms. Must not translate word f"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Presiuni pentru renunțarea la țintele de neutralitate climatică\", \"fapt\":\"Andy Burnham, un posibil viitor prim-ministru, este îndemnat să mențină țintele de neutralitate climatică, în ciuda "
+   "raw": "{\"titlu\":\"Onsemi urmează să cumpere Synaptics într-o tranzacție de 7 miliarde de dolari, doar cu acțiuni\",\"fapt\":\"Onsemi va achiziționa Synaptics într-un contract în valoare de 7 miliarde de dolari, p"
   },
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Acțiunile Wendy's ating un maxim șapte luni după o creștere puternică\", \"fapt\":\"Acțiunile lanțului de restaurante Wendy's au înregistrat o creștere puternică, atingând un nivel maxim din ult"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use corect terms. Provide original summary, not "
   },
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Wendy's atinge un maxim șapte luni, pe fondul unei raliuri similare unor meme, generată de traderi individuali\",\"fapt\":\"Acțiunile Wendy's au atins un nivel maxim pe o perioadă de șapte luni,"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Union Pacific (UNP) – Printre cele 12 cele mai bune acțiuni S&P 500 de cumpărat pentru dividende\",\"fapt\":\"Union Pacific (UNP) este considerată una dintre cele mai bune acțiuni pentru investi"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Venezuela se confruntă cu cea mai mare restructurare a datoriei din lume\",\"fakt\":\"Venezuela se confruntă cu o restructurare masivă a datoriei sale externe, fiind considerată cea mai mare din"
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. The title should be clear Romanian, reformulated. The \"fapt\" is 1-2 neutral sentence"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 5,
-  "fresh": 5,
-  "fb": 0,
+  "new": 8,
+  "fresh": 8,
+  "fb": 3,
   "tier2": 3,
   "explainer": 2
  }
