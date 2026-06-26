@@ -1,52 +1,55 @@
 {
  "ok": {
-  "nvidia": 13
+  "nvidia": 14
  },
  "err": {
-  "gemini:429": 14,
-  "mistral:401": 14,
-  "cerebras:403": 14,
-  "deepseek:402": 28,
-  "siliconflow:401": 14,
-  "groq:403": 14,
-  "together:403": 14,
-  "sambanova:402": 14,
-  "sambanova:429": 70,
-  "nvidia:TimeoutError": 18
+  "gemini:429": 15,
+  "mistral:401": 15,
+  "cerebras:403": 15,
+  "deepseek:402": 30,
+  "siliconflow:401": 15,
+  "groq:403": 15,
+  "together:403": 15,
+  "sambanova:402": 15,
+  "sambanova:429": 75,
+  "nvidia:TimeoutError": 13,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Acțiunile companiilor tehnologice din China se bazează pe rezultatele financiare pentru a menține creșterea puternică\",\"fapt\":\"Acțiunile companiilor de tehnologie din hardware din China au î"
+   "raw": "{\"titlu\":\"Prețul țițeiului rămâne ridicat după atacul asupra unei nave în Strâmtoarea Hormuz\", \"fapt\":\"Un atac recent asupra unei nave în Strâmtoarea Hormuz a determinat o creștere a prețului țițeiulu"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Piața bursieră americană arată încredere în dolar\", \"fapt\":\"Rezerva Federală a Statelor Unite, condusă de Kevin Warsh, a luat măsuri care au stimulat creșterea pieței bursiere, ceea ce a dus"
+   "raw": "{\"titlu\":\"Rezerva Federală: inflația rămâne prea ridicată, politica ratelor este bine poziționată pentru a reduce presiunile asupra prețurilor\",\"fakt\":\"John Williams, unul dintre cei mai importanți re"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Piața bursieră americană se confruntă cu incertitudine\", \"fapt\":\"Futures-urile pentru principalele indici bursiere americane, Dow, S&P 500 și Nasdaq, au înregistrat fluctuații, pe fondul dif"
+   "raw": "{\"titlu\":\"Williams de la Rezerva Federală: Inflația este încă prea ridicată, politica ratelor este 'bine poziționată' pentru a reduce presiunile asupra prețurilor\",\"fapt\":\"Reprezentantul Rezervei Fede"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output a JSON object on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian summary original, not literal translation. "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Title: clear Romanian reformulated. Fact: 1-2 neutral sentences with main fact. Ce_inseamn"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Ghana va cumpăra 30% din producția de aur a minerilor mari\", \"fapt\":\"Guvernul din Ghana a anunțat că va achiziționa 30% din producția de aur a companiilor miniere mari, începând cu 1 iulie.\""
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Ghana va cumpăra 30% din producția de aur a minerilor mari începând cu 1 iulie, conform unui comunicat\", \"fapt\":\"Guvernul din Ghana va achiziționa o treime din producția de aur a companiilor"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Bursa Nasdaq înregistrează o nouă scădere\", \"fapt\":\"Compania Micron a depășit Meta și Tesla ca valoare de piață, în timp ce bursa Nasdaq a continuat să scadă\", \"ce_inseamnă\":\"Această scădere"
+   "raw": "{\"titlu\":\"UE prelungește suspendarea taxelor vamale în disputa comercială Boeing-Airbus\", \"fapt\":\"Uniunea Europeană a decis să prelungească suspendarea taxelor vamale în disputa comercială dintre Boei"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 5,
-  "fresh": 5,
+  "new": 6,
+  "fresh": 6,
   "fb": 0,
-  "tier2": 2,
+  "tier2": 3,
   "explainer": 3
  }
 }
