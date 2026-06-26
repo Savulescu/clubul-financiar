@@ -1,53 +1,55 @@
 {
  "ok": {
-  "sambanova": 1,
   "nvidia": 8
  },
  "err": {
-  "gemini:429": 9,
-  "mistral:401": 9,
-  "cerebras:403": 9,
-  "deepseek:402": 18,
-  "siliconflow:401": 9,
-  "groq:403": 9,
-  "together:403": 9,
-  "sambanova:402": 9,
-  "sambanova:429": 44,
-  "nvidia:TimeoutError": 21
+  "gemini:429": 10,
+  "mistral:401": 10,
+  "cerebras:403": 10,
+  "deepseek:402": 20,
+  "siliconflow:401": 10,
+  "groq:403": 10,
+  "together:403": 10,
+  "sambanova:402": 10,
+  "sambanova:429": 50,
+  "nvidia:TimeoutError": 21,
+  "fireworks:404": 2
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 4
+ },
  "samples": [
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Prețul gazului natural european crește din cauza tensiunilor din Strâmtoarea Hormuz\",\"fapt\":\"Prețul gazului natural în Europa a înregistrat o creștere modestă, pe fondul îngrijorărilor legat"
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian summary original, not literal translation. Must follow language rul"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, natural, correct diacritics, no words from other langu"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Piața bursieră americană în scădere după zvonuri despre amânarea listării OpenAI\",\"fakt\":\"Bursa de valori din Statele Unite ale Americii a înregistrat o scădere, după ce au apărut zvonuri de"
+   "raw": "{\"titlu\":\"Compania Aeriană China Eastern cumpără 25 de avioane Airbus A330 neo pentru 9,4 miliarde de dolari - Reuters\",\"fapt\":\"Compania Aeriană China Eastern a anunțat o comandă pentru 25 de avioane "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian, correct diacritics, no foreign "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be in Romanian, original summary, no word-for-word translation. Must follow lan"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Piața bursieră astăzi: S&P 500, futures Nasdaq scad pe fondul raportului privind amânarea IPO OpenAI care tulbură tehnologia\", \"fapt\":\"Piața bursieră a scăzut astăzi, S&P 500 și futures Nasd"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"VW ia în calcul reducerea a 100.000 de locuri de muncă și închiderea unor fabrici\",\"fapt\":\"Conform unui raport, concernul auto german VW ar putea reduce până la 100.000 de locuri de muncă și"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Futures ale burselor americane scad după vânzarea acțiunilor din sectorul tehnologiei\", \"fapt\":\"Viitoarele contracte ale indicilor Nasdaq și S&P 500 au scăzut după o vânzare masivă a acțiuni"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Probabilitatea majorării ratelor dobânzilor de către Rezerva Federală este în creștere puternică, ceea ce ridică o problemă serioasă pentru Wall Street\",\"fakt\":\"Probabilitatea unei majorări "
+   "raw": "{\"titlu\":\"Țițeiul se îndreaptă spre o altă săptămână de pierderi, dar un analist avertizează că traficul lent din Strâmtoarea Hormuz ar putea trimite din nou prețul în sus\",\"fapt\":\"Iran a avertizat jo"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 15,
-  "fresh": 15,
-  "fb": 9,
-  "tier2": 2,
-  "explainer": 4
+  "new": 5,
+  "fresh": 5,
+  "fb": 0,
+  "tier2": 5,
+  "explainer": 0
  }
 }
