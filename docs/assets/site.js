@@ -116,6 +116,11 @@
     }
     scored.sort((x, y) => y[0] - x[0]);
     const top = scored.slice(0, 24);
+    // marchează căutarea (debounce: doar interogarea finală + nr. rezultate)
+    clearTimeout(window._cfSearchT);
+    window._cfSearchT = setTimeout(function(){
+      try { if (window.cf && cf.track) cf.track("search", { meta: { q: q, results: scored.length } }); } catch(e){}
+    }, 1200);
     if (!top.length) { sRes.innerHTML = `<p class="search-hint">Niciun rezultat pentru „${esc(sInput.value)}".</p>`; return; }
     sRes.innerHTML = top.map(([, a]) => {
       const badge = a.k === "g" ? "Glosar" : (a.k === "calc" ? "Calculator" : (a.cn || "Articol"));
@@ -213,6 +218,7 @@
           } else done(false, "N-a mers, încearcă din nou.");
         } else {
           localStorage.setItem("cf-nl", JSON.stringify({ email: em, token: token })); showSubscribed(em);
+          try { if (window.cf && cf.track) cf.track("signup", { meta: { kind: "newsletter" } }); } catch(e){}
           try { sb.functions.invoke("newsletter-welcome", { body: { email: em } }); } catch(e){}  // email de bun-venit (best-effort)
         }
       }, function(){ done(false, "N-a mers, încearcă din nou."); });
@@ -402,15 +408,124 @@
     onScroll();
   })();
 
-  // ---- analytics minimal: numără pageview-ul în Supabase (cookieless, fără date personale) ----
+  // ============================================================================
+  // analytics — cookieless, fără date personale. Numără pagini, timpul activ pe
+  // fiecare pagină, sursa traficului, interesul pe abonamente și orice eveniment.
+  // Expune window.cf.track(type, props) pentru a marca acțiuni de oriunde.
+  // ============================================================================
   (function(){
     try{
-      if (navigator.webdriver) return;                 // sari peste boți/headless
-      if (location.pathname.indexOf("/statistici") === 0) return; // nu număra panoul de admin
-      let vid = localStorage.getItem("cf-vid");
-      if (!vid) { vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now())+"-"+Math.random().toString(36).slice(2)); localStorage.setItem("cf-vid", vid); }
+      if (navigator.webdriver) return;                              // sari peste boți/headless
+      if (location.pathname.indexOf("/statistici") === 0) return;   // nu număra panoul de admin
       if (!sb) return;
-      sb.from("page_views").insert({ path: location.pathname, visitor: vid, referrer: document.referrer || null }).then(function(){}, function(){});
+
+      function uuid(){ return (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+        : (String(Date.now())+"-"+Math.random().toString(36).slice(2)); }
+
+      // vizitator unic (persistent) + sesiune (per-vizită)
+      var vid = localStorage.getItem("cf-vid");
+      if (!vid) { vid = uuid(); localStorage.setItem("cf-vid", vid); }
+      var sid = sessionStorage.getItem("cf-sid");
+      if (!sid) { sid = uuid(); sessionStorage.setItem("cf-sid", sid); }
+
+      // sursă: UTM dacă există (Google/Insta/TikTok rup referrer-ul), altfel
+      // referrer clasificat. Reținută pe sesiune (first-touch) ca navigarea internă
+      // să nu suprascrie de unde au venit.
+      function classify(){
+        try{
+          var p = new URLSearchParams(location.search);
+          var us = p.get("utm_source");
+          if (us) { var um = p.get("utm_medium"); return (us + (um ? " / "+um : "")).toLowerCase(); }
+          var r = document.referrer || "";
+          if (!r) return "direct";
+          var h = new URL(r).hostname.replace(/^www\./, "");
+          if (h === location.hostname) return "";                   // navigare internă
+          var map = [
+            [/google\./,"google"],[/bing\./,"bing"],[/duckduckgo/,"duckduckgo"],[/yahoo\./,"yahoo"],[/ecosia/,"ecosia"],
+            [/facebook|fb\.me|fb\.com|l\.facebook/,"facebook"],[/instagram/,"instagram"],
+            [/tiktok/,"tiktok"],[/youtube|youtu\.be/,"youtube"],[/threads/,"threads"],
+            [/t\.me|telegram/,"telegram"],[/twitter|t\.co|x\.com/,"x"],[/linkedin|lnkd\.in/,"linkedin"],
+            [/reddit/,"reddit"],[/whatsapp|wa\.me/,"whatsapp"]
+          ];
+          for (var i=0;i<map.length;i++) if (map[i][0].test(h)) return map[i][1];
+          return h;                                                 // alt domeniu care ne-a trimis
+        }catch(e){ return "direct"; }
+      }
+      var src = sessionStorage.getItem("cf-src");
+      if (src === null) { src = classify() || "direct"; sessionStorage.setItem("cf-src", src); }
+
+      // marcator generic de eveniment — folosit pentru orice acțiune
+      function track(type, props){
+        try{
+          var row = { type: type, path: location.pathname, visitor: vid, session: sid, source: src };
+          if (props) for (var k in props) if (props[k] != null) row[k] = props[k];
+          sb.from("cf_events").insert(row).then(function(){}, function(){});
+        }catch(e){}
+      }
+      window.cf = window.cf || {};
+      window.cf.track = track;
+
+      // 1) pageview → page_views (continuitate istorică) cu sursă + cf_events
+      sb.from("page_views").insert({ path: location.pathname, visitor: vid,
+        referrer: document.referrer || null, source: src }).then(function(){}, function(){});
+      track("pageview", { referrer: document.referrer || null });
+
+      // 2) timp ACTIV pe pagină — heartbeat cumulativ. Prima bătaie la 5s (ca
+      //    vizitele scurte să nu fie 0), apoi la 15s; pauză când tabul e ascuns.
+      var activeMs = 0, last = Date.now(), visible = (document.visibilityState === "visible");
+      function acc(){ if (visible) { var n = Date.now(); activeMs += n - last; last = n; } }
+      function pingTime(){ acc(); var s = Math.round(activeMs/1000); if (s > 0) track("page_time", { seconds: s }); }
+      var hbStart = null, hbInt = null;
+      function startHb(){ hbStart = setTimeout(function(){ pingTime(); hbInt = setInterval(function(){ if (visible) pingTime(); }, 15000); }, 5000); }
+      function stopHb(){ clearTimeout(hbStart); clearInterval(hbInt); }
+      document.addEventListener("visibilitychange", function(){
+        if (document.visibilityState === "visible") { visible = true; last = Date.now(); }
+        else { acc(); visible = false; pingTime(); }                // flush la ascundere
+      });
+      window.addEventListener("pagehide", function(){ stopHb(); pingTime(); });
+      startHb();
+
+      // 3) adâncime de scroll (max %) — un singur eveniment la plecare
+      var maxDepth = 0, depthSent = false;
+      window.addEventListener("scroll", function(){
+        var h = document.documentElement, sh = h.scrollHeight - h.clientHeight;
+        if (sh <= 0) return;
+        var d = Math.min(100, Math.round(h.scrollTop / sh * 100));
+        if (d > maxDepth) maxDepth = d;
+      }, { passive: true });
+      window.addEventListener("pagehide", function(){
+        if (maxDepth > 0 && !depthSent) { depthSent = true; track("scroll", { depth: maxDepth }); }
+      });
+
+      // 4) interes pe abonamente — orice element cu data-tier (pagina /premium).
+      //    tier_view o singură dată/plan/sesiune când cardul intră în ecran;
+      //    tier_click la click pe butonul din card.
+      function initTiers(){
+        var cards = document.querySelectorAll("[data-tier]");
+        if (!cards.length) return;
+        var seen = {};
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(en){
+              if (en.isIntersecting && en.intersectionRatio >= 0.5) {
+                var ti = en.target.getAttribute("data-tier");
+                if (ti && !seen[ti]) { seen[ti] = 1; track("tier_view", { tier: ti }); }
+              }
+            });
+          }, { threshold: [0.5] });
+          cards.forEach(function(c){ io.observe(c); });
+        }
+        document.querySelectorAll("[data-tier] a, [data-tier] button").forEach(function(b){
+          b.addEventListener("click", function(){
+            var card = b.closest("[data-tier]");
+            var ti = card && card.getAttribute("data-tier");
+            if (ti) track("tier_click", { tier: ti });
+          });
+        });
+      }
+      if (document.readyState !== "loading") initTiers();
+      else document.addEventListener("DOMContentLoaded", initTiers);
+
     }catch(e){}
   })();
 })();

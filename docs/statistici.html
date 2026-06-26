@@ -6,44 +6,204 @@
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
-<link rel="stylesheet" href="/assets/cf-ultra.css?v=4"></head><body class="u-page">
-<section class="section"><div class="container">
-<div class="center" style="margin-bottom:6px"><p class="eyebrow">Panou administrator</p><h1 class="title">Statistici vizitatori</h1><p class="lead" style="margin-inline:auto">Câți oameni au intrat pe clubulfinanciar.ro, pe intervale.</p></div>
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=4">
+<style>
+  .st-wrap{max-width:1080px;margin:0 auto}
+  .st-sec{margin-top:40px}
+  .st-sec h2{font-family:Sora,Inter,sans-serif;font-size:1.15rem;font-weight:700;margin:0 0 4px}
+  .st-sec .st-sub{color:var(--muted);font-size:.86rem;margin:0 0 14px}
+  .st-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .st-kpi .card{text-align:center;padding:16px 12px}
+  .st-big{font-family:Sora,Inter,sans-serif;font-size:1.9rem;font-weight:800;line-height:1.05}
+  .st-mut{color:var(--muted);font-size:.8rem;margin-top:3px}
+  .st-ctrl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0 4px}
+  .st-ctrl button{font:inherit;font-size:.85rem;font-weight:600;padding:7px 14px;border-radius:999px;border:1px solid var(--border,rgba(128,128,128,.3));background:transparent;color:var(--muted);cursor:pointer}
+  .st-ctrl button.on{background:var(--emerald,#10b981);border-color:var(--emerald,#10b981);color:#fff}
+  table.st-tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+  table.st-tbl th,table.st-tbl td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--border,rgba(128,128,128,.16))}
+  table.st-tbl th{font-size:.74rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700}
+  table.st-tbl td.num,table.st-tbl th.num{text-align:right;font-variant-numeric:tabular-nums}
+  table.st-tbl tr:last-child td{border-bottom:none}
+  .st-bar{position:relative;display:block;height:7px;border-radius:4px;background:var(--border,rgba(128,128,128,.18));overflow:hidden;margin-top:5px}
+  .st-bar>i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#10b981,#0f9d77);border-radius:4px}
+  .st-tier{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .st-tier .card{padding:16px}
+  .st-tier .tname{font-family:Sora,Inter,sans-serif;font-weight:700;text-transform:capitalize;font-size:1.05rem;margin-bottom:8px}
+  .st-tier .trow{display:flex;justify-content:space-between;font-size:.86rem;padding:3px 0;color:var(--muted)}
+  .st-tier .trow b{color:var(--ink,inherit);font-weight:700;font-variant-numeric:tabular-nums}
+  .st-path{word-break:break-all}
+</style></head><body class="u-page">
+<section class="section"><div class="container st-wrap">
+<div class="center" style="margin-bottom:6px"><p class="eyebrow">Panou administrator</p><h1 class="title">Statistici complete</h1><p class="lead" style="margin-inline:auto">Tot ce fac vizitatorii pe clubulfinanciar.ro — pagini, timp, surse, abonamente și newsletter.</p></div>
+
 <div id="statState" class="search-hint" style="text-align:center;margin:30px 0">Se verifică accesul…</div>
-<div id="statGrid" class="grid grid-3" hidden style="margin-top:24px"></div>
-<p id="statNote" class="lead" hidden style="margin:28px auto 0;text-align:center;font-size:.92rem">Datele se numără de la instalare (19 iunie 2026). Intervalele lungi se umplu pe măsură ce trece timpul.</p>
+
+<div id="statBody" hidden>
+  <!-- Vizitatori pe intervale -->
+  <div class="st-sec">
+    <h2>Vizitatori pe intervale</h2>
+    <p class="st-sub">Vizitatori unici și afișări de pagină, de la instalare (19 iunie 2026).</p>
+    <div id="kpiRanges" class="st-kpi"></div>
+  </div>
+
+  <!-- Implicare + Newsletter -->
+  <div class="st-sec">
+    <h2>Pe scurt</h2>
+    <p class="st-sub">Implicarea și abonații la newsletter.</p>
+    <div id="kpiSummary" class="st-kpi"></div>
+  </div>
+
+  <!-- Selector fereastră pentru secțiunile detaliate -->
+  <div class="st-sec">
+    <div class="st-ctrl" id="rangeCtrl">
+      <button data-days="7">7 zile</button>
+      <button data-days="30" class="on">30 zile</button>
+      <button data-days="90">90 zile</button>
+      <button data-days="365">1 an</button>
+      <button data-days="100000">Total</button>
+    </div>
+    <p class="st-sub" style="text-align:center" id="winNote">Secțiunile de mai jos arată datele din ultimele 30 de zile.</p>
+  </div>
+
+  <!-- Interes pe abonamente -->
+  <div class="st-sec">
+    <h2>Interes pe abonamente</h2>
+    <p class="st-sub">Câți s-au uitat la fiecare plan pe pagina Premium și câți au dat click pe buton.</p>
+    <div id="tiersBox" class="st-tier"></div>
+  </div>
+
+  <!-- Cum ne-au găsit -->
+  <div class="st-sec">
+    <h2>Cum ne-au găsit</h2>
+    <p class="st-sub">Sursa traficului (UTM dacă există, altfel site-ul de proveniență).</p>
+    <div class="card" style="padding:6px 4px"><table class="st-tbl" id="srcTbl"><thead><tr><th>Sursă</th><th class="num">Vizitatori</th><th class="num">Afișări</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Top pagini + timp -->
+  <div class="st-sec">
+    <h2>Pe ce pagini stau și cât</h2>
+    <p class="st-sub">Cele mai vizitate pagini, cu vizitatori unici și timpul mediu activ pe pagină.</p>
+    <div class="card" style="padding:6px 4px"><table class="st-tbl" id="pagesTbl"><thead><tr><th>Pagină</th><th class="num">Afișări</th><th class="num">Vizitatori</th><th class="num">Timp mediu</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Activitate -->
+  <div class="st-sec">
+    <h2>Activitate pe site</h2>
+    <p class="st-sub">Tipurile de acțiuni înregistrate (afișări, timp, scroll, abonamente, căutări, înscrieri…).</p>
+    <div class="card" style="padding:6px 4px"><table class="st-tbl" id="evTbl"><thead><tr><th>Eveniment</th><th class="num">Număr</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <p class="lead" style="margin:34px auto 0;text-align:center;font-size:.86rem;color:var(--muted)">Datele se numără cookieless, fără date personale. Intervalele lungi se umplu pe măsură ce trece timpul.</p>
+</div>
 </div></section>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
-<script defer src="/assets/site.js?v=30"></script>
+<script defer src="/assets/site.js?v=32"></script>
 <script defer>
 (function(){
-  var RANGES = [
-    ["h24","Ultimele 24 de ore"],["d7","Ultima săptămână"],["d30","Ultima lună"],
-    ["d90","Ultimele 3 luni"],["d180","Ultimele 6 luni"],["d365","Ultimul an"],["total","Total (de la start)"]
-  ];
-  var state=document.getElementById("statState"), grid=document.getElementById("statGrid"), note=document.getElementById("statNote");
   var nf = new Intl.NumberFormat("ro-RO");
-  function render(d){
-    grid.innerHTML = RANGES.map(function(r){
+  var state=document.getElementById("statState"), body=document.getElementById("statBody");
+  var loaded=false, days=30;
+
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+  function dur(s){ s=Math.round(s||0); if(s<=0) return "—"; if(s<60) return s+"s"; var m=Math.floor(s/60), r=s%60; if(m<60) return m+"m "+(r<10?"0":"")+r+"s"; var h=Math.floor(m/60); return h+"h "+(m%60)+"m"; }
+
+  var RANGES=[["h24","24 ore"],["d7","7 zile"],["d30","30 zile"],["d90","90 zile"],["d180","6 luni"],["d365","1 an"],["total","Total"]];
+  function renderRanges(d){
+    var box=document.getElementById("kpiRanges");
+    box.innerHTML=RANGES.map(function(r){
       var v=(d&&d[r[0]])||{views:0,visitors:0};
-      return '<div class="card" style="text-align:center"><p class="eyebrow" style="margin-bottom:6px">'+r[1]+'</p>'+
-        '<div class="result-big" style="font-size:2.2rem">'+nf.format(v.visitors||0)+'</div>'+
-        '<p style="color:var(--muted);font-size:.85rem;margin-top:2px">vizitatori unici</p>'+
-        '<p style="color:var(--muted);font-size:.82rem;margin-top:8px">'+nf.format(v.views||0)+' afișări de pagină</p></div>';
+      return '<div class="card"><p class="eyebrow" style="margin-bottom:6px">'+r[1]+'</p>'+
+        '<div class="st-big">'+nf.format(v.visitors||0)+'</div><p class="st-mut">vizitatori unici</p>'+
+        '<p class="st-mut" style="margin-top:6px">'+nf.format(v.views||0)+' afișări</p></div>';
     }).join("");
-    grid.hidden=false; note.hidden=false; state.hidden=true;
   }
+  function renderSummary(d){
+    var e=d.engagement||{}, n=d.newsletter||{};
+    var cards=[
+      ['Timp mediu / pagină', dur(e.avg_seconds), 'cât stau activ pe o pagină'],
+      ['Sesiuni cu timp', nf.format(e.sessions||0), 'vizite cronometrate'],
+      ['Abonați newsletter', nf.format(n.active||0), nf.format(n.total||0)+' în total'],
+      ['Abonați noi (7 zile)', nf.format(n.last7||0), nf.format(n.last30||0)+' în 30 de zile']
+    ];
+    document.getElementById("kpiSummary").innerHTML=cards.map(function(c){
+      return '<div class="card"><p class="eyebrow" style="margin-bottom:6px">'+c[0]+'</p>'+
+        '<div class="st-big" style="font-size:1.55rem">'+c[1]+'</div><p class="st-mut" style="margin-top:6px">'+c[2]+'</p></div>';
+    }).join("");
+  }
+  function renderTiers(t){
+    t=t||{};
+    var order=["free","premium","pro","ultra","max"];
+    var keys=Object.keys(t).sort(function(a,b){var ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
+    var box=document.getElementById("tiersBox");
+    if(!keys.length){ box.innerHTML='<p class="st-sub">Încă nu sunt date. Apar după ce cineva vizitează pagina Premium.</p>'; return; }
+    box.innerHTML=keys.map(function(k){
+      var v=t[k]||{};
+      return '<div class="card"><div class="tname">'+esc(k)+'</div>'+
+        '<div class="trow"><span>S-au uitat</span><b>'+nf.format(v.viewers||0)+'</b></div>'+
+        '<div class="trow"><span>Afișări card</span><b>'+nf.format(v.views||0)+'</b></div>'+
+        '<div class="trow"><span>Click pe buton</span><b>'+nf.format(v.clicks||0)+'</b></div></div>';
+    }).join("");
+  }
+  function renderSources(arr){
+    arr=arr||[]; var max=arr.reduce(function(m,s){return Math.max(m,s.visitors||0);},0)||1;
+    var tb=document.querySelector("#srcTbl tbody");
+    if(!arr.length){ tb.innerHTML='<tr><td colspan="3" class="st-sub">Încă nu sunt date.</td></tr>'; return; }
+    tb.innerHTML=arr.map(function(s){
+      return '<tr><td>'+esc(s.source)+'<span class="st-bar"><i style="width:'+Math.round((s.visitors||0)/max*100)+'%"></i></span></td>'+
+        '<td class="num">'+nf.format(s.visitors||0)+'</td><td class="num">'+nf.format(s.views||0)+'</td></tr>';
+    }).join("");
+  }
+  function renderPages(arr){
+    arr=arr||[]; var tb=document.querySelector("#pagesTbl tbody");
+    if(!arr.length){ tb.innerHTML='<tr><td colspan="4" class="st-sub">Încă nu sunt date.</td></tr>'; return; }
+    tb.innerHTML=arr.map(function(p){
+      return '<tr><td class="st-path">'+esc(p.path)+'</td><td class="num">'+nf.format(p.views||0)+'</td>'+
+        '<td class="num">'+nf.format(p.visitors||0)+'</td><td class="num">'+dur(p.avg_seconds)+'</td></tr>';
+    }).join("");
+  }
+  function renderEvents(arr){
+    arr=arr||[]; var tb=document.querySelector("#evTbl tbody");
+    var LBL={pageview:"Afișări de pagină",page_time:"Timp pe pagină (bătăi)",scroll:"Scroll",tier_view:"Vizualizări abonament",tier_click:"Click abonament",search:"Căutări",signup:"Înscrieri newsletter",cta_click:"Click CTA",tool_use:"Folosire unealtă",quiz:"Quiz",ai_ask:"Întrebări AI"};
+    if(!arr.length){ tb.innerHTML='<tr><td colspan="2" class="st-sub">Încă nu sunt date.</td></tr>'; return; }
+    tb.innerHTML=arr.map(function(e){
+      return '<tr><td>'+esc(LBL[e.type]||e.type)+'</td><td class="num">'+nf.format(e.count||0)+'</td></tr>';
+    }).join("");
+  }
+
+  function renderDetail(d){
+    renderTiers(d.tiers); renderSources(d.sources); renderPages(d.top_pages); renderEvents(d.events);
+  }
+
+  function fetchAll(){
+    var sb=window._sb;
+    sb.rpc("cf_stats_full",{p_days:days}).then(function(res){
+      if(res.error){ state.textContent="Nu am putut încărca: "+res.error.message; state.hidden=false; return; }
+      var d=res.data||{};
+      renderRanges(d.ranges); renderSummary(d); renderDetail(d);
+      body.hidden=false; state.hidden=true;
+    });
+  }
+
   function load(){
     var sb=window._sb;
     if(!sb){ state.textContent="Eroare: conexiunea nu e disponibilă."; return; }
     if(!window.cfAdmin){ state.innerHTML='Această pagină e doar pentru administrator.<br>Conectează-te cu contul de admin (clubulfinanciar@gmail.com).'; return; }
+    if(loaded) return; loaded=true;
     state.textContent="Se încarcă datele…";
-    sb.rpc("cf_stats").then(function(res){
-      if(res.error){ state.textContent="Nu am putut încărca statisticile: "+res.error.message; return; }
-      render(res.data);
-    });
+    fetchAll();
   }
-  // site.js emite 'cf-auth' după ce verifică sesiunea; reacționăm la el + încercăm o dată direct
+
+  document.getElementById("rangeCtrl").addEventListener("click",function(e){
+    var b=e.target.closest("button[data-days]"); if(!b) return;
+    days=parseInt(b.getAttribute("data-days"),10)||30;
+    Array.prototype.forEach.call(this.querySelectorAll("button"),function(x){x.classList.toggle("on",x===b);});
+    var lbl=b.textContent.trim();
+    document.getElementById("winNote").textContent = (days>=100000)
+      ? "Secțiunile de mai jos arată toate datele, de la start."
+      : "Secțiunile de mai jos arată datele din ultimele "+lbl+".";
+    if(loaded && window.cfAdmin) fetchAll();
+  });
+
   window.addEventListener("cf-auth", load);
   window.addEventListener("DOMContentLoaded", function(){ setTimeout(load, 1200); });
 })();

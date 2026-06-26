@@ -280,7 +280,7 @@ def build():
   window.addEventListener('cf-auth', function(){{ prem=!!window.cfPremium; gateUI(); apply(); }});
 }})();
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/tilt.js?v=23"></script><script defer src="/assets/site.js?v=30"></script></body></html>'''
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/tilt.js?v=23"></script><script defer src="/assets/site.js?v=32"></script></body></html>'''
     open(os.path.join(ROOT, "docs", "stiri.html"), "w", encoding="utf-8").write(page)
     print(f"stiri.html scris cu {len(items)} știri din {n_src} surse | categorii: {counts}")
 
