@@ -1,18 +1,18 @@
 {
  "ok": {
-  "nvidia": 8
+  "nvidia": 6
  },
  "err": {
-  "gemini:429": 10,
-  "mistral:401": 10,
-  "cerebras:403": 10,
-  "deepseek:402": 20,
-  "siliconflow:401": 10,
-  "groq:403": 10,
-  "together:403": 10,
-  "sambanova:402": 10,
-  "sambanova:429": 50,
-  "nvidia:TimeoutError": 21,
+  "gemini:429": 9,
+  "mistral:401": 9,
+  "cerebras:403": 9,
+  "deepseek:402": 18,
+  "siliconflow:401": 9,
+  "groq:403": 9,
+  "together:403": 9,
+  "sambanova:402": 9,
+  "sambanova:429": 45,
+  "nvidia:TimeoutError": 22,
   "fireworks:404": 2
  },
  "ro_reject": {
@@ -20,36 +20,36 @@
  },
  "samples": [
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian summary original, not literal translation. Must follow language rul"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Investitorii reduc estimările privind creșterea ratelor dobânzilor de către BCE în 2026\",\"fapt\":\"Investitorii pariază pe o creștere a ratelor dobânzilor de către Banca Centrală Europeană (BC"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, natural, correct diacritics, no words from other langu"
+   "raw": "We need to output a JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words. Use specific terms as per rules. Must not translate word "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian summary, original, no direct translation. Must follow language rule"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use specified term mappings. Must not t"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original summary in Romanian, not word-for-word translation. Must use correct terms. Must "
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Compania Aeriană China Eastern cumpără 25 de avioane Airbus A330 neo pentru 9,4 miliarde de dolari - Reuters\",\"fapt\":\"Compania Aeriană China Eastern a anunțat o comandă pentru 25 de avioane "
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian, correct diacritics, no foreign "
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be in Romanian, original summary, no word-for-word translation. Must follow lan"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Țițeiul se îndreaptă spre o altă săptămână de pierderi, dar un analist avertizează că traficul lent din Strâmtoarea Hormuz ar putea trimite din nou prețul în sus\",\"fapt\":\"Iran a avertizat jo"
+   "raw": "{\"titlu\":\"Oferta de dimineață: Când cipurile sunt jos și sus și jos\",\"fapt\":\"Rezerva Federală a anunțat o nouă creștere a ratelor dobânzilor, afectând randamentul obligațiunilor și prețul acțiunilor, "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 5,
-  "fresh": 5,
-  "fb": 0,
-  "tier2": 5,
-  "explainer": 0
+  "new": 20,
+  "fresh": 20,
+  "fb": 15,
+  "tier2": 2,
+  "explainer": 3
  }
 }
