@@ -1,56 +1,56 @@
 {
  "ok": {
-  "sambanova": 9,
-  "nvidia": 8
+  "sambanova": 1,
+  "nvidia": 9
  },
  "err": {
-  "gemini:429": 18,
-  "mistral:401": 18,
-  "cerebras:403": 18,
-  "deepseek:402": 36,
-  "siliconflow:401": 18,
-  "groq:403": 18,
-  "together:403": 18,
-  "sambanova:402": 18,
-  "sambanova:429": 80,
-  "nvidia:TimeoutError": 12,
-  "fireworks:404": 1
+  "gemini:429": 12,
+  "mistral:401": 12,
+  "cerebras:403": 12,
+  "deepseek:402": 24,
+  "siliconflow:401": 12,
+  "groq:403": 12,
+  "together:403": 12,
+  "sambanova:402": 12,
+  "sambanova:429": 59,
+  "nvidia:TimeoutError": 17,
+  "fireworks:404": 2
  },
  "ro_reject": {
-  "openrouter": 2
+  "openrouter": 4
  },
  "samples": [
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian correct, no foreign words, prope"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on one line, valid JSON. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Title must be clear Romanian reformulated. Fact: 1-2 neutral sentences with main fact. ce"
-  },
-  {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Căldura extremă afectează productivitatea Europei\",\"fapt\":\"Valurile de căldură extreme din Europa afectează condițiile de muncă și ar putea reduce creșterea economică. Temperaturile ridicate"
+   "raw": "{\"titlu\":\"Importurile Chinei de țiței scad și mai mult în luna iunie\",\"fapt\":\"Importurile Chinei de țiței sunt așteptate să scadă și mai mult în luna iunie, potrivit unor surse din industrie. Acest de"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Creșterea prețurilor la combustibilii fosili poate duce la o calitate a aerului mai proastă\",\"fapt\":\"O cercetare recentă arată că creșterile prețurilor la combustibilii fosili pot duce la o "
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary, original, no translation word-for-word. Must follow language rules: correct R"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use specified term translations. Title should b"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Parisul folosește apa râului Sena pentru a reduce nevoia de aer condiționat\",\"fapt\":\"Parisul intenționează să tripleze sistemul de conducte subterane care distribuie apă răcită din râul Sena"
+   "raw": "{\"titlu\":\"Acțiunile coreene scad cu 6% pe fondul noii vânzări a producătorilor de cipuri\", \"fapt\":\"Acțiunile coreene au scăzut cu 6% din cauza impactului asupra producătorilor de cipuri\"}"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Președintele Chinei, Xi Jinping, întărește legăturile cu lideri mondiali\",\"fakt\":\"Xi Jinping se întâlnește cu prim-ministrul Bangladeshului, în cadrul unei serii de întâlniri cu lideri mondi"
+   "raw": "{\"titlu\":\"Bursa americană înregistrează o creștere puternică, în ciuda scăderilor din sectorul tehnologiei\", \"fapt\":\"Indicii bursieri S&P 500 și Dow Futures au crescut, deși companiile din sectorul te"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Use Romanian original summary, not word-for-word translation. Must be"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 8,
-  "fresh": 8,
-  "fb": 0,
-  "tier2": 1,
-  "explainer": 7
+  "new": 10,
+  "fresh": 10,
+  "fb": 2,
+  "tier2": 2,
+  "explainer": 6
  }
 }
