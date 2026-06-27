@@ -1,53 +1,55 @@
 {
  "ok": {
-  "nvidia": 12,
-  "sambanova": 7
+  "nvidia": 12
  },
  "err": {
-  "gemini:429": 19,
-  "mistral:401": 19,
-  "cerebras:403": 19,
-  "deepseek:402": 38,
-  "siliconflow:401": 19,
-  "groq:403": 19,
-  "together:403": 19,
-  "sambanova:402": 19,
-  "sambanova:429": 88,
-  "nvidia:TimeoutError": 13
+  "gemini:429": 13,
+  "mistral:401": 13,
+  "cerebras:403": 13,
+  "deepseek:402": 26,
+  "siliconflow:401": 13,
+  "groq:403": 13,
+  "together:403": 13,
+  "sambanova:402": 13,
+  "sambanova:429": 65,
+  "nvidia:TimeoutError": 16,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Datoria dublă a studenților postuniversitari din Regatul Unit\",\"fapt\":\"Studenții postuniversitari din Regatul Unit se confruntă cu datorii duble din cauza sistemului de împrumuturi pentru st"
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Title in Romanian, reformulated, clear. Fact: 1-2 neutral sentences with main fact. ce_ins"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Rithm Property Trust Inc. anunță dividendele pentru al doilea trimestru 2026\",\"fapt\":\"Compania Rithm Property Trust Inc. a declarat dividendele pentru acțiunile obișnuite și preferențiale pe"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Aerul condiționat, o soluție mai bună decât dormitul la parter în zilele călduroase\",\"fapt\":\"Conform unui studiu, aerul condiționat oferă o alternativă mai confortabilă și mai sănătoasă decâ"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not literal translation. Must follow language rules: use correct ter"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Acțiunile companiilor de inteligență artificială scad puternic, dar experții sunt optimiști\",\"fapt\":\"Acțiunile unor companii importante din domeniul inteligenței artificiale, cum ar fi MU, I"
+   "raw": "{\"titlu\":\"Rubrik (RBRK) printre cele mai promițătoare acțiuni noi de tehnologie de cumpărat acum\", \"fapt\":\"Rubrik (RBRK) este considerată una dintre cele mai promițătoare acțiuni noi de tehnologie car"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Bursa londoneză ar putea înregistra scăderi, dar tehnologia americană și asiatică este susținută de Micron\",\"fapt\":\"Bursa de valori din Londra este așteptată să înregistreze scăderi, în timp"
+   "raw": "{\"titlu\":\"Acțiuni americane de top listate pe piețe secundare\",\"fakt\":\"Unele dintre cele mai mari companii americane nu sunt listate pe bursele principale, ci pe piețe secundare, cum ar fi Pink Sheets"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"De ce acțiunile Alphabet sunt o opțiune promițătoare pentru investiții pe termen lung\",\"fapt\":\"Compania Alphabet, mama lui Google, este considerată una dintre cele mai promițătoare acțiuni l"
+   "raw": "{\"titlu\":\"Acțiuni Pink Sheet: Principalele companii americane care nu tranzacționează pe bursele majore\",\"fapt\":\"Există companii americane importante care nu sunt listate pe bursele majore, ci sunt tr"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Evoluția piețelor financiare globale\", \"fapt\":\"Indicii bursieri mondiali, futures, obligațiuni, valute, acțiuni și fonduri tranzacționate pe baza indicilor (ETF) sunt monitorizate și raporta"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 3,
-  "fresh": 3,
+  "new": 5,
+  "fresh": 5,
   "fb": 0,
-  "tier2": 0,
-  "explainer": 3
+  "tier2": 4,
+  "explainer": 1
  }
 }
