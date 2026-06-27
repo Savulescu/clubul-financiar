@@ -1,6 +1,7 @@
 {
  "ok": {
-  "nvidia": 8
+  "nvidia": 6,
+  "openrouter": 1
  },
  "err": {
   "gemini:429": 9,
@@ -10,40 +11,38 @@
   "siliconflow:401": 9,
   "groq:403": 9,
   "together:403": 9,
-  "sambanova:402": 8,
-  "sambanova:429": 38,
-  "nvidia:TimeoutError": 12,
-  "fireworks:404": 1,
-  "sambanova:TimeoutError": 8
+  "sambanova:402": 9,
+  "sambanova:429": 45,
+  "nvidia:TimeoutError": 22,
+  "fireworks:404": 2
  },
  "ro_reject": {
   "openrouter": 2
  },
- "ro_reject": {},
  "samples": [
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"BCE: Riscuri de inflație în creștere, în ciuda acordului de pace\",\"fakt\":\"Isabel Schnabel, membră a consiliului director al Băncii Centrale Europene, avertizează că există riscuri de creșter"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Schnabel de la BCE vede riscuri de inflație în creștere, în ciuda acordului de pace - Bloomberg\",\"fapt\":\"Isabel Schnabel, membră a consiliului executiv al Băncii Centrale Europene, avertizea"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must use correct terms: oil/crude = \"țintă\" (no"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct diacritics, no foreign words. Must not use "
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: Romanian c"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Berkshire Hathaway a lui Warren Buffett deține aproape 400 de miliarde de dolari în numerar. Vine o criză a pieței bursiere?\", \"fapt\":\"Compania Berkshire Hathaway, condusă de Warren Buffett,"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Indicele global de securitate cibernetică S&P Kensho\", \"fapt\":\"S&P Kensho Global Cyber Security Screened Index (USD) oferă o imagine de ansamblu asupra performanței companiilor implicate în "
   },
   {
    "p": "openrouter",
-   "raw": "We need to output a JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary, original, no translation word-for-word. Must use correct terms, diacritics,"
+   "raw": "{\"titlu\":\"Tesla încheie procesul legat de accident fatal cu Full Self"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"2 acțiuni ale companiilor de țiței care merită încă cumpărate cu țițeiul la 70 de dolari pe baril\", \"fapt\":\"Prețul scăzut al țițeiului la 70 de dolari pe baril nu a redus valoarea acestor do"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"SpaceX va intra în indicele Nasdaq-100 printr-un proces accelerat\",\"fakt\":\"Compania SpaceX a lui Elon Musk va fi adăugată în indicele Nasdaq-100 într-un proces rapid, ceea ce va genera o cer"
+   "raw": "{\"titlu\":\"Tesla a încheiat procesul privind accidentul mortal implicând conducerea autonomă completă\",\"fapt\":\"Tesla a încheiat un proces legat de un accident mortal care a implicat sistemul său de con"
   }
  ],
  "no_keys": [],
@@ -51,7 +50,7 @@
   "new": 5,
   "fresh": 5,
   "fb": 0,
-  "tier2": 4,
-  "explainer": 1
+  "tier2": 3,
+  "explainer": 2
  }
 }
