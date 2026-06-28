@@ -1,44 +1,55 @@
 {
  "ok": {
-  "nvidia": 4
+  "nvidia": 6
  },
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:402": 4,
-  "sambanova:429": 20,
-  "nvidia:TimeoutError": 4
+  "gemini:429": 7,
+  "mistral:401": 7,
+  "cerebras:403": 7,
+  "deepseek:402": 14,
+  "siliconflow:401": 7,
+  "groq:403": 7,
+  "together:403": 7,
+  "sambanova:402": 7,
+  "sambanova:429": 35,
+  "nvidia:TimeoutError": 10,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"NVIDIA, o opțiune atractivă pentru investitorii miliardari\",\"fakt\":\"Bilionarii investesc în acțiunile NVIDIA Corporation, o companie lider în domeniul semiconductoarelor.\",\"ce_inseamna\":\"Ace"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, original summary, not literal translation. Must follow language rules: correct Romania"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be original summary in Romanian, not word-for-word translation. Must use correct"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Este NVIDIA Corporation (NVDA) una dintre cele mai bune acțiuni din sectorul semiconductor pentru a cumpăra, conform miliardarilor?\",\"fapt\":\"Conform unor rapoarte, NVIDIA Corporation ar pute"
+   "raw": "{\"titlu\":\"Prețurile petrolului cresc, viitorul acțiunilor avansează ușor pe fondul schimbului de atacuri aeriene între SUA și Iran\",\"fapt\":\"Prețurile petrolului au crescut duminică, în timp ce viitoru"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Evolutia potentială a acțiunilor Enbridge în următorii 10 ani\",\"fakt\":\"Compania Enbridge, cunoscută pentru randamentul său ridicat, ar putea înregistra o creștere semnificativă în următorul "
+   "raw": "{\"titlu\":\"Prețul țițeiului crește după atacul asupra unei petroliere în Orientul Mijlociu\",\"fakt\":\"Un atac asupra unei petroliere în regiunea Orientului Mijlociu a determinat o creștere a prețului țiț"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Unde va fi acțiunea Enbridge cu randament ridicat peste 10 ani?\", \"fapt\":\"Analiștii financiari se întreabă unde va ajunge acțiunea Enbridge, cunoscută pentru randamentul său ridicat, în urmă"
+   "raw": "{\"titlu\":\"Prețul țițeiului sare în sus după ce un tanc petrolier a fost lovit în escaladarea tensiunilor din Orientul Mijlociu - Bloomberg.com\",\"fapt\":\"Prețul țițeiului a crescut brusc după ce un tanc"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Cele mai inteligente acțiuni cu dividend pentru investiții de 3.000 de dolari\",\"fapt\":\"Yahoo Finance prezintă o listă cu acțiuni care oferă dividend și pot fi cumpărate cu o investiție de 3."
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 2,
-  "fresh": 2,
+  "new": 4,
+  "fresh": 4,
   "fb": 0,
-  "tier2": 2,
-  "explainer": 0
+  "tier2": 3,
+  "explainer": 1
  }
 }
