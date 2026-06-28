@@ -1,56 +1,56 @@
 {
  "ok": {
-  "sambanova": 4,
-  "nvidia": 5
+  "sambanova": 5,
+  "nvidia": 1
  },
  "err": {
-  "gemini:429": 12,
-  "mistral:401": 12,
-  "cerebras:403": 12,
-  "deepseek:402": 24,
-  "siliconflow:401": 12,
-  "groq:403": 12,
-  "together:403": 12,
-  "sambanova:402": 12,
-  "sambanova:429": 40,
-  "nvidia:TimeoutError": 19,
-  "fireworks:404": 2
+  "gemini:429": 9,
+  "mistral:401": 9,
+  "cerebras:403": 9,
+  "deepseek:402": 18,
+  "siliconflow:401": 9,
+  "groq:403": 9,
+  "together:403": 9,
+  "sambanova:402": 9,
+  "sambanova:429": 20,
+  "nvidia:TimeoutError": 22,
+  "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 5
  },
  "samples": [
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Piețele din Golful Persic au înregistrat evoluții mixte din cauza tensiunilor comerciale între SUA și Iran\",\"fapt\":\"Tensiunile comerciale și atacurile dintre Statele Unite și Iran au afectat"
+   "raw": "{\"titlu\":\"Avion prăbușit în turnul de control din Beijing, în apropierea reședinței președintelui Xi\", \"fapt\":\"Un avion s-a prăbușit în turnul de control al aeroportului din Beijing, ridicând întrebăr"
+  },
+  {
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Pericolul ascuns al unor acțiuni cu randament ridicat la dividend\",\"fapt\":\"Unele acțiuni cu randament ridicat la dividend pot ascunde pericole necunoscute, potrivit unor analiști financiari."
+  },
+  {
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Arta comunicării Rezervei Federale, o abilitate cheie pentru conducerea economică\",\"fapt\":\"Fostul președinte al Rezervei Federale, Alan Greenspan, a fost cunoscut pentru abilitatea sa de a c"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON with fields: titlu, fapt, ce_inseamna, categorie. Must be valid JSON on one line. Title: clear Romanian reformulated. Fact: 1-2 neutral sentences with main fact. ce_inseamna: 2-"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary original, not word-for-word translation. Must follow language rules: correct R"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian summary, original, not literal translation. Must follow language rules: R"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, natural, correct diacritics. Must not use words fro"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian correct, natural, no foreign wor"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian text, no foreign language words. Must use correct terms. Title must be cl"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Advanced Micro Devices (AMD) Este O Acțiune Care Ar Putea Sări În Valoare, Conform Newsletter-urilor - Yahoo Finance\",\"fapt\":\"Acțiunile Advanced Micro Devices (AMD) ar putea sări în valoare,"
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Europa în alertă maximă pe măsură ce valul de căldură letală se deplasează spre est și sud\",\"fapt\":\"Europa se confruntă cu o alertă maximă din cauza unei perioade prelungite de căldură extre"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 9,
-  "fresh": 9,
-  "fb": 1,
-  "tier2": 3,
-  "explainer": 5
+  "new": 5,
+  "fresh": 5,
+  "fb": 0,
+  "tier2": 2,
+  "explainer": 3
  }
 }
