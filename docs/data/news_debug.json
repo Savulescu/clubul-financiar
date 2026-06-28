@@ -1,57 +1,56 @@
 {
  "ok": {
-  "nvidia": 4,
-  "sambanova": 5
+  "sambanova": 4,
+  "nvidia": 5
  },
  "err": {
-  "gemini:429": 11,
-  "mistral:401": 11,
-  "cerebras:403": 11,
-  "deepseek:402": 22,
-  "siliconflow:401": 11,
-  "groq:403": 11,
-  "together:403": 11,
-  "sambanova:402": 11,
-  "sambanova:TimeoutError": 2,
-  "sambanova:429": 28,
+  "gemini:429": 12,
+  "mistral:401": 12,
+  "cerebras:403": 12,
+  "deepseek:402": 24,
+  "siliconflow:401": 12,
+  "groq:403": 12,
+  "together:403": 12,
+  "sambanova:402": 12,
+  "sambanova:429": 40,
   "nvidia:TimeoutError": 19,
-  "fireworks:404": 1
+  "fireworks:404": 2
  },
  "ro_reject": {
-  "openrouter": 2
+  "openrouter": 4
  },
  "samples": [
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian correct, no words from other langua"
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Piețele din Golful Persic au înregistrat evoluții mixte din cauza tensiunilor comerciale între SUA și Iran\",\"fapt\":\"Tensiunile comerciale și atacurile dintre Statele Unite și Iran au afectat"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must not translate word for word. Must "
+   "raw": "We need to output JSON with fields: titlu, fapt, ce_inseamna, categorie. Must be valid JSON on one line. Title: clear Romanian reformulated. Fact: 1-2 neutral sentences with main fact. ce_inseamna: 2-"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian summary, original, not literal translation. Must follow language rules: R"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian correct, natural, no foreign wor"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian text, no foreign language words. Must use correct terms. Title must be cl"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Apolul care a alimentat ralliul acțiunilor americane devine o preocupare tot mai mare\",\"fapt\":\"Utilizarea apolului pentru a cumpăra acțiuni și obligațiuni a devenit o sursă de îngrijorare pe"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Acțiunile companiilor de inteligență artificială se confruntă cu noi provocări\",\"fapt\":\"Acțiunile companiilor de inteligență artificială ar putea înregistra o creștere puternică sau o scăder"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Pensionarii de azi ar putea avea nevoie de mai multe acțiuni decât părinții lor\",\"fapt\":\"O analiză recentă sugerează că pensionarii de azi ar trebui să dețină o pondere mai mare de acțiuni î"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Prețul acțiunilor Newmont Corporation scade\",\"fapt\":\"Compania minieră Newmont Corporation a înregistrat o scădere a prețului acțiunilor sale, potrivit datelor de pe Yahoo Finance Canada. Ace"
+   "raw": "{\"titlu\":\"Advanced Micro Devices (AMD) Este O Acțiune Care Ar Putea Sări În Valoare, Conform Newsletter-urilor - Yahoo Finance\",\"fapt\":\"Acțiunile Advanced Micro Devices (AMD) ar putea sări în valoare,"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 16,
-  "fresh": 16,
-  "fb": 8,
-  "tier2": 2,
-  "explainer": 6
+  "new": 9,
+  "fresh": 9,
+  "fb": 1,
+  "tier2": 3,
+  "explainer": 5
  }
 }
