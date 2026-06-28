@@ -1,35 +1,55 @@
 {
  "ok": {
-  "nvidia": 2
+  "nvidia": 8
  },
  "err": {
-  "gemini:429": 2,
-  "mistral:401": 2,
-  "cerebras:403": 2,
-  "deepseek:402": 4,
-  "siliconflow:401": 2,
-  "groq:403": 2,
-  "together:403": 2,
-  "sambanova:402": 2,
-  "sambanova:429": 10
+  "gemini:429": 10,
+  "mistral:401": 10,
+  "cerebras:403": 10,
+  "deepseek:402": 20,
+  "siliconflow:401": 10,
+  "groq:403": 10,
+  "together:403": 10,
+  "sambanova:402": 10,
+  "sambanova:429": 50,
+  "nvidia:TimeoutError": 21,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Irakul lansează o campanie de combatere a corupției, arestând politicieni și funcționari guvernamentali\",\"fakt\":\"Autoritățile irakiene au demarat o acțiune de combatere a corupției, arestând"
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: titlu, fapt, ce_inseamna, categorie. Must be valid JSON on a single line. Provide original Romanian summary, not literal translation. Must follow language rules: co"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Provide original summary in Romanian, no translation word-for-word. Must obey language rul"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Irakul arestează politicieni și funcționari guvernamentali în cadrul unei acțiuni de combatere a corupției\", \"fapt\":\"Irakul a arestat politicieni și funcționari guvernamentali ca parte a une"
+   "raw": "{\"titlu\":\"Ed Miliband ca cancelar ar beneficia fiecare parte a Regatului Unit - și piețele obligațiunilor\", \"fapt\":\"Dacă Andy Burnham alege secretarul pentru energie, Labour ar putea utiliza pe deplin"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Accordul comercial post-Brexit lovește puternic fermierii britanici\",\"fapt\":\"Prețurile la carne de vită din Regatul Unit au scăzut semnificativ din cauza importurilor de carne ieftină din Au"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Taxarea milionarilor: o provocare pentru guverne\",\"fakt\":\"Statele încearcă să implementeze taxe pe avere pentru cei foarte bogați, dar există numeroase excepții și scăpări care pot reduce ef"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Când vine vorba de impozitarea suprabogaților, nu este nevoie să reinventăm roata\",\"fapt\":\"Orice nou impozit pe cei bogați nu va aduce prea mulți bani, decât dacă se vor rezolva majoritatea "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 1,
-  "fresh": 1,
-  "fb": 0,
-  "tier2": 1,
-  "explainer": 0
+  "new": 6,
+  "fresh": 6,
+  "fb": 1,
+  "tier2": 4,
+  "explainer": 1
  }
 }
