@@ -1,53 +1,56 @@
 {
  "ok": {
-  "sambanova": 32,
-  "nvidia": 4
+  "sambanova": 3,
+  "nvidia": 15
  },
  "err": {
-  "gemini:429": 36,
-  "mistral:401": 36,
-  "cerebras:403": 36,
-  "deepseek:402": 72,
-  "siliconflow:401": 36,
-  "groq:403": 36,
-  "together:403": 36,
-  "sambanova:402": 36,
-  "sambanova:429": 111,
-  "nvidia:TimeoutError": 7
+  "gemini:429": 19,
+  "mistral:401": 19,
+  "cerebras:403": 19,
+  "deepseek:402": 38,
+  "siliconflow:401": 19,
+  "groq:403": 19,
+  "together:403": 19,
+  "sambanova:402": 19,
+  "sambanova:429": 92,
+  "nvidia:TimeoutError": 12,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Antrenorul Scoției demisionează după eliminarea de la Campionatul Mondial\",\"fapt\":\"Antrenorul Steve Clarke a demisionat din funcția de selecționer al Scoției după ce echipa a fost eliminată "
+   "raw": "{\"titlu\":\"Atenție la escrocheriile cu recuperarea codurilor de acces pentru criptomonede\",\"fapt\":\"O nouă schemă de fraudă vizează persoanele care au uitat codurile de acces pentru portofelele digitale"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Elbit Systems, o investiție atractivă pe NASDAQ\",\"fakt\":\"Compania Elbit Systems (ESLT) este considerată una dintre acțiunile cu creștere ridicată de pe NASDAQ\",\"ce_inseamna\":\"Pentru investit"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Este Elbit Systems (ESLT) una dintre acțiunile NASDAQ cu creștere ridicată de cumpărat acum - Yahoo Finance\",\"fapt\":\"Elbit Systems (ESLT) este analizat ca o posibilă oportunitate de investiț"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Partidul Laburist din Marea Britanie se confruntă cu o schimbare de strategie economică\",\"fapt\":\"Partidul Laburist din Marea Britanie se pregătește pentru o schimbare de lider, iar acest luc"
+   "raw": "{\"titlu\":\"Johnson & Johnson, una dintre cele mai bune acțiuni pentru venituri pasive\",\"fapt\":\"Compania Johnson & Johnson a fost inclusă în lista celor mai bune 10 acțiuni pentru venituri pasive, potri"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"3M, una dintre cele mai profitabile acțiuni din S&P 500\",\"fapt\":\"Compania 3M a fost inclusă în lista celor 12 acțiuni din S&P 500 considerate a fi cele mai profitabile pentru investitori. Ac"
+   "raw": "{\"titlu\":\"Airbus câștigă un contract de 9,35 miliarde de dolari cu China Eastern pentru avioane cu corp lat\",\"fapt\":\"Compania aerospațială europeană Airbus a semnat un acord cu compania aeriană chinez"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"China și Rusia desfășoară patrulări aeriene comune deasupra mărilor regionale\",\"fapt\":\"China și Rusia au efectuat o patrulare aeriană comună deasupra mărilor regionale, într-un gest de conso"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Președintele Trump amenință cu taxe vamale de 100% pentru Europa\",\"fapt\":\"Președintele american Donald Trump a anunțat că va impune taxe vamale de 100% pentru produsele europene, ca răspuns "
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Prețul acțiunilor Aecon Group Inc. a înregistrat o mișcare semnificativă\",\"fapt\":\"Compania canadiană Aecon Group Inc. a anunțat recent evoluții ale prețului acțiunilor sale, reflectate pe pl"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no words from other languages. Use correct terms: oil/crude = \"tițe"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 6,
-  "fresh": 6,
+  "new": 5,
+  "fresh": 5,
   "fb": 0,
-  "tier2": 1,
-  "explainer": 5
+  "tier2": 2,
+  "explainer": 3
  }
 }
