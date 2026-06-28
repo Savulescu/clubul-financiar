@@ -1,19 +1,20 @@
 {
  "ok": {
-  "nvidia": 8,
-  "sambanova": 6
+  "nvidia": 4,
+  "sambanova": 5
  },
  "err": {
-  "gemini:429": 15,
-  "mistral:401": 15,
-  "cerebras:403": 15,
-  "deepseek:402": 30,
-  "siliconflow:401": 15,
-  "groq:403": 15,
-  "together:403": 15,
-  "sambanova:402": 15,
-  "sambanova:429": 45,
-  "nvidia:TimeoutError": 15,
+  "gemini:429": 11,
+  "mistral:401": 11,
+  "cerebras:403": 11,
+  "deepseek:402": 22,
+  "siliconflow:401": 11,
+  "groq:403": 11,
+  "together:403": 11,
+  "sambanova:402": 11,
+  "sambanova:TimeoutError": 2,
+  "sambanova:429": 28,
+  "nvidia:TimeoutError": 19,
   "fireworks:404": 1
  },
  "ro_reject": {
@@ -21,36 +22,36 @@
  },
  "samples": [
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Ultimele știri și titluri despre acțiunile AEU4B.NX pe Yahoo Finance Singapore\",\"fapt\":\"Acțiunile AEU4B.NX sunt în atenția investitorilor, cu informații și știri actualizate pe Yahoo Finance"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Evolutia producătorilor de automobile pe piața bursieră germană\",\"fakt\":\"Producătorii de automobile germani au înregistrat o evoluție variată pe piața bursieră, conform datelor oferite de Ya"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"DAXsub. Toate Producătorii de Automobile P (4N8D.DE) Grafic Interactiv de Acțiuni - Yahoo! Finance Canada\",\"fapt\":\"Graficul interactiv de acțiuni DAXsub. Toate Producătorii de Automobile P ("
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian correct, no words from other langua"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must use correct terms. Must not incl"
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must not translate word for word. Must "
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no words from other languages. Must use correct terms: oil/crude "
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Apolul care a alimentat ralliul acțiunilor americane devine o preocupare tot mai mare\",\"fapt\":\"Utilizarea apolului pentru a cumpăra acțiuni și obligațiuni a devenit o sursă de îngrijorare pe"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Diagramă interactivă a acțiunilor (AEV4B.NX) - Yahoo Finance Singapore\",\"fapt\":\"Yahoo Finance Singapore oferă o diagramă interactivă a acțiunilor (AEV4B.NX) pentru a ajuta investitorii să ur"
+   "raw": "{\"titlu\":\"Acțiunile companiilor de inteligență artificială se confruntă cu noi provocări\",\"fapt\":\"Acțiunile companiilor de inteligență artificială ar putea înregistra o creștere puternică sau o scăder"
+  },
+  {
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Pensionarii de azi ar putea avea nevoie de mai multe acțiuni decât părinții lor\",\"fapt\":\"O analiză recentă sugerează că pensionarii de azi ar trebui să dețină o pondere mai mare de acțiuni î"
+  },
+  {
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Prețul acțiunilor Newmont Corporation scade\",\"fapt\":\"Compania minieră Newmont Corporation a înregistrat o scădere a prețului acțiunilor sale, potrivit datelor de pe Yahoo Finance Canada. Ace"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 0,
-  "fresh": 0,
-  "fb": 0,
-  "tier2": 0,
-  "explainer": 0
+  "new": 16,
+  "fresh": 16,
+  "fb": 8,
+  "tier2": 2,
+  "explainer": 6
  }
 }
