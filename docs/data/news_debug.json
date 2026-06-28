@@ -1,44 +1,55 @@
 {
  "ok": {
-  "nvidia": 4
+  "nvidia": 6
  },
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:402": 4,
-  "sambanova:429": 20,
-  "nvidia:TimeoutError": 10
+  "gemini:429": 8,
+  "mistral:401": 8,
+  "cerebras:403": 8,
+  "deepseek:402": 16,
+  "siliconflow:401": 8,
+  "groq:403": 8,
+  "together:403": 8,
+  "sambanova:402": 8,
+  "sambanova:429": 40,
+  "nvidia:TimeoutError": 21,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Randamentul de peste 13,5% al AGNC Investment, afectat de Rezerva Federală\",\"fapt\":\"Rezerva Federală a anunțat o nouă măsură care ar putea afecta randamentul de peste 13,5% al AGNC Investmen"
+   "raw": "{\"titlu\":\"Rezerva Federală lansează o provocare pentru obligațiunile țărilor emergente\",\"fakt\":\"Rezerva Federală a adoptat o atitudine fermă, ceea ce poate influența negativ randamentul obligațiunilor"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"De ce Alphabet este una dintre cele mai bune acțiuni de cloud computing de cumpărat, potrivit fondurilor de investiții\",\"fapt\":\"Fondurile de investiții consideră că Alphabet (GOOGL) este una"
+   "raw": "{\"titlu\":\"Rezerva Federală agresivă lansează o provocare pentru ralliul obligațiunilor piețelor emergente\",\"fapt\":\"Rezerva Federală a lansat o provocare pentru ralliul obligațiunilor piețelor emergent"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Acțiuni din domeniul gestionării deșeurilor care transformă investițiile în inteligență artificială în creștere economică\",\"fakt\":\"Companii din sectorul gestionării deșeurilor folosesc intel"
+   "raw": "{\"titlu\":\"Austria îndeamnă Europa să găzduiască Anthropic după restricțiile SUA privind accesul la inteligența artificială\",\"fakt\":\"Austria a făcut un apel către Europa pentru a găzdui compania de int"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"3 acțiuni deșeuri transformând investițiile în inteligență artificială în creștere\", \"fapt\":\"Există trei acțiuni din domeniul deșeurilor care folosesc investițiile în inteligență artificială"
+   "raw": "{\"titlu\":\"Austria îndeamnă Europa să găzduiască Anthropic după restricțiile SUA privind accesul la IA\", \"fapt\":\"Austria îndeamnă Europa să găzduiască compania de inteligență artificială Anthropic, dup"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line. Must follow constraints: Romanian correct, no foreign words, proper diacriti"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line. Must be Romanian, natural, correct diacritics. Must not translate word-"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 3,
-  "fresh": 3,
-  "fb": 0,
-  "tier2": 1,
-  "explainer": 2
+  "new": 24,
+  "fresh": 24,
+  "fb": 20,
+  "tier2": 3,
+  "explainer": 1
  }
 }
