@@ -1,52 +1,56 @@
 {
  "ok": {
-  "nvidia": 22
+  "nvidia": 3,
+  "sambanova": 5
  },
  "err": {
-  "gemini:429": 22,
-  "mistral:401": 22,
-  "cerebras:403": 22,
-  "deepseek:402": 44,
-  "siliconflow:401": 22,
-  "groq:403": 22,
-  "together:403": 22,
-  "sambanova:402": 22,
-  "sambanova:429": 110,
-  "nvidia:TimeoutError": 12
+  "gemini:429": 11,
+  "mistral:401": 11,
+  "cerebras:403": 11,
+  "deepseek:402": 22,
+  "siliconflow:401": 11,
+  "groq:403": 11,
+  "together:403": 11,
+  "sambanova:402": 11,
+  "sambanova:429": 33,
+  "nvidia:TimeoutError": 21,
+  "fireworks:404": 2
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 4
+ },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"PDD Holdings, o opțiune atractivă pentru investitori\",\"fapt\":\"Analiștii financiari consideră că PDD Holdings ar putea fi una dintre cele mai bune acțiuni non-tehnologice de cumpărat\",\"ce_ins"
+   "raw": "{\"titlu\":\"Valul de căldură extremă lovește Europa\", \"fapt\":\"O serie de țări europene, printre care și Franța, se confruntă cu un val de căldură extremă, care a provocat deja numeroase victime și a per"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Este PDD Holdings (PDD) una dintre cele mai bune acțiuni non-tehnologice de cumpărat, conform analiștilor?\", \"fapt\":\"Analiștii financiari evaluează potențialul de investiție al acțiunilor PD"
+   "raw": "{\"titlu\":\"Investiții pe termen lung: acțiuni cu randament ridicat\",\"fakt\":\"Există oportunități de investiții în acțiuni care oferă randamente de peste 8,5% și pot fi achiziționate cu o sumă de 1.000 d"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Curtea Supremă amână decizia privind strategia lui Trump referitoare la Rezerva Federală și cetățenie\",\"fakt\":\"Curtea Supremă a decis să amâne luarea unei decizii finale cu privire la strate"
+   "raw": "{\"titlu\":\"3 Acțiuni cu Dividende care oferă un randament de peste 8,5% pentru a cumpăra cu 1.000 de dolari acum -- și a le păstra pentru o viață de venit pasiv\",\"fapt\":\"Investitorii pot cumpăra acțiun"
   },
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Curtea Supremă lasă strategiile lui Trump referitoare la Rezerva Federală și cetățenie pentru ultimul moment\",\"fapt\":\"Curtea Supremă a decis să amâne examinarea strategiilor lui Trump referi"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original summary in Romanian, not word-for-word translation. Must follow language rules: correc"
   },
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Casa de brokeraj Phillip Securities menține recomandarea de cumpărare pentru acțiunile Adobe\",\"fakt\":\"Casa de brokeraj Phillip Securities a anunțat că menține recomandarea de cumpărare pentr"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must use correct terms: oil/crude = \"ți"
   },
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Phillip Securities menține ratingul de cumpărare pentru acțiunile Adobe (ADBE)\",\"fapt\":\"Phillip Securities a menținut ratingul de cumpărare pentru acțiunile Adobe, conform sursei Yahoo Finan"
+   "p": "sambanova",
+   "raw": "{\"titlu\":\"Ce ne arată istoria despre un posibil prăbușire a pieței de acțiuni în 2026\", \"fapt\":\"Istoria pieței financiare arată că există posibilitatea unei prăbușiri a pieței de acțiuni în 2026\"}"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 6,
-  "fresh": 6,
-  "fb": 0,
-  "tier2": 4,
-  "explainer": 2
+  "new": 12,
+  "fresh": 12,
+  "fb": 4,
+  "tier2": 2,
+  "explainer": 6
  }
 }
