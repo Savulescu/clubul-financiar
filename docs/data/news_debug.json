@@ -1,56 +1,55 @@
 {
  "ok": {
-  "sambanova": 5,
-  "nvidia": 1
+  "nvidia": 13
  },
  "err": {
-  "gemini:429": 9,
-  "mistral:401": 9,
-  "cerebras:403": 9,
-  "deepseek:402": 18,
-  "siliconflow:401": 9,
-  "groq:403": 9,
-  "together:403": 9,
-  "sambanova:402": 9,
-  "sambanova:429": 20,
-  "nvidia:TimeoutError": 22,
-  "fireworks:404": 3
+  "gemini:429": 14,
+  "mistral:401": 14,
+  "cerebras:403": 14,
+  "deepseek:402": 28,
+  "siliconflow:401": 14,
+  "groq:403": 14,
+  "together:403": 14,
+  "sambanova:402": 14,
+  "sambanova:429": 70,
+  "nvidia:TimeoutError": 14,
+  "fireworks:404": 1
  },
  "ro_reject": {
-  "openrouter": 5
+  "openrouter": 2
  },
  "samples": [
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Avion prăbușit în turnul de control din Beijing, în apropierea reședinței președintelui Xi\", \"fapt\":\"Un avion s-a prăbușit în turnul de control al aeroportului din Beijing, ridicând întrebăr"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Pericolul ascuns al unor acțiuni cu randament ridicat la dividend\",\"fapt\":\"Unele acțiuni cu randament ridicat la dividend pot ascunde pericole necunoscute, potrivit unor analiști financiari."
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Arta comunicării Rezervei Federale, o abilitate cheie pentru conducerea economică\",\"fapt\":\"Fostul președinte al Rezervei Federale, Alan Greenspan, a fost cunoscut pentru abilitatea sa de a c"
+   "p": "openrouter",
+   "raw": "We need to output a JSON object with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line.\n\nConstraints: Romanian language, natural, correct diacritics, no foreign words. M"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary original, not word-for-word translation. Must follow language rules: correct R"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Title in Romanian, reformulated, clear. Fact: 1-2 neutral sentences w"
   },
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, natural, correct diacritics. Must not use words fro"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Va Averi Loc o Divizionare a Acțiunilor Micron Acum După Rezultatele Exceptionale ale Veniturilor Sale?\", \"fapt\":\"Compania Micron a înregistrat rezultate exceptionale ale veniturilor, ceea c"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Europa în alertă maximă pe măsură ce valul de căldură letală se deplasează spre est și sud\",\"fapt\":\"Europa se confruntă cu o alertă maximă din cauza unei perioade prelungite de căldură extre"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Prețul acțiunilor YRD.N și știri recente\", \"fapt\":\"YRD.N este un simbol bursier urmărit de Reuters pentru evoluția prețului acțiunilor și a știrilor recente.\", \"ce_inseamnă\":\"Pentru un inves"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"YRD.N - Prețul acțiunilor și știri recente - Reuters\",\"fapt\":\"YRD.N oferă informații despre prețul acțiunilor și știri recente pe Reuters.\"}"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Anthropic, potențialul campion al companiilor de software din istorie\",\"fapt\":\"Compania Anthropic ar putea deveni cea mai valoroasă companie de software din istorie, iar anumiți investitori "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 5,
-  "fresh": 5,
-  "fb": 0,
-  "tier2": 2,
+  "new": 13,
+  "fresh": 13,
+  "fb": 5,
+  "tier2": 5,
   "explainer": 3
  }
 }
