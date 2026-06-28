@@ -1,53 +1,56 @@
 {
  "ok": {
-  "nvidia": 5,
-  "sambanova": 34
+  "nvidia": 4,
+  "sambanova": 1
  },
  "err": {
-  "gemini:429": 39,
-  "mistral:401": 39,
-  "cerebras:403": 39,
-  "deepseek:402": 78,
-  "siliconflow:401": 39,
-  "groq:403": 39,
-  "together:403": 39,
-  "sambanova:402": 39,
-  "sambanova:429": 93,
-  "nvidia:TimeoutError": 8
+  "gemini:429": 6,
+  "mistral:401": 6,
+  "cerebras:403": 6,
+  "deepseek:402": 12,
+  "siliconflow:401": 6,
+  "groq:403": 6,
+  "together:403": 6,
+  "sambanova:402": 6,
+  "sambanova:429": 29,
+  "nvidia:TimeoutError": 14,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Gigantul obligațiunilor Pimco își extinde influența prin plasamente private\",\"fakt\":\"Pimco, unul dintre cei mai mari manageri de obligațiuni la nivel global, și-a anunțat intenția de a-și di"
+   "raw": "{\"titlu\":\"Morgan Stanley ridică ținta de preț pentru acțiunile IBM\",\"fapt\":\"Morgan Stanley a anunțat o creștere a țintei de preț pentru acțiunile companiei International Business Machines (IBM), potri"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Gigantul obligațiunilor Pimco își arată puterea prin plasarea privată a obligațiunilor\",\"fapt\":\"Pimco, unul dintre cei mai mari manageri de obligațiuni din lume, își extinde activitatea prin"
+   "raw": "{\"titlu\":\"Amazon, o opțiune de investiție în cloud computing potrivit fondurilor de investiții\",\"fapt\":\"Fondurile de investiții consideră că Amazon ar putea fi una dintre cele mai bune acțiuni de cump"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Răcirea Europei nu trebuie să fie un lux\", \"fapt\":\"Prețurile la energie ar putea scădea în Europa, făcând răcirea mai accesibilă pentru mai multe persoane.\", \"ce_inseamnă\":\"Acest lucru ar pu"
+   "raw": "{\"titlu\":\"NVIDIA, o investiție atractivă în domeniul interfeței creier-calculator\",\"fakt\":\"Compania NVIDIA Corporation este luată în considerare ca o posibilă investiție în domeniul interfeței creier-"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"De ce menținerea Europei la rece nu trebuie să fie un lux\",\"fapt\":\"Menținerea Europei la rece nu trebuie să fie neapărat un lux, potrivit unui articol din Financial Times\"}"
+   "raw": "{\"titlu\":\"Este NVIDIA Corporation (NVDA) una dintre cele mai bune acțiuni de interfață creier-calculator de cumpărat?\", \"fapt\":\"NVIDIA Corporation (NVDA) este luată în considerare ca una dintre cele m"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Braze Inc., una dintre cele mai slabe acțiuni de inteligență artificială sub 30 de dolari\",\"fapt\":\"Compania Braze Inc. a fost desemnată de vânzătorii scurți ca una dintre cele mai slabe acți"
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, containing fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no words from other languages. Must use specific terms. Must "
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Escaladarea conflictului între Statele Unite și Iran\", \"fapt\":\"Statele Unite și Iran au schimbat lovituri militare după ce încercarea de încetare a focului a eșuat, potrivit Financial Times."
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, correct grammar, no foreign words except allowed terms. Mus"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 7,
-  "fresh": 7,
+  "new": 4,
+  "fresh": 4,
   "fb": 0,
-  "tier2": 3,
-  "explainer": 4
+  "tier2": 2,
+  "explainer": 2
  }
 }
