@@ -1,51 +1,54 @@
 {
  "ok": {
-  "nvidia": 9
+  "nvidia": 14
  },
  "err": {
-  "gemini:429": 10,
-  "mistral:401": 10,
-  "cerebras:403": 10,
-  "deepseek:402": 20,
-  "siliconflow:401": 10,
-  "groq:403": 10,
-  "together:403": 10,
-  "sambanova:402": 60,
-  "nvidia:TimeoutError": 22
+  "gemini:429": 16,
+  "mistral:401": 16,
+  "cerebras:403": 16,
+  "deepseek:402": 32,
+  "siliconflow:401": 16,
+  "groq:403": 16,
+  "together:403": 16,
+  "sambanova:402": 96,
+  "nvidia:TimeoutError": 17,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Mamula Island by Banyan Tree deschide oficial primul resort al lanțului în Europa\",\"fapt\":\"Lanțul hotelier Banyan Tree a inaugurat oficial primul său resort în Europa, pe insula Mamula. Aces"
+   "raw": "{\"titlu\":\"Curtea Supremă din SUA se implică în disputa privind marca înregistrată a băuturii 'Mtn Dew Rise' a companiei Pepsi\",\"fapt\":\"Curtea Supremă din Statele Unite ale Americii a decis să se impli"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON with fields: \"titlu\", \"fapt\", \"ce_inseamna\", \"categorie\". Must be valid JSON on one line. Must be Romanian summary original, not word-for-word translation. Must follow language "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with keys: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, no foreign words, correct diacritics, specific terms. Must not translate word-for-word,"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Avertismentul Argentinei către Venezuela privind restructurarea datoriei\",\"fapt\":\"Argentina a emis un avertisment către Venezuela în legătură cu restructurarea datoriei, subliniind provocări"
+   "raw": "{\"titlu\":\"Charter ar putea face \\\"prieteni-dușmani\\\" cu SpaceX, iar acțiunile sale sunt în plină ascensiune\",\"fapt\":\"Acțiunile altor companii de telecomunicații scad, deoarece Starlink al SpaceX are o"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Tumult pe piața telecomunicațiilor: Comcast urcă cu 7% după spunerea afacerii media, AT&T scade cu 5% din cauza plecării directorului financiar și a concurenței de la Starlink, Verizon scade"
+   "raw": "{\"titlu\":\"Sectorul de chip-uri suferă pierderi masive\", \"fapt\":\"Acțiunile companiilor Micron și Intel au continuat să scadă, în contextul în care sectorul de chip-uri, evaluat la 200 de miliarde de do"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Turbulențe în telecomunicații: Comcast urcă cu 7% după divizarea media, AT&T scade cu 5% din cauza plecării directorului financiar și amenințării Starlink, Verizon scade cu 7% după ieșirea d"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Investitorii se orientează către acțiuni ale companiilor mijlocii și mici\", \"fapt\":\"Investitorii încep să se orienteze către acțiuni ale companiilor mijlocii și mici, o tendință observată pe"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"De ce investitorii se orientează către acțiuni ale companiilor mijlocii și mici\", \"fapt\":\"Investitorii se orientează către acțiuni ale companiilor mijlocii și mici, o tendință care ar putea "
+   "raw": "{\"titlu\":\"Tratatul fragil de la Hormuz: impact asupra unor acțiuni importante\",\"fakt\":\"Un tratat fragil de la Hormuz ar putea influența evoluția acțiunilor unor companii importante, printre care Halli"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 12,
-  "fresh": 12,
-  "fb": 6,
-  "tier2": 3,
-  "explainer": 3
+  "new": 9,
+  "fresh": 9,
+  "fb": 1,
+  "tier2": 6,
+  "explainer": 2
  }
 }
