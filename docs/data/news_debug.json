@@ -1,51 +1,55 @@
 {
  "ok": {
-  "nvidia": 9
+  "nvidia": 10
  },
  "err": {
-  "gemini:429": 10,
-  "mistral:401": 10,
-  "cerebras:403": 10,
-  "deepseek:402": 20,
-  "siliconflow:401": 10,
-  "groq:403": 10,
-  "together:403": 10,
-  "sambanova:402": 60,
-  "nvidia:TimeoutError": 21
+  "gemini:429": 12,
+  "mistral:401": 11,
+  "cerebras:403": 11,
+  "deepseek:402": 22,
+  "siliconflow:401": 11,
+  "groq:403": 11,
+  "together:403": 11,
+  "sambanova:402": 66,
+  "nvidia:TimeoutError": 19,
+  "fireworks:404": 1,
+  "openrouter:429": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 1
+ },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Compania de transport maritim Maersk își revizuiește în creștere estimările de profit\",\"fakt\":\"Compania daneză de transport maritim Maersk și-a revizuit în creștere estimările de profit, dup"
+   "raw": "{\"titlu\":\"JPMorgan are dificultăți în a găsi cumpărători pentru împrumutul cu 15% al companiei de foraj de țiței\",\"fakt\":\"JPMorgan întâmpină dificultăți în a găsi investitori dispuși să cumpere un împ"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Maersk majorează estimările de profit pe fondul creșterii cererii cauzate de noile taxe vamale americane\",\"fapt\":\"Compania daneză de transport maritim Maersk a majorat estimările sale de pro"
+   "raw": "{\"titlu\":\"JPMorgan are dificultăți în a găsi cerere pentru împrumutul de 15% al companiei de foraj de țiței\", \"fapt\":\"JPMorgan întâmpină dificultăți în a găsi investitori interesați de un împrumut cu "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no foreign words. Must follow rules: oil/crude = \"tiței\", barrel=ba"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Fondurile de obligațiuni municipale ale BNY Mellon anunță distribuiri de dividende\",\"fapt\":\"Fondurile de obligațiuni municipale închise ale BNY Mellon au anunțat distribuiri de dividende pen"
+   "raw": "{\"titlu\":\"Susquehanna afirmă că a pierdut milioane din cauza unor tranzacționari insider misterioși\",\"fapt\":\"Compania Susquehanna a anunțat că a înregistrat pierderi de milioane de dolari din cauza un"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Echipa Olandeiă se solidarizează cu jucătorul Gakpo după pierderea fiului nenăscut\",\"fapt\":\"Jucătorul olandez Cody Gakpo a suferit o tragedie personală, pierzându-și fiul nenăscut, iar echip"
+   "raw": "{\"titlu\":\"Europa devine mai rezistentă la șocurile economice\", \"fapt\":\"Președintele Băncii Centrale Europene, Christine Lagarde, a declarat că Europa este tot mai rezistentă la șocurile economice.\", \""
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Oracle, lider în soluții de gestionare a experienței clienților pentru utilități cu tehnologie de inteligență artificială\",\"fapt\":\"Compania Oracle a fost desemnată lider de către IDC MarketS"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Acțiunile Nike ajung la cel mai mic nivel din ultimii 11 ani\",\"fapt\":\"Acțiunile companiei Nike au scăzut la cel mai mic nivel din ultimii 11 ani, potrivit datelor de pe Yahoo Finance. Aceast"
+   "raw": "{\"titlu\":\"Atacurile din weekend asupra Iranului declanșate de Trump generează creșteri puternice ale acțiunilor luni\",\"fapt\":\"Președintele american Donald Trump a ordonat atacuri asupra Iranului, ceea"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 5,
-  "fresh": 19,
-  "fb": 6,
-  "tier2": 5,
-  "explainer": 8
+  "new": 9,
+  "fresh": 9,
+  "fb": 2,
+  "tier2": 3,
+  "explainer": 4
  }
 }
