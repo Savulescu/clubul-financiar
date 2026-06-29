@@ -1,14 +1,55 @@
 {
- "ok": {},
- "err": {},
- "ro_reject": {},
- "samples": [],
+ "ok": {
+  "nvidia": 6
+ },
+ "err": {
+  "gemini:429": 9,
+  "mistral:401": 9,
+  "cerebras:403": 9,
+  "deepseek:402": 18,
+  "siliconflow:401": 9,
+  "groq:403": 9,
+  "together:403": 9,
+  "sambanova:402": 9,
+  "sambanova:429": 45,
+  "nvidia:TimeoutError": 19,
+  "fireworks:404": 2
+ },
+ "ro_reject": {
+  "openrouter": 4
+ },
+ "samples": [
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Acțiunile pe loc, prețul țițeiului în creștere după încetarea atacurilor între SUA și Iran\",\"fapt\":\"Prețul țițeiului a crescut după ce Statele Unite și Iran au oprit atacurile, în timp ce ac"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words except allowed terms. Must not translate word for word. Must"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output a JSON object with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian summary original, not word-for-word translation. Must follow lan"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Dezvoltările războiului din Iran, indicii pentru calea ratelor Rezerva Federală în atenție pentru rupia indiană și obligațiuni\",\"fapt\":\"Dezvoltările războiului din Iran și indicii pentru cal"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Riscuri pe termen scurt pentru acțiunile japoneze din domeniul inteligenței artificiale\", \"fapt\":\"Compania BlueBay avertizează asupra unor riscuri pe termen scurt pentru acțiunile companiilo"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"China extinde restricțiile de export către Japonia\", \"fapt\":\"China a impus restricții de export asupra unor instituțe de apărare și companii japoneze, inclusiv producători de drone și firme "
+  }
+ ],
  "no_keys": [],
  "summary": {
-  "new": 0,
-  "fresh": 0,
-  "fb": 0,
-  "tier2": 0,
-  "explainer": 0
+  "new": 8,
+  "fresh": 8,
+  "fb": 2,
+  "tier2": 2,
+  "explainer": 4
  }
 }
