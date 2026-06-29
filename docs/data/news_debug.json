@@ -1,6 +1,6 @@
 {
  "ok": {
-  "nvidia": 1
+  "nvidia": 2
  },
  "err": {
   "gemini:429": 5,
@@ -15,39 +15,39 @@
   "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 6
+  "openrouter": 5
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: Romanian "
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use corect terms. Provide original summary, not"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian summary original, not literal translation. Must follo"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary, original, not word-for-word translation. Must follow language rules: correct "
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Curtea Supremă din SUA spune că guvernatorul Rezervei Federale, Lisa Cook, poate rămâne în funcție\",\"fakt\":\"Curtea Supremă a refuzat solicitarea președintelui Donald Trump de a o demite pe g"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Curtea Supremă hotărăște că Lisa Cook de la Rezerva Federală poate rămâne la banca centrală în timp ce contestă încercarea lui Trump de a o demite\",\"fapt\":\"Curtea Supremă a refuzat să permit"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use specified term translations. Must not trans"
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must not contain any other text. Must be Romanian summary original, not literal translati"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on a single line. Must be original Romanian summary, no literal translation. Must follow l"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be original Romanian summary, not literal translation. Must follow language rule"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian original summary, not literal translation. Use correct terms. Title"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text.\n\nConstraints: Romanian language, natural, correct diacritics, no fore"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 22,
-  "fresh": 22,
-  "fb": 19,
+  "new": 19,
+  "fresh": 19,
+  "fb": 16,
   "tier2": 1,
   "explainer": 2
  }
