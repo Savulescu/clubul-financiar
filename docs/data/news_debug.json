@@ -1,56 +1,57 @@
 {
  "ok": {
-  "sambanova": 9,
-  "nvidia": 1
+  "sambanova": 1,
+  "openrouter": 1,
+  "nvidia": 2
  },
  "err": {
-  "gemini:429": 13,
-  "mistral:401": 13,
-  "cerebras:403": 13,
-  "deepseek:402": 26,
-  "siliconflow:401": 13,
-  "groq:403": 13,
-  "together:403": 13,
-  "sambanova:402": 49,
-  "sambanova:429": 6,
-  "nvidia:TimeoutError": 20,
-  "fireworks:404": 2
+  "gemini:429": 7,
+  "mistral:401": 7,
+  "cerebras:403": 7,
+  "deepseek:402": 14,
+  "siliconflow:401": 7,
+  "groq:403": 7,
+  "together:403": 7,
+  "sambanova:402": 38,
+  "sambanova:429": 1,
+  "nvidia:TimeoutError": 22,
+  "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 5
  },
  "samples": [
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Valoarea companiei Strategy scade sub valoarea deținerilor de bitcoin pe fondul sentimentului negativ din piața criptomonedelor\",\"fapt\":\"Valoarea companiei Strategy a scăzut sub valoarea deț"
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian summary original, not literal translation. Must follow language rul"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, on one line. Must be Romanian, correct language, no foreign words. Must use correct t"
   },
   {
    "p": "sambanova",
-   "raw": "{\"titlu\":\"Exodul de țiței din Hormuz amenință cu o reechilibrare haotică a pieței\",\"fapt\":\"Tensiunile din regiunea Strait of Hormuz au dus la o reducere semnificativă a exporturilor de țiței, ceea ce "
+   "raw": "{\"titlu\":\"Taxele vamale ale lui Trump nu salvează locurile de muncă la fabrica de frigidere Whirlpool din Iowa - Reuters\",\"fapt\":\"Taxele vamale impuse de președintele Trump nu au reușit să salveze loc"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Producătorii din Orientul Mijlociu mențin livrările de țiței și GNL în ciuda atacurilor asupra navelor\",\"fapt\":\"Producătorii de țiței și gaze naturale lichefiate (GNL) din Orientul Mijlociu "
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: correct R"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Performanța slabă a acțiunilor de top din S&P 500\",\"fapt\":\"Acțiunile din indicele S&P 500 au avut o performanță slabă, fiind depășite de indicele ponderat egal, cu o diferență de 350 de punc"
+   "p": "openrouter",
+   "raw": "{\"titlu\":\"Debara financiară care susține râsul acțiunilor în Statele Unite devine mai costisitoare\",\"fapt\":\"Costurile împrumutului pentru investitori care folosesc bani pentru a cumpăra acți"
   },
   {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"British American Tobacco reduce personalul cu 9.000 de angajați\",\"fapt\":\"Compania British American Tobacco a anunțat disponibilizarea a 9.000 de angajați, în contextul intensificării program"
-  },
-  {
-   "p": "sambanova",
-   "raw": "{\"titlu\":\"Europa, o piață atractivă pentru investitori, potrivit J.P. Morgan\",\"fapt\":\"J.P. Morgan consideră că Europa ar putea deveni o piață atractivă pentru investitori și a majorat țintele sale pen"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Banii împrumutați care alimentează ralliul acțiunilor din SUA devin tot mai scumpi\",\"fapt\":\"Randamentul obligațiunilor crește, ceea ce face împrumuturile mai scumpe pentru investitorii care "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 13,
-  "fresh": 13,
-  "fb": 3,
-  "tier2": 2,
-  "explainer": 8
+  "new": 24,
+  "fresh": 24,
+  "fb": 21,
+  "tier2": 3,
+  "explainer": 0
  }
 }
