@@ -4,52 +4,51 @@
  },
  "err": {
   "gemini:429": 12,
-  "mistral:401": 11,
-  "cerebras:403": 11,
-  "deepseek:402": 22,
-  "siliconflow:401": 11,
-  "groq:403": 11,
-  "together:403": 11,
-  "sambanova:402": 66,
-  "nvidia:TimeoutError": 19,
-  "fireworks:404": 1,
-  "openrouter:429": 1
+  "mistral:401": 12,
+  "cerebras:403": 12,
+  "deepseek:402": 24,
+  "siliconflow:401": 12,
+  "groq:403": 12,
+  "together:403": 12,
+  "sambanova:402": 72,
+  "nvidia:TimeoutError": 17,
+  "fireworks:404": 1
  },
  "ro_reject": {
-  "openrouter": 1
+  "openrouter": 2
  },
  "samples": [
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"JPMorgan are dificultăți în a găsi cumpărători pentru împrumutul cu 15% al companiei de foraj de țiței\",\"fakt\":\"JPMorgan întâmpină dificultăți în a găsi investitori dispuși să cumpere un împ"
+   "raw": "{\"titlu\":\"BCE nu trebuie să lupte cu inflația cu aceeași forță ca în 2022-2023\", \"fapt\":\"Președintele BCE, Christine Lagarde, a declarat că instituția nu trebuie să lupte împotriva inflației cu aceeaș"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"JPMorgan are dificultăți în a găsi cerere pentru împrumutul de 15% al companiei de foraj de țiței\", \"fapt\":\"JPMorgan întâmpină dificultăți în a găsi investitori interesați de un împrumut cu "
+   "raw": "{\"titlu\":\"Reglementări noi pentru companiile de criptomonede din Regatul Unit\",\"fakt\":\"Companiile de criptomonede din Regatul Unit vor trebui să demonstreze că pot face față șocurilor de piață și să d"
+  },
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Companiile de criptomonede care operează în Regatul Unit vor fi supuse unor reguli noi cuprinzătoare\",\"fapt\":\"Autoritatea de reglementare financiară va cere industriei în plină expansiune să"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no foreign words. Must follow rules: oil/crude = \"tiței\", barrel=ba"
+   "raw": "We need to output only JSON on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must not include extra text. Must follow constraints: Romanian correct, no foreign wo"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian, correct, natural, no foreign words. "
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Susquehanna afirmă că a pierdut milioane din cauza unor tranzacționari insider misterioși\",\"fapt\":\"Compania Susquehanna a anunțat că a înregistrat pierderi de milioane de dolari din cauza un"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Europa devine mai rezistentă la șocurile economice\", \"fapt\":\"Președintele Băncii Centrale Europene, Christine Lagarde, a declarat că Europa este tot mai rezistentă la șocurile economice.\", \""
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Atacurile din weekend asupra Iranului declanșate de Trump generează creșteri puternice ale acțiunilor luni\",\"fapt\":\"Președintele american Donald Trump a ordonat atacuri asupra Iranului, ceea"
+   "raw": "{\"titlu\":\"Goldman Sachs susține obligațiunile Indiei pe 30 de ani, deoarece impactul războiului din Iran este controlat\",\"fapt\":\"Goldman Sachs recomandă investiții în obligațiunile Indiei pe 30 de ani"
   }
  ],
  "no_keys": [],
  "summary": {
   "new": 9,
   "fresh": 9,
-  "fb": 2,
-  "tier2": 3,
-  "explainer": 4
+  "fb": 4,
+  "tier2": 4,
+  "explainer": 1
  }
 }
