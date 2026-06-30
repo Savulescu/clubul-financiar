@@ -1,55 +1,52 @@
 {
- "ok": {
-  "openrouter": 1,
-  "nvidia": 2
- },
+ "ok": {},
  "err": {
-  "gemini:429": 6,
-  "mistral:401": 6,
-  "cerebras:403": 6,
-  "deepseek:402": 12,
-  "siliconflow:401": 6,
-  "groq:403": 6,
-  "together:403": 6,
-  "sambanova:402": 36,
-  "nvidia:TimeoutError": 23,
-  "fireworks:404": 3
+  "gemini:429": 4,
+  "mistral:401": 4,
+  "cerebras:403": 4,
+  "deepseek:402": 8,
+  "siliconflow:401": 4,
+  "groq:403": 4,
+  "together:403": 4,
+  "sambanova:402": 24,
+  "nvidia:TimeoutError": 24,
+  "fireworks:404": 4
  },
  "ro_reject": {
-  "openrouter": 5
+  "openrouter": 7
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to produce JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: correct "
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original summary in Romanian, not word-for-word translation. Must use correct terms. Must be ne"
   },
   {
    "p": "openrouter",
-   "raw": "{\"titlu\":\"Căutarea robotului în China declanșează suprasolicitarea sistemului\",\"fapt\":\"Reuters informează că inițiatiivața china de implementare rapidă a robotelor în sectorele cheie a pus presiuni se"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Breakingviews - Căutarea robotilor din China declanșează suprasarcina sistemului\",\"fapt\":\"Eforturile Chinei de a dezvolta roboți ar putea duce la o suprasarcină a sistemului, potrivit Breaki"
+   "raw": "We need to output JSON only, one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct diacritics, no words from other languages. Mu"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on a single line. Must not include extra text. Must follow constraints: Romanian correct, "
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil = țesă NU ulei? Actually"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must follow constraints: Romanian correct, no foreign words, diacritics c"
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}\n\nWe need to translate the title naturally and correctly, using given terms: oil=tiței NU ul"
   },
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Schimbările metodologice ar putea reduce rata inflației de bază a PCE din mai în Statele Unite\", \"fapt\":\"Economiștii spun că modificările metodologice ar putea reduce rata inflației de bază "
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not literal translation. Must follow language rules: correct Romanian"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output only JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian summary original, not literal translation. Must"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 6,
-  "fresh": 6,
-  "fb": 4,
-  "tier2": 2,
+  "new": 10,
+  "fresh": 10,
+  "fb": 10,
+  "tier2": 0,
   "explainer": 0
  }
 }
