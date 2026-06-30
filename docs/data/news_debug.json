@@ -1,45 +1,33 @@
 {
- "ok": {},
+ "ok": {
+  "nvidia": 1
+ },
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:402": 24,
-  "nvidia:TimeoutError": 24,
+  "gemini:429": 6,
+  "mistral:401": 6,
+  "cerebras:403": 6,
+  "deepseek:402": 12,
+  "siliconflow:401": 6,
+  "groq:403": 6,
+  "together:403": 6,
+  "sambanova:402": 36,
+  "nvidia:TimeoutError": 25,
   "fireworks:404": 4,
-  "openrouter:429": 4
+  "openrouter:429": 8
  },
- "ro_reject": {
-  "openrouter": 4
- },
+ "ro_reject": {},
  "samples": [
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, natural, correct diacritics, no foreign words. Must use correct terms: oil=tițe, barr"
-  },
-  {
-   "p": "openrouter",
-   "raw": "The user wants translation into Romanian natural and correct, with specific terms: oil=țesă? Actually \"oil\" is \"țesă\"? Wait they said oil=țesă NU ulei. Probably they want to replace \"oil\" with \"țesă\"?"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line. Must be Romanian summary original, not literal translation. Must follow lang"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into Romanian natural and correct, with mapping: oil=tiței NU ulei"
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Rusia crește exporturile de țiței la nivel record în timp ce prețurile scad\",\"fapt\":\"Rusia a atins un nivel record de exporturi de țiței, în ciuda scăderii prețurilor la nivel global.\"}"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 17,
-  "fresh": 17,
-  "fb": 17,
-  "tier2": 0,
+  "new": 22,
+  "fresh": 22,
+  "fb": 21,
+  "tier2": 1,
   "explainer": 0
  }
 }
