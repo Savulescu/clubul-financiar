@@ -1,51 +1,55 @@
 {
  "ok": {
-  "nvidia": 13
+  "openrouter": 1,
+  "nvidia": 2
  },
  "err": {
-  "gemini:429": 13,
-  "mistral:401": 13,
-  "cerebras:403": 13,
-  "deepseek:402": 26,
-  "siliconflow:401": 13,
-  "groq:403": 13,
-  "together:403": 13,
-  "sambanova:402": 78,
-  "nvidia:TimeoutError": 17
+  "gemini:429": 6,
+  "mistral:401": 6,
+  "cerebras:403": 6,
+  "deepseek:402": 12,
+  "siliconflow:401": 6,
+  "groq:403": 6,
+  "together:403": 6,
+  "sambanova:402": 36,
+  "nvidia:TimeoutError": 23,
+  "fireworks:404": 3
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 5
+ },
  "samples": [
   {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Compania Ionic Digital, specializată în minerit de Bitcoin și inteligență artificială, depune cerere pentru listarea pe Nasdaq\",\"fakt\":\"Compania Ionic Digital a depus o cerere pentru o lista"
+   "p": "openrouter",
+   "raw": "We need to produce JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: correct "
+  },
+  {
+   "p": "openrouter",
+   "raw": "{\"titlu\":\"Căutarea robotului în China declanșează suprasolicitarea sistemului\",\"fapt\":\"Reuters informează că inițiatiivața china de implementare rapidă a robotelor în sectorele cheie a pus presiuni se"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"Compania de minerit Bitcoin și AI Ionic Digital depune cerere pentru listare directă pe Nasdaq\",\"fapt\":\"Compania Ionic Digital, care se ocupă cu mineritul de Bitcoin și cu inteligența artifi"
+   "raw": "{\"titlu\":\"Breakingviews - Căutarea robotilor din China declanșează suprasarcina sistemului\",\"fapt\":\"Eforturile Chinei de a dezvolta roboți ar putea duce la o suprasarcină a sistemului, potrivit Breaki"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on a single line. Must not include extra text. Must follow constraints: Romanian correct, "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must follow constraints: Romanian correct, no foreign words, diacritics c"
   },
   {
    "p": "nvidia",
-   "raw": "{\"titlu\":\"O petrolieră suspectată de evaziune fiscală este blocată de autoritățile franceze\",\"fakt\":\"Un petrolier suspectat de a face parte dintr-o flotă clandestină a fost blocat de autoritățile fran"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Procuror francez blochează un tanc petrolier suspectat de a face parte dintr-o 'flotă umbrită', eliberează căpitanul\",\"fapt\":\"Un procuror francez a blocat un tanc petrolier suspectat de a fa"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Compania de transport maritim Maersk își revizuiește în creștere estimările de profit\",\"fakt\":\"Compania daneză Maersk a anunțat o revizuire a estimărilor sale de profit în urma creșterii cer"
-  },
-  {
-   "p": "nvidia",
-   "raw": "{\"titlu\":\"Maersk majorează estimările de profit pe fondul creșterii cererii cauzate de noile taxe vamale americane\",\"fapt\":\"Compania Maersk a majorat estimările sale de profit după ce noile taxe vamal"
+   "raw": "{\"titlu\":\"Schimbările metodologice ar putea reduce rata inflației de bază a PCE din mai în Statele Unite\", \"fapt\":\"Economiștii spun că modificările metodologice ar putea reduce rata inflației de bază "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 7,
-  "fresh": 7,
-  "fb": 0,
-  "tier2": 5,
-  "explainer": 2
+  "new": 6,
+  "fresh": 6,
+  "fb": 4,
+  "tier2": 2,
+  "explainer": 0
  }
 }
