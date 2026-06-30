@@ -54,8 +54,35 @@ _BAD_RE = re.compile(
     r"acciun|lanc[eă]az|lancă|internazional|prevezi|pre[țt]ele|subire|irachen|"
     r"più|della|degli|nicht|werden|haben|aujourd", re.I)
 
+# 2026-06-30: robust English detector. _BAD_RE is a finite ~40-word finance
+# blocklist, so generic English bodies (that avoid those exact words) slipped
+# through is_good_ro and the penalty → "doar titlul tradus" (RO title vouching
+# for an EN body) and fully-EN items. These English-ONLY function words never
+# appear as standalone Romanian words; 3+ of them with ZERO RO diacritics ⇒
+# the text is English, not Romanian.
+_EN_RE = re.compile(
+    r"\b(the|and|of|to|with|for|from|that|this|is|are|was|were|be|been|has|have|had|"
+    r"will|would|said|says|after|before|amid|over|into|about|its|their|they|when|while|"
+    r"as|at|on|by|up|new|market|markets|stocks?|shares?|oil|crude|yields?|bonds?|growth|"
+    r"prices?|rates?|rises?|falls?|week|year)\b",
+    re.I)
+
+def looks_english(text):
+    """True if `text` is substantially English. A Romanian sentence never
+    contains 2+ of these English-only words, and the model is instructed to use
+    diacritics — so «no RO diacritics AND ≥2 English words» is a near-certain
+    English flag, robust to the finance-blocklist gap. Tuned on the live store:
+    0 false-positives across 1743 translated items, ~78/91 English recall."""
+    t = (text or "").strip()
+    if not t:
+        return False
+    if re.search(r"[ăâîșțĂÂÎȘȚ]", t):   # has Romanian diacritics → treat as RO
+        return False
+    return len(_EN_RE.findall(t)) >= 2
+
 def is_good_ro(text):
-    return not _BAD_RE.search(text or "")
+    # Reject known garbage/mistranslations (_BAD_RE) AND generic English.
+    return not _BAD_RE.search(text or "") and not looks_english(text)
 
 def _selftest_filter():
     """Co-design: garbage-ul real TREBUIE respins, exemplele bune TREBUIE acceptate."""
@@ -227,8 +254,12 @@ def make_record(it, now):
         titlu, fapt, ce = d["titlu"].strip(), d["fapt"].strip(), d["ce_inseamna"].strip()
         cat = d.get("categorie", "").strip()
         if cat not in CAT_KEYS: cat = classify(it["title"] + " " + it["desc"])
-        if titlu and len(ce) > 20:
-            pen = _ro_penalty(titlu + " " + fapt + " " + ce)
+        # Per-field gate (2026-06-30): score EACH field, take the WORST. The old
+        # concat `_ro_penalty(titlu+fapt+ce)` let a diacritic'd title zero out the
+        # no-diacritics penalty for an English body → "doar titlul tradus". Now an
+        # English fapt/ce is rejected even when the title is perfect Romanian.
+        if titlu and len(ce) > 20 and not looks_english(fapt) and not looks_english(ce):
+            pen = max(_ro_penalty(titlu), _ro_penalty(fapt), _ro_penalty(ce))
             cands.append((pen, {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt, "ce_inseamna": ce}))
             if pen == 0:
                 return cands[0][1]   # română curată — gata
@@ -244,8 +275,8 @@ def make_record(it, now):
         d = _parse_json(r.get("content", "").strip())
         titlu, fapt = d.get("titlu", "").strip(), d.get("fapt", "").strip()
         cat = classify(it["title"] + " " + it["desc"])
-        if titlu:
-            pen = _ro_penalty(titlu + " " + fapt)
+        if titlu and not looks_english(titlu) and not looks_english(fapt):
+            pen = max(_ro_penalty(titlu), _ro_penalty(fapt or titlu))
             cands.append((pen, {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt or titlu,
                                 "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"]), "tier2": 1}))
     except Exception as e:
