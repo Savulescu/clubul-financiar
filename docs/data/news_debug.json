@@ -1,5 +1,7 @@
 {
- "ok": {},
+ "ok": {
+  "nvidia": 1
+ },
  "err": {
   "gemini:429": 5,
   "mistral:401": 5,
@@ -9,18 +11,44 @@
   "groq:403": 5,
   "together:403": 5,
   "sambanova:402": 30,
-  "nvidia:TimeoutError": 27,
-  "fireworks:404": 4,
-  "openrouter:429": 8
+  "nvidia:TimeoutError": 22,
+  "fireworks:404": 3
  },
- "ro_reject": {},
- "samples": [],
+ "ro_reject": {
+  "openrouter": 6
+ },
+ "samples": [
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian correct, no foreign words, use spec"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian correct, no foreign words, diacri"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe need to translate title naturally and correctly, using given mappings: oil=tiței NU ulei, b"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil=tiței NU ulei (so \"tiței\" is "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian, correct diacritics, no foreign words. Use corect terms. Must not t"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian correct, natural, diacritics correc"
+  }
+ ],
  "no_keys": [],
  "summary": {
-  "new": 0,
-  "fresh": 0,
-  "fb": 0,
-  "tier2": 0,
+  "new": 11,
+  "fresh": 11,
+  "fb": 10,
+  "tier2": 1,
   "explainer": 0
  }
 }
