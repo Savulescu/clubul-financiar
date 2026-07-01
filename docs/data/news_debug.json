@@ -10,43 +10,43 @@
   "together:403": 4,
   "sambanova:402": 24,
   "nvidia:TimeoutError": 24,
-  "fireworks:404": 4
+  "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 8
+  "openrouter": 6
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, original summary, not word-for-word translation. Must follow language rules: correct "
+   "raw": "We need to output a JSON object with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, correct language, no words from other languages. Must use corre"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian summary original, not literal translat"
+   "raw": "We need to output JSON valid on one line. Must include keys: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must use corecțit terms: oil/crude = «tiț"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate the title into natural Romanian, using given terms: oil = \"tiței\" (but "
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into Romanian natural and correct, with specific terms: oil = tiței NU "
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}\n\nWe must translate title and summary? The user says \"Tradu în română naturală și corectă (oil=ti"
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil=tiței NU ulei, bonds=obl"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: correct Ro"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no words from other languages. Must use specific terms: oil/crude"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on a single line. Must be original Romanian summary, not word-for-word translation. Must f"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian summary, original, not literal transl"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 18,
-  "fresh": 28,
-  "fb": 24,
-  "tier2": 1,
-  "explainer": 3
+  "new": 10,
+  "fresh": 10,
+  "fb": 10,
+  "tier2": 0,
+  "explainer": 0
  }
 }
