@@ -93,6 +93,13 @@ async function waitServer() {
 
   await cmd('Page.enable'); await cmd('Runtime.enable');
 
+  // CF_THEME=dark → pre-seed localStorage before any page script runs
+  if (process.env.CF_THEME) {
+    await cmd('Page.addScriptToEvaluateOnNewDocument', {
+      source: `try{localStorage.setItem('cf-theme',${JSON.stringify(process.env.CF_THEME)})}catch(e){}`,
+    });
+  }
+
   const capture = async (page, w, name) => {
       const url = `http://localhost:${PORT}/${page}`;
       const mobile = w < 700;
