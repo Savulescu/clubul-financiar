@@ -167,7 +167,7 @@
   }
 
   // ---- pe paginile premium (.u-page), nav + footer capătă accente aurii ----
-  if (document.querySelector("main.u-page")) {
+  if (document.querySelector("main.u-page") || document.body.classList.contains("u-page")) {
     document.querySelectorAll("header.nav, footer.foot").forEach(function(el){ el.classList.add("ultra"); });
   }
 
@@ -229,8 +229,10 @@
     const sub = nlGet();
     if (sub && sub.email) showSubscribed(sub.email);
   }
-  // banda site-wide deasupra footer-ului (mai puțin pe login/reset/account/dezabonare)
-  if (!document.querySelector(".nl-band") && !/\/(login|reset|account|dezabonare)(?:\.html)?$/.test(location.pathname)) {
+  // banda site-wide deasupra footer-ului (mai puțin pe login/reset/account/dezabonare
+  // și pe paginile care au deja propriul formular de abonare într-o bandă dedicată)
+  if (!document.querySelector(".nl-band") && !document.querySelector(".band .nl-form") &&
+      !/\/(login|reset|account|dezabonare)(?:\.html)?$/.test(location.pathname)) {
     const band = document.createElement("section");
     band.className = "nl-band";
     band.innerHTML = `<div class="container nl-in">

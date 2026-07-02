@@ -17,6 +17,7 @@
   --u-line:rgba(168,134,49,.30);        /* hairline auriu */
   --u-line-soft:rgba(168,134,49,.16);
   --u-gold:#9a7414; --u-gold2:#caa44a; --u-gold-soft:rgba(168,134,49,.10);
+  --u-gold-text:#7d5e0f;                /* auriu-cerneală pt TEXT mic pe fundal deschis (AA) */
   --u-pos:#0f9d6e; --u-neg:#d2453b;
   --u-shadow:0 18px 50px rgba(40,30,8,.10);
   background:
@@ -28,15 +29,16 @@
    folosește componente de bază (.card/.eyebrow/.btn/.price/.band). Consolidat din inline,
    ca o pagină nouă să devină premium doar adăugând class="u-page" + acest fișier. */
 .u-page{
-  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold);
+  --emerald:var(--u-gold); --emerald-d:var(--u-gold); --emerald-link:var(--u-gold-text);
   --blue:var(--u-gold2); --blue-d:var(--u-gold2);
   --muted:var(--u-muted); --text:var(--u-ink); --navy:var(--u-ink);
+  --gold:var(--u-gold); --gold-ink:var(--u-gold-text);
   --border:var(--u-line-soft); --card:var(--u-panel);
   --bg-soft:var(--u-bg2); --bg-soft2:var(--u-gold-soft);
   --shadow:var(--u-shadow);
   --grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));
 }
-.u-page .eyebrow{ color:var(--u-gold); }
+.u-page .eyebrow{ color:var(--u-gold-text); }
 .u-page .title,.u-page h1.title,.u-page h2.title{
   font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); letter-spacing:-.01em;
 }
@@ -48,8 +50,8 @@
   background:linear-gradient(135deg,var(--u-gold),var(--u-gold2)); color:#1a1304;
   box-shadow:0 10px 26px rgba(168,134,49,.26);
 }
-.u-page .btn-ghost{ color:var(--u-gold); border-color:var(--u-line); }
-.u-page .btn-ghost:hover{ border-color:var(--u-gold); color:var(--u-gold); }
+.u-page .btn-ghost{ color:var(--u-gold-text); border-color:var(--u-line); }
+.u-page .btn-ghost:hover{ border-color:var(--u-gold); color:var(--u-gold-text); }
 [data-theme="dark"] .u-page{
   /* paletă Ultra — dark (navy nocturn) */
   --u-bg1:#081627; --u-bg2:#0c2138;
@@ -58,6 +60,7 @@
   --u-line:rgba(232,194,104,.24);
   --u-line-soft:rgba(232,194,104,.12);
   --u-gold:#E8C268; --u-gold2:#F3D690; --u-gold-soft:rgba(232,194,104,.08);
+  --u-gold-text:#E8C268;                /* pe navy, auriul plin trece de AA */
   --u-pos:#19c08a; --u-neg:#ef6b62;
   --u-shadow:0 24px 60px rgba(0,0,0,.45);
   background:
@@ -72,7 +75,7 @@
 }
 .u-eyebrow{
   font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
-  color:var(--u-gold); font-weight:600; margin:0 0 10px;
+  color:var(--u-gold-text,var(--u-gold)); font-weight:600; margin:0 0 10px;
 }
 .u-crest{
   font-weight:600; color:var(--u-ink); line-height:1.05;
@@ -283,3 +286,7 @@
 .u-page .article tbody tr:nth-child(even){background:var(--u-panel2)}
 .u-page .article table strong{color:var(--u-ink);font-weight:700}
 @media(max-width:640px){.u-page .article table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:.88rem;white-space:normal}.u-page .article thead th,.u-page .article tbody td{padding:10px 12px}}
+
+/* ── lizibilitate pe gradientul auriu (dark): elementele active cu background:var(--grad)
+   păstrau color:#fff → alb pe auriu deschis 1.4:1. Pe skinul auriu, cerneala e ink. ── */
+[data-theme="dark"] .u-page :is(.glos-alpha button.active,.cf-tab.active,.cf-badge.pro,.cf-msg.user){color:#1a1304}
