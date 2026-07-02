@@ -1,7 +1,7 @@
 /* ===== Clubul Financiar — design system ===== */
 :root{
   --emerald:#10b981; --emerald-d:#059669; --blue:#2563eb; --blue-d:#1d4ed8;
-  --navy:#0f2540; --gold:#E8C268;
+  --navy:#0f2540; --gold:#E8C268; --gold-ink:#8a6a12;
   --bg:#ffffff; --bg-soft:#f5f8fc; --bg-soft2:#eef4fb;
   --text:#0f2540; --muted:#5b7088; --card:#ffffff; --border:#e6edf5;
   --shadow:0 10px 30px rgba(15,37,64,.08); --shadow-lg:0 24px 60px rgba(15,37,64,.14);
@@ -9,7 +9,7 @@
   --grad:linear-gradient(135deg,var(--emerald),var(--blue));
 }
 [data-theme="dark"]{
-  --bg:#0a1424; --bg-soft:#0e1c30; --bg-soft2:#12233b;
+  --bg:#0a1424; --bg-soft:#0e1c30; --bg-soft2:#12233b; --gold-ink:#E8C268;
   --text:#e8eefb; --muted:#93a7c4; --card:#101f35; --border:rgba(255,255,255,.09);
   --shadow:0 10px 30px rgba(0,0,0,.35); --shadow-lg:0 24px 60px rgba(0,0,0,.5);
 }
@@ -54,10 +54,11 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
 .icon-btn:hover{border-color:var(--emerald)}
 .burger{display:none}
 @media(max-width:980px){
-  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;
-    padding:12px 18px;border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;margin-left:0;background:var(--bg);flex-direction:column;
+    padding:14px 18px 16px;border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
   .nav-links.open{display:flex}
-  .nav-links a{padding:12px;font-size:1rem}
+  .nav-links a{padding:13px 12px;font-size:1rem;border-radius:0;border-bottom:1px solid color-mix(in srgb,var(--border) 55%,transparent)}
+  .nav-links a:last-child{border-bottom:0}
   .burger{display:grid}
 }
 
@@ -65,12 +66,12 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
 .hero{position:relative;overflow:hidden;background:
   radial-gradient(900px 500px at 85% -10%,rgba(37,99,235,.14),transparent 60%),
   radial-gradient(700px 460px at 0% 10%,rgba(16,185,129,.14),transparent 55%)}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:70px 0 84px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:70px 84px}
 .hero h1{font-size:clamp(2.1rem,5vw,3.6rem);font-weight:900}
 .hero .lead{margin:18px 0 26px;font-size:1.16rem}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 .hero-trust{margin-top:26px;color:var(--muted);font-size:.86rem;display:flex;gap:18px;flex-wrap:wrap}
-@media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:30px;padding:46px 0 56px}}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:46px 56px}}
 
 /* card visual in hero */
 .glasscard{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);
@@ -132,6 +133,7 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
 .foot .soc{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 .foot .soc a{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);display:grid;place-items:center;opacity:.85}
 .foot-bottom{border-top:1px solid var(--border);margin-top:34px;padding-top:18px;color:var(--muted);font-size:.84rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot-bottom a{display:inline;padding:0}
 @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
 
 /* badge / pill */
@@ -164,7 +166,7 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
 .lesson-intro{background:linear-gradient(135deg,color-mix(in srgb,var(--emerald) 8%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--emerald) 28%,var(--border));border-radius:14px;padding:14px 18px;margin:14px 0 22px}
 .lesson-intro .li-step{font-size:.82rem;font-weight:800;color:var(--emerald-link,var(--emerald));letter-spacing:.01em}
 .lesson-intro .li-bar{height:6px;border-radius:999px;background:rgba(0,0,0,.06);overflow:hidden;margin:8px 0}
-.lesson-intro .li-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--emerald),#2563eb)}
+.lesson-intro .li-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--emerald),var(--blue))}
 .lesson-intro .li-hook{margin:6px 0 0;font-size:1.02rem;line-height:1.5;color:var(--text)}
 
 /* ============ BANDĂ DE ABONARE NEWSLETTER (site-wide) ============ */
@@ -185,17 +187,18 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
 .nl-sub-em{color:#cbd7ea;font-size:.9rem}
 .nl-unsub{background:transparent;border:1px solid rgba(232,194,104,.3);border-radius:11px;color:#93a7c4;font-size:.86rem;cursor:pointer;padding:10px 16px;font-family:inherit;font-weight:600}
 .nl-unsub:hover{color:#ff9a9a;border-color:rgba(255,154,154,.4)}
-@media(max-width:680px){.nl-in{flex-direction:column;align-items:stretch}.nl-form input{min-width:0;flex:1}}
+@media(max-width:680px){.nl-in{flex-direction:column;align-items:stretch}.nl-form input{min-width:0;flex:1}
+  .band .nl-form{flex-direction:column;align-items:stretch}.band .nl-form input{width:100%}}
 
 /* ============ NAV + FOOTER PREMIUM (auto pe paginile .u-page) ============ */
 .nav.ultra{border-bottom-color:color-mix(in srgb,var(--gold) 24%,var(--border))}
 .nav.ultra .brand-logo .dot{background:linear-gradient(135deg,var(--gold),#caa23f);box-shadow:0 6px 16px rgba(232,194,104,.4)}
-.nav.ultra .nav-links a:hover{color:var(--gold);background:color-mix(in srgb,var(--gold) 11%,transparent)}
+.nav.ultra .nav-links a:hover{color:var(--gold-ink);background:color-mix(in srgb,var(--gold) 11%,transparent)}
 .nav.ultra .icon-btn:hover{border-color:var(--gold)}
 .nav.ultra .btn-primary{background:linear-gradient(135deg,var(--gold),#caa23f);color:#1a1304;box-shadow:0 8px 22px rgba(232,194,104,.32)}
 .foot.ultra{border-top:1px solid color-mix(in srgb,var(--gold) 22%,var(--border))}
 .foot.ultra .brand-logo .dot{background:linear-gradient(135deg,var(--gold),#caa23f)}
-.foot.ultra a:hover{color:var(--gold)}
+.foot.ultra a:hover{color:var(--gold-ink)}
 .foot.ultra .soc a:hover{background:var(--gold);border-color:var(--gold);color:#1a1304}
 
 /* ============ DROPDOWN DE CONT (avatar) — setări + planuri ============ */
@@ -209,7 +212,7 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
   font-weight:800;font-size:1.1rem;flex:0 0 auto}
 .acct-id{min-width:0}
 .acct-id .em{font-weight:700;font-size:.86rem;color:var(--text);word-break:break-all;line-height:1.25}
-.acct-id .tier{font-size:.72rem;font-weight:800;margin-top:3px;display:inline-flex;align-items:center;gap:5px;color:var(--gold)}
+.acct-id .tier{font-size:.72rem;font-weight:800;margin-top:3px;display:inline-flex;align-items:center;gap:5px;color:var(--gold-ink)}
 .acct-id .tier.free{color:var(--muted)}
 .acct-body{display:grid;grid-template-columns:1fr 1fr}
 .acct-col{padding:11px 10px}
@@ -232,10 +235,10 @@ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;margin:10px 0 12px
 .acct-plan.owned{opacity:.72}
 .acct-plan.up{border-color:color-mix(in srgb,var(--gold) 45%,var(--border))}
 .acct-plan.up:hover{background:color-mix(in srgb,var(--gold) 12%,transparent);transform:translateX(2px)}
-.acct-plan.up .pp{color:var(--gold)}
+.acct-plan.up .pp{color:var(--gold-ink)}
 .acct-manage{display:block;text-align:center;font-size:.76rem;color:var(--muted);text-decoration:none;
   padding:7px;border-radius:9px;margin-top:2px}
-.acct-manage:hover{color:var(--gold)}
+.acct-manage:hover{color:var(--gold-ink)}
 .acct-foot{display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:var(--bg-soft)}
 .acct-foot .acct-theme{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--border);
   border-radius:9px;padding:7px 12px;cursor:pointer;color:var(--text);font-size:.82rem;font-weight:600;font-family:inherit}

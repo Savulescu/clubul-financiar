@@ -2,16 +2,28 @@
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plan Anti-Datorii — data exactă când scapi de datorii — Clubul Financiar</title>
 <meta name="description" content="Introdu-ți datoriile și află data exactă la care scapi de ele, câți lei plătești pe dobândă și cum economisești mii de lei cu metoda avalanșă vs bulgăre.">
-<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/unelte/plan-anti-datorii">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Plan Anti-Datorii — când scapi de datorii"><meta property="og:description" content="Data exactă la care scapi de datorii + câți lei economisești cu strategia corectă."><meta property="og:url" content="https://clubulfinanciar.ro/unelte/plan-anti-datorii"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Plan Anti-Datorii"><meta name="twitter:description" content="Data exactă la care scapi de datorii + câți lei economisești."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/assets/style.css?v=33"><link rel="stylesheet" href="/assets/upgrade.css?v=33">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=33">
 <style>
+/* Skin Ultra — doar prezentare; simularea datoriilor e neatinsă. Tokenii vechi
+   (--emerald/--card) sunt remapați de cf-ultra.css pe .u-page. */
+.u-page{ --gold:var(--u-gold); }
+.u-page .panel{ position:relative; overflow:hidden; border-radius:18px; }
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+/* data libertății gravată Fraunces, nu gradient-clip */
+.u-page .result-big{ font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  background:none; -webkit-background-clip:border-box; background-clip:border-box;
+  -webkit-text-fill-color:var(--u-ink); color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; }
 .debt-row{display:grid;grid-template-columns:1.4fr .9fr .8fr .9fr auto;gap:8px;align-items:end;margin-bottom:10px}
 .debt-row .field{margin-bottom:0}
 .debt-row label{font-size:.74rem}
@@ -19,10 +31,11 @@
 @media(max-width:680px){.debt-row{grid-template-columns:1fr 1fr;}.debt-row .rm-btn{grid-column:2;justify-self:end}}
 .strat{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
 @media(max-width:680px){.strat{grid-template-columns:1fr}}
-.strat .card.win{border-color:var(--emerald);box-shadow:0 16px 40px rgba(16,185,129,.18)}
+.strat .card.win{border-color:var(--u-gold);box-shadow:0 16px 40px rgba(168,134,49,.22)}
 .verdict-box{background:color-mix(in srgb,var(--emerald) 10%,var(--card));border:1px solid color-mix(in srgb,var(--emerald) 35%,var(--border));border-radius:14px;padding:18px 20px;margin-top:18px}
 .order-list{list-style:none;margin:10px 0 0;padding:0}.order-list li{padding:5px 0;border-bottom:1px solid var(--border);font-size:.9rem;display:flex;justify-content:space-between;gap:10px}
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Plan Anti-Datorii — data exactă când scapi de datorii", "url": "https://clubulfinanciar.ro/unelte/plan-anti-datorii", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ro-RO", "isAccessibleForFree": true, "description": "Introdu-ți datoriile și află data exactă la care scapi de ele, câți lei plătești pe dobândă și cum economisești mii de lei cu metoda avalanșă vs bulgăre.", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente"}, {"@type": "ListItem", "position": 3, "name": "Plan Anti-Datorii — data exactă când scapi de datorii", "item": "https://clubulfinanciar.ro/unelte/plan-anti-datorii"}]}</script></head><body>
+<main class="u-page">
 <section class="section"><div class="container">
 <div class="center" style="margin-bottom:8px">
   <span class="cf-premium-badge">Premium</span>
@@ -32,7 +45,7 @@
 
 <!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
 <div class="cf-premium-lock">
-  <div class="lock-ic">🔓</div>
+  <div class="lock-ic">🔒</div>
   <h2>Vezi data exactă a libertății tale financiare</h2>
   <p>Adaugă-ți datoriile (carduri, credite, rate) și planul îți arată <strong>ziua în care scapi de toate</strong>, cât plătești pe dobândă și cum economisești <strong>mii de lei</strong> alegând ordinea corectă de plată (avalanșă vs bulgăre).</p>
   <p class="price-line">Inclus în Premium — 49 lei/lună</p>
@@ -57,6 +70,7 @@
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie#datorii">← Articole despre datorii</a></p>
 </div>
 </div></section>
+</main>
 
 <script>
 (function(){
@@ -146,5 +160,5 @@
 })();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
-<script defer src="/assets/site.js?v=32"></script>
+<script defer src="/assets/site.js?v=33"></script>
 </body></html>

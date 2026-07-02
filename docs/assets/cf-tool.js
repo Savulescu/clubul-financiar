@@ -56,7 +56,7 @@
           '<div class="cf-gate-ic">🔒</div>' +
           '<h3>Unealtă ' + label + '</h3>' +
           '<p>' + (opts.msg || "Deblochează această unealtă cu planul " + label + ".") + '</p>' +
-          '<a class="btn btn-primary" href="/premium#alege">Vezi planul ' + label + '</a>' +
+          '<a class="btn btn-primary" href="/premium#plan-' + needed + '">Vezi planul ' + label + '</a>' +
           '</div>';
         el.appendChild(g);
       } else if (ok && g) { g.remove(); }

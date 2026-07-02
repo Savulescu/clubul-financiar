@@ -2,16 +2,26 @@
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Planul Meu Financiar — plan personalizat în PDF — Clubul Financiar</title>
 <meta name="description" content="Răspunde la câteva întrebări și primești un plan financiar personalizat: rata de economisire, fond de urgență, buget 50/30/20, alocare investiții pe vârstă și numărul tău FIRE. Exportabil ca PDF.">
-<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/unelte/planul-meu-financiar">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
 <meta property="og:title" content="Planul Meu Financiar — plan personalizat în PDF"><meta property="og:description" content="Un plan financiar personalizat din datele tale: economisire, fond de urgență, buget, investiții și FIRE. Descărcabil ca PDF."><meta property="og:url" content="https://clubulfinanciar.ro/unelte/planul-meu-financiar"><meta property="og:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Planul Meu Financiar"><meta name="twitter:description" content="Un plan financiar personalizat din datele tale, descărcabil ca PDF."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/assets/style.css?v=33"><link rel="stylesheet" href="/assets/upgrade.css?v=33">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=33">
 <style>
+/* Skin Ultra — doar prezentare; logica planului e neatinsă. Tokenii vechi
+   (--emerald/--grad/--card) sunt remapați de cf-ultra.css pe .u-page. */
+.u-page{ --gold:var(--u-gold); }
+.u-page .panel{ position:relative; overflow:hidden; border-radius:18px; }
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+.u-page .kpi .val{ font-family:'Fraunces',Georgia,serif; font-weight:600;
+  font-variant-numeric:tabular-nums lining-nums; letter-spacing:-.01em; }
+.u-page .plan-sec h3{ font-family:'Fraunces',Georgia,serif; font-weight:600; color:var(--u-ink); }
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
 .form-grid .field.full{grid-column:1 / -1}
 @media(max-width:680px){.form-grid{grid-template-columns:1fr}}
@@ -32,8 +42,8 @@
 .bar-line{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:5px}
 .bar-track{height:10px;border-radius:6px;background:var(--bg-soft,color-mix(in srgb,var(--text) 8%,var(--card)));overflow:hidden;margin-bottom:13px}
 .bar-fill{height:100%;border-radius:6px}
-.bar-fill.g{background:linear-gradient(90deg,var(--emerald),#34d399)}
-.bar-fill.gold{background:linear-gradient(90deg,var(--gold,#d4af37),#f0d27a)}
+.bar-fill.g{background:linear-gradient(90deg,var(--u-gold),var(--u-gold2))}
+.bar-fill.gold{background:linear-gradient(90deg,var(--u-gold),var(--u-gold2))}
 .alloc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
 @media(max-width:680px){.alloc{grid-template-columns:1fr}}
 .alloc .a-card{border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
@@ -54,6 +64,7 @@
 @media print{
   @page{size:A4;margin:16mm 14mm}
   body{background:#fff!important;color:#111!important}
+  main.u-page{background:none!important}
   .nav,header.nav,footer,.cf-premium-lock,#planForm,.plan-actions,.disc,.no-print,nav,.section>.container>.center{display:none!important}
   .section{padding:0!important}
   .cf-premium-only{display:block!important}
@@ -67,6 +78,7 @@
   .bar-track{background:#eee!important}
 }
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Planul Meu Financiar — plan personalizat în PDF", "url": "https://clubulfinanciar.ro/unelte/planul-meu-financiar", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ro-RO", "isAccessibleForFree": true, "description": "Răspunde la câteva întrebări și primești un plan financiar personalizat: rata de economisire, fond de urgență, buget 50/30/20, alocare investiții pe vârstă și numărul tău FIRE. Exportabil ca PDF.", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente"}, {"@type": "ListItem", "position": 3, "name": "Planul Meu Financiar — plan personalizat în PDF", "item": "https://clubulfinanciar.ro/unelte/planul-meu-financiar"}]}</script></head><body>
+<main class="u-page">
 <section class="section"><div class="container">
 <div class="center" style="margin-bottom:8px">
   <span class="cf-premium-badge">Premium</span>
@@ -76,7 +88,7 @@
 
 <!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
 <div class="cf-premium-lock">
-  <div class="lock-ic">🔓</div>
+  <div class="lock-ic">🔒</div>
   <h2>Primește planul tău financiar, scris pe numele tău</h2>
   <p>Dintr-un chestionar de 2 minute, generăm un <strong>plan complet și personalizat</strong>: cât economisești de fapt, ce fond de urgență ai nevoie și în câte luni îl strângi, bugetul tău 50/30/20 în lei, ce alocare de investiții ți se potrivește pe vârstă și risc, <strong>numărul tău FIRE</strong> și pașii concreți de urmat. Totul descărcabil ca <strong>PDF</strong>.</p>
   <p class="price-line">Inclus în Premium — 49 lei/lună</p>
@@ -136,6 +148,7 @@
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie#planificare">← Articole despre planificare financiară</a></p>
 </div>
 </div></section>
+</main>
 
 <script>
 (function(){
@@ -304,5 +317,5 @@
 })();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
-<script defer src="/assets/site.js?v=32"></script>
+<script defer src="/assets/site.js?v=33"></script>
 </body></html>

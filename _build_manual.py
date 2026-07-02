@@ -7,7 +7,7 @@ ROOT = "/Users/savulescucristian/clubul-financiar"
 DOCS = os.path.join(ROOT, "docs")
 sys.path.insert(0, ROOT)
 from _shell import NAV_HTML, FOOTER_HTML
-V = "32"
+V = "33"
 
 NAMES = {"buget":"💰 Buget personal","economii":"🐖 Economii","datorii":"💳 Datorii",
  "psihologie":"🧠 Psihologia banilor","venituri":"💵 Venituri","investitii":"📈 Investiții",
@@ -59,7 +59,7 @@ def head(title, desc, canon, ld=""):
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(desc)}"><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=3"><link rel="stylesheet" href="/assets/cf-article.css?v=1">{CSS}</head><body class="u-page">{NAV_HTML}'''
+<link rel="stylesheet" href="/assets/style.css?v=33"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=33"><link rel="stylesheet" href="/assets/cf-article.css?v=1">{CSS}</head><body class="u-page">{NAV_HTML}'''
 
 FOOT_SCRIPTS = f'{FOOTER_HTML}<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/site.js?v={V}"></script>'
 
