@@ -42,17 +42,36 @@ def _keys(base):
 # Filtru de calitate RO: respinge output cu contaminare engleză/altă limbă/garbage tipic.
 # Co-proiectat pe garbage-ul REAL găsit în store (ulei, bonduri, possibiliți, publicăză,
 # să-l pășiți, econometrice, trimestrene) + asigură că exemplele BUNE trec (vezi _selftest).
-_BAD_RE = re.compile(
-    # 1) cuvinte engleze lăsate netraduse
+# 2026-07-02: lista de cuvinte engleze e CASE-SENSITIVE (doar minuscule) — contaminarea
+# reală e cu minuscule («se apropie de un bear market»), pe când Majuscula e nume propriu
+# legitim (The Guardian, T. Rowe Price, Emerging Markets ... ETF) și trebuie să treacă.
+_BAD_EN = re.compile(
     r"\b(the|and|with|from|after|before|market|markets|oil|crude|stocks?|shares?|equity|equities|"
     r"tariffs?|vessels?|tankers?|trade|growth|prices?|rising|falling|barrel|yield|bonds?|economy|"
-    r"bear market|bull market|stock|earnings|revenue|federal reserve)\b"
-    # 2) mistranslări tipice / termeni greșiți (oil→ulei, bonds→bonduri)
-    r"|\bulei(ul|uri)?\b|\bbondu(ri|l|rile)?\b"
-    # 3) garbage / conjugări inexistente / alte limbi
+    r"bear market|bull market|stock|earnings|revenue|federal reserve|peace|returns|outlook|historic)\b")
+_BAD_GARBAGE = re.compile(
+    # mistranslări tipice: oil→«ulei» (dar «ulei DE palmier/măsline» e română legitimă), bonds→bonduri
+    r"\bulei\w*\b(?!\s+de\b)|\bbondu(ri|l|rile)?\b"
+    # garbage / conjugări inexistente / alte limbi
     r"|possibil|publicăz|publicaz[ăa]|econometr|trimestren|p[ăa]șiț|pasiț|vasoare|"
     r"acciun|lanc[eă]az|lancă|internazional|prevezi|pre[țt]ele|subire|irachen|"
-    r"più|della|degli|nicht|werden|haben|aujourd", re.I)
+    r"più|della|degli|nicht|werden|haben|aujourd"
+    # garbage văzut LIVE 2026-07-02 (paciência→_foreign_word, dissipe, opțiunistii se îndrecău,
+    # diversificationare, previsul, estabilizează)
+    r"|îndrec|dissip|opțiunist|previsul|diversification|estabiliz", re.I)
+def _bad_hits(text):
+    t = text or ""
+    return len(_BAD_EN.findall(t)) + len(_BAD_GARBAGE.findall(t))
+
+# Litere latine care NU există în română (ê ç ñ ü é...): un cuvânt cu inițială MICĂ ce le
+# conține e aproape sigur din altă limbă (paciência, più); cu inițială MARE e nume propriu
+# legitim (El Niño, São Paulo, Citroën) și trece.
+_FOREIGN_CH = re.compile(r"[êçõñüöäéèìòùáíóúãëï]")
+def _foreign_word(text):
+    for w in re.findall(r"\S+", text or ""):
+        if _FOREIGN_CH.search(w) and w[:1].islower():
+            return True
+    return False
 
 # 2026-06-30: robust English detector. _BAD_RE is a finite ~40-word finance
 # blocklist, so generic English bodies (that avoid those exact words) slipped
@@ -81,8 +100,8 @@ def looks_english(text):
     return len(_EN_RE.findall(t)) >= 2
 
 def is_good_ro(text):
-    # Reject known garbage/mistranslations (_BAD_RE) AND generic English.
-    return not _BAD_RE.search(text or "") and not looks_english(text)
+    # Reject known garbage/mistranslations, generic English AND foreign-letter words.
+    return _bad_hits(text) == 0 and not looks_english(text) and not _foreign_word(text)
 
 def _selftest_filter():
     """Co-design: garbage-ul real TREBUIE respins, exemplele bune TREBUIE acceptate."""
@@ -101,7 +120,11 @@ _DIAG = {"ok": {}, "err": {}, "ro_reject": {}, "samples": [], "no_keys": []}   #
 _DEADLINE = 0.0   # buget global de timp (setat în main); după el, chat() iese pe fallback rapid
 
 def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, max_attempts=40):
-    last = "n/a"; fallback = None; tries = 0; attempts = 0
+    """2026-07-02: textul RESPINS de filtrul de calitate NU se mai publică niciodată.
+    Vechiul comportament păstra prima variantă respinsă ca «rezervă» și o întorcea după
+    max_tries — exact așa au ajuns LIVE «paciência», «possibiliți», «opțiunistii se îndrecău».
+    Acum: accept pică pe toți → RuntimeError; apelantul decide (fallback EN NEafișat / retry)."""
+    last = "n/a"; tries = 0; attempts = 0
     if _DEADLINE and time.time() > _DEADLINE:
         raise RuntimeError("buget de timp depășit — fallback rapid pe restul")
     for name, api_base, model, envb in PROVIDERS:
@@ -120,11 +143,10 @@ def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, ma
                 tries += 1
                 if len(_DIAG["samples"]) < 6: _DIAG["samples"].append({"p": name, "raw": (content or "")[:200]})
                 if accept and not accept(content):
-                    if fallback is None: fallback = content        # prima variantă validă = rezervă
                     last = f"{name} (RO respins)"
                     _DIAG["ro_reject"][name] = _DIAG["ro_reject"].get(name, 0) + 1
                     if tries >= max_tries:                         # nu te învârti la nesfârșit
-                        return {"content": fallback, "provider": name + " (fallback)"}
+                        raise RuntimeError("calitate RO respinsă de " + str(tries) + " provideri")
                     continue
                 _DIAG["ok"][name] = _DIAG["ok"].get(name, 0) + 1
                 return {"content": content, "provider": name}
@@ -132,10 +154,10 @@ def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, ma
                 last = f"{name} HTTP {e.code}"; _DIAG["err"][f"{name}:{e.code}"] = _DIAG["err"].get(f"{name}:{e.code}", 0) + 1
                 if e.code in (401, 403, 404):
                     break   # cheie/provider inutilizabil → sari TOATE cheile lui (nu mânca bugetul de încercări)
+            except RuntimeError:
+                raise
             except Exception as e:
                 last = f"{name} {e}"; k = f"{name}:{type(e).__name__}"; _DIAG["err"][k] = _DIAG["err"].get(k, 0) + 1
-    if fallback is not None:
-        return {"content": fallback, "provider": "fallback"}
     raise RuntimeError("toți providerii au eșuat: " + last)
 
 V = "33"
@@ -224,8 +246,12 @@ _END_OK = re.compile(r'[.!?…»”")\]]$')
 def _scrub_store(store):
     """Igienizare store la fiecare rulare: decodează entități escapate, aruncă intrările
     cu titlu placeholder (nepublicabile) și repară excerpturile tăiate dur în mijlocul
-    cuvântului (fără elipsă) de versiunile vechi ale scriptului."""
-    out = []
+    cuvântului (fără elipsă) de versiunile vechi ale scriptului.
+    + SELF-CLEANING (2026-07-02): traducerile existente sunt re-verificate cu filtrul de
+    calitate CURENT la fiecare rulare — dacă îmbunătățim filtrul mâine, garbage-ul strecurat
+    ieri e prins automat: retrogradat la fb (re-tradus din originalul păstrat în src_title)
+    sau eliminat dacă nu mai avem originalul. Nimic stricat nu rămâne pe pagină."""
+    out, demoted, dropped = [], 0, 0
     for s in store:
         for f in ("titlu", "fapt", "ce_inseamna"):
             if s.get(f): s[f] = clean_txt(s[f])
@@ -239,7 +265,19 @@ def _scrub_store(store):
         ce = s.get("ce_inseamna", "")
         if ce and not _END_OK.search(ce):                # proză trunchiată de LLM → elipsă onestă
             s["ce_inseamna"] = cut(ce, len(ce) - 1) if len(ce) >= 200 else ce.rstrip(" ,;:–—-") + "…"
+        if not s.get("fb"):
+            ok = is_good_ro(s.get("titlu", "")) and is_good_ro(s.get("fapt", "")) \
+                 and is_good_ro(s.get("ce_inseamna", ""))
+            if not ok:
+                if s.get("src_title"):                   # avem originalul → re-traducem la healing
+                    s["titlu"] = s["src_title"]; s["fapt"] = s.get("src_desc") or s["src_title"]
+                    s["ce_inseamna"] = FB_NOTE.get(s.get("cat", "macro"), FB_NOTE["macro"])
+                    s["fb"] = 1; s.pop("tier2", None); demoted += 1
+                else:
+                    dropped += 1; continue               # garbage fără sursă → afară din store
         out.append(s)
+    if demoted or dropped:
+        print(f"  scrub calitate: {demoted} retrogradate spre re-traducere, {dropped} eliminate")
     return out
 def classify(txt):
     txt = txt.lower(); best, bn = "macro", 0
@@ -259,8 +297,11 @@ FB_NOTE = {
 }
 
 def _base(it, now):
+    # src_title/src_desc = ORIGINALUL englez, păstrat permanent: orice card poate fi
+    # re-tradus oricând de la sursă (nu din româna posibil stricată) — self-healing durabil.
     return {"url": it["link"].split("?")[0], "link": it["link"], "src": it["src"],
-            "ts": it["ts"], "gen_ts": now, "score": it["score"]}
+            "ts": it["ts"], "gen_ts": now, "score": it["score"],
+            "src_title": clean_txt(it.get("title", "")), "src_desc": cut(clean_txt(it.get("desc", "")), 400)}
 
 def _parse_json(c):
     m = re.search(r"\{.*\}", c, re.S)
@@ -270,7 +311,7 @@ def _ro_penalty(text):
     """Cât de «ne-românesc» e textul: cuvinte engleze/garbage + (mare) dacă n-are diacritice.
     0 = română curată. Folosit ca RANG de calitate, nu ca poartă spre engleză."""
     t = text or ""
-    hits = len(_BAD_RE.findall(t))
+    hits = _bad_hits(t)
     has_diac = bool(re.search(r"[ăâîșțĂÂÎȘȚ]", t))
     return hits + (0 if has_diac else 5)   # fără diacritice = aproape sigur netradus
 
@@ -341,11 +382,91 @@ def make_record(it, now):
     return None              # nimic românesc → engleză brută badge-uită
 
 def make_fallback(it, now):
-    """Ultimă instanță: păstrăm faptul în engleză (badge «rezumat în engleză») + notă RO pe categorie."""
+    """Ultimă instanță: păstrăm faptul în engleză ÎN STORE (nu se mai afișează pe pagină
+    din 2026-07-02) + notă RO pe categorie; vindecarea în loturi îl traduce la rulările următoare."""
     cat = classify(it["title"] + " " + it["desc"])
     fapt = cut(clean_txt(it.get("desc", "")), 240) or clean_txt(it["title"])
     return {**_base(it, now), "cat": cat, "fb": 1,
             "titlu": clean_txt(it["title"]), "fapt": fapt, "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])}
+
+def _parse_json_arr(c):
+    m = re.search(r"\[.*\]", c or "", re.S)
+    return json.loads(re.sub(r"[\x00-\x1f]", " ", m.group(0) if m else c))
+
+def _ro_field_ok(t, minlen=8):
+    """Câmp publicabil dintr-un lot: valid, românesc; fără diacritice acceptăm doar texte scurte
+    (titluri gen «Dow și S&P 500 scad» pot fi legitime fără diacritice)."""
+    t = (t or "").strip()
+    if not _valid(t, minlen) or not is_good_ro(t): return False
+    return bool(re.search(r"[ăâîșțĂÂÎȘȚ]", t)) or len(t) < 60
+
+def heal_batch_translate(store, batch=8):
+    """Traduce fallback-urile engleze în LOTURI de `batch` per apel LLM (debit ~8×).
+    Acceptare per-item (un item prost nu aruncă lotul); ce nu iese românesc rămâne fb."""
+    fbs = sorted([x for x in store if x.get("fb")], key=lambda x: -x.get("score", 0))
+    healed = 0
+    for i in range(0, len(fbs), batch):
+        if _DEADLINE and time.time() > _DEADLINE - 25: break   # lasă timp de scriere/commit
+        lot = fbs[i:i + batch]
+        # traducem de la ORIGINALUL englez când există (src_title), altfel din câmpurile curente
+        lst = "\n".join(f'{j}. TITLU: {s.get("src_title") or s.get("titlu","")}\n'
+                        f'   REZUMAT: {cut(s.get("src_desc") or s.get("fapt",""), 220)}'
+                        for j, s in enumerate(lot))
+        p = ("Tradu în română naturală și corectă știrile de mai jos (oil/crude=țiței NU ulei, "
+             "bonds=obligațiuni NU bonduri, stocks/shares=acțiuni, yield=randament, Fed=Rezerva Federală, "
+             "tariffs=tarife vamale). Diacritice corecte, zero cuvinte din alte limbi. "
+             "Răspunde DOAR cu JSON array pe o linie, câte un obiect per știre, în ordinea dată:\n"
+             '[{"i":0,"titlu":"...","fapt":"1-2 propoziții cu faptul principal"}, ...]\n\n' + lst)
+        try:
+            r = chat([{"role": "user", "content": p}], max_tokens=1600, temperature=0.3)
+            arr = _parse_json_arr(r.get("content", ""))
+        except Exception as e:
+            print("  lot traducere fail:", str(e)[:60]); continue
+        for d in arr if isinstance(arr, list) else []:
+            try:
+                s = lot[int(d.get("i", -1))]
+            except Exception:
+                continue
+            titlu, fapt = clean_txt(d.get("titlu", "")), clean_txt(d.get("fapt", ""))
+            if _ro_field_ok(titlu) and (not fapt or _ro_field_ok(fapt, 12)):
+                s["titlu"] = titlu; s["fapt"] = fapt or titlu
+                s["cat"] = classify(titlu + " " + fapt) if s.get("cat") not in CAT_KEYS else s["cat"]
+                s.pop("fb", None); s["tier2"] = 1
+                healed += 1
+    return healed
+
+def heal_batch_explain(store, batch=6):
+    """Scrie analiza «ce înseamnă pentru tine» pentru cardurile traduse dar cu notă generică
+    (tier2), în loturi. Analiza proastă/engleză e respinsă per-item; rămâne generică (box ascuns)."""
+    generic = set(FB_NOTE.values())
+    t2 = sorted([x for x in store if not x.get("fb") and x.get("ce_inseamna") in generic],
+                key=lambda x: -x.get("score", 0))
+    done = 0
+    for i in range(0, len(t2), batch):
+        if _DEADLINE and time.time() > _DEADLINE - 25: break
+        lot = t2[i:i + batch]
+        lst = "\n".join(f'{j}. {s.get("titlu","")} — {cut(s.get("fapt",""), 180)}' for j, s in enumerate(lot))
+        p = ("Ești redactor la Clubul Financiar (educație financiară, România). Pentru fiecare știre "
+             "de mai jos scrie «ce înseamnă pentru banii unui român»: 2-3 propoziții CONCRETE și specifice "
+             "știrii (dobânzi la credite/depozite, cursul leului, prețuri, pensii private, ETF-uri, joburi) "
+             "— NU generalități. Română corectă cu diacritice, zero cuvinte străine, fără sfaturi de "
+             "tranzacționare. Răspunde DOAR cu JSON array pe o linie:\n"
+             '[{"i":0,"ce":"..."}]\n\n' + lst)
+        try:
+            r = chat([{"role": "user", "content": p}], max_tokens=1400, temperature=0.4)
+            arr = _parse_json_arr(r.get("content", ""))
+        except Exception as e:
+            print("  lot analiză fail:", str(e)[:60]); continue
+        for d in arr if isinstance(arr, list) else []:
+            try:
+                s = lot[int(d.get("i", -1))]
+            except Exception:
+                continue
+            ce = clean_txt(d.get("ce", ""))
+            if len(ce) > 40 and _ro_field_ok(ce, 40) and not looks_english(ce):
+                s["ce_inseamna"] = ce; s.pop("tier2", None)
+                done += 1
+    return done
 
 def main():
     store = []
@@ -389,26 +510,46 @@ def main():
         if new:
             print(f"generate: {len(new) - fb_count} traduse RO / {fb_count} fallback engleză")
 
-        # VINDECĂ fallback-urile: re-încearcă traducerea știrilor rămase în engleză (providerii
-        # free pică intermitent; fără asta, o știre prinsă pe fallback rămânea engleză pe veci).
-        # Întâi cele mai vizibile (scor mare); în limita bugetului de timp.
-        healed = 0
-        for s in sorted([x for x in store if x.get("fb")], key=lambda x: -x.get("score", 0)):
-            if _DEADLINE and time.time() > _DEADLINE - 25: break   # lasă timp de scriere/commit
-            it = {"title": s.get("titlu", ""), "desc": s.get("fapt", ""), "src": s.get("src", ""),
-                  "link": s.get("link") or s["url"], "ts": s.get("ts", 0), "score": s.get("score", 0)}
-            rec = make_record(it, now)   # None dacă tot nu iese română → rămâne fallback
-            if rec:
-                s["titlu"] = rec["titlu"]; s["fapt"] = rec["fapt"]; s["ce_inseamna"] = rec["ce_inseamna"]
-                s["cat"] = rec["cat"]; s.pop("fb", None)
-                if rec.get("tier2"): s["tier2"] = 1
-                healed += 1
-        if healed: print(f"vindecate (fallback→RO): {healed}")
+        # AUDIT de limbă pe noile traduceri (un apel LLM per rulare): un verificator
+        # independent re-citește ce tocmai am generat; ce nu e română curată e retrogradat
+        # la fb și re-tradus la rulările următoare din originalul src_title. Eșecul
+        # auditului nu blochează rularea (filtrele locale rămân prima linie de apărare).
+        fresh_now = [s for s in store if s.get("gen_ts") == now and not s.get("fb")]
+        if fresh_now:
+            try:
+                lst = "\n".join(f'{j}. {s["titlu"]} — {cut(s.get("ce_inseamna", ""), 140)}'
+                                for j, s in enumerate(fresh_now))
+                p = ("Ești corector de limba română. Textele de mai jos trebuie să fie română corectă "
+                     "și naturală. Răspunde DOAR cu un JSON array cu indecșii textelor care conțin cuvinte "
+                     "inventate/străine sau gramatică evident greșită — array gol [] dacă toate sunt bune:\n\n" + lst)
+                bad = _parse_json_arr(chat([{"role": "user", "content": p}],
+                                           max_tokens=200, temperature=0.0).get("content", ""))
+                nbad = 0
+                for j in bad if isinstance(bad, list) else []:
+                    s = fresh_now[int(j)]
+                    if s.get("src_title"):
+                        s["titlu"] = s["src_title"]; s["fapt"] = s.get("src_desc") or s["src_title"]
+                        s["ce_inseamna"] = FB_NOTE.get(s.get("cat", "macro"), FB_NOTE["macro"])
+                        s["fb"] = 1; s.pop("tier2", None); nbad += 1
+                if nbad: print(f"  audit limbă: {nbad} retrogradate spre re-traducere")
+            except Exception as e:
+                print("  audit limbă sărit:", str(e)[:50])
+
+        # VINDECĂ backlog-ul în LOTURI (2026-07-02): 8 știri per apel LLM în loc de 1 —
+        # debit ~8× pe providerii free care pică intermitent. Întâi fallback-urile engleze
+        # (nu se mai afișează până nu-s românești), apoi analizele lipsă (tier2/generic).
+        healed = heal_batch_translate(store)
+        if healed: print(f"vindecate (fallback→RO, loturi): {healed}")
+        enriched = heal_batch_explain(store)
+        if enriched: print(f"analize adăugate (tier2→complet, loturi): {enriched}")
 
     store.sort(key=lambda s: -s.get("score", 0))
-    # dedup la afișare: aceeași știre sindicalizată (titlu normalizat identic) o singură dată
+    # dedup la afișare: aceeași știre sindicalizată (titlu normalizat identic) o singură dată.
+    # 2026-07-02: fallback-urile ENGLEZE nu se mai afișează deloc — promisiunea paginii e
+    # «explicat pe înțelesul tău»; rămân în store și se vindecă la rulările următoare.
     seen_t, disp = set(), []
     for s in store:
+        if s.get("fb"): continue
         k = norm(s.get("titlu", ""))
         if k and k in seen_t: continue
         seen_t.add(k); disp.append(s)
