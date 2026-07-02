@@ -175,9 +175,9 @@ def fetch(url):
         raw = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=20).read()
         root = ET.fromstring(raw); out = []
         for it in root.iter("item"):
-            t = (it.findtext("title") or "").strip()
+            t = clean_txt(it.findtext("title") or "")
             link = (it.findtext("link") or "").strip()
-            desc = re.sub("<[^>]+>", "", it.findtext("description") or "").strip()
+            desc = clean_txt(it.findtext("description") or "")
             pub = it.findtext("pubDate") or ""; ts = 0
             if pub:
                 try:
@@ -193,6 +193,54 @@ def fetch(url):
         print("  fetch fail", url[:48], e); return []
 
 def norm(t): return re.sub(r"[^a-z0-9 ]", "", t.lower())[:60]
+def _normtxt(t): return re.sub(r"[^a-z0-9ăâîșț]", "", (t or "").lower())
+
+def clean_txt(t):
+    """Igienizează text pentru afișare: decodează entitățile HTML rămase escapate
+    (Google News livrează «Title&nbsp;&nbsp;Source» în description — fără unescape,
+    &nbsp; ajungea TEXT literal pe pagină), taie tag-urile rămase, normalizează spațiile."""
+    t = html.unescape(html.unescape(t or ""))   # 2 treceri: feed-urile dublu-escapează
+    t = re.sub(r"<[^>]+>", " ", t)
+    t = t.replace("\xa0", " ")
+    return re.sub(r"\s+", " ", t).strip()
+
+def cut(t, n):
+    """Taie la graniță de cuvânt + elipsă (nu «se confruntă cu provocări profunde: p»)."""
+    t = re.sub(r"\s+", " ", (t or "")).strip()
+    if len(t) <= n: return t
+    c = t[:n + 1].rsplit(" ", 1)[0].rstrip(" ,;:·–—-")
+    return c + "…"
+
+# Ecouri de prompt: LLM-ul întoarce uneori chiar șablonul JSON («titlul tradus»,
+# «o propoziție cu faptul principal», «...») — au ajuns LIVE ca titluri de card.
+_PH_RE = re.compile(r"titlul tradus|faptul principal|\d\s*-\s*\d propoziții|titlu clar în român", re.I)
+def _valid(t, minlen=8):
+    """Câmp publicabil: ne-gol, ne-placeholder. Cardurile fără titlu valid NU se publică."""
+    t = (t or "").strip()
+    core = t.strip(' ."„”…').strip()
+    return len(core) >= minlen and not _PH_RE.search(t)
+
+_END_OK = re.compile(r'[.!?…»”")\]]$')
+def _scrub_store(store):
+    """Igienizare store la fiecare rulare: decodează entități escapate, aruncă intrările
+    cu titlu placeholder (nepublicabile) și repară excerpturile tăiate dur în mijlocul
+    cuvântului (fără elipsă) de versiunile vechi ale scriptului."""
+    out = []
+    for s in store:
+        for f in ("titlu", "fapt", "ce_inseamna"):
+            if s.get(f): s[f] = clean_txt(s[f])
+        if not _valid(s.get("titlu", "")):
+            continue                                     # titlu placeholder/gol → nu se publică
+        if not _valid(s.get("fapt", ""), 12):
+            s["fapt"] = s["titlu"]
+        v = s.get("fapt", "")
+        if len(v) >= 200 and not _END_OK.search(v):      # tăiat dur la vechiul cap de 240
+            s["fapt"] = cut(v, len(v) - 1)
+        ce = s.get("ce_inseamna", "")
+        if ce and not _END_OK.search(ce):                # proză trunchiată de LLM → elipsă onestă
+            s["ce_inseamna"] = cut(ce, len(ce) - 1) if len(ce) >= 200 else ce.rstrip(" ,;:–—-") + "…"
+        out.append(s)
+    return out
 def classify(txt):
     txt = txt.lower(); best, bn = "macro", 0
     for k, kws in CAT_KW.items():
@@ -251,14 +299,17 @@ def make_record(it, now):
     try:
         r = chat([{"role": "user", "content": p1}], max_tokens=900, temperature=0.5, accept=is_good_ro)
         d = _parse_json(r.get("content", "").strip())
-        titlu, fapt, ce = d["titlu"].strip(), d["fapt"].strip(), d["ce_inseamna"].strip()
+        titlu, fapt, ce = clean_txt(d["titlu"]), clean_txt(d["fapt"]), clean_txt(d["ce_inseamna"])
         cat = d.get("categorie", "").strip()
         if cat not in CAT_KEYS: cat = classify(it["title"] + " " + it["desc"])
         # Per-field gate (2026-06-30): score EACH field, take the WORST. The old
         # concat `_ro_penalty(titlu+fapt+ce)` let a diacritic'd title zero out the
         # no-diacritics penalty for an English body → "doar titlul tradus". Now an
         # English fapt/ce is rejected even when the title is perfect Romanian.
-        if titlu and len(ce) > 20 and not looks_english(fapt) and not looks_english(ce):
+        # + gate anti-placeholder (2026-07-02): LLM-ul întorcea chiar șablonul din prompt
+        # («titlul tradus», «...») și ajungea LIVE ca titlu de card.
+        if _valid(titlu) and _valid(fapt, 12) and len(ce) > 20 and _valid(ce, 20) \
+                and not looks_english(fapt) and not looks_english(ce):
             pen = max(_ro_penalty(titlu), _ro_penalty(fapt), _ro_penalty(ce))
             cands.append((pen, {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt, "ce_inseamna": ce}))
             if pen == 0:
@@ -273,9 +324,10 @@ def make_record(it, now):
     try:
         r = chat([{"role": "user", "content": p2}], max_tokens=400, temperature=0.3, accept=is_good_ro)
         d = _parse_json(r.get("content", "").strip())
-        titlu, fapt = d.get("titlu", "").strip(), d.get("fapt", "").strip()
+        titlu, fapt = clean_txt(d.get("titlu", "")), clean_txt(d.get("fapt", ""))
+        if not _valid(fapt, 12): fapt = ""               # placeholder «o propoziție cu faptul principal»
         cat = classify(it["title"] + " " + it["desc"])
-        if titlu and not looks_english(titlu) and not looks_english(fapt):
+        if _valid(titlu) and not looks_english(titlu) and not looks_english(fapt):
             pen = max(_ro_penalty(titlu), _ro_penalty(fapt or titlu))
             cands.append((pen, {**_base(it, now), "cat": cat, "titlu": titlu, "fapt": fapt or titlu,
                                 "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"]), "tier2": 1}))
@@ -291,9 +343,9 @@ def make_record(it, now):
 def make_fallback(it, now):
     """Ultimă instanță: păstrăm faptul în engleză (badge «rezumat în engleză») + notă RO pe categorie."""
     cat = classify(it["title"] + " " + it["desc"])
-    fapt = re.sub(r"\s+", " ", it.get("desc", "")).strip()[:240] or it["title"].strip()
+    fapt = cut(clean_txt(it.get("desc", "")), 240) or clean_txt(it["title"])
     return {**_base(it, now), "cat": cat, "fb": 1,
-            "titlu": it["title"].strip(), "fapt": fapt, "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])}
+            "titlu": clean_txt(it["title"]), "fapt": fapt, "ce_inseamna": FB_NOTE.get(cat, FB_NOTE["macro"])}
 
 def main():
     store = []
@@ -304,6 +356,7 @@ def main():
     global _DEADLINE
     _DEADLINE = now + 300   # buget total ~5 min (fetch + LLM); după el, restul știrilor → fallback rapid
     store = [s for s in store if s.get("gen_ts", 0) > now - KEEP_H*3600]
+    store = _scrub_store(store)   # decode entități, aruncă placeholdere, repară tăieturile dure
     new = []
     if "--rebuild-only" in sys.argv:
         # Reconstruiește pagina + feed din store, FĂRĂ fetch/LLM (pentru cleanup/regenerare).
@@ -353,9 +406,16 @@ def main():
         if healed: print(f"vindecate (fallback→RO): {healed}")
 
     store.sort(key=lambda s: -s.get("score", 0))
-    disp = store[:DISPLAY]
+    # dedup la afișare: aceeași știre sindicalizată (titlu normalizat identic) o singură dată
+    seen_t, disp = set(), []
+    for s in store:
+        k = norm(s.get("titlu", ""))
+        if k and k in seen_t: continue
+        seen_t.add(k); disp.append(s)
+        if len(disp) >= DISPLAY: break
     counts = {k: sum(1 for s in disp if s["cat"] == k) for k, _ in CATS}
 
+    generic_cti = set(FB_NOTE.values())
     cards = []
     for s in disp:
         ref = s["ts"] or s["gen_ts"]
@@ -368,11 +428,17 @@ def main():
             when = f"acum {int(dmin // 60)}h"
         else:
             when = f"acum {int(dmin // 1440)}z"
+        # fără fraza-șablon repetată: când explainer-ul e fallback-ul generic pe categorie,
+        # cardul apare FĂRĂ boxul «ce înseamnă» (mai onest decât același text pe 40% din carduri)
+        cti = "" if s["ce_inseamna"] in generic_cti else \
+            f'\n<div class="ne-cti"><strong>💡 Ce înseamnă pentru tine:</strong> {html.escape(s["ce_inseamna"])}</div>'
+        # nu repeta titlul pe post de rezumat (desc Google News = titlu + numele sursei)
+        nf, nt = _normtxt(s["fapt"]), _normtxt(s["titlu"])
+        fapt = "" if (nt and nf.startswith(nt) and len(nf) - len(nt) < 40) else html.escape(s["fapt"]) + " "
         cards.append(f'''<article class="card news-card" data-cat="{s['cat']}" data-ts="{s['ts'] or s['gen_ts']:.0f}" data-score="{s.get('score',0)}">
-<div class="ne-top"><span class="ne-src">🌍 {html.escape(s['src'])} · {CAT_LABEL[s['cat']]}{' · rezumat în engleză' if s.get('fb') else ''}</span><span class="ne-when">{when}</span></div>
+<div class="ne-top"><span class="ne-src">🌍 {html.escape(s['src'])} · {CAT_LABEL.get(s['cat'], s['cat'])}{' · rezumat în engleză' if s.get('fb') else ''}</span><span class="ne-when">{when}</span></div>
 <h2>{html.escape(s['titlu'])}</h2>
-<p class="ne-fapt">{html.escape(s['fapt'])} <a class="ne-link" href="{html.escape(s['link'])}" target="_blank" rel="noopener nofollow">Sursă: {html.escape(s['src'])} →</a></p>
-<div class="ne-cti"><strong>💡 Ce înseamnă pentru tine:</strong> {html.escape(s['ce_inseamna'])}</div>
+<p class="ne-fapt">{fapt}<a class="ne-link" href="{html.escape(s['link'])}" target="_blank" rel="noopener nofollow">Sursă: {html.escape(s['src'])} →</a></p>{cti}
 </article>''')
 
     tabs = f'<button class="news-tab active" data-f="all">Toate <span>({len(disp)})</span></button>'
@@ -409,6 +475,7 @@ def main():
 .ne-src{{font-size:.74rem;font-weight:800;color:var(--emerald-link);text-transform:uppercase;letter-spacing:.04em}}.ne-when{{font-size:.78rem;color:var(--muted);white-space:nowrap}}
 .news-card h2{{font-size:1.18rem;margin:2px 0 10px;line-height:1.3}}.ne-fapt{{color:var(--muted);font-size:.94rem;margin:0 0 12px}}.ne-link{{color:var(--emerald-link);font-weight:700;white-space:nowrap}}
 .ne-cti{{background:var(--bg-soft);border-left:4px solid var(--emerald);border-radius:10px;padding:13px 15px;font-size:.93rem}}
+.news-card{{display:flex;flex-direction:column}}.news-card .ne-cti{{margin-top:auto}}
 </style></head><body>{NAV_HTML}<main class="u-page">
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri externe · actualizat {today}</p><h1 class="title">Economia lumii, pe înțelesul tău</h1>

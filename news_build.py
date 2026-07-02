@@ -87,9 +87,24 @@ def classify(text):
     return "economie"
 
 def clean(t):
-    t = re.sub(r"<[^>]+>", "", t or "")
-    t = html.unescape(t)
-    return re.sub(r"\s+", " ", t).strip()
+    # ordinea contează: unescape ÎNTÂI (2 treceri — feed-urile dublu-escapează: &amp;lt;b&amp;gt;),
+    # ABIA apoi taie tag-urile; invers, «&lt;b&gt;» devenea «<b>» literal, vizibil pe carduri.
+    t = html.unescape(html.unescape(t or ""))
+    t = re.sub(r"<[^>]+>", " ", t)
+    t = t.replace("\xa0", " ")
+    t = re.sub(r"\s+", " ", t).strip()
+    # boilerplate feed WordPress: «The post <titlu> appeared first on <site>.»
+    t = re.sub(r"\s*The post .*$", "", t)
+    t = re.sub(r"\s*\[…+\]\s*$", "…", t)      # marcajul de excerpt rămas la coadă
+    t = re.sub(r"\s*\[…+\]\s*", " … ", t)     # sau în mijloc
+    return t.strip()
+
+def cut(t, n):
+    """Taie la graniță de cuvânt + elipsă (nu dur, în mijlocul cuvântului)."""
+    t = (t or "").strip()
+    if len(t) <= n: return t
+    c = t[:n + 1].rsplit(" ", 1)[0].rstrip(" ,;:·–—-")
+    return c + "…"
 
 def reltime(ts):
     if not ts: return ""
@@ -129,7 +144,11 @@ def collect():
             tp = e.get("published_parsed") or e.get("updated_parsed")
             ts = int(time.mktime(tp)) if tp else int(now)
             if (now - ts) > MAX_AGE_DAYS * 86400: continue
-            summ = clean(e.get("summary", ""))[:200]
+            summ = cut(clean(e.get("summary", "")), 200)
+            # Google News: description = titlul repetat + numele sursei → nu-l afișa ca excerpt
+            _nt = re.sub(r"[^a-z0-9ăâîșț]", "", title.lower())
+            _ns = re.sub(r"[^a-z0-9ăâîșț]", "", summ.lower())
+            if _nt and _ns.startswith(_nt) and len(_ns) - len(_nt) < 40: summ = ""
             text = (title + " " + summ).lower()
             kw_hit = any(k in text for k in KW)
             if need and not kw_hit: continue
@@ -183,7 +202,7 @@ def build():
         cards += f'''<a class="card reveal news-card" data-cat="{it['cat']}" data-ts="{it['ts']}" data-score="{it['score']:.3f}" href="{html.escape(it['link'])}" target="_blank" rel="noopener nofollow">
 <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px">
 <span class="pill">{html.escape(it['source'])}</span><span style="color:var(--muted);font-size:.8rem">{reltime(it['ts'])}</span></div>
-<h3 style="font-size:1.05rem">{t}</h3>{f'<p>{s}</p>' if s else ''}<span class="more">Citește la sursă →</span></a>\n'''
+<h3 style="font-size:1.05rem">{t}</h3>{f'<p>{s}</p>' if s else ''}<span class="more">Citește la sursă</span></a>\n'''
     page = f'''<!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Știri financiare România — Clubul Financiar</title>
@@ -212,6 +231,7 @@ def build():
 .news-controls{{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:34px}}
 .news-grp{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
 .news-lbl{{color:var(--muted);font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}}
+.news-card{{display:flex;flex-direction:column}}.news-card .more{{margin-top:auto;padding-top:10px}}
 </style></head><body>{NAV_HTML}<main class="u-page">
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Știri · {n_src} surse · actualizat {today}</p><h1 class="title">Știri financiare România</h1>
@@ -261,7 +281,7 @@ def build():
     var e=document.getElementById('newsEmpty'); if(e) e.hidden=(vis.length>0);
     var cta=document.getElementById('newsPremCTA');
     if(!prem && vis.length>FREE){{
-      if(!cta){{ cta=document.createElement('div'); cta.id='newsPremCTA'; cta.className='cf-premium-lock'; cta.style.margin='26px 0 0';
+      if(!cta){{ cta=document.createElement('div'); cta.id='newsPremCTA'; cta.className='cf-premium-lock'; cta.style.margin='26px auto 0';
         cta.innerHTML='<div class="lock-ic">🔒</div><h2>Vezi toate știrile + filtre cu Premium</h2><p>Free: primele '+FREE+' știri din sursele principale. Premium: toate sursele, pe categorii, cu filtre (24h / 7 zile / relevanță).</p><p class="price-line" style="color:var(--gold);font-weight:800;margin:10px 0 14px">49 lei/lună</p><a class="btn btn-primary" href="/premium">Deblochează cu Premium</a>';
         grid.parentNode.insertBefore(cta, grid.nextSibling); }}
       cta.style.display='';
