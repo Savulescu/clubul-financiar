@@ -1,25 +1,51 @@
 {
  "ok": {},
  "err": {
-  "gemini:429": 5,
-  "mistral:401": 5,
-  "cerebras:403": 5,
-  "deepseek:402": 10,
-  "siliconflow:401": 5,
-  "groq:403": 5,
-  "together:403": 5,
-  "sambanova:402": 30,
-  "nvidia:TimeoutError": 27,
-  "fireworks:404": 4,
-  "openrouter:429": 8
+  "gemini:429": 4,
+  "mistral:401": 4,
+  "cerebras:403": 4,
+  "deepseek:402": 8,
+  "siliconflow:401": 4,
+  "groq:403": 4,
+  "together:403": 4,
+  "sambanova:402": 24,
+  "nvidia:TimeoutError": 23,
+  "fireworks:404": 3
  },
- "ro_reject": {},
- "samples": [],
+ "ro_reject": {
+  "openrouter": 6
+ },
+ "samples": [
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct diacritics, no foreign words. Must use core"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line. Must be Romanian, correct diacritics, no foreign words. Use corect terms. Mu"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"...\",\"fapt\":\"...\"} with natural Romanian translation of title and a sentence with the main fact.\n\nTitle: \"Musk Meme Traders Rush Back Into Tesla When"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate into natural Romanian, using specific terms: oil = \"tiței\" (but not rel"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian summary original, not literal translation. Must foll"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no words from other languages. Must use specific terms: oil/crude ="
+  }
+ ],
  "no_keys": [],
  "summary": {
-  "new": 3,
-  "fresh": 3,
-  "fb": 3,
+  "new": 13,
+  "fresh": 13,
+  "fb": 13,
   "tier2": 0,
   "explainer": 0
  }
