@@ -2,7 +2,7 @@
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trusă de șabloane — buget și contracte gata de folosit — Clubul Financiar</title>
 <meta name="description" content="Descarcă șabloane gata de folosit: buget 50/30/20, zero-based, tracker cheltuieli, planificator datorii (CSV pentru Excel) și contracte printabile (închiriere, împrumut, proces-verbal, chitanță).">
-<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/unelte/sabloane">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
@@ -11,9 +11,20 @@
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=4">
 <style>
+/* Skin Ultra — doar prezentare; descărcările CSV și print-ul sunt neatinse.
+   Tokenii vechi (--emerald/--card) sunt remapați de cf-ultra.css pe .u-page. */
+.u-page{ --gold:var(--u-gold); }
+.u-page .card{ position:relative; overflow:hidden; }
+.u-page .card::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+/* bara overlay-ului de print stă mereu pe fundal închis → aur constant */
+.cf-doc-bar .btn-primary{ background:linear-gradient(135deg,#E8C268,#caa23f); color:#1a1304;
+  border:1px solid transparent; box-shadow:0 10px 26px rgba(0,0,0,.35); }
+.cf-doc-bar .btn-ghost{ color:#F3D690; border:1px solid rgba(232,194,104,.45); }
 .tpl-section{margin-top:30px}
-.tpl-section h3{font-size:1.18rem;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.tpl-section h3{font-family:'Fraunces',Georgia,serif;font-weight:600;color:var(--u-ink);font-size:1.18rem;margin-bottom:4px;display:flex;align-items:center;gap:10px}
 .tpl-section .sub{color:var(--muted);font-size:.9rem;margin:0 0 16px}
 .tpl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 @media(max-width:680px){.tpl-grid{grid-template-columns:1fr}}
@@ -56,6 +67,7 @@
   #cfDocPage table{page-break-inside:auto}#cfDocPage tr{page-break-inside:avoid}
 }
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Trusă de șabloane — buget și contracte gata de folosit", "url": "https://clubulfinanciar.ro/unelte/sabloane", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ro-RO", "isAccessibleForFree": true, "description": "Descarcă șabloane gata de folosit: buget 50/30/20, zero-based, tracker cheltuieli, planificator datorii (CSV pentru Excel) și contracte printabile (închiriere, împrumut, proces-verbal, chitanță).", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente"}, {"@type": "ListItem", "position": 3, "name": "Trusă de șabloane — buget și contracte", "item": "https://clubulfinanciar.ro/unelte/sabloane"}]}</script></head><body>
+<main class="u-page">
 <section class="section"><div class="container">
 <div class="center" style="margin-bottom:8px">
   <span class="cf-premium-badge">Premium</span>
@@ -65,7 +77,7 @@
 
 <!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
 <div class="cf-premium-lock">
-  <div class="lock-ic">🔓</div>
+  <div class="lock-ic">🔒</div>
   <h2>Bibliotecă de șabloane gata de folosit</h2>
   <p>Descarcă într-un click <strong>fișiere de buget</strong> (50/30/20, zero-based, tracker de cheltuieli, planificator datorii) care se deschid perfect în Excel și <strong>contracte printabile</strong> (închiriere, împrumut între persoane, proces-verbal de predare-primire, chitanță). Le completezi, le printezi sau le salvezi ca PDF.</p>
   <p class="price-line">Inclus în Premium — 49 lei/lună</p>
@@ -154,6 +166,7 @@
   <p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie#buget">← Articole despre bugetare</a></p>
 </div>
 </div></section>
+</main>
 
 <!-- ===== Overlay preview + print (sibling de body, izolat la print) ===== -->
 <div class="cf-doc-overlay" id="cfDocOverlay" role="dialog" aria-modal="true" aria-label="Previzualizare document">

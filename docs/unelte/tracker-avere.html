@@ -2,7 +2,7 @@
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tracker de avere + reminder lunar — calculează-ți averea netă — Clubul Financiar</title>
 <meta name="description" content="Adaugă-ți activele și datoriile și află-ți averea netă pe loc. Salvează un instantaneu lunar, vezi cum crește averea de la lună la lună și primește reminder lunar de actualizare.">
-<meta name="robots" content="index, follow"><meta name="theme-color" content="#10b981">
+<meta name="robots" content="index, follow"><meta name="theme-color" content="#0f2540">
 <link rel="canonical" href="https://clubulfinanciar.ro/unelte/tracker-avere">
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clubul Financiar"><meta property="og:locale" content="ro_RO">
@@ -11,7 +11,19 @@
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=4">
 <style>
+/* Skin Ultra — doar prezentare; calculul averii e neatins. Tokenii vechi
+   (--emerald/--grad/--card) sunt remapați de cf-ultra.css pe .u-page. */
+.u-page{ --gold:var(--u-gold); }
+.u-page .panel{ position:relative; overflow:hidden; border-radius:18px; }
+.u-page .panel::before{ content:""; position:absolute; inset:0 0 auto 0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); opacity:.7; }
+/* averea netă gravată Fraunces; păstrează culoarea setată din JS (auriu/roșu) */
+.u-page .result-big{ font-family:'Fraunces',Georgia,serif; font-weight:600; letter-spacing:-.015em;
+  background:none; -webkit-background-clip:border-box; background-clip:border-box;
+  -webkit-text-fill-color:currentColor; color:var(--u-ink);
+  font-variant-numeric:tabular-nums lining-nums; text-align:center; }
 .cat-block{margin-bottom:18px}
 .cat-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 8px}
 .cat-head h4{margin:0;font-size:.95rem}
@@ -29,7 +41,7 @@
 .bar-line{margin-bottom:9px}
 .bar-top{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;gap:10px}
 .bar-track{height:9px;border-radius:6px;background:var(--bg-soft);overflow:hidden}
-.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--emerald),color-mix(in srgb,var(--emerald) 55%,var(--gold)));transition:width .5s ease}
+.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--u-gold),var(--u-gold2));transition:width .5s ease}
 .bar-fill.neg{background:linear-gradient(90deg,#e25555,#f0a0a0)}
 .hist-list{list-style:none;margin:12px 0 0;padding:0}
 .hist-list li{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:.88rem}
@@ -51,6 +63,7 @@
 .cat-total-row{display:flex;justify-content:space-between;gap:10px;font-size:.92rem;padding:6px 0}
 .cat-total-row.big{font-size:1rem;font-weight:700;border-top:1px solid var(--border);padding-top:10px;margin-top:4px}
 </style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Tracker de avere + reminder lunar", "url": "https://clubulfinanciar.ro/unelte/tracker-avere", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ro-RO", "isAccessibleForFree": true, "description": "Adaugă-ți activele și datoriile și află-ți averea netă pe loc. Salvează instantanee lunare, urmărește creșterea averii și primește reminder lunar de actualizare.", "publisher": {"@type": "Organization", "name": "Clubul Financiar", "url": "https://clubulfinanciar.ro"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://clubulfinanciar.ro/"}, {"@type": "ListItem", "position": 2, "name": "Instrumente", "item": "https://clubulfinanciar.ro/instrumente"}, {"@type": "ListItem", "position": 3, "name": "Tracker de avere + reminder lunar", "item": "https://clubulfinanciar.ro/unelte/tracker-avere"}]}</script></head><body>
+<main class="u-page">
 <section class="section"><div class="container">
 <div class="center" style="margin-bottom:8px">
   <span class="cf-premium-badge">Premium</span>
@@ -60,7 +73,7 @@
 
 <!-- pentru cei FĂRĂ premium: teaser care creează dorința -->
 <div class="cf-premium-lock">
-  <div class="lock-ic">🔓</div>
+  <div class="lock-ic">🔒</div>
   <h2>Vezi-ți averea netă reală și cum crește în timp</h2>
   <p>Adaugă-ți conturile, depozitele, investițiile, pensiile, imobilele și aurul — minus datoriile — și afli pe loc <strong>cât valorezi cu adevărat</strong>. Salvezi un <strong>instantaneu lunar</strong>, vezi variația față de luna trecută și primești <strong>reminder lunar</strong> să-ți actualizezi averea. Totul rămâne pe dispozitivul tău.</p>
   <p class="price-line">Inclus în Premium — 49 lei/lună</p>
@@ -112,6 +125,7 @@
 <p style="margin-top:18px"><a class="btn btn-ghost" href="/educatie#economisire">← Articole despre avere și economisire</a></p>
 </div>
 </div></section>
+</main>
 
 <script>
 (function(){

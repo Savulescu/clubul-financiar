@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ro"><head>
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagina nu există — Clubul Financiar</title>
+<meta name="description" content="Pagina căutată nu există sau a fost mutată. Continuă către lecții, calculatoare sau căutarea globală Clubul Financiar.">
+<meta name="robots" content="noindex, follow"><meta name="theme-color" content="#0f2540">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css?v=31">
+<link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=4">
+<style>
+/* 404 — sobru, pe skinul Ultra (navy/crem + auriu) */
+.nf-wrap{ min-height:56vh; display:flex; flex-direction:column; justify-content:center; }
+.nf-code{
+  font-family:'Fraunces',Georgia,serif; font-weight:600; font-style:italic;
+  font-size:clamp(4.6rem,14vw,8.5rem); line-height:1; letter-spacing:.02em;
+  color:var(--u-gold); opacity:.92; margin:0 0 6px;
+  font-variant-numeric:lining-nums;
+}
+.nf-rule{ width:72px; height:2px; margin:22px auto 0;
+  background:linear-gradient(90deg,transparent,var(--u-gold2),transparent); border:0; }
+.nf-links{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:26px; }
+.nf-links .btn{ min-width:132px; justify-content:center; }
+.nf-hint{ color:var(--u-muted); font-size:.88rem; margin-top:22px; }
+.nf-hint a{ color:var(--u-gold); font-weight:600; text-decoration:none; }
+.nf-hint a:hover{ text-decoration:underline; text-underline-offset:4px; }
+.u-page a:focus-visible,.u-page .btn:focus-visible{ outline:2px solid var(--u-gold); outline-offset:3px; border-radius:10px; }
+</style>
+</head><body>
+<main class="u-page">
+<section class="section"><div class="container nf-wrap" style="max-width:720px;text-align:center">
+  <div class="u-hero" style="padding-bottom:8px">
+    <p class="u-eyebrow">Eroare 404</p>
+    <p class="nf-code" aria-hidden="true">404</p>
+    <h1 class="u-crest">Pagina nu <em>există</em></h1>
+    <p class="u-lead" style="margin-inline:auto">Linkul poate fi greșit sau pagina a fost mutată între timp. Nimic pierdut — de aici ajungi oriunde pe site.</p>
+  </div>
+  <div class="nf-links">
+    <a class="btn btn-primary" href="/">Acasă</a>
+    <a class="btn btn-ghost" href="/educatie">Învață</a>
+    <a class="btn btn-ghost" href="/calculatoare">Calculatoare</a>
+    <a class="btn btn-ghost" href="/" id="nfSearch">Căutare</a>
+  </div>
+  <p class="nf-hint">Cauți un termen anume? Îl găsești explicat simplu în <a href="/glosar">glosarul financiar</a>.</p>
+  <hr class="nf-rule" aria-hidden="true">
+</div></section>
+</main>
+<div class="nl-band" hidden aria-hidden="true"></div>
+<footer class="foot"><div class="container">
+  <div class="foot-bottom">
+    <span>© Clubul Financiar · clubulfinanciar.ro</span>
+    <span><a href="/privacy">Confidențialitate</a> · <a href="/terms">Termeni</a> · Conținut educativ, nu sfat de investiții</span>
+  </div>
+</div></footer>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
+<script defer src="/assets/site.js?v=32"></script>
+<script>
+// „Căutare" deschide căutarea globală injectată de site.js; fallback = Acasă.
+document.addEventListener("DOMContentLoaded",function(){
+  var l=document.getElementById("nfSearch");
+  if(!l) return;
+  l.addEventListener("click",function(e){
+    var b=document.getElementById("searchBtn");
+    if(b){ e.preventDefault(); b.click(); }
+  });
+});
+</script>
+</body></html>
