@@ -1,14 +1,55 @@
 {
- "ok": {},
- "err": {},
- "ro_reject": {},
- "samples": [],
+ "ok": {
+  "nvidia": 2
+ },
+ "err": {
+  "gemini:429": 6,
+  "mistral:401": 6,
+  "cerebras:403": 6,
+  "deepseek:402": 12,
+  "siliconflow:401": 6,
+  "groq:403": 6,
+  "together:403": 6,
+  "sambanova:402": 36,
+  "nvidia:TimeoutError": 22,
+  "fireworks:404": 3,
+  "nvidia:503": 2
+ },
+ "ro_reject": {
+  "openrouter": 6
+ },
+ "samples": [
+  {
+   "p": "nvidia",
+   "raw": "{\"titlu\":\"Bursa asiatică se confruntă cu scădere din cauza incertitudinii\", \"fapt\":\"Bursa asiatică este așteptată să înregistreze o scădere, pe fondul incertitudinii generate de evenimentele economice"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation natural Romanian, correct terms: oil = \"tiței NU ulei\"? Actually they w"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correcting terms: oil = \"tiței\" (but they w"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words, diacritics correct. Must not translate word-for-word. Must"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on a single line. Must be Romanian summary original, not literal translation. Must follow "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be original Romanian summary, not word-for-word t"
+  }
+ ],
  "no_keys": [],
  "summary": {
-  "new": 0,
-  "fresh": 0,
-  "fb": 0,
-  "tier2": 0,
-  "explainer": 0
+  "new": 24,
+  "fresh": 24,
+  "fb": 22,
+  "tier2": 1,
+  "explainer": 1
  }
 }
