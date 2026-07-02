@@ -35,6 +35,26 @@
     "telegram": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z\"/></svg>"
   };
 
+  // ---- iconuri UI SVG (înlocuiesc emoji-urile de sistem — uniforme pe orice OS) ----
+  const UI_IC = {
+    search: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
+    moon:   '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+    sun:    '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>',
+    menu:   '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+    user:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    compass:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
+    cap:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>',
+    tools:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+    chat:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+    chart:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>',
+    crown:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18h20M4 18 2 7l6 4 4-7 4 7 6-4-2 11"/></svg>',
+    star:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    signal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 20V4"/></svg>',
+    out:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>',
+  };
+  const ico = k => '<span class="ico">' + UI_IC[k] + '</span>';
+  function themeIcon(){ return document.documentElement.getAttribute("data-theme")==="dark" ? UI_IC.sun : UI_IC.moon; }
+
   // ---- theme ----
   const saved = localStorage.getItem("cf-theme");
   if (saved) document.documentElement.setAttribute("data-theme", saved);
@@ -42,7 +62,7 @@
     const cur = document.documentElement.getAttribute("data-theme")==="dark"?"":"dark";
     if(cur) document.documentElement.setAttribute("data-theme",cur); else document.documentElement.removeAttribute("data-theme");
     localStorage.setItem("cf-theme",cur);
-    document.querySelectorAll(".theme-ic").forEach(e=>e.textContent=cur==="dark"?"☀️":"🌙");
+    document.querySelectorAll(".theme-ic").forEach(e=>e.innerHTML=themeIcon());
   }
 
   // ---- navbar (hidratează dacă e pre-randat static în HTML, altfel îl creează) ----
@@ -53,10 +73,10 @@
     <a class="brand-logo" href="/"><img class="brand-img" src="/icon-64.png" alt="Clubul Financiar" width="34" height="34"> <span class="brand-txt">Clubul Financiar</span></a>
     <nav class="nav-links" id="navLinks">${NAV.map(([t,h])=>`<a href="${h}"${t==="Ultra"?' style="color:#E8C268;font-weight:700"':""}>${t}</a>`).join("")}</nav>
     <div class="nav-right">
-      <button class="icon-btn" id="searchBtn" aria-label="Caută">🔍</button>
-      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">${document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"🌙"}</span></button>
+      <button class="icon-btn" id="searchBtn" aria-label="Caută">${UI_IC.search}</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temă"><span class="theme-ic">${themeIcon()}</span></button>
       <span id="acctSlot"></span>
-      <button class="icon-btn burger" id="burger" aria-label="Meniu">☰</button>
+      <button class="icon-btn burger" id="burger" aria-label="Meniu">${UI_IC.menu}</button>
     </div>
   </div>`;
   document.body.prepend(nav);
@@ -64,6 +84,11 @@
   document.getElementById("themeBtn").onclick = toggleTheme;
   const burgerBtn = document.getElementById("burger");
   const navLinksEl = document.getElementById("navLinks");
+  // hidratare nav static: emoji-urile pre-randate din HTML → iconurile SVG
+  const sBtnEl = document.getElementById("searchBtn");
+  if (sBtnEl) sBtnEl.innerHTML = UI_IC.search;
+  document.querySelectorAll("#themeBtn .theme-ic").forEach(e => e.innerHTML = themeIcon());
+  burgerBtn.innerHTML = UI_IC.menu;
   burgerBtn.setAttribute("aria-controls", "navLinks");
   burgerBtn.setAttribute("aria-expanded", "false");
   burgerBtn.onclick = () => {
@@ -81,7 +106,7 @@
   overlay.className = "search-ov";
   overlay.hidden = true;
   overlay.innerHTML = `<div class="search-box">
-    <div class="search-in"><span>🔍</span><input id="searchInput" type="search" placeholder="Caută articole, termeni, calculatoare…" autocomplete="off"><button id="searchClose" aria-label="Închide">✕</button></div>
+    <div class="search-in"><span class="search-ic">${UI_IC.search}</span><input id="searchInput" type="search" placeholder="Caută articole, termeni, calculatoare…" autocomplete="off"><button id="searchClose" aria-label="Închide">✕</button></div>
     <div id="searchRes" class="search-res"><p class="search-hint">Scrie un cuvânt — ex: „inflație", „ETF", „credit ipotecar".</p></div>
   </div>`;
   document.body.appendChild(overlay);
@@ -236,7 +261,7 @@
     const band = document.createElement("section");
     band.className = "nl-band";
     band.innerHTML = `<div class="container nl-in">
-      <div class="nl-tx"><div class="nl-h">📬 Dimineața pe scurt</div>
+      <div class="nl-tx"><div class="nl-h">Dimineața pe scurt</div>
         <div class="nl-p">Știrile care-ți mișcă banii + un concept explicat simplu, în 5 minute. Gratuit, în fiecare dimineață.</div></div>
       <form class="nl-form" novalidate>
         <input type="email" placeholder="adresa ta de email" autocomplete="email" required aria-label="Email">
@@ -285,17 +310,17 @@
 
   // ---- auth account area ----
   function tierMeta(tier, isAdmin){
-    if(isAdmin) return { ic:"👑", nm:"Administrator", cls:"" };
+    if(isAdmin) return { ic:UI_IC.crown, nm:"Administrator", cls:"" };
     return ({
-      ultra:  { ic:"◆",  nm:"Ultra · birou privat", cls:"" },
-      pro:    { ic:"🛰️", nm:"Pro · Hub Fiscal",      cls:"" },
-      premium:{ ic:"⭐", nm:"Premium",               cls:"" },
-      free:   { ic:"",   nm:"Cont gratuit",          cls:"free" }
+      ultra:  { ic:"◆",        nm:"Ultra · birou privat", cls:"" },
+      pro:    { ic:UI_IC.signal, nm:"Pro · Hub Fiscal",   cls:"" },
+      premium:{ ic:UI_IC.star, nm:"Premium",              cls:"" },
+      free:   { ic:"",         nm:"Cont gratuit",         cls:"free" }
     })[tier] || { ic:"", nm:"Cont gratuit", cls:"free" };
   }
   // rândurile cu planuri (dreapta în dropdown): evidențiază planul curent, marchează upgrade-urile
   function plansHTML(rank){
-    const P = [["premium","⭐ Premium","49 lei"],["pro","🛰️ Pro","99 lei"],["ultra","◆ Ultra","199 lei"]];
+    const P = [["premium",UI_IC.star+" Premium","49 lei"],["pro",UI_IC.signal+" Pro","99 lei"],["ultra","◆ Ultra","199 lei"]];
     return P.map(function(row){
       const k=row[0], nm=row[1], pr=row[2], r=RANK[k];
       let cls,tag,href;
@@ -318,31 +343,33 @@
       const tier = isAdmin ? "ultra" : (window.cfTier || "free");
       const rank = isAdmin ? 3 : (RANK[tier] != null ? RANK[tier] : 0);
       const tm = tierMeta(isAdmin ? null : tier, isAdmin);
-      const avBg = (isAdmin || tier==="ultra") ? "linear-gradient(135deg,#E8C268,#caa23f)" : "var(--grad)";
+      const goldAv = (isAdmin || tier==="ultra");
+      const avBg = goldAv ? "linear-gradient(135deg,#E8C268,#caa23f)" : "var(--grad)";
+      const avInk = goldAv ? "#1a1304" : "#fff";
       const isDark = document.documentElement.getAttribute("data-theme")==="dark";
       const initial = (name[0]||"U").toUpperCase();
       slot.innerHTML = `<span style="position:relative">
-        <button class="icon-btn" id="avatarBtn" title="Contul meu" style="background:${avBg};border:none;color:#fff;font-weight:800">${initial}</button>
+        <button class="icon-btn" id="avatarBtn" title="Contul meu" style="background:${avBg};border:none;color:${avInk};font-weight:800">${initial}</button>
         <div id="acctMenu" class="acct-pop" hidden>
           <div class="acct-head">
-            <span class="acct-av" style="background:${avBg}">${initial}</span>
+            <span class="acct-av" style="background:${avBg};color:${avInk}">${initial}</span>
             <div class="acct-id"><div class="em">${esc(name)}</div><div class="tier ${tm.cls}">${tm.ic} ${esc(tm.nm)}</div></div>
           </div>
           <div class="acct-body">
             <div class="acct-col">
               <h5>Cont &amp; setări</h5>
-              <a class="acct-link" href="/account"><span class="ico">👤</span>Contul meu</a>
-              <a class="acct-link" href="/ultra/profil"><span class="ico">🧭</span>Profilul financiar</a>
-              <a class="acct-link" href="/cursuri"><span class="ico">🎓</span>Cursurile mele${isPremium?` <span class="meta">deblocate</span>`:``}</a>
-              <a class="acct-link" href="/instrumente"><span class="ico">🧰</span>Instrumentele mele</a>
-              <a class="acct-link" href="/feedback"><span class="ico">💬</span>Trimite feedback</a>
-              ${isAdmin ? `<a class="acct-link" href="/statistici"><span class="ico">📊</span>Statistici</a>` : ``}
+              <a class="acct-link" href="/account">${ico("user")}Contul meu</a>
+              <a class="acct-link" href="/ultra/profil">${ico("compass")}Profilul financiar</a>
+              <a class="acct-link" href="/cursuri">${ico("cap")}Cursurile mele${isPremium?` <span class="meta">deblocate</span>`:``}</a>
+              <a class="acct-link" href="/instrumente">${ico("tools")}Instrumentele mele</a>
+              <a class="acct-link" href="/feedback">${ico("chat")}Trimite feedback</a>
+              ${isAdmin ? `<a class="acct-link" href="/statistici">${ico("chart")}Statistici</a>` : ``}
             </div>
             <div class="acct-col" id="acctPlans">${plansColHTML(rank)}</div>
           </div>
           <div class="acct-foot">
-            <button class="acct-theme" id="acctTheme"><span class="theme-ic">${isDark?"☀️":"🌙"}</span> <span id="acctThemeT">${isDark?"Mod luminos":"Mod întunecat"}</span></button>
-            <button class="acct-logout" id="logoutBtn">↩︎ Deconectează-te</button>
+            <button class="acct-theme" id="acctTheme"><span class="theme-ic">${themeIcon()}</span> <span id="acctThemeT">${isDark?"Mod luminos":"Mod întunecat"}</span></button>
+            <button class="acct-logout" id="logoutBtn"><span class="ico">${UI_IC.out}</span> Deconectează-te</button>
           </div>
         </div></span>`;
       const menu = document.getElementById("acctMenu");
