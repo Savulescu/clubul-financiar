@@ -326,7 +326,7 @@
       let cls,tag,href;
       if(rank > r){ cls="owned"; tag="Inclus"; href="/instrumente#"+k; }
       else if(rank === r){ cls="cur"; tag="Activ ✓"; href="/instrumente#"+k; }
-      else { cls="up"; tag="Treci →"; href="/premium#alege"; }
+      else { cls="up"; tag="Treci →"; href="/premium#plan-"+k; }
       return `<a class="acct-plan ${cls}" href="${href}"><span class="pn">${nm} <span style="color:var(--muted);font-weight:600">· ${pr}</span></span><span class="pp">${tag}</span></a>`;
     }).join("");
   }

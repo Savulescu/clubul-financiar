@@ -8,11 +8,11 @@
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script>(function(){var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31">
-<link rel="stylesheet" href="/assets/upgrade.css?v=30">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="/assets/style.css?v=33">
+<link rel="stylesheet" href="/assets/upgrade.css?v=33">
 <link rel="stylesheet" href="/assets/cf-tool.css?v=1">
-<link rel="stylesheet" href="/assets/cf-ultra.css?v=4">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=33">
 <style id="profilSkin">
   /* ---- Skin de pagină pentru formularul Profil (doar prezentare) ---- */
   #formProfil{ counter-reset: ufs; }
@@ -155,16 +155,16 @@
 
           <fieldset class="u-fieldset"><legend>Persoană</legend>
             <div class="u-grid u-grid-2" style="gap:0 16px">
-              <div class="u-field"><label>Nume (opțional)</label>
+              <div class="u-field"><label for="f_nume">Nume (opțional)</label>
                 <input class="u-input" type="text" id="f_nume" placeholder="ex. Andrei"></div>
-              <div class="u-field"><label>Oraș (opțional)</label>
+              <div class="u-field"><label for="f_oras">Oraș (opțional)</label>
                 <input class="u-input" type="text" id="f_oras" placeholder="ex. Cluj-Napoca"></div>
-              <div class="u-field"><label>Vârstă</label>
+              <div class="u-field"><label for="f_varsta">Vârstă</label>
                 <input class="u-input" type="number" id="f_varsta" min="16" max="100" inputmode="numeric"></div>
-              <div class="u-field"><label>Persoane în întreținere</label>
+              <div class="u-field"><label for="f_dependenti">Persoane în întreținere</label>
                 <span class="hint">Copii / persoane pe care le susții</span>
                 <input class="u-input" type="number" id="f_dependenti" min="0" max="12" inputmode="numeric"></div>
-              <div class="u-field"><label>Stare civilă</label>
+              <div class="u-field"><label for="f_stareCivila">Stare civilă</label>
                 <select class="u-select" id="f_stareCivila">
                   <option value="necasatorit">Necăsătorit(ă)</option>
                   <option value="casatorit">Căsătorit(ă)</option>
@@ -173,7 +173,7 @@
           </fieldset>
 
           <fieldset class="u-fieldset"><legend>Structură &amp; venituri</legend>
-            <div class="u-field"><label>Cum câștigi banii?</label>
+            <div class="u-field"><label for="f_structura">Cum câștigi banii?</label>
               <select class="u-select" id="f_structura"></select></div>
             <div class="u-field" id="wrap_tva" hidden>
               <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
@@ -186,11 +186,11 @@
             <div class="u-hr"></div>
             <p class="u-label" style="margin-bottom:8px">Alte venituri</p>
             <div class="u-grid u-grid-2" style="gap:0 16px">
-              <div class="u-field"><label>Chirii încasate</label><span class="hint">lei / lună (brut)</span>
+              <div class="u-field"><label for="f_chiriiLunar">Chirii încasate</label><span class="hint">lei / lună (brut)</span>
                 <input class="u-input" type="number" id="f_chiriiLunar" min="0" inputmode="numeric"></div>
-              <div class="u-field"><label>Dividende din portofoliu</label><span class="hint">lei / an</span>
+              <div class="u-field"><label for="f_dividendeAnual">Dividende din portofoliu</label><span class="hint">lei / an</span>
                 <input class="u-input" type="number" id="f_dividendeAnual" min="0" inputmode="numeric"></div>
-              <div class="u-field"><label>Alte venituri nete</label><span class="hint">lei / lună</span>
+              <div class="u-field"><label for="f_alteLunar">Alte venituri nete</label><span class="hint">lei / lună</span>
                 <input class="u-input" type="number" id="f_alteLunar" min="0" inputmode="numeric"></div>
             </div>
           </fieldset>
@@ -211,13 +211,13 @@
 
           <fieldset class="u-fieldset"><legend>Obiective &amp; risc</legend>
             <div class="u-grid u-grid-2" style="gap:0 16px">
-              <div class="u-field"><label>Fond de urgență dorit</label><span class="hint">luni de cheltuieli</span>
+              <div class="u-field"><label for="f_fondUrgentaLuni">Fond de urgență dorit</label><span class="hint">luni de cheltuieli</span>
                 <input class="u-input" type="number" id="f_fondUrgentaLuni" min="0" max="24" inputmode="numeric"></div>
-              <div class="u-field"><label>Vârsta libertății financiare</label><span class="hint">când vrei independență</span>
+              <div class="u-field"><label for="f_varstaLibertate">Vârsta libertății financiare</label><span class="hint">când vrei independență</span>
                 <input class="u-input" type="number" id="f_varstaLibertate" min="30" max="90" inputmode="numeric"></div>
-              <div class="u-field"><label>Randament real estimat</label><span class="hint">% pe an, peste inflație</span>
+              <div class="u-field"><label for="f_randamentReal">Randament real estimat</label><span class="hint">% pe an, peste inflație</span>
                 <input class="u-input" type="number" id="f_randamentReal" min="0" max="15" step="0.5" inputmode="decimal"></div>
-              <div class="u-field"><label>Toleranță la risc</label>
+              <div class="u-field"><label for="f_toleranteRisc">Toleranță la risc</label>
                 <select class="u-select" id="f_toleranteRisc">
                   <option value="mica">Mică — vreau stabilitate</option>
                   <option value="medie">Medie — echilibrat</option>
@@ -268,9 +268,9 @@
 <!-- footer-ul e injectat automat de site.js; NU-l scrie manual -->
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script>
 <script defer src="/assets/tilt.js?v=23"></script>
-<script defer src="/assets/site.js?v=32"></script>
+<script defer src="/assets/site.js?v=33"></script>
 <script src="/assets/fiscal-2026.js?v=1"></script>
-<script src="/assets/cf-tool.js?v=2"></script>
+<script src="/assets/cf-tool.js?v=33"></script>
 <script src="/assets/cf-ultra.js?v=1"></script>
 <script>
 (function(){

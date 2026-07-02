@@ -4,6 +4,7 @@
    (cel mai mare cost de LCP mobil — audit perf P1). CSP permite inline handlers.
 2. Articole: strip emoji din meta-row (<a href="/educatie#cat">📈 Investiții</a> → text sobru).
 3. Calculatoare + ultra/profil: label-uri asociate programatic (for="id") — audit a11y P1.
+4. theme-color verde vechi #10b981 → navy brand #0f2540 (bara browserului mobil).
 """
 import glob, os, re, sys
 
@@ -43,7 +44,7 @@ def patch_labels(t):
     out.append(t[pos:])
     return "".join(out), n
 
-stats = {"fonts": 0, "meta": 0, "labels": 0, "files": 0}
+stats = {"fonts": 0, "meta": 0, "labels": 0, "theme": 0, "files": 0}
 for f in glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True):
     rel = os.path.relpath(f, ROOT)
     with open(f, encoding="utf-8") as fh:
@@ -51,6 +52,10 @@ for f in glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True):
     orig = t
     t, nf = patch_fonts(t)
     stats["fonts"] += nf
+    if '<meta name="theme-color" content="#10b981">' in t:
+        t = t.replace('<meta name="theme-color" content="#10b981">',
+                      '<meta name="theme-color" content="#0f2540">')
+        stats["theme"] += 1
     if rel.startswith("articole" + os.sep):
         t, nm = META_EMOJI_RE.subn(r"\1", t)
         stats["meta"] += nm

@@ -215,7 +215,7 @@ def build():
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Știri financiare România — Clubul Financiar"><meta name="twitter:description" content="Știri financiare RO pe categorii, din zeci de surse, într-un singur loc."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 {FONT}
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v=30"><link rel="stylesheet" href="/assets/cf-ultra.css?v=4"><link rel="stylesheet" href="/assets/cf-preview.css?v=2">
+<link rel="stylesheet" href="/assets/style.css?v=33"><link rel="stylesheet" href="/assets/upgrade.css?v=33"><link rel="stylesheet" href="/assets/cf-ultra.css?v=33"><link rel="stylesheet" href="/assets/cf-preview.css?v=2">
 <style>
 /* premium auriu pe pagina de stiri (remap tokeni pe .u-page) */
 .u-page{{--emerald:var(--u-gold);--emerald-link:var(--u-gold);--grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));--card:var(--u-panel);--border:var(--u-line-soft);--bg-soft:var(--u-panel2);--bg-soft2:var(--u-panel2);--text:var(--u-ink);--muted:var(--u-muted)}}
@@ -300,7 +300,7 @@ def build():
   window.addEventListener('cf-auth', function(){{ prem=!!window.cfPremium; gateUI(); apply(); }});
 }})();
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/tilt.js?v=23"></script><script defer src="/assets/site.js?v=32"></script></body></html>'''
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/tilt.js?v=23"></script><script defer src="/assets/site.js?v=33"></script></body></html>'''
     open(os.path.join(ROOT, "docs", "stiri.html"), "w", encoding="utf-8").write(page)
     print(f"stiri.html scris cu {len(items)} știri din {n_src} surse | categorii: {counts}")
 

@@ -286,7 +286,7 @@ function glosGoToHash(){
 window.addEventListener("hashchange",glosGoToHash);
 if(location.hash) requestAnimationFrame(()=>requestAnimationFrame(glosGoToHash));
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/site.js?v=32"></script></body></html>'''
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js" integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p" crossorigin="anonymous"></script><script defer src="/assets/site.js?v=33"></script></body></html>'''
 
 page = f'''<!DOCTYPE html><html lang="ro"><head>
 <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://maumjqciuxdbwjtvcpsy.supabase.co https://maumjqciuxdbwjtvcpsy.functions.supabase.co wss://maumjqciuxdbwjtvcpsy.supabase.co; form-action 'self'; frame-src 'self'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -300,9 +300,9 @@ page = f'''<!DOCTYPE html><html lang="ro"><head>
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"DefinedTermSet","name":"Glosar financiar Clubul Financiar","inLanguage":"ro-RO","url":"https://clubulfinanciar.ro/glosar"}}</script>
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=31">
-<link rel="stylesheet" href="/assets/upgrade.css?v=30">
-<link rel="stylesheet" href="/assets/cf-ultra.css?v=4"><script type="application/ld+json">{breadcrumb_ld}</script></head><body class="u-page">{NAV_HTML}
+<link rel="stylesheet" href="/assets/style.css?v=33">
+<link rel="stylesheet" href="/assets/upgrade.css?v=33">
+<link rel="stylesheet" href="/assets/cf-ultra.css?v=33"><script type="application/ld+json">{breadcrumb_ld}</script></head><body class="u-page">{NAV_HTML}
 <section class="section-sm" style="background:var(--bg-soft)"><div class="container center">
 <p class="eyebrow">Dicționar</p><h1 class="title">Glosar de termeni financiari</h1>
 <p class="lead" style="margin-inline:auto">{count} {nd}termeni despre bani, investiții, credite și taxe — explicați pe înțelesul tuturor. Caută orice cuvânt sau sari direct la litera dorită.</p>

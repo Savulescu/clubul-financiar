@@ -138,7 +138,7 @@ def chat(messages, max_tokens=900, temperature=0.5, accept=None, max_tries=3, ma
         return {"content": fallback, "provider": "fallback"}
     raise RuntimeError("toți providerii au eșuat: " + last)
 
-V = "31"
+V = "33"
 MAX_NEW = 24          # explainer-e noi pe rulare (mărit de la 18: rulările sunt rare din cauza throttle-ului GitHub, deci prindem mai multe știri/rulare = acoperire mai bună)
 KEEP_H = 336          # cât stă o știre în pagină (7 zile)
 DISPLAY = 400         # max carduri afișate (o săptămână de știri)
@@ -456,7 +456,7 @@ def main():
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Știri economice externe — ce înseamnă pentru tine"><meta name="twitter:description" content="Știri economice mondiale explicate pentru banii tăi."><meta name="twitter:image" content="https://clubulfinanciar.ro/og-image.jpg">
 <script>(function(){{var t=localStorage.getItem("cf-theme");if(t)document.documentElement.setAttribute("data-theme",t);}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/assets/style.css?v=31"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=4"><link rel="stylesheet" href="/assets/cf-preview.css?v=2">
+<link rel="stylesheet" href="/assets/style.css?v=33"><link rel="stylesheet" href="/assets/upgrade.css?v={V}"><link rel="stylesheet" href="/assets/cf-ultra.css?v=33"><link rel="stylesheet" href="/assets/cf-preview.css?v=2">
 <style>
 /* premium auriu pe pagina de stiri (remap tokeni pe .u-page) */
 .u-page{{--emerald:var(--u-gold);--emerald-link:var(--u-gold);--grad:linear-gradient(135deg,var(--u-gold),var(--u-gold2));--card:var(--u-panel);--border:var(--u-line-soft);--bg-soft:var(--u-panel2);--bg-soft2:var(--u-panel2);--text:var(--u-ink);--muted:var(--u-muted)}}
