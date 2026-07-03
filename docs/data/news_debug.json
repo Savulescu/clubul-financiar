@@ -1,7 +1,5 @@
 {
- "ok": {
-  "openrouter": 2
- },
+ "ok": {},
  "err": {
   "gemini:429": 4,
   "mistral:401": 4,
@@ -12,43 +10,43 @@
   "together:403": 4,
   "sambanova:402": 24,
   "nvidia:TimeoutError": 24,
-  "fireworks:404": 3
+  "fireworks:404": 4
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 8
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Title in Romanian, reformulated. Fact: 1-2 neutral sentences with main fact. ce_inseamna: "
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\", \"fapt\", \"ce_inseamna\", \"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian correct, natural, no foreign wor"
   },
   {
    "p": "openrouter",
-   "raw": "{\"titlu\":\"Indexul FTSE 100 atinge maximum de patru luni în timp ce piațele europene se ridică\",\"fapt\":\"Indexul FTSE 100 a atins un nivel de patru luni, iar piațele europene"
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must follow language rules: Romanian, correct diacritics, specific term translations. Mus"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"...\",\"fapt\":\"...\"} with natural Romanian translation. Title translation: \"Indexul de acțiuni FTSE 100 atinge un maximum de patru luni ca piațele europene "
+   "raw": "We need to output JSON on one line with fields \"titlu\" and \"fapt\". The user wants translation into natural Romanian, correcting terms: oil=tiței NU ulei, bonds=obligațiuni, stocks/shares=acțiuni, yiel"
   },
   {
    "p": "openrouter",
-   "raw": "{\"titlu\":\"Indexul FTSE 100 atinge un maxim de patru luni în timp ce piața europeană se ridică – business live\",\"fapt\":\"Indexul FTSE 100 a atins un maxim de patru luni în timp ce piața europeană se rid"
+   "raw": "We need to output JSON on one line with fields \"titlu\" and \"fapt\". The user wants translation into natural Romanian, correcting terms: oil=tiței NU ulei (so oil is \"tiței\"? Actually \"tiței\" is plural "
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian summary original, not literal translation. Must foll"
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian original summary, not literal translation. Must follow language rules: correct"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary original, not literal translation. Must follow language rules: correct Romania"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, no foreign words, correct diacritics, correct terms. Use specified translations: oil/"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 11,
-  "fresh": 11,
-  "fb": 10,
-  "tier2": 1,
+  "new": 6,
+  "fresh": 6,
+  "fb": 6,
+  "tier2": 0,
   "explainer": 0
  }
 }
