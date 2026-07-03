@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Clubul Financiar — Reel: Creierul tău nu simte cardul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1424; --navy2:#0f2540; --gold:#E8C268; --green:#5cf0aa;
+  --red:#ff5c5c; --text:#eef4fc; --muted:#9fb3d1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow:hidden}
+#stage{
+  position:relative;width:1080px;height:1920px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:var(--text);overflow:hidden;
+  background:radial-gradient(120% 80% at 50% -10%, #16335a 0%, var(--navy2) 38%, var(--navy) 75%);
+}
+#stage::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:90px 90px;mask:radial-gradient(75% 60% at 50% 42%,#000 30%,transparent 100%);
+}
+#stage::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 120%, rgba(0,0,0,.55), transparent 55%);
+}
+
+/* ===== brand bar ===== */
+#brand{position:absolute;top:70px;left:0;right:0;display:flex;align-items:center;
+  justify-content:center;gap:18px;z-index:6;opacity:0}
+#brand .dot{width:60px;height:60px;border-radius:50%;overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 2px rgba(232,194,104,.45)}
+#brand .dot img,#cta .badge img{width:100%;height:100%;object-fit:cover;display:block}
+#brand .name{font-weight:700;font-size:34px;letter-spacing:.5px}
+#brand .name b{color:var(--gold)}
+
+/* ===== tap rings (semnătura) ===== */
+.ring{position:absolute;z-index:6;border-radius:50%;border:6px solid var(--green);
+  left:50%;top:50%;transform:translate(-50%,-50%);opacity:0;pointer-events:none;
+  box-shadow:0 0 40px rgba(92,240,170,.55), inset 0 0 24px rgba(92,240,170,.25)}
+#freeze{position:absolute;border-radius:50%;border:7px solid var(--green);
+  left:50%;top:50%;width:340px;height:340px;transform:translate(-50%,-50%);opacity:0;
+  box-shadow:0 0 60px rgba(92,240,170,.5), inset 0 0 30px rgba(92,240,170,.2);z-index:9}
+
+/* ===== hook ===== */
+#hook{position:absolute;top:0;left:80px;right:80px;height:100%;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:7}
+#hook .l1,#hook .l2{font-size:118px;font-weight:800;line-height:1.06;letter-spacing:-1px;
+  background:linear-gradient(180deg,#fff,#cfe0ff);-webkit-background-clip:text;background-clip:text;
+  color:transparent;opacity:0}
+#hook .l2 em{font-style:normal;color:var(--green);-webkit-text-fill-color:var(--green)}
+#hook .l3{margin-top:44px;font-size:46px;font-weight:600;color:var(--muted);opacity:0}
+
+/* ===== split screen ===== */
+#split{position:absolute;inset:0;z-index:5;opacity:0}
+#split .divider{position:absolute;left:50%;top:330px;bottom:430px;width:3px;
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.28) 15%,rgba(255,255,255,.28) 85%,transparent)}
+#split .side{position:absolute;top:330px;bottom:430px;width:50%}
+#split .left{left:0}
+#split .right{right:0}
+#split .lbl{position:absolute;top:40px;left:40px;right:40px;text-align:center;
+  font-size:44px;font-weight:700;line-height:1.3}
+#split .left .lbl b{color:var(--gold)}
+#split .right .lbl b{color:var(--green)}
+#painflash{position:absolute;left:0;top:0;bottom:0;width:50%;z-index:4;opacity:0;
+  background:radial-gradient(70% 60% at 50% 55%, rgba(255,92,92,.34), transparent 70%)}
+#notes{position:absolute;left:0;top:52%;width:100%;height:420px;transform:translateY(-50%)}
+.note{position:absolute;left:50%;width:330px;height:150px;border-radius:14px;opacity:0;
+  background:linear-gradient(180deg,#f3d792,#c79f4a);
+  box-shadow:0 14px 30px rgba(0,0,0,.45), inset 0 0 0 2px rgba(255,255,255,.25)}
+.note::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:64px;transform:translateX(-50%);
+  background:rgba(10,20,36,.22)}
+.note::after{content:"LEI";position:absolute;right:18px;bottom:10px;font-size:26px;font-weight:800;
+  color:rgba(10,20,36,.55);letter-spacing:2px}
+.note .val{position:absolute;left:20px;top:10px;font-size:40px;font-weight:800;color:rgba(10,20,36,.72)}
+#tapzone{position:absolute;right:0;top:52%;width:100%;height:420px;transform:translateY(-50%)}
+#cardchip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:300px;height:190px;
+  border-radius:22px;opacity:0;
+  background:linear-gradient(135deg,#123055,#0d2038);
+  box-shadow:0 18px 40px rgba(0,0,0,.5), inset 0 0 0 2px rgba(92,240,170,.4)}
+#cardchip .chip{position:absolute;left:28px;top:28px;width:56px;height:42px;border-radius:8px;
+  background:linear-gradient(135deg,#f3d792,#c79f4a)}
+#cardchip .wave{position:absolute;right:26px;top:24px;font-size:40px;color:var(--green);font-weight:800}
+#cardchip .num{position:absolute;left:28px;bottom:22px;font-size:30px;letter-spacing:5px;color:#cfe0ff;font-weight:600}
+
+/* ===== study bars ===== */
+#study{position:absolute;inset:0;z-index:6;opacity:0}
+#study .title{position:absolute;top:400px;left:80px;right:80px;text-align:center;
+  font-size:62px;font-weight:800;line-height:1.25}
+#study .title b{color:var(--green)}
+#stage3d{position:absolute;top:760px;left:0;right:0;height:760px;perspective:1600px;perspective-origin:50% 10%}
+#cols{position:absolute;bottom:60px;left:50%;transform:translateX(-50%) rotateX(28deg);
+  transform-style:preserve-3d;display:flex;align-items:flex-end;gap:150px;height:640px;
+  -webkit-box-reflect:below 2px linear-gradient(transparent 62%, rgba(255,255,255,.09) 100%)}
+.col{width:230px;position:relative;border-radius:12px 12px 4px 4px}
+.col .fill{position:absolute;bottom:0;left:0;right:0;border-radius:12px 12px 4px 4px}
+#colCash .fill{background:linear-gradient(180deg,#f3d792,#c79f4a);
+  box-shadow:0 0 34px rgba(232,194,104,.35)}
+#colCard .fill{background:linear-gradient(180deg,var(--green),#1ea877);
+  box-shadow:0 0 40px rgba(92,240,170,.4)}
+.col .cap{position:absolute;top:-86px;left:0;right:0;text-align:center;font-size:56px;font-weight:800;
+  font-variant-numeric:tabular-nums}
+#colCash .cap{color:var(--gold)} #colCard .cap{color:var(--green)}
+.col .tag{position:absolute;bottom:-84px;left:0;right:0;text-align:center;font-size:42px;
+  font-weight:600;color:var(--muted)}
+#study .src{position:absolute;bottom:250px;left:80px;right:80px;text-align:center;
+  font-size:30px;color:var(--muted);opacity:.9}
+
+/* ===== RO application: counter + heartbeat taps ===== */
+#apply{position:absolute;inset:0;z-index:6;opacity:0}
+#apply .ctx{position:absolute;top:410px;left:90px;right:90px;text-align:center;
+  font-size:40px;font-weight:600;color:var(--muted);line-height:1.4}
+#flipwrap{position:absolute;top:700px;left:50%;transform:translateX(-50%);
+  width:840px;height:420px;perspective:1500px;z-index:7}
+#flipcard{position:absolute;inset:0;transform-style:preserve-3d}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:34px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,rgba(18,48,85,.85),rgba(13,32,56,.9));
+  box-shadow:0 24px 70px rgba(0,0,0,.5), inset 0 0 0 2px rgba(232,194,104,.35)}
+.face.back{transform:rotateY(180deg);
+  box-shadow:0 24px 70px rgba(0,0,0,.5), inset 0 0 0 2px rgba(92,240,170,.45)}
+.face .eyebrow{font-size:34px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px}
+.face .big{font-size:150px;font-weight:800;letter-spacing:-3px;line-height:1;
+  font-variant-numeric:tabular-nums;color:#fff;display:flex;align-items:baseline;gap:16px}
+.face .big .cur{font-size:74px;font-weight:700;color:var(--gold)}
+.face.back .zi{font-size:82px;font-weight:800;line-height:1.14;text-align:center;white-space:nowrap}
+.face.back .zi em{font-style:normal;color:var(--green)}
+.face.back .zisub{margin-top:16px;font-size:40px;color:var(--muted);font-weight:600}
+#dial{position:absolute;right:44px;top:50%;transform:translateY(-50%);width:150px;height:150px}
+.face.back{padding-right:168px;padding-left:36px}
+#applyHit{position:absolute;top:1220px;left:90px;right:90px;text-align:center;
+  font-size:60px;font-weight:800;line-height:1.3;opacity:0}
+#applyHit em{font-style:normal;color:var(--gold)}
+
+/* ===== 10 years ===== */
+#decade{position:absolute;inset:0;z-index:6;opacity:0}
+#decade .t1{position:absolute;top:420px;left:80px;right:80px;text-align:center;
+  font-size:64px;font-weight:800}
+#decade .bignum{position:absolute;top:560px;left:0;right:0;text-align:center;
+  font-size:168px;font-weight:800;letter-spacing:-4px;font-variant-numeric:tabular-nums;
+  background:linear-gradient(180deg,#fff,#d8e6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+#decade .bignum .cur{font-size:80px;-webkit-text-fill-color:var(--gold);color:var(--gold);font-weight:700}
+#dstage{position:absolute;top:830px;left:0;right:0;height:760px;perspective:1600px;perspective-origin:50% 8%}
+#dcol{position:absolute;bottom:40px;left:50%;transform:translateX(-50%) rotateX(26deg);
+  width:300px;height:640px;
+  -webkit-box-reflect:below 2px linear-gradient(transparent 62%, rgba(255,255,255,.09) 100%)}
+#dgold{position:absolute;bottom:0;left:0;right:0;border-radius:4px;
+  background:linear-gradient(180deg,#f3d792,#c79f4a);box-shadow:0 0 34px rgba(232,194,104,.3)}
+#dgreen{position:absolute;left:0;right:0;border-radius:14px 14px 0 0;
+  background:linear-gradient(180deg,var(--green),#1ea877);box-shadow:0 0 44px rgba(92,240,170,.45)}
+.dlab{position:absolute;white-space:normal;max-width:320px;line-height:1.15;font-size:40px;font-weight:700;opacity:0}
+#dlabGold{color:var(--gold);left:calc(50% + 180px);}
+#dlabGreen{color:var(--green);left:calc(50% + 180px);}
+.dlab small{display:block;font-size:31px;font-weight:600;color:var(--muted)}
+
+/* ===== revelation ===== */
+#dimmer{position:absolute;inset:0;background:rgba(6,11,20,0);z-index:8;pointer-events:none}
+#reveal{position:absolute;inset:0;z-index:10;opacity:0}
+#reveal .r1{position:absolute;top:470px;left:80px;right:80px;text-align:center;
+  font-size:88px;font-weight:800;line-height:1.2;opacity:0}
+#reveal .r1 em{font-style:normal;color:var(--green)}
+#reveal .r2{position:absolute;top:1190px;left:90px;right:90px;text-align:center;
+  font-size:62px;font-weight:800;line-height:1.35;opacity:0}
+#reveal .r2 em{font-style:normal;color:var(--gold)}
+#reveal .r3{position:absolute;top:1420px;left:110px;right:110px;text-align:center;
+  font-size:42px;font-weight:600;color:var(--muted);opacity:0}
+
+/* ===== CTA ===== */
+#cta{position:absolute;inset:0;z-index:11;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;opacity:0;
+  background:radial-gradient(120% 80% at 50% 38%, #16335a 0%, #0f2540 40%, #0a1424 80%)}
+#cta .badge{width:140px;height:140px;border-radius:50%;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 3px rgba(232,194,104,.55),0 0 50px rgba(232,194,104,.3);
+  transform:scale(.7);opacity:0}
+#cta .q{margin-top:46px;font-size:64px;font-weight:800;text-align:center;opacity:0}
+#cta .q em{font-style:normal;color:var(--green)}
+#cta .url{margin-top:52px;font-size:60px;font-weight:800;color:var(--gold);
+  padding:24px 56px;border:2px solid rgba(232,194,104,.5);border-radius:999px;
+  box-shadow:0 0 50px rgba(232,194,104,.18);opacity:0}
+#cta .sub2{margin-top:26px;font-size:42px;color:var(--muted);opacity:0}
+#cta .handle{margin-top:30px;font-size:40px;font-weight:600;opacity:0}
+#cta .handle b{color:var(--gold)}
+#cta .disc{position:absolute;bottom:100px;left:90px;right:90px;text-align:center;
+  font-size:28px;color:var(--muted);opacity:0;line-height:1.4}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="brand"><div class="dot"><img src="profile.png" alt=""></div><div class="name">Clubul <b>Financiar</b></div></div>
+
+  <!-- tap rings pool -->
+  <div class="ring" id="r0"></div><div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+  <div class="ring" id="r3"></div><div class="ring" id="r4"></div><div class="ring" id="r5"></div>
+  <div id="freeze"></div>
+
+  <div id="hook">
+    <div class="l1">CREIERUL TĂU</div>
+    <div class="l2">NU SIMTE <em>CARDUL.</em></div>
+    <div class="l3">Și te costă mai mult decât crezi.</div>
+  </div>
+
+  <div id="split">
+    <div class="divider"></div>
+    <div id="painflash"></div>
+    <div class="side left">
+      <div class="lbl"><b>CASH:</b> creierul simte<br>fiecare leu</div>
+      <div id="notes"></div>
+    </div>
+    <div class="side right">
+      <div class="lbl"><b>TAP:</b> creierul nu simte<br>nimic</div>
+      <div id="tapzone">
+        <div id="cardchip"><div class="chip"></div><div class="wave">)))</div><div class="num">•••• 2026</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="study">
+    <div class="title">Cu cardul, oamenii plătesc<br>până la <b>de 2× mai mult</b></div>
+    <div id="stage3d"><div id="cols">
+      <div class="col" id="colCash"><div class="fill"></div><div class="cap">100</div><div class="tag">cash</div></div>
+      <div class="col" id="colCard"><div class="fill"></div><div class="cap">200</div><div class="tag">card</div></div>
+    </div></div>
+    <div class="src">Prelec &amp; Simester, MIT · la cumpărături uzuale: +12–18% (estimare din studii)</div>
+  </div>
+
+  <div id="apply">
+    <div class="ctx">Cheltuieli flexibile pe card: ~2.000 lei/lună<br>(din salariul mediu net de 5.843 lei)</div>
+    <div id="flipwrap"><div id="flipcard">
+      <div class="face front">
+        <div class="eyebrow">plătești în plus, fără să simți</div>
+        <div class="big"><span id="anum">0</span><span class="cur">lei/lună</span></div>
+      </div>
+      <div class="face back">
+        <div class="zi">= aproape <em>o&nbsp;ZI</em><br>de muncă.</div>
+        <div class="zisub">7 ore și jumătate. Gratis.</div>
+        <svg id="dial" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(232,194,104,.28)" stroke-width="9"/>
+          <circle id="dialArc" cx="60" cy="60" r="52" fill="none" stroke="#E8C268" stroke-width="9"
+            stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"
+            transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="6" fill="#E8C268"/>
+        </svg>
+      </div>
+    </div></div>
+    <div id="applyHit">Partea pe care cash<br><em>NU ai fi dat-o.</em> În fiecare lună.</div>
+  </div>
+
+  <div id="decade">
+    <div class="t1" id="dt1">În 10 ani…</div>
+    <div class="bignum"><span id="dnum">3.120</span> <span class="cur">lei</span></div>
+    <div id="dstage"><div id="dcol">
+      <div id="dgold"></div>
+      <div id="dgreen"></div>
+    </div></div>
+    <div class="dlab" id="dlabGold">31.200 lei<small>banii tăi</small></div>
+    <div class="dlab" id="dlabGreen">+16.300 lei<small>dobânda pierdută (8%/an)</small></div>
+  </div>
+
+  <div id="dimmer"></div>
+  <div id="reveal">
+    <div class="r1">Nu cardul e problema.<br><em>Invizibilitatea</em> e.</div>
+    <div class="r2">Trucul: pornește notificarea<br>la <em>FIECARE</em> plată.</div>
+    <div class="r3">Durerea se întoarce. Cheltuiala scade.</div>
+  </div>
+
+  <div id="cta">
+    <div class="badge"><img src="profile.png" alt=""></div>
+    <div class="q">Tu ai notificările <em>pornite?</em></div>
+    <div class="url">clubulfinanciar.ro</div>
+    <div class="sub2">Educație financiară, pe românește.</div>
+    <div class="handle">Urmărește <b>@clubulfinanciar</b></div>
+    <div class="disc">Conținut educativ. Estimări pe baza unor studii; randamentul de 8%/an este o ipoteză. Nu este sfat de investiții.</div>
+  </div>
+</div>
+
+<script>
+const DUR = 21500;
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const easeOut=t=>1-Math.pow(1-t,3);
+const easeInOut=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const fmt=n=>Math.round(n).toLocaleString('ro-RO');
+
+// build banknotes (4)
+const notesEl=$('notes');
+const noteEls=[];
+for(let i=0;i<4;i++){
+  const n=document.createElement('div');n.className='note';
+  n.innerHTML='<div class="val">100</div>';
+  notesEl.appendChild(n);noteEls.push(n);
+}
+const NOTE_T=[2700,3600,4500,5400];      // cash counting moments
+const PHASE3_TAPS=[9700,10500,11150,11620,11960,12200,12420,12620,12800,12980,13160]; // accelerating
+// ring pool: [time, x%, y%, baseSize] — phase1 flash, phase2 single, phase3 heartbeat (center of stage)
+function ringSpec(){
+  const specs=[{t:300,x:50,y:50,s:420,dur:450}];               // opening flash
+  specs.push({t:3000,x:75,y:52,s:330,dur:520});                // split single tap (right side)
+  PHASE3_TAPS.forEach((t,i)=>specs.push({t,x:50,y:47,s:560*Math.pow(1.07,i),dur:470}));
+  return specs;
+}
+const RINGS=ringSpec();
+// extra pooled ring divs beyond the 6 static: create dynamically
+while(document.querySelectorAll('.ring').length<RINGS.length){
+  const d=document.createElement('div');d.className='ring';$('stage').appendChild(d);
+}
+const ringEls=[...document.querySelectorAll('.ring')];
+
+// dial arc (7.5/8 of a turn) via conic gradient
+function setDial(p){ // p 0..1 of the 7.5h/8h sweep
+  const C=326.7;
+  $('dialArc').style.strokeDashoffset=C*(1-0.9375*p);
+}
+
+const T={
+  ringFlash:300, hookIn:500, hookOut:2100,
+  splitIn:2300, splitOut:6400,
+  studyIn:6500, studyOut:9400,
+  applyIn:9500, hit:12000, flip:13400, applyOut:14800,
+  decIn:14900, decLand:15700, greenGrow:16000, boom:16600, decOut:17400,
+  revIn:17500, trick:18600,
+  ctaIn:19800
+};
+
+function frame(t){
+  t=clamp(t,0,DUR);
+  const vis=(a,b)=>t>=a&&t<b;
+  const io=(el,inT,outT,d=350)=>{ // fade in at inT, out at outT
+    el.style.opacity = clamp((t-inT)/d,0,1)*clamp(1-(t-outT)/d,0,1);
+  };
+
+  // brand bar: visible from 500 to CTA
+  $('brand').style.opacity=clamp((t-600)/500,0,1)*clamp(1-(t-T.ctaIn)/300,0,1);
+
+  // ===== rings =====
+  ringEls.forEach((el,i)=>{
+    const spec=RINGS[i];
+    if(!spec){el.style.opacity=0;return;}
+    const p=(t-spec.t)/spec.dur;
+    if(p<0||p>1){el.style.opacity=0;return;}
+    const e=easeOut(p);
+    const size=spec.s*lerp(.35,1.6,e);
+    el.style.width=el.style.height=size+'px';
+    el.style.left=spec.x+'%';el.style.top=spec.y+'%';
+    el.style.opacity=(1-p)* (t>=T.revIn?0:1);
+    el.style.borderWidth=lerp(9,3,e)+'px';
+  });
+
+  // ===== hook =====
+  const hk=$('hook');
+  if(t<T.splitIn+400){
+    const l1=hk.querySelector('.l1'),l2=hk.querySelector('.l2'),l3=hk.querySelector('.l3');
+    const p1=clamp((t-T.hookIn)/420,0,1), p2=clamp((t-900)/420,0,1), p3=clamp((t-1400)/400,0,1);
+    l1.style.opacity=p1; l1.style.transform=`scale(${lerp(1.12,1,easeOut(p1))})`;
+    l2.style.opacity=p2;
+    // tremble on line 2
+    const trem = (t>900&&t<T.hookOut)?2*Math.sin(t/13):0;
+    l2.style.transform=`scale(${lerp(1.12,1,easeOut(p2))}) translateX(${trem}px)`;
+    l3.style.opacity=p3*.95;
+    const out=clamp((t-T.hookOut)/300,0,1);
+    hk.style.opacity=1-out;
+    hk.style.transform=`translateY(${lerp(0,-90,easeOut(out))}px)`;
+  } else hk.style.opacity=0;
+
+  // ===== split =====
+  const sp=$('split');
+  io(sp,T.splitIn,T.splitOut,300);
+  if(vis(T.splitIn-400,T.studyIn+600)){
+    // banknotes count in, each with red pain pulse on left half
+    noteEls.forEach((n,i)=>{
+      const nt=NOTE_T[i];
+      const p=clamp((t-nt)/360,0,1);
+      n.style.opacity=p;
+      n.style.transform=`translateX(-50%) translateY(${lerp(60,(i-1.5)*-96,easeOut(p))+150}px) rotate(${(i%2?-1:1)*lerp(8,2,p)}deg)`;
+      n.style.zIndex=10+i;
+    });
+    // pain flash
+    let pf=0;
+    NOTE_T.forEach(nt=>{const d=t-nt;if(d>0&&d<220)pf=Math.max(pf,Math.sin(Math.PI*d/220)*.9);});
+    $('painflash').style.opacity=pf;
+    // card chip appears right, small tap at 3000
+    const cp=clamp((t-(T.splitIn+300))/400,0,1);
+    const chip=$('cardchip');
+    chip.style.opacity=cp;
+    const tapKick=(t>3000&&t<3200)?1-Math.abs((t-3100)/100):0;
+    chip.style.transform=`translate(-50%,-50%) scale(${1+0.05*tapKick})`;
+  }
+
+  // ===== study =====
+  const st=$('study');
+  io(st,T.studyIn,T.studyOut,300);
+  if(vis(T.studyIn-400,T.applyIn+600)){
+    const pCash=clamp((t-6700)/700,0,1);
+    const pCard=clamp((t-7400)/1200,0,1);
+    const eCash=easeOut(pCash);
+    // overshoot elastic for card
+    const eCardRaw=easeOut(pCard);
+    const over=pCard>=1?1:eCardRaw*(1+0.06*Math.sin(pCard*Math.PI));
+    const H=560;
+    $('colCash').querySelector('.fill').style.height=(H*0.5*eCash)+'px';
+    $('colCash').querySelector('.cap').style.opacity=eCash;
+    $('colCash').querySelector('.cap').textContent=Math.round(100*eCash);
+    $('colCash').querySelector('.cap').style.transform=`translateY(${-H*0.5*eCash}px)`;
+    $('colCard').querySelector('.fill').style.height=(H*over)+'px';
+    $('colCard').querySelector('.cap').style.opacity=eCardRaw;
+    $('colCard').querySelector('.cap').textContent=Math.round(200*eCardRaw);
+    $('colCard').querySelector('.cap').style.transform=`translateY(${-H*over}px)`;
+  }
+
+  // ===== apply (counter + flip) =====
+  const ap=$('apply');
+  io(ap,T.applyIn,T.applyOut,300);
+  if(vis(T.applyIn-400,T.decIn+600)){
+    // counter 0 -> 260 landing at hit moment
+    const cp=clamp((t-9700)/(T.hit-9700),0,1);
+    $('anum').textContent=fmt(260*easeInOut(cp));
+    // pulse counter on each tap
+    let kick=0;
+    PHASE3_TAPS.forEach(tt=>{const d=t-tt;if(d>0&&d<200)kick=Math.max(kick,Math.sin(Math.PI*d/200));});
+    // flip at T.flip
+    const fp=clamp((t-T.flip)/520,0,1);
+    $('flipcard').style.transform=`rotateY(${180*easeInOut(fp)}deg) scale(${1+0.045*kick*(fp<1?1:0)})`;
+    // dial sweep after flip
+    setDial(clamp((t-T.flip-420)/900,0,1)*0.9375);
+    // hit text
+    const hp=clamp((t-T.hit)/420,0,1);
+    const hEl=$('applyHit');
+    hEl.style.opacity=hp;
+    hEl.style.transform=`translateY(${lerp(30,0,easeOut(hp))}px)`;
+  }
+
+  // ===== decade =====
+  const dc=$('decade');
+  io(dc,T.decIn,T.decOut,300);
+  if(vis(T.decIn-400,T.revIn+600)){
+    // number roll 3120 -> 31200 by decLand, then jump to 47500 at boom
+    let val;
+    if(t<T.decLand) val=lerp(3120,31200,easeOut(clamp((t-T.decIn)/(T.decLand-T.decIn),0,1)));
+    else if(t<T.boom) val=31200;
+    else val=lerp(31200,47500,easeOut(clamp((t-T.boom)/500,0,1)));
+    $('dnum').textContent=fmt(val);
+    $('dt1').textContent = t<T.boom? 'În 10 ani…' : 'Puși la treabă, ar fi fost';
+    // boom pop
+    const bp=t-T.boom;
+    const pop=(bp>0&&bp<420)?1+0.08*Math.sin(Math.PI*clamp(bp/420,0,1)):1;
+    document.querySelector('#decade .bignum').style.transform=`scale(${pop})`;
+    document.querySelector('#decade .bignum').style.filter =
+      t>=T.boom?`drop-shadow(0 0 ${lerp(8,42,clamp(bp/400,0,1))}px rgba(92,240,170,.6))`:'none';
+    // column: gold to landing, green grows after
+    const H=560, goldH=H*(31200/47500), greenH=H*(16300/47500);
+    const gp=easeOut(clamp((t-T.decIn)/(T.decLand-T.decIn),0,1));
+    $('dgold').style.height=(goldH*gp)+'px';
+    const grp=easeOut(clamp((t-T.greenGrow)/900,0,1));
+    $('dgreen').style.height=(greenH*grp)+'px';
+    $('dgreen').style.bottom=(goldH*gp)+'px';
+    // labels
+    const lg=$('dlabGold'), lgr=$('dlabGreen');
+    lg.style.opacity=clamp((t-T.decLand)/350,0,1);
+    lg.style.top=(830+640-40-goldH*gp+goldH*0.45)+'px';
+    lgr.style.opacity=clamp((t-T.greenGrow-250)/350,0,1);
+    lgr.style.top=(830+640-40-goldH*gp-greenH*grp+greenH*0.3)+'px';
+  }
+
+  // ===== revelation =====
+  const dim=$('dimmer');
+  dim.style.background=`rgba(6,11,20,${t>=T.revIn?clamp((t-T.revIn)/500,0,1)*0.8*(t>=T.ctaIn?clamp(1-(t-T.ctaIn)/300,0,1):1):0})`;
+  const rv=$('reveal');
+  io(rv,T.revIn,T.ctaIn,300);
+  if(vis(T.revIn-200,T.ctaIn+400)){
+    const r1=rv.querySelector('.r1'),r2=rv.querySelector('.r2'),r3=rv.querySelector('.r3');
+    const p1=clamp((t-T.revIn-350)/500,0,1);
+    r1.style.opacity=p1; r1.style.transform=`translateY(${lerp(26,0,easeOut(p1))}px)`;
+    const p2=clamp((t-T.trick)/450,0,1);
+    r2.style.opacity=p2; r2.style.transform=`translateY(${lerp(26,0,easeOut(p2))}px)`;
+    const p3=clamp((t-T.trick-350)/450,0,1);
+    r3.style.opacity=p3;
+    // frozen ring: appears, turns green->gold
+    const fz=$('freeze');
+    const fp=clamp((t-T.revIn)/400,0,1);
+    fz.style.opacity=fp*(t>=T.ctaIn?clamp(1-(t-T.ctaIn)/450,0,1):1);
+    const cshift=clamp((t-T.revIn-600)/600,0,1);
+    const col=cshift<1?`rgba(${Math.round(lerp(92,232,cshift))},${Math.round(lerp(240,194,cshift))},${Math.round(lerp(170,104,cshift))},1)`:'rgba(232,194,104,1)';
+    fz.style.borderColor=col;
+    fz.style.boxShadow=`0 0 60px ${col.replace(',1)',',.5)')}, inset 0 0 30px ${col.replace(',1)',',.2)')}`;
+    // it slides up towards badge position during CTA entry
+    if(t>=T.ctaIn){
+      const mp=easeInOut(clamp((t-T.ctaIn)/600,0,1));
+      fz.style.top=lerp(50,36,mp)+'%';
+      fz.style.width=fz.style.height=lerp(340,140,mp)+'px';
+    } else { fz.style.top='50%'; fz.style.width=fz.style.height='340px'; }
+    // gentle heartbeat pause: ring static (no pulse) = taps stopped
+  } else $('freeze').style.opacity=0;
+
+  // ===== CTA =====
+  const cta=$('cta');
+  if(t>=T.ctaIn){
+    cta.style.opacity=clamp((t-T.ctaIn)/450,0,1);
+    const seq=(d,dur=450)=>clamp((t-T.ctaIn-d)/dur,0,1);
+    const badge=cta.querySelector('.badge');const be=easeOut(seq(250));
+    badge.style.opacity=be;badge.style.transform=`scale(${lerp(.7,1,be)})`;
+    const q=cta.querySelector('.q');const qe=easeOut(seq(400));
+    q.style.opacity=qe;q.style.transform=`translateY(${lerp(20,0,qe)}px)`;
+    const url=cta.querySelector('.url');const ue=easeOut(seq(560));
+    url.style.opacity=ue;
+    const pulse=1+0.03*Math.sin((t-T.ctaIn-560)/240);
+    url.style.transform=ue>=1?`scale(${pulse})`:`scale(${lerp(.9,1,ue)})`;
+    cta.querySelector('.sub2').style.opacity=easeOut(seq(700));
+    cta.querySelector('.handle').style.opacity=easeOut(seq(830));
+    cta.querySelector('.disc').style.opacity=easeOut(seq(960))*.9;
+  } else cta.style.opacity=0;
+}
+
+// driver
+const params=new URLSearchParams(location.search);
+if(params.has('t')){ frame(parseInt(params.get('t'),10)||0); }
+else{
+  let start=null;
+  function loop(ts){ if(start===null)start=ts; let e=ts-start;
+    if(e>DUR+1200){ start=ts; e=0; } frame(e); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>
