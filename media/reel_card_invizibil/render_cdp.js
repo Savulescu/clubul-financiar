@@ -6,7 +6,7 @@ const path = require('path');
 const DIR = __dirname;
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const PORT = 9333;
-const FPS = 30, DUR = 21500;
+const FPS = 30, DUR = 24500;
 const N = Math.round(DUR * FPS / 1000);
 const URL = `file://${DIR}/scene.html?t=0`;
 const framesDir = path.join(DIR, 'frames');

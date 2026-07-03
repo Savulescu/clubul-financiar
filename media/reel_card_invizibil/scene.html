@@ -170,6 +170,16 @@ html,body{background:#000;overflow:hidden}
 #reveal .r3{position:absolute;top:1420px;left:110px;right:110px;text-align:center;
   font-size:42px;font-weight:600;color:var(--muted);opacity:0}
 
+/* ===== ghost -45 lei ===== */
+#ghost{position:absolute;z-index:7;left:75%;top:38%;transform:translateX(-50%);font-size:54px;
+  font-weight:800;color:var(--green);opacity:0;text-shadow:0 0 24px rgba(92,240,170,.6)}
+/* ===== 2x badge ===== */
+#x2{position:absolute;top:980px;left:50%;transform:translate(-50%,0) scale(0);z-index:8;
+  font-size:64px;font-weight:800;color:#0a1424;background:linear-gradient(180deg,#f3d792,#c79f4a);
+  padding:10px 38px;border-radius:999px;box-shadow:0 0 44px rgba(232,194,104,.55);opacity:0}
+/* ===== gold burst particles ===== */
+#burst{position:absolute;top:700px;left:50%;width:0;height:0;z-index:7;pointer-events:none}
+.pt{position:absolute;border-radius:50%;opacity:0}
 /* ===== CTA ===== */
 #cta{position:absolute;inset:0;z-index:11;display:flex;flex-direction:column;
   align-items:center;justify-content:center;opacity:0;
@@ -216,6 +226,7 @@ html,body{background:#000;overflow:hidden}
       <div id="tapzone">
         <div id="cardchip"><div class="chip"></div><div class="wave">)))</div><div class="num">•••• 2026</div></div>
       </div>
+      <div id="ghost">−45 lei</div>
     </div>
   </div>
 
@@ -225,6 +236,7 @@ html,body{background:#000;overflow:hidden}
       <div class="col" id="colCash"><div class="fill"></div><div class="cap">100</div><div class="tag">cash</div></div>
       <div class="col" id="colCard"><div class="fill"></div><div class="cap">200</div><div class="tag">card</div></div>
     </div></div>
+    <div id="x2">2×</div>
     <div class="src">Prelec &amp; Simester, MIT · la cumpărături uzuale: +12–18% (estimare din studii)</div>
   </div>
 
@@ -261,6 +273,7 @@ html,body{background:#000;overflow:hidden}
     <div class="dlab" id="dlabGreen">+16.300 lei<small>dobânda pierdută (8%/an)</small></div>
   </div>
 
+  <div id="burst"></div>
   <div id="dimmer"></div>
   <div id="reveal">
     <div class="r1">Nu cardul e problema.<br><em>Invizibilitatea</em> e.</div>
@@ -279,7 +292,7 @@ html,body{background:#000;overflow:hidden}
 </div>
 
 <script>
-const DUR = 21500;
+const DUR = 24500;
 const $=id=>document.getElementById(id);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const lerp=(a,b,t)=>a+(b-a)*t;
@@ -295,12 +308,12 @@ for(let i=0;i<4;i++){
   n.innerHTML='<div class="val">100</div>';
   notesEl.appendChild(n);noteEls.push(n);
 }
-const NOTE_T=[2700,3600,4500,5400];      // cash counting moments
-const PHASE3_TAPS=[9700,10500,11150,11620,11960,12200,12420,12620,12800,12980,13160]; // accelerating
+const NOTE_T=[2800,3700,4600,5500];      // cash counting moments
+const PHASE3_TAPS=[10500,11300,11950,12500,12960,13340,13660,13940,14180]; // accelerating
 // ring pool: [time, x%, y%, baseSize] — phase1 flash, phase2 single, phase3 heartbeat (center of stage)
 function ringSpec(){
   const specs=[{t:300,x:50,y:50,s:420,dur:450}];               // opening flash
-  specs.push({t:3000,x:75,y:52,s:330,dur:520});                // split single tap (right side)
+  specs.push({t:3100,x:75,y:52,s:330,dur:520});                // split single tap (right side)
   PHASE3_TAPS.forEach((t,i)=>specs.push({t,x:50,y:47,s:560*Math.pow(1.07,i),dur:470}));
   return specs;
 }
@@ -318,17 +331,24 @@ function setDial(p){ // p 0..1 of the 7.5h/8h sweep
 }
 
 const T={
-  ringFlash:300, hookIn:500, hookOut:2100,
-  splitIn:2300, splitOut:6400,
-  studyIn:6500, studyOut:9400,
-  applyIn:9500, hit:12000, flip:13400, applyOut:14800,
-  decIn:14900, decLand:15700, greenGrow:16000, boom:16600, decOut:17400,
-  revIn:17500, trick:18600,
-  ctaIn:19800
+  ringFlash:300, hookIn:500, hookOut:2200,
+  splitIn:2400, splitOut:7000,
+  studyIn:7100, studyOut:10100,
+  applyIn:10200, hit:12900, flip:14400, applyOut:16100,
+  decIn:16300, decLand:17100, greenGrow:17400, boom:18100, decOut:19200,
+  revIn:19400, trick:20700,
+  ctaIn:22200
 };
 
 function frame(t){
   t=clamp(t,0,DUR);
+  // subtle cinematic push-in per phase
+  const stage=$('stage');
+  let z=1;
+  const push=(a,b,amt)=>{if(t>=a&&t<b)z=1+amt*easeInOut(clamp((t-a)/(b-a),0,1));};
+  push(500,2400,0.018); push(2400,7100,0.02); push(7100,10200,0.022);
+  push(10200,14400,0.028); push(14400,16300,0.015); push(16300,19400,0.03);
+  stage.style.transform=`scale(${z})`; stage.style.transformOrigin='50% 46%';
   const vis=(a,b)=>t>=a&&t<b;
   const io=(el,inT,outT,d=350)=>{ // fade in at inT, out at outT
     el.style.opacity = clamp((t-inT)/d,0,1)*clamp(1-(t-outT)/d,0,1);
@@ -355,11 +375,11 @@ function frame(t){
   const hk=$('hook');
   if(t<T.splitIn+400){
     const l1=hk.querySelector('.l1'),l2=hk.querySelector('.l2'),l3=hk.querySelector('.l3');
-    const p1=clamp((t-T.hookIn)/420,0,1), p2=clamp((t-900)/420,0,1), p3=clamp((t-1400)/400,0,1);
+    const p1=clamp((t-T.hookIn)/420,0,1), p2=clamp((t-950)/420,0,1), p3=clamp((t-1500)/400,0,1);
     l1.style.opacity=p1; l1.style.transform=`scale(${lerp(1.12,1,easeOut(p1))})`;
     l2.style.opacity=p2;
     // tremble on line 2
-    const trem = (t>900&&t<T.hookOut)?2*Math.sin(t/13):0;
+    const trem = (t>950&&t<T.hookOut)?2*Math.sin(t/13):0;
     l2.style.transform=`scale(${lerp(1.12,1,easeOut(p2))}) translateX(${trem}px)`;
     l3.style.opacity=p3*.95;
     const out=clamp((t-T.hookOut)/300,0,1);
@@ -387,16 +407,21 @@ function frame(t){
     const cp=clamp((t-(T.splitIn+300))/400,0,1);
     const chip=$('cardchip');
     chip.style.opacity=cp;
-    const tapKick=(t>3000&&t<3200)?1-Math.abs((t-3100)/100):0;
+    const tapKick=(t>3100&&t<3300)?1-Math.abs((t-3200)/100):0;
     chip.style.transform=`translate(-50%,-50%) scale(${1+0.05*tapKick})`;
+    // ghost "-45 lei": floats up and evaporates right after the tap — the invisible pain, visible for a blink
+    const gp=clamp((t-3450)/950,0,1);
+    const g=$('ghost');
+    g.style.opacity=gp<1?Math.sin(Math.PI*gp)*.85:0;
+    g.style.transform=`translateX(-50%) translateY(${lerp(0,-120,easeOut(gp))}px)`;
   }
 
   // ===== study =====
   const st=$('study');
   io(st,T.studyIn,T.studyOut,300);
   if(vis(T.studyIn-400,T.applyIn+600)){
-    const pCash=clamp((t-6700)/700,0,1);
-    const pCard=clamp((t-7400)/1200,0,1);
+    const pCash=clamp((t-7300)/700,0,1);
+    const pCard=clamp((t-8000)/1300,0,1);
     const eCash=easeOut(pCash);
     // overshoot elastic for card
     const eCardRaw=easeOut(pCard);
@@ -410,6 +435,12 @@ function frame(t){
     $('colCard').querySelector('.cap').style.opacity=eCardRaw;
     $('colCard').querySelector('.cap').textContent=Math.round(200*eCardRaw);
     $('colCard').querySelector('.cap').style.transform=`translateY(${-H*over}px)`;
+    // "2x" badge pops between columns when card bar lands
+    const xp=clamp((t-9300)/380,0,1);
+    const x2=$('x2');
+    const xs=xp<1?easeOut(xp)*(1+0.18*Math.sin(xp*Math.PI)):1;
+    x2.style.opacity=xp;
+    x2.style.transform=`translate(-50%,0) scale(${xs})`;
   }
 
   // ===== apply (counter + flip) =====
@@ -417,7 +448,7 @@ function frame(t){
   io(ap,T.applyIn,T.applyOut,300);
   if(vis(T.applyIn-400,T.decIn+600)){
     // counter 0 -> 260 landing at hit moment
-    const cp=clamp((t-9700)/(T.hit-9700),0,1);
+    const cp=clamp((t-10500)/(T.hit-10500),0,1);
     $('anum').textContent=fmt(260*easeInOut(cp));
     // pulse counter on each tap
     let kick=0;
@@ -425,13 +456,15 @@ function frame(t){
     // flip at T.flip
     const fp=clamp((t-T.flip)/520,0,1);
     $('flipcard').style.transform=`rotateY(${180*easeInOut(fp)}deg) scale(${1+0.045*kick*(fp<1?1:0)})`;
+    $('flipcard').style.filter=`drop-shadow(0 0 ${lerp(0,34,kick)}px rgba(92,240,170,${0.5*kick}))`;
     // dial sweep after flip
     setDial(clamp((t-T.flip-420)/900,0,1)*0.9375);
     // hit text
     const hp=clamp((t-T.hit)/420,0,1);
     const hEl=$('applyHit');
     hEl.style.opacity=hp;
-    hEl.style.transform=`translateY(${lerp(30,0,easeOut(hp))}px)`;
+    const shake=(t>T.hit&&t<T.hit+320)?6*Math.sin((t-T.hit)/16)*(1-(t-T.hit)/320):0;
+    hEl.style.transform=`translateY(${lerp(30,0,easeOut(hp))}px) translateX(${shake}px)`;
   }
 
   // ===== decade =====
@@ -442,7 +475,7 @@ function frame(t){
     let val;
     if(t<T.decLand) val=lerp(3120,31200,easeOut(clamp((t-T.decIn)/(T.decLand-T.decIn),0,1)));
     else if(t<T.boom) val=31200;
-    else val=lerp(31200,47500,easeOut(clamp((t-T.boom)/500,0,1)));
+    else val=lerp(31200,47500,easeOut(clamp((t-T.boom)/450,0,1)));
     $('dnum').textContent=fmt(val);
     $('dt1').textContent = t<T.boom? 'În 10 ani…' : 'Puși la treabă, ar fi fost';
     // boom pop
@@ -455,7 +488,7 @@ function frame(t){
     const H=560, goldH=H*(31200/47500), greenH=H*(16300/47500);
     const gp=easeOut(clamp((t-T.decIn)/(T.decLand-T.decIn),0,1));
     $('dgold').style.height=(goldH*gp)+'px';
-    const grp=easeOut(clamp((t-T.greenGrow)/900,0,1));
+    const grp=easeOut(clamp((t-T.greenGrow)/700,0,1));
     $('dgreen').style.height=(greenH*grp)+'px';
     $('dgreen').style.bottom=(goldH*gp)+'px';
     // labels
@@ -466,6 +499,30 @@ function frame(t){
     lgr.style.top=(830+640-40-goldH*gp-greenH*grp+greenH*0.3)+'px';
   }
 
+  // ===== gold burst on the 47.500 boom =====
+  const bu=$('burst');
+  const bp2=(t-T.boom)/900;
+  if(bp2>0&&bp2<1){
+    if(!bu.dataset.built){
+      for(let i=0;i<26;i++){const d=document.createElement('div');d.className='pt';bu.appendChild(d);}
+      bu.dataset.built=1;
+    }
+    const dots=bu.children;
+    for(let i=0;i<dots.length;i++){
+      const ang=(i/dots.length)*Math.PI*2 + (i%2?0.18:0);
+      const dist=lerp(70,360+(i%5)*40,easeOut(bp2));
+      const sz=(i%3===0)?13:9;
+      const d=dots[i];
+      d.style.width=d.style.height=sz+'px';
+      d.style.left=(Math.cos(ang)*dist)+'px';
+      d.style.top=(Math.sin(ang)*dist*0.62)+'px';
+      d.style.background=i%4===0?'var(--green)':'var(--gold)';
+      d.style.boxShadow=`0 0 14px ${i%4===0?'rgba(92,240,170,.8)':'rgba(232,194,104,.8)'}`;
+      d.style.opacity=(1-bp2)*.95;
+    }
+    bu.style.opacity=1;
+  } else bu.style.opacity=0;
+
   // ===== revelation =====
   const dim=$('dimmer');
   dim.style.background=`rgba(6,11,20,${t>=T.revIn?clamp((t-T.revIn)/500,0,1)*0.8*(t>=T.ctaIn?clamp(1-(t-T.ctaIn)/300,0,1):1):0})`;
@@ -473,11 +530,11 @@ function frame(t){
   io(rv,T.revIn,T.ctaIn,300);
   if(vis(T.revIn-200,T.ctaIn+400)){
     const r1=rv.querySelector('.r1'),r2=rv.querySelector('.r2'),r3=rv.querySelector('.r3');
-    const p1=clamp((t-T.revIn-350)/500,0,1);
+    const p1=clamp((t-T.revIn-400)/550,0,1);
     r1.style.opacity=p1; r1.style.transform=`translateY(${lerp(26,0,easeOut(p1))}px)`;
     const p2=clamp((t-T.trick)/450,0,1);
     r2.style.opacity=p2; r2.style.transform=`translateY(${lerp(26,0,easeOut(p2))}px)`;
-    const p3=clamp((t-T.trick-350)/450,0,1);
+    const p3=clamp((t-T.trick-420)/450,0,1);
     r3.style.opacity=p3;
     // frozen ring: appears, turns green->gold
     const fz=$('freeze');
@@ -493,6 +550,11 @@ function frame(t){
       fz.style.top=lerp(50,36,mp)+'%';
       fz.style.width=fz.style.height=lerp(340,140,mp)+'px';
     } else { fz.style.top='50%'; fz.style.width=fz.style.height='340px'; }
+    // breathing glow on the frozen ring
+    if(t<T.ctaIn){
+      const br=1+0.012*Math.sin((t-T.revIn)/260);
+      fz.style.transform=`translate(-50%,-50%) scale(${br})`;
+    } else fz.style.transform='translate(-50%,-50%)';
     // gentle heartbeat pause: ring static (no pulse) = taps stopped
   } else $('freeze').style.opacity=0;
 
