@@ -8,37 +8,33 @@
   "siliconflow:401": 5,
   "groq:403": 5,
   "together:403": 5,
-  "sambanova:402": 29,
-  "nvidia:TimeoutError": 24,
+  "sambanova:402": 30,
+  "nvidia:TimeoutError": 25,
   "fireworks:404": 4,
-  "openrouter:429": 4
+  "openrouter:429": 5
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 3
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words. Must not translate word for word. Must be original summary"
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: u"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"...\",\"fapt\":\"...\"} with natural Romanian translation, using specified terms: oil=tiței NU ulei, bonds=obligațiuni, stocks/shares=acțiuni, yield=randament,"
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil=tiței NU ulei, bonds=obligați"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Title: clear Romanian, reformulated. Fact: 1-2 neutral sentences with main fact. Expl"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to translate into Romanian natural and correct, using specific terms: oil = \"tiței NU ulei\"? Wait \"oil=tiței NU ulei\" maybe they want to replace \"oil\" with \"tiței NU ulei\"? That seems odd. Act"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words. Use terms correctly. Title: \"Munteanu demitează funcția de"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 4,
-  "fresh": 10,
-  "fb": 10,
+  "new": 5,
+  "fresh": 5,
+  "fb": 5,
   "tier2": 0,
   "explainer": 0
  }
