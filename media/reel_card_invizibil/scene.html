@@ -292,7 +292,7 @@ html,body{background:#000;overflow:hidden}
 </div>
 
 <script>
-const DUR = 24500;
+const DUR = 28000;          // timeline intern 24500, redat cu 14% mai lent
 const $=id=>document.getElementById(id);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const lerp=(a,b,t)=>a+(b-a)*t;
@@ -341,7 +341,7 @@ const T={
 };
 
 function frame(t){
-  t=clamp(t,0,DUR);
+  t=clamp(t,0,DUR)*(24500/28000);   // remap: derulare mai lentă, aceleași faze
   // subtle cinematic push-in per phase
   const stage=$('stage');
   let z=1;
