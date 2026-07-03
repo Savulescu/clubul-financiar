@@ -9,7 +9,7 @@
   "groq:403": 4,
   "together:403": 4,
   "sambanova:402": 24,
-  "nvidia:TimeoutError": 24,
+  "nvidia:TimeoutError": 23,
   "fireworks:404": 3
  },
  "ro_reject": {
@@ -18,34 +18,34 @@
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use core terms. Must not translate word for wor"
+   "raw": "We need to output JSON valid on one line. Must contain fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words. Must not translate word for word. Must be original"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output a JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, natural. Title: reformulated Romanian title, clear. Fact: 1-2 neutral sent"
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be original Romanian summary, not word-for-word translation. Must"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correcting terms: oil=tiței NU ulei (so oil"
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate the title naturally and correctly, using given mappings: oil=tiței NU ulei, "
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"...\",\"fapt\":\"...\"} with natural Romanian translation. Title translation: \"Asian markets choppy as US jobs data douse Fed rate hike bets - Reuters\". Need t"
+   "raw": "We need to translate into Romanian natural and correct, using specific terms: oil = \"tiței NU ulei\"? Actually they said oil=tiței NU ulei, bonds=obligațiuni, stocks/shares=acțiuni, yield=randament, Fe"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output a JSON object on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct diacritics, no foreign words. Must"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: no foreig"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use core terms as specified. Ensure title is cl"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not literal translation. Must follow language rules: correct Romania"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 4,
-  "fresh": 4,
-  "fb": 4,
+  "new": 7,
+  "fresh": 7,
+  "fb": 7,
   "tier2": 0,
   "explainer": 0
  }
