@@ -1,44 +1,44 @@
 {
- "ok": {
-  "openrouter": 4
- },
+ "ok": {},
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:402": 24,
-  "nvidia:TimeoutError": 24,
+  "gemini:429": 5,
+  "mistral:401": 5,
+  "cerebras:403": 5,
+  "deepseek:402": 10,
+  "siliconflow:401": 5,
+  "groq:403": 5,
+  "together:403": 5,
+  "sambanova:402": 30,
+  "nvidia:TimeoutError": 27,
   "fireworks:404": 4,
   "openrouter:429": 4
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 4
+ },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i, titlu, fact (1-2 sentences with main fact). Use natural Romanian translation, correct diacritics, no foreign words. Replace oil/crude = \"t"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow rules: Romanian correct, diacritics, specific terms. Must"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i, titlu, fapt (1-2 sentences with the main fact). Must translate titles and summaries into natural Romanian, correct diacritics, no foreign "
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}\n\nWe must translate title naturally and correctly, using given terms: oil=tiței NU ulei, bon"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output a JSON array on one line, each object with fields i, titlu, fapt. Must translate the Romanian natural and correct sentences (the \"REZUMAT\" lines) into natural Romanian, using given m"
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow rules: Romanian correct, no foreign words, use specific te"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i (index), titlu, fapt (1-2 sentences with main fact). Must translate titles and summaries into natural Romanian, correct diacritics, no fore"
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correcting terms: oil = tiței NU ulei (so oil sh"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 0,
-  "fresh": 0,
-  "fb": 0,
+  "new": 2,
+  "fresh": 2,
+  "fb": 2,
   "tier2": 0,
   "explainer": 0
  }
