@@ -1,7 +1,5 @@
 {
- "ok": {
-  "openrouter": 3
- },
+ "ok": {},
  "err": {
   "gemini:429": 4,
   "mistral:401": 4,
@@ -14,26 +12,40 @@
   "nvidia:TimeoutError": 23,
   "fireworks:404": 3
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 6
+ },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i, titlu, fapt (1-2 sentences with main fact). Must translate titles and summaries into natural Romanian, correct diacritics, no foreign word"
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian original summary, not literal translation. Must follow language rules: co"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i, titlu, fapt (1-2 sentences with main fact). Must translate titles and summaries into Romanian natural and correct, using specific term map"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Provide original Romanian summary, not word-for-word translation. Must follow langua"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i, titlu, fapt (1-2 sentences with the main fact). Must translate titles and summaries into natural Romanian, correct diacritics, zero words "
+   "raw": "We need to output JSON on a single line with fields \"titlu\" and \"fapt\". The user wants translation into natural Romanian, correcting terms: oil=țes (actually oil is \"uă\" no, \"uă\" is not; they said oil"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe need to translate the title and summary? The user says \"Tradu în română naturală și corectă"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, one line. Must follow rules: Romanian correct, no foreign words, proper diacritics, "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, correct language, no words from other languages. Must "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 0,
-  "fresh": 3,
-  "fb": 3,
+  "new": 2,
+  "fresh": 2,
+  "fb": 2,
   "tier2": 0,
   "explainer": 0
  }
