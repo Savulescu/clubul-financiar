@@ -1,25 +1,51 @@
 {
  "ok": {},
  "err": {
-  "gemini:429": 5,
-  "mistral:401": 5,
-  "cerebras:403": 5,
-  "deepseek:402": 10,
-  "siliconflow:401": 5,
-  "groq:403": 5,
-  "together:403": 5,
-  "sambanova:402": 30,
-  "nvidia:TimeoutError": 27,
-  "fireworks:404": 4,
-  "openrouter:429": 8
+  "gemini:429": 4,
+  "mistral:401": 4,
+  "cerebras:403": 4,
+  "deepseek:402": 8,
+  "siliconflow:401": 4,
+  "groq:403": 4,
+  "together:403": 4,
+  "sambanova:402": 24,
+  "nvidia:TimeoutError": 23,
+  "fireworks:404": 3
  },
- "ro_reject": {},
- "samples": [],
+ "ro_reject": {
+  "openrouter": 6
+ },
+ "samples": [
+  {
+   "p": "openrouter",
+   "raw": "We need to output a JSON object on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must follow language rules: Romanian correct, natural, no words from other "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Use terms as specified. Must not translate word"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate title naturally and correctly, using given mappings: oil=tiței NU ulei, bond"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil = \"țesă\" (but they said \"oil="
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no foreign words. Use specific terms as per rules. Must not translat"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output a JSON object with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Provide original Romanian summary, not word-for-word translation. Must follow lan"
+  }
+ ],
  "no_keys": [],
  "summary": {
-  "new": 10,
-  "fresh": 10,
-  "fb": 10,
+  "new": 3,
+  "fresh": 3,
+  "fb": 3,
   "tier2": 0,
   "explainer": 0
  }
