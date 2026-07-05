@@ -1,6 +1,6 @@
 {
  "ok": {
-  "openrouter": 3
+  "openrouter": 1
  },
  "err": {
   "gemini:429": 4,
@@ -15,36 +15,40 @@
   "fireworks:404": 4
  },
  "ro_reject": {
-  "openrouter": 2
+  "openrouter": 6
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, original summary, not literal translation. Must follow language rules: use co"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Use correct terms, no foreign words. "
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian correct, natural, diacritics, specif"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words, use specified terms. Must not translate word-for-word. Pro"
   },
   {
    "p": "openrouter",
-   "raw": "{\"titlu\":\"Aici este de ce Microsoft (MSFT) este una dintre cele mai bune acțiuni NASDAQ pentru investiții pe termen lung - Yahoo Finance\",\""
+   "raw": "{\"titlu\":\"Acțiunea Nvidia este acum mai ieftină decât Coca‑Cola. Iată matematica.\",\"fapt\":\"Nvidia are un preț mai scăzut decât Coca‑Cola.\"}"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i, titlu, fapt (1-2 sentences with the main fact). Must translate titles and summaries into natural Romanian, correct diacritics, no words fr"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian, correct, no foreign words. Use corre"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON array on one line, each object with i, titlu, fapt (1-2 sentences with the main fact). Must translate titles and summaries into natural Romanian, correct diacritics, no foreign "
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words. Must use correct terms: oil/crude = \"țintă\", ba"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe need to translate the title naturally and correctly, using given term mappings: oil=ti"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 1,
-  "fresh": 1,
-  "fb": 1,
-  "tier2": 0,
+  "new": 6,
+  "fresh": 6,
+  "fb": 5,
+  "tier2": 1,
   "explainer": 0
  }
 }
