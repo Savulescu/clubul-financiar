@@ -9,29 +9,21 @@
   "groq:403": 5,
   "together:403": 5,
   "sambanova:402": 30,
-  "nvidia:TimeoutError": 26,
+  "nvidia:TimeoutError": 27,
   "fireworks:404": 4,
-  "openrouter:429": 4
+  "openrouter:429": 6
  },
  "ro_reject": {
-  "openrouter": 4
+  "openrouter": 2
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON only, one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Title: clear Romanian reformulated. Fact: 1-2 neutral sentences with main fact. ce_ins"
+   "raw": "We need to output JSON valid on one line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, no translation word-for-word. Use correct terms. Must be neutral, 1-2"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil = \"tiței\" (but they wrote \"ti"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Title in Romanian, reformulated, clear. Fact: 1-2 neutral sentences with main fact. Expla"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate naturally and correctly, using given mappings: oil=tiței NU ulei, bonds"
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate title naturally and correctly, using given mappings: oil=țiței NU ulei, bond"
   }
  ],
  "no_keys": [],
