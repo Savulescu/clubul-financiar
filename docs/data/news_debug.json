@@ -1,41 +1,44 @@
 {
  "ok": {},
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:URLError": 8,
-  "sambanova:402": 15,
-  "nvidia:TimeoutError": 18,
-  "fireworks:404": 3,
-  "openrouter:429": 3
+  "gemini:429": 5,
+  "mistral:401": 5,
+  "cerebras:403": 5,
+  "deepseek:402": 10,
+  "siliconflow:401": 5,
+  "groq:403": 5,
+  "together:403": 5,
+  "sambanova:402": 30,
+  "nvidia:TimeoutError": 26,
+  "fireworks:404": 4,
+  "openrouter:429": 4
  },
  "ro_reject": {
-  "openrouter": 3
+  "openrouter": 4
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Provide Romanian summary original, not word-for-word translation. Must"
+   "raw": "We need to output JSON only, one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Title: clear Romanian reformulated. Fact: 1-2 neutral sentences with main fact. ce_ins"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into Romanian natural and correct, with specific terms: oil = \"tiței NU"
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil = \"tiței\" (but they wrote \"ti"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian, correct diacritics, specific te"
+   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Title in Romanian, reformulated, clear. Fact: 1-2 neutral sentences with main fact. Expla"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate naturally and correctly, using given mappings: oil=tiței NU ulei, bonds"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 2,
-  "fresh": 7,
-  "fb": 7,
+  "new": 4,
+  "fresh": 4,
+  "fb": 4,
   "tier2": 0,
   "explainer": 0
  }
