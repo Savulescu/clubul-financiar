@@ -1,5 +1,7 @@
 {
- "ok": {},
+ "ok": {
+  "openrouter": 1
+ },
  "err": {
   "gemini:429": 4,
   "mistral:401": 4,
@@ -13,40 +15,40 @@
   "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 6
+  "openrouter": 5
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must follow language rules: Romanian, correct diacritics, no foreign words, use specific t"
+   "raw": "We need to output JSON valid on one line. Must follow format: {\"titlu\":\"...\",\"fapt\":\"1-2 propoziții neutre cu faptul principal\",\"ce_inseamna\":\"2-4 propoziții: ce înseamnă pentru banii unui român (rată"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct, no foreign words, use specific terms. Must not translate word-for-word. Prov"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words, use specified terms. Must not translate word-fo"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"...\",\"fapt\":\"...\"} with Romanian translation natural and correct, using specific terms: oil=tiței NU ulei, bonds=obligațiuni, stocks/shares=acțiuni, yield"
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil=țesu? Actually \"oil\" = \""
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line with keys \"titlu\" and \"fapt\". Must translate title naturally and correctly, using given terms: oil=tiței NU ulei, bonds=obligațiuni, stocks/shares=acțiuni, yield=ran"
+   "raw": "{\"titlu\":\"China testează un misil pe Pacific, alarmând puterile regionale - Reuters\",\"fapt\":\"Testul lanțuit de misil de China în Pacific a alarmi puterile regionale.\"}"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no words from other languages. Must not translate word for word. "
+   "raw": "We need to output JSON only, one line, with keys: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, correct language, no foreign words. Use specified term equ"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words except allowed terms. Must not translate word fo"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: correct R"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 8,
-  "fresh": 8,
-  "fb": 8,
-  "tier2": 0,
+  "new": 16,
+  "fresh": 16,
+  "fb": 15,
+  "tier2": 1,
   "explainer": 0
  }
 }
