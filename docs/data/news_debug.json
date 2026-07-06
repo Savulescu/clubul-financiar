@@ -1,5 +1,7 @@
 {
- "ok": {},
+ "ok": {
+  "openrouter": 2
+ },
  "err": {
   "gemini:429": 4,
   "mistral:401": 4,
@@ -13,39 +15,31 @@
   "fireworks:404": 3
  },
  "ro_reject": {
-  "openrouter": 6
+  "openrouter": 2
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, one line. Title: clear Romanian reformulated. Fact: 1-2 neutral sentences with main f"
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow constraints: Romanian correct, natural, no foreign words,"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian summary original, not literal translation. Must follow language rul"
+   "raw": "We need to output only JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Title in Romanian, reformulated. Fact: 1-2 neutral sentences with main fact. Explana"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}\n\nWe must translate title naturally and correctly, using given term mappings: oil=tiței NU ulei, "
+   "raw": "{\"titlu\":\"F"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, using specific terms: oil=tiței NU ulei, bonds=o"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Title should be clear Romanian reformulated. Fact: 1-2 neutral sentences with main fact. ce_ins"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Title must be clear Romanian, reformulated. Fact: 1-2 neutral sentenc"
+   "raw": "We need to output JSON array on one line, each object with i, titlu, fapt (1-2 sentences with the main fact). Must translate titles and summaries into natural Romanian, correct diacritics, zero words "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 7,
-  "fresh": 7,
-  "fb": 7,
+  "new": 1,
+  "fresh": 1,
+  "fb": 1,
   "tier2": 0,
   "explainer": 0
  }
