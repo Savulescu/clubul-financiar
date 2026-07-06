@@ -3,51 +3,51 @@
   "openrouter": 1
  },
  "err": {
-  "gemini:429": 4,
-  "mistral:401": 4,
-  "cerebras:403": 4,
-  "deepseek:402": 8,
-  "siliconflow:401": 4,
-  "groq:403": 4,
-  "together:403": 4,
-  "sambanova:402": 24,
-  "nvidia:TimeoutError": 24,
-  "fireworks:404": 3
+  "gemini:429": 5,
+  "mistral:401": 5,
+  "cerebras:403": 5,
+  "deepseek:402": 10,
+  "siliconflow:401": 5,
+  "groq:403": 5,
+  "together:403": 5,
+  "sambanova:402": 30,
+  "nvidia:TimeoutError": 25,
+  "fireworks:404": 4
  },
  "ro_reject": {
-  "openrouter": 5
+  "openrouter": 6
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line. Must follow format: {\"titlu\":\"...\",\"fapt\":\"1-2 propoziții neutre cu faptul principal\",\"ce_inseamna\":\"2-4 propoziții: ce înseamnă pentru banii unui român (rată"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, no word-for-word translation, correct diacritics, specific terms. Mu"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct diacritics, no foreign words, use specified terms. Must not translate word-fo"
+   "raw": "We need to output JSON with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be original Romanian summary, not word-for-word translation. Must follow language rul"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correct terms: oil=țesu? Actually \"oil\" = \""
+   "raw": "We need to output JSON on a single line: {\"titlu\":\"...\",\"fapt\":\"...\"} where titlu is the translated title, and fapt is a sentence with the main fact. Must be natural Romanian, using specified translat"
   },
   {
    "p": "openrouter",
-   "raw": "{\"titlu\":\"China testează un misil pe Pacific, alarmând puterile regionale - Reuters\",\"fapt\":\"Testul lanțuit de misil de China în Pacific a alarmi puterile regionale.\"}"
+   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nWe must translate title naturally and correctly, using given mappings: oil=tiței NU ulei, bond"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON only, one line, with keys: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on one line. Must be Romanian, correct language, no foreign words. Use specified term equ"
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian, correct language, no words from other languages. Must use correct terms. Must not tra"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be original Romanian summary, not word-for-word translation. Must follow language rules: correct R"
+   "raw": "We need to output only JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian, correct language, no foreign words. Use corect terms. Title should"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 16,
-  "fresh": 16,
-  "fb": 15,
+  "new": 21,
+  "fresh": 21,
+  "fb": 20,
   "tier2": 1,
   "explainer": 0
  }
