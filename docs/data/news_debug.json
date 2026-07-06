@@ -1,11 +1,13 @@
 {
- "ok": {},
+ "ok": {
+  "openrouter": 3
+ },
  "err": {
-  "gemini:429": 5,
-  "mistral:401": 5,
-  "cerebras:403": 5,
-  "deepseek:402": 10,
-  "siliconflow:401": 5,
+  "gemini:429": 4,
+  "mistral:401": 4,
+  "cerebras:403": 4,
+  "deepseek:402": 8,
+  "siliconflow:401": 4,
   "groq:403": 4,
   "together:403": 4,
   "sambanova:402": 24,
@@ -13,40 +15,36 @@
   "fireworks:404": 4
  },
  "ro_reject": {
-  "openrouter": 8
+  "openrouter": 2
  },
  "samples": [
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be original Romanian summary, not word-for-word t"
+   "raw": "We need to output JSON on a single line with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, only one line. Must be Romanian summary original, not translation word for word. Must"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct diacritics, no foreign words. Must use spec"
+   "raw": "We need to output JSON only, one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON. Must be Romanian, correct diacritics, no foreign words. Must use specific terms: oil/c"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on one line: {\"titlu\":\"titlul tradus\",\"fapt\":\"o propoziție cu faptul principal\"}.\n\nUser wants translation into natural Romanian, correcting terms: oil = tiței NU ulei (so use \"t"
+   "raw": "{\"titlu\":\"Cathie Wood găsește valoare într-un acțiune de creștere scăzută. Eu tot așa fac.\",\"fapt\":\"Cathie Wood recomandă acțiunile de creștere scăzute, iar eu sunt de acord.\"}"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line with fields \"titlu\" and \"fapt\". Provide Romanian natural translation of title, and a sentence with the main fact. Use given terms: oil = \"tiței NU ulei\"? Actual"
+   "raw": "We need to output a JSON array with indices of texts that contain invented/strange words or evident grammatical errors. The user gave two texts? Actually they gave a list: \"0. Cathie Wood găsește valo"
   },
   {
    "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must be Romanian, correct diacritics, no words from other languages. "
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON on a single line. Must be Romanian, correct, no foreign words except allowed terms. Must n"
+   "raw": "We need to output a JSON array on one line, each object with i, titlu, fapt (1-2 sentences with the main fact). Must translate titles and summaries into Romanian natural and correct, using specific te"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 5,
-  "fresh": 5,
-  "fb": 5,
-  "tier2": 0,
+  "new": 1,
+  "fresh": 1,
+  "fb": 0,
+  "tier2": 1,
   "explainer": 0
  }
 }
