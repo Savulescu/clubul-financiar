@@ -1,43 +1,54 @@
 {
  "ok": {
-  "mistral": 12
+  "mistral": 15
  },
  "err": {
-  "gemini:429": 12
+  "gemini:429": 16,
+  "mistral:TimeoutError": 12,
+  "cerebras:403": 1,
+  "deepseek:402": 2,
+  "siliconflow:401": 1,
+  "groq:403": 1,
+  "together:403": 1,
+  "sambanova:402": 6,
+  "nvidia:TimeoutError": 6,
+  "fireworks:404": 1
  },
- "ro_reject": {},
+ "ro_reject": {
+  "openrouter": 2
+ },
  "samples": [
   {
-   "p": "mistral",
-   "raw": "{\"titlu\":\"Acțiunile Verizon în creștere după ce câștigurile arată că firma nu mai este o țintă ușoară pentru investitori\", \"fapt\":\"Verizon a depășit așteptările privind numărul de abonați, reducând to"
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian, correct diacritics, no foreign "
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary, original, no translation word-for-word. Must follow language rules: correct R"
   },
   {
    "p": "mistral",
-   "raw": "```json\n{\"titlu\":\"Șansele unei majorări a dobânzii Fed în iulie au crescut de trei ori în ultima săptămână – iată de ce\", \"fapt\":\"Rezerva Federală a SUA (Fed) ar putea crește dobânda de politică monet"
+   "raw": "{\"titlu\":\"Cine finanțează creșterea datoriei SUA în raport cu restul lumii?\", \"fapt\":\"Statele străine și investitorii internaționali achiziționează obligațiuni americane, contribuind la acoperirea def"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Probabilitatea unei majorări a dobânzii Fed în iulie s-a triplat în ultima săptămână -- Iată de ce\", \"fapt\":\"Probabilitatea unei majorări a dobânzii de către Rezerva Federală în iulie a cres"
+   "raw": "{\"titlu\":\"Noi taxe americane nu afectează companiile britanice, susține guvernul Regatului Unit\",\"fapt\":\"Guvernul britanic afirmă că ultimele taxe vamale impuse de SUA asupra importurilor nu vor avea "
   },
   {
    "p": "mistral",
-   "raw": "```json\n{\"titlu\":\"Lockheed Martin și RTX își revizuiesc prognozele pentru 2026 datorită comenziilor militare crescute de la Pentagon\", \"fapt\":\"Două dintre cele mai mari companii americane de apărare, "
+   "raw": "{\"titlu\":\"Regatul Unit afirmă că ultimele tarife americane nu vor avea un impact negativ asupra companiilor britanice - Reuters\",\"fapt\":\"Guvernul britanic susține că noile taxe vamale impuse de SUA nu"
   },
   {
    "p": "mistral",
-   "raw": "```json\n{\"titlu\":\"Riscurile unui conflict cu Iran ar putea îmbunătăți perspectivele lui Dow, conform managementului\", \"fapt\":\"Grupul industrial Dow consideră că un eventual război cu Iran ar putea duc"
-  },
-  {
-   "p": "mistral",
-   "raw": "{\"titlu\":\"Cei mai buni 500 de dolari de investit acum: unde să pui banii în 2024\",\"fapt\":\"Un articol de pe Yahoo Finance recomandă plasamente strategice pentru 500 de dolari, subliniind opțiuni accesi"
+   "raw": "```json\n{\"titlu\":\"Acțiuni cu cele mai mari variații înainte de deschiderea bursei: Intel, Oracle, American Express și altele\",\"fapt\":\"Mai multe acțiuni, printre care Intel, Oracle și American Express,"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 6,
-  "fresh": 6,
+  "new": 11,
+  "fresh": 11,
   "fb": 0,
   "tier2": 0,
-  "explainer": 6
+  "explainer": 11
  }
 }
