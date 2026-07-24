@@ -1,45 +1,55 @@
 {
  "ok": {
-  "mistral": 10
+  "mistral": 6
  },
  "err": {
-  "gemini:429": 11
+  "gemini:429": 7,
+  "mistral:TimeoutError": 15,
+  "mistral:429": 9,
+  "cerebras:403": 1,
+  "deepseek:402": 2,
+  "siliconflow:401": 1,
+  "groq:403": 1,
+  "together:403": 1,
+  "sambanova:402": 6,
+  "nvidia:TimeoutError": 6,
+  "fireworks:404": 1
  },
  "ro_reject": {
-  "mistral": 3
+  "openrouter": 2
  },
  "samples": [
   {
-   "p": "mistral",
-   "raw": "{\"titlu\":\"Piețele asiatice în scădere din cauza noilor tarife vamale anunțate de Trump – impact asupra economiei globale\",\"fapt\":\"Președintele Trump a impus noi tarife vamale pentru peste 80 de țări, "
+   "p": "openrouter",
+   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian summary original, not word-for-word t"
+  },
+  {
+   "p": "openrouter",
+   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Title in Romanian, reformulated, clear. Fact: 1-2 neutral sentences with main fact. \"ce_inseamn"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Acțiunile asiatice scad după ce Trump impune noi tarife la peste 80 de țări – în direct\", \"fapt\":\"Guvernatorul Băncii Franței, Emmanuel Moulin, a declarat astăzi că noile tarife comerciale a"
+   "raw": "{\"titlu\":\"Spania începe să-i enerveze pe ceilalți europeni\", \"fapt\":\"Spania își face simțită prezența în mod tot mai deranjant pentru partenerii săi din Uniunea Europeană.\"}"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Guvernul Japoniei avertizează asupra creșterii presiunii inflaționiste\", \"fapt\":\"Guvernul Japoniei a atras atenția asupra riscului crescător de inflație, semnalând o tendință îngrijorătoare "
+   "raw": "{\"titlu\":\"China trimite o navă petroliere în Strâmtoarea Hormuz, pe fondul revenirii traficului în Marea Roșie\",\"fapt\":\"O navă petroliere chineză a pornit spre Strâmtoarea Hormuz, în timp ce o alta a "
   },
   {
    "p": "mistral",
-   "raw": "```json\n{\"titlu\":\"Primul mare trader de pe Wall Street care a schimbat istoria piețelor financiare\",\"fapt\":\"Un trader de la începutul secolului XX a devenit prima vedetă a Wall Street, demonstrând că "
+   "raw": "{\"titlu\":\"Piețele din India ignoră protestele studențești, dar riscurile rămân\", \"fapt\":\"Piețele financiare din India au reacționat cu calm la protestele studențești, menținând trendul de creștere, în"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Randul sud-african se prăbușește după decizia neașteptată a băncii centrale de a menține dobânzile\", \"fapt\":\"Banca centrală a Africii de Sud a păstrat dobânzile neschimbate, contrar așteptăr"
-  },
-  {
-   "p": "mistral",
-   "raw": "```json\n{\"titlu\":\"Acțiunile companiilor de calcul cuantic scad. Ce înseamnă pentru investitori IonQ, D-Wave și Nvidia?\", \"fapt\":\"Piețele financiare au înregistrat scăderi semnificative la companiile s"
+   "raw": "{\"titlu\":\"Șeful Băncii Franței: taxe vamale ale lui Trump sporesc incertitudinea pentru economia globală\",\"fapt\":\"Franck Riester, guvernatorul Băncii Franței, avertizează că politicile protecționiste "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 6,
-  "fresh": 6,
+  "new": 5,
+  "fresh": 5,
   "fb": 0,
-  "tier2": 0,
-  "explainer": 6
+  "tier2": 2,
+  "explainer": 3
  }
 }
