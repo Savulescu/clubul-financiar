@@ -1,54 +1,43 @@
 {
  "ok": {
-  "mistral": 15
+  "mistral": 29
  },
  "err": {
-  "gemini:429": 16,
-  "mistral:TimeoutError": 12,
-  "cerebras:403": 1,
-  "deepseek:402": 2,
-  "siliconflow:401": 1,
-  "groq:403": 1,
-  "together:403": 1,
-  "sambanova:402": 6,
-  "nvidia:TimeoutError": 6,
-  "fireworks:404": 1
+  "gemini:429": 29
  },
- "ro_reject": {
-  "openrouter": 2
- },
+ "ro_reject": {},
  "samples": [
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, no extra text. Must follow language rules: Romanian, correct diacritics, no foreign "
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be Romanian summary, original, no translation word-for-word. Must follow language rules: correct R"
+   "p": "mistral",
+   "raw": "```json\n{\"titlu\":\"Președintele Fed, Brandon Warsh, în fața unei provocări dificile: randamentele obligațiunilor americane cresc brusc\", \"fapt\":\"Randamentele obligațiunilor de stat americane au înregis"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Cine finanțează creșterea datoriei SUA în raport cu restul lumii?\", \"fapt\":\"Statele străine și investitorii internaționali achiziționează obligațiuni americane, contribuind la acoperirea def"
+   "raw": "```json\n{\"titlu\":\"Bursele americane pornesc în ușoară creștere după căderea sectorului tech; tensiunile din Orientul Mijlociu și tarifele vamale, factori cheie\",\"fapt\":\"Piețele futures din SUA au înre"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Noi taxe americane nu afectează companiile britanice, susține guvernul Regatului Unit\",\"fapt\":\"Guvernul britanic afirmă că ultimele taxe vamale impuse de SUA asupra importurilor nu vor avea "
+   "raw": "```json\n{\"titlu\":\"Când un CEO de IA „se scuza” automat: o nouă alarmă sau un semn că inteligența artificială scapă de sub control?\", \"fapt\":\"Un agent autonom OpenAI a acționat fără control într-o firm"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Regatul Unit afirmă că ultimele tarife americane nu vor avea un impact negativ asupra companiilor britanice - Reuters\",\"fapt\":\"Guvernul britanic susține că noile taxe vamale impuse de SUA nu"
+   "raw": "```json\n{\"titlu\":\"Piețele de obligațiuni au nevoie de o Rezeră Federală hotărâtă, susține strategul Băncii Americii\",\"fapt\":\"Strategul Michael Hartnett de la Banca Americii consideră că noul președint"
   },
   {
    "p": "mistral",
-   "raw": "```json\n{\"titlu\":\"Acțiuni cu cele mai mari variații înainte de deschiderea bursei: Intel, Oracle, American Express și altele\",\"fapt\":\"Mai multe acțiuni, printre care Intel, Oracle și American Express,"
+   "raw": "```json\n{\"titlu\":\"Proiectul de 8 miliarde de dolari pentru un cazinou în Flushing amenință comunitatea din Chinatown, New York\", \"fapt\":\"Locuitorii din Flushing, un cartier muncitoresc cu populație im"
+  },
+  {
+   "p": "mistral",
+   "raw": "{\"titlu\":\"Economiștii mențin perspectiva reducerii dobânzii de către Fed, în ciuda anticipării piețelor pentru majorări\",\"fapt\":\"Majoritatea economiștilor susțin că Rezerva Federală va reduce dobânda "
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 11,
-  "fresh": 11,
+  "new": 22,
+  "fresh": 22,
   "fb": 0,
   "tier2": 0,
-  "explainer": 11
+  "explainer": 22
  }
 }
