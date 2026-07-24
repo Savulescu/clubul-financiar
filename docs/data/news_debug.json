@@ -1,55 +1,43 @@
 {
  "ok": {
-  "mistral": 6
+  "mistral": 16
  },
  "err": {
-  "gemini:429": 7,
-  "mistral:TimeoutError": 15,
-  "mistral:429": 9,
-  "cerebras:403": 1,
-  "deepseek:402": 2,
-  "siliconflow:401": 1,
-  "groq:403": 1,
-  "together:403": 1,
-  "sambanova:402": 6,
-  "nvidia:TimeoutError": 6,
-  "fireworks:404": 1
+  "gemini:429": 16
  },
- "ro_reject": {
-  "openrouter": 2
- },
+ "ro_reject": {},
  "samples": [
   {
-   "p": "openrouter",
-   "raw": "We need to output JSON on a single line, with fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Must be valid JSON, single line (no line breaks). Must be Romanian summary original, not word-for-word t"
-  },
-  {
-   "p": "openrouter",
-   "raw": "We need to output JSON valid on one line. Must include fields: \"titlu\",\"fapt\",\"ce_inseamna\",\"categorie\". Title in Romanian, reformulated, clear. Fact: 1-2 neutral sentences with main fact. \"ce_inseamn"
+   "p": "mistral",
+   "raw": "```json\n{\"titlu\":\"Țițeiul în creștere pune presiune pe obligațiunile globale și reaprinde teama de inflație\",\"fapt\":\"Țițeiul a înregistrat o nouă creștere bruscă, determinând scăderea randamentelor ob"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Spania începe să-i enerveze pe ceilalți europeni\", \"fapt\":\"Spania își face simțită prezența în mod tot mai deranjant pentru partenerii săi din Uniunea Europeană.\"}"
+   "raw": "{\"titlu\":\"Obligațiunile globale se prăbușesc în timp ce creșterea prețului țițeiului reaprinde amenințarea inflației\", \"fapt\":\"Creșterea bruscă a prețului țițeiului a determinat scăderea randamentelor"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"China trimite o navă petroliere în Strâmtoarea Hormuz, pe fondul revenirii traficului în Marea Roșie\",\"fapt\":\"O navă petroliere chineză a pornit spre Strâmtoarea Hormuz, în timp ce o alta a "
+   "raw": "```json\n{\"titlu\":\"Țițeiul trece de 100 de dolari pe baril, declanșând vânzări masive pe piețele de obligațiuni globale\",\"fapt\":\"Prețul țițeiului a atins 100 de dolari pe baril, determinând investitori"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Piețele din India ignoră protestele studențești, dar riscurile rămân\", \"fapt\":\"Piețele financiare din India au reacționat cu calm la protestele studențești, menținând trendul de creștere, în"
+   "raw": "{\"titlu\":\"Țițeiul atinge 100 de dolari și declanșează o vânzare masivă de obligațiuni la nivel global - Financial Times\",\"fapt\":\"Creșterea prețului țițeiului la 100 de dolari a determinat investitorii"
   },
   {
    "p": "mistral",
-   "raw": "{\"titlu\":\"Șeful Băncii Franței: taxe vamale ale lui Trump sporesc incertitudinea pentru economia globală\",\"fapt\":\"Franck Riester, guvernatorul Băncii Franței, avertizează că politicile protecționiste "
+   "raw": "```json\n{\"titlu\":\"Volkswagen reduce drastic estimările de venituri din cauza vânzărilor slabe în China\", \"fapt\":\"Gigantul auto german a redus semnificativ previziunile de venituri pentru 2024, atribui"
+  },
+  {
+   "p": "mistral",
+   "raw": "{\"titlu\":\"China se pregătește pentru furtuni puternice pe măsură ce furtuna tropicală Noul se apropie\",\"fapt\":\"Autoritățile chineze au emis avertismente privind ploi torențiale și inundații în urma ap"
   }
  ],
  "no_keys": [],
  "summary": {
-  "new": 5,
-  "fresh": 5,
+  "new": 10,
+  "fresh": 10,
   "fb": 0,
-  "tier2": 2,
-  "explainer": 3
+  "tier2": 0,
+  "explainer": 10
  }
 }
