@@ -169,7 +169,7 @@
   const cols = [
     ["Educație", [["Prezentare","/incepe-aici"],["Buget personal","/educatie"],["Economisire","/educatie"],["Psihologia banilor","/educatie"]]],
     ["Investiții", [["Bursă & acțiuni","/investitii"],["ETF-uri","/investitii"],["Titluri de stat","/investitii"],["Calculatoare","/calculatoare"]]],
-    ["Platformă", [["Despre noi","/despre"],["Cursuri","/cursuri"],["Premium","/premium"],["Cont","/login"],["Contact","/contact"]]],
+    ["Platformă", [["Despre noi","/despre"],["Cursuri","/cursuri"],["Premium","/premium"],["Cont","/login"],["Contact","/contact"],["Matepolis · matematică","https://matepolis.ro/"]]],
   ];
   if (!document.querySelector("footer.foot")) {
   const foot = document.createElement("footer");
